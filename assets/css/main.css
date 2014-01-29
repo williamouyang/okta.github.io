@@ -1246,6 +1246,23 @@ div#sticker {
   margin-bottom: 10px;
 }
 
+.docs-page p {
+	font-size: 15px;
+}
+
+.docs-page th, .docs-page td {
+	font-size: 14px;
+}
+
+.docs-page .white-bg {
+	padding-top: 40px;
+	width: 75%;
+}
+
+.docs-page .left-sidebar {
+	width: 25%;
+}
+
 /*
  * jquery.tocify.css 1.8.0
  * Author: @gregfranko
@@ -1285,6 +1302,7 @@ div#sticker {
 /* Makes the font smaller for all subheader elements. */
 .tocify-subheader li {
   font-size: 12px;
+  margin-bottom: 0 !important;
 }
 
 .tocify-subheader li a {
@@ -1303,7 +1321,11 @@ div#sticker {
 }
 
 .tocify-item a {
-  padding-left: 45px !important;
+  padding-left: 42px !important;
+}
+
+.tocify-item.active {
+	margin-bottom: 0 !important;
 }
 
 .signup-button {
@@ -1419,7 +1441,8 @@ p {
 .page_block_name {
   margin-left: 30px;
   font-weight: 700;
-  margin-top: 30px;
+  margin-top: 10px;
+  margin-bottom: 14px;
   display: inline-block;
 }
 
@@ -1429,7 +1452,7 @@ p {
   display: block;
   position: absolute;
   top: 8px;
-  left: 35px;
+  left: 30px;
   border-top: 4px solid transparent;
   border-left: 4px solid #1a74ba;
   border-bottom: 4px solid transparent;
