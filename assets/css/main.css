@@ -49,10 +49,14 @@ ul li {
 
 .input-lg {
   height: 46px;
-  padding: 10px 15px;
+  padding: 10px 40px;
   font-size: 18px;
   line-height: 1.33;
   border-radius: 6px;
+}
+
+.signup-form .input-lg {
+  padding: 10px 15px !important;
 }
 
 .navbar-header {
