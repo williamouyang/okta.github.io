@@ -534,6 +534,7 @@ footer {
   font-size: 21px;
   margin-bottom: 22px;
   letter-spacing: 3px;
+  font-family: 'inconsolata' !important;
 }
 
 .terminal-os-x {
