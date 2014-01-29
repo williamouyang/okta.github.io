@@ -196,7 +196,7 @@ footer {
 }
 
 .valprop-home {
-  height: 474px;
+  height: 476px;
   border-bottom: none;
   background: url(/assets/img/home-bg.png);
   margin-top: 40px;
@@ -545,7 +545,8 @@ footer {
 
 .home-featured-title {
  line-height: 1.35;
- margin-top: 6px 0px 0px 9px;
+ margin: 6px 0px 0px 7px;
+ font-weight: bold;
 }
 
 .features-page ul {
@@ -979,6 +980,7 @@ div#sticker {
 .featured-desc {
   min-height: 90px;
   margin-bottom: 30px !important;
+  margin-top: 0;
 }
 
 
