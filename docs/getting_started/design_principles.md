@@ -18,12 +18,32 @@ priority: 1
 - [Authentication](#authentication)
 - [Pagination](#pagination)
 	- [Link Header](#link-header)
+- [Rate Limiting](#rate-limiting)
+
+## Versioning
+
+The Okta API is a versioned API.  Okta reserves the right to add new parameters, properties, or resources to the API without advance notice. These updates are considered **non-breaking** and the compatibility rules below should be followed to ensure your application does not break. Breaking changes such as removing or renaming an attribute will be released as a new version of the API.  Okta will provide a migration path for new versions of APIs and will communicate timelines for end-of-life when deprecating APIs.
+
+### Compatibility rules for input parameters
+
+- Requests are compatible irrespective of the order in which the query parameters appear.
+- Requests are compatible irrespective of the order in which the properties of the JSON parameters appear
+- New query parameters may be added to future versions of requests.
+- Existing query parameters cannot be removed from future versions of requests.
+- Existing properties cannot be removed from the JSON parameters in future versions of requests.
+
+### Compatibility rules for JSON responses
+
+- Responses are compatible irrespective of the order in which the properties appear.
+- New properties may be added to future versions of the response.
+- Existing properties cannot be removed from future versions of the response.
+	- Properties with null values may be omitted by responses
 
 ## URL Namespace
 
-All URLs listed in the documentation should be preceded with your organization's subdomain (tenant) https://&lt;yoursubdomain&gt;.okta.com/api/&lt;apiversion&gt;
+All URLs listed in the documentation should be preceded with your organization's subdomain (tenant) https://*{yoursubdomain}*.okta.com/api/*{apiversion}*
 
-The apiversion is v1 for API version 1.
+The `apiversion` is is currently v1.
 
 *Note: All API access is over HTTPS*
 
@@ -33,7 +53,7 @@ The API currently only supports JSON as an exchange format.  Be sure to set both
 
 All Date objects are returned in ISO 8601 format:
 
-    YYYY-MM-DDTHH:MM:SSZ
+    YYYY-MM-DDTHH:mm:ss.SSSZ
     
 ## HTTP Verbs
 
@@ -119,8 +139,7 @@ Pagination links are included in the [Link
 header](http://tools.ietf.org/html/rfc5988). It is **important** to
 follow these Link header values instead of constructing your own URLs.
 
-    Link: 
-    <https://yoursubdomain.okta.com/api/v1/users?after=00ubfjQEMYBLRUWIEDKK; rel="next",
+    Link: <https://yoursubdomain.okta.com/api/v1/users?after=00ubfjQEMYBLRUWIEDKK; rel="next",
       <https://yoursubdomain.okta.com/api/v1/users?after=00ub4tTFYKXCCZJSGFKM>; rel="self"
 
 The possible `rel` values are:
@@ -134,4 +153,64 @@ The possible `rel` values are:
 `prev`
 : Specifies the URL of the immediate previous page of results.
 
-When you first make an API call and get a cursor-paged list of objects, the end of the list will be the point at which you do not receive another `next` link value with the response.
+When you first make an API call and get a cursor-paged list of objects, the end of the list will be the point at which you do not receive another `next` link value with the response. The behavior is different in the  *Events* API. In the *Events* API, the next link always exists, since that connotation is more like a cursor or stream of data. The other APIs are primarily fixed data lengths.
+
+## Hypermedia
+
+Resources in the Okta API use hypermedia for "discoverability".  Hypermedia enables API clients to navigate  resources by following links like a web browser instead of hard-coding URLs in your application.  Links are identified by link relations which are named keys. Link relations describe what resources are available and how they can be interacted with.  Each resource may publish a set of link relationships based on the state of the resource.  For example, the status of a user in the [User API](../endpoints/users.md#links-object) will govern which lifecycle operations are permitted.  Only the permitted operations will be published a lifecycle operations.
+
+The Okta API had incorporated [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) or HAL format as the foundation for hypermedia "discoverability.  HAL provides a set of conventions for expressing hyperlinks in JSON responses representing two simple concepts: Resources and Links. 
+
+*Note: The HAL-specific media type `application/hal+json` is currently not supported as a formal media type for content negotiation at this time.  Use the standard `application/json` media type.  As we get more experience with the media format we may add support for the media type.*  
+
+### Resources
+
+A Resource Object represents a resource.
+
+- `"_links"` contains links to other resources.
+
+- `"_embedded"` contains embedded resources.
+
+All other properties represent the current state of the resource.
+
+### Links
+
+Object whose property names are link relation types (as defined by [RFC5988](http://tools.ietf.org/html/rfc5988)) and values are either a Link Object or an array of Link Objects.
+
+- A target URI
+- The name of the link relation (`rel`)
+- A few other optional properties to help with deprecation, content negotiation, etc.
+
+*Note: A resource may have multiple links that share the same link relation.*
+
+```json
+{
+    "_links": {
+        "self": { "href": "/example_resource" },
+        "next": { "href": "/page=2" }
+    }
+}
+```
+
+## Rate Limiting
+
+The number of API requests per-second for an organization is limited for all APIs based on your edition. 
+
+The following three headers are set in each response:
+
+`X-Rate-Limit-Limit` - the rate limit ceiling that is applicable for the current request.
+
+`X-Rate-Limit-Remaining` - the number of requests left for the current rate-limit window.
+
+`X-Rate-Limit-Reset` - the remaining time in the current rate-limit window before the rate limit resets, in UTC epoch seconds.
+
+```http
+HTTP/1.1 200 OK
+X-RateLimit-Limit: 75
+X-RateLimit-Remaining: 99
+X-RateLimit-Reset: 1366037820
+```
+
+If the rate limit is exceeded, an HTTP 429 Status Code is returned.
+
+**Rate Limits are currently not enforced. The headers are returned for information only.  Enforcement will be rolled out on a per-org basis for existing API users**

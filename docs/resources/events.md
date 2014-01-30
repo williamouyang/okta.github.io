@@ -1,16 +1,17 @@
 ---
 layout: sdks
 title: Events
-category : Endpoints
-tagline: "Endpoints - Events"
-tags : [endpoints, events]
+category : Resources
+tagline: "Events"
+tags : [resource, events]
 icon: "glyphicon glyphicon-events"
 position: leftsidebar
-priority: 3
+priority: 5
 ---
 
 # Events
-### Overview
+
+## Overview
 
 The Event API provides read access to your organization's system log. The API is intended to export event data as a batch job from your organization to another system for reporting or analysis.
 
@@ -25,41 +26,48 @@ The Event API provides read access to your organization's system log. The API is
 - [List Events](#list-events)
 	
 
-### Event Model
+## Event Model
 
 Every organization has a system log that maintains a history of actions performed by users.  The Event model describes a single action that was performed by a set of actors for a set of targets.
 
 ### Example
 
 ```json
-{
-    "eventId": "tevIyAytNfpQo-rIZKhUDDRrg1365719153000",
-    "published": "2013-04-11T22:25:53.000Z",
+ {
+    "eventId": "tevR26HuMJMSkWsKBUcQ65Raw1384847190000",
+    "published": "2013-11-19T07:46:30.000Z",
     "action": {
         "message": "User performed single sign on to app",
         "categories": [
             "Application Access"
         ],
-        "objectType": "app.auth.sso"
+        "objectType": "app.auth.sso",
+        "requestUri": "/app/salesforce/kdx9PWYBPEOBAUNVRBHK/sso/saml"
     },
     "actors": [
         {
-            "id": "00u3gjksoiRGRAZHLSYV",
-            "displayName": "Samus Aran",
-            "login": "samus.aran@example.com",
-            "objectType": "User"
-        }
-    ],
-    "targets": [
-        {
-            "id": "00u3gjksoiRGRAZHLSYV",
+            "id": "00ubgaSARVOQDIOXMORI",
             "displayName": "Samus Aran",
             "login": "samus.aran@example.com",
             "objectType": "User"
         },
         {
-            "id": "0oa3gjksodLJFLTUWWHC",
-            "displayName": "Okta Administration",
+            "id": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36",
+            "displayName": "CHROME",
+            "ipAddress": "127.0.0.1",
+            "objectType": "Client"
+        }
+    ],
+    "targets": [
+        {
+            "id": "00ubgaSARVOQDIOXMORI",
+            "displayName": "Samus Aran",
+            "login": "samus.aran@example.com",
+            "objectType": "User"
+        },
+        {
+            "id": "0oadxaKUTKAXSXUZYJHC",
+            "displayName": "Salesforce.com",
             "objectType": "AppInstance"
         }
     ]
@@ -88,6 +96,7 @@ Attribute | Description | DataType | Nullable
 message | Description of an action | String | FALSE
 categories | [Categories](#action-categories) for an action | Array of String | FALSE
 objectType | Identifies the [unique type](#action-objecttypes) of an action | String | FALSE
+requestUri | Uri of the request that generated the event. | String | TRUE
 
 *Note: Actions that do not define any categories will have an zero element array value.*
 
@@ -97,7 +106,8 @@ objectType | Identifies the [unique type](#action-objecttypes) of an action | St
     "categories": [
         "Application Access"
     ],
-    "objectType": "app.auth.sso"
+    "objectType": "app.auth.sso",
+    "requestUri": "/app/salesforce/kdx9PWYBPEOBAUNVRBHK/sso/saml"
 }
 ```
 
@@ -323,9 +333,9 @@ Attribute | Description | DataType | Nullable
 --- | --- | ---	| ---
 id | Unique key for actor| String | FALSE
 displayName | Name of actor used for display purposes | String | FALSE
-objectType | [User](#user-objecttype) | String | FALSE
+objectType | [User](#user-objecttype) or [Client](#client-objecttype)  | String | FALSE
 
-*Note: The schema of an actor is dependant on the actor's `objectType`*
+*Note: The schema of an actor is dependent on the actor's `objectType`*
 
 ### Target Object
 
@@ -337,7 +347,7 @@ id | Unique key for target| String | FALSE
 displayName | Name of target used for display purposes | String | FALSE
 objectType | [User](#user-objecttype) or [AppInstance](#appinstance-objecttype) | String | FALSE
 
-*Note: The schema of a target is dependant on the actor's `objectType`*
+*Note: The schema of a target is dependent on the actor's `objectType`*
 
 ### Actor/Target ObjectTypes
 
@@ -361,6 +371,8 @@ login | Unique login for [user](users.md#user-model) | String | FALSE
 }
 ```
 
+*Note: The user can be retrieved by `id` with the [User API](users.md#get-user-with-id).*
+
 #### AppInstance ObjectType
 
 A denormalized reference to an application
@@ -379,6 +391,29 @@ displayName | Label of application | String | FALSE
 }
 ```
 
+*Note: The app can be retrieved by `id` with the [Apps API](apps.md#get-application).*
+
+#### Client ObjectType
+
+A denormalized reference to a client such as a browser
+
+Attribute | Description | DataType | Nullable
+--- | --- | ---	| ---
+id | User agent of client | String | FALSE
+objectType | Client | String | FALSE
+displayName | Name of client | String | FALSE
+ipAddress | IP Address of client | String | TRUE
+
+
+```json
+{
+    "id": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.65 Safari/537.36",
+    "displayName": "CHROME",
+    "ipAddress": "127.0.0.1",
+    "objectType": "Client"
+}
+```         
+
 ## List Events
 
 ### GET /events
@@ -393,7 +428,7 @@ limit | Specifies the number of results to page | Query | Number | FALSE | 1000
 startDate | Specifies the timestamp to list events after | Query | Date | FALSE |
 after | Specifies the pagination cursor for the next page of events | Query | String | FALSE |
 
-*Note: The cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)*
+*Note: The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)*
 
 #### Response Parameters
 
@@ -413,57 +448,70 @@ curl -v -H "Authorization:SSWS yourtoken" \
 
 ```
 HTTP/1.1 200 OK
+Content-Type: application/json
 Link: <https://your-domain.okta.com/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z&limit=3>; rel="self"
 Link: <https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0-f0w1373905100000&limit=3>; rel="next"
-```
-```json
- [
+
+[
     {
-        "eventId": "tevYiodnDFOSrmv0TkiWsoxGg1373905156000",
-        "published": "2013-07-15T16:19:16.000Z",
+        "eventId": "tev8hc_KK9NRzKe2WtdvVQIOg1384845263000",
+        "published": "2013-11-19T07:14:23.000Z",
         "action": {
-            "message": "User updated their Okta password",
+            "message": "App activated",
             "categories": [],
-            "objectType": "core.user.config.password_update.success"
+            "objectType": "app.generic.config.app_activated",
+            "requestUri": "/api/v1/apps/0oadxaKUTKAXSXUZYJHC/lifecycle/activate"
         },
         "actors": [
             {
-                "id": "00ub4tTFYKXCCZJSGFKM",
-                "displayName": "Samus Aran",
-                "login": "samus.aran@example.com",
+                "id": "00upgyMVOKIYORVNYUUM",
+                "displayName": "Adam Malkovich",
+                "login": "adam.malkovich@example.com",
                 "objectType": "User"
+            },
+            {
+                "id": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36",
+                "displayName": "CHROME",
+                "ipAddress": "192.168.1.100",
+                "objectType": "Client"
             }
         ],
         "targets": [
             {
-                "id": "00ub4tTFYKXCCZJSGFKM",
-                "displayName": "Samus Aran",
-                "login": "samus.aran@example.com",
-                "objectType": "User"
+                "id": "0oadxaKUTKAXSXUZYJHC",
+                "displayName": "Salesforce.com",
+                "objectType": "AppInstance"
             }
         ]
     },
     {
-        "eventId": "tevfTQM_IWNQRaTIWa8GNG1OA1373905156000",
-        "published": "2013-07-15T16:19:16.000Z",
+        "eventId": "tevaEByjeq-QZW-utKgDVVvng1384847185000",
+        "published": "2013-11-19T07:46:25.000Z",
         "action": {
             "message": "Sign-in successful",
             "categories": [
                 "Sign-in Success"
             ],
-            "objectType": "core.user_auth.login_success"
+            "objectType": "core.user_auth.login_success",
+            "requestUri": "/login/do-login"
         },
         "actors": [
             {
-                "id": "00ub4tTFYKXCCZJSGFKM",
+                "id": "00ubgaSARVOQDIOXMORI",
                 "displayName": "Samus Aran",
                 "login": "samus.aran@example.com",
                 "objectType": "User"
+            },
+            {
+                "id": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36",
+                "displayName": "CHROME",
+                "ipAddress": "10.10.10.10",
+                "objectType": "Client"
             }
         ],
         "targets": [
             {
-                "id": "00ub4tTFYKXCCZJSGFKM",
+                "id": "00ubgaSARVOQDIOXMORI",
                 "displayName": "Samus Aran",
                 "login": "samus.aran@example.com",
                 "objectType": "User"
@@ -471,27 +519,41 @@ Link: <https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0-f0
         ]
     },
     {
-        "eventId": "tevm1GHyjBeTqS1PXtzPhvpjA1373912507000",
-        "published": "2013-07-15T18:21:47.000Z",
+        "eventId": "tevR26HuMJMSkWsKBUcQ65Raw1384847190000",
+        "published": "2013-11-19T07:46:30.000Z",
         "action": {
-            "message": "Session has expired",
-            "categories": [],
-            "objectType": "core.user_auth.session_expired"
+            "message": "User performed single sign on to app",
+            "categories": [
+                "Application Access"
+            ],
+            "objectType": "app.auth.sso",
+            "requestUri": "/app/salesforce/kdx9PWYBPEOBAUNVRBHK/sso/saml"
         },
         "actors": [
             {
-                "id": "00ub4tTFYKXCCZJSGFKM",
+                "id": "00ubgaSARVOQDIOXMORI",
                 "displayName": "Samus Aran",
                 "login": "samus.aran@example.com",
                 "objectType": "User"
+            },
+            {
+                "id": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36",
+                "displayName": "CHROME",
+                "ipAddress": "10.10.10.10",
+                "objectType": "Client"
             }
         ],
         "targets": [
             {
-                "id": "00ub4tTFYKXCCZJSGFKM",
+                "id": "00ubgaSARVOQDIOXMORI",
                 "displayName": "Samus Aran",
                 "login": "samus.aran@example.com",
                 "objectType": "User"
+            },
+            {
+                "id": "0oadxaKUTKAXSXUZYJHC",
+                "displayName": "Salesforce.com",
+                "objectType": "AppInstance"
             }
         ]
     }

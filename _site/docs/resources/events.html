@@ -1,6 +1,6 @@
 <h1 id="toc_0">Events</h1>
 
-<h3 id="toc_1">Overview</h3>
+<h2 id="toc_1">Overview</h2>
 
 <p>The Event API provides read access to your organization&#39;s system log. The API is intended to export event data as a batch job from your organization to another system for reporting or analysis.</p>
 
@@ -22,39 +22,46 @@
 <li><a href="#list-events">List Events</a></li>
 </ul>
 
-<h3 id="toc_2">Event Model</h3>
+<h2 id="toc_2">Event Model</h2>
 
 <p>Every organization has a system log that maintains a history of actions performed by users.  The Event model describes a single action that was performed by a set of actors for a set of targets.</p>
 
 <h3 id="toc_3">Example</h3>
-<div class="highlight"><pre><code class="json language-json" data-lang="json"><span class="p">{</span>
-    <span class="nt">&quot;eventId&quot;</span><span class="p">:</span> <span class="s2">&quot;tevIyAytNfpQo-rIZKhUDDRrg1365719153000&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;published&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-04-11T22:25:53.000Z&quot;</span><span class="p">,</span>
+<div class="highlight"><pre><code class="json language-json" data-lang="json"> <span class="p">{</span>
+    <span class="nt">&quot;eventId&quot;</span><span class="p">:</span> <span class="s2">&quot;tevR26HuMJMSkWsKBUcQ65Raw1384847190000&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;published&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-11-19T07:46:30.000Z&quot;</span><span class="p">,</span>
     <span class="nt">&quot;action&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;User performed single sign on to app&quot;</span><span class="p">,</span>
         <span class="nt">&quot;categories&quot;</span><span class="p">:</span> <span class="p">[</span>
             <span class="s2">&quot;Application Access&quot;</span>
         <span class="p">],</span>
-        <span class="nt">&quot;objectType&quot;</span><span class="p">:</span> <span class="s2">&quot;app.auth.sso&quot;</span>
+        <span class="nt">&quot;objectType&quot;</span><span class="p">:</span> <span class="s2">&quot;app.auth.sso&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;requestUri&quot;</span><span class="p">:</span> <span class="s2">&quot;/app/salesforce/kdx9PWYBPEOBAUNVRBHK/sso/saml&quot;</span>
     <span class="p">},</span>
     <span class="nt">&quot;actors&quot;</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-            <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;00u3gjksoiRGRAZHLSYV&quot;</span><span class="p">,</span>
-            <span class="nt">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;Samus Aran&quot;</span><span class="p">,</span>
-            <span class="nt">&quot;login&quot;</span><span class="p">:</span> <span class="s2">&quot;samus.aran@example.com&quot;</span><span class="p">,</span>
-            <span class="nt">&quot;objectType&quot;</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span>
-        <span class="p">}</span>
-    <span class="p">],</span>
-    <span class="nt">&quot;targets&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-            <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;00u3gjksoiRGRAZHLSYV&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;00ubgaSARVOQDIOXMORI&quot;</span><span class="p">,</span>
             <span class="nt">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;Samus Aran&quot;</span><span class="p">,</span>
             <span class="nt">&quot;login&quot;</span><span class="p">:</span> <span class="s2">&quot;samus.aran@example.com&quot;</span><span class="p">,</span>
             <span class="nt">&quot;objectType&quot;</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span>
         <span class="p">},</span>
         <span class="p">{</span>
-            <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;0oa3gjksodLJFLTUWWHC&quot;</span><span class="p">,</span>
-            <span class="nt">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;Okta Administration&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;CHROME&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;ipAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;objectType&quot;</span><span class="p">:</span> <span class="s2">&quot;Client&quot;</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;targets&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;00ubgaSARVOQDIOXMORI&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;Samus Aran&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;login&quot;</span><span class="p">:</span> <span class="s2">&quot;samus.aran@example.com&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;objectType&quot;</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;0oadxaKUTKAXSXUZYJHC&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;Salesforce.com&quot;</span><span class="p">,</span>
             <span class="nt">&quot;objectType&quot;</span><span class="p">:</span> <span class="s2">&quot;AppInstance&quot;</span>
         <span class="p">}</span>
     <span class="p">]</span>
@@ -136,6 +143,12 @@
 <td>String</td>
 <td>FALSE</td>
 </tr>
+<tr>
+<td>requestUri</td>
+<td>Uri of the request that generated the event.</td>
+<td>String</td>
+<td>TRUE</td>
+</tr>
 </tbody></table>
 
 <p><em>Note: Actions that do not define any categories will have an zero element array value.</em></p>
@@ -144,7 +157,8 @@
     <span class="nt">&quot;categories&quot;</span><span class="p">:</span> <span class="p">[</span>
         <span class="s2">&quot;Application Access&quot;</span>
     <span class="p">],</span>
-    <span class="nt">&quot;objectType&quot;</span><span class="p">:</span> <span class="s2">&quot;app.auth.sso&quot;</span>
+    <span class="nt">&quot;objectType&quot;</span><span class="p">:</span> <span class="s2">&quot;app.auth.sso&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;requestUri&quot;</span><span class="p">:</span> <span class="s2">&quot;/app/salesforce/kdx9PWYBPEOBAUNVRBHK/sso/saml&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="toc_6">Action Categories</h4>
@@ -801,13 +815,13 @@
 </tr>
 <tr>
 <td>objectType</td>
-<td><a href="#user-objecttype">User</a></td>
+<td><a href="#user-objecttype">User</a> or <a href="#client-objecttype">Client</a></td>
 <td>String</td>
 <td>FALSE</td>
 </tr>
 </tbody></table>
 
-<p><em>Note: The schema of an actor is dependant on the actor&#39;s <code>objectType</code></em></p>
+<p><em>Note: The schema of an actor is dependent on the actor&#39;s <code>objectType</code></em></p>
 
 <h3 id="toc_24">Target Object</h3>
 
@@ -841,7 +855,7 @@
 </tr>
 </tbody></table>
 
-<p><em>Note: The schema of a target is dependant on the actor&#39;s <code>objectType</code></em></p>
+<p><em>Note: The schema of a target is dependent on the actor&#39;s <code>objectType</code></em></p>
 
 <h3 id="toc_25">Actor/Target ObjectTypes</h3>
 
@@ -889,6 +903,8 @@
     <span class="nt">&quot;objectType&quot;</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
+<p><em>Note: The user can be retrieved by <code>id</code> with the <a href="users.md#get-user-with-id">User API</a>.</em></p>
+
 <h4 id="toc_27">AppInstance ObjectType</h4>
 
 <p>A denormalized reference to an application</p>
@@ -926,13 +942,59 @@
     <span class="nt">&quot;objectType&quot;</span><span class="p">:</span> <span class="s2">&quot;AppInstance&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h2 id="toc_28">List Events</h2>
+<p><em>Note: The app can be retrieved by <code>id</code> with the <a href="apps.md#get-application">Apps API</a>.</em></p>
 
-<h3 id="toc_29">GET /events</h3>
+<h4 id="toc_28">Client ObjectType</h4>
+
+<p>A denormalized reference to a client such as a browser</p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+<th>DataType</th>
+<th>Nullable</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>User agent of client</td>
+<td>String</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>objectType</td>
+<td>Client</td>
+<td>String</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>displayName</td>
+<td>Name of client</td>
+<td>String</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>ipAddress</td>
+<td>IP Address of client</td>
+<td>String</td>
+<td>TRUE</td>
+</tr>
+</tbody></table>
+<div class="highlight"><pre><code class="json language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.65 Safari/537.36&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;CHROME&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;ipAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;objectType&quot;</span><span class="p">:</span> <span class="s2">&quot;Client&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="toc_29">List Events</h2>
+
+<h3 id="toc_30">GET /events</h3>
 
 <p>Fetch a list of events from your Okta organization system log</p>
 
-<h4 id="toc_30">Request Parameters</h4>
+<h4 id="toc_31">Request Parameters</h4>
 
 <table><thead>
 <tr>
@@ -970,101 +1032,130 @@
 </tr>
 </tbody></table>
 
-<p><em>Note: The cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></em></p>
+<p><em>Note: The <code>after</code> cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></em></p>
 
-<h4 id="toc_31">Response Parameters</h4>
+<h4 id="toc_32">Response Parameters</h4>
 
 <p>Array of <a href="#event-model">Events</a></p>
 
-<h4 id="toc_32">Example</h4>
+<h4 id="toc_33">Example</h4>
 
-<h5 id="toc_33">Request</h5>
+<h5 id="toc_34">Request</h5>
 <div class="highlight"><pre><code class="sh language-sh" data-lang="sh">curl -v -H <span class="s2">&quot;Authorization:SSWS yourtoken&quot;</span> <span class="se">\</span>
 -H <span class="s2">&quot;Accept:application/json&quot;</span> <span class="se">\</span>
 -H <span class="s2">&quot;Content-type:application/json&quot;</span> <span class="se">\</span>
 -X GET https://your-domain.okta.com/api/v1/events?startDate<span class="o">=</span>2013-07-15T16%3A00%3A00.000Z<span class="se">\&amp;</span><span class="nv">limit</span><span class="o">=</span>3
 </code></pre></div>
-<h5 id="toc_34">Response</h5>
+<h5 id="toc_35">Response</h5>
 <div class="highlight"><pre><code class="text language-text" data-lang="text">HTTP/1.1 200 OK
+Content-Type: application/json
 Link: &lt;https://your-domain.okta.com/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z&amp;limit=3&gt;; rel=&quot;self&quot;
 Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0-f0w1373905100000&amp;limit=3&gt;; rel=&quot;next&quot;
-</code></pre></div><div class="highlight"><pre><code class="json language-json" data-lang="json"> <span class="p">[</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;eventId&quot;</span><span class="p">:</span> <span class="s2">&quot;tevYiodnDFOSrmv0TkiWsoxGg1373905156000&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;published&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-07-15T16:19:16.000Z&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;action&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;User updated their Okta password&quot;</span><span class="p">,</span>
-            <span class="nt">&quot;categories&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="nt">&quot;objectType&quot;</span><span class="p">:</span> <span class="s2">&quot;core.user.config.password_update.success&quot;</span>
-        <span class="p">},</span>
-        <span class="nt">&quot;actors&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">{</span>
-                <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;00ub4tTFYKXCCZJSGFKM&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;Samus Aran&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;login&quot;</span><span class="p">:</span> <span class="s2">&quot;samus.aran@example.com&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;objectType&quot;</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span>
-            <span class="p">}</span>
-        <span class="p">],</span>
-        <span class="nt">&quot;targets&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">{</span>
-                <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;00ub4tTFYKXCCZJSGFKM&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;Samus Aran&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;login&quot;</span><span class="p">:</span> <span class="s2">&quot;samus.aran@example.com&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;objectType&quot;</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span>
-            <span class="p">}</span>
-        <span class="p">]</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;eventId&quot;</span><span class="p">:</span> <span class="s2">&quot;tevfTQM_IWNQRaTIWa8GNG1OA1373905156000&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;published&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-07-15T16:19:16.000Z&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;action&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Sign-in successful&quot;</span><span class="p">,</span>
-            <span class="nt">&quot;categories&quot;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="s2">&quot;Sign-in Success&quot;</span>
-            <span class="p">],</span>
-            <span class="nt">&quot;objectType&quot;</span><span class="p">:</span> <span class="s2">&quot;core.user_auth.login_success&quot;</span>
-        <span class="p">},</span>
-        <span class="nt">&quot;actors&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">{</span>
-                <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;00ub4tTFYKXCCZJSGFKM&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;Samus Aran&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;login&quot;</span><span class="p">:</span> <span class="s2">&quot;samus.aran@example.com&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;objectType&quot;</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span>
-            <span class="p">}</span>
-        <span class="p">],</span>
-        <span class="nt">&quot;targets&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">{</span>
-                <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;00ub4tTFYKXCCZJSGFKM&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;Samus Aran&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;login&quot;</span><span class="p">:</span> <span class="s2">&quot;samus.aran@example.com&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;objectType&quot;</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span>
-            <span class="p">}</span>
-        <span class="p">]</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;eventId&quot;</span><span class="p">:</span> <span class="s2">&quot;tevm1GHyjBeTqS1PXtzPhvpjA1373912507000&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;published&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-07-15T18:21:47.000Z&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;action&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Session has expired&quot;</span><span class="p">,</span>
-            <span class="nt">&quot;categories&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="nt">&quot;objectType&quot;</span><span class="p">:</span> <span class="s2">&quot;core.user_auth.session_expired&quot;</span>
-        <span class="p">},</span>
-        <span class="nt">&quot;actors&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">{</span>
-                <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;00ub4tTFYKXCCZJSGFKM&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;Samus Aran&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;login&quot;</span><span class="p">:</span> <span class="s2">&quot;samus.aran@example.com&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;objectType&quot;</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span>
-            <span class="p">}</span>
-        <span class="p">],</span>
-        <span class="nt">&quot;targets&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">{</span>
-                <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;00ub4tTFYKXCCZJSGFKM&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;Samus Aran&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;login&quot;</span><span class="p">:</span> <span class="s2">&quot;samus.aran@example.com&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;objectType&quot;</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span>
-            <span class="p">}</span>
-        <span class="p">]</span>
-    <span class="p">}</span>
-<span class="p">]</span>
+
+[
+    {
+        &quot;eventId&quot;: &quot;tev8hc_KK9NRzKe2WtdvVQIOg1384845263000&quot;,
+        &quot;published&quot;: &quot;2013-11-19T07:14:23.000Z&quot;,
+        &quot;action&quot;: {
+            &quot;message&quot;: &quot;App activated&quot;,
+            &quot;categories&quot;: [],
+            &quot;objectType&quot;: &quot;app.generic.config.app_activated&quot;,
+            &quot;requestUri&quot;: &quot;/api/v1/apps/0oadxaKUTKAXSXUZYJHC/lifecycle/activate&quot;
+        },
+        &quot;actors&quot;: [
+            {
+                &quot;id&quot;: &quot;00upgyMVOKIYORVNYUUM&quot;,
+                &quot;displayName&quot;: &quot;Adam Malkovich&quot;,
+                &quot;login&quot;: &quot;adam.malkovich@example.com&quot;,
+                &quot;objectType&quot;: &quot;User&quot;
+            },
+            {
+                &quot;id&quot;: &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36&quot;,
+                &quot;displayName&quot;: &quot;CHROME&quot;,
+                &quot;ipAddress&quot;: &quot;192.168.1.100&quot;,
+                &quot;objectType&quot;: &quot;Client&quot;
+            }
+        ],
+        &quot;targets&quot;: [
+            {
+                &quot;id&quot;: &quot;0oadxaKUTKAXSXUZYJHC&quot;,
+                &quot;displayName&quot;: &quot;Salesforce.com&quot;,
+                &quot;objectType&quot;: &quot;AppInstance&quot;
+            }
+        ]
+    },
+    {
+        &quot;eventId&quot;: &quot;tevaEByjeq-QZW-utKgDVVvng1384847185000&quot;,
+        &quot;published&quot;: &quot;2013-11-19T07:46:25.000Z&quot;,
+        &quot;action&quot;: {
+            &quot;message&quot;: &quot;Sign-in successful&quot;,
+            &quot;categories&quot;: [
+                &quot;Sign-in Success&quot;
+            ],
+            &quot;objectType&quot;: &quot;core.user_auth.login_success&quot;,
+            &quot;requestUri&quot;: &quot;/login/do-login&quot;
+        },
+        &quot;actors&quot;: [
+            {
+                &quot;id&quot;: &quot;00ubgaSARVOQDIOXMORI&quot;,
+                &quot;displayName&quot;: &quot;Samus Aran&quot;,
+                &quot;login&quot;: &quot;samus.aran@example.com&quot;,
+                &quot;objectType&quot;: &quot;User&quot;
+            },
+            {
+                &quot;id&quot;: &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36&quot;,
+                &quot;displayName&quot;: &quot;CHROME&quot;,
+                &quot;ipAddress&quot;: &quot;10.10.10.10&quot;,
+                &quot;objectType&quot;: &quot;Client&quot;
+            }
+        ],
+        &quot;targets&quot;: [
+            {
+                &quot;id&quot;: &quot;00ubgaSARVOQDIOXMORI&quot;,
+                &quot;displayName&quot;: &quot;Samus Aran&quot;,
+                &quot;login&quot;: &quot;samus.aran@example.com&quot;,
+                &quot;objectType&quot;: &quot;User&quot;
+            }
+        ]
+    },
+    {
+        &quot;eventId&quot;: &quot;tevR26HuMJMSkWsKBUcQ65Raw1384847190000&quot;,
+        &quot;published&quot;: &quot;2013-11-19T07:46:30.000Z&quot;,
+        &quot;action&quot;: {
+            &quot;message&quot;: &quot;User performed single sign on to app&quot;,
+            &quot;categories&quot;: [
+                &quot;Application Access&quot;
+            ],
+            &quot;objectType&quot;: &quot;app.auth.sso&quot;,
+            &quot;requestUri&quot;: &quot;/app/salesforce/kdx9PWYBPEOBAUNVRBHK/sso/saml&quot;
+        },
+        &quot;actors&quot;: [
+            {
+                &quot;id&quot;: &quot;00ubgaSARVOQDIOXMORI&quot;,
+                &quot;displayName&quot;: &quot;Samus Aran&quot;,
+                &quot;login&quot;: &quot;samus.aran@example.com&quot;,
+                &quot;objectType&quot;: &quot;User&quot;
+            },
+            {
+                &quot;id&quot;: &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36&quot;,
+                &quot;displayName&quot;: &quot;CHROME&quot;,
+                &quot;ipAddress&quot;: &quot;10.10.10.10&quot;,
+                &quot;objectType&quot;: &quot;Client&quot;
+            }
+        ],
+        &quot;targets&quot;: [
+            {
+                &quot;id&quot;: &quot;00ubgaSARVOQDIOXMORI&quot;,
+                &quot;displayName&quot;: &quot;Samus Aran&quot;,
+                &quot;login&quot;: &quot;samus.aran@example.com&quot;,
+                &quot;objectType&quot;: &quot;User&quot;
+            },
+            {
+                &quot;id&quot;: &quot;0oadxaKUTKAXSXUZYJHC&quot;,
+                &quot;displayName&quot;: &quot;Salesforce.com&quot;,
+                &quot;objectType&quot;: &quot;AppInstance&quot;
+            }
+        ]
+    }
+]
 </code></pre></div>

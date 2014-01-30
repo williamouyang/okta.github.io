@@ -1,15 +1,16 @@
 ---
 layout: sdks
 title: Apps
-category : Endpoints
-tagline: "Endpoints - Apps"
-tags : [endpoints, apps]
+category : Resources
+tagline: "Apps"
+tags : [resource, apps]
 icon: "glyphicon glyphicon-apps"
 position: leftsidebar
-priority: 5
+priority: 4
 ---
 
 # Apps
+
 ## Overview
 
 The Application API provides operations to manage applications and/or assignments to users or groups for your organization.
@@ -33,6 +34,7 @@ __This API is currently in `Beta` status and documentation is *draft* quality.  
 		- [UserName Template Object](#username-template-object)
 			- [Built-In Expressions](#built-in-expressions)
 	- [Password Object](#password-object)
+	- [Application Links Object](#application-links-object)
 - [Application User Model](#application-user-model)
 	- [Application User Attributes](#application-user-attributes)
 	- [Application User Credentials Object](#application-user-credentials-object)
@@ -49,11 +51,19 @@ __This API is currently in `Beta` status and documentation is *draft* quality.  
 		- [Add WS-Federation Application](#add-ws-federation-application)
 	- [Get Application](#get-application)
 	- [List Applications](#list-applications)
+	- [List Applications Assigned to User](#list-applications-assigned-to-user)
+		- [List Applications with Defaults](#list-applications-with-defaults)
+		- [List Applications Assigned to User](#list-applications-assigned-to-user)
+		- [List Applications Assigned to Group](#list-applications-assigned-to-group)
 	- [Update Application](#update-application)
 		- [Set SWA User-Editable UserName & Password](#set-swa-user-editable-username--password)
 		- [Set SWA User-Editable Password](#set-swa-user-editable-password)
 		- [Set SWA Okta Password](#set-swa-okta-password)
 		- [Set SWA Shared Credentials](#set-swa-shared-credentials)
+	- [Delete Application](#delete-application)
+- [Application Lifecycle Operations](#application-lifecycle-operations)
+	- [Activate Application](#activate-application)
+	- [Deactivate Application](#deactivate-application)
 - [Application User Operations](#application-user-operations)
 	- [Assign User to Application](#assign-user-to-application)
 	- [Get Assigned User for Application](#get-assigned-user-for-application)
@@ -122,13 +132,16 @@ __This API is currently in `Beta` status and documentation is *draft* quality.  
     },
     "_links": {
         "users": {
-            "href": "http://example.okta.com/api/v1/apps/0oabhnUQFYHMBNVSVXMV/users"
+            "href": "https://example.okta.com/api/v1/apps/0oabhnUQFYHMBNVSVXMV/users"
         },
         "self": {
-            "href": "http://example.okta.com/api/v1/apps/0oabhnUQFYHMBNVSVXMV"
+            "href": "https://example.okta.com/api/v1/apps/0oabhnUQFYHMBNVSVXMV"
         },
         "metadata": {
-            "href": "http://example.okta.com/app/0oabhnUQFYHMBNVSVXMV/sso/saml/metadata"
+            "href": "https://example.okta.com/app/0oabhnUQFYHMBNVSVXMV/sso/saml/metadata"
+        },
+        "deactivate": {
+            "href": "https://example.okta.com/api/v1/apps/0oabhnUQFYHMBNVSVXMV/lifecycle/deactivate"
         }
     }
 }
@@ -151,9 +164,9 @@ accessibility | access settings for app | [Accessibility Object](#accessibility-
 visibility | visibility settings for app | [Visibility Object](#visibility-object) | | | TRUE | FALSE | FALSE
 credentials | credentials for the specified `signOnMode` | [Application Credentials Object](#application-credentials-object) | | | TRUE | FALSE | FALSE
 settings | settings for app ([App Names & Settings](#app-names--settings))| | | | TRUE | FALSE | FALSE
-_links | discoverable resources related to the app | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-05) | | | TRUE | FALSE | TRUE
+_links | discoverable resources related to the app | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | | | TRUE | FALSE | TRUE
 
-*Note: id, created, lastUpdated, and status are only available after an app is created*
+*Note: id, created, lastUpdated, status, and _links are only available after an app is created*
 
 #### App Names & Settings
 
@@ -343,6 +356,19 @@ Attribute | DataType | MinLength | MaxLength | Nullable | Unique | Validation
 --- | --- | ---	| --- | --- | --- | ---
 value | String | | | TRUE | FALSE |
 
+### Application Links Object
+
+Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the current status of an application using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  This object is used for dynamic discovery of related resources and lifecycle operations.  The Links Object is **read-only**.
+
+Relation Name | Description
+--- | ---
+self | The actual application
+activate | [Lifecycle action](#activate-application) to transition application to **ACTIVE** status
+deactivate | [Lifecycle action](#deactivate-application) to transition application to **INACTIVE** status
+metadata | Protocol-specific metadata document for the configured `SignOnMode`
+users |  [User](#application-user-operations) assignments for application
+users | [Group](#application-group-operations) assignments for application
+
 ## Application User Model
 The application user model defines a user's application assignment and credentials.
 
@@ -472,9 +498,9 @@ requestIntegration | Would you like Okta to add an integration for this app? | B
 ##### Request
 
 ```sh
-curl -v -H "Authorization:SSWS yourtoken" \
--H "Accept:application/json" \
--H "Content-type:application/json" \
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
 -X POST "https://your-domain.okta.com/api/v1/apps" \
 -d \
 '{
@@ -534,6 +560,9 @@ curl -v -H "Authorization:SSWS yourtoken" \
         },
         "self": {
             "href": "https://example.okta.com/api/v1/apps/0oafxqCAJWWGELFTYASJ"
+        },
+        "deactivate": {
+            "href": "https://example.okta.com/api/v1/apps/0oafxqCAJWWGELFTYASJ/lifecycle/deactivate"
         }
     }
 ```
@@ -553,9 +582,9 @@ authURL | The URL of the authenticating site for this app | String | FALSE | FAL
 ##### Request
 
 ```sh
-curl -v -H "Authorization:SSWS yourtoken" \
--H "Accept:application/json" \
--H "Content-type:application/json" \
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
 -X POST "https://your-domain.okta.com/api/v1/apps" \
 -d \
 '{
@@ -616,6 +645,9 @@ curl -v -H "Authorization:SSWS yourtoken" \
         },
         "self": {
             "href": "https://example.okta.com/api/v1/apps/0oafwvZDWJKVLDCUWUAC"
+        },
+        "deactivate": {
+            "href": "https://example.okta.com/api/v1/apps/0oafwvZDWJKVLDCUWUAC/lifecycle/deactivate"
         }
     }
 }
@@ -638,9 +670,9 @@ buttonField | CSS selector for the login button in the login form | String | FAL
 ##### Request
 
 ```sh
-curl -v -H "Authorization:SSWS yourtoken" \
--H "Accept:application/json" \
--H "Content-type:application/json" \
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
 -X POST "https://your-domain.okta.com/api/v1/apps" \
 -d \
 '{
@@ -662,51 +694,54 @@ curl -v -H "Authorization:SSWS yourtoken" \
 
 ```json
 {
-        "id": "0oabkvBLDEKCNXBGYUAS",
-        "name": "template_swa",
-        "label": "Sample Plugin App",
-        "status": "ACTIVE",
-        "lastUpdated": "2013-09-11T17:58:54.000Z",
-        "created": "2013-09-11T17:46:08.000Z",
-        "accessibility": {
-            "selfService": false,
-            "errorRedirectUrl": null
+"id": "0oabkvBLDEKCNXBGYUAS",
+    "name": "template_swa",
+    "label": "Sample Plugin App",
+    "status": "ACTIVE",
+    "lastUpdated": "2013-09-11T17:58:54.000Z",
+    "created": "2013-09-11T17:46:08.000Z",
+    "accessibility": {
+        "selfService": false,
+        "errorRedirectUrl": null
+    },
+    "visibility": {
+        "autoSubmitToolbar": false,
+        "hide": {
+            "iOS": false,
+            "web": false
         },
-        "visibility": {
-            "autoSubmitToolbar": false,
-            "hide": {
-                "iOS": false,
-                "web": false
-            },
-            "appLinks": {
-                "login": true
-            }
-        },
-        "features": [],
-        "signOnMode": "BROWSER_PLUGIN",
-        "credentials": {
-            "scheme": "EDIT_USERNAME_AND_PASSWORD",
-            "userNameTemplate": {
-                "template": "${source.login}",
-                "type": "BUILT_IN"
-            }
-        },
-        "settings": {
-            "app": {
-                "buttonField": "btn-login",
-                "passwordField": "txtbox-password",
-                "usernameField": "txtbox-username",
-                "url": "https://example.com/login.html"
-            }
-        },
-        "_links": {
-            "users": {
-                "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
-            },
-            "self": {
-                "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
-            }
+        "appLinks": {
+            "login": true
         }
+    },
+    "features": [],
+    "signOnMode": "BROWSER_PLUGIN",
+    "credentials": {
+        "scheme": "EDIT_USERNAME_AND_PASSWORD",
+        "userNameTemplate": {
+            "template": "${source.login}",
+            "type": "BUILT_IN"
+        }
+    },
+    "settings": {
+        "app": {
+            "buttonField": "btn-login",
+            "passwordField": "txtbox-password",
+            "usernameField": "txtbox-username",
+            "url": "https://example.com/login.html"
+        }
+    },
+    "_links": {
+        "users": {
+            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
+        },
+        "self": {
+            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
+        },
+        "deactivate": {
+            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
+        }
+    }    
 }
 ```
 
@@ -728,9 +763,9 @@ extraFieldValue | Value for extra field form field | String | FALSE | FALSE |
 ##### Request
 
 ```sh
-curl -v -H "Authorization:SSWS yourtoken" \
--H "Accept:application/json" \
--H "Content-type:application/json" \
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
 -X "POST https://your-domain.okta.com/api/v1/apps" \
 -d \
 '{
@@ -754,53 +789,56 @@ curl -v -H "Authorization:SSWS yourtoken" \
 
 ```json
 {
-        "id": "0oabkvBLDEKCNXBGYUAS",
-        "name": "template_swa",
-        "label": "Sample Plugin App",
-        "status": "ACTIVE",
-        "lastUpdated": "2013-09-11T17:58:54.000Z",
-        "created": "2013-09-11T17:46:08.000Z",
-        "accessibility": {
-            "selfService": false,
-            "errorRedirectUrl": null
+    "id": "0oabkvBLDEKCNXBGYUAS",
+    "name": "template_swa",
+    "label": "Sample Plugin App",
+    "status": "ACTIVE",
+    "lastUpdated": "2013-09-11T17:58:54.000Z",
+    "created": "2013-09-11T17:46:08.000Z",
+    "accessibility": {
+        "selfService": false,
+        "errorRedirectUrl": null
+    },
+    "visibility": {
+        "autoSubmitToolbar": false,
+        "hide": {
+            "iOS": false,
+            "web": false
         },
-        "visibility": {
-            "autoSubmitToolbar": false,
-            "hide": {
-                "iOS": false,
-                "web": false
-            },
-            "appLinks": {
-                "login": true
-            }
-        },
-        "features": [],
-        "signOnMode": "BROWSER_PLUGIN",
-        "credentials": {
-            "scheme": "EDIT_USERNAME_AND_PASSWORD",
-            "userNameTemplate": {
-                "template": "${source.login}",
-                "type": "BUILT_IN"
-            }
-        },
-        "settings": {
-            "app": {
-            	"buttonField": "#btn-login",
-            	"passwordField": "#txtbox-password",
-            	"usernameField": "#txtbox-username",
-            	"url": "https://example.com/login.html",
-            	"extraFieldSelector": ".login",
-            	"extraFieldValue": "SOMEVALUE"
-            }
-        },
-        "_links": {
-            "users": {
-                "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
-            },
-            "self": {
-                "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
-            }
+        "appLinks": {
+            "login": true
         }
+    },
+    "features": [],
+    "signOnMode": "BROWSER_PLUGIN",
+    "credentials": {
+        "scheme": "EDIT_USERNAME_AND_PASSWORD",
+        "userNameTemplate": {
+            "template": "${source.login}",
+            "type": "BUILT_IN"
+        }
+    },
+    "settings": {
+        "app": {
+            "buttonField": "#btn-login",
+            "passwordField": "#txtbox-password",
+            "usernameField": "#txtbox-username",
+            "url": "https://example.com/login.html",
+            "extraFieldSelector": ".login",
+            "extraFieldValue": "SOMEVALUE"
+        }
+    },
+    "_links": {
+        "users": {
+            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
+        },
+        "self": {
+            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
+        },
+        "deactivate": {
+            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
+        }
+    }
 }
 ```
 
@@ -827,9 +865,9 @@ optionalField3Value | Name of the optional value in the login form | String | TR
 ##### Request
 
 ```sh
-curl -v -H "Authorization:SSWS yourtoken" \
--H "Accept:application/json" \
--H "Content-type:application/json" \
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
 -X POST "https://your-domain.okta.com/api/v1/apps" \
 -d \
 '{
@@ -904,6 +942,9 @@ curl -v -H "Authorization:SSWS yourtoken" \
         },
         "self": {
             "href": "https://example.okta.com/api/v1/apps/0oafywQDNMXLYDBIHQTT"
+        },
+        "deactivate": {
+            "href": "https://example.okta.com/api/v1/apps/0oafywQDNMXLYDBIHQTT/lifecycle/deactivate"
         }
     }
 }
@@ -916,9 +957,9 @@ Adds a SAML 2.0 WebSSO application
 ##### Request
 
 ```sh
-curl -v -H "Authorization:SSWS yourtoken" \
--H "Accept:application/json" \
--H "Content-type:application/json" \
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
 -X POST "https://your-domain.okta.com/api/v1/apps" \
 -d \
 '{
@@ -954,9 +995,9 @@ Adds a WS-Federation Passive Requestor Profile application with a SAML 2.0 token
 ##### Request
 
 ```sh
-curl -v -H "Authorization:SSWS yourtoken" \
--H "Accept:application/json" \
--H "Content-type:application/json" \
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
 -X POST "https://your-domain.okta.com/api/v1/apps" \
 -d \
 '{
@@ -1003,9 +1044,9 @@ Fetched [Application](#application-model)
 ##### Request
 
 ```sh
-curl -v -H "Authorization:SSWS yourtoken" \
--H "Accept:application/json" \
--H "Content-type:application/json" \
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
 -X GET "https://your-domain.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD"
 ```
 
@@ -1069,6 +1110,9 @@ curl -v -H "Authorization:SSWS yourtoken" \
         },
         "metadata": {
             "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/sso/saml/metadata"
+        },
+        "deactivate": {
+            "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/lifecycle/deactivate"
         }
     }
 }
@@ -1085,23 +1129,35 @@ Fetch a list of apps from your Okta organization.
 Parameter | Description | Param Type | DataType | Required | Default
 --- | --- | --- | --- | --- | ---
 limit | Specified the number of results for a page | Query | Number | FALSE | 20
-filter | Filters apps by `status` expression | Query | String | FALSE | status eq "ACTIVE" or status eq "INACTIVE"
+filter | Filters apps by `status`, `user.id`, or `group.id` expression | Query | String | FALSE |
 after | Specifies the pagination cursor for the next page of apps | Query | String | FALSE |
 
 *Note: The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)*
 
+###### Filters
+The following filters are supported with the filter query parameter:
+
+Filter | Description
+--- | --- 
+`status eq "ACTIVE"` | Apps that have a `status` of `ACTIVE`
+`status eq "INACTIVE"` | Apps that have a `status` of `INACTIVE`
+`user.id eq ":uid"` | Apps assigned to a specific user such as `00ucw2RPGIUNTDQOYPOF`
+`group.id eq ":gid"` | Apps assigned to a specific group such as `00gckgEHZXOUDGDJLYLG`
+
+*Note: Only a single expression is supported as this time*
+
 ##### Response Parameters
 
-Array of [Application](#application-model)
+Array of [Applications](#application-model)
 
 #### List Applications with Defaults
 
 ##### Request
 
 ```sh
-curl -v -H "Authorization:SSWS yourtoken" \
--H "Accept:application/json" \
--H "Content-type:application/json" \
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
 -X GET "https://your-domain.okta.com/api/v1/apps"
 ```
 
@@ -1166,6 +1222,9 @@ curl -v -H "Authorization:SSWS yourtoken" \
             },
             "metadata": {
                 "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/sso/saml/metadata"
+            },
+            "deactivate": {
+                "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/lifecycle/deactivate"
             }
         }
     },
@@ -1213,11 +1272,214 @@ curl -v -H "Authorization:SSWS yourtoken" \
             },
             "self": {
                 "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
+            },
+            "deactivate": {
+                "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
             }
         }
     }
 ]
 ```
+
+#### List Applications Assigned to User
+
+##### Request
+
+```sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X GET "https://your-domain.okta.com/api/v1/apps?filter=user.id+eq+\"00ucw2RPGIUNTDQOYPOF\""
+```
+
+##### Response
+
+```json
+[
+    {
+        "id": "0oabizCHPNYALCHDUIOD",
+        "name": "template_saml_2_0",
+        "label": "Example SAML App",
+        "status": "ACTIVE",
+        "lastUpdated": "2013-09-19T22:57:23.000Z",
+        "created": "2013-09-10T23:52:31.000Z",
+        "accessibility": {
+            "selfService": false,
+            "errorRedirectUrl": null
+        },
+        "visibility": {
+            "autoSubmitToolbar": false,
+            "hide": {
+                "iOS": false,
+                "web": false
+            },
+            "appLinks": {
+                "login": true
+            }
+        },
+        "features": [],
+        "signOnMode": "SAML_2_0",
+        "credentials": {
+            "userNameTemplate": {
+                "template": "${source.login}",
+                "type": "BUILT_IN"
+            }
+        },
+        "settings": {
+            "app": {
+                "audienceRestriction": "https://example.com/tenant/123",
+                "groupName": null,
+                "forceAuthn": false,
+                "defaultRelayState": null,
+                "postBackURL": "https://example.com/sso/saml",
+                "authnContextClassRef": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
+                "configuredIssuer": null,
+                "requestCompressed": "COMPRESSED",
+                "groupFilter": null,
+                "recipient": "https://example.com/sso/saml",
+                "signAssertion": "SIGNED",
+                "destination": "https://example.com/sso/saml",
+                "signResponse": "SIGNED",
+                "nameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+                "attributeStatements": null
+            }
+        },
+        "_links": {
+            "users": {
+                "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/users"
+            },
+            "self": {
+                "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD"
+            },
+            "metadata": {
+                "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/sso/saml/metadata"
+            },
+            "deactivate": {
+                "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/lifecycle/deactivate"
+            }
+        }
+    },
+    {
+        "id": "0oabkvBLDEKCNXBGYUAS",
+        "name": "template_swa",
+        "label": "Sample Plugin App",
+        "status": "ACTIVE",
+        "lastUpdated": "2013-09-11T17:58:54.000Z",
+        "created": "2013-09-11T17:46:08.000Z",
+        "accessibility": {
+            "selfService": false,
+            "errorRedirectUrl": null
+        },
+        "visibility": {
+            "autoSubmitToolbar": false,
+            "hide": {
+                "iOS": false,
+                "web": false
+            },
+            "appLinks": {
+                "login": true
+            }
+        },
+        "features": [],
+        "signOnMode": "BROWSER_PLUGIN",
+        "credentials": {
+            "scheme": "EDIT_USERNAME_AND_PASSWORD",
+            "userNameTemplate": {
+                "template": "${source.login}",
+                "type": "BUILT_IN"
+            }
+        },
+        "settings": {
+            "app": {
+                "buttonField": "btn-login",
+                "passwordField": "txtbox-password",
+                "usernameField": "txtbox-username",
+                "url": "https://example.com/login.html"
+            }
+        },
+        "_links": {
+            "users": {
+                "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
+            },
+            "self": {
+                "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
+            },
+            "deactivate": {
+                "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
+            }
+        }
+    }
+]
+```
+
+#### List Applications Assigned to Group
+
+##### Request
+
+```sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X GET "https://your-domain.okta.com/api/v1/apps?filter=group.id+eq+\"00gckgEHZXOUDGDJLYLG\""
+```
+
+##### Response
+
+```json
+[
+       {
+        "id": "0oabkvBLDEKCNXBGYUAS",
+        "name": "template_swa",
+        "label": "Sample Plugin App",
+        "status": "ACTIVE",
+        "lastUpdated": "2013-09-11T17:58:54.000Z",
+        "created": "2013-09-11T17:46:08.000Z",
+        "accessibility": {
+            "selfService": false,
+            "errorRedirectUrl": null
+        },
+        "visibility": {
+            "autoSubmitToolbar": false,
+            "hide": {
+                "iOS": false,
+                "web": false
+            },
+            "appLinks": {
+                "login": true
+            }
+        },
+        "features": [],
+        "signOnMode": "BROWSER_PLUGIN",
+        "credentials": {
+            "scheme": "EDIT_USERNAME_AND_PASSWORD",
+            "userNameTemplate": {
+                "template": "${source.login}",
+                "type": "BUILT_IN"
+            }
+        },
+        "settings": {
+            "app": {
+                "buttonField": "btn-login",
+                "passwordField": "txtbox-password",
+                "usernameField": "txtbox-username",
+                "url": "https://example.com/login.html"
+            }
+        },
+        "_links": {
+            "users": {
+                "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
+            },
+            "self": {
+                "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
+            },
+            "deactivate": {
+                "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
+            }
+        }
+    }
+]
+```
+
 
 ### Update Application
 
@@ -1243,9 +1505,9 @@ Updated [Application](#application-model)
 ##### Request
 
 ```sh
-curl -v -H "Authorization:SSWS yourtoken" \
--H "Accept:application/json" \
--H "Content-type:application/json" \
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
 -X PUT "https://your-domain.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS" \
 -d \
 '{
@@ -1336,6 +1598,9 @@ curl -v -H "Authorization:SSWS yourtoken" \
         },
         "metadata": {
             "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/sso/saml/metadata"
+        },
+        "deactivate": {
+            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
         }
     }
 }
@@ -1346,9 +1611,9 @@ curl -v -H "Authorization:SSWS yourtoken" \
 ##### Request
 
 ```sh
-curl -v -H "Authorization:SSWS yourtoken" \
--H "Accept:application/json" \
--H "Content-type:application/json" \
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
 -X PUT "https://your-domain.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS" \
 -d \
 '{
@@ -1436,6 +1701,9 @@ curl -v -H "Authorization:SSWS yourtoken" \
         },
         "self": {
             "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
+        },
+        "deactivate": {
+            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
         }
     }
 }
@@ -1446,9 +1714,9 @@ curl -v -H "Authorization:SSWS yourtoken" \
 ##### Request
 
 ```sh
-curl -v -H "Authorization:SSWS yourtoken" \
--H "Accept:application/json" \
--H "Content-type:application/json" \
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
 -X PUT "https://your-domain.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS" \
 -d \
 '{
@@ -1536,6 +1804,9 @@ curl -v -H "Authorization:SSWS yourtoken" \
         },
         "self": {
             "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
+        },
+        "deactivate": {
+            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
         }
     }
 }
@@ -1546,9 +1817,9 @@ curl -v -H "Authorization:SSWS yourtoken" \
 ##### Request
 
 ```sh
-curl -v -H "Authorization:SSWS yourtoken" \
--H "Accept:application/json" \
--H "Content-type:application/json" \
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
 -X PUT "https://your-domain.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS" \
 -d \
 '{
@@ -1640,9 +1911,125 @@ curl -v -H "Authorization:SSWS yourtoken" \
         },
         "self": {
             "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
+        },
+        "deactivate": {
+            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
         }
     }
 }
+```
+
+### Delete Application
+
+#### DELETE /apps/:id
+
+Removes an inactive application.
+
+*Note: applications must be deactivated before they can be deleted*
+
+##### Request Parameters
+
+Parameter | Description | Param Type | DataType | Required | Default
+--- | --- | --- | --- | --- | ---
+id | id of app to delete | URL | String | TRUE |
+
+
+##### Request
+
+```sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X DELETE "https://your-domain.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
+```
+
+##### Response
+
+```http
+HTTP/1.1 204 No Content
+```
+
+If the application has an `ACTIVE` status you will receive an error response.
+
+```
+HTTP/1.1 403 Forbidden
+Content-Type: application/json
+
+{
+    "errorCode": "E0000056",
+    "errorSummary": "Delete application forbidden.",
+    "errorLink": "E0000056",
+    "errorId": "oaeHifznCllQ26xcRsO5vAk7A",
+    "errorCauses": [
+        {
+            "errorSummary": "The application must be deactivated before deletion."
+        }
+    ]
+}
+```
+
+## Application Lifecycle Operations
+
+### Activate Application
+
+#### POST /apps/:id/lifecycle/activate
+
+Activates an inactive application.
+
+##### Request Parameters
+
+Parameter | Description | Param Type | DataType | Required | Default
+--- | --- | --- | --- | --- | ---
+id | id of app to activate | URL | String | TRUE |
+
+##### Response Parameters
+
+An empty JSON object `{}`
+
+##### Request
+
+```sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/activate"
+```
+
+##### Response
+
+```json
+{}
+```
+
+### Deactivate Application
+
+#### POST /apps/:id/lifecycle/deactivate
+
+Deactivates an active application.
+
+##### Request Parameters
+
+Parameter | Description | Param Type | DataType | Required | Default
+--- | --- | --- | --- | --- | ---
+id | id of app to deactivate | URL | String | TRUE |
+
+##### Response Parameters
+
+An empty JSON object `{}`
+
+##### Request
+
+```sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
+```
+
+##### Response
+
+```json
+{}
 ```
 
 ## Application User Operations
@@ -1670,9 +2057,9 @@ All responses return the assigned [Application User](#application-user-model).
 ##### Request
 
 ```sh
-curl -v -H "Authorization:SSWS yourtoken" \
--H "Accept:application/json" \
--H "Content-type:application/json" \
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
 -X PUT "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users/00ud4tVDDXYVKPXKVLCO" \
 -d \
 '{
@@ -1726,9 +2113,9 @@ Fetched [Application User](#application-user-model)
 ##### Request
 
 ```sh
-curl -v -H "Authorization:SSWS yourtoken" \
--H "Accept:application/json" \
--H "Content-type:application/json" \
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
 -X GET "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users/00ud4tVDDXYVKPXKVLCO"
 ```
 
@@ -1774,9 +2161,9 @@ Array of [Application Users](#application-user-model)
 ##### Request
 
 ```sh
-curl -v -H "Authorization:SSWS yourtoken" \
--H "Accept:application/json" \
--H "Content-type:application/json" \
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
 -X GET "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users"
 ```
 
@@ -1852,9 +2239,9 @@ All responses return the assigned [Application User](#application-user-model).
 ##### Request
 
 ```sh
-curl -v -H "Authorization:SSWS yourtoken" \
--H "Accept:application/json" \
--H "Content-type:application/json" \
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
 -X PUT "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users/00ud4tVDDXYVKPXKVLCO" \
 -d \
 '{
@@ -1907,9 +2294,9 @@ An empty JSON object `{}`
 ##### Request
 
 ```sh
-curl -v -H "Authorization:SSWS yourtoken" \
--H "Accept:application/json" \
--H "Content-type:application/json" \
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
 -X DELETE "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users/00ud4tVDDXYVKPXKVLCO" 
 ```
 
@@ -1942,9 +2329,9 @@ All responses return the assigned [Application Group](#application-group-model).
 ##### Request
 
 ```sh
-curl -v -H "Authorization:SSWS yourtoken" \
--H "Accept:application/json" \
--H "Content-type:application/json" \
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
 -X PUT "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/groups/00gbkkGFFWZDLCNTAGQR" \
 -d \
 '{
@@ -1983,9 +2370,9 @@ Fetched [Application Group](#application-group-model)
 ##### Request
 
 ```sh
-curl -v -H "Authorization:SSWS yourtoken" \
--H "Accept:application/json" \
--H "Content-type:application/json" \
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
 -X GET "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/groups/00gbkkGFFWZDLCNTAGQR"
 ```
 
@@ -2022,9 +2409,9 @@ Array of [Application Groups](#application-group-model)
 ##### Request
 
 ```sh
-curl -v -H "Authorization:SSWS yourtoken" \
--H "Accept:application/json" \
--H "Content-type:application/json" \
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
 -X GET "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/groups"
 ```
 
@@ -2067,9 +2454,9 @@ An empty JSON object `{}`
 ##### Request
 
 ```sh
-curl -v -H "Authorization:SSWS yourtoken" \
--H "Accept:application/json" \
--H "Content-type:application/json" \
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
 -X DELETE "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/groups/00gbkkGFFWZDLCNTAGQR"
 ```
 

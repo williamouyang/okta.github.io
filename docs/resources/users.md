@@ -1,53 +1,54 @@
 ---
 layout: sdks
 title: Users
-category : Endpoints
-tagline: "Endpoints - Users"
-tags : [endpoints, users]
+category : Resources
+tagline: "Users"
+tags : [resource, user]
 icon: "glyphicon glyphicon-user"
 position: leftsidebar
-priority: 4
+priority: 2
 ---
 
 # Users
+
 ## Overview
 
 The User API provides operations for user management.
 
 - [User Model](#user-model)
-    - [Metadata Attributes](#metadata-attributes)
-    - [Profile Object](#profile-object)
-    - [Credentials Object](#credentials-object)
-    - [Links Object](#links-object)
-- [User Operations](#user-operations)   
-    - [Create User](#create-user)
-        - [Create User without Credentials](#create-user-without-credentials)
-        - [Create User with Recovery Question](#create-user-with-recovery-question)
-        - [Create User with Password](#create-user-with-password)
-        - [Create User with Password & Recovery Question](#create-user-with-password--recovery-question)
-    - [Get User](#get-user)
-        - [Get User with id](#get-user-with-id)
-        - [Get User with login](#get-user-with-login)
-        - [Get User with login shortname](#get-user-with-login-shortname)
-    - [List Users](#list-users)
-        - [List Users with Search](#list-users-with-search)
-        - [List Users with Status (Filter)](#list-users-with-status-filter)
-    - [Update User](#update-user)
-        - [Update Profile](#update-profile)
-        - [Set Password](#set-password)
-        - [Set Recovery Question & Answer](#set-recovery-question--answer)
+	- [Metadata Attributes](#metadata-attributes)
+	- [Profile Object](#profile-object)
+	- [Credentials Object](#credentials-object)
+	- [Links Object](#links-object)
+- [User Operations](#user-operations)	
+	- [Create User](#create-user)
+		- [Create User without Credentials](#create-user-without-credentials)
+		- [Create User with Recovery Question](#create-user-with-recovery-question)
+		- [Create User with Password](#create-user-with-password)
+		- [Create User with Password & Recovery Question](#create-user-with-password--recovery-question)
+	- [Get User](#get-user)
+		- [Get User with id](#get-user-with-id)
+		- [Get User with login](#get-user-with-login)
+		- [Get User with login shortname](#get-user-with-login-shortname)
+	- [List Users](#list-users)
+		- [List Users with Search](#list-users-with-search)
+		- [List Users with Status (Filter)](#list-users-with-status-filter)
+	- [Update User](#update-user)
+		- [Update Profile](#update-profile)
+		- [Set Password](#set-password)
+		- [Set Recovery Question & Answer](#set-recovery-question--answer)
 - [Related Resources](#related-resources)
-    - [Get Assigned App Links](#get-assigned-app-links)
-    - [Get Member Groups](#get-member-groups)
+	- [Get Assigned App Links](#get-assigned-app-links)
+	- [Get Member Groups](#get-member-groups)
 - [Lifecycle Operations](#lifecycle-operations)
-    - [Activate](#activate-user)
-    - [Deactivate](#deactivate-user)
-    - [Unlock](#unlock-user)
-    - [Reset Password](#reset-password)
+	- [Activate](#activate-user)
+	- [Deactivate](#deactivate-user)
+	- [Unlock](#unlock-user)
+	- [Reset Password](#reset-password)
 - [Credential Operations](#credential-operations)
-    - [Forgot Password](#forgot-password)
-    - [Change Password](#change-password)
-    - [Change Recovery Question](#change-recovery-question)
+	- [Forgot Password](#forgot-password)
+	- [Change Password](#change-password)
+	- [Change Recovery Question](#change-recovery-question)
 
 ## User Model
 
@@ -105,7 +106,7 @@ Content Type: application/json
 The User model defines several ***read-only*** attributes:
 
 Attribute | Description | DataType | Nullable
---- | --- | --- | ---
+--- | --- | ---	| ---
 id | unique key for user | String | FALSE
 status | current status | Enum: STAGED, PROVISIONED, ACTIVE, RECOVERY, LOCKED_OUT, DEPROVISIONED | FALSE
 created | timestamp when user was created | Date | FALSE
@@ -141,12 +142,14 @@ Specifies standard and custom profile attributes for a user.
 All profiles have the following attributes:
 
 Attribute | DataType | MinLength | MaxLength | Nullable | Unique | Validation
---- | --- | --- | --- | --- | --- | ---
+--- | --- | ---	| --- | --- | --- | ---
 login | String | 5 | 100 | FALSE | TRUE | [RFC 6531 section 3.3](http://tools.ietf.org/html/rfc6531#section-3.3)
-email | String | 5 | 100 |  FALSE | TRUE |  [RFC 5322 section 3.2.3](http://tools.ietf.org/html/rfc5322#section-3.2.3)
-firstName | String | 1 | 50 | FALSE | FALSE |
-lastName | String | 1 | 50  | FALSE | FALSE |
-mobilePhone | String |  0 | 100 | TRUE | FALSE  |
+email |	String | 5 | 100 |	FALSE | TRUE |	[RFC 5322 section 3.2.3](http://tools.ietf.org/html/rfc5322#section-3.2.3)
+firstName | String | 1 | 50	| FALSE	| FALSE	|
+lastName | String | 1 | 50	| FALSE	| FALSE	|
+mobilePhone | String |	0 |	100	| TRUE | FALSE	|
+
+*Note: Avoid using a `login` with a `/` character.  Although `/` is a valid character according to [RFC 6531 section 3.3](http://tools.ietf.org/html/rfc6531#section-3.3), a user with this character in their `login` cannot be fetched by `login` ([see Get User with id](#get-user-with-id)) due to security risks with escaping this character.*
 
 #### Custom Attributes
 Custom attributes may be added to a user profile.  Custom attributes must be single-value (non-array) and have a data type of `Number`, `String`, `Boolean`, or `null`.
@@ -155,7 +158,7 @@ Custom attributes may be added to a user profile.  Custom attributes must be sin
 Specifies credentials for a user.  Credential types and requirements vary depending on the operation and security policy of the organization.
 
 Attribute | DataType | MinLength | MaxLength | Nullable | Unique | Validation
---- | --- | --- | --- | --- | --- | ---
+--- | --- | ---	| --- | --- | --- | ---
 password | [Password Object](#password-object) | | | TRUE | FALSE |
 recovery_question | [Recovery Question Object](#recovery-question-object) | | | TRUE | FALSE |
 
@@ -178,16 +181,26 @@ recovery_question | [Recovery Question Object](#recovery-question-object) | | | 
 Specifies a password for a user.  A password value is a **write-only** property.  When a user has a valid password and a response object contains a password credential, then the Password Object will be a bare object without the ```value``` property defined (e.g. ```password: {}```) to indicate that a password value exists.
 
 Attribute | DataType | MinLength | MaxLength | Nullable | Unique | Validation
---- | --- | --- | --- | --- | --- | ---
+--- | --- | ---	| --- | --- | --- | ---
 value | String | *Password Policy* | 40 | TRUE | FALSE | *Password Policy* 
 
+##### Default Password Policy
+
+- Must be a minimum of 8 characters
+- Must have a character that meets 3 of the 4 following groups:
+	- Upper case
+	- Lower case
+	- Digit
+	- Non-Alpha or Digit
+- Must not contain the user's login or parts of the the login when split on the following characters: `,` `.` `_` `#` `@`
+	- *For example, a user with login i.brock@example.org will not be able set password brockR0cks! as the password contains the login part brock*
 
 #### Recovery Question Object
 
 Specifies a secret question and answer that is validated when a user forgets their password.  The answer property is **write-only**.
 
 Attribute | DataType | MinLength | MaxLength | Nullable | Unique | Validation
---- | --- | --- | --- | --- | --- | ---
+--- | --- | ---	| --- | --- | --- | ---
 question | String | 1 | 100 | TRUE | FALSE |
 answer | String | 1 | 100 | TRUE | FALSE |
 
@@ -278,7 +291,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "statusChanged": null,
     "lastLogin": null,
     "profile": {
-        "firstName": "Isaac",
+	    "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
         "login": "isaac@example.org",
@@ -331,7 +344,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "statusChanged": null,
     "lastLogin": null,
     "profile": {
-        "firstName": "Isaac",
+	    "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
         "login": "isaac@example.org",
@@ -385,7 +398,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "statusChanged": null,
     "lastLogin": null,
     "profile": {
-        "firstName": "Isaac",
+	    "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
         "login": "isaac@example.org",
@@ -441,7 +454,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "statusChanged": null,
     "lastLogin": null,
     "profile": {
-        "firstName": "Isaac",
+	    "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
         "login": "isaac@example.org",
@@ -473,6 +486,8 @@ Fetch a specific user by id, login, or login shortname (as long as it is unambig
 Parameter | Description | Param Type | DataType | Required | Default
 --- | --- | --- | --- | --- | ---
 id | `id`, `login`, or *login shortname* (as long as it is unambiguous) | URL | String | TRUE |
+
+*Note: When fetching a user by `login` or `login shortname`, you should [URL encode](http://en.wikipedia.org/wiki/Percent-encoding) the request parameter to ensure reserved characters at escaped properly.  Logins with a `/` character can only be fetched by 'id' due to security issues with escaping the `/` character.*
 
 ##### Response Parameters
 
@@ -651,6 +666,9 @@ Parameter | Description | Param Type | DataType | Required | Default
 q | Searches `firstName`, `lastName`, and `email` attributes of users for matching value | Query | String | FALSE |
 limit | Specified the number of results | Query | Number | FALSE | 10000
 filter | Filters users by `status` expression (See Filter Expressions) | Query | String | FALSE | status eq "STAGED" or status eq "PROVISIONED" or status eq "ACTIVE" or status eq "RECOVERY" or status eq "LOCKED_OUT"
+after | Specifies the pagination cursor for the next page of users | Query | String | FALSE |
+
+*Note: The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)*
 
 *Note: Search currently performs a startsWith match but it should be considered an implementation detail and may change without notice in the future*
 
@@ -660,17 +678,27 @@ Array of [User](#user-model)
 
 #### List Users with Defaults
 
+The default user limit is set to a very high number due to historical reasons which is no longer valid for most organizations.  This will change in a future version of this API.  The recommended page limit is now `limit=200`.
+
+*Note:  If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller `limit` and page the results (See [Pagination](../getting_started/design_principles.md#pagination))*
+
 ##### Request
 
 ```sh
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/users"
+-X GET "https://your-domain.okta.com/api/v1/users?limit=200"
 ```
 
 ##### Response
-```json
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+Link: <https://your-domain.okta.com/api/v1/users?limit=200>; rel="self"
+Link: <https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limit=200>; rel="next"
+
 [
     {
         "id": "00u1ero7vZFVEIYLWPBN",
@@ -680,7 +708,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "statusChanged": null,
         "lastLogin": null,
         "profile": {
-            "firstName": "Isaac",
+    	    "firstName": "Isaac",
             "lastName": "Brock",
             "email": "isaac@example.org",
             "login": "isaac@example.org",
@@ -1329,7 +1357,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ```
 
 ## Credential Operations
-    
+	
 ### Forgot Password
 
 #### POST /users/:id/lifecycle/forgot_password

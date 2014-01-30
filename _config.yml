@@ -22,37 +22,14 @@ ASSET_PATH : false
 # Some JB helpers refer to these paths; change them here if needed.
 #
 sdks_path: /sdks/index.html
-maruku:
-  use_tex:    false
-  use_divs:   false
 
-rdiscount:
-  extensions: []
-
-exclude:     []
+exclude: []
 
 markdown: redcarpet
+markdown_ext: md
+
 redcarpet:
     extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
-
-kramdown:
-  auto_ids: true
-  footnote_nr: 1
-  entity_output: as_char
-  toc_levels: 1..6
-  smart_quotes: lsquo,rsquo,ldquo,rdquo
-  use_coderay: false
-
-  coderay:
-    coderay_wrap: div
-    coderay_line_numbers: inline
-    coderay_line_numbers_start: 1
-    coderay_tab_width: 4
-    coderay_bold_every: 10
-    coderay_css: style
-
-redcloth:
-  hard_breaks: true
 
 sitemap:
   filename: "/site-map.xml"
@@ -61,7 +38,7 @@ safe: true
 folder_priority:
 - text: Getting Started
   weight: 1
-- text: Endpoints
+- text: Resources
   weight: 2
 - text: Examples
   weight: 3
