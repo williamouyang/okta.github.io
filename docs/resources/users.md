@@ -9,46 +9,12 @@ position: leftsidebar
 priority: 2
 ---
 
+
 # Users
 
 ## Overview
 
 The User API provides operations for user management.
-
-- [User Model](#user-model)
-	- [Metadata Attributes](#metadata-attributes)
-	- [Profile Object](#profile-object)
-	- [Credentials Object](#credentials-object)
-	- [Links Object](#links-object)
-- [User Operations](#user-operations)	
-	- [Create User](#create-user)
-		- [Create User without Credentials](#create-user-without-credentials)
-		- [Create User with Recovery Question](#create-user-with-recovery-question)
-		- [Create User with Password](#create-user-with-password)
-		- [Create User with Password & Recovery Question](#create-user-with-password--recovery-question)
-	- [Get User](#get-user)
-		- [Get User with id](#get-user-with-id)
-		- [Get User with login](#get-user-with-login)
-		- [Get User with login shortname](#get-user-with-login-shortname)
-	- [List Users](#list-users)
-		- [List Users with Search](#list-users-with-search)
-		- [List Users with Status (Filter)](#list-users-with-status-filter)
-	- [Update User](#update-user)
-		- [Update Profile](#update-profile)
-		- [Set Password](#set-password)
-		- [Set Recovery Question & Answer](#set-recovery-question--answer)
-- [Related Resources](#related-resources)
-	- [Get Assigned App Links](#get-assigned-app-links)
-	- [Get Member Groups](#get-member-groups)
-- [Lifecycle Operations](#lifecycle-operations)
-	- [Activate](#activate-user)
-	- [Deactivate](#deactivate-user)
-	- [Unlock](#unlock-user)
-	- [Reset Password](#reset-password)
-- [Credential Operations](#credential-operations)
-	- [Forgot Password](#forgot-password)
-	- [Change Password](#change-password)
-	- [Change Recovery Question](#change-recovery-question)
 
 ## User Model
 
@@ -69,6 +35,7 @@ Content Type: application/json
     "activated": "2013-06-24T16:39:19.000Z",
     "statusChanged": "2013-06-24T16:39:19.000Z",
     "lastLogin": "2013-06-24T17:39:19.000Z",
+    "lastUpdated": "2013-06-27T16:35:28.000Z",
     "profile": {
         "firstName": "Isaac",
         "lastName": "Brock",
@@ -85,6 +52,9 @@ Content Type: application/json
     "_links": {
         "resetPassword": {
             "href": "https://example.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+        },
+        "expirePassword": {
+            "href": "https://example.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
         },
         "forgotPassword": {
             "href": "https://example.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
@@ -103,25 +73,28 @@ Content Type: application/json
 ```
 
 ### Metadata Attributes
+
 The User model defines several ***read-only*** attributes:
 
 Attribute | Description | DataType | Nullable
 --- | --- | ---	| ---
 id | unique key for user | String | FALSE
-status | current status | Enum: STAGED, PROVISIONED, ACTIVE, RECOVERY, LOCKED_OUT, DEPROVISIONED | FALSE
+status | current status | Enum: STAGED, PROVISIONED, ACTIVE, RECOVERY, LOCKED_OUT, PASSWORD_EXPIRED, DEPROVISIONED | FALSE
 created | timestamp when user was created | Date | FALSE
 activated | timestamp when transition to **ACTIVE** status *completed* | Date | TRUE
 statusChanged | timestamp when status last changed | Date | TRUE
 lastLogin | timestamp of last login | Date | TRUE
+lastUpdated | timestamp when user was last updated | Date | FALSE
 transitioningToStatus | target status of an inprogress asynchronous status transition | Enum: PROVISIONED, ACTIVE, DEPROVISIONED | TRUE
 
-*Note: These attributes are only available after a user is created*
+> These attributes are only available after a user is created
 
-`activated` timestamp will only be available to users activated after *06/30/2013*.
+> `activated` timestamp will only be available to users activated after *06/30/2013*.
 
-`statusChanged` and `lastLogin` timestamps will be missing for users created before *06/30/2013*.  They will be updated on next status change or login.
+> `statusChanged` and `lastLogin` timestamps will be missing for users created before *06/30/2013*.  They will be updated on next status change or login.
 
 ### Profile Object
+
 Specifies standard and custom profile attributes for a user.
 
 ```json
@@ -139,6 +112,7 @@ Specifies standard and custom profile attributes for a user.
 ```
 
 #### Standard Attributes
+
 All profiles have the following attributes:
 
 Attribute | DataType | MinLength | MaxLength | Nullable | Unique | Validation
@@ -149,12 +123,14 @@ firstName | String | 1 | 50	| FALSE	| FALSE	|
 lastName | String | 1 | 50	| FALSE	| FALSE	|
 mobilePhone | String |	0 |	100	| TRUE | FALSE	|
 
-*Note: Avoid using a `login` with a `/` character.  Although `/` is a valid character according to [RFC 6531 section 3.3](http://tools.ietf.org/html/rfc6531#section-3.3), a user with this character in their `login` cannot be fetched by `login` ([see Get User with id](#get-user-with-id)) due to security risks with escaping this character.*
+> Avoid using a `login` with a `/` character.  Although `/` is a valid character according to [RFC 6531 section 3.3](http://tools.ietf.org/html/rfc6531#section-3.3), a user with this character in their `login` cannot be fetched by `login` ([see Get User with id](#get-user-with-id)) due to security risks with escaping this character.
 
 #### Custom Attributes
+
 Custom attributes may be added to a user profile.  Custom attributes must be single-value (non-array) and have a data type of `Number`, `String`, `Boolean`, or `null`.
 
 ### Credentials Object
+
 Specifies credentials for a user.  Credential types and requirements vary depending on the operation and security policy of the organization.
 
 Attribute | DataType | MinLength | MaxLength | Nullable | Unique | Validation
@@ -162,7 +138,7 @@ Attribute | DataType | MinLength | MaxLength | Nullable | Unique | Validation
 password | [Password Object](#password-object) | | | TRUE | FALSE |
 recovery_question | [Recovery Question Object](#recovery-question-object) | | | TRUE | FALSE |
 
-*Note: Some credential values are __write-only__*
+> Some credential values are __write-only__
 
 ```json
 {
@@ -214,6 +190,7 @@ self | The actual user
 activate | [Lifecycle action](#activate-user) to transition user to **ACTIVE** status
 deactivate | [Lifecycle action](#deactivate-user) to transition user to **DEPROVISIONED** status
 resetPassword | [Lifecycle action](#reset-password) to transition user to **RECOVERY** status
+expirePassword | [Lifecycle action](#expire-password) to transition user to **PASSWORD_EXPIRED** status
 forgotPassword | [Resets a user's password](#forgot-password) by validating the user's recovery credential.
 changePassword | [Changes a user's password](#change-password) validating the user's current password
 changeRecoveryQuestion | [Changes a user's recovery credential](#change-recovery-question) by validating the user's current password
@@ -246,7 +223,7 @@ Users can be created with or without credentials:
 
 All responses return the created [User](#user-model).  Activation of a user is an asynchronous operation.  The user will have the `transitioningToStatus` property with a value of **ACTIVE** during activation to indicate that the user hasn't completed the asynchronous operation.  The user will have a `status` of **ACTIVE** when the activation process is complete.
 
-*Note: The user will be emailed a one-time activation token if activated without a password*
+> The user will be emailed a one-time activation token if activated without a password
 
 Security Q & A | Password | Activate Query Parameter | User Status | Login Credential | Welcome Screen
 --- | --- | --- | --- | --- | ---
@@ -290,6 +267,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "activated": null,
     "statusChanged": null,
     "lastLogin": null,
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
     "profile": {
 	    "firstName": "Isaac",
         "lastName": "Brock",
@@ -343,6 +321,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "activated": null,
     "statusChanged": null,
     "lastLogin": null,
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
     "profile": {
 	    "firstName": "Isaac",
         "lastName": "Brock",
@@ -397,6 +376,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "activated": null,
     "statusChanged": null,
     "lastLogin": null,
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
     "profile": {
 	    "firstName": "Isaac",
         "lastName": "Brock",
@@ -418,7 +398,6 @@ curl -v -H "Authorization: SSWS yourtoken" \
 #### Create User with Password & Recovery Question
 
 ##### Request
-
 
 ```sh
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -445,6 +424,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ```
 
 ##### Response
+
 ```json
 {
     "id": "00u1ero7vZFVEIYLWPBN",
@@ -453,6 +433,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "activated": null,
     "statusChanged": null,
     "lastLogin": null,
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
     "profile": {
 	    "firstName": "Isaac",
         "lastName": "Brock",
@@ -487,11 +468,72 @@ Parameter | Description | Param Type | DataType | Required | Default
 --- | --- | --- | --- | --- | ---
 id | `id`, `login`, or *login shortname* (as long as it is unambiguous) | URL | String | TRUE |
 
-*Note: When fetching a user by `login` or `login shortname`, you should [URL encode](http://en.wikipedia.org/wiki/Percent-encoding) the request parameter to ensure reserved characters at escaped properly.  Logins with a `/` character can only be fetched by 'id' due to security issues with escaping the `/` character.*
+> When fetching a user by `login` or `login shortname`, you should [URL encode](http://en.wikipedia.org/wiki/Percent-encoding) the request parameter to ensure reserved characters at escaped properly.  Logins with a `/` character can only be fetched by 'id' due to security issues with escaping the `/` character.
+
+>You can substitute *me* for the id to fetch the current user.
 
 ##### Response Parameters
 
 Fetched [User](#user-model)
+
+#### Get Current User
+
+##### Request
+
+```sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X GET "https://your-domain.okta.com/api/v1/users/me"
+```
+
+##### Response
+
+```json
+{
+    "id": "00ub0oNGTSWTBKOLGLNR",
+    "status": "ACTIVE",
+    "created": "2013-06-24T16:39:18.000Z",
+    "activated": "2013-06-24T16:39:19.000Z",
+    "statusChanged": "2013-06-24T16:39:19.000Z",
+    "lastLogin": "2013-06-24T17:39:19.000Z",
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "profile": {
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "email": "isaac@example.org",
+        "login": "isaac@example.org",
+        "mobilePhone": "555-415-1337"
+    },
+    "credentials": {
+        "password": {},
+        "recovery_question": {
+            "question": "Who's a major player in the cowboy scene?"
+        }
+    },
+    "_links": {
+        "resetPassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+        },
+        "expirePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+        },
+        "forgotPassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+        },
+        "changeRecoveryQuestion": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+        },
+        "deactivate": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+        },
+        "changePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+        }
+    }
+}
+```
+
 
 #### Get User with id
 
@@ -514,6 +556,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "activated": "2013-06-24T16:39:19.000Z",
     "statusChanged": "2013-06-24T16:39:19.000Z",
     "lastLogin": "2013-06-24T17:39:19.000Z",
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
     "profile": {
         "firstName": "Isaac",
         "lastName": "Brock",
@@ -530,6 +573,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "_links": {
         "resetPassword": {
             "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+        },
+        "expirePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
         },
         "forgotPassword": {
             "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
@@ -559,6 +605,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ```
 
 ##### Response
+
 ```json
 {
     "id": "00ub0oNGTSWTBKOLGLNR",
@@ -567,6 +614,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "activated": "2013-06-24T16:39:19.000Z",
     "statusChanged": "2013-06-24T16:39:19.000Z",
     "lastLogin": "2013-06-24T17:39:19.000Z",
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
     "profile": {
         "firstName": "Isaac",
         "lastName": "Brock",
@@ -583,6 +631,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "_links": {
         "resetPassword": {
             "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+        },
+        "expirePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
         },
         "forgotPassword": {
             "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
@@ -612,6 +663,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ```
 
 ##### Response
+
 ```json
 {
     "id": "00ub0oNGTSWTBKOLGLNR",
@@ -620,6 +672,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "activated": "2013-06-24T16:39:19.000Z",
     "statusChanged": "2013-06-24T16:39:19.000Z",
     "lastLogin": "2013-06-24T17:39:19.000Z",
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
     "profile": {
         "firstName": "Isaac",
         "lastName": "Brock",
@@ -636,6 +689,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "_links": {
         "resetPassword": {
             "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+        },
+        "expirePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
         },
         "forgotPassword": {
             "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
@@ -665,12 +721,51 @@ Parameter | Description | Param Type | DataType | Required | Default
 --- | --- | --- | --- | --- | ---
 q | Searches `firstName`, `lastName`, and `email` attributes of users for matching value | Query | String | FALSE |
 limit | Specified the number of results | Query | Number | FALSE | 10000
-filter | Filters users by `status` expression (See Filter Expressions) | Query | String | FALSE | status eq "STAGED" or status eq "PROVISIONED" or status eq "ACTIVE" or status eq "RECOVERY" or status eq "LOCKED_OUT"
+filter | [Filter expression](../getting_started/design_principles.md#filtering) for users | Query | String | FALSE |
 after | Specifies the pagination cursor for the next page of users | Query | String | FALSE |
 
-*Note: The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)*
+> The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)
 
-*Note: Search currently performs a startsWith match but it should be considered an implementation detail and may change without notice in the future*
+> Search currently performs a startsWith match but it should be considered an implementation detail and may change without notice in the future
+
+###### Filters
+
+The following expressions are supported for users with the `filter` query parameter:
+
+Filter | Description
+------ | ----------- 
+`status eq "STAGED"` | Users that have a `status` of `STAGED`
+`status eq "PROVISIONED"` | Users that have a `status` of `PROVISIONED`
+`status eq "ACTIVE"` | Users that have a `status` of `ACTIVE`
+`status eq "RECOVERY"` | Users that have a `status` of `RECOVERY`
+`status eq "PASSWORD_EXPIRED"` | Users that have a `status` of `PASSWORD_EXPIRED`
+`status eq "LOCKED_OUT"` | Users that have a `status` of `LOCKED_OUT`
+`status eq "DEPROVISIONED"` | Users that have a `status` of `DEPROVISIONED`
+`lastUpdated lt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Users last updated before a specific datetime
+`lastUpdated eq "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Users last updated at a specific datetime
+`lastUpdated gt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Users last updated after a specific datetime
+
+See [Filtering](../getting_started/design_principles.md#filtering) for more information on expressions
+
+> All filters must be [URL encoded](http://en.wikipedia.org/wiki/Percent-encoding) where `filter=lastUpdated gt "2013-06-01T00:00:00.000Z"` is encoded as `filter=lastUpdated%20gt%20%222013-06-01T00:00:00.000Z%22`
+
+**Filter Examples**
+
+Users with status of `LOCKED_OUT`
+
+    filter=status eq "LOCKED_OUT"
+
+Users updated after 06/01/2013 but before 01/01/2014
+
+    filter=lastUpdated gt "2013-06-01T00:00:00.000Z" and lastUpdated lt "2014-01-01T00:00:00.000Z"
+
+Users updated after 06/01/2013 but before 01/01/2014 with a status of `ACTIVE`
+
+    filter=lastUpdated gt "2013-06-27T16:35:28.000Z" and lastUpdated lt "2013-07-04T16:35:28.000Z" and status eq "ACTIVE"
+    
+Users updated after 06/01/2013 but with a status of `LOCKED_OUT` or `RECOVERY`
+
+    filter=lastUpdated gt "2013-06-27T16:35:28.000Z" and (status eq "LOCKED_OUT" or status eq "RECOVERY")
 
 ##### Response Parameters
 
@@ -680,7 +775,7 @@ Array of [User](#user-model)
 
 The default user limit is set to a very high number due to historical reasons which is no longer valid for most organizations.  This will change in a future version of this API.  The recommended page limit is now `limit=200`.
 
-*Note:  If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller `limit` and page the results (See [Pagination](../getting_started/design_principles.md#pagination))*
+> If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller `limit` and page the results (See [Pagination](../getting_started/design_principles.md#pagination))
 
 ##### Request
 
@@ -707,6 +802,7 @@ Link: <https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limi
         "activated": null,
         "statusChanged": null,
         "lastLogin": null,
+        "lastUpdated": "2013-07-02T21:36:25.344Z",
         "profile": {
     	    "firstName": "Isaac",
             "lastName": "Brock",
@@ -728,6 +824,7 @@ Link: <https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limi
         "activated": "2013-06-24T16:39:19.000Z",
         "statusChanged": "2013-06-24T16:39:19.000Z",
         "lastLogin": "2013-06-24T17:39:19.000Z",
+        "lastUpdated": "2013-07-02T21:36:25.344Z",
         "profile": {
             "firstName": "Eric",
             "lastName": "Judy",
@@ -744,6 +841,9 @@ Link: <https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limi
         "_links": {
             "resetPassword": {
                 "href": "https://your-domain.okta.com/api/v1/users/00uar9CIHZHPTVFRSEYZ/lifecycle/reset_password"
+            },
+            "expirePassword": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
             },
             "forgotPassword": {
                 "href": "https://your-domain.okta.com/api/v1/users/00uar9CIHZHPTVFRSEYZ/credentials/forgot_password"
@@ -774,6 +874,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ```
 
 ##### Response
+
 ```json
 [
     {
@@ -783,6 +884,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "activated": "2013-06-24T16:39:19.000Z",
         "statusChanged": "2013-06-24T16:39:19.000Z",
         "lastLogin": "2013-06-24T17:39:19.000Z",
+        "lastUpdated": "2013-07-02T21:36:25.344Z",
         "profile": {
             "firstName": "Eric",
             "lastName": "Judy",
@@ -799,6 +901,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "_links": {
             "resetPassword": {
                 "href": "https://your-domain.okta.com/api/v1/users/00uar9CIHZHPTVFRSEYZ/lifecycle/reset_password"
+            },
+            "expirePassword": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
             },
             "forgotPassword": {
                 "href": "https://your-domain.okta.com/api/v1/users/00uar9CIHZHPTVFRSEYZ/credentials/forgot_password"
@@ -817,7 +922,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ]
 ```
 
-#### List Users with Status (Filter)
+#### List Users Updated after Timestamp
 
 ##### Request
 
@@ -825,7 +930,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/users?filter=status+eq+\"ACTIVE\""
+-X GET "https://your-domain.okta.com/api/v1/users?filter=lastUpdated+gt+\"2013-07-01T00:00:00.000Z\""
 ```
 
 ##### Response
@@ -839,6 +944,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "activated": "2013-06-24T16:39:19.000Z",
         "statusChanged": "2013-06-24T16:39:19.000Z",
         "lastLogin": "2013-06-24T17:39:19.000Z",
+        "lastUpdated": "2013-07-02T21:36:25.344Z",
         "profile": {
             "firstName": "Eric",
             "lastName": "Judy",
@@ -855,6 +961,69 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "_links": {
             "resetPassword": {
                 "href": "https://your-domain.okta.com/api/v1/users/00uar9CIHZHPTVFRSEYZ/lifecycle/reset_password"
+            },
+            "expirePassword": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+            },
+            "forgotPassword": {
+                "href": "https://your-domain.okta.com/api/v1/users/00uar9CIHZHPTVFRSEYZ/credentials/forgot_password"
+            },
+            "changeRecoveryQuestion": {
+                "href": "https://your-domain.okta.com/api/v1/users/00uar9CIHZHPTVFRSEYZ/credentials/change_recovery_question"
+            },
+            "deactivate": {
+                "href": "https://your-domain.okta.com/api/v1/users/00uar9CIHZHPTVFRSEYZ/lifecycle/deactivate"
+            },
+            "changePassword": {
+                "href": "https://your-domain.okta.com/api/v1/users/00uar9CIHZHPTVFRSEYZ/credentials/change_password"
+            }
+        }
+    }    
+]
+```
+
+#### List Users with Status
+
+##### Request
+
+```sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X GET "https://your-domain.okta.com/api/v1/users?filter=status+eq+\"ACTIVE\"+or+status+eq+\"RECOVERY\""
+```
+
+##### Response
+
+```json
+[
+    {
+        "id": "00uar9CIHZHPTVFRSEYZ",
+        "status": "ACTIVE",
+        "created": "2013-06-24T16:39:18.000Z",
+        "activated": "2013-06-24T16:39:19.000Z",
+        "statusChanged": "2013-06-24T16:39:19.000Z",
+        "lastLogin": "2013-06-24T17:39:19.000Z",
+        "lastUpdated": "2013-07-02T21:36:25.344Z",
+        "profile": {
+            "firstName": "Eric",
+            "lastName": "Judy",
+            "email": "eric@example.org",
+            "login": "eric@example.org",
+            "mobilePhone": "555-415-2011"
+        },
+        "credentials": {
+            "password": {},
+            "recovery_question": {
+                "question": "The stars are projectors?"
+            }
+        },
+        "_links": {
+            "resetPassword": {
+                "href": "https://your-domain.okta.com/api/v1/users/00uar9CIHZHPTVFRSEYZ/lifecycle/reset_password"
+            },
+            "expirePassword": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
             },
             "forgotPassword": {
                 "href": "https://your-domain.okta.com/api/v1/users/00uar9CIHZHPTVFRSEYZ/credentials/forgot_password"
@@ -889,7 +1058,7 @@ credentials | Update credentials for user | Body | [Credentials Object](#credent
 
 `profile` and `credentials` can be updated independently or with a single request. 
 
-*Note: All profile attributes must be specified when updating a user's profile.  __Partial updates are not supported!__*
+> All profile attributes must be specified when updating a user's profile.  __Partial updates are not supported!__
 
 ##### Response Parameters
 
@@ -927,6 +1096,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "activated": "2013-06-24T16:39:19.000Z",
     "statusChanged": "2013-06-24T16:39:19.000Z",
     "lastLogin": "2013-06-24T17:39:19.000Z",
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
     "profile": {
         "firstName": "Isaac",
         "lastName": "Brock",
@@ -944,6 +1114,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "_links": {
         "resetPassword": {
             "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+        },
+        "expirePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
         },
         "forgotPassword": {
             "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
@@ -994,6 +1167,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "activated": "2013-06-24T16:39:19.000Z",
     "statusChanged": "2013-06-24T16:39:19.000Z",
     "lastLogin": "2013-06-24T17:39:19.000Z",
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
     "profile": {
         "firstName": "Isaac",
         "lastName": "Brock",
@@ -1010,6 +1184,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "_links": {
         "resetPassword": {
             "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+        },
+        "expirePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
         },
         "forgotPassword": {
             "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
@@ -1059,6 +1236,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "activated": "2013-06-24T16:39:19.000Z",
     "statusChanged": "2013-06-24T16:39:19.000Z",
     "lastLogin": "2013-06-24T17:39:19.000Z",
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
     "profile": {
         "firstName": "Isaac",
         "lastName": "Brock",
@@ -1075,6 +1253,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "_links": {
         "resetPassword": {
             "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+        },
+        "expirePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
         },
         "forgotPassword": {
             "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
@@ -1123,6 +1304,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ```json
 [
     {
+        "id": "auc01100002754172417",
         "label": "Google Apps Mail",
         "linkUrl": "https://your-domain.okta.com/home/google/0oa3omz2i9XRNSRIHBZO/50",
         "logoUrl": "https://your-domain.okta.com/img/logos/google-mail.png",
@@ -1134,6 +1316,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "sortOrder": 0
     },
     {
+        "id": "auc01100002754172415",
         "label": "Google Apps Calendar",
         "linkUrl": "https://your-domain.okta.com/home/google/0oa3omz2i9XRNSRIHBZO/54",
         "logoUrl": "https://your-domain.okta.com/img/logos/google-calendar.png",
@@ -1145,6 +1328,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "sortOrder": 1
     },
     {
+        "id": "auc01100002754172416",
         "label": "Box",
         "linkUrl": "https://your-domain.okta.com/home/boxnet/0oa3ompioiQCSTOYXVBK/72",
         "logoUrl": "https://your-domain.okta.com/img/logos/box.png",
@@ -1156,6 +1340,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "sortOrder": 3
     },
     {
+        "id": "auc01100002754172417",
         "label": "Salesforce.com",
         "linkUrl": "https://your-domain.okta.com/home/salesforce/0oa12ecnxtBQMKOXJSMF/46",
         "logoUrl": "https://your-domain.okta.com/img/logos/salesforce_logo.png",
@@ -1223,7 +1408,7 @@ Lifecycle operations are non-idempotent operations that initiate a state transit
 
 Activates a user.  This operation can only be performed on users with a **STAGED** `status`.  Activation of a user is an asynchronous operation.  The user will have the `transitioningToStatus` property with a value of **ACTIVE** during activation to indicate that the user hasn't completed the asynchronous operation.  The user will have a `status` of **ACTIVE** when the activation process is complete.
 
-*Note: Users that do not have a password must complete the welcome flow by visiting the activation link to complete the transition to __ACTIVE__ status.*
+> Users that do not have a password must complete the welcome flow by visiting the activation link to complete the transition to __ACTIVE__ status.
 
 ##### Request Parameters
 
@@ -1242,7 +1427,7 @@ Returns empty object by default. When `sendEmail` is `false`, returns an activat
 }
 ```
 
-*Note: If a password was set before the user was activated, then user must login with with their password and not the activation link*
+> If a password was set before the user was activated, then user must login with with their password and not the activation link
 
 ##### Request
 
@@ -1267,7 +1452,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 Deactivates a user.  This operation can only be performed on users that do not have a **DEPROVISIONED** `status`.  Deactivation of a user is an asynchronous operation.  The user will have the `transitioningToStatus` property with a value of **DEPROVISIONED** during deactivation to indicate that the user hasn't completed the asynchronous operation.  The user will have a `status` of **DEPROVISIONED** when the deactivation process is complete.
 
-*Note: Deactivating a user is a __destructive__ operation.  The user will be deprovisioned from all assigned applications which may destroy their data such as email or files.  __This action cannot be recovered!__*
+> Deactivating a user is a __destructive__ operation.  The user will be deprovisioned from all assigned applications which may destroy their data such as email or files.  __This action cannot be recovered!__
 
 ##### Request Parameters
 
@@ -1294,7 +1479,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 Unlocks a user with a **LOCKED_OUT** status and returns them to **ACTIVE** `status`.  Users will be able to login with their current password.
 
-*Note: This operation currently only works with Okta-mastered users and does not support directory-mastered accounts such as Active Directory.*
+> This operation currently only works with Okta-mastered users and does not support directory-mastered accounts such as Active Directory.
 
 ##### Request Parameters
 
@@ -1356,6 +1541,91 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ```
 
+### Expire Password
+
+#### POST /users/:id/lifecycle/expire_password
+
+This operation will transition the user to the `status` of **PASSWORD_EXPIRED** and the user will be required to change their password at their next login. If `tempPassword` is passed, the user's password is reset to a temporary password that is returned, and then the temporary password is expired.
+
+##### Request Parameters
+
+Parameter | Description | Param Type | DataType | Required | Default
+--- | --- | --- | --- | --- | ---
+id | `id` of user | URL | String | TRUE |
+tempPassword | Sets the user's password to a temporary password,  if `true` | Query | Boolean | FALSE | FALSE
+
+##### Response Parameters
+
+Returns an the complete user object by default. When `tempPassword` is `true`, returns the temporary password.
+
+```json
+{
+    "tempPassword": "HR076gb6"
+}
+```
+
+##### Request
+
+```sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password?tempPassword=false"
+```
+
+##### Response
+
+```json
+{
+    "id": "00udp9BOIVEWHAAGSXRJ",
+    "status": "ACTIVE",
+    "created": "2014-03-04T06:14:07.000Z",
+    "activated": null,
+    "statusChanged": null,
+    "lastLogin": "2014-03-04T17:46:59.000Z",
+    "lastUpdated": "2014-03-04T17:54:48.000Z",
+    "profile": {
+        "firstName": "Add-Min",
+        "lastName": "O'Cloudy Tud",
+        "email": "webmaster@clouditude.net",
+        "login": "administrator1@clouditude.net",
+        "mobilePhone": null
+    },
+    "credentials": {
+        "password": {},
+        "recovery_question": {
+            "question": "Last 4 digits of your social security number?"
+        }
+    },
+    "_links": {
+        "resetPassword": {
+            "href": "http://rain.okta1.com:1802/api/v1/users/00udp9BOIVEWHAAGSXRJ/lifecycle/reset_password",
+            "method": "POST"
+        },
+        "expirePassword": {
+            "href": "http://rain.okta1.com:1802/api/v1/users/00udp9BOIVEWHAAGSXRJ/lifecycle/expire_password",
+            "method": "POST"
+        },
+        "forgotPassword": {
+            "href": "http://rain.okta1.com:1802/api/v1/users/00udp9BOIVEWHAAGSXRJ/credentials/forgot_password",
+            "method": "POST"
+        },
+        "changeRecoveryQuestion": {
+            "href": "http://rain.okta1.com:1802/api/v1/users/00udp9BOIVEWHAAGSXRJ/credentials/change_recovery_question",
+            "method": "POST"
+        },
+        "deactivate": {
+            "href": "http://rain.okta1.com:1802/api/v1/users/00udp9BOIVEWHAAGSXRJ/lifecycle/deactivate",
+            "method": "POST"
+        },
+        "changePassword": {
+            "href": "http://rain.okta1.com:1802/api/v1/users/00udp9BOIVEWHAAGSXRJ/credentials/change_password",
+            "method": "POST"
+        }
+    }
+}
+```
+
 ## Credential Operations
 	
 ### Forgot Password
@@ -1380,7 +1650,7 @@ Returns an empty object by default. When `sendEmail` is `false`, returns a link 
   "resetPasswordUrl": "https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"
 }
 ```
-*Note: This operation does not affect the status of the user.*
+> This operation does not affect the status of the user.
 
 ##### Request
 
@@ -1403,7 +1673,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
   
 Sets a new password for a user by validating the user's answer to their current recovery question.  This operation can only be performed on users with a valid [recovery question credential](#recovery-question-object) and have an **ACTIVE** `status`.
 
-*Note: This operation is intended for applications that need to implement their own forgot password flow.  You are responsible for mitigation of all security risks such as phishing and replay attacks.  Best-practice is to generate a short-lived one-time token (OTT) that is sent to a verified email account.*
+> This operation is intended for applications that need to implement their own forgot password flow.  You are responsible for mitigation of all security risks such as phishing and replay attacks.  Best-practice is to generate a short-lived one-time token (OTT) that is sent to a verified email account.
 
 
 ##### Request Parameters
@@ -1418,7 +1688,7 @@ recovery_question | Answer to user's current recovery question | Body | [Recover
 
 [Credentials](#credentials-object) of the user
 
-*Note: This operation does not affect the status of the user.*
+> This operation does not affect the status of the user.
 
 ##### Request
 
@@ -1465,7 +1735,7 @@ newPassword | New password for user | Body | [Password Object](#password-object)
 
 [Credentials](#credentials-object) of the user
 
-*Note: The user will transition to __ACTIVE__ status when successfully invoked in __RECOVERY__ status*
+> The user will transition to __ACTIVE__ status when successfully invoked in __RECOVERY__ status
 
 ##### Request
 
@@ -1512,7 +1782,7 @@ recovery_question | New recovery question & answer for user| Body | [Recovery Qu
 
 [Credentials](#credentials-object) of the user
 
-*Note: This operation does not affect the status of the user.*
+> This operation does not affect the status of the user.
 
 ##### Request
 

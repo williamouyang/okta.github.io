@@ -76,6 +76,7 @@
 <ul>
 <li><a href="#link-header">Link Header</a></li>
 </ul></li>
+<li><a href="#filtering">Filtering</a></li>
 <li><a href="#rate-limiting">Rate Limiting</a></li>
 </ul>
 
@@ -111,7 +112,9 @@
 
 <p>The <code>apiversion</code> is is currently v1.</p>
 
-<p><em>Note: All API access is over HTTPS</em></p>
+<blockquote>
+<p>All API requests must use HTTPS scheme</p>
+</blockquote>
 
 <h2 id="toc_5">Media Types</h2>
 
@@ -142,7 +145,9 @@ with no <code>body</code> param, be sure to set the <code>Content-Length</code> 
 <p>DELETE
 : Used for deleting resources.</p>
 
-<p><em>Note: Any PUT or POST request with no Content-Length header nor a body will return a 411 error.  To get around this, either include a Content-Length: 0 header</em></p>
+<blockquote>
+<p>Any PUT or POST request with no Content-Length header nor a body will return a 411 error.  To get around this, either include a Content-Length: 0 header</p>
+</blockquote>
 
 <h2 id="toc_7">Errors</h2>
 
@@ -172,15 +177,20 @@ with no <code>body</code> param, be sure to set the <code>Content-Length</code> 
 
 <p>See <a href="error_codes.md">Error Codes</a> for a list of API error codes.</p>
 
-<p><em>Note: Only the <code>errorCode</code> property is supported for runtime error flow control.  The <code>errorSummary</code> property is only to intended for troubleshooting and may change over time</em></p>
+<blockquote>
+<p>Only the <code>errorCode</code> property is supported for runtime error flow control.  The <code>errorSummary</code> property is only to intended for troubleshooting and may change over time</p>
+</blockquote>
 
 <h2 id="toc_8">Authentication</h2>
 
-<p>The API currently only supports API keys with a custom HTTP authentication scheme <code>SSWS</code> for API authentication. All requests must have a valid API key specified in the HTTP <code>Authorization</code> header with the <code>SSWS</code> scheme.</p>
+<p>The Okta API currently requires the custom HTTP authentication scheme <code>SSWS</code> for authentication. All requests must have a valid API key specified in the HTTP <code>Authorization</code> header with the <code>SSWS</code> scheme.</p>
 
-<p><code>Authorization: SSWS 00QCjAl4MlV-WPXM…0HmjFx-vbGua</code></p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">Authorization: SSWS 00QCjAl4MlV-WPXM…0HmjFx-vbGua
+</code></pre></div>
 
+<blockquote>
 <p>See <a href="getting_a_token.md">Obtaining a token</a> for instructions on how to get an API key for your organization.</p>
+</blockquote>
 
 <h2 id="toc_9">Pagination</h2>
 
@@ -188,7 +198,7 @@ with no <code>body</code> param, be sure to set the <code>Content-Length</code> 
 cursor and not on page number. The cursor is opaque to the client and specified in either the <code>?before</code> or <code>?after</code> query parameter.  For some resources, you can also set a custom page size with the <code>?limit</code> parameter.</p>
 
 <p>Note that for technical reasons not all endpoints respect pagination or the <code>?limit</code> parameter,
-see the <a href="../endpoints/events.md">Events</a> API for example.</p>
+see the <a href="../resources/events.md">Events</a> API for example.</p>
 
 <p><code>before</code>
 : This is the cursor that points to the start of the page of data that has been returned.</p>
@@ -201,11 +211,10 @@ see the <a href="../endpoints/events.md">Events</a> API for example.</p>
 
 <h3 id="toc_10">Link Header</h3>
 
-<p>Pagination links are included in the <a href="http://tools.ietf.org/html/rfc5988">Link
-header</a>. It is <strong>important</strong> to
-follow these Link header values instead of constructing your own URLs.</p>
+<p>Pagination links are included in the <a href="http://tools.ietf.org/html/rfc5988">Link header</a> of responses. It is <strong>important</strong> to follow these Link header values instead of constructing your own URLs as query parameters or  cursor formats may change without notice.</p>
 
-<div class="highlight"><pre><code class="text language-text" data-lang="text">Link: &lt;https://yoursubdomain.okta.com/api/v1/users?after=00ubfjQEMYBLRUWIEDKK; rel=&quot;next&quot;,
+<div class="highlight"><pre><code class="text language-text" data-lang="text">HTTP/1.1 200 OK
+Link: &lt;https://yoursubdomain.okta.com/api/v1/users?after=00ubfjQEMYBLRUWIEDKK; rel=&quot;next&quot;,
   &lt;https://yoursubdomain.okta.com/api/v1/users?after=00ub4tTFYKXCCZJSGFKM&gt;; rel=&quot;self&quot;
 </code></pre></div>
 
@@ -222,15 +231,134 @@ follow these Link header values instead of constructing your own URLs.</p>
 
 <p>When you first make an API call and get a cursor-paged list of objects, the end of the list will be the point at which you do not receive another <code>next</code> link value with the response. The behavior is different in the  <em>Events</em> API. In the <em>Events</em> API, the next link always exists, since that connotation is more like a cursor or stream of data. The other APIs are primarily fixed data lengths.</p>
 
-<h2 id="toc_11">Hypermedia</h2>
+<h2 id="toc_11">Filtering</h2>
 
-<p>Resources in the Okta API use hypermedia for &quot;discoverability&quot;.  Hypermedia enables API clients to navigate  resources by following links like a web browser instead of hard-coding URLs in your application.  Links are identified by link relations which are named keys. Link relations describe what resources are available and how they can be interacted with.  Each resource may publish a set of link relationships based on the state of the resource.  For example, the status of a user in the <a href="../endpoints/users.md#links-object">User API</a> will govern which lifecycle operations are permitted.  Only the permitted operations will be published a lifecycle operations.</p>
+<p>Filtering allows a requestor to specify a subset of resources to return and is often needed for large collection resources such as Users.  While filtering semantics are standardized in the Okta API, not all resources in the Okta API support filtering. When filtering is supported for a resource, the <code>filter</code> URL query parameter contains a filter expression.</p>
+
+<p>The expression language that is used in the filter parameter supports references to JSON attributes and literals. The literal values can be strings enclosed in double quotes, numbers, date times enclosed in double quotes, and Boolean values; i.e., true or false. String literals must be valid JSON strings.</p>
+
+<p>The attribute names are case-sensitive while attribute operators are case-insensitive. For example, the following two expressions will evaluate to the same logical value:</p>
+
+<div class="highlight"><pre><code class="text language-text" data-lang="text">filter=firstName Eq &quot;john&quot;
+
+filter=firstName eq &quot;john&quot;
+</code></pre></div>
+
+<p>The filter parameter <strong>must</strong> contain at least one valid Boolean expression. Each expression <strong>must</strong> contain an attribute name followed by an attribute operator and optional value. Multiple expressions <strong>may</strong> be combined using the two logical operators. Furthermore expressions can be grouped together using &quot;()&quot;.</p>
+
+<blockquote>
+<p>Each resource in the Okta API defines what attributes and operators are supported for expression.  <em>Please refer to resource-specific documentation for details.</em></p>
+</blockquote>
+
+<h3 id="toc_12">Operators</h3>
+
+<p>The operators supported in the expression are listed in the following table.</p>
+
+<table><thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+<th>Behavior</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>eq</td>
+<td>equal</td>
+<td>The attribute and operator values must be identical for a match.</td>
+</tr>
+<tr>
+<td>co</td>
+<td>contains</td>
+<td>The entire operator value must be a substring of the attribute value for a match.</td>
+</tr>
+<tr>
+<td>sw</td>
+<td>starts with</td>
+<td>The entire operator value must be a substring of the attribute value, starting at the beginning of the attribute value. This criterion is satisfied if the two strings are identical.</td>
+</tr>
+<tr>
+<td>pr</td>
+<td>present (has value)</td>
+<td>If the attribute has a non-empty value, or if it contains a non-empty node for complex attributes there is a match.</td>
+</tr>
+<tr>
+<td>gt</td>
+<td>greater than</td>
+<td>If the attribute value is greater than operator value, there is a match. The actual comparison is dependent on the attribute type. For <code>String</code> attribute types, this is a lexicographical comparison and for <code>Date</code> types, it is a chronological comparison.</td>
+</tr>
+<tr>
+<td>ge</td>
+<td>greater than or equal</td>
+<td>If the attribute value is greater than or equal to the operator value, there is a match. The actual comparison is dependent on the attribute type. For <code>String</code> attribute types, this is a lexicographical comparison and for <code>Date</code> types, it is a chronological comparison.</td>
+</tr>
+<tr>
+<td>lt</td>
+<td>less than</td>
+<td>If the attribute value is less than operator value, there is a match. The actual comparison is dependent on the attribute type. For <code>String</code> attribute types, this is a lexicographical comparison and for <code>Date</code> types, it is a chronological comparison.</td>
+</tr>
+<tr>
+<td>le</td>
+<td>less than or equal</td>
+<td>If the attribute value is less than or equal to the operator value, there is a match. The actual comparison is dependent on the attribute type. For <code>String</code> attribute types, this is a lexicographical comparison and for <code>Date</code> types, it is a chronological comparison.</td>
+</tr>
+</tbody></table>
+
+<p>Note: Some resources do not support all operators.</p>
+
+<blockquote>
+<p>All <code>Date</code> values use the ISO 8601 format <code>YYYY-MM-DDTHH:mm:ss.SSSZ</code></p>
+</blockquote>
+
+<h3 id="toc_13">Attribute Operators</h3>
+
+<table><thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+<th>Behavior</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>and</td>
+<td>Logical And</td>
+<td>The filter is only a match if both expressions evaluate to true.</td>
+</tr>
+<tr>
+<td>or</td>
+<td>Logical or</td>
+<td>The filter is a match if either expression evaluates to true.</td>
+</tr>
+</tbody></table>
+
+<h3 id="toc_14">Logical Operators</h3>
+
+<table><thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+<th>Behavior</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>()</td>
+<td>Precedence grouping</td>
+<td>Boolean expressions may be grouped using parentheses to change the standard order of operations; i.e., evaluate OR logical operators before logical AND operators.</td>
+</tr>
+</tbody></table>
+
+<p>Filters must be evaluated using standard order of operations. Attribute operators have the highest precedence, followed by the grouping operator (i.e, parentheses), followed by the logical <code>AND</code> operator, followed by the logical <code>OR</code> operator.</p>
+
+<h2 id="toc_15">Hypermedia</h2>
+
+<p>Resources in the Okta API use hypermedia for &quot;discoverability&quot;.  Hypermedia enables API clients to navigate  resources by following links like a web browser instead of hard-coding URLs in your application.  Links are identified by link relations which are named keys. Link relations describe what resources are available and how they can be interacted with.  Each resource may publish a set of link relationships based on the state of the resource.  For example, the status of a user in the <a href="../resources/users.md#links-object">User API</a> will govern which lifecycle operations are permitted.  Only the permitted operations will be published a lifecycle operations.</p>
 
 <p>The Okta API had incorporated <a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON Hypertext Application Language</a> or HAL format as the foundation for hypermedia &quot;discoverability.  HAL provides a set of conventions for expressing hyperlinks in JSON responses representing two simple concepts: Resources and Links. </p>
 
-<p><em>Note: The HAL-specific media type <code>application/hal+json</code> is currently not supported as a formal media type for content negotiation at this time.  Use the standard <code>application/json</code> media type.  As we get more experience with the media format we may add support for the media type.</em>  </p>
+<blockquote>
+<p>The HAL-specific media type <code>application/hal+json</code> is currently not supported as a formal media type for content negotiation at this time.  Use the standard <code>application/json</code> media type.  As we get more experience with the media format we may add support for the media type.</p>
+</blockquote>
 
-<h3 id="toc_12">Resources</h3>
+<h3 id="toc_16">Resources</h3>
 
 <p>A Resource Object represents a resource.</p>
 
@@ -241,7 +369,7 @@ follow these Link header values instead of constructing your own URLs.</p>
 
 <p>All other properties represent the current state of the resource.</p>
 
-<h3 id="toc_13">Links</h3>
+<h3 id="toc_17">Links</h3>
 
 <p>Object whose property names are link relation types (as defined by <a href="http://tools.ietf.org/html/rfc5988">RFC5988</a>) and values are either a Link Object or an array of Link Objects.</p>
 
@@ -251,7 +379,9 @@ follow these Link header values instead of constructing your own URLs.</p>
 <li>A few other optional properties to help with deprecation, content negotiation, etc.</li>
 </ul>
 
-<p><em>Note: A resource may have multiple links that share the same link relation.</em></p>
+<blockquote>
+<p>A resource may have multiple links that share the same link relation.</p>
+</blockquote>
 
 <div class="highlight"><pre><code class="json language-json" data-lang="json"><span class="p">{</span>
     <span class="nt">&quot;_links&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -261,7 +391,7 @@ follow these Link header values instead of constructing your own URLs.</p>
 <span class="p">}</span>
 </code></pre></div>
 
-<h2 id="toc_14">Rate Limiting</h2>
+<h2 id="toc_18">Rate Limiting</h2>
 
 <p>The number of API requests per-second for an organization is limited for all APIs based on your edition. </p>
 
@@ -275,13 +405,13 @@ follow these Link header values instead of constructing your own URLs.</p>
 
 <div class="highlight"><pre><code class="http language-http" data-lang="http"><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">X-RateLimit-Limit</span><span class="o">:</span> <span class="l">75</span>
-<span class="na">X-RateLimit-Remaining</span><span class="o">:</span> <span class="l">99</span>
+<span class="na">X-RateLimit-Remaining</span><span class="o">:</span> <span class="l">70</span>
 <span class="na">X-RateLimit-Reset</span><span class="o">:</span> <span class="l">1366037820</span>
 </code></pre></div>
 
-<p>If the rate limit is exceeded, an HTTP 429 Status Code is returned.</p>
+<p>If the rate limit is exceeded, an HTTP 429 Status Code is returned.  The current Rate Limit is 75 request per-org per-second</p>
 
-<p><strong>Rate Limits are currently not enforced. The headers are returned for information only.  Enforcement will be rolled out on a per-org basis for existing API users</strong></p>
+<p><strong>Rate limits are enforced. SSO and Enterprise customers as of March 25, 2014 are not rate limited. Okta support will contact current SSO and Enterprise customers if there are any changes to the rate limit policy that affect their organizations.</strong></p>
 
       </div>
     </div>
@@ -374,103 +504,410 @@ follow these Link header values instead of constructing your own URLs.</p>
        <div class="text">
         <h1 id="toc_0">Error Codes</h1>
 
-<p>This document provides further information about the errors that the Okta API returns.  Listed by error code.</p>
+<p>This document provides further information about the errors that the Okta API returns. The first table is listed by error code, and the second table is listed by HTTP return code.</p>
 
-<h4 id="toc_1">E0000001</h4>
+<p><a name="EC_by_EC"></a></p>
 
-<p>API validation failed</p>
+<h3 id="toc_1">Okta Error Codes Listed by Error Code</h3>
 
-<h4 id="toc_2">E0000002</h4>
+<p><a href="#EC_by_RC">View by HTTP return code</a></p>
 
-<p>The request was not valid</p>
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Description</th>
+<th>HTTP Return Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><a name="E0000001"></a>E0000001</td>
+<td>API validation failed.</td>
+<td>400</td>
+</tr>
+<tr>
+<td><a name="E0000002"></a>E0000002</td>
+<td>The request was not valid.</td>
+<td>400</td>
+</tr>
+<tr>
+<td><a name="E0000003"></a>E0000003</td>
+<td>The request body was not well-formed.</td>
+<td>400</td>
+</tr>
+<tr>
+<td><a name="E0000004"></a>E0000004</td>
+<td>Authentication failed.</td>
+<td>401</td>
+</tr>
+<tr>
+<td><a name="E0000005"></a>E0000005</td>
+<td>Invalid session.</td>
+<td>403</td>
+</tr>
+<tr>
+<td><a name="E0000006"></a>E0000006</td>
+<td>You do not have permission to perform the requested action.</td>
+<td>403</td>
+</tr>
+<tr>
+<td><a name="E0000007"></a>E0000007</td>
+<td>Not found.</td>
+<td>404</td>
+</tr>
+<tr>
+<td><a name="E0000008"></a>E0000008</td>
+<td>The requested path was not found.</td>
+<td>404</td>
+</tr>
+<tr>
+<td><a name="E0000009"></a>E0000009</td>
+<td>Internal Server Error.</td>
+<td>500</td>
+</tr>
+<tr>
+<td><a name="E0000010"></a>E0000010</td>
+<td>Service is in read-only mode.</td>
+<td>503</td>
+</tr>
+<tr>
+<td><a name="E0000011"></a>E0000011</td>
+<td>Invalid token provided.</td>
+<td>401</td>
+</tr>
+<tr>
+<td><a name="E0000012"></a>E0000012</td>
+<td>Unsupported media type.</td>
+<td>404</td>
+</tr>
+<tr>
+<td><a name="E0000013"></a>E0000013</td>
+<td>Invalid client app ID.</td>
+<td>403</td>
+</tr>
+<tr>
+<td><a name="E0000014"></a>E0000014</td>
+<td>Update of credentials failed.</td>
+<td>403</td>
+</tr>
+<tr>
+<td><a name="E0000015"></a>E0000015</td>
+<td>You do not have permission to access the feature you are requesting.</td>
+<td>401</td>
+</tr>
+<tr>
+<td><a name="E0000016"></a>E0000016</td>
+<td>Activation failed because the user is already active.</td>
+<td>403</td>
+</tr>
+<tr>
+<td><a name="E0000017"></a>E0000017</td>
+<td>Password reset failed.</td>
+<td>403</td>
+</tr>
+<tr>
+<td><a name="E0000018"></a>E0000018</td>
+<td>Bad request. Accept and/or Content-Type headers are likely not set.</td>
+<td>400</td>
+</tr>
+<tr>
+<td><a name="E0000019"></a>E0000019</td>
+<td>Bad request. Accept and/or Content-Type headers likely do not match supported values.</td>
+<td>400</td>
+</tr>
+<tr>
+<td><a name="E0000020"></a>E0000020</td>
+<td>Bad request.</td>
+<td>400</td>
+</tr>
+<tr>
+<td><a name="E0000021"></a>E0000021</td>
+<td>Bad request. Accept and/or Content-Type headers likely do not match supported values.</td>
+<td>400</td>
+</tr>
+<tr>
+<td><a name="E0000022"></a>E0000022</td>
+<td>The endpoint does not support the provided HTTP method.</td>
+<td>404</td>
+</tr>
+<tr>
+<td><a name="E0000023"></a>E0000023</td>
+<td>Operation failed because user profile is mastered under another system.</td>
+<td>403</td>
+</tr>
+<tr>
+<td><a name="E0000024"></a>E0000024</td>
+<td>Bad request. This operation on app metadata is not yet supported.</td>
+<td>400</td>
+</tr>
+<tr>
+<td><a name="E0000025"></a>E0000025</td>
+<td>App version assignment failed.</td>
+<td>400</td>
+</tr>
+<tr>
+<td><a name="E0000026"></a>E0000026</td>
+<td>This endpoint has been deprecated.</td>
+<td>404</td>
+</tr>
+<tr>
+<td><a name="E0000027"></a>E0000027</td>
+<td>Bad group push request.</td>
+<td>400</td>
+</tr>
+<tr>
+<td><a name="E0000028"></a>E0000028</td>
+<td>The request is missing a required parameter.</td>
+<td>400</td>
+</tr>
+<tr>
+<td><a name="E0000029"></a>E0000029</td>
+<td>Invalid paging request.</td>
+<td>400</td>
+</tr>
+<tr>
+<td><a name="E0000030"></a>E0000030</td>
+<td>Bad request. Invalid date. Dates must be of the form yyyy-MM-dd&#39;&#39;T&#39;&#39;HH:mm:ss.SSSZZ, e.g. 2013-01-01T12:00:00.000-07:00.</td>
+<td>400</td>
+</tr>
+<tr>
+<td><a name="E0000031"></a>E0000031</td>
+<td>Bad request. Invalid filter parameter.</td>
+<td>400</td>
+</tr>
+<tr>
+<td><a name="E0000032"></a>E0000032</td>
+<td>Unlock is not allowed for this user.</td>
+<td>403</td>
+</tr>
+<tr>
+<td><a name="E0000033"></a>E0000033</td>
+<td>Bad request. Can&#39;t specify a search query and filter in the same request.</td>
+<td>400</td>
+</tr>
+<tr>
+<td><a name="E0000034"></a>E0000034</td>
+<td>Forgot password not allowed on specified user.</td>
+<td>403</td>
+</tr>
+<tr>
+<td><a name="E0000035"></a>E0000035</td>
+<td>Change password not allowed on specified user.</td>
+<td>403</td>
+</tr>
+<tr>
+<td><a name="E0000036"></a>E0000036</td>
+<td>Change recovery question not allowed on specified user.</td>
+<td>403</td>
+</tr>
+<tr>
+<td><a name="E0000037"></a>E0000037</td>
+<td>Type mismatch exception.</td>
+<td>400</td>
+</tr>
+<tr>
+<td><a name="E0000038"></a>E0000038</td>
+<td>This operation is not allowed in the user&#39;s current status.</td>
+<td>403</td>
+</tr>
+<tr>
+<td><a name="E0000039"></a>E0000039</td>
+<td>Operation on application settings failed.</td>
+<td>403</td>
+</tr>
+<tr>
+<td><a name="E0000040"></a>E0000040</td>
+<td>Application label must not be the same as an existing application label.</td>
+<td>400</td>
+</tr>
+<tr>
+<td><a name="E0000041"></a>E0000041</td>
+<td>Credentials should not be set on this resource based on the scheme.</td>
+<td>400</td>
+</tr>
+<tr>
+<td><a name="E0000042"></a>E0000042</td>
+<td>Setting the error page redirect URL failed.</td>
+<td>403</td>
+</tr>
+<tr>
+<td><a name="E0000043"></a>E0000043</td>
+<td>Self-service application assignment is not enabled.</td>
+<td>403</td>
+</tr>
+<tr>
+<td><a name="E0000044"></a>E0000044</td>
+<td>Self-service application assignment is not supported.</td>
+<td>403</td>
+</tr>
+<tr>
+<td><a name="E0000045"></a>E0000045</td>
+<td>Field mapping bad request.</td>
+<td>400</td>
+</tr>
+<tr>
+<td><a name="E0000046"></a>E0000046</td>
+<td>Deactivate application for user forbidden.</td>
+<td>403</td>
+</tr>
+<tr>
+<td><a name="E0000047"></a>E0000047</td>
+<td>API call exceeded rate limit due to too many requests.</td>
+<td>429</td>
+</tr>
+<tr>
+<td><a name="E0000048"></a>E0000048</td>
+<td>Entity not found exception.</td>
+<td>404</td>
+</tr>
+<tr>
+<td><a name="E0000049"></a>E0000049</td>
+<td>Invalid SCIM data from SCIM implementation.</td>
+<td>500</td>
+</tr>
+<tr>
+<td><a name="E0000050"></a>E0000050</td>
+<td>Invalid SCIM data from client.</td>
+<td>400</td>
+</tr>
+<tr>
+<td><a name="E0000051"></a>E0000051</td>
+<td>No response from SCIM implementation.</td>
+<td>500</td>
+</tr>
+<tr>
+<td><a name="E0000052"></a>E0000052</td>
+<td>Endpoint not implemented.</td>
+<td>501</td>
+</tr>
+<tr>
+<td><a name="E0000053"></a>E0000053</td>
+<td>Invalid SCIM filter.</td>
+<td>400</td>
+</tr>
+<tr>
+<td><a name="E0000054"></a>E0000054</td>
+<td>Invalid pagination properties.</td>
+<td>400</td>
+</tr>
+<tr>
+<td><a name="E0000055"></a>E0000055</td>
+<td>Duplicate group.</td>
+<td>409</td>
+</tr>
+<tr>
+<td><a name="E0000056"></a>E0000056</td>
+<td>Delete application forbidden.</td>
+<td>403</td>
+</tr>
+<tr>
+<td><a name="E0000057"></a>E0000057</td>
+<td>Access to this application is denied due to a policy.</td>
+<td>403</td>
+</tr>
+<tr>
+<td><a name="E0000058"></a>E0000058</td>
+<td>Access to this application requires MFA.</td>
+<td>403</td>
+</tr>
+<tr>
+<td><a name="E0000059"></a>E0000059</td>
+<td>The connector configuration could not be tested. Make sure that the URL and Authentication Parameters are correct, and that there is an implementation available at the URL provided.</td>
+<td>500</td>
+</tr>
+<tr>
+<td><a name="E0000060"></a>E0000060</td>
+<td>Unsupported operation.</td>
+<td>404</td>
+</tr>
+<tr>
+<td><a name="E0000061"></a>E0000061</td>
+<td>Tab error.</td>
+<td>403</td>
+</tr>
+<tr>
+<td><a name="E0000063"></a>E0000063</td>
+<td>Invalid combination of parameters specified.</td>
+<td>400</td>
+</tr>
+<tr>
+<td><a name="E0000064"></a>E0000064</td>
+<td>Password is expired and must be changed.</td>
+<td>401</td>
+</tr>
+</tbody></table>
 
-<h4 id="toc_3">E0000003</h4>
+<p><a name="EC_by_RC"></a></p>
 
-<p>The request body was not well-formed</p>
+<h3 id="toc_2">Okta Error Codes Listed by HTTP Return Code</h3>
 
-<h4 id="toc_4">E0000004</h4>
+<p><a href="#EC_by_EC">View by error code</a></p>
 
-<p>Authentication failed</p>
-
-<h4 id="toc_5">E0000005</h4>
-
-<p>Invalid session</p>
-
-<h4 id="toc_6">E0000006</h4>
-
-<p>You do not have permission to perform the requested action</p>
-
-<h4 id="toc_7">E0000007</h4>
-
-<p>The requested resource was not found</p>
-
-<h4 id="toc_8">E0000008</h4>
-
-<p>The requested path was not found</p>
-
-<h4 id="toc_9">E0000009</h4>
-
-<p>Internal server error</p>
-
-<h4 id="toc_10">E0000010</h4>
-
-<p>Service is in read only mode</p>
-
-<h4 id="toc_11">E0000011</h4>
-
-<p>Invalid token provided</p>
-
-<h4 id="toc_12">E0000012</h4>
-
-<p>Unsupported media type</p>
-
-<h4 id="toc_13">E0000013</h4>
-
-<p>Invalid client app id. A client app is a third party application that queries the Okta API.  Each client app must use its id for certain operations, such as requesting a token.  Contact Okta to receive a client app id for your particular client app.</p>
-
-<h4 id="toc_14">E0000014</h4>
-
-<p>Update of credentials failed</p>
-
-<h4 id="toc_15">E0000015</h4>
-
-<p>You do not have permission to access the feature you are requesting</p>
-
-<h4 id="toc_16">E0000016</h4>
-
-<p>Activation failed because the user is already active</p>
-
-<h4 id="toc_17">E0000017</h4>
-
-<p>Password reset failed</p>
-
-<h4 id="toc_18">E0000018</h4>
-
-<p>Bad request.  Accept and/or Content-Type headers are likely not set.</p>
-
-<h4 id="toc_19">E0000019</h4>
-
-<p>Bad request.  Accept and/or Content-Type headers likely do not match supported values.</p>
-
-<h4 id="toc_20">E0000020</h4>
-
-<p>Bad request.</p>
-
-<h4 id="toc_21">E0000021</h4>
-
-<p>Bad request.  Accept and/or Content-Type headers likely do not match supported values.</p>
-
-<h4 id="toc_22">E0000022</h4>
-
-<p>The endpoint does not support the provided HTTP method</p>
-
-<h4 id="toc_23">E0000023</h4>
-
-<p>Operation failed because user profile is mastered under another system</p>
-
-<h4 id="toc_24">E0000026</h4>
-
-<p>This endpoint has been deprecated.</p>
+<table>
+<tr><td><strong>HTTP Return Code</strong></td><td><strong>Error Code</strong></td><td><strong>Description</strong></td></tr>
+<tr><td rowspan="23" bgcolor="#FFFFFF"><strong>400</strong></td><td>E0000001</td><td>API validation failed.</td></tr>
+<tr><td>E0000002</td><td>The request was not valid.</td></tr>
+<tr><td>E0000003</td><td>The request body was not well-formed.</td></tr>
+<tr><td>E0000018</td><td>Bad request. Accept and/or Content-Type headers are likely not set.</td></tr>
+<tr><td>E0000019</td><td>Bad request. Accept and/or Content-Type headers likely do not match supported values.</td></tr>
+<tr><td>E0000020</td><td>Bad request.</td></tr>
+<tr><td>E0000021</td><td>Bad request. Accept and/or Content-Type headers likely do not match supported values.</td></tr>
+<tr><td>E0000024</td><td>Bad request. This operation on app metadata is not yet supported.</td></tr>
+<tr><td>E0000025</td><td>App version assignment failed.</td></tr>
+<tr><td>E0000027</td><td>Bad group push request.</td></tr>
+<tr><td>E0000028</td><td>The request is missing a required parameter.</td></tr>
+<tr><td>E0000029</td><td>Invalid paging request.</td></tr>
+<tr><td>E0000030</td><td>Bad request. Invalid date. Dates must be of the form yyyy-MM-dd''T''HH:mm:ss.SSSZZ, e.g. 2013-01-01T12:00:00.000-07:00.</td></tr>
+<tr><td>E0000031</td><td>Bad request. Invalid filter parameter.</td></tr>
+<tr><td>E0000033</td><td>Bad request. Can't specify a search query and filter in the same request.</td></tr>
+<tr><td>E0000037</td><td>Type mismatch exception.</td></tr>
+<tr><td>E0000040</td><td>Application label must not be the same as an existing application label.</td></tr>
+<tr><td>E0000041</td><td>Credentials should not be set on this resource based on the scheme.</td></tr>
+<tr><td>E0000045</td><td>Field mapping bad request.</td></tr>
+<tr><td>E0000050</td><td>Invalid SCIM data from client.</td></tr>
+<tr><td>E0000053</td><td>Invalid SCIM filter.</td></tr>
+<tr><td>E0000054</td><td>Invalid pagination properties.</td></tr>
+<tr><td>E0000063</td><td>Invalid combination of parameters specified.</td></tr>
+<tr><td rowspan="4" bgcolor="#FFFFFF"><strong>401</strong></td><td>E0000004</td><td>Authentication failed.</td></tr>
+<tr><td>E0000011</td><td>Invalid token provided.</td></tr>
+<tr><td>E0000015</td><td>You do not have permission to access the feature you are requesting.</td></tr>
+<tr><td>E0000064</td><td>Password is expired and must be changed.</td></tr>
+<tr><td rowspan="21" bgcolor="#FFFFFF"><strong>403</strong></td><td>E0000005</td><td>Invalid session.</td></tr>
+<tr><td>E0000006</td><td>You do not have permission to perform the requested action.</td></tr>
+<tr><td>E0000013</td><td>Invalid client app ID.</td></tr>
+<tr><td>E0000014</td><td>Update of credentials failed.</td></tr>
+<tr><td>E0000016</td><td>Activation failed because the user is already active.</td></tr>
+<tr><td>E0000017</td><td>Password reset failed.</td></tr>
+<tr><td>E0000023</td><td>Operation failed because user profile is mastered under another system.</td></tr>
+<tr><td>E0000032</td><td>Unlock is not allowed for this user.</td></tr>
+<tr><td>E0000034</td><td>Forgot password not allowed on specified user.</td></tr>
+<tr><td>E0000035</td><td>Change password not allowed on specified user.</td></tr>
+<tr><td>E0000036</td><td>Change recovery question not allowed on specified user.</td></tr>
+<tr><td>E0000038</td><td>This operation is not allowed in the user's current status.</td></tr>
+<tr><td>E0000039</td><td>Operation on application settings failed.</td></tr>
+<tr><td>E0000042</td><td>Setting the error page redirect URL failed.</td></tr>
+<tr><td>E0000043</td><td>Self-service application assignment is not enabled.</td></tr>
+<tr><td>E0000044</td><td>Self-service application assignment is not supported.</td></tr>
+<tr><td>E0000046</td><td>Deactivate application for user forbidden.</td></tr>
+<tr><td>E0000056</td><td>Delete application forbidden.</td></tr>
+<tr><td>E0000057</td><td>Access to this application is denied due to a policy.</td></tr>
+<tr><td>E0000058</td><td>Access to this application requires MFA.</td></tr>
+<tr><td>E0000061</td><td>Tab error.</td></tr>
+<tr><td rowspan="7" bgcolor="#FFFFFF"><strong>404</strong></td><td>E0000007</td><td>Not found.</td></tr>
+<tr><td>E0000008</td><td>The requested path was not found.</td></tr>
+<tr><td>E0000012</td><td>Unsupported media type.</td></tr>
+<tr><td>E0000022</td><td>The endpoint does not support the provided HTTP method.</td></tr>
+<tr><td>E0000026</td><td>This endpoint has been deprecated.</td></tr>
+<tr><td>E0000048</td><td>Entity not found exception.</td></tr>
+<tr><td>E0000060</td><td>Unsupported operation.</td></tr>
+<tr><td rowspan="1" bgcolor="#FFFFFF"><strong>409</strong></td><td>E0000055</td><td>Duplicate group.</td></tr>
+<tr><td rowspan="1" bgcolor="#FFFFFF"><strong>429</strong></td><td>E0000047</td><td>API call exceeded rate limit due to too many requests.</td></tr>
+<tr><td rowspan="4" bgcolor="#FFFFFF"><strong>500</strong></td><td>E0000009</td><td>Internal Server Error.</td></tr>
+<tr><td>E0000049</td><td>Invalid SCIM data from SCIM implementation.</td></tr>
+<tr><td>E0000051</td><td>No response from SCIM implementation.</td></tr>
+<tr><td>E0000059</td><td>The connector configuration could not be tested. Make sure that the URL and Authentication Parameters are correct, and that there is an implementation available at the URL provided.</td></tr>
+<tr><td rowspan="1" bgcolor="#FFFFFF"><strong>501</strong></td><td>E0000052</td><td>Endpoint not implemented.</td></tr>
+<tr><td rowspan="1" bgcolor="#FFFFFF"><strong>503</strong></td><td>E0000010</td><td>Service is in read-only mode.</td></tr>
+</table> 
 
       </div>
     </div>
@@ -569,11 +1006,13 @@ follow these Link header values instead of constructing your own URLs.</p>
      
      <div id="section-0" class="twocolordiv">
        <div class="text">
-        <h1 id="toc_0">Getting an API Token</h1>
+        <h1 id="toc_0">Getting A Token</h1>
 
 <p>Administrators can generate tokens to access the API via the Security &gt; API section of the admin application. Note, tokens generated by this mechanism will have the permissions of the user who generated them.</p>
 
-<p><em>Note: API tokens are currently an early-access feature and need to be enabled by <a href="https://support.okta.com">Okta support</a>.  If you don&#39;t see the API section then your organization has not been enabled for API access.</em></p>
+<blockquote>
+<p>API tokens are currently an early-access feature and need to be enabled by <a href="https://support.okta.com">Okta support</a>.  If you don&#39;t see the API section then your organization has not been enabled for API access.</p>
+</blockquote>
 
 <h2 id="toc_1">Token Expiration</h2>
 
@@ -716,106 +1155,6 @@ follow these Link header values instead of constructing your own URLs.</p>
 <p><strong>This API is currently in <code>Beta</code> status and documentation is <em>draft</em> quality.  There may be small inconsistencies with actual API.</strong></p>
 
 <p><em>Note: This API currently only supports applications without user-management features enabled at this time</em></p>
-
-<ul>
-<li><a href="#application-model">Application Model</a>
-
-<ul>
-<li><a href="#application-attributes">Application Attributes</a>
-
-<ul>
-<li><a href="#app-names--settings">App Names &amp; Settings</a></li>
-<li><a href="#features">Features</a></li>
-<li><a href="#signon-modes">SignOn Modes</a></li>
-</ul></li>
-<li><a href="#accessibility-object">Accessibility Object</a></li>
-<li><a href="#visibility-object">Visibility Object</a>
-
-<ul>
-<li><a href="#hide-object">Hide Object</a> </li>
-<li><a href="#applinks-object">AppLinks Object</a></li>
-</ul></li>
-<li><a href="#application-credentials-object">Application Credentials Object</a>
-
-<ul>
-<li><a href="#authentication-schemes">Authentication Schemes</a></li>
-<li><a href="#username-template-object">UserName Template Object</a>
-
-<ul>
-<li><a href="#built-in-expressions">Built-In Expressions</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#password-object">Password Object</a></li>
-<li><a href="#application-links-object">Application Links Object</a></li>
-</ul></li>
-<li><a href="#application-user-model">Application User Model</a>
-
-<ul>
-<li><a href="#application-user-attributes">Application User Attributes</a></li>
-<li><a href="#application-user-credentials-object">Application User Credentials Object</a></li>
-</ul></li>
-<li><a href="#application-group-model">Application Group Model</a>
-
-<ul>
-<li><a href="#application-group-attributes">Application Group Attributes</a></li>
-</ul></li>
-<li><a href="#application-operations">Application Operations</a>
-
-<ul>
-<li><a href="#add-application">Add Application</a>
-
-<ul>
-<li><a href="#add-bookmark-application">Add Bookmark Application</a></li>
-<li><a href="#add-basic-authentication-application">Add Basic Authentication Application</a></li>
-<li><a href="#add-plugin-swa-application">Add Plugin SWA Application</a></li>
-<li><a href="#add-plugin-swa-3-field-application">Add Plugin SWA (3 Field) Application</a></li>
-<li><a href="#add-swa-application-no-plugin">Add SWA Application (No Plugin)</a></li>
-<li><a href="#add-saml-20-application">Add SAML 2.0 Application</a></li>
-<li><a href="#add-ws-federation-application">Add WS-Federation Application</a></li>
-</ul></li>
-<li><a href="#get-application">Get Application</a></li>
-<li><a href="#list-applications">List Applications</a></li>
-<li><a href="#list-applications-assigned-to-user">List Applications Assigned to User</a>
-
-<ul>
-<li><a href="#list-applications-with-defaults">List Applications with Defaults</a></li>
-<li><a href="#list-applications-assigned-to-user">List Applications Assigned to User</a></li>
-<li><a href="#list-applications-assigned-to-group">List Applications Assigned to Group</a></li>
-</ul></li>
-<li><a href="#update-application">Update Application</a>
-
-<ul>
-<li><a href="#set-swa-user-editable-username--password">Set SWA User-Editable UserName &amp; Password</a></li>
-<li><a href="#set-swa-user-editable-password">Set SWA User-Editable Password</a></li>
-<li><a href="#set-swa-okta-password">Set SWA Okta Password</a></li>
-<li><a href="#set-swa-shared-credentials">Set SWA Shared Credentials</a></li>
-</ul></li>
-<li><a href="#delete-application">Delete Application</a></li>
-</ul></li>
-<li><a href="#application-lifecycle-operations">Application Lifecycle Operations</a>
-
-<ul>
-<li><a href="#activate-application">Activate Application</a></li>
-<li><a href="#deactivate-application">Deactivate Application</a></li>
-</ul></li>
-<li><a href="#application-user-operations">Application User Operations</a>
-
-<ul>
-<li><a href="#assign-user-to-application">Assign User to Application</a></li>
-<li><a href="#get-assigned-user-for-application">Get Assigned User for Application</a></li>
-<li><a href="#list-users-assigned-to-application">List Users Assigned to Application</a></li>
-<li><a href="#update-credentials-for-application">Update Credentials for Application</a></li>
-<li><a href="#remove-user-from-application">Remove User from Application</a></li>
-</ul></li>
-<li><a href="#application-group-operations">Application Group Operations</a>
-
-<ul>
-<li><a href="#assign-group-to-application">Assign Group to Application</a></li>
-<li><a href="#get-assigned-group-for-application">Get Assigned Group for Application</a></li>
-<li><a href="#list-groups-assigned-to-application">List Groups Assigned to Application</a></li>
-<li><a href="#remove-group-from-application">Remove Group from Application</a></li>
-</ul></li>
-</ul>
 
 <h2 id="toc_2">Application Model</h2>
 
@@ -1034,7 +1373,9 @@ follow these Link header values instead of constructing your own URLs.</p>
 </tr>
 </tbody></table>
 
-<p><em>Note: id, created, lastUpdated, status, and _links are only available after an app is created</em></p>
+<blockquote>
+<p><code>id</code>, <code>created</code>, <code>lastUpdated</code>, <code>status</code>, and <code>_links</code> are only available after an app is created</p>
+</blockquote>
 
 <h4 id="toc_5">App Names &amp; Settings</h4>
 
@@ -1080,7 +1421,9 @@ follow these Link header values instead of constructing your own URLs.</p>
 
 <p>The current workaround is to manually configure the desired application via the Administration UI in a preview (sandbox) organization and view the application via <a href="#get-application">Get Application</a></p>
 
-<p><em>Note: As previously stated, this endpoint currently doesn&#39;t support creating or managing apps with user management features</em></p>
+<blockquote>
+<p>As previously stated, this endpoint currently doesn&#39;t support creating or managing apps with user management features</p>
+</blockquote>
 
 <h4 id="toc_6">Features</h4>
 
@@ -1387,7 +1730,9 @@ follow these Link header values instead of constructing your own URLs.</p>
 </tr>
 </tbody></table>
 
-<p><em>Note: <code>BOOKMARK</code>, <code>SAML_2_0</code>, and <code>WS_FEDERATION</code> signOnModes do not support an authentication scheme as they use a federated SSO protocol.  The <code>scheme</code> property should be omitted for apps with these signOnModes</em></p>
+<blockquote>
+<p><code>BOOKMARK</code>, <code>SAML_2_0</code>, and <code>WS_FEDERATION</code> signOnModes do not support an authentication scheme as they use a federated SSO protocol.  The <code>scheme</code> property should be omitted for apps with these signOnModes</p>
+</blockquote>
 
 <h4 id="toc_14">UserName Template Object</h4>
 
@@ -1433,7 +1778,9 @@ follow these Link header values instead of constructing your own URLs.</p>
 </tr>
 </tbody></table>
 
-<p><em>Note: You must use the <code>CUSTOM</code> type when defining your own expression that is not built-in</em></p>
+<blockquote>
+<p>You must use the <code>CUSTOM</code> type when defining your own expression that is not built-in</p>
+</blockquote>
 
 <div class="highlight"><pre><code class="json language-json" data-lang="json"><span class="p">{</span>
     <span class="nt">&quot;userNameTemplate&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -2701,7 +3048,9 @@ follow these Link header values instead of constructing your own URLs.</p>
 </tr>
 </tbody></table>
 
-<p><em>Note: The page cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></em></p>
+<blockquote>
+<p>The page cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></p>
+</blockquote>
 
 <h6 id="toc_63">Filters</h6>
 
@@ -2731,7 +3080,9 @@ follow these Link header values instead of constructing your own URLs.</p>
 </tr>
 </tbody></table>
 
-<p><em>Note: Only a single expression is supported as this time</em></p>
+<blockquote>
+<p>Only a single expression is supported as this time</p>
+</blockquote>
 
 <h5 id="toc_64">Response Parameters</h5>
 
@@ -3097,7 +3448,9 @@ follow these Link header values instead of constructing your own URLs.</p>
 </tr>
 </tbody></table>
 
-<p><em>Note: All attributes must be specified when updating an app  <strong>Partial updates are not supported!</strong></em></p>
+<blockquote>
+<p>All attributes must be specified when updating an app  <strong>Partial updates are not supported!</strong></p>
+</blockquote>
 
 <h5 id="toc_77">Response Parameters</h5>
 
@@ -3520,7 +3873,9 @@ follow these Link header values instead of constructing your own URLs.</p>
 
 <p>Removes an inactive application.</p>
 
-<p><em>Note: applications must be deactivated before they can be deleted</em></p>
+<blockquote>
+<p>Applications must be deactivated before they can be deleted</p>
+</blockquote>
 
 <h5 id="toc_92">Request Parameters</h5>
 
@@ -3713,7 +4068,9 @@ Content-Type: application/json
 </tr>
 </tbody></table>
 
-<p><em>Note: For applications with <a href="#signon-modes">SignOn Modes</a> or <a href="#authentication-schemes">Authentication Schemes</a> that do not require or support credentials, pass and empty json object <code>{}</code> as the <code>appuser</code> request body</em> </p>
+<blockquote>
+<p>For applications with <a href="#signon-modes">SignOn Modes</a> or <a href="#authentication-schemes">Authentication Schemes</a> that do not require or support credentials, pass and empty json object <code>{}</code> as the <code>appuser</code> request body</p>
+</blockquote>
 
 <h5 id="toc_112">Response Parameters</h5>
 
@@ -3866,7 +4223,9 @@ Content-Type: application/json
 </tr>
 </tbody></table>
 
-<p><em>Note: The page cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></em></p>
+<blockquote>
+<p>The page cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></p>
+</blockquote>
 
 <h5 id="toc_124">Response Parameters</h5>
 
@@ -4240,7 +4599,9 @@ Content-Type: application/json
 </tr>
 </tbody></table>
 
-<p><em>Note: The page cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></em></p>
+<blockquote>
+<p>The page cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></p>
+</blockquote>
 
 <h5 id="toc_155">Response Parameters</h5>
 
@@ -4424,24 +4785,6 @@ Content-Type: application/json
 
 <p>The Event API provides read access to your organization&#39;s system log. The API is intended to export event data as a batch job from your organization to another system for reporting or analysis.</p>
 
-<ul>
-<li><a href="#event-model">Event Model</a>
-
-<ul>
-<li><a href="#attributes">Attributes</a></li>
-<li><a href="#action-object">Action Object</a>
-
-<ul>
-<li><a href="#action-categories">Categories</a></li>
-<li><a href="#action-objecttypes">Object Types</a></li>
-</ul></li>
-<li><a href="#actor-object">Actor Object</a></li>
-<li><a href="#target-object">Target Object</a></li>
-<li><a href="#actortarget-objecttypes">Actor/Target Object Types</a></li>
-</ul></li>
-<li><a href="#list-events">List Events</a></li>
-</ul>
-
 <h2 id="toc_2">Event Model</h2>
 
 <p>Every organization has a system log that maintains a history of actions performed by users.  The Event model describes a single action that was performed by a set of actors for a set of targets.</p>
@@ -4533,7 +4876,9 @@ Content-Type: application/json
 </tr>
 </tbody></table>
 
-<p><em>Note: The actor and/or target of an event is dependant on the action performed. Not all events have an actor or target.</em></p>
+<blockquote>
+<p>The actor and/or target of an event is dependent on the action performed. Not all events have an actor or target.</p>
+</blockquote>
 
 <h3 id="toc_5">Action Object</h3>
 
@@ -4573,7 +4918,9 @@ Content-Type: application/json
 </tr>
 </tbody></table>
 
-<p><em>Note: Actions that do not define any categories will have an zero element array value.</em></p>
+<blockquote>
+<p>Actions that do not define any categories will have an zero element array value.</p>
+</blockquote>
 
 <div class="highlight"><pre><code class="json language-json" data-lang="json"><span class="p">{</span>
     <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;User performed single sign on to app&quot;</span><span class="p">,</span>
@@ -4605,7 +4952,9 @@ Content-Type: application/json
 <li>SMS Messages</li>
 </ul>
 
-<p><em>Note: Additional categories may be added in the future without versioning</em></p>
+<blockquote>
+<p>Additional categories may be added in the future without versioning</p>
+</blockquote>
 
 <h4 id="toc_7">Action ObjectTypes</h4>
 
@@ -5245,7 +5594,9 @@ Content-Type: application/json
 </tr>
 </tbody></table>
 
-<p><em>Note: The schema of an actor is dependent on the actor&#39;s <code>objectType</code></em></p>
+<blockquote>
+<p>The schema of an actor is dependent on the actor&#39;s <code>objectType</code></p>
+</blockquote>
 
 <h3 id="toc_24">Target Object</h3>
 
@@ -5279,7 +5630,9 @@ Content-Type: application/json
 </tr>
 </tbody></table>
 
-<p><em>Note: The schema of a target is dependent on the actor&#39;s <code>objectType</code></em></p>
+<blockquote>
+<p>The schema of a target is dependent on the actor&#39;s <code>objectType</code></p>
+</blockquote>
 
 <h3 id="toc_25">Actor/Target ObjectTypes</h3>
 
@@ -5329,7 +5682,9 @@ Content-Type: application/json
 <span class="p">}</span>
 </code></pre></div>
 
-<p><em>Note: The user can be retrieved by <code>id</code> with the <a href="users.md#get-user-with-id">User API</a>.</em></p>
+<blockquote>
+<p>The user can be retrieved by <code>id</code> with the <a href="users.md#get-user-with-id">User API</a>.</p>
+</blockquote>
 
 <h4 id="toc_27">AppInstance ObjectType</h4>
 
@@ -5370,7 +5725,9 @@ Content-Type: application/json
 <span class="p">}</span>
 </code></pre></div>
 
-<p><em>Note: The app can be retrieved by <code>id</code> with the <a href="apps.md#get-application">Apps API</a>.</em></p>
+<blockquote>
+<p>The app can be retrieved by <code>id</code> with the <a href="apps.md#get-application">Apps API</a>.</p>
+</blockquote>
 
 <h4 id="toc_28">Client ObjectType</h4>
 
@@ -5453,6 +5810,14 @@ Content-Type: application/json
 <td></td>
 </tr>
 <tr>
+<td>filter</td>
+<td><a href="../getting_started/design_principles.md#filtering">Filter expression</a> for events</td>
+<td>Query</td>
+<td>String</td>
+<td>FALSE</td>
+<td></td>
+</tr>
+<tr>
 <td>after</td>
 <td>Specifies the pagination cursor for the next page of events</td>
 <td>Query</td>
@@ -5462,15 +5827,88 @@ Content-Type: application/json
 </tr>
 </tbody></table>
 
-<p><em>Note: The <code>after</code> cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></em></p>
+<blockquote>
+<p>The <code>after</code> cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></p>
 
-<h4 id="toc_32">Response Parameters</h4>
+<p><code>startDate</code> and <code>filter</code> query parameters are mutually exclusive and cannot be used together in the same request</p>
+</blockquote>
+
+<h5 id="toc_32">Filters</h5>
+
+<p>The following expressions are supported for events with the <code>filter</code> query parameter:</p>
+
+<table><thead>
+<tr>
+<th>Filter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>action.objectType eq &quot;:actionType&quot;</code></td>
+<td>Events that have a specific <a href="#action-objectypes">action objectType</a></td>
+</tr>
+<tr>
+<td><code>target.objectType eq &quot;:objectType&quot;</code></td>
+<td>Events published with a specific <a href="#actortarget-objecttypes">target objectType</a></td>
+</tr>
+<tr>
+<td><code>target.id eq &quot;:id&quot;</code></td>
+<td>Events published with a specific target id</td>
+</tr>
+<tr>
+<td><code>published lt &quot;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZZ&quot;</code></td>
+<td>Events published before a specific datetime</td>
+</tr>
+<tr>
+<td><code>published eq &quot;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZZ&quot;</code></td>
+<td>Events published updated at a specific datetime</td>
+</tr>
+<tr>
+<td><code>published gt &quot;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZZ&quot;</code></td>
+<td>Events published updated after a specific datetime</td>
+</tr>
+</tbody></table>
+
+<p>See <a href="../getting_started/design_principles.md#filtering">Filtering</a> for more information on expressions</p>
+
+<blockquote>
+<p>All filters must be <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encoded</a> where <code>filter=published gt &quot;2013-06-01T00:00:00.000Z&quot;</code> is encoded as <code>filter=published%20gt%20%222013-06-01T00:00:00.000Z%22</code></p>
+</blockquote>
+
+<p><strong>Filter Examples</strong></p>
+
+<p>Events published after 06/01/2013</p>
+
+<div class="highlight"><pre><code class="text language-text" data-lang="text">filter=published gt &quot;2013-06-01T00:00:00.000Z&quot;
+</code></pre></div>
+
+<p>Events published for a target user </p>
+
+<div class="highlight"><pre><code class="text language-text" data-lang="text">filter=target.id eq &quot;00uxc78lMKUMVIHLTAXY&quot;
+</code></pre></div>
+
+<p>Failed login events published after 06/01/2013</p>
+
+<div class="highlight"><pre><code class="text language-text" data-lang="text">filter=published gt &quot;2013-06-01T00:00:00.000Z&quot; and action.objectType eq &quot;core.user_auth.login_failed&quot; 
+</code></pre></div>
+
+<p>Events published after 06/01/2013 for a target user and application</p>
+
+<div class="highlight"><pre><code class="text language-text" data-lang="text">filter=published gt &quot;2013-06-01T00:00:00.000Z&quot; and target.id eq &quot;00uxc78lMKUMVIHLTAXY&quot; and target.id eq &quot;0oabe82gnXOFVCDUMVAK&quot;
+</code></pre></div>
+
+<p>App SSO events for a target user and application</p>
+
+<div class="highlight"><pre><code class="text language-text" data-lang="text">filter=action.objectType eq &quot;app.auth.sso&quot; and target.id eq &quot;00uxc78lMKUMVIHLTAXY&quot; and target.id eq &quot;0oabe82gnXOFVCDUMVAK&quot;
+</code></pre></div>
+
+<h4 id="toc_33">Response Parameters</h4>
 
 <p>Array of <a href="#event-model">Events</a></p>
 
-<h4 id="toc_33">Example</h4>
+<h4 id="toc_34">Example</h4>
 
-<h5 id="toc_34">Request</h5>
+<h5 id="toc_35">Request</h5>
 
 <div class="highlight"><pre><code class="sh language-sh" data-lang="sh">curl -v -H <span class="s2">&quot;Authorization:SSWS yourtoken&quot;</span> <span class="se">\</span>
 -H <span class="s2">&quot;Accept:application/json&quot;</span> <span class="se">\</span>
@@ -5478,7 +5916,7 @@ Content-Type: application/json
 -X GET https://your-domain.okta.com/api/v1/events?startDate<span class="o">=</span>2013-07-15T16%3A00%3A00.000Z<span class="se">\&amp;</span><span class="nv">limit</span><span class="o">=</span>3
 </code></pre></div>
 
-<h5 id="toc_35">Response</h5>
+<h5 id="toc_36">Response</h5>
 
 <div class="highlight"><pre><code class="text language-text" data-lang="text">HTTP/1.1 200 OK
 Content-Type: application/json
@@ -5680,42 +6118,6 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 
 <p>The Groups API provides operations to manage your organization groups an their user members.</p>
 
-<ul>
-<li><a href="#group-model">Group Model</a>
-
-<ul>
-<li><a href="#group-attributes">Group Attributes</a></li>
-<li><a href="#profile-object">Profile Object</a></li>
-<li><a href="#links">Links</a></li>
-</ul></li>
-<li><a href="#group-operations">Group Operations</a>
-
-<ul>
-<li><a href="#add-group">Add Group</a></li>
-<li><a href="#get-group">Get Group</a></li>
-<li><a href="#list-groups">List Groups</a>
-
-<ul>
-<li><a href="#list-all-groups">List All Groups</a></li>
-<li><a href="#search-groups">Search Groups</a></li>
-</ul></li>
-<li><a href="#update-group">Update Group</a></li>
-<li><a href="#remove-group">Remove Group</a></li>
-</ul></li>
-<li><a href="#group-member-operations">Group Member Operations</a>
-
-<ul>
-<li><a href="#list-group-members">List Group Members</a></li>
-<li><a href="#add-user-to-group">Add User to Group</a></li>
-<li><a href="#remove-user-from-group">Remove User from Group</a></li>
-</ul></li>
-<li><a href="#related-resources">Related Resources</a>
-
-<ul>
-<li><a href="#list-assigned-applications">List Assigned Applications</a></li>
-</ul></li>
-</ul>
-
 <h2 id="toc_2">Group Model</h2>
 
 <h3 id="toc_3">Example</h3>
@@ -5810,7 +6212,9 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 </tr>
 </tbody></table>
 
-<p><em>Note: id, objectClass, and _links are only available after a group is created</em></p>
+<blockquote>
+<p><code>id</code>, <code>objectClass</code>, and <code>_links</code> are only available after a group is created</p>
+</blockquote>
 
 <h3 id="toc_5">Profile Object</h3>
 
@@ -5960,7 +6364,9 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 
 <p>Adds a new Okta group to your organization.</p>
 
-<p><em>Note: Only Okta groups can be added.  Application import operations are responsible for syncing non-Okta groups such as Active Directory groups.</em></p>
+<blockquote>
+<p>Only Okta groups can be added.  Application import operations are responsible for syncing non-Okta groups such as Active Directory groups.</p>
+</blockquote>
 
 <h4 id="toc_11">POST /groups</h4>
 
@@ -6156,7 +6562,9 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 </tr>
 </tbody></table>
 
-<p><em>Note: The <code>after</code> cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></em></p>
+<blockquote>
+<p>The <code>after</code> cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></p>
+</blockquote>
 
 <h5 id="toc_25">Response Parameters</h5>
 
@@ -6168,7 +6576,9 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 
 <p>The default group limit is set to a very high number due to historical reasons which is no longer valid for most organizations.  This will change in a future version of this API.  The recommended page limit is now <code>limit=200</code>.</p>
 
-<p><em>Note:  If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller <code>limit</code> and page the results (See <a href="../getting_started/design_principles.md#pagination">Pagination</a>)</em></p>
+<blockquote>
+<p>If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller <code>limit</code> and page the results (See <a href="../getting_started/design_principles.md#pagination">Pagination</a>)</p>
+</blockquote>
 
 <h5 id="toc_27">Request</h5>
 
@@ -6252,9 +6662,11 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 
 <p>Searches for groups by <code>name</code> in your organization.</p>
 
-<p><em>Note: Paging and searching are currently mutually exclusive.  You cannot page a query.  The default limit for a query is <code>300</code> results. Query is intended for an auto-complete picker use case where users will refine their search string to constrain the results.</em></p>
+<blockquote>
+<p>Paging and searching are currently mutually exclusive.  You cannot page a query.  The default limit for a query is <code>300</code> results. Query is intended for an auto-complete picker use case where users will refine their search string to constrain the results.</p>
 
-<p><em>Note: Search currently performs a startsWith match but it should be considered an implementation detail and may change without notice in the future. Exact matches will always be returned before partial matches</em></p>
+<p>Search currently performs a startsWith match but it should be considered an implementation detail and may change without notice in the future. Exact matches will always be returned before partial matches</p>
+</blockquote>
 
 <h5 id="toc_30">Request</h5>
 
@@ -6305,7 +6717,9 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 
 <p>Updates an Okta group&#39;s profile.</p>
 
-<p><em>Note: Only profiles for Okta groups can be modified.</em></p>
+<blockquote>
+<p>Only profiles for Okta groups can be modified.</p>
+</blockquote>
 
 <h5 id="toc_34">Request Parameters</h5>
 
@@ -6337,7 +6751,9 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 </tr>
 </tbody></table>
 
-<p><em>Note: All profile attributes must be specified when updating a user&#39;s profile.  <strong>Partial updates are not supported!</strong></em></p>
+<blockquote>
+<p>All profile attributes must be specified when updating a user&#39;s profile.  <strong>Partial updates are not supported!</strong></p>
+</blockquote>
 
 <h5 id="toc_35">Response Parameters</h5>
 
@@ -6398,7 +6814,9 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 
 <p>Removes an Okta group from your organization.</p>
 
-<p><em>Note: Only Okta groups can be removed.  Application import operations are responsible for syncing non-Okta groups such as Active Directory groups.</em></p>
+<blockquote>
+<p>Only Okta groups can be removed.  Application import operations are responsible for syncing non-Okta groups such as Active Directory groups.</p>
+</blockquote>
 
 <h5 id="toc_40">Request Parameters</h5>
 
@@ -6486,11 +6904,15 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 </tr>
 </tbody></table>
 
-<p><em>Note: The <code>after</code> cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></em></p>
+<blockquote>
+<p>The <code>after</code> cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></p>
+</blockquote>
 
 <p>The default user limit is set to a very high number due to historical reasons which is no longer valid for most organizations.  This will change in a future version of this API.  The recommended page limit is now <code>limit=200</code>.</p>
 
-<p><em>Note:  If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller <code>limit</code> and page the results (See <a href="../getting_started/design_principles.md#pagination">Pagination</a>)</em></p>
+<blockquote>
+<p>If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller <code>limit</code> and page the results (See <a href="../getting_started/design_principles.md#pagination">Pagination</a>)</p>
+</blockquote>
 
 <h5 id="toc_48">Response Parameters</h5>
 
@@ -6584,7 +7006,9 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 
 <p>Adds an <a href="users.md#user-model">Okta user</a> from an Okta group.</p>
 
-<p><em>Note: You can only manage Okta-mastered group memberships.  Application import operations are responsible for syncing non-Okta group memberships such as Active Directory groups.</em></p>
+<blockquote>
+<p>You can only manage Okta-mastered group memberships.  Application import operations are responsible for syncing non-Okta group memberships such as Active Directory groups.</p>
+</blockquote>
 
 <h5 id="toc_53">Request Parameters</h5>
 
@@ -6638,7 +7062,9 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 
 <p>Removes an <a href="users.md#user-model">Okta user</a> from an Okta group.</p>
 
-<p><em>Note: You can only manage Okta-mastered group memberships.  Application import operations are responsible for syncing non-Okta group memberships such as Active Directory groups.</em></p>
+<blockquote>
+<p>You can only manage Okta-mastered group memberships.  Application import operations are responsible for syncing non-Okta group memberships such as Active Directory groups.</p>
+</blockquote>
 
 <h5 id="toc_59">Request Parameters</h5>
 
@@ -6732,7 +7158,9 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 </tr>
 </tbody></table>
 
-<p><em>Note: The page cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></em></p>
+<blockquote>
+<p>The page cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></p>
+</blockquote>
 
 <h5 id="toc_67">Response Parameters</h5>
 
@@ -6952,7 +7380,9 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 
 <p>Okta uses a cookie-based authentication mechanism to maintain a user&#39;s authentication session across web requests.  The Session API provides operations to create and manage authentication sessions with your Okta organization.</p>
 
-<p><em>Note:  The Session API currently does not support multi-factor authentication (MFA).  Sessions created for users with an assigned MFA policy will have a significantly constrained session and will not be able to access their applications.</em></p>
+<blockquote>
+<p>The Session API currently does not support multi-factor authentication (MFA).  Sessions created for users with an assigned MFA policy will have a significantly constrained session and will not be able to access their applications.</p>
+</blockquote>
 
 <ul>
 <li><a href="#session-model">Session Model</a></li>
@@ -6981,7 +7411,9 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 
 <p>A one-time token may only be used <strong>once</strong> to establish a session for a user.  If the session expires or the user logs out of Okta after using the token, they will not be able to reuse the same one-time token to get a new session cookie.</p>
 
-<p><em>Note: One-time tokens are secrets and should be protected at rest as well as during transit. A one-time token for a user is equivalent to having the user&#39;s actual credentials</em></p>
+<blockquote>
+<p>One-time tokens are secrets and should be protected at rest as well as during transit. A one-time token for a user is equivalent to having the user&#39;s actual credentials</p>
+</blockquote>
 
 <h2 id="toc_4">Session Model</h2>
 
@@ -7470,70 +7902,6 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 
 <p>The User API provides operations for user management.</p>
 
-<ul>
-<li><a href="#user-model">User Model</a>
-
-<ul>
-<li><a href="#metadata-attributes">Metadata Attributes</a></li>
-<li><a href="#profile-object">Profile Object</a></li>
-<li><a href="#credentials-object">Credentials Object</a></li>
-<li><a href="#links-object">Links Object</a></li>
-</ul></li>
-<li><a href="#user-operations">User Operations</a><br>
-
-<ul>
-<li><a href="#create-user">Create User</a>
-
-<ul>
-<li><a href="#create-user-without-credentials">Create User without Credentials</a></li>
-<li><a href="#create-user-with-recovery-question">Create User with Recovery Question</a></li>
-<li><a href="#create-user-with-password">Create User with Password</a></li>
-<li><a href="#create-user-with-password--recovery-question">Create User with Password &amp; Recovery Question</a></li>
-</ul></li>
-<li><a href="#get-user">Get User</a>
-
-<ul>
-<li><a href="#get-user-with-id">Get User with id</a></li>
-<li><a href="#get-user-with-login">Get User with login</a></li>
-<li><a href="#get-user-with-login-shortname">Get User with login shortname</a></li>
-</ul></li>
-<li><a href="#list-users">List Users</a>
-
-<ul>
-<li><a href="#list-users-with-search">List Users with Search</a></li>
-<li><a href="#list-users-with-status-filter">List Users with Status (Filter)</a></li>
-</ul></li>
-<li><a href="#update-user">Update User</a>
-
-<ul>
-<li><a href="#update-profile">Update Profile</a></li>
-<li><a href="#set-password">Set Password</a></li>
-<li><a href="#set-recovery-question--answer">Set Recovery Question &amp; Answer</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#related-resources">Related Resources</a>
-
-<ul>
-<li><a href="#get-assigned-app-links">Get Assigned App Links</a></li>
-<li><a href="#get-member-groups">Get Member Groups</a></li>
-</ul></li>
-<li><a href="#lifecycle-operations">Lifecycle Operations</a>
-
-<ul>
-<li><a href="#activate-user">Activate</a></li>
-<li><a href="#deactivate-user">Deactivate</a></li>
-<li><a href="#unlock-user">Unlock</a></li>
-<li><a href="#reset-password">Reset Password</a></li>
-</ul></li>
-<li><a href="#credential-operations">Credential Operations</a>
-
-<ul>
-<li><a href="#forgot-password">Forgot Password</a></li>
-<li><a href="#change-password">Change Password</a></li>
-<li><a href="#change-recovery-question">Change Recovery Question</a></li>
-</ul></li>
-</ul>
-
 <h2 id="toc_2">User Model</h2>
 
 <p>Content Type: application/json</p>
@@ -7554,6 +7922,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
     <span class="nt">&quot;activated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T16:39:19.000Z&quot;</span><span class="p">,</span>
     <span class="nt">&quot;statusChanged&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T16:39:19.000Z&quot;</span><span class="p">,</span>
     <span class="nt">&quot;lastLogin&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T17:39:19.000Z&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;lastUpdated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-27T16:35:28.000Z&quot;</span><span class="p">,</span>
     <span class="nt">&quot;profile&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="nt">&quot;firstName&quot;</span><span class="p">:</span> <span class="s2">&quot;Isaac&quot;</span><span class="p">,</span>
         <span class="nt">&quot;lastName&quot;</span><span class="p">:</span> <span class="s2">&quot;Brock&quot;</span><span class="p">,</span>
@@ -7570,6 +7939,9 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
     <span class="nt">&quot;_links&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="nt">&quot;resetPassword&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;expirePassword&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password&quot;</span>
         <span class="p">},</span>
         <span class="nt">&quot;forgotPassword&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password&quot;</span>
@@ -7608,7 +7980,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 <tr>
 <td>status</td>
 <td>current status</td>
-<td>Enum: STAGED, PROVISIONED, ACTIVE, RECOVERY, LOCKED_OUT, DEPROVISIONED</td>
+<td>Enum: STAGED, PROVISIONED, ACTIVE, RECOVERY, LOCKED_OUT, PASSWORD_EXPIRED, DEPROVISIONED</td>
 <td>FALSE</td>
 </tr>
 <tr>
@@ -7636,6 +8008,12 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 <td>TRUE</td>
 </tr>
 <tr>
+<td>lastUpdated</td>
+<td>timestamp when user was last updated</td>
+<td>Date</td>
+<td>FALSE</td>
+</tr>
+<tr>
 <td>transitioningToStatus</td>
 <td>target status of an inprogress asynchronous status transition</td>
 <td>Enum: PROVISIONED, ACTIVE, DEPROVISIONED</td>
@@ -7643,11 +8021,13 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 </tr>
 </tbody></table>
 
-<p><em>Note: These attributes are only available after a user is created</em></p>
+<blockquote>
+<p>These attributes are only available after a user is created</p>
 
 <p><code>activated</code> timestamp will only be available to users activated after <em>06/30/2013</em>.</p>
 
 <p><code>statusChanged</code> and <code>lastLogin</code> timestamps will be missing for users created before <em>06/30/2013</em>.  They will be updated on next status change or login.</p>
+</blockquote>
 
 <h3 id="toc_5">Profile Object</h3>
 
@@ -7728,7 +8108,9 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 </tr>
 </tbody></table>
 
-<p><em>Note: Avoid using a <code>login</code> with a <code>/</code> character.  Although <code>/</code> is a valid character according to <a href="http://tools.ietf.org/html/rfc6531#section-3.3">RFC 6531 section 3.3</a>, a user with this character in their <code>login</code> cannot be fetched by <code>login</code> (<a href="#get-user-with-id">see Get User with id</a>) due to security risks with escaping this character.</em></p>
+<blockquote>
+<p>Avoid using a <code>login</code> with a <code>/</code> character.  Although <code>/</code> is a valid character according to <a href="http://tools.ietf.org/html/rfc6531#section-3.3">RFC 6531 section 3.3</a>, a user with this character in their <code>login</code> cannot be fetched by <code>login</code> (<a href="#get-user-with-id">see Get User with id</a>) due to security risks with escaping this character.</p>
+</blockquote>
 
 <h4 id="toc_7">Custom Attributes</h4>
 
@@ -7769,7 +8151,9 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 </tr>
 </tbody></table>
 
-<p><em>Note: Some credential values are <strong>write-only</strong></em></p>
+<blockquote>
+<p>Some credential values are <strong>write-only</strong></p>
+</blockquote>
 
 <div class="highlight"><pre><code class="json language-json" data-lang="json"><span class="p">{</span>
     <span class="nt">&quot;credentials&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -7889,6 +8273,10 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 <td><a href="#reset-password">Lifecycle action</a> to transition user to <strong>RECOVERY</strong> status</td>
 </tr>
 <tr>
+<td>expirePassword</td>
+<td><a href="#expire-password">Lifecycle action</a> to transition user to <strong>PASSWORD_EXPIRED</strong> status</td>
+</tr>
+<tr>
 <td>forgotPassword</td>
 <td><a href="#forgot-password">Resets a user&#39;s password</a> by validating the user&#39;s recovery credential.</td>
 </tr>
@@ -7965,7 +8353,9 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 
 <p>All responses return the created <a href="#user-model">User</a>.  Activation of a user is an asynchronous operation.  The user will have the <code>transitioningToStatus</code> property with a value of <strong>ACTIVE</strong> during activation to indicate that the user hasn&#39;t completed the asynchronous operation.  The user will have a <code>status</code> of <strong>ACTIVE</strong> when the activation process is complete.</p>
 
-<p><em>Note: The user will be emailed a one-time activation token if activated without a password</em></p>
+<blockquote>
+<p>The user will be emailed a one-time activation token if activated without a password</p>
+</blockquote>
 
 <table><thead>
 <tr>
@@ -8072,6 +8462,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
     <span class="nt">&quot;activated&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nt">&quot;statusChanged&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nt">&quot;lastLogin&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;lastUpdated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-07-02T21:36:25.344Z&quot;</span><span class="p">,</span>
     <span class="nt">&quot;profile&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="nt">&quot;firstName&quot;</span><span class="p">:</span> <span class="s2">&quot;Isaac&quot;</span><span class="p">,</span>
         <span class="nt">&quot;lastName&quot;</span><span class="p">:</span> <span class="s2">&quot;Brock&quot;</span><span class="p">,</span>
@@ -8123,6 +8514,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
     <span class="nt">&quot;activated&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nt">&quot;statusChanged&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nt">&quot;lastLogin&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;lastUpdated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-07-02T21:36:25.344Z&quot;</span><span class="p">,</span>
     <span class="nt">&quot;profile&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="nt">&quot;firstName&quot;</span><span class="p">:</span> <span class="s2">&quot;Isaac&quot;</span><span class="p">,</span>
         <span class="nt">&quot;lastName&quot;</span><span class="p">:</span> <span class="s2">&quot;Brock&quot;</span><span class="p">,</span>
@@ -8175,6 +8567,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
     <span class="nt">&quot;activated&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nt">&quot;statusChanged&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nt">&quot;lastLogin&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;lastUpdated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-07-02T21:36:25.344Z&quot;</span><span class="p">,</span>
     <span class="nt">&quot;profile&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="nt">&quot;firstName&quot;</span><span class="p">:</span> <span class="s2">&quot;Isaac&quot;</span><span class="p">,</span>
         <span class="nt">&quot;lastName&quot;</span><span class="p">:</span> <span class="s2">&quot;Brock&quot;</span><span class="p">,</span>
@@ -8229,6 +8622,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
     <span class="nt">&quot;activated&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nt">&quot;statusChanged&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nt">&quot;lastLogin&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;lastUpdated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-07-02T21:36:25.344Z&quot;</span><span class="p">,</span>
     <span class="nt">&quot;profile&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="nt">&quot;firstName&quot;</span><span class="p">:</span> <span class="s2">&quot;Isaac&quot;</span><span class="p">,</span>
         <span class="nt">&quot;lastName&quot;</span><span class="p">:</span> <span class="s2">&quot;Brock&quot;</span><span class="p">,</span>
@@ -8279,20 +8673,24 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 </tr>
 </tbody></table>
 
-<p><em>Note: When fetching a user by <code>login</code> or <code>login shortname</code>, you should <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encode</a> the request parameter to ensure reserved characters at escaped properly.  Logins with a <code>/</code> character can only be fetched by &#39;id&#39; due to security issues with escaping the <code>/</code> character.</em></p>
+<blockquote>
+<p>When fetching a user by <code>login</code> or <code>login shortname</code>, you should <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encode</a> the request parameter to ensure reserved characters at escaped properly.  Logins with a <code>/</code> character can only be fetched by &#39;id&#39; due to security issues with escaping the <code>/</code> character.</p>
+
+<p>You can substitute <em>me</em> for the id to fetch the current user.</p>
+</blockquote>
 
 <h5 id="toc_33">Response Parameters</h5>
 
 <p>Fetched <a href="#user-model">User</a></p>
 
-<h4 id="toc_34">Get User with id</h4>
+<h4 id="toc_34">Get Current User</h4>
 
 <h5 id="toc_35">Request</h5>
 
 <div class="highlight"><pre><code class="sh language-sh" data-lang="sh">curl -v -H <span class="s2">&quot;Authorization: SSWS yourtoken&quot;</span> <span class="se">\</span>
 -H <span class="s2">&quot;Accept: application/json&quot;</span> <span class="se">\</span>
 -H <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="se">\</span>
--X GET <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR&quot;</span>
+-X GET <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/me&quot;</span>
 </code></pre></div>
 
 <h5 id="toc_36">Response</h5>
@@ -8304,6 +8702,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
     <span class="nt">&quot;activated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T16:39:19.000Z&quot;</span><span class="p">,</span>
     <span class="nt">&quot;statusChanged&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T16:39:19.000Z&quot;</span><span class="p">,</span>
     <span class="nt">&quot;lastLogin&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T17:39:19.000Z&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;lastUpdated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-07-02T21:36:25.344Z&quot;</span><span class="p">,</span>
     <span class="nt">&quot;profile&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="nt">&quot;firstName&quot;</span><span class="p">:</span> <span class="s2">&quot;Isaac&quot;</span><span class="p">,</span>
         <span class="nt">&quot;lastName&quot;</span><span class="p">:</span> <span class="s2">&quot;Brock&quot;</span><span class="p">,</span>
@@ -8321,6 +8720,9 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
         <span class="nt">&quot;resetPassword&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password&quot;</span>
         <span class="p">},</span>
+        <span class="nt">&quot;expirePassword&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password&quot;</span>
+        <span class="p">},</span>
         <span class="nt">&quot;forgotPassword&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password&quot;</span>
         <span class="p">},</span>
@@ -8337,14 +8739,14 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 <span class="p">}</span>
 </code></pre></div>
 
-<h4 id="toc_37">Get User with login</h4>
+<h4 id="toc_37">Get User with id</h4>
 
 <h5 id="toc_38">Request</h5>
 
 <div class="highlight"><pre><code class="sh language-sh" data-lang="sh">curl -v -H <span class="s2">&quot;Authorization: SSWS yourtoken&quot;</span> <span class="se">\</span>
 -H <span class="s2">&quot;Accept: application/json&quot;</span> <span class="se">\</span>
 -H <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="se">\</span>
--X GET <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/isaac@example.org&quot;</span>
+-X GET <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR&quot;</span>
 </code></pre></div>
 
 <h5 id="toc_39">Response</h5>
@@ -8356,6 +8758,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
     <span class="nt">&quot;activated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T16:39:19.000Z&quot;</span><span class="p">,</span>
     <span class="nt">&quot;statusChanged&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T16:39:19.000Z&quot;</span><span class="p">,</span>
     <span class="nt">&quot;lastLogin&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T17:39:19.000Z&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;lastUpdated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-07-02T21:36:25.344Z&quot;</span><span class="p">,</span>
     <span class="nt">&quot;profile&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="nt">&quot;firstName&quot;</span><span class="p">:</span> <span class="s2">&quot;Isaac&quot;</span><span class="p">,</span>
         <span class="nt">&quot;lastName&quot;</span><span class="p">:</span> <span class="s2">&quot;Brock&quot;</span><span class="p">,</span>
@@ -8373,6 +8776,9 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
         <span class="nt">&quot;resetPassword&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password&quot;</span>
         <span class="p">},</span>
+        <span class="nt">&quot;expirePassword&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password&quot;</span>
+        <span class="p">},</span>
         <span class="nt">&quot;forgotPassword&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password&quot;</span>
         <span class="p">},</span>
@@ -8389,14 +8795,14 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 <span class="p">}</span>
 </code></pre></div>
 
-<h4 id="toc_40">Get User with login shortname</h4>
+<h4 id="toc_40">Get User with login</h4>
 
 <h5 id="toc_41">Request</h5>
 
 <div class="highlight"><pre><code class="sh language-sh" data-lang="sh">curl -v -H <span class="s2">&quot;Authorization: SSWS yourtoken&quot;</span> <span class="se">\</span>
 -H <span class="s2">&quot;Accept: application/json&quot;</span> <span class="se">\</span>
 -H <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="se">\</span>
--X GET <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/isaac&quot;</span>
+-X GET <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/isaac@example.org&quot;</span>
 </code></pre></div>
 
 <h5 id="toc_42">Response</h5>
@@ -8408,6 +8814,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
     <span class="nt">&quot;activated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T16:39:19.000Z&quot;</span><span class="p">,</span>
     <span class="nt">&quot;statusChanged&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T16:39:19.000Z&quot;</span><span class="p">,</span>
     <span class="nt">&quot;lastLogin&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T17:39:19.000Z&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;lastUpdated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-07-02T21:36:25.344Z&quot;</span><span class="p">,</span>
     <span class="nt">&quot;profile&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="nt">&quot;firstName&quot;</span><span class="p">:</span> <span class="s2">&quot;Isaac&quot;</span><span class="p">,</span>
         <span class="nt">&quot;lastName&quot;</span><span class="p">:</span> <span class="s2">&quot;Brock&quot;</span><span class="p">,</span>
@@ -8425,6 +8832,9 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
         <span class="nt">&quot;resetPassword&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password&quot;</span>
         <span class="p">},</span>
+        <span class="nt">&quot;expirePassword&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password&quot;</span>
+        <span class="p">},</span>
         <span class="nt">&quot;forgotPassword&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password&quot;</span>
         <span class="p">},</span>
@@ -8441,13 +8851,69 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 <span class="p">}</span>
 </code></pre></div>
 
-<h3 id="toc_43">List Users</h3>
+<h4 id="toc_43">Get User with login shortname</h4>
 
-<h4 id="toc_44">GET /users</h4>
+<h5 id="toc_44">Request</h5>
+
+<div class="highlight"><pre><code class="sh language-sh" data-lang="sh">curl -v -H <span class="s2">&quot;Authorization: SSWS yourtoken&quot;</span> <span class="se">\</span>
+-H <span class="s2">&quot;Accept: application/json&quot;</span> <span class="se">\</span>
+-H <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="se">\</span>
+-X GET <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/isaac&quot;</span>
+</code></pre></div>
+
+<h5 id="toc_45">Response</h5>
+
+<div class="highlight"><pre><code class="json language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;00ub0oNGTSWTBKOLGLNR&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;ACTIVE&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T16:39:18.000Z&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;activated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T16:39:19.000Z&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;statusChanged&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T16:39:19.000Z&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;lastLogin&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T17:39:19.000Z&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;lastUpdated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-07-02T21:36:25.344Z&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;profile&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;firstName&quot;</span><span class="p">:</span> <span class="s2">&quot;Isaac&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;lastName&quot;</span><span class="p">:</span> <span class="s2">&quot;Brock&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;isaac@example.org&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;login&quot;</span><span class="p">:</span> <span class="s2">&quot;isaac@example.org&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;mobilePhone&quot;</span><span class="p">:</span> <span class="s2">&quot;555-415-1337&quot;</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;credentials&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;password&quot;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="nt">&quot;recovery_question&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;Who&#39;s a major player in the cowboy scene?&quot;</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;_links&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;resetPassword&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;expirePassword&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;forgotPassword&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;changeRecoveryQuestion&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;deactivate&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;changePassword&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="toc_46">List Users</h3>
+
+<h4 id="toc_47">GET /users</h4>
 
 <p>Fetch a list of users from your Okta organization.</p>
 
-<h5 id="toc_45">Request Parameters</h5>
+<h5 id="toc_48">Request Parameters</h5>
 
 <table><thead>
 <tr>
@@ -8477,11 +8943,11 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 </tr>
 <tr>
 <td>filter</td>
-<td>Filters users by <code>status</code> expression (See Filter Expressions)</td>
+<td><a href="../getting_started/design_principles.md#filtering">Filter expression</a> for users</td>
 <td>Query</td>
 <td>String</td>
 <td>FALSE</td>
-<td>status eq &quot;STAGED&quot; or status eq &quot;PROVISIONED&quot; or status eq &quot;ACTIVE&quot; or status eq &quot;RECOVERY&quot; or status eq &quot;LOCKED_OUT&quot;</td>
+<td></td>
 </tr>
 <tr>
 <td>after</td>
@@ -8493,21 +8959,105 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 </tr>
 </tbody></table>
 
-<p><em>Note: The <code>after</code> cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></em></p>
+<blockquote>
+<p>The <code>after</code> cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></p>
 
-<p><em>Note: Search currently performs a startsWith match but it should be considered an implementation detail and may change without notice in the future</em></p>
+<p>Search currently performs a startsWith match but it should be considered an implementation detail and may change without notice in the future</p>
+</blockquote>
 
-<h5 id="toc_46">Response Parameters</h5>
+<h6 id="toc_49">Filters</h6>
+
+<p>The following expressions are supported for users with the <code>filter</code> query parameter:</p>
+
+<table><thead>
+<tr>
+<th>Filter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>status eq &quot;STAGED&quot;</code></td>
+<td>Users that have a <code>status</code> of <code>STAGED</code></td>
+</tr>
+<tr>
+<td><code>status eq &quot;PROVISIONED&quot;</code></td>
+<td>Users that have a <code>status</code> of <code>PROVISIONED</code></td>
+</tr>
+<tr>
+<td><code>status eq &quot;ACTIVE&quot;</code></td>
+<td>Users that have a <code>status</code> of <code>ACTIVE</code></td>
+</tr>
+<tr>
+<td><code>status eq &quot;RECOVERY&quot;</code></td>
+<td>Users that have a <code>status</code> of <code>RECOVERY</code></td>
+</tr>
+<tr>
+<td><code>status eq &quot;PASSWORD_EXPIRED&quot;</code></td>
+<td>Users that have a <code>status</code> of <code>PASSWORD_EXPIRED</code></td>
+</tr>
+<tr>
+<td><code>status eq &quot;LOCKED_OUT&quot;</code></td>
+<td>Users that have a <code>status</code> of <code>LOCKED_OUT</code></td>
+</tr>
+<tr>
+<td><code>status eq &quot;DEPROVISIONED&quot;</code></td>
+<td>Users that have a <code>status</code> of <code>DEPROVISIONED</code></td>
+</tr>
+<tr>
+<td><code>lastUpdated lt &quot;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZZ&quot;</code></td>
+<td>Users last updated before a specific datetime</td>
+</tr>
+<tr>
+<td><code>lastUpdated eq &quot;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZZ&quot;</code></td>
+<td>Users last updated at a specific datetime</td>
+</tr>
+<tr>
+<td><code>lastUpdated gt &quot;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZZ&quot;</code></td>
+<td>Users last updated after a specific datetime</td>
+</tr>
+</tbody></table>
+
+<p>See <a href="../getting_started/design_principles.md#filtering">Filtering</a> for more information on expressions</p>
+
+<blockquote>
+<p>All filters must be <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encoded</a> where <code>filter=lastUpdated gt &quot;2013-06-01T00:00:00.000Z&quot;</code> is encoded as <code>filter=lastUpdated%20gt%20%222013-06-01T00:00:00.000Z%22</code></p>
+</blockquote>
+
+<p><strong>Filter Examples</strong></p>
+
+<p>Users with status of <code>LOCKED_OUT</code></p>
+
+<div class="highlight"><pre><code class="text language-text" data-lang="text">filter=status eq &quot;LOCKED_OUT&quot;
+</code></pre></div>
+
+<p>Users updated after 06/01/2013 but before 01/01/2014</p>
+
+<div class="highlight"><pre><code class="text language-text" data-lang="text">filter=lastUpdated gt &quot;2013-06-01T00:00:00.000Z&quot; and lastUpdated lt &quot;2014-01-01T00:00:00.000Z&quot;
+</code></pre></div>
+
+<p>Users updated after 06/01/2013 but before 01/01/2014 with a status of <code>ACTIVE</code></p>
+
+<div class="highlight"><pre><code class="text language-text" data-lang="text">filter=lastUpdated gt &quot;2013-06-27T16:35:28.000Z&quot; and lastUpdated lt &quot;2013-07-04T16:35:28.000Z&quot; and status eq &quot;ACTIVE&quot;
+</code></pre></div>
+
+<p>Users updated after 06/01/2013 but with a status of <code>LOCKED_OUT</code> or <code>RECOVERY</code></p>
+
+<div class="highlight"><pre><code class="text language-text" data-lang="text">filter=lastUpdated gt &quot;2013-06-27T16:35:28.000Z&quot; and (status eq &quot;LOCKED_OUT&quot; or status eq &quot;RECOVERY&quot;)
+</code></pre></div>
+
+<h5 id="toc_50">Response Parameters</h5>
 
 <p>Array of <a href="#user-model">User</a></p>
 
-<h4 id="toc_47">List Users with Defaults</h4>
+<h4 id="toc_51">List Users with Defaults</h4>
 
 <p>The default user limit is set to a very high number due to historical reasons which is no longer valid for most organizations.  This will change in a future version of this API.  The recommended page limit is now <code>limit=200</code>.</p>
 
-<p><em>Note:  If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller <code>limit</code> and page the results (See <a href="../getting_started/design_principles.md#pagination">Pagination</a>)</em></p>
+<blockquote>
+<p>If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller <code>limit</code> and page the results (See <a href="../getting_started/design_principles.md#pagination">Pagination</a>)</p>
+</blockquote>
 
-<h5 id="toc_48">Request</h5>
+<h5 id="toc_52">Request</h5>
 
 <div class="highlight"><pre><code class="sh language-sh" data-lang="sh">curl -v -H <span class="s2">&quot;Authorization: SSWS yourtoken&quot;</span> <span class="se">\</span>
 -H <span class="s2">&quot;Accept: application/json&quot;</span> <span class="se">\</span>
@@ -8515,7 +9065,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 -X GET <span class="s2">&quot;https://your-domain.okta.com/api/v1/users?limit=200&quot;</span>
 </code></pre></div>
 
-<h5 id="toc_49">Response</h5>
+<h5 id="toc_53">Response</h5>
 
 <div class="highlight"><pre><code class="http language-http" data-lang="http"><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
@@ -8530,6 +9080,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
         <span class="nt">&quot;activated&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
         <span class="nt">&quot;statusChanged&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
         <span class="nt">&quot;lastLogin&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;lastUpdated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-07-02T21:36:25.344Z&quot;</span><span class="p">,</span>
         <span class="nt">&quot;profile&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="nt">&quot;firstName&quot;</span><span class="p">:</span> <span class="s2">&quot;Isaac&quot;</span><span class="p">,</span>
             <span class="nt">&quot;lastName&quot;</span><span class="p">:</span> <span class="s2">&quot;Brock&quot;</span><span class="p">,</span>
@@ -8551,6 +9102,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
         <span class="nt">&quot;activated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T16:39:19.000Z&quot;</span><span class="p">,</span>
         <span class="nt">&quot;statusChanged&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T16:39:19.000Z&quot;</span><span class="p">,</span>
         <span class="nt">&quot;lastLogin&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T17:39:19.000Z&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;lastUpdated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-07-02T21:36:25.344Z&quot;</span><span class="p">,</span>
         <span class="nt">&quot;profile&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="nt">&quot;firstName&quot;</span><span class="p">:</span> <span class="s2">&quot;Eric&quot;</span><span class="p">,</span>
             <span class="nt">&quot;lastName&quot;</span><span class="p">:</span> <span class="s2">&quot;Judy&quot;</span><span class="p">,</span>
@@ -8567,6 +9119,9 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
         <span class="nt">&quot;_links&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="nt">&quot;resetPassword&quot;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00uar9CIHZHPTVFRSEYZ/lifecycle/reset_password&quot;</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;expirePassword&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password&quot;</span>
             <span class="p">},</span>
             <span class="nt">&quot;forgotPassword&quot;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00uar9CIHZHPTVFRSEYZ/credentials/forgot_password&quot;</span>
@@ -8585,9 +9140,9 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 <span class="p">]</span>
 </code></pre></div>
 
-<h4 id="toc_50">List Users with Search</h4>
+<h4 id="toc_54">List Users with Search</h4>
 
-<h5 id="toc_51">Request</h5>
+<h5 id="toc_55">Request</h5>
 
 <div class="highlight"><pre><code class="sh language-sh" data-lang="sh">curl -v -H <span class="s2">&quot;Authorization: SSWS yourtoken&quot;</span> <span class="se">\</span>
 -H <span class="s2">&quot;Accept: application/json&quot;</span> <span class="se">\</span>
@@ -8595,7 +9150,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 -X GET <span class="s2">&quot;https://your-domain.okta.com/api/v1/users?q=er&amp;limit=1&quot;</span>
 </code></pre></div>
 
-<h5 id="toc_52">Response</h5>
+<h5 id="toc_56">Response</h5>
 
 <div class="highlight"><pre><code class="json language-json" data-lang="json"><span class="p">[</span>
     <span class="p">{</span>
@@ -8605,6 +9160,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
         <span class="nt">&quot;activated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T16:39:19.000Z&quot;</span><span class="p">,</span>
         <span class="nt">&quot;statusChanged&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T16:39:19.000Z&quot;</span><span class="p">,</span>
         <span class="nt">&quot;lastLogin&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T17:39:19.000Z&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;lastUpdated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-07-02T21:36:25.344Z&quot;</span><span class="p">,</span>
         <span class="nt">&quot;profile&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="nt">&quot;firstName&quot;</span><span class="p">:</span> <span class="s2">&quot;Eric&quot;</span><span class="p">,</span>
             <span class="nt">&quot;lastName&quot;</span><span class="p">:</span> <span class="s2">&quot;Judy&quot;</span><span class="p">,</span>
@@ -8621,6 +9177,9 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
         <span class="nt">&quot;_links&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="nt">&quot;resetPassword&quot;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00uar9CIHZHPTVFRSEYZ/lifecycle/reset_password&quot;</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;expirePassword&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password&quot;</span>
             <span class="p">},</span>
             <span class="nt">&quot;forgotPassword&quot;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00uar9CIHZHPTVFRSEYZ/credentials/forgot_password&quot;</span>
@@ -8639,17 +9198,17 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 <span class="p">]</span>
 </code></pre></div>
 
-<h4 id="toc_53">List Users with Status (Filter)</h4>
+<h4 id="toc_57">List Users Updated after Timestamp</h4>
 
-<h5 id="toc_54">Request</h5>
+<h5 id="toc_58">Request</h5>
 
 <div class="highlight"><pre><code class="sh language-sh" data-lang="sh">curl -v -H <span class="s2">&quot;Authorization: SSWS yourtoken&quot;</span> <span class="se">\</span>
 -H <span class="s2">&quot;Accept: application/json&quot;</span> <span class="se">\</span>
 -H <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="se">\</span>
--X GET <span class="s2">&quot;https://your-domain.okta.com/api/v1/users?filter=status+eq+\&quot;ACTIVE\&quot;&quot;</span>
+-X GET <span class="s2">&quot;https://your-domain.okta.com/api/v1/users?filter=lastUpdated+gt+\&quot;2013-07-01T00:00:00.000Z\&quot;&quot;</span>
 </code></pre></div>
 
-<h5 id="toc_55">Response</h5>
+<h5 id="toc_59">Response</h5>
 
 <div class="highlight"><pre><code class="json language-json" data-lang="json"><span class="p">[</span>
     <span class="p">{</span>
@@ -8659,6 +9218,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
         <span class="nt">&quot;activated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T16:39:19.000Z&quot;</span><span class="p">,</span>
         <span class="nt">&quot;statusChanged&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T16:39:19.000Z&quot;</span><span class="p">,</span>
         <span class="nt">&quot;lastLogin&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T17:39:19.000Z&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;lastUpdated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-07-02T21:36:25.344Z&quot;</span><span class="p">,</span>
         <span class="nt">&quot;profile&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="nt">&quot;firstName&quot;</span><span class="p">:</span> <span class="s2">&quot;Eric&quot;</span><span class="p">,</span>
             <span class="nt">&quot;lastName&quot;</span><span class="p">:</span> <span class="s2">&quot;Judy&quot;</span><span class="p">,</span>
@@ -8675,6 +9235,9 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
         <span class="nt">&quot;_links&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="nt">&quot;resetPassword&quot;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00uar9CIHZHPTVFRSEYZ/lifecycle/reset_password&quot;</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;expirePassword&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password&quot;</span>
             <span class="p">},</span>
             <span class="nt">&quot;forgotPassword&quot;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00uar9CIHZHPTVFRSEYZ/credentials/forgot_password&quot;</span>
@@ -8693,13 +9256,71 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 <span class="p">]</span>
 </code></pre></div>
 
-<h3 id="toc_56">Update User</h3>
+<h4 id="toc_60">List Users with Status</h4>
 
-<h4 id="toc_57">PUT /users/:id</h4>
+<h5 id="toc_61">Request</h5>
+
+<div class="highlight"><pre><code class="sh language-sh" data-lang="sh">curl -v -H <span class="s2">&quot;Authorization: SSWS yourtoken&quot;</span> <span class="se">\</span>
+-H <span class="s2">&quot;Accept: application/json&quot;</span> <span class="se">\</span>
+-H <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="se">\</span>
+-X GET <span class="s2">&quot;https://your-domain.okta.com/api/v1/users?filter=status+eq+\&quot;ACTIVE\&quot;+or+status+eq+\&quot;RECOVERY\&quot;&quot;</span>
+</code></pre></div>
+
+<h5 id="toc_62">Response</h5>
+
+<div class="highlight"><pre><code class="json language-json" data-lang="json"><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;00uar9CIHZHPTVFRSEYZ&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;ACTIVE&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T16:39:18.000Z&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;activated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T16:39:19.000Z&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;statusChanged&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T16:39:19.000Z&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;lastLogin&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T17:39:19.000Z&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;lastUpdated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-07-02T21:36:25.344Z&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;profile&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;firstName&quot;</span><span class="p">:</span> <span class="s2">&quot;Eric&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;lastName&quot;</span><span class="p">:</span> <span class="s2">&quot;Judy&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;eric@example.org&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;login&quot;</span><span class="p">:</span> <span class="s2">&quot;eric@example.org&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;mobilePhone&quot;</span><span class="p">:</span> <span class="s2">&quot;555-415-2011&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;credentials&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;password&quot;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="nt">&quot;recovery_question&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;The stars are projectors?&quot;</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;_links&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;resetPassword&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00uar9CIHZHPTVFRSEYZ/lifecycle/reset_password&quot;</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;expirePassword&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password&quot;</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;forgotPassword&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00uar9CIHZHPTVFRSEYZ/credentials/forgot_password&quot;</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;changeRecoveryQuestion&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00uar9CIHZHPTVFRSEYZ/credentials/change_recovery_question&quot;</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;deactivate&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00uar9CIHZHPTVFRSEYZ/lifecycle/deactivate&quot;</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;changePassword&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00uar9CIHZHPTVFRSEYZ/credentials/change_password&quot;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>    
+<span class="p">]</span>
+</code></pre></div>
+
+<h3 id="toc_63">Update User</h3>
+
+<h4 id="toc_64">PUT /users/:id</h4>
 
 <p>Update a user&#39;s profile and/or credentials.</p>
 
-<h5 id="toc_58">Request Parameters</h5>
+<h5 id="toc_65">Request Parameters</h5>
 
 <table><thead>
 <tr>
@@ -8739,15 +9360,17 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 
 <p><code>profile</code> and <code>credentials</code> can be updated independently or with a single request. </p>
 
-<p><em>Note: All profile attributes must be specified when updating a user&#39;s profile.  <strong>Partial updates are not supported!</strong></em></p>
+<blockquote>
+<p>All profile attributes must be specified when updating a user&#39;s profile.  <strong>Partial updates are not supported!</strong></p>
+</blockquote>
 
-<h5 id="toc_59">Response Parameters</h5>
+<h5 id="toc_66">Response Parameters</h5>
 
 <p>Updated <a href="#user-model">User</a></p>
 
-<h4 id="toc_60">Update Profile</h4>
+<h4 id="toc_67">Update Profile</h4>
 
-<h5 id="toc_61">Request</h5>
+<h5 id="toc_68">Request</h5>
 
 <div class="highlight"><pre><code class="sh language-sh" data-lang="sh">curl -v -H <span class="s2">&quot;Authorization: SSWS yourtoken&quot;</span> <span class="se">\</span>
 -H <span class="s2">&quot;Accept: application/json&quot;</span> <span class="se">\</span>
@@ -8766,7 +9389,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 <span class="s1">}&#39;</span>
 </code></pre></div>
 
-<h5 id="toc_62">Response</h5>
+<h5 id="toc_69">Response</h5>
 
 <div class="highlight"><pre><code class="json language-json" data-lang="json"><span class="p">{</span>
     <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;00ub0oNGTSWTBKOLGLNR&quot;</span><span class="p">,</span>
@@ -8775,6 +9398,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
     <span class="nt">&quot;activated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T16:39:19.000Z&quot;</span><span class="p">,</span>
     <span class="nt">&quot;statusChanged&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T16:39:19.000Z&quot;</span><span class="p">,</span>
     <span class="nt">&quot;lastLogin&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T17:39:19.000Z&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;lastUpdated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-07-02T21:36:25.344Z&quot;</span><span class="p">,</span>
     <span class="nt">&quot;profile&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="nt">&quot;firstName&quot;</span><span class="p">:</span> <span class="s2">&quot;Isaac&quot;</span><span class="p">,</span>
         <span class="nt">&quot;lastName&quot;</span><span class="p">:</span> <span class="s2">&quot;Brock&quot;</span><span class="p">,</span>
@@ -8793,6 +9417,9 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
         <span class="nt">&quot;resetPassword&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password&quot;</span>
         <span class="p">},</span>
+        <span class="nt">&quot;expirePassword&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password&quot;</span>
+        <span class="p">},</span>
         <span class="nt">&quot;forgotPassword&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password&quot;</span>
         <span class="p">},</span>
@@ -8809,7 +9436,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 <span class="p">}</span>
 </code></pre></div>
 
-<h4 id="toc_63">Set Password</h4>
+<h4 id="toc_70">Set Password</h4>
 
 <p>This is an administrative operation and does not validate existing user credentials.  For operations that validate credentials refer to:</p>
 
@@ -8819,7 +9446,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 <li><a href="#change-password">Change Password</a></li>
 </ul>
 
-<h5 id="toc_64">Request</h5>
+<h5 id="toc_71">Request</h5>
 
 <div class="highlight"><pre><code class="sh language-sh" data-lang="sh">curl -v -H <span class="s2">&quot;Authorization: SSWS yourtoken&quot;</span> <span class="se">\</span>
 -H <span class="s2">&quot;Accept: application/json&quot;</span> <span class="se">\</span>
@@ -8833,7 +9460,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 <span class="s1">}&#39;</span>
 </code></pre></div>
 
-<h5 id="toc_65">Response</h5>
+<h5 id="toc_72">Response</h5>
 
 <div class="highlight"><pre><code class="json language-json" data-lang="json"><span class="p">{</span>
     <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;00ub0oNGTSWTBKOLGLNR&quot;</span><span class="p">,</span>
@@ -8842,6 +9469,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
     <span class="nt">&quot;activated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T16:39:19.000Z&quot;</span><span class="p">,</span>
     <span class="nt">&quot;statusChanged&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T16:39:19.000Z&quot;</span><span class="p">,</span>
     <span class="nt">&quot;lastLogin&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T17:39:19.000Z&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;lastUpdated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-07-02T21:36:25.344Z&quot;</span><span class="p">,</span>
     <span class="nt">&quot;profile&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="nt">&quot;firstName&quot;</span><span class="p">:</span> <span class="s2">&quot;Isaac&quot;</span><span class="p">,</span>
         <span class="nt">&quot;lastName&quot;</span><span class="p">:</span> <span class="s2">&quot;Brock&quot;</span><span class="p">,</span>
@@ -8859,6 +9487,9 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
         <span class="nt">&quot;resetPassword&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password&quot;</span>
         <span class="p">},</span>
+        <span class="nt">&quot;expirePassword&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password&quot;</span>
+        <span class="p">},</span>
         <span class="nt">&quot;forgotPassword&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password&quot;</span>
         <span class="p">},</span>
@@ -8875,11 +9506,11 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 <span class="p">}</span>
 </code></pre></div>
 
-<h4 id="toc_66">Set Recovery Question &amp; Answer</h4>
+<h4 id="toc_73">Set Recovery Question &amp; Answer</h4>
 
 <p>This is an administrative operation and does not validate existing user credentials.  See <a href="#change-recovery-question">Change Recovery Question</a> for an operation that requires validation</p>
 
-<h5 id="toc_67">Request</h5>
+<h5 id="toc_74">Request</h5>
 
 <div class="highlight"><pre><code class="sh language-sh" data-lang="sh">curl -v -H <span class="s2">&quot;Authorization: SSWS yourtoken&quot;</span> <span class="se">\</span>
 -H <span class="s2">&quot;Accept: application/json&quot;</span> <span class="se">\</span>
@@ -8896,7 +9527,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 <span class="s1">}&#39;</span>
 </code></pre></div>
 
-<h5 id="toc_68">Response</h5>
+<h5 id="toc_75">Response</h5>
 
 <div class="highlight"><pre><code class="json language-json" data-lang="json"><span class="p">{</span>
     <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;00ub0oNGTSWTBKOLGLNR&quot;</span><span class="p">,</span>
@@ -8905,6 +9536,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
     <span class="nt">&quot;activated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T16:39:19.000Z&quot;</span><span class="p">,</span>
     <span class="nt">&quot;statusChanged&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T16:39:19.000Z&quot;</span><span class="p">,</span>
     <span class="nt">&quot;lastLogin&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-24T17:39:19.000Z&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;lastUpdated&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-07-02T21:36:25.344Z&quot;</span><span class="p">,</span>
     <span class="nt">&quot;profile&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="nt">&quot;firstName&quot;</span><span class="p">:</span> <span class="s2">&quot;Isaac&quot;</span><span class="p">,</span>
         <span class="nt">&quot;lastName&quot;</span><span class="p">:</span> <span class="s2">&quot;Brock&quot;</span><span class="p">,</span>
@@ -8922,6 +9554,9 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
         <span class="nt">&quot;resetPassword&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password&quot;</span>
         <span class="p">},</span>
+        <span class="nt">&quot;expirePassword&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password&quot;</span>
+        <span class="p">},</span>
         <span class="nt">&quot;forgotPassword&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password&quot;</span>
         <span class="p">},</span>
@@ -8938,15 +9573,15 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 <span class="p">}</span>
 </code></pre></div>
 
-<h2 id="toc_69">Related Resources</h2>
+<h2 id="toc_76">Related Resources</h2>
 
-<h3 id="toc_70">Get Assigned App Links</h3>
+<h3 id="toc_77">Get Assigned App Links</h3>
 
-<h4 id="toc_71">GET /users/:id/appLinks</h4>
+<h4 id="toc_78">GET /users/:id/appLinks</h4>
 
 <p>Fetches appLinks for all direct or indirect (via group membership) assigned applications</p>
 
-<h5 id="toc_72">Request Parameters</h5>
+<h5 id="toc_79">Request Parameters</h5>
 
 <table><thead>
 <tr>
@@ -8968,11 +9603,11 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 </tr>
 </tbody></table>
 
-<h5 id="toc_73">Response Type</h5>
+<h5 id="toc_80">Response Type</h5>
 
 <p>Array of App Links</p>
 
-<h5 id="toc_74">Request</h5>
+<h5 id="toc_81">Request</h5>
 
 <div class="highlight"><pre><code class="sh language-sh" data-lang="sh">curl -v -H <span class="s2">&quot;Authorization: SSWS yourtoken&quot;</span> <span class="se">\</span>
 -H <span class="s2">&quot;Accept: application/json&quot;</span> <span class="se">\</span>
@@ -8980,10 +9615,11 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 -X GET <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/appLinks&quot;</span>
 </code></pre></div>
 
-<h5 id="toc_75">Response</h5>
+<h5 id="toc_82">Response</h5>
 
 <div class="highlight"><pre><code class="json language-json" data-lang="json"><span class="p">[</span>
     <span class="p">{</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;auc01100002754172417&quot;</span><span class="p">,</span>
         <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Google Apps Mail&quot;</span><span class="p">,</span>
         <span class="nt">&quot;linkUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/home/google/0oa3omz2i9XRNSRIHBZO/50&quot;</span><span class="p">,</span>
         <span class="nt">&quot;logoUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/img/logos/google-mail.png&quot;</span><span class="p">,</span>
@@ -8995,6 +9631,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
         <span class="nt">&quot;sortOrder&quot;</span><span class="p">:</span> <span class="mi">0</span>
     <span class="p">},</span>
     <span class="p">{</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;auc01100002754172415&quot;</span><span class="p">,</span>
         <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Google Apps Calendar&quot;</span><span class="p">,</span>
         <span class="nt">&quot;linkUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/home/google/0oa3omz2i9XRNSRIHBZO/54&quot;</span><span class="p">,</span>
         <span class="nt">&quot;logoUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/img/logos/google-calendar.png&quot;</span><span class="p">,</span>
@@ -9006,6 +9643,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
         <span class="nt">&quot;sortOrder&quot;</span><span class="p">:</span> <span class="mi">1</span>
     <span class="p">},</span>
     <span class="p">{</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;auc01100002754172416&quot;</span><span class="p">,</span>
         <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Box&quot;</span><span class="p">,</span>
         <span class="nt">&quot;linkUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/home/boxnet/0oa3ompioiQCSTOYXVBK/72&quot;</span><span class="p">,</span>
         <span class="nt">&quot;logoUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/img/logos/box.png&quot;</span><span class="p">,</span>
@@ -9017,6 +9655,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
         <span class="nt">&quot;sortOrder&quot;</span><span class="p">:</span> <span class="mi">3</span>
     <span class="p">},</span>
     <span class="p">{</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;auc01100002754172417&quot;</span><span class="p">,</span>
         <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Salesforce.com&quot;</span><span class="p">,</span>
         <span class="nt">&quot;linkUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/home/salesforce/0oa12ecnxtBQMKOXJSMF/46&quot;</span><span class="p">,</span>
         <span class="nt">&quot;logoUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/img/logos/salesforce_logo.png&quot;</span><span class="p">,</span>
@@ -9030,13 +9669,13 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 <span class="p">]</span>
 </code></pre></div>
 
-<h3 id="toc_76">Get Member Groups</h3>
+<h3 id="toc_83">Get Member Groups</h3>
 
-<h4 id="toc_77">GET /users/:id/groups</h4>
+<h4 id="toc_84">GET /users/:id/groups</h4>
 
 <p>Fetches the groups of which the user is a member.</p>
 
-<h5 id="toc_78">Request Parameters</h5>
+<h5 id="toc_85">Request Parameters</h5>
 
 <table><thead>
 <tr>
@@ -9058,9 +9697,9 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 </tr>
 </tbody></table>
 
-<h5 id="toc_79">Response Type</h5>
+<h5 id="toc_86">Response Type</h5>
 
-<h5 id="toc_80">Request</h5>
+<h5 id="toc_87">Request</h5>
 
 <div class="highlight"><pre><code class="sh language-sh" data-lang="sh">curl -v -H <span class="s2">&quot;Authorization: SSWS yourtoken&quot;</span> <span class="se">\</span>
 -H <span class="s2">&quot;Accept: application/json&quot;</span> <span class="se">\</span>
@@ -9068,7 +9707,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 -X GET <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/groups&quot;</span> 
 </code></pre></div>
 
-<h5 id="toc_81">Response</h5>
+<h5 id="toc_88">Response</h5>
 
 <div class="highlight"><pre><code class="json language-json" data-lang="json"><span class="p">[</span>
   <span class="p">{</span>
@@ -9088,19 +9727,21 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 <span class="p">]</span>
 </code></pre></div>
 
-<h2 id="toc_82">Lifecycle Operations</h2>
+<h2 id="toc_89">Lifecycle Operations</h2>
 
 <p>Lifecycle operations are non-idempotent operations that initiate a state transition for a user&#39;s status.  Some operations are asynchronous while others are synchronous.  The user&#39;s current status limits what operations are allowed.  For example, you can&#39;t unlock a user that is <code>ACTIVE</code>.</p>
 
-<h3 id="toc_83">Activate User</h3>
+<h3 id="toc_90">Activate User</h3>
 
-<h5 id="toc_84">POST /users/:id/lifecycle/activate</h5>
+<h5 id="toc_91">POST /users/:id/lifecycle/activate</h5>
 
 <p>Activates a user.  This operation can only be performed on users with a <strong>STAGED</strong> <code>status</code>.  Activation of a user is an asynchronous operation.  The user will have the <code>transitioningToStatus</code> property with a value of <strong>ACTIVE</strong> during activation to indicate that the user hasn&#39;t completed the asynchronous operation.  The user will have a <code>status</code> of <strong>ACTIVE</strong> when the activation process is complete.</p>
 
-<p><em>Note: Users that do not have a password must complete the welcome flow by visiting the activation link to complete the transition to <strong>ACTIVE</strong> status.</em></p>
+<blockquote>
+<p>Users that do not have a password must complete the welcome flow by visiting the activation link to complete the transition to <strong>ACTIVE</strong> status.</p>
+</blockquote>
 
-<h5 id="toc_85">Request Parameters</h5>
+<h5 id="toc_92">Request Parameters</h5>
 
 <table><thead>
 <tr>
@@ -9130,7 +9771,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 </tr>
 </tbody></table>
 
-<h5 id="toc_86">Response Parameters</h5>
+<h5 id="toc_93">Response Parameters</h5>
 
 <p>Returns empty object by default. When <code>sendEmail</code> is <code>false</code>, returns an activation link for the user to set up their account.</p>
 
@@ -9139,9 +9780,11 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 <span class="p">}</span>
 </code></pre></div>
 
-<p><em>Note: If a password was set before the user was activated, then user must login with with their password and not the activation link</em></p>
+<blockquote>
+<p>If a password was set before the user was activated, then user must login with with their password and not the activation link</p>
+</blockquote>
 
-<h5 id="toc_87">Request</h5>
+<h5 id="toc_94">Request</h5>
 
 <div class="highlight"><pre><code class="sh language-sh" data-lang="sh">curl -v -H <span class="s2">&quot;Authorization: SSWS yourtoken&quot;</span> <span class="se">\</span>
 -H <span class="s2">&quot;Accept: application/json&quot;</span> <span class="se">\</span>
@@ -9149,22 +9792,24 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 -X POST <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate?sendEmail=false&quot;</span>
 </code></pre></div>
 
-<h5 id="toc_88">Response</h5>
+<h5 id="toc_95">Response</h5>
 
 <div class="highlight"><pre><code class="json language-json" data-lang="json"><span class="p">{</span>
   <span class="nt">&quot;activationUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/welcome/XE6wE17zmphl3KqAPFxO&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
 
-<h3 id="toc_89">Deactivate User</h3>
+<h3 id="toc_96">Deactivate User</h3>
 
-<h5 id="toc_90">POST /users/:id/lifecycle/deactivate</h5>
+<h5 id="toc_97">POST /users/:id/lifecycle/deactivate</h5>
 
 <p>Deactivates a user.  This operation can only be performed on users that do not have a <strong>DEPROVISIONED</strong> <code>status</code>.  Deactivation of a user is an asynchronous operation.  The user will have the <code>transitioningToStatus</code> property with a value of <strong>DEPROVISIONED</strong> during deactivation to indicate that the user hasn&#39;t completed the asynchronous operation.  The user will have a <code>status</code> of <strong>DEPROVISIONED</strong> when the deactivation process is complete.</p>
 
-<p><em>Note: Deactivating a user is a <strong>destructive</strong> operation.  The user will be deprovisioned from all assigned applications which may destroy their data such as email or files.  <strong>This action cannot be recovered!</strong></em></p>
+<blockquote>
+<p>Deactivating a user is a <strong>destructive</strong> operation.  The user will be deprovisioned from all assigned applications which may destroy their data such as email or files.  <strong>This action cannot be recovered!</strong></p>
+</blockquote>
 
-<h5 id="toc_91">Request Parameters</h5>
+<h5 id="toc_98">Request Parameters</h5>
 
 <table><thead>
 <tr>
@@ -9186,11 +9831,11 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 </tr>
 </tbody></table>
 
-<h5 id="toc_92">Response Parameters</h5>
+<h5 id="toc_99">Response Parameters</h5>
 
 <p>Returns an empty object</p>
 
-<h5 id="toc_93">Request</h5>
+<h5 id="toc_100">Request</h5>
 
 <div class="highlight"><pre><code class="sh language-sh" data-lang="sh">curl -v -H <span class="s2">&quot;Authorization: SSWS yourtoken&quot;</span> <span class="se">\</span>
 -H <span class="s2">&quot;Accept: application/json&quot;</span> <span class="se">\</span>
@@ -9198,15 +9843,17 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 -X POST <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate&quot;</span>
 </code></pre></div>
 
-<h3 id="toc_94">Unlock User</h3>
+<h3 id="toc_101">Unlock User</h3>
 
-<h5 id="toc_95">POST /users/:id/lifecycle/unlock</h5>
+<h5 id="toc_102">POST /users/:id/lifecycle/unlock</h5>
 
 <p>Unlocks a user with a <strong>LOCKED_OUT</strong> status and returns them to <strong>ACTIVE</strong> <code>status</code>.  Users will be able to login with their current password.</p>
 
-<p><em>Note: This operation currently only works with Okta-mastered users and does not support directory-mastered accounts such as Active Directory.</em></p>
+<blockquote>
+<p>This operation currently only works with Okta-mastered users and does not support directory-mastered accounts such as Active Directory.</p>
+</blockquote>
 
-<h5 id="toc_96">Request Parameters</h5>
+<h5 id="toc_103">Request Parameters</h5>
 
 <table><thead>
 <tr>
@@ -9228,11 +9875,11 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 </tr>
 </tbody></table>
 
-<h5 id="toc_97">Response Parameters</h5>
+<h5 id="toc_104">Response Parameters</h5>
 
 <p>Returns an empty object</p>
 
-<h5 id="toc_98">Request</h5>
+<h5 id="toc_105">Request</h5>
 
 <div class="highlight"><pre><code class="sh language-sh" data-lang="sh">curl -v -H <span class="s2">&quot;Authorization: SSWS yourtoken&quot;</span> <span class="se">\</span>
 -H <span class="s2">&quot;Accept: application/json&quot;</span> <span class="se">\</span>
@@ -9240,15 +9887,15 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 -X POST <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/unlock&quot;</span>
 </code></pre></div>
 
-<h3 id="toc_99">Reset Password</h3>
+<h3 id="toc_106">Reset Password</h3>
 
-<h4 id="toc_100">POST /users/:id/lifecycle/reset_password</h4>
+<h4 id="toc_107">POST /users/:id/lifecycle/reset_password</h4>
 
 <p>Generates a one-time token (OTT) that can be used to reset a user&#39;s password.  The OTT link can be automatically emailed to the user or returned to the API caller and distributed using a custom flow.</p>
 
 <p>This operation will transition the user to the <code>status</code> of <strong>RECOVERY</strong> and the user will not be able to login or initiate a forgot password flow until they complete the reset flow.</p>
 
-<h5 id="toc_101">Request Parameters</h5>
+<h5 id="toc_108">Request Parameters</h5>
 
 <table><thead>
 <tr>
@@ -9278,7 +9925,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 </tr>
 </tbody></table>
 
-<h5 id="toc_102">Response Parameters</h5>
+<h5 id="toc_109">Response Parameters</h5>
 
 <p>Returns an empty object by default. When <code>sendEmail</code> is <code>false</code>, returns a link for the user to reset their password.</p>
 
@@ -9287,7 +9934,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 <span class="p">}</span>
 </code></pre></div>
 
-<h5 id="toc_103">Request</h5>
+<h5 id="toc_110">Request</h5>
 
 <div class="highlight"><pre><code class="sh language-sh" data-lang="sh">curl -v -H <span class="s2">&quot;Authorization: SSWS yourtoken&quot;</span> <span class="se">\</span>
 -H <span class="s2">&quot;Accept: application/json&quot;</span> <span class="se">\</span>
@@ -9295,22 +9942,127 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 -X POST <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password?sendEmail=false&quot;</span>
 </code></pre></div>
 
-<h5 id="toc_104">Response</h5>
+<h5 id="toc_111">Response</h5>
 
 <div class="highlight"><pre><code class="json language-json" data-lang="json"><span class="p">{</span>
   <span class="nt">&quot;resetPasswordUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
 
-<h2 id="toc_105">Credential Operations</h2>
+<h3 id="toc_112">Expire Password</h3>
 
-<h3 id="toc_106">Forgot Password</h3>
+<h4 id="toc_113">POST /users/:id/lifecycle/expire_password</h4>
 
-<h4 id="toc_107">POST /users/:id/lifecycle/forgot_password</h4>
+<p>This operation will transition the user to the <code>status</code> of <strong>PASSWORD_EXPIRED</strong> and the user will be required to change their password at their next login. If <code>tempPassword</code> is passed, the user&#39;s password is reset to a temporary password that is returned, and then the temporary password is expired.</p>
+
+<h5 id="toc_114">Request Parameters</h5>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Param Type</th>
+<th>DataType</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td><code>id</code> of user</td>
+<td>URL</td>
+<td>String</td>
+<td>TRUE</td>
+<td></td>
+</tr>
+<tr>
+<td>tempPassword</td>
+<td>Sets the user&#39;s password to a temporary password,  if <code>true</code></td>
+<td>Query</td>
+<td>Boolean</td>
+<td>FALSE</td>
+<td>FALSE</td>
+</tr>
+</tbody></table>
+
+<h5 id="toc_115">Response Parameters</h5>
+
+<p>Returns an the complete user object by default. When <code>tempPassword</code> is <code>true</code>, returns the temporary password.</p>
+
+<div class="highlight"><pre><code class="json language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&quot;tempPassword&quot;</span><span class="p">:</span> <span class="s2">&quot;HR076gb6&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h5 id="toc_116">Request</h5>
+
+<div class="highlight"><pre><code class="sh language-sh" data-lang="sh">curl -v -H <span class="s2">&quot;Authorization: SSWS yourtoken&quot;</span> <span class="se">\</span>
+-H <span class="s2">&quot;Accept: application/json&quot;</span> <span class="se">\</span>
+-H <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="se">\</span>
+-X POST <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password?tempPassword=false&quot;</span>
+</code></pre></div>
+
+<h5 id="toc_117">Response</h5>
+
+<div class="highlight"><pre><code class="json language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;00udp9BOIVEWHAAGSXRJ&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;ACTIVE&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-03-04T06:14:07.000Z&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;activated&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;statusChanged&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;lastLogin&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-03-04T17:46:59.000Z&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;lastUpdated&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-03-04T17:54:48.000Z&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;profile&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;firstName&quot;</span><span class="p">:</span> <span class="s2">&quot;Add-Min&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;lastName&quot;</span><span class="p">:</span> <span class="s2">&quot;O&#39;Cloudy Tud&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;webmaster@clouditude.net&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;login&quot;</span><span class="p">:</span> <span class="s2">&quot;administrator1@clouditude.net&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;mobilePhone&quot;</span><span class="p">:</span> <span class="kc">null</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;credentials&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;password&quot;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="nt">&quot;recovery_question&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;Last 4 digits of your social security number?&quot;</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;_links&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;resetPassword&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://rain.okta1.com:1802/api/v1/users/00udp9BOIVEWHAAGSXRJ/lifecycle/reset_password&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;POST&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;expirePassword&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://rain.okta1.com:1802/api/v1/users/00udp9BOIVEWHAAGSXRJ/lifecycle/expire_password&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;POST&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;forgotPassword&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://rain.okta1.com:1802/api/v1/users/00udp9BOIVEWHAAGSXRJ/credentials/forgot_password&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;POST&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;changeRecoveryQuestion&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://rain.okta1.com:1802/api/v1/users/00udp9BOIVEWHAAGSXRJ/credentials/change_recovery_question&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;POST&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;deactivate&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://rain.okta1.com:1802/api/v1/users/00udp9BOIVEWHAAGSXRJ/lifecycle/deactivate&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;POST&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;changePassword&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://rain.okta1.com:1802/api/v1/users/00udp9BOIVEWHAAGSXRJ/credentials/change_password&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;POST&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2 id="toc_118">Credential Operations</h2>
+
+<h3 id="toc_119">Forgot Password</h3>
+
+<h4 id="toc_120">POST /users/:id/lifecycle/forgot_password</h4>
 
 <p>Generates a one-time token (OTT) that can be used to reset a user&#39;s password.  The user will be required to validate their security question&#39;s answer when visiting the reset link.  This operation can only be performed on users with a valid <a href="#recovery-question-object">recovery question credential</a> and have an <strong>ACTIVE</strong> <code>status</code>.</p>
 
-<h5 id="toc_108">Request Parameters</h5>
+<h5 id="toc_121">Request Parameters</h5>
 
 <table><thead>
 <tr>
@@ -9340,7 +10092,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 </tr>
 </tbody></table>
 
-<h5 id="toc_109">Response Parameters</h5>
+<h5 id="toc_122">Response Parameters</h5>
 
 <p>Returns an empty object by default. When <code>sendEmail</code> is <code>false</code>, returns a link for the user to reset their password. </p>
 
@@ -9349,9 +10101,11 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 <span class="p">}</span>
 </code></pre></div>
 
-<p><em>Note: This operation does not affect the status of the user.</em></p>
+<blockquote>
+<p>This operation does not affect the status of the user.</p>
+</blockquote>
 
-<h5 id="toc_110">Request</h5>
+<h5 id="toc_123">Request</h5>
 
 <div class="highlight"><pre><code class="sh language-sh" data-lang="sh">curl -v -H <span class="s2">&quot;Authorization: SSWS yourtoken&quot;</span> <span class="se">\</span>
 -H <span class="s2">&quot;Accept: application/json&quot;</span> <span class="se">\</span>
@@ -9359,20 +10113,22 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 -X POST <span class="s2">&quot;https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/forgot_password?sendEmail=false&quot;</span>
 </code></pre></div>
 
-<h5 id="toc_111">Response</h5>
+<h5 id="toc_124">Response</h5>
 
 <div class="highlight"><pre><code class="json language-json" data-lang="json"><span class="p">{</span>
   <span class="nt">&quot;resetPasswordUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
 
-<h4 id="toc_112">POST /users/:id/credentials/forgot_password</h4>
+<h4 id="toc_125">POST /users/:id/credentials/forgot_password</h4>
 
 <p>Sets a new password for a user by validating the user&#39;s answer to their current recovery question.  This operation can only be performed on users with a valid <a href="#recovery-question-object">recovery question credential</a> and have an <strong>ACTIVE</strong> <code>status</code>.</p>
 
-<p><em>Note: This operation is intended for applications that need to implement their own forgot password flow.  You are responsible for mitigation of all security risks such as phishing and replay attacks.  Best-practice is to generate a short-lived one-time token (OTT) that is sent to a verified email account.</em></p>
+<blockquote>
+<p>This operation is intended for applications that need to implement their own forgot password flow.  You are responsible for mitigation of all security risks such as phishing and replay attacks.  Best-practice is to generate a short-lived one-time token (OTT) that is sent to a verified email account.</p>
+</blockquote>
 
-<h5 id="toc_113">Request Parameters</h5>
+<h5 id="toc_126">Request Parameters</h5>
 
 <table><thead>
 <tr>
@@ -9410,13 +10166,15 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 </tr>
 </tbody></table>
 
-<h5 id="toc_114">Response Parameters</h5>
+<h5 id="toc_127">Response Parameters</h5>
 
 <p><a href="#credentials-object">Credentials</a> of the user</p>
 
-<p><em>Note: This operation does not affect the status of the user.</em></p>
+<blockquote>
+<p>This operation does not affect the status of the user.</p>
+</blockquote>
 
-<h5 id="toc_115">Request</h5>
+<h5 id="toc_128">Request</h5>
 
 <div class="highlight"><pre><code class="sh language-sh" data-lang="sh">curl -v -H <span class="s2">&quot;Authorization: SSWS yourtoken&quot;</span> <span class="se">\</span>
 -H <span class="s2">&quot;Accept: application/json&quot;</span> <span class="se">\</span>
@@ -9429,7 +10187,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 <span class="s1">}&#39;</span>
 </code></pre></div>
 
-<h5 id="toc_116">Response</h5>
+<h5 id="toc_129">Response</h5>
 
 <div class="highlight"><pre><code class="json language-json" data-lang="json"><span class="p">{</span>
     <span class="nt">&quot;credentials&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -9441,13 +10199,13 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 <span class="p">}</span>
 </code></pre></div>
 
-<h3 id="toc_117">Change Password</h3>
+<h3 id="toc_130">Change Password</h3>
 
-<h4 id="toc_118">POST /users/:id/credentials/change_password</h4>
+<h4 id="toc_131">POST /users/:id/credentials/change_password</h4>
 
 <p>Changes a user&#39;s password by validating the user&#39;s current password.  This operation can only be performed on users in <strong>STAGED</strong>, <strong>ACTIVE</strong> or <strong>RECOVERY</strong> <code>status</code> that have a valid <a href="#password-object">password credential</a></p>
 
-<h5 id="toc_119">Request Parameters</h5>
+<h5 id="toc_132">Request Parameters</h5>
 
 <table><thead>
 <tr>
@@ -9485,13 +10243,15 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 </tr>
 </tbody></table>
 
-<h5 id="toc_120">Response Parameters</h5>
+<h5 id="toc_133">Response Parameters</h5>
 
 <p><a href="#credentials-object">Credentials</a> of the user</p>
 
-<p><em>Note: The user will transition to <strong>ACTIVE</strong> status when successfully invoked in <strong>RECOVERY</strong> status</em></p>
+<blockquote>
+<p>The user will transition to <strong>ACTIVE</strong> status when successfully invoked in <strong>RECOVERY</strong> status</p>
+</blockquote>
 
-<h5 id="toc_121">Request</h5>
+<h5 id="toc_134">Request</h5>
 
 <div class="highlight"><pre><code class="sh language-sh" data-lang="sh">curl -v -H <span class="s2">&quot;Authorization: SSWS yourtoken&quot;</span> <span class="se">\</span>
 -H <span class="s2">&quot;Accept: application/json&quot;</span> <span class="se">\</span>
@@ -9504,7 +10264,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 <span class="s1">}&#39;</span>
 </code></pre></div>
 
-<h5 id="toc_122">Response</h5>
+<h5 id="toc_135">Response</h5>
 
 <div class="highlight"><pre><code class="json language-json" data-lang="json"><span class="p">{</span>
     <span class="nt">&quot;credentials&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -9516,13 +10276,13 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 <span class="p">}</span>
 </code></pre></div>
 
-<h3 id="toc_123">Change Recovery Question</h3>
+<h3 id="toc_136">Change Recovery Question</h3>
 
-<h4 id="toc_124">POST /users/:id/credentials/change_recovery_question</h4>
+<h4 id="toc_137">POST /users/:id/credentials/change_recovery_question</h4>
 
 <p>Changes a user&#39;s recovery question &amp; answer credential by validating the user&#39;s current password.  This operation can only be performed on users in <strong>STAGED</strong>, <strong>ACTIVE</strong> or <strong>RECOVERY</strong> <code>status</code> that have a valid <a href="#password-object">password credential</a></p>
 
-<h5 id="toc_125">Request Parameters</h5>
+<h5 id="toc_138">Request Parameters</h5>
 
 <table><thead>
 <tr>
@@ -9560,13 +10320,15 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 </tr>
 </tbody></table>
 
-<h5 id="toc_126">Response Parameters</h5>
+<h5 id="toc_139">Response Parameters</h5>
 
 <p><a href="#credentials-object">Credentials</a> of the user</p>
 
-<p><em>Note: This operation does not affect the status of the user.</em></p>
+<blockquote>
+<p>This operation does not affect the status of the user.</p>
+</blockquote>
 
-<h5 id="toc_127">Request</h5>
+<h5 id="toc_140">Request</h5>
 
 <div class="highlight"><pre><code class="sh language-sh" data-lang="sh">curl -v -H <span class="s2">&quot;Authorization: SSWS yourtoken&quot;</span> <span class="se">\</span>
 -H <span class="s2">&quot;Accept: application/json&quot;</span> <span class="se">\</span>
@@ -9582,7 +10344,7 @@ Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0
 <span class="s1">}&#39;</span>
 </code></pre></div>
 
-<h5 id="toc_128">Response</h5>
+<h5 id="toc_141">Response</h5>
 
 <div class="highlight"><pre><code class="json language-json" data-lang="json"><span class="p">{</span>
     <span class="nt">&quot;credentials&quot;</span><span class="p">:</span> <span class="p">{</span>

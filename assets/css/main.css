@@ -1056,10 +1056,6 @@ div#sticker {
   padding-left: 5px !important;
 }
 
-.docs-page .white-bg ul {
-  display: none;
-}
-
 .fixed {
   position: fixed;
 }
@@ -1254,6 +1250,15 @@ div#sticker {
 	font-size: 15px;
 }
 
+.docs-page blockquote p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.docs-page ul li {
+  font-size: 14px;
+}
+
 .docs-page th, .docs-page td {
 	font-size: 14px;
 }
@@ -1414,20 +1419,8 @@ tr em {
   display: inline;
 }
 
-
 p em {
   display: inline-block;
-}
-
-em {
-  background-color: #feffe7;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius:5px;
-  /*line-height: 40px;*/
-  display: block;
-  margin: 10px 0px 10px 0px;
-  font-style: normal;
 }
 
 code {

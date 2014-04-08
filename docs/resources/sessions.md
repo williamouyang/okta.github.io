@@ -15,7 +15,7 @@ priority: 1
 
 Okta uses a cookie-based authentication mechanism to maintain a user's authentication session across web requests.  The Session API provides operations to create and manage authentication sessions with your Okta organization.
 
-*Note:  The Session API currently does not support multi-factor authentication (MFA).  Sessions created for users with an assigned MFA policy will have a significantly constrained session and will not be able to access their applications.*
+> The Session API currently does not support multi-factor authentication (MFA).  Sessions created for users with an assigned MFA policy will have a significantly constrained session and will not be able to access their applications.
 
 - [Session Model](#session-model)
 - [Session Operations](#session-operations)
@@ -36,7 +36,7 @@ Okta provides a mechanism to validate a user's credentials via the Session API a
 
 A one-time token may only be used **once** to establish a session for a user.  If the session expires or the user logs out of Okta after using the token, they will not be able to reuse the same one-time token to get a new session cookie.
 
-*Note: One-time tokens are secrets and should be protected at rest as well as during transit. A one-time token for a user is equivalent to having the user's actual credentials*
+> One-time tokens are secrets and should be protected at rest as well as during transit. A one-time token for a user is equivalent to having the user's actual credentials
 
 ## Session Model
 

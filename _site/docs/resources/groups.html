@@ -4,42 +4,6 @@
 
 <p>The Groups API provides operations to manage your organization groups an their user members.</p>
 
-<ul>
-<li><a href="#group-model">Group Model</a>
-
-<ul>
-<li><a href="#group-attributes">Group Attributes</a></li>
-<li><a href="#profile-object">Profile Object</a></li>
-<li><a href="#links">Links</a></li>
-</ul></li>
-<li><a href="#group-operations">Group Operations</a>
-
-<ul>
-<li><a href="#add-group">Add Group</a></li>
-<li><a href="#get-group">Get Group</a></li>
-<li><a href="#list-groups">List Groups</a>
-
-<ul>
-<li><a href="#list-all-groups">List All Groups</a></li>
-<li><a href="#search-groups">Search Groups</a></li>
-</ul></li>
-<li><a href="#update-group">Update Group</a></li>
-<li><a href="#remove-group">Remove Group</a></li>
-</ul></li>
-<li><a href="#group-member-operations">Group Member Operations</a>
-
-<ul>
-<li><a href="#list-group-members">List Group Members</a></li>
-<li><a href="#add-user-to-group">Add User to Group</a></li>
-<li><a href="#remove-user-from-group">Remove User from Group</a></li>
-</ul></li>
-<li><a href="#related-resources">Related Resources</a>
-
-<ul>
-<li><a href="#list-assigned-applications">List Assigned Applications</a></li>
-</ul></li>
-</ul>
-
 <h2 id="toc_2">Group Model</h2>
 
 <h3 id="toc_3">Example</h3>
@@ -132,7 +96,9 @@
 </tr>
 </tbody></table>
 
-<p><em>Note: id, objectClass, and _links are only available after a group is created</em></p>
+<blockquote>
+<p><code>id</code>, <code>objectClass</code>, and <code>_links</code> are only available after a group is created</p>
+</blockquote>
 
 <h3 id="toc_5">Profile Object</h3>
 
@@ -278,7 +244,9 @@
 
 <p>Adds a new Okta group to your organization.</p>
 
-<p><em>Note: Only Okta groups can be added.  Application import operations are responsible for syncing non-Okta groups such as Active Directory groups.</em></p>
+<blockquote>
+<p>Only Okta groups can be added.  Application import operations are responsible for syncing non-Okta groups such as Active Directory groups.</p>
+</blockquote>
 
 <h4 id="toc_11">POST /groups</h4>
 
@@ -466,7 +434,9 @@
 </tr>
 </tbody></table>
 
-<p><em>Note: The <code>after</code> cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></em></p>
+<blockquote>
+<p>The <code>after</code> cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></p>
+</blockquote>
 
 <h5 id="toc_25">Response Parameters</h5>
 
@@ -478,7 +448,9 @@
 
 <p>The default group limit is set to a very high number due to historical reasons which is no longer valid for most organizations.  This will change in a future version of this API.  The recommended page limit is now <code>limit=200</code>.</p>
 
-<p><em>Note:  If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller <code>limit</code> and page the results (See <a href="../getting_started/design_principles.md#pagination">Pagination</a>)</em></p>
+<blockquote>
+<p>If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller <code>limit</code> and page the results (See <a href="../getting_started/design_principles.md#pagination">Pagination</a>)</p>
+</blockquote>
 
 <h5 id="toc_27">Request</h5>
 <div class="highlight"><pre><code class="sh language-sh" data-lang="sh">curl -v -H <span class="s2">&quot;Authorization: SSWS yourtoken&quot;</span> <span class="se">\</span>
@@ -558,9 +530,11 @@
 
 <p>Searches for groups by <code>name</code> in your organization.</p>
 
-<p><em>Note: Paging and searching are currently mutually exclusive.  You cannot page a query.  The default limit for a query is <code>300</code> results. Query is intended for an auto-complete picker use case where users will refine their search string to constrain the results.</em></p>
+<blockquote>
+<p>Paging and searching are currently mutually exclusive.  You cannot page a query.  The default limit for a query is <code>300</code> results. Query is intended for an auto-complete picker use case where users will refine their search string to constrain the results.</p>
 
-<p><em>Note: Search currently performs a startsWith match but it should be considered an implementation detail and may change without notice in the future. Exact matches will always be returned before partial matches</em></p>
+<p>Search currently performs a startsWith match but it should be considered an implementation detail and may change without notice in the future. Exact matches will always be returned before partial matches</p>
+</blockquote>
 
 <h5 id="toc_30">Request</h5>
 <div class="highlight"><pre><code class="sh language-sh" data-lang="sh">curl -v -H <span class="s2">&quot;Authorization: SSWS yourtoken&quot;</span> <span class="se">\</span>
@@ -607,7 +581,9 @@
 
 <p>Updates an Okta group&#39;s profile.</p>
 
-<p><em>Note: Only profiles for Okta groups can be modified.</em></p>
+<blockquote>
+<p>Only profiles for Okta groups can be modified.</p>
+</blockquote>
 
 <h5 id="toc_34">Request Parameters</h5>
 
@@ -639,7 +615,9 @@
 </tr>
 </tbody></table>
 
-<p><em>Note: All profile attributes must be specified when updating a user&#39;s profile.  <strong>Partial updates are not supported!</strong></em></p>
+<blockquote>
+<p>All profile attributes must be specified when updating a user&#39;s profile.  <strong>Partial updates are not supported!</strong></p>
+</blockquote>
 
 <h5 id="toc_35">Response Parameters</h5>
 
@@ -696,7 +674,9 @@
 
 <p>Removes an Okta group from your organization.</p>
 
-<p><em>Note: Only Okta groups can be removed.  Application import operations are responsible for syncing non-Okta groups such as Active Directory groups.</em></p>
+<blockquote>
+<p>Only Okta groups can be removed.  Application import operations are responsible for syncing non-Okta groups such as Active Directory groups.</p>
+</blockquote>
 
 <h5 id="toc_40">Request Parameters</h5>
 
@@ -780,11 +760,15 @@
 </tr>
 </tbody></table>
 
-<p><em>Note: The <code>after</code> cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></em></p>
+<blockquote>
+<p>The <code>after</code> cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></p>
+</blockquote>
 
 <p>The default user limit is set to a very high number due to historical reasons which is no longer valid for most organizations.  This will change in a future version of this API.  The recommended page limit is now <code>limit=200</code>.</p>
 
-<p><em>Note:  If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller <code>limit</code> and page the results (See <a href="../getting_started/design_principles.md#pagination">Pagination</a>)</em></p>
+<blockquote>
+<p>If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller <code>limit</code> and page the results (See <a href="../getting_started/design_principles.md#pagination">Pagination</a>)</p>
+</blockquote>
 
 <h5 id="toc_48">Response Parameters</h5>
 
@@ -874,7 +858,9 @@
 
 <p>Adds an <a href="users.md#user-model">Okta user</a> from an Okta group.</p>
 
-<p><em>Note: You can only manage Okta-mastered group memberships.  Application import operations are responsible for syncing non-Okta group memberships such as Active Directory groups.</em></p>
+<blockquote>
+<p>You can only manage Okta-mastered group memberships.  Application import operations are responsible for syncing non-Okta group memberships such as Active Directory groups.</p>
+</blockquote>
 
 <h5 id="toc_53">Request Parameters</h5>
 
@@ -924,7 +910,9 @@
 
 <p>Removes an <a href="users.md#user-model">Okta user</a> from an Okta group.</p>
 
-<p><em>Note: You can only manage Okta-mastered group memberships.  Application import operations are responsible for syncing non-Okta group memberships such as Active Directory groups.</em></p>
+<blockquote>
+<p>You can only manage Okta-mastered group memberships.  Application import operations are responsible for syncing non-Okta group memberships such as Active Directory groups.</p>
+</blockquote>
 
 <h5 id="toc_59">Request Parameters</h5>
 
@@ -1014,7 +1002,9 @@
 </tr>
 </tbody></table>
 
-<p><em>Note: The page cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></em></p>
+<blockquote>
+<p>The page cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></p>
+</blockquote>
 
 <h5 id="toc_67">Response Parameters</h5>
 

@@ -15,25 +15,6 @@ priority: 3
 
 The Groups API provides operations to manage your organization groups an their user members.
 
-- [Group Model](#group-model)
-	- [Group Attributes](#group-attributes)
-	- [Profile Object](#profile-object)
-	- [Links](#links)
-- [Group Operations](#group-operations)
-	- [Add Group](#add-group)
-	- [Get Group](#get-group)
-	- [List Groups](#list-groups)
-		- [List All Groups](#list-all-groups)
-		- [Search Groups](#search-groups)
-	- [Update Group](#update-group)
-	- [Remove Group](#remove-group)
-- [Group Member Operations](#group-member-operations)
-	- [List Group Members](#list-group-members)
-	- [Add User to Group](#add-user-to-group)
-	- [Remove User from Group](#remove-user-from-group)
-- [Related Resources](#related-resources)
-	- [List Assigned Applications](#list-assigned-applications)
-
 ## Group Model
 
 ### Example
@@ -76,13 +57,13 @@ The Groups API provides operations to manage your organization groups an their u
 All groups have the following attributes:
 
 Attribute | Description | DataType | MinLength | MaxLength | Nullable | Unique | Readonly
---- | --- | ---	| --- | --- | --- | --- | ---
+--------- | ----------- | -------- | --------- | --------- | -------- | ------ | --------
 id | unique key for group | String | | | FALSE | TRUE | TRUE
 objectClass | determines the group's `profile` | Array of String | 1 | | TRUE | FALSE | TRUE
 profile | the group's profile attributes | [Profile Object](#profile-object) | | | FALSE | FALSE | FALSE
 _links | [discoverable resources](#links-object) related to the group | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | | | TRUE | FALSE | TRUE
 
-*Note: id, objectClass, and _links are only available after a group is created*
+> `id`, `objectClass`, and `_links` are only available after a group is created
 
 ### Profile Object
 
@@ -147,7 +128,7 @@ apps | Lists all [applications](apps.md#application-model) that are assigned to 
 
 Adds a new Okta group to your organization.
 
-*Note: Only Okta groups can be added.  Application import operations are responsible for syncing non-Okta groups such as Active Directory groups.*
+> Only Okta groups can be added.  Application import operations are responsible for syncing non-Okta groups such as Active Directory groups.
 
 #### POST /groups
 
@@ -285,7 +266,7 @@ q | Searches the `name` attribute of groups for matching value | Query | String 
 limit | Specifies the number of group results in a page | Query | Number | FALSE | 10000
 after | Specifies the pagination cursor for the next page of groups | Query | String | FALSE |
 
-*Note: The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)*
+> The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)
 
 ##### Response Parameters
 
@@ -297,7 +278,7 @@ Fetches all groups in your organization.
 
 The default group limit is set to a very high number due to historical reasons which is no longer valid for most organizations.  This will change in a future version of this API.  The recommended page limit is now `limit=200`.
 
-*Note:  If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller `limit` and page the results (See [Pagination](../getting_started/design_principles.md#pagination))*
+> If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller `limit` and page the results (See [Pagination](../getting_started/design_principles.md#pagination))
 
 ##### Request
 
@@ -383,9 +364,9 @@ Link: <https://your-domain.okta.com/api/v1/groups?after=00ud4tVDDXYVKPXKVLCO&lim
 
 Searches for groups by `name` in your organization.
 
-*Note: Paging and searching are currently mutually exclusive.  You cannot page a query.  The default limit for a query is `300` results. Query is intended for an auto-complete picker use case where users will refine their search string to constrain the results.*
+> Paging and searching are currently mutually exclusive.  You cannot page a query.  The default limit for a query is `300` results. Query is intended for an auto-complete picker use case where users will refine their search string to constrain the results.
 
-*Note: Search currently performs a startsWith match but it should be considered an implementation detail and may change without notice in the future. Exact matches will always be returned before partial matches*
+> Search currently performs a startsWith match but it should be considered an implementation detail and may change without notice in the future. Exact matches will always be returned before partial matches
 
 ##### Request
 
@@ -438,7 +419,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 Updates an Okta group's profile.
 
-*Note: Only profiles for Okta groups can be modified.*
+> Only profiles for Okta groups can be modified.
 
 ##### Request Parameters
 
@@ -447,7 +428,7 @@ Parameter | Description | ParamType | DataType | Required | Default
 id | id of the group to update | URL | String | TRUE |
 profile | Updated profile for the group | Body | [Profile Object](#profile-object) | TRUE |
 
-*Note: All profile attributes must be specified when updating a user's profile.  __Partial updates are not supported!__*
+> All profile attributes must be specified when updating a user's profile.  __Partial updates are not supported!__
 
 ##### Response Parameters
 
@@ -510,7 +491,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 Removes an Okta group from your organization.
 
-*Note: Only Okta groups can be removed.  Application import operations are responsible for syncing non-Okta groups such as Active Directory groups.*
+> Only Okta groups can be removed.  Application import operations are responsible for syncing non-Okta groups such as Active Directory groups.
 
 ##### Request Parameters
 
@@ -554,11 +535,11 @@ id | id of the group | URL | String | TRUE |
 limit | Specifies the number of user results in a page | Query | Number | FALSE | 10000
 after | Specifies the pagination cursor for the next page of users | Query | String | FALSE |
 
-*Note: The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)*
+> The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)
 
 The default user limit is set to a very high number due to historical reasons which is no longer valid for most organizations.  This will change in a future version of this API.  The recommended page limit is now `limit=200`.
 
-*Note:  If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller `limit` and page the results (See [Pagination](../getting_started/design_principles.md#pagination))*
+> If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller `limit` and page the results (See [Pagination](../getting_started/design_principles.md#pagination))
 
 ##### Response Parameters
 
@@ -654,7 +635,7 @@ Link: <https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/users?aft
 
 Adds an [Okta user](users.md#user-model) from an Okta group.
 
-*Note: You can only manage Okta-mastered group memberships.  Application import operations are responsible for syncing non-Okta group memberships such as Active Directory groups.*
+> You can only manage Okta-mastered group memberships.  Application import operations are responsible for syncing non-Okta group memberships such as Active Directory groups.
 
 ##### Request Parameters
 
@@ -686,7 +667,7 @@ HTTP/1.1 204 No Content
 
 Removes an [Okta user](users.md#user-model) from an Okta group.
 
-*Note: You can only manage Okta-mastered group memberships.  Application import operations are responsible for syncing non-Okta group memberships such as Active Directory groups.*
+> You can only manage Okta-mastered group memberships.  Application import operations are responsible for syncing non-Okta group memberships such as Active Directory groups.
 
 ##### Request Parameters
 
@@ -728,7 +709,7 @@ id | id of the group | URL | String | TRUE |
 limit | Specifies the number of app results for a page | Query | Number | FALSE | 20
 after | Specifies the pagination cursor for the next page of apps | Query | String | FALSE |
 
-*Note: The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)*
+> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)
 
 ##### Response Parameters
 

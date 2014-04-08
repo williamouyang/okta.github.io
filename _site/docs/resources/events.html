@@ -4,24 +4,6 @@
 
 <p>The Event API provides read access to your organization&#39;s system log. The API is intended to export event data as a batch job from your organization to another system for reporting or analysis.</p>
 
-<ul>
-<li><a href="#event-model">Event Model</a>
-
-<ul>
-<li><a href="#attributes">Attributes</a></li>
-<li><a href="#action-object">Action Object</a>
-
-<ul>
-<li><a href="#action-categories">Categories</a></li>
-<li><a href="#action-objecttypes">Object Types</a></li>
-</ul></li>
-<li><a href="#actor-object">Actor Object</a></li>
-<li><a href="#target-object">Target Object</a></li>
-<li><a href="#actortarget-objecttypes">Actor/Target Object Types</a></li>
-</ul></li>
-<li><a href="#list-events">List Events</a></li>
-</ul>
-
 <h2 id="toc_2">Event Model</h2>
 
 <p>Every organization has a system log that maintains a history of actions performed by users.  The Event model describes a single action that was performed by a set of actors for a set of targets.</p>
@@ -111,7 +93,9 @@
 </tr>
 </tbody></table>
 
-<p><em>Note: The actor and/or target of an event is dependant on the action performed. Not all events have an actor or target.</em></p>
+<blockquote>
+<p>The actor and/or target of an event is dependent on the action performed. Not all events have an actor or target.</p>
+</blockquote>
 
 <h3 id="toc_5">Action Object</h3>
 
@@ -151,7 +135,9 @@
 </tr>
 </tbody></table>
 
-<p><em>Note: Actions that do not define any categories will have an zero element array value.</em></p>
+<blockquote>
+<p>Actions that do not define any categories will have an zero element array value.</p>
+</blockquote>
 <div class="highlight"><pre><code class="json language-json" data-lang="json"><span class="p">{</span>
     <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;User performed single sign on to app&quot;</span><span class="p">,</span>
     <span class="nt">&quot;categories&quot;</span><span class="p">:</span> <span class="p">[</span>
@@ -181,7 +167,9 @@
 <li>SMS Messages</li>
 </ul>
 
-<p><em>Note: Additional categories may be added in the future without versioning</em></p>
+<blockquote>
+<p>Additional categories may be added in the future without versioning</p>
+</blockquote>
 
 <h4 id="toc_7">Action ObjectTypes</h4>
 
@@ -821,7 +809,9 @@
 </tr>
 </tbody></table>
 
-<p><em>Note: The schema of an actor is dependent on the actor&#39;s <code>objectType</code></em></p>
+<blockquote>
+<p>The schema of an actor is dependent on the actor&#39;s <code>objectType</code></p>
+</blockquote>
 
 <h3 id="toc_24">Target Object</h3>
 
@@ -855,7 +845,9 @@
 </tr>
 </tbody></table>
 
-<p><em>Note: The schema of a target is dependent on the actor&#39;s <code>objectType</code></em></p>
+<blockquote>
+<p>The schema of a target is dependent on the actor&#39;s <code>objectType</code></p>
+</blockquote>
 
 <h3 id="toc_25">Actor/Target ObjectTypes</h3>
 
@@ -903,7 +895,9 @@
     <span class="nt">&quot;objectType&quot;</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<p><em>Note: The user can be retrieved by <code>id</code> with the <a href="users.md#get-user-with-id">User API</a>.</em></p>
+<blockquote>
+<p>The user can be retrieved by <code>id</code> with the <a href="users.md#get-user-with-id">User API</a>.</p>
+</blockquote>
 
 <h4 id="toc_27">AppInstance ObjectType</h4>
 
@@ -942,7 +936,9 @@
     <span class="nt">&quot;objectType&quot;</span><span class="p">:</span> <span class="s2">&quot;AppInstance&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<p><em>Note: The app can be retrieved by <code>id</code> with the <a href="apps.md#get-application">Apps API</a>.</em></p>
+<blockquote>
+<p>The app can be retrieved by <code>id</code> with the <a href="apps.md#get-application">Apps API</a>.</p>
+</blockquote>
 
 <h4 id="toc_28">Client ObjectType</h4>
 
@@ -1023,6 +1019,14 @@
 <td></td>
 </tr>
 <tr>
+<td>filter</td>
+<td><a href="../getting_started/design_principles.md#filtering">Filter expression</a> for events</td>
+<td>Query</td>
+<td>String</td>
+<td>FALSE</td>
+<td></td>
+</tr>
+<tr>
 <td>after</td>
 <td>Specifies the pagination cursor for the next page of events</td>
 <td>Query</td>
@@ -1032,21 +1036,84 @@
 </tr>
 </tbody></table>
 
-<p><em>Note: The <code>after</code> cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></em></p>
+<blockquote>
+<p>The <code>after</code> cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></p>
 
-<h4 id="toc_32">Response Parameters</h4>
+<p><code>startDate</code> and <code>filter</code> query parameters are mutually exclusive and cannot be used together in the same request</p>
+</blockquote>
+
+<h5 id="toc_32">Filters</h5>
+
+<p>The following expressions are supported for events with the <code>filter</code> query parameter:</p>
+
+<table><thead>
+<tr>
+<th>Filter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>action.objectType eq &quot;:actionType&quot;</code></td>
+<td>Events that have a specific <a href="#action-objectypes">action objectType</a></td>
+</tr>
+<tr>
+<td><code>target.objectType eq &quot;:objectType&quot;</code></td>
+<td>Events published with a specific <a href="#actortarget-objecttypes">target objectType</a></td>
+</tr>
+<tr>
+<td><code>target.id eq &quot;:id&quot;</code></td>
+<td>Events published with a specific target id</td>
+</tr>
+<tr>
+<td><code>published lt &quot;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZZ&quot;</code></td>
+<td>Events published before a specific datetime</td>
+</tr>
+<tr>
+<td><code>published eq &quot;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZZ&quot;</code></td>
+<td>Events published updated at a specific datetime</td>
+</tr>
+<tr>
+<td><code>published gt &quot;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZZ&quot;</code></td>
+<td>Events published updated after a specific datetime</td>
+</tr>
+</tbody></table>
+
+<p>See <a href="../getting_started/design_principles.md#filtering">Filtering</a> for more information on expressions</p>
+
+<blockquote>
+<p>All filters must be <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encoded</a> where <code>filter=published gt &quot;2013-06-01T00:00:00.000Z&quot;</code> is encoded as <code>filter=published%20gt%20%222013-06-01T00:00:00.000Z%22</code></p>
+</blockquote>
+
+<p><strong>Filter Examples</strong></p>
+
+<p>Events published after 06/01/2013</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">filter=published gt &quot;2013-06-01T00:00:00.000Z&quot;
+</code></pre></div>
+<p>Events published for a target user </p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">filter=target.id eq &quot;00uxc78lMKUMVIHLTAXY&quot;
+</code></pre></div>
+<p>Failed login events published after 06/01/2013</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">filter=published gt &quot;2013-06-01T00:00:00.000Z&quot; and action.objectType eq &quot;core.user_auth.login_failed&quot; 
+</code></pre></div>
+<p>Events published after 06/01/2013 for a target user and application</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">filter=published gt &quot;2013-06-01T00:00:00.000Z&quot; and target.id eq &quot;00uxc78lMKUMVIHLTAXY&quot; and target.id eq &quot;0oabe82gnXOFVCDUMVAK&quot;
+</code></pre></div>
+<p>App SSO events for a target user and application</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">filter=action.objectType eq &quot;app.auth.sso&quot; and target.id eq &quot;00uxc78lMKUMVIHLTAXY&quot; and target.id eq &quot;0oabe82gnXOFVCDUMVAK&quot;
+</code></pre></div>
+<h4 id="toc_33">Response Parameters</h4>
 
 <p>Array of <a href="#event-model">Events</a></p>
 
-<h4 id="toc_33">Example</h4>
+<h4 id="toc_34">Example</h4>
 
-<h5 id="toc_34">Request</h5>
+<h5 id="toc_35">Request</h5>
 <div class="highlight"><pre><code class="sh language-sh" data-lang="sh">curl -v -H <span class="s2">&quot;Authorization:SSWS yourtoken&quot;</span> <span class="se">\</span>
 -H <span class="s2">&quot;Accept:application/json&quot;</span> <span class="se">\</span>
 -H <span class="s2">&quot;Content-type:application/json&quot;</span> <span class="se">\</span>
 -X GET https://your-domain.okta.com/api/v1/events?startDate<span class="o">=</span>2013-07-15T16%3A00%3A00.000Z<span class="se">\&amp;</span><span class="nv">limit</span><span class="o">=</span>3
 </code></pre></div>
-<h5 id="toc_35">Response</h5>
+<h5 id="toc_36">Response</h5>
 <div class="highlight"><pre><code class="text language-text" data-lang="text">HTTP/1.1 200 OK
 Content-Type: application/json
 Link: &lt;https://your-domain.okta.com/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z&amp;limit=3&gt;; rel=&quot;self&quot;

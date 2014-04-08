@@ -19,64 +19,6 @@ __This API is currently in `Beta` status and documentation is *draft* quality.  
 
 *Note: This API currently only supports applications without user-management features enabled at this time*
 
-
-- [Application Model](#application-model)
-	- [Application Attributes](#application-attributes)
-		- [App Names & Settings](#app-names--settings)
-		- [Features](#features)
-		- [SignOn Modes](#signon-modes)
-	- [Accessibility Object](#accessibility-object)
-	- [Visibility Object](#visibility-object)
-		- [Hide Object](#hide-object) 
-		- [AppLinks Object](#applinks-object)
-	- [Application Credentials Object](#application-credentials-object)
-		- [Authentication Schemes](#authentication-schemes)
-		- [UserName Template Object](#username-template-object)
-			- [Built-In Expressions](#built-in-expressions)
-	- [Password Object](#password-object)
-	- [Application Links Object](#application-links-object)
-- [Application User Model](#application-user-model)
-	- [Application User Attributes](#application-user-attributes)
-	- [Application User Credentials Object](#application-user-credentials-object)
-- [Application Group Model](#application-group-model)
-	- [Application Group Attributes](#application-group-attributes)
-- [Application Operations](#application-operations)
-	- [Add Application](#add-application)
-		- [Add Bookmark Application](#add-bookmark-application)
-		- [Add Basic Authentication Application](#add-basic-authentication-application)
-		- [Add Plugin SWA Application](#add-plugin-swa-application)
-		- [Add Plugin SWA (3 Field) Application](#add-plugin-swa-3-field-application)
-		- [Add SWA Application (No Plugin)](#add-swa-application-no-plugin)
-		- [Add SAML 2.0 Application](#add-saml-20-application)
-		- [Add WS-Federation Application](#add-ws-federation-application)
-	- [Get Application](#get-application)
-	- [List Applications](#list-applications)
-	- [List Applications Assigned to User](#list-applications-assigned-to-user)
-		- [List Applications with Defaults](#list-applications-with-defaults)
-		- [List Applications Assigned to User](#list-applications-assigned-to-user)
-		- [List Applications Assigned to Group](#list-applications-assigned-to-group)
-	- [Update Application](#update-application)
-		- [Set SWA User-Editable UserName & Password](#set-swa-user-editable-username--password)
-		- [Set SWA User-Editable Password](#set-swa-user-editable-password)
-		- [Set SWA Okta Password](#set-swa-okta-password)
-		- [Set SWA Shared Credentials](#set-swa-shared-credentials)
-	- [Delete Application](#delete-application)
-- [Application Lifecycle Operations](#application-lifecycle-operations)
-	- [Activate Application](#activate-application)
-	- [Deactivate Application](#deactivate-application)
-- [Application User Operations](#application-user-operations)
-	- [Assign User to Application](#assign-user-to-application)
-	- [Get Assigned User for Application](#get-assigned-user-for-application)
-	- [List Users Assigned to Application](#list-users-assigned-to-application)
-	- [Update Credentials for Application](#update-credentials-for-application)
-	- [Remove User from Application](#remove-user-from-application)
-- [Application Group Operations](#application-group-operations)
-	- [Assign Group to Application](#assign-group-to-application)
-	- [Get Assigned Group for Application](#get-assigned-group-for-application)
-	- [List Groups Assigned to Application](#list-groups-assigned-to-application)
-	- [Remove Group from Application](#remove-group-from-application)
-
-
 ## Application Model
 
 ### Example
@@ -166,7 +108,7 @@ credentials | credentials for the specified `signOnMode` | [Application Credenti
 settings | settings for app ([App Names & Settings](#app-names--settings))| | | | TRUE | FALSE | FALSE
 _links | discoverable resources related to the app | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | | | TRUE | FALSE | TRUE
 
-*Note: id, created, lastUpdated, status, and _links are only available after an app is created*
+> `id`, `created`, `lastUpdated`, `status`, and `_links` are only available after an app is created
 
 #### App Names & Settings
 
@@ -186,7 +128,7 @@ template_wsfed | [Add WS-Federation Application](#add-ws-federation-application)
 
 The current workaround is to manually configure the desired application via the Administration UI in a preview (sandbox) organization and view the application via [Get Application](#get-application)
 
-*Note: As previously stated, this endpoint currently doesn't support creating or managing apps with user management features*
+> As previously stated, this endpoint currently doesn't support creating or managing apps with user management features
 
 #### Features
 
@@ -206,6 +148,7 @@ The list of possible features an app may support are:
 This setting modifies the same settings as the `User Management` tab when editing an application in your Okta Administration app.
 
 #### SignOn Modes
+
 Applications support a limited set of sign-on modes that specify how a user is authenticated to the app.
 
 The list of possible modes an app may support are:  
@@ -222,6 +165,7 @@ WS_FEDERATION | Federated Authentication with WS-Federation Passive Requestor Pr
 This setting modifies the same settings as the `Sign On` tab when editing an application in your Okta Administration app.
 
 ### Accessibility Object
+
 Specifies access settings for the application.
 
 Attribute | Description | DataType | MinLength | MaxLength | Nullable  | Default
@@ -239,6 +183,7 @@ errorRedirectUrl | Custom error page for this application | String | | | TRUE | 
 ```
 
 ### Visibility Object
+
 Specifies visibility settings for the application.
 
 Attribute | Description | DataType | MinLength | MaxLength | Nullable | Default
@@ -270,9 +215,11 @@ iOS | Okta Mobile for iOS | Boolean | FALSE | FALSE
 web | Okta Web Browser Home Page | Boolean | FALSE | FALSE
 
 #### AppLinks Object
+
 Each application defines 1 or more appLinks that can be published. AppLinks can be disabled by setting the link value to ```false```.
 
 ### Application Credentials Object
+
 Specifies app credentials and vaulting for the application.
 
 Attribute | Description | DataType | MinLength | MaxLength | Nullable | Default
@@ -307,7 +254,7 @@ EXTERNAL_PASSWORD_SYNC	| Administrator sets username, password is the same as us
 EDIT_USERNAME_AND_PASSWORD	| User sets username and password | | | Admin/User:R/W | Admin/User:W
 EDIT_PASSWORD_ONLY	| Administrator sets username, user sets password | | | Admin:R/W | Admin/User:W
 
-*Note: `BOOKMARK`, `SAML_2_0`, and `WS_FEDERATION` signOnModes do not support an authentication scheme as they use a federated SSO protocol.  The `scheme` property should be omitted for apps with these signOnModes*
+> `BOOKMARK`, `SAML_2_0`, and `WS_FEDERATION` signOnModes do not support an authentication scheme as they use a federated SSO protocol.  The `scheme` property should be omitted for apps with these signOnModes
 
 #### UserName Template Object
 
@@ -319,7 +266,7 @@ template | mapping expression for username | String | | 1024 | TRUE | `${source.
 type | type of mapping expression | Enum: `NONE`,  `BUILT_IN`, or `CUSTOM` | | | FALSE | BUILT_IN
 userSuffix | suffix for built-in mapping expressions | String | | | TRUE | NULL
 
-*Note: You must use the `CUSTOM` type when defining your own expression that is not built-in*
+> You must use the `CUSTOM` type when defining your own expression that is not built-in
 
 ```json
 {
@@ -331,6 +278,7 @@ userSuffix | suffix for built-in mapping expressions | String | | | TRUE | NULL
 ```
 
 ##### Built-In Expressions
+
 The following expressions are built-in and may be used with the `BUILT_IN` template type:
 
 Name | Template Expression
@@ -340,13 +288,12 @@ Okta username prefix | ${fn:substringBefore(source.login, ""@"")}
 Email | ${source.email}
 Email prefix | ${fn:substringBefore(source.email, ""@"")}
 Email (lowercase) | ${fn:toLowerCase(source.email)}
-AD SAM Account Name | 	${source.samAccountName}
+AD SAM Account Name | ${source.samAccountName}
 AD SAM Account Name (lowercase) | ${fn:toLowerCase(source.samAccountName)}
 AD User Principal Name | ${source.userName}
 AD User Principal Name prefix | ${fn:substringBefore(source.userName, ""@"")}
 AD Employee ID | ${source.employeeID}
 LDAP UID + custom suffix | ${source.userName}${instance.userSuffix}
-
 
 ### Password Object
 
@@ -370,6 +317,7 @@ users |  [User](#application-user-operations) assignments for application
 users | [Group](#application-group-operations) assignments for application
 
 ## Application User Model
+
 The application user model defines a user's application assignment and credentials.
 
 ### Example
@@ -392,6 +340,7 @@ The application user model defines a user's application assignment and credentia
 ```
 
 ### Application User Attributes
+
 All application users have the following attributes:
 
 Attribute | Description | DataType | MinLength | MaxLength | Nullable | Unique | Readonly
@@ -403,6 +352,7 @@ credentials | credentials for assigned app | [Application User Credentials Objec
 _links | discoverable resources related to the app user | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-05) | | | TRUE | FALSE | TRUE
 
 ### Application User Credentials Object
+
 Specifies a user's credentials for the application.  The [Authentication Scheme](#authentication-schemes) of the app determines whether a userName or password can be assigned to a user.
 
 Attribute | Description | DataType | MinLength | MaxLength | Nullable | Default
@@ -455,6 +405,7 @@ If you attempt to assign a username or password to an application with an incomp
 ```
 
 ### Application Group Attributes
+
 All application groups have the following attributes:
 
 Attribute | Description | DataType | MinLength | MaxLength | Nullable | Unique | Readonly
@@ -1132,9 +1083,10 @@ limit | Specified the number of results for a page | Query | Number | FALSE | 20
 filter | Filters apps by `status`, `user.id`, or `group.id` expression | Query | String | FALSE |
 after | Specifies the pagination cursor for the next page of apps | Query | String | FALSE |
 
-*Note: The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)*
+> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)
 
 ###### Filters
+
 The following filters are supported with the filter query parameter:
 
 Filter | Description
@@ -1144,7 +1096,7 @@ Filter | Description
 `user.id eq ":uid"` | Apps assigned to a specific user such as `00ucw2RPGIUNTDQOYPOF`
 `group.id eq ":gid"` | Apps assigned to a specific group such as `00gckgEHZXOUDGDJLYLG`
 
-*Note: Only a single expression is supported as this time*
+> Only a single expression is supported as this time
 
 ##### Response Parameters
 
@@ -1494,7 +1446,7 @@ Parameter | Description | Param Type | DataType | Required | Default
 id | id of app to update | URL | String | TRUE |
 profile | Updated profile for user | Body | [Application](#application-model) | FALSE |
 
-*Note: All attributes must be specified when updating an app  __Partial updates are not supported!__*
+> All attributes must be specified when updating an app  __Partial updates are not supported!__
 
 ##### Response Parameters
 
@@ -1925,7 +1877,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 Removes an inactive application.
 
-*Note: applications must be deactivated before they can be deleted*
+> Applications must be deactivated before they can be deleted
 
 ##### Request Parameters
 
@@ -2048,7 +2000,7 @@ aid | unique key of [Application](#application-model) | URL | String | TRUE |
 uid | unique key of a valid [User](../users.md) | URL | String | TRUE |
 appuser | App user | Body | [Application User](#application-user-model) | FALSE |
 
-*Note: For applications with [SignOn Modes](#signon-modes) or [Authentication Schemes](#authentication-schemes) that do not require or support credentials, pass and empty json object `{}` as the `appuser` request body* 
+> For applications with [SignOn Modes](#signon-modes) or [Authentication Schemes](#authentication-schemes) that do not require or support credentials, pass and empty json object `{}` as the `appuser` request body
 
 ##### Response Parameters
 
@@ -2152,7 +2104,7 @@ aid | unique key of [Application](#application-model) | URL | String | TRUE |
 limit | Specifies the number of results for a page | Query | Number | FALSE | 20
 after | Specifies the pagination cursor for the next page of assignments | Query | String | FALSE |
 
-*Note: The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)*
+> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)
 
 ##### Response Parameters
 
@@ -2400,7 +2352,7 @@ aid | unique key of [Application](#application-model) | URL | String | TRUE |
 limit | Specifies the number of results for a page | Query | Number | FALSE | 20
 after | Specifies the pagination cursor for the next page of assignments | Query | String | FALSE |
 
-*Note: The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)*
+> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)
 
 ##### Response Parameters
 

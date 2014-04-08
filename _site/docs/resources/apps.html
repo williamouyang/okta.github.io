@@ -8,106 +8,6 @@
 
 <p><em>Note: This API currently only supports applications without user-management features enabled at this time</em></p>
 
-<ul>
-<li><a href="#application-model">Application Model</a>
-
-<ul>
-<li><a href="#application-attributes">Application Attributes</a>
-
-<ul>
-<li><a href="#app-names--settings">App Names &amp; Settings</a></li>
-<li><a href="#features">Features</a></li>
-<li><a href="#signon-modes">SignOn Modes</a></li>
-</ul></li>
-<li><a href="#accessibility-object">Accessibility Object</a></li>
-<li><a href="#visibility-object">Visibility Object</a>
-
-<ul>
-<li><a href="#hide-object">Hide Object</a> </li>
-<li><a href="#applinks-object">AppLinks Object</a></li>
-</ul></li>
-<li><a href="#application-credentials-object">Application Credentials Object</a>
-
-<ul>
-<li><a href="#authentication-schemes">Authentication Schemes</a></li>
-<li><a href="#username-template-object">UserName Template Object</a>
-
-<ul>
-<li><a href="#built-in-expressions">Built-In Expressions</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#password-object">Password Object</a></li>
-<li><a href="#application-links-object">Application Links Object</a></li>
-</ul></li>
-<li><a href="#application-user-model">Application User Model</a>
-
-<ul>
-<li><a href="#application-user-attributes">Application User Attributes</a></li>
-<li><a href="#application-user-credentials-object">Application User Credentials Object</a></li>
-</ul></li>
-<li><a href="#application-group-model">Application Group Model</a>
-
-<ul>
-<li><a href="#application-group-attributes">Application Group Attributes</a></li>
-</ul></li>
-<li><a href="#application-operations">Application Operations</a>
-
-<ul>
-<li><a href="#add-application">Add Application</a>
-
-<ul>
-<li><a href="#add-bookmark-application">Add Bookmark Application</a></li>
-<li><a href="#add-basic-authentication-application">Add Basic Authentication Application</a></li>
-<li><a href="#add-plugin-swa-application">Add Plugin SWA Application</a></li>
-<li><a href="#add-plugin-swa-3-field-application">Add Plugin SWA (3 Field) Application</a></li>
-<li><a href="#add-swa-application-no-plugin">Add SWA Application (No Plugin)</a></li>
-<li><a href="#add-saml-20-application">Add SAML 2.0 Application</a></li>
-<li><a href="#add-ws-federation-application">Add WS-Federation Application</a></li>
-</ul></li>
-<li><a href="#get-application">Get Application</a></li>
-<li><a href="#list-applications">List Applications</a></li>
-<li><a href="#list-applications-assigned-to-user">List Applications Assigned to User</a>
-
-<ul>
-<li><a href="#list-applications-with-defaults">List Applications with Defaults</a></li>
-<li><a href="#list-applications-assigned-to-user">List Applications Assigned to User</a></li>
-<li><a href="#list-applications-assigned-to-group">List Applications Assigned to Group</a></li>
-</ul></li>
-<li><a href="#update-application">Update Application</a>
-
-<ul>
-<li><a href="#set-swa-user-editable-username--password">Set SWA User-Editable UserName &amp; Password</a></li>
-<li><a href="#set-swa-user-editable-password">Set SWA User-Editable Password</a></li>
-<li><a href="#set-swa-okta-password">Set SWA Okta Password</a></li>
-<li><a href="#set-swa-shared-credentials">Set SWA Shared Credentials</a></li>
-</ul></li>
-<li><a href="#delete-application">Delete Application</a></li>
-</ul></li>
-<li><a href="#application-lifecycle-operations">Application Lifecycle Operations</a>
-
-<ul>
-<li><a href="#activate-application">Activate Application</a></li>
-<li><a href="#deactivate-application">Deactivate Application</a></li>
-</ul></li>
-<li><a href="#application-user-operations">Application User Operations</a>
-
-<ul>
-<li><a href="#assign-user-to-application">Assign User to Application</a></li>
-<li><a href="#get-assigned-user-for-application">Get Assigned User for Application</a></li>
-<li><a href="#list-users-assigned-to-application">List Users Assigned to Application</a></li>
-<li><a href="#update-credentials-for-application">Update Credentials for Application</a></li>
-<li><a href="#remove-user-from-application">Remove User from Application</a></li>
-</ul></li>
-<li><a href="#application-group-operations">Application Group Operations</a>
-
-<ul>
-<li><a href="#assign-group-to-application">Assign Group to Application</a></li>
-<li><a href="#get-assigned-group-for-application">Get Assigned Group for Application</a></li>
-<li><a href="#list-groups-assigned-to-application">List Groups Assigned to Application</a></li>
-<li><a href="#remove-group-from-application">Remove Group from Application</a></li>
-</ul></li>
-</ul>
-
 <h2 id="toc_2">Application Model</h2>
 
 <h3 id="toc_3">Example</h3>
@@ -323,7 +223,9 @@
 </tr>
 </tbody></table>
 
-<p><em>Note: id, created, lastUpdated, status, and _links are only available after an app is created</em></p>
+<blockquote>
+<p><code>id</code>, <code>created</code>, <code>lastUpdated</code>, <code>status</code>, and <code>_links</code> are only available after an app is created</p>
+</blockquote>
 
 <h4 id="toc_5">App Names &amp; Settings</h4>
 
@@ -369,7 +271,9 @@
 
 <p>The current workaround is to manually configure the desired application via the Administration UI in a preview (sandbox) organization and view the application via <a href="#get-application">Get Application</a></p>
 
-<p><em>Note: As previously stated, this endpoint currently doesn&#39;t support creating or managing apps with user management features</em></p>
+<blockquote>
+<p>As previously stated, this endpoint currently doesn&#39;t support creating or managing apps with user management features</p>
+</blockquote>
 
 <h4 id="toc_6">Features</h4>
 
@@ -670,7 +574,9 @@
 </tr>
 </tbody></table>
 
-<p><em>Note: <code>BOOKMARK</code>, <code>SAML_2_0</code>, and <code>WS_FEDERATION</code> signOnModes do not support an authentication scheme as they use a federated SSO protocol.  The <code>scheme</code> property should be omitted for apps with these signOnModes</em></p>
+<blockquote>
+<p><code>BOOKMARK</code>, <code>SAML_2_0</code>, and <code>WS_FEDERATION</code> signOnModes do not support an authentication scheme as they use a federated SSO protocol.  The <code>scheme</code> property should be omitted for apps with these signOnModes</p>
+</blockquote>
 
 <h4 id="toc_14">UserName Template Object</h4>
 
@@ -716,7 +622,9 @@
 </tr>
 </tbody></table>
 
-<p><em>Note: You must use the <code>CUSTOM</code> type when defining your own expression that is not built-in</em></p>
+<blockquote>
+<p>You must use the <code>CUSTOM</code> type when defining your own expression that is not built-in</p>
+</blockquote>
 <div class="highlight"><pre><code class="json language-json" data-lang="json"><span class="p">{</span>
     <span class="nt">&quot;userNameTemplate&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="nt">&quot;template&quot;</span><span class="p">:</span> <span class="s2">&quot;${source.login}&quot;</span><span class="p">,</span>
@@ -1946,7 +1854,9 @@
 </tr>
 </tbody></table>
 
-<p><em>Note: The page cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></em></p>
+<blockquote>
+<p>The page cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></p>
+</blockquote>
 
 <h6 id="toc_63">Filters</h6>
 
@@ -1976,7 +1886,9 @@
 </tr>
 </tbody></table>
 
-<p><em>Note: Only a single expression is supported as this time</em></p>
+<blockquote>
+<p>Only a single expression is supported as this time</p>
+</blockquote>
 
 <h5 id="toc_64">Response Parameters</h5>
 
@@ -2330,7 +2242,9 @@
 </tr>
 </tbody></table>
 
-<p><em>Note: All attributes must be specified when updating an app  <strong>Partial updates are not supported!</strong></em></p>
+<blockquote>
+<p>All attributes must be specified when updating an app  <strong>Partial updates are not supported!</strong></p>
+</blockquote>
 
 <h5 id="toc_77">Response Parameters</h5>
 
@@ -2737,7 +2651,9 @@
 
 <p>Removes an inactive application.</p>
 
-<p><em>Note: applications must be deactivated before they can be deleted</em></p>
+<blockquote>
+<p>Applications must be deactivated before they can be deleted</p>
+</blockquote>
 
 <h5 id="toc_92">Request Parameters</h5>
 
@@ -2916,7 +2832,9 @@ Content-Type: application/json
 </tr>
 </tbody></table>
 
-<p><em>Note: For applications with <a href="#signon-modes">SignOn Modes</a> or <a href="#authentication-schemes">Authentication Schemes</a> that do not require or support credentials, pass and empty json object <code>{}</code> as the <code>appuser</code> request body</em> </p>
+<blockquote>
+<p>For applications with <a href="#signon-modes">SignOn Modes</a> or <a href="#authentication-schemes">Authentication Schemes</a> that do not require or support credentials, pass and empty json object <code>{}</code> as the <code>appuser</code> request body</p>
+</blockquote>
 
 <h5 id="toc_112">Response Parameters</h5>
 
@@ -3061,7 +2979,9 @@ Content-Type: application/json
 </tr>
 </tbody></table>
 
-<p><em>Note: The page cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></em></p>
+<blockquote>
+<p>The page cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></p>
+</blockquote>
 
 <h5 id="toc_124">Response Parameters</h5>
 
@@ -3413,7 +3333,9 @@ Content-Type: application/json
 </tr>
 </tbody></table>
 
-<p><em>Note: The page cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></em></p>
+<blockquote>
+<p>The page cursor should treated as an opaque value and obtained through the next link relation. See <a href="../getting_started/design_principles.md#pagination">Pagination</a></p>
+</blockquote>
 
 <h5 id="toc_155">Response Parameters</h5>
 

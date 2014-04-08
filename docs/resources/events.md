@@ -15,17 +15,6 @@ priority: 5
 
 The Event API provides read access to your organization's system log. The API is intended to export event data as a batch job from your organization to another system for reporting or analysis.
 
-- [Event Model](#event-model)
-	- [Attributes](#attributes)
-	- [Action Object](#action-object)
-		- [Categories](#action-categories)
-		- [Object Types](#action-objecttypes)
-	- [Actor Object](#actor-object)
-	- [Target Object](#target-object)
-	- [Actor/Target Object Types](#actortarget-objecttypes)
-- [List Events](#list-events)
-	
-
 ## Event Model
 
 Every organization has a system log that maintains a history of actions performed by users.  The Event model describes a single action that was performed by a set of actors for a set of targets.
@@ -75,6 +64,7 @@ Every organization has a system log that maintains a history of actions performe
 ```
 
 ### Attributes
+
 The Event model is a ***read-only*** object and has a fixed set of attributes:
 
 Attribute | Description | DataType | Nullable
@@ -85,7 +75,7 @@ action | Identifies the action that the event describes | [Action Object](#actio
 actors | Describes zero or more entities that performed the action | Array of [Actor Object](#actor-object) | TRUE
 targets | Describes zero or more entities that the action was performed against | Array of [Target Object](#target-object) | TRUE
 
-*Note: The actor and/or target of an event is dependant on the action performed. Not all events have an actor or target.*
+> The actor and/or target of an event is dependent on the action performed. Not all events have an actor or target.
 
 ### Action Object
 
@@ -98,7 +88,7 @@ categories | [Categories](#action-categories) for an action | Array of String | 
 objectType | Identifies the [unique type](#action-objecttypes) of an action | String | FALSE
 requestUri | Uri of the request that generated the event. | String | TRUE
 
-*Note: Actions that do not define any categories will have an zero element array value.*
+> Actions that do not define any categories will have an zero element array value.
 
 ``` json
 {
@@ -112,6 +102,7 @@ requestUri | Uri of the request that generated the event. | String | TRUE
 ```
 
 #### Action Categories
+
 Categories for an action:
 
 * Application Assignment
@@ -128,12 +119,11 @@ Categories for an action:
 * Application Imports (Detailed)
 * SMS Messages
 
-*Note: Additional categories may be added in the future without versioning*
+> Additional categories may be added in the future without versioning
 
 #### Action ObjectTypes
 
 Action `objectType` identifies the unique action performed.
-
 
 ##### Application Authentication
 
@@ -287,7 +277,6 @@ core.user.sms.message_sent.factor |
 core.user.sms.message_sent.verify |
 core.user.sms.message_sent.forgotpw |
 
-
 ##### User RADIUS Authentication
 
 ObjectType | Description 
@@ -324,7 +313,6 @@ ObjectType | Description
 core.user.admin_privilege.granted |
 core.user.admin_privilege.revoked |
 
-
 ### Actor Object
 
 Actor of an event
@@ -335,7 +323,7 @@ id | Unique key for actor| String | FALSE
 displayName | Name of actor used for display purposes | String | FALSE
 objectType | [User](#user-objecttype) or [Client](#client-objecttype)  | String | FALSE
 
-*Note: The schema of an actor is dependent on the actor's `objectType`*
+> The schema of an actor is dependent on the actor's `objectType`
 
 ### Target Object
 
@@ -347,7 +335,7 @@ id | Unique key for target| String | FALSE
 displayName | Name of target used for display purposes | String | FALSE
 objectType | [User](#user-objecttype) or [AppInstance](#appinstance-objecttype) | String | FALSE
 
-*Note: The schema of a target is dependent on the actor's `objectType`*
+> The schema of a target is dependent on the actor's `objectType`
 
 ### Actor/Target ObjectTypes
 
@@ -371,7 +359,7 @@ login | Unique login for [user](users.md#user-model) | String | FALSE
 }
 ```
 
-*Note: The user can be retrieved by `id` with the [User API](users.md#get-user-with-id).*
+> The user can be retrieved by `id` with the [User API](users.md#get-user-with-id).
 
 #### AppInstance ObjectType
 
@@ -391,7 +379,7 @@ displayName | Label of application | String | FALSE
 }
 ```
 
-*Note: The app can be retrieved by `id` with the [Apps API](apps.md#get-application).*
+> The app can be retrieved by `id` with the [Apps API](apps.md#get-application).
 
 #### Client ObjectType
 
@@ -412,7 +400,7 @@ ipAddress | IP Address of client | String | TRUE
     "ipAddress": "127.0.0.1",
     "objectType": "Client"
 }
-```         
+```        
 
 ## List Events
 
@@ -426,9 +414,52 @@ Parameter | Description | Param Type | DataType | Required | Default
 --- | --- | --- | --- | --- | ---
 limit | Specifies the number of results to page | Query | Number | FALSE | 1000
 startDate | Specifies the timestamp to list events after | Query | Date | FALSE |
+filter | [Filter expression](../getting_started/design_principles.md#filtering) for events | Query | String | FALSE |
 after | Specifies the pagination cursor for the next page of events | Query | String | FALSE |
 
-*Note: The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)*
+> The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)
+
+> `startDate` and `filter` query parameters are mutually exclusive and cannot be used together in the same request
+
+##### Filters
+
+The following expressions are supported for events with the `filter` query parameter:
+
+Filter | Description
+------ | ----------- 
+`action.objectType eq ":actionType"` | Events that have a specific [action objectType](#action-objectypes)
+`target.objectType eq ":objectType"` | Events published with a specific [target objectType](#actortarget-objecttypes)
+`target.id eq ":id"` | Events published with a specific target id
+`published lt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Events published before a specific datetime
+`published eq "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Events published updated at a specific datetime
+`published gt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Events published updated after a specific datetime
+
+See [Filtering](../getting_started/design_principles.md#filtering) for more information on expressions
+
+> All filters must be [URL encoded](http://en.wikipedia.org/wiki/Percent-encoding) where `filter=published gt "2013-06-01T00:00:00.000Z"` is encoded as `filter=published%20gt%20%222013-06-01T00:00:00.000Z%22`
+
+**Filter Examples**
+
+Events published after 06/01/2013
+
+    filter=published gt "2013-06-01T00:00:00.000Z"
+    
+Events published for a target user 
+
+    filter=target.id eq "00uxc78lMKUMVIHLTAXY"
+    
+Failed login events published after 06/01/2013
+
+    filter=published gt "2013-06-01T00:00:00.000Z" and action.objectType eq "core.user_auth.login_failed" 
+    
+Events published after 06/01/2013 for a target user and application
+
+    filter=published gt "2013-06-01T00:00:00.000Z" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
+
+App SSO events for a target user and application
+
+    filter=action.objectType eq "app.auth.sso" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
+
 
 #### Response Parameters
 
