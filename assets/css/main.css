@@ -1573,4 +1573,6 @@ p {
 }
 
 
-
+hr {
+  border-top-color: #000;
+}

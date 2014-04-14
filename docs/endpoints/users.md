@@ -1,3 +1,8 @@
+---
+layout: docs
+title: Users
+---
+
 # Users
 
 ## Overview

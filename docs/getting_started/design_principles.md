@@ -1,7 +1,6 @@
 ---
 layout: docs
-title: API Documentation
-description: "Okta developers"
+title: Design Principles
 ---
 
 

@@ -1,3 +1,8 @@
+---
+layout: docs
+title: Error Codes
+---
+
 # Error Codes
 
 

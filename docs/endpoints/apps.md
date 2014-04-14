@@ -1,3 +1,8 @@
+---
+layout: docs
+title: Apps
+---
+
 # Apps
 
 ## Overview

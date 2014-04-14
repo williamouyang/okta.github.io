@@ -1,0 +1,14 @@
+- section: endpoints
+  title: Endpoints
+  pages:
+    - apps
+    - events
+    - groups
+    - sessions
+
+- section: getting_started
+  title: Examples
+  pages:
+    - design_principles
+    - error_codes
+    - getting_a_token

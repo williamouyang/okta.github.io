@@ -1,3 +1,8 @@
+---
+layout: docs
+title: Tokens
+---
+
 # Token endpoints
 
 *Note:  This API is __deprecated__. Please see [Getting an API Token](/docs/getting_started/getting_a_token.md)*
