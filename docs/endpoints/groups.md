@@ -1,3 +1,8 @@
+---
+layout: docs
+title: Groups
+---
+
 # Groups
 
 ## Overview

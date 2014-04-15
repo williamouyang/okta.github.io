@@ -1,10 +1,56 @@
-<div class="fixed" id="sidebar">
-  sidebar goes here
+<!-- method 1 -->
+<hr>
+<pre>iterate through yml data file</pre>
 
-  <h2>Introduction to Okta</h2>
-  <a href="/docs/introduction_to_okta/overview.html">Overview</a>
+{% for nav in site.data.sidenav %}
+<h2>{{ nav.title }}</h2>
+<ul>
+  {% for item in nav.pages %}
+    <li>
+      <a href="/docs/{{ nav.section }}/{{ item }}.html">{{ item }}</a>
+    </li>
+  {% endfor %}
+</ul>
+{% endfor %}
 
-</div>
 
 
+<!-- method 2 -->
+<hr>
+<pre>iterate through site.pages</pre>
+
+
+{% for page in site.pages %}
+  {% if page.layout == 'docs' %}
+  {{ page.title }} -- {{ page.path }}
+    <br>
+  {% endif %}
+{% endfor %}
+
+
+
+<!-- method 3 -->
+<hr>
+<pre>iterate through yml data file, pull page data</pre>
+
+{% for nav in site.data.sidenav %}
+<h2>{{ nav.title }}</h2>
+<ul>
+  {% for item in nav.pages %}
+
+    {% for page in site.pages %}
+      {% if page.layout == 'docs' %}
+        {% assign name = page.path | replace: '.md', '' | split: '/' | last | downcase %}
+      {% endif %}
+
+      {% if name == item %}
+        <li>
+          <a href="/docs/{{ nav.section }}/{{ item }}.html">{{ page.title }}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+
+  {% endfor %}
+</ul>
+{% endfor %}
 
