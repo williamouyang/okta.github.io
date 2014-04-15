@@ -1,52 +1,18 @@
-<!-- method 1 -->
-<hr>
-<pre>iterate through yml data file</pre>
+<!-- iterate through yml data file, pull page data-->
+{% assign section = page.path | split: '/' %}
 
 {% for nav in site.data.sidenav %}
 <h2>{{ nav.title }}</h2>
-<ul>
+<ul {% if section[1] != nav.section %} class="closed" {% endif %}>
   {% for item in nav.pages %}
-    <li>
-      <a href="/docs/{{ nav.section }}/{{ item }}.html">{{ item }}</a>
-    </li>
-  {% endfor %}
-</ul>
-{% endfor %}
-
-
-
-<!-- method 2 -->
-<hr>
-<pre>iterate through site.pages</pre>
-
-
-{% for page in site.pages %}
-  {% if page.layout == 'docs' %}
-  {{ page.title }} -- {{ page.path }}
-    <br>
-  {% endif %}
-{% endfor %}
-
-
-
-<!-- method 3 -->
-<hr>
-<pre>iterate through yml data file, pull page data</pre>
-
-{% for nav in site.data.sidenav %}
-<h2>{{ nav.title }}</h2>
-<ul>
-  {% for item in nav.pages %}
-
     {% for page in site.pages %}
       {% if page.layout == 'docs' %}
         {% assign name = page.path | replace: '.md', '' | split: '/' | last | downcase %}
-      {% endif %}
-
-      {% if name == item %}
-        <li>
-          <a href="/docs/{{ nav.section }}/{{ item }}.html">{{ page.title }}</a>
-        </li>
+        {% if name == item %}
+          <li>
+            <a href="/docs/{{ nav.section }}/{{ item }}.html">{{ page.title }}</a>
+          </li>
+        {% endif %}
       {% endif %}
     {% endfor %}
 

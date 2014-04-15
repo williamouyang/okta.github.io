@@ -1507,3 +1507,15 @@ p {
 hr {
   border-top-color: #000;
 }
+
+.left-sidebar ul.closed{
+  display: none;
+}
+
+.left-sidebar h2 {
+  cursor: pointer;
+}
+
+.left-sidebar h2:hover {
+  color: #428bca;
+}

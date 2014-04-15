@@ -1,14 +1,26 @@
-- section: endpoints
-  title: Endpoints
-  pages:
-    - apps
-    - events
-    - groups
-    - sessions
+- section: introduction_to_okta
+  title: Introduction to Okta
+  pages: 
+    - overview
 
 - section: getting_started
-  title: Examples
+  title: Getting Started
   pages:
     - design_principles
     - error_codes
     - getting_a_token
+
+- section: endpoints
+  title: Endpoints
+  pages:
+    - users
+    - apps
+    - events
+    - groups
+    - sessions
+    - tokens
+
+- section: examples
+  title: Examples
+  pages:
+    - session_cookie
