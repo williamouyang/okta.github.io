@@ -9,12 +9,15 @@ title: Users
 
 The User API provides operations for user management.
 
+<div class="toc"></div>
+
+<!-- 
 - [User Model](#user-model)
 	- [Metadata Attributes](#metadata-attributes)
 	- [Profile Object](#profile-object)
 	- [Credentials Object](#credentials-object)
 	- [Links Object](#links-object)
-- [User Operations](#user-operations)	
+- [User Operations](#user operations)	
 	- [Create User](#create-user)
 		- [Create User without Credentials](#create-user-without-credentials)
 		- [Create User with Recovery Question](#create-user-with-recovery-question)
@@ -46,7 +49,7 @@ The User API provides operations for user management.
 	- [Forgot Password](#forgot-password)
 	- [Change Password](#change-password)
 	- [Change Recovery Question](#change-recovery-question)
-
+ -->
 ## User Model
 
 Content Type: application/json

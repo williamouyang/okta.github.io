@@ -13,7 +13,9 @@ __This API is currently in `Beta` status and documentation is *draft* quality.  
 
 *Note: This API currently only supports applications without user-management features enabled at this time*
 
+<div class="toc"></div>
 
+<!-- 
 - [Application Model](#application-model)
 	- [Application Attributes](#application-attributes)
 		- [App Names & Settings](#app-names--settings)
@@ -69,7 +71,7 @@ __This API is currently in `Beta` status and documentation is *draft* quality.  
 	- [Get Assigned Group for Application](#get-assigned-group-for-application)
 	- [List Groups Assigned to Application](#list-groups-assigned-to-application)
 	- [Remove Group from Application](#remove-group-from-application)
-
+-->
 
 ## Application Model
 

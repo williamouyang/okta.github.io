@@ -11,6 +11,9 @@ Okta uses a cookie-based authentication mechanism to maintain a user's authentic
 
 > The Session API currently does not support multi-factor authentication (MFA).  Sessions created for users with an assigned MFA policy will have a significantly constrained session and will not be able to access their applications.
 
+<div class="toc"></div>
+
+<!-- 
 - [Session Model](#session-model)
 - [Session Operations](#session-operations)
 	- [Create Session](#create-session)
@@ -19,7 +22,7 @@ Okta uses a cookie-based authentication mechanism to maintain a user's authentic
 	- [Validate Session](#validate-session)
 	- [Extend Session](#extend-session)
 	- [Close Session](#close-session)
-
+ -->
 ### Session Cookie
 
 Okta utilizes a non-persistent HTTP session cookie to provide access to your Okta organization and applications across web requests for an interactive user-agents such as a browser.  Session cookies have an  expiration configurable by an administrator for the organization and are valid until the cookie expires or the user closes the session (logout) or browser application.

@@ -5,6 +5,7 @@ title: Error Codes
 
 # Error Codes
 
+<div class="toc"></div>
 
 This document provides further information about the errors that the Okta API returns. The first table is listed by error code, and the second table is listed by HTTP return code.
 
