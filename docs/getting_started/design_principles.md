@@ -3,18 +3,9 @@ layout: docs
 title: Design Principles
 ---
 
-
 # Design Principles
 
-- [URL Namespace](#url-namespace)
-- [Media Types](#media-types)
-- [HTTP Verbs](#http-verbs)
-- [Errors](#errors)
-- [Authentication](#authentication)
-- [Pagination](#pagination)
-	- [Link Header](#link-header)
-- [Filtering](#filtering)
-- [Rate Limiting](#rate-limiting)
+<div class="toc"></div>
 
 ## Versioning
 

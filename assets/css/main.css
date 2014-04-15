@@ -1519,3 +1519,17 @@ hr {
 .left-sidebar h2:hover {
   color: #428bca;
 }
+
+.clickable-header {
+  cursor:pointer;
+}
+.clickable-header:hover {
+  text-decoration:underline;
+}
+.top-level-header {
+  display:inline;
+}
+.back-to-top {
+  margin-left:5px;
+  cursor:pointer;
+}
