@@ -28,3 +28,6 @@ reload_views.rb
 
 
 /_site
+
+.bundle
+bin/*
