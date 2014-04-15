@@ -1,3 +1,9 @@
+---
+layout: docs
+title: Session Cookie
+---
+
+
 # Session Cookie
 
 Okta utilizes a non-persistent HTTP session cookie to provide access to your Okta organization and applications across web requests for an interactive user-agents such as a browser.  This document provides examples for programmatically retrieving and setting a session cookie for different deployment scenarios to provide SSO capabilities for custom web applications built on the Okta platform.
@@ -52,7 +58,7 @@ After your login flow is complete you often need to establish a session cookie f
 
 > Only the Okta session redirect URL with one-time token is required
 
-```HTTP
+```http
 HTTP/1.1 302 Moved Temporarily
 Set-Cookie: my_app_session_cookie_name=my_apps_session_cookie_value; Path=/
 Location: https://your-subdomain.okta.com/login/sessionCookieRedirect?token=009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6&redirectUrl=https%3A%2F%2Fwww.example.com%2Fportal%2Fhome
@@ -65,7 +71,7 @@ Host: your-subdomain.okta.com
 Accept: */*
 ```
 
-```HTTP
+```http
 HTTP/1.1 302 Moved Temporarily
 Set-Cookie: sid=000aC_z7AZKTpSqtHFc0Ak6Vg; Path=/
 Location: https://www.example.com/portal/home
@@ -123,7 +129,7 @@ Location: https://your-subdomain/app/google/go1013td3mXAQOJCHEHQ/mail?onetimetok
 
 When the link is visited, the token in the request will be used to initiate the user's session before processing the application launch request. A session cookie will be set in the browser and the user will have an active session with Okta and will be able to SSO into additional applications until the session is expired or the user closes the session (logout) or browser application.
 
-```HTTP
+```http
 HTTP/1.1 302 Moved Temporarily
 Set-Cookie: sid=000aC_z7AZKTpSqtHFc0Ak6Vg; Path=/
 Location: https://mail.google.com/a/your-subdomain
@@ -143,7 +149,7 @@ Accept: */*
 
 When the link is visited, the token in the request will be used to initiate the user's session before processing the SAML SSO request. A session cookie will be set in the browser and the user will have an active session with Okta and will be able to SSO into additional applications until the session is expired or the user closes the session (logout) or browser application.
  
-```HTTP
+```http
 HTTP/1.1 200 OK
 Content-Type: text/html;charset=utf-8
 Set-Cookie: sid=000aC_z7AZKTpSqtHFc0Ak6Vg; Path=/
@@ -225,7 +231,7 @@ When you are ready to establish a session with Okta for the user, include the se
 
 When the page containing the tag is loaded, the token in the request will be used to initiate the user's session, and a session cookie will be set in the browser. The image that renders is a 1x1 transparent image. After the page has loaded the user will have an active session with Okta and will be able to SSO into their applications. The token is a one-time token, so successive page loads will have no impact on the user's session. If the user logs out of Okta after using the token, they will not be able to reuse that same token to get a session cookie.
 
-```HTTP
+```http
 HTTP/1.1 200 OK
 Content-Type: image/png
 Set-Cookie: sid=000O8P2OlZLTHuz4RZV8locXA; Path=/
