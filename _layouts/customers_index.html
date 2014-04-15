@@ -1,0 +1,21 @@
+{% include header.html css_file='customers.css' %}
+
+
+
+<div class="container-features container-non-responsive customers" id="main-container">
+  {% for page in site.pages %}
+  {% if page.layout == 'customer' %}
+
+
+
+      <a href="{{ page.url }}">{{ page.title }}</a>
+      <br>
+
+
+    {% endif %}
+  {% endfor %}
+</div>
+
+
+
+{% include footer.html %}

@@ -1,10 +1,10 @@
-{% include header.html %}
+{% include header.html css_file='blog.css' %}
 
 
 
 {% assign author = site.data.authors[page.author] %}
 
-<div class="container-features container-non-responsive" id="main-container">
+<div class="container-features container-non-responsive blog" id="main-container">
   <a href="/blog">back to blog</a>
   <h1>{{ page.title }}</h1>
   <img src="/assets/img/{{ author.avatar }}">

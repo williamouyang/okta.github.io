@@ -1,8 +1,8 @@
-{% include header.html %}
+{% include header.html css_file='blog.css' %}
 
 
 
-<div class="container-features container-non-responsive" id="main-container">
+<div class="container-features container-non-responsive blog" id="main-container">
   {% for post in site.posts %}
     {% assign author = site.data.authors[post.author] %}
     <div>
