@@ -1,18 +1,18 @@
 {% include header.html %}
 
-<div class="container-features container-non-responsive" id="main-container">
 
+
+<div class="container-features container-non-responsive" id="main-container">
   {% for post in site.posts %}
+    {% assign author = site.data.authors[post.author] %}
     <div>
       <h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
+      {{ author.full_name }}
     </div>
     <br>
   {% endfor %}
-
-
-
-  {{ content }}
-
 </div>
+
+
 
 {% include footer.html %}
