@@ -9,9 +9,7 @@
       {% if page.layout == 'docs' %}
         {% assign name = page.path | replace: '.md', '' | split: '/' | last | downcase %}
         {% if name == item %}
-          <li>
-            <a href="/docs/{{ nav.section }}/{{ item }}.html">{{ page.title }}</a>
-          </li>
+          <li data-name="{{ page.title }}"><a href="/docs/{{ nav.section }}/{{ item }}.html">{{ page.title }}</a>
         {% endif %}
       {% endif %}
     {% endfor %}

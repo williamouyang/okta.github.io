@@ -9,20 +9,6 @@ title: Events
 
 The Event API provides read access to your organization's system log. The API is intended to export event data as a batch job from your organization to another system for reporting or analysis.
 
-<div class="toc"></div>
-
-<!--
-- [Event Model](#event-model)
-	- [Attributes](#attributes)
-	- [Action Object](#action-object)
-		- [Categories](#action-categories)
-		- [Object Types](#action-objecttypes)
-	- [Actor Object](#actor-object)
-	- [Target Object](#target-object)
-	- [Actor/Target Object Types](#actortarget-objecttypes)
-- [List Events](#list-events)
-
--->
 
 ## Event Model
 

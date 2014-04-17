@@ -8,12 +8,3 @@ redcarpet:
 # -- blog:NE:NE
 
 permalink: /blog/:year/:month/:day/:title
-
-# markdown: kramdown 
-# kramdown:
-#   auto_ids: true
-#   footnote_nr: 1
-#   entity_output: as_char
-#   toc_levels: 2..4
-#   smart_quotes: lsquo,rsquo,ldquo,rdquo
-#   use_coderay: false

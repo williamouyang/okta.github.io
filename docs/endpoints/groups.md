@@ -9,29 +9,6 @@ title: Groups
 
 The Groups API provides operations to manage your organization groups an their user members.
 
-<div class="toc"></div>
-
-<!--
-- [Group Model](#group-model)
-	- [Group Attributes](#group-attributes)
-	- [Profile Object](#profile-object)
-	- [Links](#links)
-- [Group Operations](#group-operations)
-	- [Add Group](#add-group)
-	- [Get Group](#get-group)
-	- [List Groups](#list-groups)
-		- [List All Groups](#list-all-groups)
-		- [Search Groups](#search-groups)
-	- [Update Group](#update-group)
-	- [Remove Group](#remove-group)
-- [Group Member Operations](#group-member-operations)
-	- [List Group Members](#list-group-members)
-	- [Add User to Group](#add-user-to-group)
-	- [Remove User from Group](#remove-user-from-group)
-- [Related Resources](#related-resources)
-	- [List Assigned Applications](#list-assigned-applications)
-
--->
 
 ## Group Model
 

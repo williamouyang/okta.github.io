@@ -11,8 +11,6 @@ Okta utilizes a non-persistent HTTP session cookie to provide access to your Okt
 
 Okta sessions are created and managed with the [Session API](/docs/endpoints/sessions.md).
 
-<div class="toc"></div>
-
 ## Retrieving a session cookie by visiting a session redirect link
 
 This scenario is ideal for deployment scenarios where you have implemented both a custom login page and custom landing page for your application.  The login page will typically collect the user's credentials via a HTML form submit or POST and the web application will validate the credentials against your Okta organization by calling the [Create Session](/docs/endpoints/sessions.md#create-session-with-one-time-token) API to obtain a one-time token. 
