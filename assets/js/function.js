@@ -9,7 +9,7 @@
 
   // generate sidebar anchor link
   var $toc              = $('<ul class="toc">');
-  var $headerSelector   = $('#docs-article h1:first');
+  var $headerSelector   = $('#docs-article h1:first-child');
   var $sidebarSelector  = $('.left-sidebar [data-name="'+ $headerSelector.text() +'"');
 
   if ($headerSelector.length > 0) {
@@ -19,7 +19,6 @@
          .attr('href','#'+ $(this).attr('id'))
          .text($(this).text())));
     });
- 
-    $sidebarSelector.after($toc);
+    $headerSelector.after($toc);
   }
 })();
