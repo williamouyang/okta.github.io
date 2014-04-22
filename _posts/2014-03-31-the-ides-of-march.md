@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: blog_post
 title: The Ides of March
 author: doug
 tags: [example, session, authentication]
