@@ -2,18 +2,43 @@
 
 
 
-<div class="container-features container-non-responsive customers" id="main-container">
-  {% for page in site.pages %}
-  {% if page.layout == 'customer' %}
+<div class="boundary container-non-responsive customers-index" id="main-container">
 
 
 
-      <a href="{{ page.url }}">{{ page.title }}</a>
-      <br>
+  <div class="block title-block">
+    <h1>{{ page.tagline }}</h1>
+  </div>
 
 
-    {% endif %}
-  {% endfor %}
+
+  <div class="block">
+    {% for page in site.pages %}
+      {% if page.layout == 'customer_story' %}
+        {% assign path  = page.url | remove: "/index.html" %}
+        {% assign idx   = idx | plus: 1 %}
+        {% assign break = idx | modulo: 3 %}
+
+        {% if break == 1 %} <div class="row customer-row"> {% endif %}
+
+        <div class="col-md-4 customer-card">
+          <a href="{{ path }}">
+            <div class="customer-logo">
+              <img src="{{ path }}/{{ page.index_image }}" alt="" />
+            </div>
+            <h2>{{ page.title }}</h2>
+            <p>{{ page.index_blurb }}</p>
+          </a>
+        </div>
+
+        {% if break == 0 %} </div> {% endif %}
+
+      {% endif %}
+    {% endfor %}
+  </div>
+
+
+
 </div>
 
 

@@ -1,13 +1,34 @@
 ---
-layout: customer
-title: Appirio
-thumb: appirio-thumb.jpg
-image: appirio-image.jpg
-bg: appirio-bg.jpg
-customer_url: www.appirio.com
-quote: 'Wise men speak because they have something to say; Fools because they have to say something.'
-blurb: 'We use Okta because its awesome'
+layout:         customer_story
+title:          Box
+
+thumb_image:    box-thumb.jpg
+index_image:    box-index.jpg
+bg_image:       box-bg.jpg
+diagram_image:  box-diagram.jpg
+
+customer_url:   www.box.com
+
+index_blurb: box's IT team looks like heroes inside the Company and the support of Okta is a key factor in that. Okta is one of our top recommendations for CIOs. Okta is easy to implement, it’s fun to use, it’s a powerful, holistic solution, and we feel it gives IT a positive boost reputationally.
+
+title_tagline: Wise men speak because they have something to say; Fools because they have to say something.
+
+sidebar_testimonial: Okta solved all our problems, at a fraction of the cost and time of every other vendor in the market. Who says you can't have it all?
+sidebar_testimonial_attribution: John Sinclair
+sidebar_testimonial_meta: EVP Global Impact, box Worldwide Partners
+sidebar_copy: >
+  ## This is the headline of a sidebar
+
+  * bullet 1
+
+  * bullet 2
+
+
+  Hibh curabitur cred commodo enim metus mattis foodie curabitur. Rutrum adipiscing elementum beard lorem proin rutrum sit farm-to-table
 ---
+
+
+
 
 ## Section 1
 Food truck metus adipiscing amet ipsum +1 integer quam porta diam Brooklyn morbi eget justo vitae Toms et amet sapien ipsum. Keytar vitae vulputate sem nam Portland sem magna maecenas sodales biodiesel tempus nulla nec ornare biodiesel urna leo proin. Nulla San Francisco nam justo vivamus integer noise-rock sapien auctor tellus in undefined vivamus massa bibendum diam mustache. Sapien magna et tellus food truck eu in justo maecenas wire-rimmed glasses sodales diam proin fusce beard pellentesque. Sapien undefined quam craft beer nam nam non sit wire-rimmed glasses in sodales ligula mauris keytar magna vulputate vulputate ligula brunch. Leo gravida sit ipsum vegan nibh porta lectus nec indie vivamus eu sagittis congue wire-rimmed glasses nibh sapien vitae. Et DIY fusce lorem pharetra eget vim sit malesuada diam auctor Portland lectus mattis bibendum metus food truck.
