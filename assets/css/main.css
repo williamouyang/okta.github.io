@@ -67,6 +67,31 @@ footer {
   width: 1080px !important;
 }
 
+/* -- the new pages use this container */
+#main-container.boundary {
+  border: 1px solid #d7d7d7;
+  border-top: none;
+  background: #fff;
+  margin-top: 40px;
+}
+
+.block {
+  padding: 2em;
+}
+
+.title-block {
+  background: #3d75b3;
+  padding-top: 4em;
+  padding-bottom: 4em;
+  color: #fff;
+}
+
+.title-block h1 {
+  color: #fff;
+  text-align: center;
+  font-weight: 700;
+}
+
 .left-sidebar {
   width: 28.8%;
   padding-top: 35px;
