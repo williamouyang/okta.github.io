@@ -1,7 +1,6 @@
 ---
-layout: docs
+layout: docs_index
 title: API Documentation
-description: "Okta developers"
 ---
 
 
@@ -13,6 +12,12 @@ This is the starting point for documentation on the Okta API. If you are new, ta
 Contents
 --------
 
+
+
+
+
+
+<!--
 ### Getting Started
 * [Getting an API Token](getting_started/getting_a_token.html)
 * [Design Principles](getting_started/design_principles.html)
@@ -27,3 +32,4 @@ Contents
 
 ### Examples
 * [Retrieving a Session Cookie](examples/session_cookie.md)
+-->

@@ -1,5 +1,5 @@
 ---
-layout: docs
+layout: docs_page
 title: Design Principles
 ---
 

@@ -1,0 +1,30 @@
+{% include header.html css_file='docs.css' %}
+
+
+
+<div class="boundary docs docs-index" id="main-container">
+
+  {{ content }}
+
+
+  {% for nav in site.data.docs %}
+  <h2>{{ nav.title }}</h2>
+  <ul>
+    {% for item in nav.pages %}
+      {% for page in site.pages %}
+        {% if page.layout == 'docs_page' %}
+          {% assign name = page.path | replace: '.md', '' | split: '/' | last | downcase %}
+          {% if name == item %}
+            <li data-name="{{ page.title }}"><a href="/docs/{{ nav.section }}/{{ item }}.html">{{ page.title }}</a>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  </ul>
+  {% endfor %}
+
+</div>
+
+
+
+{% include footer.html %} 
