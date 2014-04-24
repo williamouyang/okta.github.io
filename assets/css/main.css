@@ -6,10 +6,6 @@ html, body {
   font-family: "proxima-nova", sans-serif;
 }
 
-body {
-  padding-top: 50px; /* body padding for fixed top nav */
-}
-
 body p {
   color: #555;
   font-size: 18px;
@@ -32,18 +28,6 @@ ul li {
   margin-bottom: 5px;
 }
 
-footer {
-  margin: 50px 0;
-}
-
-.logo-dev {
-  margin-left: 30px;
-  top: 50px;
-  position: absolute;
-  color: #504f50;
-  font-size: 16px;
-}
-
 .white { color: #fff; }
 .black { color: #504f50; }
 .black:hover {
@@ -51,9 +35,35 @@ footer {
   background-color: transparent !important;
 }
 
+.fixed {
+  position: fixed;
+}
+
+.nopadding {
+ padding: 0 !important;
+ margin: 0 !important;
+}
+
+.mrg-right-15 { margin-right:   15px; }
+.mrg-right-30 { margin-right:   30px; }
+.mrg-bot-20   { margin-bottom:  20px; }
+.mrg-bot-30   { margin-bottom:  30px; }
+.mrg-top-20   { margin-top:     25px; }
+.mrg-top-50   { margin-top:     50px; }
+.mrg-top-60   { margin-top:     60px; }
+
+.neg-mrg {
+  margin-top: -10px;
+  margin-right: 9px;
+}
+
 
 
 /* --------------------------  BASE LAYOUT */
+
+.body-features {
+  background-color: #eaeaea;
+}
 
 .container {
   width: 1296px;
@@ -64,15 +74,32 @@ footer {
 
 #main-container {
   margin: 0 auto;
+  margin-top: 90px;
   width: 1080px !important;
 }
 
-/* -- the new pages use this container */
+.white-bg {
+  background-color: #fff;
+  padding: 65px 45px 150px 50px;
+  width: 71.2%;
+}
+
+.white-bg li {
+  margin-bottom: 10px !important;
+  padding-left: 5px !important;
+}
+
+.features-border {
+  border:1px solid #d7d7d7;
+  margin-bottom: 20px;
+}
+
+
+/* -- NEW LAYOUT CLASSES APR 2014 */
 #main-container.boundary {
   border: 1px solid #d7d7d7;
   border-top: none;
   background: #fff;
-  margin-top: 40px;
 }
 
 .block {
@@ -92,114 +119,17 @@ footer {
   font-weight: 700;
 }
 
-.left-sidebar {
-  width: 28.8%;
-  padding-top: 35px;
-}
-
-.left-sidebar h2 {
-  cursor: pointer;
-}
-
-.left-sidebar h2:hover {
-  color: #428bca;
-}
-
-.left-sidebar ul {
-  list-style: none;
-  /*margin-left: 50px;*/
-}
-
-.left-sidebar ul li {
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.left-sidebar ul.closed{
-  display: none;
-}
-
-.bs-footer {
-  height: 75px;
-}
-
-#sidebar {
-  width: 310px !important;
-  margin-left: -16px;
-}
-
-#sidebar a:hover {
-  text-decoration: none;
-}
-
-#sidebar .active a {
-  color: #fff !important;
-}
-
-.fixed {
-  position: fixed;
-}
-
-.input-lg {
-  height: 46px;
-  padding: 10px 40px;
-  font-size: 18px;
-  line-height: 1.33;
-  border-radius: 6px;
-}
-
-.valprop-title {
-  color: #fff;
-  letter-spacing: 1px;
-  font-size: 31px;
-  font-weight: bold;
-  line-height: 1.35;
-  margin-top: 55px;
-}
-
-.valprop-home {
-  height: 476px;
-  border-bottom: none;
-  background: url(/assets/img/home-bg.png);
-  margin-top: 40px;
-  margin-bottom: 90px
-}
-
-.valprop-features {
-  background: #fff;
-  height: 225px;
-  position: relative;
-  background: url(/assets/img/home-bg.png);
-  margin-top: 28px;
-}
-
-.valprop-features p {
-  color: #fff;
-}
-
-.white-bg {
-  background-color: #fff;
-  padding: 65px 45px 150px 50px;
-  width: 71.2%;
-}
-
-.white-bg li {
-  margin-bottom: 10px !important;
-  padding-left: 5px !important;
-}
-
-.body-features {
-  background-color: #eaeaea;
-}
-
-.features-border {
-  border:1px solid #d7d7d7;
-  margin-bottom: 20px;
-}
-
 
 
 /* -------------------------- HEADER */
+
+.logo-dev {
+  margin-left: 30px;
+  top: 50px;
+  position: absolute;
+  color: #504f50;
+  font-size: 16px;
+}
 
 .navbar {
   padding-top: 20px;
@@ -262,7 +192,6 @@ footer {
   float: left;
 }
 
-/* Undo the collapsing navbar */
 .navbar-collapse {
   display: block !important;
   height: auto !important;
@@ -278,7 +207,6 @@ footer {
   margin-left: -15px;
 }
 
-/* Always apply the floated nav */
 .navbar-nav {
   float: left;
   margin: 0;
@@ -293,7 +221,6 @@ footer {
   margin-top: 5px;
 }
 
-/* Redeclare since we override the float above */
 .navbar-nav.navbar-right {
   float: right;
 }
@@ -305,9 +232,61 @@ footer {
 }
 
 
+
+/* -------------------------- FOOTER */
+
+footer {
+  margin: 50px 0;
+}
+
+.bs-footer {
+  height: 75px;
+}
+
+
+
 /* -------------------------- HOME & FEATURES */
 
-/* Custom container */
+.left-sidebar {
+  width: 28.8%;
+  padding-top: 35px;
+}
+.left-sidebar ul {
+  list-style: none;
+}
+.left-sidebar ul li {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+
+.valprop-home {
+  height: 476px;
+  border-bottom: none;
+  background: url(/assets/img/home-bg.png);
+  margin-top: 40px;
+  margin-bottom: 90px
+}
+.valprop-title {
+  color: #fff;
+  letter-spacing: 1px;
+  font-size: 31px;
+  font-weight: bold;
+  line-height: 1.35;
+  margin-top: 55px;
+}
+.valprop-features {
+  background: #fff;
+  height: 225px;
+  position: relative;
+  background: url(/assets/img/home-bg.png);
+  margin-top: 28px;
+}
+.valprop-features p {
+  color: #fff;
+}
+
+
 .container-narrow {
   margin: 0 auto;
   width: 990px !important;
@@ -315,11 +294,10 @@ footer {
 .container-narrow > hr {
   margin: 30px 0;
 }
-
 .container-valprop {
   width: 100%;
-  /*margin-bottom: 30px;*/
 }
+
 
 .home-featured-title {
  line-height: 1.35;
@@ -347,7 +325,6 @@ footer {
 }
 
 .features-page {
-  /*margin-top: 75px;*/
   background-color: #e1eff6;
 }
 
@@ -658,9 +635,7 @@ div#sticker {
 }
 
 
-
-/* -------------------------- FINDER WINDOW */
-
+/* -- terminal window */
 #window {
   margin-top:40px;
   margin-bottom:40px;
@@ -671,7 +646,6 @@ div#sticker {
   overflow: hidden;
   height: 280px;
 }
-
 #toolbar {
   width: 100%;
   height: 40px;
@@ -680,20 +654,16 @@ div#sticker {
   margin: 0 auto;
   background: #cfcfcf;
 }
-
 #toolbar .top {
   float: left;
   width: 100%;
   height: 23px;
 }
-
 #toolbar .bottom {
   float: left;
   width: 100%;
   height: 30px;
 }
-
-/* -- traffic lights */
 #toolbar #lights {
   float: left;
   position: relative;
@@ -707,16 +677,15 @@ div#sticker {
   border-radius:14px;
   overflow: hidden;
 }
-
 .red {
- background: #ff5c30; /* Old browsers */
+ background: #ff5c30;
 }
 .yellow {
-  background: #fae325; /* Old browsers */
+  background: #fae325;
   margin:0px 7px;
 }
 .green {
-  background: #3b9e06; /* Old browsers */
+  background: #3b9e06;
 }
 
 
@@ -780,180 +749,6 @@ div#sticker {
   font-size: 18px;
 }
 
-/* -- DOCS -- */
-
-
-/* Code highlighter */
-/*
-
-pre {
-  background-color: #5d5d5d;
-  color: #c6ebff;
-  border-radius: 0;
-}
-
-pre .s2 {
-  color: #c6ebff;
-}
-
-.sh {
-  color:#FDFCA6;
-}
-
-pre .nt {
-  color: #fdfca7;
-}
-
-table {
-  margin-bottom: 30px;
-  word-break: break-word;
-}
-
-table thead tr th {
-  background-color: #f9f9f9;
-}
-
-table th, table td {
-  border: 1px solid #ddd;
-  padding: 6px 8px;
-  word-break: normal;
-  font-size: 11px;
-}
-
-table tr:nth-child(2n) {
-  background-color: #f8f8f8;
-}
-
-table tr {
-  border-top: 1px solid #ccc;
-  background-color: #fff;
-
-}
-
-tr em {
-  padding: 0px;
-  border-radius:5px;
-  background-color: transparent;
-  display: inline;
-}
-
-
-p em {
-  display: inline-block;
-}
-
-em {
-  background-color: #feffe7;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius:5px;
-  display: block;
-  margin: 10px 0px 10px 0px;
-  font-style: normal;
-}
-
-code {
-  background-color: #f9f9f9;
-  color:#555;
-  border-radius:5px;
-}
-
-p {
-  margin-bottom: 15px;
-  margin-top: 20px;
-}
-
-.sub_header_arrow {
-  width: 0;
-  height: 0;
-  display: block;
-  position: absolute;
-  top: 8px;
-  left: 30px;
-  border-top: 4px solid transparent;
-  border-left: 4px solid #1a74ba;
-  border-bottom: 4px solid transparent;
-  cursor: pointer
-}
-
-.docs-page {
-  margin-top: 75px;
-  background-color: #e1eff6;
-}
-
-.docs-page h1 {
-  font-size: 28px;
-  margin-bottom: 20px;
-  margin-top: 50px;
-}
-
-.docs-page h2 {
-  font-size: 24px;
-  margin-top: 30px;
-  margin-bottom: 10px;
-}
-
-.docs-page h3 {
-  font-size: 20px;
-}
-
-.docs-page h4 {
-  font-size: 18px;
-}
-
-.docs-page h5 {
-  font-size: 16px;
-}
-
-.docs-page h4, h5, h6 {
-  margin-top: 30px;
-  margin-bottom: 10px;
-}
-
-.docs-page p {
-  font-size: 15px;
-}
-
-.docs-page table {
-  width: 100%;
-}
-
-.docs-page th, .docs-page td {
-  font-size: 12px;
-}
-
-.docs-page .white-bg {
-  padding-top: 40px;
-  width: 75%;
-}
-
-.docs-page .white-bg ul {
-  display: none;
-}
-
-.docs-page .left-sidebar {
-  width: 25%;
-}
-
-
-
-.page_block_name {
-  color: #0069aa;
-  font-size: 18px;
-  margin-left: 30px;
-  font-weight: 700;
-  margin-top: 10px;
-  margin-bottom: 14px;
-  display: inline-block;
-
-}
-
-.block-title {
-  font-size: 30px;
-  margin-bottom: 45px !important;
-}
-*/
-
 
 
 /* -------------------------- GET STARTED/DEV PLUS */
@@ -995,23 +790,24 @@ p {
   padding: 10px 15px !important;
 }
 
+.input-lg {
+  height: 46px;
+  padding: 10px 40px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 6px;
+}
+
 .signup-button {
   float: right;
   margin-right: 36px;
   padding: 12px 25px !important;
   width: 150px;
 }
-.left-sidebar h2:focus {
-  outline: 0;
-}
 
 
 
-/* -------------------------- 404 PAGE */
-
-.error-404 {
-  font-size: 8em;
-}
+/* -------------------------- BUTTONS */
 
 .button {
   font-family: "proxima-nova", sans-serif;
@@ -1120,24 +916,6 @@ p {
 
 .button-padding {
   padding: 15px 50px 15px 50px !important;
-}
-
-.nopadding {
- padding: 0 !important;
- margin: 0 !important;
-}
-
-.mrg-right-15 { margin-right:   15px; }
-.mrg-right-30 { margin-right:   30px; }
-.mrg-bot-20   { margin-bottom:  20px; }
-.mrg-bot-30   { margin-bottom:  30px; }
-.mrg-top-20   { margin-top:     25px; }
-.mrg-top-50   { margin-top:     50px; }
-.mrg-top-60   { margin-top:     60px; }
-
-.neg-mrg {
-  margin-top: -10px;
-  margin-right: 9px;
 }
 
 .active {

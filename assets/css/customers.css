@@ -1,5 +1,5 @@
 
-/* -------------------------- CUSTOMER INDEX -- */
+/* -------------------------- CUSTOMER INDEX PAGE -- */
 
 .customer-row {
   margin: 1em 0 3em;
@@ -54,7 +54,38 @@
 
 
 
-/* -------------------------- CUSTOMER STORY -- */
+/* -------------------------- CUSTOMER STORY PAGE -- */
+
+/* -- layout */
+.customer-story-layout {
+  display: table;
+}
+
+.customer-story-body {
+  display: table-cell;
+  padding: 3em;
+}
+
+.customer-story-sidebar {
+  display: table-cell;
+  background: #e1eff6;
+  width: 300px;
+}
+
+
+/* -- body */
+.customer-story-body h2 {
+  margin-top: 2em;
+  font-size: 22px;
+}
+.customer-story-body h2:first-child {
+  margin-top: 0;
+}
+
+.customer-story-diagram {
+  width: 694px;
+  margin-top: 30px;
+}
 
 .customer-story .title-block {
   background-image: url('/assets/img/bg-customer-story.jpg');
@@ -81,37 +112,8 @@
   margin-top: 10px;
 }
 
-.customer-story-layout {
-  display: table;
-}
 
-.customer-story-body {
-  display: table-cell;
-  padding: 3em;
-}
-.customer-story-body h2 {
-  margin-top: 2em;
-  font-size: 22px;
-}
-.customer-story-body h2:first-child {
-  margin-top: 0;
-}
-
-.customer-story-diagram {
-  width: 694px;
-  margin-top: 30px;
-}
-
-.customer-story-sidebar {
-  display: table-cell;
-  background: #e1eff6;
-  width: 300px;
-}
-
-
-
-/* -------------------------- SIDEBAR -- */
-
+/* -- sidebar */
 .customer-story-sidebar blockquote,
 .customer-story-sidebar h2,
 .customer-story-sidebar li,

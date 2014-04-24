@@ -1,0 +1,16 @@
+{% include header.html css_file='docs.css' %}
+
+
+
+<div class="boundary docs docs-page" id="main-container">
+    <div class="docs-page-sidebar" id="docs-page-sidebar">
+      {% include sidebar.html %}
+    </div>
+    <div class="docs-page-body" id="docs-page-body">
+      {{ content }}
+    </div>
+</div>
+
+
+
+{% include footer.html %} 
