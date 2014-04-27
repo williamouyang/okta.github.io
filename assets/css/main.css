@@ -75,7 +75,7 @@ ul li {
 #main-container {
   margin: 0 auto;
   margin-top: 90px;
-  width: 1080px !important;
+  width: 1080px;
 }
 
 .white-bg {
