@@ -5,11 +5,8 @@
 <div class="container-non-responsive blog" id="main-container">
   {% for post in site.posts %}
     {% assign author = site.data.authors[post.author] %}
-    <div>
-      <h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
-      {{ author.full_name }}
-    </div>
-    <br>
+    {% capture _post_content %}{{ post.content }}{% endcapture %}
+    {% include blog_post.html post_content=_post_content %}
   {% endfor %}
 </div>
 
