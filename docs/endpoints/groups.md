@@ -3,11 +3,11 @@ layout: docs_page
 title: Groups
 ---
 
-# Groups
 
 ## Overview
 
 The Groups API provides operations to manage your organization groups an their user members.
+
 
 
 ## Group Model
@@ -76,16 +76,16 @@ description | description of the group | String | 0 | 1024 | TRUE | FALSE
 ```json
 {
     "name": "West Coast",
-    "description": "Straight Outta Compton" 
+    "description": "Straight Outta Compton"
 }
 ```
 
-#### ObjectClass: okta:windows_security_principal 
+#### ObjectClass: okta:windows_security_principal
 
 Profile for a group that is imported from Active Directory
 
 Attribute | Description | DataType | Nullable  | Readonly
---- | --- | ---	| --- | --- | --- 
+--- | --- | ---	| --- | --- | ---
 name | name of the windows group | String | FALSE | TRUE
 description | description of the windows group | String | FALSE | TRUE
 samAccountName | pre-windows 2000 name of the windows group | String | FALSE | TRUE
@@ -148,9 +148,9 @@ curl -v -H "Authorization:SSWS yourtoken" \
 '{
   "profile": {
     "name": "West Coast",
-    "description": "Straight Outta Compton" 
+    "description": "Straight Outta Compton"
   }
-}' 
+}'
 ```
 
 ##### Response
@@ -163,7 +163,7 @@ curl -v -H "Authorization:SSWS yourtoken" \
     ],
     "profile": {
         "name": "West Coast",
-        "description": "Straight Outta Compton" 
+        "description": "Straight Outta Compton"
     },
     "_links": {
         "logo": [
@@ -222,7 +222,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     ],
     "profile": {
         "name": "West Coast",
-        "description": "Straight Outta Compton" 
+        "description": "Straight Outta Compton"
     },
     "_links": {
         "logo": [
@@ -299,7 +299,7 @@ Link: <https://your-domain.okta.com/api/v1/groups?after=00ud4tVDDXYVKPXKVLCO&lim
 	    ],
 	    "profile": {
 	        "name": "West Coast",
-	        "description": "Straight Outta Compton" 
+	        "description": "Straight Outta Compton"
 	    },
 	    "_links": {
 	        "logo": [
@@ -329,7 +329,7 @@ Link: <https://your-domain.okta.com/api/v1/groups?after=00ud4tVDDXYVKPXKVLCO&lim
 	    ],
 	    "profile": {
 	        "name": "East Coast",
-	        "description": "Illmatic" 
+	        "description": "Illmatic"
 	    },
 	    "_links": {
 	        "logo": [
@@ -355,7 +355,7 @@ Link: <https://your-domain.okta.com/api/v1/groups?after=00ud4tVDDXYVKPXKVLCO&lim
 ]
 ```
 
-#### Search Groups 
+#### Search Groups
 
 Searches for groups by `name` in your organization.
 
@@ -382,7 +382,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 	    ],
 	    "profile": {
 	        "name": "West Coast",
-	        "description": "Straight Outta Compton" 
+	        "description": "Straight Outta Compton"
 	    },
 	    "_links": {
 	        "logo": [
@@ -455,7 +455,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     ],
     "profile": {
         "name": "Ameliorate Name",
-        "description": "Amended description" 
+        "description": "Amended description"
     },
     "_links": {
         "logo": [
@@ -688,7 +688,7 @@ curl -v -H "Authorization:SSWS yourtoken" \
 HTTP/1.1 204 No Content
 ```
 
-## Related Resources    
+## Related Resources
 
 ### List Assigned Applications
 
@@ -838,5 +838,3 @@ Link: <https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/apps?afte
     }
 ]
 ```
-    
-

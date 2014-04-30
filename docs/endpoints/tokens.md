@@ -3,9 +3,10 @@ layout: docs_page
 title: Tokens
 ---
 
-# Token endpoints
+
 
 *Note:  This API is __deprecated__. Please see [Getting an API Token](/docs/getting_started/getting_a_token.md)*
+
 
 ## Create tokens
 
@@ -33,6 +34,8 @@ Response
   "token": "00F-MBcxD2SC8tzXDCDZm2a04qtXLcFqtlrrPu6eVtxRs"
 }
 ```
+
+
 ## Revoke tokens
 
 #### DELETE /tokens

@@ -1,6 +1,6 @@
 name: Okta
-pygments: true
-exclude: [NOTES.txt, README.md]
+highlighter: pygments
+exclude: [Gemfile, Gemfile.lock, NOTES.txt, README.md]
 
 markdown: redcarpet 
 markdown_ext: md

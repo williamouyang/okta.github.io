@@ -7,9 +7,17 @@
 
 
 
-  <script src="/assets/js/jquery.js"></script>
-  <script src="/assets/dist/js/bootstrap.min.js"></script>
-  <script src="/assets/js/jquery-ui-1.10.3.custom.js"></script>
+  <!-- <script src="/assets/js/jquery.js"></script> -->
+  <!-- <script src="/assets/dist/js/bootstrap.min.js"></script> -->
+  <!-- <script src="/assets/js/jquery-ui-1.10.3.custom.js"></script> -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="/assets/js/jquery.scrollTo.min.js"></script>
+  <script src="/assets/js/jquery.localScroll.min.js"></script>
   <script src="/assets/js/function.js"></script>
+
+  {% if include.js_file %}
+    <script src="/assets/js/{{ include.js_file }}"></script>
+  {% endif %}
+
 
 </html>

@@ -1,5 +1,9 @@
 
-/* -------------------------- CUSTOMER INDEX PAGE -- */
+/* -------------------------- CUSTOMER INDEX PAGE */
+
+.customers-index .title-block {
+  text-align: center;
+}
 
 .customer-row {
   margin: 1em 0 3em;
@@ -26,7 +30,7 @@
 
 .customer-card p {
   font-size: 1.1em;
-  max-height: 4em; /* -- 3 lines of text -- */
+  max-height: 4em; /* -- 3 lines of text */
   overflow: hidden;
 }
 
@@ -54,7 +58,7 @@
 
 
 
-/* -------------------------- CUSTOMER STORY PAGE -- */
+/* -------------------------- CUSTOMER STORY PAGE */
 
 /* -- layout */
 .customer-story-layout {
@@ -88,7 +92,7 @@
 }
 
 .customer-story .title-block {
-  background-image: url('/assets/img/bg-customer-story.jpg');
+  //background-image: url('/assets/img/bg-customer-story.jpg');
   position: relative;
   height: 200px;
   padding-top: 3em;
@@ -126,6 +130,8 @@
   padding: 0;
   border: 0 none;
   margin-bottom: 3em;
+  border-left: 3px solid #789;
+  padding-left: 20px;
 }
 .customer-story-sidebar blockquote em {
   color: #888;
