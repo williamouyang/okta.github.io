@@ -1,28 +1,26 @@
 
 /* -------------------------- PRICING PAGE -- */
 
-
-
 .valprop-pricing {
-  background: #fff;
-  height: 400px;
-  position: relative;
-  background: url(/assets/img/home-bg.png);
-  margin-top: 28px;
-  text-align: center;
+	background: #fff;
+	height: 400px;
+	position: relative;
+	background: url(/assets/img/home-bg.png);
+	margin-top: 28px;
+	text-align: center;
 }
 .valprop-pricing p {
-  color: #fff;
+	color: #fff;
 }
 
 .pricing-title {
-  color: #fff;
-  letter-spacing: 1px;
-  font-size: 31px;
-  font-weight: bold;
-  line-height: 1.35;
-  margin-top: 40px;
-  margin-bottom: 14px;
+	color: #fff;
+	letter-spacing: 1px;
+	font-size: 31px;
+	font-weight: bold;
+	line-height: 1.35;
+	margin-top: 40px;
+	margin-bottom: 14px;
 }
 
 .mid-container-pricing {
@@ -38,8 +36,8 @@
 }
 
 .pricing-border {
-  border:1px solid #d7d7d7;
-  margin-bottom: 20px;
+	border:1px solid #d7d7d7;
+	margin-bottom: 20px;
 }
 
 .price-box {
@@ -89,7 +87,7 @@ button {
 	font-size: 24px;
 	left: 30px;
 	bottom: 0;
-  position: absolute;
+	position: absolute;
 }
 
 .left-btn {
@@ -107,8 +105,8 @@ button {
 	text-align: center;
 	height: 280px;
 	position: relative;
-  display: block;
-  margin: 0 auto;
+	display: block;
+	margin: 0 auto;
 }
 
 .features {
