@@ -3,7 +3,7 @@ layout: docs_page
 title: Apps
 ---
 
-# Apps
+
 
 ## Overview
 
@@ -12,6 +12,8 @@ The Application API provides operations to manage applications and/or assignment
 __This API is currently in `Beta` status and documentation is *draft* quality.  There may be small inconsistencies with actual API.__
 
 *Note: This API currently only supports applications without user-management features enabled at this time*
+
+
 
 ## Application Model
 
@@ -104,6 +106,7 @@ _links | discoverable resources related to the app | [JSON HAL](http://tools.iet
 
 > `id`, `created`, `lastUpdated`, `status`, and `_links` are only available after an app is created
 
+
 #### App Names & Settings
 
 The Okta Application Network (OAN) defines the catalog of applications that can be added to your Okta organization.  Each application has a unique name (key) and schema that defines the required and optional settings for the application.  When adding an application, the unique app name must be specified in the request as well as any required settings.
@@ -124,11 +127,12 @@ The current workaround is to manually configure the desired application via the 
 
 > As previously stated, this endpoint currently doesn't support creating or managing apps with user management features
 
+
 #### Features
 
 Applications may support optional features. Most apps only support sign-on and do not allow additional features.  *Note:  At this time additional features may not be configured via the API*
 
-The list of possible features an app may support are:  
+The list of possible features an app may support are:
 
 * PUSH_NEW_USERS
 * PUSH_USER_DEACTIVATION
@@ -141,11 +145,12 @@ The list of possible features an app may support are:
 
 This setting modifies the same settings as the `User Management` tab when editing an application in your Okta Administration app.
 
+
 #### SignOn Modes
 
 Applications support a limited set of sign-on modes that specify how a user is authenticated to the app.
 
-The list of possible modes an app may support are:  
+The list of possible modes an app may support are:
 
 Mode | Description
 --- | ---
@@ -157,6 +162,7 @@ SAML_2_0 | Federated Authentication with SAML 2.0 WebSSO
 WS_FEDERATION | Federated Authentication with WS-Federation Passive Requestor Profile
 
 This setting modifies the same settings as the `Sign On` tab when editing an application in your Okta Administration app.
+
 
 ### Accessibility Object
 
@@ -173,15 +179,16 @@ errorRedirectUrl | Custom error page for this application | String | | | TRUE | 
         "selfService": false,
         "errorRedirectUrl": null
     }
-}    
+}
 ```
+
 
 ### Visibility Object
 
 Specifies visibility settings for the application.
 
 Attribute | Description | DataType | MinLength | MaxLength | Nullable | Default
---- | --- | ---	| --- | --- | --- | --- 
+--- | --- | ---	| --- | --- | --- | ---
 autoSubmitToolbar | Automatically log in when user lands on login page | Boolean | | | FALSE | FALSE
 hide | Hides this app for specific end-user apps | [Hide Object](#hide-object) | | | FALSE |
 appLinks | Displays specific appLinks for the app | [AppLinks Object](#applinks-object) | | | FALSE |
@@ -217,7 +224,7 @@ Each application defines 1 or more appLinks that can be published. AppLinks can 
 Specifies app credentials and vaulting for the application.
 
 Attribute | Description | DataType | MinLength | MaxLength | Nullable | Default
---- | --- | ---	| --- | --- | --- | --- 
+--- | --- | ---	| --- | --- | --- | ---
 scheme | Determines how credentials are managed for the ```signOnMode``` | [Authentication Scheme](#authentication-schemes) | | TRUE | NULL
 userNameTemplate | Default username that is generated when an application is assigned to a user | [UserName Template Object](#username-template-object) | | TRUE | *Okta UserName*
 userName | Shared username for app | String | 1 | 100 | TRUE | NULL
@@ -234,7 +241,7 @@ password | Shared password for app | [Password Object](#password-object) | | | T
         "userName": "test",
         "password": {}
     }
-}   
+}
 ```
 
 #### Authentication Schemes
@@ -255,7 +262,7 @@ EDIT_PASSWORD_ONLY	| Administrator sets username, user sets password | | | Admin
 Specifies the template used to generate a user's username when the application is assigned via a group or directly to a user
 
 Attribute | Description | DataType | MinLength | MaxLength | Nullable | Default
---- | --- | ---	| --- | --- | --- | --- 
+--- | --- | ---	| --- | --- | --- | ---
 template | mapping expression for username | String | | 1024 | TRUE | `${source.login}`
 type | type of mapping expression | Enum: `NONE`,  `BUILT_IN`, or `CUSTOM` | | | FALSE | BUILT_IN
 userSuffix | suffix for built-in mapping expressions | String | | | TRUE | NULL
@@ -268,7 +275,7 @@ userSuffix | suffix for built-in mapping expressions | String | | | TRUE | NULL
         "template": "${source.login}",
         "type": "BUILT_IN"
     }
-}    
+}
 ```
 
 ##### Built-In Expressions
@@ -350,7 +357,7 @@ _links | discoverable resources related to the app user | [JSON HAL](http://tool
 Specifies a user's credentials for the application.  The [Authentication Scheme](#authentication-schemes) of the app determines whether a userName or password can be assigned to a user.
 
 Attribute | Description | DataType | MinLength | MaxLength | Nullable | Default
---- | --- | ---	| --- | --- | --- | --- 
+--- | --- | ---	| --- | --- | --- | ---
 userName | username for app | String | 1 | 100 | TRUE | NULL
 password | password for app | [Password Object](#password-object) | | | TRUE | NULL
 
@@ -360,7 +367,7 @@ password | password for app | [Password Object](#password-object) | | | TRUE | N
         "userName": "test",
         "password": {}
     }
-}    
+}
 ```
 
 *Note: The [UserName Template Object](#username-template-object) defines the default username generated when a user is assigned to an application.*
@@ -382,7 +389,7 @@ If you attempt to assign a username or password to an application with an incomp
 ```
 
 ## Application Group Model
-    
+
 ### Example
 
 ```json
@@ -686,7 +693,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "deactivate": {
             "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
         }
-    }    
+    }
 }
 ```
 
@@ -1084,7 +1091,7 @@ after | Specifies the pagination cursor for the next page of apps | Query | Stri
 The following filters are supported with the filter query parameter:
 
 Filter | Description
---- | --- 
+--- | ---
 `status eq "ACTIVE"` | Apps that have a `status` of `ACTIVE`
 `status eq "INACTIVE"` | Apps that have a `status` of `INACTIVE`
 `user.id eq ":uid"` | Apps assigned to a specific user such as `00ucw2RPGIUNTDQOYPOF`
@@ -2148,7 +2155,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ]
 ```
 
-### Update Credentials for Application 
+### Update Credentials for Application
 
 Updates a user's credentials for an application
 
@@ -2243,7 +2250,7 @@ An empty JSON object `{}`
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X DELETE "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users/00ud4tVDDXYVKPXKVLCO" 
+-X DELETE "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users/00ud4tVDDXYVKPXKVLCO"
 ```
 
 ##### Response

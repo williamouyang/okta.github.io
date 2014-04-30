@@ -3,16 +3,13 @@ layout: docs_page
 title: Error Codes
 ---
 
-# Error Codes
 
 This document provides further information about the errors that the Okta API returns. The first table is listed by error code, and the second table is listed by HTTP return code.
 
 
 
-<a name="EC_by_EC"></a>
-###Okta Error Codes Listed by Error Code
+## Okta Error Codes Listed by Error Code
 
-[View by HTTP return code](#EC_by_RC)
 
 | Error Code | Description |HTTP Return Code|
 | ------------ | ------------- | ------------ |
@@ -81,10 +78,8 @@ This document provides further information about the errors that the Okta API re
 |<a name="E0000064"></a>E0000064|Password is expired and must be changed.|401|
 
 
-<a name="EC_by_RC"></a>
 
-###Okta Error Codes Listed by HTTP Return Code   
-[View by error code](#EC_by_EC)
+## Okta Error Codes Listed by HTTP Return Code   
 
 <table>
 <tr><td><strong>HTTP Return Code</strong></td><td><strong>Error Code</strong></td><td><strong>Description</strong></td></tr>

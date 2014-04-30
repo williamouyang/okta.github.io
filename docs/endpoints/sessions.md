@@ -3,7 +3,7 @@ layout: docs_page
 title: Sessions
 ---
 
-# Sessions
+
 
 ## Overview
 
@@ -17,13 +17,15 @@ Okta utilizes a non-persistent HTTP session cookie to provide access to your Okt
 
 ### One-Time Token
 
-Okta provides a mechanism to validate a user's credentials via the Session API and obtain a one-time token that can be later exchanged for a session cookie using flows detailed [here](/docs/examples/session_cookie.md) for specific deployment scenarios. 
+Okta provides a mechanism to validate a user's credentials via the Session API and obtain a one-time token that can be later exchanged for a session cookie using flows detailed [here](/docs/examples/session_cookie.md) for specific deployment scenarios.
 
 A one-time token may only be used **once** to establish a session for a user.  If the session expires or the user logs out of Okta after using the token, they will not be able to reuse the same one-time token to get a new session cookie.
 
 > One-time tokens are secrets and should be protected at rest as well as during transit. A one-time token for a user is equivalent to having the user's actual credentials
 
 ## Session Model
+
+
 
 ### Example
 
@@ -54,6 +56,8 @@ Field | Description
 cookieToken | One-time token which can be used to obtain a session cookie for your organization by visiting either an application's embed link or a session redirect URL.<br><br>See [retrieving a session cookie by visiting a session redirect link](/docs/examples/session_cookie.md#retrieving-a-session-cookie-by-visiting-a-session-redirect-link) or [retrieving a session cookie by visiting an application embed link](/docs/examples/session_cookie.md#retrieving-a-session-cookie-by-visiting-an-application-embed-link) for more info.
 cookieTokenUrl | URL for a a transparent 1x1 pixel image which contains a one-time token which when visited  sets the session cookie in your browser for your organization.<br><br>See [retrieving a session cookie by visiting a session redirect link](/docs/examples/session_cookie.md#retrieving-a-session-cookie-with-a-hidden-image) for more info.
 
+
+
 ## Session Operations
 
 ### Create Session
@@ -74,7 +78,7 @@ password | password for an `ACTIVE` user | Body | String | TRUE |
 
 The new [Session](#session-model) for the user.
 
-#### Create Session with One-Time Token 
+#### Create Session with One-Time Token
 
 Validates a user's credentials and returns a one-time token that can be used to set a session cookie in the user's browser.
 
@@ -88,7 +92,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -d \
 '{
   "username": "art.vandelay@example.com",
-  "password": "correct horse battery staple" 
+  "password": "correct horse battery staple"
 }'
 ```
 
@@ -96,7 +100,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ```json
 {
-  "id": "000rWcxHV-lQUOzBhLJLYTl0Q", 
+  "id": "000rWcxHV-lQUOzBhLJLYTl0Q",
   "userId": "00uld5QRRGEMJSSQJCUB",
   "mfaActive": false,
   "cookieToken": "00hbM-dbQNhKUtQY2lAl34Y0O9sHicFECHiTg3Ccv4"
@@ -132,7 +136,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -d \
 '{
   "username": "art.vandelay@example.com",
-  "password": "correct horse battery staple" 
+  "password": "correct horse battery staple"
 }'
 ```
 
@@ -140,7 +144,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ```json
 {
-  "id": "000rWcxHV-lQUOzBhLJLYTl0Q", 
+  "id": "000rWcxHV-lQUOzBhLJLYTl0Q",
   "userId": "00uld5QRRGEMJSSQJCUB",
   "mfaActive": false,
   "cookieTokenUrl": "https://your-subdomain.okta.com/login/sessionCookie?token=00hbM-dbQNhKUtQY2lAl34Y0O9sHicFECHiTg3Ccv4"
@@ -191,7 +195,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ```json
 {
-  "id": "000rWcxHV-lQUOzBhLJLYTl0Q", 
+  "id": "000rWcxHV-lQUOzBhLJLYTl0Q",
   "userId": "00uld5QRRGEMJSSQJCUB",
   "mfaActive": false
 }
@@ -209,7 +213,7 @@ Content-Type: application/json
     "errorLink": "E0000005",
     "errorId": "oaeweHTU2w9QlC7ySKNEASqhA",
     "errorCauses": []
-} 
+}
 ```
 
 ### Extend Session
@@ -242,7 +246,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ```json
 {
-  "id": "000rWcxHV-lQUOzBhLJLYTl0Q", 
+  "id": "000rWcxHV-lQUOzBhLJLYTl0Q",
   "userId": "00uld5QRRGEMJSSQJCUB",
   "mfaActive": false
 }
@@ -260,7 +264,7 @@ Content-Type: application/json
     "errorLink": "E0000005",
     "errorId": "oaeweHTU2w9QlC7ySKNEASqhA",
     "errorCauses": []
-} 
+}
 ```
 
 ### Close Session
@@ -306,5 +310,5 @@ Content-Type: application/json
     "errorLink": "E0000005",
     "errorId": "oaeweHTU2w9QlC7ySKNEASqhA",
     "errorCauses": []
-} 
+}
 ```

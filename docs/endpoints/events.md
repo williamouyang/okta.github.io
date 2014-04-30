@@ -3,11 +3,12 @@ layout: docs_page
 title: Events
 ---
 
-# Events
+
 
 ## Overview
 
 The Event API provides read access to your organization's system log. The API is intended to export event data as a batch job from your organization to another system for reporting or analysis.
+
 
 
 ## Event Model
@@ -122,14 +123,14 @@ Action `objectType` identifies the unique action performed.
 
 ##### Application Authentication
 
-ObjectType | Description 
+ObjectType | Description
 --- | ---
 app.auth.sso | Event occurred during single sign on
 app.auth.delegated.outbound | Event occurred during outbound delegated authentication
 
-##### Application User Management 
+##### Application User Management
 
-ObjectType | Description 
+ObjectType | Description
 --- | ---
 app.user_management.push_password_update | Update user's password in application
 app.user_management.push_profile_success | Successfully created or updated user's profile in application
@@ -151,7 +152,7 @@ app.user_management.deprovision_task_complete | Deprovisioning task has been mar
 
 ##### Application Group Management
 
-ObjectType | Description 
+ObjectType | Description
 --- | ---
 app.user_management.user_group_import.upsert_success | Successfully created or updated group from application
 app.user_management.user_group_import.delete_success | Successfully removed imported group that was deleted from application
@@ -174,7 +175,7 @@ app.user_management.grouppush.mapping.and.groups.deleted.rule.deleted | An exist
 
 ##### Delegated Authentication
 
-ObjectType | Description 
+ObjectType | Description
 --- | ---
 app.inbound_del_auth.failure.not_supported" | application doesn't support delauth
 app.inbound_del_auth.failure.instance_not_found | Couldn't find delauth app instance
@@ -182,20 +183,20 @@ app.inbound_del_auth.failure.invalid_request.could_not_parse_credentials | Could
 app.inbound_del_auth.failure.account_not_found | Inbound delauth account not found
 app.inbound_del_auth.failure.invalid_login_credentials | Inbound delauth, invalid login credentials
 app.inbound_del_auth.login_success | Successful delauth login
-   
-##### Rich Client Authentication   
 
-ObjectType | Description 
+##### Rich Client Authentication
+
+ObjectType | Description
 --- | ---
-app.rich_client.instance_not_found | 
+app.rich_client.instance_not_found |
 app.rich_client.account_not_found |
 app.rich_client.multiple_accounts_found |
 app.rich_client.login_failure |
 app.rich_client.login_success |
 
-##### Admin Appplication  
+##### Admin Appplication
 
-ObjectType | Description 
+ObjectType | Description
 --- | ---
 app.admin.sso.no_response |
 app.admin.sso.bad_response |
@@ -203,7 +204,7 @@ app.admin.sso.orgapp.notfound |
 
 ##### Applications
 
-ObjectType | Description 
+ObjectType | Description
 --- | ---
 app.generic.provision.assign_user_to_app | Assign external user to internal Okta user
 app.generic.provision.deactivate_user_from_app | Deactivate external user to internal Okta user
@@ -217,7 +218,7 @@ app.generic.import.user_update | Application has updated an exsiting user
 app.generic.config.app_username_update | User credentials for an application have been updated
 app.generic.config.app_password_update | User credentials for an application have been updated
 app.generic.import.user_delete | Application has deleted user
-app.generic.import.started | 
+app.generic.import.started |
 app.generic.import.complete |
 app.generic.import.user_match.complete |
 app.generic.import.details.add_custom_object |
@@ -236,15 +237,15 @@ app.generic.import.summary.group_membership |
 
 ##### Credential Recovery
 
-ObjectType | Description 
+ObjectType | Description
 --- | ---
-app.generic.reversibility.credentials.recover | 
+app.generic.reversibility.credentials.recover |
 app.generic.reversibility.personal.app.recovery |
 app.generic.reversibility.individual.app.recovery |
 
 ##### Application Instance
 
-ObjectType | Description 
+ObjectType | Description
 --- | ---
 app.app_instance.change |
 app.app_instance.logo_update |
@@ -255,9 +256,9 @@ app.app_instance.config-error |
 
 ##### User Authentication
 
-ObjectType | Description 
+ObjectType | Description
 --- | ---
-core.user_auth.login_failed | 
+core.user_auth.login_failed |
 core.user_auth.login_success |
 core.user_auth.logout_success |
 core.user_auth.account_locked |
@@ -266,7 +267,7 @@ core.user_auth.mfa_bypass_attempted |
 
 ##### User MFA Authentication
 
-ObjectType | Description 
+ObjectType | Description
 --- | ---
 core.user.sms.message_sent.factor |
 core.user.sms.message_sent.verify |
@@ -274,14 +275,14 @@ core.user.sms.message_sent.forgotpw |
 
 ##### User RADIUS Authentication
 
-ObjectType | Description 
+ObjectType | Description
 --- | ---
 core.user_auth.radius.login.succeeded |
 core.user_auth.radius.login.failed |
 
 ##### User Status
 
-ObjectType | Description 
+ObjectType | Description
 --- | ---
 core.user.config.password_update.success |
 core.user.config.password_update.failure |
@@ -293,7 +294,7 @@ core.user.config.user_creation.failure |
 
 ##### User Impersonation
 
-ObjectType | Description 
+ObjectType | Description
 --- | ---
 core.user.impersonation.session.initiated |
 core.user.impersonation.session.ended |
@@ -303,7 +304,7 @@ core.user.impersonation.grant.revoked |
 
 ##### User Administrator Roles
 
-ObjectType | Description 
+ObjectType | Description
 --- | ---
 core.user.admin_privilege.granted |
 core.user.admin_privilege.revoked |
@@ -395,7 +396,7 @@ ipAddress | IP Address of client | String | TRUE
     "ipAddress": "127.0.0.1",
     "objectType": "Client"
 }
-```        
+```
 
 ## List Events
 
@@ -421,7 +422,7 @@ after | Specifies the pagination cursor for the next page of events | Query | St
 The following expressions are supported for events with the `filter` query parameter:
 
 Filter | Description
------- | ----------- 
+------ | -----------
 `action.objectType eq ":actionType"` | Events that have a specific [action objectType](#action-objectypes)
 `target.objectType eq ":objectType"` | Events published with a specific [target objectType](#actortarget-objecttypes)
 `target.id eq ":id"` | Events published with a specific target id
@@ -438,15 +439,15 @@ See [Filtering](../getting_started/design_principles.md#filtering) for more info
 Events published after 06/01/2013
 
     filter=published gt "2013-06-01T00:00:00.000Z"
-    
-Events published for a target user 
+
+Events published for a target user
 
     filter=target.id eq "00uxc78lMKUMVIHLTAXY"
-    
+
 Failed login events published after 06/01/2013
 
-    filter=published gt "2013-06-01T00:00:00.000Z" and action.objectType eq "core.user_auth.login_failed" 
-    
+    filter=published gt "2013-06-01T00:00:00.000Z" and action.objectType eq "core.user_auth.login_failed"
+
 Events published after 06/01/2013 for a target user and application
 
     filter=published gt "2013-06-01T00:00:00.000Z" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
