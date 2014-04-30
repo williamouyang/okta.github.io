@@ -3,7 +3,7 @@ layout: docs_page
 title: Users
 ---
 
-# Users
+
 
 ## Overview
 
@@ -11,12 +11,14 @@ The User API provides operations for user management.
 
 ## User Model
 
+<!--
 Content Type: application/json
 
 - [Metadata Attributes](#metadata-attributes)
 - [Profile Object](#profile-object)
 - [Credentials Object](#credentials-object)
 - [Links Object](#links-object)
+-->
 
 ### Example
 
