@@ -172,12 +172,13 @@ button {
 	padding-left: 15px !important;
 }
 
-.icon-check-sign {
-	color: #74b340;
-}
-
 .icon-check-sign:before {
-	font-size: 25px !important;
+	font-size: 35px !important;
+	font-family: fontawesome;
+	color: #74b340;
+	content: '\f058';
+	position: relative;
+	top: -8px;
 }
 
 .title-row {
