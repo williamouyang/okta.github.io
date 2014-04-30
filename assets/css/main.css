@@ -246,12 +246,66 @@ ul li {
 
 /* -------------------------- FOOTER */
 
-footer {
-  margin: 50px 0;
+footer.container {
+  margin: 0 auto;
+  padding: 20px 10px;
+  width: 1080px;
+  color: #999;
+  font-weight: 300;
+  font-size: 12px;
 }
 
-.bs-footer {
-  height: 75px;
+.footer-left {
+  padding-top: 6px;
+}
+
+.footer-right {
+  text-align: right;
+  font-size: 12px;
+  position: relative;
+  left: 15px;
+}
+
+footer .social-icons {
+  display: inline-block;
+}
+
+footer .social-icons a {
+  display: inline-block;
+  font-size: 15px;
+  margin: 0 5px;
+  color: #eee;
+  width: 26px;
+  height: 26px;
+  text-align: center;
+  line-height: 1.7em;
+  border-radius: 15px;
+  background: #ccc;
+  -webkit-transition: .1s all ease-in;
+  transition: .1s all ease-in;
+}
+
+footer .social-icons a:hover {
+  background: #aaa;
+  text-decoration: none;
+}
+
+footer .social-icons a:before {
+  font-family: fontawesome;
+  content: '\f097';
+}
+
+footer .social-icons a.youtube:before     { content: '\f167'; }
+footer .social-icons a.facebook:before    { content: '\f082'; }
+footer .social-icons a.twitter:before     { content: '\f099'; }
+footer .social-icons a.rss:before         { content: '\f09e'; }
+footer .social-icons a.linkedin:before    { content: '\f08c'; }
+footer .social-icons a.googleplus:before  { content: '\f0d5'; }
+
+
+/* -- hacks -- */
+#home footer {
+  border-top: 1px dotted #ccc;
 }
 
 
@@ -275,7 +329,7 @@ footer {
   height: 476px;
   border-bottom: none;
   background: url(/assets/img/home-bg.png);
-  margin-top: 40px;
+  margin-top: 90px;
   margin-bottom: 90px
 }
 .valprop-title {
@@ -309,6 +363,14 @@ footer {
   width: 100%;
 }
 
+#benefits-grid {
+  margin-bottom: 10px;
+}
+
+#benefits-grid .featured-row {
+  position: relative;
+  left: 30px;
+}
 
 .home-featured-title {
  line-height: 1.35;
@@ -570,7 +632,7 @@ footer {
 }
 
 .terminal-os-x {
-  margin-top: 44px;
+  margin-top: 49px;
 }
 
 .lastlogin {
@@ -897,7 +959,6 @@ div#sticker {
   background-image: -o-linear-gradient(top, #ffffff 40%, #eeeeee 90%);
   background-image: linear-gradient(top, #ffffff 40%, #eeeeee 90%);
   filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFFFFFFF', endColorstr='#FFEEEEEE');
-  behavior: url(/_js/PIE.htc);
   text-decoration: none !important;
 }
 
@@ -907,9 +968,9 @@ div#sticker {
   font-weight: 300;
   text-shadow: none;
   background-color: #fff;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFFFFFFF', endColorstr='#FFEEEEEE');
-  behavior: url(/_js/PIE.htc);
   text-decoration: none !important;
+  -webkit-transition: .1s all ease-in;
+  transition: .1s all ease-in;
 }
 
 .visit {

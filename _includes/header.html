@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
+
+
 <head>
   <meta charset="utf-8">
   <meta name="description" content="">
@@ -25,7 +28,12 @@
 </head>
 
 
-<body data-scrollspy="scrollspy" data-target="#sidebar" {% if page.url != "/index.html" %} class="body-features" {% endif %}>
+
+<body data-scrollspy="scrollspy"
+      data-target="#sidebar"
+      {% if page.url != "/index.html" %} class="body-features" {% endif %}
+      {% if include.body_id %}id="{{ include.body_id }}"{% endif %}>
+
   <nav class="navbar navbar-fixed-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
@@ -37,7 +45,6 @@
         </button>
         <a class="navbar-brand" href="/index.html"><span class="logo-dev">developers</span></a>
       </div>
-
       <div class="collapse navbar-collapse">
         {% assign path = page.url | split: '/' %}
         <ul class="nav navbar-nav navbar-right">
