@@ -1,8 +1,23 @@
-    <footer class="bs-footer" role="contentinfo">
-      <div class="container">
-        FOOTER HERE
+
+    <footer class="container" role="contentinfo">
+      <div class="row">
+        <div class="col-md-7 footer-left">
+          &copy; {{ site.time | date: "%Y" }} Okta, Inc. All Rights Reserved. Various trademarks held by their respective owners.
+        </div>
+        <div class="col-md-5 footer-right">
+          Follow us:
+          <div class="social-icons">
+            <a class="youtube" href="http://www.youtube.com/user/OktaInc" target="_blank"></a>
+            <a class="facebook" href="http://www.facebook.com/oktaidentity" target="_blank"></a>
+            <a class="twitter" href="https://twitter.com/okta" target="_blank"></a>
+            <a class="rss" href="http://feeds.feedburner.com/OktaBlog" target="_blank"></a>
+            <a class="linkedin" href="http://www.linkedin.com/company/okta-inc." target="_blank"></a>
+            <a class="googleplus" href="https://plus.google.com/u/0/108139509898948278735" target="_blank"></a>
+          </div>
+        </div>
       </div>
     </footer>
+
   </body>
 
 
@@ -18,6 +33,7 @@
   {% if include.js_file %}
     <script src="/assets/js/{{ include.js_file }}"></script>
   {% endif %}
+
 
 
 </html>
