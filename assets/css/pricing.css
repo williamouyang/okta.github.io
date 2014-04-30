@@ -172,6 +172,14 @@ button {
 	padding-left: 15px !important;
 }
 
+.icon-check-sign {
+	color: #74b340;
+}
+
+.icon-check-sign:before {
+	font-size: 25px !important;
+}
+
 .title-row {
 	height: 65px;
 	border: none;
