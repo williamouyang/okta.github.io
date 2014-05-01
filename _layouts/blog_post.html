@@ -1,6 +1,12 @@
-{% include header.html css_file='blog.css' %}
+{% include header.html css_file='blog.css' body_id='blog' %}
 
 
+
+{% comment %}
+  // assigned variables will "leak" into the included file
+  // we must capture the content however otherwise {{ content }} 
+  // will leak as a raw string
+{% endcomment %}
 
 {% assign author = site.data.authors[page.author] %}
 {% assign post = page %}

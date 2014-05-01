@@ -55,9 +55,9 @@
   margin-bottom: 25px;
 }
 
-#scroll-top {
+#scroll-top-button {
   position: fixed;
-  bottom: 70px;
+  bottom: 91px;
   right: 10%;
   left: 90%;
   width: 140px;
@@ -77,17 +77,17 @@
                       .05s position ease-out;
 }
 
-#scroll-top.on {
+#scroll-top-button.on {
   opacity: 1;
 }
 
-#scroll-top:before {
+#scroll-top-button:before {
   font-family: fontawesome;
   content: '\f0a6';
   margin-right: 10px;
 }
 
-#scroll-top:hover {
+#scroll-top-button:hover {
   text-decoration: none;
   background: #fafafa;
 }
@@ -105,7 +105,7 @@
 /* -------------------------- SIDEBAR */
 
 .docs-sidebar ul {
-  border: 1px solid transparent; /* hack to fix jquery slidetoggle jump */
+  border: 1px solid transparent; /* hack fixes jquery slidetoggle jump */
   margin-left: 20px;
 }
 .docs-sidebar .closed ul {
@@ -179,6 +179,7 @@
 
 .docs-body h3, .docs-body h4, .docs-body h5, .docs-body h6 {
   margin-top: 30px;
+  color: #456;
 }
 
 .docs-body h3 {
@@ -187,7 +188,6 @@
 
 .docs-body h4, .docs-body h5, .docs-body h6 {
   font-size: 16px;
-  color: #456;
 }
 
 .docs-body blockquote {
