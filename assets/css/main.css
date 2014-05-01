@@ -1,5 +1,18 @@
-@import url(http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
+/* -- HERE THERE BE DRAGONS - MAY 2014
+ *
+ * this file has been sectioned off and amended/appended
+ * but side effects of further work are unknown as of may 2014
+ *
+ * in general page specific styles used in this file
+ * should not be applied to ne pages
+ * instead, use the css_file mechanism in page/layout front matter
+ * to introduce specific stylesheets
+ *
+ * -- */
+
+
+@import url(http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
 
 /* -------------------------- GLOBAL STYLES */
@@ -98,34 +111,6 @@ ul li {
 }
 
 
-/* -- NEW LAYOUT CLASSES APR 2014 */
-#main-container.boundary {
-  border: 1px solid #d7d7d7;
-  border-top: none;
-  background: #fff;
-}
-
-.block {
-  padding: 2em;
-}
-
-.title-block {
-  background: #3d75b3;
-  padding-top: 4em;
-  padding-bottom: 4em;
-  color: #fff;
-}
-
-.title-block h1 {
-  color: #fff;
-  font-weight: 700;
-}
-
-.title-block p {
-  color: #fff;
-}
-
-
 
 /* -------------------------- HEADER */
 
@@ -163,7 +148,7 @@ ul li {
 }
 
 .nav > li > a:hover, .nav > li > a:focus {
-  background-color: transparent; !important;
+  background-color: transparent !important;
 }
 
 .navbar-nav.navbar-right {
@@ -245,11 +230,16 @@ ul li {
 
 
 
-/* -------------------------- FOOTER */
+/* -------------------------- FOOTER MAY 2014
+ *
+ * added here instead of end of file for
+ * logical arrangement reasons
+ *
+ * -- */
 
-footer.container {
+footer.main-footer {
   margin: 0 auto;
-  padding: 20px 10px;
+  padding: 25px 10px 40px;
   width: 1080px;
   color: #999;
   font-weight: 300;
@@ -264,7 +254,7 @@ footer.container {
   text-align: right;
   font-size: 12px;
   position: relative;
-  left: 15px;
+  left: 5px;
 }
 
 footer .social-icons {
@@ -304,11 +294,157 @@ footer .social-icons a.linkedin:before    { content: '\f08c'; }
 footer .social-icons a.googleplus:before  { content: '\f0d5'; }
 
 
-/* -- hacks -- */
-#home footer {
+/* -- CUSTOM (LEGACY) FOOTER SHIMS/TREATMENTS MAY 2014
+ *
+ * newer modules contain their custom styles
+ * in their respective stylesheets
+ *
+ * ie. do not add them here
+ *
+ * -- */
+
+#home footer.main-footer {
   border-top: 1px dotted #ccc;
 }
 
+#signup-form footer.main-footer {
+  width: 875px;
+  position: relative;
+  top: -20px;
+}
+
+#signup-form .footer-right {
+  position: relative;
+  left: initial;
+  right: 10px;
+}
+
+
+
+/* -------------------------- BUTTONS, POSSIBLY OTHER STUFF */
+
+.button {
+  font-family: "proxima-nova", sans-serif;
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+  border: 1px solid #3c5a0b;
+  background: #7aa633;
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: middle;
+  zoom: 1;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgi…pZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(40%, #7aa633), color-stop(90%, #65911f));
+  background-image: -webkit-linear-gradient(top, #7aa633 40%, #65911f 90%);
+  background-image: -moz-linear-gradient(top, #7aa633 40%, #65911f 90%);
+  background-image: -o-linear-gradient(top, #7aa633 40%, #65911f 90%);
+  background-image: linear-gradient(top, #7aa633 40%, #65911f 90%);
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFA3D148', endColorstr='#FF7EA72A');
+  border-radius: 2px;
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
+  text-shadow: 0px 1px 1px #6e6e6e;
+  behavior: url(/_js/PIE.htc);
+  text-decoration: none !important;
+}
+
+.button:hover {
+  color: #fff;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgi…3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(40%, rgba(122, 166, 51, 0.75)), color-stop(90%, rgba(101, 145, 31, 0.75)));
+  background-image: -webkit-linear-gradient(top, rgba(122, 166, 51, 0.75) 40%, rgba(101, 145, 31, 0.75) 90%);
+  background-image: -moz-linear-gradient(top, rgba(122, 166, 51, 0.75) 40%, rgba(101, 145, 31, 0.75) 90%);
+  background-image: -o-linear-gradient(top, rgba(122, 166, 51, 0.75) 40%, rgba(101, 145, 31, 0.75) 90%);
+  background-image: linear-gradient(top, rgba(122, 166, 51, 0.75) 40%, rgba(101, 145, 31, 0.75) 90%)
+}
+
+.button-empty {
+  font-family: "proxima-nova", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: middle;
+  zoom: 1;
+  background-color: transparent;
+  border-radius: 2px;
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
+  text-shadow: 0px 1px 1px #6e6e6e;
+  behavior: url(/_js/PIE.htc);
+  text-decoration: none !important;
+  width: 172px;
+  border: 1px solid rgba(255, 255, 255, .7);
+}
+
+.button-empty:hover {
+  background: #3b70ab;
+  color: #fff;
+}
+
+.button-gray {
+  color: #555;
+  border: 1px solid #a0a0a0;
+  font-weight: 100;
+  text-shadow: none;
+  background: #fff;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgi…pZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(40%, #ffffff), color-stop(90%, #eeeeee));
+  background-image: -webkit-linear-gradient(top, #ffffff 40%, #eeeeee 90%);
+  background-image: -moz-linear-gradient(top, #ffffff 40%, #eeeeee 90%);
+  background-image: -o-linear-gradient(top, #ffffff 40%, #eeeeee 90%);
+  background-image: linear-gradient(top, #ffffff 40%, #eeeeee 90%);
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFFFFFFF', endColorstr='#FFEEEEEE');
+  text-decoration: none !important;
+}
+
+.button-white {
+  color: #555;
+  border: 1px solid #d5d5d5;
+  font-weight: 300;
+  text-shadow: none;
+  background-color: #fff;
+  text-decoration: none !important;
+  -webkit-transition: .1s all ease-in;
+  transition: .1s all ease-in;
+}
+
+.visit {
+  width: 150px;
+  padding-top: 7px !important;
+  padding-bottom: 7px !important;
+  margin-top: 7px;
+  border-radius: 2px;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.15);
+  color: #504F50;
+  text-align: center;
+  font-weight: normal;
+}
+.visit:hover { color: #555 !important; }
+
+.button-padding {
+  padding: 15px 50px 15px 50px !important;
+}
+
+.active {
+  background: #0c87c9 !important;
+}
+
+
+
+/* -- LEGACY PAGE STYLES MAY 2014
+ *
+ * this section contains the specific pages styles
+ * for the legacy pages
+ *
+ * refer to dragon warning at top of file, applies here as well
+ *
+ * --*/
 
 
 /* -------------------------- HOME & FEATURES */
@@ -762,7 +898,6 @@ div#sticker {
   background: #3b9e06;
 }
 
-
 /* -- Horrible to do this for firefox */
 @-moz-document url-prefix() {
   .red .glyph {
@@ -773,7 +908,6 @@ div#sticker {
     top: -4px;
     left: 3px;
   }
-
   .green .glyph {
     position: relative;
     top: -4px;
@@ -881,118 +1015,42 @@ div#sticker {
 
 
 
-/* -------------------------- BUTTONS */
+/* -- NEW GLOBAL STYLES MAY 2014
+ *
+ * adding new global styles here at the end of the document
+ * judiciously append new global style sections here
+ *
+ * ~~ dragon free zone ~~
+ * let's keep it that way
+ *
+ * -- */
 
-.button {
-  font-family: "proxima-nova", sans-serif;
-  color: #fff;
-  font-size: 16px;
-  text-align: center;
-  border: 1px solid #3c5a0b;
-  background: #7aa633;
-  display: -moz-inline-stack;
-  display: inline-block;
-  vertical-align: middle;
-  zoom: 1;
-  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgi…pZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
-  background-size: 100%;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(40%, #7aa633), color-stop(90%, #65911f));
-  background-image: -webkit-linear-gradient(top, #7aa633 40%, #65911f 90%);
-  background-image: -moz-linear-gradient(top, #7aa633 40%, #65911f 90%);
-  background-image: -o-linear-gradient(top, #7aa633 40%, #65911f 90%);
-  background-image: linear-gradient(top, #7aa633 40%, #65911f 90%);
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFA3D148', endColorstr='#FF7EA72A');
-  border-radius: 2px;
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
-  text-shadow: 0px 1px 1px #6e6e6e;
-  behavior: url(/_js/PIE.htc);
-  text-decoration: none !important;
-}
+/* -------------------------- NEW LAYOUT CLASSES APR 2014 */
 
-.button:hover {
-  color: #fff;
-  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgi…3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
-  background-size: 100%;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(40%, rgba(122, 166, 51, 0.75)), color-stop(90%, rgba(101, 145, 31, 0.75)));
-  background-image: -webkit-linear-gradient(top, rgba(122, 166, 51, 0.75) 40%, rgba(101, 145, 31, 0.75) 90%);
-  background-image: -moz-linear-gradient(top, rgba(122, 166, 51, 0.75) 40%, rgba(101, 145, 31, 0.75) 90%);
-  background-image: -o-linear-gradient(top, rgba(122, 166, 51, 0.75) 40%, rgba(101, 145, 31, 0.75) 90%);
-  background-image: linear-gradient(top, rgba(122, 166, 51, 0.75) 40%, rgba(101, 145, 31, 0.75) 90%)
-}
-
-.button-empty {
-  font-family: "proxima-nova", sans-serif;
-  font-weight: 100;
-  font-style: normal;
-  color: #fff;
-  font-size: 16px;
-  text-align: center;
-  display: -moz-inline-stack;
-  display: inline-block;
-  vertical-align: middle;
-  zoom: 1;
-  background-color: transparent;
-  border-radius: 2px;
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
-  text-shadow: 0px 1px 1px #6e6e6e;
-  behavior: url(/_js/PIE.htc);
-  text-decoration: none !important;
-  width: 172px;
-  border: 1px solid rgba(255, 255, 255, .7);
-}
-
-.button-empty:hover {
-  background: #3b70ab;
-  color: #fff;
-}
-
-.button-gray {
-  color: #555;
-  border: 1px solid #a0a0a0;
-  font-weight: 100;
-  text-shadow: none;
+#main-container.boundary {
+  border: 1px solid #d7d7d7;
+  border-top: none;
   background: #fff;
-  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgi…pZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
-  background-size: 100%;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(40%, #ffffff), color-stop(90%, #eeeeee));
-  background-image: -webkit-linear-gradient(top, #ffffff 40%, #eeeeee 90%);
-  background-image: -moz-linear-gradient(top, #ffffff 40%, #eeeeee 90%);
-  background-image: -o-linear-gradient(top, #ffffff 40%, #eeeeee 90%);
-  background-image: linear-gradient(top, #ffffff 40%, #eeeeee 90%);
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFFFFFFF', endColorstr='#FFEEEEEE');
-  text-decoration: none !important;
 }
 
-.button-white {
-  color: #555;
-  border: 1px solid #d5d5d5;
-  font-weight: 300;
-  text-shadow: none;
-  background-color: #fff;
-  text-decoration: none !important;
-  -webkit-transition: .1s all ease-in;
-  transition: .1s all ease-in;
+.block {
+  padding: 2em;
 }
 
-.visit {
-  width: 150px;
-  padding-top: 7px !important;
-  padding-bottom: 7px !important;
-  margin-top: 7px;
-  border-radius: 2px;
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.15);
-  color: #504F50;
-  text-align: center;
-  font-weight: normal;
-}
-.visit:hover { color: #555 !important; }
-
-.button-padding {
-  padding: 15px 50px 15px 50px !important;
+.title-block {
+  background: #3d75b3;
+  padding-top: 4em;
+  padding-bottom: 4em;
+  color: #fff;
 }
 
-.active {
-  background: #0c87c9 !important;
+.title-block h1 {
+  color: #fff;
+  font-weight: 700;
+}
+
+.title-block p {
+  color: #fff;
 }
 
 
@@ -1020,7 +1078,10 @@ pre code {
   white-space: pre;
 }
 
-/* -- pygments -- */
+
+
+/* -------------------------- PYGMENTS */
+
 .hll { background-color: #ffffcc; }
 .c { color: #999988; font-style: italic; } /* Comment */
 .err { color: #a61717; background-color: #e3d2d2; } /* Error */
@@ -1094,4 +1155,3 @@ pre code {
 .highlight pre code {
   white-space: pre;
 }
-

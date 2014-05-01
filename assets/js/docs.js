@@ -1,7 +1,6 @@
 $(function() {
 
 
-
   // ------------------------ SIDENAV
 
   $('.docs-sidebar-block > h2').on('click', function() {
@@ -50,11 +49,11 @@ $(function() {
 
 
 
-  // ------------------------ HANDLE SCROLL TO TOP BUTTON
+  // ------------------------ SCROLL TO TOP BUTTON
 
   var scrolled = false,
       $docsBody = $('#docs-body'),
-      $scroller = $('#scroll-top');
+      $scroller = $('#scroll-top-button');
 
 
   // -- poll to display button
@@ -86,7 +85,6 @@ $(function() {
     var pos = $docsBody.width() + $docsBody.offset().left + 100;
     $scroller.css('left', pos);
   }
-
 
 
 });
