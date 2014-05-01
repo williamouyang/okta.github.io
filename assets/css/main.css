@@ -1,4 +1,3 @@
-
 @import url(http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
 
@@ -236,6 +235,7 @@ ul li {
 .navbar-brand {
   margin-left: -15px;
 }
+
 
 .container .navbar-header,
 .container .navbar-collapse {
