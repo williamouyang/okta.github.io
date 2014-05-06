@@ -96,6 +96,7 @@
 
 .docs-page .title-block {
   padding: 1.5em;
+  padding-left: 45px;
   height: 120px;
 }
 
@@ -156,10 +157,6 @@
   font-size: 16px;
 }
 
-.docs-body table {
-  max-width: 98%;
-}
-
 #docs-page-title,
 .docs-body h1 {
   padding-bottom: .5em;
@@ -210,6 +207,8 @@
   margin: 20px auto;
   width: 98%;
   border: 1px dotted #f0f0f0;
+  max-width: 98%;
+  word-break: break-word;
 }
 
 .docs-body tr {
@@ -224,6 +223,7 @@
   font-style: italic;
   font-weight: 500;
   vertical-align: top;
+  word-break: normal;
 }
 
 .docs-body td {
