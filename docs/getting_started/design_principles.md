@@ -1,25 +1,9 @@
 ---
-layout: sdks
-title: Getting Started - Design Principles
-category : Getting Started
-tagline: "Getting Started - Design Principles"
-tags : [getting stated, design principles]
-icon: "glyphicon glyphicon-design"
-position: leftsidebar
-priority: 1
+layout: docs_page
+title: Design Principles
 ---
 
-# Design Principles
 
-- [URL Namespace](#url-namespace)
-- [Media Types](#media-types)
-- [HTTP Verbs](#http-verbs)
-- [Errors](#errors)
-- [Authentication](#authentication)
-- [Pagination](#pagination)
-	- [Link Header](#link-header)
-- [Filtering](#filtering)
-- [Rate Limiting](#rate-limiting)
 
 ## Versioning
 
@@ -38,7 +22,9 @@ The Okta API is a versioned API.  Okta reserves the right to add new parameters,
 - Responses are compatible irrespective of the order in which the properties appear.
 - New properties may be added to future versions of the response.
 - Existing properties cannot be removed from future versions of the response.
-	- Properties with null values may be omitted by responses
+- Properties with null values may be omitted by responses
+
+
 
 ## URL Namespace
 
@@ -48,6 +34,8 @@ The `apiversion` is is currently v1.
 
 > All API requests must use HTTPS scheme
 
+
+
 ## Media Types
 
 The API currently only supports JSON as an exchange format.  Be sure to set both the Content-Type and Accept headers for every request as `application/json`.
@@ -55,7 +43,9 @@ The API currently only supports JSON as an exchange format.  Be sure to set both
 All Date objects are returned in ISO 8601 format:
 
     YYYY-MM-DDTHH:mm:ss.SSSZ
-    
+
+
+
 ## HTTP Verbs
 
 Where possible, the Okta API strives to use appropriate HTTP verbs for each
@@ -77,6 +67,8 @@ DELETE
 : Used for deleting resources.
 
 > Any PUT or POST request with no Content-Length header nor a body will return a 411 error.  To get around this, either include a Content-Length: 0 header
+
+
 
 ## Errors
 
@@ -107,6 +99,8 @@ See [Error Codes](error_codes.md) for a list of API error codes.
 
 > Only the `errorCode` property is supported for runtime error flow control.  The `errorSummary` property is only to intended for troubleshooting and may change over time
 
+
+
 ## Authentication
 
 The Okta API currently requires the custom HTTP authentication scheme `SSWS` for authentication. All requests must have a valid API key specified in the HTTP `Authorization` header with the `SSWS` scheme.
@@ -114,6 +108,8 @@ The Okta API currently requires the custom HTTP authentication scheme `SSWS` for
     Authorization: SSWS 00QCjAl4MlV-WPXM…0HmjFx-vbGua
 
 > See [Obtaining a token](getting_a_token.md) for instructions on how to get an API key for your organization.
+
+
 
 ## Pagination
 
@@ -153,6 +149,8 @@ The possible `rel` values are:
 
 When you first make an API call and get a cursor-paged list of objects, the end of the list will be the point at which you do not receive another `next` link value with the response. The behavior is different in the  *Events* API. In the *Events* API, the next link always exists, since that connotation is more like a cursor or stream of data. The other APIs are primarily fixed data lengths.
 
+
+
 ## Filtering
 
 Filtering allows a requestor to specify a subset of resources to return and is often needed for large collection resources such as Users.  While filtering semantics are standardized in the Okta API, not all resources in the Okta API support filtering. When filtering is supported for a resource, the `filter` URL query parameter contains a filter expression.
@@ -188,14 +186,14 @@ Note: Some resources do not support all operators.
 
 > All `Date` values use the ISO 8601 format `YYYY-MM-DDTHH:mm:ss.SSSZ`
 
-### Attribute Operators 
+### Attribute Operators
 
 Operator | Description | Behavior
 -------- | ----------- | --------
 and | Logical And | The filter is only a match if both expressions evaluate to true.
 or | Logical or | The filter is a match if either expression evaluates to true.
 
-### Logical Operators 
+### Logical Operators
 
 Operator | Description | Behavior
 -------- | ----------- | --------
@@ -203,11 +201,13 @@ Operator | Description | Behavior
 
 Filters must be evaluated using standard order of operations. Attribute operators have the highest precedence, followed by the grouping operator (i.e, parentheses), followed by the logical `AND` operator, followed by the logical `OR` operator.
 
+
+
 ## Hypermedia
 
 Resources in the Okta API use hypermedia for "discoverability".  Hypermedia enables API clients to navigate  resources by following links like a web browser instead of hard-coding URLs in your application.  Links are identified by link relations which are named keys. Link relations describe what resources are available and how they can be interacted with.  Each resource may publish a set of link relationships based on the state of the resource.  For example, the status of a user in the [User API](../resources/users.md#links-object) will govern which lifecycle operations are permitted.  Only the permitted operations will be published a lifecycle operations.
 
-The Okta API had incorporated [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) or HAL format as the foundation for hypermedia "discoverability.  HAL provides a set of conventions for expressing hyperlinks in JSON responses representing two simple concepts: Resources and Links. 
+The Okta API had incorporated [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) or HAL format as the foundation for hypermedia "discoverability.  HAL provides a set of conventions for expressing hyperlinks in JSON responses representing two simple concepts: Resources and Links.
 
 > The HAL-specific media type `application/hal+json` is currently not supported as a formal media type for content negotiation at this time.  Use the standard `application/json` media type.  As we get more experience with the media format we may add support for the media type.
 
@@ -240,9 +240,11 @@ Object whose property names are link relation types (as defined by [RFC5988](htt
 }
 ```
 
+
+
 ## Rate Limiting
 
-The number of API requests per-second for an organization is limited for all APIs based on your edition. 
+The number of API requests per-second for an organization is limited for all APIs based on your edition.
 
 The following three headers are set in each response:
 
