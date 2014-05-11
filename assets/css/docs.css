@@ -38,12 +38,12 @@
 .docs-body {
   padding: 3em;
   padding-top: 1em;
-  margin-left: 320px;
+  margin-left: 292px;
 }
 
 .docs-sidebar {
   background: #e1eff6;
-  width: 320px;
+  width: 292px;
   padding-top: 1em;
   position: absolute;
   left: 0;
@@ -208,7 +208,6 @@
   width: 98%;
   border: 1px dotted #f0f0f0;
   max-width: 98%;
-  word-break: break-word;
 }
 
 .docs-body tr {
