@@ -11,8 +11,6 @@ Okta utilizes a non-persistent HTTP session cookie to provide access to your Okt
 
 Okta sessions are created and managed with the [Session API](/docs/endpoints/sessions.html).
 
-
-
 ## Retrieving a session cookie by visiting a session redirect link
 
 This scenario is ideal for deployment scenarios where you have implemented both a custom login page and custom landing page for your application.  The login page will typically collect the user's credentials via a HTML form submit or POST and the web application will validate the credentials against your Okta organization by calling the [Create Session](/docs/endpoints/sessions.html#create-session-with-one-time-token) API to obtain a one-time token.
@@ -80,7 +78,6 @@ HTTP/1.1 302 Moved Temporarily
 Set-Cookie: sid=000aC_z7AZKTpSqtHFc0Ak6Vg; Path=/
 Location: https://www.example.com/portal/home
 ~~~
-
 
 ## Retrieving a session cookie by visiting an application embed link
 
@@ -190,7 +187,7 @@ Accept: */*
 
 ## Retrieving a session cookie with a hidden image
 
-This flow uses a browser trick to establish a session by setting a cookie when retrieving a transparent 1x1 image with a one-time token.  Your login page will typically collect the user's credentials via a HTML form submit or POST and validate the credentials against your Okta organization by calling the [Create Session](docs/endpoints/sessions.html#create-session-with-embed-image-url) API to obtain a session cookie image URL with a one-time token.
+This flow uses a browser trick to establish a session by setting a cookie when retrieving a transparent 1x1 image with a one-time token.  Your login page will typically collect the user's credentials via a HTML form submit or POST and validate the credentials against your Okta organization by calling the [Create Session](/docs/endpoints/sessions.html#create-session-with-embed-image-url) API to obtain a session cookie image URL with a one-time token.
 
 > This flow is now deprecated as some major browser vendors such as Safari block cookies from 3rd-party sites by default.  Please use an alternative flow as browser vendors are increasingly blocking cookies from 3rd party sites by default
 
