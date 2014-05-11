@@ -13,11 +13,10 @@
   title: Endpoints
   pages:
     - users
-    - apps
-    - events
     - groups
     - sessions
-    - tokens
+    - apps
+    - events
 
 
 
