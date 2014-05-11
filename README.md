@@ -1,9 +1,9 @@
 
 # Okta Developer Site
 
-Okta developer site (developer.okta.com) is a custom Jekyll site deployed on GitHub pages
+Okta developer site (developer.okta.com) is a custom Jekyll site deployed on [GitHub pages](https://pages.github.com/)
 
-All API documenation submissions are welcome. To submit a change, fork this repo, commit your changes, and send us a [pull request](http://help.github.com/send-pull-requests/)
+All API documentation submissions are welcome. To submit a change, fork this repo, commit your changes, and send us a [pull request](http://help.github.com/send-pull-requests/)
 
 
 ## Setup
@@ -25,7 +25,8 @@ Pages are single purpose html or markdown files
 
 1. Create a folder with `index.html` file. (e.g. *pricing/index.html*)
 2. Author front matter as follows:
-```
+
+ ```
 ---
 layout: page
 title: YOUR_TITLE
@@ -41,7 +42,8 @@ css: CSS_FILENAME.css (optional page specific css file)
 1.  Create `PAGE_NAME.md` in `docs/FOLDER_NAME` (e.g. *docs/endpoints/users.md*)
 2.  Filenames are underscore seperated and all lowercase. (e.g. *my_cool_doc_page.md*)
 3.  Author front matter
-```
+
+ ```
 ---
 layout: docs_page
 title: Title Case Name of Page
@@ -55,7 +57,8 @@ title: Title Case Name of Page
     appropriate `pages` section.
 7.  The `pages` name must match the filename without extension. (e.g. `users.md` => `users`)
 8.  To create a new section in the manifest
-```
+
+ ```
 section: NAME_OF_FOLDER
 title: TITLE_CASE_NAME_OF_SECTION
 ```
@@ -67,13 +70,15 @@ title: TITLE_CASE_NAME_OF_SECTION
 
 1.  Create an `index.md` folder in `customers/CUSTOMER_NAME` (e.g. *customers/box/index.md*)
 2.  Create the images:
-```
+
+ ```
 `thumb_image`:   250px x 120px
 `index_image`:   303px x 226px
 `diagram_image`: 694px x <n>px
 ```
 3.  Author front matter
-```
+ 
+ ```
 `index_blurb` will be clipped over three lines of text
 `sidebar_copy` will be markdownified. Newlines sohuld be doubled.
 ```
