@@ -30,7 +30,7 @@ $(function() {
     return $('<li>', {
       html: $('<a>', {
         href: '#' + $header.attr('id'),
-        text: $header.html()
+        text: $header.text()
       })
     });
   }
