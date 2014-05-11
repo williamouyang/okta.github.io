@@ -163,7 +163,6 @@ WS_FEDERATION         | Federated Authentication with WS-Federation Passive Requ
 
 This setting modifies the same settings as the `Sign On` tab when editing an application in your Okta Administration app.
 
-
 ### Accessibility Object
 
 Specifies access settings for the application.
@@ -314,7 +313,7 @@ self               | The actual application
 activate           | [Lifecycle action](#activate-application) to transition application to `ACTIVE` status
 deactivate         | [Lifecycle action](#deactivate-application) to transition application to `INACTIVE` status
 metadata           | Protocol-specific metadata document for the configured `SignOnMode`
-users              |  [User](#application-user-operations) assignments for application
+users              | [User](#application-user-operations) assignments for application
 groups             | [Group](#application-group-operations) assignments for application
 
 ## Application User Model
@@ -529,7 +528,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 #### Add Basic Authentication Application
 {:.api .operation}
 
-Add an new application that uses HTTP Basic Authentication Scheme and requires a browser plugin.
+Adds an new application that uses HTTP Basic Authentication Scheme and requires a browser plugin.
 
 ##### Settings
 {:.api .request-params}
@@ -728,6 +727,7 @@ extraFieldSelector | CSS selector for the extra field in the form          | Str
 extraFieldValue    | Value for extra field form field                      | String   | FALSE    | FALSE  |
 
 ##### Request
+{:.api .request}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -1001,7 +1001,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Get Application
 {:.api .operation}
 
-#### GET /apps/:id
+#### GET /apps/*:id*
 {:.api .uri-template}
 
 Fetches an application from your Okta organization by `id`.
@@ -1486,7 +1486,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Update Application
 {:.api .operation}
 
-#### PUT /apps/:id
+#### PUT /apps/*:id*
 {:.api .uri-template}
 
 Updates an application in your organization.
@@ -1948,7 +1948,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Delete Application
 {:.api .operation}
 
-#### DELETE /apps/:id
+#### DELETE /apps/*:id*
 {:.api .uri-template}
 
 Removes an inactive application.
@@ -2008,7 +2008,7 @@ Content-Type: application/json
 ### Activate Application
 {:.api .operation}
 
-#### POST /apps/:id/lifecycle/activate
+#### POST /apps/*:id*/lifecycle/activate
 {:.api .uri-template}
 
 Activates an inactive application.
@@ -2045,7 +2045,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Deactivate Application
 {:.api .operation}
 
-#### POST /apps/:id/lifecycle/deactivate
+#### POST /apps/*:id*/lifecycle/deactivate
 {:.api .uri-template}
 
 Deactivates an active application.
