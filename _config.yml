@@ -6,7 +6,7 @@ highlighter: pygments
 #exclude: [Gemfile, Gemfile.lock, NOTES.txt, README.md, blog, customers, pricing]
 
 # -- standard exclusions
-exclude: [Gemfile, Gemfile.lock, NOTES.txt, README.md]
+exclude: [Gemfile, Gemfile.lock, README.md]
 
 markdown: kramdown
 markdown_ext: md
