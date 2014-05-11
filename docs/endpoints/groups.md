@@ -110,12 +110,12 @@ externalId | base-64 encoded GUID (objectGUID) of the windows group | String | F
 
 Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the group using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  This object is used for dynamic discovery of related resources and lifecycle operations.  The Links Object is **read-only**.
 
-Relation Name | Description
---- | ---
-self | The primary URL for the group
-logo | Provides links to logo images for the group if available
-users | Provides [group member operations](#group-member-operations) for the group
-apps | Lists all [applications](apps.html#application-model) that are assigned to the group. See [Application Group Operations](apps.html#application-group-operations)
+Link Relation Type | Description
+------------------ | -----------
+self               | The primary URL for the group
+logo               | Provides links to logo images for the group if available
+users              | Provides [group member operations](#group-member-operations) for the group
+apps               | Lists all [applications](apps.html#application-model) that are assigned to the group. See [Application Group Operations](apps.html#application-group-operations)
 
 ## Group Operations
 

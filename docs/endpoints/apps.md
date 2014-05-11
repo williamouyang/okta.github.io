@@ -308,14 +308,14 @@ value | String | | | TRUE | FALSE |
 
 Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the current status of an application using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  This object is used for dynamic discovery of related resources and lifecycle operations.  The Links Object is **read-only**.
 
-Relation Name | Description
---- | ---
-self | The actual application
-activate | [Lifecycle action](#activate-application) to transition application to **ACTIVE** status
-deactivate | [Lifecycle action](#deactivate-application) to transition application to **INACTIVE** status
-metadata | Protocol-specific metadata document for the configured `SignOnMode`
-users |  [User](#application-user-operations) assignments for application
-users | [Group](#application-group-operations) assignments for application
+Link Relation Type | Description
+------------------ | -----------
+self               | The actual application
+activate           | [Lifecycle action](#activate-application) to transition application to **ACTIVE** status
+deactivate         | [Lifecycle action](#deactivate-application) to transition application to **INACTIVE** status
+metadata           | Protocol-specific metadata document for the configured `SignOnMode`
+users              |  [User](#application-user-operations) assignments for application
+groups             | [Group](#application-group-operations) assignments for application
 
 ## Application User Model
 

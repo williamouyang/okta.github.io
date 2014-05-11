@@ -179,16 +179,16 @@ answer    | String   | 1         | 100       | TRUE     | FALSE  |
 
 Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the current status of a user.  The Links Object is used for dynamic discovery of related resources and lifecycle or credential operations.  The Links Object is **read-only**.
 
-Relation Name | Description
---- | ---
-self | The actual user
-activate | [Lifecycle action](#activate-user) to transition user to `ACTIVE` status
-deactivate | [Lifecycle action](#deactivate-user) to transition user to `DEPROVISIONED` status
-resetPassword | [Lifecycle action](#reset-password) to transition user to `RECOVERY` status
-expirePassword | [Lifecycle action](#expire-password) to transition user to `PASSWORD_EXPIRED` status
-unlock | [Lifecycle action](#unlock-user) to returns a user to `ACTIVE` status when their current status is `LOCKED_OUT` due to exceeding failed login attempts
-forgotPassword | [Resets a user's password](#forgot-password) by validating the user's recovery credential.
-changePassword | [Changes a user's password](#change-password) validating the user's current password
+Link Relation Type     | Description
+---------------------- | -----------
+self                   | The actual user
+activate               | [Lifecycle action](#activate-user) to transition user to `ACTIVE` status
+deactivate             | [Lifecycle action](#deactivate-user) to transition user to `DEPROVISIONED` status
+resetPassword          | [Lifecycle action](#reset-password) to transition user to `RECOVERY` status
+expirePassword         | [Lifecycle action](#expire-password) to transition user to `PASSWORD_EXPIRED` status
+unlock                 | [Lifecycle action](#unlock-user) to returns a user to `ACTIVE` status when their current status is `LOCKED_OUT` due to exceeding failed login attempts
+forgotPassword         | [Resets a user's password](#forgot-password) by validating the user's recovery credential.
+changePassword         | [Changes a user's password](#change-password) validating the user's current password
 changeRecoveryQuestion | [Changes a user's recovery credential](#change-recovery-question) by validating the user's current password
 
 ## User Operations
