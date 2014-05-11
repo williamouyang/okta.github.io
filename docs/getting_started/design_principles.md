@@ -4,7 +4,6 @@ title: Design Principles
 ---
 
 
-
 ## Versioning
 
 The Okta API is a versioned API.  Okta reserves the right to add new parameters, properties, or resources to the API without advance notice. These updates are considered **non-breaking** and the compatibility rules below should be followed to ensure your application does not break. Breaking changes such as removing or renaming an attribute will be released as a new version of the API.  Okta will provide a migration path for new versions of APIs and will communicate timelines for end-of-life when deprecating APIs.
@@ -24,17 +23,13 @@ The Okta API is a versioned API.  Okta reserves the right to add new parameters,
 - Existing properties cannot be removed from future versions of the response.
 - Properties with null values may be omitted by responses
 
-
-
 ## URL Namespace
 
-All URLs listed in the documentation should be preceded with your organization's subdomain (tenant) https://*{yoursubdomain}*.okta.com/api/*{apiversion}*
+All URLs listed in the documentation should be preceded with your organization's subdomain (tenant) https://*{yoursubdomain}*.okta.com/api/*{apiversion}* and API version.
 
 The `apiversion` is is currently v1.
 
 > All API requests must use HTTPS scheme
-
-
 
 ## Media Types
 
@@ -44,31 +39,31 @@ All Date objects are returned in ISO 8601 format:
 
     YYYY-MM-DDTHH:mm:ss.SSSZ
 
-
-
 ## HTTP Verbs
 
 Where possible, the Okta API strives to use appropriate HTTP verbs for each
 action.
 
-GET
-: Used for retrieving resources.
+#### GET
 
-POST
-: Used for creating resources, or performing custom actions (such as
+Used for retrieving resources.
+
+#### POST
+
+Used for creating resources, or performing custom actions (such as
 user lifecycle operations).  POST requests
 with no `body` param, be sure to set the `Content-Length` header to zero.
 
-PUT
-: Used for replacing resources or collections. For PUT requests
+#### PUT
+
+Used for replacing resources or collections. For PUT requests
 with no `body` param, be sure to set the `Content-Length` header to zero.
 
-DELETE
-: Used for deleting resources.
+#### DELETE
+
+Used for deleting resources.
 
 > Any PUT or POST request with no Content-Length header nor a body will return a 411 error.  To get around this, either include a Content-Length: 0 header
-
-
 
 ## Errors
 
@@ -76,10 +71,10 @@ All requests on success will return a 200 status if there is content to return o
 
 All requests that result in an error will return the appropriate 4xx or 5xx error code with a custom JSON error object:
 
-- errorCode: A code that is associated with this error type
-- errorLink: A link to documentation with a more detailed explanation of the error (note: this has yet to be implemented and for the time being is the same value as the errorCode)
-- errorSummary: A natural language explanation of the error
-- errorId: An id that identifies this request.  These ids are mapped to the internal error on the server side in order to assist in troubleshooting.
+- `errorCode`: A code that is associated with this error type
+- `errorLink`: A link to documentation with a more detailed explanation of the error (note: this has yet to be implemented and for the time being is the same value as the errorCode)
+- `errorSummary`: A natural language explanation of the error
+- `errorId`: An id that identifies this request.  These ids are mapped to the internal error on the server side in order to assist in troubleshooting.
 
 ~~~ json
 {
@@ -95,11 +90,9 @@ All requests that result in an error will return the appropriate 4xx or 5xx erro
 }
 ~~~
 
-See [Error Codes](error_codes.md) for a list of API error codes.
+See [Error Codes](error_codes.html) for a list of API error codes.
 
 > Only the `errorCode` property is supported for runtime error flow control.  The `errorSummary` property is only to intended for troubleshooting and may change over time
-
-
 
 ## Authentication
 
@@ -107,26 +100,19 @@ The Okta API currently requires the custom HTTP authentication scheme `SSWS` for
 
     Authorization: SSWS 00QCjAl4MlV-WPXM…0HmjFx-vbGua
 
-> See [Obtaining a token](getting_a_token.md) for instructions on how to get an API key for your organization.
-
-
+> See [Obtaining a token](getting_a_token.html) for instructions on how to get an API key for your organization.
 
 ## Pagination
 
-Requests that return a list of resources may support paging.  Pagination is based on
-cursor and not on page number. The cursor is opaque to the client and specified in either the `?before` or `?after` query parameter.  For some resources, you can also set a custom page size with the `?limit` parameter.
+Requests that return a list of resources may support paging.  Pagination is based on cursor and not on page number. The cursor is opaque to the client and specified in either the `?before` or `?after` query parameter.  For some resources, you can also set a custom page size with the `?limit` parameter.
 
-Note that for technical reasons not all endpoints respect pagination or the `?limit` parameter,
-see the [Events](../resources/events.md) API for example.
+Note that for technical reasons not all endpoints respect pagination or the `?limit` parameter, see the [Events API](/docs/endpoints/events.html) for example.
 
-`before`
-: This is the cursor that points to the start of the page of data that has been returned.
-
-`after`
-: This is the cursor that points to the end of the page of data that has been returned.
-
-`limit`
-: This is the number of individual objects that are returned in each page.
+Param    | Description
+-------- | ------------
+`before` | This is the cursor that points to the start of the page of data that has been returned.
+`after`  | This is the cursor that points to the end of the page of data that has been returned.
+`limit`  | This is the number of individual objects that are returned in each page.
 
 ### Link Header
 
@@ -140,18 +126,13 @@ Link: <https://yoursubdomain.okta.com/api/v1/users?after=00ubfjQEMYBLRUWIEDKK; r
 
 The possible `rel` values are:
 
-`self`
-: Specifies the URL of the current page of results
+Link Relation Type | Description
+------------------ | ------------
+`self`             | Specifies the URL of the current page of results
+`next`             | Specifies the URL of the immediate next page of results.
+`prev`             | Specifies the URL of the immediate previous page of results.
 
-`next`
-: Specifies the URL of the immediate next page of results.
-
-`prev`
-: Specifies the URL of the immediate previous page of results.
-
-When you first make an API call and get a cursor-paged list of objects, the end of the list will be the point at which you do not receive another `next` link value with the response. The behavior is different in the  *Events* API. In the *Events* API, the next link always exists, since that connotation is more like a cursor or stream of data. The other APIs are primarily fixed data lengths.
-
-
+When you first make an API call and get a cursor-paged list of objects, the end of the list will be the point at which you do not receive another `next` link value with the response. The behavior is different in the [Events API](/docs/endpoints/events.html). In the [Events API](/docs/endpoints/events.html), the next link always exists, since that connotation is more like a cursor or stream of data. The other APIs are primarily fixed data lengths.
 
 ## Filtering
 
@@ -207,7 +188,7 @@ Filters must be evaluated using standard order of operations. Attribute operator
 
 ## Hypermedia
 
-Resources in the Okta API use hypermedia for "discoverability".  Hypermedia enables API clients to navigate  resources by following links like a web browser instead of hard-coding URLs in your application.  Links are identified by link relations which are named keys. Link relations describe what resources are available and how they can be interacted with.  Each resource may publish a set of link relationships based on the state of the resource.  For example, the status of a user in the [User API](../resources/users.md#links-object) will govern which lifecycle operations are permitted.  Only the permitted operations will be published a lifecycle operations.
+Resources in the Okta API use hypermedia for "discoverability".  Hypermedia enables API clients to navigate  resources by following links like a web browser instead of hard-coding URLs in your application.  Links are identified by link relations which are named keys. Link relations describe what resources are available and how they can be interacted with.  Each resource may publish a set of link relationships based on the state of the resource.  For example, the status of a user in the [User API](/docs/endpoints/users.html#links-object) will govern which lifecycle operations are permitted.  Only the permitted operations will be published a lifecycle operations.
 
 The Okta API had incorporated [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) or HAL format as the foundation for hypermedia "discoverability.  HAL provides a set of conventions for expressing hyperlinks in JSON responses representing two simple concepts: Resources and Links.
 
