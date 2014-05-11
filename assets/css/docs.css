@@ -151,6 +151,10 @@
 
 /* -------------------------- TYPOGRAPHY */
 
+.docs-body b, strong {
+  font-weight: 500;
+}
+
 .docs-body div,
 .docs-body p,
 .docs-body ul > li {
@@ -184,7 +188,11 @@
   font-size: 18px;
 }
 
-.docs-body h4, .docs-body h5, .docs-body h6 {
+.docs-body h4 {
+  font-size: 16px;
+}
+
+.docs-body h5, .docs-body h6 {
   font-size: 16px;
 }
 
@@ -220,7 +228,7 @@
   padding: 5px;
   font-size: 12px;
   font-style: italic;
-  font-weight: 500;
+  font-weight: bold;
   vertical-align: top;
   word-break: normal;
 }
@@ -276,4 +284,50 @@
   font-size: 12px;
   color: #ccc;
   margin-right: 6px;
+}
+
+.toc ul {
+  list-style-type: none;
+}
+
+/* -------------------------- IMG */
+
+.docs-body img {
+  max-width: 700px;
+}
+
+
+/* -------------------------- API Headers */
+
+.docs-body .api:before {
+  font-family: fontawesome;
+  margin-right: 8px;
+}
+
+.docs-body .operation {
+  font-size: 20px;
+}
+
+.docs-body .operation:before {
+  content: '\f12e';
+}
+
+.docs-body .uri-template:before {
+  content: '\f135';
+}
+
+.docs-body .request:before {
+  content: '\f0a9';
+}
+
+.docs-body .response:before {
+  content: '\f0a9';
+}
+
+.docs-body .request-params:before {
+  content: '\f18e';
+}
+
+.docs-body .response-params:before {
+  content: '\f190';
 }
