@@ -1445,7 +1445,7 @@ Update settings for an application.
 Parameter | Description | Param Type | DataType | Required | Default
 --- | --- | --- | --- | --- | ---
 id | id of app to update | URL | String | TRUE |
-profile | Updated profile for user | Body | [Application](#application-model) | FALSE |
+app | Updated app | Body | [Application](#application-model) | FALSE |
 
 > All attributes must be specified when updating an app  **updates are not supported!**
 
