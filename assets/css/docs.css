@@ -312,16 +312,19 @@
   content: '\f12e';
 }
 
+/*
 .docs-body .uri-template:before {
   content: '\f135';
+  margin-right: 10px !important;
 }
+*/
 
 .docs-body .request:before {
   content: '\f0a9';
 }
 
 .docs-body .response:before {
-  content: '\f0a9';
+  content: '\f0a8';
 }
 
 .docs-body .request-params:before {
