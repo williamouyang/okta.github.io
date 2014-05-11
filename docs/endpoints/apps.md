@@ -1084,7 +1084,7 @@ limit | Specified the number of results for a page | Query | Number | FALSE | 20
 filter | Filters apps by `status`, `user.id`, or `group.id` expression | Query | String | FALSE |
 after | Specifies the pagination cursor for the next page of apps | Query | String | FALSE |
 
-> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)
+> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.html#pagination)
 
 ###### Filters
 
@@ -1998,7 +1998,7 @@ Assigns a user to an application
 Parameter | Description | Param Type | DataType | Required | Default
 --- | --- | --- | --- | --- | ---
 aid | unique key of [Application](#application-model) | URL | String | TRUE |
-uid | unique key of a valid [User](../users.md) | URL | String | TRUE |
+uid | unique key of a valid [User](users.html) | URL | String | TRUE |
 appuser | App user | Body | [Application User](#application-user-model) | FALSE |
 
 > For applications with [SignOn Modes](#signon-modes) or [Authentication Schemes](#authentication-schemes) that do not require or support credentials, pass and empty json object `{}` as the `appuser` request body
@@ -2057,7 +2057,7 @@ Fetch a specific app user assignment by id.
 Parameter | Description | Param Type | DataType | Required | Default
 --- | --- | --- | --- | --- | ---
 aid | unique key of [Application](#application-model) | URL | String | TRUE |
-uid | unique key of assigned [User](../users.md) | URL | String | TRUE |
+uid | unique key of assigned [User](users.html) | URL | String | TRUE |
 
 ##### Response Parameters
 
@@ -2105,7 +2105,7 @@ aid | unique key of [Application](#application-model) | URL | String | TRUE |
 limit | Specifies the number of results for a page | Query | Number | FALSE | 20
 after | Specifies the pagination cursor for the next page of assignments | Query | String | FALSE |
 
-> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)
+> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.html#pagination)
 
 ##### Response Parameters
 
@@ -2166,7 +2166,7 @@ Updates a user's credentials for an application
 Parameter | Description | Param Type | DataType | Required | Default
 --- | --- | --- | --- | --- | ---
 aid | unique key of [Application](#application-model) | URL | String | TRUE |
-uid | unique key of a valid [User](../users.md) | URL | String | TRUE |
+uid | unique key of a valid [User](users.html) | URL | String | TRUE |
 appuser | App user | Body | [Application User](#application-user-model) | FALSE |
 
 If you attempt to assign a username or password to an application with an incompatible [Authentication Scheme](#authentication-schemes) you will receive the following error:
@@ -2239,7 +2239,7 @@ Remove a specific app user assignment by id.
 Parameter | Description | Param Type | DataType | Required | Default
 --- | --- | --- | --- | --- | ---
 aid | unique key of [Application](#application-model) | URL | String | TRUE |
-uid | unique key of assigned [User](../users.md) | URL | String | TRUE |
+uid | unique key of assigned [User](users.html) | URL | String | TRUE |
 
 ##### Response Parameters
 
@@ -2273,7 +2273,7 @@ Assigns a group to an application
 Parameter | Description | Param Type | DataType | Required | Default
 --- | --- | --- | --- | --- | ---
 aid | unique key of [Application](#application-model) | URL | String | TRUE |
-gid | unique key of a valid [Group](../groups.md) | URL | String | TRUE |
+gid | unique key of a valid [Group](groups.html) | URL | String | TRUE |
 appgroup | App group | Body | [Application Group](#application-group-model) | FALSE |
 
 ##### Response Parameters
@@ -2315,7 +2315,7 @@ Fetch a specific app group assignment by id.
 Parameter | Description | Param Type | DataType | Required | Default
 --- | --- | --- | --- | --- | ---
 aid | unique key of [Application](#application-model) | URL | String | TRUE |
-gid | unique key of an assigned [Group](../groups.md) | URL | String | TRUE |
+gid | unique key of an assigned [Group](groups.html) | URL | String | TRUE |
 
 ##### Response Parameters
 
@@ -2354,7 +2354,7 @@ aid | unique key of [Application](#application-model) | URL | String | TRUE |
 limit | Specifies the number of results for a page | Query | Number | FALSE | 20
 after | Specifies the pagination cursor for the next page of assignments | Query | String | FALSE |
 
-> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)
+> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.html#pagination)
 
 ##### Response Parameters
 
@@ -2399,7 +2399,7 @@ Remove a specific app group assignment by id.
 Parameter | Description | Param Type | DataType | Required | Default
 --- | --- | --- | --- | --- | ---
 aid | unique key of [Application](#application-model) | URL | String | TRUE |
-gid | unique key of an assigned [Group](../groups.md) | URL | String | TRUE |
+gid | unique key of an assigned [Group](groups.html) | URL | String | TRUE |
 
 ##### Response Parameters
 

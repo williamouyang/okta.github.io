@@ -115,7 +115,7 @@ Relation Name | Description
 self | The primary URL for the group
 logo | Provides links to logo images for the group if available
 users | Provides [group member operations](#group-member-operations) for the group
-apps | Lists all [applications](apps.md#application-model) that are assigned to the group. See [Application Group Operations](apps.md#application-group-operations)
+apps | Lists all [applications](apps.html#application-model) that are assigned to the group. See [Application Group Operations](apps.html#application-group-operations)
 
 ## Group Operations
 
@@ -261,7 +261,7 @@ q | Searches the `name` attribute of groups for matching value | Query | String 
 limit | Specifies the number of group results in a page | Query | Number | FALSE | 10000
 after | Specifies the pagination cursor for the next page of groups | Query | String | FALSE |
 
-> The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)
+> The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.html#pagination)
 
 ##### Response Parameters
 
@@ -273,7 +273,7 @@ Fetches all groups in your organization.
 
 The default group limit is set to a very high number due to historical reasons which is no longer valid for most organizations.  This will change in a future version of this API.  The recommended page limit is now `limit=200`.
 
-> If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller `limit` and page the results (See [Pagination](../getting_started/design_principles.md#pagination))
+> If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller `limit` and page the results (See [Pagination](../getting_started/design_principles.html#pagination))
 
 ##### Request
 
@@ -520,7 +520,7 @@ Operations that manage group memberships.
 
 #### GET /groups/:id/users
 
-Fetches all [users](#users.md) that are a member of an Okta group or an application imported group.
+Fetches all [users](#users.html) that are a member of an Okta group or an application imported group.
 
 ##### Request Parameters
 
@@ -530,15 +530,15 @@ id | id of the group | URL | String | TRUE |
 limit | Specifies the number of user results in a page | Query | Number | FALSE | 10000
 after | Specifies the pagination cursor for the next page of users | Query | String | FALSE |
 
-> The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)
+> The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.html#pagination)
 
 The default user limit is set to a very high number due to historical reasons which is no longer valid for most organizations.  This will change in a future version of this API.  The recommended page limit is now `limit=200`.
 
-> If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller `limit` and page the results (See [Pagination](../getting_started/design_principles.md#pagination))
+> If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller `limit` and page the results (See [Pagination](../getting_started/design_principles.html#pagination))
 
 ##### Response Parameters
 
-Array of [Users](users.md#user-model)
+Array of [Users](users.html#user-model)
 
 ##### Request
 
@@ -628,7 +628,7 @@ Link: <https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/users?aft
 
 #### PUT /groups/:gid/users/:uid
 
-Adds an [Okta user](users.md#user-model) from an Okta group.
+Adds an [Okta user](users.html#user-model) from an Okta group.
 
 > You can only manage Okta-mastered group memberships.  Application import operations are responsible for syncing non-Okta group memberships such as Active Directory groups.
 
@@ -661,7 +661,7 @@ HTTP/1.1 204 No Content
 
 #### DELETE /groups/:gid/users/:uid
 
-Removes an [Okta user](users.md#user-model) from an Okta group.
+Removes an [Okta user](users.html#user-model) from an Okta group.
 
 > You can only manage Okta-mastered group memberships.  Application import operations are responsible for syncing non-Okta group memberships such as Active Directory groups.
 
@@ -694,7 +694,7 @@ HTTP/1.1 204 No Content
 
 ### List Assigned Applications
 
-Lists all [applications](apps.md#application-model) that are assigned to the group. See [Application Group Operations](apps.md#application-group-operations)
+Lists all [applications](apps.html#application-model) that are assigned to the group. See [Application Group Operations](apps.html#application-group-operations)
 
 #### GET /groups/:id/apps
 
@@ -706,11 +706,11 @@ id | id of the group | URL | String | TRUE |
 limit | Specifies the number of app results for a page | Query | Number | FALSE | 20
 after | Specifies the pagination cursor for the next page of apps | Query | String | FALSE |
 
-> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)
+> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.html#pagination)
 
 ##### Response Parameters
 
-Array of [Applications](apps.md#application-model)
+Array of [Applications](apps.html#application-model)
 
 ##### Request
 

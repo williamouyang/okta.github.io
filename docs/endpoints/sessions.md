@@ -17,7 +17,7 @@ Okta utilizes a non-persistent HTTP session cookie to provide access to your Okt
 
 ### One-Time Token
 
-Okta provides a mechanism to validate a user's credentials via the Session API and obtain a one-time token that can be later exchanged for a session cookie using flows detailed [here](/docs/examples/session_cookie.md) for specific deployment scenarios.
+Okta provides a mechanism to validate a user's credentials via the Session API and obtain a one-time token that can be later exchanged for a session cookie using flows detailed [here](/docs/examples/session_cookie.html) for specific deployment scenarios.
 
 A one-time token may only be used **once** to establish a session for a user.  If the session expires or the user logs out of Okta after using the token, they will not be able to reuse the same one-time token to get a new session cookie.
 
@@ -44,7 +44,7 @@ Sessions have the following attributes:
 Attribute | Description | DataType | Nullable | Unique | Readonly
 --- | --- | --- | --- | --- | ---
 id | unique key for the session | String | FALSE | TRUE | TRUE
-userId | unique key for the [user](users.md#get-user-with-id) | String | FALSE | FALSE | TRUE
+userId | unique key for the [user](users.html#get-user-with-id) | String | FALSE | FALSE | TRUE
 mfaActive | indicates whether the user has enrolled a valid MFA credential | Boolean | FALSE | FALSE | TRUE
 
 #### Conditional Token Attributes
@@ -53,8 +53,8 @@ The [Create Session](#create-session) operation can optionally return the follow
 
 Field | Description
 --- | ---
-cookieToken | One-time token which can be used to obtain a session cookie for your organization by visiting either an application's embed link or a session redirect URL.<br><br>See [retrieving a session cookie by visiting a session redirect link](/docs/examples/session_cookie.md#retrieving-a-session-cookie-by-visiting-a-session-redirect-link) or [retrieving a session cookie by visiting an application embed link](/docs/examples/session_cookie.md#retrieving-a-session-cookie-by-visiting-an-application-embed-link) for more info.
-cookieTokenUrl | URL for a a transparent 1x1 pixel image which contains a one-time token which when visited  sets the session cookie in your browser for your organization.<br><br>See [retrieving a session cookie by visiting a session redirect link](/docs/examples/session_cookie.md#retrieving-a-session-cookie-with-a-hidden-image) for more info.
+cookieToken | One-time token which can be used to obtain a session cookie for your organization by visiting either an application's embed link or a session redirect URL.<br><br>See [retrieving a session cookie by visiting a session redirect link](/docs/examples/session_cookie.html#retrieving-a-session-cookie-by-visiting-a-session-redirect-link) or [retrieving a session cookie by visiting an application embed link](/docs/examples/session_cookie.html#retrieving-a-session-cookie-by-visiting-an-application-embed-link) for more info.
+cookieTokenUrl | URL for a a transparent 1x1 pixel image which contains a one-time token which when visited  sets the session cookie in your browser for your organization.<br><br>See [retrieving a session cookie by visiting a session redirect link](/docs/examples/session_cookie.html#retrieving-a-session-cookie-with-a-hidden-image) for more info.
 
 
 

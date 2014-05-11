@@ -337,14 +337,14 @@ objectType | [User](#user-objecttype) or [AppInstance](#appinstance-objecttype) 
 
 #### User ObjectType
 
-A denormalized reference to a [User](users.md#user-model).
+A denormalized reference to a [User](users.html#user-model).
 
 Attribute | Description | DataType | Nullable
 --- | --- | --- | ---
-id | Unique key for [user](users.md#user-model) | String | FALSE
+id | Unique key for [user](users.html#user-model) | String | FALSE
 objectType | User | String | FALSE
-displayName | [User's](users.md#profile-object) first and last name | String | FALSE
-login | Unique login for [user](users.md#user-model) | String | FALSE
+displayName | [User's](users.html#profile-object) first and last name | String | FALSE
+login | Unique login for [user](users.html#user-model) | String | FALSE
 
 ~~~ json
 {
@@ -355,7 +355,7 @@ login | Unique login for [user](users.md#user-model) | String | FALSE
 }
 ~~~
 
-> The user can be retrieved by `id` with the [User API](users.md#get-user-with-id).
+> The user can be retrieved by `id` with the [User API](users.html#get-user-with-id).
 
 #### AppInstance ObjectType
 
@@ -375,7 +375,7 @@ displayName | Label of application | String | FALSE
 }
 ~~~
 
-> The app can be retrieved by `id` with the [Apps API](apps.md#get-application).
+> The app can be retrieved by `id` with the [Apps API](apps.html#get-application).
 
 #### Client ObjectType
 
@@ -410,10 +410,10 @@ Parameter | Description | Param Type | DataType | Required | Default
 --- | --- | --- | --- | --- | ---
 limit | Specifies the number of results to page | Query | Number | FALSE | 1000
 startDate | Specifies the timestamp to list events after | Query | Date | FALSE |
-filter | [Filter expression](../getting_started/design_principles.md#filtering) for events | Query | String | FALSE |
+filter | [Filter expression](../getting_started/design_principles.html#filtering) for events | Query | String | FALSE |
 after | Specifies the pagination cursor for the next page of events | Query | String | FALSE |
 
-> The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)
+> The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.html#pagination)
 
 > `startDate` and `filter` query parameters are mutually exclusive and cannot be used together in the same request
 
@@ -430,7 +430,7 @@ Filter | Description
 `published eq "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Events published updated at a specific datetime
 `published gt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Events published updated after a specific datetime
 
-See [Filtering](../getting_started/design_principles.md#filtering) for more information on expressions
+See [Filtering](../getting_started/design_principles.html#filtering) for more information on expressions
 
 > All filters must be [URL encoded](http://en.wikipedia.org/wiki/Percent-encoding) where `filter=published gt "2013-06-01T00:00:00.000Z"` is encoded as `filter=published%20gt%20%222013-06-01T00:00:00.000Z%22`
 
