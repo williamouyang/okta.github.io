@@ -6,7 +6,7 @@ title: Apps
 
 ## Overview
 
-The Application API provides operations to manage applications and/or assignments to users or groups for your organization.
+The Okta Application API provides operations to manage applications and/or assignments to users or groups for your organization.
 
 > This API is currently in **Beta** status
 

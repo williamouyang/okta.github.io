@@ -6,7 +6,7 @@ title: Groups
 
 ## Overview
 
-The Groups API provides operations to manage your organization groups an their user members.
+The Okta Groups API provides operations to manage your organization groups and their user members.
 
 ## Group Model
 

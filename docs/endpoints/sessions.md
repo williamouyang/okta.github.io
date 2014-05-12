@@ -6,7 +6,7 @@ title: Sessions
 
 ## Overview
 
-Okta uses a cookie-based authentication mechanism to maintain a [user's](users.html) authentication session across web requests.  The Session API provides operations to create and manage authentication sessions with your Okta organization.
+Okta uses a cookie-based authentication mechanism to maintain a [user's](users.html) authentication session across web requests.  The Okta Session API provides operations to create and manage authentication sessions with your Okta organization.
 
 > The Session API currently does not support multi-factor authentication (MFA).  Sessions created for users with an assigned MFA policy will have a significantly constrained session and will not be able to access their applications.
 

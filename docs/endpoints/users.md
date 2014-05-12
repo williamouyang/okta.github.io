@@ -5,7 +5,7 @@ title: Users
 
 ## Overview
 
-The User API provides operations to manage users in your organization.
+The Okta User API provides operations to manage users in your organization.
 
 ## User Model
 
