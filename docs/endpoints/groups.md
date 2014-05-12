@@ -449,7 +449,7 @@ Parameter | Description                   | ParamType | DataType                
 id        | id of the group to update     | URL       | String                            | TRUE     |
 profile   | Updated profile for the group | Body      | [Profile Object](#profile-object) | TRUE     |
 
-> All profile attributes must be specified when updating a user's profile.  **updates are not supported!**
+> All profile attributes must be specified when updating a user's profile.  **partial updates are not supported!**
 
 ##### Response Parameters
 {:.api .response-params}

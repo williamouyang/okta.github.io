@@ -421,10 +421,10 @@ _links      | discoverable resources related to the app group | [JSON HAL](http:
 ### Add Application
 {:.api .operation}
 
-Adds a new application to your Okta organization.
-
 #### POST /apps
 {:.api .uri-template}
+
+Adds a new application to your Okta organization.
 
 ##### Request Parameters
 {:.api .request-params}
