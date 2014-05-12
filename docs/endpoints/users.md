@@ -60,16 +60,16 @@ The User API provides operations to manage users in your organization.
 
 The User model defines several **read-only** attributes:
 
-Attribute | Description | DataType | Nullable
---- | --- | --- | ---
-id | unique key for user | String | FALSE
-status | current status of user | `STAGED`, `PROVISIONED`, `ACTIVE`, `RECOVERY`, `LOCKED_OUT`, `PASSWORD_EXPIRED`, or `DEPROVISIONED` | FALSE
-created | timestamp when user was created | Date | FALSE
-activated | timestamp when transition to `ACTIVE` status completed | Date | TRUE
-statusChanged | timestamp when status last changed | Date | TRUE
-lastLogin | timestamp of last login | Date | TRUE
-lastUpdated | timestamp when user was last updated | Date | FALSE
-transitioningToStatus | target status of an inprogress asynchronous status transition | `PROVISIONED`, `ACTIVE`, or `DEPROVISIONED` | TRUE
+Attribute             | Description                                                   | DataType                                                                                            | Nullable
+--------------------- | ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | -----
+id                    | unique key for user                                           | String                                                                                              | FALSE
+status                | current status of user                                        | `STAGED`, `PROVISIONED`, `ACTIVE`, `RECOVERY`, `LOCKED_OUT`, `PASSWORD_EXPIRED`, or `DEPROVISIONED` | FALSE
+created               | timestamp when user was created                               | Date                                                                                                | FALSE
+activated             | timestamp when transition to `ACTIVE` status completed        | Date                                                                                                | TRUE
+statusChanged         | timestamp when status last changed                            | Date                                                                                                | TRUE
+lastLogin             | timestamp of last login                                       | Date                                                                                                | TRUE
+lastUpdated           | timestamp when user was last updated                          | Date                                                                                                | FALSE
+transitioningToStatus | target status of an inprogress asynchronous status transition | `PROVISIONED`, `ACTIVE`, or `DEPROVISIONED`                                                         | TRUE
 
 > Metadata attributes are only available after a user is created
 
@@ -103,13 +103,13 @@ Specifies [standard](#standard-attributes) and [custom](#custom-attributes) prof
 
 All profiles have the following attributes:
 
-Attribute | DataType | MinLength | MaxLength | Nullable | Unique | Validation
---- | --- | --- | --- | --- | --- | ---
-login | String | 5 | 100 | FALSE | TRUE | [RFC 6531 section 3.3](http://tools.ietf.org/html/rfc6531#section-3.3)
-email | String | 5 | 100 |  FALSE | TRUE |  [RFC 5322 section 3.2.3](http://tools.ietf.org/html/rfc5322#section-3.2.3)
-firstName | String | 1 | 50 | FALSE | FALSE |
-lastName | String | 1 | 50  | FALSE | FALSE |
-mobilePhone | String | 0 | 100 | TRUE | FALSE  |
+Attribute   | DataType | MinLength | MaxLength | Nullable | Unique | Validation
+----------- | -------- | --------- | --------- | -------- | ------ | ----------
+login       | String   | 5         | 100       | FALSE    | TRUE   | [RFC 6531 section 3.3](http://tools.ietf.org/html/rfc6531#section-3.3)
+email       | String   | 5         | 100       | FALSE    | TRUE   | [RFC 5322 section 3.2.3](http://tools.ietf.org/html/rfc5322#section-3.2.3)
+firstName   | String   | 1         | 50        | FALSE    | FALSE  |
+lastName    | String   | 1         | 50        | FALSE    | FALSE  |
+mobilePhone | String   | 0         | 100       | TRUE     | FALSE  |
 
 ##### Okta Login
 
@@ -127,10 +127,10 @@ Custom attributes may be added to a user profile.  Custom attributes must be sin
 
 Specifies credentials for a user.  Credential types and requirements vary depending on the operation and security policy of the organization.
 
-Attribute | DataType | MinLength | MaxLength | Nullable | Unique | Validation
---- | --- | --- | --- | --- | --- | ---
-password | [Password Object](#password-object) | | | TRUE | FALSE |
-recovery_question | [Recovery Question Object](#recovery-question-object) | | | TRUE | FALSE |
+Attribute         | DataType                                              | MinLength | MaxLength | Nullable | Unique | Validation
+----------------- | ----------------------------------------------------- | --------- | --------- | -------- | -------| ----------
+password          | [Password Object](#password-object)                   |           |           | TRUE     | FALSE  |
+recovery_question | [Recovery Question Object](#recovery-question-object) |           |           | TRUE     | FALSE  |
 
 > Some credential values are **write-only**
 
@@ -150,9 +150,9 @@ recovery_question | [Recovery Question Object](#recovery-question-object) | | | 
 
 Specifies a password for a user.  A password value is a **write-only** property.  When a user has a valid password and a response object contains a password credential, then the Password Object will be a bare object without the `value` property defined (e.g. `password: {}`) to indicate that a password value exists.
 
-Attribute | DataType | MinLength | MaxLength | Nullable | Unique | Validation
---- | --- | --- | --- | --- | --- | ---
-value | String | *Password Policy* | 40 | TRUE | FALSE | *Password Policy* 
+Attribute | DataType | MinLength         | MaxLength | Nullable | Unique | Validation
+--------- | -------- | ----------------- | --------- | -------- | ------ | -----------------
+value     | String   | *Password Policy* | 40        | TRUE     | FALSE  | *Password Policy* 
 
 ##### Default Password Policy
 
@@ -209,11 +209,11 @@ Creates a new user in your Okta organization with or without credentials:
 ##### Request Parameters
 {:.api .request-params}
 
-Parameter | Description | Param Type | DataType | Required | Default
---- | --- | --- | --- | --- | ---
-activate | Executes [activation lifecycle](#activate-user) operation when creating the user | Query | Boolean | FALSE | TRUE
-profile | Profile attributes for user | Body | [Profile Object](#profile-object) | TRUE |
-credentials | Credentials for user | Body | [Credentials Object](#credentials-object) | FALSE | |
+Parameter   | Description                                                                      | Param Type | DataType                                  | Required | Default
+----------- | -------------------------------------------------------------------------------- | ---------- | ----------------------------------------- | -------- | -------
+activate    | Executes [activation lifecycle](#activate-user) operation when creating the user | Query      | Boolean                                   | FALSE    | TRUE
+profile     | Profile attributes for user                                                      | Body       | [Profile Object](#profile-object)         | TRUE     |
+credentials | Credentials for user                                                             | Body       | [Credentials Object](#credentials-object) | FALSE    |
 
 ##### Response Parameters
 {:.api .response-params}
@@ -490,9 +490,9 @@ Fetches a user from your Okta organization
 
 Fetch a specific user by `id`, `login`, or login shortname *(as long as it is unambiguous)*.
 
-Parameter | Description | Param Type | DataType | Required | Default
---- | --- | --- | --- | --- | ---
-id | `id`, `login`, or *login shortname* (as long as it is unambiguous) | URL | String | TRUE |
+Parameter | Description                                                        | Param Type | DataType | Required | Default
+--------- | ------------------------------------------------------------------ | ---------- | -------- | -------- | -------
+id        | `id`, `login`, or *login shortname* (as long as it is unambiguous) | URL        | String   | TRUE     |
 
 > When fetching a user by `login` or `login shortname`, you should [URL encode](http://en.wikipedia.org/wiki/Percent-encoding) the request parameter to ensure special characters are escaped properly.  Logins with a `/` character can only be fetched by 'id' due to URL issues with escaping the `/` character.
 
@@ -790,12 +790,12 @@ Enumerates users in your organization with pagination.  A subset of users can be
 ##### Request Parameters
 {:.api .request-params}
 
-Parameter | Description | Param Type | DataType | Required | Default
---- | --- | --- | --- | --- | ---
-q | Searches `firstName`, `lastName`, and `email` attributes of users for matching value | Query | String | FALSE |
-limit | Specified the number of results | Query | Number | FALSE | 10000
-filter | [Filter expression](../getting_started/design_principles.html#filtering) for users | Query | String | FALSE |
-after | Specifies the pagination cursor for the next page of users | Query | String | FALSE |
+Parameter | Description                                                                          | Param Type | DataType | Required | Default
+--------- | ------------------------------------------------------------------------------------ | ---------- | -------- | -------- | -------
+q         | Searches `firstName`, `lastName`, and `email` attributes of users for matching value | Query      | String   | FALSE    |
+limit     | Specified the number of results                                                      | Query      | Number   | FALSE    | 10000
+filter    | [Filter expression](../getting_started/design_principles.html#filtering) for users   | Query      | String   | FALSE    |
+after     | Specifies the pagination cursor for the next page of users                           | Query      | String   | FALSE    |
 
 > The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.html#pagination)
 
@@ -805,15 +805,15 @@ after | Specifies the pagination cursor for the next page of users | Query | Str
 
 The following expressions are supported for users with the `filter` query parameter:
 
-Filter | Description
------- | ----------- 
-`status eq "STAGED"` | Users that have a `status` of `STAGED`
-`status eq "PROVISIONED"` | Users that have a `status` of `PROVISIONED`
-`status eq "ACTIVE"` | Users that have a `status` of `ACTIVE`
-`status eq "RECOVERY"` | Users that have a `status` of `RECOVERY`
-`status eq "PASSWORD_EXPIRED"` | Users that have a `status` of `PASSWORD_EXPIRED`
-`status eq "LOCKED_OUT"` | Users that have a `status` of `LOCKED_OUT`
-`status eq "DEPROVISIONED"` | Users that have a `status` of `DEPROVISIONED`
+Filter                                         | Description
+---------------------------------------------- | ------------------------------------------------ 
+`status eq "STAGED"`                           | Users that have a `status` of `STAGED`
+`status eq "PROVISIONED"`                      | Users that have a `status` of `PROVISIONED`
+`status eq "ACTIVE"`                           | Users that have a `status` of `ACTIVE`
+`status eq "RECOVERY"`                         | Users that have a `status` of `RECOVERY`
+`status eq "PASSWORD_EXPIRED"`                 | Users that have a `status` of `PASSWORD_EXPIRED`
+`status eq "LOCKED_OUT"`                       | Users that have a `status` of `LOCKED_OUT`
+`status eq "DEPROVISIONED"`                    | Users that have a `status` of `DEPROVISIONED`
 `lastUpdated lt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Users last updated before a specific datetime
 `lastUpdated eq "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Users last updated at a specific datetime
 `lastUpdated gt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Users last updated after a specific datetime
@@ -1148,11 +1148,11 @@ Update a user's profile and/or credentials.
 ##### Request Parameters
 {:.api .request-params}
 
-Parameter | Description | Param Type | DataType | Required | Default
---- | --- | --- | --- | --- | ---
-id | id of user to update | URL | String | TRUE |
-profile | Updated profile for user | Body | [Profile Object](#profile-object) | FALSE |
-credentials | Update credentials for user | Body | [Credentials Object](#credentials-object) | FALSE | |
+Parameter   | Description                 | Param Type | DataType                                  | Required | Default
+----------- | --------------------------- | ---------- | ----------------------------------------- | -------- | -------
+id          | `id` of user to update      | URL        | String                                    | TRUE     |
+profile     | Updated profile for user    | Body       | [Profile Object](#profile-object)         | FALSE    |
+credentials | Update credentials for user | Body       | [Credentials Object](#credentials-object) | FALSE    |
 
 `profile` and `credentials` can be updated independently or with a single request. 
 
@@ -1394,9 +1394,9 @@ Fetches appLinks for all direct or indirect (via group membership) assigned appl
 ##### Request Parameters
 {:.api .request-params}
 
-Parameter | Description | Param Type | DataType | Required | Default
---- | --- | --- | --- | --- | ---
-id | `id` of user | URL | String | TRUE |
+Parameter | Description  | Param Type | DataType | Required | Default
+--------- | ------------ | ---------- | -------- | -------- | -------
+id        | `id` of user | URL        | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .response-params}
@@ -1480,9 +1480,9 @@ Fetches the groups of which the user is a member.
 ##### Request Parameters
 {:.api .request-params}
 
-Parameter | Description | Param Type | DataType | Required | Default
---- | --- | --- | --- | --- | ---
-id | `id` of user | URL | String | TRUE |
+Parameter | Description  | Param Type | DataType | Required | Default
+--------- | ------------ | ---------- | -------- | -------- | -------
+id        | `id` of user | URL        | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .response-params}
@@ -1538,10 +1538,10 @@ Activates a user.  This operation can only be performed on users with a `STAGED`
 ##### Request Parameters
 {:.api .request-params}
 
-Parameter | Description | Param Type | DataType | Required | Default
---- | --- | --- | --- | --- | ---
-id | `id` of user | URL | String | TRUE |
-sendEmail | Sends an activation email to the user if `true` | Query | Boolean | FALSE | TRUE
+Parameter | Description                                     | Param Type | DataType | Required | Default
+--------- | ----------------------------------------------- | ---------- | -------- | -------- | -------
+id        | `id` of user                                    | URL        | String   | TRUE     |
+sendEmail | Sends an activation email to the user if `true` | Query      | Boolean  | FALSE    | TRUE
 
 ##### Response Parameters
 {:.api .response-params}
@@ -1588,9 +1588,9 @@ Deactivates a user.  This operation can only be performed on users that do not h
 ##### Request Parameters
 {:.api .request-params}
 
-Parameter | Description | Param Type | DataType | Required | Default
---- | --- | --- | --- | --- | ---
-id | `id` of user | URL | String | TRUE |
+Parameter | Description  | Param Type | DataType | Required | Default
+--------- | ------------ | ---------- | -------- | -------- | -------
+id        | `id` of user | URL        | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .response-params}
@@ -1628,9 +1628,9 @@ Unlocks a user with a `LOCKED_OUT` status and returns them to `ACTIVE` status.  
 ##### Request Parameters
 {:.api .request-params}
 
-Parameter | Description | Param Type | DataType | Required | Default
---- | --- | --- | --- | --- | ---
-id | `id` of user | URL | String | TRUE |
+Parameter | Description  | Param Type | DataType | Required | Default
+--------- | ------------ | ---------- | -------- | -------- | -------
+id        | `id` of user | URL        | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .response-params}
@@ -1666,10 +1666,10 @@ This operation will transition the user to the status of `RECOVERY` and the user
 ##### Request Parameters
 {:.api .request-params}
 
-Parameter | Description | Param Type | DataType | Required | Default
---- | --- | --- | --- | --- | ---
-id | `id` of user | URL | String | TRUE |
-sendEmail | Sends reset password email to the user if `true` | Query | Boolean | FALSE | TRUE
+Parameter | Description                                      | Param Type | DataType | Required | Default
+--------- | ------------------------------------------------ | ---------- | -------- | -------- | -------
+id        | `id` of user                                     | URL        | String   | TRUE     |
+sendEmail | Sends reset password email to the user if `true` | Query      | Boolean  | FALSE    | TRUE
 
 ##### Response Parameters
 {:.api .response-params}
@@ -1712,10 +1712,10 @@ This operation will transition the user to the status of `PASSWORD_EXPIRED` and 
 ##### Request Parameters
 {:.api .request-params}
 
-Parameter | Description | Param Type | DataType | Required | Default
---- | --- | --- | --- | --- | ---
-id | `id` of user | URL | String | TRUE |
-tempPassword | Sets the user's password to a temporary password,  if `true` | Query | Boolean | FALSE | FALSE
+Parameter    | Description                                                  | Param Type | DataType | Required | Default
+------------ | ------------------------------------------------------------ | ---------- | -------- | -------- | -------
+id           | `id` of user                                                 | URL        | String   | TRUE     |
+tempPassword | Sets the user's password to a temporary password,  if `true` | Query      | Boolean  | FALSE    | FALSE
 
 ##### Response Parameters
 {:.api .response-params}
@@ -1805,10 +1805,10 @@ Generates a one-time token (OTT) that can be used to reset a user's password.  T
 ##### Request Parameters
 {:.api .request-params}
 
-Parameter | Description | Param Type | DataType | Required | Default
---- | --- | --- | --- | --- | ---
-id | `id` of user | URL | String | TRUE |
-sendEmail | Sends a forgot password email to the user if `true` | Query | Boolean | FALSE | TRUE
+Parameter    | Description                                         | Param Type | DataType | Required | Default
+------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
+id           | `id` of user                                        | URL        | String   | TRUE     |
+sendEmail    | Sends a forgot password email to the user if `true` | Query      | Boolean  | FALSE    | TRUE
 
 ##### Response Parameters
 {:.api .response-params}
@@ -1851,11 +1851,11 @@ Sets a new password for a user by validating the user's answer to their current 
 ##### Request Parameters
 {:.api .request-params}
 
-Parameter | Description | Param Type | DataType | Required | Default
---- | --- | --- | --- | --- | ---
-id | `id` of user | URL | String | TRUE |
-password | New password for user | Body | [Password Object](#password-object) | TRUE |
-recovery_question | Answer to user's current recovery question | Body | [Recovery Question Object](#recovery-question-object) | TRUE |
+Parameter         | Description                                | Param Type | DataType                                              | Required | Default
+----------------- | ------------------------------------------ | ---------- | ----------------------------------------------------- | -------- | -------
+id                | `id` of user                               | URL        | String                                                | TRUE     |
+password          | New password for user                      | Body       | [Password Object](#password-object)                   | TRUE     |
+recovery_question | Answer to user's current recovery question | Body       | [Recovery Question Object](#recovery-question-object) | TRUE     |
 
 ##### Response Parameters
 {:.api .response-params}
@@ -1904,11 +1904,11 @@ Changes a user's password by validating the user's current password.  This opera
 ##### Request Parameters
 {:.api .request-params}
 
-Parameter | Description | Param Type | DataType | Required | Default
---- | --- | --- | --- | --- | ---
-id | `id` of user | URL | String | TRUE |
-oldPassword | Current password for user | Body | [Password Object](#password-object) | TRUE |
-newPassword | New password for user | Body | [Password Object](#password-object) | TRUE |
+Parameter   | Description               | Param Type | DataType                            | Required | Default
+------------| --------------------------| ---------- | ------------------------------------| -------- | -------
+id          | `id` of user              | URL        | String                              | TRUE     |
+oldPassword | Current password for user | Body       | [Password Object](#password-object) | TRUE     |
+newPassword | New password for user     | Body       | [Password Object](#password-object) | TRUE     |
 
 ##### Response Parameters
 {:.api .response-params}
@@ -1957,11 +1957,11 @@ Changes a user's recovery question & answer credential by validating the user's 
 ##### Request Parameters
 {:.api .request-params}
 
-Parameter | Description | Param Type | DataType | Required | Default
---- | --- | --- | --- | --- | ---
-id | `id` of user | URL | String | TRUE |
-password | Current password for user | Body | [Password Object](#password-object) | TRUE |
-recovery_question | New recovery question & answer for user| Body | [Recovery Question Object](#recovery-question-object) | TRUE |
+Parameter         | Description                             | Param Type | DataType                                              | Required | Default
+----------------- | --------------------------------------- | ---------- | ----------------------------------------------------- | -------- | -------
+id                | `id` of user                            | URL        | String                                                | TRUE     |
+password          | Current password for user               | Body       | [Password Object](#password-object)                   | TRUE     |
+recovery_question | New recovery question & answer for user | Body       | [Recovery Question Object](#recovery-question-object) | TRUE     |
 
 ##### Response Parameters
 {:.api .response-params}
