@@ -294,6 +294,7 @@
 
 .docs-body img {
   max-width: 700px;
+  display: block;
 }
 
 
