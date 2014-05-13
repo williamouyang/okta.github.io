@@ -118,29 +118,29 @@ apps               | Lists all [applications](apps.html#application-model) that 
 ## Group Operations
 
 ### Add Group
-{:.api .operation}
+{:.api .api-operation}
 
 #### POST /groups
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Adds a new Okta group to your organization.
 
 > Only Okta groups can be added.  Application import operations are responsible for syncing non-Okta groups such as Active Directory groups.
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description                               | ParamType | DataType                          | Required | Default
 --------- | ----------------------------------------- | --------- | --------------------------------- | -------- | ---
 profile   | `okta:user_group` profile for a new group | Body      | [Profile-Object](#profile-object) | TRUE     |
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 The created [Group](#group-model).
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization:SSWS yourtoken" \
@@ -156,8 +156,8 @@ curl -v -H "Authorization:SSWS yourtoken" \
 }'
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -193,27 +193,27 @@ curl -v -H "Authorization:SSWS yourtoken" \
 ~~~
 
 ### Get Group
-{:.api .operation}
+{:.api .api-operation}
 
 #### GET /groups/*:id*
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Fetches a specific group by `id` from your organization
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description     | ParamType | DataType | Required | Default
 --------- | --------------- | --------- | -------- | -------- | -------
 id        | `id` of a group | URL       | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 Fetched [Group](#group-model)
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -221,8 +221,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X GET "https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -258,10 +258,10 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 ### List Groups
-{:.api .operation}
+{:.api .api-operation}
 
 #### GET /groups
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Enumerates groups in your organization with pagination. A subset of groups can be returned that match a supported filter expression or query.
 
@@ -269,7 +269,7 @@ Enumerates groups in your organization with pagination. A subset of groups can b
 - [Search Groups](#search-groups)
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description                                                 | ParamType | DataType | Required | Default
 --------- | ----------------------------------------------------------- | --------- | -------- | -------- | -------
@@ -280,12 +280,12 @@ after     | Specifies the pagination cursor for the next page of groups | Query 
 > The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.html#pagination)
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 Array of [Groups](#group-model)
 
 #### List All Groups
-{:.api .operation}
+{:.api .api-operation}
 
 Fetches all groups in your organization.
 
@@ -293,8 +293,8 @@ The default group limit is set to a very high number due to historical reasons w
 
 > If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller `limit` and page the results (See [Pagination](../getting_started/design_principles.html#pagination))
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -302,8 +302,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X GET "https://your-domain.okta.com/api/v1/groups?limit=200"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ ruby
 HTTP/1.1 200 OK
@@ -376,7 +376,7 @@ Link: <https://your-domain.okta.com/api/v1/groups?after=00ud4tVDDXYVKPXKVLCO&lim
 ~~~
 
 #### Search Groups
-{:.api .operation}
+{:.api .api-operation}
 
 Searches for groups by `name` in your organization.
 
@@ -384,8 +384,8 @@ Searches for groups by `name` in your organization.
 
 > Search currently performs a startsWith match but it should be considered an implementation detail and may change without notice in the future. Exact matches will always be returned before partial matches
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -393,8 +393,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X GET "https://your-domain.okta.com/api/v1/groups?q=West&limit=1"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 [
@@ -432,17 +432,17 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 ### Update Group
-{:.api .operation}
+{:.api .api-operation}
 
 #### PUT /groups/*:id*
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Updates an Okta group's profile.
 
 > Only profiles for Okta groups can be modified.
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description                   | ParamType | DataType                          | Required | Default
 --------- | ----------------------------- | --------- | --------------------------------- | -------- | -------
@@ -452,12 +452,12 @@ profile   | Updated profile for the group | Body      | [Profile Object](#profil
 > All profile attributes must be specified when updating a user's profile.  **partial updates are not supported!**
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 Updated [Group](#group-model)
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -473,8 +473,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }'
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -510,7 +510,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 ### Remove Group
-{:.api .operation}
+{:.api .api-operation}
 
 #### DELETE /groups/*:id*
 {:.api .uri-tempalate}
@@ -520,19 +520,19 @@ Removes an Okta group from your organization.
 > Only Okta groups can be removed.  Application import operations are responsible for syncing non-Okta groups such as Active Directory groups.
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description                 | ParamType | DataType | Required | Default
 --------- | --------------------------- | --------- | -------- | -------- | -------
 id        | `id` of the group to delete | URL       | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 N/A
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -540,8 +540,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X DELETE "https://your-domain.okta.com/api/v1/groups/00ub0oNGTSWTBKOLGLNR"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ ruby
 HTTP/1.1 204 No Content
@@ -550,15 +550,15 @@ HTTP/1.1 204 No Content
 ## Group Member Operations
 
 ### List Group Members
-{:.api .operation}
+{:.api .api-operation}
 
 #### GET /groups/*:id*/users
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Enumerates all [users](#users.html) that are a member of a group.
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description                                                | ParamType | DataType | Required | Default
 --------- | ---------------------------------------------------------- | --------- | -------- | -------- | -------
@@ -573,12 +573,12 @@ The default user limit is set to a very high number due to historical reasons wh
 > If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller `limit` and page the results (See [Pagination](../getting_started/design_principles.html#pagination))
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 Array of [Users](users.html#user-model)
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -586,8 +586,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X GET "https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/users?limit=2"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ ruby
 HTTP/1.1 200 OK
@@ -664,17 +664,17 @@ Link: <https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/users?aft
 ~~~
 
 ### Add User to Group
-{:.api .operation}
+{:.api .api-operation}
 
 #### PUT /groups/*:gid*/users/*:uid*
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Adds an [Okta user](users.html#user-model) to an Okta group.
 
 > You can only manage Okta-mastered group memberships.  Application import operations are responsible for syncing non-Okta group memberships such as Active Directory groups.
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description     | ParamType | DataType | Required | Default
 --------- | --------------- | --------- | -------- | -------- | -------
@@ -682,12 +682,12 @@ gid       | id of the group | URL       | String   | TRUE     |
 uid       | id of the user  | URL       | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 N/A
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization:SSWS yourtoken" \
@@ -695,25 +695,25 @@ curl -v -H "Authorization:SSWS yourtoken" \
 -X PUT https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/users/00u1f96ECLNVOKVMUSEA
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ ruby
 HTTP/1.1 204 No Content
 ~~~
 
 ### Remove User from Group
-{:.api .operation}
+{:.api .api-operation}
 
 #### DELETE /groups/*:gid*/users/*:uid*
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Removes an [Okta user](users.html#user-model) from an Okta group.
 
 > You can only manage Okta-mastered group memberships.  Application import operations are responsible for syncing non-Okta group memberships such as Active Directory groups.
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description       | ParamType | DataType | Required | Default
 --------- | ----------------- | --------- | -------- | -------- | -------
@@ -721,12 +721,12 @@ gid       | `id` of the group | URL       | String   | TRUE     |
 uid       | `id` of the user  | URL       | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 N/A
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization:SSWS yourtoken" \
@@ -734,8 +734,8 @@ curl -v -H "Authorization:SSWS yourtoken" \
 -X DELETE https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/users/00u1f96ECLNVOKVMUSEA
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ ruby
 HTTP/1.1 204 No Content
@@ -744,15 +744,15 @@ HTTP/1.1 204 No Content
 ## Related Resources
 
 ### List Assigned Applications
-{:.api .operation}
+{:.api .api-operation}
 
 #### GET /groups/*:id*/apps
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Enumerates all [applications](apps.html#application-model) that are assigned to the group. See [Application Group Operations](apps.html#application-group-operations)
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description                                               | ParamType | DataType | Required | Default
 --------- | --------------------------------------------------------- | --------- | -------- | -------- | -------
@@ -763,12 +763,12 @@ after     | Specifies the pagination cursor for the next page of apps | Query   
 > The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.html#pagination)
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 Array of [Applications](apps.html#application-model)
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization:SSWS yourtoken" \
@@ -776,8 +776,8 @@ curl -v -H "Authorization:SSWS yourtoken" \
 -X GET https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/apps
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ ruby
 HTTP/1.1 200 OK

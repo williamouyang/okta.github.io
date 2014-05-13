@@ -14,7 +14,7 @@ title: Tokens
 
 Create a token.  This API does not require any token-based authentication to access.
 
-#### Request
+#### Request Example
 
 ~~~ ruby
 curl -v -H "Content-type:application/json" \
@@ -30,7 +30,7 @@ curl -v -H "Content-type:application/json" \
 ~~~
 
 
-#### Response
+#### Response Example
 
 ~~~ json
 {
@@ -45,7 +45,7 @@ curl -v -H "Content-type:application/json" \
 
 Revokes the token that is being used to authenticate to the API.
 
-#### Request
+#### Request Example
 
 ~~~ ruby
 curl -v -H "Content-type:application/json" \

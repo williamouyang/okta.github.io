@@ -56,10 +56,10 @@ cookieTokenUrl | URL for a a transparent 1x1 pixel image which contains a one-ti
 ## Session Operations
 
 ### Create Session
-{:.api .operation}
+{:.api .api-operation}
 
 ##### POST /sessions
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Creates a new session for a [user](users.html).
 
@@ -76,17 +76,17 @@ username         | `login` for an `ACTIVE` [user](users.html)                   
 password         | password for an `ACTIVE` [user](users.html)                         | Body       | String                                | TRUE     |
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 The new [Session](#session-model) for the [user](users.html).
 
 #### Create Session with One-Time Token
-{:.api .operation}
+{:.api .api-operation}
 
 Validates a [user's](users.html) credentials and returns a one-time token that can be used to set a session cookie in the user's browser.
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -100,8 +100,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }'
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -128,12 +128,12 @@ Content-Type: application/json
 ~~~
 
 #### Create Session with Embed Image URL
-{:.api .operation}
+{:.api .api-operation}
 
 Validates a [user's](users.html) credentials and returns a URL with a one-time token for 1x1 transparent image that can be used to set a session cookie in the [user's](users.html) browser
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -147,8 +147,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }'
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -175,27 +175,27 @@ Content-Type: application/json
 ~~~
 
 ### Validate Session
-{:.api .operation}
+{:.api .api-operation}
 
 ##### GET /sessions/*:id*
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Validate a [user's](users.html) session.
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description                          | Param Type | DataType | Required | Default
 --------- | ------------------------------------ | ---------- | -------- | -------- | -------
 id        | `id` of [user's](users.html) session | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 [Session](#session-model)
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -204,8 +204,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X GET "https://your-subdomain.okta.com/api/v1/sessions/000rWcxHV-lQUOzBhLJLYTl0Q"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -231,27 +231,27 @@ Content-Type: application/json
 ~~~
 
 ### Extend Session
-{:.api .operation}
+{:.api .api-operation}
 
 ##### PUT /sessions/*:id*
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Extends the lifetime of a session for a [user](users.html).
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description                            | Param Type | DataType | Required | Default
 --------- | -------------------------------------- | ---------- | -------- | -------- | -------
 id        | `id` of [user's](users.html) session   | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 [Session](#session-model)
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -260,8 +260,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X PUT "https://your-subdomain.okta.com/api/v1/sessions/000rWcxHV-lQUOzBhLJLYTl0Q"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -287,27 +287,27 @@ Content-Type: application/json
 ~~~
 
 ### Close Session
-{:.api .operation}
+{:.api .api-operation}
 
 ##### DELETE /sessions/*:id*
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Closes a session for a [user](users.html) (logout).
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description                          | Param Type | DataType | Required | Default
 --------- | ------------------------------------ | ---------- | -------- | -------- | -------
 id        | `id` of [user's](users.html) session | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 N/A
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -316,8 +316,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X DELETE "https://your-subdomain.okta.com/api/v1/sessions/000rWcxHV-lQUOzBhLJLYTl0Q"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ ruby
 HTTP/1.1 204 No Content

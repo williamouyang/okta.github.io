@@ -419,40 +419,40 @@ _links      | discoverable resources related to the app group | [JSON HAL](http:
 ## Application Operations
 
 ### Add Application
-{:.api .operation}
+{:.api .api-operation}
 
 #### POST /apps
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Adds a new application to your Okta organization.
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description                                | Param Type | DataType                          | Required | Default
 --------- | ------------------------------------------ | ---------- | --------------------------------- | -------- | -------
 app       | App-specific name, signOnMode and settings | Body       | [Application](#application-model) | TRUE     |
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 All responses return the created [Application](#application-model).
 
 #### Add Bookmark Application
-{:.api .operation}
+{:.api .api-operation}
 
 Adds an new bookmark application to your organization.
 
 ##### Settings
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Attribute          | Description                                             | DataType | Nullable | Unique | Validation
 ------------------ | ------------------------------------------------------- | -------- | -------- | ------ | ----------------------------------------
 url                | The URL of the launch page for this app                 | String   | FALSE    | FALSE  | [URL](http://tools.ietf.org/html/rfc3986)
 requestIntegration | Would you like Okta to add an integration for this app? | Boolean  | FALSE    | FALSE  |
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -473,8 +473,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }'
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -526,20 +526,20 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 #### Add Basic Authentication Application
-{:.api .operation}
+{:.api .api-operation}
 
 Adds an new application that uses HTTP Basic Authentication Scheme and requires a browser plugin.
 
 ##### Settings
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Attribute | Description                                     | DataType | Nullable | Unique | Validation
 --------- | ----------------------------------------------- | -------- | -------- | ------ | ----------------------------------------
 url       | The URL of the login page for this app          | String   | FALSE    | FALSE  | [URL](http://tools.ietf.org/html/rfc3986)
 authURL   | The URL of the authenticating site for this app | String   | FALSE    | FALSE  | [URL](http://tools.ietf.org/html/rfc3986)
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -560,8 +560,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }'
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -615,12 +615,12 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 #### Add Plugin SWA Application
-{:.api .operation}
+{:.api .api-operation}
 
 Adds a SWA application that requires a browser plugin.
 
 ##### Settings
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Attribute     | Description                                           | DataType | Nullable | Unique | Validation
 ------------- | ----------------------------------------------------- | -------- | -------- | ------ | ----------------------------------------
@@ -629,8 +629,8 @@ usernameField | CSS selector for the username field in the login form | String  
 passwordField | CSS selector for the password field in the login form | String   | FALSE    | FALSE  |
 buttonField   | CSS selector for the login button in the login form   | String   | FALSE    | FALSE  |
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -653,8 +653,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }'
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -710,12 +710,12 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 #### Add Plugin SWA (3 Field) Application
-{:.api .operation}
+{:.api .api-operation}
 
 Adds a SWA application that requires a browser plugin and supports 3 CSS selectors for the login form.
 
 ##### Settings
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Attribute          | Description                                           | DataType | Nullable | Unique | Validation
 ------------------ | ----------------------------------------------------- | -------- | -------- | ------ | ----------------------------------------
@@ -726,8 +726,8 @@ buttonField        | CSS selector for the login button in the login form   | Str
 extraFieldSelector | CSS selector for the extra field in the form          | String   | FALSE    | FALSE  |
 extraFieldValue    | Value for extra field form field                      | String   | FALSE    | FALSE  |
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -752,8 +752,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }'
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -811,12 +811,12 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 #### Add SWA Application (No Plugin)
-{:.api .operation}
+{:.api .api-operation}
 
 Adds a SWA application that uses HTTP POST and does not require a browser plugin
 
 ##### Settings
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Attribute           | Description                                           | DataType  | Nullable | Unique | Validation
 ------------------- | ----------------------------------------------------- | --------- | -------- | ------ | ----------------------------------------
@@ -831,8 +831,8 @@ optionalField3      | Name of the optional parameter in the login form      | St
 optionalField3Value | Name of the optional value in the login form          | String    | TRUE     | FALSE  |
 
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -860,8 +860,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }'
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -922,12 +922,12 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 #### Add SAML 2.0 Application
-{:.api .operation}
+{:.api .api-operation}
 
 Adds a SAML 2.0 WebSSO application
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -962,12 +962,12 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 #### Add WS-Federation Application
-{:.api .operation}
+{:.api .api-operation}
 
 Adds a WS-Federation Passive Requestor Profile application with a SAML 2.0 token
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -999,27 +999,27 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 ### Get Application
-{:.api .operation}
+{:.api .api-operation}
 
 #### GET /apps/*:id*
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Fetches an application from your Okta organization by `id`.
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description    | Param Type | DataType | Required | Default
 --------- | -------------- | ---------- | -------- | -------- | -------
 id        | `id` of an app | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 Fetched [Application](#application-model)
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -1028,8 +1028,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X GET "https://your-domain.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -1098,10 +1098,10 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 ### List Applications
-{:.api .operation}
+{:.api .api-operation}
 
 #### GET /apps
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Enumerates apps added to your organization with pagination. A subset of apps can be returned that match a supported filter expression or query.
 
@@ -1110,7 +1110,7 @@ Enumerates apps added to your organization with pagination. A subset of apps can
 - [List Applications Assigned to Group](#list-applications-assigned-to-group)
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description                                                   | Param Type | DataType | Required | Default
 --------- | ------------------------------------------------------------- | ---------- | -------- | -------- | -------
@@ -1134,17 +1134,17 @@ Filter                 | Description
 > Only a single expression is supported as this time
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 Array of [Applications](#application-model)
 
 #### List Applications with Defaults
-{:.api .operation}
+{:.api .api-operation}
 
 Enumerates all apps added to your organization
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -1153,8 +1153,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X GET "https://your-domain.okta.com/api/v1/apps"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 [
@@ -1275,12 +1275,12 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 #### List Applications Assigned to User
-{:.api .operation}
+{:.api .api-operation}
 
 Enumerates all applications assigned to a user
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -1289,8 +1289,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X GET "https://your-domain.okta.com/api/v1/apps?filter=user.id+eq+\"00ucw2RPGIUNTDQOYPOF\""
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 [
@@ -1411,12 +1411,12 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 #### List Applications Assigned to Group
-{:.api .operation}
+{:.api .api-operation}
 
 Enumerates all applications assigned to a group
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -1425,8 +1425,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X GET "https://your-domain.okta.com/api/v1/apps?filter=group.id+eq+\"00gckgEHZXOUDGDJLYLG\""
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 [
@@ -1484,15 +1484,15 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 ### Update Application
-{:.api .operation}
+{:.api .api-operation}
 
 #### PUT /apps/*:id*
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Updates an application in your organization.
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description         | Param Type | DataType                          | Required | Default
 --------- | ------------------- | ---------- | --------------------------------- | -------- | -------
@@ -1502,17 +1502,17 @@ app       | Updated app         | Body       | [Application](#application-model)
 > All attributes must be specified when updating an app  **updates are not supported!**
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 Updated [Application](#application-model)
 
 #### Set SWA User-Editable UserName & Password
-{:.api .operation}
+{:.api .api-operation}
 
 Configures the `EDIT_USERNAME_AND_PASSWORD` scheme for a SWA application with a username template
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -1558,8 +1558,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }'
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -1618,12 +1618,12 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 #### Set SWA User-Editable Password
-{:.api .operation}
+{:.api .api-operation}
 
 Configures the `EDIT_PASSWORD_ONLY` scheme for a SWA application with a username template
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -1669,8 +1669,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }'
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -1726,12 +1726,12 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 #### Set SWA Okta Password
-{:.api .operation}
+{:.api .api-operation}
 
 Configures the `EXTERNAL_PASSWORD_SYNC` scheme for a SWA application with a username template
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -1777,8 +1777,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }'
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -1834,12 +1834,12 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 #### Set SWA Shared Credentials
-{:.api .operation}
+{:.api .api-operation}
 
 Configures the `SHARED_USERNAME_AND_PASSWORD` scheme for a SWA application with a username and password
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -1887,7 +1887,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }'
 ~~~
 
-##### Response
+##### Response Example
 {:.api .reponse}
 
 ~~~ json
@@ -1946,29 +1946,29 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 ### Delete Application
-{:.api .operation}
+{:.api .api-operation}
 
 #### DELETE /apps/*:id*
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Removes an inactive application.
 
 > Applications must be deactivated before they can be deleted
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description         | Param Type | DataType | Required | Default
 --------- | ------------------- | ---------- | -------- | -------- | -------
 id        | id of app to delete | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 An empty JSON object `{}`
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -1977,8 +1977,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X DELETE "https://your-domain.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ ruby
 HTTP/1.1 204 No Content
@@ -2006,27 +2006,27 @@ Content-Type: application/json
 ## Application Lifecycle Operations
 
 ### Activate Application
-{:.api .operation}
+{:.api .api-operation}
 
 #### POST /apps/*:id*/lifecycle/activate
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Activates an inactive application.
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description           | Param Type | DataType | Required | Default
 --------- | --------------------- | ---------- | -------- | -------- | -------
 id        | `id` of app to activate | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 An empty JSON object `{}`
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -2035,35 +2035,35 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X POST "https://your-domain.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/activate"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {}
 ~~~
 
 ### Deactivate Application
-{:.api .operation}
+{:.api .api-operation}
 
 #### POST /apps/*:id*/lifecycle/deactivate
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Deactivates an active application.
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description               | Param Type | DataType | Required | Default
 --------- | ------------------------- | ---------- | -------- | -------- | -------
 id        | `id` of app to deactivate | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 An empty JSON object `{}`
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -2072,8 +2072,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X POST "https://your-domain.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {}
@@ -2082,15 +2082,15 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ## Application User Operations
 
 ### Assign User to Application
-{:.api .operation}
+{:.api .api-operation}
 
 Assigns a user to an application
 
 #### PUT /apps/*:aid*/users/*:uid*
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description                                     | Param Type | DataType                                    | Required | Default
 --------- | ----------------------------------------------- | ---------- | ------------------------------------------- | -------- | -------
@@ -2101,12 +2101,12 @@ appuser   | App user                                        | Body       | [Appl
 > For applications with [SignOn Modes](#signon-modes) or [Authentication Schemes](#authentication-schemes) that do not require or support credentials, pass and empty json object `{}` as the `appuser` request body
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 All responses return the assigned [Application User](#application-user-model).
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -2124,8 +2124,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }'
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -2145,15 +2145,15 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 ### Get Assigned User for Application
-{:.api .operation}
+{:.api .api-operation}
 
 #### GET /apps/*:aid*/users/*:uid*
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Fetches a specific application user assignment by `id`.
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description                                     | Param Type | DataType | Required | Default
 --------- | ----------------------------------------------- | ---------- | -------- | -------- | -------
@@ -2161,12 +2161,12 @@ aid       | unique key of [Application](#application-model) | URL        | Strin
 uid       | unique key of assigned [User](users.html)       | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 Fetched [Application User](#application-user-model)
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -2175,8 +2175,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X GET "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users/00ud4tVDDXYVKPXKVLCO"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -2196,15 +2196,15 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 ### List Users Assigned to Application
-{:.api .operation}
+{:.api .api-operation}
 
 #### GET /apps/*:aid*/users
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Enumerates application user assignments for an application.
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description                                                      | Param Type | DataType | Required | Default
 --------- | ---------------------------------------------------------------- | ---------- | -------- | -------- | -------
@@ -2215,12 +2215,12 @@ after     | Specifies the pagination cursor for the next page of assignments | Q
 > The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination)
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 Array of [Application Users](#application-user-model)
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -2229,8 +2229,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X GET "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 [
@@ -2266,15 +2266,15 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 ### Update Credentials for Application
-{:.api .operation}
+{:.api .api-operation}
 
 #### PUT /apps/*:aid*/users/*:uid*
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Updates a user's credentials for an application
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description                                     | Param Type | DataType                                    | Required | Default
 --------- | ----------------------------------------------- | ---------- | ------------------------------------------- | -------- | -------
@@ -2299,12 +2299,12 @@ If you attempt to assign a username or password to an application with an incomp
 ~~~
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 All responses return the assigned [Application User](#application-user-model).
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -2322,8 +2322,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }'
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -2343,15 +2343,15 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 ### Remove User from Application
-{:.api .operation}
+{:.api .api-operation}
 
 #### DELETE /apps/*:aid*/users/*:uid*
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Removes an assignment for a user from an application.
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description                                     | Param Type | DataType | Required | Default
 --------- | ----------------------------------------------- | ---------- | -------- | -------- | -------
@@ -2359,12 +2359,12 @@ aid       | unique key of [Application](#application-model) | URL        | Strin
 uid       | unique key of assigned [User](users.html)       | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 An empty JSON object `{}`
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -2373,8 +2373,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X DELETE "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users/00ud4tVDDXYVKPXKVLCO"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {}
@@ -2383,15 +2383,15 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ## Application Group Operations
 
 ### Assign Group to Application
-{:.api .operation}
+{:.api .api-operation}
 
 #### PUT /apps/*:aid*/groups/*:gid*
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Assigns a group to an application
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description                                     | Param Type | DataType                                      | Required | Default
 --------- | ----------------------------------------------- | ---------- | --------------------------------------------- | -------- | -------
@@ -2400,12 +2400,12 @@ gid       | unique key of a valid [Group](groups.html)      | URL        | Strin
 appgroup  | App group                                       | Body       | [Application Group](#application-group-model) | FALSE    |
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 All responses return the assigned [Application Group](#application-group-model).
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -2417,8 +2417,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }'
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -2429,15 +2429,15 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 ### Get Assigned Group for Application
-{:.api .operation}
+{:.api .api-operation}
 
 #### GET /apps/*:aid*/groups/*:gid*
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Fetches an application group assignment
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description                                     | Param Type | DataType | Required | Default
 --------- | ----------------------------------------------- | ---------- | -------- | -------- | -------
@@ -2445,12 +2445,12 @@ aid       | unique key of [Application](#application-model) | URL        | Strin
 gid       | unique key of an assigned [Group](groups.html)  | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 Fetched [Application Group](#application-group-model)
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -2459,8 +2459,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X GET "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/groups/00gbkkGFFWZDLCNTAGQR"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -2471,15 +2471,15 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 ### List Groups Assigned to Application
-{:.api .operation}
+{:.api .api-operation}
 
 #### GET /apps/*:aid*/groups
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Enumerates group assignments for an application.
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description                                                      | Param Type | DataType | Required | Default
 --------- | ---------------------------------------------------------------- | ---------- | -------- | -------- | -------
@@ -2490,12 +2490,12 @@ after     | Specifies the pagination cursor for the next page of assignments | Q
 > The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination)
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 Array of [Application Groups](#application-group-model)
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -2504,8 +2504,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X GET "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/groups"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 [
@@ -2523,15 +2523,15 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 ### Remove Group from Application
-{:.api .operation}
+{:.api .api-operation}
 
 #### DELETE /apps/*:aid*/groups/*:gid*
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Removes a group assignment from an application.
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description                                     | Param Type | DataType | Required | Default
 --------- | ----------------------------------------------- | ---------- | -------- | -------- | -------
@@ -2539,12 +2539,12 @@ aid       | unique key of [Application](#application-model) | URL        | Strin
 gid       | unique key of an assigned [Group](groups.html)  | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 An empty JSON object `{}`
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -2553,8 +2553,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X DELETE "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/groups/00gbkkGFFWZDLCNTAGQR"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {}

@@ -302,40 +302,47 @@
 }
 
 
-/* -------------------------- API Headers */
+/* -------------------------- API */
 
 .docs-body .api:before {
   font-family: fontawesome;
   margin-right: 8px;
 }
 
-.docs-body .operation {
+.docs-body .api-operation {
   font-size: 20px;
 }
 
-.docs-body .operation:before {
+.docs-body .api-operation:before {
   content: '\f12e';
 }
 
+.docs-body .api-uri-template em {
+  color: #090;
+}
+
 /*
-.docs-body .uri-template:before {
+.docs-body .api-uri-template:before {
   content: '\f135';
   margin-right: 10px !important;
 }
 */
 
-.docs-body .request:before {
-  content: '\f0a9';
-}
-
-.docs-body .response:before {
-  content: '\f0a8';
-}
-
-.docs-body .request-params:before {
+.docs-body .api-request-params:before {
   content: '\f18e';
 }
 
-.docs-body .response-params:before {
+.docs-body .api-response-params:before {
   content: '\f190';
 }
+
+.docs-body .api-request-example:before {
+  content: '\f0a9';
+}
+
+.docs-body .api-response-example:before {
+  content: '\f0a8';
+}
+
+
+

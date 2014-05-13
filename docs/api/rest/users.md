@@ -194,10 +194,10 @@ changeRecoveryQuestion | [Changes a user's recovery credential](#change-recovery
 ## User Operations
 
 ### Create User
-{:.api .operation}
+{:.api .api-operation}
 
 #### POST /users
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Creates a new user in your Okta organization with or without credentials:
 
@@ -207,7 +207,7 @@ Creates a new user in your Okta organization with or without credentials:
 - [Create User with Password & Recovery Question](#create-user-with-password--recovery-question)
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter   | Description                                                                      | Param Type | DataType                                  | Required | Default
 ----------- | -------------------------------------------------------------------------------- | ---------- | ----------------------------------------- | -------- | -------
@@ -216,7 +216,7 @@ profile     | Profile attributes for user                                       
 credentials | Credentials for user                                                             | Body       | [Credentials Object](#credentials-object) | FALSE    |
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 All responses return the created [User](#user-model).  Activation of a user is an asynchronous operation.  The system will perform group reconcilation during activation and assign the user to all applications via direct or inderect relationships (group memberships).  The user will have the `transitioningToStatus` property with a value of `ACTIVE` during activation to indicate that the user hasn't completed the asynchronous operation.  The user will have a `status` of `ACTIVE` when the activation process is complete.
 
@@ -236,12 +236,12 @@ X   |X    |FALSE|STAGED     |                      |
 X   |X    |TRUE |ACTIVE     |Password              |
 
 #### Create User without Credentials
-{:.api .operation}
+{:.api .api-operation}
 
 Creates a user without a [password](#password-object) or [recovery question & answer](#recovery-question-object).  When the user is activated, an email is sent to the user with an activation token that the can be used to complete the activation process.  This is the default flow for new user registration with the Okta Admin UI
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -260,8 +260,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }'
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -289,12 +289,12 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 #### Create User with Recovery Question
-{:.api .operation}
+{:.api .api-operation}
 
 Creates a user without a [password](#password-object).  When the user is activated, an email is sent to the user with an activation token that the can be used to complete the activation process.  This flow is not common but might be useful if migrating users from an existing user store.
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -319,8 +319,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }'
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -352,14 +352,14 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 #### Create User with Password
-{:.api .operation}
+{:.api .api-operation}
 
 Creates a user without a [recovery question & answer](#recovery-question-object).  The new user will immediately be able to login after activation with the assigned password.  This flow is common when developing a custom user registration experience.
 
 > Do not generate or send a one-time activation token when activating users with an assigned password.  Users should login with their assigned password.
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -381,8 +381,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }'
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -412,14 +412,14 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 #### Create User with Password & Recovery Question
-{:.api .operation}
+{:.api .api-operation}
 
 Creates a new user with a [password](#password-object) and [recovery question & answer](#recovery-question-object).  The new user will immediately be able to login after activation with the assigned password.  This flow is common when developing a custom user registration experience.
 
 > Do not generate or send a one-time activation token when activating users with an assigned password.  Users should login with their assigned password.
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -445,8 +445,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }'
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -478,15 +478,15 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 ### Get User
-{:.api .operation}
+{:.api .api-operation}
 
-#### GET /users/:id
-{:.api .uri-template}
+#### GET /users/*:id*
+{:.api .api-uri-template}
 
 Fetches a user from your Okta organization
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Fetch a specific user by `id`, `login`, or login shortname *(as long as it is unambiguous)*.
 
@@ -499,7 +499,7 @@ id        | `id`, `login`, or *login shortname* (as long as it is unambiguous) |
 >You can substitute *me* for the id to fetch the current user linked to API token or session cookie.
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 Fetched [User](#user-model)
 
@@ -519,12 +519,12 @@ Content-Type: application/json
 ~~~
 
 #### Get Current User
-{:.api .operation}
+{:.api .api-operation}
 
 Fetches the current user linked to API token or session cookie
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -533,8 +533,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X GET "https://your-domain.okta.com/api/v1/users/me"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -582,12 +582,12 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 #### Get User with ID
-{:.api .operation}
+{:.api .api-operation}
 
 Fetches a specific user when you know the user's `id`
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -596,8 +596,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X GET "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -645,14 +645,14 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 #### Get User with Login
-{:.api .operation}
+{:.api .api-operation}
 
 Fetches a specific user when you know the user's `login`
 
 > When fetching a user by `login`, you should [URL encode](http://en.wikipedia.org/wiki/Percent-encoding) the request parameter to ensure special characters are escaped properly.  Logins with a `/` character can only be fetched by 'id' due to URL issues with escaping the `/` character.
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -661,8 +661,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X GET "https://your-domain.okta.com/api/v1/users/isaac%40example.org"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -710,14 +710,14 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 #### Get User with Login Shortname
-{:.api .operation}
+{:.api .api-operation}
 
 Fetches a specific user when you know the user's `login shortname` and the shortname is unique within the organization
 
 > When fetching a user by `login shortname`, you should [URL encode](http://en.wikipedia.org/wiki/Percent-encoding) the request parameter to ensure special characters are escaped properly.  Logins with a `/` character can only be fetched by 'id' due to URL issues with escaping the `/` character.
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -726,8 +726,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X GET "https://your-domain.okta.com/api/v1/users/isaac"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -775,10 +775,10 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 ### List Users
-{:.api .operation}
+{:.api .api-operation}
 
 #### GET /users
-{:.api .uri-template}
+{:.api .api-uri-template}
 
 Enumerates users in your organization with pagination.  A subset of users can be returned that match a supported filter expression or query. 
 
@@ -788,7 +788,7 @@ Enumerates users in your organization with pagination.  A subset of users can be
 - [List Users with Status](#list-users-with-status)
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description                                                                          | Param Type | DataType | Required | Default
 --------- | ------------------------------------------------------------------------------------ | ---------- | -------- | -------- | -------
@@ -841,12 +841,12 @@ Users updated after 06/01/2013 but with a status of `LOCKED_OUT` or `RECOVERY`
     filter=lastUpdated gt "2013-06-27T16:35:28.000Z" and (status eq "LOCKED_OUT" or status eq "RECOVERY")
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 Array of [User](#user-model)
 
 #### List Users with Defaults
-{:.api .operation}
+{:.api .api-operation}
 
 Enumerates all users that do not have a status of `DEPROVISIONED`
 
@@ -854,8 +854,8 @@ The default user limit is set to a very high number due to historical reasons wh
 
 > If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller `limit` and page the results (See [Pagination](../getting_started/design_principles.html#pagination))
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -864,8 +864,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X GET "https://your-domain.okta.com/api/v1/users?limit=200"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ ruby
 HTTP/1.1 200 OK
@@ -942,12 +942,12 @@ Link: <https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limi
 ~~~
 
 #### List Users with Search
-{:.api .operation}
+{:.api .api-operation}
 
 Searches for user by `firstName`, `lastName`, or `email` value.  This operation is ideal for implementing a people picker.
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -956,8 +956,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X GET "https://your-domain.okta.com/api/v1/users?q=er&limit=1"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~json
 [
@@ -1007,12 +1007,12 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 #### List Users Updated after Timestamp
-{:.api .operation}
+{:.api .api-operation}
 
 Enumerates all users that have been updated since a specific timestamp.  Use this operation when implementing a background synchronization job and you want to poll for changes.
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -1021,7 +1021,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X GET "https://your-domain.okta.com/api/v1/users?filter=lastUpdated+gt+\"2013-07-01T00:00:00.000Z\""
 ~~~
 
-##### Response
+##### Response Example
 
 ~~~json
 [
@@ -1071,14 +1071,14 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 #### List Users with Status
-{:.api .operation}
+{:.api .api-operation}
 
 Enumerates all users that have a specific status.
 
 > Users with a status of `DEPROVISIONED` are not enumerated by default and must be explicitly requested with a status filter.
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -1087,8 +1087,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X GET "https://your-domain.okta.com/api/v1/users?filter=status+eq+\"ACTIVE\"+or+status+eq+\"RECOVERY\""
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~json
 [
@@ -1138,15 +1138,15 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 ### Update User
-{:.api .operation}
+{:.api .api-operation}
 
-#### PUT /users/:id
-{:.api .uri-template}
+#### PUT /users/*:id*
+{:.api .api-uri-template}
 
 Update a user's profile and/or credentials.
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter   | Description                 | Param Type | DataType                                  | Required | Default
 ----------- | --------------------------- | ---------- | ----------------------------------------- | -------- | -------
@@ -1159,15 +1159,15 @@ credentials | Update credentials for user | Body       | [Credentials Object](#c
 > All profile attributes must be specified when updating a user's profile.  **Partial updates are not supported**!
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 Updated [User](#user-model)
 
 #### Update Profile
-{:.api .operation}
+{:.api .api-operation}
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -1187,8 +1187,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }'
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json
 {
@@ -1237,7 +1237,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~   
 
 #### Set Password
-{:.api .operation}
+{:.api .api-operation}
 
 This is an administrative operation and does not validate existing user credentials.  For operations that validate credentials refer to:
 
@@ -1245,8 +1245,8 @@ This is an administrative operation and does not validate existing user credenti
 - [Forgot Password](#forgot-password)
 - [Change Password](#change-password)
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -1261,8 +1261,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }'
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~json
 {
@@ -1310,12 +1310,12 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~    
 
 #### Set Recovery Question & Answer
-{:.api .operation}
+{:.api .api-operation}
 
 This is an administrative operation and does not validate existing user credentials.  See [Change Recovery Question](#change-recovery-question) for an operation that requires validation
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -1333,8 +1333,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }'
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~json
 {
@@ -1384,27 +1384,27 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ## Related Resources    
 
 ### Get Assigned App Links
-{:.api .operation}
+{:.api .api-operation}
 
-#### GET /users/:id/appLinks
-{:.api .uri-template}
+#### GET /users/*:id*/appLinks
+{:.api .api-uri-template}
 
 Fetches appLinks for all direct or indirect (via group membership) assigned applications
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description  | Param Type | DataType | Required | Default
 --------- | ------------ | ---------- | -------- | -------- | -------
 id        | `id` of user | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 Array of App Links
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -1413,8 +1413,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X GET "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/appLinks"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~json
 [
@@ -1470,27 +1470,27 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 ### Get Member Groups
-{:.api .operation}
+{:.api .api-operation}
 
-#### GET /users/:id/groups
-{:.api .uri-template}
+#### GET /users/*:id*/groups
+{:.api .api-uri-template}
 
 Fetches the groups of which the user is a member.
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description  | Param Type | DataType | Required | Default
 --------- | ------------ | ---------- | -------- | -------- | -------
 id        | `id` of user | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 Array of [Groups](groups.html)
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -1499,8 +1499,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X GET "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/groups" 
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~json
 [
@@ -1526,17 +1526,17 @@ curl -v -H "Authorization: SSWS yourtoken" \
 Lifecycle operations are non-idempotent operations that initiate a state transition for a user's status.  Some operations are asynchronous while others are synchronous.  The user's current status limits what operations are allowed.  For example, you can't unlock a user that is `ACTIVE`.
 
 ### Activate User
-{:.api .operation}
+{:.api .api-operation}
 
-##### POST /users/:id/lifecycle/activate
-{:.api .uri-template}
+##### POST /users/*:id*/lifecycle/activate
+{:.api .api-uri-template}
 
 Activates a user.  This operation can only be performed on users with a `STAGED` status.  Activation of a user is an asynchronous operation.  The user will have the `transitioningToStatus` property with a value of `ACTIVE` during activation to indicate that the user hasn't completed the asynchronous operation.  The user will have a status of `ACTIVE` when the activation process is complete.
 
 > Users that do not have a password must complete the welcome flow by visiting the activation link to complete the transition to `ACTIVE` status.
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description                                     | Param Type | DataType | Required | Default
 --------- | ----------------------------------------------- | ---------- | -------- | -------- | -------
@@ -1544,7 +1544,7 @@ id        | `id` of user                                    | URL        | Strin
 sendEmail | Sends an activation email to the user if `true` | Query      | Boolean  | FALSE    | TRUE
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 Returns empty object by default. When `sendEmail` is `false`, returns an activation link for the user to set up their account.
 
@@ -1556,8 +1556,8 @@ Returns empty object by default. When `sendEmail` is `false`, returns an activat
 
 > If a password was set before the user was activated, then user must login with with their password and not the activation link
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -1566,8 +1566,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate?sendEmail=false"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ json    
 {
@@ -1576,29 +1576,29 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 ### Deactivate User
-{:.api .operation}
+{:.api .api-operation}
 
-##### POST /users/:id/lifecycle/deactivate
-{:.api .uri-template}
+##### POST /users/*:id*/lifecycle/deactivate
+{:.api .api-uri-template}
 
 Deactivates a user.  This operation can only be performed on users that do not have a `DEPROVISIONED` status.  Deactivation of a user is an asynchronous operation.  The user will have the `transitioningToStatus` property with a value of `DEPROVISIONED` during deactivation to indicate that the user hasn't completed the asynchronous operation.  The user will have a status of `DEPROVISIONED` when the deactivation process is complete.
 
 > Deactivating a user is a **destructive** operation.  The user will be deprovisioned from all assigned applications which may destroy their data such as email or files.  **This action cannot be recovered!**
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description  | Param Type | DataType | Required | Default
 --------- | ------------ | ---------- | -------- | -------- | -------
 id        | `id` of user | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 Returns an empty object
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -1607,8 +1607,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ ruby
 HTTP/1.1 200 OK
@@ -1616,28 +1616,28 @@ Content-Type: application/json
 ~~~
 
 ### Unlock User
-{:.api .operation}
+{:.api .api-operation}
 
-##### POST /users/:id/lifecycle/unlock
-{:.api .uri-template}
+##### POST /users/*:id*/lifecycle/unlock
+{:.api .api-uri-template}
 
 Unlocks a user with a `LOCKED_OUT` status and returns them to `ACTIVE` status.  Users will be able to login with their current password.
 
 > This operation currently only works with Okta-mastered users and does not support directory-mastered accounts such as Active Directory.
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description  | Param Type | DataType | Required | Default
 --------- | ------------ | ---------- | -------- | -------- | -------
 id        | `id` of user | URL        | String   | TRUE     |
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 Returns an empty object
 
-##### Request
+##### Request Example
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
@@ -1645,8 +1645,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/unlock"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ ruby
 HTTP/1.1 200 OK
@@ -1654,17 +1654,17 @@ Content-Type: application/json
 ~~~
 
 ### Reset Password
-{:.api .operation}
+{:.api .api-operation}
 
-#### POST /users/:id/lifecycle/reset_password
-{:.api .uri-template}
+#### POST /users/*:id*/lifecycle/reset_password
+{:.api .api-uri-template}
 
 Generates a one-time token (OTT) that can be used to reset a user's password.  The OTT link can be automatically emailed to the user or returned to the API caller and distributed using a custom flow.
 
 This operation will transition the user to the status of `RECOVERY` and the user will not be able to login or initiate a forgot password flow until they complete the reset flow.
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter | Description                                      | Param Type | DataType | Required | Default
 --------- | ------------------------------------------------ | ---------- | -------- | -------- | -------
@@ -1672,7 +1672,7 @@ id        | `id` of user                                     | URL        | Stri
 sendEmail | Sends reset password email to the user if `true` | Query      | Boolean  | FALSE    | TRUE
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 Returns an empty object by default. When `sendEmail` is `false`, returns a link for the user to reset their password.
 
@@ -1682,8 +1682,8 @@ Returns an empty object by default. When `sendEmail` is `false`, returns a link 
 }
 ~~~
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -1692,8 +1692,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password?sendEmail=false"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~json
 {
@@ -1702,15 +1702,15 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 ### Expire Password
-{:.api .operation}
+{:.api .api-operation}
 
-#### POST /users/:id/lifecycle/expire_password
-{:.api .uri-template}
+#### POST /users/*:id*/lifecycle/expire_password
+{:.api .api-uri-template}
 
 This operation will transition the user to the status of `PASSWORD_EXPIRED` and the user will be required to change their password at their next login. If `tempPassword` is passed, the user's password is reset to a temporary password that is returned, and then the temporary password is expired.
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter    | Description                                                  | Param Type | DataType | Required | Default
 ------------ | ------------------------------------------------------------ | ---------- | -------- | -------- | -------
@@ -1718,7 +1718,7 @@ id           | `id` of user                                                 | UR
 tempPassword | Sets the user's password to a temporary password,  if `true` | Query      | Boolean  | FALSE    | FALSE
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 Returns an the complete user object by default. When `tempPassword` is `true`, returns the temporary password.
 
@@ -1728,8 +1728,8 @@ Returns an the complete user object by default. When `tempPassword` is `true`, r
 }
 ~~~
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -1738,8 +1738,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password?tempPassword=false"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~json
 {
@@ -1795,15 +1795,15 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ## Credential Operations
   
 ### Forgot Password
-{:.api .operation}
+{:.api .api-operation}
 
-#### POST /users/:id/lifecycle/forgot_password
-{:.api .uri-template}
+#### POST /users/*:id*/lifecycle/forgot_password
+{:.api .api-uri-template}
 
 Generates a one-time token (OTT) that can be used to reset a user's password.  The user will be required to validate their security question's answer when visiting the reset link.  This operation can only be performed on users with a valid [recovery question credential](#recovery-question-object) and have an `ACTIVE` status.
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter    | Description                                         | Param Type | DataType | Required | Default
 ------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
@@ -1811,7 +1811,7 @@ id           | `id` of user                                        | URL        
 sendEmail    | Sends a forgot password email to the user if `true` | Query      | Boolean  | FALSE    | TRUE
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 Returns an empty object by default. When `sendEmail` is `false`, returns a link for the user to reset their password. 
 
@@ -1822,8 +1822,8 @@ Returns an empty object by default. When `sendEmail` is `false`, returns a link 
 ~~~
 > This operation does not affect the status of the user.
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -1832,8 +1832,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/forgot_password?sendEmail=false"
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~json
 {
@@ -1841,15 +1841,15 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ~~~
 
-#### POST /users/:id/credentials/forgot_password
-{:.api .uri-template}
+#### POST /users/*:id*/credentials/forgot_password
+{:.api .api-uri-template}
   
 Sets a new password for a user by validating the user's answer to their current recovery question.  This operation can only be performed on users with a valid [recovery question credential](#recovery-question-object) and have an `ACTIVE` status.
 
 > This operation is intended for applications that need to implement their own forgot password flow.  You are responsible for mitigation of all security risks such as phishing and replay attacks.  Best-practice is to generate a short-lived one-time token (OTT) that is sent to a verified email account.
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter         | Description                                | Param Type | DataType                                              | Required | Default
 ----------------- | ------------------------------------------ | ---------- | ----------------------------------------------------- | -------- | -------
@@ -1858,14 +1858,14 @@ password          | New password for user                      | Body       | [P
 recovery_question | Answer to user's current recovery question | Body       | [Recovery Question Object](#recovery-question-object) | TRUE     |
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 [Credentials](#credentials-object) of the user
 
 > This operation does not affect the status of the user.
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -1879,8 +1879,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }'
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~json
 {
@@ -1894,15 +1894,15 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 ### Change Password
-{:.api .operation}
+{:.api .api-operation}
 
-#### POST /users/:id/credentials/change_password
-{:.api .uri-template}
+#### POST /users/*:id*/credentials/change_password
+{:.api .api-uri-template}
 
 Changes a user's password by validating the user's current password.  This operation can only be performed on users in `STAGED`, `ACTIVE` or `RECOVERY` status that have a valid [password credential](#password-object)
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter   | Description               | Param Type | DataType                            | Required | Default
 ------------| --------------------------| ---------- | ------------------------------------| -------- | -------
@@ -1911,14 +1911,14 @@ oldPassword | Current password for user | Body       | [Password Object](#passwo
 newPassword | New password for user     | Body       | [Password Object](#password-object) | TRUE     |
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 [Credentials](#credentials-object) of the user
 
 > The user will transition to `ACTIVE` status when successfully invoked in `RECOVERY` status
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -1932,8 +1932,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }'
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~json
 {
@@ -1947,15 +1947,15 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 ### Change Recovery Question
-{:.api .operation}
+{:.api .api-operation}
 
-#### POST /users/:id/credentials/change_recovery_question
-{:.api .uri-template}
+#### POST /users/*:id*/credentials/change_recovery_question
+{:.api .api-uri-template}
 
 Changes a user's recovery question & answer credential by validating the user's current password.  This operation can only be performed on users in **STAGED**, **ACTIVE** or **RECOVERY** `status` that have a valid [password credential](#password-object)
 
 ##### Request Parameters
-{:.api .request-params}
+{:.api .api-request .api-request-params}
 
 Parameter         | Description                             | Param Type | DataType                                              | Required | Default
 ----------------- | --------------------------------------- | ---------- | ----------------------------------------------------- | -------- | -------
@@ -1964,14 +1964,14 @@ password          | Current password for user               | Body       | [Pass
 recovery_question | New recovery question & answer for user | Body       | [Recovery Question Object](#recovery-question-object) | TRUE     |
 
 ##### Response Parameters
-{:.api .response-params}
+{:.api .api-response .api-response-params}
 
 [Credentials](#credentials-object) of the user
 
 > This operation does not affect the status of the user.
 
-##### Request
-{:.api .request}
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
@@ -1988,8 +1988,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }'
 ~~~
 
-##### Response
-{:.api .response}
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~json
 {

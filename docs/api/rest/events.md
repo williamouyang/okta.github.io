@@ -464,7 +464,7 @@ Array of [Events](#event-model)
 
 #### Example
 
-##### Request
+##### Request Example
 
 ~~~ ruby
 curl -v -H "Authorization:SSWS yourtoken" \
@@ -473,7 +473,7 @@ curl -v -H "Authorization:SSWS yourtoken" \
 -X GET https://your-domain.okta.com/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z\&limit=3
 ~~~
 
-##### Response
+##### Response Example
 
 ~~~ ruby
 HTTP/1.1 200 OK

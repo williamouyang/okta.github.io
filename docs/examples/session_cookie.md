@@ -23,7 +23,7 @@ The generated one-time token along with the URL for your landing page can then b
 
 When processing a user's login request in your web application, retrieve an one-time token by passing the user's credentials with the `cookieToken` additionalFields query param to the [Create Session](/docs/api/rest/sessions.html#create-session-with-one-time-token) operation.
 
-#### Request
+#### Request Example
 
 ~~~ ruby
 POST /api/v1/sessions?additionalFields=cookieToken HTTP/1.1
@@ -37,8 +37,9 @@ Content-Type: application/json
   "password": "correct horse battery staple"
 }
 ~~~
+{:.api .api-request .api-request-example}
 
-#### Response
+#### Response Example
 
 ~~~ ruby
 HTTP/1.1 200 OK
@@ -51,6 +52,7 @@ Content-Type: application/json
     "cookieToken": "009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6"
 }
 ~~~
+{:.api .api-response .api-response-example}
 
 ### Visit session redirect URL with the one-time token
 
@@ -91,7 +93,7 @@ The generated one-time token can than be passed as a query parameter to an Okta 
 
 When processing a user's login request in your web application, retrieve an one-time token by passing the user's credentials with the `cookieToken` additionalFields query param to the [Create Session](/docs/api/rest/sessions.html#create-session-with-one-time-token) operation.
 
-#### Request
+#### Request Example
 
 ~~~ ruby
 POST /api/v1/sessions?additionalFields=cookieToken HTTP/1.1
@@ -105,8 +107,9 @@ Content-Type: application/json
   "password": "correct horse battery staple"
 }
 ~~~
+{:.api .api-request .api-request-example}
 
-#### Response
+#### Response Example
 
 ~~~ ruby
 HTTP/1.1 200 OK
@@ -119,6 +122,7 @@ Content-Type: application/json
     "cookieToken": "009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6"
 }
 ~~~
+{:.api .api-response .api-response-example}
 
 ### Visit an embed link with the one-time token
 
@@ -195,7 +199,7 @@ This flow uses a browser trick to establish a session by setting a cookie when r
 
 When processing a user's login request in your web application, retrieve a session cookie image URL by passing the user's credentials with the `cookieTokenUrl` additionalFields query param to the [Create Session](/docs/api/rest/sessions.html#create-session-with-embed-image-url) operation.
 
-#### Request
+#### Request Example
 
 ~~~ ruby
 POST /api/v1/sessions?additionalFields=cookieTokenUrl HTTP/1.1
@@ -209,8 +213,9 @@ Content-Type: application/json
   "password": "correct horse battery staple"
 }
 ~~~
+{:.api .api-request .api-request-example}
 
-#### Response
+#### Response Example
 
 ~~~ ruby
 HTTP/1.1 200 OK
@@ -223,6 +228,7 @@ Content-Type: application/json
     "cookieTokenUrl": "https://your-subdomain.okta.com/login/sessionCookie?token=00nwBmuBFS4o2E5l58eSbgnr4NmY0-ELQR4Pvn2RZV"
 }
 ~~~
+{:.api .api-response .api-response-example}
 
 ### Add image tag with session cookie image URL
 
