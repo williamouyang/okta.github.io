@@ -39,7 +39,7 @@ css: CSS_FILENAME.css (optional page specific css file)
 
 ### Docs
 
-1.  Create `PAGE_NAME.md` in `docs/FOLDER_NAME` (e.g. *docs/endpoints/users.md*)
+1.  Create `PAGE_NAME.md` in `docs/FOLDER_NAME` (e.g. *docs/api/rest/users.md*)
 2.  Filenames are underscore seperated and all lowercase. (e.g. *my_cool_doc_page.md*)
 3.  Author front matter
 

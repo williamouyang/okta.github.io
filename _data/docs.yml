@@ -9,9 +9,9 @@
 
 
 
-# -- ENDPOINTS
-- section: endpoints
-  title: Endpoints
+# -- APIS
+- section: api/rest
+  title: API
   pages:
     - users
     - groups

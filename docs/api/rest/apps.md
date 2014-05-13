@@ -109,7 +109,7 @@ _links        | discoverable resources related to the app  | [JSON HAL](http://t
 
 The Okta Application Network (OAN) defines the catalog of applications that can be added to your Okta organization.  Each application has a unique name (key) and schema that defines the required and optional settings for the application.  When adding an application, the unique app name must be specified in the request as well as any required settings.
 
-The catalog is currently not exposed via an API endpoint.  While additional apps may be added via the API, this endpoint only documents the following template applications:
+The catalog is currently not exposed via an API.  While additional apps may be added via the API, only the following template applications are documented:
 
 Name                | Example
 ------------------- | ---------------------------------------------------------
@@ -123,7 +123,7 @@ template_wsfed      | [Add WS-Federation Application](#add-ws-federation-applica
 
 The current workaround is to manually configure the desired application via the Administration UI in a preview (sandbox) organization and view the application via [Get Application](#get-application)
 
-> As previously stated, this endpoint currently doesn't support creating or managing apps with user management features
+> As previously stated, this API currently doesn't support creating or managing apps with user management features
 
 
 #### Features

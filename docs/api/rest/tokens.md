@@ -12,7 +12,7 @@ title: Tokens
 
 ### POST /tokens
 
-Create a token.  This endpoint does not require any token-based authentication to access.
+Create a token.  This API does not require any token-based authentication to access.
 
 #### Request
 
@@ -43,7 +43,7 @@ curl -v -H "Content-type:application/json" \
 
 ### DELETE /tokens
 
-Revoke the token that is being used to authenticate to the endpoint.
+Revokes the token that is being used to authenticate to the API.
 
 #### Request
 
