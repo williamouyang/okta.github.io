@@ -233,6 +233,10 @@
   word-break: normal;
 }
 
+.docs-body .table-word-break td{
+  word-break: break-word;
+}
+
 .docs-body td {
   padding: 3px 5px;
   border-right: 1px dotted #f0f0f0;

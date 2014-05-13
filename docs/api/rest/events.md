@@ -172,6 +172,7 @@ app.user_management.grouppush.mapping.deactivated.source.group.renamed.failed | 
 app.user_management.grouppush.mapping.app.group.renamed | Successfully renamed target application group when source group was renamed
 app.user_management.grouppush.mapping.app.group.renamed.failed | Failed to rename target application group when source group was renamed
 app.user_management.grouppush.mapping.and.groups.deleted.rule.deleted | An existing mapping and its target groups have been deleted because a mapping rule was deleted
+{:.table .table-word-break}
 
 ##### Delegated Authentication
 
