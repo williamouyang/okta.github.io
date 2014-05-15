@@ -4,45 +4,6 @@ title: Home
 body_id: home
 ---
 
-
-
-<script>
-var months = new Array(12);
-months[0] = "Jan";
-months[1] = "Feb";
-months[2] = "Mar";
-months[3] = "Apr";
-months[4] = "May";
-months[5] = "Jun";
-months[6] = "Jul";
-months[7] = "Aug";
-months[8] = "Sep";
-months[9] = "Oct";
-months[10] = "Nov";
-months[11] = "Dec";
-
-var weekday=new Array(7);
-weekday[0]="Sun";
-weekday[1]="Mon";
-weekday[2]="Tue";
-weekday[3]="Wed";
-weekday[4]="Thu";
-weekday[5]="Fri";
-weekday[6]="Sat";
-
-var current_date = new Date();
-current_date.setDate(current_date.getDate());
-month_value = current_date.getMonth();
-day_value = current_date.getDate();
-year_value = current_date.getFullYear();
-var day_name = weekday[current_date.getDay()];
-
-var current_date_format = day_name + " " + months[month_value] + " " + day_value  + " " + current_date.getHours() + ":"   + current_date.getMinutes() + ":"
-                + current_date.getSeconds();
-</script>
-
-
-
 <div class="valprop-home">
   <div class="container-narrow">
     <div class="row">
@@ -87,7 +48,7 @@ var current_date_format = day_name + " " + months[month_value] + " " + day_value
               </div>
             </div>
             <div id="body">
-              <p class="lastlogin"><span class="dollar"></span>Last login: <script>document.write(current_date_format)</script>  on console </p>
+              <p class="lastlogin"><span class="dollar"></span>Last login: <span id="last-login-date"></span> on console </p>
               <p class="terminal-command">
                 <span class="dollar"></span>The Okta Platform delivers all the power of Okta, for developers.<br />
                 <span class="dollar"></span>With the Okta REST API developers can build secure, scalable, and <br />
