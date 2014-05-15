@@ -399,34 +399,39 @@ ipAddress | IP Address of client | String | TRUE
 }
 ~~~
 
-## List Events
+## Event Operations
 
-### GET /events
+### List Events
+{:.api .api-operation}
+
+#### GET /events
+{:.api .api-uri-template}
 
 Fetch a list of events from your Okta organization system log
 
-#### Request Parameters
+##### Request Parameters
+{:.api .api-request .api-request-params}
 
-Parameter | Description | Param Type | DataType | Required | Default
---- | --- | --- | --- | --- | ---
-limit | Specifies the number of results to page | Query | Number | FALSE | 1000
-startDate | Specifies the timestamp to list events after | Query | Date | FALSE |
-filter | [Filter expression](../getting_started/design_principles.html#filtering) for events | Query | String | FALSE |
-after | Specifies the pagination cursor for the next page of events | Query | String | FALSE |
+Parameter | Description                                                                         | Param Type | DataType | Required | Default
+--------- | ----------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------
+limit     | Specifies the number of results to page                                             | Query      | Number   | FALSE    | 1000
+startDate | Specifies the timestamp to list events after                                        | Query      | Date     | FALSE    |
+filter    | [Filter expression](../getting_started/design_principles.html#filtering) for events | Query      | String   | FALSE    |
+after     | Specifies the pagination cursor for the next page of events                         | Query      | String   | FALSE    |
 
 > The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.html#pagination)
 
 > `startDate` and `filter` query parameters are mutually exclusive and cannot be used together in the same request
 
-##### Filters
+###### Filters
 
 The following expressions are supported for events with the `filter` query parameter:
 
-Filter | Description
------- | -----------
-`action.objectType eq ":actionType"` | Events that have a specific [action objectType](#action-objectypes)
-`target.objectType eq ":objectType"` | Events published with a specific [target objectType](#actortarget-objecttypes)
-`target.id eq ":id"` | Events published with a specific target id
+Filter                                       | Description
+-------------------------------------------- | ------------------------------------------------------------------------------
+`action.objectType eq ":actionType"`         | Events that have a specific [action objectType](#action-objectypes)
+`target.objectType eq ":objectType"`         | Events published with a specific [target objectType](#actortarget-objecttypes)
+`target.id eq ":id"`                         | Events published with a specific target id
 `published lt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Events published before a specific datetime
 `published eq "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Events published updated at a specific datetime
 `published gt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Events published updated after a specific datetime
@@ -458,13 +463,13 @@ App SSO events for a target user and application
     filter=action.objectType eq "app.auth.sso" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
 
 
-#### Response Parameters
+##### Response Parameters
+{:.api .api-response .api-response-params}
 
 Array of [Events](#event-model)
 
-#### Example
-
 ##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ ruby
 curl -v -H "Authorization:SSWS yourtoken" \
@@ -474,6 +479,7 @@ curl -v -H "Authorization:SSWS yourtoken" \
 ~~~
 
 ##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~ ruby
 HTTP/1.1 200 OK
