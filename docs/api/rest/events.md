@@ -18,44 +18,42 @@ Every organization has a system log that maintains a history of actions performe
 ### Example
 
 ~~~ json
- {
-    "eventId": "tevR26HuMJMSkWsKBUcQ65Raw1384847190000",
-    "published": "2013-11-19T07:46:30.000Z",
-    "action": {
-        "message": "User performed single sign on to app",
-        "categories": [
-            "Application Access"
-        ],
-        "objectType": "app.auth.sso",
-        "requestUri": "/app/salesforce/kdx9PWYBPEOBAUNVRBHK/sso/saml"
-    },
-    "actors": [
-        {
-            "id": "00ubgaSARVOQDIOXMORI",
-            "displayName": "Samus Aran",
-            "login": "samus.aran@example.com",
-            "objectType": "User"
-        },
-        {
-            "id": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36",
-            "displayName": "CHROME",
-            "ipAddress": "127.0.0.1",
-            "objectType": "Client"
-        }
-    ],
-    "targets": [
-        {
-            "id": "00ubgaSARVOQDIOXMORI",
-            "displayName": "Samus Aran",
-            "login": "samus.aran@example.com",
-            "objectType": "User"
-        },
-        {
-            "id": "0oadxaKUTKAXSXUZYJHC",
-            "displayName": "Salesforce.com",
-            "objectType": "AppInstance"
-        }
-    ]
+{
+   "eventId":"tevGr2BhQTMR72OiBGvKXTp2Q1399593071000",
+   "published":"2014-05-08T23:51:11.000Z",
+   "requestId":"req8U_MHmEbSai_0I4RopTnfA",
+   "sessionId":"000cWiYg47QSFyk1YjE6cDcEg",
+   "action":{
+      "message":"Okta user created",
+      "categories":[
+         "User Creation"
+      ],
+      "objectType":"core.user.config.user_creation.success",
+      "requestUri":"Background"
+   },
+   "actors":[
+      {
+         "id":"00ue1aWYUCUFFKXLXELW",
+         "displayName":"Add-Min O'Cloudy Tud",
+         "login":"administrator1@clouditude.net",
+         "objectType":"User"
+      },
+      {
+         "id":"Jakarta Commons-HttpClient/3.1",
+         "displayName":"UNKNOWN",
+         "ipAddress":"",
+         "objectType":"Client"
+      }
+   ],
+   "targets":[
+      {
+         "id":"00ue1gAKBMCSWHRZYDJS",
+         "displayName":"Inca-Louise O'Rain Dum",
+         "login":"inca@clouditude.net",
+         "objectType":"User"
+      }
+   ]
+   
 }
 ~~~
 
@@ -67,11 +65,18 @@ Attribute | Description | DataType | Nullable
 ---- | --- | --- | ---
 eventId | Unique key for event | String | FALSE
 published | Timestamp when event was published | Date | FALSE
+requestID | Identifies the request | String | FALSE
+sessionID | Session in which the event occurred | String | FALSE
 action | Identifies the action that the event describes | [Action Object](#action-object) | FALSE
 actors | Describes zero or more entities that performed the action | Array of [Actor Object](#actor-object) | TRUE
 targets | Describes zero or more entities that the action was performed against | Array of [Target Object](#target-object) | TRUE
 
 > The actor and/or target of an event is dependent on the action performed. Not all events have an actor or target.
+
+> A single requestID can identify multiple events.
+
+> The sessionID can identify multiple requests. Use the sessionID to link events and requests that occurred in the same session.
+
 
 ### Action Object
 
