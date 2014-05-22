@@ -64,9 +64,9 @@ The Event model is a ***read-only*** object and has a fixed set of attributes:
 Attribute | Description | DataType | Nullable
 ---- | --- | --- | ---
 eventId | Unique key for event | String | FALSE
-published | Timestamp when event was published | Date | FALSE
-requestID | Identifies the request | String | FALSE
-sessionID | Session in which the event occurred | String | FALSE
+published | Timestamp when event was published | Date | TRUE
+requestId | Identifies the request | String | TRUE
+sessionId | Session in which the event occurred | String | FALSE
 action | Identifies the action that the event describes | [Action Object](#action-object) | FALSE
 actors | Describes zero or more entities that performed the action | Array of [Actor Object](#actor-object) | TRUE
 targets | Describes zero or more entities that the action was performed against | Array of [Target Object](#target-object) | TRUE
