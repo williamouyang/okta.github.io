@@ -794,10 +794,10 @@ Parameter | Description                                                         
 --------- | ------------------------------------------------------------------------------------ | ---------- | -------- | -------- | -------
 q         | Searches `firstName`, `lastName`, and `email` attributes of users for matching value | Query      | String   | FALSE    |
 limit     | Specified the number of results                                                      | Query      | Number   | FALSE    | 10000
-filter    | [Filter expression](../getting_started/design_principles.html#filtering) for users   | Query      | String   | FALSE    |
+filter    | [Filter expression](/docs/getting_started/design_principles.html#filtering) for users   | Query      | String   | FALSE    |
 after     | Specifies the pagination cursor for the next page of users                           | Query      | String   | FALSE    |
 
-> The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.html#pagination)
+> The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination)
 
 > Search currently performs a startsWith match but it should be considered an implementation detail and may change without notice in the future
 
@@ -818,7 +818,7 @@ Filter                                         | Description
 `lastUpdated eq "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Users last updated at a specific datetime
 `lastUpdated gt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Users last updated after a specific datetime
 
-See [Filtering](../getting_started/design_principles.html#filtering) for more information on expressions
+See [Filtering](/docs/getting_started/design_principles.html#filtering) for more information on expressions
 
 > All filters must be [URL encoded](http://en.wikipedia.org/wiki/Percent-encoding) where `filter=lastUpdated gt "2013-06-01T00:00:00.000Z"` is encoded as `filter=lastUpdated%20gt%20%222013-06-01T00:00:00.000Z%22`
 
@@ -852,7 +852,7 @@ Enumerates all users that do not have a status of `DEPROVISIONED`
 
 The default user limit is set to a very high number due to historical reasons which is no longer valid for most organizations.  This will change in a future version of this API.  The recommended page limit is now `limit=200`.
 
-> If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller `limit` and page the results (See [Pagination](../getting_started/design_principles.html#pagination))
+> If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller `limit` and page the results (See [Pagination](/docs/getting_started/design_principles.html#pagination))
 
 ##### Request Example
 {:.api .api-request .api-request-example}

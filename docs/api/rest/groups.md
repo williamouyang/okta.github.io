@@ -277,7 +277,7 @@ q         | Searches the `name` attribute of groups for matching value  | Query 
 limit     | Specifies the number of group results in a page             | Query     | Number   | FALSE    | 10000
 after     | Specifies the pagination cursor for the next page of groups | Query     | String   | FALSE    |
 
-> The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.html#pagination)
+> The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination)
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -291,7 +291,7 @@ Fetches all groups in your organization.
 
 The default group limit is set to a very high number due to historical reasons which is no longer valid for most organizations.  This will change in a future version of this API.  The recommended page limit is now `limit=200`.
 
-> If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller `limit` and page the results (See [Pagination](../getting_started/design_principles.html#pagination))
+> If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller `limit` and page the results (See [Pagination](/docs/getting_started/design_principles.html#pagination))
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -566,11 +566,11 @@ id        | `id` of the group                                          | URL    
 limit     | Specifies the number of user results in a page             | Query     | Number   | FALSE    | 10000
 after     | Specifies the pagination cursor for the next page of users | Query     | String   | FALSE    |
 
-> The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.html#pagination)
+> The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination)
 
 The default user limit is set to a very high number due to historical reasons which is no longer valid for most organizations.  This will change in a future version of this API.  The recommended page limit is now `limit=200`.
 
-> If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller `limit` and page the results (See [Pagination](../getting_started/design_principles.html#pagination))
+> If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller `limit` and page the results (See [Pagination](/docs/getting_started/design_principles.html#pagination))
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -760,7 +760,7 @@ id        | id of the group                                           | URL     
 limit     | Specifies the number of app results for a page            | Query     | Number   | FALSE    | 20
 after     | Specifies the pagination cursor for the next page of apps | Query     | String   | FALSE    |
 
-> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.html#pagination)
+> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination)
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}

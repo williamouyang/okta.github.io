@@ -416,10 +416,10 @@ Parameter | Description                                                         
 --------- | ----------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------
 limit     | Specifies the number of results to page                                             | Query      | Number   | FALSE    | 1000
 startDate | Specifies the timestamp to list events after                                        | Query      | Date     | FALSE    |
-filter    | [Filter expression](../getting_started/design_principles.html#filtering) for events | Query      | String   | FALSE    |
+filter    | [Filter expression](/docs/getting_started/design_principles.html#filtering) for events | Query      | String   | FALSE    |
 after     | Specifies the pagination cursor for the next page of events                         | Query      | String   | FALSE    |
 
-> The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.html#pagination)
+> The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination)
 
 > `startDate` and `filter` query parameters are mutually exclusive and cannot be used together in the same request
 
@@ -436,7 +436,7 @@ Filter                                       | Description
 `published eq "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Events published updated at a specific datetime
 `published gt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Events published updated after a specific datetime
 
-See [Filtering](../getting_started/design_principles.html#filtering) for more information on expressions
+See [Filtering](/docs/getting_started/design_principles.html#filtering) for more information on expressions
 
 > All filters must be [URL encoded](http://en.wikipedia.org/wiki/Percent-encoding) where `filter=published gt "2013-06-01T00:00:00.000Z"` is encoded as `filter=published%20gt%20%222013-06-01T00:00:00.000Z%22`
 
