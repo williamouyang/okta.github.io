@@ -73,6 +73,9 @@ The Okta Application API provides operations to manage applications and/or assig
                 "type": "image/png"
              }
                  ],
+        "groups": {
+                "href": "http://example.okta.com/api/v1/apps/0oabhnUQFYHMBNVSVXMV/groups"
+        },
         "users": {
             "href": "https://example.okta.com/api/v1/apps/0oabhnUQFYHMBNVSVXMV/users"
         },
