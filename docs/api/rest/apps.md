@@ -1303,6 +1303,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X GET "https://your-domain.okta.com/api/v1/apps?filter=user.id+eq+\"00ucw2RPGIUNTDQOYPOF\""
 ~~~
 
+<b>Note: </b> You can add the string *?expand=user/:id* to the request to add additional user information to the response in the *_embedded* section. The above request would be<br /><br /> your-domain.okta.com/api/v1/apps?filter=user.id+eq+\"00ucw2RPGIUNTDQOYPOF\"&expand=user/:id<br /><br /> to add the embedded information. This is the only use of this expand parameter in a filter inthe Applications API.  
+
 ##### Response Example
 {:.api .api-response .api-response-example}
 
@@ -1422,6 +1424,28 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 ]
+~~~
+
+If you added the request for additional user information to the filter, information similar to the following is included.
+
+~~~ json
+"_embedded": {
+             "user": {
+                   "id": "00ueeqWMYJUAGGIUBPKB",
+                   "externalId": null,
+                   "created": "2014-05-28T00:13:33.000Z",
+                   "lastUpdated": "2014-05-28T00:13:33.000Z",
+                   "scope": "GROUP",
+                   "status": "ACTIVE",
+                   "statusChanged": "2014-05-28T00:13:33.000Z",
+                   "passwordChanged": null,
+                   "syncState": "DISABLED",
+                   "lastSync": null,
+                   "credentials": {
+                      "userName": "inca@clouditude.net"
+                   }
+                 }
+               }
 ~~~
 
 #### List Applications Assigned to Group
