@@ -513,6 +513,13 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     },
     "_links": {
+        "logo": [
+            {
+                "href": "http:/example.okta.com/img/logos/logo_1.png",
+                "name": "medium",
+                "type": "image/png"
+             }
+                ],
         "users": {
             "href": "https://example.okta.com/api/v1/apps/0oafxqCAJWWGELFTYASJ/users"
         },
