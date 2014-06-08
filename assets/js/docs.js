@@ -1,6 +1,62 @@
 $(function() {
 
 
+  // ------------------------ LINKIFY ANCHORS
+
+  var anchorForId = function (id) {
+    var anchor = document.createElement("a");
+    anchor.className = "header-link";
+    anchor.href      = "#" + id;
+    anchor.innerHTML = "<i class=\"fa fa-link\"></i>";
+    return anchor;
+  };
+
+  var linkifyAnchors = function (level, container) {
+    var headers = container.getElementsByTagName("h" + level);
+    for (var h = 0; h < headers.length; h++) {
+      var header = headers[h];
+
+      if (typeof header.id !== "undefined" && header.id !== "") {
+        header.appendChild(anchorForId(header.id), header);
+      }
+    }
+  };
+
+  var body = document.getElementById('docs-body');
+  for (var level = 1; level <= 6; level++) {
+    linkifyAnchors(level, body);
+  }
+
+  // ------------------------  DYNAMIC ANCHOR ADJUST FOR FIXED TOPNAV
+
+  var fixedNavHeight = 105;
+
+  $('a[href*=#]:not([href=#])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+&& location.hostname == this.hostname) {
+
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html,body').animate({
+          scrollTop: target.offset().top - fixedNavHeight //offsets for fixed header
+        }, 1000);
+        return false;
+      }
+    }
+  });
+
+  // Executed on page load with URL containing an anchor tag.
+  if ($(location.href.split("#")[1])) {
+    var target = $('#' + location.href.split("#")[1]);
+    if (target.length) {
+      $('html,body').animate({
+        scrollTop: target.offset().top - fixedNavHeight //offset height of header here too.
+      }, 1000);
+      return false;
+    }
+  };
+
   // ------------------------ SIDENAV
   $('.docs-sidebar-block > h2').on('click', function() {
     $this  = $(this);
@@ -20,45 +76,15 @@ $(function() {
     });
   });
 
+  // ------------------------  Add TOC Header
 
-  // -- TOC scrolling
-  var $toc              = $('<ul class="list-unstyled toc">'),
-      $headerSelector   = $('#docs-page-title'),
-      $h2s              = $('#docs-body > h2');
+  $('<h2>', {
+    'id': 'toc-title',
+    'html': 'Table of Contents'
+  }).prependTo('.toc');
 
-  var makeHeaderItem = function($header) {
-    return $('<li>', {
-      html: $('<a>', {
-        href: '#' + $header.attr('id'),
-        text: $header.text()
-      })
-    });
-  }
 
-  var makeToc = function(headers, toc) {
-    headers.each(function() {
-      var $this       = $(this),
-          $parent       = makeHeaderItem($this),
-          $nextHeaders  = $this.nextUntil('h2', '#docs-body > h3');
-      
-      if ($nextHeaders.length) {
-        var $children   = $('<ul>');
-        
-        $nextHeaders.each(function() {
-          var $child = makeHeaderItem($(this));
-          $children.append($child);
-        });
-        $parent.append($children);
-      }
-      toc.append($parent);
-    });
-  }
-
-  if ($headerSelector.length && $h2s.length) {
-    $toc.append('<h2 id="toc-title">Table of Contents</h2>');
-    makeToc($h2s, $toc);
-    $headerSelector.after($toc);
-  }
+  // ------------------------  TOC scrolling
 
   $('.docs-page').localScroll({
     duration: 300,
@@ -66,7 +92,6 @@ $(function() {
     onAfter: function() {
     }
   });
-
 
 
   // ------------------------ SCROLL TO TOP BUTTON
@@ -105,6 +130,5 @@ $(function() {
     var pos = $docsBody.width() + $docsBody.offset().left + 100;
     $scroller.css('left', pos);
   }
-
 
 });

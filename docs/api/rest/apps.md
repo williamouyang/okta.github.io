@@ -3,6 +3,8 @@ layout: docs_page
 title: Apps
 ---
 
+* Will be replaced with the ToC
+{:toc .list-unstyled .toc}
 
 ## Overview
 

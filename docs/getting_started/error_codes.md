@@ -3,13 +3,14 @@ layout: docs_page
 title: Error Codes
 ---
 
+* Will be replaced with the ToC
+{:toc .list-unstyled .toc}
+
+## Overview
 
 This document provides further information about the errors that the Okta API returns. The first table is listed by error code, and the second table is listed by HTTP return code.
 
-
-
 ## Okta Error Codes Listed by Error Code
-
 
 | Error Code | Description |HTTP Return Code|
 | ------------ | ------------- | ------------ |
@@ -76,7 +77,6 @@ This document provides further information about the errors that the Okta API re
 |<a name="E0000061"></a>E0000061|Tab error.|403|
 |<a name="E0000063"></a>E0000063|Invalid combination of parameters specified.|400|
 |<a name="E0000064"></a>E0000064|Password is expired and must be changed.|401|
-
 
 
 ## Okta Error Codes Listed by HTTP Return Code   

@@ -31,7 +31,7 @@
 
 /* -------------------------- LAYOUT */
 
-.docs-page {
+.docs-content {
   position: relative;
 }
 
@@ -47,7 +47,7 @@
   padding-top: 1em;
   position: absolute;
   left: 0;
-  top: 120px;
+  top: 0;
   bottom: 0;
 }
 
@@ -294,6 +294,27 @@
   list-style-type: none;
 }
 
+/* -------------------------- Header Links */
+
+.header-link {
+  position: relative;
+  left: 0.5em;
+  opacity: 0;
+  font-size: 0.8em;
+
+  -webkit-transition: opacity 0.2s ease-in-out 0.1s;
+  -moz-transition: opacity 0.2s ease-in-out 0.1s;
+  -ms-transition: opacity 0.2s ease-in-out 0.1s;
+}
+
+h2:hover .header-link,
+h3:hover .header-link,
+h4:hover .header-link,
+h5:hover .header-link,
+h6:hover .header-link {
+  opacity: 1;
+}
+
 /* -------------------------- IMG */
 
 .docs-body img {
@@ -343,6 +364,3 @@
 .docs-body .api-response-example:before {
   content: '\f0a8';
 }
-
-
-

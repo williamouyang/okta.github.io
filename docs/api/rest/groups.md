@@ -3,6 +3,8 @@ layout: docs_page
 title: Groups
 ---
 
+* Will be replaced with the ToC
+{:toc .list-unstyled .toc}
 
 ## Overview
 

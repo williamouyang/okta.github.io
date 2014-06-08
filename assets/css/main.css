@@ -24,6 +24,7 @@ html, body {
 
 body {
   background-color: #eaeaea;
+  margin-top: 90px;
 }
 
 body p {
@@ -89,7 +90,6 @@ ul li {
 
 #main-container {
   margin: 0 auto;
-  margin-top: 90px;
   width: 1080px;
 }
 

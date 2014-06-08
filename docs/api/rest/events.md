@@ -3,13 +3,12 @@ layout: docs_page
 title: Events
 ---
 
-
+* Will be replaced with the ToC
+{:toc .list-unstyled .toc}
 
 ## Overview
 
 The Okta Event API provides read access to your organization's system log. The API is intended to export event data as a batch job from your organization to another system for reporting or analysis.
-
-
 
 ## Event Model
 

@@ -6,12 +6,14 @@
   <div class="title-block">
     <h1>Developer Documentation</h1>
   </div>
-  <div class="block docs-sidebar" id="docs-sidebar">
-    {% include docs_sidebar.html %}
-  </div>
-  <div class="block docs-body" id="docs-body">
-    <h1 id="docs-page-title">{{ page.title }}</h1>
-    {{ content }}
+  <div class="docs-content">
+    <div class="block docs-sidebar clearfix" id="docs-sidebar">
+      {% include docs_sidebar.html %}
+    </div>
+    <div class="block docs-body" id="docs-body">
+      <h1 id="docs-page-title">{{ page.title }}</h1>
+      {{ content }}
+    </div>
   </div>
   <a href="#main-container" id="scroll-top-button">Scroll to Top</a>
 </div>
