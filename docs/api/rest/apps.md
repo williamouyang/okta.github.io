@@ -70,13 +70,13 @@ The Okta Application API provides operations to manage applications and/or assig
     "_links": {
         "logo": [
             {
-                "href": "http:/example.okta.com/img/logos/logo_1.png",
+                "href": "https:/example.okta.com/img/logos/logo_1.png",
                 "name": "medium",
                 "type": "image/png"
-             }
-                 ],
+            }
+        ],
         "groups": {
-                "href": "http://example.okta.com/api/v1/apps/0oabhnUQFYHMBNVSVXMV/groups"
+            "href": "http://example.okta.com/api/v1/apps/0oabhnUQFYHMBNVSVXMV/groups"
         },
         "users": {
             "href": "https://example.okta.com/api/v1/apps/0oabhnUQFYHMBNVSVXMV/users"
@@ -113,8 +113,9 @@ visibility    | visibility settings for app                | [Visibility Object]
 credentials   | credentials for the specified `signOnMode` | [Application Credentials Object](#application-credentials-object) |           |           | TRUE     | FALSE  | FALSE
 settings      | settings for app                           | Object ([App Names & Settings](#app-names--settings))             |           |           | TRUE     | FALSE  | FALSE
 _links        | discoverable resources related to the app  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)    |           |           | TRUE     | FALSE  | TRUE
+_embedded     | embedded resources related to the app      | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)    |           |           | TRUE     | FALSE  | TRUE
 
-> `id`, `created`, `lastUpdated`, `status`, and `_links` are only available after an app is created
+> `id`, `created`, `lastUpdated`, `status`, `_links`, and `_embedded` are only available after an app is created
 
 
 #### App Names & Settings
@@ -327,6 +328,7 @@ deactivate         | [Lifecycle action](#deactivate-application) to transition a
 metadata           | Protocol-specific metadata document for the configured `SignOnMode`
 users              | [User](#application-user-operations) assignments for application
 groups             | [Group](#application-group-operations) assignments for application
+logo               | Application logo image
 
 ## Application User Model
 
@@ -527,13 +529,16 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "_links": {
         "logo": [
             {
-                "href": "http:/example.okta.com/img/logos/logo_1.png",
+                "href": "https:/example.okta.com/img/logos/logo_1.png",
                 "name": "medium",
                 "type": "image/png"
-             }
-                ],
+            }
+        ],
         "users": {
             "href": "https://example.okta.com/api/v1/apps/0oafxqCAJWWGELFTYASJ/users"
+        },
+        "groups": {
+            "href": "https://example.okta.com/api/v1/apps/0oafxqCAJWWGELFTYASJ/groups"
         },
         "self": {
             "href": "https://example.okta.com/api/v1/apps/0oafxqCAJWWGELFTYASJ"
@@ -620,8 +625,18 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     },
     "_links": {
+        "logo": [
+            {
+                "href": "https:/example.okta.com/img/logos/logo_1.png",
+                "name": "medium",
+                "type": "image/png"
+            }
+        ],
         "users": {
             "href": "https://example.okta.com/api/v1/apps/0oafwvZDWJKVLDCUWUAC/users"
+        },
+        "groups": {
+            "href": "https://example.okta.com/api/v1/apps/0oafwvZDWJKVLDCUWUAC/groups"
         },
         "self": {
             "href": "https://example.okta.com/api/v1/apps/0oafwvZDWJKVLDCUWUAC"
@@ -715,8 +730,18 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     },
     "_links": {
+        "logo": [
+            {
+                "href": "https:/example.okta.com/img/logos/logo_1.png",
+                "name": "medium",
+                "type": "image/png"
+            }
+        ],
         "users": {
             "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
+        },
+        "groups": {
+            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/groups"
         },
         "self": {
             "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
@@ -816,8 +841,18 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     },
     "_links": {
+        "logo": [
+            {
+                "href": "https:/example.okta.com/img/logos/logo_1.png",
+                "name": "medium",
+                "type": "image/png"
+            }
+        ],
         "users": {
             "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
+        },
+        "groups": {
+            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/groups"
         },
         "self": {
             "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
@@ -927,8 +962,18 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     },
     "_links": {
+        "logo": [
+            {
+                "href": "https:/example.okta.com/img/logos/logo_1.png",
+                "name": "medium",
+                "type": "image/png"
+            }
+        ],
         "users": {
             "href": "https://example.okta.com/api/v1/apps/0oafywQDNMXLYDBIHQTT/users"
+        },
+        "groups": {
+            "href": "https://example.okta.com/api/v1/apps/0oafywQDNMXLYDBIHQTT/groups"
         },
         "self": {
             "href": "https://example.okta.com/api/v1/apps/0oafywQDNMXLYDBIHQTT"
@@ -1100,8 +1145,18 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     },
     "_links": {
+        "logo": [
+            {
+                "href": "https:/example.okta.com/img/logos/logo_1.png",
+                "name": "medium",
+                "type": "image/png"
+            }
+        ],
         "users": {
             "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/users"
+        },
+        "groups": {
+            "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/groups"
         },
         "self": {
             "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD"
@@ -1131,11 +1186,12 @@ Enumerates apps added to your organization with pagination. A subset of apps can
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter | Description                                                   | Param Type | DataType | Required | Default
---------- | ------------------------------------------------------------- | ---------- | -------- | -------- | -------
-limit     | Specified the number of results for a page                    | Query      | Number   | FALSE    | 20
-filter    | Filters apps by `status`, `user.id`, or `group.id` expression | Query      | String   | FALSE    |
-after     | Specifies the pagination cursor for the next page of apps     | Query      | String   | FALSE    |
+Parameter | Description                                                                                                      | Param Type | DataType | Required | Default
+--------- | ---------------------------------------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------
+limit     | Specified the number of results for a page                                                                       | Query      | Number   | FALSE    | 20
+filter    | Filters apps by `status`, `user.id`, or `group.id` expression                                                    | Query      | String   | FALSE    |
+after     | Specifies the pagination cursor for the next page of apps                                                        | Query      | String   | FALSE    |
+expand    | Traverses `users` link relationship and optionally embeds [Application User](#application-user-model) resource   | Query      | String   | FALSE    |
 
 > The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination)
 
@@ -1151,6 +1207,17 @@ Filter                 | Description
 `group.id eq ":gid"`   | Apps assigned to a specific group such as `00gckgEHZXOUDGDJLYLG`
 
 > Only a single expression is supported as this time
+
+###### Link Expansions
+
+The following link expansions are supported to embed additional resources into the response:
+
+Expansion    | Description
+------------ | ---------------------------------------------------------------------------------------------------------------
+`user/:id`   | Embeds the [Application User](#application-user-model) for an assigned user such as `user/00ucw2RPGIUNTDQOYPOF`
+
+> The `user/:id` expansion can currently only be used in conjunction with the `user.id eq ":uid"` filter (See [List Applications Assigned to User](#list-applications-assigned-to-user)).
+
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -1226,8 +1293,18 @@ curl -v -H "Authorization: SSWS yourtoken" \
             }
         },
         "_links": {
+            "logo": [
+                {
+                    "href": "https:/example.okta.com/img/logos/logo_1.png",
+                    "name": "medium",
+                    "type": "image/png"
+                }
+            ],
             "users": {
                 "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/users"
+            },
+            "groups": {
+                "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/groups"
             },
             "self": {
                 "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD"
@@ -1279,8 +1356,18 @@ curl -v -H "Authorization: SSWS yourtoken" \
             }
         },
         "_links": {
+            "logo": [
+                {
+                    "href": "https:/example.okta.com/img/logos/logo_1.png",
+                    "name": "medium",
+                    "type": "image/png"
+                }
+            ],
             "users": {
                 "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
+            },
+            "groups": {
+                "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/groups"
             },
             "self": {
                 "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
@@ -1296,7 +1383,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 #### List Applications Assigned to User
 {:.api .api-operation}
 
-Enumerates all applications assigned to a user
+Enumerates all applications assigned to a user and optionally embeds their [Application User](#application-user-model) in a single response.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1305,10 +1392,10 @@ Enumerates all applications assigned to a user
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/apps?filter=user.id+eq+\"00ucw2RPGIUNTDQOYPOF\""
+-X GET "https://your-domain.okta.com/api/v1/apps?filter=user.id+eq+\"00ucw2RPGIUNTDQOYPOF\"&expand=user/00ucw2RPGIUNTDQOYPOF"
 ~~~
 
-<b>Note: </b> You can add the string *?expand=user/:id* to the request to add additional user information to the response in the *_embedded* section. The above request would be<br /><br /> your-domain.okta.com/api/v1/apps?filter=user.id+eq+\"00ucw2RPGIUNTDQOYPOF\"&expand=user/:id<br /><br /> to add the embedded information. This is the only use of this expand parameter in a filter inthe Applications API.  
+> The `expand=user/:id` query parameter optionally return the user's [Application User](#application-user-model) information  in the response body's `_embedded` property. 
 
 ##### Response Example
 {:.api .api-response .api-response-example}
@@ -1364,8 +1451,18 @@ curl -v -H "Authorization: SSWS yourtoken" \
             }
         },
         "_links": {
+            "logo": [
+                {
+                    "href": "https:/example.okta.com/img/logos/logo_1.png",
+                    "name": "medium",
+                    "type": "image/png"
+                }
+            ],
             "users": {
                 "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/users"
+            },
+            "groups": {
+                "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/groups"
             },
             "self": {
                 "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD"
@@ -1375,6 +1472,31 @@ curl -v -H "Authorization: SSWS yourtoken" \
             },
             "deactivate": {
                 "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/lifecycle/deactivate"
+            }
+        },
+        "_embedded": {
+            {
+                "id": "00ucw2RPGIUNTDQOYPOF",
+                "externalId": null,
+                "created": "2014-03-21T23:31:35.000Z",
+                "lastUpdated": "2014-03-21T23:31:35.000Z",
+                "scope": "USER",
+                "status": "ACTIVE",
+                "statusChanged": "2014-03-21T23:31:35.000Z",
+                "passwordChanged": null,
+                "syncState": "DISABLED",
+                "lastSync": null,
+                "credentials": {
+                    "userName": "user@example.com"
+                },
+                "_links": {
+                    "app": {
+                        "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD"
+                    },
+                    "user": {
+                        "href": "https://example.okta.com/api/v1/users/00ucw2RPGIUNTDQOYPOF"
+                    }
+                }
             }
         }
     },
@@ -1417,8 +1539,18 @@ curl -v -H "Authorization: SSWS yourtoken" \
             }
         },
         "_links": {
+            "logo": [
+                {
+                    "href": "https:/example.okta.com/img/logos/logo_1.png",
+                    "name": "medium",
+                    "type": "image/png"
+                }
+            ],
             "users": {
                 "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
+            },
+            "groups": {
+                "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/groups"
             },
             "self": {
                 "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
@@ -1426,31 +1558,35 @@ curl -v -H "Authorization: SSWS yourtoken" \
             "deactivate": {
                 "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
             }
-        }
+        },
+        "_embedded": {
+            {
+                "id": "00ucw2RPGIUNTDQOYPOF",
+                "externalId": null,
+                "created": "2014-06-10T15:16:01.000Z",
+                "lastUpdated": "2014-06-10T15:17:38.000Z",
+                "scope": "USER",
+                "status": "ACTIVE",
+                "statusChanged": "2014-06-10T15:16:01.000Z",
+                "passwordChanged": "2014-06-10T15:17:38.000Z",
+                "syncState": "DISABLED",
+                "lastSync": null,
+                "credentials": {
+                    "userName": "user@example.com",
+                    "password": {}
+                },
+                "_links": {
+                    "app": {
+                        "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
+                    },
+                    "user": {
+                        "href": "https://example.okta.com/api/v1/users/00ucw2RPGIUNTDQOYPOF"
+                    }
+                }
+            }
+        }        
     }
 ]
-~~~
-
-If you added the request for additional user information to the filter, information similar to the following is included.
-
-~~~ json
-"_embedded": {
-             "user": {
-                   "id": "00ueeqWMYJUAGGIUBPKB",
-                   "externalId": null,
-                   "created": "2014-05-28T00:13:33.000Z",
-                   "lastUpdated": "2014-05-28T00:13:33.000Z",
-                   "scope": "GROUP",
-                   "status": "ACTIVE",
-                   "statusChanged": "2014-05-28T00:13:33.000Z",
-                   "passwordChanged": null,
-                   "syncState": "DISABLED",
-                   "lastSync": null,
-                   "credentials": {
-                      "userName": "inca@clouditude.net"
-                   }
-                 }
-               }
 ~~~
 
 #### List Applications Assigned to Group
@@ -1512,8 +1648,18 @@ curl -v -H "Authorization: SSWS yourtoken" \
             }
         },
         "_links": {
+            "logo": [
+                {
+                    "href": "https:/example.okta.com/img/logos/logo_1.png",
+                    "name": "medium",
+                    "type": "image/png"
+                }
+            ],
             "users": {
                 "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
+            },
+            "groups": {
+                "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/groups"
             },
             "self": {
                 "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
@@ -1644,14 +1790,21 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     },
     "_links": {
+        "logo": [
+            {
+                "href": "https:/example.okta.com/img/logos/logo_1.png",
+                "name": "medium",
+                "type": "image/png"
+            }
+        ],
         "users": {
             "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
         },
+        "groups": {
+            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/groups"
+        },
         "self": {
             "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
-        },
-        "metadata": {
-            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/sso/saml/metadata"
         },
         "deactivate": {
             "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
@@ -1755,8 +1908,18 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     },
     "_links": {
+        "logo": [
+            {
+                "href": "https:/example.okta.com/img/logos/logo_1.png",
+                "name": "medium",
+                "type": "image/png"
+            }
+        ],
         "users": {
             "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
+        },
+        "groups": {
+            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/groups"
         },
         "self": {
             "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
@@ -1863,8 +2026,18 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     },
     "_links": {
+        "logo": [
+            {
+                "href": "https:/example.okta.com/img/logos/logo_1.png",
+                "name": "medium",
+                "type": "image/png"
+            }
+        ],
         "users": {
             "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
+        },
+        "groups": {
+            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/groups"
         },
         "self": {
             "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
@@ -1975,8 +2148,18 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     },
     "_links": {
+        "logo": [
+            {
+                "href": "https:/example.okta.com/img/logos/logo_1.png",
+                "name": "medium",
+                "type": "image/png"
+            }
+        ],
         "users": {
             "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
+        },
+        "groups": {
+            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/groups"
         },
         "self": {
             "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
