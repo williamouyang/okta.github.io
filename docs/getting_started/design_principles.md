@@ -249,3 +249,15 @@ X-RateLimit-Reset: 1366037820
 If the rate limit is exceeded, an HTTP 429 Status Code is returned.  The current Rate Limit is 75 request per-org per-second
 
 **Rate limits are enforced. SSO and Enterprise customers as of March 25, 2014 are not rate limited. Okta support will contact current SSO and Enterprise customers if there are any changes to the rate limit policy that affect their organizations.**
+
+## Cross-Origin Resource Sharing (CORS)
+
+[Cross-Origin Resource Sharing (CORS)](http://en.wikipedia.org/wiki/Cross-Origin_Resource_Sharing) is a mechanism that allows a web page to make an AJAX call using [XMLHttpRequest (XHR)](http://en.wikipedia.org/wiki/XMLHttpRequest) to a domain that is  different from the one from where the script was loaded.  Such "cross-domain" requests would otherwise be forbidden by web browsers, per the [same origin security policy](http://en.wikipedia.org/wiki/Same_origin_policy).  CORS defines a [standardized](http://www.w3.org/TR/cors/) way in which the browser and the server can interact to determine whether or not to allow the cross-origin request.
+
+In Okta, CORS allows JavaScript hosted on your websites to make an XHR to the Okta API with the Okta session cookie. Every website orgin must be explictly permitted via the Okta Admin Dashboard for CORS.  See [Enabling CORS](./enabling_cors.html) for details on how to allow your website to make cross-orgin requests.
+
+> **Caution:** Only grant access to specific orgins (websites) that you control and trust to access the Okta API.
+
+### API Support
+
+The Okta API supports CORS on an API by API basis. If you’re building an application that needs CORS, please check that the specific operation supports CORS for your use case. APIs that support CORS are marked with the following icon <span class="label label-cors"><i class="fa fa-cloud-download"></i> CORS</span>.

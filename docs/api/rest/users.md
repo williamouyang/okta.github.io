@@ -199,7 +199,7 @@ changeRecoveryQuestion | [Changes a user's recovery credential](#change-recovery
 ### Create User
 {:.api .api-operation}
 
-#### POST /users
+#### <span class="label label-api-post">POST</span> /users
 {:.api .api-uri-template}
 
 Creates a new user in your Okta organization with or without credentials:
@@ -483,8 +483,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Get User
 {:.api .api-operation}
 
-#### GET /users/*:id*
+#### <span class="label label-api-get">GET</span> /users/*:id*
 {:.api .api-uri-template}
+<span class="label label-cors pull-right"><i class="fa fa-cloud-download"></i> CORS</span>
 
 Fetches a user from your Okta organization
 
@@ -523,6 +524,7 @@ Content-Type: application/json
 
 #### Get Current User
 {:.api .api-operation}
+<span class="label label-cors pull-right"><i class="fa fa-cloud-download"></i> CORS</span>
 
 Fetches the current user linked to API token or session cookie
 
@@ -586,6 +588,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 #### Get User with ID
 {:.api .api-operation}
+<span class="label label-cors pull-right"><i class="fa fa-cloud-download"></i> CORS</span>
 
 Fetches a specific user when you know the user's `id`
 
@@ -649,6 +652,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 #### Get User with Login
 {:.api .api-operation}
+<span class="label label-cors pull-right"><i class="fa fa-cloud-download"></i> CORS</span>
 
 Fetches a specific user when you know the user's `login`
 
@@ -714,6 +718,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 #### Get User with Login Shortname
 {:.api .api-operation}
+<span class="label label-cors pull-right"><i class="fa fa-cloud-download"></i> CORS</span>
 
 Fetches a specific user when you know the user's `login shortname` and the shortname is unique within the organization
 
@@ -780,7 +785,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### List Users
 {:.api .api-operation}
 
-#### GET /users
+#### <span class="label label-api-get">GET</span> /users
 {:.api .api-uri-template}
 
 Enumerates users in your organization with pagination.  A subset of users can be returned that match a supported filter expression or query. 
@@ -1143,7 +1148,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Update User
 {:.api .api-operation}
 
-#### PUT /users/*:id*
+#### <span class="label label-api-put">PUT</span> /users/*:id*
 {:.api .api-uri-template}
 
 Update a user's profile and/or credentials.
@@ -1389,8 +1394,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Get Assigned App Links
 {:.api .api-operation}
 
-#### GET /users/*:id*/appLinks
+#### <span class="label label-api-get">GET</span> /users/*:id*/appLinks
 {:.api .api-uri-template}
+<span class="label label-cors pull-right"><i class="fa fa-cloud-download"></i> CORS</span>
 
 Fetches appLinks for all direct or indirect (via group membership) assigned applications
 
@@ -1475,8 +1481,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Get Member Groups
 {:.api .api-operation}
 
-#### GET /users/*:id*/groups
+#### <span class="label label-api-get">GET</span> /users/*:id*/groups
 {:.api .api-uri-template}
+<span class="label label-cors pull-right"><i class="fa fa-cloud-download"></i> CORS</span>
 
 Fetches the groups of which the user is a member.
 
@@ -1531,7 +1538,7 @@ Lifecycle operations are non-idempotent operations that initiate a state transit
 ### Activate User
 {:.api .api-operation}
 
-##### POST /users/*:id*/lifecycle/activate
+##### <span class="label label-api-post">POST</span> /users/*:id*/lifecycle/activate
 {:.api .api-uri-template}
 
 Activates a user.  This operation can only be performed on users with a `STAGED` status.  Activation of a user is an asynchronous operation.  The user will have the `transitioningToStatus` property with a value of `ACTIVE` during activation to indicate that the user hasn't completed the asynchronous operation.  The user will have a status of `ACTIVE` when the activation process is complete.
@@ -1581,7 +1588,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Deactivate User
 {:.api .api-operation}
 
-##### POST /users/*:id*/lifecycle/deactivate
+##### <span class="label label-api-post">POST</span> /users/*:id*/lifecycle/deactivate
 {:.api .api-uri-template}
 
 Deactivates a user.  This operation can only be performed on users that do not have a `DEPROVISIONED` status.  Deactivation of a user is an asynchronous operation.  The user will have the `transitioningToStatus` property with a value of `DEPROVISIONED` during deactivation to indicate that the user hasn't completed the asynchronous operation.  The user will have a status of `DEPROVISIONED` when the deactivation process is complete.
@@ -1621,7 +1628,7 @@ Content-Type: application/json
 ### Unlock User
 {:.api .api-operation}
 
-##### POST /users/*:id*/lifecycle/unlock
+##### <span class="label label-api-post">POST</span> /users/*:id*/lifecycle/unlock
 {:.api .api-uri-template}
 
 Unlocks a user with a `LOCKED_OUT` status and returns them to `ACTIVE` status.  Users will be able to login with their current password.
@@ -1659,7 +1666,7 @@ Content-Type: application/json
 ### Reset Password
 {:.api .api-operation}
 
-#### POST /users/*:id*/lifecycle/reset_password
+#### <span class="label label-api-post">POST</span> /users/*:id*/lifecycle/reset_password
 {:.api .api-uri-template}
 
 Generates a one-time token (OTT) that can be used to reset a user's password.  The OTT link can be automatically emailed to the user or returned to the API caller and distributed using a custom flow.
@@ -1707,7 +1714,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Expire Password
 {:.api .api-operation}
 
-#### POST /users/*:id*/lifecycle/expire_password
+#### <span class="label label-api-post">POST</span> /users/*:id*/lifecycle/expire_password
 {:.api .api-uri-template}
 
 This operation will transition the user to the status of `PASSWORD_EXPIRED` and the user will be required to change their password at their next login. If `tempPassword` is passed, the user's password is reset to a temporary password that is returned, and then the temporary password is expired.
@@ -1800,7 +1807,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Forgot Password
 {:.api .api-operation}
 
-#### POST /users/*:id*/lifecycle/forgot_password
+#### <span class="label label-api-post">POST</span> /users/*:id*/lifecycle/forgot_password
 {:.api .api-uri-template}
 
 Generates a one-time token (OTT) that can be used to reset a user's password.  The user will be required to validate their security question's answer when visiting the reset link.  This operation can only be performed on users with a valid [recovery question credential](#recovery-question-object) and have an `ACTIVE` status.
@@ -1844,7 +1851,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ~~~
 
-#### POST /users/*:id*/credentials/forgot_password
+#### <span class="label label-api-post">POST</span> /users/*:id*/credentials/forgot_password
 {:.api .api-uri-template}
   
 Sets a new password for a user by validating the user's answer to their current recovery question.  This operation can only be performed on users with a valid [recovery question credential](#recovery-question-object) and have an `ACTIVE` status.
@@ -1899,7 +1906,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Change Password
 {:.api .api-operation}
 
-#### POST /users/*:id*/credentials/change_password
+#### <span class="label label-api-post">POST</span> /users/*:id*/credentials/change_password
 {:.api .api-uri-template}
 
 Changes a user's password by validating the user's current password.  This operation can only be performed on users in `STAGED`, `ACTIVE` or `RECOVERY` status that have a valid [password credential](#password-object)
@@ -1952,7 +1959,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Change Recovery Question
 {:.api .api-operation}
 
-#### POST /users/*:id*/credentials/change_recovery_question
+#### <span class="label label-api-post">POST</span> /users/*:id*/credentials/change_recovery_question
 {:.api .api-uri-template}
 
 Changes a user's recovery question & answer credential by validating the user's current password.  This operation can only be performed on users in **STAGED**, **ACTIVE** or **RECOVERY** `status` that have a valid [password credential](#password-object)

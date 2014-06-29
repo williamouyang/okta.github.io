@@ -155,6 +155,10 @@
   font-weight: 500;
 }
 
+.docs-body .alert strong {
+  font-weight: bold;
+}
+
 .docs-body div,
 .docs-body p,
 .docs-body ul > li {
@@ -180,7 +184,7 @@
 }
 
 .docs-body h3, .docs-body h4, .docs-body h5, .docs-body h6 {
-  margin-top: 30px;
+  margin-top: 25px;
   color: #456;
 }
 
@@ -245,6 +249,12 @@
 .docs-body table code {
   background: transparent;
   color: #090;
+}
+
+/* ---------------- FORM CONTROLS */
+
+.docs-body .form-control {
+  margin: 0 0;
 }
 
 
@@ -325,20 +335,20 @@ h6:hover .header-link {
 
 /* -------------------------- API */
 
-.docs-body .api:before {
+.api:before {
   font-family: fontawesome;
   margin-right: 8px;
 }
 
-.docs-body .api-operation {
+.api-operation {
   font-size: 20px;
 }
 
-.docs-body .api-operation:before {
+.api-operation:before {
   content: '\f12e';
 }
 
-.docs-body .api-uri-template em {
+.api-uri-template em {
   color: #090;
 }
 
@@ -349,18 +359,70 @@ h6:hover .header-link {
 }
 */
 
-.docs-body .api-request-params:before {
+.api-request-params:before {
   content: '\f18e';
 }
 
-.docs-body .api-response-params:before {
+.api-response-params:before {
   content: '\f190';
 }
 
-.docs-body .api-request-example:before {
+.api-request-example:before {
   content: '\f0a9';
 }
 
-.docs-body .api-response-example:before {
+.api-response-example:before {
   content: '\f0a8';
+}
+
+.label-api-get {
+  background-color: #090;
+  font-size: 80%;
+}
+
+.label-api-post {
+  background-color: #F39C44;
+  font-size: 80%;
+}
+
+.label-api-put {
+  background-color: #0069aa;
+  font-size: 80%;
+}
+
+.label-api-delete {
+  background-color: #d9534f;
+  font-size: 80%;
+}
+
+.label-cors {
+  background-color: #456;
+  font-size: 80%;
+}
+
+/* -------------------------- CORS */
+
+.form-cors-test {
+  margin-bottom: 20px;
+}
+
+.form-cors-test .form-group {
+  display: inline-block;
+  margin-bottom: 0;
+  vertical-align: middle;
+}
+
+.form-cors-test .input-group {
+  display: inline-table;
+  vertical-align: middle;
+}
+
+.form-cors-test .input-group {
+  display: inline-table;
+  vertical-align: middle;
+}
+
+.cors-test-result {
+  width: 425px;
+  padding-left: 15px;
 }
