@@ -23,6 +23,7 @@ The Okta User API provides operations to manage users in your organization.
     "statusChanged": "2013-06-24T16:39:19.000Z",
     "lastLogin": "2013-06-24T17:39:19.000Z",
     "lastUpdated": "2013-06-27T16:35:28.000Z",
+    "passwordChanged": "2013-06-24T16:39:19.000Z",
     "profile": {
         "firstName": "Isaac",
         "lastName": "Brock",
@@ -34,6 +35,10 @@ The Okta User API provides operations to manage users in your organization.
         "password": {},
         "recovery_question": {
             "question": "Who's a major player in the cowboy scene?"
+        },
+        "provider": {
+            "type": "OKTA",
+            "name": "OKTA"
         }
     },
     "_links": {
@@ -72,6 +77,7 @@ activated             | timestamp when transition to `ACTIVE` status completed  
 statusChanged         | timestamp when status last changed                            | Date                                                                                                | TRUE
 lastLogin             | timestamp of last login                                       | Date                                                                                                | TRUE
 lastUpdated           | timestamp when user was last updated                          | Date                                                                                                | FALSE
+passwordChanged       | timestamp when password last changed                          | Date                                                                                                | TRUE
 transitioningToStatus | target status of an inprogress asynchronous status transition | `PROVISIONED`, `ACTIVE`, or `DEPROVISIONED`                                                         | TRUE
 
 > Metadata attributes are only available after a user is created
@@ -134,18 +140,24 @@ Attribute         | DataType                                              | MinL
 ----------------- | ----------------------------------------------------- | --------- | --------- | -------- | -------| ----------
 password          | [Password Object](#password-object)                   |           |           | TRUE     | FALSE  |
 recovery_question | [Recovery Question Object](#recovery-question-object) |           |           | TRUE     | FALSE  |
+provider          | [Provider Object](#provider-object)                   |           |           | TRUE     | FALSE  |
+
 
 > Some credential values are **write-only**
 
 ~~~ json
 {
     "credentials": {
-      "password" : { "value": "GoAw@y123" },
-      "recovery_question": {
-          "question": "Who's a major player in the cowboy scene?",
-          "answer": "Cowboy Dan"
+        "password" : { "value": "GoAw@y123" },
+        "recovery_question": {
+            "question": "Who's a major player in the cowboy scene?",
+            "answer": "Cowboy Dan"
+        },
+        "provider": {
+            "type": "OKTA",
+            "name": "OKTA"
+        }
     }
-  }
 }
 ~~~
 
@@ -177,6 +189,17 @@ Attribute | DataType | MinLength | MaxLength | Nullable | Unique | Validation
 --------- | -------- | --------- | --------- | -------- | ------ | ----------
 question  | String   | 1         | 100       | TRUE     | FALSE  |
 answer    | String   | 1         | 100       | TRUE     | FALSE  |
+
+#### Provider Object
+
+Specifies the authentication provider that validates the user's password credential. The user's current provider is managed by the Delegated Authentication settings for your organization. The provider object is **read-only**.
+
+Attribute | DataType | MinLength | MaxLength | Nullable | Unique | Validation
+--------- | -------- | --------- | --------- | -------- | ------ | ----------
+type      | `OKTA`, `ACTIVE_DIRECTORY`,`LDAP`, or `FEDERATION`     | 1         | 100       | FALSE    | FALSE  |
+name      | String   | 1         | 100       | TRUE     | FALSE  |
+
+> `ACTIVE_DIRECTORY` or `LDAP` providers specify the directory instance name as the `name` property.
 
 ### Links Object
 
@@ -252,13 +275,13 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X POST "https://your-domain.okta.com/api/v1/users?activate=false" \
 -d \
 '{
-  "profile": {
-    "firstName": "Isaac",
-    "lastName": "Brock",
-    "email": "isaac@example.org",
-    "login": "isaac@example.org",
-    "mobilePhone": "555-415-1337"
-  }
+    "profile": {
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "email": "isaac@example.org",
+        "login": "isaac@example.org",
+        "mobilePhone": "555-415-1337"
+    }
 }'
 ~~~
 
@@ -274,14 +297,20 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "statusChanged": null,
     "lastLogin": null,
     "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": null,
     "profile": {
-      "firstName": "Isaac",
+        "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
         "login": "isaac@example.org",
         "mobilePhone": "555-415-1337"
     },
-    "credentials": {},
+    "credentials": {
+        "provider": {
+            "type": "OKTA",
+            "name": "OKTA"
+        }
+    },
     "_links": {
         "activate": {
             "href": "https://your-domain.okta.com/api/v1/users/00u1ero7vZFVEIYLWPBN/lifecycle/activate"
@@ -305,19 +334,19 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X POST "https://your-domain.okta.com/api/v1/users?activate=false" \
 -d \
 '{
-  "profile": {
-    "firstName": "Isaac",
-    "lastName": "Brock",
-    "email": "isaac@example.org",
-    "login": "isaac@example.org",
-    "mobilePhone": "555-415-1337"
-  },
-  "credentials": {
-    "recovery_question": {
-      "question": "Who\'s a major player in the cowboy scene?",
-      "answer": "Cowboy Dan"
+    "profile": {
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "email": "isaac@example.org",
+        "login": "isaac@example.org",
+        "mobilePhone": "555-415-1337"
+    },
+    "credentials": {
+        "recovery_question": {
+            "question": "Who\'s a major player in the cowboy scene?",
+            "answer": "Cowboy Dan"
+        }
     }
-  }
 }'
 ~~~
 
@@ -333,8 +362,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "statusChanged": null,
     "lastLogin": null,
     "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": null,
     "profile": {
-      "firstName": "Isaac",
+        "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
         "login": "isaac@example.org",
@@ -343,6 +373,10 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "credentials": {
         "recovery_question": {
             "question": "Who's a major player in the cowboy scene?"
+        },
+        "provider": {
+            "type": "OKTA",
+            "name": "OKTA"
         }
     },
     "_links": {
@@ -370,16 +404,16 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X POST "https://your-domain.okta.com/api/v1/users?activate=false" \
 -d \
 '{
-  "profile": {
-    "firstName": "Isaac",
-    "lastName": "Brock",
-    "email": "isaac@example.org",
-    "login": "isaac@example.org",
-    "mobilePhone": "555-415-1337"
-  },
-  "credentials": {
-    "password" : { "value": "GoAw@y123" }
-  }
+    "profile": {
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "email": "isaac@example.org",
+        "login": "isaac@example.org",
+        "mobilePhone": "555-415-1337"
+    },
+    "credentials": {
+        "password" : { "value": "GoAw@y123" }
+    }
 }'
 ~~~
 
@@ -395,6 +429,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "statusChanged": null,
     "lastLogin": null,
     "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": "2013-07-02T21:36:25.344Z",
     "profile": {
       "firstName": "Isaac",
         "lastName": "Brock",
@@ -403,7 +438,11 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "mobilePhone": "555-415-1337"
     },
     "credentials": {
-        "password": {}
+        "password": {},
+        "provider": {
+           "type": "OKTA",
+           "name": "OKTA"
+        }
     },
     "_links": {
         "activate": {
@@ -430,20 +469,20 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X POST "https://your-domain.okta.com/api/v1/users?activate=false" \
 -d \
 '{
-  "profile": {
-    "firstName": "Isaac",
-    "lastName": "Brock",
-    "email": "isaac@example.org",
-    "login": "isaac@example.org",
-    "mobilePhone": "555-415-1337"
-  },
-  "credentials": {
-    "password" : { "value": "GoAw@y123" },
-    "recovery_question": {
-      "question": "Who\'s a major player in the cowboy scene?",
-      "answer": "Cowboy Dan"
+    "profile": {
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "email": "isaac@example.org",
+        "login": "isaac@example.org",
+        "mobilePhone": "555-415-1337"
+    },
+    "credentials": {
+        "password" : { "value": "GoAw@y123" },
+        "recovery_question": {
+            "question": "Who\'s a major player in the cowboy scene?",
+            "answer": "Cowboy Dan"
+        }
     }
-  }
 }'
 ~~~
 
@@ -459,8 +498,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "statusChanged": null,
     "lastLogin": null,
     "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": "2013-07-02T21:36:25.344Z",
     "profile": {
-      "firstName": "Isaac",
+        "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
         "login": "isaac@example.org",
@@ -470,6 +510,11 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "password" : {},
         "recovery_question": {
             "question": "Who's a major player in the cowboy scene?"
+        },
+        "provider": {
+            "type": "OKTA",
+            "name": "OKTA"
+       }
     },
     "_links": {
         "activate": {
@@ -546,6 +591,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "statusChanged": "2013-06-24T16:39:19.000Z",
     "lastLogin": "2013-06-24T17:39:19.000Z",
     "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": "2013-07-02T21:36:25.344Z",
     "profile": {
         "firstName": "Isaac",
         "lastName": "Brock",
@@ -557,6 +603,10 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "password": {},
         "recovery_question": {
             "question": "Who's a major player in the cowboy scene?"
+        },
+        "provider": {
+            "type": "OKTA",
+            "name": "OKTA"
         }
     },
     "_links": {
@@ -609,6 +659,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "statusChanged": "2013-06-24T16:39:19.000Z",
     "lastLogin": "2013-06-24T17:39:19.000Z",
     "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": "2013-07-02T21:36:25.344Z",
     "profile": {
         "firstName": "Isaac",
         "lastName": "Brock",
@@ -620,6 +671,10 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "password": {},
         "recovery_question": {
             "question": "Who's a major player in the cowboy scene?"
+        },
+        "provider": {
+            "type": "OKTA",
+            "name": "OKTA"
         }
     },
     "_links": {
@@ -674,6 +729,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "statusChanged": "2013-06-24T16:39:19.000Z",
     "lastLogin": "2013-06-24T17:39:19.000Z",
     "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": "2013-07-02T21:36:25.344Z",
     "profile": {
         "firstName": "Isaac",
         "lastName": "Brock",
@@ -685,6 +741,10 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "password": {},
         "recovery_question": {
             "question": "Who's a major player in the cowboy scene?"
+        },
+        "provider": {
+          "type": "OKTA",
+          "name": "OKTA"
         }
     },
     "_links": {
@@ -739,6 +799,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "statusChanged": "2013-06-24T16:39:19.000Z",
     "lastLogin": "2013-06-24T17:39:19.000Z",
     "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": "2013-07-02T21:36:25.344Z",
     "profile": {
         "firstName": "Isaac",
         "lastName": "Brock",
@@ -750,6 +811,10 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "password": {},
         "recovery_question": {
             "question": "Who's a major player in the cowboy scene?"
+        },
+        "provider": {
+            "type": "OKTA",
+            "name": "OKTA"
         }
     },
     "_links": {
@@ -882,14 +947,20 @@ Link: <https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limi
         "statusChanged": null,
         "lastLogin": null,
         "lastUpdated": "2013-07-02T21:36:25.344Z",
+        "passwordChanged": "2013-07-02T21:36:25.344Z",
         "profile": {
-          "firstName": "Isaac",
+            "firstName": "Isaac",
             "lastName": "Brock",
             "email": "isaac@example.org",
             "login": "isaac@example.org",
             "mobilePhone": "555-415-1337"
         },
-        "credentials": {},
+        "credentials": {
+            "provider": {
+               "type": "OKTA",
+               "name": "OKTA"
+            }
+        },
         "_links": {
             "activate": {
                 "href": "https://your-domain.okta.com/api/v1/users/00u1ero7vZFVEIYLWPBN/lifecycle/activate"
@@ -904,6 +975,7 @@ Link: <https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limi
         "statusChanged": "2013-06-24T16:39:19.000Z",
         "lastLogin": "2013-06-24T17:39:19.000Z",
         "lastUpdated": "2013-07-02T21:36:25.344Z",
+        "passwordChanged": "2013-07-02T21:36:25.344Z",
         "profile": {
             "firstName": "Eric",
             "lastName": "Judy",
@@ -915,6 +987,10 @@ Link: <https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limi
             "password": {},
             "recovery_question": {
                 "question": "The stars are projectors?"
+            },
+            "provider": {
+                "type": "OKTA",
+                "name": "OKTA"
             }
         },
         "_links": {
@@ -969,6 +1045,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "statusChanged": "2013-06-24T16:39:19.000Z",
         "lastLogin": "2013-06-24T17:39:19.000Z",
         "lastUpdated": "2013-07-02T21:36:25.344Z",
+        "passwordChanged": "2013-07-02T21:36:25.344Z",
         "profile": {
             "firstName": "Eric",
             "lastName": "Judy",
@@ -980,6 +1057,10 @@ curl -v -H "Authorization: SSWS yourtoken" \
             "password": {},
             "recovery_question": {
                 "question": "The stars are projectors?"
+            },
+            "provider": {
+                "type": "OKTA",
+                "name": "OKTA"
             }
         },
         "_links": {
@@ -1033,6 +1114,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "statusChanged": "2013-06-24T16:39:19.000Z",
         "lastLogin": "2013-06-24T17:39:19.000Z",
         "lastUpdated": "2013-07-02T21:36:25.344Z",
+        "passwordChanged": "2013-07-02T21:36:25.344Z",
         "profile": {
             "firstName": "Eric",
             "lastName": "Judy",
@@ -1044,6 +1126,10 @@ curl -v -H "Authorization: SSWS yourtoken" \
             "password": {},
             "recovery_question": {
                 "question": "The stars are projectors?"
+            },
+            "provider": {
+                "type": "OKTA",
+                "name": "OKTA"
             }
         },
         "_links": {
@@ -1100,6 +1186,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "statusChanged": "2013-06-24T16:39:19.000Z",
         "lastLogin": "2013-06-24T17:39:19.000Z",
         "lastUpdated": "2013-07-02T21:36:25.344Z",
+        "passwordChanged": "2013-07-02T21:36:25.344Z",
         "profile": {
             "firstName": "Eric",
             "lastName": "Judy",
@@ -1111,6 +1198,10 @@ curl -v -H "Authorization: SSWS yourtoken" \
             "password": {},
             "recovery_question": {
                 "question": "The stars are projectors?"
+            },
+            "provider": {
+                "type": "OKTA",
+                "name": "OKTA"
             }
         },
         "_links": {
@@ -1198,6 +1289,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "statusChanged": "2013-06-24T16:39:19.000Z",
     "lastLogin": "2013-06-24T17:39:19.000Z",
     "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": "2013-07-02T21:36:25.344Z",
     "profile": {
         "firstName": "Isaac",
         "lastName": "Brock",
@@ -1210,6 +1302,10 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "password": {},
         "recovery_question": {
             "question": "Who's a major player in the cowboy scene?"
+        },
+        "provider": {
+            "type": "OKTA",
+            "name": "OKTA"
         }
     },
     "_links": {
@@ -1254,9 +1350,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X PUT "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR" \
 -d \
 '{
-  "credentials": {
-    "password" : { "value": "UpdatedP@55w0rd" }
-  }
+    "credentials": {
+        "password" : { "value": "UpdatedP@55w0rd" }
+    }
 }'
 ~~~
 
@@ -1272,6 +1368,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "statusChanged": "2013-06-24T16:39:19.000Z",
     "lastLogin": "2013-06-24T17:39:19.000Z",
     "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": "2013-07-02T21:36:25.344Z",
     "profile": {
         "firstName": "Isaac",
         "lastName": "Brock",
@@ -1283,6 +1380,10 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "password": {},
         "recovery_question": {
             "question": "Who's a major player in the cowboy scene?"
+        },
+        "provider": {
+             "type": "OKTA",
+             "name": "OKTA"
         }
     },
     "_links": {
@@ -1344,6 +1445,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "statusChanged": "2013-06-24T16:39:19.000Z",
     "lastLogin": "2013-06-24T17:39:19.000Z",
     "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": "2013-07-02T21:36:25.344Z",
     "profile": {
         "firstName": "Isaac",
         "lastName": "Brock",
@@ -1355,6 +1457,10 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "password": {},
         "recovery_question": {
             "question": "I have a new recovery question?"
+        },
+        "provider": {
+            "type": "OKTA",
+            "name": "OKTA"
         }
     },
     "_links": {
@@ -1742,6 +1848,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "statusChanged": null,
     "lastLogin": "2014-03-04T17:46:59.000Z",
     "lastUpdated": "2014-03-04T17:54:48.000Z",
+    "passwordChanged": "2014-03-04T17:54:48.000Z",
     "profile": {
         "firstName": "Add-Min",
         "lastName": "O'Cloudy Tud",
@@ -1753,6 +1860,10 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "password": {},
         "recovery_question": {
             "question": "Last 4 digits of your social security number?"
+        },
+        "provider": {
+            "type": "OKTA",
+            "name": "OKTA"
         }
     },
     "_links": {
@@ -1878,6 +1989,10 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "password": {},
         "recovery_question": {
             "question": "Who's a major player in the cowboy scene?"
+        },
+        "provider": {
+           "type": "OKTA",
+           "name": "OKTA"
         }
     }
 }
@@ -1930,6 +2045,10 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "password": {},
         "recovery_question": {
             "question": "Who's a major player in the cowboy scene?"
+        },
+        "provider": {
+           "type": "OKTA",
+           "name": "OKTA"
         }
     }
 }
@@ -1985,6 +2104,10 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "password": {},
         "recovery_question": {
             "question": "What happens when I update my question?"
+        },
+        "provider": {
+           "type": "OKTA",
+           "name": "OKTA"
         }
     }
 }
