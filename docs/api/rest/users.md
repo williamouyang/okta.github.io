@@ -189,6 +189,16 @@ Attribute | DataType | MinLength | MaxLength | Nullable | Unique | Validation
 question  | String   | 1         | 100       | TRUE     | FALSE  |
 answer    | String   | 1         | 100       | TRUE     | FALSE  |
 
+#### Provider Object
+
+Specifies the authentication provider. The Provider Object is **read-only**.
+
+Attribute | DataType | MinLength | MaxLength | Nullable | Unique | Validation
+--------- | -------- | --------- | --------- | -------- | ------ | ----------
+type      | `OKTA`, `LDAP`, or `ACTIVE_DIRECTORY`   | 1         | 100       | FALSE    | FALSE  |
+name      | String   | 1         | 100       | TRUE     | FALSE   |
+
+
 ### Links Object
 
 Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the current status of a user.  The Links Object is used for dynamic discovery of related resources and lifecycle or credential operations.  The Links Object is **read-only**.
