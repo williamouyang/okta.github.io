@@ -60,8 +60,7 @@ cookieTokenUrl | URL for a a transparent 1x1 pixel image which contains a one-ti
 ### Create Session
 {:.api .api-operation}
 
-##### POST /sessions
-{:.api .api-uri-template}
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /sessions</span>
 
 Creates a new session for a [user](users.html).
 
@@ -179,8 +178,7 @@ Content-Type: application/json
 ### Validate Session
 {:.api .api-operation}
 
-##### GET /sessions/*:id*
-{:.api .api-uri-template}
+<span class="api-uri-template api-uri-post"><span class="api-label">GET</span> /sessions/*:id*</span>
 
 Validate a [user's](users.html) session.
 
@@ -235,8 +233,7 @@ Content-Type: application/json
 ### Extend Session
 {:.api .api-operation}
 
-##### PUT /sessions/*:id*
-{:.api .api-uri-template}
+<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /sessions/*:id*</span>
 
 Extends the lifetime of a session for a [user](users.html).
 
@@ -291,8 +288,7 @@ Content-Type: application/json
 ### Close Session
 {:.api .api-operation}
 
-##### DELETE /sessions/*:id*
-{:.api .api-uri-template}
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /sessions/*:id*</span>
 
 Closes a session for a [user](users.html) (logout).
 

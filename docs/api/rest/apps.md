@@ -435,8 +435,7 @@ _links      | discoverable resources related to the app group | [JSON HAL](http:
 ### Add Application
 {:.api .api-operation}
 
-#### POST /apps
-{:.api .api-uri-template}
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /apps</span>
 
 Adds a new application to your Okta organization.
 
@@ -1065,8 +1064,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Get Application
 {:.api .api-operation}
 
-#### GET /apps/*:id*
-{:.api .api-uri-template}
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /apps/*:id*</span>
 
 Fetches an application from your Okta organization by `id`.
 
@@ -1174,8 +1172,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### List Applications
 {:.api .api-operation}
 
-#### GET /apps
-{:.api .api-uri-template}
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /apps</span>
 
 Enumerates apps added to your organization with pagination. A subset of apps can be returned that match a supported filter expression or query.
 
@@ -1675,8 +1672,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Update Application
 {:.api .api-operation}
 
-#### PUT /apps/*:id*
-{:.api .api-uri-template}
+<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /apps/*:id*</span>
 
 Updates an application in your organization.
 
@@ -2174,8 +2170,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Delete Application
 {:.api .api-operation}
 
-#### DELETE /apps/*:id*
-{:.api .api-uri-template}
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /apps/*:id*</span>
 
 Removes an inactive application.
 
@@ -2234,8 +2229,7 @@ Content-Type: application/json
 ### Activate Application
 {:.api .api-operation}
 
-#### POST /apps/*:id*/lifecycle/activate
-{:.api .api-uri-template}
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /apps/*:id*/lifecycle/activate</span>
 
 Activates an inactive application.
 
@@ -2271,8 +2265,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Deactivate Application
 {:.api .api-operation}
 
-#### POST /apps/*:id*/lifecycle/deactivate
-{:.api .api-uri-template}
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /apps/*:id*/lifecycle/deactivate</span>
 
 Deactivates an active application.
 
@@ -2310,10 +2303,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Assign User to Application
 {:.api .api-operation}
 
-Assigns a user to an application
+<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /apps/*:aid*/users/*:uid*</span>
 
-#### PUT /apps/*:aid*/users/*:uid*
-{:.api .api-uri-template}
+Assigns a user to an application
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2373,8 +2365,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Get Assigned User for Application
 {:.api .api-operation}
 
-#### GET /apps/*:aid*/users/*:uid*
-{:.api .api-uri-template}
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /apps/*:aid*/users/*:uid*</span>
 
 Fetches a specific application user assignment by `id`.
 
@@ -2424,8 +2415,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### List Users Assigned to Application
 {:.api .api-operation}
 
-#### GET /apps/*:aid*/users
-{:.api .api-uri-template}
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /apps/*:aid*/users</span>
 
 Enumerates application user assignments for an application.
 
@@ -2494,8 +2484,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Update Credentials for Application
 {:.api .api-operation}
 
-#### PUT /apps/*:aid*/users/*:uid*
-{:.api .api-uri-template}
+<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /apps/*:aid*/users/*:uid*</span>
 
 Updates a user's credentials for an application
 
@@ -2571,8 +2560,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Remove User from Application
 {:.api .api-operation}
 
-#### DELETE /apps/*:aid*/users/*:uid*
-{:.api .api-uri-template}
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /apps/*:aid*/users/*:uid*</span>
 
 Removes an assignment for a user from an application.
 
@@ -2611,8 +2599,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Assign Group to Application
 {:.api .api-operation}
 
-#### PUT /apps/*:aid*/groups/*:gid*
-{:.api .api-uri-template}
+<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /apps/*:aid*/groups/*:gid*</span>
 
 Assigns a group to an application
 
@@ -2657,8 +2644,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Get Assigned Group for Application
 {:.api .api-operation}
 
-#### GET /apps/*:aid*/groups/*:gid*
-{:.api .api-uri-template}
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /apps/*:aid*/groups/*:gid*</span>
 
 Fetches an application group assignment
 
@@ -2699,8 +2685,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### List Groups Assigned to Application
 {:.api .api-operation}
 
-#### GET /apps/*:aid*/groups
-{:.api .api-uri-template}
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /apps/*:aid*/groups</span>
 
 Enumerates group assignments for an application.
 
@@ -2751,8 +2736,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Remove Group from Application
 {:.api .api-operation}
 
-#### DELETE /apps/*:aid*/groups/*:gid*
-{:.api .api-uri-template}
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /apps/*:aid*/groups/*:gid*</span>
 
 Removes a group assignment from an application.
 

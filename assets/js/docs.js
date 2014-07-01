@@ -16,7 +16,8 @@ $(function() {
     for (var h = 0; h < headers.length; h++) {
       var header = headers[h];
 
-      if (typeof header.id !== "undefined" && header.id !== "") {
+      if (typeof header.id !== "undefined" && header.id !== "" && 
+        header.className.indexOf("no-link") !== 0) {
         header.appendChild(anchorForId(header.id), header);
       }
     }

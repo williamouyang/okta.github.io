@@ -408,8 +408,7 @@ ipAddress | IP Address of client | String | TRUE
 ### List Events
 {:.api .api-operation}
 
-#### GET /events
-{:.api .api-uri-template}
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /events</span>
 
 Fetch a list of events from your Okta organization system log
 
