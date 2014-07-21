@@ -77,13 +77,14 @@ This document provides further information about the errors that the Okta API re
 |<a name="E0000061"></a>E0000061|Tab error.|403|
 |<a name="E0000063"></a>E0000063|Invalid combination of parameters specified.|400|
 |<a name="E0000064"></a>E0000064|Password is expired and must be changed.|401|
+|<a name="E0000081"></a>E0000081|Cannot modify the test attribute because it is a reserved attribute for this application.|400|
 
 
 ## Okta Error Codes Listed by HTTP Return Code   
 
 <table>
 <tr><th><strong>HTTP Return Code</strong></th><th><strong>Error Code</strong></th><th><strong>Description</strong></th></tr>
-<tr><td rowspan="23" bgcolor="#FFFFFF"><strong>400</strong></td><td>E0000001</td><td>API validation failed.</td></tr>
+<tr><td rowspan="24" bgcolor="#FFFFFF"><strong>400</strong></td><td>E0000001</td><td>API validation failed.</td></tr>
 <tr><td>E0000002</td><td>The request was not valid.</td></tr>
 <tr><td>E0000003</td><td>The request body was not well-formed.</td></tr>
 <tr><td>E0000018</td><td>Bad request. Accept and/or Content-Type headers are likely not set.</td></tr>
@@ -106,6 +107,7 @@ This document provides further information about the errors that the Okta API re
 <tr><td>E0000053</td><td>Invalid SCIM filter.</td></tr>
 <tr><td>E0000054</td><td>Invalid pagination properties.</td></tr>
 <tr><td>E0000063</td><td>Invalid combination of parameters specified.</td></tr>
+<tr><td>E0000081</td><td>Cannot modify the test attribute because it is a reserved attribute for this application.</td></tr>
 <tr><td rowspan="4" bgcolor="#FFFFFF"><strong>401</strong></td><td>E0000004</td><td>Authentication failed.</td></tr>
 <tr><td>E0000011</td><td>Invalid token provided.</td></tr>
 <tr><td>E0000015</td><td>You do not have permission to access the feature you are requesting.</td></tr>
