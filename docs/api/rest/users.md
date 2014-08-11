@@ -635,7 +635,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 #### Get User with ID
 {:.api .api-operation}
 
-Fetches a specific user when you know the user's `id`
+Fetches a specific user when you know the user's `id`. See the filters section below for an example of fetching multiple ids.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -882,6 +882,7 @@ Filter                                         | Description
 `lastUpdated lt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Users last updated before a specific datetime
 `lastUpdated eq "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Users last updated at a specific datetime
 `lastUpdated gt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Users last updated after a specific datetime
+`id eq "00u1ero7vZFVEIYLWPBN"`                 | Users with a specified `id`
 
 See [Filtering](/docs/getting_started/design_principles.html#filtering) for more information on expressions
 
