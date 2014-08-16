@@ -10,87 +10,83 @@ title: Apps
 
 The Okta Application API provides operations to manage applications and/or assignments to users or groups for your organization.
 
-> This API is currently in **Beta** status
-
-> This API currently only supports applications without user-management features enabled at this time
-
 ## Application Model
 
 ### Example
 
 ~~~ json
 {
-    "id": "0oabhnUQFYHMBNVSVXMV",
-    "name": "template_saml_2_0",
-    "label": "Example SAML App",
-    "status": "ACTIVE",
-    "lastUpdated": "2013-09-09T16:25:14.000Z",
-    "created": "2013-09-09T16:25:14.000Z",
-    "accessibility": {
-        "selfService": false,
-        "errorRedirectUrl": null
+  "id": "0oabhnUQFYHMBNVSVXMV",
+  "name": "template_saml_2_0",
+  "label": "Example SAML App",
+  "status": "ACTIVE",
+  "lastUpdated": "2013-09-09T16:25:14.000Z",
+  "created": "2013-09-09T16:25:14.000Z",
+  "accessibility": {
+    "selfService": false,
+    "errorRedirectUrl": null
+  },
+  "visibility": {
+    "autoSubmitToolbar": false,
+    "hide": {
+      "iOS": false,
+      "web": false
     },
-    "visibility": {
-        "autoSubmitToolbar": false,
-        "hide": {
-            "iOS": false,
-            "web": false
-        },
-        "appLinks": {
-            "login": true
-        }
-    },
-    "features": [],
-    "signOnMode": "SAML_2_0",
-    "credentials": {
-        "userNameTemplate": {
-            "template": "${source.login}",
-            "type": "BUILT_IN"
-        }
-    },
-    "settings": {
-        "app": {
-            "audienceRestriction": "https://www.example.com/",
-            "groupName": null,
-            "forceAuthn": false,
-            "defaultRelayState": null,
-            "postBackURL": "https://www.example.com/sso/saml",
-            "authnContextClassRef": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
-            "configuredIssuer": null,
-            "requestCompressed": "COMPRESSED",
-            "groupFilter": null,
-            "recipient": "https://www.example.com/",
-            "signAssertion": "SIGNED",
-            "destination": "https://www.example.com/",
-            "signResponse": "SIGNED",
-            "nameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
-            "attributeStatements": null
-        }
-    },
-    "_links": {
-        "logo": [
-            {
-                "href": "https:/example.okta.com/img/logos/logo_1.png",
-                "name": "medium",
-                "type": "image/png"
-            }
-        ],
-        "groups": {
-            "href": "http://example.okta.com/api/v1/apps/0oabhnUQFYHMBNVSVXMV/groups"
-        },
-        "users": {
-            "href": "https://example.okta.com/api/v1/apps/0oabhnUQFYHMBNVSVXMV/users"
-        },
-        "self": {
-            "href": "https://example.okta.com/api/v1/apps/0oabhnUQFYHMBNVSVXMV"
-        },
-        "metadata": {
-            "href": "https://example.okta.com/app/0oabhnUQFYHMBNVSVXMV/sso/saml/metadata"
-        },
-        "deactivate": {
-            "href": "https://example.okta.com/api/v1/apps/0oabhnUQFYHMBNVSVXMV/lifecycle/deactivate"
-        }
+    "appLinks": {
+      "login": true
     }
+  },
+  "features": [],
+  "signOnMode": "SAML_2_0",
+  "credentials": {
+    "userNameTemplate": {
+      "template": "${source.login}",
+      "type": "BUILT_IN"
+    }
+  },
+  "settings": {
+    "app": {
+      "audienceRestriction": "https://www.example.com/",
+      "groupName": null,
+      "forceAuthn": false,
+      "defaultRelayState": null,
+      "postBackURL": "https://www.example.com/sso/saml",
+      "authnContextClassRef": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
+      "configuredIssuer": null,
+      "requestCompressed": "COMPRESSED",
+      "groupFilter": null,
+      "recipient": "https://www.example.com/",
+      "signAssertion": "SIGNED",
+      "destination": "https://www.example.com/",
+      "signResponse": "SIGNED",
+      "nameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+      "attributeStatements": null
+    }
+  },
+  "_links": {
+    "logo": [
+      {
+        "href": "https:/example.okta.com/img/logos/logo_1.png",
+        "name": "medium",
+        "type": "image/png"
+      }
+    ],
+    "groups": {
+      "href": "http://example.okta.com/api/v1/apps/0oabhnUQFYHMBNVSVXMV/groups"
+    },
+    "users": {
+      "href": "https://example.okta.com/api/v1/apps/0oabhnUQFYHMBNVSVXMV/users"
+    },
+    "self": {
+      "href": "https://example.okta.com/api/v1/apps/0oabhnUQFYHMBNVSVXMV"
+    },
+    "metadata": {
+      "href": "https://example.okta.com/app/0oabhnUQFYHMBNVSVXMV/sso/saml/metadata"
+    },
+    "deactivate": {
+      "href": "https://example.okta.com/api/v1/apps/0oabhnUQFYHMBNVSVXMV/lifecycle/deactivate"
+    }
+  }
 }
 ~~~
 
@@ -134,30 +130,30 @@ tempalte_sps        | [Add SWA Application (No Plugin)](#add-swa-application-no-
 template_saml_2_0   | [Add SAML 2.0 Application](#add-saml-20-application)
 template_wsfed      | [Add WS-Federation Application](#add-ws-federation-application)
 
-The current workaround is to manually configure the desired application via the Administration UI in a preview (sandbox) organization and view the application via [Get Application](#get-application)
+The current workaround is to manually configure the desired application via the Okta Admin UI in a preview (sandbox) organization and view the application via [Get Application](#get-application)
 
-> As previously stated, this API currently doesn't support creating or managing apps with user management features
-
+> App provisioning settings currently cannot be managed via the API and must be configured via the Okta Admin UI.
 
 #### Features
 
-Applications may support optional features. Most apps only support sign-on and do not allow additional features.  
+Applications may support optional provisioning features on a per-app basis.
 
-> At this time additional features may not be configured via the API
+> Provisioning features currently may not be configured via the API and must be configured via the Okta Admin UI.
 
-The list of possible features an app may support are:
+The list of provisioning features an app may support are:
 
-* PUSH_NEW_USERS
-* PUSH_USER_DEACTIVATION
-* PROFILE_MASTERING
-* REACTIVATE_USERS
-* PUSH_PROFILE_UPDATES
-* GROUP_PUSH
-* IMPORT_NEW_USERS
-* PUSH_PASSWORD_UPDATES
-
-This setting modifies the same settings as the `User Management` tab when editing an application in your Okta Administration app.
-
+App Feature            | Admin UI Name          | Description
+---------------------- | ---------------------- | -----------------------------
+IMPORT_NEW_USERS       | User Import            | Creates or links a user in Okta to a user from the application.
+IMPORT_PROFILE_UPDATES | User Import            | Updates a linked user's app profile during manual or scheduled imports.
+PROFILE_MASTERING      | Profile Master         | Designates the app as the identity lifecycle and profile attribute authority for linked users.  The user's profile in Okta is *read-only*
+IMPORT_USER_SCHEMA     |                        | Discovers the profile schema for a user from the app automatically
+PUSH_NEW_USERS         | Create Users           | Creates or links a user account in the application when assigning the app to a user in Okta.      
+PUSH_PROFILE_UPDATES   | Update User Attributes | Updates a user's profile in the app when the user's profile changes in Okta (Profile Master).
+PUSH_USER_DEACTIVATION | Deactivate Users       | Deactivates a user's account in the app when unassigned from the app in Okta or deactivated.
+REACTIVATE_USERS       | Deactivate Users       | Reactivates an existing inactive user when provisioning a user to the app.
+PUSH_PASSWORD_UPDATES  | Sync Okta Password     | Updates the user's app password when their password changes in Okta.
+GROUP_PUSH             | Group Push             | Creates or links a group in the app when a mapping is defined for a group in Okta.  Okta is the the master for group memberships and all group members in Okta who are also assigned to the app will be synced as group members to the app.
 
 #### SignOn Modes
 
@@ -173,6 +169,7 @@ BROWSER_PLUGIN        | Secure Web Authentication (SWA) with Okta Browser Plugin
 SECURE_PASSWORD_STORE | Secure Web Authentication (SWA) with POST (plugin not required)
 SAML_2_0              | Federated Authentication with SAML 2.0 WebSSO
 WS_FEDERATION         | Federated Authentication with WS-Federation Passive Requestor Profile
+Custom                | App-Specific SignOn Mode
 
 This setting modifies the same settings as the `Sign On` tab when editing an application in your Okta Administration app.
 
@@ -187,10 +184,10 @@ errorRedirectUrl | Custom error page for this application     | String   |      
 
 ~~~ json
 {
-    "accessibility": {
-        "selfService": false,
-        "errorRedirectUrl": null
-    }
+  "accessibility": {
+    "selfService": false,
+    "errorRedirectUrl": null
+  }
 }
 ~~~
 
@@ -207,25 +204,25 @@ appLinks          | Displays specific appLinks for the app             | [AppLin
 
 ~~~ json
 {
-    "visibility": {
-        "autoSubmitToolbar": false,
-        "hide": {
-            "iOS": false,
-            "web": false
-        },
-        "appLinks": {
-            "login": true
-        }
+  "visibility": {
+    "autoSubmitToolbar": false,
+    "hide": {
+      "iOS": false,
+      "web": false
+    },
+    "appLinks": {
+      "login": true
     }
+  }
 }
 ~~~
 
 #### Hide Object
 
-Attribute | Description                | DataType | Nullable | Default
---------- | -------------------------- | -------- | -------- | -------
-iOS       | Okta Mobile for iOS        | Boolean  | FALSE    | FALSE
-web       | Okta Web Browser Home Page | Boolean  | FALSE    | FALSE
+Attribute | Description                                        | DataType | Nullable | Default
+--------- | -------------------------------------------------- | -------- | -------- | -------
+iOS       | Okta Mobile for iOS or Android (pre-dates Android) | Boolean  | FALSE    | FALSE
+web       | Okta Web Browser Home Page                         | Boolean  | FALSE    | FALSE
 
 #### AppLinks Object
 
@@ -233,7 +230,7 @@ Each application defines 1 or more appLinks that can be published. AppLinks can 
 
 ### Application Credentials Object
 
-Specifies app credentials and vaulting for the application.
+Specifies credentials and scheme for the application's `signOnMode`.
 
 Attribute        | Description                                                                  | DataType                                              | MinLength | MaxLength | Nullable | Default
 ---------------- | ---------------------------------------------------------------------------- | ----------------------------------------------------- | --------- | --------- | -------- | -------
@@ -244,21 +241,21 @@ password         | Shared password for app                                      
 
 ~~~ json
 {
-    "credentials": {
-        "scheme": "SHARED_USERNAME_AND_PASSWORD",
-        "userNameTemplate": {
-            "template": "${source.login}",
-            "type": "BUILT_IN"
-        },
-        "userName": "test",
-        "password": {}
-    }
+  "credentials": {
+    "scheme": "SHARED_USERNAME_AND_PASSWORD",
+    "userNameTemplate": {
+      "template": "${source.login}",
+      "type": "BUILT_IN"
+    },
+    "userName": "test",
+    "password": {}
+  }
 }
 ~~~
 
 #### Authentication Schemes
 
-Apps that are configured with the `BASIC_AUTH`, `BROWSER_PLUGIN`, or `SECURE_PASSWORD_STORE`  have credentials vaulted by Okta and can be configured with the following schemes:
+Applications that are configured with the `BASIC_AUTH`, `BROWSER_PLUGIN`, or `SECURE_PASSWORD_STORE`  have credentials vaulted by Okta and can be configured with the following schemes:
 
 Scheme                       | Description                                                               | Shared UserName | Shared Password | App UserName   | App Password
 ---------------------------- | ------------------------------------------------------------------------- | --------------- | --------------- | -------------- | -----------------------
@@ -283,10 +280,10 @@ userSuffix | suffix for built-in mapping expressions | String                   
 
 ~~~ json
 {
-    "userNameTemplate": {
-        "template": "${source.login}",
-        "type": "BUILT_IN"
-    }
+  "userNameTemplate": {
+    "template": "${source.login}",
+    "type": "BUILT_IN"
+  }
 }
 ~~~
 
@@ -332,42 +329,111 @@ logo               | Application logo image
 
 ## Application User Model
 
-The application user model defines a user's application assignment and credentials.
+The application user model defines a user's app-specific profile and credentials for an application.
 
 ### Example
 
 ~~~ json
 {
-    "id": "00ubgfEUVRPSHGWHAZRI",
-    "scope": "USER",
-    "credentials": {
-        "userName": "user@example.com",
-        "password": { "value": "app_password" }
+  "id": "00u11z6WHMYCGPCHCRFK",
+  "externalId": "70c14cc17d3745e8a9f98d599a68329c",
+  "created": "2014-06-24T15:27:59.000Z",
+  "lastUpdated": "2014-06-24T15:28:14.000Z",
+  "scope": "USER",
+  "status": "ACTIVE",
+  "statusChanged": "2014-06-24T15:28:14.000Z",
+  "passwordChanged": "2014-06-24T15:27:59.000Z",
+  "syncState": "SYNCHRONIZED",
+  "lastSync": "2014-06-24T15:27:59.000Z",
+  "credentials": {
+    "userName": "saml.jackson@example.com",
+    "password": {}
+  },
+  "profile": {
+    "secondEmail": null,
+    "lastName": "Jackson",
+    "mobilePhone": null,
+    "email": "saml.jackson@example.com",
+    "salesforceGroups": [
+      "Employee"
+    ],
+    "role": "CEO",
+    "firstName": "Saml",
+    "profile": "Standard User"
+  },
+  "_links": {
+    "app": {
+      "href": "https://example.okta.com/api/v1/apps/0oabhnUQFYHMBNVSVXMV"
     },
-    "lastUpdated": "2013-09-11T15:56:58.000Z",
-    "_links": {
-      "user": {
-          "href": "https://example.okta.com/api/v1/users/00ubgfEUVRPSHGWHAZRI"
-        }
+    "user": {
+      "href": "https://example.okta.com/api/v1/users/00u11z6WHMYCGPCHCRFK"
     }
+  }
 }
 ~~~
 
 ### Application User Attributes
 
-All application users have the following attributes:
+All application user assignments have the following attributes:
 
-Attribute   | Description                                        | DataType                                                                    | MinLength | MaxLength | Nullable | Unique | Readonly
------------ | -------------------------------------------------- | --------------------------------------------------------------------------- | --------- | --------- | -------- | ------ | --------
-id          | unique key of user                                 | String                                                                      |           |           | FALSE    | TRUE   | TRUE
-scope       | toggles the assignment between user or group scope | `USER` or `GROUP`                                                           |           |           | FALSE    | FALSE  | FALSE
-lastUpdated | timestamp when app user was last updated           | Date                                                                        |           |           | FALSE    | FALSE  | TRUE
-credentials | credentials for assigned app                       | [Application User Credentials Object](#application-user-credentials-object) |           |           | TRUE     | FALSE  | FALSE
-_links      | discoverable resources related to the app user     | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-05)              |           |           | TRUE     | FALSE  | TRUE
+Attribute       | Description                                                  | DataType                                                                    | MinLength | MaxLength | Nullable | Unique | Readonly
+--------------- | ----------------------------------------------------------   | --------------------------------------------------------------------------- | --------- | --------- | -------- | ------ | --------
+id              | unique key of [User](Users.html)                             | String                                                                      |           |           | FALSE    | TRUE   | TRUE
+externalId      | id of user in target app *(must be imported or provisioned)* | String                                                                      |           | 512       | TRUE     | TRUE   | TRUE
+created         | timestamp when app user was created                          | Date                                                                        |           |           | FALSE    | FALSE  | TRUE
+lastUpdated     | timestamp when app user was last updated                     | Date                                                                        |           |           | FALSE    | FALSE  | TRUE
+scope           | toggles the assignment between user or group scope           | `USER` or `GROUP`                                                           |           |           | FALSE    | FALSE  | FALSE
+status          | status of app user                                           | `STAGED`, `PROVISIONED`, `ACTIVE`, `INACTIVE`, or `DEPROVISIONED`           |           |           | FALSE    | FALSE  | TRUE
+statusChanged   | timestamp when status was last changed                       | Date                                                                        |           |           | TRUE     | FALSE  | TRUE
+passwordChanged | timestamp when app password last changed                     | Date                                                                        |           |           | TRUE     | FALSE  | TRUE
+syncState       | synchronization state for app user                           | `DISABLED`, `OUT_OF_SYNC`, `SYNCING`, `SYNCHRONIZED`, `ERROR`               |           |           | FALSE    | FALSE  | TRUE
+lastSync        | timestamp when last sync operation was executed              | Date                                                                        |           |           | TRUE     | FALSE  | TRUE
+credentials     | credentials for assigned app                                 | [Application User Credentials Object](#application-user-credentials-object) |           |           | TRUE     | FALSE  | FALSE
+profile         | app-specific profile for the user                            | [Application User Profile Object](#application-user-profile-object)         |           |           | FALSE    | FALSE  | TRUE
+_links          | discoverable resources related to the app user               | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-05)              |           |           | TRUE     | FALSE  | TRUE
+
+> `lastSync` is only updated for applications with the `IMPORT_PROFILE_UPDATES` or `PUSH PROFILE_UPDATES` feature
+
+#### External ID
+
+Users in Okta are linked to a user in a target application via an `externalId`.  Okta anchors an user with his or her `externalId` during an import or provisioning synchronization event.  Okta uses the native app-specific identifier or primary key for the user as the `externalId`.  The `externalId` is selected during import when the user is confirmed (reconciled) or during provisioning when the user has been successfully created in the target application.
+
+> SSO Application Assignments (e.g. SAML or SWA) do not have an `externalId` as they are not synchronized with the application.
+  
+#### Application User Status
+
+##### Single Sign-On
+
+Users assigned to an application for SSO without provisioning features enabled will have a an `ACTIVE` status with `syncState` as `DISABLED`.
+
+##### User Import
+
+Users imported and confirmed by an application with the `IMPORT_PROFILE_UPDATES` feature will have an `ACTIVE` status.  The application user's `syncState` depends on whether the `PROFILE_MASTERING` feature is enabled for the application. When `PROFILE_MASTERING` is enabled the `syncState` transitions to `SYNCHRONIZED` otherwise the `syncState` is `DISABLED`.
+
+##### User Provisioning
+
+User provisioning in Okta is an asynchronous background job that is triggered during assignment of user (or indirectly via a group assignment).
+
+1. User is assigned to an application that has `PUSH_NEW_USERS` feature enabled
+    * Application user will have a `STAGED` status with no `externalId` while the background provisioning job is queued.
+2. When the background provisioning job completes successfully, the application user transitions to the `PROVISIONED` status. 
+    * Application user is assigned an `externalId` when successfully provisioned in target application.  The `externalId` should be immutable for the life of the assignment
+3. If the background provisioning job completes with an error, the application user remains with the `STAGED` status but will have `syncState` as `ERROR`.  A provisioning task is created in the Okta Admin UI that must be resolved to retry the job.
+
+When the `PUSH_PROFILE_UPDATES` feature is enabled, updates to an upstream profile are pushed downstream to the application according to profile mastering priority.  The app user's `syncState` will have the following values:
+
+syncState    | Description
+------------ | ----------- 
+OUT_OF_SYNC  | Application user has changes that have not been pushed to the target application
+SYNCING      | Background provisioning job is running to update the user's profile in the target application
+SYNCHRONIZED | All changes to the app user profile have successfully been synchronized with the target application
+ERROR        | Background provisioning job failed to update the user's profile in the target application. A provisioning task is created in the Okta Admin UI that must be resolved to retry the job.
+
+> User provisioning currently must be configured via the Okta Admin UI and is only available to with specific editions.
 
 ### Application User Credentials Object
 
-Specifies a user's credentials for the application.  The [Authentication Scheme](#authentication-schemes) of the app determines whether a userName or password can be assigned to a user.
+Specifies a user's credentials for the application.  The [Authentication Scheme](#authentication-schemes) of the application determines whether a userName or password can be assigned to a user.
 
 Attribute | Description      | DataType                            | MinLength | MaxLength | Nullable | Default
 --------- | ---------------- | ----------------------------------- | --------- | --------- | -------- | ---
@@ -376,30 +442,63 @@ password  | password for app | [Password Object](#password-object) |           |
 
 ~~~ json
 {
-    "credentials": {
-        "userName": "test",
-        "password": {}
-    }
+  "credentials": {
+    "userName": "test",
+    "password": {}
+  }
 }
 ~~~
 
-> The [UserName Template Object](#username-template-object) defines the default username generated when a user is assigned to an application.
+> The application's [UserName Template](#username-template-object) defines the default username generated when a user is assigned to an application.
 
 If you attempt to assign a username or password to an application with an incompatible [Authentication Scheme](#authentication-schemes) you will receive the following error:
 
 ~~~ json
 {
-    "errorCode": "E0000041",
-    "errorSummary": "Credentials should not be set on this resource based on the scheme.",
-    "errorLink": "E0000041",
-    "errorId": "oaeUM77NBynQQu4C_qT5ngjGQ",
-    "errorCauses": [
-        {
-            "errorSummary": "User level credentials should not be provided for this scheme."
-        }
-    ]
+  "errorCode": "E0000041",
+  "errorSummary": "Credentials should not be set on this resource based on the scheme.",
+  "errorLink": "E0000041",
+  "errorId": "oaeUM77NBynQQu4C_qT5ngjGQ",
+  "errorCauses": [
+    {
+      "errorSummary": "User level credentials should not be provided for this scheme."
+    }
+  ]
 }
 ~~~
+
+### Application User Profile Object
+
+Application User profiles are app-specific but may be customized by the Profile Editor in the Okta Admin UI. SSO apps typically don't support a user profile while apps with [user provisioning features](#features) have an app-specific profiles with optional and/or required attributes.  Any profile attribute visible in the Okta Admin UI for an application assignment can also be assigned via the API. Some attributes are reference attributes and imported from the target application and only allow specific values to be configured.
+
+#### Profile Editor
+
+![Profile Editor UI](/assets/img/okta-admin-ui-profile-editor.png "Profile Editor UI")
+
+> Managing profiles for applications is restricted to specific editions and requires access to the Universal Directory Early Access feature
+
+#### Example Application Assignment
+
+![App Assignment UI](/assets/img/okta-admin-ui-app-assignment.png "App Assignment UI")
+
+#### Example Profile Object
+
+~~~ json
+{
+  "profile": {
+    "secondEmail": null,
+    "lastName": "Jackson",
+    "mobilePhone": null,
+    "email": "saml.jackson@example.com",
+    "salesforceGroups": [
+      "Employee"
+    ],
+    "role": "CEO",
+    "firstName": "Saml",
+    "profile": "Standard User"
+  }
+}
+~~~ 
 
 ## Application Group Model
 
@@ -407,14 +506,14 @@ If you attempt to assign a username or password to an application with an incomp
 
 ~~~ json
 {
-    "id": "00gbkkGFFWZDLCNTAGQR",
-    "lastUpdated": "2013-09-11T15:56:58.000Z",
-    "priority": 0,
-    "_links": {
-      "user": {
-          "href": "https://example.okta.com/api/v1/users/00ubgfEUVRPSHGWHAZRI"
-        }
+  "id": "00gbkkGFFWZDLCNTAGQR",
+  "lastUpdated": "2013-09-11T15:56:58.000Z",
+  "priority": 0,
+  "_links": {
+    "user": {
+      "href": "https://example.okta.com/api/v1/users/00ubgfEUVRPSHGWHAZRI"
     }
+  }
 }
 ~~~
 
@@ -474,15 +573,15 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X POST "https://your-domain.okta.com/api/v1/apps" \
 -d \
 '{
-    "name": "bookmark",
-    "label": "Sample Bookmark App",
-    "signOnMode": "BOOKMARK",
-    "settings": {
-        "app": {
-            "requestIntegration": false,
-            "url": "https://example.com/bookmark.htm"
-        }
+  "name": "bookmark",
+  "label": "Sample Bookmark App",
+  "signOnMode": "BOOKMARK",
+  "settings": {
+    "app": {
+      "requestIntegration": false,
+      "url": "https://example.com/bookmark.htm"
     }
+  }
 }'
 ~~~
 
@@ -492,60 +591,61 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~ json
 {
   "id": "0oafxqCAJWWGELFTYASJ",
-    "name": "bookmark",
-    "label": "Sample Bookmark App",
-    "status": "ACTIVE",
-    "lastUpdated": "2013-10-01T04:22:31.000Z",
-    "created": "2013-10-01T04:22:27.000Z",
-    "accessibility": {
-        "selfService": false,
-        "errorRedirectUrl": null
+  "name": "bookmark",
+  "label": "Sample Bookmark App",
+  "status": "ACTIVE",
+  "lastUpdated": "2013-10-01T04:22:31.000Z",
+  "created": "2013-10-01T04:22:27.000Z",
+  "accessibility": {
+    "selfService": false,
+    "errorRedirectUrl": null
+  },
+  "visibility": {
+    "autoSubmitToolbar": false,
+    "hide": {
+      "iOS": false,
+      "web": false
     },
-    "visibility": {
-        "autoSubmitToolbar": false,
-        "hide": {
-            "iOS": false,
-            "web": false
-        },
-        "appLinks": {
-            "login": true
-        }
-    },
-    "features": [],
-    "signOnMode": "BOOKMARK",
-    "credentials": {
-        "userNameTemplate": {
-            "template": "${source.login}",
-            "type": "BUILT_IN"
-        }
-    },
-    "settings": {
-        "app": {
-            "requestIntegration": false,
-            "url": "https://example.com/bookmark.htm"
-        }
-    },
-    "_links": {
-        "logo": [
-            {
-                "href": "https:/example.okta.com/img/logos/logo_1.png",
-                "name": "medium",
-                "type": "image/png"
-            }
-        ],
-        "users": {
-            "href": "https://example.okta.com/api/v1/apps/0oafxqCAJWWGELFTYASJ/users"
-        },
-        "groups": {
-            "href": "https://example.okta.com/api/v1/apps/0oafxqCAJWWGELFTYASJ/groups"
-        },
-        "self": {
-            "href": "https://example.okta.com/api/v1/apps/0oafxqCAJWWGELFTYASJ"
-        },
-        "deactivate": {
-            "href": "https://example.okta.com/api/v1/apps/0oafxqCAJWWGELFTYASJ/lifecycle/deactivate"
-        }
+    "appLinks": {
+      "login": true
     }
+  },
+  "features": [],
+  "signOnMode": "BOOKMARK",
+  "credentials": {
+    "userNameTemplate": {
+      "template": "${source.login}",
+      "type": "BUILT_IN"
+    }
+  },
+  "settings": {
+    "app": {
+      "requestIntegration": false,
+      "url": "https://example.com/bookmark.htm"
+    }
+  },
+  "_links": {
+    "logo": [
+      {
+        "href": "https:/example.okta.com/img/logos/logo_1.png",
+        "name": "medium",
+        "type": "image/png"
+      }
+    ],
+    "users": {
+      "href": "https://example.okta.com/api/v1/apps/0oafxqCAJWWGELFTYASJ/users"
+    },
+    "groups": {
+      "href": "https://example.okta.com/api/v1/apps/0oafxqCAJWWGELFTYASJ/groups"
+    },
+    "self": {
+      "href": "https://example.okta.com/api/v1/apps/0oafxqCAJWWGELFTYASJ"
+    },
+    "deactivate": {
+      "href": "https://example.okta.com/api/v1/apps/0oafxqCAJWWGELFTYASJ/lifecycle/deactivate"
+    }
+  }
+}
 ~~~
 
 #### Add Basic Authentication Application
@@ -571,15 +671,15 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X POST "https://your-domain.okta.com/api/v1/apps" \
 -d \
 '{
-    "name": "template_basic_auth",
-    "label": "Sample Basic Auth App",
-    "signOnMode": "BASIC_AUTH",
-    "settings": {
-        "app": {
-            "url": "https://example.com/login.html",
-            "authURL": "https://example.com/auth.html"
-        }
+  "name": "template_basic_auth",
+  "label": "Sample Basic Auth App",
+  "signOnMode": "BASIC_AUTH",
+  "settings": {
+    "app": {
+      "url": "https://example.com/login.html",
+      "authURL": "https://example.com/auth.html"
     }
+  }
 }'
 ~~~
 
@@ -588,62 +688,62 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~ json
 {
-    "id": "0oafwvZDWJKVLDCUWUAC",
-    "name": "template_basic_auth",
-    "label": "Sample Basic Auth App",
-    "status": "ACTIVE",
-    "lastUpdated": "2013-09-30T00:56:52.365Z",
-    "created": "2013-09-30T00:56:52.365Z",
-    "accessibility": {
-        "selfService": false,
-        "errorRedirectUrl": null
+  "id": "0oafwvZDWJKVLDCUWUAC",
+  "name": "template_basic_auth",
+  "label": "Sample Basic Auth App",
+  "status": "ACTIVE",
+  "lastUpdated": "2013-09-30T00:56:52.365Z",
+  "created": "2013-09-30T00:56:52.365Z",
+  "accessibility": {
+    "selfService": false,
+    "errorRedirectUrl": null
+  },
+  "visibility": {
+    "autoSubmitToolbar": false,
+    "hide": {
+      "iOS": false,
+      "web": false
     },
-    "visibility": {
-        "autoSubmitToolbar": false,
-        "hide": {
-            "iOS": false,
-            "web": false
-        },
-        "appLinks": {
-            "login": true
-        }
-    },
-    "features": [],
-    "signOnMode": "BASIC_AUTH",
-    "credentials": {
-        "scheme": "EDIT_USERNAME_AND_PASSWORD",
-        "userNameTemplate": {
-            "template": "${source.login}",
-            "type": "BUILT_IN"
-        }
-    },
-    "settings": {
-        "app": {
-            "url": "https://example.com/login.html",
-            "authURL": "https://example.com/auth.html"
-        }
-    },
-    "_links": {
-        "logo": [
-            {
-                "href": "https:/example.okta.com/img/logos/logo_1.png",
-                "name": "medium",
-                "type": "image/png"
-            }
-        ],
-        "users": {
-            "href": "https://example.okta.com/api/v1/apps/0oafwvZDWJKVLDCUWUAC/users"
-        },
-        "groups": {
-            "href": "https://example.okta.com/api/v1/apps/0oafwvZDWJKVLDCUWUAC/groups"
-        },
-        "self": {
-            "href": "https://example.okta.com/api/v1/apps/0oafwvZDWJKVLDCUWUAC"
-        },
-        "deactivate": {
-            "href": "https://example.okta.com/api/v1/apps/0oafwvZDWJKVLDCUWUAC/lifecycle/deactivate"
-        }
+    "appLinks": {
+      "login": true
     }
+  },
+  "features": [],
+  "signOnMode": "BASIC_AUTH",
+  "credentials": {
+    "scheme": "EDIT_USERNAME_AND_PASSWORD",
+    "userNameTemplate": {
+      "template": "${source.login}",
+      "type": "BUILT_IN"
+    }
+  },
+  "settings": {
+    "app": {
+      "url": "https://example.com/login.html",
+      "authURL": "https://example.com/auth.html"
+    }
+  },
+  "_links": {
+    "logo": [
+      {
+        "href": "https:/example.okta.com/img/logos/logo_1.png",
+        "name": "medium",
+        "type": "image/png"
+      }
+    ],
+    "users": {
+      "href": "https://example.okta.com/api/v1/apps/0oafwvZDWJKVLDCUWUAC/users"
+    },
+    "groups": {
+      "href": "https://example.okta.com/api/v1/apps/0oafwvZDWJKVLDCUWUAC/groups"
+    },
+    "self": {
+      "href": "https://example.okta.com/api/v1/apps/0oafwvZDWJKVLDCUWUAC"
+    },
+    "deactivate": {
+      "href": "https://example.okta.com/api/v1/apps/0oafwvZDWJKVLDCUWUAC/lifecycle/deactivate"
+    }
+  }
 }
 ~~~
 
@@ -672,17 +772,17 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X POST "https://your-domain.okta.com/api/v1/apps" \
 -d \
 '{
-    "name": "template_swa",
-    "label": "Sample Plugin App",
-    "signOnMode": "BROWSER_PLUGIN",
-    "settings": {
-        "app": {
-            "buttonField": "btn-login",
-            "passwordField": "txtbox-password",
-            "usernameField": "txtbox-username",
-            "url": "https://example.com/login.html"
-        }
+  "name": "template_swa",
+  "label": "Sample Plugin App",
+  "signOnMode": "BROWSER_PLUGIN",
+  "settings": {
+    "app": {
+      "buttonField": "btn-login",
+      "passwordField": "txtbox-password",
+      "usernameField": "txtbox-username",
+      "url": "https://example.com/login.html"
     }
+  }
 }'
 ~~~
 
@@ -691,64 +791,64 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~ json
 {
-"id": "0oabkvBLDEKCNXBGYUAS",
-    "name": "template_swa",
-    "label": "Sample Plugin App",
-    "status": "ACTIVE",
-    "lastUpdated": "2013-09-11T17:58:54.000Z",
-    "created": "2013-09-11T17:46:08.000Z",
-    "accessibility": {
-        "selfService": false,
-        "errorRedirectUrl": null
+  "id": "0oabkvBLDEKCNXBGYUAS",
+  "name": "template_swa",
+  "label": "Sample Plugin App",
+  "status": "ACTIVE",
+  "lastUpdated": "2013-09-11T17:58:54.000Z",
+  "created": "2013-09-11T17:46:08.000Z",
+  "accessibility": {
+    "selfService": false,
+    "errorRedirectUrl": null
+  },
+  "visibility": {
+    "autoSubmitToolbar": false,
+    "hide": {
+      "iOS": false,
+      "web": false
     },
-    "visibility": {
-        "autoSubmitToolbar": false,
-        "hide": {
-            "iOS": false,
-            "web": false
-        },
-        "appLinks": {
-            "login": true
-        }
-    },
-    "features": [],
-    "signOnMode": "BROWSER_PLUGIN",
-    "credentials": {
-        "scheme": "EDIT_USERNAME_AND_PASSWORD",
-        "userNameTemplate": {
-            "template": "${source.login}",
-            "type": "BUILT_IN"
-        }
-    },
-    "settings": {
-        "app": {
-            "buttonField": "btn-login",
-            "passwordField": "txtbox-password",
-            "usernameField": "txtbox-username",
-            "url": "https://example.com/login.html"
-        }
-    },
-    "_links": {
-        "logo": [
-            {
-                "href": "https:/example.okta.com/img/logos/logo_1.png",
-                "name": "medium",
-                "type": "image/png"
-            }
-        ],
-        "users": {
-            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
-        },
-        "groups": {
-            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/groups"
-        },
-        "self": {
-            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
-        },
-        "deactivate": {
-            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
-        }
+    "appLinks": {
+      "login": true
     }
+  },
+  "features": [],
+  "signOnMode": "BROWSER_PLUGIN",
+  "credentials": {
+    "scheme": "EDIT_USERNAME_AND_PASSWORD",
+    "userNameTemplate": {
+      "template": "${source.login}",
+      "type": "BUILT_IN"
+    }
+  },
+  "settings": {
+    "app": {
+      "buttonField": "btn-login",
+      "passwordField": "txtbox-password",
+      "usernameField": "txtbox-username",
+      "url": "https://example.com/login.html"
+    }
+  },
+  "_links": {
+    "logo": [
+      {
+        "href": "https:/example.okta.com/img/logos/logo_1.png",
+        "name": "medium",
+        "type": "image/png"
+      }
+    ],
+    "users": {
+      "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
+    },
+    "groups": {
+      "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/groups"
+    },
+    "self": {
+      "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
+    },
+    "deactivate": {
+      "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
+    }
+  }
 }
 ~~~
 
@@ -779,19 +879,19 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X "POST https://your-domain.okta.com/api/v1/apps" \
 -d \
 '{
-    "name": "template_swa3field",
-    "label": "Sample Plugin App",
-    "signOnMode": "BROWSER_PLUGIN",
-    "settings": {
-        "app": {
-            "buttonField": "#btn-login",
-            "passwordField": "#txtbox-password",
-            "usernameField": "#txtbox-username",
-            "url": "https://example.com/login.html",
-            "extraFieldSelector": ".login",
-            "extraFieldValue": "SOMEVALUE"
-        }
+  "name": "template_swa3field",
+  "label": "Sample Plugin App",
+  "signOnMode": "BROWSER_PLUGIN",
+  "settings": {
+    "app": {
+      "buttonField": "#btn-login",
+      "passwordField": "#txtbox-password",
+      "usernameField": "#txtbox-username",
+      "url": "https://example.com/login.html",
+      "extraFieldSelector": ".login",
+      "extraFieldValue": "SOMEVALUE"
     }
+  }
 }'
 ~~~
 
@@ -800,66 +900,66 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~ json
 {
-    "id": "0oabkvBLDEKCNXBGYUAS",
-    "name": "template_swa",
-    "label": "Sample Plugin App",
-    "status": "ACTIVE",
-    "lastUpdated": "2013-09-11T17:58:54.000Z",
-    "created": "2013-09-11T17:46:08.000Z",
-    "accessibility": {
-        "selfService": false,
-        "errorRedirectUrl": null
+  "id": "0oabkvBLDEKCNXBGYUAS",
+  "name": "template_swa",
+  "label": "Sample Plugin App",
+  "status": "ACTIVE",
+  "lastUpdated": "2013-09-11T17:58:54.000Z",
+  "created": "2013-09-11T17:46:08.000Z",
+  "accessibility": {
+    "selfService": false,
+    "errorRedirectUrl": null
+  },
+  "visibility": {
+    "autoSubmitToolbar": false,
+    "hide": {
+      "iOS": false,
+      "web": false
     },
-    "visibility": {
-        "autoSubmitToolbar": false,
-        "hide": {
-            "iOS": false,
-            "web": false
-        },
-        "appLinks": {
-            "login": true
-        }
-    },
-    "features": [],
-    "signOnMode": "BROWSER_PLUGIN",
-    "credentials": {
-        "scheme": "EDIT_USERNAME_AND_PASSWORD",
-        "userNameTemplate": {
-            "template": "${source.login}",
-            "type": "BUILT_IN"
-        }
-    },
-    "settings": {
-        "app": {
-            "buttonField": "#btn-login",
-            "passwordField": "#txtbox-password",
-            "usernameField": "#txtbox-username",
-            "url": "https://example.com/login.html",
-            "extraFieldSelector": ".login",
-            "extraFieldValue": "SOMEVALUE"
-        }
-    },
-    "_links": {
-        "logo": [
-            {
-                "href": "https:/example.okta.com/img/logos/logo_1.png",
-                "name": "medium",
-                "type": "image/png"
-            }
-        ],
-        "users": {
-            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
-        },
-        "groups": {
-            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/groups"
-        },
-        "self": {
-            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
-        },
-        "deactivate": {
-            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
-        }
+    "appLinks": {
+      "login": true
     }
+  },
+  "features": [],
+  "signOnMode": "BROWSER_PLUGIN",
+  "credentials": {
+    "scheme": "EDIT_USERNAME_AND_PASSWORD",
+    "userNameTemplate": {
+      "template": "${source.login}",
+      "type": "BUILT_IN"
+    }
+  },
+  "settings": {
+    "app": {
+      "buttonField": "#btn-login",
+      "passwordField": "#txtbox-password",
+      "usernameField": "#txtbox-username",
+      "url": "https://example.com/login.html",
+      "extraFieldSelector": ".login",
+      "extraFieldValue": "SOMEVALUE"
+    }
+  },
+  "_links": {
+    "logo": [
+      {
+        "href": "https:/example.okta.com/img/logos/logo_1.png",
+        "name": "medium",
+        "type": "image/png"
+      }
+    ],
+    "users": {
+      "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
+    },
+    "groups": {
+      "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/groups"
+    },
+    "self": {
+      "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
+    },
+    "deactivate": {
+      "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
+    }
+  }
 }
 ~~~
 
@@ -894,22 +994,22 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X POST "https://your-domain.okta.com/api/v1/apps" \
 -d \
 '{
-    "name": "template_sps",
-    "label": "Example SWA App",
-    "signOnMode": "SECURE_PASSWORD_STORE",
-    "settings": {
-        "app": {
-            "url": "https://example.com/login.html",
-            "passwordField": "#txtbox-password",
-            "usernameField": "#txtbox-username",
-            "optionalField1": "param1",
-            "optionalField1Value": "somevalue",
-            "optionalField2": "param2",
-            "optionalField2Value": "yetanothervalue",
-            "optionalField3": "param3",
-            "optionalField3Value": "finalvalue"
-        }
+  "name": "template_sps",
+  "label": "Example SWA App",
+  "signOnMode": "SECURE_PASSWORD_STORE",
+  "settings": {
+    "app": {
+      "url": "https://example.com/login.html",
+      "passwordField": "#txtbox-password",
+      "usernameField": "#txtbox-username",
+      "optionalField1": "param1",
+      "optionalField1Value": "somevalue",
+      "optionalField2": "param2",
+      "optionalField2Value": "yetanothervalue",
+      "optionalField3": "param3",
+      "optionalField3Value": "finalvalue"
     }
+  }
 }'
 ~~~
 
@@ -918,69 +1018,69 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~ json
 {
-    "id": "0oafywQDNMXLYDBIHQTT",
-    "name": "template_sps",
-    "label": "Example SWA App",
-    "status": "ACTIVE",
-    "lastUpdated": "2013-10-01T05:41:01.983Z",
-    "created": "2013-10-01T05:41:01.983Z",
-    "accessibility": {
-        "selfService": false,
-        "errorRedirectUrl": null
+  "id": "0oafywQDNMXLYDBIHQTT",
+  "name": "template_sps",
+  "label": "Example SWA App",
+  "status": "ACTIVE",
+  "lastUpdated": "2013-10-01T05:41:01.983Z",
+  "created": "2013-10-01T05:41:01.983Z",
+  "accessibility": {
+    "selfService": false,
+    "errorRedirectUrl": null
+  },
+  "visibility": {
+    "autoSubmitToolbar": false,
+    "hide": {
+      "iOS": false,
+      "web": false
     },
-    "visibility": {
-        "autoSubmitToolbar": false,
-        "hide": {
-            "iOS": false,
-            "web": false
-        },
-        "appLinks": {
-            "login": true
-        }
-    },
-    "features": [],
-    "signOnMode": "SECURE_PASSWORD_STORE",
-    "credentials": {
-        "scheme": "EDIT_USERNAME_AND_PASSWORD",
-        "userNameTemplate": {
-            "template": "${source.login}",
-            "type": "BUILT_IN"
-        }
-    },
-    "settings": {
-        "app": {
-            "url": "https://example.com/login.html",
-            "passwordField": "#txtbox-password",
-            "usernameField": "#txtbox-username",
-            "optionalField1": "param1",
-            "optionalField1Value": "somevalue",
-            "optionalField2": "param2",
-            "optionalField2Value": "yetanothervalue",
-            "optionalField3": "param3",
-            "optionalField3Value": "finalvalue"
-        }
-    },
-    "_links": {
-        "logo": [
-            {
-                "href": "https:/example.okta.com/img/logos/logo_1.png",
-                "name": "medium",
-                "type": "image/png"
-            }
-        ],
-        "users": {
-            "href": "https://example.okta.com/api/v1/apps/0oafywQDNMXLYDBIHQTT/users"
-        },
-        "groups": {
-            "href": "https://example.okta.com/api/v1/apps/0oafywQDNMXLYDBIHQTT/groups"
-        },
-        "self": {
-            "href": "https://example.okta.com/api/v1/apps/0oafywQDNMXLYDBIHQTT"
-        },
-        "deactivate": {
-            "href": "https://example.okta.com/api/v1/apps/0oafywQDNMXLYDBIHQTT/lifecycle/deactivate"
-        }
+    "appLinks": {
+      "login": true
     }
+  },
+  "features": [],
+  "signOnMode": "SECURE_PASSWORD_STORE",
+  "credentials": {
+    "scheme": "EDIT_USERNAME_AND_PASSWORD",
+    "userNameTemplate": {
+      "template": "${source.login}",
+      "type": "BUILT_IN"
+    }
+  },
+  "settings": {
+    "app": {
+      "url": "https://example.com/login.html",
+      "passwordField": "#txtbox-password",
+      "usernameField": "#txtbox-username",
+      "optionalField1": "param1",
+      "optionalField1Value": "somevalue",
+      "optionalField2": "param2",
+      "optionalField2Value": "yetanothervalue",
+      "optionalField3": "param3",
+      "optionalField3Value": "finalvalue"
+    }
+  },
+  "_links": {
+    "logo": [
+      {
+        "href": "https:/example.okta.com/img/logos/logo_1.png",
+        "name": "medium",
+        "type": "image/png"
+      }
+    ],
+    "users": {
+      "href": "https://example.okta.com/api/v1/apps/0oafywQDNMXLYDBIHQTT/users"
+    },
+    "groups": {
+      "href": "https://example.okta.com/api/v1/apps/0oafywQDNMXLYDBIHQTT/groups"
+    },
+    "self": {
+      "href": "https://example.okta.com/api/v1/apps/0oafywQDNMXLYDBIHQTT"
+    },
+    "deactivate": {
+      "href": "https://example.okta.com/api/v1/apps/0oafywQDNMXLYDBIHQTT/lifecycle/deactivate"
+    }
+  }
 }
 ~~~
 
@@ -999,28 +1099,28 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X POST "https://your-domain.okta.com/api/v1/apps" \
 -d \
 '{
-    "name": "template_saml_2_0",
-    "label": "Example SAML App",
-    "signOnMode": "SAML_2_0",
-    "settings": {
-        "app": {
-            "audienceRestriction": "https://example.com/tenant/123",
-            "forceAuthn": false,
-            "postBackURL": "https://example.com/sso/saml",
-            "authnContextClassRef": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
-            "requestCompressed": "COMPRESSED",
-            "recipient": "https://example.com/sso/saml",
-            "signAssertion": "SIGNED",
-            "destination": "https://example.com/sso/saml",
-            "signResponse": "SIGNED",
-            "nameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
-            "groupName": null,
-            "groupFilter": null,
-            "defaultRelayState": null,
-            "configuredIssuer": null,
-            "attributeStatements": null
-        }
+  "name": "template_saml_2_0",
+  "label": "Example SAML App",
+  "signOnMode": "SAML_2_0",
+  "settings": {
+    "app": {
+      "audienceRestriction": "https://example.com/tenant/123",
+      "forceAuthn": false,
+      "postBackURL": "https://example.com/sso/saml",
+      "authnContextClassRef": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
+      "requestCompressed": "COMPRESSED",
+      "recipient": "https://example.com/sso/saml",
+      "signAssertion": "SIGNED",
+      "destination": "https://example.com/sso/saml",
+      "signResponse": "SIGNED",
+      "nameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+      "groupName": null,
+      "groupFilter": null,
+      "defaultRelayState": null,
+      "configuredIssuer": null,
+      "attributeStatements": null
     }
+  }
 }'
 ~~~
 
@@ -1039,25 +1139,25 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X POST "https://your-domain.okta.com/api/v1/apps" \
 -d \
 '{
-    "name": "template_wsfed",
-    "label": "Sample WS-Fed App",
-    "signOnMode": "WS_FEDERATION",
-    "settings": {
-        "app": {
-            "audienceRestriction": "urn:example:app",
-            "groupName": null,
-            "groupValueFormat": "windowsDomainQualifiedName",
-            "realm": "urn:example:app",
-            "wReplyURL": "https://example.com/",
-            "attributeStatements": null,
-            "nameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified",
-            "authnContextClassRef": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
-            "siteURL": "https://example.com",
-            "wReplyOverride": false,
-            "groupFilter": null,
-            "usernameAttribute": "username"
-        }
+  "name": "template_wsfed",
+  "label": "Sample WS-Fed App",
+  "signOnMode": "WS_FEDERATION",
+  "settings": {
+    "app": {
+      "audienceRestriction": "urn:example:app",
+      "groupName": null,
+      "groupValueFormat": "windowsDomainQualifiedName",
+      "realm": "urn:example:app",
+      "wReplyURL": "https://example.com/",
+      "attributeStatements": null,
+      "nameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified",
+      "authnContextClassRef": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
+      "siteURL": "https://example.com",
+      "wReplyOverride": false,
+      "groupFilter": null,
+      "usernameAttribute": "username"
     }
+  }
 }'
 ~~~
 
@@ -1095,77 +1195,77 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~ json
 {
-    "id": "0oabizCHPNYALCHDUIOD",
-    "name": "template_saml_2_0",
-    "label": "Example SAML App",
-    "status": "ACTIVE",
-    "lastUpdated": "2013-09-19T22:57:23.000Z",
-    "created": "2013-09-10T23:52:31.000Z",
-    "accessibility": {
-        "selfService": false,
-        "errorRedirectUrl": null
+  "id": "0oabizCHPNYALCHDUIOD",
+  "name": "template_saml_2_0",
+  "label": "Example SAML App",
+  "status": "ACTIVE",
+  "lastUpdated": "2013-09-19T22:57:23.000Z",
+  "created": "2013-09-10T23:52:31.000Z",
+  "accessibility": {
+    "selfService": false,
+    "errorRedirectUrl": null
+  },
+  "visibility": {
+    "autoSubmitToolbar": false,
+    "hide": {
+      "iOS": false,
+      "web": false
     },
-    "visibility": {
-        "autoSubmitToolbar": false,
-        "hide": {
-            "iOS": false,
-            "web": false
-        },
-        "appLinks": {
-            "login": true
-        }
-    },
-    "features": [],
-    "signOnMode": "SAML_2_0",
-    "credentials": {
-        "userNameTemplate": {
-            "template": "${source.login}",
-            "type": "BUILT_IN"
-        }
-    },
-    "settings": {
-        "app": {
-            "audienceRestriction": "https://example.com/tenant/123",
-            "groupName": null,
-            "forceAuthn": false,
-            "defaultRelayState": null,
-            "postBackURL": "https://example.com/sso/saml",
-            "authnContextClassRef": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
-            "configuredIssuer": null,
-            "requestCompressed": "COMPRESSED",
-            "groupFilter": null,
-            "recipient": "https://example.com/sso/saml",
-            "signAssertion": "SIGNED",
-            "destination": "https://example.com/sso/saml",
-            "signResponse": "SIGNED",
-            "nameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
-            "attributeStatements": null
-        }
-    },
-    "_links": {
-        "logo": [
-            {
-                "href": "https:/example.okta.com/img/logos/logo_1.png",
-                "name": "medium",
-                "type": "image/png"
-            }
-        ],
-        "users": {
-            "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/users"
-        },
-        "groups": {
-            "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/groups"
-        },
-        "self": {
-            "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD"
-        },
-        "metadata": {
-            "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/sso/saml/metadata"
-        },
-        "deactivate": {
-            "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/lifecycle/deactivate"
-        }
+    "appLinks": {
+      "login": true
     }
+  },
+  "features": [],
+  "signOnMode": "SAML_2_0",
+  "credentials": {
+    "userNameTemplate": {
+      "template": "${source.login}",
+      "type": "BUILT_IN"
+    }
+  },
+  "settings": {
+    "app": {
+      "audienceRestriction": "https://example.com/tenant/123",
+      "groupName": null,
+      "forceAuthn": false,
+      "defaultRelayState": null,
+      "postBackURL": "https://example.com/sso/saml",
+      "authnContextClassRef": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
+      "configuredIssuer": null,
+      "requestCompressed": "COMPRESSED",
+      "groupFilter": null,
+      "recipient": "https://example.com/sso/saml",
+      "signAssertion": "SIGNED",
+      "destination": "https://example.com/sso/saml",
+      "signResponse": "SIGNED",
+      "nameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+      "attributeStatements": null
+    }
+  },
+  "_links": {
+    "logo": [
+      {
+        "href": "https:/example.okta.com/img/logos/logo_1.png",
+        "name": "medium",
+        "type": "image/png"
+      }
+    ],
+    "users": {
+      "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/users"
+    },
+    "groups": {
+      "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/groups"
+    },
+    "self": {
+      "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD"
+    },
+    "metadata": {
+      "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/sso/saml/metadata"
+    },
+    "deactivate": {
+      "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/lifecycle/deactivate"
+    }
+  }
 }
 ~~~
 
@@ -1241,139 +1341,139 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~ json
 [
-    {
-        "id": "0oabizCHPNYALCHDUIOD",
-        "name": "template_saml_2_0",
-        "label": "Example SAML App",
-        "status": "ACTIVE",
-        "lastUpdated": "2013-09-19T22:57:23.000Z",
-        "created": "2013-09-10T23:52:31.000Z",
-        "accessibility": {
-            "selfService": false,
-            "errorRedirectUrl": null
-        },
-        "visibility": {
-            "autoSubmitToolbar": false,
-            "hide": {
-                "iOS": false,
-                "web": false
-            },
-            "appLinks": {
-                "login": true
-            }
-        },
-        "features": [],
-        "signOnMode": "SAML_2_0",
-        "credentials": {
-            "userNameTemplate": {
-                "template": "${source.login}",
-                "type": "BUILT_IN"
-            }
-        },
-        "settings": {
-            "app": {
-                "audienceRestriction": "https://example.com/tenant/123",
-                "groupName": null,
-                "forceAuthn": false,
-                "defaultRelayState": null,
-                "postBackURL": "https://example.com/sso/saml",
-                "authnContextClassRef": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
-                "configuredIssuer": null,
-                "requestCompressed": "COMPRESSED",
-                "groupFilter": null,
-                "recipient": "https://example.com/sso/saml",
-                "signAssertion": "SIGNED",
-                "destination": "https://example.com/sso/saml",
-                "signResponse": "SIGNED",
-                "nameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
-                "attributeStatements": null
-            }
-        },
-        "_links": {
-            "logo": [
-                {
-                    "href": "https:/example.okta.com/img/logos/logo_1.png",
-                    "name": "medium",
-                    "type": "image/png"
-                }
-            ],
-            "users": {
-                "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/users"
-            },
-            "groups": {
-                "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/groups"
-            },
-            "self": {
-                "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD"
-            },
-            "metadata": {
-                "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/sso/saml/metadata"
-            },
-            "deactivate": {
-                "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/lifecycle/deactivate"
-            }
-        }
+  {
+    "id": "0oabizCHPNYALCHDUIOD",
+    "name": "template_saml_2_0",
+    "label": "Example SAML App",
+    "status": "ACTIVE",
+    "lastUpdated": "2013-09-19T22:57:23.000Z",
+    "created": "2013-09-10T23:52:31.000Z",
+    "accessibility": {
+      "selfService": false,
+      "errorRedirectUrl": null
     },
-    {
-        "id": "0oabkvBLDEKCNXBGYUAS",
-        "name": "template_swa",
-        "label": "Sample Plugin App",
-        "status": "ACTIVE",
-        "lastUpdated": "2013-09-11T17:58:54.000Z",
-        "created": "2013-09-11T17:46:08.000Z",
-        "accessibility": {
-            "selfService": false,
-            "errorRedirectUrl": null
-        },
-        "visibility": {
-            "autoSubmitToolbar": false,
-            "hide": {
-                "iOS": false,
-                "web": false
-            },
-            "appLinks": {
-                "login": true
-            }
-        },
-        "features": [],
-        "signOnMode": "BROWSER_PLUGIN",
-        "credentials": {
-            "scheme": "EDIT_USERNAME_AND_PASSWORD",
-            "userNameTemplate": {
-                "template": "${source.login}",
-                "type": "BUILT_IN"
-            }
-        },
-        "settings": {
-            "app": {
-                "buttonField": "btn-login",
-                "passwordField": "txtbox-password",
-                "usernameField": "txtbox-username",
-                "url": "https://example.com/login.html"
-            }
-        },
-        "_links": {
-            "logo": [
-                {
-                    "href": "https:/example.okta.com/img/logos/logo_1.png",
-                    "name": "medium",
-                    "type": "image/png"
-                }
-            ],
-            "users": {
-                "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
-            },
-            "groups": {
-                "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/groups"
-            },
-            "self": {
-                "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
-            },
-            "deactivate": {
-                "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
-            }
+    "visibility": {
+      "autoSubmitToolbar": false,
+      "hide": {
+        "iOS": false,
+        "web": false
+      },
+      "appLinks": {
+        "login": true
+      }
+    },
+    "features": [],
+    "signOnMode": "SAML_2_0",
+    "credentials": {
+      "userNameTemplate": {
+        "template": "${source.login}",
+        "type": "BUILT_IN"
+      }
+    },
+    "settings": {
+      "app": {
+        "audienceRestriction": "https://example.com/tenant/123",
+        "groupName": null,
+        "forceAuthn": false,
+        "defaultRelayState": null,
+        "postBackURL": "https://example.com/sso/saml",
+        "authnContextClassRef": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
+        "configuredIssuer": null,
+        "requestCompressed": "COMPRESSED",
+        "groupFilter": null,
+        "recipient": "https://example.com/sso/saml",
+        "signAssertion": "SIGNED",
+        "destination": "https://example.com/sso/saml",
+        "signResponse": "SIGNED",
+        "nameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+        "attributeStatements": null
+      }
+    },
+    "_links": {
+      "logo": [
+        {
+          "href": "https:/example.okta.com/img/logos/logo_1.png",
+          "name": "medium",
+          "type": "image/png"
         }
+      ],
+      "users": {
+        "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/users"
+      },
+      "groups": {
+        "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/groups"
+      },
+      "self": {
+        "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD"
+      },
+      "metadata": {
+        "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/sso/saml/metadata"
+      },
+      "deactivate": {
+        "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/lifecycle/deactivate"
+      }
     }
+  },
+  {
+    "id": "0oabkvBLDEKCNXBGYUAS",
+    "name": "template_swa",
+    "label": "Sample Plugin App",
+    "status": "ACTIVE",
+    "lastUpdated": "2013-09-11T17:58:54.000Z",
+    "created": "2013-09-11T17:46:08.000Z",
+    "accessibility": {
+      "selfService": false,
+      "errorRedirectUrl": null
+    },
+    "visibility": {
+      "autoSubmitToolbar": false,
+      "hide": {
+        "iOS": false,
+        "web": false
+      },
+      "appLinks": {
+        "login": true
+      }
+    },
+    "features": [],
+    "signOnMode": "BROWSER_PLUGIN",
+    "credentials": {
+      "scheme": "EDIT_USERNAME_AND_PASSWORD",
+      "userNameTemplate": {
+        "template": "${source.login}",
+        "type": "BUILT_IN"
+      }
+    },
+    "settings": {
+      "app": {
+        "buttonField": "btn-login",
+        "passwordField": "txtbox-password",
+        "usernameField": "txtbox-username",
+        "url": "https://example.com/login.html"
+      }
+    },
+    "_links": {
+      "logo": [
+        {
+          "href": "https:/example.okta.com/img/logos/logo_1.png",
+          "name": "medium",
+          "type": "image/png"
+        }
+      ],
+      "users": {
+        "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
+      },
+      "groups": {
+        "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/groups"
+      },
+      "self": {
+        "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
+      },
+      "deactivate": {
+        "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
+      }
+    }
+  }
 ]
 ~~~
 
@@ -1399,190 +1499,190 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~ json
 [
-    {
-        "id": "0oabizCHPNYALCHDUIOD",
-        "name": "template_saml_2_0",
-        "label": "Example SAML App",
-        "status": "ACTIVE",
-        "lastUpdated": "2013-09-19T22:57:23.000Z",
-        "created": "2013-09-10T23:52:31.000Z",
-        "accessibility": {
-            "selfService": false,
-            "errorRedirectUrl": null
-        },
-        "visibility": {
-            "autoSubmitToolbar": false,
-            "hide": {
-                "iOS": false,
-                "web": false
-            },
-            "appLinks": {
-                "login": true
-            }
-        },
-        "features": [],
-        "signOnMode": "SAML_2_0",
-        "credentials": {
-            "userNameTemplate": {
-                "template": "${source.login}",
-                "type": "BUILT_IN"
-            }
-        },
-        "settings": {
-            "app": {
-                "audienceRestriction": "https://example.com/tenant/123",
-                "groupName": null,
-                "forceAuthn": false,
-                "defaultRelayState": null,
-                "postBackURL": "https://example.com/sso/saml",
-                "authnContextClassRef": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
-                "configuredIssuer": null,
-                "requestCompressed": "COMPRESSED",
-                "groupFilter": null,
-                "recipient": "https://example.com/sso/saml",
-                "signAssertion": "SIGNED",
-                "destination": "https://example.com/sso/saml",
-                "signResponse": "SIGNED",
-                "nameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
-                "attributeStatements": null
-            }
-        },
-        "_links": {
-            "logo": [
-                {
-                    "href": "https:/example.okta.com/img/logos/logo_1.png",
-                    "name": "medium",
-                    "type": "image/png"
-                }
-            ],
-            "users": {
-                "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/users"
-            },
-            "groups": {
-                "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/groups"
-            },
-            "self": {
-                "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD"
-            },
-            "metadata": {
-                "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/sso/saml/metadata"
-            },
-            "deactivate": {
-                "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/lifecycle/deactivate"
-            }
-        },
-        "_embedded": {
-            {
-                "id": "00ucw2RPGIUNTDQOYPOF",
-                "externalId": null,
-                "created": "2014-03-21T23:31:35.000Z",
-                "lastUpdated": "2014-03-21T23:31:35.000Z",
-                "scope": "USER",
-                "status": "ACTIVE",
-                "statusChanged": "2014-03-21T23:31:35.000Z",
-                "passwordChanged": null,
-                "syncState": "DISABLED",
-                "lastSync": null,
-                "credentials": {
-                    "userName": "user@example.com"
-                },
-                "_links": {
-                    "app": {
-                        "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD"
-                    },
-                    "user": {
-                        "href": "https://example.okta.com/api/v1/users/00ucw2RPGIUNTDQOYPOF"
-                    }
-                }
-            }
-        }
+  {
+    "id": "0oabizCHPNYALCHDUIOD",
+    "name": "template_saml_2_0",
+    "label": "Example SAML App",
+    "status": "ACTIVE",
+    "lastUpdated": "2013-09-19T22:57:23.000Z",
+    "created": "2013-09-10T23:52:31.000Z",
+    "accessibility": {
+      "selfService": false,
+      "errorRedirectUrl": null
     },
-    {
-        "id": "0oabkvBLDEKCNXBGYUAS",
-        "name": "template_swa",
-        "label": "Sample Plugin App",
+    "visibility": {
+      "autoSubmitToolbar": false,
+      "hide": {
+        "iOS": false,
+        "web": false
+      },
+      "appLinks": {
+        "login": true
+      }
+    },
+    "features": [],
+    "signOnMode": "SAML_2_0",
+    "credentials": {
+      "userNameTemplate": {
+        "template": "${source.login}",
+        "type": "BUILT_IN"
+      }
+    },
+    "settings": {
+      "app": {
+        "audienceRestriction": "https://example.com/tenant/123",
+        "groupName": null,
+        "forceAuthn": false,
+        "defaultRelayState": null,
+        "postBackURL": "https://example.com/sso/saml",
+        "authnContextClassRef": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
+        "configuredIssuer": null,
+        "requestCompressed": "COMPRESSED",
+        "groupFilter": null,
+        "recipient": "https://example.com/sso/saml",
+        "signAssertion": "SIGNED",
+        "destination": "https://example.com/sso/saml",
+        "signResponse": "SIGNED",
+        "nameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+        "attributeStatements": null
+      }
+    },
+    "_links": {
+      "logo": [
+        {
+          "href": "https:/example.okta.com/img/logos/logo_1.png",
+          "name": "medium",
+          "type": "image/png"
+        }
+      ],
+      "users": {
+        "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/users"
+      },
+      "groups": {
+        "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/groups"
+      },
+      "self": {
+        "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD"
+      },
+      "metadata": {
+        "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/sso/saml/metadata"
+      },
+      "deactivate": {
+        "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/lifecycle/deactivate"
+      }
+    },
+    "_embedded": {
+      "user": {
+        "id": "00ucw2RPGIUNTDQOYPOF",
+        "externalId": null,
+        "created": "2014-03-21T23:31:35.000Z",
+        "lastUpdated": "2014-03-21T23:31:35.000Z",
+        "scope": "USER",
         "status": "ACTIVE",
-        "lastUpdated": "2013-09-11T17:58:54.000Z",
-        "created": "2013-09-11T17:46:08.000Z",
-        "accessibility": {
-            "selfService": false,
-            "errorRedirectUrl": null
-        },
-        "visibility": {
-            "autoSubmitToolbar": false,
-            "hide": {
-                "iOS": false,
-                "web": false
-            },
-            "appLinks": {
-                "login": true
-            }
-        },
-        "features": [],
-        "signOnMode": "BROWSER_PLUGIN",
+        "statusChanged": "2014-03-21T23:31:35.000Z",
+        "passwordChanged": null,
+        "syncState": "DISABLED",
+        "lastSync": null,
         "credentials": {
-            "scheme": "EDIT_USERNAME_AND_PASSWORD",
-            "userNameTemplate": {
-                "template": "${source.login}",
-                "type": "BUILT_IN"
-            }
-        },
-        "settings": {
-            "app": {
-                "buttonField": "btn-login",
-                "passwordField": "txtbox-password",
-                "usernameField": "txtbox-username",
-                "url": "https://example.com/login.html"
-            }
+          "userName": "user@example.com"
         },
         "_links": {
-            "logo": [
-                {
-                    "href": "https:/example.okta.com/img/logos/logo_1.png",
-                    "name": "medium",
-                    "type": "image/png"
-                }
-            ],
-            "users": {
-                "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
-            },
-            "groups": {
-                "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/groups"
-            },
-            "self": {
-                "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
-            },
-            "deactivate": {
-                "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
-            }
-        },
-        "_embedded": {
-            {
-                "id": "00ucw2RPGIUNTDQOYPOF",
-                "externalId": null,
-                "created": "2014-06-10T15:16:01.000Z",
-                "lastUpdated": "2014-06-10T15:17:38.000Z",
-                "scope": "USER",
-                "status": "ACTIVE",
-                "statusChanged": "2014-06-10T15:16:01.000Z",
-                "passwordChanged": "2014-06-10T15:17:38.000Z",
-                "syncState": "DISABLED",
-                "lastSync": null,
-                "credentials": {
-                    "userName": "user@example.com",
-                    "password": {}
-                },
-                "_links": {
-                    "app": {
-                        "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
-                    },
-                    "user": {
-                        "href": "https://example.okta.com/api/v1/users/00ucw2RPGIUNTDQOYPOF"
-                    }
-                }
-            }
-        }        
+          "app": {
+            "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD"
+          },
+          "user": {
+            "href": "https://example.okta.com/api/v1/users/00ucw2RPGIUNTDQOYPOF"
+          }
+        }
+      }
     }
+  },
+  {
+    "id": "0oabkvBLDEKCNXBGYUAS",
+    "name": "template_swa",
+    "label": "Sample Plugin App",
+    "status": "ACTIVE",
+    "lastUpdated": "2013-09-11T17:58:54.000Z",
+    "created": "2013-09-11T17:46:08.000Z",
+    "accessibility": {
+      "selfService": false,
+      "errorRedirectUrl": null
+    },
+    "visibility": {
+      "autoSubmitToolbar": false,
+      "hide": {
+        "iOS": false,
+        "web": false
+      },
+      "appLinks": {
+        "login": true
+      }
+    },
+    "features": [],
+    "signOnMode": "BROWSER_PLUGIN",
+    "credentials": {
+      "scheme": "EDIT_USERNAME_AND_PASSWORD",
+      "userNameTemplate": {
+        "template": "${source.login}",
+        "type": "BUILT_IN"
+      }
+    },
+    "settings": {
+      "app": {
+        "buttonField": "btn-login",
+        "passwordField": "txtbox-password",
+        "usernameField": "txtbox-username",
+        "url": "https://example.com/login.html"
+      }
+    },
+    "_links": {
+      "logo": [
+        {
+          "href": "https:/example.okta.com/img/logos/logo_1.png",
+          "name": "medium",
+          "type": "image/png"
+        }
+      ],
+      "users": {
+        "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
+      },
+      "groups": {
+        "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/groups"
+      },
+      "self": {
+        "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
+      },
+      "deactivate": {
+        "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
+      }
+    },
+    "_embedded": {
+      "user": {
+        "id": "00ucw2RPGIUNTDQOYPOF",
+        "externalId": null,
+        "created": "2014-06-10T15:16:01.000Z",
+        "lastUpdated": "2014-06-10T15:17:38.000Z",
+        "scope": "USER",
+        "status": "ACTIVE",
+        "statusChanged": "2014-06-10T15:16:01.000Z",
+        "passwordChanged": "2014-06-10T15:17:38.000Z",
+        "syncState": "DISABLED",
+        "lastSync": null,
+        "credentials": {
+          "userName": "user@example.com",
+          "password": {}
+        },
+        "_links": {
+          "app": {
+            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
+          },
+          "user": {
+            "href": "https://example.okta.com/api/v1/users/00ucw2RPGIUNTDQOYPOF"
+          }
+        }
+      }
+    }
+  }
 ]
 ~~~
 
@@ -1606,66 +1706,66 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~ json
 [
-       {
-        "id": "0oabkvBLDEKCNXBGYUAS",
-        "name": "template_swa",
-        "label": "Sample Plugin App",
-        "status": "ACTIVE",
-        "lastUpdated": "2013-09-11T17:58:54.000Z",
-        "created": "2013-09-11T17:46:08.000Z",
-        "accessibility": {
-            "selfService": false,
-            "errorRedirectUrl": null
-        },
-        "visibility": {
-            "autoSubmitToolbar": false,
-            "hide": {
-                "iOS": false,
-                "web": false
-            },
-            "appLinks": {
-                "login": true
-            }
-        },
-        "features": [],
-        "signOnMode": "BROWSER_PLUGIN",
-        "credentials": {
-            "scheme": "EDIT_USERNAME_AND_PASSWORD",
-            "userNameTemplate": {
-                "template": "${source.login}",
-                "type": "BUILT_IN"
-            }
-        },
-        "settings": {
-            "app": {
-                "buttonField": "btn-login",
-                "passwordField": "txtbox-password",
-                "usernameField": "txtbox-username",
-                "url": "https://example.com/login.html"
-            }
-        },
-        "_links": {
-            "logo": [
-                {
-                    "href": "https:/example.okta.com/img/logos/logo_1.png",
-                    "name": "medium",
-                    "type": "image/png"
-                }
-            ],
-            "users": {
-                "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
-            },
-            "groups": {
-                "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/groups"
-            },
-            "self": {
-                "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
-            },
-            "deactivate": {
-                "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
-            }
+  {
+    "id": "0oabkvBLDEKCNXBGYUAS",
+    "name": "template_swa",
+    "label": "Sample Plugin App",
+    "status": "ACTIVE",
+    "lastUpdated": "2013-09-11T17:58:54.000Z",
+    "created": "2013-09-11T17:46:08.000Z",
+    "accessibility": {
+      "selfService": false,
+      "errorRedirectUrl": null
+    },
+    "visibility": {
+      "autoSubmitToolbar": false,
+      "hide": {
+        "iOS": false,
+        "web": false
+      },
+      "appLinks": {
+        "login": true
+      }
+    },
+    "features": [],
+    "signOnMode": "BROWSER_PLUGIN",
+    "credentials": {
+      "scheme": "EDIT_USERNAME_AND_PASSWORD",
+      "userNameTemplate": {
+        "template": "${source.login}",
+        "type": "BUILT_IN"
+      }
+    },
+    "settings": {
+      "app": {
+        "buttonField": "btn-login",
+        "passwordField": "txtbox-password",
+        "usernameField": "txtbox-username",
+        "url": "https://example.com/login.html"
+      }
+    },
+    "_links": {
+      "logo": [
+        {
+          "href": "https:/example.okta.com/img/logos/logo_1.png",
+          "name": "medium",
+          "type": "image/png"
         }
+      ],
+      "users": {
+        "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
+      },
+      "groups": {
+        "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/groups"
+      },
+      "self": {
+        "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
+      },
+      "deactivate": {
+        "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
+      }
     }
+  }
 ]
 ~~~
 
@@ -1706,40 +1806,40 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X PUT "https://your-domain.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS" \
 -d \
 '{
-    "name": "template_swa",
-    "label": "Sample Plugin App",
-    "status": "ACTIVE",
-    "accessibility": {
-        "selfService": false,
-        "errorRedirectUrl": null
+  "name": "template_swa",
+  "label": "Sample Plugin App",
+  "status": "ACTIVE",
+  "accessibility": {
+    "selfService": false,
+    "errorRedirectUrl": null
+  },
+  "visibility": {
+    "autoSubmitToolbar": false,
+    "hide": {
+      "iOS": false,
+      "web": false
     },
-    "visibility": {
-        "autoSubmitToolbar": false,
-        "hide": {
-            "iOS": false,
-            "web": false
-        },
-        "appLinks": {
-            "login": true
-        }
-    },
-    "features": [],
-    "signOnMode": "BROWSER_PLUGIN",
-    "credentials": {
-        "scheme": "EDIT_USERNAME_AND_PASSWORD",
-        "userNameTemplate": {
-            "template": "${source.login}",
-            "type": "BUILT_IN"
-        }
-    },
-    "settings": {
-        "app": {
-            "buttonField": "btn-login",
-            "passwordField": "txtbox-password",
-            "usernameField": "txtbox-username",
-            "url": "https://example.com/login.html"
-        }
+    "appLinks": {
+      "login": true
     }
+  },
+  "features": [],
+  "signOnMode": "BROWSER_PLUGIN",
+  "credentials": {
+    "scheme": "EDIT_USERNAME_AND_PASSWORD",
+    "userNameTemplate": {
+      "template": "${source.login}",
+      "type": "BUILT_IN"
+    }
+  },
+  "settings": {
+    "app": {
+      "buttonField": "btn-login",
+      "passwordField": "txtbox-password",
+      "usernameField": "txtbox-username",
+      "url": "https://example.com/login.html"
+    }
+  }
 }'
 ~~~
 
@@ -1748,64 +1848,64 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~ json
 {
-    "id": "0oabkvBLDEKCNXBGYUAS",
-    "name": "template_swa",
-    "label": "Sample Plugin App",
-    "status": "ACTIVE",
-    "lastUpdated": "2013-10-01T06:28:03.486Z",
-    "created": "2013-09-11T17:46:08.000Z",
-    "accessibility": {
-        "selfService": false,
-        "errorRedirectUrl": null
+  "id": "0oabkvBLDEKCNXBGYUAS",
+  "name": "template_swa",
+  "label": "Sample Plugin App",
+  "status": "ACTIVE",
+  "lastUpdated": "2013-10-01T06:28:03.486Z",
+  "created": "2013-09-11T17:46:08.000Z",
+  "accessibility": {
+    "selfService": false,
+    "errorRedirectUrl": null
+  },
+  "visibility": {
+    "autoSubmitToolbar": false,
+    "hide": {
+      "iOS": false,
+      "web": false
     },
-    "visibility": {
-        "autoSubmitToolbar": false,
-        "hide": {
-            "iOS": false,
-            "web": false
-        },
-        "appLinks": {
-            "login": true
-        }
-    },
-    "features": [],
-    "signOnMode": "BROWSER_PLUGIN",
-    "credentials": {
-        "scheme": "EDIT_USERNAME_AND_PASSWORD",
-        "userNameTemplate": {
-            "template": "${source.login}",
-            "type": "BUILT_IN"
-        }
-    },
-    "settings": {
-        "app": {
-            "buttonField": "btn-login",
-            "passwordField": "txtbox-password",
-            "usernameField": "txtbox-username",
-            "url": "https://example.com/login.html"
-        }
-    },
-    "_links": {
-        "logo": [
-            {
-                "href": "https:/example.okta.com/img/logos/logo_1.png",
-                "name": "medium",
-                "type": "image/png"
-            }
-        ],
-        "users": {
-            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
-        },
-        "groups": {
-            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/groups"
-        },
-        "self": {
-            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
-        },
-        "deactivate": {
-            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
-        }
+    "appLinks": {
+      "login": true
     }
+  },
+  "features": [],
+  "signOnMode": "BROWSER_PLUGIN",
+  "credentials": {
+    "scheme": "EDIT_USERNAME_AND_PASSWORD",
+    "userNameTemplate": {
+      "template": "${source.login}",
+      "type": "BUILT_IN"
+    }
+  },
+  "settings": {
+    "app": {
+      "buttonField": "btn-login",
+      "passwordField": "txtbox-password",
+      "usernameField": "txtbox-username",
+      "url": "https://example.com/login.html"
+    }
+  },
+  "_links": {
+    "logo": [
+      {
+        "href": "https:/example.okta.com/img/logos/logo_1.png",
+        "name": "medium",
+        "type": "image/png"
+      }
+    ],
+    "users": {
+      "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
+    },
+    "groups": {
+      "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/groups"
+    },
+    "self": {
+      "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
+    },
+    "deactivate": {
+      "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
+    }
+  }
 }
 ~~~
 
@@ -1824,40 +1924,40 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X PUT "https://your-domain.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS" \
 -d \
 '{
-    "name": "template_swa",
-    "label": "Sample Plugin App",
-    "status": "ACTIVE",
-    "accessibility": {
-        "selfService": false,
-        "errorRedirectUrl": null
+  "name": "template_swa",
+  "label": "Sample Plugin App",
+  "status": "ACTIVE",
+  "accessibility": {
+    "selfService": false,
+    "errorRedirectUrl": null
+  },
+  "visibility": {
+    "autoSubmitToolbar": false,
+    "hide": {
+      "iOS": false,
+      "web": false
     },
-    "visibility": {
-        "autoSubmitToolbar": false,
-        "hide": {
-            "iOS": false,
-            "web": false
-        },
-        "appLinks": {
-            "login": true
-        }
-    },
-    "features": [],
-    "signOnMode": "BROWSER_PLUGIN",
-    "credentials": {
-        "scheme": "EDIT_PASSWORD_ONLY",
-        "userNameTemplate": {
-            "template": "${source.login}",
-            "type": "BUILT_IN"
-        }
-    },
-    "settings": {
-        "app": {
-            "buttonField": "btn-login",
-            "passwordField": "txtbox-password",
-            "usernameField": "txtbox-username",
-            "url": "https://example.com/login.html"
-        }
+    "appLinks": {
+      "login": true
     }
+  },
+  "features": [],
+  "signOnMode": "BROWSER_PLUGIN",
+  "credentials": {
+    "scheme": "EDIT_PASSWORD_ONLY",
+    "userNameTemplate": {
+      "template": "${source.login}",
+      "type": "BUILT_IN"
+    }
+  },
+  "settings": {
+    "app": {
+      "buttonField": "btn-login",
+      "passwordField": "txtbox-password",
+      "usernameField": "txtbox-username",
+      "url": "https://example.com/login.html"
+    }
+  }
 }'
 ~~~
 
@@ -1866,64 +1966,64 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~ json
 {
-    "id": "0oabkvBLDEKCNXBGYUAS",
-    "name": "template_swa",
-    "label": "Sample Plugin App",
-    "status": "ACTIVE",
-    "lastUpdated": "2013-10-01T06:25:37.612Z",
-    "created": "2013-09-11T17:46:08.000Z",
-    "accessibility": {
-        "selfService": false,
-        "errorRedirectUrl": null
+  "id": "0oabkvBLDEKCNXBGYUAS",
+  "name": "template_swa",
+  "label": "Sample Plugin App",
+  "status": "ACTIVE",
+  "lastUpdated": "2013-10-01T06:25:37.612Z",
+  "created": "2013-09-11T17:46:08.000Z",
+  "accessibility": {
+    "selfService": false,
+    "errorRedirectUrl": null
+  },
+  "visibility": {
+    "autoSubmitToolbar": false,
+    "hide": {
+      "iOS": false,
+      "web": false
     },
-    "visibility": {
-        "autoSubmitToolbar": false,
-        "hide": {
-            "iOS": false,
-            "web": false
-        },
-        "appLinks": {
-            "login": true
-        }
-    },
-    "features": [],
-    "signOnMode": "BROWSER_PLUGIN",
-    "credentials": {
-        "scheme": "EDIT_PASSWORD_ONLY",
-        "userNameTemplate": {
-            "template": "${source.login}",
-            "type": "BUILT_IN"
-        }
-    },
-    "settings": {
-        "app": {
-            "buttonField": "btn-login",
-            "passwordField": "txtbox-password",
-            "usernameField": "txtbox-username",
-            "url": "https://example.com/login.html"
-        }
-    },
-    "_links": {
-        "logo": [
-            {
-                "href": "https:/example.okta.com/img/logos/logo_1.png",
-                "name": "medium",
-                "type": "image/png"
-            }
-        ],
-        "users": {
-            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
-        },
-        "groups": {
-            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/groups"
-        },
-        "self": {
-            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
-        },
-        "deactivate": {
-            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
-        }
+    "appLinks": {
+      "login": true
     }
+  },
+  "features": [],
+  "signOnMode": "BROWSER_PLUGIN",
+  "credentials": {
+    "scheme": "EDIT_PASSWORD_ONLY",
+    "userNameTemplate": {
+      "template": "${source.login}",
+      "type": "BUILT_IN"
+    }
+  },
+  "settings": {
+    "app": {
+      "buttonField": "btn-login",
+      "passwordField": "txtbox-password",
+      "usernameField": "txtbox-username",
+      "url": "https://example.com/login.html"
+    }
+  },
+  "_links": {
+    "logo": [
+      {
+        "href": "https:/example.okta.com/img/logos/logo_1.png",
+        "name": "medium",
+        "type": "image/png"
+      }
+    ],
+    "users": {
+      "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
+    },
+    "groups": {
+      "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/groups"
+    },
+    "self": {
+      "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
+    },
+    "deactivate": {
+      "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
+    }
+  }
 }
 ~~~
 
@@ -1942,40 +2042,40 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X PUT "https://your-domain.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS" \
 -d \
 '{
-    "name": "template_swa",
-    "label": "Sample Plugin App",
-    "status": "ACTIVE",
-    "accessibility": {
-        "selfService": false,
-        "errorRedirectUrl": null
+  "name": "template_swa",
+  "label": "Sample Plugin App",
+  "status": "ACTIVE",
+  "accessibility": {
+    "selfService": false,
+    "errorRedirectUrl": null
+  },
+  "visibility": {
+    "autoSubmitToolbar": false,
+    "hide": {
+      "iOS": false,
+      "web": false
     },
-    "visibility": {
-        "autoSubmitToolbar": false,
-        "hide": {
-            "iOS": false,
-            "web": false
-        },
-        "appLinks": {
-            "login": true
-        }
-    },
-    "features": [],
-    "signOnMode": "BROWSER_PLUGIN",
-    "credentials": {
-        "scheme": "EXTERNAL_PASSWORD_SYNC",
-        "userNameTemplate": {
-            "template": "${source.login}",
-            "type": "BUILT_IN"
-        }
-    },
-    "settings": {
-        "app": {
-            "buttonField": "btn-login",
-            "passwordField": "txtbox-password",
-            "usernameField": "txtbox-username",
-            "url": "https://example.com/login.html"
-        }
+    "appLinks": {
+      "login": true
     }
+  },
+  "features": [],
+  "signOnMode": "BROWSER_PLUGIN",
+  "credentials": {
+    "scheme": "EXTERNAL_PASSWORD_SYNC",
+    "userNameTemplate": {
+      "template": "${source.login}",
+      "type": "BUILT_IN"
+    }
+  },
+  "settings": {
+    "app": {
+      "buttonField": "btn-login",
+      "passwordField": "txtbox-password",
+      "usernameField": "txtbox-username",
+      "url": "https://example.com/login.html"
+    }
+  }
 }'
 ~~~
 
@@ -1984,64 +2084,64 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~ json
 {
-    "id": "0oabkvBLDEKCNXBGYUAS",
-    "name": "template_swa",
-    "label": "Sample Plugin App",
-    "status": "ACTIVE",
-    "lastUpdated": "2013-10-01T06:30:17.151Z",
-    "created": "2013-09-11T17:46:08.000Z",
-    "accessibility": {
-        "selfService": false,
-        "errorRedirectUrl": null
+  "id": "0oabkvBLDEKCNXBGYUAS",
+  "name": "template_swa",
+  "label": "Sample Plugin App",
+  "status": "ACTIVE",
+  "lastUpdated": "2013-10-01T06:30:17.151Z",
+  "created": "2013-09-11T17:46:08.000Z",
+  "accessibility": {
+    "selfService": false,
+    "errorRedirectUrl": null
+  },
+  "visibility": {
+    "autoSubmitToolbar": false,
+    "hide": {
+      "iOS": false,
+      "web": false
     },
-    "visibility": {
-        "autoSubmitToolbar": false,
-        "hide": {
-            "iOS": false,
-            "web": false
-        },
-        "appLinks": {
-            "login": true
-        }
-    },
-    "features": [],
-    "signOnMode": "BROWSER_PLUGIN",
-    "credentials": {
-        "scheme": "EXTERNAL_PASSWORD_SYNC",
-        "userNameTemplate": {
-            "template": "${source.login}",
-            "type": "BUILT_IN"
-        }
-    },
-    "settings": {
-        "app": {
-            "buttonField": "btn-login",
-            "passwordField": "txtbox-password",
-            "usernameField": "txtbox-username",
-            "url": "https://example.com/login.html"
-        }
-    },
-    "_links": {
-        "logo": [
-            {
-                "href": "https:/example.okta.com/img/logos/logo_1.png",
-                "name": "medium",
-                "type": "image/png"
-            }
-        ],
-        "users": {
-            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
-        },
-        "groups": {
-            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/groups"
-        },
-        "self": {
-            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
-        },
-        "deactivate": {
-            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
-        }
+    "appLinks": {
+      "login": true
     }
+  },
+  "features": [],
+  "signOnMode": "BROWSER_PLUGIN",
+  "credentials": {
+    "scheme": "EXTERNAL_PASSWORD_SYNC",
+    "userNameTemplate": {
+      "template": "${source.login}",
+      "type": "BUILT_IN"
+    }
+  },
+  "settings": {
+    "app": {
+      "buttonField": "btn-login",
+      "passwordField": "txtbox-password",
+      "usernameField": "txtbox-username",
+      "url": "https://example.com/login.html"
+    }
+  },
+  "_links": {
+    "logo": [
+      {
+        "href": "https:/example.okta.com/img/logos/logo_1.png",
+        "name": "medium",
+        "type": "image/png"
+      }
+    ],
+    "users": {
+      "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
+    },
+    "groups": {
+      "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/groups"
+    },
+    "self": {
+      "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
+    },
+    "deactivate": {
+      "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
+    }
+  }
 }
 ~~~
 
@@ -2060,42 +2160,44 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X PUT "https://your-domain.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS" \
 -d \
 '{
-    "name": "template_swa",
-    "label": "Sample Plugin App",
-    "status": "ACTIVE",
-    "accessibility": {
-        "selfService": false,
-        "errorRedirectUrl": null
+  "name": "template_swa",
+  "label": "Sample Plugin App",
+  "status": "ACTIVE",
+  "accessibility": {
+    "selfService": false,
+    "errorRedirectUrl": null
+  },
+  "visibility": {
+    "autoSubmitToolbar": false,
+    "hide": {
+      "iOS": false,
+      "web": false
     },
-    "visibility": {
-        "autoSubmitToolbar": false,
-        "hide": {
-            "iOS": false,
-            "web": false
-        },
-        "appLinks": {
-            "login": true
-        }
-    },
-    "features": [],
-    "signOnMode": "BROWSER_PLUGIN",
-    "credentials": {
-        "scheme": "SHARED_USERNAME_AND_PASSWORD",
-        "userNameTemplate": {
-            "template": "${source.login}",
-            "type": "BUILT_IN"
-        },
-        "userName": "sharedusername",
-        "password":  { "value": "sharedpassword" }
-    },
-    "settings": {
-        "app": {
-            "buttonField": "btn-login",
-            "passwordField": "txtbox-password",
-            "usernameField": "txtbox-username",
-            "url": "https://example.com/login.html"
-        }
+    "appLinks": {
+      "login": true
     }
+  },
+  "features": [],
+  "signOnMode": "BROWSER_PLUGIN",
+  "credentials": {
+    "scheme": "SHARED_USERNAME_AND_PASSWORD",
+    "userNameTemplate": {
+      "template": "${source.login}",
+      "type": "BUILT_IN"
+    },
+    "userName": "sharedusername",
+    "password": {
+      "value": "sharedpassword"
+    }
+  },
+  "settings": {
+    "app": {
+      "buttonField": "btn-login",
+      "passwordField": "txtbox-password",
+      "usernameField": "txtbox-username",
+      "url": "https://example.com/login.html"
+    }
+  }
 }'
 ~~~
 
@@ -2104,66 +2206,66 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~ json
 {
-    "id": "0oabkvBLDEKCNXBGYUAS",
-    "name": "template_swa",
-    "label": "Sample Plugin App",
-    "status": "ACTIVE",
-    "lastUpdated": "2013-10-01T06:20:18.436Z",
-    "created": "2013-09-11T17:46:08.000Z",
-    "accessibility": {
-        "selfService": false,
-        "errorRedirectUrl": null
+  "id": "0oabkvBLDEKCNXBGYUAS",
+  "name": "template_swa",
+  "label": "Sample Plugin App",
+  "status": "ACTIVE",
+  "lastUpdated": "2013-10-01T06:20:18.436Z",
+  "created": "2013-09-11T17:46:08.000Z",
+  "accessibility": {
+    "selfService": false,
+    "errorRedirectUrl": null
+  },
+  "visibility": {
+    "autoSubmitToolbar": false,
+    "hide": {
+      "iOS": false,
+      "web": false
     },
-    "visibility": {
-        "autoSubmitToolbar": false,
-        "hide": {
-            "iOS": false,
-            "web": false
-        },
-        "appLinks": {
-            "login": true
-        }
-    },
-    "features": [],
-    "signOnMode": "BROWSER_PLUGIN",
-    "credentials": {
-        "scheme": "SHARED_USERNAME_AND_PASSWORD",
-        "userNameTemplate": {
-            "template": "${source.login}",
-            "type": "BUILT_IN"
-        },
-        "userName": "sharedusername",
-        "password": {}
-    },
-    "settings": {
-        "app": {
-            "buttonField": "btn-login",
-            "passwordField": "txtbox-password",
-            "usernameField": "txtbox-username",
-            "url": "https://example.com/login.html"
-        }
-    },
-    "_links": {
-        "logo": [
-            {
-                "href": "https:/example.okta.com/img/logos/logo_1.png",
-                "name": "medium",
-                "type": "image/png"
-            }
-        ],
-        "users": {
-            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
-        },
-        "groups": {
-            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/groups"
-        },
-        "self": {
-            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
-        },
-        "deactivate": {
-            "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
-        }
+    "appLinks": {
+      "login": true
     }
+  },
+  "features": [],
+  "signOnMode": "BROWSER_PLUGIN",
+  "credentials": {
+    "scheme": "SHARED_USERNAME_AND_PASSWORD",
+    "userNameTemplate": {
+      "template": "${source.login}",
+      "type": "BUILT_IN"
+    },
+    "userName": "sharedusername",
+    "password": {}
+  },
+  "settings": {
+    "app": {
+      "buttonField": "btn-login",
+      "passwordField": "txtbox-password",
+      "usernameField": "txtbox-username",
+      "url": "https://example.com/login.html"
+    }
+  },
+  "_links": {
+    "logo": [
+      {
+        "href": "https:/example.okta.com/img/logos/logo_1.png",
+        "name": "medium",
+        "type": "image/png"
+      }
+    ],
+    "users": {
+      "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
+    },
+    "groups": {
+      "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/groups"
+    },
+    "self": {
+      "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
+    },
+    "deactivate": {
+      "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
+    }
+  }
 }
 ~~~
 
@@ -2212,15 +2314,15 @@ HTTP/1.1 403 Forbidden
 Content-Type: application/json
 
 {
-    "errorCode": "E0000056",
-    "errorSummary": "Delete application forbidden.",
-    "errorLink": "E0000056",
-    "errorId": "oaeHifznCllQ26xcRsO5vAk7A",
-    "errorCauses": [
-        {
-            "errorSummary": "The application must be deactivated before deletion."
-        }
-    ]
+  "errorCode": "E0000056",
+  "errorSummary": "Delete application forbidden.",
+  "errorLink": "E0000056",
+  "errorId": "oaeHifznCllQ26xcRsO5vAk7A",
+  "errorCauses": [
+    {
+      "errorSummary": "The application must be deactivated before deletion."
+    }
+  ]
 }
 ~~~
 
@@ -2300,28 +2402,29 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ## Application User Operations
 
-### Assign User to Application
+### Assign User to Application for SSO
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /apps/*:aid*/users/*:uid*</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /apps/*:aid*/users</span>
 
-Assigns a user to an application
+Assigns a user without a [profile](#application-user-profile-object) to an application for SSO.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter | Description                                     | Param Type | DataType                                    | Required | Default
---------- | ----------------------------------------------- | ---------- | ------------------------------------------- | -------- | -------
-aid       | unique key of [Application](#application-model) | URL        | String                                      | TRUE     |
-uid       | unique key of a valid [User](users.html)        | URL        | String                                      | TRUE     |
-appuser   | App user                                        | Body       | [Application User](#application-user-model) | FALSE    |
+Parameter | Description                                                            | Param Type | DataType                                    | Required | Default
+--------- | ---------------------------------------------------------------------- | ---------- | ------------------------------------------- | -------- | -------
+aid       | unique key of [Application](#application-model)                        | URL        | String                                      | TRUE     |
+appuser   | user's [credentials](#application-user-credentials-object) for the app | Body       | [Application User](#application-user-model) | TRUE     |
 
-> For applications with [SignOn Modes](#signon-modes) or [Authentication Schemes](#authentication-schemes) that do not require or support credentials, pass and empty json object `{}` as the `appuser` request body
+> Only the user's `id` is required for the request body of applications with [SignOn Modes](#signon-modes) or [Authentication Schemes](#authentication-schemes) that do not require or support credentials
+
+> If your SSO application requires a profile but doesn't have provisioning enabled, you should add a profile to the request and use the [Assign User to Application for SSO & Provisioning](#assign-user-to-application-for-sso--provisioning) operation
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-All responses return the assigned [Application User](#application-user-model).
+[Application User](#application-user-model)
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -2330,15 +2433,17 @@ All responses return the assigned [Application User](#application-user-model).
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X PUT "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users/00ud4tVDDXYVKPXKVLCO" \
+-X POST "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users" \
 -d \
 '{
-    "id": "00ud4tVDDXYVKPXKVLCO",
-    "scope": "USER",
-    "credentials": {
-        "userName": "user@example.com",
-        "password": { "value": "correcthorsebatterystaple" }
+  "id": "00ud4tVDDXYVKPXKVLCO",
+  "scope": "USER",
+  "credentials": {
+    "userName": "user@example.com",
+    "password": {
+      "value": "correcthorsebatterystaple"
     }
+  }
 }'
 ~~~
 
@@ -2347,18 +2452,132 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~ json
 {
-    "id": "00ud4tVDDXYVKPXKVLCO",
-    "scope": "USER",
-    "credentials": {
-        "userName": "user@example.com",
-        "password": {}
+  "id": "00u15s1KDETTQMQYABRL",
+  "externalId": null,
+  "created": "2014-08-11T02:24:31.000Z",
+  "lastUpdated": "2014-08-11T05:38:01.000Z",
+  "scope": "USER",
+  "status": "ACTIVE",
+  "statusChanged": "2014-08-11T02:24:32.000Z",
+  "passwordChanged": null,
+  "syncState": "DISABLED",
+  "lastSync": null,
+  "credentials": {
+    "userName": "user@example.com"
+  },
+  "profile": {},
+  "_links": {
+    "app": {
+      "href": "https://example.okta.com/api/v1/apps/0oaq2rRZUQAKJIZYFIGM"
     },
-    "lastUpdated": "2013-09-11T15:56:58.000Z",
-    "_links": {
-      "user": {
-          "href": "https://example.okta.com/api/v1/users/00ud4tVDDXYVKPXKVLCO"
-        }
+    "user": {
+      "href": "https://example.okta.com/api/v1/users/00u15s1KDETTQMQYABRL"
     }
+  }
+}
+~~~
+
+### Assign User to Application for SSO & Provisioning
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /apps/*:aid*/users</span>
+
+Assigns an user to an application with [credentials](#application-user-credentials-object) and an app-specific [profile](#application-user-profile-object). Profile mappings defined for the application are first applied before applying any profile attributes specified in the request.
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter | Description                                                                                                            | Param Type | DataType                                    | Required | Default
+--------- | ---------------------------------------------------------------------------------------------------------------------- | ---------- | ------------------------------------------- | -------- | -------
+aid       | unique key of [Application](#application-model)                                                                        | URL        | String                                      | TRUE     |
+appuser   | user's [credentials](#application-user-credentials-object) and [profile](#application-user-profile-object) for the app | Body       | [Application User](#application-user-model) | FALSE    |
+
+> The [Application User](#application-user-model) must specify the user's `id` and should omit [credentials](#application-user-credentials-object) for applications with [SignOn Modes](#signon-modes) or [Authentication Schemes](#authentication-schemes) that do not require or support credentials.
+> 
+> *You can only specify profile attributes that are not defined by profile mappings when Universal Directory is enabled.*
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+[Application User](#application-user-model) with user profile mappings applied
+
+Your request will be rejected with a `403 Forbidden` status for applications with the `PUSH_NEW_USERS` or `PUSH_PROFILE_UPDATES` features enabled if the request specifies a value for an attribute that is defined by an application user profile mapping (Universal Directory) and the value for the attribute does not match the output of the mapping.  
+
+*It is recommended to omit mapped attributes during assignment to minimize assignment errors.*
+
+~~~ json
+{
+  "errorCode": "E0000075",
+  "errorSummary": "Cannot modify the firstName attribute because it has a field mapping and profile push is enabled.",
+  "errorLink": "E0000075",
+  "errorId": "oaez9oW_WXiR_K-WwaTKhlgBQ",
+  "errorCauses": []
+}
+~~~
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~ ruby
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users" \
+-d \
+'{
+  "id": "00u15s1KDETTQMQYABRL",
+  "scope": "USER",
+  "credentials": {
+    "userName": "saml.jackson@example.com"
+  },
+  "profile": {
+      "salesforceGroups": [
+        "Employee"
+      ],
+      "role": "Developer",
+      "profile": "Standard User"
+  }
+}'
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~ json
+{
+  "id": "00u13okQOVWZJGDOAUVR",
+  "externalId": "005o0000000ogQ9AAI",
+  "created": "2014-07-03T20:37:14.000Z",
+  "lastUpdated": "2014-07-10T13:25:04.000Z",
+  "scope": "USER",
+  "status": "PROVISIONED",
+  "statusChanged": "2014-07-03T20:37:17.000Z",
+  "passwordChanged": null,
+  "syncState": "SYNCHRONIZED",
+  "lastSync": "2014-07-10T13:25:04.000Z",
+  "credentials": {
+    "userName": "saml.jackson@example.com"
+  },
+  "profile": {
+    "secondEmail": null,
+    "lastName": "Jackson",
+    "mobilePhone": null,
+    "email": "saml.jackson@example.com",
+    "salesforceGroups": [
+      "Employee"
+    ],
+    "role": "Developer",
+    "firstName": "Saml",
+    "profile": "Standard User"
+  },
+  "_links": {
+    "app": {
+      "href": "https://example.okta.com/api/v1/apps/0oa164zIYRQREYAAGGQR"
+    },
+    "user": {
+      "href": "https://example.okta.com/api/v1/users/00u13okQOVWZJGDOAUVR"
+    }
+  }
 }
 ~~~
 
@@ -2367,7 +2586,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /apps/*:aid*/users/*:uid*</span>
 
-Fetches a specific application user assignment by `id`.
+Fetches a specific user assignment for application by `id`.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2380,7 +2599,7 @@ uid       | unique key of assigned [User](users.html)       | URL        | Strin
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Fetched [Application User](#application-user-model)
+[Application User](#application-user-model)
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -2397,18 +2616,39 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~ json
 {
-    "id": "00ud4tVDDXYVKPXKVLCO",
-    "scope": "USER",
-    "credentials": {
-        "userName": "user@example.com",
-        "password": {}
+  "id": "00u13okQOVWZJGDOAUVR",
+  "externalId": "005o0000000ogQ9AAI",
+  "created": "2014-07-03T20:37:14.000Z",
+  "lastUpdated": "2014-07-10T13:25:04.000Z",
+  "scope": "USER",
+  "status": "PROVISIONED",
+  "statusChanged": "2014-07-03T20:37:17.000Z",
+  "passwordChanged": null,
+  "syncState": "SYNCHRONIZED",
+  "lastSync": "2014-07-10T13:25:04.000Z",
+  "credentials": {
+    "userName": "saml.jackson@example.com"
+  },
+  "profile": {
+    "secondEmail": null,
+    "lastName": "Jackson",
+    "mobilePhone": null,
+    "email": "saml.jackson@example.com",
+    "salesforceGroups": [
+      "Employee"
+    ],
+    "role": "Developer",
+    "firstName": "Saml",
+    "profile": "Standard User"
+  },
+  "_links": {
+    "app": {
+      "href": "https://example.okta.com/api/v1/apps/0oa164zIYRQREYAAGGQR"
     },
-    "lastUpdated": "2013-09-11T15:56:58.000Z",
-    "_links": {
-      "user": {
-          "href": "https://example.okta.com/api/v1/users/00ud4tVDDXYVKPXKVLCO"
-        }
+    "user": {
+      "href": "https://example.okta.com/api/v1/users/00u13okQOVWZJGDOAUVR"
     }
+  }
 }
 ~~~
 
@@ -2417,7 +2657,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /apps/*:aid*/users</span>
 
-Enumerates application user assignments for an application.
+Enumerates all assigned [application users](#application-user-model) for an application.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2425,8 +2665,8 @@ Enumerates application user assignments for an application.
 Parameter | Description                                                      | Param Type | DataType | Required | Default
 --------- | ---------------------------------------------------------------- | ---------- | -------- | -------- | -------
 aid       | unique key of [Application](#application-model)                  | URL        | String   | TRUE     |
-limit     | Specifies the number of results for a page                       | Query      | Number   | FALSE    | 20
-after     | Specifies the pagination cursor for the next page of assignments | Query      | String   | FALSE    |
+limit     | specifies the number of results for a page                       | Query      | Number   | FALSE    | 20
+after     | specifies the pagination cursor for the next page of assignments | Query      | String   | FALSE    |
 
 > The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination)
 
@@ -2451,72 +2691,112 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~ json
 [
   {
-      "id": "00ud4tVDDXYVKPXKVLCO",
-      "scope": "USER",
-      "credentials": {
-          "userName": "user@example.com",
-          "password": {}
+    "id": "00ui2sVIFZNCNKFFNBPM",
+    "externalId": "005o0000000umnEAAQ",
+    "created": "2014-08-15T18:59:43.000Z",
+    "lastUpdated": "2014-08-15T18:59:48.000Z",
+    "scope": "USER",
+    "status": "PROVISIONED",
+    "statusChanged": "2014-08-15T18:59:48.000Z",
+    "passwordChanged": null,
+    "syncState": "SYNCHRONIZED",
+    "lastSync": "2014-08-15T18:59:48.000Z",
+    "credentials": {
+      "userName": "user@example.com"
+    },
+    "profile": {
+      "secondEmail": null,
+      "lastName": "McJanky",
+      "mobilePhone": "415-555-555",
+      "email": "user@example.com",
+      "salesforceGroups": [],
+      "role": "CEO",
+      "firstName": "Karl",
+      "profile": "Standard Platform User"
+    },
+    "_links": {
+      "app": {
+        "href": "https://example.okta.com/api/v1/apps/0oajiqIRNXPPJBNZMGYL"
       },
-      "lastUpdated": "2013-09-11T15:56:58.000Z",
-      "_links": {
-        "user": {
-            "href": "https://example.okta.com/api/v1/users/00ud4tVDDXYVKPXKVLCO"
-          }
+      "user": {
+        "href": "https://example.okta.com/api/v1/users/00ui2sVIFZNCNKFFNBPM"
       }
+    }
   },
-    {
-      "id": "00ubgfEUVRPSHGWHAZRI",
-      "scope": "USER",
-      "credentials": {
-          "userName": "admin@example.com",
-          "password": {}
+  {
+    "id": "00ujsgVNDRESKKXERBUJ",
+    "externalId": "005o0000000uqJaAAI",
+    "created": "2014-08-16T02:35:14.000Z",
+    "lastUpdated": "2014-08-16T02:56:49.000Z",
+    "scope": "USER",
+    "status": "PROVISIONED",
+    "statusChanged": "2014-08-16T02:56:49.000Z",
+    "passwordChanged": null,
+    "syncState": "SYNCHRONIZED",
+    "lastSync": "2014-08-16T02:56:49.000Z",
+    "credentials": {
+      "userName": "saml.jackson@example.com"
+    },
+    "profile": {
+      "secondEmail": null,
+      "lastName": "Jackson",
+      "mobilePhone": null,
+      "email": "saml.jackson@example.com",
+      "salesforceGroups": [
+        "Employee"
+      ],
+      "role": "Developer",
+      "firstName": "Saml",
+      "profile": "Standard User"
+    },
+    "_links": {
+      "app": {
+        "href": "https://example.okta.com/api/v1/apps/0oajiqIRNXPPJBNZMGYL"
       },
-      "lastUpdated": "2013-09-11T15:56:51.000Z",
-      "_links": {
-        "user": {
-            "href": "https://example.okta.com/api/v1/users/00ubgfEUVRPSHGWHAZRI"
-          }
+      "user": {
+        "href": "https://example.okta.com/api/v1/users/00ujsgVNDRESKKXERBUJ"
       }
+    }
   }
 ]
 ~~~
 
-### Update Credentials for Application
+### Update Application Credentials for Assigned User
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /apps/*:aid*/users/*:uid*</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /apps/*:aid*/users/*:uid*</span>
 
-Updates a user's credentials for an application
+Updates a user's [credentials](#application-user-credentials-object) for an assigned application
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter | Description                                     | Param Type | DataType                                    | Required | Default
---------- | ----------------------------------------------- | ---------- | ------------------------------------------- | -------- | -------
-aid       | unique key of [Application](#application-model) | URL        | String                                      | TRUE     |
-uid       | unique key of a valid [User](users.html)        | URL        | String                                      | TRUE     |
-appuser   | App user                                        | Body       | [Application User](#application-user-model) | FALSE    |
-
-If you attempt to assign a username or password to an application with an incompatible [Authentication Scheme](#authentication-schemes) you will receive the following error:
-
-~~~ json
-{
-    "errorCode": "E0000041",
-    "errorSummary": "Credentials should not be set on this resource based on the scheme.",
-    "errorLink": "E0000041",
-    "errorId": "oaeUM77NBynQQu4C_qT5ngjGQ",
-    "errorCauses": [
-        {
-            "errorSummary": "User level credentials should not be provided for this scheme."
-        }
-    ]
-}
-~~~
+Parameter | Description                                                        | Param Type | DataType                                    | Required | Default
+--------- | ------------------------------------------------------------------ | ---------- | ------------------------------------------- | -------- | -------
+aid       | unique key of [Application](#application-model)                    | URL        | String                                      | TRUE     |
+uid       | unique key of a valid [User](users.html)                           | URL        | String                                      | TRUE     |
+appuser   | user's [credentials](#application-user-credentials-object) for app | Body       | [Application User](#application-user-model) | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-All responses return the assigned [Application User](#application-user-model).
+[Application User](#application-user-model)
+
+Your request will be rejected with a `400 Bad Request` status if you attempt to assign a username or password to an application with an incompatible [Authentication Scheme](#authentication-schemes)
+
+~~~ json
+{
+  "errorCode": "E0000041",
+  "errorSummary": "Credentials should not be set on this resource based on the scheme.",
+  "errorLink": "E0000041",
+  "errorId": "oaeUM77NBynQQu4C_qT5ngjGQ",
+  "errorCauses": [
+    {
+      "errorSummary": "User level credentials should not be provided for this scheme."
+    }
+  ]
+}
+~~~
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -2525,15 +2805,15 @@ All responses return the assigned [Application User](#application-user-model).
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X PUT "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users/00ud4tVDDXYVKPXKVLCO" \
+-X POST "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users/00ud4tVDDXYVKPXKVLCO" \
 -d \
 '{
-    "id": "00ud4tVDDXYVKPXKVLCO",
-    "scope": "USER",
-    "credentials": {
-        "userName": "user@example.com",
-        "password": { "value": "updatedP@55word" }
+  "credentials": {
+    "userName": "user@example.com",
+    "password": {
+      "value": "updatedP@55word"
     }
+  }
 }'
 ~~~
 
@@ -2542,18 +2822,125 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~ json
 {
-    "id": "00ud4tVDDXYVKPXKVLCO",
-    "scope": "USER",
-    "credentials": {
-        "userName": "user@example.com",
-        "password": {}
+  "id": "00ud4tVDDXYVKPXKVLCO",
+  "externalId": null,
+  "created": "2014-07-03T17:24:36.000Z",
+  "lastUpdated": "2014-07-03T17:26:05.000Z",
+  "scope": "USER",
+  "status": "ACTIVE",
+  "statusChanged": "2014-07-03T17:24:36.000Z",
+  "passwordChanged": "2014-07-03T17:26:05.000Z",
+  "syncState": "DISABLED",
+  "lastSync": null,
+  "credentials": {
+    "userName": "user@example.com",
+    "password": {}
+  },
+  "profile": {},
+  "_links": {
+    "app": {
+      "href": "https://example.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC"
     },
-    "lastUpdated": "2013-09-11T15:56:58.000Z",
-    "_links": {
-      "user": {
-          "href": "https://example.okta.com/api/v1/users/00ud4tVDDXYVKPXKVLCO"
-        }
+    "user": {
+      "href": "https://example.okta.com/api/v1/users/00ud4tVDDXYVKPXKVLCO"
     }
+  }
+}
+~~~
+
+### Update Application Profile for Assigned User
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /apps/*:aid*/users/*:uid*</span>
+
+Updates a user's profile for an application
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter | Description                                     | Param Type | DataType                                    | Required | Default
+--------- | ----------------------------------------------- | ---------- | ------------------------------------------- | -------- | -------
+aid       | unique key of [Application](#application-model) | URL        | String                                      | TRUE     |
+uid       | unique key of a valid [User](users.html)        | URL        | String                                      | TRUE     |
+appuser   | credentials for app                             | Body       | [Application User](#application-user-model) | FALSE    |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+[Application User](#application-user-model) with user profile mappings applied
+
+Your request will be rejected with a `403 Forbidden` status for applications with the `PUSH_NEW_USERS` or `PUSH_PROFILE_UPDATES` features enabled if the request specifies a value for an attribute that is defined by an application user profile mapping (Universal Directory) and the value for the attribute does not match the output of the mapping.  
+
+> The Okta API currently doesn't support entity tags for conditional updates.  It is only safe to fetch the most recent profile with [Get Assigned User for Application](#get-assigned-user-for-application), apply your profile update, then `POST` back the updated profile as long as you are the **only** user updating a user's application profile.  
+
+~~~ json
+{
+  "errorCode": "E0000075",
+  "errorSummary": "Cannot modify the firstName attribute because it has a field mapping and profile push is enabled.",
+  "errorLink": "E0000075",
+  "errorId": "oaez9oW_WXiR_K-WwaTKhlgBQ",
+  "errorCauses": []
+}
+~~~
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~ ruby
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users/00ud4tVDDXYVKPXKVLCO" \
+-d \
+'{
+  "profile": {
+    "salesforceGroups": [
+      "Partner"
+    ],
+    "role": "Developer",
+    "profile": "Gold Partner User"
+  }
+}'
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~ json
+{
+  "id": "00ujsgVNDRESKKXERBUJ",
+  "externalId": "005o0000000uqJaAAI",
+  "created": "2014-08-16T02:35:14.000Z",
+  "lastUpdated": "2014-08-16T02:56:49.000Z",
+  "scope": "USER",
+  "status": "PROVISIONED",
+  "statusChanged": "2014-08-16T02:56:49.000Z",
+  "passwordChanged": null,
+  "syncState": "SYNCHRONIZED",
+  "lastSync": "2014-08-16T02:56:49.000Z",
+  "credentials": {
+    "userName": "saml.jackson@example.com"
+  },
+  "profile": {
+    "secondEmail": null,
+    "lastName": "Jackson",
+    "mobilePhone": null,
+    "email": "saml.jackson@example.com",
+    "salesforceGroups": [
+      "Partner"
+    ],
+    "role": "Developer",
+    "firstName": "Saml",
+    "profile": "Gold Partner User"
+  },
+  "_links": {
+    "app": {
+      "href": "https://example.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC"
+    },
+    "user": {
+      "href": "https://example.okta.com/api/v1/users/00ud4tVDDXYVKPXKVLCO"
+    }
+  }
 }
 ~~~
 
@@ -2563,6 +2950,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 <span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /apps/*:aid*/users/*:uid*</span>
 
 Removes an assignment for a user from an application.
+
+> This is a destructive operation and the user's app profile will not be recoverable.  If the app is enabled for provisioning and configured to deactivate users, the user will also be deactivated in the target application.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2635,9 +3024,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~ json
 {
-    "id": "00gbkkGFFWZDLCNTAGQR",
-    "lastUpdated": "2013-10-02T07:38:20.000Z",
-    "priority": 0
+  "id": "00gbkkGFFWZDLCNTAGQR",
+  "lastUpdated": "2013-10-02T07:38:20.000Z",
+  "priority": 0
 }
 ~~~
 
@@ -2676,9 +3065,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~ json
 {
-    "id": "00gbkkGFFWZDLCNTAGQR",
-    "lastUpdated": "2013-10-02T07:38:20.000Z",
-    "priority": 0
+  "id": "00gbkkGFFWZDLCNTAGQR",
+  "lastUpdated": "2013-10-02T07:38:20.000Z",
+  "priority": 0
 }
 ~~~
 
@@ -2720,16 +3109,16 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~ json
 [
-    {
-        "id": "00gbkkGFFWZDLCNTAGQR",
-        "lastUpdated": "2013-10-02T07:38:20.000Z",
-        "priority": 0
-    },
-    {
-        "id": "00gg0xVALADWBPXOFZAS",
-        "lastUpdated": "2013-10-02T14:40:29.000Z",
-        "priority": 1
-    }
+  {
+    "id": "00gbkkGFFWZDLCNTAGQR",
+    "lastUpdated": "2013-10-02T07:38:20.000Z",
+    "priority": 0
+  },
+  {
+    "id": "00gg0xVALADWBPXOFZAS",
+    "lastUpdated": "2013-10-02T14:40:29.000Z",
+    "priority": 1
+  }
 ]
 ~~~
 
