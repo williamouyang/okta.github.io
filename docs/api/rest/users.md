@@ -212,6 +212,7 @@ activate               | [Lifecycle action](#activate-user) to transition user t
 deactivate             | [Lifecycle action](#deactivate-user) to transition user to `DEPROVISIONED` status
 resetPassword          | [Lifecycle action](#reset-password) to transition user to `RECOVERY` status
 expirePassword         | [Lifecycle action](#expire-password) to transition user to `PASSWORD_EXPIRED` status
+resetFactors           | [Lifecycle action](#reset-factors) to transition user to `ACTIVE` status
 unlock                 | [Lifecycle action](#unlock-user) to returns a user to `ACTIVE` status when their current status is `LOCKED_OUT` due to exceeding failed login attempts
 forgotPassword         | [Resets a user's password](#forgot-password) by validating the user's recovery credential.
 changePassword         | [Changes a user's password](#change-password) validating the user's current password
@@ -613,6 +614,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "resetPassword": {
             "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
         },
+        "resetFactors": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+        },
         "expirePassword": {
             "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
         },
@@ -680,6 +684,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "_links": {
         "resetPassword": {
             "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+        },
+        "resetFactors": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
         },
         "expirePassword": {
             "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
@@ -751,6 +758,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "resetPassword": {
             "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
         },
+        "resetFactors": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+        },
         "expirePassword": {
             "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
         },
@@ -820,6 +830,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "_links": {
         "resetPassword": {
             "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+        },
+        "resetFactors": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
         },
         "expirePassword": {
             "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
@@ -998,6 +1011,9 @@ Link: <https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limi
             "resetPassword": {
                 "href": "https://your-domain.okta.com/api/v1/users/00uar9CIHZHPTVFRSEYZ/lifecycle/reset_password"
             },
+            "resetFactors": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+            },
             "expirePassword": {
                 "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
             },
@@ -1068,6 +1084,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
             "resetPassword": {
                 "href": "https://your-domain.okta.com/api/v1/users/00uar9CIHZHPTVFRSEYZ/lifecycle/reset_password"
             },
+            "resetFactors": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+            },
             "expirePassword": {
                 "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
             },
@@ -1136,6 +1155,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "_links": {
             "resetPassword": {
                 "href": "https://your-domain.okta.com/api/v1/users/00uar9CIHZHPTVFRSEYZ/lifecycle/reset_password"
+            },
+            "resetFactors": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
             },
             "expirePassword": {
                 "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
@@ -1208,6 +1230,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "_links": {
             "resetPassword": {
                 "href": "https://your-domain.okta.com/api/v1/users/00uar9CIHZHPTVFRSEYZ/lifecycle/reset_password"
+            },
+            "resetFactors": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
             },
             "expirePassword": {
                 "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
@@ -1313,6 +1338,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "resetPassword": {
             "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
         },
+        "resetFactors": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+         },
         "expirePassword": {
             "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
         },
@@ -1391,6 +1419,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "resetPassword": {
             "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
         },
+        "resetFactors": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+        },
         "expirePassword": {
             "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
         },
@@ -1467,6 +1498,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "_links": {
         "resetPassword": {
             "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+        },
+        "resetFactors": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
         },
         "expirePassword": {
             "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
@@ -1870,6 +1904,102 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "_links": {
         "resetPassword": {
             "href": "http://rain.okta1.com:1802/api/v1/users/00udp9BOIVEWHAAGSXRJ/lifecycle/reset_password",
+            "method": "POST"
+        },
+        "resetFactors": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors",
+            "method": "POST"
+        },
+        "expirePassword": {
+            "href": "http://rain.okta1.com:1802/api/v1/users/00udp9BOIVEWHAAGSXRJ/lifecycle/expire_password",
+            "method": "POST"
+        },
+        "forgotPassword": {
+            "href": "http://rain.okta1.com:1802/api/v1/users/00udp9BOIVEWHAAGSXRJ/credentials/forgot_password",
+            "method": "POST"
+        },
+        "changeRecoveryQuestion": {
+            "href": "http://rain.okta1.com:1802/api/v1/users/00udp9BOIVEWHAAGSXRJ/credentials/change_recovery_question",
+            "method": "POST"
+        },
+        "deactivate": {
+            "href": "http://rain.okta1.com:1802/api/v1/users/00udp9BOIVEWHAAGSXRJ/lifecycle/deactivate",
+            "method": "POST"
+        },
+        "changePassword": {
+            "href": "http://rain.okta1.com:1802/api/v1/users/00udp9BOIVEWHAAGSXRJ/credentials/change_password",
+            "method": "POST"
+        }
+    }
+}
+~~~
+
+### Reset Factors
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:id*/lifecycle/reset_factors</span>
+
+This operation resets all factors for the specified user. All MFA factor enrollments are lost and return to the unenrolled state. The user's status remains ACTIVE.
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter    | Description                                                  | Param Type | DataType | Required | Default
+------------ | ------------------------------------------------------------ | ---------- | -------- | -------- | -------
+id           | `id` of user                                                 | URL        | String   | TRUE     |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+Returns an the complete user object by default. 
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~ ruby
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors”
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+    "id": "00udp9BOIVEWHAAGSXRJ",
+    "status": "ACTIVE",
+    "created": "2014-03-04T06:14:07.000Z",
+    "activated": null,
+    "statusChanged": null,
+    "lastLogin": "2014-03-04T17:46:59.000Z",
+    "lastUpdated": "2014-03-04T17:54:48.000Z",
+    "passwordChanged": "2014-03-04T17:54:48.000Z",
+    "profile": {
+        "firstName": "Add-Min",
+        "lastName": "O'Cloudy Tud",
+        "email": "webmaster@clouditude.net",
+        "login": "administrator1@clouditude.net",
+        "mobilePhone": null
+    },
+    "credentials": {
+        "password": {},
+        "recovery_question": {
+            "question": "Last 4 digits of your social security number?"
+        },
+        "provider": {
+            "type": "OKTA",
+            "name": "OKTA"
+        }
+    },
+    "_links": {
+        "resetPassword": {
+            "href": "http://rain.okta1.com:1802/api/v1/users/00udp9BOIVEWHAAGSXRJ/lifecycle/reset_password",
+            "method": "POST"
+        },
+        "resetFactors": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors”,
             "method": "POST"
         },
         "expirePassword": {
