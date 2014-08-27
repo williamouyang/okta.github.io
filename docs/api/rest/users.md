@@ -45,6 +45,9 @@ The Okta User API provides operations to manage users in your organization.
         "resetPassword": {
             "href": "https://example.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
         },
+        "resetFactors": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+        },
         "expirePassword": {
             "href": "https://example.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
         },
