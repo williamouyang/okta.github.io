@@ -21,7 +21,9 @@ title: API Test Client
 2. Launch Postman with new Chrome App Launcher
 
     ![Chrome App Launcher](/assets/img/chrome-ui-app-launcher.png "Chrome App Launcher")
-
+    
+    <br>
+    
     ![Postman App Icon](/assets/img/postman-icon.png "Postman App Icon")
 
 3. Import the environment template
