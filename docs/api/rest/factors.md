@@ -9,7 +9,7 @@ title: Factors
 
 # Overview
 
-The Okta Factor API provides operations to manage and verify factors for multi-factor authentication
+The Okta Factor Administration API provides operations to manage and verify factors for multi-factor authentication
 
 > This API is currently in **Beta** status and provides no guarantees for backwards-compatibility.  Okta is free to break this API until it is released.
 
@@ -31,7 +31,7 @@ profile       | profile of a [supported factor](#supported-factors)             
 _links        | [discoverable resources](#links-object) related to the factor   | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                 |           |           | TRUE     | FALSE  | TRUE
 _embedded     | [embedded resources](#embedded-object) related to the factor    | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                 |           |           | TRUE     | FALSE  | TRUE
 
-> `id`, `created`, `lastUpdated`, `status`, `_links`, and `_embedded` are only available after a factor is enrolled
+> `id`, `created`, `lastUpdated`, `status`, `_links`, and `_embedded` are only available after a factor is enrolled.
 
 ### Factor Type
 
