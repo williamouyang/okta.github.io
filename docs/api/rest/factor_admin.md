@@ -11,7 +11,7 @@ title: Factors Administration
 
 The Okta Factor Administration API is a subset of the Factors API. It provides operations to activate or deactivate which factor types are available to use for multi-factor authentication. Activating a factor type with this API does not enable multi-factor authentication. It makes an activated factor available for multi-factor authentication only. 
 
-After activating a facor with this API, it cannot be used until you enable a policy that uses this factor. If there is only one factor enabled in the policy, this api cannot disable that factor.
+After activating a facor with this API, it cannot be used until you enable a policy that uses this factor. If there is only one factor enabled in the policy, this API cannot disable that factor.
 
 > This API is currently in **Beta** status and provides no guarantees for backwards-compatibility.  Okta is free to break this API until it is released.
 
@@ -271,10 +271,7 @@ Allows multi-factor authentication to use an SMS factor.
 
 None.
 
-#### Response Parameters
-{:.api .api-response .api-response-params}
- 
- #### Request Example
+#### Request Example
 {:.api .api-request .api-request-example}
 
 ~~~ ruby
@@ -325,11 +322,8 @@ Denies use of an SMS factor for multi-factor authentication.
 {:.api .api-request .api-request-params}
 
 None.
-
-#### Response Parameters
-{:.api .api-response .api-response-params}
  
- #### Request Example
+#### Request Example
 {:.api .api-request .api-request-example}
 
 ~~~ ruby
@@ -380,11 +374,8 @@ Allows multi-factor authentication to use Okta Verify as a factor.
 {:.api .api-request .api-request-params}
 
 None.
-
-#### Response Parameters
-{:.api .api-response .api-response-params}
  
- #### Request Example
+#### Request Example
 {:.api .api-request .api-request-example}
 
 ~~~ ruby
@@ -435,11 +426,8 @@ Denies use of Okta Verify for multi-factor authentication.
 {:.api .api-request .api-request-params}
 
 None.
-
-#### Response Parameters
-{:.api .api-response .api-response-params}
  
- #### Request Example
+#### Request Example
 {:.api .api-request .api-request-example}
 
 ~~~ ruby
