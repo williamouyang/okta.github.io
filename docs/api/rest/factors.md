@@ -9,13 +9,21 @@ title: Factors
 
 # Overview
 
-The Okta Factor Administration API provides operations to manage and verify factors for multi-factor authentication
+The Okta Factors API provides operations to manage and verify factors for multi-factor authentication. This API is called only when a user is signed in. Enrolling in factors and resetting factors is done within Okta; consequently, the user must be authenticated first. The Authentication API is called from outside Okta and cannot manage factors.
+
+The Factors API contains three types of operations.
+
+ - **Factor List Operations** &ndash; List factors and security questions.
+ - **Factor Verification Operations** &ndash; Verify the factors for all challenges.
+ - **Factor Lifecycle Operations** &ndash; Enroll, activate, and reset factors.
 
 > This API is currently in **Beta** status and provides no guarantees for backwards-compatibility.  Okta is free to break this API until it is released.
 
-## Postman Tempalate
+## Postman Template
 
-[Factor Operations](https://www.getpostman.com/collections/871df976d79a9a5f7a85)
+In Postman, navigate to Import Collections and paste in the following URL: 
+
+**https://www.getpostman.com/collections/871df976d79a9a5f7a85**
 
 ## Factor Model
 
@@ -181,7 +189,7 @@ factorResult           | Description
 `ERROR`                | Unexpected server error occurred verifying factor.
 
 
-## Factor Operations
+## Factor List Operations
 
 ### Get Factor 
 {:.api .api-operation}
@@ -256,6 +264,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
     }
 }
 ~~~
+
+<hr />
 
 ### List Enrolled Factors 
 {:.api .api-operation}
@@ -415,6 +425,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ~~~
 
+<hr />
+
 ### List Factors to Enroll
 {:.api .api-operation}
 
@@ -516,6 +528,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ]
 ~~~
 
+<hr />
+
 ### List Security Questions
 {:.api .api-operation}
 
@@ -569,41 +583,6 @@ curl -v -H "Authorization: SSWS yourtoken" \
     }
 ]
 ~~~
-
-### Reset Factor
-{:.api .api-operation}
-
-<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/users/*:uid*/factors/*:fid*
-
-Resets a factor for the specified user.
-
-#### Request Parameters
-{:.api .api-request .api-request-params}
-
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
-uid          | `id` of user                                        | URL        | String   | TRUE     |
-fid          | `id` of the factor to reset                         | URL        | String   | TRUE     |
-
-#### Response Parameters
-{:.api .api-response .api-response-params}
-
-`204 No Content`
-
-#### Request Example
-{:.api .api-request .api-request-example}
-
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
--X DELETE "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors"
-~~~
-
-#### Response Example
-{:.api .api-response .api-response-example}
-
-`204 No Content`
 
 ## Factor Verification Operations
 
@@ -669,6 +648,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ~~~
 
+<hr />
+
 ### Verify SMS Factor
 {:.api .api-operation}
 
@@ -732,6 +713,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "factorResult": "SUCCESS"
 }
 ~~~
+
+<hr />
 
 ### Verify TOTP Factor
 {:.api .api-operation}
@@ -892,6 +875,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ~~~
 
+<hr />
+
 #### Enroll User with Okta SMS Factor
 {:.api .api-operation}
 
@@ -970,6 +955,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ~~~
 
+<hr />
 
 #### Enroll User with Okta Verify Factor
 {:.api .api-operation}
@@ -1049,6 +1035,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ~~~
 
+<hr />
+
 #### Enroll User with Google Authenticator Factor
 {:.api .api-operation}
 
@@ -1126,6 +1114,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
     }
 }
 ~~~
+
+<hr />
 
 ### Activate Factor
 {:.api .api-operation}
@@ -1230,6 +1220,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ~~~
 
+<hr />
+
 #### Activate SMS Factor
 {:.api .api-operation}
 
@@ -1322,3 +1314,41 @@ curl -v -H "Authorization: SSWS yourtoken" \
     }
 }
 ~~~
+
+<hr />
+
+### Reset Factor
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/users/*:uid*/factors/*:fid*
+
+Resets a factor for the specified user.
+
+#### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter    | Description                                         | Param Type | DataType | Required | Default
+------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
+uid          | `id` of user                                        | URL        | String   | TRUE     |
+fid          | `id` of the factor to reset                         | URL        | String   | TRUE     |
+
+#### Response Parameters
+{:.api .api-response .api-response-params}
+
+`204 No Content`
+
+#### Request Example
+{:.api .api-request .api-request-example}
+
+~~~ ruby
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X DELETE "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors"
+~~~
+
+#### Response Example
+{:.api .api-response .api-response-example}
+
+`204 No Content`
+

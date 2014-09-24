@@ -6,9 +6,9 @@ title: Policy
 * Will be replaced with the ToC
 {:toc .list-unstyled .toc}
 
-## Overview
+# Overview
 
-The Okta Policy API enables you to create, edit, delete, and use various policies including Okta Signon and MIM. 
+The Okta Policy API enables you to peform policy and rule operations. These operation apply to various policies including Okta Signon.
 
 This API supports the following **policy operations**:
 
@@ -23,6 +23,10 @@ This API supports the following **rule operations**:
 * Activate and deactivate a rule
 * Manage rules for the default policy
 
+# Policies
+
+## Policy Model and Defaults
+
 ### Default Policies
 
 There is always a default policy created for each type for any users for whom other policies in the org do not apply. This ensures that there is always a policy to apply to a user in all situations. 
@@ -31,13 +35,13 @@ There is always a default policy created for each type for any users for whom ot
 
  - The default policy is always the last policy in the priority order. Any added policies of this type have higher priority than the default policy. 
 
- - The default policy always has one default rule that is required and always is the last rule in the priority order. If you add rules to the default policy, the have a higher priority than the default rule.
+ - The default policy always has one default rule that is required and always is the last rule in the priority order. If you add rules to the default policy, they have a higher priority than the default rule.
 
  - The only permitted edits to the default policy are settings edits. You can add an unlimited number of rules.
 
- - The `system` attribute determines whether a policy is the default policy.
+ - The `system` attribute determines whether a policy is created by a system or by a user. The default policy is the only policy that has this attribute.
 
-## Policy Model
+### Policy Model
 
 ### Example
 
@@ -57,15 +61,10 @@ There is always a default policy created for each type for any users for whom ot
   },
   "conditions": {
     "people": {
-      "users": { // This is not supported yet. Should not be Doc'ed
-        "include": [],
-        "exclude": []
-      },
       "groups": {
         "include": [
           "00geutPTXWYKIKWNOKUX"
         ],
-        "exclude": [] // This is not supported yet. Should not be Doc'ed
       }
     }
   },
@@ -116,19 +115,6 @@ system | Whether or not the policy is the default | boolean | No | false
 status | Status of the policy: ACTIVE or INACTIVE | String | No | "ACTIVE" 
 created | Timestamp when the policy was created | Date | No | Assigned 
 lastUpdated | Timestamp when the policy was last modified | Date | No | Assigned
-
-### Mobile Identity Settings (MIM) Object
-
-Parameter | Description | DataType | Required | Default
-| --- | --- | --- | --- 
-requirePasscode | Whether a device should require a passcode | Boolean | Yes | 
-minLenth | Minimum length of the passcode | Int | No | 0 
-requireLetter | Whether passcode requires a letter | Boolean | If `requirePasscode` is `true` | 
-requireSymbol | Whether passcode requires a symbol | Boolean | If `requirePasscode` is `true` | 
-maxPasscodeAge | Number of days until passcode needs to be changed | Int | If `requirePasscode` is `true` | 
-passcodeHistoryLimit | Number of previously used passcodes that cannot be used | Int | If `requirePasscode` is `true` | 
-maxFailed | Maximum failed attempts | Int | If `requirePasscode` is `true` |
-
 
 ### People Object
 
@@ -285,13 +271,17 @@ id  | Policy ID | URL | String  | YES
 
 None
 
-## Rules
+# Rules
+
+## Rules Model and Defaults
 
 ### Default Rules
 
- - Only the default policy contains a default rule. The default rule cannot be edited.
+ - Only the default policy contains a default rule. The default rule cannot be edited or deleted.
 
- - The default rule is determined by the system property in the JSON shown in the next section.
+ - The default rule is required and always is the last rule in the priority order. If you add rules to the default policy, they have a higher priority than the default rule.
+
+ - The `system` attribute determines whether a rule is created by a system or by a user. The default rule is the only rule that has this attribute.
 
 ### Rule Model
 
@@ -312,7 +302,7 @@ None
       }
     },
     "network": {
-      "connection": "OFF_NETWORK"
+      "connection": "ON_NETWORK"
     },
     "authContext": {
       "authType": "RADIUS"
@@ -323,7 +313,7 @@ None
       "access": "ALLOW",
       "requireFactor": true,
       "factorPromptMode": "SESSION",
-      "factorLifetime": 0
+      "factorLifetime": 15
     }
   },
   "_links": {
@@ -368,15 +358,10 @@ authType	| `ANY` or `RADIUS`	| String	| No	| Empty
 Parameter | Description | DataType  |  Required |  Default
 access	| `ALLOW` or `DENY`	| String	| YES	
 requireFactor	| `true` or `false`	| Boolean	| NO	| `false`
-factorPromptMode	| `DEVICE` or `SESSION`	| String	| When requireFactor = `true`	
+factorPromptMode	| `DEVICE`, `SESSION` or `ALWAYS`	| String	| When requireFactor = `true`	
 factorLifetime	| How long until factor times out	| Int	| When factorPromptMode = `SESSION`	
 
-**Mim Action**
-
-Parameter | Description | DataType  |  Required |  Default
-access	| `ALLOW`or `DENY`	| String	| YES	
-
-### Rules APIs
+## Rules Operations
 
 ### Get Policy Rules
 {:.api .api-operation}
