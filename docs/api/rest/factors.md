@@ -1239,7 +1239,7 @@ passCode     | OTP sent to mobile device                           | Body       
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-If the passcode is correct the response will be the [Factor](#factor-model) with an `ACTIVE` status
+If the passcode is correct you will receive the [Factor](#factor-model) with an `ACTIVE` status.
 
 If the passcode is invalid you will receive a `403 Forbidden` status code with the following error: 
 
