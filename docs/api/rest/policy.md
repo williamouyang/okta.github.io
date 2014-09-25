@@ -102,7 +102,7 @@ There is always a default policy created for each type for any users for whom ot
 The Policy model defines several attributes:
 
 Parameter | Description | DataType | Required | Default
-| --- | --- | --- | --- 
+ --- | --- | --- | --- 
 id | Identifier for the policy | String | No | Assigned 
 type | Type for the policy | String | Yes | 
 name | Name for the policy | String | Yes | 
@@ -118,7 +118,7 @@ lastUpdated | Timestamp when the policy was last modified | Date | No | Assigned
 The people condition identifies users and groups that are used together.
 
 Parameter | Description | DataType | Required | Default
-| --- | --- | --- | ---
+ --- | --- | --- | ---
 groups | The group condition | Group Condition | No | Include Everyone users | The user condition | User Condition | No | Empty
 
 ### Group Condition Object
