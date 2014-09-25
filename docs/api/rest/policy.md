@@ -162,7 +162,7 @@ status	| Policy | Status	| Query	| String	| No	| Empty
 
 #### Response Parameters
 
-Array of Policies
+An array policies.
 
 ### Create a Policy
 {:.api .api-operation}
@@ -174,11 +174,12 @@ Creates a new policy.
 #### Request Parameters
 
 Parameter | Description | Param | Type  | DataType  | Required  | Default
+----------|-------------|-------|-------|-----------|-----------|--------
 activate	| Policy Type	| Query	| Boolean	| No	| true
 
 #### Request Body
 
-A Policy Object
+A Policy object.
 
 #### Response Parameters
 
@@ -194,11 +195,12 @@ Gets an existing policy.
 #### Request Parameters
 
 Parameter | Description | Param | Type  | DataType  | Required  | Default
+----------|-------------|-------|-------|-----------|-----------|--------
 id	| Policy ID	| URL	| String	| YES	
 
 #### Response Parameters
 
-The policy
+The policy.
 
 ### Update a Policy
 {:.api .api-operation}
@@ -218,7 +220,7 @@ The policy in a changed state. Note this will be a strict PUT. Any missing item 
 
 ### Response Parameters
 
-The updated policy
+The updated policy.
 
 ### Delete Policy
 {:.api .api-operation}
@@ -230,11 +232,12 @@ Deletes a policy and all rules associated with it.
 #### Request Parameters
 
 Parameter | Description | Param | Type  | DataType  | Required  | Default
+----------|-------------|-------|-------|-----------|-----------|--------
 id	| Policy ID	| URL	| String	| YES	
 
 ### Response Parameters
 
-None
+None.
 
 ### Activate a Policy
 {:.api .api-operation}
@@ -246,11 +249,12 @@ Activates the specified policy.
 #### Request Parameters
 
 Parameter | Description | Param | Type  | DataType  | Required  | Default
+----------|-------------|-------|-------|-----------|-----------|--------
 id	| Policy ID	| URL	| String	| YES	
 
 ### Response Parameters
 
-None
+None.
 
 ### Deactivate a Policy
 {:.api .api-operation}
@@ -262,11 +266,12 @@ Deactivates the specified policy.
 #### Request Parameters
 
 Parameter | Description | Param | Type  | DataType  | Required  | Default
+----------|-------------|-------|-------|-----------|-----------|--------
 id  | Policy ID | URL | String  | YES 
 
 ### Response Parameters
 
-None
+None.
 
 # Rules
 
@@ -339,6 +344,7 @@ Rule conditions include the people, user, and group conditions from the policy m
 Specifies a network segment.
 
 Parameter |	Description	| DataType	|  Required	|  Default
+----------|-------------|----------|-----------|-----------
 connection	|  `ANYWHERE`, `ON_NETWORK`, or `OFF_NETWORK` | 	String	| No	|  Empty
 
 **AuthContext Condition Body**
@@ -346,6 +352,7 @@ connection	|  `ANYWHERE`, `ON_NETWORK`, or `OFF_NETWORK` | 	String	| No	|  Empty
 Specifies an authentication entry point.
 
 Parameter | Description | DataType  |  Required |  Default
+----------|-------------|----------|-----------|-----------
 authType	| `ANY` or `RADIUS`	| String	| No	| Empty
 
 ### Actions
@@ -353,6 +360,7 @@ authType	| `ANY` or `RADIUS`	| String	| No	| Empty
 **Signon Action**
 
 Parameter | Description | DataType  |  Required |  Default
+----------|-------------|----------|-----------|-----------
 access	| `ALLOW` or `DENY`	| String	| YES	
 requireFactor	| `true` or `false`	| Boolean	| NO	| `false`
 factorPromptMode	| `DEVICE`, `SESSION` or `ALWAYS`	| String	| When requireFactor = `true`	
@@ -369,12 +377,13 @@ Retrieves all rules for a specified policy.
 
 #### Request Parameters
 
-Parameter | Description | Param | Type  | DataType  | Required  | Default
-policyId	|Policy ID	| URL	| String	| YES	
+Parameter | Description | Param | Type   | Required
+----------|-------------|-------|--------|----------
+policyId	 |Policy ID	   | URL	  | String	| YES	
 
 #### Response Parameters
 
-Array of Rules for the policy
+An array of Rules for the policy.
 
 ### Create Rule 
 {:.api .api-operation}
@@ -385,16 +394,17 @@ Creates a new rule for a specified policy.
 
 #### Request Parameters
 
-Parameter | Description | Param | Type  | DataType  | Required  | Default
-policyId	| Policy ID	| URL	| String	| YES	
+Parameter | Description | Param | Type   | Required
+----------|-------------|-------|--------|----------
+policyId	 | Policy ID	  | URL	  | String	| YES	
 
 #### Request Body
 
-The rule to create
+The rule to create.
 
 #### Response Parameters
 
-The created rule
+The created rule.
 
 ### Get a Rule
 {:.api .api-operation}
@@ -405,13 +415,14 @@ Retrieves the specified rule for a specified policy.
 
 #### Request Parameters
 
-Parameter | Description | Param | Type  | DataType  | Required  | Default
+Parameter | Description | Param | Type   | Required
+----------|-------------|-------|--------|----------
 policyId	| Policy ID	| URL	| String	| YES	
 ruleId	| Rule ID	| URL	| String	| YES	
 
 #### Response Parameters
 
-The specified rule
+The specified rule.
 
 ### Update a Rule
 {:.api .api-operation}
@@ -422,14 +433,15 @@ Retrieves the specified rule for the specified policy.
 
 #### Request Parameters
 
-Parameter | Description | Param | Type  | DataType  | Required  | Default
+Parameter | Description | Param | Type   | Required
+----------|-------------|-------|--------|----------
 policyId  | Policy ID | URL | String  | YES 
-ruleId  | Rule ID | URL | String  Y| ES 
+ruleId  | Rule ID | URL | String  | YES 
 
 
 #### Response Parameters
 
-The updated rule
+The updated rule.
 
 ### Request Body
 
@@ -437,7 +449,7 @@ The rule in a changed state. Note this will be a strict PUT. Any missing item is
 
 ### Response Parameters
 
-Updated rule
+The updated rule.
 
 ### Delete a Rule
 {:.api .api-operation}
@@ -449,6 +461,7 @@ Deletes the specified rule for the specified policy.
 #### Request Parameters
 
 Parameter | Description | Param | Type  | DataType  | Required  | Default
+----------|-------------|-------|-------|-----------|-----------|--------
 policyId  | Policy ID | URL | String  | YES 
 ruleId  | Rule ID | URL | String  | YES 
 
@@ -465,13 +478,14 @@ Activates the specified rule for the specified policy.
 
 #### Request Parameters
 
-Parameter | Description | Param | Type  | DataType  | Required  | Default
+Parameter | Description | Param | Type   | Required
+----------|-------------|-------|--------|----------
 policyId  | Policy ID | URL | String  | YES 
 ruleId  | Rule ID | URL| String  | YES 
 
 #### Response Parameters
 
-None
+None.
 
 ### Deactivate a Rule
 {:.api .api-operation}
@@ -482,10 +496,11 @@ Deactivates the specified rule for the specified policy.
 
 #### Request Parameters
 
-Parameter | Description | Param | Type  | DataType  | Required  | Default
-policyId  | Policy ID | URL | String  Y| ES 
+PParameter | Description | Param | Type   | Required
+----------|-------------|-------|--------|----------
+policyId  | Policy ID | URL | String  | YES 
 ruleId  | Rule ID | URL | String  | YES 
 
 #### Response Parameters
 
-None
+None.
