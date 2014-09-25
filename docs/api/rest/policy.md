@@ -118,11 +118,13 @@ lastUpdated | Timestamp when the policy was last modified | Date | No | Assigned
 The people condition identifies users and groups that are used together.
 
 Parameter | Description | DataType | Required | Default
+| --- | --- | --- | ---
 groups | The group condition | Group Condition | No | Include Everyone users | The user condition | User Condition | No | Empty
 
 ### Group Condition Object
 
 Parameter | Description | DataType | Required | Default
+| --- | --- | --- | ---
 include	| The groups to be included |	Collection of String	| No |	Everyone Group if exclude is empty
 exclude	| The groups to be excluded	| Collection of String	| No	| Empty
 
@@ -130,6 +132,7 @@ exclude	| The groups to be excluded	| Collection of String	| No	| Empty
 ### User Condition Object
 
 Parameter | Description | DataType | Required | Default
+| --- | --- | --- | ---
 include	| The users to be included	| Collection of String	| No	| Empty
 exclude	| The users to be excluded	| Collection of String	| No	| Empty
 
@@ -157,6 +160,7 @@ policy	| Policy object for a rule only
 #### Request Parameters
 
 Parameter	| Description	| Param | Type	| DataType	| Required	| Default
+| --- | --- | --- | ---
 type	| Policy Type	| Query	| String	| Yes	
 status	| Policy | Status	| Query	| String	| No	| Empty
 
@@ -212,6 +216,7 @@ Updates an existing policy.
 #### Request Parameters
 
 Parameter | Description | Param | Type  | DataType  | Required  | Default
+| --- | --- | --- | ---
 id  | Policy ID | URL | String  | YES 
 
 ### Request Body
@@ -231,8 +236,8 @@ Deletes a policy and all rules associated with it.
 
 #### Request Parameters
 
-Parameter | Description | Param | Type  | DataType  | Required  | Default
-----------|-------------|-------|-------|-----------|-----------|--------
+Parameter | Description |  Type  | DataType  | Required  | Default
+----------|-------------|-------|-----------|-----------|--------
 id	| Policy ID	| URL	| String	| YES	
 
 ### Response Parameters
@@ -248,8 +253,8 @@ Activates the specified policy.
 
 #### Request Parameters
 
-Parameter | Description | Param | Type  | DataType  | Required  | Default
-----------|-------------|-------|-------|-----------|-----------|--------
+Parameter | Description |  Type  | DataType  | Required  | Default
+----------|-------------|-------|-----------|-----------|--------
 id	| Policy ID	| URL	| String	| YES	
 
 ### Response Parameters
@@ -265,8 +270,8 @@ Deactivates the specified policy.
 
 #### Request Parameters
 
-Parameter | Description | Param | Type  | DataType  | Required  | Default
-----------|-------------|-------|-------|-----------|-----------|--------
+Parameter | Description |  Type  | DataType  | Required  | Default
+----------|-------------|-------|-----------|-----------|--------
 id  | Policy ID | URL | String  | YES 
 
 ### Response Parameters
@@ -496,7 +501,7 @@ Deactivates the specified rule for the specified policy.
 
 #### Request Parameters
 
-PParameter | Description | Param | Type   | Required
+Parameter | Description | Param | Type   | Required
 ----------|-------------|-------|--------|----------
 policyId  | Policy ID | URL | String  | YES 
 ruleId  | Rule ID | URL | String  | YES 
