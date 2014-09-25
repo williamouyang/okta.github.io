@@ -56,9 +56,6 @@ There is always a default policy created for each type for any users for whom ot
   "system": false,
   "created": "2014-05-25T21:40:49.000Z",
   "lastUpdated": "2014-05-25T21:40:49.000Z",
-  "settings": {
-    "key" : "value" // This is an example, not actually valid for OKTA_SIGN_ON policies
-  },
   "conditions": {
     "people": {
       "groups": {
