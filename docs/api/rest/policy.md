@@ -472,7 +472,7 @@ ruleId  | Rule ID | URL | String  | YES
 
 #### Response Parameters
 
-None
+None.
 
 ### Activate a Rule
 {:.api .api-operation}
