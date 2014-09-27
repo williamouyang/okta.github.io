@@ -8,7 +8,7 @@ title: Authentication
 
 ## Overview
 
-The goal of the flows in the Authorization API is to obtain an authorization code. This authorization code can be exchanged for an access token using calls from the Sessions API that exchange a one-time token for a session cookie. Your client app can use our existing APIs to trade the authorization code for a session cookie.
+The goal of the flows in the Authorization API is to obtain an authorization code. This authorization code can be exchanged for an access token using calls from the Sessions API that exchange a one-time token for a session cookie. Your client app can use our existing APIs to trade the authentication code for a session cookie.
 
 There are three types of functionality in this API.
 
@@ -20,7 +20,7 @@ There are three types of functionality in this API.
 
    **Note:** For information on unlocking a locked out user, see <a href="http://developer.okta.com/docs/api/rest/users.html#unlock-user">Unlock User </a> in the Users API.
 
-> This API is currently in **Beta** status and provides no guarantees for backwards-compatibility.  Okta is free to break this API until it is released.
+> This API is currently in **Beta** status and provides no guarantees for backwards-compatibility.  Okta is free to modify this API until it is released.
 
 ## Authentication Model
 
@@ -76,9 +76,9 @@ There are seven common use cases for the Authentication API that are detailed in
 
 <img style="border: 0; padding: 2;" src="authn_nomfa.png" alt="Primary Authentication" />
 
-Primary authentication is always used to verify a user name and password whether or not other MFA factors are used. Primary authentication is only omitted for certain utility APIs that are anonymous or use an existing state token.
+Primary authentication is always used to verify a user name and password whether or not other MFA factors are used. Primary authentication is not required only for certain utility APIs that are anonymous or use an existing state token.
 
-The entry point into the authorization flow is a simple POST to the /api/v1/authn endpoint with the user's credentials. Optionally, the request can contain some client context and a relay state.
+The entry point into the authentication flow is a simple POST to the /api/v1/authn endpoint with the user's credentials. Optionally, the request can contain some client context and a relay state.
 
 {:.api .api-operation}
 
@@ -111,12 +111,12 @@ deviceToken | A globally unique ID identifying the device making the request    
 
 ~~~json
 POST /api/v1/authn HTTP/1.1
-Host: acme.okta.com
+Host: your-domain.okta.com
 Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
 Accept: application/json
 Content-Type: application/json
 {
-    "login": "user@example.com",
+    "login": "isaac@example.org",
     "password": "Abcd1234",
     "relayState": "5Fij07bc0j",
     "context": {
@@ -207,13 +207,13 @@ This example shows a user who is already enrolled in MFA and needs to complete t
 
 ~~~JSON
 POST /api/v1/authn?response_type=code%20id_token HTTP/1.1
-Host: acme.okta.com
+Host: your-domain.okta.com
 Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
 Accept: application/json
 Content-Type: application/json
  
 {
-    "login": "user@example.com",
+    "login": "isaac@example.org",
     "password": "Abcd1234",
     "relayState": "5Fij07bc0j",
     "context": {
@@ -294,7 +294,7 @@ A state token is generated, and the status is set to `MFA_REQUIRED`. This indica
 
 ~~~JSON
 POST /api/v1/authn/factors/01xy4tVDDXYVKPXKVLCA/verify HTTP/1.1
-Host: acme.okta.com
+Host: your-domain.okta.com
 Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
 Accept: application/json
 Content-Type: application/json
@@ -360,7 +360,7 @@ For factors such as Okta Verify, this intermediate step is not necessary since t
 
 ~~~JSON
 POST /api/v1/authn/factors/01xy4tVDDXYVKPXKVLCA/verify HTTP/1.1
-Host: acme.okta.com
+Host: your-domain.okta.com
 Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
 Accept: application/json
 Content-Type: application/json
@@ -439,12 +439,12 @@ None.
 
 ~~~json
 POST /api/v1/authn HTTP/1.1
-Host: acme.okta.com
+Host: your-domain.okta.com
 Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
 Accept: application/json
 Content-Type: application/json
 {
-    "login": "user@example.com",
+    "login": "isaac@example.org",
     "password": "Abcd1234",
     "relayState": "5Fij07bc0j",
     "context": {
@@ -541,7 +541,7 @@ Security Question |  *question* and *answer*
 
 ~~~JSON 
 POST /api/v1/authn/factors?activate=true HTTP/1.1
-Host: acme.okta.com
+Host: your-domain.okta.com
 Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
 Accept: application/json
 Content-Type: application/json
@@ -621,7 +621,7 @@ The status is now `MFA_ENROLL_ACTIVATE`. The user now obtains some sort of enrol
 
 ~~~JSON
 POST /api/v1/authn/factors/00fa0pazBD8AZNmHmbB5/lifecycle/activate HTTP/1.1
-Host: acme.okta.com
+Host: your-domain.okta.com
 Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
 Accept: application/json
 Content-Type: application/json
@@ -660,7 +660,7 @@ Content-Type: application/json
 }
 ~~~
 
-The final result is a successful authentication that generates an `authCode` that can be passed to the Sessions API to get a session cookie; for example `https://acme.okta.com/login/sessionCookie?token=08Aa6xn76LQVGsxC25xENmvyOSyWqMZK`.
+The final result is a successful authentication that generates an `authCode` that can be passed to the Sessions API to get a session cookie; for example `https://your-domain.okta.com/login/sessionCookie?token=08Aa6xn76LQVGsxC25xENmvyOSyWqMZK`.
 
 <hr />
 
@@ -679,13 +679,13 @@ The following examples show how the flow changes if the user's password is expir
 
 ~~~JSON
 POST /api/v1/authn HTTP/1.1
-Host: acme.okta.com
+Host: your-domain.okta.com
 Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
 Accept: application/json
 Content-Type: application/json
  
 {
-    "login": "user@example.com",
+    "login": "isaac@example.org",
     "password": "Abcd1234",
     "relayState": "5Fij07bc0j",
     "context": {
@@ -713,9 +713,9 @@ Content-Type: application/json
               "id": "00udnlQDVLVRIVXESCMZ",
               "lastLogin": "2014-06-06T05:47:17.000Z",
               "profile": {
-                  "firstName": "Add-Min",
-                  "lastName": "O'Cloudy Tud",
-                  "login": "administrator1@clouditude.net",
+                  "firstName": "Isaac",
+                  "lastName": "Brock",
+                  "login": "isaac@example.org",
               }
           }
     },
@@ -743,7 +743,7 @@ Next, the app obtains the previous password and new password from the user, and 
 
 ~~~JSON
 POST /api/v1/authn/credentials/change_password HTTP/1.1
-Host: acme.okta.com
+Host: your-domain.okta.com
 Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
 Accept: application/json
 Content-Type: application/json
@@ -775,9 +775,9 @@ Content-Type: application/json
               "id": "00udnlQDVLVRIVXESCMZ",
               "lastLogin": "2014-06-06T05:47:17.000Z",
               "profile": {
-                  "firstName": "Add-Min",
-                  "lastName": "O'Cloudy Tud",
-                  "login": "administrator1@clouditude.net",
+                  "firstName": "Isaac",
+                  "lastName": "Brock",
+                  "login": "isaac@example.org",
               }
        },
        "factors": [
@@ -831,13 +831,13 @@ The System Info endpoint has a Forgot Password link which can be used to take a 
 
 ~~~JSON
 POST /api/v1/authn?forgot_password=true HTTP/1.1
-Host: acme.okta.com
+Host: your-domain.okta.com
 Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
 Accept: application/json
 Content-Type: application/json
  
 {
-    "login": "user@example.com",
+    "login": "isaac@example.org",
     "relayState": "5Fij07bc0j",
     "context": {
         "ipAddress": "192.168.12.11",
@@ -863,9 +863,9 @@ Content-Type: application/json
               "id": "00udnlQDVLVRIVXESCMZ",
               "lastLogin": "2014-06-06T05:47:17.000Z",
               "profile": {
-                  "firstName": "John",
-                  "lastName": "Smith",
-                  "login": "user@example.com",
+                  "firstName": "Isaac",
+                  "lastName": "Brock",
+                  "login": "isaac@example.org",
               }
         }
     },    
@@ -892,7 +892,7 @@ This scenario presents the client with a recoveryToken to send  to the user in a
 
 ~~~JSON
 POST /api/v1/authn/recovery HTTP/1.1
-Host: acme.okta.com
+Host: your-domain.okta.com
 Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
 Accept: application/json
 Content-Type: application/json
@@ -922,9 +922,9 @@ Content-Type: application/json
               "id": "00udnlQDVLVRIVXESCMZ",
               "lastLogin": "2014-06-06T05:47:17.000Z",
               "profile": {
-                  "firstName": "John",
-                  "lastName": "Smith",
-                  "login": "user@example.com",
+                  "firstName": "Isaac",
+                  "lastName": "Brock",
+                  "login": "isaac@example.org",
               },
               "recovery_question": {
                  "question": "Who's a major player in the cowboy scene?"
@@ -947,7 +947,7 @@ The final step is to answer the security question and set a new password. This c
 
 ~~~JSON
 POST /api/v1/authn/recovery/answer HTTP/1.1
-Host: acme.okta.com
+Host: your-domain.okta.com
 Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
 Accept: application/json
 Content-Type: application/json
@@ -984,7 +984,7 @@ Content-Type: application/json
 
 ~~~JSON
 POST /api/v1/authn/credentials/reset_password HTTP/1.1
-Host: acme.okta.com
+Host: your-domain.okta.com
 Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
 Accept: application/json
 Content-Type: application/json
@@ -1015,9 +1015,9 @@ Content-Type: application/json
              "id": "00udnlQDVLVRIVXESCMZ",
              "lastLogin": "2014-06-06T05:47:17.000Z",
              "profile": {
-                 "firstName": "John",
-                 "lastName": "Smith",
-                 "login": "user@example.com",
+                 "firstName": "Isaac",
+                 "lastName": "Brock",
+                 "login": "isaac@example.org",
              }
          },
          "factors": [
@@ -1125,7 +1125,7 @@ This example is useful in the following three use cases:
 
 ~~~JSON
 POST /api/v1/authn HTTP/1.1
-Host: acme.okta.com
+Host: your-domain.okta.com
 Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
 Accept: application/json
 Content-Type: application/json
@@ -1154,9 +1154,9 @@ Content-Type: application/json
               "id": "00udnlQDVLVRIVXESCMZ",
               "lastLogin": "2014-06-06T05:47:17.000Z",
               "profile": {
-                  "firstName": "Add-Min",
-                  "lastName": "O'Cloudy Tud",
-                  "login": "administrator1@clouditude.net",
+                  "firstName": "Isaac",
+                  "lastName": "Brock",
+                  "login": "isaac@example.org",
               }
           }
     },
