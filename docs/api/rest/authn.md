@@ -8,7 +8,7 @@ title: Authentication
 
 ## Overview
 
-The goal of the flows in the Authorization API is to obtain an authorization code. This authorization code can be exchanged for an access token using calls from the Sessions API that exchange a one-time token for a session cookie. Your client app can use our existing APIs to trade the authentication code for a session cookie.
+The Okta Auth API provides operations to authenticate users, perform MFA enrollment and challenge flows, recover forgotten passwords, and unlock accounts. It can be used as a standalone API to provide the identity layer on top of your existing application, or it can be integrated with the Okta Sessions API to obtain an Okta session cookie and access apps within Okta.
 
 There are three types of functionality in this API.
 
@@ -20,7 +20,7 @@ There are three types of functionality in this API.
 
    **Note:** For information on unlocking a locked out user, see <a href="http://developer.okta.com/docs/api/rest/users.html#unlock-user">Unlock User </a> in the Users API.
 
-> This API is currently in **Beta** status and provides no guarantees for backwards-compatibility.  Okta is free to modify this API until it is released.
+> This API is currently in Beta status. The state model and data contracts will not change, but there may be additional attributes added to the JSON or minor semantic changes until the API reaches GA status.
 
 ## Authentication Model
 
@@ -72,11 +72,11 @@ There are seven common use cases for the Authentication API that are detailed in
 [stateToken Status](#statetoken-status)<br />
 
 
-### Primary Authentication
+### Primary Authentication 
 
 <img style="border: 0; padding: 2;" src="authn_nomfa.png" alt="Primary Authentication" />
 
-Primary authentication is always used to verify a user name and password whether or not other MFA factors are used. Primary authentication is not required only for certain utility APIs that are anonymous or use an existing state token.
+Primary authentication is always used to verify a username and password whether or not other MFA factors are used. Primary authentication is usually required. The only time it is not required is in certain utility APIs that are anonymous or use an existing state token.
 
 The entry point into the authentication flow is a simple POST to the /api/v1/authn endpoint with the user's credentials. Optionally, the request can contain some client context and a relay state.
 
@@ -89,7 +89,7 @@ The entry point into the authentication flow is a simple POST to the /api/v1/aut
 
 Parameter   | Description                                                         | Param Type | DataType                          | Required | Default
 ----------- | ------------------------------------------------------------------- | ---------- | --------------------------------- | -------- | -------
-login       | URL of the user to authenticate                                     | Body       | String                            | TRUE     |
+username       | URL of the user to authenticate                                     | Body       | String                            | TRUE     |
 password    | Password for the user to authenticate                               | Body       | String                            | TRUE     |
 relayState  | An optional value to track this authentication                      | Body       | String                            | FALSE    |
 context     | Optional values to track how this authentication is accessed        | Body       | [Context Object](#context-object) | FALSE 
@@ -116,7 +116,7 @@ Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
 Accept: application/json
 Content-Type: application/json
 {
-    "login": "isaac@example.org",
+    "username": "isaac@example.org",
     "password": "Abcd1234",
     "relayState": "5Fij07bc0j",
     "context": {
@@ -132,64 +132,27 @@ Content-Type: application/json
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-In the response, a state token is presented and the status is `MFA_UNENROLLED`. 
+This basic response is for a user with no MFA required. See the following sections for other use cases. 
 
 ~~~JSON
 HTTP/1.1 200 OK
 Content-Type: application/json
  
 {
-    "stateToken": "NzYxMDAxIiwKICJhdWQiOiAiczZCaGRSa3F0",
     "status": "MFA_UNENROLLED",
-    "expiresAt" : "2014-04-17T19:59:19.000Z",
     "relayState": "5Fij07bc0j",
+    "stateToken": "NzYxMDAxIiwKICJhdWQiOiAiczZCaGRSa3F0",
     "_embedded" : {
           "user": {
               "id": "00udnlQDVLVRIVXESCMZ",
-              "lastLogin": "2014-06-06T05:47:17.000Z",
               "profile": {
+                  "username": "isaac@example.org",
                   "firstName": "Isaac",
                   "lastName": "Brock",
-                  "login": "isaac@example.org",
+                  "locale": "en_US",
+                  "timeZone": "America/Los_Angeles"
               }
-          },
-          "factors": [
-           {
-                "factorType": "sms",
-                "provider": "OKTA",
-                "deviceTypes": [ "mobile" ],
-                "_links": {
-                    "logo": { "href": "https://okta.com/static/sms.png" },
-                    "enroll": {
-                        "href": "http://your-domain.okta.com/api/v1/authn/factors",
-                        "hints": {
-                            "allow": [ "POST" ]
-                        }
-                    }
-                }
-           },
-           {
-               "factorType": "totp",
-               "provider":"OKTA",
-               "deviceTypes":["smartphone:ios","smartphone:android","smartphone:blackberry"],
-               "_links": {
-                   "logo": { "href": "https://okta.com/static/okta-verify.png" },
-                   "enroll": {
-                        "href": "http://your-domain.okta.com/api/v1/authn/factors",
-                        "hints": {
-                            "allow": [ "POST" ]
-                        }
-                    }
-               }
-           }],
-    },
-    "_links": {
-        "cancel": {
-             "href": "/api/v1/authn/cancel",
-             "hints": {
-                "allow": [ "POST" ]
-             }
-        }
+          }
     }
 }
 ~~~
@@ -200,7 +163,7 @@ Content-Type: application/json
 
 <img style="border: 0; padding: 2;" src="authn_mfa.png" alt="Authentication with Enrolled MFA" />
 
-This example shows a user who is already enrolled in MFA and needs to complete the challenge phase. The value of the state token reflects that the user is already enrolled in MFA. This example also illustrates how to request an ID token. 
+This example shows a user who is already enrolled in MFA and needs to complete the challenge phase. The value of the state token is `MFA_REQUIRED` and reflects that the user is already enrolled in MFA. This example also illustrates how to request an ID token. There are two enrolled factors in this example, a security question and SMS authentication.
 
 ##### Request Example
 {:.api .api-request .api-request-example} 
@@ -213,7 +176,7 @@ Accept: application/json
 Content-Type: application/json
  
 {
-    "login": "isaac@example.org",
+    "username": "isaac@example.org",
     "password": "Abcd1234",
     "relayState": "5Fij07bc0j",
     "context": {
@@ -235,50 +198,63 @@ Content-Type: application/json
  
 {
     "stateToken": "NzYxMDAxIiwKICJhdWQiOiAiczZCaGRSa3F0",
-    "status": "MFA_REQUIRED",
     "expiresAt": "2014-04-17T19:59:19.000Z",
+    "status": "MFA_REQUIRED",
     "relayState": "5Fij07bc0j",
     "_embedded": {
          "user": {
              "id": "00udnlQDVLVRIVXESCMZ",
-             "lastLogin": "2014-06-06T05:47:17.000Z",
              "profile": {
-                 "firstName": "Isaac",
-                 "lastName": "Brock",
-                 "login": "isaac@example.org",
+                  "username": "isaac@example.org",
+                  "firstName":"Isaac",
+                  "lastName": "Brock",
+                  "locale": "en_US",
+                  "timeZone": "America/Los_Angeles"
              }
          },
-         "factors": [
-          {
-             "id": "00ud4tVDDXYVKPXKVLCO",
-             "factorType": "sms",
-             "deviceType": "phone",
-             "profile": {
-                 "displayName": "My Phone",
-                 "phoneNumber": "XXX-XXX-4567"
-             },
-             "_links": {
-                 "logo": { "href": "https://okta.com/static/sms.png" },
-                 "verify": { "href": "/api/v1/authn/factors/00ud4tVDDXYVKPXKVLCO/verify" }
-             }
-          },
-          {
-             "id": "00ud4tVDDXYVKPXKVLCO",
-             "factorType": "totp",
-             "deviceType": "tablet",
-             "profile": {
-                 "displayName": "My IPad",
-             },
-             "_links": {
-                 "logo": { "href": "https://okta.com/static/verify.png" },
-                 "verify": { "href": "/api/v1/authn/factors/01xy4tVDDXYVKPXKVLCA/verify" }
-             }
-          }
-       ]
+        "factors": [
+            {
+                "id": "ufs2r3z6svTZWUFFNAKY",
+                "factorType": "question",
+                "provider": "OKTA",
+                "profile": {
+                    "question": "favorite_book_movie_character",
+                    "questionText": "Who is your favorite book/movie character?"
+                },
+                "_links": {
+                    "verify": {
+                        "href": "http://your-domain.okta.com/api/v1/authn/factors/ufs2r3z6svTZWUFFNAKY/verify",
+                        "hints": {
+                            "allow": [
+                                "POST"
+                            ]
+                        }
+                    }
+                }
+            },
+            {
+                "id": "sms2r3z79aSQXYAARCIC",
+                "factorType": "sms",
+                "provider": "OKTA",
+                "profile": {
+                    "phoneNumber": "+1 XXX-XXX-5309"
+                },
+                "_links": {
+                    "verify": {
+                        "href": "http://your-domain.okta.com/api/v1/authn/factors/sms2r3z79aSQXYAARCIC/verify",
+                        "hints": {
+                            "allow": [
+                                "POST"
+                            ]
+                        }
+                    }
+                }
+            }
+        ]
     },
     "_links": {
         "cancel": { 
-            "href": "/api/v1/authn/cancel",
+            "href": "http://your-domain.okta.com/api/v1/authn/cancel",
             "hints": {
                  "allow": [ "POST" ]
              }
@@ -314,35 +290,45 @@ Content-Type: application/json
  
 {
     "stateToken": "NzYxMDAxIiwKICJhdWQiOiAiczZCaGRSa3F0",
-    "status": "MFA_CHALLENGE",
     "expiresAt": "2014-04-17T19:59:19.000Z",
+    "status": "MFA_CHALLENGE",
     "relayState": "5Fij07bc0j",
     "_embedded": {
         "user": {
               "id": "00udnlQDVLVRIVXESCMZ",
-              "lastLogin": "2014-06-06T05:47:17.000Z",
               "profile": {
-                  "firstName": "Isaac",
+                  "username": "isaac@example.org",
+                  "firstName":"Isaac",
                   "lastName": "Brock",
-                  "login": "isaac@example.org",
+                  "locale": "en_US",
+                  "timeZone": "America/Los_Angeles"
               }
-          }
+        },
+        "factor": {
+            "id": "sms2r3z79aSQXYAARCIC",
+            "factorType": "sms",
+            "provider": "OKTA",
+            "profile": {
+                "phoneNumber": "+1 XXX-XXX-5709"
+             }
+         }
     },
     "_links": { 
         "next": {
-              "href": "/api/v1/authn/factors/00ud4tVDDXYVKPXKVLCO/verify",
+              "name": "verify"
+              "href": "http://your-domain.okta.com/api/v1/authn/factors/00ud4tVDDXYVKPXKVLCO/verify",
               "hints": {
                  "allow": [ "POST" ]
               } 
          },
-        "prev": {
-             "href": "/api/v1/authn/previous",
+        "cancel": {
+             "href": "http://your-domain.okta.com/api/v1/authn/cancel",
              "hints": {
                  "allow": [ "POST" ]
              }
-        },
-        "cancel": {
-             "href": "/api/v1/authn/cancel",
+        }
+        "prev": {
+             "href": "http://your-domain.okta.com/api/v1/authn/previous",
              "hints": {
                  "allow": [ "POST" ]
              }
@@ -390,11 +376,12 @@ Content-Type: application/json
     "_embedded": {
         "user": {
               "id": "00udnlQDVLVRIVXESCMZ",
-              "lastLogin": "2014-06-06T05:47:17.000Z",
               "profile": {
-                  "firstName": "Isaac",
+                  "username": "isaac@example.org",
+                  "firstName":"Isaac",
                   "lastName": "Brock",
-                  "login": "isaac@example.org",
+                  "locale": "en_US",
+                  "timeZone": "America/Los_Angeles"
               }
           }
     }
@@ -409,15 +396,14 @@ Content-Type: application/json
 
 The following flows use the /api/v1/authn endpoint to navigate through primary user authentication, MFA enrollment, challenge, and verification. There are also the special cases of password expired and forgot-password. The end result is either an authorization code which can be redeemed for a session, or an ID token, or both. We follow the same patterns as OpenID Connect for specifying the response type.
 
-The client can optionally include some relay state on the URL or in the request body, with the *relayState* parameter. This parameter is echoed back in the response, and can be used anywhere along the chain for this API.
+The client can optionally include some relay state on the URL or in the request body, with the *relayState* attribute. This attribute is echoed back in the response, and can be used anywhere along the chain for this API.
 
-The client can force an MFA challenge, even if Okta's policies do not require it. Use the *force_mfa* parameter, if you want to force a challenge.
+The client can force an MFA challenge, even if Okta's policies do not require it. Use the *force_mfa* query parameter, if you want to force a challenge.
 
-Parameter    | Description                     | Param Type | DataType | Required | Default
------------- | ------------------------------- | ---------- | -------- | -------- | -------
-response_type | The type that contains the response. Valid types are `code`, `id_token`, and `code%20id_token`         | String     | String   | False    | `code`
-force_mfa    | Forces an MFA challenge         | Boolean    | Boolean   | False   | False
-relayState   | Optional relay state            | String     | String    | False   | None
+Attribute    | Description                     | Type                | DataType | Required | Default
+------------ | ------------------------------- | ------------------- | -------- | -------- | -------
+force_mfa    | Forces an MFA challenge         | URL query parameter | Boolean   | FALSE   | FALSE
+relayState   | Optional relay state            | JSON attribute      | String    | FALSE   | None
 
 
 
@@ -444,7 +430,7 @@ Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
 Accept: application/json
 Content-Type: application/json
 {
-    "login": "isaac@example.org",
+    "username": "isaac@example.org",
     "password": "Abcd1234",
     "relayState": "5Fij07bc0j",
     "context": {
@@ -460,7 +446,7 @@ Content-Type: application/json
 #####Response Example
 {:.api .api-response .api-response-example}
 
-In the response, a state token is presented and the status is `MFA_UNENROLLED`. 
+In the response, a state token is presented and the status is `MFA_UNENROLLED`.  All the possible factors into which you can enroll the user are returned.
 
 ~~~JSON
 HTTP/1.1 200 OK
@@ -468,52 +454,90 @@ Content-Type: application/json
  
 {
     "stateToken": "NzYxMDAxIiwKICJhdWQiOiAiczZCaGRSa3F0",
-    "status": "MFA_UNENROLLED",
     "expiresAt" : "2014-04-17T19:59:19.000Z",
+    "status": "MFA_UNENROLLED",
     "relayState": "5Fij07bc0j",
     "_embedded" : {
           "user": {
               "id": "00udnlQDVLVRIVXESCMZ",
-              "lastLogin": "2014-06-06T05:47:17.000Z",
               "profile": {
-                  "firstName": "Isaac",
+                  "username": "isaac@example.org",
+                  "firstName":"Isaac",
                   "lastName": "Brock",
-                  "login": "isaac@example.org",
+                  "locale": "en_US",
+                  "timeZone": "America/Los_Angeles"
               }
           },
           "factors": [
-           {
-                "factorType": "sms",
+              {
+                "factorType": "question",
                 "provider": "OKTA",
-                "deviceTypes": [ "mobile" ],
                 "_links": {
-                    "logo": { "href": "https://okta.com/static/sms.png" },
-                    "enroll": {
-                        "href": "http://your-domain.okta.com/api/v1/authn/factors",
+                    "questions": {
+                        "href": "https://your-domain.okta.com/api/v1/users/00u2r3z7cmFGLPBJSQRD/factors/questions",
                         "hints": {
-                            "allow": [ "POST" ]
+                            "allow": [
+                                "GET"
+                            ]
+                        }
+                    },
+                    "enroll": {
+                        "href": "https://your-domain.okta.com/api/v1/authn/factors",
+                        "hints": {
+                            "allow": [
+                                "POST"
+                            ]
                         }
                     }
                 }
-           },
-           {
-               "factorType": "totp",
-               "provider":"OKTA",
-               "deviceTypes":["smartphone:ios","smartphone:android","smartphone:blackberry"],
-               "_links": {
-                   "logo": { "href": "https://okta.com/static/okta-verify.png" },
-                   "enroll": {
-                        "href": "http://your-domain.okta.com/api/v1/authn/factors",
+            },
+            {
+                "factorType": "token:software:totp",
+                "provider": "OKTA",
+                "_links": {
+                    "enroll": {
+                        "href": "https://your-domain.okta.com/api/v1/authn/factors",
                         "hints": {
-                            "allow": [ "POST" ]
+                            "allow": [
+                                "POST"
+                            ]
                         }
                     }
-               }
-           }],
+                }
+            },
+            {
+                "factorType": "token:software:totp",
+                "provider": "GOOGLE",
+                "_links": {
+                    "enroll": {
+                        "href": "https://your-domain.okta.com/api/v1/authn/factors",
+                        "hints": {
+                            "allow": [
+                                "POST"
+                            ]
+                        }
+                    }
+                }
+            },
+            {
+                "factorType": "sms",
+                "provider": "OKTA",
+                "_links": {
+                    "enroll": {
+                        "href": "https://your-domain.okta.com/api/v1/authn/factors",
+                        "hints": {
+                            "allow": [
+                                "POST"
+                            ]
+                        }
+                    }
+                }
+            }
+        ]
     },
     "_links": {
         "cancel": {
-             "href": "/api/v1/authn/cancel",
+             "href": "https://your-domain.okta.com/api/v1/authn/cancel",
              "hints": {
                 "allow": [ "POST" ]
              }
@@ -578,33 +602,36 @@ Content-Type: application/json
               "id": "00udnlQDVLVRIVXESCMZ",
               "lastLogin": "2014-06-06T05:47:17.000Z",
               "profile": {
-                  "firstName": "Isaac",
+                  "username": "isaac@example.org",
+                  "firstName":"Isaac",
                   "lastName": "Brock",
-                  "login": "isaac@example.org",
+                  "locale": "en_US",
+                  "timeZone": "America/Los_Angeles"
               }
           }
     },
     "_links": {
         "next": {
-             "href": "/api/v1/authn/factors/00fa0pazBD8AZNmHmbB5/lifecycle/activate",
+             "name": "activate",
+             "href": "https://your-domain.okta.com/api/v1/authn/factors/00fa0pazBD8AZNmHmbB5/lifecycle/activate",
              "hints": {
                 "allow": [ "POST" ]
              }
         },
         "prev": {
-             "href": "/api/v1/authn/previous",
+             "href": "https://your-domain.okta.com/api/v1/authn/previous",
              "hints": {
                 "allow": [ "POST" ]
              }
         },
         "resend": {
-             "href": "/api/v1/authn/factors/00fa0pazBD8AZNmHmbB5/lifecycle/resend",
+             "href": "https://your-domain.okta.com/api/v1/authn/factors/00fa0pazBD8AZNmHmbB5/lifecycle/resend",
              "hints": {
                 "allow": [ "POST" ]
              }
         },
         "cancel": { 
-             "href": "/api/v1/authn/cancel",
+             "href": "https://your-domain.okta.com/api/v1/authn/cancel",
              "hints": {
                  "allow": [ "POST" ]
              } 
@@ -614,7 +641,7 @@ Content-Type: application/json
 ~~~
 
 
-The status is now `MFA_ENROLL_ACTIVATE`. The user now obtains some sort of enrollment key or passcode from their device and the client POSTs it back to finish the enrollment.
+The status is now `MFA_ENROLL_ACTIVATE`. The user now obtains some sort of enrollment key or passcode from their device and the client POSTs it back to finish the enrollment using the reference in the activate link.
  
 ##### Request Example
 {:.api .api-request .api-request-example} 
@@ -654,6 +681,8 @@ Content-Type: application/json
                   "firstName": "Isaac",
                   "lastName": "Brock",
                   "login": "isaac@example.org",
+                  "locale": "en_US",
+                  "timeZone": "America/Los_Angeles"
               }
           }
     }
@@ -713,21 +742,24 @@ Content-Type: application/json
               "id": "00udnlQDVLVRIVXESCMZ",
               "lastLogin": "2014-06-06T05:47:17.000Z",
               "profile": {
-                  "firstName": "Isaac",
+                  "username": "isaac@example.org",
+                  "firstName":"Isaac",
                   "lastName": "Brock",
-                  "login": "isaac@example.org",
+                  "locale": "en_US",
+                  "timeZone": "America/Los_Angeles"
               }
           }
     },
     "_links": {
         "next": {
-              "href": "/api/v1/authn/credentials/change_password",
+              "name": "change_password",
+              "href": "https://your-domain.okta.com/api/v1/authn/credentials/change_password",
               "hints": {
                  "allow": [ "POST" ]
               }
          },
         "cancel": {
-             "href": "/api/v1/authn/cancel",
+             "href": "https://your-domain.okta.com/api/v1/authn/cancel",
              "hints": {
                  "allow": [ "POST" ]
              }
@@ -773,11 +805,12 @@ Content-Type: application/json
     "_embedded": {
        "user": {
               "id": "00udnlQDVLVRIVXESCMZ",
-              "lastLogin": "2014-06-06T05:47:17.000Z",
               "profile": {
-                  "firstName": "Isaac",
+                  "username": "isaac@example.org",
+                  "firstName":"Isaac",
                   "lastName": "Brock",
-                  "login": "isaac@example.org",
+                  "locale": "en_US",
+                  "timeZone": "America/Los_Angeles"
               }
        },
        "factors": [
@@ -790,8 +823,10 @@ Content-Type: application/json
                 "phoneNumber": "XXX-XXX-4567"
             },
             "_links": {
-                "logo": { "href": "https://okta.com/static/sms.png" },
-                "next": { "href": "/api/v1/authn/factors/00ud4tVDDXYVKPXKVLCO/verify" }
+                "next": { 
+                   "name": "verify",
+                   "href": "https://your-domain.okta.com/api/v1/authn/factors/00ud4tVDDXYVKPXKVLCO/verify" 
+                 }
             }
         },
         {
@@ -802,19 +837,21 @@ Content-Type: application/json
                 "displayName": "My IPad",
             },
             "_links": {
-                "logo": { "href": "https://okta.com/static/verify.png" },
-                "next": { "href": "/api/v1/authn/factors/01xy4tVDDXYVKPXKVLCA/verify" }
+                "next": { 
+                   "name": "activate", 
+                   "href": "https://your-domain.okta.com/api/v1/authn/factors/01xy4tVDDXYVKPXKVLCA/verify"
+                    }
             }
         }
        ]
     },
     "_links": {
-        "cancel": { "href": "/api/v1/authn/cancel" }
+        "cancel": { "href": "https://your-domain.okta.com/api/v1/authn/cancel" }
     }
 }
 ~~~
 
-At this point, the flow continues as before. The user must choose a verification factor, and then the app will receive an authorization code or an ID token. 
+At this point, the flow continues as before. The user must choose a verification factor, and then the app receives an authorization code or an ID token. 
 
 <hr />
 
@@ -861,24 +898,28 @@ Content-Type: application/json
     "_embedded": {
          "user": {
               "id": "00udnlQDVLVRIVXESCMZ",
-              "lastLogin": "2014-06-06T05:47:17.000Z",
               "profile": {
-                  "firstName": "Isaac",
+                  "username": "isaac@example.org",
+                  "firstName":"Isaac",
                   "lastName": "Brock",
-                  "login": "isaac@example.org",
+                  "locale": "en_US",
+                  "timeZone": "America/Los_Angeles"
               }
         }
     },    
     "_links": {
-        "next"  : { "name": "recovery", "href": "/api/v1/authn/recovery" },
+        "next"  : { 
+           "name": "recovery", 
+           "href": "https://your-domain.okta.com/api/v1/authn/recovery" 
+        },
         "send" : [ 
                    { 
                       "name": "sms",
-                      "href": "/api/v1/authn/recovery/sms" 
+                      "href": "https://your-domain.okta.com/api/v1/authn/recovery/sms" 
                    },
                    {
                       "name": "call",
-                      "href": "/api/v1/authn/recovery/call"
+                      "href": "https://your-domain.okta.com/api/v1/authn/recovery/call"
                    }
                 ]
     }
@@ -920,11 +961,12 @@ Content-Type: application/json
     "_embedded" : {
           "user": {
               "id": "00udnlQDVLVRIVXESCMZ",
-              "lastLogin": "2014-06-06T05:47:17.000Z",
               "profile": {
-                  "firstName": "Isaac",
+                  "username": "isaac@example.org",
+                  "firstName":"Isaac",
                   "lastName": "Brock",
-                  "login": "isaac@example.org",
+                  "locale": "en_US",
+                  "timeZone": "America/Los_Angeles"
               },
               "recovery_question": {
                  "question": "Who's a major player in the cowboy scene?"
@@ -932,8 +974,8 @@ Content-Type: application/json
           }
     },
     "_links": {
-        "next"  : { "name": "answer", href": "/api/v1/authn/recovery/answer" },
-        "cancel": { "href": "/api/v1/authn/cancel" }
+        "next"  : { "name": "answer", href": "https://your-domain.okta.com/api/v1/authn/recovery/answer" },
+        "cancel": { "href": "https://your-domain.okta.com/api/v1/authn/cancel" }
     }
 }
 ~~~
@@ -973,8 +1015,8 @@ Content-Type: application/json
     "expiresAt" : "2014-04-17T19:59:19.000Z",
     "relayState": "5Fij07bc0j",
     "_links": {
-        "next"  : { "name": "password", "href": "/api/v1/authn/credentials/reset_password" },
-        "cancel": { "href": "/api/v1/authn/cancel" }
+        "next"  : { "name": "password", "href": "https://your-domain.okta.com/api/v1/authn/credentials/reset_password" },
+        "cancel": { "href": "https://your-domain.okta.com/api/v1/authn/cancel" }
     }
 }
 ~~~
@@ -1013,11 +1055,12 @@ Content-Type: application/json
     "_embedded": {
          "user": {
              "id": "00udnlQDVLVRIVXESCMZ",
-             "lastLogin": "2014-06-06T05:47:17.000Z",
              "profile": {
-                 "firstName": "Isaac",
-                 "lastName": "Brock",
-                 "login": "isaac@example.org",
+                  "username": "isaac@example.org",
+                  "firstName":"Isaac",
+                  "lastName": "Brock",
+                  "locale": "en_US",
+                  "timeZone": "America/Los_Angeles"
              }
          },
          "factors": [
@@ -1030,8 +1073,7 @@ Content-Type: application/json
                  "phoneNumber": "XXX-XXX-4567"
              },
              "_links": {
-                 "logo": { "href": "https://okta.com/static/sms.png" },
-                 "next": { "href": "/api/v1/authn/factors/00ud4tVDDXYVKPXKVLCO/verify" }
+                 "next": { "href": "https://your-domain.okta.com/api/v1/authn/factors/00ud4tVDDXYVKPXKVLCO/verify" }
              }
           },
           {
@@ -1042,14 +1084,13 @@ Content-Type: application/json
                  "displayName": "My IPad",
              },
              "_links": {
-                 "logo": { "href": "https://okta.com/static/verify.png" },
-                 "next": { "href": "/api/v1/authn/factors/01xy4tVDDXYVKPXKVLCA/verify" }
+                 "next": { "href": "https://your-domain.okta.com/api/v1/authn/factors/01xy4tVDDXYVKPXKVLCA/verify" }
              }
           }
        ]
     },
     "_links": {
-        "cancel": { "href": "/api/v1/authn/cancel" }
+        "cancel": { "href": "https://your-domain.okta.com/api/v1/authn/cancel" }
     }
 }
 ~~~
@@ -1086,9 +1127,6 @@ Content-Type: application/json
     "_links": {
         "home": {
             "href": "http:/your-domain.okta.com"
-        },
-        "logoUrl": {
-            "href": "http:/your-domain.okta.com/img/logos/okta-logo.png"
         },
         "forgotPassword": {
             "href": "http:/your-domain.okta.com/api/v1/authn?forgot_password=true",
@@ -1152,29 +1190,31 @@ Content-Type: application/json
     "_embedded": {
         "user": {
               "id": "00udnlQDVLVRIVXESCMZ",
-              "lastLogin": "2014-06-06T05:47:17.000Z",
               "profile": {
-                  "firstName": "Isaac",
+                  "username": "isaac@example.org",
+                  "firstName":"Isaac",
                   "lastName": "Brock",
-                  "login": "isaac@example.org",
+                  "locale": "en_US",
+                  "timeZone": "America/Los_Angeles"
               }
           }
     },
     "_links": { 
         "next": {
-              "href": "/api/v1/authn/factors/00ud4tVDDXYVKPXKVLCO/verify",
+              "name": "verify",
+              "href": "https://your-domain.okta.com/api/v1/authn/factors/00ud4tVDDXYVKPXKVLCO/verify",
               "hints": {
                  "allow": [ "POST" ]
               }
          },
         "prev": {
-             "href": "/api/v1/authn/previous",
+             "href": "https://your-domain.okta.com/api/v1/authn/previous",
              "hints": {
                  "allow": [ "POST" ]
              }
         },
         "cancel": {
-             "href": "/api/v1/authn/cancel",
+             "href": "https://your-domain.okta.com/api/v1/authn/cancel",
              "hints": {
                  "allow": [ "POST" ]
              }
