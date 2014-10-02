@@ -9,13 +9,13 @@ title: Factors
 
 # Overview
 
-The Okta Factors API provides operations to manage and verify factors for multi-factor authentication. This API is called only when a user is signed in. Enrolling in factors and resetting factors is done within Okta; consequently, the user must be authenticated first. The Authentication API is called from outside Okta and cannot manage factors.
+The Okta Factors API provides operations to manage a user's profile for reset, enroll, and verify factors for multi-factor authentication. Call this API after a user is authenticated. Enrolling in factors and resetting factors is done within Okta; consequently, the user must be authenticated first. The Authentication API is called from outside Okta and cannot manage factors.
 
 The Factors API contains three types of operations.
 
  - **Factor List Operations** &ndash; List factors and security questions.
- - **Factor Verification Operations** &ndash; Verify the factors for all challenges.
  - **Factor Lifecycle Operations** &ndash; Enroll, activate, and reset factors.
+ - **Factor Verification Operations** &ndash; Verify the factors for all challenges.
 
 > This API is currently in **Beta** status and provides no guarantees for backwards-compatibility.  Okta is free to break this API until it is released.
 

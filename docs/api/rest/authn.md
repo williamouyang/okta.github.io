@@ -12,25 +12,27 @@ The Okta Auth API provides operations to authenticate users, perform MFA enrollm
 
 There are three types of functionality in this API.
 
-- **Primary authentication** allows you to verify username and password credentials. Verifying these credentials is the only part of the functionality that starts outside of Okta. In some cases this verification is all that is specified.
+- **Primary authentication** allows you to verify username and password credentials. Verifying these credentials is the only part of the functionality that starts outside of Okta.
 
-- **Multifactor authentication** (MFA) provides an additional layer of security for your enterprise applications by requiring the user to complete additional challenges besides the username and password. The authentication API supports the MFA enrollment and authentication flows. All MFA flows begin within Okta.
+- **Multifactor authentication** (MFA) provides an additional layer of security when authenticating users by requiring both the primary password and an additional factor such as a temporary, one-time password or an SMS passcode. The Auth API supports user enrollment in the various MFA factors enabled by the administrator, as well as the MFA challenge based on your security policy.
 
-- **Utilites** allow you to get user information, get status information, respond to a forgotten password request, and force users with expired passwords to set a new one. 
+- **Recovery** allows users to securely reset their password if they've forgotten it, or unlock their account if it has been locked out due to excessive failed login attempts. This functionality is subject to the security policy set by the administrator.
 
-   **Note:** For information on unlocking a locked out user, see <a href="http://developer.okta.com/docs/api/rest/users.html#unlock-user">Unlock User </a> in the Users API.
+   **Note:**The unlock user functionality in the Auth API is a user-initiated flow that includes sending a recovery token to the user that the user returns to the Auth API where it is redeemed for a security question. After the user answers the security question correctly, the user's account is unlocked. The unlock user functionality in the Users API allows an administrator to unlock a user's account directly. It is not a user-initiated flow.
+
+   <a href="http://developer.okta.com/docs/api/rest/users.html#unlock-user">Unlock User </a> in the Users API.
 
 > This API is currently in Beta status. The state model and data contracts will not change, but there may be additional attributes added to the JSON or minor semantic changes until the API reaches GA status.
 
 ## Authentication Model
 
-The current state of the authentication is tracked in a **stateToken**. This token is bound to the server-side status. The following table shows the possible values for this token.
+The authentication flow uses a state machine and standard JSON HAL (*next* and *prev* links) to navigate through it. The current state is tracked in a state token, which is returned in each response and required to be passed back in on the next request. The following table shows the possible statuses for this token:
 
 ##### stateToken 
 
 Value|Description
 -----|-----------
-PASSWORD_EXPIRED|The user credentials are valid but expired; the user must change them with a POST to authn/credentials/change_password.
+PASSWORD_EXPIRED|The user credentials are valid but expired.
 RECOVERY|The user is in the middle of a forgot-password flow.
 PASSWORD_RESET|The user has answered their recovery question and needs to set a new password.
 LOCKED_OUT|The user account is locked; self-service unlock or admin unlock is required.
@@ -38,10 +40,9 @@ MFA_UNENROLLED|The user credentials are valid, but MFA is required and no factor
 MFA_ENROLL_ACTIVATE|The user enrolled in a MFA factor, but the factor requires activation.
 MFA_REQUIRED|The user credentials are valid, but MFA is required.
 MFA_CHALLENGE|The user needs to enter the passCode from their MFA factor.
-SUCCESS|The user is authenticated.
+SUCCESS|The user finished the authentication flow successfully.
 
-Each of these statuses has an expiration date and a cancellation link which that deletes the stateToken and returns the user to the UNAUTHENTICATED state.
-The current status of the state token is aways available.
+Each of these statuses has an expiration date and a cancellation link which that deletes the stateToken and returns the user to the unauthenticated state. The current status of the state token is aways available by POSTing a stateToken to the /api/v1/authn endpoint, as described in the [stateToken Status](#stateToken-status) section.
 
 ##### factorResult 
 
@@ -49,11 +50,8 @@ In addition to these state values, the MFA_CHALLENGE state can return an additio
 
 Value|Description
 -----|-----------
-WAITING|challenge request is being sent to device.
 FAILED|passcode or challenge answer is wrong.
-CANCELLED|verification request cancelled by user.
 TIMEOUT|user did not respond within a specified time window.
-TIME_WINDOW_EXCEEDED|The OTP you provided is within the Sync window, but outside the Look Ahead Window. This operation requires a second consecutive OTP.
 PASSCODE_REPLAYED|The OTP has already been seen by the service.
 ERROR|an unspecified error occurred during factor authentication; the corresponding "factorResultMessage" attribute should contain the details. 
 
@@ -63,13 +61,60 @@ ERROR|an unspecified error occurred during factor authentication; the correspond
 
 There are seven common use cases for the Authentication API that are detailed in the following section. Items in red all represent an unauthenticated state. Items in blue represent authentication processes. The goal of all flows is the authenticated state, shown in green. Most of these use cases use the **stateToken** and **factorResult** described in the [Authentication Model](#authentication-model) section. Use the following links to jump to a use case.
 
+[Get Anonymous System Information](#get-anonymous-system-information)<br />
 [Primary Authentication](#primary-authentication)<br />
 [Authentication with an Enrolled MFA Factor](#authentication-with-an-enrolled-mfa-factor)<br />
 [Authentication with an Unenrolled MFA Factor](#authentication-with-an-unenrolled-mfa-factor)<br />
 [Expired Password Flow](#expired-password-flow)<br />
 [Forgotten Password Flow](#forgotten-password-flow)<br />
-[Get Basic Information](#get-basic-information)<br />
 [stateToken Status](#statetoken-status)<br />
+
+
+### Get Anonymous System Information
+{:.api .api-operation}
+
+<img style="border: 0; padding: 2;" src="authn_get_basic_info.png" alt="Get Basic Information" />
+
+Returns basic information and links. The user data that is returned is considered anonymous, as this API is run without user authentication.
+
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span>/api/v1/authn/info
+
+##### Request Parameters
+
+None.
+
+#####Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+HTTP/1.1 200 OK
+Content-Type: application/json
+ 
+{
+    "id": "00oewwEGGIFFQTUCFCVJ",
+    "name": your-domain08",
+    "status": "ACTIVE",
+    "subdomain": "your-domain",
+    "website": "http://example.net/",
+    "technicalContact": "webmaster@example.net",
+    "_links": {
+        "home": {
+            "href": "http:/your-domain.okta.com"
+        },
+        "forgotPassword": {
+            "href": "http:/your-domain.okta.com/api/v1/authn?forgot_password=true",
+            "hints": {
+                "allow": [ "POST" ]
+            }
+        },
+        "help": {
+            "href": "http:/your-domain.okta.com/help/login"
+        }
+    }
+}
+~~~
+
+<hr />
 
 
 ### Primary Authentication 
@@ -112,7 +157,7 @@ deviceToken | A globally unique ID identifying the device making the request    
 ~~~json
 POST /api/v1/authn HTTP/1.1
 Host: your-domain.okta.com
-Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
+Authorization: SSWS yourtoken
 Accept: application/json
 Content-Type: application/json
 {
@@ -139,7 +184,7 @@ HTTP/1.1 200 OK
 Content-Type: application/json
  
 {
-    "status": "MFA_UNENROLLED",
+    "status": "SUCCESS",
     "relayState": "5Fij07bc0j",
     "stateToken": "NzYxMDAxIiwKICJhdWQiOiAiczZCaGRSa3F0",
     "_embedded" : {
@@ -163,15 +208,15 @@ Content-Type: application/json
 
 <img style="border: 0; padding: 2;" src="authn_mfa.png" alt="Authentication with Enrolled MFA" />
 
-This example shows a user who is already enrolled in MFA and needs to complete the challenge phase. The value of the state token is `MFA_REQUIRED` and reflects that the user is already enrolled in MFA. This example also illustrates how to request an ID token. There are two enrolled factors in this example, a security question and SMS authentication.
+This example shows a user who is already enrolled in MFA and needs to complete the challenge phase. The value of the state token is `MFA_REQUIRED` and reflects that the user is already enrolled in MFA. There are two enrolled factors in this example, a security question and SMS authentication.
 
 ##### Request Example
 {:.api .api-request .api-request-example} 
 
 ~~~JSON
-POST /api/v1/authn?response_type=code%20id_token HTTP/1.1
+POST /api/v1/authn HTTP/1.1
 Host: your-domain.okta.com
-Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
+Authorization: SSWS yourtoken
 Accept: application/json
 Content-Type: application/json
  
@@ -186,6 +231,7 @@ Content-Type: application/json
     }
 }
 ~~~
+
 
 The application passes the user credentials along with some context into the Okta /api/v1/authn endpoint.
  
@@ -263,7 +309,7 @@ Content-Type: application/json
 }
 ~~~
 
-A state token is generated, and the status is set to `MFA_REQUIRED`. This indicates that there are one or more enrolled factors. To choose which factor to use, follow the "verify" link for that factor. In this example the request POSTs to the SMS factor. At this time, there is no passcode to send. The operation only selects which factor to use. 
+A state token is generated, and the status is set to `MFA_REQUIRED`. This indicates that there are one or more enrolled factors. To choose which factor to use, follow the "verify" link for that factor. In this example the request POSTs to the SMS factor. At this point in the flow, there is no passcode to send. The operation only selects which factor to use. 
 
 ##### Request Example
 {:.api .api-request .api-request-example} 
@@ -271,7 +317,7 @@ A state token is generated, and the status is set to `MFA_REQUIRED`. This indica
 ~~~JSON
 POST /api/v1/authn/factors/01xy4tVDDXYVKPXKVLCA/verify HTTP/1.1
 Host: your-domain.okta.com
-Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
+Authorization: SSWS yourtoken
 Accept: application/json
 Content-Type: application/json
  
@@ -347,7 +393,7 @@ For factors such as Okta Verify, this intermediate step is not necessary since t
 ~~~JSON
 POST /api/v1/authn/factors/01xy4tVDDXYVKPXKVLCA/verify HTTP/1.1
 Host: your-domain.okta.com
-Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
+Authorization: SSWS yourtoken
 Accept: application/json
 Content-Type: application/json
  
@@ -394,7 +440,7 @@ Content-Type: application/json
 
 <img style="border: 0; padding: 2;" src="authn_mfa_unenrolled.png" alt="Authentication with Unenrolled MFA" />
 
-The following flows use the /api/v1/authn endpoint to navigate through primary user authentication, MFA enrollment, challenge, and verification. There are also the special cases of password expired and forgot-password. The end result is either an authorization code which can be redeemed for a session, or an ID token, or both. We follow the same patterns as OpenID Connect for specifying the response type.
+The following flow begins with primary authentication that returns a status of MFA_UNENROLLED. This status indicates that MFA is enabled for the user, but the user is not registered for any factors.
 
 The client can optionally include some relay state on the URL or in the request body, with the *relayState* attribute. This attribute is echoed back in the response, and can be used anywhere along the chain for this API.
 
@@ -426,7 +472,7 @@ None.
 ~~~json
 POST /api/v1/authn HTTP/1.1
 Host: your-domain.okta.com
-Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
+Authorization: SSWS yourtoken
 Accept: application/json
 Content-Type: application/json
 {
@@ -552,7 +598,7 @@ The user can now choose which factor to enroll in. The client should POST to one
 
 **Note:** When enrolling in a factor, there is an *activate* parameter which indicates whether  to enroll in the factor and activate it by sending out the activation code all in one step. The default is `true`, but you change behavior using this parameter. If the factor is not activated now, there is a *resend* link in the response below which can be followed to send the activation code.
 
-What goes in the *profile* is specific to which factor you choose. The general requiremen
+What goes in the *profile* is specific to which factor you choose, as shown in the following table.
 
 Type | General Requirement
 ---- | -------------------
@@ -564,9 +610,9 @@ Security Question |  *question* and *answer*
 {:.api .api-request .api-request-example} 
 
 ~~~JSON 
-POST /api/v1/authn/factors?activate=true HTTP/1.1
+POST /api/v1/authn/factors HTTP/1.1
 Host: your-domain.okta.com
-Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
+Authorization: SSWS yourtoken
 Accept: application/json
 Content-Type: application/json
  
@@ -649,7 +695,7 @@ The status is now `MFA_ENROLL_ACTIVATE`. The user now obtains some sort of enrol
 ~~~JSON
 POST /api/v1/authn/factors/00fa0pazBD8AZNmHmbB5/lifecycle/activate HTTP/1.1
 Host: your-domain.okta.com
-Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
+Authorization: SSWS yourtoken
 Accept: application/json
 Content-Type: application/json
  
@@ -678,9 +724,9 @@ Content-Type: application/json
               "id": "00udnlQDVLVRIVXESCMZ",
               "lastLogin": "2014-06-06T05:47:17.000Z",
               "profile": {
+                  "userame": "isaac@example.org",
                   "firstName": "Isaac",
                   "lastName": "Brock",
-                  "login": "isaac@example.org",
                   "locale": "en_US",
                   "timeZone": "America/Los_Angeles"
               }
@@ -714,7 +760,7 @@ Accept: application/json
 Content-Type: application/json
  
 {
-    "login": "isaac@example.org",
+    "username": "isaac@example.org",
     "password": "Abcd1234",
     "relayState": "5Fij07bc0j",
     "context": {
@@ -776,7 +822,7 @@ Next, the app obtains the previous password and new password from the user, and 
 ~~~JSON
 POST /api/v1/authn/credentials/change_password HTTP/1.1
 Host: your-domain.okta.com
-Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
+Authorization: SSWS yourtoken
 Accept: application/json
 Content-Type: application/json
  
@@ -867,14 +913,14 @@ The System Info endpoint has a Forgot Password link which can be used to take a 
 {:.api .api-request .api-request-example} 
 
 ~~~JSON
-POST /api/v1/authn?forgot_password=true HTTP/1.1
+POST /api/v1/authn/recovery/password HTTP/1.1
 Host: your-domain.okta.com
-Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
+Authorization: SSWS yourtoken
 Accept: application/json
 Content-Type: application/json
  
 {
-    "login": "isaac@example.org",
+    "username": "isaac@example.org",
     "relayState": "5Fij07bc0j",
     "context": {
         "ipAddress": "192.168.12.11",
@@ -934,12 +980,12 @@ This scenario presents the client with a recoveryToken to send  to the user in a
 ~~~JSON
 POST /api/v1/authn/recovery HTTP/1.1
 Host: your-domain.okta.com
-Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
+Authorization: SSWS yourtoken
 Accept: application/json
 Content-Type: application/json
  
 {
-    "recoveryToken": "zcAuL98F0DOtdrwK7I6" [alternatively, in the future: "passCode" from SMS or voice call]
+    "recoveryToken": "zcAuL98F0DOtdrwK7I6" 
     "relayState": "5Fij07bc0j",
 }
 ~~~
@@ -990,7 +1036,7 @@ The final step is to answer the security question and set a new password. This c
 ~~~JSON
 POST /api/v1/authn/recovery/answer HTTP/1.1
 Host: your-domain.okta.com
-Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
+Authorization: SSWS yourtoken
 Accept: application/json
 Content-Type: application/json
  
@@ -1027,7 +1073,7 @@ Content-Type: application/json
 ~~~JSON
 POST /api/v1/authn/credentials/reset_password HTTP/1.1
 Host: your-domain.okta.com
-Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
+Authorization: SSWS yourtoken
 Accept: application/json
 Content-Type: application/json
  
@@ -1097,52 +1143,6 @@ Content-Type: application/json
 
 <hr />
 
-### Get Basic Information
-{:.api .api-operation}
-
-<img style="border: 0; padding: 2;" src="authn_get_basic_info.png" alt="Get Basic Information" />
-
-Returns basic information and links. The user data that is returned is considered anonymous, as this API is run without user authentication.
-
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span>/api/v1/authn/info
-
-##### Request Parameters
-
-None.
-
-#####Response Example
-{:.api .api-response .api-response-example}
-
-~~~json
-HTTP/1.1 200 OK
-Content-Type: application/json
- 
-{
-    "id": "00oewwEGGIFFQTUCFCVJ",
-    "name": your-domain08",
-    "status": "ACTIVE",
-    "subdomain": "your-domain",
-    "website": "http://example.net/",
-    "technicalContact": "webmaster@example.net",
-    "_links": {
-        "home": {
-            "href": "http:/your-domain.okta.com"
-        },
-        "forgotPassword": {
-            "href": "http:/your-domain.okta.com/api/v1/authn?forgot_password=true",
-            "hints": {
-                "allow": [ "POST" ]
-            }
-        },
-        "help": {
-            "href": "http:/your-domain.okta.com/help/login"
-        }
-    }
-}
-~~~
-
-<hr />
-
 ### stateToken Status
 {:.api .api-operation}
 
@@ -1164,7 +1164,7 @@ This example is useful in the following three use cases:
 ~~~JSON
 POST /api/v1/authn HTTP/1.1
 Host: your-domain.okta.com
-Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
+Authorization: SSWS yourtoken
 Accept: application/json
 Content-Type: application/json
  
