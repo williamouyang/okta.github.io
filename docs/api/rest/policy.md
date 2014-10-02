@@ -111,7 +111,7 @@ the action in Rule A is taken, and Rule B is not evaluated.
 
 The Policy model defines several attributes:
 
-Parameter | Description | DataType | Required | Default
+Parameter | Description | DataT ype | Required | Default
 | --- | --- | --- | --- 
 id | Identifier for the policy | String | No | Assigned 
 type | Type for the policy | String | Yes | 
@@ -127,14 +127,14 @@ lastUpdated | Timestamp when the policy was last modified | Date | No | Assigned
 
 The people condition identifies users and groups that are used together. For policies, you can only include a group.
 
-Parameter | Description | DataType | Required | Default
+Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | --- 
 groups | The group condition | Group Condition | No | Include Everyone 
 users  | The user condition  | User Condition  | No | Empty
 
 ### Group Condition Object
 
-Parameter | Description | DataType | Required | Default
+Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | --- 
 include	| The groups to be included |	Collection of String	| No |	Everyone Group (if exclude is empty)
 exclude	| The groups to be excluded	| Collection of String	| No	| Empty
@@ -142,7 +142,7 @@ exclude	| The groups to be excluded	| Collection of String	| No	| Empty
 
 ### User Condition Object
 
-Parameter | Description | DataType | Required | Default
+Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | --- 
 include	| The users to be included	| Collection of String	| No	| Empty
 exclude	| The users to be excluded	| Collection of String	| No	| Empty
@@ -170,7 +170,7 @@ policy	| Policy object for a rule only
 
 #### Request Parameters
 
-Parameter | Description | Type  | DataType  | Required  | Default
+Parameter | Description | Type  | Data Type  | Required  | Default
 | --- | --- | --- | --- 
 type	| Policy Type	| Query	| String	| Yes	
 status	| Policy |  Query	| String	| No	| Empty
@@ -188,7 +188,7 @@ Creates a new policy.
 
 #### Request Parameters
 
-Parameter | Description | Type  | DataType  | Required  | Default
+Parameter | Description | Type  | DataT ype  | Required  | Default
 | --- | --- | --- | --- 
 activate	| Policy Type	| Query	| Boolean	| No	| true
 
@@ -209,7 +209,7 @@ Gets an existing policy.
 
 #### Request Parameters
 
-Parameter | Description | Type  | DataType  | Required  | Default
+Parameter | Description | Type  | Data Type  | Required  
 | --- | --- | --- | --- 
 id	| Policy ID	| URL	| String	| YES	
 
@@ -226,7 +226,7 @@ Updates an existing policy.
 
 #### Request Parameters
 
-Parameter | Description | Type  | DataType  | Required  | Default
+Parameter | Description | Type  | Data Type  | Required 
 | --- | --- | --- | --- 
 id  | Policy ID | URL | String  | YES 
 
@@ -247,7 +247,7 @@ Deletes a policy and all rules associated with it.
 
 #### Request Parameters
 
-Parameter | Description | Type  | DataType  | Required  | Default
+Parameter | Description | Type  | Data Type  | Required  
 | --- | --- | --- | --- 
 id	| Policy ID	| URL	| String	| YES	
 
@@ -264,7 +264,7 @@ Activates the specified policy.
 
 #### Request Parameters
 
-Parameter | Description | Type  | DataType  | Required  | Default
+Parameter | Description | Type  | DataT ype  | Required  
 | --- | --- | --- | --- 
 id	| Policy ID	| URL	| String	| YES	
 
@@ -281,7 +281,7 @@ Deactivates the specified policy.
 
 #### Request Parameters
 
-Parameter | Description | Type  | DataType  | Required  | Default
+Parameter | Description | Type  | Data Type  | Required  
 | --- | --- | --- | --- 
 id  | Policy ID | URL | String  | YES 
 
@@ -352,7 +352,7 @@ Rule conditions include the people, user, and group conditions from the policy m
 
 Specifies a network segment.
 
-Parameter |	Description	| DataType	|  Required	|  Default
+Parameter |	Description	| Data Type	|  Required	|  Default
 | --- | --- | --- | --- 
 connection	|  `ANYWHERE`, `ON_NETWORK`, or `OFF_NETWORK` | 	String	| No	|  Empty
 
@@ -368,7 +368,7 @@ authType	| `ANY` or `RADIUS`	| String	| No	| Empty
 
 **Signon Action**
 
-Parameter | Description | DataType  |  Required |  Default
+Parameter | Description | Data Type  |  Required |  Default
 | --- | --- | --- | --- 
 access	| `ALLOW` or `DENY`	| String	| YES	
 requireFactor	| `true` or `false`	| Boolean	| NO	| `false`
@@ -386,7 +386,7 @@ Retrieves all rules for a specified policy.
 
 #### Request Parameters
 
-Parameter | Description | DataType  |  Required |  Default
+Parameter | Description | Type  | Data Type | Required
 | --- | --- | --- | --- 
 policyId	|Policy ID	| URL	| String	| YES	
 
@@ -403,7 +403,7 @@ Creates a new rule for a specified policy.
 
 #### Request Parameters
 
-Parameter | Description | DataType  |  Required |  Default
+Parameter | Description | Type  | Data Type | Required
 | --- | --- | --- | --- 
 policyId	| Policy ID	| URL	| String	| YES	
 
@@ -424,7 +424,7 @@ Retrieves the specified rule for a specified policy.
 
 #### Request Parameters
 
-Parameter | Description | DataType  |  Required |  Default
+Parameter | Description | Type  | Data Type | Required
 | --- | --- | --- | --- 
 policyId	| Policy ID	| URL	| String	| YES	
 ruleId	| Rule ID	| URL	| String	| YES	
@@ -442,10 +442,10 @@ Retrieves the specified rule for the specified policy.
 
 #### Request Parameters
 
-Parameter | Description | DataType  |  Required |  Default
+Parameter | Description | Type  | Data Type | Required
 | --- | --- | --- | --- 
 policyId  | Policy ID | URL | String  | YES 
-ruleId  | Rule ID | URL | String  Y| ES 
+ruleId  | Rule ID | URL | String | YES 
 
 
 #### Response Parameters
@@ -469,7 +469,7 @@ Deletes the specified rule for the specified policy.
 
 #### Request Parameters
 
-Parameter | Description | DataType  |  Required |  Default
+PParameter | Description | Type  | Data Type | Required
 | --- | --- | --- | --- 
 policyId  | Policy ID | URL | String  | YES 
 ruleId  | Rule ID | URL | String  | YES 
@@ -487,7 +487,7 @@ Activates the specified rule for the specified policy.
 
 #### Request Parameters
 
-Parameter | Description | DataType  |  Required |  Default
+Parameter | Description | Type  | Data Type | Required
 | --- | --- | --- | --- 
 policyId  | Policy ID | URL | String  | YES 
 ruleId  | Rule ID | URL| String  | YES 
@@ -505,9 +505,9 @@ Deactivates the specified rule for the specified policy.
 
 #### Request Parameters
 
-Parameter | Description | DataType  |  Required |  Default
+Parameter | Description | Type  | Data Type | Required
 | --- | --- | --- | --- 
-policyId  | Policy ID | URL | String  Y| ES 
+policyId  | Policy ID | URL | String | YES 
 ruleId  | Rule ID | URL | String  | YES 
 
 #### Response Parameters
