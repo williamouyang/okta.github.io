@@ -12,8 +12,8 @@ The Okta Policy API enables you to peform policy and rule operations. These oper
 
 This API supports the following **policy operations**:
 
-* Get all policies of a specific type
-* Create, read, update, and delete a policy for an org
+* Get all policies of a specific type  for an org
+* Create, read, update, and delete a policy
 * Activate and deactivate a policy
 
 This API supports the following **rule operations**:
@@ -21,7 +21,6 @@ This API supports the following **rule operations**:
 * Get all rules for a policy
 * Create, read, update, and delete a rule for a policy
 * Activate and deactivate a rule
-* Manage rules for the default policy
 
 # Policies
 
@@ -29,19 +28,27 @@ This API supports the following **rule operations**:
 
 ### Default Policies
 
-There is always a default policy created for each type for any users for whom other policies in the org do not apply. This ensures that there is always a policy to apply to a user in all situations. 
+There is always a default policy created for each type of policy. The default policy applies to any users for whom other policies in the org do not apply. This ensures that there is always a policy to apply to a user in all situations. 
 
  - A default policy is required and cannot be deleted.
 
  - The default policy is always the last policy in the priority order. Any added policies of this type have higher priority than the default policy. 
 
- - The default policy always has one default rule that is required and always is the last rule in the priority order. If you add rules to the default policy, they have a higher priority than the default rule.
-
- - The only permitted edits to the default policy are settings edits. You can add an unlimited number of rules.
+ - The default policy always has one default rule that cannot be deleted. It is always the last rule in the priority order. If you add rules to the default policy, they have a higher priority than the default rule. For information on default rules, see [Rules Model and Defaults](#rules-model-and-defaults).
 
  - The `system` attribute determines whether a policy is created by a system or by a user. The default policy is the only policy that has this attribute.
 
 ### Policy Model
+
+Policies and rules are ordered numerically by priority. This priority determines the order in which they are searched for a context match. The highest priority policy has a priorityOrder of 1.
+
+For example, assume the following conditions are in effect.
+
+- Rule A has priority 1 and applies to RADIUS VPN scenarios.
+- Rule B has priority 2 and applies to ON_NETWORK scenarios.
+
+Because Rule A has a higher priority, even though requests are coming from ON_NETWORK due to VPN,
+the action in Rule A is taken, and Rule B is not evaluated.
 
 ### Example
 
@@ -118,21 +125,25 @@ lastUpdated | Timestamp when the policy was last modified | Date | No | Assigned
 
 ### People Object
 
-The people condition identifies users and groups that are used together.
+The people condition identifies users and groups that are used together. For policies, you can only include a group.
 
 Parameter | Description | DataType | Required | Default
-groups | The group condition | Group Condition | No | Include Everyone users | The user condition | User Condition | No | Empty
+| --- | --- | --- | --- 
+groups | The group condition | Group Condition | No | Include Everyone 
+users  | The user condition  | User Condition  | No | Empty
 
 ### Group Condition Object
 
 Parameter | Description | DataType | Required | Default
-include	| The groups to be included |	Collection of String	| No |	Everyone Group if exclude is empty
+| --- | --- | --- | --- 
+include	| The groups to be included |	Collection of String	| No |	Everyone Group (if exclude is empty)
 exclude	| The groups to be excluded	| Collection of String	| No	| Empty
 
 
 ### User Condition Object
 
 Parameter | Description | DataType | Required | Default
+| --- | --- | --- | --- 
 include	| The users to be included	| Collection of String	| No	| Empty
 exclude	| The users to be excluded	| Collection of String	| No	| Empty
 
@@ -159,9 +170,10 @@ policy	| Policy object for a rule only
 
 #### Request Parameters
 
-Parameter	| Description	| Param | Type	| DataType	| Required	| Default
+Parameter | Description | Type  | DataType  | Required  | Default
+| --- | --- | --- | --- 
 type	| Policy Type	| Query	| String	| Yes	
-status	| Policy | Status	| Query	| String	| No	| Empty
+status	| Policy |  Query	| String	| No	| Empty
 
 #### Response Parameters
 
@@ -176,7 +188,8 @@ Creates a new policy.
 
 #### Request Parameters
 
-Parameter | Description | Param | Type  | DataType  | Required  | Default
+Parameter | Description | Type  | DataType  | Required  | Default
+| --- | --- | --- | --- 
 activate	| Policy Type	| Query	| Boolean	| No	| true
 
 #### Request Body
@@ -196,12 +209,13 @@ Gets an existing policy.
 
 #### Request Parameters
 
-Parameter | Description | Param | Type  | DataType  | Required  | Default
+Parameter | Description | Type  | DataType  | Required  | Default
+| --- | --- | --- | --- 
 id	| Policy ID	| URL	| String	| YES	
 
 #### Response Parameters
 
-The policy
+The policy.
 
 ### Update a Policy
 {:.api .api-operation}
@@ -212,7 +226,8 @@ Updates an existing policy.
 
 #### Request Parameters
 
-Parameter | Description | Param | Type  | DataType  | Required  | Default
+Parameter | Description | Type  | DataType  | Required  | Default
+| --- | --- | --- | --- 
 id  | Policy ID | URL | String  | YES 
 
 ### Request Body
@@ -221,7 +236,7 @@ The policy in a changed state. Note this will be a strict PUT. Any missing item 
 
 ### Response Parameters
 
-The updated policy
+The updated policy.
 
 ### Delete Policy
 {:.api .api-operation}
@@ -232,7 +247,8 @@ Deletes a policy and all rules associated with it.
 
 #### Request Parameters
 
-Parameter | Description | Param | Type  | DataType  | Required  | Default
+Parameter | Description | Type  | DataType  | Required  | Default
+| --- | --- | --- | --- 
 id	| Policy ID	| URL	| String	| YES	
 
 ### Response Parameters
@@ -248,7 +264,8 @@ Activates the specified policy.
 
 #### Request Parameters
 
-Parameter | Description | Param | Type  | DataType  | Required  | Default
+Parameter | Description | Type  | DataType  | Required  | Default
+| --- | --- | --- | --- 
 id	| Policy ID	| URL	| String	| YES	
 
 ### Response Parameters
@@ -264,7 +281,8 @@ Deactivates the specified policy.
 
 #### Request Parameters
 
-Parameter | Description | Param | Type  | DataType  | Required  | Default
+Parameter | Description | Type  | DataType  | Required  | Default
+| --- | --- | --- | --- 
 id  | Policy ID | URL | String  | YES 
 
 ### Response Parameters
@@ -316,13 +334,6 @@ None
       "factorLifetime": 15
     }
   },
-  "_links": {
-    "self": {
-      "href": "/api/v1/policies/00ub0oNGTSWTBKOLGLNR/rules",
-      "hints": {
-        "allow": ["GET", "POST"]
-      }
-    },
     "policy": {
       "href": "/api/v1/policies/00ub0oNGTSWTBKOLGLNR",
       "hints": {
@@ -342,6 +353,7 @@ Rule conditions include the people, user, and group conditions from the policy m
 Specifies a network segment.
 
 Parameter |	Description	| DataType	|  Required	|  Default
+| --- | --- | --- | --- 
 connection	|  `ANYWHERE`, `ON_NETWORK`, or `OFF_NETWORK` | 	String	| No	|  Empty
 
 **AuthContext Condition Body**
@@ -349,6 +361,7 @@ connection	|  `ANYWHERE`, `ON_NETWORK`, or `OFF_NETWORK` | 	String	| No	|  Empty
 Specifies an authentication entry point.
 
 Parameter | Description | DataType  |  Required |  Default
+| --- | --- | --- | --- 
 authType	| `ANY` or `RADIUS`	| String	| No	| Empty
 
 ### Actions
@@ -356,6 +369,7 @@ authType	| `ANY` or `RADIUS`	| String	| No	| Empty
 **Signon Action**
 
 Parameter | Description | DataType  |  Required |  Default
+| --- | --- | --- | --- 
 access	| `ALLOW` or `DENY`	| String	| YES	
 requireFactor	| `true` or `false`	| Boolean	| NO	| `false`
 factorPromptMode	| `DEVICE`, `SESSION` or `ALWAYS`	| String	| When requireFactor = `true`	
@@ -372,7 +386,8 @@ Retrieves all rules for a specified policy.
 
 #### Request Parameters
 
-Parameter | Description | Param | Type  | DataType  | Required  | Default
+Parameter | Description | DataType  |  Required |  Default
+| --- | --- | --- | --- 
 policyId	|Policy ID	| URL	| String	| YES	
 
 #### Response Parameters
@@ -388,16 +403,17 @@ Creates a new rule for a specified policy.
 
 #### Request Parameters
 
-Parameter | Description | Param | Type  | DataType  | Required  | Default
+Parameter | Description | DataType  |  Required |  Default
+| --- | --- | --- | --- 
 policyId	| Policy ID	| URL	| String	| YES	
 
 #### Request Body
 
-The rule to create
+The rule to create.
 
 #### Response Parameters
 
-The created rule
+The created rule.
 
 ### Get a Rule
 {:.api .api-operation}
@@ -408,13 +424,14 @@ Retrieves the specified rule for a specified policy.
 
 #### Request Parameters
 
-Parameter | Description | Param | Type  | DataType  | Required  | Default
+Parameter | Description | DataType  |  Required |  Default
+| --- | --- | --- | --- 
 policyId	| Policy ID	| URL	| String	| YES	
 ruleId	| Rule ID	| URL	| String	| YES	
 
 #### Response Parameters
 
-The specified rule
+The specified rule.
 
 ### Update a Rule
 {:.api .api-operation}
@@ -425,7 +442,8 @@ Retrieves the specified rule for the specified policy.
 
 #### Request Parameters
 
-Parameter | Description | Param | Type  | DataType  | Required  | Default
+Parameter | Description | DataType  |  Required |  Default
+| --- | --- | --- | --- 
 policyId  | Policy ID | URL | String  | YES 
 ruleId  | Rule ID | URL | String  Y| ES 
 
@@ -451,7 +469,8 @@ Deletes the specified rule for the specified policy.
 
 #### Request Parameters
 
-Parameter | Description | Param | Type  | DataType  | Required  | Default
+Parameter | Description | DataType  |  Required |  Default
+| --- | --- | --- | --- 
 policyId  | Policy ID | URL | String  | YES 
 ruleId  | Rule ID | URL | String  | YES 
 
@@ -468,7 +487,8 @@ Activates the specified rule for the specified policy.
 
 #### Request Parameters
 
-Parameter | Description | Param | Type  | DataType  | Required  | Default
+Parameter | Description | DataType  |  Required |  Default
+| --- | --- | --- | --- 
 policyId  | Policy ID | URL | String  | YES 
 ruleId  | Rule ID | URL| String  | YES 
 
@@ -485,7 +505,8 @@ Deactivates the specified rule for the specified policy.
 
 #### Request Parameters
 
-Parameter | Description | Param | Type  | DataType  | Required  | Default
+Parameter | Description | DataType  |  Required |  Default
+| --- | --- | --- | --- 
 policyId  | Policy ID | URL | String  Y| ES 
 ruleId  | Rule ID | URL | String  | YES 
 
