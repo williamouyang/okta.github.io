@@ -5,7 +5,7 @@
  * but side effects of further work are unknown as of may 2014
  *
  * in general page specific styles used in this file
- * should not be applied to ne pages
+ * should not be applied to new pages
  * instead, use the css_file mechanism in page/layout front matter
  * to introduce specific stylesheets
  *

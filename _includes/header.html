@@ -29,8 +29,20 @@
 
 
 
-<body {% if include.body_id %}id="{{ include.body_id }}"{% endif %}>
+{% comment %}
+  legacy pages explicitly pass body_id
+  for new pages we resolve the module name to pass as body_id
+{% endcomment %}
 
+{% if include.body_id %}
+  {% assign body_id = include.body_id %}
+{% else %}
+  {% assign active_page_name  = page.url | split: "/" | last | remove: ".html" %}
+  {% assign split_url         = page.url | split: "/" %}
+  {% assign body_id           = split_url[1] %}
+{% endif %}
+
+<body id="{{ body_id }}">
   <nav class="navbar navbar-fixed-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
