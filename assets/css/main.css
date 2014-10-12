@@ -245,6 +245,14 @@ footer.main-footer {
   font-size: 12px;
 }
 
+.main-footer a {
+  color: #999;
+}
+.main-footer .sepr {
+  display: inline-block;
+  margin: 0 .3em;
+}
+
 .footer-left {
   padding-top: 6px;
 }
@@ -1293,3 +1301,14 @@ pre code {
   display: block!important;
 }
 
+
+
+/* -------------------------- TERMS CONTENT */
+
+#terms .block.content h2 {
+  font-size: 18px;
+}
+
+#terms .block.content p {
+  font-size: 14px;
+}
