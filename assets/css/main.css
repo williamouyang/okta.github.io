@@ -1276,3 +1276,20 @@ pre code {
 .highlight pre code {
   white-space: pre;
 }
+
+
+
+/* -------------------------- GITHUB RIBBON */
+
+#github-ribbon {
+  display: none!important;
+  position: fixed;
+  top: 90px;
+  right: 0;
+  z-index: 2;
+}
+
+#docs #github-ribbon {
+  display: block!important;
+}
+
