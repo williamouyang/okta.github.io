@@ -50,6 +50,7 @@ Factor Type           | Description
 `sms`                 | SMS
 `token`               | A software or hardware one-time password [OTP](http://en.wikipedia.org/wiki/One-time_password) device
 `token:software:totp` | Software [Time-based One-time Password (TOTP)](http://en.wikipedia.org/wiki/Time-based_One-time_Password_Algorithm)
+`token:hardware`      | a hardware [Time-based One-time Password (TOTP)](http://en.wikipedia.org/wiki/Time-based_One-time_Password_Algorithm)
 `question`            | Additional security question
 
 ### Provider Type
@@ -523,6 +524,27 @@ curl -v -H "Authorization: SSWS yourtoken" \
                     ]
                 }
             }
+        }
+    },
+    {
+         "factorType": "token:hardware",
+         "provider": "okta:rsa",
+         "profile": {
+            "credentialId": “rsa_account_id"
+         },
+        "verify": {
+            "passCode": “12345"
+         }
+    },
+    {
+        "factorType": "token",
+        "provider": "okta:symantec",
+        "profile": {
+           "credentialId": “symantec_credential_id"
+        },
+        "verify": {
+           "passCode": "875498",
+           "nextPassCode":"678195"
         }
     }
 ]

@@ -83,7 +83,7 @@ Returns basic information and links. The user data that is returned is considere
 
 None.
 
-#####Response Example
+##### Response Example
 {:.api .api-response .api-response-example}
 
 ~~~json
