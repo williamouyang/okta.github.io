@@ -963,6 +963,11 @@ div#sticker {
   margin-bottom: 6em;
 }
 
+h4.recent-subtitle {
+  font-size: 24px;
+  margin-top: 2em;
+}
+
 
 
 /* -------------------------- GET STARTED/DEV PLUS */

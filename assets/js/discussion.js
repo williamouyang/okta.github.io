@@ -13,7 +13,10 @@ $(function() {
 
   var listTopics = function(data, container) {
     var $ul = $('<ul>');
-    _.each(data.items, function(item) {
+    _.each(data.items, function(item, idx) {
+      if(idx >= 9) {
+        return false;
+      }
       var $li = $('<li>'),
           $a = $('<a>');
       $a.attr({
