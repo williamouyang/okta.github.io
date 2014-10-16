@@ -960,12 +960,7 @@ div#sticker {
 }
 
 .recent-discussions {
-  margin-bottom: 100px;
-}
-
-.recent-discussions li {
-  margin-bottom: 18px;
-  font-size: 18px;
+  margin-bottom: 6em;
 }
 
 
