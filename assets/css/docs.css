@@ -106,7 +106,7 @@
 
 #docs-sidebar-wrap.fixed {
   position: fixed;
-  top: 100px;
+  top: 131px;  /* top offset */
   width: 236px; /* XXX: should use js to set width when fixed */
 }
 
