@@ -1360,10 +1360,11 @@ pre code {
 
 /* -------------------------- GITHUB RIBBON */
 
+/*
 #github-ribbon {
   display: none!important;
   position: fixed;
-  top: 121px;  /* top offset */
+  top: 121px;
   right: 0;
   z-index: 2;
 }
@@ -1371,6 +1372,7 @@ pre code {
 #docs #github-ribbon {
   display: block!important;
 }
+*/
 
 
 
