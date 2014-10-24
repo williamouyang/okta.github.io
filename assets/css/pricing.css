@@ -54,8 +54,12 @@
 }
 
 .grid .row {
-  padding: 2em;
+  padding: 3em 2em 2em;
   margin: 0;
+}
+
+.pricing-icon {
+  margin-bottom: 1em;
 }
 
 .stripe-row {

@@ -91,6 +91,14 @@
   background: #fafafa;
 }
 
+.btn-github {
+  transition: all .1s ease-in;
+}
+.btn-github:hover {
+  background: #fdfdff;
+}
+
+
 
 /* -------------------------- TITLE BLOCK */
 
