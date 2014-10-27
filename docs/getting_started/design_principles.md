@@ -246,7 +246,7 @@ X-RateLimit-Remaining: 70
 X-RateLimit-Reset: 1366037820
 ~~~
 
-If the rate limit is exceeded, an HTTP 429 Status Code is returned.  The current Rate Limit is 75 request per-org per-second
+If the rate limit is exceeded, an HTTP 429 Status Code is returned.  The current Rate Limit is 75 request per-org per-second.
 
 **Rate limits are enforced for all organizations.**
 
