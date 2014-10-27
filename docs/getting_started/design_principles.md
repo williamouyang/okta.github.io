@@ -229,7 +229,7 @@ Object whose property names are link relation types (as defined by [RFC5988](htt
 
 ## Rate Limiting
 
-The number of API requests per-second for an organization is limited for all APIs based on your edition.
+The number of API requests for an organization is limited for all APIs based on your edition.
 
 The following three headers are set in each response:
 
@@ -246,7 +246,7 @@ X-RateLimit-Remaining: 70
 X-RateLimit-Reset: 1366037820
 ~~~
 
-If the rate limit is exceeded, an HTTP 429 Status Code is returned.  The current Rate Limit is 75 request per-org per-second.
+If the rate limit is exceeded, an HTTP 429 Status Code is returned.  The current Rate Limit is on a per-org per-endpoint basis.
 
 **Rate limits are enforced for all organizations.**
 
