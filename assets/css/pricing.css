@@ -58,6 +58,18 @@
   margin: 0;
 }
 
+.grid .col-md-4 {
+  cursor: pointer;
+  transition: all .1s ease-in;
+  transform: scale(1);
+}
+
+.grid .col-md-4:hover {
+  color: #000;
+  transform: scale(1.05);
+}
+
+
 .pricing-icon {
   margin-bottom: 1em;
 }

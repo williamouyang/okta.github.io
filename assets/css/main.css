@@ -149,7 +149,7 @@ ul li {
   right: 0;
   left: initial;
   text-align: left;
-  width: 310px;
+  width: 350px;
   padding: 1em;
 }
 #support-menu-dropdown li {
@@ -157,7 +157,7 @@ ul li {
 }
 #support-menu-dropdown span {
   display: inline-block;
-  padding-left: .5em;
+  padding-left: .75em;
   width: 240px;
 }
 #support-menu-dropdown li .fa {

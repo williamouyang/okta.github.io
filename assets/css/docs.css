@@ -95,7 +95,8 @@
   transition: all .1s ease-in;
 }
 .btn-github:hover {
-  background: #fdfdff;
+  background: #fdfeff;
+  border-color: #3d75b3;
 }
 
 
