@@ -454,7 +454,7 @@ Array of [Factors](#factor-model)
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/users/me/factors/catalog"
+-X GET "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/catalog"
 ~~~
 
 #### Response Example
@@ -512,7 +512,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
             }
         }
     },
-    {
+    {https://www.getpostman.com/collections/9faaf6a9b78ff952521f
         "factorType": "sms",
         "provider": "OKTA",
         "_links": {
@@ -583,7 +583,7 @@ questionText  | display text for question | String    |           |           | 
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/users/me/factors/questions"
+-X GET "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/questions"
 ~~~
 
 #### Response Example
@@ -672,10 +672,33 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 <hr />
 
-### Verify SMS Factor
+### Start SMS Challenge
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/verify</span>
+
+There are two steps to verify with SMS. This is the first step in which you send the userID and factorID to the server and receive an SMS passcode back. 
+
+There are two steps to verify with SMS. First, send the userID and factorID to the server and receive an SMS passcode back. Then, verify the factor with that passcode.
+
+Parameter    | Description                                         | Param Type | DataType | Required | Default
+------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
+uid          | `id` of user                                        | URL        | String   | TRUE     |
+fid          | `id` of factor                                      | URL        | String   | TRUE     |
+
+
+#### Response Example
+{:.api .api-response .api-response-example}
+~~~json
+
+~~~
+
+### Resend SMS
+
+### Verify SMS Factor
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/authn</span>
 
 Verifies an OTP for a `sms` factor.
 

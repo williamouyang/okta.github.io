@@ -12,7 +12,7 @@ The Okta Policy API enables you to peform policy and rule operations. These oper
 
 This API supports the following **policy operations**:
 
-* Get all policies of a specific type  for an org
+* Get all policies of a specific type
 * Create, read, update, and delete a policy
 * Activate and deactivate a policy
 
@@ -36,7 +36,7 @@ There is always a default policy created for each type of policy. The default po
 
  - The default policy always has one default rule that cannot be deleted. It is always the last rule in the priority order. If you add rules to the default policy, they have a higher priority than the default rule. For information on default rules, see [Rules Model and Defaults](#rules-model-and-defaults).
 
- - The `system` attribute determines whether a policy is created by a system or by a user. The default policy is the only policy that has this attribute.
+ - The `system` attribute determines whether a policy is created by a system or by a user.
 
 ### Policy Model
 
@@ -145,7 +145,7 @@ GET api/v1/policies?type=OKTA_SIGN_ON
         "lastUpdated": "2014-10-09T00:06:07.000Z",
         "_links": {
             "self": {
-                "href": "https://eklein.oktapreview.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ",
+                "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ",
                 "hints": {
                     "allow": [
                         "GET",
@@ -155,7 +155,7 @@ GET api/v1/policies?type=OKTA_SIGN_ON
                 }
             },
             "deactivate": {
-                "href": "https://eklein.oktapreview.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/lifecycle/deactivate",
+                "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/lifecycle/deactivate",
                 "hints": {
                     "allow": [
                         "POST"
@@ -163,7 +163,7 @@ GET api/v1/policies?type=OKTA_SIGN_ON
                 }
             },
             "rules": {
-                "href": "https://eklein.oktapreview.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/rules",
+                "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/rules",
                 "hints": {
                     "allow": [
                         "GET",
@@ -175,7 +175,7 @@ GET api/v1/policies?type=OKTA_SIGN_ON
     },
     {
         "type": "OKTA_SIGN_ON",
-        "id": "00oewwEGGIFFQTUCFCVJ",
+        "id": "11oewwEGGIFFQTUCFCVJ",
         "status": "ACTIVE",
         "name": "Default Policy",
         "description": "The default policy applies in all situations if no other policy applies.",
@@ -185,7 +185,7 @@ GET api/v1/policies?type=OKTA_SIGN_ON
             "people": {
                 "groups": {
                     "include": [
-                        "00oewwEGGIFFQTUCFCVJ"
+                        "01oewwEGGIFFQTUCFCVJ"
                     ]
                 }
             }
@@ -194,7 +194,7 @@ GET api/v1/policies?type=OKTA_SIGN_ON
         "lastUpdated": "2014-10-09T00:06:07.000Z",
         "_links": {
             "self": {
-                "href": "http:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ",
+                "href": "https:/your-domain.okta.com/api/v1/policies/01oewwEGGIFFQTUCFCVJ",
                 "hints": {
                     "allow": [
                         "GET",
@@ -203,7 +203,7 @@ GET api/v1/policies?type=OKTA_SIGN_ON
                 }
             },
             "rules": {
-                "href": "http:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/rules",
+                "href": "https:/your-domain.okta.com/api/v1/policies/01oewwEGGIFFQTUCFCVJ/rules",
                 "hints": {
                     "allow": [
                         "GET",
@@ -257,7 +257,7 @@ GET api/v1/policies/00oewwEGGIFFQTUCFCVJ
     "lastUpdated": "2014-10-09T00:06:07.000Z",
     "_links": {
         "self": {
-            "href": "http:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ",
+            "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ",
             "hints": {
                 "allow": [
                     "GET",
@@ -267,7 +267,7 @@ GET api/v1/policies/00oewwEGGIFFQTUCFCVJ
             }
         },
         "deactivate": {
-            "href": "http:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/lifecycle/deactivate",
+            "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/lifecycle/deactivate",
             "hints": {
                 "allow": [
                     "POST"
@@ -275,7 +275,7 @@ GET api/v1/policies/00oewwEGGIFFQTUCFCVJ
             }
         },
         "rules": {
-            "href": "http:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/rules",
+            "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/rules",
             "hints": {
                 "allow": [
                     "GET",
@@ -334,7 +334,7 @@ The policy name, description, and type described in the [Policy Object](#policy-
     "lastUpdated": "2014-10-13T22:53:12.000Z",
     "_links": {
         "self": {
-            "href": "http:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ",
+            "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ",
             "hints": {
                 "allow": [
                     "GET",
@@ -344,7 +344,7 @@ The policy name, description, and type described in the [Policy Object](#policy-
             }
         },
         "deactivate": {
-            "href": "http:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/lifecycle/deactivate",
+            "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/lifecycle/deactivate",
             "hints": {
                 "allow": [
                     "POST"
@@ -352,7 +352,7 @@ The policy name, description, and type described in the [Policy Object](#policy-
             }
         },
         "rules": {
-            "href": "http:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/rules",
+            "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/rules",
             "hints": {
                 "allow": [
                     "GET",
@@ -381,7 +381,7 @@ The policy id described in the [Policy Object](#policy-object) is required.
 
 The example below shows the required items. You can add other items in the [Policy Object](#policy-object) as desired.
 
-**Note:** This is a strict PUT. Any missing item is set to its default value. For example if `priorityOrder` is missing from the policy body, the item moves to the lowest priority order in the policy.
+**Note:** This is a strict PUT. Any missing item is set to its default value. For example if `priorityOrder` is missing from the policy body, the item moves to the lowest priority order in the policy. If the group assignment is missing, the policy is reassigned to the Everyone group.
 
 ~~~json
 {
@@ -415,7 +415,7 @@ The example below shows the required items. You can add other items in the [Poli
     "lastUpdated": "2014-10-13T23:55:46.000Z",
     "_links": {
         "self": {
-            "href": "http:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ",
+            "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ",
             "hints": {
                 "allow": [
                     "GET",
@@ -425,7 +425,7 @@ The example below shows the required items. You can add other items in the [Poli
             }
         },
         "deactivate": {
-            "href": "http:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/lifecycle/deactivate",
+            "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/lifecycle/deactivate",
             "hints": {
                 "allow": [
                     "POST"
@@ -433,7 +433,7 @@ The example below shows the required items. You can add other items in the [Poli
             }
         },
         "rules": {
-            "href": "http:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/rules",
+            "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/rules",
             "hints": {
                 "allow": [
                     "GET",
@@ -727,7 +727,7 @@ The policy id described in the [Policy Object](#policy-object) and the rule id d
 ##### Request Example
 {:.api .api-resquest .api-request-example}
 
-**Note:** This is a strict PUT. Any missing item is set to its default value. For example if `priorityOrder` is missing from the policy body, the item moves to the lowest priority order in the policy.
+**Note:** This is a strict PUT. Any missing item is set to its default value. For example if `priorityOrder` is missing, the item moves to the lowest priority order in the policy. 
 
 ~~~json
 {
