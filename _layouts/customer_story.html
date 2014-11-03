@@ -4,12 +4,13 @@
   <div class="title-block" style="background-image:url({{page.bg_image}});"></div>
   <div class="customer-story-layout">
     <div class="block customer-story-body">
-      {% if page.title %}
-        <h1 class="customer-story-title">{{ page.title }}</h1>
-      {% endif %}
-      {% if page.title_tagline %}
-        <p class="customer-story-tagline">{{ page.title_tagline }}</p>
-      {% endif %}
+      <h1 class="customer-story-title">{{ page.title }}</h1>
+      <p class="customer-url">
+        <a href="{{ page.customer_url }}" target="_blank">
+          {{ page.customer_link_name }}
+        </a>
+      </p>
+      <p class="customer-story-tagline">{{ page.title_tagline }}</p>
       {{ content }}
       {% if page.diagram_image %}
         <img src="{{ page.diagram_image }}"
