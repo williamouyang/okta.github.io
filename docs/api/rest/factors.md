@@ -9,21 +9,15 @@ title: Factors
 
 # Overview
 
-The Okta Factors API provides operations to manage a user's profile for reset, enroll, and verify factors for multi-factor authentication. Call this API after a user is authenticated. Enrolling in factors and resetting factors is done within Okta; consequently, the user must be authenticated first. The Authentication API is called from outside Okta and cannot manage factors.
+The Okta Factors API provides operations to enroll, manage, and verify factors for multi-factor authentication (MFA).  It is optimized for both administrative and end-user account management, but may also be used verify a factor at any time on-demand.
 
 The Factors API contains three types of operations.
 
- - **Factor List Operations** &ndash; List factors and security questions.
+ - **Factor Operations** &ndash; List factors and security questions.
  - **Factor Lifecycle Operations** &ndash; Enroll, activate, and reset factors.
- - **Factor Verification Operations** &ndash; Verify the factors for all challenges.
+ - **Factor Verification Operations** &ndash; Verify a factor
 
-> This API is currently in **Beta** status and provides no guarantees for backwards-compatibility.  Okta is free to break this API until it is released.
-
-## Postman Template
-
-In Postman, navigate to Import Collections and paste in the following URL: 
-
-**https://www.getpostman.com/collections/871df976d79a9a5f7a85**
+> This API is currently in **Beta** status and provides no guarantees for backwards-compatibility.  Okta is free to break compatibility with this API until it released as GA.
 
 ## Factor Model
 
@@ -48,9 +42,9 @@ The following factor types are supported:
 Factor Type           | Description
 --------------------- | -----------
 `sms`                 | SMS
-`token`               | A software or hardware one-time password [OTP](http://en.wikipedia.org/wiki/One-time_password) device
+`token`               | Software or hardware one-time password [OTP](http://en.wikipedia.org/wiki/One-time_password) device
 `token:software:totp` | Software [Time-based One-time Password (TOTP)](http://en.wikipedia.org/wiki/Time-based_One-time_Password_Algorithm)
-`token:hardware`      | a hardware [Time-based One-time Password (TOTP)](http://en.wikipedia.org/wiki/Time-based_One-time_Password_Algorithm)
+`token:hardware`      | Hardware one-time password [OTP](http://en.wikipedia.org/wiki/One-time_password) device
 `question`            | Additional security question
 
 ### Provider Type
@@ -190,7 +184,7 @@ factorResult           | Description
 `ERROR`                | Unexpected server error occurred verifying factor.
 
 
-## Factor List Operations
+## Factor Operations
 
 ### Get Factor 
 {:.api .api-operation}
@@ -215,7 +209,7 @@ fid          | `id` of factor                                      | URL        
 #### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
+~~~sh
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -238,7 +232,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     },
     "_links": {
         "verify": {
-            "href": "https://example.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/sms2gt8gzgEBPUWBIFHN/verify",
+            "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/sms2gt8gzgEBPUWBIFHN/verify",
             "hints": {
                 "allow": [
                     "POST"
@@ -246,7 +240,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
             }
         },
         "self": {
-            "href": "https://example.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/sms2gt8gzgEBPUWBIFHN",
+            "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/sms2gt8gzgEBPUWBIFHN",
             "hints": {
                 "allow": [
                     "GET",
@@ -255,7 +249,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
             }
         },
         "user": {
-            "href": "https://example.okta.com/api/v1/users/00u6fud33CXDPBXULRNG",
+            "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG",
             "hints": {
                 "allow": [
                     "GET"
@@ -265,8 +259,6 @@ curl -v -H "Authorization: SSWS yourtoken" \
     }
 }
 ~~~
-
-<hr />
 
 ### List Enrolled Factors 
 {:.api .api-operation}
@@ -290,7 +282,7 @@ Array of [Factors](#factor-model)
 #### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
+~~~sh
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -314,7 +306,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     },
     "_links": {
         "questions": {
-            "href": "https://example.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/questions",
+            "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/questions",
             "hints": {
                 "allow": [
                     "GET"
@@ -322,7 +314,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
             }
         },
         "self": {
-            "href": "https://example.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/ufs2bysphxKODSZKWVCT",
+            "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/ufs2bysphxKODSZKWVCT",
             "hints": {
                 "allow": [
                     "GET",
@@ -331,7 +323,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
             }
         },
         "user": {
-            "href": "https://example.okta.com/api/v1/users/00u6fud33CXDPBXULRNG",
+            "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG",
             "hints": {
                 "allow": [
                     "GET"
@@ -353,7 +345,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "_links": {
         "next": {
             "name": "activate",
-            "href": "https://example.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/ostf2gsyictRQDSGTDZE/lifecycle/activate",
+            "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/ostf2gsyictRQDSGTDZE/lifecycle/activate",
             "hints": {
                 "allow": [
                     "POST"
@@ -361,7 +353,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
             }
         },
         "self": {
-            "href": "https://example.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/ostf2gsyictRQDSGTDZE",
+            "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/ostf2gsyictRQDSGTDZE",
             "hints": {
                 "allow": [
                     "GET"
@@ -369,7 +361,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
             }
         },
         "user": {
-            "href": "https://example.okta.com/api/v1/users/00u6fud33CXDPBXULRNG",
+            "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG",
             "hints": {
                 "allow": [
                     "GET"
@@ -398,7 +390,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     },
     "_links": {
         "verify": {
-            "href": "https://example.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/sms2gt8gzgEBPUWBIFHN/verify",
+            "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/sms2gt8gzgEBPUWBIFHN/verify",
             "hints": {
                 "allow": [
                     "POST"
@@ -406,7 +398,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
             }
         },
         "self": {
-            "href": "https://example.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/sms2gt8gzgEBPUWBIFHN",
+            "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/sms2gt8gzgEBPUWBIFHN",
             "hints": {
                 "allow": [
                     "GET",
@@ -415,7 +407,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
             }
         },
         "user": {
-            "href": "https://example.okta.com/api/v1/users/00u6fud33CXDPBXULRNG",
+            "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG",
             "hints": {
                 "allow": [
                     "GET"
@@ -425,8 +417,6 @@ curl -v -H "Authorization: SSWS yourtoken" \
     }
 }
 ~~~
-
-<hr />
 
 ### List Factors to Enroll
 {:.api .api-operation}
@@ -450,7 +440,7 @@ Array of [Factors](#factor-model)
 #### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
+~~~sh
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -467,7 +457,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "provider": "OKTA",
         "_links": {
             "questions": {
-                "href": "https://example.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/questions",
+                "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/questions",
                 "hints": {
                     "allow": [
                         "GET"
@@ -475,7 +465,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
                 }
             },
             "enroll": {
-                "href": "https://example.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors",
+                "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors",
                 "hints": {
                     "allow": [
                         "POST"
@@ -489,7 +479,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "provider": "OKTA",
         "_links": {
             "enroll": {
-                "href": "https://example.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors",
+                "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors",
                 "hints": {
                     "allow": [
                         "POST"
@@ -503,7 +493,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "provider": "GOOGLE",
         "_links": {
             "enroll": {
-                "href": "https://example.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors",
+                "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors",
                 "hints": {
                     "allow": [
                         "POST"
@@ -512,12 +502,12 @@ curl -v -H "Authorization: SSWS yourtoken" \
             }
         }
     },
-    {https://www.getpostman.com/collections/9faaf6a9b78ff952521f
+    {
         "factorType": "sms",
         "provider": "OKTA",
         "_links": {
             "enroll": {
-                "href": "https://example.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors",
+                "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors",
                 "hints": {
                     "allow": [
                         "POST"
@@ -550,8 +540,6 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ]
 ~~~
 
-<hr />
-
 ### List Security Questions
 {:.api .api-operation}
 
@@ -579,7 +567,7 @@ questionText  | display text for question | String    |           |           | 
 #### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
+~~~sh
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -591,18 +579,18 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~json
 [
-    {
-        "question": "disliked_food",
-        "questionText": "What is the food you least liked as a child?"
-    },
-    {
-        "question": "name_of_first_plush_toy",
-        "questionText": "What is the name of your first stuffed animal?"
-    },
-    {
-        "question": "first_award",
-        "questionText": "What did you earn your first medal or award for?"
-    }
+  {
+    "question": "disliked_food",
+    "questionText": "What is the food you least liked as a child?"
+  },
+  {
+    "question": "name_of_first_plush_toy",
+    "questionText": "What is the name of your first stuffed animal?"
+  },
+  {
+    "question": "first_award",
+    "questionText": "What did you earn your first medal or award for?"
+  }
 ]
 ~~~
 
@@ -635,22 +623,22 @@ If the `answer` is invalid you will receive a `403 Forbidden` status code with t
 
 ~~~ json
 {
-    "errorCode": "E0000068",
-    "errorSummary": "Invalid Passcode/Answer",
-    "errorLink": "E0000068",
-    "errorId": "oaei_IfXcpnTHit_YEKGInpFw",
-    "errorCauses": [
-        {
-            "errorSummary": "Your answer doesn't match our records. Please try again."
-        }
-    ]
+  "errorCode": "E0000068",
+  "errorSummary": "Invalid Passcode/Answer",
+  "errorLink": "E0000068",
+  "errorId": "oaei_IfXcpnTHit_YEKGInpFw",
+  "errorCauses": [
+    {
+      "errorSummary": "Your answer doesn't match our records. Please try again."
+    }
+  ]
 }
 ~~~
 
 #### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
+~~~sh
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -666,39 +654,15 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~ json
 {
-    "factorResult": "SUCCESS"
+  "factorResult": "SUCCESS"
 }
 ~~~
 
-<hr />
-
-### Start SMS Challenge
-{:.api .api-operation}
-
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/verify</span>
-
-There are two steps to verify with SMS. This is the first step in which you send the userID and factorID to the server and receive an SMS passcode back. 
-
-There are two steps to verify with SMS. First, send the userID and factorID to the server and receive an SMS passcode back. Then, verify the factor with that passcode.
-
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
-uid          | `id` of user                                        | URL        | String   | TRUE     |
-fid          | `id` of factor                                      | URL        | String   | TRUE     |
-
-
-#### Response Example
-{:.api .api-response .api-response-example}
-~~~json
-
-~~~
-
-### Resend SMS
 
 ### Verify SMS Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/authn</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/verify</span>
 
 Verifies an OTP for a `sms` factor.
 
@@ -724,29 +688,29 @@ If the passcode is invalid you will receive a `403 Forbidden` status code with t
 
 ~~~ json
 {
-    "errorCode": "E0000068",
-    "errorSummary": "Invalid Passcode/Answer",
-    "errorLink": "E0000068",
-    "errorId": "oaei_IfXcpnTHit_YEKGInpFw",
-    "errorCauses": [
-        {
-            "errorSummary": "Your passcode doesn't match our records. Please try again."
-        }
-    ]
+  "errorCode": "E0000068",
+  "errorSummary": "Invalid Passcode/Answer",
+  "errorLink": "E0000068",
+  "errorId": "oaei_IfXcpnTHit_YEKGInpFw",
+  "errorCauses": [
+    {
+      "errorSummary": "Your passcode doesn't match our records. Please try again."
+    }
+  ]
 }
 ~~~
 
 #### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
+~~~sh
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X POST "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf17zuKEUMYQAQGCOV/verify
 -d \
 '{
-    "passCode": "123456" 
+  "passCode": "123456"
 }'
 ~~~
 
@@ -755,17 +719,14 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~ json
 {
-    "factorResult": "SUCCESS"
+  "factorResult": "SUCCESS"
 }
 ~~~
-
-<hr />
 
 ### Verify TOTP Factor
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/verify</span>
-
 
 Verifies an OTP for a `token:software:totp` factor.
 
@@ -789,29 +750,29 @@ If the passcode is invalid you will receive a `403 Forbidden` status code with t
 
 ~~~ json
 {
-    "errorCode": "E0000068",
-    "errorSummary": "Invalid Passcode/Answer",
-    "errorLink": "E0000068",
-    "errorId": "oaei_IfXcpnTHit_YEKGInpFw",
-    "errorCauses": [
-        {
-            "errorSummary": "Your passcode doesn't match our records. Please try again."
-        }
-    ]
+  "errorCode": "E0000068",
+  "errorSummary": "Invalid Passcode/Answer",
+  "errorLink": "E0000068",
+  "errorId": "oaei_IfXcpnTHit_YEKGInpFw",
+  "errorCauses": [
+    {
+      "errorSummary": "Your passcode doesn't match our records. Please try again."
+    }
+  ]
 }
 ~~~
 
 #### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
+~~~sh
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X POST "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf17zuKEUMYQAQGCOV/verify
 -d \
 '{
-    "passCode": "123456" 
+  "passCode": "123456"
 }'
 ~~~
 
@@ -820,7 +781,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~ json
 {
-    "factorResult": "SUCCESS"
+  "factorResult": "SUCCESS"
 }
 ~~~
 
@@ -848,7 +809,6 @@ All responses return the enrolled [Factor](#factor-model) with a status of eithe
 
 > Some [factor types](#factor-types) require [activation](#activate-factor) to complete the enrollment process
 
-
 #### Enroll User with Security Question
 {:.api .api-operation}
 
@@ -859,19 +819,19 @@ Enrolls a user with the Okta `question` factor and [question profile](#question-
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
+~~~sh
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X POST "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors
 -d \
 '{
-    "factorType": "question",
-    "provider": "OKTA",
-    "profile": {
-        "question": "disliked_food",
-        "answer": "mayonnaise"
-    }
+  "factorType": "question",
+  "provider": "OKTA",
+  "profile": {
+    "question": "disliked_food",
+    "answer": "mayonnaise"
+  }
 }'
 ~~~
 
@@ -880,47 +840,45 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~ json
 {
-    "id": "ufs1o01OTMGHLAJPVHDZ",
-    "factorType": "question",
-    "provider": "OKTA",
-    "status": "ACTIVE",
-    "created": "2014-08-05T22:58:49.000Z",
-    "lastUpdated": "2014-08-05T22:58:49.000Z",
-    "profile": {
-        "question": "disliked_food",
-        "questionText": "What is the food you least liked as a child?"
+  "id": "ufs1o01OTMGHLAJPVHDZ",
+  "factorType": "question",
+  "provider": "OKTA",
+  "status": "ACTIVE",
+  "created": "2014-08-05T22:58:49.000Z",
+  "lastUpdated": "2014-08-05T22:58:49.000Z",
+  "profile": {
+    "question": "disliked_food",
+    "questionText": "What is the food you least liked as a child?"
+  },
+  "_links": {
+    "questions": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/questions",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
     },
-    "_links": {
-        "questions": {
-            "href": "https://example.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/questions",
-            "hints": {
-                "allow": [
-                    "GET"
-                ]
-            }
-        },
-        "self": {
-            "href": "https://example.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ufs1o01OTMGHLAJPVHDZ",
-            "hints": {
-                "allow": [
-                    "GET",
-                    "DELETE"
-                ]
-            }
-        },
-        "user": {
-            "href": "https://example.okta.com/api/v1/users/00u15s1KDETTQMQYABRL",
-            "hints": {
-                "allow": [
-                    "GET"
-                ]
-            }
-        }
+    "self": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ufs1o01OTMGHLAJPVHDZ",
+      "hints": {
+        "allow": [
+          "GET",
+          "DELETE"
+        ]
+      }
+    },
+    "user": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
     }
+  }
 }
 ~~~
-
-<hr />
 
 #### Enroll User with Okta SMS Factor
 {:.api .api-operation}
@@ -930,18 +888,18 @@ Enrolls a user with the Okta `sms` factor and a [SMS profile](#sms-profile).  A 
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
+~~~sh
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X POST "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors
 -d \
 '{
-    "factorType" : "sms",
-    "provider": "OKTA",
-    "profile": {
-        "phoneNumber":  "+1-555-415-1337"
-    }
+  "factorType": "sms",
+  "provider": "OKTA",
+  "profile": {
+    "phoneNumber": "+1-555-415-1337"
+  }
 }'
 ~~~
 
@@ -950,57 +908,55 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~ json
 {
-    "id": "mbl1nz9JHJGHWRKMTLHP",
-    "factorType": "sms",
-    "provider": "OKTA",
-    "status": "PENDING_ACTIVATION",
-    "created": "2014-08-05T20:59:49.000Z",
-    "lastUpdated": "2014-08-06T03:59:49.000Z",
-    "profile": {
-        "phoneNumber": "+1-555-415-1337"
+  "id": "mbl1nz9JHJGHWRKMTLHP",
+  "factorType": "sms",
+  "provider": "OKTA",
+  "status": "PENDING_ACTIVATION",
+  "created": "2014-08-05T20:59:49.000Z",
+  "lastUpdated": "2014-08-06T03:59:49.000Z",
+  "profile": {
+    "phoneNumber": "+1-555-415-1337"
+  },
+  "_links": {
+    "next": {
+      "name": "activate",
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP/lifecycle/activate",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
     },
-    "_links": {
-        "next": {
-            "name": "activate",
-            "href": "https://example.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP/lifecycle/activate",
-            "hints": {
-                "allow": [
-                    "POST"
-                ]
-            }
-        },
-        "resend": [
-            {
-                "name": "sms",
-                "href": "https://example.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP/resend",
-                "hints": {
-                    "allow": [
-                        "POST"
-                    ]
-                }
-            }
-        ],
-        "self": {
-            "href": "https://example.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP",
-            "hints": {
-                "allow": [
-                    "GET"
-                ]
-            }
-        },
-        "user": {
-            "href": "https://example.okta.com/api/v1/users/00u15s1KDETTQMQYABRL",
-            "hints": {
-                "allow": [
-                    "GET"
-                ]
-            }
+    "resend": [
+      {
+        "name": "sms",
+        "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP/resend",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
         }
+      }
+    ],
+    "self": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    },
+    "user": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
     }
+  }
 }
 ~~~
-
-<hr />
 
 #### Enroll User with Okta Verify Factor
 {:.api .api-operation}
@@ -1010,15 +966,15 @@ Enrolls a user with the Okta `token:software:totp` factor.  The factor must be [
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
+~~~sh
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X POST "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors
 -d \
 '{
-    "factorType": "token:software:totp",
-    "provider": "OKTA"
+  "factorType": "token:software:totp",
+  "provider": "OKTA"
 }'
 ~~~
 
@@ -1027,60 +983,58 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~ json
 {
-    "id": "ostf1fmaMGJLMNGNLIVG",
-    "factorType": "token:software:totp",
-    "provider": "OKTA",
-    "status": "PENDING_ACTIVATION",
-    "created": "2014-07-16T16:13:56.000Z",
-    "lastUpdated": "2014-07-16T16:13:56.000Z",
-    "profile": {
-        "credentialId": "isaac@example.org"
+  "id": "ostf1fmaMGJLMNGNLIVG",
+  "factorType": "token:software:totp",
+  "provider": "OKTA",
+  "status": "PENDING_ACTIVATION",
+  "created": "2014-07-16T16:13:56.000Z",
+  "lastUpdated": "2014-07-16T16:13:56.000Z",
+  "profile": {
+    "credentialId": "isaac@example.org"
+  },
+  "_links": {
+    "next": {
+      "name": "activate",
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/lifecycle/activate",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "self": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    },
+    "user": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    }
+  },
+  "_embedded": {
+    "activation": {
+      "timeStep": 30,
+      "sharedSecret": "JBTWGV22G4ZGKV3N",
+      "encoding": "base32",
+      "keyLength": 6
     },
     "_links": {
-        "next": {
-            "name": "activate",
-            "href": "https://example.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/lifecycle/activate",
-            "hints": {
-                "allow": [
-                    "POST"
-                ]
-            }
-        },
-        "self": {
-            "href": "https://example.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG",
-            "hints": {
-                "allow": [
-                    "GET"
-                ]
-            }
-        },
-        "user": {
-            "href": "https://example.okta.com/api/v1/users/00u15s1KDETTQMQYABRL",
-            "hints": {
-                "allow": [
-                    "GET"
-                ]
-            }
-        }
-    },
-    "_embedded": {
-        "_links": {
-            "qrcode": {
-                "href": "https://example.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/qr/00fukNElRS_Tz6k-CFhg3pH4KO2dj2guhmaapXWbc4",
-                "type": "image/png"
-            }
-        },
-        "activation": {
-            "timeStep": 30,
-            "sharedSecret": "JBTWGV22G4ZGKV3N",
-            "encoding": "base32",
-            "keyLength": 6
-        }
+      "qrcode": {
+        "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/qr/00fukNElRS_Tz6k-CFhg3pH4KO2dj2guhmaapXWbc4",
+        "type": "image/png"
+      }
     }
+  }
 }
 ~~~
-
-<hr />
 
 #### Enroll User with Google Authenticator Factor
 {:.api .api-operation}
@@ -1090,15 +1044,15 @@ Enrolls a user with the Google `token:software:totp` factor.  The factor must be
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
+~~~sh
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X POST "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors
 -d \
 '{
-    "factorType": "token:software:totp",
-    "provider": "GOOGLE"
+  "factorType": "token:software:totp",
+  "provider": "GOOGLE"
 }'
 ~~~
 
@@ -1107,60 +1061,58 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~ json
 {
-    "id": "ostf1fmaMGJLMNGNLIVG",
-    "factorType": "token:software:totp",
-    "provider": "GOOGLE",
-    "status": "PENDING_ACTIVATION",
-    "created": "2014-07-16T16:13:56.000Z",
-    "lastUpdated": "2014-07-16T16:13:56.000Z",
-    "profile": {
-        "credentialId": "isaac@example.org"
+  "id": "ostf1fmaMGJLMNGNLIVG",
+  "factorType": "token:software:totp",
+  "provider": "GOOGLE",
+  "status": "PENDING_ACTIVATION",
+  "created": "2014-07-16T16:13:56.000Z",
+  "lastUpdated": "2014-07-16T16:13:56.000Z",
+  "profile": {
+    "credentialId": "isaac@example.org"
+  },
+  "_links": {
+    "next": {
+      "name": "activate",
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/lifecycle/activate",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
     },
-    "_links": {
-        "next": {
-            "name": "activate",
-            "href": "https://example.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/lifecycle/activate",
-            "hints": {
-                "allow": [
-                    "POST"
-                ]
-            }
-        },
-        "self": {
-            "href": "https://example.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG",
-            "hints": {
-                "allow": [
-                    "GET"
-                ]
-            }
-        },
-        "user": {
-            "href": "https://example.okta.com/api/v1/users/00u15s1KDETTQMQYABRL",
-            "hints": {
-                "allow": [
-                    "GET"
-                ]
-            }
-        }
+    "self": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
     },
-    "_embedded": {
-        "activation": {
-            "timeStep": 30,
-            "sharedSecret": "JBTWGV22G4ZGKV3N",
-            "encoding": "base32",
-            "keyLength": 16,
-            "_links": {
-                "qrcode": {
-                    "href": "https://example.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/qr/00fukNElRS_Tz6k-CFhg3pH4KO2dj2guhmaapXWbc4",
-                    "type": "image/png"
-                }
-            }
-        }
+    "user": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
     }
+  },
+  "_embedded": {
+    "activation": {
+      "timeStep": 30,
+      "sharedSecret": "JBTWGV22G4ZGKV3N",
+      "encoding": "base32",
+      "keyLength": 16,
+      "_links": {
+        "qrcode": {
+          "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/qr/00fukNElRS_Tz6k-CFhg3pH4KO2dj2guhmaapXWbc4",
+          "type": "image/png"
+        }
+      }
+    }
+  }
 }
 ~~~
-
-<hr />
 
 ### Activate Factor
 {:.api .api-operation}
@@ -1195,29 +1147,29 @@ If the passcode is invalid you will receive a `403 Forbidden` status code with t
 
 ~~~ json
 {
-    "errorCode": "E0000068",
-    "errorSummary": "Invalid Passcode/Answer",
-    "errorLink": "E0000068",
-    "errorId": "oaei_IfXcpnTHit_YEKGInpFw",
-    "errorCauses": [
-        {
-            "errorSummary": "Your passcode doesn't match our records. Please try again."
-        }
-    ]
+  "errorCode": "E0000068",
+  "errorSummary": "Invalid Passcode/Answer",
+  "errorLink": "E0000068",
+  "errorId": "oaei_IfXcpnTHit_YEKGInpFw",
+  "errorCauses": [
+    {
+      "errorSummary": "Your passcode doesn't match our records. Please try again."
+    }
+  ]
 }
 ~~~
 
 #### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
+~~~sh
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X POST "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/lifecycle/activate
 -d \
 '{
-    "passCode": "123456" 
+  "passCode": "123456"
 }'
 ~~~
 
@@ -1226,46 +1178,44 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~ json
 {
-    "id": "ostf1fmaMGJLMNGNLIVG",
-    "factorType": "token:software:totp",
-    "provider": "OKTA",
-    "status": "ACTIVE",
-    "created": "2014-07-16T16:13:56.000Z",
-    "lastUpdated": "2014-08-06T00:31:07.000Z",
-    "profile": {
-        "credentialId": "isaac@example.org"
+  "id": "ostf1fmaMGJLMNGNLIVG",
+  "factorType": "token:software:totp",
+  "provider": "OKTA",
+  "status": "ACTIVE",
+  "created": "2014-07-16T16:13:56.000Z",
+  "lastUpdated": "2014-08-06T00:31:07.000Z",
+  "profile": {
+    "credentialId": "isaac@example.org"
+  },
+  "_links": {
+    "verify": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/verify",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
     },
-    "_links": {
-        "verify": {
-            "href": "https://example.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/verify",
-            "hints": {
-                "allow": [
-                    "POST"
-                ]
-            }
-        },
-        "self": {
-            "href": "https://example.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG",
-            "hints": {
-                "allow": [
-                    "GET",
-                    "DELETE"
-                ]
-            }
-        },
-        "user": {
-            "href": "https://example.okta.com/api/v1/users/00u15s1KDETTQMQYABRL",
-            "hints": {
-                "allow": [
-                    "GET"
-                ]
-            }
-        }
+    "self": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG",
+      "hints": {
+        "allow": [
+          "GET",
+          "DELETE"
+        ]
+      }
+    },
+    "user": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
     }
+  }
 }
 ~~~
-
-<hr />
 
 #### Activate SMS Factor
 {:.api .api-operation}
@@ -1290,29 +1240,29 @@ If the passcode is invalid you will receive a `403 Forbidden` status code with t
 
 ~~~ json
 {
-    "errorCode": "E0000068",
-    "errorSummary": "Invalid Passcode/Answer",
-    "errorLink": "E0000068",
-    "errorId": "oaei_IfXcpnTHit_YEKGInpFw",
-    "errorCauses": [
-        {
-            "errorSummary": "Your passcode doesn't match our records. Please try again."
-        }
-    ]
+  "errorCode": "E0000068",
+  "errorSummary": "Invalid Passcode/Answer",
+  "errorLink": "E0000068",
+  "errorId": "oaei_IfXcpnTHit_YEKGInpFw",
+  "errorCauses": [
+    {
+      "errorSummary": "Your passcode doesn't match our records. Please try again."
+    }
+  ]
 }
 ~~~
 
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
+~~~sh
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X POST "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/sms1o51EADOTFXHHBXBP/lifecycle/activate
 -d \
 '{
-    "passCode": "123456" 
+  "passCode": "123456"
 }'
 ~~~
 
@@ -1321,46 +1271,44 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~ json
 {
-    "id": "sms1o51EADOTFXHHBXBP",
-    "factorType": "sms",
-    "provider": "OKTA",
-    "status": "ACTIVE",
-    "created": "2014-08-06T16:56:31.000Z",
-    "lastUpdated": "2014-08-06T16:56:31.000Z",
-    "profile": {
-        "phoneNumber": "+1-555-415-1337"
+  "id": "sms1o51EADOTFXHHBXBP",
+  "factorType": "sms",
+  "provider": "OKTA",
+  "status": "ACTIVE",
+  "created": "2014-08-06T16:56:31.000Z",
+  "lastUpdated": "2014-08-06T16:56:31.000Z",
+  "profile": {
+    "phoneNumber": "+1-555-415-1337"
+  },
+  "_links": {
+    "verify": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/sms1o51EADOTFXHHBXBP/verify",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
     },
-    "_links": {
-        "verify": {
-            "href": "https://example.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/sms1o51EADOTFXHHBXBP/verify",
-            "hints": {
-                "allow": [
-                    "POST"
-                ]
-            }
-        },
-        "self": {
-            "href": "https://example.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/sms1o51EADOTFXHHBXBP",
-            "hints": {
-                "allow": [
-                    "GET",
-                    "DELETE"
-                ]
-            }
-        },
-        "user": {
-            "href": "https://example.okta.com/api/v1/users/00u15s1KDETTQMQYABRL",
-            "hints": {
-                "allow": [
-                    "GET"
-                ]
-            }
-        }
+    "self": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/sms1o51EADOTFXHHBXBP",
+      "hints": {
+        "allow": [
+          "GET",
+          "DELETE"
+        ]
+      }
+    },
+    "user": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
     }
+  }
 }
 ~~~
-
-<hr />
 
 ### Reset Factor
 {:.api .api-operation}
@@ -1385,7 +1333,7 @@ fid          | `id` of the factor to reset                         | URL        
 #### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
+~~~sh
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
