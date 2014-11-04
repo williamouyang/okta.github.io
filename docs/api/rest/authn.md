@@ -442,7 +442,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "username": "isaac@example.org",
+        "login": "isaac@example.org",
         "firstName": "Isaac",
         "lastName": "Brock",
         "locale": "en_US",
@@ -510,7 +510,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "username": "isaac@example.org",
+        "login": "isaac@example.org",
         "firstName": "Isaac",
         "lastName": "Brock",
         "locale": "en_US",
@@ -559,7 +559,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "username": "isaac@example.org",
+        "login": "isaac@example.org",
         "firstName": "Isaac",
         "lastName": "Brock",
         "locale": "en_US",
@@ -711,7 +711,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "username": "isaac@example.org",
+        "login": "isaac@example.org",
         "firstName": "Isaac",
         "lastName": "Brock",
         "locale": "en_US",
@@ -900,7 +900,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "username": "isaac@example.org",
+        "login": "isaac@example.org",
         "firstName": "Isaac",
         "lastName": "Brock",
         "locale": "en_US",
@@ -981,7 +981,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "username": "isaac@example.org",
+        "login": "isaac@example.org",
         "firstName": "Isaac",
         "lastName": "Brock",
         "locale": "en_US",
@@ -1030,7 +1030,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "username": "isaac@example.org",
+        "login": "isaac@example.org",
         "firstName": "Isaac",
         "lastName": "Brock",
         "locale": "en_US",
@@ -1121,7 +1121,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "username": "isaac@example.org",
+        "login": "isaac@example.org",
         "firstName": "Isaac",
         "lastName": "Brock",
         "locale": "en_US",
@@ -1215,7 +1215,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "username": "isaac@example.org",
+        "login": "isaac@example.org",
         "firstName": "Isaac",
         "lastName": "Brock",
         "locale": "en_US",
@@ -1352,7 +1352,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "username": "isaac@example.org",
+        "login": "isaac@example.org",
         "firstName": "Isaac",
         "lastName": "Brock",
         "locale": "en_US",
@@ -1429,7 +1429,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "username": "isaac@example.org",
+        "login": "isaac@example.org",
         "firstName": "Isaac",
         "lastName": "Brock",
         "locale": "en_US",
@@ -1513,7 +1513,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "username": "isaac@example.org",
+        "login": "isaac@example.org",
         "firstName": "Isaac",
         "lastName": "Brock",
         "locale": "en_US",
@@ -1593,7 +1593,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "username": "isaac@example.org",
+        "login": "isaac@example.org",
         "firstName": "Isaac",
         "lastName": "Brock",
         "locale": "en_US",
@@ -1682,7 +1682,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "username": "isaac@example.org",
+        "login": "isaac@example.org",
         "firstName": "Isaac",
         "lastName": "Brock",
         "locale": "en_US",
@@ -1758,7 +1758,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "username": "isaac@example.org",
+        "login": "isaac@example.org",
         "firstName": "Isaac",
         "lastName": "Brock",
         "locale": "en_US",
@@ -1821,7 +1821,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "username": "isaac@example.org",
+        "login": "isaac@example.org",
         "firstName": "Isaac",
         "lastName": "Brock",
         "locale": "en_US",
@@ -1905,7 +1905,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "username": "isaac@example.org",
+        "login": "isaac@example.org",
         "firstName": "Isaac",
         "lastName": "Brock",
         "locale": "en_US",
@@ -1996,7 +1996,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "username": "isaac@example.org",
+        "login": "isaac@example.org",
         "firstName": "Isaac",
         "lastName": "Brock",
         "locale": "en_US",
@@ -2092,7 +2092,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "username": "isaac@example.org",
+        "login": "isaac@example.org",
         "firstName": "Isaac",
         "lastName": "Brock",
         "locale": "en_US",
@@ -2204,7 +2204,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "username": "isaac@example.org",
+        "login": "isaac@example.org",
         "firstName": "Isaac",
         "lastName": "Brock",
         "locale": "en_US",
@@ -2258,7 +2258,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "username": "isaac@example.org",
+        "login": "isaac@example.org",
         "firstName": "Isaac",
         "lastName": "Brock",
         "locale": "en_US",
