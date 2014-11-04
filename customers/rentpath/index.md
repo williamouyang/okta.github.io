@@ -1,40 +1,52 @@
 ---
-layout:         customer_story
-customer_url:   "http://rentpath.com/"
+layout:             customer_story
+customer_url:       "http://rentpath.com/"
+customer_link_name: "rentpath.com"
 
 index_image:    rentpath-index.png
 bg_image:       rentpath-header.jpg
 diagram_image:  rentpath-diagram.png
 
-title:          Rentpath International Case Study
-title_tagline:  How federated authentication security transformed billion dollar IT costs
+title:          RentPath Gives Advertisers a Unified Product Experience with Okta
+title_tagline: >
+
+  RentPath provides a suite of sites including Rent.com, Rentals.com, RentalHouses.com, Lovely and New Home Guide to help property managers, landlords and home sellers connect with consumers looking for a home.
+
+  RentPath sites allow consumers to search for listings by location, find a property manager, get a quote for moving services, browse new homes, and discover home builders by region. Advertisers can manage orders and listings centrally for syndication across all RentPath properties.
 
 index_blurb: >
-  Appirio's IT team looks like heroes inside the Company and the support of Okta is a key factor in that. Okta is one of our top recommendations for CIOs. Okta is easy to implement, it’s fun to use, it’s a powerful, holistic solution, and we feel it gives IT a positive boost reputationally.
+  Okta simplifies the RentPath customer experience and unlocks engineering cycles by providing one central customer authentication service and single sign-on across all customer-facing tools.
 
 sidebar_testimonial: >
   Okta solved all our problems, at a fraction of the cost and time of every other vendor in the market. Who says you can't have it all?
-sidebar_testimonial_attribution: John Sinclair
-sidebar_testimonial_meta: EVP Global Impact, Appirio Worldwide Partners
+sidebar_testimonial_attribution: Dan Morris
+sidebar_testimonial_meta: Sr. Director of Architecture and Engineering, RentPath
 
 sidebar_copy: >
-  ## This is the headline of a sidebar
+  * RentPath needed a consolidated identity store, authentication, and single sign-on for their suite of disparate advertiser tools.
 
-  * bullet 1
+  * The Okta Identity Platform's Cloud Directory, and LDAP integration agent enabled a seamless transition from a maintenance-intensive homegrown authentication solution.
 
-  * bullet 2
-
-  Hibh curabitur cred commodo enim metus mattis foodie curabitur. Rutrum adipiscing elementum beard lorem proin rutrum sit farm-to-table
+  * Relying on Okta's highly available service and product roadmap allows the RentPath team to spend more time building features for customers and less time worrying about the identity layer.
 ---
 
 
+## Situation: LDAP - Too much maintenance, yet not enough functionality
 
+RentPath acquires real estate focused sites, and then integrates them together to provide one centralized interface for advertisers who want to manage placements across all of RentPath's inventory. To consolidate advertiser identities and authentication for administration interfaces the RentPath team initially deployed an LDAP server.
 
-## Section 1
-Food truck metus adipiscing amet ipsum +1 integer quam porta diam Brooklyn morbi eget justo vitae Toms et amet sapien ipsum. Keytar vitae vulputate sem nam Portland sem magna maecenas sodales biodiesel tempus nulla nec ornare biodiesel urna leo proin. Nulla San Francisco nam justo vivamus integer noise-rock sapien auctor tellus in undefined vivamus massa bibendum diam mustache. Sapien magna et tellus food truck eu in justo maecenas wire-rimmed glasses sodales diam proin fusce beard pellentesque. Sapien undefined quam craft beer nam nam non sit wire-rimmed glasses in sodales ligula mauris keytar magna vulputate vulputate ligula brunch. Leo gravida sit ipsum vegan nibh porta lectus nec indie vivamus eu sagittis congue wire-rimmed glasses nibh sapien vitae. Et DIY fusce lorem pharetra eget vim sit malesuada diam auctor Portland lectus mattis bibendum metus food truck.
+"We were maintaining LDAP and providing a little too much support and not enough support at the same time. We were using our own resources, but never enough to get the level of functionality that we were interested in," said Dan Morris, Sr. Director of Architecture and Engineering.
 
-## Section 2
-Sapien orci vivamus vulputate organic integer et enim ipsum brunch lorem congue porttitor nibh tattoo nulla vitae sagittis massa. Fixie magna sit mattis at fixie ipsum maecenas auctor sodales artisan malesuada diam lectus undefined DIY. Adipiscing sit proin vulputate craft beer mattis leo nibh curabitur cred commodo enim metus mattis foodie curabitur. Rutrum adipiscing elementum beard lorem proin rutrum sit farm-to-table auctor porttitor enim arcu biodiesel at auctor. Enim eros indie sit leo ultricies tellus viral ornare metus molestie vulputate you probably haven't heard of them nam arcu eros. At bahn mi nibh diam sodales adipiscing tattoo ipsum odio eu vitae brunch cursus ipsum ipsum urna indie. Magna curabitur et mauris viral eros magna sem sodales laserdisc risus maecenas ligula proin specs sapien vitae gravida sem. Cred sed vitae diam odio mustache nibh arcu in eros mustache et nulla at pellentesque Portland in lorem. Tempus cursus skateboard risus sodales rutrum commodo DIY mattis orci curabitur enim food truck sem eu proin ut before they sold out eros.
+## Solution: Seamless migration to a future-proof authentication service
 
-## Section 3
-Mauris bibendum eu tattoo adipiscing nibh quisque sit bicycle adipiscing lectus quam justo organic porttitor ipsum ut. Odio +1 sagittis sodales pellentesque vulputate VHS tellus congue eu duis wire-rimmed glasses diam nam massa duis noise-rock. Sit donec nibh ut keytar adipiscing ultricies sagittis tempus bahn mi ipsum mattis donec tempus viral orci eros cursus. Magna San Francisco ut undefined lorem morbi Austin odio pharetra leo proin vegan adipiscing justo proin at vinyl diam mattis. Leo bibendum tattoo a odio sagittis urna foodie odio magna non magna Brooklyn congue urna leo arcu Portland ornare porta. Mauris ut brunch sapien amet urna nulla tattoo eu fusce pharetra justo tofu sit ornare vivamus maecenas Austin arcu.
+"Using Okta we were able to allow for a very seamless transition from that legacy system," said Morris.
+
+RentPath decided to migrate authentication and single sign-on to the Okta Identity Platform. Customer identities are now stored centrally in the Okta Universal Directory, and the user lifecycle and authentication is handled entirely via API. This approach allows RentPath full control of the UI. Customers use just one username, one password, and one session to access a series of otherwise siloed services including listings management and support tools.
+
+"We gained a security platform that was growing and evolving with the SaaS model for authentication. We are aligning with the Okta roadmap which has been pretty solid," said Morris.
+
+## Benefits: More time to focus on customers
+
+"If we're engineering the security layer then we're focusing less time on the thing that differentiates us as a provider of services," said Morris. "The fact that I really haven't had to worry about Okta either from a development or operational standpoint is one of the best testaments that I can give toward its value. If you're dealing with a security system, the highest praise you can give it is that you don't have any concerns." 
+
+## Architecture

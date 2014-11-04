@@ -282,8 +282,16 @@
   color: #fff;
 }
 
-.tooltipster-okta .tooltipster-content {
+.tooltipster-okta .tooltipster-content,
+.tooltipster-okta .tooltipster-content p,
+.tooltipster-okta .tooltipster-content li {
   font-size: 14px;
   line-height: 16px;
   padding: 12px;
+  color: #fff !important;
+}
+
+.tooltipster-okta .tooltipster-content li {
+  padding: 2px;
+  margin: 0;
 }

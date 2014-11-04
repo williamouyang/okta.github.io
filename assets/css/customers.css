@@ -81,12 +81,16 @@
 /* -- body */
 .customer-story-body h2 {
   margin-top: 2em;
-  font-size: 22px;
+  font-size: 24px;
 }
 .customer-story-body h2:first-child {
   margin-top: 0;
 }
 
+.customer-story-body h3 {
+  margin-top: 1em;
+  font-size: 20px;
+}
 .customer-story-diagram {
   width: 694px;
   margin-top: 30px;

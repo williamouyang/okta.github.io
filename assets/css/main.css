@@ -1035,12 +1035,13 @@ div#sticker {
 }
 
 .recent-discussions {
-  margin-bottom: 100px;
+  margin-bottom: 6em;
 }
 
-.recent-discussions li {
-  margin-bottom: 18px;
-  font-size: 18px;
+h4.recent-subtitle {
+  font-size: 24px;
+  margin-top: 2em;
+  margin-bottom: 1em;
 }
 
 

@@ -37,13 +37,12 @@ js_file:        pricing.js
       </div>
     </div>
     <div class="row stripe-row">
-      <div class="col-md-4 tip"
-          title="Use Okta's MFA login screen in conjunction with our security questions, SMS-based one time passwords, the Okta Verify soft token, Google Authenticator, RSA SecureId, Verisign VIP, and Duo Security.">
+      <div class="col-md-4" id="mfa-tip">
         <img src="/assets/img/pricing-icon-multi-auth.png" class="pricing-icon" alt="Multi-factor Authentication icon">
         <p>Multi-factor Authentication</p>
       </div>
       <div class="col-md-4 tip"
-          title="Accept inbound IDP-initiated SAML from any number of identity providers.">
+          title="Manage IDP-initiated SAML with any number of identity providers.">
         <img src="/assets/img/pricing-icon-inbound-fed.png" class="pricing-icon" alt="Inbound Federation icon">
         <p>Inbound Federation</p>
       </div>
@@ -54,8 +53,7 @@ js_file:        pricing.js
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4 tip"
-          title="">
+      <div class="col-md-4" id="policy-engine-tip">
         <img src="/assets/img/pricing-icon-policy.png" class="pricing-icon" alt="Policy Engine icon">
         <p>Policy Engine</p>
       </div>
