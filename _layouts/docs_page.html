@@ -1,7 +1,6 @@
 {% include header.html css_file='docs.css' %}
 
-
-
+{% assign github_page_url = site.github_url | append: page.path %}
 <div class="boundary docs docs-page" id="main-container">
   <div class="title-block">
     <h1>Developer Documentation</h1>
@@ -11,13 +10,15 @@
       {% include docs_sidebar.html %}
     </div>
     <div class="block docs-body" id="docs-body">
-      <h1 id="docs-page-title">{{ page.title }}</h1>
+      <div class="page-title-block">
+        <h1 id="docs-page-title">{{ page.title }}</h1>
+        <a href="{{ github_page_url }}" target="_blank" class="btn btn-default btn-sm btn-github"><i class="fa fa-github"></i> Edit on GitHub</a>
+      </div>
       {{ content }}
     </div>
   </div>
   <a href="#main-container" id="scroll-top-button">Scroll to Top</a>
 </div>
-
 
 
 {% include footer.html js_file='docs.js' %}

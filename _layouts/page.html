@@ -12,14 +12,10 @@
 
 
 
-<div class="page-layout" id="main-container">
+<div class="page-layout container" id="main-container">
   {{ content }}
 </div>
 
 
 
-{% if page.js_file %}
-  {% include footer.html js_file=page.js_file %}
-{% else %}
-  {% include footer.html %}
-{% endif %}
+{% include footer.html %}

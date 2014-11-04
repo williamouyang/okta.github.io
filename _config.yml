@@ -20,6 +20,7 @@ kramdown:
     coderay_line_numbers: nil
     coderay_css: class
 
-
-
 permalink: /blog/:year/:month/:day/:title
+
+support_phone_number: "1-888-722-7871"
+github_url: "https://github.com/okta/okta.github.io/tree/master/"
