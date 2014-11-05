@@ -24,12 +24,11 @@ The API is targeted for developers who want to build their own end-to-end login 
 
 The Authentication API is a *stateful* API that implements a finite state machine with defined states and required transitions between those states.  State is transferred with a `stateToken` that is issued for each authentication or recovery transaction and must be passed with each request.  The Authentication API leverages the [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) format to publish `next` and `prev` links for the current transaction state which should be used to transition the state machine.  
 
-> You should never assume a specific state transition or URL when navigating the [state model](#authentication-status).  Always inspect the response for `status` and dynamically follow the [published link relations](#links-object).
 
 Attribute     | Description                                                                                           | DataType                                                       | MinLength | MaxLength | Nullable | Unique | Readonly
 ------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | --------- | --------- | -------- | ------ | --------
-stateToken    | ephemeral token that encodes the current state of an authentication or recovery transaction           | String                                                         |           |           | FALSE    | FALSE  | TRUE
-expiresAt     | lifetime of the `stateToken`, `recoveryToken`, or `sessionToken` (See [Tokens](#tokens))              | Date                                                           |           |           | FALSE    | FALSE  | TRUE
+stateToken    | ephemeral token that encodes the current state of an authentication or recovery transaction           | String                                                         |           |           | TRUE     | FALSE  | TRUE
+expiresAt     | lifetime of the `stateToken`, `recoveryToken`, or `sessionToken` (See [Tokens](#tokens))              | Date                                                           |           |           | TRUE     | FALSE  | TRUE
 status        | current state of the  transaction                                                                     | [Authentication Status](#authentication-status)                |           |           | FALSE    | FALSE  | TRUE
 relayState    | Optional state value that is persisted for the lifetime of the authentication or recovery transaction | String                                                         |           | 2048      | TRUE     | FALSE  | TRUE
 _embedded     | [embedded resources](#embedded-resources) for the current `status`                                    | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) |           |           | TRUE     | FALSE  | TRUE
@@ -42,17 +41,54 @@ _links        | [link relations](#links-object) for the current `status`        
 
 An authentication or recovery transaction has one of the following statuses:
 
-Value               | Description
-------------------- | ---------------------------------------------------------------------------------
-PASSWORD_EXPIRED    | The user's password was successfully validated but is expired.  <br>Follow the `next` link relation to [change the user's expired password](#change-expired-password).
-RECOVERY            | The user has requested a recovery token to reset their password or unlock their account.  <br>Follow the `next` link relation to [answer the user's recovery question](#answer-recovery-question).
-PASSWORD_RESET      | The user successfully answered their recovery question and must to set a new password.  <br>Follow the `next` link relation to [reset the user's password](#reset-password).
-LOCKED_OUT          | The user account is locked; self-service unlock or admin unlock is required.  <br>Follow the `unlock` link relation to perform a [self-service unlock](#unlock-account).
-MFA_UNENROLLED      | The user must select and enroll an available factor for additional verification.  <br>Follow the `enroll` link relation for a specific factor to [enroll the factor](#enroll-factor).
-MFA_ENROLL_ACTIVATE | The user must activate the factor to complete enrollment.  <br>Follow the `next` link relation to [activate the factor](#activate-factor).
-MFA_REQUIRED        | The user must provide additional verification with a previously enrolled factor.   <br>Follow the `verify` link relation for a specific factor to [provide additional verification](#verify-factor).
-MFA_CHALLENGE       | The user must verify the factor-specific challenge.  <br>Follow the `verify` link relation to [verify the factor](#verify-factor).
-SUCCESS             | The transaction has completed successfully
+Value               | Description                                                                              | Next Action
+------------------- | ---------------------------------------------------------------------------------------- |
+PASSWORD_EXPIRED    | The user's password was successfully validated but is expired.                           | POST to the `next` link relation to [change the user's expired password](#change-expired-password).
+RECOVERY            | The user has requested a recovery token to reset their password or unlock their account. | POST to the `next` link relation to [answer the user's recovery question](#answer-recovery-question).
+PASSWORD_RESET      | The user successfully answered their recovery question and must to set a new password.   | POST to the `next` link relation to [reset the user's password](#reset-password).
+LOCKED_OUT          | The user account is locked; self-service unlock or admin unlock is required.             | POST to the `unlock` link relation to perform a [self-service unlock](#unlock-account).
+MFA_UNENROLLED      | The user must select and enroll an available factor for additional verification.         | POST to the `enroll` link relation for a specific factor to [enroll the factor](#enroll-factor).
+MFA_ENROLL_ACTIVATE | The user must activate the factor to complete enrollment.                                | POST to the `next` link relation to [activate the factor](#activate-factor).
+MFA_REQUIRED        | The user must provide additional verification with a previously enrolled factor.         | POST to the `verify` link relation for a specific factor to [provide additional verification](#verify-factor).
+MFA_CHALLENGE       | The user must verify the factor-specific challenge.                                      | POST to the `verify` link relation to [verify the factor](#verify-factor).
+SUCCESS             | The transaction has completed successfully                                               |
+
+You can advance the authentication or recovery transaction to the next status by posting a **status-specific** request to the the `next` link relation published in the [JSON HAL links object](#links-object) for the response.  [Enrolling a factor](#enroll-factor) and [verifying a factor](#verify-factor) do not have `next` link relationships as the end-user must make a selection of which factor to enroll or verify.
+
+> You should never assume a specific state transition or URL when navigating the [state model](#authentication-status).  Always inspect the response for `status` and dynamically follow the [published link relations](#links-object).
+
+~~~json
+{
+  "_links": {
+    "next": {
+      "name": "activate",
+      "href": "https://your-domain.okta.com/api/v1/authn/factors/ostf2xjtDKWFPZIKYDZV/lifecycle/activate",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "cancel": {
+      "href": "https://your-domain.okta.com/api/v1/authn/cancel",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "prev": {
+      "href": "https://your-domain.okta.com/api/v1/authn/previous",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
+~~~
+
 
 ### Tokens
 
@@ -474,7 +510,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 #### Primary Authentication without Additional Verification
 
-Authenticates a user that is not assigned to a Sign-On Policy with a MFA requirement.
+Authenticates a user that is not assigned to a Sign-On Policy with a MFA challenge requirement.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -523,7 +559,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 #### Primary Authentication with Additional Verification for Enrolled Factors
 
-Authenticates a user that has previously enrolled at least one factor for additional verification to comply the user's Sign-On Policy MFA requirement.  The user must select and [verify](#verify-factor) a [factor](#factor-object) by `id` to complete the authentication transaction.
+Authenticates a user that has previously enrolled a factor for additional verification and assigned to a Sign-On Policy with a MFA challenge requirement.  The user must select and [verify](#verify-factor) a [factor](#factor-object) by `id` to complete the authentication transaction.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -675,7 +711,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 #### Primary Authentication with Factor Enrollment
 
-Authenticates a user who must enroll an additional factor for verification to comply the user's Sign-On Policy MFA requirement.  The user must select a [factor](#factor-object) to [enroll](#enroll-factor)
+Authenticates a user assigned to a Sign-On Policy with a MFA challenge requirement who has not previously enrolled a factor for additional verification.  The user must select a [factor](#factor-object) to [enroll](#enroll-factor) to complete the authentication transaction.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -817,7 +853,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/credentials/change_password
 
-Okta enforces changing expired passwords during authentication when primary authentication returns the `PASSWORD_EXPIRED` status.  The user must change their password by posting new credentials to the `next` link to successfully complete authentication.  
+Okta enforces changing expired passwords during authentication when primary authentication returns the `PASSWORD_EXPIRED` status.  The user must change their existing password by posting a new password to the `next` link relation to successfully complete authentication.  
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -917,7 +953,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/factors
 
-Enrolls the user with a supported [factor](factors.html#supported-factors)
+Enrolls a user with a [factor](factors.html#supported-factors) assigned by their administrator.  The operation is only available for users that have not previously enrolled a factor and have transitioned to the `MFA_UNENROLLED` [authentication status][#authentication-status]. 
 
 - [Enroll User with Security Question](#enroll-user-with-security-question)
 - [Enroll User with Okta SMS Factor](#enroll-user-with-okta-sms-factor)
@@ -1769,6 +1805,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ~~~
 
+## Recovery Operations
+
 ### Forgot Password
 {:.api .api-operation}
 
@@ -2214,6 +2252,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
   }
 }
 ~~~
+
+## State Management Operations
 
 ### Get Authentication Status for Transaction
 {:.api .api-operation}
