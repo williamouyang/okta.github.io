@@ -27,6 +27,8 @@ sidebar_copy: >
   * Relying on Okta's highly available service and product roadmap allows the RentPath team to spend more time building features for customers and less time worrying about the identity layer.
 ---
 
+
+
 ## About RentPath
 RentPath provides a suite of sites including Rent.com, Rentals.com, RentalHouses.com, Lovely and New Home Guide to help property managers, landlords and home sellers connect with consumers looking for a home.
 
