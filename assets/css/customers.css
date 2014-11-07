@@ -24,7 +24,7 @@
 .customer-row h2 {
   font-size: 1.2em;
   font-weight: 700;
-  margin-top: .2em;
+  margin-top: .7em;
   color: #000;
 }
 
@@ -91,6 +91,11 @@
   margin-top: 1em;
   font-size: 20px;
 }
+
+.customer-movie {
+  margin-top: 1em;
+}
+
 .customer-story-diagram {
   width: 694px;
   margin-top: 30px;

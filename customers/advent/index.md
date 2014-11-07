@@ -7,13 +7,12 @@ index_image:    advent-index.png
 bg_image:       advent-header.jpg
 xxxdiagram_image:  advent-diagram.png
 
-title:          Advent Secures Online Community For Thousands of Clients with Okta
+title: Advent Secures Online Community For Thousands of Clients with Okta
 title_tagline: >
   Okta provides a robust cloud-based identity platform for Advent Direct™, Advent's cloud platform for investment management professionals.  With thousands of financial institutions accessing the online Advent Direct™ Community, Advent uses Okta's identity layer to enhance security while providing seamless access to help Advent clients, partners, and employees connect with the content and people most relevant to their needs.
 
-
 index_blurb: >
-  TBD
+  Advent Software uses the Okta Identity Platform to achieve a simplified user experience across on-premises, cloud, and 3rd party services, while accelerating time-to-market for new features.
 
 sidebar_testimonial: >
   The Okta platform provides Advent with a complete identity management platform that enabled us to quickly provide secure access for our clients to our cloud applications.
@@ -29,6 +28,8 @@ sidebar_copy: >
 ---
 
 
+
+<iframe src="//player.vimeo.com/video/110836136" width="694" height="391" frameborder="0" class="customer-movie" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 
 ## About Advent

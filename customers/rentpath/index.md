@@ -7,12 +7,12 @@ index_image:    rentpath-index.png
 bg_image:       rentpath-header.jpg
 diagram_image:  rentpath-diagram.png
 
-title:          RentPath Gives Advertisers a Unified Product Experience with Okta
+title: RentPath Gives Advertisers a Unified Product Experience with Okta
 title_tagline: >
   Okta simplifies the RentPath customer experience and unlocks engineering cycles by providing one central customer authentication service and single sign-on across all customer-facing tools.
 
 index_blurb: >
-  TBD
+  RentPath has migrated from an expensive, feature-poor, home-grown user management and authentication solution to Okta’s Identity Platform, and is thereby able to free up engineering cycles to build the features customers care about most.
 
 sidebar_testimonial: >
   If we're engineering the security layer then we're focusing less time on the thing that differentiates us as a provider of services. The fact that I really haven't had to worry about Okta either from a development or operational standpoint is one of the best testaments that I can give toward its value.

@@ -7,13 +7,13 @@ index_image:    rotary-index.png
 bg_image:       rotary-header.jpg
 xxxdiagram_image:  rotary-diagram.png
 
-title:          Rotary Simplifies Online Access for Members with Okta
+title: Rotary Simplifies Online Access for Members with Okta
 
 title_tagline:  >
   Okta enriches the online Rotary experience by integrating legacy and third-party platforms with a new central Rotary authentication system, enabling members of the Rotary community worldwide to work more effectively and productively for the good of their neighbors
 
 index_blurb: >
-  TBD
+  By centralizing authentication and user management with Okta, Rotary International can now crowd-source applications from its community and make these available to over 1.2M members with just one set of credentials.
 
 sidebar_testimonial: >
   Okta had the best approach for what we needed. They had a more complete vision to managing identity, and the integration and single sign-on approach was very consistent with what we needed to have happen in the coming years for our user base.
@@ -26,6 +26,7 @@ sidebar_copy: >
   * The Okta Identity Platform's single sign-on identity provider and Universal Directory with integration to Rotary's CRM system, provide a unified view of all members and seamless access across a suite of applications.
 
 ---
+
 
 
 ## About Rotary International

@@ -564,11 +564,10 @@ body#home {
   margin-top: 55px;
 }
 .valprop-features {
-  background: #fff;
   height: 225px;
   position: relative;
-  background: url(/assets/img/home-bg.png);
-  margin-top: 28px;
+  background: #0069aa;
+  imargin-top: 28px;
 }
 .valprop-features p {
   color: #fff;
@@ -610,7 +609,7 @@ body#home {
 }
 
 .features-page ul {
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .features-title {
@@ -634,7 +633,7 @@ body#home {
 }
 
 .features-sep {
-  margin: 80px 0 80px 0;
+  margin: 60px 0;
 }
 
 .featured-row {
