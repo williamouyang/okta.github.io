@@ -4,7 +4,7 @@
   <div class="block title-block">
     <h1>{{ page.tagline }}</h1>
   </div>
-  {% for page in site.pages %}
+  {% for page in site.pages reversed %}
     {% if page.layout == 'customer_story' %}
       <div class="row customer-row">
         {% assign path  = page.url | remove: "/index.html" %}
