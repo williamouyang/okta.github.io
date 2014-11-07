@@ -645,6 +645,19 @@ body#home {
   margin-right: 23px;
 }
 
+.featured-row.row-1 .col-xs-4 {
+  height: 245px;
+}
+
+.featured-row.row-2 .col-xs-4 {
+  height: 265px;
+}
+
+.featured-row .learnmore {
+  position: absolute;
+  bottom: 0;
+}
+
 .circle {
   width: 47px;
   height: 47px;
