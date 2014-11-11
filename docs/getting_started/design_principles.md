@@ -241,8 +241,8 @@ The following three headers are set in each response:
 
 ~~~ ruby
 HTTP/1.1 200 OK
-X-RateLimit-Limit: 75
-X-RateLimit-Remaining: 70
+X-RateLimit-Limit: 20
+X-RateLimit-Remaining: 15
 X-RateLimit-Reset: 1366037820
 ~~~
 
