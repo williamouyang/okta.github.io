@@ -22,7 +22,7 @@ title: API
     <div class="sdk-wrapper col-xs-3">
         <div class="sdk-content col-xs-12">
             <span class="medium-circle home-cyan sdk-microsoft-net"></span>
-            <h4>Powershell</h4>
+            <h4>PowerShell</h4>
             <ul class="sdk-list list-unstyled">
                 <li><a class="learnmore sdk-more button-white" href="https://github.com/okta/oktasdk-csharp/tree/master/Okta.Core.Automation">Documentation</a></li>
                 <li><a class="learnmore sdk-more button-white" href="https://github.com/okta/oktasdk-csharp">GitHub</a></li>
