@@ -20,7 +20,11 @@
     - apps
     - events
 
-
+# -- SDK
+- section: sdk/core
+  title: SDK
+  pages:
+    - api
 
 # -- EXAMPLES
 - section: examples
