@@ -1,6 +1,6 @@
 ---
 layout: docs_page
-title: Factors
+title: Factors (MFA)
 ---
 
 * Will be replaced with the ToC
@@ -87,8 +87,8 @@ answer        | answer to question        | String    |           |           | 
 
 ~~~ json
 "profile": {
-    "question": "favorite_art_piece",
-    "questionText": "What is your favorite piece of art?"
+  "question": "favorite_art_piece",
+  "questionText": "What is your favorite piece of art?"
 }
 ~~~
 
@@ -102,7 +102,7 @@ phoneNumber   | phone number of mobile device   | String [E.164 formatted](http:
 
 ~~~ json
 "profile": {
-    "phoneNumber": "+1-555-415-1337"
+  "phoneNumber": "+1-555-415-1337"
 }
 ~~~
 
@@ -120,7 +120,7 @@ credentialId  | unique id for instance          | String    |           |       
 
 ~~~ json
 "profile": {
-    "credentialId": "isaac@example.org"
+  "credentialId": "isaac@example.org"
 }
 ~~~
 
@@ -152,11 +152,11 @@ keyLength     | number of digits in an HOTP value                 | Number      
 _links        | discoverable resources related to the activation  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) |           |           | TRUE     | FALSE  | TRUE
  
 ~~~ json
- "activation": {
-    "timeStep": 30,
-    "sharedSecret": "HE64TMLL2IUZW2ZLB",
-    "encoding": "base32",
-    "keyLength": 6
+"activation": {
+  "timeStep": 30,
+  "sharedSecret": "HE64TMLL2IUZW2ZLB",
+  "encoding": "base32",
+  "keyLength": 6
 } 
 ~~~
 
@@ -221,42 +221,42 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~json
 {
-    "id": "sms2gt8gzgEBPUWBIFHN",
-    "factorType": "sms",
-    "provider": "OKTA",
-    "status": "ACTIVE",
-    "created": "2014-06-27T20:27:26.000Z",
-    "lastUpdated": "2014-06-27T20:27:26.000Z",
-    "profile": {
-        "phoneNumber": "+1-555-415-1337"
+  "id": "sms2gt8gzgEBPUWBIFHN",
+  "factorType": "sms",
+  "provider": "OKTA",
+  "status": "ACTIVE",
+  "created": "2014-06-27T20:27:26.000Z",
+  "lastUpdated": "2014-06-27T20:27:26.000Z",
+  "profile": {
+    "phoneNumber": "+1-555-415-1337"
+  },
+  "_links": {
+    "verify": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/sms2gt8gzgEBPUWBIFHN/verify",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
     },
-    "_links": {
-        "verify": {
-            "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/sms2gt8gzgEBPUWBIFHN/verify",
-            "hints": {
-                "allow": [
-                    "POST"
-                ]
-            }
-        },
-        "self": {
-            "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/sms2gt8gzgEBPUWBIFHN",
-            "hints": {
-                "allow": [
-                    "GET",
-                    "DELETE"
-                ]
-            }
-        },
-        "user": {
-            "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG",
-            "hints": {
-                "allow": [
-                    "GET"
-                ]
-            }
-        }
+    "self": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/sms2gt8gzgEBPUWBIFHN",
+      "hints": {
+        "allow": [
+          "GET",
+          "DELETE"
+        ]
+      }
+    },
+    "user": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
     }
+  }
 }
 ~~~
 
@@ -293,7 +293,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 {:.api .api-response .api-response-example}
 
 ~~~json
-{
+[
+  {
     "id": "ufs2bysphxKODSZKWVCT",
     "factorType": "question",
     "provider": "OKTA",
@@ -301,38 +302,38 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "created": "2014-04-15T18:10:06.000Z",
     "lastUpdated": "2014-04-15T18:10:06.000Z",
     "profile": {
-        "question": "favorite_art_piece",
-        "questionText": "What is your favorite piece of art?"
+      "question": "favorite_art_piece",
+      "questionText": "What is your favorite piece of art?"
     },
     "_links": {
-        "questions": {
-            "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/questions",
-            "hints": {
-                "allow": [
-                    "GET"
-                ]
-            }
-        },
-        "self": {
-            "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/ufs2bysphxKODSZKWVCT",
-            "hints": {
-                "allow": [
-                    "GET",
-                    "DELETE"
-                ]
-            }
-        },
-        "user": {
-            "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG",
-            "hints": {
-                "allow": [
-                    "GET"
-                ]
-            }
+      "questions": {
+        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/questions",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
         }
+      },
+      "self": {
+        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/ufs2bysphxKODSZKWVCT",
+        "hints": {
+          "allow": [
+            "GET",
+            "DELETE"
+          ]
+        }
+      },
+      "user": {
+        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      }
     }
-},
-{
+  },
+  {
     "id": "ostf2gsyictRQDSGTDZE",
     "factorType": "token:software:totp",
     "provider": "OKTA",
@@ -340,45 +341,45 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "created": "2014-06-27T20:27:33.000Z",
     "lastUpdated": "2014-06-27T20:27:33.000Z",
     "profile": {
-        "credentialId": "isaac@example.org"
+      "credentialId": "isaac@example.org"
     },
     "_links": {
-        "next": {
-            "name": "activate",
-            "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/ostf2gsyictRQDSGTDZE/lifecycle/activate",
-            "hints": {
-                "allow": [
-                    "POST"
-                ]
-            }
-        },
-        "self": {
-            "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/ostf2gsyictRQDSGTDZE",
-            "hints": {
-                "allow": [
-                    "GET"
-                ]
-            }
-        },
-        "user": {
-            "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG",
-            "hints": {
-                "allow": [
-                    "GET"
-                ]
-            }
+      "next": {
+        "name": "activate",
+        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/ostf2gsyictRQDSGTDZE/lifecycle/activate",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
         }
+      },
+      "self": {
+        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/ostf2gsyictRQDSGTDZE",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      },
+      "user": {
+        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      }
     },
     "_embedded": {
-        "activation": {
-            "timeStep": 30,
-            "sharedSecret": "HE64TMLL2IUZW2ZLB",
-            "encoding": "base32",
-            "keyLength": 16
-        }
+      "activation": {
+        "timeStep": 30,
+        "sharedSecret": "HE64TMLL2IUZW2ZLB",
+        "encoding": "base32",
+        "keyLength": 16
+      }
     }
-},
-{
+  },
+  {
     "id": "sms2gt8gzgEBPUWBIFHN",
     "factorType": "sms",
     "provider": "OKTA",
@@ -386,36 +387,37 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "created": "2014-06-27T20:27:26.000Z",
     "lastUpdated": "2014-06-27T20:27:26.000Z",
     "profile": {
-        "phoneNumber": "+1-555-415-1337"
+      "phoneNumber": "+1-555-415-1337"
     },
     "_links": {
-        "verify": {
-            "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/sms2gt8gzgEBPUWBIFHN/verify",
-            "hints": {
-                "allow": [
-                    "POST"
-                ]
-            }
-        },
-        "self": {
-            "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/sms2gt8gzgEBPUWBIFHN",
-            "hints": {
-                "allow": [
-                    "GET",
-                    "DELETE"
-                ]
-            }
-        },
-        "user": {
-            "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG",
-            "hints": {
-                "allow": [
-                    "GET"
-                ]
-            }
+      "verify": {
+        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/sms2gt8gzgEBPUWBIFHN/verify",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
         }
+      },
+      "self": {
+        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/sms2gt8gzgEBPUWBIFHN",
+        "hints": {
+          "allow": [
+            "GET",
+            "DELETE"
+          ]
+        }
+      },
+      "user": {
+        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      }
     }
-}
+  }
+]
 ~~~
 
 ### List Factors to Enroll
@@ -452,91 +454,98 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ~~~json
 [
-    {
-        "factorType": "question",
-        "provider": "OKTA",
-        "_links": {
-            "questions": {
-                "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/questions",
-                "hints": {
-                    "allow": [
-                        "GET"
-                    ]
-                }
-            },
-            "enroll": {
-                "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors",
-                "hints": {
-                    "allow": [
-                        "POST"
-                    ]
-                }
-            }
+  {
+    "factorType": "question",
+    "provider": "OKTA",
+    "_links": {
+      "questions": {
+        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/questions",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
         }
-    },
-    {
-        "factorType": "token:software:totp",
-        "provider": "OKTA",
-        "_links": {
-            "enroll": {
-                "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors",
-                "hints": {
-                    "allow": [
-                        "POST"
-                    ]
-                }
-            }
+      },
+      "enroll": {
+        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
         }
-    },
-    {
-        "factorType": "token:software:totp",
-        "provider": "GOOGLE",
-        "_links": {
-            "enroll": {
-                "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors",
-                "hints": {
-                    "allow": [
-                        "POST"
-                    ]
-                }
-            }
-        }
-    },
-    {
-        "factorType": "sms",
-        "provider": "OKTA",
-        "_links": {
-            "enroll": {
-                "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors",
-                "hints": {
-                    "allow": [
-                        "POST"
-                    ]
-                }
-            }
-        }
-    },
-    {
-         "factorType": "token:hardware",
-         "provider": "okta:rsa",
-         "profile": {
-            "credentialId": “rsa_account_id"
-         },
-        "verify": {
-            "passCode": “12345"
-         }
-    },
-    {
-        "factorType": "token",
-        "provider": "okta:symantec",
-        "profile": {
-           "credentialId": “symantec_credential_id"
-        },
-        "verify": {
-           "passCode": "875498",
-           "nextPassCode":"678195"
-        }
+      }
     }
+  },
+  {
+    "factorType": "token:software:totp",
+    "provider": "OKTA",
+    "_links": {
+      "enroll": {
+        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "factorType": "token:software:totp",
+    "provider": "GOOGLE",
+    "_links": {
+      "enroll": {
+        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "factorType": "sms",
+    "provider": "OKTA",
+    "_links": {
+      "enroll": {
+        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "factorType": "token",
+    "provider": "RSA",
+    "_links": {
+      "enroll": {
+        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "factorType": "token",
+    "provider": "SYMANTEC",
+    "_links": {
+      "enroll": {
+        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      }
+    }
+  }
 ]
 ~~~
 
@@ -645,7 +654,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X POST "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ufs1pe3ISGKGPYKXRBKK/verify
 -d \
 '{
-    "answer": "mayonnaise" 
+  "answer": "mayonnaise" 
 }'
 ~~~
 

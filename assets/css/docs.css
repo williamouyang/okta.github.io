@@ -39,6 +39,7 @@
   padding: 3em;
   padding-top: 1em;
   margin-left: 292px;
+  min-height: 650px;
 }
 
 .docs-sidebar {
@@ -509,3 +510,89 @@ h6:hover .header-link {
   width: 425px;
   padding-left: 15px;
 }
+
+/* -------------------------- SDKS */
+
+.container-sdk {
+  width: 700px;
+}
+
+
+.panel-sdk {
+  text-align: center;
+}
+
+
+/* The ghost, nudged to maintain perfect centering */
+.panel-sdk:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -0.25em; /* Adjusts for spacing */
+}
+
+/* The element to be centered, can
+   also be of any width and height */ 
+.panel-sdk min-height: 600px; {
+  display: inline-block;
+  vertical-align: middle;
+  width: 300px;
+}
+
+
+
+.panel-sdk2 {
+  padding: 1em;
+  background: #fafafa;
+  border: 1px solid #f0f0f0;
+  height: 300px;
+}
+
+.panel-sdk .circle {
+  display: inline-block;
+
+width: 100px;
+height: 100px;
+border-radius: 50px;
+text-align: center;
+display: inline-block;
+margin: 0 0;
+
+}
+
+.panel-sdk .blue {
+  background-color: #0c87c9;
+}
+
+.panel-sdk .info {
+  position: relative;
+  padding: 0 15px 80px 30px;
+}
+
+.panel-sdk img {
+  max-height: 75px;
+}
+
+.panel-sdk a {
+  text-decoration: none;
+}
+
+.panel-sdk li {
+  font-size: 14px !important;
+}
+
+.panel-sdk ul {
+  list-style-type: none;
+  padding-left: 0px;
+}
+
+.panel-sdk2 .button {
+  display: inline-block;
+  width: 292px;
+  bottom: 10px;
+  left: 37px;
+  position: absolute;
+}
+
+

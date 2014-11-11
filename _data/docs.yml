@@ -14,6 +14,8 @@
 - section: api/rest
   title: API
   pages:
+    - authn
+    - factors
     - users
     - groups
     - sessions
@@ -22,7 +24,7 @@
 
 # -- SDK
 - section: sdk/core
-  title: SDK
+  title: SDKs
   pages:
     - api
 

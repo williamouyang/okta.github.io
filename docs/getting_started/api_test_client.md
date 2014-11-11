@@ -86,7 +86,7 @@ Once you have setup your Postman environment, you can import pre-built collectio
     Apps           | https://www.getpostman.com/collections/d4296020e4118bdbfa7a
     Events         | https://www.getpostman.com/collections/57071989b25f5fc96070
     Authentication | https://www.getpostman.com/collections/005bc1ffcf4302fe4346
-    Factors        | https://www.getpostman.com/collections/871df976d79a9a5f7a85
+    Factors        | https://www.getpostman.com/collections/920850db85b2c8681f6b
 
 ### Sample Requests
 
