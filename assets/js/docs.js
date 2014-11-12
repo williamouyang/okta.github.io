@@ -140,7 +140,7 @@ $(function() {
       $window=$(window);
   var fixedScroll = function() {
     if ($window.scrollTop() > 121) {
-      wrap.addClass("fixed");
+      //wrap.addClass("fixed");
     } else {
       wrap.removeClass("fixed");
     }
