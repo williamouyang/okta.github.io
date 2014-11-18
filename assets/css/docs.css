@@ -366,6 +366,7 @@ h6:hover .header-link {
 .docs-body img {
   max-width: 700px;
   display: block;
+  margin-bottom: 15px;
 }
 
 

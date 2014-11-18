@@ -31,7 +31,7 @@ title: API Test Client
     You should [download and import the Environment Template JSON](templates/example.okta.com.postman_environment) and duplicate for each new environment (dev, test, preview, prod)
 
     1. [Download the template environment JSON](templates/example.okta.com.postman_environment) to your computer
-    2. Select the `No environment` dropdown at the top and select `Manage environments`
+    2. Select the `No environment` pull-down at the top and select `Manage environments`
 
         ![Manage Environments](/assets/img/postman-ui-manage-env.png "Manage Environments")
 
@@ -49,20 +49,27 @@ title: API Test Client
 
     5. Edit the environment, assign a new name, and specify the following values:
 
-        - `url`
-        - `apikey`
+        - `url`: full-qualified base URL for your Okta organization such as *https://acme.okta.com*
+        - `apikey`: the API key you generated as part of prerequisites
+        - `email-suffix`: used by request templates for email addresses and logins of new users
+        - `subdomain`: *orgname* in https://*orgname*.okta.com
 
-            > Enter the API key you generated as part of prerequisites
-
-        - `email-suffix`
-
-            > `email-suffix` is for generating email address and logins for new users
-
-        - `subdomain` (orgname in https://*orgname*.okta.com/
+        > We recommend you name the new environment the name of your okta organization such as example.okta.com in case you have both a preview and production organization
 
         ![Edit Environment](/assets/img/postman-ui-edit-env.png "Edit Environment")
 
-        > We recommend you name the new environment the name of your okta organization such as example.okta.com in case you have both a preview and production organization
+4. Select and verify your configured environment
+
+    1. Ensure you have selected your environment in the pull-down
+       
+        ![Select Environment](/assets/img/postman-ui-select-env.png "Select Environment")
+
+        > Your selected environment should have your name that you configured above and not say `No environment` or `example.okta.com` 
+
+    2. You can preview your configured environment variables by hovering over the `eye icon`
+       
+        ![Preview Environment](/assets/img/postman-ui-preview-env.png "Preview Environment")
+
 
 ### Collections
 
@@ -72,27 +79,43 @@ Once you have setup your Postman environment, you can import pre-built collectio
 
     ![Import Collection](/assets/img/postman-ui-import-collection.png "Import Collection")
 
-2. Add URL for Collection
+2. Download from link
 
-    ![Add URL for Collection](/assets/img/postman-ui-import-url.png "Add URL for Collection")
+    ![Download URL for Collection](/assets/img/postman-ui-import-url.png "Download URL for Collection")
 
     **Import the following templates:**
 
     API            | Postman Template
     -------------- | ---------------------------------------------------------
-    Users          | https://www.getpostman.com/collections/8bf0965119e3a46fd18b
+    Users          | https://www.getpostman.com/collections/bcd230dced07b89598b4
     Groups         | https://www.getpostman.com/collections/342602f07409f65559fd
     Sessions       | https://www.getpostman.com/collections/570290000c864ac8d454
-    Apps           | https://www.getpostman.com/collections/d4296020e4118bdbfa7a
+    Apps           | https://www.getpostman.com/collections/2bda23178f1c6a44f894
     Events         | https://www.getpostman.com/collections/57071989b25f5fc96070
     Authentication | https://www.getpostman.com/collections/005bc1ffcf4302fe4346
     Factors        | https://www.getpostman.com/collections/920850db85b2c8681f6b
 
 ### Sample Requests
 
-The imported collections contain URLs and JSON request bodies that have sample data.  You will need to replace URL and body parameters designiated in the API documentation for your specific organization. 
+The imported collections contain URLs and JSON request bodies that have sample data with params such as **\{\{id\}\}**.  You will need to replace URL and body parameters with ids of specific resources for your specific organization.  This can usually be accomplished by first listing a resource collection with a search or filter, than copying the `id` of a specific resource.  See API documentation for the specific request for details.
 
-   ![Add URL for Collection](/assets/img/postman-ui-replace-id.png "Add URL for Collection")
+The following request example requires a specific user `id`
+
+   ![URL template with ID](/assets/img/postman-ui-replace-id.png "URL template with ID")
+
+You can copy an `id` from a previous response such as a `GET` request to list resources and paste it.
+
+   ![Copy and replace ID](/assets/img/postman-ui-paste-id.png "Copy and replace ID in URL") 
+
+You can also set environment variables directly from the right-click context menu.  This is recommended so you can re-use the `id` across multiple requests
+
+   ![Set environment variable](/assets/img/postman-ui-set-variable-id.png "Set environment variable")
+
+Always check the request preview to ensure all **\{\{id\}\}** variables have been properly replaced before sending the request
+
+   ![Request preview](/assets/img/postman-ui-req-prevew.png "Request preview")
+
+ 
 
 
 
