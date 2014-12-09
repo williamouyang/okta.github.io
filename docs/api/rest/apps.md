@@ -1784,7 +1784,7 @@ Parameter | Description         | Param Type | DataType                         
 id        | id of app to update | URL        | String                            | TRUE     |
 app       | Updated app         | Body       | [Application](#application-model) | FALSE    |
 
-> All attributes must be specified when updating an app  **updates are not supported!**
+> All attributes must be specified when updating an app.  **Delta updates are not supported.**
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
