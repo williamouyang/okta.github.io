@@ -1390,11 +1390,11 @@ pre code {
 
 /* -------------------------- TERMS CONTENT */
 
-#terms .block.content h2 {
+#terms .block.content h2, #privacy .block.content h2 {
   font-size: 18px;
 }
 
-#terms .block.content p {
+#terms .block.content p, #privacy .block.content p {
   font-size: 14px;
 }
 
