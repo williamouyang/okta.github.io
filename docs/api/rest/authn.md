@@ -144,7 +144,7 @@ One-time token issued as `recoveryToken` response parameter when a recovery tran
 - Unlike the `statusToken` the `recoveryToken` should be distributed out-of-band to a user such as via email.
 - The lifetime of the `recoveryToken` is managed by the organization's security policy.
 
-> The `recoveryToken` is usually sent directly to the end-user via email or SMS.  Obtaining a `recoveryToken` is a highly privileged operation and should be restricted to trusted web applications.  Anyone that obtains a `recoveryToken` for a user and knows the answer to user's recovery question can reset their password or unlock their account.
+> The `recoveryToken` is usually sent directly to the end-user via email or SMS.  Obtaining a `recoveryToken` is a highly privileged operation and should be restricted to trusted web applications.  Anyone that obtains a `recoveryToken` for a user and knows the answer to a user's recovery question can reset their password or unlock their account.
 
 #### Session Token
 
@@ -217,8 +217,8 @@ Attribute | Description                                                         
 username  | unique username for user                                                                                                    | String                                                                                              | 5         | 100       | FALSE    | TRUE   | TRUE
 firstName | first name of user                                                                                                          | String                                                                                              | 1         | 50        | FALSE    | FALSE  | TRUE
 lastName  | last name of user                                                                                                           | String                                                                                              | 1         | 50        | FALSE    | FALSE  | TRUE
-locale    | user's preferred display formatting for localizing items such as currency, date time format, numerical representations, etc | ISO 639-1 two letter language code, an underscore, and the ISO 3166-1 2 letter country code (en-US) | 5         | 5         | FALSE    | FALSE  | TRUE
-timeZone  | user's time zone in the "Olson" timezone database format                                                                    | "Area/Location" of "Olson" timezone                                                                 |           |           | FALSE    | FALSE  | TRUE
+locale    | user's preferred display formatting for localizing items such as currency, date time format, numerical representations, etc | ISO 639-1 two letter language code, an underscore, and the ISO 3166-1 two letter country code (en_US) | 5         | 5         | FALSE    | FALSE  | TRUE
+timeZone  | user's time zone in the "[Olson](https://en.wikipedia.org/wiki/Tz_database)" timezone database format                                                                    | "Area/Location" of "Olson" timezone                                                                 |           |           | FALSE    | FALSE  | TRUE
 
 #### Recovery Question Object
 
@@ -953,7 +953,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/factors
 
-Enrolls a user with a [factor](factors.html#supported-factors) assigned by their administrator.  The operation is only available for users that have not previously enrolled a factor and have transitioned to the `MFA_UNENROLLED` [authentication status][#authentication-status]. 
+Enrolls a user with a [factor](factors.html#supported-factors) assigned by their administrator.  The operation is only available for users that have not previously enrolled a factor and have transitioned to the `MFA_UNENROLLED` [authentication status](#authentication-status).
 
 - [Enroll User with Security Question](#enroll-user-with-security-question)
 - [Enroll User with Okta SMS Factor](#enroll-user-with-okta-sms-factor)

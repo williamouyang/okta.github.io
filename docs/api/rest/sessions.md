@@ -64,7 +64,7 @@ cookieTokenUrl | URL for a a transparent 1x1 pixel image which contains a one-ti
 
 Creates a new session for a [user](users.html).
 
-- [Create Session with One-Time Token](#create-session-with-one--time-token)
+- [Create Session with One-Time Token](#create-session-with-one-time-token)
 - [Create Session with Embed Image URL](#create-session-with-embed-image-url)
 
 ##### Request Parameters
