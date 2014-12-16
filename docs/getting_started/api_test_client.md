@@ -87,11 +87,11 @@ Once you have setup your Postman environment, you can import pre-built collectio
 
     API            | Postman Template
     -------------- | ---------------------------------------------------------
-    Users          | https://www.getpostman.com/collections/bcd230dced07b89598b4
-    Groups         | https://www.getpostman.com/collections/342602f07409f65559fd
-    Sessions       | https://www.getpostman.com/collections/570290000c864ac8d454
-    Apps           | https://www.getpostman.com/collections/2bda23178f1c6a44f894
-    Events         | https://www.getpostman.com/collections/57071989b25f5fc96070
+    Users          | https://www.getpostman.com/collections/f4e7ed3d0e949e2acd82
+    Groups         | https://www.getpostman.com/collections/14a2be97e21c780fdd7c
+    Sessions       | https://www.getpostman.com/collections/e2552b9f3fec5d190fad
+    Apps           | https://www.getpostman.com/collections/cbd0d3e4ae4361208345
+    Events         | https://www.getpostman.com/collections/f0a1d03c249fc6cac0c0
     Authentication | https://www.getpostman.com/collections/005bc1ffcf4302fe4346
     Factors        | https://www.getpostman.com/collections/920850db85b2c8681f6b
 

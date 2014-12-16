@@ -1040,7 +1040,7 @@ Link: <https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limi
 #### List Users with Search
 {:.api .api-operation}
 
-Searches for user by `firstName`, `lastName`, or `email` value.  This operation is ideal for implementing a people picker.
+Searches for user by `firstName`, `lastName`, or `email` value.  This operation is ideal for implementing a people picker. This operation does not support pagination.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
