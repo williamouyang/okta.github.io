@@ -2075,7 +2075,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:id*/credentials/change_password</span>
 
-Changes a user's password by validating the user's current password.  This operation can only be performed on users in `STAGED`, `ACTIVE` or `RECOVERY` status that have a valid [password credential](#password-object)
+Changes a user's password by validating the user's current password.  This operation can only be performed on users in `STAGED`, `ACTIVE`, `PASSWORD_EXPIRED`, or `RECOVERY` status that have a valid [password credential](#password-object)
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
