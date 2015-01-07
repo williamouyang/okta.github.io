@@ -1611,11 +1611,11 @@
   <HelpKINode Title="UserGroupsClient.UserGroupsClient constructor" Url="html/b6218830-9f78-e87a-88b2-967a6d2e3ae8.htm" />
   <HelpKINode Title="UserId field" Url="html/d5f44829-28bf-699c-7495-0bbf01ece177.htm" />
   <HelpKINode Title="UserId property" Url="html/69267677-53cd-210f-8a0b-1f2430582b38.htm" />
-  <HelpKINode Title="Username property" Url="html/6bec3c8c-4493-319b-9d3c-0701f069eb9f.htm" />
   <HelpKINode Title="UserName property">
-    <HelpKINode Title="AppCredentials.UserName Property " Url="html/c5b6a967-fba0-29a0-b64e-8c38cf92fe81.htm" />
     <HelpKINode Title="AppUserCredentials.UserName Property " Url="html/32cf267b-79f9-4af3-03f8-6785f3c60f1a.htm" />
+    <HelpKINode Title="AppCredentials.UserName Property " Url="html/c5b6a967-fba0-29a0-b64e-8c38cf92fe81.htm" />
   </HelpKINode>
+  <HelpKINode Title="Username property" Url="html/6bec3c8c-4493-319b-9d3c-0701f069eb9f.htm" />
   <HelpKINode Title="UsernameField property" Url="html/0d816d3f-b8cf-a0e2-8b51-b605a4355c7c.htm" />
   <HelpKINode Title="UserNameTemplate class">
     <HelpKINode Title="UserNameTemplate Class" Url="html/350e9c9e-02e4-425a-7a7e-2657330ed306.htm" />
