@@ -376,7 +376,7 @@ deviceToken | A globally unique ID identifying the device of the user           
 
 ###### Device Token
 
-You must always pass the same `deviceToken` for a user's device with every authentication request for **per-device** or **per-session** Sign-On Policy factor challenges.  If the `deviceToken` is absent or does not match the previous `deviceToken`, the user will still be challenged everytime instead of **per-device** or **per-session**.  It is recommend that you generate a UUID or GUID for each client and persist the `deviceToken` as a persistent cookie or HTML5 localStorage item scoped to your web application's origin.
+You must always pass the same `deviceToken` for a user's device with every authentication request for **per-device** or **per-session** Sign-On Policy factor challenges.  If the `deviceToken` is absent or does not match the previous `deviceToken`, the user will still be challenged everytime instead of **per-device** or **per-session**.  It is recommend that you generate a UUID or GUID for each client and persist the `deviceToken` as a persistent cookie or HTML5 localStorage item scoped to your web application's origin.  The max length for `deviceToken` is 32 characters.
 
 #### Response Parameters
 {:.api .api-response .api-response-params}
