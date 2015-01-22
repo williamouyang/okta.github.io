@@ -215,17 +215,17 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ~~~
 
-Invalid sessions will return a `403 Forbidden` status code.
+Invalid sessions will return a `404 Not Found` status code.
 
 ~~~ ruby
-HTTP/1.1 403 Forbidden
+HTTP/1.1 404 Not Found
 Content-Type: application/json
 
 {
-    "errorCode": "E0000005",
-    "errorSummary": "Invalid session",
-    "errorLink": "E0000005",
-    "errorId": "oaeweHTU2w9QlC7ySKNEASqhA",
+    "errorCode": "E0000007",
+    "errorSummary": "Not found: Resource not found: 000rWcxHV-lQUOzBhLJLYTl0Q (AppSession)",
+    "errorLink": "E0000007",
+    "errorId": "oaeAu0LCZaeRMaJqzQ3OzFuow",
     "errorCauses": []
 }
 ~~~
@@ -270,17 +270,17 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ~~~
 
-Invalid sessions will return a `403 Forbidden` status code.
+Invalid sessions will return a `404 Not Found` status code.
 
 ~~~ ruby
-HTTP/1.1 403 Forbidden
+HTTP/1.1 404 Not Found
 Content-Type: application/json
 
 {
-    "errorCode": "E0000005",
-    "errorSummary": "Invalid session",
-    "errorLink": "E0000005",
-    "errorId": "oaeweHTU2w9QlC7ySKNEASqhA",
+    "errorCode": "E0000007",
+    "errorSummary": "Not found: Resource not found: 000rWcxHV-lQUOzBhLJLYTl0Q (AppSession)",
+    "errorLink": "E0000007",
+    "errorId": "oaeAu0LCZaeRMaJqzQ3OzFuow",
     "errorCauses": []
 }
 ~~~
@@ -321,17 +321,17 @@ curl -v -H "Authorization: SSWS yourtoken" \
 HTTP/1.1 204 No Content
 ~~~
 
-Invalid sessions will return a `403 Forbidden` status code.
+Invalid sessions will return a `404 Not Found` status code.
 
 ~~~ ruby
-HTTP/1.1 403 Forbidden
+HTTP/1.1 404 Not Found
 Content-Type: application/json
 
 {
-    "errorCode": "E0000005",
-    "errorSummary": "Invalid session",
-    "errorLink": "E0000005",
-    "errorId": "oaeweHTU2w9QlC7ySKNEASqhA",
+    "errorCode": "E0000007",
+    "errorSummary": "Not found: Resource not found: 000rWcxHV-lQUOzBhLJLYTl0Q (AppSession)",
+    "errorLink": "E0000007",
+    "errorId": "oaeAu0LCZaeRMaJqzQ3OzFuow",
     "errorCauses": []
 }
 ~~~
