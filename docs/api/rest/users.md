@@ -28,6 +28,7 @@ The Okta User API provides operations to manage users in your organization.
         "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
         "login": "isaac@example.org",
         "mobilePhone": "555-415-1337"
     },
@@ -103,6 +104,7 @@ Specifies [standard](#standard-attributes) and [custom](#custom-attributes) prof
         "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
         "login": "isaac@example.org",
         "mobilePhone": "555-415-1337",
         "customAttribute": true,
@@ -119,6 +121,7 @@ Attribute   | DataType | MinLength | MaxLength | Nullable | Unique | Validation
 ----------- | -------- | --------- | --------- | -------- | ------ | ----------
 login       | String   | 5         | 100       | FALSE    | TRUE   | [RFC 6531 section 3.3](http://tools.ietf.org/html/rfc6531#section-3.3)
 email       | String   | 5         | 100       | FALSE    | TRUE   | [RFC 5322 section 3.2.3](http://tools.ietf.org/html/rfc5322#section-3.2.3)
+secondEmail | String   | 5         | 100       | FALSE    | TRUE   | [RFC 5322 section 3.2.3](http://tools.ietf.org/html/rfc5322#section-3.2.3)
 firstName   | String   | 1         | 50        | FALSE    | FALSE  |
 lastName    | String   | 1         | 50        | FALSE    | FALSE  |
 mobilePhone | String   | 0         | 100       | TRUE     | FALSE  |
@@ -283,6 +286,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
         "login": "isaac@example.org",
         "mobilePhone": "555-415-1337"
     }
@@ -306,6 +310,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
         "login": "isaac@example.org",
         "mobilePhone": "555-415-1337"
     },
@@ -342,6 +347,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
         "login": "isaac@example.org",
         "mobilePhone": "555-415-1337"
     },
@@ -371,6 +377,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
         "login": "isaac@example.org",
         "mobilePhone": "555-415-1337"
     },
@@ -412,6 +419,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
         "login": "isaac@example.org",
         "mobilePhone": "555-415-1337"
     },
@@ -438,6 +446,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
       "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
         "login": "isaac@example.org",
         "mobilePhone": "555-415-1337"
     },
@@ -477,6 +486,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
         "login": "isaac@example.org",
         "mobilePhone": "555-415-1337"
     },
@@ -507,6 +517,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
         "login": "isaac@example.org",
         "mobilePhone": "555-415-1337"
     },
@@ -600,6 +611,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
         "login": "isaac@example.org",
         "mobilePhone": "555-415-1337"
     },
@@ -671,6 +683,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
         "login": "isaac@example.org",
         "mobilePhone": "555-415-1337"
     },
@@ -744,6 +757,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
         "login": "isaac@example.org",
         "mobilePhone": "555-415-1337"
     },
@@ -817,6 +831,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
         "login": "isaac@example.org",
         "mobilePhone": "555-415-1337"
     },
@@ -874,7 +889,7 @@ Enumerates users in your organization with pagination.  A subset of users can be
 Parameter | Description                                                                          | Param Type | DataType | Required | Default
 --------- | ------------------------------------------------------------------------------------ | ---------- | -------- | -------- | -------
 q         | Searches `firstName`, `lastName`, and `email` attributes of users for matching value | Query      | String   | FALSE    |
-limit     | Specified the number of results                                                      | Query      | Number   | FALSE    | 10000
+limit     | Specified the number of results                                                      | Query      | Number   | FALSE    | 
 filter    | [Filter expression](/docs/getting_started/design_principles.html#filtering) for users   | Query      | String   | FALSE    |
 after     | Specifies the pagination cursor for the next page of users                           | Query      | String   | FALSE    |
 
@@ -969,6 +984,7 @@ Link: <https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limi
             "firstName": "Isaac",
             "lastName": "Brock",
             "email": "isaac@example.org",
+            "secondEmail": "isaac2@example.org",
             "login": "isaac@example.org",
             "mobilePhone": "555-415-1337"
         },
@@ -997,6 +1013,7 @@ Link: <https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limi
             "firstName": "Eric",
             "lastName": "Judy",
             "email": "eric@example.org",
+            "secondEmail": "isaac2@example.org",
             "login": "eric@example.org",
             "mobilePhone": "555-415-2011"
         },
@@ -1070,6 +1087,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
             "firstName": "Eric",
             "lastName": "Judy",
             "email": "eric@example.org",
+            "secondEmail": "eric2@example.org",
             "login": "eric@example.org",
             "mobilePhone": "555-415-2011"
         },
@@ -1142,6 +1160,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
             "firstName": "Eric",
             "lastName": "Judy",
             "email": "eric@example.org",
+            "secondEmail": "eric2@example.org",
             "login": "eric@example.org",
             "mobilePhone": "555-415-2011"
         },
@@ -1217,6 +1236,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
             "firstName": "Eric",
             "lastName": "Judy",
             "email": "eric@example.org",
+            "secondEmail": "eric2@example.org",
             "login": "eric@example.org",
             "mobilePhone": "555-415-2011"
         },
@@ -1260,9 +1280,14 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Update User
 {:.api .api-operation}
 
+> Use the POST method to make a partial update. Use the PUT method to delete unspecified attributes.
+
 <span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /users/*:id*</span>
 
 Update a user's profile and/or credentials.
+
+> All profile attributes must be specified when updating a user's profile with this method. Any attribute not specified 
+is deleted. Do not use this method for partial updates.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -1299,6 +1324,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
         "login": "isaac.brock@example.org",
         "mobilePhone": "555-415-1337",
         "isManager": false
@@ -1323,6 +1349,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
         "login": "isaac.brock@example.org",
         "mobilePhone": "555-415-1337",
         "isManager": false
@@ -1362,6 +1389,109 @@ curl -v -H "Authorization: SSWS yourtoken" \
     }
 }
 ~~~   
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:id*</span>
+
+Update a user's profile and/or credentials. Use this method for a partial update. 
+
+> Only the profile attributes to change must be specified when updating a user's profile with this method. Any attribute not specified 
+is unchanged. Use this method for partial updates.
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter   | Description                 | Param Type | DataType                                  | Required | Default
+----------- | --------------------------- | ---------- | ----------------------------------------- | -------- | -------
+id          | `id` of user to update      | URL        | String                                    | TRUE     |
+profile     | Updated profile for user    | Body       | [Profile Object](#profile-object)         | FALSE    |
+credentials | Update credentials for user | Body       | [Credentials Object](#credentials-object) | FALSE    |
+
+`profile` and `credentials` can be updated independently or with a single request. 
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+Updated [User](#user-model)
+
+#### Update Profile
+{:.api .api-operation}
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+This example updates the second email field only.
+
+~~~ ruby
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X PUT "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR" \
+-d \
+'{
+    "profile": {
+        "secondEmail": "isaacDirect@example.org"
+    }
+}'
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~ json
+{
+    "id": "00ub0oNGTSWTBKOLGLNR",
+    "status": "ACTIVE",
+    "created": "2013-06-24T16:39:18.000Z",
+    "activated": "2013-06-24T16:39:19.000Z",
+    "statusChanged": "2013-06-24T16:39:19.000Z",
+    "lastLogin": "2013-06-24T17:39:19.000Z",
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": "2013-07-02T21:36:25.344Z",
+    "profile": {
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "email": "isaac@example.org",
+        "secondEmail": "isaacDirect@example.org",
+        "login": "isaac.brock@example.org",
+        "mobilePhone": "555-415-1337",
+        "isManager": false
+    },
+    "credentials": {
+        "password": {},
+        "recovery_question": {
+            "question": "Who's a major player in the cowboy scene?"
+        },
+        "provider": {
+            "type": "OKTA",
+            "name": "OKTA"
+        }
+    },
+    "_links": {
+        "resetPassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+        },
+        "resetFactors": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+         },
+        "expirePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+        },
+        "forgotPassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+        },
+        "changeRecoveryQuestion": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+        },
+        "deactivate": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+        },
+        "changePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+        }
+    }
+}
+~~~  
+
 
 #### Set Password
 {:.api .api-operation}
@@ -1405,6 +1535,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
         "login": "isaac@example.org",
         "mobilePhone": "555-415-1337"
     },
@@ -1485,6 +1616,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
         "login": "isaac@example.org",
         "mobilePhone": "555-415-1337"
     },
@@ -1891,6 +2023,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
         "login": "isaac@example.org",
         "mobilePhone": "555-415-1337"
     },
