@@ -90,7 +90,7 @@ The easiest way to implement SAML is to leverage an OpenSource SAML toolkits.  A
 
 ### Single IDP vs Multiple IDPs
 
-If you are building an internal app and you want to SAML-enable it in order to integrate with your corporate SAML identity provider, then you are looking at supporting only a single IDP.  In this case, your app only needs to deal with a single set of IDP metadata (cert, endpoints, etc).  The need 
+If you are building an internal app and you want to SAML-enable it in order to integrate with your corporate SAML identity provider, then you are looking at supporting only a single IDP.  In this case, your app only needs to deal with a single set of IDP metadata (cert, endpoints, etc). 
 
 ![Single IDP](/assets/img/saml_guidance_one_idp.png "Single IDP")
 
