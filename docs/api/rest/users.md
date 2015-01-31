@@ -889,13 +889,15 @@ Enumerates users in your organization with pagination.  A subset of users can be
 Parameter | Description                                                                          | Param Type | DataType | Required | Default
 --------- | ------------------------------------------------------------------------------------ | ---------- | -------- | -------- | -------
 q         | Searches `firstName`, `lastName`, and `email` attributes of users for matching value | Query      | String   | FALSE    |
-limit     | Specified the number of results                                                      | Query      | Number   | FALSE    | 
+limit     | Specified the number of results                                                      | Query      | Number   | FALSE    | 200
 filter    | [Filter expression](/docs/getting_started/design_principles.html#filtering) for users   | Query      | String   | FALSE    |
 after     | Specifies the pagination cursor for the next page of users                           | Query      | String   | FALSE    |
 
 > The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination)
 
 > Search currently performs a startsWith match but it should be considered an implementation detail and may change without notice in the future
+
+> The limit of 200 applies to new organizations and will be rolled out to existing organizations over time.
 
 ###### Filters
 
