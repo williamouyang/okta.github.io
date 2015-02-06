@@ -121,7 +121,7 @@ Attribute   | DataType | MinLength | MaxLength | Nullable | Unique | Validation
 ----------- | -------- | --------- | --------- | -------- | ------ | ----------
 login       | String   | 5         | 100       | FALSE    | TRUE   | [RFC 6531 section 3.3](http://tools.ietf.org/html/rfc6531#section-3.3)
 email       | String   | 5         | 100       | FALSE    | TRUE   | [RFC 5322 section 3.2.3](http://tools.ietf.org/html/rfc5322#section-3.2.3)
-secondEmail | String   | 5         | 100       | FALSE    | TRUE   | [RFC 5322 section 3.2.3](http://tools.ietf.org/html/rfc5322#section-3.2.3)
+secondEmail | String   | 5         | 100       | TRUE    | TRUE   | [RFC 5322 section 3.2.3](http://tools.ietf.org/html/rfc5322#section-3.2.3)
 firstName   | String   | 1         | 50        | FALSE    | FALSE  |
 lastName    | String   | 1         | 50        | FALSE    | FALSE  |
 mobilePhone | String   | 0         | 100       | TRUE     | FALSE  |
