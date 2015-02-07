@@ -18,7 +18,7 @@ The API is targeted for developers who want to build their own end-to-end login 
 
 - **Recovery** allows users to securely reset their password if they've forgotten it, or unlock their account if it has been locked out due to excessive failed login attempts. This functionality is subject to the security policy set by the administrator.
 
-> This API is currently in **Beta** status and provides no guarantees for backwards-compatibility.  Okta is free to break compatibility with this API until it released as GA.
+> This API is currently in **Early Access (EA)** status.
 
 ## Authentication Model
 

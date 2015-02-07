@@ -17,7 +17,7 @@ The Factors API contains three types of operations.
  - **Factor Lifecycle Operations** &ndash; Enroll, activate, and reset factors.
  - **Factor Verification Operations** &ndash; Verify a factor
 
-> This API is currently in **Beta** status and provides no guarantees for backwards-compatibility.  Okta is free to break compatibility with this API until it released as GA.
+> This API is currently in **Early Access (EA)** status.
 
 ## Factor Model
 
