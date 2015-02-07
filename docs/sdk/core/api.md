@@ -29,16 +29,18 @@ title: API
             </ul>
         </div>
         
-        <a class="learnmore sdk-learnmore button-white col-xs-10" href="https://github.com/okta/oktasdk-csharp/releases">Download SDK</a>
+        <a class="learnmore sdk-learnmore button-white col-xs-10" href="https://chocolatey.org/packages/Okta.Core.Automation">Download SDK</a>
     </div>
     <div class="sdk-wrapper col-xs-3">
         <div class="sdk-content col-xs-12">
             <span class="medium-circle home-orange sdk-java"></span>
             <h4>Java SDK</h4>
-            <ul class="sdk-list list-unstyled"></ul>
+            <ul class="sdk-list list-unstyled">
+              <li><a class="learnmore sdk-more button-white" href="https://github.com/okta/oktasdk-java">GitHub</a></li>
+            </ul>
         </div>
         
-        <a class="learnmore sdk-learnmore button-white col-xs-10 disabled" href="#">Coming Soon</a>
+        <a class="learnmore sdk-learnmore button-white col-xs-10" href="https://github.com/okta/oktasdk-java">Download SDK</a>
     </div>
   </div><!-- /.row -->
 </div> <!-- /.container-narrow -->
