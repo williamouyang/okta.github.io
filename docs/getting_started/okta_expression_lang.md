@@ -8,11 +8,9 @@ title: Okta Expression Language
 
 ## Overview
 
-> Okta EL is currently only supported on the Profile Mappings Page and in the SAML App Wizard.
+Expressions allow you to reference, transform and combine attributes before you store them on a user profile or before passing them to an application for authentication or provisioning.  For example, you might use a custom expression to create a username by stripping @company.com from an email address.  Or you might combine `firstName` and `lastName` attributes into a single `displayName` attribute.
 
-This document details the features and syntax of Okta's Expression Language.  Expressions allow you to reference, transform and combine attributes before you store them on a user profile or before passing them to an application for authentication or provisioning.  For example, you might use a custom expression to create a username by stripping @company.com from an email address.  Or you might combine `firstName` and `lastName` attributes into a single `displayName` attribute.
-
-This document will be updated over time as new capabilities are added to the language.  Okta's expression language is based on [SpEL](http://docs.spring.io/spring/docs/3.0.x/reference/expressions.html) and uses a subset of functionalities offered by SpEL.
+This document details the features and syntax of Okta's Expression Language which can be used throughout the Okta Admin Console and API. This document will be updated over time as new capabilities are added to the language.  Okta's expression language is based on [SpEL](http://docs.spring.io/spring/docs/3.0.x/reference/expressions.html) and uses a subset of functionalities offered by SpEL.
 
 ## Referencing User Attributes
 When you create an Okta expression, you can reference any attribute that lives on an Okta user profile or App user profile.
@@ -26,17 +24,17 @@ Syntax  | Definitions | Examples
 `user.$attribute` | `user` reference to the Okta user<br>`$attribute` the attribute variable name | user.firstName<br>user.lastName<br>user.username<br>user.email
 
 ###Application user profile
-In addtion to a Okta user profile, all users have separate Application user profiles for each of their applications.  The Application user profiles are used to store application specific information about a user like their application username or their user role.  To reference an App user profile attribute, just specify the application variable and the attribute variable in that application's App user profile. In specifying the application you can either name the specific application you're referencing or use an implicit reference to an in-context application.
+In addtion to an Okta user profile, all users have separate Application user profiles for each of their applications.  The Application user profiles are used to store application specific information about a user, such as application username or user role.  To reference an App user profile attribute, just specify the application variable and the attribute variable in that application's App user profile. In specifying the application you can either name the specific application you're referencing or use an implicit reference to an in-context application.
 
 Syntax  | Definitions | Examples
 -------- | ---------- | ------------
 `$appuser.$attribute` | `$appUser` explicit reference to specific app<br>`$attribute` the attribute variable name | zendesk.firstName<br>active_directory.managerUpn<br>google_apps.email
 `appuser.$attribute` | `appUser` implicit reference to in-context app<br>`$attribute` the attribute variable name | appUser.firstName
 
-> With Universal Directory, there are about 30 attributes in the base Okta profile and you can add any number of custom attributes.  All App user profiles have a username attribute and possibly others depending on the application.   To find a full list of Okta user and App user attributes and their variable names, go to People > Profile Editor.  If you're not yet using Universal Directory, contact your Support or Professional Services team.
+> With Universal Directory, there are about 30 attributes in the base Okta profile and any number of custom attributes an be added.  All App user profiles have a username attribute and possibly others depending on the application.   To find a full list of Okta user and App user attributes and their variable names, go to People > Profile Editor.  If you're not yet using Universal Directory, contact your Support or Professional Services team.
 
 ## Referencing Application and Organization Properties
-In addition to referencing user attributes, you can also reference Application properties and properties of your Organzation.  To reference a particular attribute, just specify the appropriate binding and the attribute variable name.  Here are some examples:
+In addition to referencing user attributes, you can also reference App propertis, and the properties of your Organzation.  To reference a particular attribute, just specify the appropriate binding and the attribute variable name.  Here are some examples:
 
 ###Application properties
 
@@ -52,7 +50,7 @@ Syntax  | Definitions | Examples
 `org.$attribute` | `org` reference to Okta org<br>`$attribute` the attribute variable name | org.domain
 
 
-> For a full list of Application and Org attributes, contact your Support or Professional Services team.
+> For a full list of App and Org attributes, contact your Support or Professional Services team.
 
 
 ## Functions
@@ -60,6 +58,22 @@ Syntax  | Definitions | Examples
 Okta offers a variety of functions to manipulate attributes or properties to generate a desired output.  Functions can be combined and nested inside a single expression.
 
 ### String Functions
+
+Function | Input Parameter Signature | Return Type | Example | Output
+-------- | ------------------------- | ----------- | ------- | ------
+`String.stringSwitch` | (String input, String defaultString, String... keyValuePairs) | String | 1.	String.stringSwitch("This is a test", "default", "key1", "value1")<br /><br />2. String.stringSwitch("This is a test", "default", "is", "value1")<br /><br />3. String.stringSwitch("This is a test", "default", "key1", "value1", "test", "value2") | 1. default<br /><br />2. value1<br /><br />3. value2
+`String.stringContains` | (String input, String searchString) | Boolean |1. String.stringContains("This is a test", "test") <br /><br />2. String.stringContains("This is a test", "doesn'tExist") | 1. true<br /><br />2. false
+`String.removeSpaces` | (String input) | String | String.removeSpaces("This is a test") | Thisisatest
+`String.join` | (String separator, String... strings) | String | 1. String.join(",", "This", "is", "a", "test")<br /><br /> | 1. This,is,a,test<br />2. Thisisatest
+`String.len` | (String input) | Integer | String.len("This") | 4
+`String.append` | (String str, String suffix) | String | String.append("This is", " a test") | This is a test
+`String.toUpperCase` | (String input ) | String | String.toUpperCase("This") | THIS
+`String.toLowerCase` | (String input) | String | String.toLowerCase("ThiS") | this
+`String.substringBefore` | (String input, String searchString) | String | String.substringBefore("abc@okta.com", "@") | abc
+`String.substringAfter` | (String input, String searchString) | String | String.substringAfter("abc@okta.com", "@") | okta.com
+`String.substring `| (String input, int startIndex, int endIndex) | String | String.substring("This is a test", 2, 9) | is is a
+
+The following deprecated functions perform some of the same tasks as the ones in the above table.
 
 Function  | Example | Input | Output
 -------- | --------- | -------| --------
@@ -76,6 +90,7 @@ Function  | Return Type | Example | Output
 `Arrays.add(array, value)` | Array | Arrays.add({10, 20, 30}, 40) | {10, 20, 30, 40}
 `Arrays.remove(array, value)` | Array | Arrays.remove({10, 20, 30}, 20) | {10, 30}
 `Arrays.clear(array)` | Array | Arrays.clear({10, 20, 30}) | { }
+`Arrays.get(array, position)` | - | Arrays.get({1,2,3},0) | 0
 `Arrays.flatten(list of values)` | Array | Arrays.flatten(10, {20, 30}, 40) | {10, 20, 30, 40}
 `Arrays.contains(array, value)` | Boolean | Arrays.contains({10, 20, 30}, 10) | true
  |  | Arrays.contains({10, 20, 30}, 50) | false
@@ -126,14 +141,15 @@ Sample user data:
 
 Value to Obtain | Expression  | Example Output | Explanation
 ---------- | ---- | ----- | ---------------
-Firstname | `user.firstName` | Winston | Obtain the value of users's firstname attribute.
+Firstname | `user.firstName` | Winston | Obtain the value of users' firstname attribute.
 Firstname + Lastname | `user.firstName + user.lastName` | WinstonChurchill | Obtain Firstname and Lastname values and append each together.
-Firstname + Lastname with Separator | `user.firstName + "." + user.lastName` | Winston.Churchill | Obtain Firstname value, append a "." character. Obtain and append the Lastname value
-First Initial + Lastname | `substring(user.firstName, 0, 1) + user.lastName` | WChurchill | Obtain Firstname value. From result, retrieve characters greater than position 0 thru position 1, including position 1. Obtain and append the Lastname value
+Firstname + Lastname with Separator | `user.firstName + "." + user.lastName` | Winston.Churchill | Obtain Firstname value, append a "." character. Obtain and append the Lastname value.
+First Initial + Lastname | `substring(user.firstName, 0, 1) + user.lastName` | WChurchill | Obtain Firstname value. From result, retrieve characters greater than position 0 thru position 1, including position 1. Obtain and append the Lastname value.
 First Initial + Lastname with Limit | `substring(user.firstName, 0, 1) + substring(user.lastName, 0, 6)` | WChurch | Obtain Firstname value. From result, retrieve 1 character starting at the beginning of the string. Obtain Lastname value. From result, retrieve characters greater than position 0 thru position 6, including position 6.
 Lower Case First Initial + Lower Case Lastname with Separator | `toLowerCase(substring( user.firstName, 0, 1)) + "." + toLowerCase(user.lastName)` | w.churchhill | Obtain Firstname value. From result, retrieve characters greater than position 0 thru position 1, including position 1. Convert result to lowercase. Append a "." character. Obtain the Lastname value. Convert to lowercase and append.
 Email Domain + Email Prefix with Separator | `toUpperCase(substringBefore( substringAfter(user.email, "@"), ".")) + "\" + substringBefore( user.email, "@")` | GMAIL\winston.churchill | Obtain Email value. From result, parse everything after the "@ character". From result, parse everything before the "." character. Convert to uppercase. Append a backslash "\" character. Obtain the email value again. From result, parse for everything before the "@" character.
 Email Domain + Lowercase First Initial and Lastname with Separator | `toUpperCase(substringBefore( substringAfter(user.email, "@"), ".")) + "\" + toLowerCase(substring( user.firstName, 0, 1)) + toLowerCase(user.lastName)` | GMAIL\wchurchill | Obtain Email value. From result, parse everything after the "@ character". From result, parse everything before the "." character. Convert to uppercase. Append a backslash "\" character. Obtain the Firstname value. From result, retrieve characters greater than position 0 thru position 1, including position 1. Convert it to lowercase. Obtain the Lastname value and convert it to lowercase.
 Static Domain + Email Prefix with Separator | `"XDOMAIN\" + toLowerCase(substring( user.firstName, 0, 1)) + toLowerCase(user.lastName)` | XDOMAIN\wchurchill | Add "XDOMAIN" string. Append a backslash "\" character. Obtain the Firstname value. From result, retrieve characters greater than position 0 thru position 1, including position 1. Convert it to lowercase. Obtain the Lastname value. Convert it to lowercase.
-Workday ID | `hasWorkdayUser()?findWorkdayUser().employeeID:null` | 123456 | Check if user has a Workday assignment, and if so, return their Workday employeeID.
+Workday ID | `hasWorkdayUser()?findWorkdayUser().employeeID:null` | 123456 | Check if user has a Workday assignment, and if so, return their Workday employee ID.
 Active Directory UPN | `hasDirectoryUser()?findDirectoryUser().managerUPN:null` | bob@okta.com | Check if user has an Active Directory assignment, and if so, return their Active Directory manager UPN.
+
