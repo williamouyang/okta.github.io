@@ -61,13 +61,17 @@ Okta offers a variety of functions to manipulate attributes or properties to gen
 
 Function | Input Parameter Signature | Return Type | Example | Output
 -------- | ------------------------- | ----------- | ------- | ------
-`String.stringSwitch` | (String input, String defaultString, String... keyValuePairs) | String | 1.	String.stringSwitch("This is a test", "default", "key1", "value1")<br /><br />2. String.stringSwitch("This is a test", "default", "is", "value1")<br /><br />3. String.stringSwitch("This is a test", "default", "key1", "value1", "test", "value2") | 1. default<br /><br />2. value1<br /><br />3. value2
-`String.stringContains` | (String input, String searchString) | Boolean |1. String.stringContains("This is a test", "test") <br /><br />2. String.stringContains("This is a test", "doesn'tExist") | 1. true<br /><br />2. false
+`String.stringSwitch` | (String input, String defaultString, String... keyValuePairs) | String | String.stringSwitch("This is a test", "default", "key1", "value1")| default
+ | | | String.stringSwitch("This is a test", "default", "is", "value1")| value1
+ | | | String.stringSwitch("This is a test", "default", "key1", "value1", "test", "value2") | value2
+`String.stringContains` | (String input, String searchString) | Boolean |String.stringContains("This is a test", "test")  | true
+ | | | String.stringContains("This is a test", "doesn'tExist") | false
 `String.removeSpaces` | (String input) | String | String.removeSpaces("This is a test") | Thisisatest
-`String.join` | (String separator, String... strings) | String | 1. String.join(",", "This", "is", "a", "test")<br /><br /> | 1. This,is,a,test<br />2. Thisisatest
+`String.join` | (String separator, String... strings) | String | String.join(",", "This", "is", "a", "test") | This,is,a,test
+ | | | String.join("", "This", "is", "a", "test") | Thisisatest
 `String.len` | (String input) | Integer | String.len("This") | 4
 `String.append` | (String str, String suffix) | String | String.append("This is", " a test") | This is a test
-`String.toUpperCase` | (String input ) | String | String.toUpperCase("This") | THIS
+`String.toUpperCase` | (String input) | String | String.toUpperCase("This") | THIS
 `String.toLowerCase` | (String input) | String | String.toLowerCase("ThiS") | this
 `String.substringBefore` | (String input, String searchString) | String | String.substringBefore("abc@okta.com", "@") | abc
 `String.substringAfter` | (String input, String searchString) | String | String.substringAfter("abc@okta.com", "@") | okta.com
