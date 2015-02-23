@@ -916,6 +916,12 @@ Filter                                         | Description
 `lastUpdated eq "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Users last updated at a specific datetime
 `lastUpdated gt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Users last updated after a specific datetime
 `id eq "00u1ero7vZFVEIYLWPBN"`                 | Users with a specified `id`
+`profile.login eq "login@example.com"`         | Users with a specified `login`
+`profile.email eq "email@example.com"`         | Users with a specified `email`*
+`profile.firstName eq "John"`                  | Users with a specified `firstName`*
+`profile.lastName eq "Smith" `                 | Users with a specified `lastName`*
+
+\* If filtering by `email`, `lastName`, or `firstName`, Okta recommends the [User query API](#list-users-with-search). These profile filters are here for your convenience.
 
 See [Filtering](/docs/getting_started/design_principles.html#filtering) for more information on expressions
 
