@@ -18,7 +18,7 @@ The API is targeted for developers who want to build their own end-to-end login 
 
 - **Recovery** allows users to securely reset their password if they've forgotten it, or unlock their account if it has been locked out due to excessive failed login attempts. This functionality is subject to the security policy set by the administrator.
 
-> This API is currently in **Beta** status and provides no guarantees for backwards-compatibility.  Okta is free to break compatibility with this API until it released as GA.
+> This API is currently in **Early Access (EA)** status.
 
 ## Authentication Model
 
@@ -47,7 +47,7 @@ PASSWORD_EXPIRED    | The user's password was successfully validated but is expi
 RECOVERY            | The user has requested a recovery token to reset their password or unlock their account. | POST to the `next` link relation to [answer the user's recovery question](#answer-recovery-question).
 PASSWORD_RESET      | The user successfully answered their recovery question and must to set a new password.   | POST to the `next` link relation to [reset the user's password](#reset-password).
 LOCKED_OUT          | The user account is locked; self-service unlock or admin unlock is required.             | POST to the `unlock` link relation to perform a [self-service unlock](#unlock-account).
-MFA_UNENROLLED      | The user must select and enroll an available factor for additional verification.         | POST to the `enroll` link relation for a specific factor to [enroll the factor](#enroll-factor).
+MFA_ENROLL          | The user must select and enroll an available factor for additional verification.         | POST to the `enroll` link relation for a specific factor to [enroll the factor](#enroll-factor).
 MFA_ENROLL_ACTIVATE | The user must activate the factor to complete enrollment.                                | POST to the `next` link relation to [activate the factor](#activate-factor).
 MFA_REQUIRED        | The user must provide additional verification with a previously enrolled factor.         | POST to the `verify` link relation for a specific factor to [provide additional verification](#verify-factor).
 MFA_CHALLENGE       | The user must verify the factor-specific challenge.                                      | POST to the `verify` link relation to [verify the factor](#verify-factor).
@@ -376,7 +376,7 @@ deviceToken | A globally unique ID identifying the device of the user           
 
 ###### Device Token
 
-You must always pass the same `deviceToken` for a user's device with every authentication request for **per-device** or **per-session** Sign-On Policy factor challenges.  If the `deviceToken` is absent or does not match the previous `deviceToken`, the user will still be challenged everytime instead of **per-device** or **per-session**.  It is recommend that you generate a UUID or GUID for each client and persist the `deviceToken` as a persistent cookie or HTML5 localStorage item scoped to your web application's origin.
+You must always pass the same `deviceToken` for a user's device with every authentication request for **per-device** or **per-session** Sign-On Policy factor challenges.  If the `deviceToken` is absent or does not match the previous `deviceToken`, the user will still be challenged everytime instead of **per-device** or **per-session**.  It is recommend that you generate a UUID or GUID for each client and persist the `deviceToken` as a persistent cookie or HTML5 localStorage item scoped to your web application's origin.  The max length for `deviceToken` is 32 characters.
 
 #### Response Parameters
 {:.api .api-response .api-response-params}
@@ -741,7 +741,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 {
   "stateToken": "00Z20ZhXVrmyR3z8R-m77BvknHyckWCy5vNwEA6huD",
   "expiresAt": "2014-11-02T23:44:41.736Z",
-  "status": "MFA_UNENROLLED",
+  "status": "MFA_ENROLL",
   "relayState": "/myapp/some/deep/link/i/want/to/return/to",
   "_embedded": {
     "user": {
@@ -953,7 +953,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/factors
 
-Enrolls a user with a [factor](factors.html#supported-factors) assigned by their administrator.  The operation is only available for users that have not previously enrolled a factor and have transitioned to the `MFA_UNENROLLED` [authentication status](#authentication-status).
+Enrolls a user with a [factor](factors.html#supported-factors) assigned by their administrator.  The operation is only available for users that have not previously enrolled a factor and have transitioned to the `MFA_ENROLL` [authentication status](#authentication-status). 
 
 - [Enroll User with Security Question](#enroll-user-with-security-question)
 - [Enroll User with Okta SMS Factor](#enroll-user-with-okta-sms-factor)

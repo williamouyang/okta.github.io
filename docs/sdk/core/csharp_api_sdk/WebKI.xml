@@ -382,9 +382,9 @@
   </HelpKINode>
   <HelpKINode Title="AuthStatus.LockedOut field" Url="html/1080e6f7-d7dc-67df-d013-63dc2d4e9b1c.htm" />
   <HelpKINode Title="AuthStatus.MfaChallenge field" Url="html/49f68d09-1bf2-f31f-ac23-320efd9c0965.htm" />
+  <HelpKINode Title="AuthStatus.MfaEnroll field" Url="html/ab1eafc9-2e5a-ae65-77f9-2916bea5a701.htm" />
   <HelpKINode Title="AuthStatus.MfaEnrollActivate field" Url="html/977f8336-4e77-2977-b1d7-820fd35c1a6d.htm" />
   <HelpKINode Title="AuthStatus.MfaRequired field" Url="html/2cf3a43d-cd8b-d43d-ed7b-2b831e77ec8d.htm" />
-  <HelpKINode Title="AuthStatus.MfaUnenrolled field" Url="html/d897314c-ffae-1c99-8bea-59936b04519d.htm" />
   <HelpKINode Title="AuthStatus.PasswordExpired field" Url="html/a043d910-461a-3efa-193a-7f9c272c66c8.htm" />
   <HelpKINode Title="AuthStatus.PasswordReset field" Url="html/28ca85c4-779e-b29d-ba41-88d13e65686d.htm" />
   <HelpKINode Title="AuthStatus.Recovery field" Url="html/35ca4dcb-e5a3-53a5-2674-d111c844c756.htm" />
@@ -939,9 +939,9 @@
   <HelpKINode Title="MfaAnswer.MfaAnswer constructor" Url="html/a73f875e-fcf0-307b-e4f2-315023711574.htm" />
   <HelpKINode Title="MfaAnswer.Passcode property" Url="html/9995067e-45fb-6e86-e2a8-dce953285594.htm" />
   <HelpKINode Title="MfaChallenge field" Url="html/49f68d09-1bf2-f31f-ac23-320efd9c0965.htm" />
+  <HelpKINode Title="MfaEnroll field" Url="html/ab1eafc9-2e5a-ae65-77f9-2916bea5a701.htm" />
   <HelpKINode Title="MfaEnrollActivate field" Url="html/977f8336-4e77-2977-b1d7-820fd35c1a6d.htm" />
   <HelpKINode Title="MfaRequired field" Url="html/2cf3a43d-cd8b-d43d-ed7b-2b831e77ec8d.htm" />
-  <HelpKINode Title="MfaUnenrolled field" Url="html/d897314c-ffae-1c99-8bea-59936b04519d.htm" />
   <HelpKINode Title="MimApnsNotConfiguredException field" Url="html/460cf96d-188c-10e7-f77b-4a94460f1c91.htm" />
   <HelpKINode Title="MimEnrollmentDisallowedException field" Url="html/6d11537f-89c0-6fcc-b777-33ca8d5e53ac.htm" />
   <HelpKINode Title="MimUnsupportedVersionException field" Url="html/c163191c-3364-4501-c0fb-b7ac2ee26c67.htm" />
@@ -1612,8 +1612,8 @@
   <HelpKINode Title="UserId field" Url="html/d5f44829-28bf-699c-7495-0bbf01ece177.htm" />
   <HelpKINode Title="UserId property" Url="html/69267677-53cd-210f-8a0b-1f2430582b38.htm" />
   <HelpKINode Title="UserName property">
-    <HelpKINode Title="AppCredentials.UserName Property " Url="html/c5b6a967-fba0-29a0-b64e-8c38cf92fe81.htm" />
     <HelpKINode Title="AppUserCredentials.UserName Property " Url="html/32cf267b-79f9-4af3-03f8-6785f3c60f1a.htm" />
+    <HelpKINode Title="AppCredentials.UserName Property " Url="html/c5b6a967-fba0-29a0-b64e-8c38cf92fe81.htm" />
   </HelpKINode>
   <HelpKINode Title="Username property" Url="html/6bec3c8c-4493-319b-9d3c-0701f069eb9f.htm" />
   <HelpKINode Title="UsernameField property" Url="html/0d816d3f-b8cf-a0e2-8b51-b605a4355c7c.htm" />

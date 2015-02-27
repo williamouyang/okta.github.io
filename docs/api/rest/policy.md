@@ -22,6 +22,8 @@ This API supports the following **rule operations**:
 * Create, read, update, and delete a rule for a policy
 * Activate and deactivate a rule
 
+> This API is currently in **Early Access (EA)** status.
+
 # Policies
 
 ## Policy Model and Defaults

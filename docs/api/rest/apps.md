@@ -179,7 +179,7 @@ Specifies access settings for the application.
 
 Attribute        | Description                                | DataType | MinLength | MaxLength | Nullable | Default
 ---------------- | ------------------------------------------ | -------- | --------- | --------- | -------- | -------
-selfService      | Enable self service application assignment | Boolean  |           |           | TRUE     | FALSE
+selfService      | Enable self-service application assignment | Boolean  |           |           | TRUE     | FALSE
 errorRedirectUrl | Custom error page for this application     | String   |           |           | TRUE     | NULL (Global Error Page)
 
 ~~~ json
@@ -235,7 +235,7 @@ Specifies credentials and scheme for the application's `signOnMode`.
 Attribute        | Description                                                                  | DataType                                              | MinLength | MaxLength | Nullable | Default
 ---------------- | ---------------------------------------------------------------------------- | ----------------------------------------------------- | --------- | --------- | -------- | -------
 scheme           | Determines how credentials are managed for the `signOnMode`                  | [Authentication Scheme](#authentication-schemes)      |           |           | TRUE     | NULL           
-userNameTemplate | Default username that is generated when an application is assigned to a user | [UserName Template Object](#username-template-object) |           |           | TRUE     | *Okta UserName*
+userNameTemplate | Template used to generate a user’s username when the application is assigned via a group or directly to a user | [UserName Template Object](#username-template-object) |           |           | TRUE     | *Okta UserName*
 userName         | Shared username for app                                                      | String                                                | 1         | 100       | TRUE     | NULL
 password         | Shared password for app                                                      | [Password Object](#password-object)                   |           |           | TRUE     | NULL
 
