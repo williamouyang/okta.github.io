@@ -1,6 +1,6 @@
 ---
 layout: docs_page
-title: SAML
+title: SAML Overview
 ---
 
 * Will be replaced with the ToC
