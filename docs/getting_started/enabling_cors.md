@@ -14,10 +14,6 @@ In Okta, CORS allows JavaScript hosted on your websites to make an XHR to the Ok
 
 > **Caution:** Only grant access to specific origins (websites) that you control and trust to access the Okta API.
 
-> **Early Access Feature (EA)**
-> 
-> Support for CORS is EA and must be explicitly enabled for your Okta organization.  Please contact support to enable CORS for your organization.
-
 ## API Support
 
 The Okta API supports CORS on an API by API basis. If you're building an application that needs CORS, please check that the specific operation supports CORS for your use case. APIs that support CORS are marked with the following icon <span class="api-label api-label-small api-label-cors"><i class="fa fa-cloud-download"></i> CORS</span>.
@@ -41,8 +37,6 @@ You can enable CORS for websites that need cross-origin requests to the Okta API
 3. Select **Save**.
 
 **Note: If you do not enable CORS, or disable it at a later date, the list of websites is retained.**
-
-> If the CORS tab is missing, you must contact support to enable the feature for your organization.  CORS is currently an Early Access feature.
 
 ## Testing
 
