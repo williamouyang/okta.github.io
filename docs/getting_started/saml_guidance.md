@@ -1,6 +1,6 @@
 ---
 layout: docs_page
-title: SAML
+title: Single Sign-On with Okta
 ---
 
 * Will be replaced with the ToC
@@ -159,7 +159,8 @@ When you are finished, publish your app to the App Store. Contact <developer@okt
 
 There are many available OpenSource toolkits that implement the SAML 2.0 specificaiton for the WebSSO Profile for Service Providers in different programming languages.  The following is a list of recommended toolkits:
 
-- Java: [Okta Java SAML Toolkit](https://support.okta.com/entries/25009573-Current-SAML-Toolkit-for-Java-Version) 
+- Java: [Okta Java SAML Toolkit](https://support.okta.com/entries/25009573-Current-SAML-Toolkit-for-Java-Version)
+- Java/Spring: [Spring Security SAML](/docs/examples/spring_security_saml.html)
 -- based on top of [OpenSAML](https://shibboleth.net/products/opensaml-java.html)
 - Ruby: [Ruby-SAML](https://rubygems.org/gems/ruby-saml)
 - Python: [PySAML2](https://pypi.python.org/pypi/pysaml2)
