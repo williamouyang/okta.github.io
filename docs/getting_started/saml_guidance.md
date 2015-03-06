@@ -1,6 +1,6 @@
 ---
 layout: docs_page
-title: Single Sign-On into Okta
+title: Single Sign-On with Okta
 ---
 
 * Will be replaced with the ToC
