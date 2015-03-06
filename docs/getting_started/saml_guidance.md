@@ -1,6 +1,6 @@
 ---
 layout: docs_page
-title: SAML Overview
+title: Single Sign-On into Okta
 ---
 
 * Will be replaced with the ToC

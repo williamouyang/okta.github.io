@@ -1,6 +1,6 @@
 # -- GETTING STARTED
 - section: getting_started
-  title: Getting Started with the Okta API
+  title: Getting Started
   pages:
     - design_principles
     - error_codes
@@ -33,10 +33,4 @@
   pages:
     - session_cookie
     - dotnet_sample_application
-
-# -- Single Sign-On Guidance
-- section: sso
-  title: Single Sign-On Guidance
-  pages:
-    - saml_overview
     - spring_security_saml
