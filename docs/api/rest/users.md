@@ -1433,7 +1433,7 @@ This example updates the second email field only.
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X PUT "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR" \
+-X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR" \
 -d \
 '{
     "profile": {
