@@ -8,6 +8,7 @@
     - enabling_cors
     - api_test_client
     - saml_guidance
+    - oan_guidance
 
 # -- APIS
 - section: api/rest
