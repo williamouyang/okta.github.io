@@ -15,3 +15,12 @@ billy:
   web: http://company.com
   twitter: https://twitter.com/duggiwuggi
   github: https://github.com/duggi
+
+victor_ronin:
+  full_name: Victor Ronin
+  display_name: Victor
+  avatar: avatar-victor_ronin.png
+  email: victor.ronin@okta.com
+  web: http://example.com
+  twitter: https://twitter.com/example
+  github: https://github.com/example

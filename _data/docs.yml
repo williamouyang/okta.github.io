@@ -35,3 +35,4 @@
     - session_cookie
     - dotnet_sample_application
     - spring_security_saml
+    - pysaml2
