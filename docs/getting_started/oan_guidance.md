@@ -42,7 +42,7 @@ Use the following instructions to integrate your app into the Okta Application N
 
 ### 2. Integrate Your App
 
-* Sign up for an Okta developer account. 
+* Sign up for an Okta [developer account](https://www.okta.com/developer/signup/).
 * Use the app wizard to integrate single sign-on after you sign into Okta as an admin. For more details, see our videos for [SAML](https://www.youtube.com/watch?v=rQpUsRe0Jxw) and [SWA](https://www.youtube.com/watch?v=FoyhQEwOnqg).
 * Currently provisioning integrations are custom-built by Okta. Email <oan@okta.com> to submit a request for your app.
 * Got Stuck? See our *Okta Application Network FAQs* below.
@@ -84,7 +84,7 @@ A: SWA was developed by Okta to provide single sign-on for apps that do not supp
 
 **Q: What is the process after I have submitted my app using the app wizard?**
 
-A: Okta App Integration team reviews all submitted apps. The team will reach out during the testing and documentation process for additional information. When completed, the application is then be promoted to the public Okta Application Network, and you are notified. Typical review time is two weeks. Have you submitted an app but have not heard from Okta? Email <oan@okta.com>.
+A: Okta App Integration team reviews all submitted apps. The team will reach out during the testing and documentation process for additional information. When completed, the application is then be promoted to the public Okta Application Network, and you are notified. Typical review time is two weeks. Have you submitted an app but have not heard from Okta? Email <developers@okta.com>.
 
 **Q: What is the difference between Community Created and Okta Verified in the Okta Application Network?**
 
