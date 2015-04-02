@@ -120,7 +120,7 @@ Here is how to configure Okta:
     field:
 
     ~~~ shell
-    http://localhost:8080/spring-security-saml2-sample/saml/SSO/alias/defaultAlias
+    http://localhost:8080/spring-security-saml2-sample/saml/metadata
     ~~~
 
     Then click the green "Next" button

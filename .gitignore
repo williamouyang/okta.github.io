@@ -22,6 +22,9 @@ classes
 # ignore vim swap files
 *.sw[a-p]
 
+# ignore emacs auto-save files
+*~
+
 # ignore mac specific files
 .DS_Store
 reload_views.rb
