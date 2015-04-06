@@ -140,7 +140,7 @@ This is particularly important where the entire population is intended to be SAM
 
 With SAML being an HTTP-based protocol, supporting SAML in a native mobile app may seem tricky.  You can actually achieve this quite easily by including an embedded webview in your native app to support the HTTP redirects.  When launching the webview, make sure you hit a URL on the SP side that will trigger a SAML redirect back to the IDP.  From this point on, the webview will carry out the SP-initiated login flow as it would happen in a browser.  When the SP finally receives the SAML response and authenticates the user successfully, your native app can leave the webview and proceed with the rest of the login bootstrap which typically involves some sort of a token (eg. OAuth) being generated and stored by the native app for subsequent access.  This is a fairly common approach used by many ISVs to support SAML integration with enterprises.
 
-> Coming Soon - Sample code for iOS webview
+For more details, see the [technical overview for Okta Mobile Connect](https://github.com/okta/okta-mobile-connect).
 
 ## Supporting Okta Mobile Connect
 
