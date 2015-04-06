@@ -140,7 +140,7 @@ This is particularly important where the entire population is intended to be SAM
 
 With SAML being an HTTP-based protocol, supporting SAML in a native mobile app may seem tricky.  You can actually achieve this quite easily by including an embedded webview in your native app to support the HTTP redirects.  When launching the webview, make sure you hit a URL on the SP side that will trigger a SAML redirect back to the IDP.  From this point on, the webview will carry out the SP-initiated login flow as it would happen in a browser.  When the SP finally receives the SAML response and authenticates the user successfully, your native app can leave the webview and proceed with the rest of the login bootstrap which typically involves some sort of a token (eg. OAuth) being generated and stored by the native app for subsequent access.  This is a fairly common approach used by many ISVs to support SAML integration with enterprises.
 
-> Coming Soon - Sample code for iOS webview
+For more details, see the [technical overview for Okta Mobile Connect](https://github.com/okta/okta-mobile-connect).
 
 ## Supporting Okta Mobile Connect
 
@@ -159,9 +159,8 @@ When you are finished, publish your app to the App Store. Contact <developer@okt
 
 There are many available OpenSource toolkits that implement the SAML 2.0 specificaiton for the WebSSO Profile for Service Providers in different programming languages.  The following is a list of recommended toolkits:
 
-- Java: [Okta Java SAML Toolkit](https://support.okta.com/entries/25009573-Current-SAML-Toolkit-for-Java-Version)
+- Java: [OpenSAML](https://shibboleth.net/products/opensaml-java.html)
 - Java/Spring: [Spring Security SAML](/docs/examples/spring_security_saml.html)
--- based on top of [OpenSAML](https://shibboleth.net/products/opensaml-java.html)
 - Ruby: [Ruby-SAML](https://rubygems.org/gems/ruby-saml)
 - Python: [PySAML2](https://pypi.python.org/pypi/pysaml2)
 - PHP: [SimpleSAMLphp](https://simplesamlphp.org/)
