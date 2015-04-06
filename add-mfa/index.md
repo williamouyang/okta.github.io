@@ -1,6 +1,6 @@
 ---
 layout: docs_page
-title: Adding Multi-Factor Authentication to your App with the Okta Platform
+title: Add Multi-Factor Authentication to your App with the Okta Platform
 ---
 
 * Will be replaced with the ToC
