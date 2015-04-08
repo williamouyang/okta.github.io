@@ -1940,6 +1940,8 @@ Generates a one-time token (OTT) that can be used to reset a user's password.  T
 
 This operation will transition the user to the status of `RECOVERY` and the user will not be able to login or initiate a forgot password flow until they complete the reset flow.
 
+**Note:** You can also use this API to convert a user with the Okta Credential Provider to a use a Federated Provider. After this conversion, the user cannot directly sign in with password. The second example demonstrate this usage.
+
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
@@ -1977,6 +1979,31 @@ curl -v -H "Authorization: SSWS yourtoken" \
   "resetPasswordUrl": "https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"
 }
 ~~~
+
+##### Request Example (Convert a User to a Federated User)
+{:.api .api-request .api-request-example}
+
+To convert a user to a federated user, pass `FEDERATED` as the ***provider*** in the [Provider Object](#provider-object). The `sendEmail`
+parameter must be false or omitted for this type of conversion.
+
+~~~ ruby
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/user/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password?provider=FEDERATION&sendEmail=false"
+
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "resetPasswordUrl": "https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"
+}
+~~~
+
+
 
 ### Expire Password
 {:.api .api-operation}
@@ -2107,6 +2134,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 HTTP/1.1 200 OK
 Content-Type: application/json
 ~~~
+
+
 
 ## Credential Operations
   
