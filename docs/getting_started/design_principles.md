@@ -42,7 +42,7 @@ All Date objects are returned in ISO 8601 format:
     YYYY-MM-DDTHH:mm:ss.SSSZ
 
 ## Character Sets
-Okta supports a subset of the `UTF-8` specification. Specifically, any character that can be encoded in three bytes or less is supported. BMP characters and/or supplementary characters that *must* be encoded using four bytes are are not supported at this time.
+Okta supports a subset of the `UTF-8` specification. Specifically, any character that can be encoded in three bytes or less is supported. BMP characters and supplementary characters that *must* be encoded using four bytes are not supported at this time.
 
 ## HTTP Verbs
 
