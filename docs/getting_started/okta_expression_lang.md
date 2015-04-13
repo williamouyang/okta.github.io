@@ -109,7 +109,13 @@ Function  | Return Type | Example | Output
 Function  | Return Type | Example | Input | Output
 -------- | ---------| --------- | -------| --------
 `Convert.toInt(string)` | Integer | `Convert.toInt(val)` | String val = '1234' | 1234
+`Convert.toInt(double)` | Integer | `Convert.toInt(val)` | Double val = 123.4 | 123
+ | | | Double val = 123.6 | 124
 `Convert.toNum(string)` | Double | `Convert.toNum(val)` | String val = '3.141' | 3.141
+
+**Note:**  Convert.toInt(double) rounds the passed numeric value either up or down to the nearest integer. Be sure to consider 
+integer type range limitations when converting from a number to an integer with this function.
+
 
 ### Directory and Workday Functions
 
