@@ -31,10 +31,10 @@ Syntax  | Definitions | Examples
 `$appuser.$attribute` | `$appUser` explicit reference to specific app<br>`$attribute` the attribute variable name | zendesk.firstName<br>active_directory.managerUpn<br>google_apps.email
 `appuser.$attribute` | `appUser` implicit reference to in-context app<br>`$attribute` the attribute variable name | appUser.firstName
 
-> With Universal Directory, there are about 30 attributes in the base Okta profile, and any number of custom attributes can be added.  All App user profiles have a username attribute and possibly others depending on the application.   To find a full list of Okta user and App user attributes and their variable names, go to People > Profile Editor.  If you're not yet using Universal Directory, contact your Support or Professional Services team.
+> With Universal Directory, there are about 30 attributes in the base Okta profile and any number of custom attributes can be added.  All App user profiles have a username attribute and possibly others depending on the application.   To find a full list of Okta user and App user attributes and their variable names, go to People > Profile Editor.  If you're not yet using Universal Directory, contact your Support or Professional Services team.
 
 ## Referencing Application and Organization Properties
-In addition to referencing user attributes, you can also reference App properties, and the properties of your Organzation.  To reference a particular attribute, just specify the appropriate binding and the attribute variable name.  Here are some examples:
+In addition to referencing user attributes, you can also reference App properties, and the properties of your Organization.  To reference a particular attribute, just specify the appropriate binding and the attribute variable name.  Here are some examples:
 
 ###Application properties
 
