@@ -1,0 +1,131 @@
+---
+---
+
+@charset "utf-8";
+
+@import
+	"variables",
+	"mixins"
+;
+
+
+.page-content {
+	section {
+		padding: 60px 0;
+		
+		header {
+			margin-bottom: 40px;
+		}
+	}
+	
+	p, ul {
+		@include scaleUpFontSizeBy(1.5);
+	}
+	
+	li {
+		margin-top: $lineHeight * $fontSize * 1/2;
+	}
+}
+
+#banner {
+	background: #016aab url(/assets/images/home/banner-bg.jpg) no-repeat center bottom;
+	background-size: $pageWidth;
+	padding: 100px 0 140px;
+	
+	h1, p {
+		color: $colorWhite;
+	}
+}
+
+#features {
+	background: $colorGreyLighter;
+	text-align: center;
+	
+	h2 {
+		@include scaleUpFontSizeBy(3);
+	}
+	
+	img {
+		display: block;
+		margin: 0 auto;
+		max-width: 100%;
+	}
+}
+
+#uptime {
+	padding: 20px 0;
+	text-align: center;
+	
+	.wrap {
+		background: url(/assets/images/home/continents-bg.jpg) no-repeat center;
+		background-size: auto 100%;
+		padding: 40px 0;
+	}
+	
+	.trailing-link {
+		font-weight: 500;
+		margin-top: 200px;
+		text-transform: uppercase;
+		
+		a {
+			text-decoration: none;
+			
+			&:after {
+				color: #7eaa40;
+				content: ">";
+				margin-left: 8px;
+			}
+		}
+	}
+}
+
+#security {
+	background: $colorBlueLight;
+	padding: 60px 0;
+	
+	h2, p {
+		text-align: center;
+	}
+	
+	.col-1-3 img {
+		width: 100%;
+	}
+}
+
+#sdk {
+	text-align: center;
+	
+	a {
+		display: block;
+		font-weight: 500;
+		text-decoration: none;
+		text-transform: uppercase;
+	}
+	
+	img {
+		display: block;
+		margin: 0 auto 20px;
+	}
+}
+
+#trust {
+	background: $colorGreyLighter;
+	
+	h2 {
+		text-align: center;
+	}
+}
+
+#get-started {
+	background: $colorBlue;
+	color: $colorWhite;
+	text-align: center;
+	
+	.wrap {
+		max-width: 660px;
+	}
+	
+	p {
+		@include scaleUpFontSizeBy(1);
+	}
+}

@@ -1,0 +1,15 @@
+body {
+	padding-top: $headerHeight;
+}
+
+.wrap {
+	margin: 0 auto;
+	max-width: $pageWidth;
+	overflow: hidden;
+	zoom: 1;
+}
+
+.page-content {
+	position: relative;
+	z-index: 10;
+}

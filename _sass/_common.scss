@@ -1,0 +1,38 @@
+.logo-placard {
+	background: #fff;
+	border-bottom: 2px solid $colorGreyLight;
+	height: 120px;
+	line-height: 120px;
+	padding: 30px;
+	text-align: center;
+	
+	img {
+		display: inline-block;
+		max-height: 100%;
+		max-width: 100%;
+		vertical-align: middle;
+	}
+}
+
+.button--large {
+	background: none;
+	border: 3px solid #075384;
+	border-radius: 33px;
+	box-shadow: none;
+	color: $colorWhite;
+	display: inline-block;
+	font-weight: 500;
+	height: 60px;
+	line-height: 60px;
+	padding: 0 40px;
+	text-decoration: none;
+	text-shadow: none;
+	text-transform: uppercase;
+	transition: 0.2s all;
+	
+	&:active, &:focus, &:hover {
+		background: #168ed8;
+		border-color: #5ab3e9;
+		color: $colorWhite;
+	}
+}

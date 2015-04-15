@@ -1,0 +1,72 @@
+.site-header {
+	background: #fff;
+	box-sizing: border-box;
+	height: $headerHeight;
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+	z-index: 20;
+}
+
+.site-title {
+	background: url(/assets/images/logo.png) no-repeat center;
+	background-size: auto 44px;
+	display: block;
+	float: left;
+	height: 90px;
+	margin: 0;
+	width: 157px;
+	
+	a {
+		display: block;
+		height: 100%;
+		overflow: hidden;
+		text-indent: 100%;
+		white-space: nowrap;
+		width: 100%;
+	}
+}
+
+.site-nav {
+	float: right;
+	line-height: 1em;
+	padding-top: 23px;
+	
+	.primary, .secondary {
+		clear: both;
+		float: right;
+		line-height: 1em;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	
+	.primary {
+		padding-top: 8px;
+	}
+
+	li {
+		float: left;
+		
+		+ li {
+			margin-left: 20px;
+		}
+	}
+	
+	a {
+		font-weight: 500;
+		text-decoration: none;
+		text-transform: uppercase;
+	}
+	
+	.primary a {
+		@include scaleDownFontSizeBy(1/2);
+		color: #333;
+	}
+	
+	.secondary a {
+		@include scaleDownFontSizeBy(1);
+		color: $colorBlue;
+	}
+}

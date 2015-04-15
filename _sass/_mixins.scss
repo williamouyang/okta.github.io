@@ -1,0 +1,11 @@
+@mixin scaleDownFontSizeBy($power) {
+	font-size: 1em / pow($sizingRatio, $power);
+}
+
+@mixin scaleUpFontSizeBy($power) {
+	font-size: 1em * pow($sizingRatio, $power);
+}
+
+@mixin defaultTransition() {
+	transition: 0.2s all;
+}
