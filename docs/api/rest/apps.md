@@ -61,7 +61,16 @@ The Okta Application API provides operations to manage applications and/or assig
       "signResponse": "SIGNED",
       "nameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
       "attributeStatements": null
-    }
+    },
+     "notifications": {
+         "vpn": {
+               "network": {
+                  "connection": "ANYWHERE"
+                },
+                "message": "Help message text.",
+                "helpUrl": "http:/www.help-site.example.com"
+          }
+      }
   },
   "_links": {
     "logo": [
@@ -326,6 +335,51 @@ metadata           | Protocol-specific metadata document for the configured `Sig
 users              | [User](#application-user-operations) assignments for application
 groups             | [Group](#application-group-operations) assignments for application
 logo               | Application logo image
+
+### Notifications Object
+
+Specifies notifications settings for the application. The VPN notification feature allows admins to communicate a requirement for signing into VPN-required apps. 
+
+Attribute         | Description                                        | DataType                            | MinLength | MaxLength | Nullable | Default
+----------------- | -------------------------------------------------- | ----------------------------------- | --------- | --------- | -------- | -------
+vpn  | VPN notification settings        | [VPN Object](#vpn-object)         |           |           | FALSE    |
+
+
+~~~ json
+{
+  "notifications": {
+    "vpn": {
+      "network": {
+        "connection": "ANYWHERE"
+      },
+      "message": "Help message text.",
+      "helpUrl": "http:/www.help-site.example.com"
+     }
+   }
+ } 
+~~~
+
+#### VPN Object
+
+Attribute | Description                                        | DataType | Nullable | Default
+--------- | -------------------------------------------------- | -------- | -------- | -------
+network   | The network connections for the VPN.              |  [Network Object](#network-object)      | FALSE   | 
+message   | An optional message to your end users.             | String   | TRUE     | null
+helpurl   | An optional URL to help page URL to assist your end users in signing into your company VPN. If you are using Juniper IVE as the VPN, this is where you can insert an embed link for the Juniper IVE SAML app. | String | TRUE | null
+
+#### Network Object
+
+Attribute | Description                                        | DataType | Nullable | Default
+--------- | -------------------------------------------------- | -------- | -------- | -------
+connection | The VPN settings on the app. Choices are shown below.| String  | FALSE    | DISABLED
+
+There are four choices for the `connection` attribute.
+
+ - `DISABLED` – The default state. Retain this setting for apps that do not require a VPN connection.
+ - `ANYWHERE` – Displays VPN connection information regardless of the browser's client IP. The notification appears before the end user can access the app.
+ - `ON_NETWORK` – Displays VPN connection information only when a browser's client IP matches the configured Pubic Gateway IPs. The notification appears before the end user can access the app.
+ - `OFF_NETWORK` – Displays VPN connection information only when the browser's client IP does not match the configured Pubic Gateway IPs. The notification appears before the end user can access the app.
+
 
 ## Application User Model
 
