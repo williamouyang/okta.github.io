@@ -17,32 +17,35 @@
 			margin-bottom: 40px;
 		}
 	}
-	
-	p, ul {
-		@include scaleUpFontSizeBy(1.5);
-	}
-	
-	li {
-		margin-top: $lineHeight * $fontSize * 1/2;
-	}
 }
 
-#banner {
-	background: #016aab url(/assets/images/home/banner-bg.jpg) no-repeat center bottom;
-	background-size: $pageWidth;
-	padding: 100px 0 140px;
+#valprop {
+	background: $colorBlueDark url(/assets/images/home/valprop-bg.jpg) no-repeat center bottom;
+	background-size: 1300px;
+	padding: 100px 0 220px;
 	
 	h1, p {
 		color: $colorWhite;
 	}
+	
+	p {
+		@include scaleUpFontSizeBy(2);
+		max-width: 640px;
+	}
+	
+	.button--large {
+		margin-top: $lineHeight * $fontSize * 1;
+	}
 }
 
 #features {
-	background: $colorGreyLighter;
 	text-align: center;
 	
 	h2 {
-		@include scaleUpFontSizeBy(3);
+		@include scaleUpFontSizeBy(.5);
+		color: #000;
+		font-weight: 500;
+		text-transform: uppercase;
 	}
 	
 	img {
@@ -53,38 +56,52 @@
 }
 
 #uptime {
-	padding: 20px 0;
-	text-align: center;
+	background: $colorBlueLight url(/assets/images/home/map-bg.png) no-repeat center;
+	background-size: auto 100%;
+	padding: 60px 0;
 	
-	.wrap {
-		background: url(/assets/images/home/continents-bg.jpg) no-repeat center;
-		background-size: auto 100%;
-		padding: 40px 0;
+	h2, p {
+		margin-left: auto;
+		margin-right: auto;
+		max-width: 780px;
+		text-align: center;
+	}
+	
+	p {
+		@include scaleUpFontSizeBy(1.5);
 	}
 	
 	.trailing-link {
+		@include scaleUpFontSizeBy(0);
 		font-weight: 500;
 		margin-top: 200px;
+		text-align: center;
 		text-transform: uppercase;
 		
 		a {
 			text-decoration: none;
-			
-			&:after {
-				color: #7eaa40;
-				content: ">";
-				margin-left: 8px;
-			}
 		}
 	}
 }
 
 #security {
-	background: $colorBlueLight;
 	padding: 60px 0;
 	
 	h2, p {
+		margin-left: auto;
+		margin-right: auto;
+		max-width: 700px;
 		text-align: center;
+	}
+	
+	p, ul {
+		@include scaleUpFontSizeBy(1.5);
+	}
+	
+	.row {
+		margin-left: auto;
+		margin-right: auto;
+		max-width: 830px;
 	}
 	
 	.col-1-3 img {
@@ -93,7 +110,24 @@
 }
 
 #sdk {
+	border-top: 10px solid $colorGreyLighter;
 	text-align: center;
+	
+	h2, p {
+		margin-left: auto;
+		margin-right: auto;
+		max-width: 830px;
+	}
+	
+	p, ul {
+		@include scaleUpFontSizeBy(1.5);
+	}
+	
+	.row {
+		margin-left: auto;
+		margin-right: auto;
+		max-width: 830px;
+	}
 	
 	a {
 		display: block;
@@ -118,8 +152,11 @@
 
 #get-started {
 	background: $colorBlue;
-	color: $colorWhite;
 	text-align: center;
+	
+	&, h2 {
+		color: $colorWhite;
+	}
 	
 	.wrap {
 		max-width: 660px;

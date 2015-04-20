@@ -1,7 +1,15 @@
 .row {
-	margin: 0 (-$gutterWidth / 2);
+	margin: ($lineHeight * $fontSize * 2) (-$gutterWidth / 2);
 	overflow: hidden;
 	zoom: 1;
+	
+	&:first-child {
+		margin-top: 0;
+	}
+	
+	&:last-child {
+		margin-bottom: 0;
+	}
 }
 
 [class*=col-] {

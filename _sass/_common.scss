@@ -15,15 +15,16 @@
 }
 
 .button--large {
-	background: none;
-	border: 3px solid #075384;
-	border-radius: 33px;
+	background: $colorGreen;
+	border: 1px solid $colorGreenDark;
+	border-radius: 3px;
 	box-shadow: none;
 	color: $colorWhite;
+	cursor: pointer;
 	display: inline-block;
 	font-weight: 500;
-	height: 60px;
-	line-height: 60px;
+	height: 65px;
+	line-height: 65px;
 	padding: 0 40px;
 	text-decoration: none;
 	text-shadow: none;
@@ -31,8 +32,8 @@
 	transition: 0.2s all;
 	
 	&:active, &:focus, &:hover {
-		background: #168ed8;
-		border-color: #5ab3e9;
+		background: mix($colorGreen, $colorWhite, 90%);
+		border-color: mix($colorGreenDark, $colorWhite, 90%);
 		color: $colorWhite;
 	}
 }

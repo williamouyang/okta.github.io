@@ -22,6 +22,7 @@ p, ul, ol, blockquote {
 }
 
 h1, h2, h3, h4, h5, h6 {
+	color: #353435;
 	font-weight: 300;
 	line-height: 1.1em;
 	margin: ($lineHeight * $fontSize * 2) 0 ($lineHeight * $fontSize * 1);
@@ -59,5 +60,29 @@ a {
 	
 	&:active, &:focus, &:hover {
 		color: mix($colorBlue, #fff, 70%);
+	}
+}
+
+ul.list--with-bullets {
+	li {
+		padding-left: $gutterWidth;
+		position: relative;
+		
+		&:before {
+			background: $colorGreen;
+			border-radius: 3px;
+			content: "";
+			display: block;
+			height: 6px;
+			left: $gutterWidth - 16;
+			margin-top: -3px;
+			position: absolute;
+			top: ($lineHeight * 1em) / 2;
+			width: 6px;
+		}
+		
+		+ li {
+			margin-top: $lineHeight * $fontSize * 1/2;
+		}
 	}
 }
