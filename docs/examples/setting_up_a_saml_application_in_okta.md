@@ -35,14 +35,24 @@ Here is how to set up a SAML application in Okta:
     "App name" field, then click the green "Next" button.
     ![General Settings](/assets/img/example-saml-application-okta-general-settings.png)
 
-7.  In Step 2 "Configure SAML",
-    Paste the URL below into the "Single sign on URL" and "Audience URI (SP Entity ID)" fields:
+7.  In Step 2 "Configure SAML"
 
-    ~~~ shell
-    http://example.com/saml/sso/example-okta-com
-    ~~~
+    - Paste the URL below into the "Single sign on URL" and "Audience URI (SP Entity ID)" fields:
 
-    Then click the green "Next" button
+      ~~~ shell
+      http://example.com/saml/sso/example-okta-com
+      ~~~
+
+    - Click "Show Advanced Settings"
+
+      Change the value of "Request compression" to "Compressed".
+
+    - In the "Attribute Statements" section, add three attribute statements:
+      1. "FirstName" set to "${user.firstName}"
+      2. "LastName" set to "${user.lastName}"
+      3. "Email" set to "${user.email}"
+
+    - Then click the green "Next" button
     
     ![SAML Settings](/assets/img/example-saml-application-okta-configure-settings.png)
 
