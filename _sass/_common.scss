@@ -1,3 +1,8 @@
+.clearfix {
+	overflow: inherit;
+	zoom: 1;
+}
+
 .logo-placard {
 	background: #fff;
 	border-bottom: 2px solid $colorGreyLight;
@@ -35,5 +40,53 @@
 		background: mix($colorGreen, $colorWhite, 90%);
 		border-color: mix($colorGreenDark, $colorWhite, 90%);
 		color: $colorWhite;
+	}
+}
+
+.tab-menu {
+	@extend .clearfix;
+	border: solid $colorGreyLight;
+	border-width: 1px 0;
+	margin-bottom: 40px;
+	
+	> ul {
+		@extend .wrap;
+		border-left: 1px solid $colorGreyLight;
+		box-sizing: border-box;
+	}
+	
+	li {
+		border-right: 1px solid $colorGreyLight;
+		box-sizing: border-box;
+		float: left;
+		width: 20%;
+	}
+	
+	a {
+		border-bottom: 4px solid transparent;
+		color: #000;
+		display: block;
+		padding: 24px 12px;
+		text-decoration: none;
+		vertical-align: middle;
+		
+		&:active, &:focus, &:hover {
+			border-bottom-color: $colorGreyLight;
+		}
+		
+		&.active {
+			border-bottom-color: $colorBlue;
+		}
+		
+		i, span {
+			display: inline-block;
+			vertical-align: middle;
+		}
+		
+		i {
+			height: 48px;
+			margin-right: 12px;
+			width: 24px;
+		}
 	}
 }

@@ -1,0 +1,60 @@
+---
+---
+
+@charset "utf-8";
+
+@import
+	"variables",
+	"mixins"
+;
+
+#valprop {
+	background-image: url(/assets/images/valprop-bg--home.jpg);
+	background-position: center bottom;
+	background-repeat: no-repeat;
+	background-size: 1300px;
+	padding: 100px 0 220px;
+}
+
+#uptime {
+	background-image: url(/assets/images/section-bg--home-map.png);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: auto 100%;
+	
+	h2, p {
+		@include centeredMaxWidth(780px);
+	}
+	
+	.trailing-link {
+		display: block;
+		margin-top: 240px;
+	}
+}
+
+#security {
+	h2, p {
+		@include centeredMaxWidth(700px);
+	}
+	
+	.row {
+		@include centeredMaxWidth(840px);
+	}
+}
+
+#sdk {
+	h2, p, .row {
+		@include centeredMaxWidth(840px);
+	}
+	
+	a {
+		display: block;
+		font-weight: 500;
+		text-decoration: none;
+		text-transform: uppercase;
+		
+		img {
+			margin-bottom: 20px;
+		}
+	}
+}

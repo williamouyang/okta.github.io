@@ -9,8 +9,38 @@
 	{% include header.html %}
 	
 	<div class="page-content">
+		
+		{% if page.valprop.title %}
+		<section id="valprop" class="section--full-width bg--dark-blue">
+			<div class="wrap">
+				
+				<header>
+					<h1>{{ page.valprop.title }}</h1>
+					{% if page.valprop.description %}<p class="text--large">{{ page.valprop.description }}</p>{% endif %}
+				</header>
+				
+				{% if page.valprop.show_cta %}<a href="#" class="button--large">Get a Free Developer Account</a>{% endif %}
+			
+			</div>
+		</section>
+		{% endif %}
 			
 		{{ content }}
+		
+		{% if page.show_bottom_cta %}
+		<section id="bottom-cta" class="section--full-width bg--blue text-align--center">
+			<div class="wrap">
+			
+				<header>
+					<h2>Get Started with Okta Now!</h2>
+					<p class="text--medium">Your identity layer is ready to go. Getting started takes just a few minutes.</p>
+				</header>
+				
+				<a href="#" class="button--large">Get a Free Developer Account</a>
+			
+			</div>
+		</section>
+		{% endif %}
 			
 	</div>
 	

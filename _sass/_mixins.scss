@@ -9,3 +9,9 @@
 @mixin defaultTransition() {
 	transition: 0.2s all;
 }
+
+@mixin centeredMaxWidth($width) {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: $width;
+}
