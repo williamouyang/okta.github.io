@@ -3,8 +3,11 @@ body {
 }
 
 .wrap {
+	box-sizing: content-box;
 	margin: 0 auto;
 	max-width: $pageWidth;
+	padding: 0 ($gutterWidth * 1/4);
+	position: relative;
 	zoom: 1;
 	
 	&:after {
@@ -24,6 +27,10 @@ body {
 		
 	header {
 		margin-bottom: 40px;
+		
+		&:last-child {
+			margin-bottom: 0;
+		}
 	}
 	
 	&.bg--dark-blue, &.bg--blue {

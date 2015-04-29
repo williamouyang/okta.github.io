@@ -20,11 +20,11 @@
 		background-position: center bottom;
 		background-repeat: no-repeat;
 		background-size: 1142px;
-		padding-bottom: 300px;
+		padding-bottom: 340px;
 	}
 }
 
-#tabbed-features {
+#features {
 	h2, p {
 		@include centeredMaxWidth(900px);
 	}

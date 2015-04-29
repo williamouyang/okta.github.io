@@ -1,37 +1,72 @@
-<!DOCTYPE html>
-<html>
+---
+layout: master
+css: layout-docs
+---
 
-{% include head.html %}
+{% assign page_name = page.section | replace: ' ', '_' | downcase %}
+{% assign path = page.url | split: '/' %}
+{% assign path_name = path[2]  %}
 
-<body>
+{% assign github_page_url = site.github_base_url | append: page.path %}
 
-	{% include svgs.html %}
-	{% include header.html %}
+<section class="section--with-sidebar docs-page">
+	<aside id="sidebar-wrapper" class="sidebar">
+		
+		{% include docs_sidebar.html %}
+		
+	</aside>
+	
+	<div id="docs-body" class="body docs-body">
+		
+		<nav id="sticky-nav" class="sticky-nav--page">
+			
+			<a {% if path_name == "guides" endif %} class="active" {% endif %} href="{{ "docs/guides/overview.html" | prepend: site.baseurl }}">
+				Guides
+			</a>
+			<a {% if path_name == "api" endif %} class="active" {% endif %} href="{{ "docs/api/rest/design_principles.html" | prepend: site.baseurl }}">
+				API
+			</a>
+			<a {% if path_name == "sdks" endif %} class="active" {% endif %} href="{{ "docs/sdk/core/api.html" | prepend: site.baseurl }}">
+				SDKs
+			</a>
+			<a {% if path_name == "examples" endif %} class="active" {% endif %} href="{{ "docs/examples/session_cookie.html" | prepend: site.baseurl }}">
+				Examples
+			</a>
+			
+		</nav>
+		
+		<a href="#docs-body" id="scroll-top-button">Scroll to Top</a>
+		
+		{% if page.title %}
+		<header>
+			<a href="{{ github_page_url }}" target="_blank" class="btn btn-default btn-sm btn-github"><i class="fa fa-github"></i> Edit on GitHub</a>
+			<h1 class="h3">{{ page.title }}</h1>
+		</header>
+		{% endif %}
+		
+		{{ content }}
+		
+		{% for nav in site.data.docs %}
+		{% if nav.section contains path_name %}
 
-	<!-- Generate page ID -->
-	{% assign page_id = page.url | replace:'/','-' | replace: '.html', '' %}
+			<ul class="list-unstyled docs-index-list">
+				{% for item in nav.pages %}
+				{% for page in site.pages %}
+				{% if page.layout == 'docs_page' %}
+				{% assign name = page.path | replace: '.md', '' | split: '/' | last | downcase %}
+				{% if name == item  and name != 'overview' %}
+				<li data-name="{{ page.title }}">
+					<a href="/docs/{{ nav.section }}/{{ item }}.html">{{ page.title }}</a>
+					<div class="excerpt">{{ page.content | strip_html | truncatewords: 30 }}</div>
+				</li>
+				{% endif %}
+				{% endif %}
+				{% endfor %}
+				{% endfor %}
+			</ul>
+		{% endif %}
 
-	<div class="page-content" id="page-{{ page_id }}">
-		<div class="docs-wrapper">
-			<section id="sticky-nav" class="clearfix in-page-nav-wrapper bg-light-light-gray">
-				{% include documentation_sticky_nav.html %}
-			</section>
-			<section id="sidebar-wrapper">
-				{% include documentation_sidebar.html %}
-			</section>
-			<section class="docs-content" name="docs-body" id="docs-body">
-				<a href="#docs-body" id="scroll-top-button" class="on">Scroll to Top</a>
-				<div class="inner-content">
-					<h1>{{ page.title }}</h1>
-					{{ content }}
-				</div>
-			</section>
-		</div>
+		{% endfor %}
+		
 	</div>
-
-	{% include footer.html %}
-
-</body>
-
-</html>
-
+</section>

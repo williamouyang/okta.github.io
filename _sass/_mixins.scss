@@ -15,3 +15,15 @@
 	margin-right: auto;
 	max-width: $width;
 }
+
+@mixin breakpoint($point) {
+	@if $point == small {
+		@media (min-width: #{$breakpointSmall}) { @content; }
+	}
+	@else if $point == medium {
+		@media (min-width: #{$breakpointMedium}) { @content; }
+	}
+	@else if $point == large {
+		@media (min-width: #{$breakpointLarge}) { @content; }
+	}
+}

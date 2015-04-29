@@ -1,0 +1,71 @@
+{% include header.html css_file='docs.css' %}
+{% assign page_name = page.section | replace: ' ', '_' | downcase %}
+{% assign path = page.url | split: '/' %}
+{% assign path_name = path[2]  %}
+
+{% assign github_page_url = site.github_base_url | append: page.path %}
+
+<div id="wrapper">
+	<!-- Sidebar -->
+	<div id="sidebar-wrapper">
+		{% include docs_sidebar.html %}
+	</div>
+	<!-- /#sidebar-wrapper -->
+	<section id="sticky-nav" class="clearfix in-page-nav-wrapper bg-light-light-gray">
+		<div class="site-container-full">
+			<nav class="in-page-nav clearfix">
+				<a {% if path_name == "guides" endif %} class="on" {% endif %} href="/docs/guides/overview.html">
+					Guides
+				</a>
+				<a {% if path_name == "api" endif %} class="on" {% endif %} href="/docs/api/rest/design_principles.html">
+					API
+				</a>
+				<a {% if path_name == "sdks" endif %} class="on" {% endif %} href="/docs/sdk/core/api.html">
+					SDKs
+				</a>
+				<a {% if path_name == "examples" endif %} class="on" {% endif %} href="/docs/examples/session_cookie.html">
+					Examples
+				</a>
+			</nav>
+		</div>
+	</section>
+	<!-- Page Content -->
+	<div id="page-content-wrapper">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="block docs-body" id="docs-body" data-offset="50" data-target="#markdown-toc" data-spy="scroll">
+						<div class="page-title-block">
+							<h1 id="docs-page-title">{{ page.title }}</h1>
+							<a href="{{ github_page_url }}" target="_blank" class="btn btn-default btn-sm btn-github"><i class="fa fa-github"></i> Edit on GitHub</a>
+						</div>
+						{{ content }}
+						{% for nav in site.data.docs %}
+						{% if nav.section contains "guides" %}
+
+							<ul class="list-unstyled docs-index-list">
+								{% for item in nav.pages %}
+								{% for page in site.pages %}
+								{% if page.layout == 'docs_page' %}
+								{% assign name = page.path | replace: '.md', '' | split: '/' | last | downcase %}
+								{% if name == item  and name != 'overview' %}
+								<li data-name="{{ page.title }}">
+									<a href="/docs/{{ nav.section }}/{{ item }}.html">{{ page.title }}</a>
+									<div class="excerpt">{{ page.content | strip_html | truncatewords: 30 }}</div>
+								</li>
+								{% endif %}
+								{% endif %}
+								{% endfor %}
+								{% endfor %}
+							</ul>
+						{% endif %}
+
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /#wrapper -->
+{% include footer.html js_file='docs.js' %}

@@ -1,5 +1,6 @@
 .site-header {
 	background: #fff;
+	border-bottom: 1px solid $colorGreyLight;
 	box-sizing: border-box;
 	height: $headerHeight;
 	left: 0;
@@ -14,9 +15,11 @@
 	background-size: auto 44px;
 	display: block;
 	float: left;
-	height: 90px;
+	height: $headerHeight - 1;
 	margin: 0;
+	position: relative;
 	width: 157px;
+	z-index: 10;
 	
 	a {
 		display: block;
@@ -29,44 +32,56 @@
 }
 
 .site-nav {
-	float: right;
-	line-height: 1em;
-	padding-top: 23px;
+	height: $headerHeight - 1;
+	left: 0;
+	padding: 0 ($gutterWidth * 1/4 + 50) 0 ($gutterWidth * 1/4 + 180);
+	position: absolute;
+	right: 0;
+	text-align: right;
+	top: 0;
+	z-index: 5;
 	
-	.primary, .secondary {
-		clear: both;
-		float: right;
-		line-height: 1em;
-		list-style: none;
-		margin: 0;
-		padding: 0;
-	}
-	
-	.primary {
-		padding-top: 8px;
-	}
-
-	li {
-		float: left;
-		
-		+ li {
-			margin-left: 20px;
-		}
-	}
-	
-	a {
+	> a, > .pac-nav--desktop a {
+		@include scaleDownFontSizeBy(1/2);
+		color: #333;
+		display: inline-block;
 		font-weight: 500;
+		line-height: $headerHeight - 1;
+		margin-left: 20px;
 		text-decoration: none;
 		text-transform: uppercase;
 	}
 	
-	.primary a {
-		@include scaleDownFontSizeBy(1/2);
-		color: #333;
+	.pac-nav--hidden,
+	&.pac-nav--is-desktop .pac-nav--toggle {
+		display: none !important;
 	}
 	
-	.secondary a {
-		@include scaleDownFontSizeBy(1);
-		color: $colorBlue;
+	.pac-nav--toggle {
+		cursor: pointer;
+	}
+	
+	&.pac-nav--is-intermediary {
+		.pac-nav--toggle {
+			background: url(/assets/svg/dots-horizontal.svg);
+			background-size: 30px;
+			height: 30px;
+			position: absolute;
+			right: ($gutterWidth * 1/4);
+			top: (($headerHeight - 1) / 2) - 15;
+			width: 30px;
+		}
+	}
+	
+	&.pac-nav--is-mobile {
+		.pac-nav--toggle {
+			background: url(/assets/svg/menu.svg);
+			background-size: 30px;
+			height: 30px;
+			position: absolute;
+			right: ($gutterWidth * 1/4);
+			top: (($headerHeight - 1) / 2) - 15;
+			width: 30px;
+		}
 	}
 }
