@@ -19,18 +19,20 @@
 	}
 }
 
-.button--large {
+[class*=button--] {
 	background: $colorGreen;
 	border: 1px solid $colorGreenDark;
 	border-radius: 3px;
 	box-shadow: none;
+	box-sizing: border-box;
 	color: $colorWhite;
 	cursor: pointer;
 	display: inline-block;
 	font-weight: 500;
-	height: 65px;
-	line-height: 65px;
-	padding: 0 40px;
+	height: 40px;
+	line-height: 40px;
+	padding: 0 20px;
+	text-align: center;
 	text-decoration: none;
 	text-shadow: none;
 	text-transform: uppercase;
@@ -41,6 +43,16 @@
 		border-color: mix($colorGreenDark, $colorWhite, 90%);
 		color: $colorWhite;
 	}
+}
+
+.button--small {
+	@include scaleDownFontSizeBy(1);
+}
+
+.button--large {
+	height: 65px;
+	line-height: 65px;
+	padding: 0 40px;
 }
 
 .tabber {

@@ -4,13 +4,17 @@
 		<h1 class="site-title"><a href="{{ site.baseurl }}">{{ site.title }}</a></h1>
 
 		<nav id="primary-nav" class="site-nav">
-			<a href="{{ "features/" | prepend: site.baseurl }}">Features</a>
-			<a href="#">Pricing</a>
-			<a href="#">Customers</a>
-			<a href="{{ "docs/" | prepend: site.baseurl }}">Documentation</a>
-			<a href="#">Discussion</a>
-			<a href="#">Support</a>
+			<div><a href="{{ "features/" | prepend: site.baseurl }}">Features</a></div>
+			<div><a href="{{ "pricing/" | prepend: site.baseurl }}">Pricing</a></div>
+			<div><a href="{{ "customers/" | prepend: site.baseurl }}">Customers</a></div>
+			<div><a href="{{ "docs/" | prepend: site.baseurl }}">Documentation</a></div>
+			<div><a href="{{ "discuss/" | prepend: site.baseurl }}">Discussion</a></div>
+			<div><a href="#">Support</a></div>
 		</nav>
+		
+		<div class="cta-button">
+			<a href="https://www.okta.com/developer/signup/" class="button--small">Try Okta Free</a>
+		</div>
 		
 	</div>
 </header>

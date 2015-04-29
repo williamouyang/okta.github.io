@@ -8,6 +8,18 @@
 	right: 0;
 	top: 0;
 	z-index: 20;
+	
+	.cta-button {
+		display: none;
+		position: absolute;
+		right: 0;
+		top: ($headerHeight - 40) / 2;
+		width: 160px;
+		
+		.button {
+			display: block;
+		}
+	}
 }
 
 .site-title {
@@ -41,7 +53,17 @@
 	top: 0;
 	z-index: 5;
 	
-	> a, > .pac-nav--desktop a {
+	> div, > .pac-nav--desktop > div {
+		display: inline-block;
+	}
+	
+	> .pac-nav--desktop,
+	> .pac-nav--mobile,
+	> .pac-nav--toggle {
+		display: block;
+	}
+	
+	> div > a, > .pac-nav--desktop > div > a {
 		@include scaleDownFontSizeBy(1/2);
 		color: #333;
 		display: inline-block;
@@ -130,5 +152,15 @@
 			right: ($gutterWidth * 1/4) + 5;
 			top: -10px;
 		}
+	}
+}
+
+@include breakpoint(small) {
+	.site-header .cta-button {
+		display: block;
+	}
+	
+	.site-nav {
+		right: 170px;
 	}
 }
