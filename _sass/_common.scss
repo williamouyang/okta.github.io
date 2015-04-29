@@ -102,13 +102,14 @@
 }
 
 .btn {
+	@include defaultTransition();
 	@include scaleDownFontSizeBy(1/2);
 	background: none;
-	border: 1px solid $colorGreyLighter;
+	border: 1px solid $colorGreyLight;
 	border-radius: 3px;
 	color: $colorBlack;
 	display: inline-block;
-	padding: .5em 1em;
+	padding: .4em .8em;
 	text-decoration: none;
 	
 	&:active,

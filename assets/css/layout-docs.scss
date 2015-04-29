@@ -147,124 +147,107 @@
 
 
 /* -------------------------- TYPOGRAPHY */
+.docs-body {
+	header {
+		padding-bottom: .5em;
+		margin-bottom: 2em;
+		border-bottom: 1px solid #888;
+		
+		h1 {
+			padding-bottom: 0;
+			margin: 0;
+			border: 0 none;
+			width: 80%;
+			display: inline-block;
+		}
+		
+		.btn {
+			@include scaleDownFontSizeBy(1.25);
+			float: right;
+			position: relative;
+			text-decoration: none;
+		}
+	}
 
-.docs-body b, strong {
-	font-weight: 500;
-}
-
-.docs-body .alert strong {
-	font-weight: bold;
-}
-
-.docs-body div,
-.docs-body p,
-.docs-body ul > li {
-	font-size: 16px;
-}
-
-.docs-body h1 {
-	padding-bottom: .5em;
-	margin-bottom: 1em;
-	border-bottom: 1px solid #888;
-}
-
-.docs-body h2, .docs-body h3, .docs-body h4, .docs-body h5, .docs-body h6 {
-	color: #000;
-}
-
-.docs-body h2 {
-	font-size: 22px;
-	margin: 2em 0 1em;
-	padding-bottom: .5em;
-	border-bottom: 1px solid #567;
-}
-
-.docs-body h3, .docs-body h4, .docs-body h5, .docs-body h6 {
-	margin-top: 25px;
-	color: #456;
-}
-
-.docs-body h3 {
-	font-size: 18px;
-}
-
-.docs-body h4 {
-	font-size: 16px;
-}
-
-.docs-body h5, .docs-body h6 {
-	font-size: 16px;
-}
-
-.docs-body blockquote {
-	margin: 20px 0;
-	border-left: 7px solid #fed;
-	background: #fffaf0;
-	padding: 20px;
-}
-
-.docs-body blockquote p {
-	color: #000;
-}
-
-.docs-body a {
-	text-decoration: underline;
-}
-
-.docs-body table {
-	margin: 20px auto;
-	width: 98%;
-	border: 1px dotted #f0f0f0;
-	max-width: 98%;
-}
-
-.docs-body tr {
-	border-bottom: 1px dotted #999;
-}
-
-.docs-body th {
-	text-align: left;
-	background: #eee;
-	padding: 5px;
-	font-size: 12px;
-	font-style: italic;
-	font-weight: bold;
-	vertical-align: top;
-	word-break: normal;
-}
-
-.docs-body .table-word-break td{
-	word-break: break-word;
-}
-
-.docs-body td {
-	padding: 3px 5px;
-	border-right: 1px dotted #f0f0f0;
-}
-
-.docs-body table code {
-	background: transparent;
-	color: #090;
-}
-
-.docs-body header {
-	padding-bottom: .5em;
-	margin-bottom: 2em;
-	border-bottom: 1px solid #888;
-	
-	h1 {
-		padding-bottom: 0;
-		margin: 0;
-		border: 0 none;
-		width: 80%;
-		display: inline-block;
+	h1, h2, h3, h4, h5, h6 {
+		font-weight: 500;
 	}
 	
-	.btn {
-		@include scaleDownFontSizeBy(1);
-		float: right;
-		position: relative;
-		text-decoration: none;
+	h1 {
+		@include scaleUpFontSizeBy(4);
+		border-bottom: 1px solid $colorGrey;
+		color: $colorGreyDark;
+		padding-bottom: .5em;
+	}
+	
+	h2 {
+		@include scaleUpFontSizeBy(2);
+		color: $colorGreyDark;
+		padding-bottom: .5em;
+		border-bottom: 1px solid mix($colorBlueDark, $colorGreyDark, 25%);
+	}
+	
+	h3, h4, h5, h6 {
+		color: mix($colorBlueDark, $colorGreyDark, 50%);
+	}
+	
+	h3 {
+		@include scaleUpFontSizeBy(1);
+	}
+	
+	h4 {
+		@include scaleUpFontSizeBy(1/2);
+	}
+	
+	h5, h6 {
+		font-size: inherit;
+	}
+	
+	blockquote {
+		margin: 20px 0;
+		border-left: 7px solid #fed;
+		background: #fffaf0;
+		padding: 20px;
+		
+		p {
+			color: #000;
+		}
+	}
+
+	table {
+		@include scaleDownFontSizeBy(1/2);
+		margin: 20px auto;
+		width: 98%;
+		border: 1px dotted #f0f0f0;
+		max-width: 98%;
+	}
+	
+	tr {
+		border-bottom: 1px dotted #999;
+	}
+	
+	th {
+		text-align: left;
+		background: #eee;
+		padding: 5px;
+		font-style: italic;
+		font-weight: bold;
+		vertical-align: top;
+		word-break: normal;
+	}
+	
+	.table-word-break td{
+		word-break: break-word;
+	}
+	
+	td {
+		padding: 3px 5px;
+		border-right: 1px dotted #f0f0f0;
+	}
+	
+	table code {
+		background: transparent;
+		color: #090;
 	}
 }
 
@@ -278,16 +261,6 @@
 
 
 /* -------------------------- TOC */
-
-.toc {
-	padding: 1em;
-	/*background: #fafafa;*/
-	border: 1px solid #f0f0f0;
-}
-
-.toc a {
-	text-decoration: none;
-}
 
 #toc-title {
 	font-size: 14px;
@@ -303,23 +276,6 @@
 	font-family: fontawesome;
 	content: '\f02d';
 	margin-right: 5px;
-}
-
-.toc li {
-	font-size: 14px !important;
-	margin-left: 15px;
-}
-
-.toc li:before {
-	font-family: fontawesome;
-	content: '\f097';
-	font-size: 12px;
-	color: #ccc;
-	margin-right: 6px;
-}
-
-.toc ul {
-	list-style-type: none;
 }
 
 /* -------------------------- Header Links */

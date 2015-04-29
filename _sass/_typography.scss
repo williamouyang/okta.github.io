@@ -37,7 +37,7 @@ h1, h2, h3, h4, h5, h6 {
 	color: #353435;
 	font-weight: 300;
 	line-height: 1.1em;
-	margin: ($lineHeight * $fontSize * 2) 0 ($lineHeight * $fontSize * 1);
+	margin: ($lineHeight * $fontSize * 2) 0 ($lineHeight * $fontSize * 1/2);
 	
 	&.text--small {
 		color: #000;
@@ -103,8 +103,29 @@ a {
 	}
 }
 
-strong {
+b, strong {
 	font-weight: 500;
+}
+
+em {
+	font-style: italic;
+}
+
+code, pre {
+	@include scaleDownFontSizeBy(1/2);
+	background: $colorGreyLighter;
+	border-radius: 3px;
+	color: $colorBlack;
+	font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+	padding: .5em;
+	white-space: normal;
+}
+
+pre {
+	display: block;
+	white-space: pre;
+	word-break: break-all;
+	word-wrap: break-word;
 }
 
 ul.list--with-bullets {
@@ -131,9 +152,42 @@ ul.list--with-bullets {
 	}
 }
 
-ol {
+ul.toc {
+	background: mix($colorGreyLighter, $colorWhite, 20%);
+	border: 1px solid $colorGreyLighter;
+	border-radius: 3px;
+	padding: (($gutterWidth / 4) - ($lineHeight * $fontSize * 1/8)) ($gutterWidth / 4);
+	
+	ul {
+		margin: 0;
+		padding-left: $gutterWidth / 2;
+	}
+	
+	li {
+		@include scaleDownFontSizeBy(0.5);
+		margin: ($lineHeight * $fontSize * 1/8) 0;
+		
+		&:before {
+			font-family: fontawesome;
+			content: '\f097';
+			font-size: 12px;
+			color: #ccc;
+			margin-right: 6px;
+		}
+	}
+	
+	a {
+		text-decoration: none;
+	}
+}
+
+ol.list--numbered {
 	list-style: decimal;
 	padding-left: 6px + $gutterWidth / 4;
+	
+	li + li {
+		margin-top: $lineHeight * $fontSize * 1/2;
+	}
 }
 
 .trailing-link {
