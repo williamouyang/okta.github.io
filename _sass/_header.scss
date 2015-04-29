@@ -155,7 +155,7 @@
 	}
 }
 
-@include breakpoint(small) {
+@include breakpoint(extra-small) {
 	.site-header .cta-button {
 		display: block;
 	}
