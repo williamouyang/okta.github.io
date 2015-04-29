@@ -3,14 +3,10 @@ layout: master
 css: layout-docs
 ---
 
-{% assign page_name = page.section | replace: ' ', '_' | downcase %}
-{% assign path = page.url | split: '/' %}
-{% assign path_name = path[2]  %}
-
 {% assign github_page_url = site.github_base_url | append: page.path %}
 
 <section class="section--with-sidebar docs-page">
-	<aside id="sidebar-wrapper" class="sidebar">
+	<aside id="sidebar-wrapper" class="sticky-nav--sidebar">
 		
 		{% include docs_sidebar.html %}
 		
@@ -18,20 +14,9 @@ css: layout-docs
 	
 	<div id="docs-body" class="body docs-body">
 		
-		<nav id="sticky-nav" class="sticky-nav--page">
+		<nav id="sticky-nav" class="sticky-nav--top">
 			
-			<a {% if path_name == "guides" endif %} class="active" {% endif %} href="{{ "docs/guides/overview.html" | prepend: site.baseurl }}">
-				Guides
-			</a>
-			<a {% if path_name == "api" endif %} class="active" {% endif %} href="{{ "docs/api/rest/design_principles.html" | prepend: site.baseurl }}">
-				API
-			</a>
-			<a {% if path_name == "sdks" endif %} class="active" {% endif %} href="{{ "docs/sdk/core/api.html" | prepend: site.baseurl }}">
-				SDKs
-			</a>
-			<a {% if path_name == "examples" endif %} class="active" {% endif %} href="{{ "docs/examples/session_cookie.html" | prepend: site.baseurl }}">
-				Examples
-			</a>
+			{% include docs_nav.html %}
 			
 		</nav>
 		
@@ -45,28 +30,6 @@ css: layout-docs
 		{% endif %}
 		
 		{{ content }}
-		
-		{% for nav in site.data.docs %}
-		{% if nav.section contains path_name %}
-
-			<ul class="list-unstyled docs-index-list">
-				{% for item in nav.pages %}
-				{% for page in site.pages %}
-				{% if page.layout == 'docs_page' %}
-				{% assign name = page.path | replace: '.md', '' | split: '/' | last | downcase %}
-				{% if name == item  and name != 'overview' %}
-				<li data-name="{{ page.title }}">
-					<a href="/docs/{{ nav.section }}/{{ item }}.html">{{ page.title }}</a>
-					<div class="excerpt">{{ page.content | strip_html | truncatewords: 30 }}</div>
-				</li>
-				{% endif %}
-				{% endif %}
-				{% endfor %}
-				{% endfor %}
-			</ul>
-		{% endif %}
-
-		{% endfor %}
 		
 	</div>
 </section>

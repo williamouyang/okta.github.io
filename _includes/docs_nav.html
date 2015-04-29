@@ -1,0 +1,10 @@
+{% assign page_name = page.section | replace: ' ', '_' | downcase %}
+{% assign path = page.url | split: '/' %}
+{% assign path_name = path[2]  %}
+
+{% assign github_page_url = site.github_base_url | append: page.path %}
+
+<a {% if path_name == "guides" endif %} class="active" {% endif %} href="{{ "docs/guides/overview.html" | prepend: site.baseurl }}">Guides</a>
+<a {% if path_name == "api" endif %} class="active" {% endif %} href="{{ "docs/api/rest/design_principles.html" | prepend: site.baseurl }}">API</a>
+<a {% if path_name == "sdks" endif %} class="active" {% endif %} href="{{ "docs/sdk/core/api.html" | prepend: site.baseurl }}">SDKs</a>
+<a {% if path_name == "examples" endif %} class="active" {% endif %} href="{{ "docs/examples/session_cookie.html" | prepend: site.baseurl }}">Examples</a>

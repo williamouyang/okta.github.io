@@ -13,7 +13,7 @@
 	border-left: 350px solid $colorBlueDark;
 	position: relative;
 	
-	.sidebar {
+	.sticky-nav--sidebar {
 		left: 0;
 		position: fixed;
 		top: $headerHeight;
@@ -21,7 +21,7 @@
 		z-index: 100;
 	}
 	
-	.sticky-nav--page {
+	.sticky-nav--top {
 		background: $colorGreyLighter;
 		border: solid $colorGreyLight;
 		border-width: 0 0 1px 1px;
@@ -71,65 +71,19 @@
 	}
 }
 
-.docs-index h2 {
-	padding-bottom: .5em;
-	border-bottom: 1px solid #888;
-	margin-bottom: .5em;
-}
-
-.docs-index-list {
-	margin-left: 10px;
-}
-
-.docs-index-list li:before {
-	font-family: fontawesome;
-	font-size: 14px;
-	color: #ccc;
-	content: '\f097';
-	margin-right: 5px;
-}
-
-
-
-#scroll-top-button {
-	position: fixed;
-	bottom: 10%;
-	right: 2%;
-	width: 140px;
-	padding: 1em 2em;
-	background: #f0f0f0;
-	font-size: 12px;
-	border: 1px solid #ddd;
-	opacity: 0;
-	-webkit-transition: .2s opacity ease-in,
-	.2s background ease-in,
-	.2s color ease-in,
-	.05s position ease-out;
-	transition:         .2s opacity ease-in,
-	.2s background ease-in,
-	.2s color ease-in,
-	.05s position ease-out;
-}
-
-#scroll-top-button.on {
-	opacity: 1;
-}
-
-#scroll-top-button:before {
-	font-family: fontawesome;
-	content: '\f0a6';
-	margin-right: 10px;
-}
-
-#scroll-top-button:hover {
-	text-decoration: none;
-	background: #fafafa;
-}
-
-
-
-/* -------------------------- TYPOGRAPHY */
 .docs-body {
+	.docs-index-list {
+		margin-left: 10px;
+		
+		li:before {
+			font-family: fontawesome;
+			font-size: 14px;
+			color: #ccc;
+			content: '\f097';
+			margin-right: 5px;
+		}
+	}
+
 	header {
 		padding-bottom: .5em;
 		margin-bottom: 2em;
@@ -164,9 +118,11 @@
 	
 	h2 {
 		@include scaleUpFontSizeBy(2);
-		color: $colorGreyDark;
-		padding-bottom: .5em;
 		border-bottom: 1px solid mix($colorBlueDark, $colorGreyDark, 25%);
+		color: $colorGreyDark;
+		margin-top: -150px;
+		padding-bottom: .5em;
+		padding-top: 150 + ($lineHeight * $fontSize * 2);
 	}
 	
 	h3, h4, h5, h6 {
@@ -230,6 +186,41 @@
 	table code {
 		background: transparent;
 		color: #090;
+	}
+	
+	#scroll-top-button {
+		position: fixed;
+		bottom: 10%;
+		right: 2%;
+		width: 140px;
+		padding: 1em 2em;
+		background: #f0f0f0;
+		font-size: 12px;
+		border: 1px solid #ddd;
+		opacity: 0;
+		-webkit-transition: .2s opacity ease-in,
+		.2s background ease-in,
+		.2s color ease-in,
+		.05s position ease-out;
+		transition:         .2s opacity ease-in,
+		.2s background ease-in,
+		.2s color ease-in,
+		.05s position ease-out;
+	}
+	
+	#scroll-top-button.on {
+		opacity: 1;
+	}
+	
+	#scroll-top-button:before {
+		font-family: fontawesome;
+		content: '\f0a6';
+		margin-right: 10px;
+	}
+	
+	#scroll-top-button:hover {
+		text-decoration: none;
+		background: #fafafa;
 	}
 }
 

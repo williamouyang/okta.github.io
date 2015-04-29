@@ -3,14 +3,10 @@ layout: master
 css: layout-docs
 ---
 
-{% assign page_name = page.section | replace: ' ', '_' | downcase %}
-{% assign path = page.url | split: '/' %}
-{% assign path_name = path[2]  %}
-
 {% assign github_page_url = site.github_base_url | append: page.path %}
 
 <section class="section--with-sidebar docs-index">
-	<aside id="sidebar-wrapper" class="sidebar">
+	<aside id="sidebar-wrapper" class="sticky-nav--sidebar">
 		
 		{% include docs_sidebar.html %}
 		
@@ -18,20 +14,9 @@ css: layout-docs
 	
 	<div id="docs-body" class="body docs-body">
 		
-		<nav id="sticky-nav" class="sticky-nav--page">
+		<nav id="sticky-nav" class="sticky-nav--top">
 			
-			<a {% if path_name == "guides" endif %} class="active" {% endif %} href="{{ "docs/guides/overview.html" | prepend: site.baseurl }}">
-				Guides
-			</a>
-			<a {% if path_name == "api" endif %} class="active" {% endif %} href="{{ "docs/api/rest/design_principles.html" | prepend: site.baseurl }}">
-				API
-			</a>
-			<a {% if path_name == "sdks" endif %} class="active" {% endif %} href="{{ "docs/sdk/core/api.html" | prepend: site.baseurl }}">
-				SDKs
-			</a>
-			<a {% if path_name == "examples" endif %} class="active" {% endif %} href="{{ "docs/examples/session_cookie.html" | prepend: site.baseurl }}">
-				Examples
-			</a>
+			{% include docs_nav.html %}
 			
 		</nav>
 		
@@ -40,7 +25,7 @@ css: layout-docs
 		{% if page.title %}
 		<header>
 			<a href="{{ github_page_url }}" target="_blank" class="btn btn-default btn-sm btn-github"><i class="fa fa-github"></i> Edit on GitHub</a>
-			<h1>{{ page.title }}</h1>
+			<h1 class="h3">{{ page.title }}</h1>
 		</header>
 		{% endif %}
 		
