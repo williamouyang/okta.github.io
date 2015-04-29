@@ -13,10 +13,10 @@
 	<link rel="stylesheet" href="{{ "/assets/css/master.css" | prepend: site.baseurl }}">
 	{% if page.css %}<link rel="stylesheet" href="{{ "/assets/css/page-" | prepend: site.baseurl | append: page.css }}.css">{% endif %}
 	{% if page.url contains '/docs/' %}
-	<link rel="stylesheet" href="{{ "/assets/css/page/docs.css" | prepend: site.baseurl }}">
-	<script src="{{ "/assets/js/page/scrollspy.js" | prepend: site.baseurl }}"></script>
-	<script src="{{ "/assets/js/page/docs.js" | prepend: site.baseurl }}"></script>
-	<script src="//use.typekit.net/pls8pog.js"></script>
-  	<script>try{Typekit.load();}catch(e){}</script>
+		<link rel="stylesheet" href="{{ "/assets/css/page/docs.css" | prepend: site.baseurl }}">
+		<script src="{{ "/assets/js/page/docs.js" | prepend: site.baseurl }}"></script>
+		<script src="{{ "/assets/js/page/scrollspy.js" | prepend: site.baseurl }}"></script>
+		<script src="//use.typekit.net/pls8pog.js"></script>
+	  	<script>try{Typekit.load();}catch(e){}</script>
 	{% endif %}
 </head>
