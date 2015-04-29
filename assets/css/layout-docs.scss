@@ -109,6 +109,11 @@
 		font-weight: 500;
 	}
 	
+	h2, h3, h4, h5, h6 {
+		margin-top: -150px;
+		padding-top: 150 + ($lineHeight * $fontSize * 2);
+	}
+	
 	h1 {
 		@include scaleUpFontSizeBy(4);
 		border-bottom: 1px solid $colorGrey;
@@ -120,9 +125,7 @@
 		@include scaleUpFontSizeBy(2);
 		border-bottom: 1px solid mix($colorBlueDark, $colorGreyDark, 25%);
 		color: $colorGreyDark;
-		margin-top: -150px;
 		padding-bottom: .5em;
-		padding-top: 150 + ($lineHeight * $fontSize * 2);
 	}
 	
 	h3, h4, h5, h6 {
