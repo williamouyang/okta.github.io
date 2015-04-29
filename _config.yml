@@ -6,7 +6,40 @@ description: >
  Google search results) and in your feed.xml site description.
 baseurl: ""
 url: "http://developer.okta.com"
-markdown: kramdown
 
 gems:
-- jekyll-compass
+  - jekyll-compass
+  - jekyll-redirect-from
+
+# -- standard exclusions
+exclude: [Gemfile, Gemfile.lock, README.md]
+
+markdown: kramdown
+markdown_ext: md
+
+kramdown:
+  use_coderay: true
+  toc_levels: 1..3
+  coderay:
+    coderay_line_numbers: nil
+    coderay_css: class
+
+permalink: /blog/:year/:month/:day/:title
+
+support_phone_number: "1-888-722-7871"
+github_base_url: "https://github.com/okta/okta.github.io/tree/master/"
+stack_overflow_forum_url: "http://stackoverflow.com/search?q=okta"
+
+ga_ua_id: "UA-15777010-3"
+
+sitemap:
+    file: "/sitemap.xml"
+    exclude:
+        - "/atom.xml"
+        - "/feed.xml"
+        - "/feed/index.xml"
+        - "/search.json"
+    include_posts:
+        - "/index.html"
+    change_frequency_name: "change_frequency"
+    priority_name: "priority"
