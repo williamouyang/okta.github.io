@@ -1,52 +1,38 @@
 ---
 layout: master
 css: home
+valprop: {
+	title: "The Identity Platform for Developers",
+	description: "Secure, scalable, and highly available authentication and user management for any app.",
+	show_cta: true
+}
+show_bottom_cta: true
 ---
 
-<section id="valprop">
-	<div class="wrap">
-		
-		<header>
-			<h1>The Identity Platform for Developers</h1>
-		</header>
-		
-		<p>Scalable, secure, and highly available authentication and user management for any app.</p>
-			
-		<a href="#" class="button--large">Get a Free Developer Account</a>
-	
-	</div>
-</section>
-
-<section id="features">
+<section id="features" class="section--full-width text-align--center">
 	<div class="wrap">
 	
 		<div class="row">
 			<div class="col-1-3">
 				
-				<h2>Authenticate users to any<br />identity source</h2>
-				
-				<p><img src="assets/images/home/identity-sources.png" /></p>
-				
+				<h2 class="h5 text--small">Authenticate users to any<br />identity source</h2>
+				<p><img class="responsive--full-width" src="{{ "/assets/images/graphics/identity-sources.png" | prepend: site.baseurl }}" /></p>
 				<p>Manage and authenticate users in Okta or connect an identity source</p>
 				
 			</div>
 			
 			<div class="col-1-3">
 				
-				<h2>Connect apps together<br />with single sign-on</h2>
-				
-				<p><img src="assets/images/home/sso.png" /></p>
-				
+				<h2 class="h5 text--small">Connect apps together<br />with single sign-on</h2>
+				<p><img class="responsive--full-width" src="{{ "/assets/images/graphics/sso.png" | prepend: site.baseurl }}" /></p>
 				<p>Give users one username, one password, and one session across all apps</p>
 				
 			</div>
 			
 			<div class="col-1-3">
 				
-				<h2>Increase security with<br />multi-factor authentication</h2>
-				
-				<p><img src="assets/images/home/mfa.png" /></p>
-				
+				<h2 class="h5 text--small">Increase security with<br />multi-factor authentication</h2>
+				<p><img class="responsive--full-width" src="{{ "/assets/images/graphics/mfa.png" | prepend: site.baseurl }}" /></p>
 				<p>Integrate with existing tokens, or use Okta’s built-in factors</p>
 				
 			</div>
@@ -55,39 +41,37 @@ css: home
 	</div>
 </section>
 
-<section id="uptime">
+<section id="uptime" class="section--full-width bg--light-blue text-align--center">
 	<div class="wrap">
 	
 		<header>
 			<h2>Architected for Zero Downtime at Scale</h2>
+			<p class="text--large">Never taken offline for scheduled maintenance or any other reason. Connecting millions of people to thousands of applications in 185 countries. Trusted by thousands of organizations.</p>
 		</header>
 		
-		<p>Never taken offline for scheduled maintenance or any other reason. Connecting millions of people to thousands of applications in 185 countries. Trusted by thousands of organizations.</p>
-		
-		<p class="trailing-link"><a href="#">See Okta's Service Apps</a></p>
+		<p><a href="#" class="trailing-link">See Okta's Service Stats</a></p>
 	
 	</div>
 </section>
 
-<section id="security">
+<section id="security" class="section--full-width">
 	<div class="wrap">
 	
-		<header>
+		<header class="text-align--center">
 			<h2>Designed, built, and maintained by security experts</h2>
+			<p class="text--large text-align--center">Protecting user profiles and authentication requires constant attention. Our team is on the job.</p>
 		</header>
-		
-		<p>Protecting user profiles and authentication requires constant attention. Our team is on the job.</p>
 		
 		<div class="row">
 			<div class="col-1-3">
 				
-				<img src="assets/images/home/shield.png" />
+				<img class="responsive--full-width" src="{{ "/assets/images/graphics/shield.png" | prepend: site.baseurl }}" />
 				
 			</div>
 			
 			<div class="col-2-3">
 				
-				<ul class="list--with-bullets">
+				<ul class="list--with-bullets text--large">
 					<li>Secure development practices & operations</li>
 					<li>Compute, network, & physical security</li>
 					<li>Independent audit & certification</li>
@@ -99,7 +83,7 @@ css: home
 	</div>
 </section>
 
-<section id="sdk">
+<section id="sdk" class="section--full-width text-align--center">
 	<div class="wrap">
 	
 		<header>
@@ -107,42 +91,30 @@ css: home
 		</header>
 		
 		<div class="row">
-			<div class="col-1-3">
-				
-				<a href="#">
-					<img src="assets/images/home/icon-cloud.png" width="150" />
-					We're Here to Help
-				</a>
-				
-			</div>
+			<a class="col-1-3" href="#">
+				<img class="responsive--full-width" src="{{ "/assets/images/icons/large-cloud.png" | prepend: site.baseurl }}" width="150" />
+				We're Here to Help
+			</a>
 			
-			<div class="col-1-3">
-				
-				<a href="#">
-					<img src="assets/images/home/icon-app.png" width="150" />
-					Visit the Sample App
-				</a>
-				
-			</div>
+			<a class="col-1-3" href="#">
+				<img class="responsive--full-width" src="{{ "/assets/images/icons/large-app.png" | prepend: site.baseurl }}" width="150" />
+				Visit the Sample App
+			</a>
 			
-			<div class="col-1-3">
-				
-				<a href="#">
-					<img src="assets/images/home/icon-lightning.png" width="150" />
-					Download an SDK
-				</a>
-				
-			</div>
+			<a class="col-1-3" href="#">
+				<img class="responsive--full-width" src="{{ "/assets/images/icons/large-lightning.png" | prepend: site.baseurl }}" width="150" />
+				Download an SDK
+			</a>
 		</div>
 	
 	</div>
 </section>
 
-<section id="trust">
+<section id="trust" class="section--full-width bg--light-grey text-align--center">
 	<div class="wrap">
 		
 		<header>
-			<h2 class="h6">Trusted by Developers at Leading Organizations</h2>
+			<h2 class="h5 text--small">Trusted by Developers at Leading Organizations</h2>
 		</header>
 		
 		<div class="row">
@@ -156,7 +128,7 @@ css: home
 			<div class="col-1-4">
 				
 				<div class="logo-placard">
-					<img src="/assets/images/logos/rentpath.png" />
+					<img src="/assets/images/logos/informatica.png" />
 				</div>
 				
 			</div>
@@ -176,17 +148,5 @@ css: home
 			</div>
 		</div>
 		
-	</div>
-</section>
-
-<section id="get-started">
-	<div class="wrap">
-	
-		<h2>Get Started with Okta Now!</h2>
-		
-		<p>Your identity layer is ready to go. Getting started takes just a few minutes. </p>
-		
-		<a href="#" class="button--large">Get a Free Developer Account</a>
-	
 	</div>
 </section>

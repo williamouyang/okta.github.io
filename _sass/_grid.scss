@@ -1,6 +1,6 @@
 .row {
-	margin: ($lineHeight * $fontSize * 2) (-$gutterWidth / 2);
-	overflow: hidden;
+	margin: ($lineHeight * $fontSize * 2) ($gutterWidth * -1/2);
+	overflow: visible;
 	zoom: 1;
 	
 	&:first-child {
@@ -15,7 +15,20 @@
 [class*=col-] {
 	box-sizing: border-box;
 	float: left;
-	padding: 0 ($gutterWidth / 2);
+	padding: 0 ($gutterWidth * 1/2);
+	position: relative;
+	
+	&.extra-padding--left {
+		padding-left: $gutterWidth * 3/2;
+		
+		.column-icon {
+			left: ($gutterWidth * 5/4);
+		}
+	}
+	
+	&.extra-padding--right {
+		padding-right: $gutterWidth * 3/2;
+	}
 }
 
 .col-1-2 {
@@ -36,4 +49,16 @@
 
 .col-3-4 {
 	width: 100% * 3/4;
+}
+
+.column-icon {
+	background-size: 39px;
+	height: 39px;
+	left: ($gutterWidth * 1/4);
+	margin-left: -39px;
+	margin-top: -20px;
+	position: absolute;
+	top: ($lineHeight * .5em);
+	width: 39px;
+	z-index: 10;
 }
