@@ -34,7 +34,7 @@
 .site-nav {
 	height: $headerHeight - 1;
 	left: 0;
-	padding: 0 ($gutterWidth * 1/4 + 50) 0 ($gutterWidth * 1/4 + 180);
+	padding: 0 ($gutterWidth * 1/4) 0 ($gutterWidth * 1/4 + 180);
 	position: absolute;
 	right: 0;
 	text-align: right;
@@ -53,7 +53,8 @@
 	}
 	
 	.pac-nav--hidden,
-	&.pac-nav--is-desktop .pac-nav--toggle {
+	&.pac-nav--is-desktop .pac-nav--toggle,
+	&.pac-nav--is-desktop .pac-nav--mobile {
 		display: none !important;
 	}
 	
@@ -61,9 +62,12 @@
 		cursor: pointer;
 	}
 	
-	&.pac-nav--is-intermediary {
+	&.pac-nav--is-intermediary,
+	&.pac-nav--is-mobile {
+		padding-right: ($gutterWidth * 1/4 + 50);
+		
 		.pac-nav--toggle {
-			background: url(/assets/svg/dots-horizontal.svg);
+			background: no-repeat center;
 			background-size: 30px;
 			height: 30px;
 			position: absolute;
@@ -73,15 +77,58 @@
 		}
 	}
 	
-	&.pac-nav--is-mobile {
-		.pac-nav--toggle {
-			background: url(/assets/svg/menu.svg);
-			background-size: 30px;
-			height: 30px;
+	&.pac-nav--is-intermediary .pac-nav--toggle {
+		background-image: url(/assets/svg/dots-horizontal.svg);
+	}
+	
+	&.pac-nav--is-mobile .pac-nav--toggle {
+		background-image: url(/assets/svg/menu.svg);
+	}
+	
+	.pac-nav--mobile {
+		background: $colorBlack;
+		position: absolute;
+		padding: 5px 0;
+		right: ($gutterWidth * 1/4);
+		top: (($headerHeight - 1) / 2) + 20;
+		z-index: 999;
+		
+		&:before {
+			border: solid transparent;
+			border-bottom-color: $colorBlack;
+			border-width: 0 5px 5px;
+			content: "";
+			display: block;
 			position: absolute;
-			right: ($gutterWidth * 1/4);
-			top: (($headerHeight - 1) / 2) - 15;
-			width: 30px;
+			right: 10px;
+			top: -5px;
+		}
+		
+		a {
+			color: #fff;
+			display: block;
+			min-width: 180px;
+			padding: 5px 10px;
+			text-decoration: none;
+			
+			&:active, &:focus, &:hover {
+				background: $colorGreyDark;
+			}
+		}
+	}
+	
+	&.pac-nav--is-mobile .pac-nav--mobile {
+		bottom: 0;
+		left: 0;
+		position: fixed;
+		right: 0;
+		text-align: left;
+		top: ($headerHeight - 1);
+		
+		&:before {
+			border-width: 0 10px 10px;
+			right: ($gutterWidth * 1/4) + 5;
+			top: -10px;
 		}
 	}
 }

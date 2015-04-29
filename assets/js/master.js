@@ -69,6 +69,8 @@
 		
 	});
 	
-	$("#primary-nav").pacNav();
+	$("#primary-nav").pacNav({
+		offsetWidth: 50
+	});
 	
 })(jQuery);

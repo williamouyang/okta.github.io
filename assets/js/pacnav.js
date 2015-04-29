@@ -7,28 +7,37 @@
 			var options = $.extend({
 				childSelector: "> *",
 				direction: "ltr",
-				minVisible: 2
+				minVisible: 2,
+				offsetWidth: 0
 			}, _options);
 			
 			this.each(function() {
 				
+				var isMobileNavOpen		= false;
 				var navItems			= [];
 				
 				var $pacNav				= $(this);
 				var $window				= $(window);
 				var $navItems			= $(options.childSelector, $pacNav);
+				var $navToggle			= $("<div>").addClass("pac-nav--toggle");
 				var $desktopNav			= $("<div>").addClass("pac-nav--desktop");
-				var $mobileNav			= $("<div>").addClass("pac-nav--mobile");
+				var $mobileNav			= $("<div>").addClass("pac-nav--mobile").addClass("pac-nav--hidden");
 				var $desktopNavItems	= $navItems.clone();
 				var $mobileNavItems		= $navItems.clone();
+				
+				var closeMobileNav = function()
+				{
+					if (isMobileNavOpen)
+					{
+						 toggleMobileNav();
+					}
+				}
 				
 				var eatPellets = function()
 				{
 					var visibleItems = 0;
 					var calculatedWidth = 0;
-					var desktopWidth = $desktopNav.innerWidth();
-					
-					console.log(desktopWidth);
+					var desktopWidth = $desktopNav.innerWidth() - options.offsetWidth;
 					
 					for (var i = 0; i < $desktopNavItems.length; i++)
 					{
@@ -95,7 +104,10 @@
 						.load(startingCalculations)
 						.load(instantiateDom)
 						.load(eatPellets)
-						.resize(eatPellets);
+						.resize(eatPellets)
+						.click(closeMobileNav);
+						
+					$navToggle.click(toggleMobileNav);
 				};
 				
 				var instantiateDom = function()
@@ -103,7 +115,7 @@
 					$pacNav
 						.empty()
 						.append($desktopNav.append($desktopNavItems))
-						.append($("<div>").addClass("pac-nav--toggle"))
+						.append($navToggle)
 						.append($mobileNav.append($mobileNavItems));
 				};
 				
@@ -116,6 +128,28 @@
 						});
 						
 					});
+				};
+				
+				var toggleMobileNav = function(e)
+				{
+					if (e)
+					{
+						e.preventDefault();
+						e.stopPropagation();
+					}
+					
+					isMobileNavOpen = !isMobileNavOpen;
+					
+					if (isMobileNavOpen)
+					{
+						$mobileNav.addClass("pac-nav--visible");
+						$mobileNav.removeClass("pac-nav--hidden");
+					}
+					else
+					{
+						$mobileNav.addClass("pac-nav--hidden");
+						$mobileNav.removeClass("pac-nav--visible");
+					}
 				};
 				
 				init();
