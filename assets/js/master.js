@@ -73,4 +73,24 @@
 		offsetWidth: 50
 	});
 	
+	$("#primary-nav").on("click", ".has-dropdown > a", function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		
+		$(this).parent().toggleClass("dropdown-active");
+	});
+	
+	$("#primary-nav").on("click", ".has-dropdown > .dropdown-window", function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+	});
+	
+	$("#primary-nav").on("click", ".has-dropdown > .dropdown-window a", function(e) {
+		e.stopPropagation();
+	});
+	
+	$(window).bind("click", function() {
+		$("#primary-nav .has-dropdown").removeClass("dropdown-active");
+	});
+	
 })(jQuery);
