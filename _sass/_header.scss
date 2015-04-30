@@ -247,7 +247,7 @@
 		}
 	}
 	
-	.pac-nav--mobile div + .has-dropdown {
+	.pac-nav--mobile .pac-nav--visible + .has-dropdown {
 		margin-bottom: 30px;
 		margin-top: 30px;
 		
@@ -312,19 +312,5 @@
 				}
 			}
 		}
-	}
-}
-
-@include breakpoint(extra-small) {
-	.site-header .cta-button {
-		display: block;
-	}
-	
-	.site-header .search-button {
-		right: ($gutterWidth * 1/4) + 180px;
-	}
-	
-	.site-nav {
-		right: ($gutterWidth * 1/4) + 230px;
 	}
 }

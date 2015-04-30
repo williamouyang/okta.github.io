@@ -3,13 +3,8 @@
  ------------------------------------------------------------ */
 $headerHeight:			90px;
 $stickyNavHeight:		60px;
-$pageWidth:				1200px;
+$pageWidth:				1230px;
 $gutterWidth:			60px;
-
-$breakpointExtraSmall:	468px;
-$breakpointSmall:		768px;
-$breakpointMedium:		992px;
-$breakpointLarge:		1200px;
 
 
 /*
@@ -34,8 +29,12 @@ $colorOrange:			#fc5f35;
 /*
  * Typography
  ------------------------------------------------------------ */
-$fontColor:				#666;
-$fontFamily:			"ProximaNova Light", Helvetica, Arial, sans-serif;
 $fontSize:				16px;
+$mobileFontSize:		14px;
+$intermediaryFontSize:	15px;
+$desktopFontSize:		$fontSize;
+
+$fontColor:				#666;
+$fontFamily:			"proxima-nova", "ProximaNova Light", Helvetica, Arial, sans-serif;
 $lineHeight:			1.5;
 $sizingRatio:			1.225;
