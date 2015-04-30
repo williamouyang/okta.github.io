@@ -552,7 +552,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### List Security Questions
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors/questions
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors/questions
 
 Enumerates all available security questions for a user's `question` factor.
 
@@ -799,7 +799,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Enroll Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-put"><span class="api-label">POST</span> /api/v1/users/*:id*/factors
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:id*/factors
 
 Enrolls a user with a supported [factor](#list-factors-to-enroll) for the specified user. 
 
@@ -927,8 +927,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "phoneNumber": "+1-555-415-1337"
   },
   "_links": {
-    "next": {
-      "name": "activate",
+    "activate": {
       "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP/lifecycle/activate",
       "hints": {
         "allow": [
@@ -1002,8 +1001,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "credentialId": "isaac@example.org"
   },
   "_links": {
-    "next": {
-      "name": "activate",
+    "activate": {
       "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/lifecycle/activate",
       "hints": {
         "allow": [
@@ -1080,8 +1078,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "credentialId": "isaac@example.org"
   },
   "_links": {
-    "next": {
-      "name": "activate",
+    "activate": {
       "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/lifecycle/activate",
       "hints": {
         "allow": [
