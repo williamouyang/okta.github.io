@@ -7,30 +7,30 @@ css: layout-docs
 
 <section class="section--with-sidebar docs-index">
 	<aside id="sidebar-wrapper" class="sticky-nav--sidebar">
-		
+
 		{% include docs_sidebar.html %}
-		
+
 	</aside>
-	
+
 	<div id="docs-body" class="body docs-body">
-		
+
 		<nav id="sticky-nav" class="sticky-nav--top">
-			
+
 			{% include docs_nav.html %}
-			
+
 		</nav>
-		
+
 		<a href="#docs-body" id="scroll-top-button">Scroll to Top</a>
-		
+
 		{% if page.title %}
 		<header>
 			<a href="{{ github_page_url }}" target="_blank" class="btn btn-default btn-sm btn-github"><i class="fa fa-github"></i> Edit on GitHub</a>
 			<h1 class="h3">{{ page.title }}</h1>
 		</header>
 		{% endif %}
-		
+
 		{{ content }}
-		
+		<div class="mynav">{{ nav }}</div>
 		{% for nav in site.data.docs %}
 		{% if nav.section contains path_name %}
 
@@ -52,6 +52,6 @@ css: layout-docs
 		{% endif %}
 
 		{% endfor %}
-		
+
 	</div>
 </section>

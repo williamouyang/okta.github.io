@@ -1,5 +1,5 @@
 ---
-layout: documentation_index
+layout: docs_index
 title: Overview
 ---
 

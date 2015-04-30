@@ -1,48 +1,71 @@
+
 $(function() {
-    var sidebarHeight = $('#myScrollspy').prop('scrollHeight');
-    var initialViewPortHeight = $(window).height() - 120;
-    if(initialViewPortHeight < sidebarHeight + 250) {
-        $('#docs-sidebar-wrap').css('min-height', sidebarHeight + 200);
-    }
+	$('.closed').hide();
+	var offset = $('.site-header').height() + $('#sticky-nav').height() + 40;
+	$('body').scrollspy({ target: '#myScrollspy', offset:  offset });
+
+// listen for scrollspy events on the navigation element itself
+$('#myScrollspy').on('activate.bs.scrollspy', function() {
+	var selected = $('#myScrollspy .nav').children('li.active');
+	if (selected.children('ul').length > 0 )
+	{
+		if (selected.children('ul').children('li').hasClass('active'))
+		{
+			selected.removeClass('active');
+			selected.children('ul').show();
+		}
+		else
+			$('#myScrollspy .nav').children('li:not(.active)').children('ul').hide();
+	}
+	if (!$('.closed').children('li').hasClass('active') && !$('#gen-toc-container .sidebar-nav li').hasClass('clicked'))
+	{
+		$('.closed').hide();
+	}
+});
+var sidebarHeight = $('#myScrollspy').prop('scrollHeight');
+var initialViewPortHeight = $(window).height() - 120;
+if(initialViewPortHeight < sidebarHeight + 250) {
+	$('#docs-sidebar-wrap').css('min-height', sidebarHeight + 200);
+}
 
     //Check for widnow height on resize
     $(window).resize(function(){
-       var sidebarHeight = $('#myScrollspy').prop('scrollHeight');
-	    var initialViewPortHeight = $(window).height() - 120;
-	    if(initialViewPortHeight < sidebarHeight + 250) {
-	        $('#docs-sidebar-wrap').css('min-height', sidebarHeight + 200);
-	    }
-    });
+    	var sidebarHeight = $('#myScrollspy').prop('scrollHeight');
+    	var initialViewPortHeight = $(window).height() - 120;
+    	if(initialViewPortHeight < sidebarHeight + 250) {
+    		$('#docs-sidebar-wrap').css('min-height', sidebarHeight + 200);
+    	}
 
-	var searched = getUrlParameter('search');
-	// $('.docs-body').highlight(searched);
+	    // Docs content
+	    $('.docs-content').css('padding-left', $('#sidebar-wrapper').width() + 20);
+	});
 
   // ------------------------ LINKIFY ANCHORS
 
-  var anchorForId = function (id) {
-  	var anchor = document.createElement("a");
-  	anchor.className = "header-link";
-  	anchor.href      = "#" + id;
-  	anchor.innerHTML = "<i class=\"fa fa-link\"></i>";
-  	return anchor;
-  };
+//   var anchorForId = function (id) {
+//   	var anchor = document.createElement("a");
+//   	anchor.className = "header-link";
+//   	anchor.href      = "#" + id;
+//   	anchor.innerHTML = "<i class=\"fa fa-link\"></i>";
+//   	return anchor;
+//   };
 
-  var linkifyAnchors = function (level, container) {
-  	var headers = container.getElementsByTagName("h" + level);
-  	for (var h = 0; h < headers.length; h++) {
-  		var header = headers[h];
+//   var linkifyAnchors = function (level, container) {
+//   	var headers = container.getElementsByTagName("h" + level);
+//   	for (var h = 0; h < headers.length; h++) {
+//   		var header = headers[h];
 
-  		if (typeof header.id !== "undefined" && header.id !== "" &&
-  			header.className.indexOf("no-link") !== 0) {
-  			header.appendChild(anchorForId(header.id), header);
-  	}
-  }
-};
+//   		if (typeof header.id !== "undefined" && header.id !== "" &&
+//   			header.className.indexOf("no-link") !== 0) {
+//   			header.appendChild(anchorForId(header.id), header);
+//   	}
+//   }
+// };
 
-var body = document.getElementById('docs-body');
-for (var level = 1; level <= 6; level++) {
-	linkifyAnchors(level, body);
-}
+// var body = document.getElementById('docs-body');
+// for (var level = 1; level <= 6; level++) {
+// 	linkifyAnchors(level, body);
+// }
 
   // ------------------------  DYNAMIC ANCHOR ADJUST FOR FIXED TOPNAV
 

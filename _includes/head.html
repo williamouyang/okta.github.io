@@ -1,26 +1,28 @@
 <head>
-	
+
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
+
 	<title>{% if page.title %}{{ page.title }} &raquo; {% endif %}{{ site.title }}</title>
 	<meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
-	
+
 	<link rel="canonical" href="{{ page.url | replace:'/index.html','' | prepend: site.url }}">
-	
+
 	<link rel="stylesheet" href="{{ "assets/vendor/font-awesome/css/font-awesome.min.css" | prepend: site.baseurl }}">
 	<link rel="stylesheet" href="{{ "assets/css/animate.css" | prepend: site.baseurl }}">
 	<link rel="stylesheet" href="{{ "assets/css/master.css" | prepend: site.baseurl }}">
 	{% if page.css %}<link rel="stylesheet" href="{{ "assets/css/" | prepend: site.baseurl | append: page.css }}.css">{% endif %}
-	
+
 	<script type="text/javascript" defer="defer" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript" defer="defer" src="{{ "assets/js/tabber.js" | prepend: site.baseurl }}"></script>
 	<script type="text/javascript" defer="defer" src="{{ "assets/js/pacnav.js" | prepend: site.baseurl }}"></script>
 	<script type="text/javascript" defer="defer" src="{{ "assets/js/master.js" | prepend: site.baseurl }}"></script>
 	<script type="text/javascript" defer="defer" src="{{ "assets/js/scrollspy.js" | prepend: site.baseurl }}"></script>
-	
+
+	{% if page.js %}<script type="text/javascript" defer="defer" src="{{ "assets/js/docs.js" | prepend: site.baseurl }}"></script>{% endif %}
+
 	<script src="//use.typekit.net/pls8pog.js"></script>
 	<script>try{Typekit.load();}catch(e){}</script>
-	
+
 </head>
