@@ -13,7 +13,7 @@
 }
 
 article {
-	@include centeredMaxWidth(800px);
+	@include centeredMaxWidth(900px);
 	@include clearfix();
 	
 	+ article {
@@ -32,6 +32,56 @@ article {
 			width: 100%;
 		}
 	}
+}
+
+.video {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	height: 0;
+	
+	iframe {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+}
+
+.sidebar {
+	blockquote {
+		border-left: 4px solid $colorGreyLight;
+		margin-bottom: $lineHeight * $fontSize * 2;
+		padding-left: ($gutterWidth / 2);
+	}
+	
+	ul {
+		li {
+			padding-left: 6px + $gutterWidth / 2;
+			position: relative;
+			
+			&:before {
+				background: $colorGreen;
+				border-radius: 3px;
+				content: "";
+				display: block;
+				height: 6px;
+				left: 0;
+				margin-top: -3px;
+				position: absolute;
+				top: ($lineHeight * 1em) / 2;
+				width: 6px;
+			}
+			
+			+ li {
+				margin-top: $lineHeight * $fontSize * 1/2;
+			}
+		}
+	}
+}
+
+iframe {
+	max-width: 100%;
 }
 
 @include breakpoint(extra-small) {

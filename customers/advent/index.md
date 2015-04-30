@@ -1,10 +1,10 @@
 ---
-layout:             customer_story
+layout:             customer_page
 customer_url:       "http://www.advent.com/"
 customer_link_name: "www.advent.com"
 
 index_image:    advent-index.png
-bg_image:       advent-header.jpg
+bg_image:       /assets/images/valprop-bg--advent.jpg
 xxxdiagram_image:  advent-diagram.png
 
 title: Advent Secures Online Community For Thousands of Clients with Okta
@@ -28,8 +28,9 @@ sidebar_copy: >
 ---
 
 
-
-<iframe src="//player.vimeo.com/video/110836136" width="694" height="391" frameborder="0" class="customer-movie" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<div class="video">
+	<iframe src="//player.vimeo.com/video/110836136" width="694" height="391" frameborder="0" class="customer-movie" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+</div>
 
 
 ## About Advent

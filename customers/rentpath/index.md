@@ -1,10 +1,11 @@
 ---
-layout:             customer_story
+layout:             customer_page
 customer_url:       "http://rentpath.com/"
 customer_link_name: "rentpath.com"
 
 index_image:    rentpath-index.png
-bg_image:       rentpath-header.jpg
+bg_color:		f0eee2
+bg_image:       /assets/images/valprop-bg--rentpath.jpg
 diagram_image:  rentpath-diagram.png
 
 title: RentPath Gives Advertisers a Unified Product Experience with Okta

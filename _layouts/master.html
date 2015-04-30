@@ -15,12 +15,12 @@
 	
 	<div class="page-content">
 		
-		{% if page.valprop.title %}
+		{% if page.valprop %}
 		<section id="valprop" class="section--full-width bg--dark-blue">
 			<div class="wrap">
 				
 				<header>
-					<h1>{{ page.valprop.title }}</h1>
+					{% if page.valprop.title %}<h1>{{ page.valprop.title }}</h1>{% endif %}
 					{% if page.valprop.description %}<p class="text--large">{{ page.valprop.description }}</p>{% endif %}
 				</header>
 				

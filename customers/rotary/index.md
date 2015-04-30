@@ -1,10 +1,10 @@
 ---
-layout:             customer_story
+layout:             customer_page
 customer_url:       "https://www.rotary.org"
 customer_link_name: "www.rotary.org"
 
 index_image:    rotary-index.png
-bg_image:       rotary-header.jpg
+bg_image:       /assets/images/valprop-bg--rotary.jpg
 xxxdiagram_image:  rotary-diagram.png
 
 title: Rotary Simplifies Online Access for Members with Okta
