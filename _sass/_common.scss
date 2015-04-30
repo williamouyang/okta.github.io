@@ -89,6 +89,10 @@
 		
 		&.active {
 			border-bottom-color: $colorBlue;
+			
+			i {
+				background-position: 0 -27px;
+			}
 		}
 		
 		i, span {
@@ -97,9 +101,10 @@
 		}
 		
 		i {
-			height: 48px;
+			border: solid #fff;
+			border-width: 11px 0;
+			height: 26px;
 			margin-right: 12px;
-			width: 24px;
 		}
 	}
 }
@@ -135,4 +140,32 @@
 
 .hide {
 	display: none;
+}
+
+[class*=icon-small--] {
+	background: no-repeat top;
+	background-size: 26px;
+	display: inline-block;
+	height: 26px;
+	width: 26px;
+}
+
+.icon-small--okta {
+	background-image: url(/assets/images/icons/flat-okta--with-hover.png);
+}
+
+.icon-small--folder {
+	background-image: url(/assets/images/icons/flat-folder--with-hover.png);
+}
+
+.icon-small--updown {
+	background-image: url(/assets/images/icons/flat-updown--with-hover.png);
+}
+
+.icon-small--db {
+	background-image: url(/assets/images/icons/flat-database--with-hover.png);
+}
+
+.icon-small--social {
+	background-image: url(/assets/images/icons/flat-twitter--with-hover.png);
 }
