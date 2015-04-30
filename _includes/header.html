@@ -1,13 +1,13 @@
 <header class="site-header">
 	<div class="wrap">
-		
+
 		<h1 class="site-title"><a href="{{ site.baseurl }}">{{ site.title }}</a></h1>
 
 		<nav id="primary-nav" class="site-nav">
 			<div><a href="{{ "features/" | prepend: site.baseurl }}">Features</a></div>
 			<div><a href="{{ "pricing/" | prepend: site.baseurl }}">Pricing</a></div>
 			<div><a href="{{ "customers/" | prepend: site.baseurl }}">Customers</a></div>
-			<div><a href="{{ "docs/" | prepend: site.baseurl }}">Documentation</a></div>
+			<div><a href="{{ "docs/guides/overview.html" | prepend: site.baseurl }}">Documentation</a></div>
 			<div><a href="{{ "discuss/" | prepend: site.baseurl }}">Discussion</a></div>
 			<div class="has-dropdown"><a href="#">Support</a>
 				<div class="dropdown-window">
@@ -29,9 +29,24 @@
 				</div>
 			</div>
 		</nav>
-		
-		<a href="#" class="search-button"></a>
+
+		<a href="#" class="search-button gsc-trigger"></a>
+		<div class="gsc-container hide">
+			<script>
+				(function() {
+					var cx = '005121479574088032773:mmh_vhv8uns';
+					var gcse = document.createElement('script');
+					gcse.type = 'text/javascript';
+					gcse.async = true;
+					gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					'//www.google.com/cse/cse.js?cx=' + cx;
+					var s = document.getElementsByTagName('script')[0];
+					s.parentNode.insertBefore(gcse, s);
+				})();
+			</script>
+			<gcse:searchbox-only resultsUrl="/search" enableAutoComplete="true"></gcse:searchbox-only>
+		</div>
 		<a href="https://www.okta.com/developer/signup/" class="cta-button button--small">Try Okta Free</a>
-		
+
 	</div>
 </header>

@@ -1,64 +1,53 @@
 ---
-layout: page
-title: Okta developers
-description: "Okta developers"
-js_file: search.js
+layout: master
+css: page-search
+valprop: {
+title: "Search",
+show_cta: false
+}
+show_bottom_cta: true
+js: search.js
 ---
 
+<section id="features" class="section--full-width">
 
-<div class="container-features">
-  <div class="valprop-features">
-    <div class="container-narrow">
-      <div class="row">
-        <div class="col-xs-12">
-          <h3 class="valprop-title discussion-header">Search</h3>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="container-features discussion-page">
-  <div class="row search-holder features-border nopadding">
-      <div class="search-holder" id="main-container">
-		<input type="text" id="search" class="search-field form-control input-lg" placeholder="Search docs">
-		<div class="results"></div>
-    </div>
-  </div>
-</div>
+	<div class="wrap">
 
-<div class="search-container" data-slide-toggle-name="search">
-				<div class="site-container">
-					<span class="por">
-						<?php // Google Custom Search START ?>
-						<script>
-							(function() {
-								var cx = '005121479574088032773:mmh_vhv8uns';
-								var gcse = document.createElement('script');
-								gcse.type = 'text/javascript';
-								gcse.async = true;
-								gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-								'//www.google.com/cse/cse.js?cx=' + cx;
-								var s = document.getElementsByTagName('script')[0];
-								s.parentNode.insertBefore(gcse, s);
-							})();
-						</script>
-						<gcse:searchbox-only resultsUrl="/search" enableAutoComplete="true"></gcse:searchbox-only>
-						<script>
-return decodeURIComponent(decodeURIComponent(keyvaluepair[1].replace(/\+/g, ' ')));
-(function() {
-	var cx = '005121479574088032773:mmh_vhv8uns';
-	var gcse = document.createElement('script');
-	gcse.type = 'text/javascript';
-	gcse.async = true;
-	gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-	  '//www.google.com/cse/cse.js?cx=' + cx;
-	var s = document.getElementsByTagName('script')[0];
-s.parentNode.insertBefore(gcse, s);
-})();
-</script>
-<gcse:searchresults-only  enableOrderBy=false></gcse:searchresults-only>
+		<div class="search-container" data-slide-toggle-name="search">
+			<div class="site-container">
+				<span class="por">
+					<?php // Google Custom Search START ?>
+					<script>
+						(function() {
+							var cx = '005121479574088032773:mmh_vhv8uns';
+							var gcse = document.createElement('script');
+							gcse.type = 'text/javascript';
+							gcse.async = true;
+							gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+							'//www.google.com/cse/cse.js?cx=' + cx;
+							var s = document.getElementsByTagName('script')[0];
+							s.parentNode.insertBefore(gcse, s);
+						})();
+					</script>
+					<gcse:searchbox-only resultsUrl="/search" enableAutoComplete="true"></gcse:searchbox-only>
+					<script>
+						return decodeURIComponent(decodeURIComponent(keyvaluepair[1].replace(/\+/g, ' ')));
+						(function() {
+							var cx = '005121479574088032773:mmh_vhv8uns';
+							var gcse = document.createElement('script');
+							gcse.type = 'text/javascript';
+							gcse.async = true;
+							gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+							'//www.google.com/cse/cse.js?cx=' + cx;
+							var s = document.getElementsByTagName('script')[0];
+							s.parentNode.insertBefore(gcse, s);
+						})();
+					</script>
+					<gcse:searchresults-only  enableOrderBy=false></gcse:searchresults-only>
 
-						<?php // Google Custom Search END ?>
-					</span>
-				</div>
+					<?php // Google Custom Search END ?>
+				</span>
 			</div>
+		</div>
+	</div>
+</section>

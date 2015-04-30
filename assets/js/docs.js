@@ -160,4 +160,10 @@ if(initialViewPortHeight < sidebarHeight + 250) {
   	});
   });
 
+
+	$('.gsc-trigger').click(function() {
+		console.log("clicked");
+		$('.gsc-container ').toggleClass('hide');
+	});
+
 });

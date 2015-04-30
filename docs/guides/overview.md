@@ -1,6 +1,4 @@
 ---
 layout: docs_index
-title: Overview
+title: Guides
 ---
-
-## Guides
