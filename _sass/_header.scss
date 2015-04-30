@@ -127,7 +127,7 @@
 		min-width: 180px;
 		position: absolute;
 		padding: 5px 0;
-		right: ($gutterWidth * 1/4);
+		right: 0;
 		top: (($headerHeight - 1) / 2) + 20;
 		z-index: 999;
 		
@@ -164,7 +164,7 @@
 		
 			&:before {
 			border-width: 0 10px 10px;
-			right: ($gutterWidth * 1/4) + 5;
+			right: ($gutterWidth * 1/4) + 55;
 			top: -10px;
 		}
 	}
