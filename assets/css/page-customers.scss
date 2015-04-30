@@ -1,0 +1,51 @@
+---
+---
+
+@charset "utf-8";
+
+@import
+	"variables",
+	"mixins"
+;
+
+#valprop {
+	text-align: center;
+}
+
+article {
+	@include centeredMaxWidth(800px);
+	@include clearfix();
+	
+	+ article {
+		border-top: 1px solid $colorGreyLight;
+		margin-top: $gutterWidth * 1/2;
+		padding-top: $gutterWidth * 1/2;
+	}
+	
+	.thumbnail {
+		float: left;
+		margin-right: ($gutterWidth * 1/2);
+		width: 120px;
+		
+		img {
+			display: block;
+			width: 100%;
+		}
+	}
+}
+
+@include breakpoint(extra-small) {
+	article .content {
+		margin-left: 120px + ($gutterWidth * 1/2);
+	}
+}
+
+@include breakpoint(small) {
+	article .thumbnail {
+		width: 240px;
+	}
+	
+	article .content {
+		margin-left: 240px + ($gutterWidth * 1/2);
+	}
+}

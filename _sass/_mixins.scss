@@ -30,3 +30,13 @@
 		@media screen and (min-width: #{$breakpointLarge}) { @content; }
 	}
 }
+
+@mixin clearfix() {
+	zoom: 1;
+	
+	&:after {
+		clear: both;
+		content: "";
+		display: table;
+	}
+}
