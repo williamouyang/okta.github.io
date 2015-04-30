@@ -9,12 +9,29 @@
 			<div><a href="{{ "customers/" | prepend: site.baseurl }}">Customers</a></div>
 			<div><a href="{{ "docs/" | prepend: site.baseurl }}">Documentation</a></div>
 			<div><a href="{{ "discuss/" | prepend: site.baseurl }}">Discussion</a></div>
-			<div><a href="#">Support</a></div>
+			<div class="has-dropdown"><a href="#">Support</a>
+				<div class="dropdown-window">
+					<p>
+						<img src="{{ "assets/images/icons/rounded-stackoverflow--small-blue.png" | prepend: site.baseurl }}" />
+						Post your question on <a href="http://stackoverflow.com/search?q=okta">Stack Overflow</a>.<br />
+						We'll answer it within 24 hours.
+					</p>
+					<p>
+						<img src="{{ "assets/images/icons/rounded-email--small-blue.png" | prepend: site.baseurl }}" />
+						Email us:<br />
+						<a href="mailto:developers@okta.com">developers@okta.com</a>
+					</p>
+					<p>
+						<img src="{{ "assets/images/icons/rounded-mobile--small-blue.png" | prepend: site.baseurl }}" />
+						Call us:<br />
+						<a href="tel:18777227871">1 (877) 722-7871</a>
+					</p>
+				</div>
+			</div>
 		</nav>
 		
-		<div class="cta-button">
-			<a href="https://www.okta.com/developer/signup/" class="button--small">Try Okta Free</a>
-		</div>
+		<a href="#" class="search-button"></a>
+		<a href="https://www.okta.com/developer/signup/" class="cta-button button--small">Try Okta Free</a>
 		
 	</div>
 </header>
