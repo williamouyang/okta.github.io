@@ -4,27 +4,29 @@
 		<h1 class="site-title"><a href="{{ site.baseurl }}">{{ site.title }}</a></h1>
 
 		<nav id="primary-nav" class="site-nav">
-			<div><a href="{{ "features/" | prepend: site.baseurl }}">Features</a></div>
-			<div><a href="{{ "pricing/" | prepend: site.baseurl }}">Pricing</a></div>
-			<div><a href="{{ "customers/" | prepend: site.baseurl }}">Customers</a></div>
-			<div><a href="{{ "docs/guides/overview.html" | prepend: site.baseurl }}">Documentation</a></div>
-			<div><a href="{{ "discuss/" | prepend: site.baseurl }}">Discussion</a></div>
-			<div class="has-dropdown"><a href="#">Support</a>
-				<div class="dropdown-window">
-					<p class="stack-overflow">
-						Post your question on <a href="http://stackoverflow.com/search?q=okta">Stack Overflow</a>.<br />
-						We'll answer it within 24 hours.
-					</p>
-					<p class="email">
-						Email us:<br />
-						<a href="mailto:developers@okta.com">developers@okta.com</a>
-					</p>
-					<p class="tel">
-						Call us:<br />
-						<a href="tel:18777227871">1 (877) 722-7871</a>
-					</p>
-				</div>
-			</div>
+			<ul>
+				<li><a href="{{ "features/" | prepend: site.baseurl }}">Features</a></li>
+				<li><a href="{{ "pricing/" | prepend: site.baseurl }}">Pricing</a></li>
+				<li><a href="{{ "customers/" | prepend: site.baseurl }}">Customers</a></li>
+				<li><a href="{{ "docs/guides/overview.html" | prepend: site.baseurl }}">Documentation</a></li>
+				<li><a href="{{ "discuss/" | prepend: site.baseurl }}">Discussion</a></li>
+				<li class="has-dropdown"><a href="#">Support</a>
+					<div class="dropdown-window">
+						<p class="stack-overflow">
+							Post your question on <a href="http://stackoverflow.com/search?q=okta">Stack Overflow</a>.<br />
+							We'll answer it within 24 hours.
+						</p>
+						<p class="email">
+							Email us:<br />
+							<a href="mailto:developers@okta.com">developers@okta.com</a>
+						</p>
+						<p class="tel">
+							Call us:<br />
+							<a href="tel:18777227871">1 (877) 722-7871</a>
+						</p>
+					</div>
+				</li>
+			</ul>
 		</nav>
 
 		<a href="#" class="search-button gsc-trigger"></a>

@@ -62,10 +62,17 @@
 	top: 0;
 	z-index: 5;
 	
-	> div, > .pac-nav--desktop > div {
-		display: inline-block;
-		line-height: 31px;
-		height: 31px;
+	ul {
+		float: right;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	
+	> ul > li, > .pac-nav--desktop > ul > li {
+		float: left;
+		line-height: 30px;
+		height: 30px;
 		padding: (($headerHeight - 31) / 2) 0;
 		position: relative;
 	}
@@ -78,7 +85,7 @@
 		height: auto;
 	}
 	
-	> div > a, > .pac-nav--desktop > div > a {
+	> ul > li > a, > .pac-nav--desktop > ul > li > a {
 		@include scaleDownFontSizeBy(1/2);
 		color: #333;
 		display: inline-block;
@@ -142,7 +149,11 @@
 			top: -5px;
 		}
 		
-		> div {
+		ul, li {
+			float: none;
+		}
+		
+		> ul > li {
 			border-bottom: 1px solid $colorGreyDark;
 			margin: 0 10px;
 			

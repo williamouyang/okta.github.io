@@ -70,6 +70,7 @@
 	});
 	
 	$("#primary-nav").pacNav({
+		childSelector: "> ul > li",
 		offsetWidth: 50
 	});
 	

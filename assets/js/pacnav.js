@@ -18,12 +18,13 @@
 				
 				var $pacNav				= $(this);
 				var $window				= $(window);
+				var $navContents		= $pacNav.children();
 				var $navItems			= $(options.childSelector, $pacNav);
 				var $navToggle			= $("<div>").addClass("pac-nav--toggle");
 				var $desktopNav			= $("<div>").addClass("pac-nav--desktop");
 				var $mobileNav			= $("<div>").addClass("pac-nav--mobile").addClass("pac-nav--hidden");
-				var $desktopNavItems	= $navItems.clone();
-				var $mobileNavItems		= $navItems.clone();
+				var $desktopNavItems	= null;
+				var $mobileNavItems		= null;
 				
 				var closeMobileNav = function()
 				{
@@ -114,9 +115,12 @@
 				{
 					$pacNav
 						.empty()
-						.append($desktopNav.append($desktopNavItems))
+						.append($desktopNav.append($navContents.clone()))
 						.append($navToggle)
-						.append($mobileNav.append($mobileNavItems));
+						.append($mobileNav.append($navContents.clone()));
+						
+					$desktopNavItems = $(options.childSelector, $desktopNav);
+					$mobileNavItems = $(options.childSelector, $mobileNav);
 				};
 				
 				var startingCalculations = function()
