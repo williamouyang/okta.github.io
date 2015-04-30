@@ -63,23 +63,23 @@
 	
 	> ul {
 		@extend .wrap;
-		border-left: 1px solid $colorGreyLight;
 		box-sizing: border-box;
 		padding: 0;
 	}
 	
 	li {
-		border-right: 1px solid $colorGreyLight;
 		box-sizing: border-box;
-		float: left;
-		width: 20%;
+		
+		+ li {
+			border-top: 1px solid $colorGreyLighter;
+		}
 	}
 	
 	a {
 		border-bottom: 4px solid transparent;
 		color: #000;
 		display: block;
-		padding: 24px 12px;
+		padding: 12px;
 		text-decoration: none;
 		vertical-align: middle;
 		

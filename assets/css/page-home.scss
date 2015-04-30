@@ -17,6 +17,11 @@
 }
 
 #features {
+	.row {
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
 	.col-1-3 + .col-1-3 {
 		border-top: 1px solid $colorGreyLight;
 		padding-top: 30px;
@@ -70,7 +75,7 @@
 	}
 }
 
-@media screen and (min-width: 468px) {
+@include breakpoint(extra-small) {
 	 #valprop {
 		background-size: 651px;
 		padding-bottom: 290px;
@@ -116,7 +121,7 @@
 	}
 }
 
-@media screen and (min-width: 768px) {
+@include breakpoint(small) {
 	#valprop {
 		background-size: 868px;
 		padding: 60px 0 400px;
@@ -134,7 +139,7 @@
 	}
 }
 
-@media screen and (min-width: 992px) {
+@include breakpoint(medium) {
 	#valprop {
 		background-image: url(/assets/images/valprop-bg--home.jpg);
 		background-size: 1300px;
@@ -152,5 +157,5 @@
 	}
 }
 
-@media screen and (min-width: 1200px) {
+@include breakpoint(large) {
 }

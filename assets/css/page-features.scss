@@ -10,6 +10,9 @@
 
 
 #valprop {
+	padding-left: ($gutterWidth * 1/4);
+	padding-right: ($gutterWidth * 1/4);
+	
 	h1 {
 		@include centeredMaxWidth(980px);
 		text-align: center;
@@ -19,8 +22,10 @@
 		background-image: url(/assets/images/valprop-bg--features.png);
 		background-position: center bottom;
 		background-repeat: no-repeat;
-		background-size: 1142px;
-		padding-bottom: 340px;
+		background-size: 100%;
+		padding-bottom: 160px;
+		padding-left: 0;
+		padding-right: 0;
 	}
 }
 
@@ -34,6 +39,11 @@
 	.row {
 		@include centeredMaxWidth(900px);
 	}
+	
+	.col-1-2 + .col-1-2 {
+		border-top: 1px solid mix($colorGrey, $colorBlueLight, 50%);
+		padding-top: 30px;
+	}
 }
 
 #sso {
@@ -46,6 +56,59 @@
 	background-image: url(/assets/images/section-bg--features-logs.jpg);
 	background-position: center bottom;
 	background-repeat: no-repeat;
-	background-size: 1440px;
-	padding-bottom: 550px;
+	background-size: 540px;
+	padding-bottom: 260px;
+	
+	header {
+		@include centeredMaxWidth(900px);
+	}
+}
+
+@include breakpoint(extra-small) {
+	#valprop .wrap {
+		padding-bottom: 240px;
+	}
+	
+	#logs {
+		background-size: 720px;
+		padding-bottom: 320px;
+	}
+}
+
+@include breakpoint(small) {
+	#valprop .wrap {
+		padding-bottom: 280px;
+	}
+	
+	#logs {
+		background-size: 900px;
+		padding-bottom: 390px;
+	}
+}
+
+@include breakpoint(medium) {
+	#valprop .wrap {
+		padding-bottom: 340px;
+	}
+	
+	#mfa .col-1-2 + .col-1-2 {
+		border-top: 0;
+		padding-top: 0;
+	}
+	
+	#logs {
+		background-size: 1260px;
+		padding-bottom: 520px;
+	}
+}
+
+@include breakpoint(large) {
+	#valprop .wrap {
+		background-size: 1142px;
+	}
+	
+	#logs {
+		background-size: 1440px;
+		padding-bottom: 590px;
+	}
 }
