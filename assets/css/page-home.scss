@@ -9,7 +9,7 @@
 ;
 
 #valprop {
-	background-image: url(/assets/images/valprop-bg--home-mobile.jpg);
+	background-image: url(/assets/images/valprop-bg--home-mobile.png);
 	background-position: center bottom;
 	background-repeat: no-repeat;
 	background-size: 434px;
@@ -141,7 +141,7 @@
 
 @include breakpoint(medium) {
 	#valprop {
-		background-image: url(/assets/images/valprop-bg--home.jpg);
+		background-image: url(/assets/images/valprop-bg--home.png);
 		background-size: 1300px;
 		padding: 100px 0 220px;
 	}
