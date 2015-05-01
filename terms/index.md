@@ -1,6 +1,8 @@
 ---
-layout: page_new
-title: Terms and Conditions
+layout: page
+valprop: {
+	title: "Terms &amp; Conditions"
+}
 ---
 
 
