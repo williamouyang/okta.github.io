@@ -25,7 +25,7 @@ body {
 
 .section--full-width {
 	background: $colorWhite;
-	padding: 45px 0;
+	padding: 30px 0;
 	position: relative;
 		
 	header {
@@ -60,7 +60,7 @@ body {
 	
 	&.extra-padding--for-anchor {
 		margin-top: -$headerHeight;
-		padding-top: $headerHeight + 45;
+		padding-top: $headerHeight + 30;
 	}
 	
 	&:not([class*=bg--]) + .section--full-width:not([class*=bg--]) {
@@ -79,7 +79,7 @@ body {
 }
 
 #valprop {
-	padding: 60px 0;
+	padding: 50px 0;
 	
 	h1, p {
 		color: $colorWhite;

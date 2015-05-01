@@ -30,14 +30,14 @@
  * _layout.scss
  ------------------------------------------------------------ */
 .section--full-width {
-	padding: 60px 0;
+	padding: 50px 0;
 	
 	&.extra-padding--for-anchor {
-		padding-top: $headerHeight + 60;
+		padding-top: $headerHeight + 50;
 	}
 	
 	header {
-		margin-bottom: 40px;
+		margin-bottom: 30px;
 	}
 }
 
