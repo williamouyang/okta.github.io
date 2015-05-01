@@ -24,7 +24,9 @@ body {
 }
 
 .section--full-width {
+	background: $colorWhite;
 	padding: 45px 0;
+	position: relative;
 		
 	header {
 		margin-bottom: 20px;
@@ -67,6 +69,12 @@ body {
 	
 	.wrap + .wrap {
 		margin-top: 40px;
+	}
+	
+	@for $i from 1 through 10 {
+		&:nth-child(#{$i}) {
+			z-index: (10 - $i);
+		}
 	}
 }
 

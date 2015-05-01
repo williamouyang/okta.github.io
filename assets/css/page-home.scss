@@ -45,12 +45,12 @@
 }
 
 #security {
-	h2, p {
-		@include centeredMaxWidth(700px);
+	.wrap {
+		@include centeredMaxWidth(840px);
 	}
 	
-	.row {
-		@include centeredMaxWidth(840px);
+	p {
+		@include centeredMaxWidth(700px);
 	}
 	
 	.col-1-3 {

@@ -22,7 +22,7 @@ h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote {
 
 p, ul, ol, blockquote {
 	line-height: $lineHeight * 1em;
-	margin: ($lineHeight * $fontSize * 1) 0;
+	margin: ($lineHeight * $fontSize * 1/2) 0;
 	
 	&.text--medium {
 		@include scaleUpFontSizeBy(0.8);
@@ -147,7 +147,7 @@ ul.list--with-bullets {
 		}
 		
 		+ li {
-			margin-top: $lineHeight * $fontSize * 1/2;
+			margin-top: $lineHeight * $fontSize * 1/4;
 		}
 	}
 }
@@ -186,7 +186,7 @@ ol.list--numbered {
 	padding-left: 6px + $gutterWidth / 4;
 	
 	li + li {
-		margin-top: $lineHeight * $fontSize * 1/2;
+		margin-top: $lineHeight * $fontSize * 1/4;
 	}
 }
 
