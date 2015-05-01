@@ -7,8 +7,11 @@
   padding-top: 1px; /* triggers margin for layout */
 }
 
+.wrap {
+	padding: 0 60px;
+}
+
 .post-block {
-  margin-top: 40px;
   background: #fff;
   border: 1px solid #d7d7d7;
   padding: 20px 60px 30px;

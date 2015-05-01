@@ -6,7 +6,7 @@ show_bottom_cta: true
 
 <section id="blog-index" class="section--full-width index">
 
-	<div class="container-non-responsive blog" id="main-container">
+	<div class="wrap blog">
 		{% for post in site.posts %}
 		{% assign author = site.data.authors[post.author] %}
 		{% capture _post_content %}{{ post.content }}{% endcapture %}
