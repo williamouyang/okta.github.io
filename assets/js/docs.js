@@ -23,23 +23,6 @@ $('#myScrollspy').on('activate.bs.scrollspy', function() {
 	}
 });
 
-// var sidebarHeight = $('#myScrollspy').prop('scrollHeight');
-// var initialViewPortHeight = $(window).height() - 120;
-// if(initialViewPortHeight < sidebarHeight + 250) {
-// 	$('#docs-sidebar-wrap').css('min-height', sidebarHeight + 300);
-// }
-
-//     //Check for widnow height on resize
-//     $(window).resize(function(){
-//     	var sidebarHeight = $('#myScrollspy').prop('scrollHeight');
-//     	var initialViewPortHeight = $(window).height() - 120;
-//     	if(initialViewPortHeight < sidebarHeight + 250) {
-//     		$('#docs-sidebar-wrap').css('min-height', sidebarHeight + 300);
-//     	}
-
-// 	    // Docs content
-// 	    $('.docs-content').css('padding-left', $('#sidebar-wrapper').width() + 20);
-// 	});
 
   var anchorForId = function (id) {
   	var anchor = document.createElement("a");
