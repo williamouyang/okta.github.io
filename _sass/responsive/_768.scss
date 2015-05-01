@@ -32,6 +32,10 @@
 .section--full-width {
 	padding: 60px 0;
 	
+	&.extra-padding--for-anchor {
+		padding-top: $headerHeight + 60;
+	}
+	
 	header {
 		margin-bottom: 40px;
 	}

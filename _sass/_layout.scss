@@ -56,6 +56,11 @@ body {
 		background: $colorGreyLighter;
 	}
 	
+	&.extra-padding--for-anchor {
+		margin-top: -$headerHeight;
+		padding-top: $headerHeight + 45;
+	}
+	
 	&:not([class*=bg--]) + .section--full-width:not([class*=bg--]) {
 		border-top: 10px solid $colorGreyLighter;
 	}

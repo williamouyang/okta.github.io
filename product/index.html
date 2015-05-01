@@ -1,8 +1,8 @@
 ---
 layout: master
-css: page-features
+css: page-product
 valprop: {
-	title: "Connect any user to any application with primary and multi-factory authentication",
+	title: "Connect any user to any application with primary and multi-factor authentication",
 	show_cta: false
 }
 show_bottom_cta: true
@@ -11,7 +11,7 @@ show_bottom_cta: true
 <section id="features" class="section--full-width">
 	
 	<header class="wrap text-align--center">
-		<h2>One Database for all your users</h2>
+		<h2>One Database for All Your Users</h2>
 	</header>
 
 	<div class="tabber">
@@ -80,7 +80,7 @@ show_bottom_cta: true
 					<div>
 						<p><strong>Authentication</strong></p>
 						<ul class="list--with-bullets">
-							<li>via API to Okta</li>
+							<li>API to Okta</li>
 						</ul>
 					</div>
 				</div>
@@ -113,7 +113,7 @@ show_bottom_cta: true
 						<p><strong>Session &amp; Policy Management</strong></p>
 						<ul class="list--with-bullets">
 							<li>Okta-managed session</li>
-							<li>Okta-managed password, lockout, MFA policy</li>
+							<li>Okta-managed password, lockout, and MFA policy</li>
 						</ul>
 					</div>
 				</div>
@@ -126,7 +126,7 @@ show_bottom_cta: true
 			<div class="text-align--center">
 				
 				<h2 class="h5 text--small">Active Directory &amp; LDAP</h2>
-				<p class="text--large">Use your existing LDAP or Active Directory as your user profile master and password store. Deploy the Okta Agent to securely delegate authentication to AD/LDAP and sync user data to/from Okta.</p>
+				<p class="text--large">Use your existing LDAP or Active Directory as your user profile master and password store. Deploy the Okta Agent to securely delegate authentication to AD or LDAP and sync user data to and from Okta.</p>
 				
 			</div>
 			
@@ -156,7 +156,7 @@ show_bottom_cta: true
 					<div>
 						<p><strong>Authentication</strong></p>
 						<ul class="list--with-bullets">
-							<li>Delegated to AD/LDAP</li>
+							<li>Delegated to AD or LDAP</li>
 						</ul>
 					</div>
 				</div>
@@ -178,7 +178,7 @@ show_bottom_cta: true
 					<div>
 						<p><strong>Groups</strong></p>
 						<ul class="list--with-bullets">
-							<li>Okta and AD / LDAP-mastered groups</li>
+							<li>Okta and AD or LDAP-mastered groups</li>
 						</ul>
 					</div>
 				</div>
@@ -188,9 +188,9 @@ show_bottom_cta: true
 					<div>
 						<p><strong>Session &amp; Policy Management</strong></p>
 						<ul class="list--with-bullets">
-							<li>"Okta-managed session</li>
+							<li>Okta-managed session</li>
 							<li>Okta-managed MFA policy</li>
-							<li>AD-based password and lockout policy"</li>
+							<li>AD-based password and lockout policy</li>
 						</ul>
 					</div>
 				</div>
@@ -280,7 +280,7 @@ show_bottom_cta: true
 			<div class="text-align--center">
 				
 				<h2 class="h5 text--small">Database</h2>
-				<p class="text--large">Use an existing database as your user profile master. Deploy the Okta Agent to securely sync user data to/from Okta.</p>
+				<p class="text--large">Use an existing database as your user profile master.<br />Deploy the Okta Agent to securely sync user data to and from Okta.</p>
 				
 			</div>
 			
@@ -312,7 +312,7 @@ show_bottom_cta: true
 					<div>
 						<p><strong>Authentication</strong></p>
 						<ul class="list--with-bullets">
-							<li>via API to Okta</li>
+							<li>API to Okta</li>
 						</ul>
 					</div>
 				</div>
@@ -324,8 +324,7 @@ show_bottom_cta: true
 					<div>
 						<p><strong>User Profile</strong></p>
 						<ul class="list--with-bullets">
-							<li>DB-mastered sync to Okta</li>
-							<li>or Okta-mastered sync to DB</li>
+							<li>DB-mastered sync to Okta or Okta-mastered sync to DB</li>
 						</ul>
 					</div>
 				</div>
@@ -346,7 +345,7 @@ show_bottom_cta: true
 						<p><strong>Session &amp; Policy Management</strong></p>
 						<ul class="list--with-bullets">
 							<li>Okta-managed session</li>
-							<li>Okta-managed password, lockout, MFA policy</li>
+							<li>Okta-managed password, lockout, and MFA policy</li>
 						</ul>
 					</div>
 				</div>
@@ -434,7 +433,7 @@ show_bottom_cta: true
 
 </section>
 
-<section id="mfa" class="section--full-width bg--light-blue text-align--center">
+<section id="mfa" class="section--full-width extra-padding--for-anchor bg--light-blue text-align--center">
 	<div class="wrap">
 		
 		<header>
@@ -445,19 +444,30 @@ show_bottom_cta: true
 			<div class="col-1-2">
 				<h2 class="h5 text--small">Integrations</h2>
 				<p><img class="responsive--full-width" src="{{ "assets/images/graphics/rsa-integrations.png" | prepend: site.baseurl }}" /></p>
-				<p>Duo Security | Google Authenticator | RSA SecurID | Symantec VIP</p>
+				<p>
+					<span style="display:inline-block;text-align:right;width:40%;">Duo Security</span>
+					<span style="display:inline-block;text-align:center;width:5%;">|</span>
+					<span style="display:inline-block;text-align:left;width:40%;">Google Authenticator</span><br />
+					<span style="display:inline-block;text-align:right;width:40%;">RSA SecurID</span>
+					<span style="display:inline-block;text-align:center;width:5%;">|</span>
+					<span style="display:inline-block;text-align:left;width:40%;">Symantec VIP</span>
+				</p>
 			</div>
 			<div class="col-1-2">
 				<h2 class="h5 text--small">Native Options</h2>
 				<p><img class="responsive--full-width" src="{{ "assets/images/graphics/native-mfa.png" | prepend: site.baseurl }}" /></p>
-				<p>Okta Verify | SMS</p>
+				<p>
+					Okta Verify
+					<span style="display:inline-block;text-align:center;width:5%;">|</span>
+					SMS
+				</p>
 			</div>
 		</div>
 		
 	</div>
 </section>
 
-<section id="sso" class="section--full-width text-align--center">
+<section id="sso" class="section--full-width extra-padding--for-anchor text-align--center">
 	<div class="wrap">
 		
 		<header>
@@ -475,7 +485,7 @@ show_bottom_cta: true
 		
 		<header class="text-align--center">
 			<h2>Okta Application Network</h2>
-			<p class="text--large">Give users a seamless experience across all parts of your product</p>
+			<p class="text--large">Give users a seamless experience across all parts of your product.</p>
 		</header>
 		
 		<p><img class="responsive--full-width" src="{{ "assets/images/graphics/oan.jpg" | prepend: site.baseurl }}" /></p>
@@ -491,7 +501,7 @@ show_bottom_cta: true
 			<div class="col-1-2 extra-padding--left">
 				<div class="column-icon" style="background-image:url(/assets/images/icons/rounded-authentication--blue.png);"></div>
 				<div>
-					<h3 class="h6 text--small">Single Sign On</h3>
+					<h3 class="h6 text--small">Single Sign-On</h3>
 					<p>Leverage Okta’s pre-built, tested, and maintained integrations to add SSO to any app or platform in minutes.</strong>
 				</div>
 			</div>

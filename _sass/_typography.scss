@@ -194,4 +194,15 @@ ol.list--numbered {
 	font-weight: 500;
 	text-decoration: none;
 	text-transform: uppercase;
+	
+	&:after {
+		@include scaleUpFontSizeBy(1);
+		color: $colorGreen;
+		content: "\203A";
+		display: inline-block;
+		margin-left: 10px;
+		position: relative;
+		top: -2px;
+		vertical-align: middle;
+	}
 }

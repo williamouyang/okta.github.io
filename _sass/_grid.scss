@@ -41,6 +41,11 @@
 	}
 }
 
+a[class*=col-] {
+	color: inherit;
+	text-decoration: none;
+}
+
 .column-icon {
 	background-size: 39px;
 	height: 39px;
