@@ -35,32 +35,4 @@
 			color: #fff;
 		}
 	}
-
-	.social-links {
-		a {
-			border: 3px solid $colorGrey;
-			border-radius: 27px;
-			display: block;
-			height: 24px;
-			line-height: 24px;
-			padding: 12px;
-			text-align: center;
-			width: 24px;
-
-			svg {
-				@include defaultTransition;
-				display: inline-block;
-				fill: $colorGrey;
-				vertical-align: middle;
-			}
-
-			&:active, &:focus, &:hover {
-				border-color: $colorGreyLight;
-
-				svg {
-					fill: $colorGreyLight;
-				}
-			}
-		}
-	}
 }
