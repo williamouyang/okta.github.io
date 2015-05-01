@@ -22,50 +22,49 @@ $('#myScrollspy').on('activate.bs.scrollspy', function() {
 		$('.closed').hide();
 	}
 });
-var sidebarHeight = $('#myScrollspy').prop('scrollHeight');
-var initialViewPortHeight = $(window).height() - 120;
-if(initialViewPortHeight < sidebarHeight + 250) {
-	$('#docs-sidebar-wrap').css('min-height', sidebarHeight + 200);
-}
 
-    //Check for widnow height on resize
-    $(window).resize(function(){
-    	var sidebarHeight = $('#myScrollspy').prop('scrollHeight');
-    	var initialViewPortHeight = $(window).height() - 120;
-    	if(initialViewPortHeight < sidebarHeight + 250) {
-    		$('#docs-sidebar-wrap').css('min-height', sidebarHeight + 200);
-    	}
-
-	    // Docs content
-	    $('.docs-content').css('padding-left', $('#sidebar-wrapper').width() + 20);
-	});
-
-  // ------------------------ LINKIFY ANCHORS
-
-//   var anchorForId = function (id) {
-//   	var anchor = document.createElement("a");
-//   	anchor.className = "header-link";
-//   	anchor.href      = "#" + id;
-//   	anchor.innerHTML = "<i class=\"fa fa-link\"></i>";
-//   	return anchor;
-//   };
-
-//   var linkifyAnchors = function (level, container) {
-//   	var headers = container.getElementsByTagName("h" + level);
-//   	for (var h = 0; h < headers.length; h++) {
-//   		var header = headers[h];
-
-//   		if (typeof header.id !== "undefined" && header.id !== "" &&
-//   			header.className.indexOf("no-link") !== 0) {
-//   			header.appendChild(anchorForId(header.id), header);
-//   	}
-//   }
-// };
-
-// var body = document.getElementById('docs-body');
-// for (var level = 1; level <= 6; level++) {
-// 	linkifyAnchors(level, body);
+// var sidebarHeight = $('#myScrollspy').prop('scrollHeight');
+// var initialViewPortHeight = $(window).height() - 120;
+// if(initialViewPortHeight < sidebarHeight + 250) {
+// 	$('#docs-sidebar-wrap').css('min-height', sidebarHeight + 300);
 // }
+
+//     //Check for widnow height on resize
+//     $(window).resize(function(){
+//     	var sidebarHeight = $('#myScrollspy').prop('scrollHeight');
+//     	var initialViewPortHeight = $(window).height() - 120;
+//     	if(initialViewPortHeight < sidebarHeight + 250) {
+//     		$('#docs-sidebar-wrap').css('min-height', sidebarHeight + 300);
+//     	}
+
+// 	    // Docs content
+// 	    $('.docs-content').css('padding-left', $('#sidebar-wrapper').width() + 20);
+// 	});
+
+  var anchorForId = function (id) {
+  	var anchor = document.createElement("a");
+  	anchor.className = "header-link";
+  	anchor.href      = "#" + id;
+  	anchor.innerHTML = "<i class=\"fa fa-link\"></i>";
+  	return anchor;
+  };
+
+  var linkifyAnchors = function (level, container) {
+  	var headers = container.getElementsByTagName("h" + level);
+  	for (var h = 0; h < headers.length; h++) {
+  		var header = headers[h];
+
+  		if (typeof header.id !== "undefined" && header.id !== "" &&
+  			header.className.indexOf("no-link") !== 0) {
+  			header.appendChild(anchorForId(header.id), header);
+  	}
+  }
+};
+
+var body = document.getElementById('docs-body');
+for (var level = 1; level <= 6; level++) {
+	linkifyAnchors(level, body);
+}
 
   // ------------------------  DYNAMIC ANCHOR ADJUST FOR FIXED TOPNAV
 
@@ -118,6 +117,12 @@ if(initialViewPortHeight < sidebarHeight + 250) {
   		else {
   			$scroller.removeClass('on');
   		}
+  		// if($(window).scrollTop() + $(window).height() < $(document).height()) {
+	   //     $scroller.css('bottom', 20);
+	   // }
+	   // else
+	   // 		$scroller.css('bottom', $('.site-footer').outerHeight());
+
   	}
   }, 250);
 
@@ -163,7 +168,7 @@ if(initialViewPortHeight < sidebarHeight + 250) {
 
 	$('.gsc-trigger').click(function() {
 		console.log("clicked");
-		$('.gsc-container ').toggleClass('hide');
+		// $('.gsc-container ').toggleClass('hide');
 	});
 
 });

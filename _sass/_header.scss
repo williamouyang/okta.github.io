@@ -8,7 +8,7 @@
 	right: 0;
 	top: 0;
 	z-index: 20;
-	
+
 	.cta-button {
 		display: none;
 		position: absolute;
@@ -16,7 +16,7 @@
 		top: ($headerHeight - 41) / 2;
 		width: 160px;
 	}
-	
+
 	.search-button {
 		background: url(/assets/svg/magnify.svg);
 		background-size: 30px;
@@ -29,6 +29,66 @@
 		width: 30px;
 		z-index: 10;
 	}
+	.search-container {
+		$tl: 0.6s;
+		.gsc-search-box {
+			float: right;
+			padding: 0;
+		}
+		.gsc-container {
+			background-size: 30px;
+			display: block;
+			height: 30px;
+			position: absolute;
+			right: ($gutterWidth * 1/4) + 190px;
+			top: ($headerHeight - 31) / 2;
+			transition: none;
+			width: 30px;
+			z-index: 10;
+		}
+
+		#gsc-i-id1 {
+			/*transition: width $tl, border-radius $tl, background $tl, box-shadow $tl;*/
+			width: 30px;
+			height: 30px;
+			border-radius: 15px;
+			padding: 0;
+			border: none;
+			cursor: pointer;
+			background: none !important;
+			/*background: url(/assets/svg/magnify.svg) no-repeat !important;*/
+			background-position-x: 100% !important;
+			background-size: 30px 30px !important;
+			&:focus {
+			// transition: width $tl cubic-bezier(0,.9,.9,.9), border-radius $tl, background $tl;
+			border: none;outline: none;
+			box-shadow: none;
+			padding-left: 15px;
+			cursor: text;
+			border: 1px solid #BBB;
+			width: $pageWidth - 500px;
+			border-radius: auto;
+			background-color: white !important;
+			color: black;
+		}
+	}
+
+	.gsc-search-button {
+		/*position: absolute;*/
+		display: none;
+	}
+
+	.search-icon {
+		position: relative;
+		left: -30px;
+		color: white;
+		cursor: pointer;
+	}
+	.gsc-clear-button {
+		display: none;
+	}
+}
+
 }
 
 .site-title {
@@ -41,7 +101,7 @@
 	position: relative;
 	width: 157px;
 	z-index: 10;
-	
+
 	a {
 		display: block;
 		height: 100%;
@@ -61,14 +121,14 @@
 	text-align: right;
 	top: 0;
 	z-index: 5;
-	
+
 	ul {
 		float: right;
 		list-style: none;
 		margin: 0;
 		padding: 0;
 	}
-	
+
 	> ul > li, > .pac-nav--desktop > ul > li {
 		float: left;
 		line-height: 30px;
@@ -76,7 +136,7 @@
 		padding: (($headerHeight - 31) / 2) 0;
 		position: relative;
 	}
-	
+
 	> .pac-nav--desktop,
 	> .pac-nav--mobile,
 	> .pac-nav--toggle {
@@ -84,7 +144,7 @@
 		padding: 0;
 		height: auto;
 	}
-	
+
 	> ul > li > a, > .pac-nav--desktop > ul > li > a {
 		@include scaleDownFontSizeBy(1/2);
 		color: #333;
@@ -94,21 +154,21 @@
 		text-decoration: none;
 		text-transform: uppercase;
 	}
-	
+
 	.pac-nav--hidden,
 	&.pac-nav--is-desktop .pac-nav--toggle,
 	&.pac-nav--is-desktop .pac-nav--mobile {
 		display: none !important;
 	}
-	
+
 	.pac-nav--toggle {
 		cursor: pointer;
 	}
-	
+
 	&.pac-nav--is-intermediary,
 	&.pac-nav--is-mobile {
 		padding-right: 50px;
-		
+
 		.pac-nav--toggle {
 			background: no-repeat center;
 			background-size: 30px;
@@ -119,15 +179,15 @@
 			width: 30px;
 		}
 	}
-	
+
 	&.pac-nav--is-intermediary .pac-nav--toggle {
 		background-image: url(/assets/svg/dots-horizontal.svg);
 	}
-	
+
 	&.pac-nav--is-mobile .pac-nav--toggle {
 		background-image: url(/assets/svg/menu.svg);
 	}
-	
+
 	.pac-nav--mobile {
 		background: $colorBlack;
 		border-radius: 3px;
@@ -137,7 +197,7 @@
 		right: 0;
 		top: (($headerHeight - 1) / 2) + 20;
 		z-index: 999;
-		
+
 		&:before {
 			border: solid transparent;
 			border-bottom-color: $colorBlack;
@@ -148,33 +208,33 @@
 			right: 10px;
 			top: -5px;
 		}
-		
+
 		ul, li {
 			float: none;
 		}
-		
+
 		> ul > li {
 			border-bottom: 1px solid $colorGreyDark;
 			margin: 0 10px;
-			
+
 			&:last-child {
 				border-bottom: 0;
 			}
-			
+
 			> a {
 				color: #fff;
 				display: block;
 				margin: 0 -10px;
 				padding: 5px 10px;
 				text-decoration: none;
-				
+
 				&:active, &:focus, &:hover {
 					background: $colorGreyDark;
 				}
 			}
 		}
 	}
-	
+
 	&.pac-nav--is-mobile .pac-nav--mobile {
 		bottom: 0;
 		left: 0;
@@ -182,14 +242,14 @@
 		right: 0;
 		text-align: left;
 		top: ($headerHeight - 1);
-		
-			&:before {
+
+		&:before {
 			border-width: 0 10px 10px;
 			right: ($gutterWidth * 1/4) + 55;
 			top: -10px;
 		}
 	}
-	
+
 	.has-dropdown > a:after {
 		border: solid transparent;
 		border-bottom-color: $colorWhite;
@@ -202,7 +262,7 @@
 		top: (($headerHeight - 1) / 2) + 15;
 		z-index: 10;
 	}
-	
+
 	.dropdown-window {
 		background: $colorWhite;
 		border-radius: 3px;
@@ -213,7 +273,7 @@
 		right: 0;
 		top: (($headerHeight - 1) / 2) + 20;
 		z-index: 5;
-		
+
 		> p {
 			@include scaleDownFontSizeBy(3/4);
 			background: no-repeat top left;
@@ -225,99 +285,99 @@
 			position: relative;
 			text-align: left;
 			white-space: nowrap;
-			
+
 			&:last-child {
 				border-bottom: 0;
 				margin-bottom: 0;
 				padding-bottom: 0;
 			}
-			
+
 			&.stack-overflow {
 				background-image: url(/assets/images/icons/rounded-stackoverflow--small-blue.png);
 			}
-			
+
 			&.email {
 				background-image: url(/assets/images/icons/rounded-email--small-blue.png);
 			}
-			
+
 			&.tel {
 				background-image: url(/assets/images/icons/rounded-mobile--small-blue.png);
 			}
 		}
-		
+
 		a {
 			font-weight: 500;
 			text-decoration: none;
 		}
 	}
-	
+
 	.has-dropdown.dropdown-active > a {
 		&:after,
 		+ .dropdown-window {
 			display: block;
 		}
 	}
-	
+
 	.pac-nav--mobile .pac-nav--visible + .has-dropdown {
 		margin-bottom: 30px;
 		margin-top: 30px;
-		
+
 		&:last-child {
 			margin-bottom: 0;
 		}
 	}
-	
+
 	.pac-nav--mobile .has-dropdown {
 		> a,
 		> a + .dropdown-window {
 			display: block !important;
 		}
-		
+
 		> a {
 			cursor: default;
-			
+
 			&:active, &:focus, &:hover {
 				background: none;
 			}
-			
+
 			&:after {
 				display: none !important;
 			}
 		}
-		
+
 		.dropdown-window {
 			background: none;
 			border-top: 1px solid $colorGreyDark;
 			padding: 10px 0 5px;
 			position: static;
-			
+
 			a {
 				color: #fff;
 				display: inline;
 				font-weight: 500;
 				padding: 0;
-				
+
 				&:active, &:focus, &:hover {
 					text-decoration: underline;
 				}
 			}
-			
+
 			> p  {
 				border-bottom-color: $colorGreyDark;
 				color: $colorGreyLight;
-				
+
 				&:last-child {
 					border-bottom: 0;
 				}
-			
+
 				&.stack-overflow {
 					background-image: url(/assets/images/icons/rounded-stackoverflow--small-grey.png);
 				}
-				
+
 				&.email {
 					background-image: url(/assets/images/icons/rounded-email--small-grey.png);
 				}
-				
+
 				&.tel {
 					background-image: url(/assets/images/icons/rounded-mobile--small-grey.png);
 				}
@@ -325,3 +385,4 @@
 		}
 	}
 }
+

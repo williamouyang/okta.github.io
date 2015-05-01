@@ -29,23 +29,30 @@
 			</ul>
 		</nav>
 
-		<a href="#" class="search-button gsc-trigger"></a>
-		<div class="gsc-container hide">
-			<script>
-				(function() {
-					var cx = '005121479574088032773:mmh_vhv8uns';
-					var gcse = document.createElement('script');
-					gcse.type = 'text/javascript';
-					gcse.async = true;
-					gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-					'//www.google.com/cse/cse.js?cx=' + cx;
-					var s = document.getElementsByTagName('script')[0];
-					s.parentNode.insertBefore(gcse, s);
-				})();
-			</script>
-			<gcse:searchbox-only resultsUrl="/search" enableAutoComplete="true"></gcse:searchbox-only>
+		<a href="#" class="gsc-trigger search-button"></a>
+
+
+		<div class="search-container">
+			<div class="gsc-container">
+				<script defer="defer">
+					(function() {
+						var cx = '005121479574088032773:mmh_vhv8uns';
+						var gcse = document.createElement('script');
+						gcse.type = 'text/javascript';
+						gcse.async = true;
+						gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+						'//cse.google.com/cse.js?cx=' + cx;
+						var s = document.getElementsByTagName('script')[0];
+						s.parentNode.insertBefore(gcse, s);
+					})();
+				</script>
+				<gcse:searchbox-only resultsUrl="/search" enableAutoComplete="true"></gcse:searchbox-only>
+			</div>
 		</div>
 		<a href="https://www.okta.com/developer/signup/" class="cta-button button--small">Get Started</a>
 
 	</div>
 </header>
+
+
+

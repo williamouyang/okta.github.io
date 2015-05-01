@@ -1,0 +1,42 @@
+---
+---
+
+@charset "utf-8";
+
+@import
+"variables",
+"mixins"
+;
+
+#valprop {
+	text-align: center;
+
+	p {
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+.gsc-table-result {
+	.gs-title {
+		font-size: 1.25rem;
+		color: #0e6aa8 !important;
+		text-decoration: none;
+	}
+	.gs-snippet {
+
+	}
+	.gsc-url-bottom {
+		color: #6c922d !important;
+		.gs-visibleUrl-long {
+			color: #6c922d !important;
+		}
+	}
+
+}
+
+.gsc-cursor {
+	.gsc-cursor-current-page {
+		color: white !important;
+	}
+}

@@ -36,7 +36,7 @@ css: layout-docs
 				{% for nav in site.data.docs %}
 				{% if nav.section contains "guides" %}
 
-				<ul class="list-unstyled docs-index-list">
+				<ul class="list-unstyled docs-index-list bulletsless">
 					{% for item in nav.pages %}
 					{% for page in site.pages %}
 					{% if page.layout == 'docs_page' %}
@@ -64,3 +64,11 @@ css: layout-docs
 
 	</div>
 </section>
+<style>
+	footer {
+		position: absolute !important;
+		width: 100%;
+		bottom: 0;
+	}
+}
+</style>

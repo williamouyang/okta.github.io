@@ -12,18 +12,16 @@ $(function() {
   });
 
   var listTopics = function(data, container) {
-    var $ul = $('<ul>');
-    _.each(data.items, function(item, idx, list) {
-      if(idx >= 9) {
-        return false;
-      }
+    var $ul = $('<ul class="recent-list">');
+    $.each(data.items, function(item, idx) {
+    	console.log(this);
       var $li = $('<li>' + idx),
           $a = $('<a>');
       $a.attr({
-          'href': item.link,
+          'href': this.link,
           'target': '_blank'
         })
-        .html(item.title);
+        .html(this.title);
       $li.append($a);
       $ul.append($li);
     });
