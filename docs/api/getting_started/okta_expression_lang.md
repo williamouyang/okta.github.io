@@ -113,7 +113,7 @@ Function  | Return Type | Example | Input | Output
  | | | Double val = 123.6 | 124
 `Convert.toNum(string)` | Double | `Convert.toNum(val)` | String val = '3.141' | 3.141
 
-**Note:**  Convert.toInt(double) rounds the passed numeric value either up or down to the nearest integer. Be sure to consider 
+**Note:**  Convert.toInt(double) rounds the passed numeric value either up or down to the nearest integer. Be sure to consider
 integer type range limitations when converting from a number to an integer with this function.
 
 
@@ -132,7 +132,7 @@ The functions above are often used in tandem to check whether a user has an AD o
 
 Common Actions  | Example
 ----------------| --------
-Refer to a `String` constant | 'Hello world' 
+Refer to a `String` constant | 'Hello world'
 Refer to a `Integer` constant | 1234
 Refer to a `Number` constant | 3.141
 Refer to a `Boolean` constant | true
@@ -162,4 +162,3 @@ Email Domain + Lowercase First Initial and Lastname with Separator | `toUpperCas
 Static Domain + Email Prefix with Separator | `"XDOMAIN\" + toLowerCase(substring( user.firstName, 0, 1)) + toLowerCase(user.lastName)` | XDOMAIN\wchurchill | Add "XDOMAIN" string. Append a backslash "\" character. Obtain the Firstname value. From result, retrieve characters greater than position 0 thru position 1, including position 1. Convert it to lowercase. Obtain the Lastname value. Convert it to lowercase.
 Workday ID | `hasWorkdayUser()?findWorkdayUser().employeeID:null` | 123456 | Check if user has a Workday assignment, and if so, return their Workday employee ID.
 Active Directory UPN | `hasDirectoryUser()?findDirectoryUser().managerUPN:null` | bob@okta.com | Check if user has an Active Directory assignment, and if so, return their Active Directory manager UPN.
-

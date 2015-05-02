@@ -150,14 +150,14 @@ sharedSecret  | unique secret key for prover                      | String      
 encoding      | encoding of `sharedSecret`                        | `base32` or `base64`                                           |           |           | FALSE    | FALSE  | TRUE
 keyLength     | number of digits in an HOTP value                 | Number                                                         |           |           | FALSE    | FALSE  | TRUE
 _links        | discoverable resources related to the activation  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) |           |           | TRUE     | FALSE  | TRUE
- 
+
 ~~~ json
 "activation": {
   "timeStep": 30,
   "sharedSecret": "HE64TMLL2IUZW2ZLB",
   "encoding": "base32",
   "keyLength": 6
-} 
+}
 ~~~
 
 ### Factor Verify Result Object
@@ -176,7 +176,7 @@ factorResult           | Description
 `SUCCESS`              | Factor was successfully verified
 `CHALLENGE`            | Another verification is required
 `WAITING`              | Factor verification has started but not yet completed (e.g user hasn't answered phone call yet)
-`FAILED`               | Factor verification failed 
+`FAILED`               | Factor verification failed
 `CANCELLED`            | Factor verification was canceled by user
 `TIMEOUT`              | Unable to verify factor within the allowed time window
 `TIME_WINDOW_EXCEEDED` | Factor was successfully verified but outside of the computed time window.  Another verification is required in current time window.
@@ -186,7 +186,7 @@ factorResult           | Description
 
 ## Factor Operations
 
-### Get Factor 
+### Get Factor
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors/*:fid*
@@ -260,7 +260,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ~~~
 
-### List Enrolled Factors 
+### List Enrolled Factors
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors
@@ -552,7 +552,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### List Security Questions
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors/questions
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors/questions
 
 Enumerates all available security questions for a user's `question` factor.
 
@@ -628,7 +628,7 @@ Parameter    | Description                                         | Param Type 
 ------------ | --------------------------------------------------- | ---------- | --------------------------------------------------- | -------- | -------
 result       | verification result                                 | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
 
-If the `answer` is invalid you will receive a `403 Forbidden` status code with the following error: 
+If the `answer` is invalid you will receive a `403 Forbidden` status code with the following error:
 
 ~~~ json
 {
@@ -654,7 +654,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X POST "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ufs1pe3ISGKGPYKXRBKK/verify
 -d \
 '{
-  "answer": "mayonnaise" 
+  "answer": "mayonnaise"
 }'
 ~~~
 
@@ -693,7 +693,7 @@ Parameter    | Description                                         | Param Type 
 ------------ | --------------------------------------------------- | ---------- | --------------------------------------------------- | -------- | -------
 result       | verification result                                 | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
 
-If the passcode is invalid you will receive a `403 Forbidden` status code with the following error: 
+If the passcode is invalid you will receive a `403 Forbidden` status code with the following error:
 
 ~~~ json
 {
@@ -755,7 +755,7 @@ Parameter    | Description                                         | Param Type 
 ------------ | --------------------------------------------------- | ---------- | --------------------------------------------------- | -------- | -------
 result       | verification result                                 | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
 
-If the passcode is invalid you will receive a `403 Forbidden` status code with the following error: 
+If the passcode is invalid you will receive a `403 Forbidden` status code with the following error:
 
 ~~~ json
 {
@@ -799,16 +799,16 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Enroll Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-put"><span class="api-label">POST</span> /api/v1/users/*:id*/factors
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:id*/factors
 
-Enrolls a user with a supported [factor](#list-factors-to-enroll) for the specified user. 
+Enrolls a user with a supported [factor](#list-factors-to-enroll) for the specified user.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
 Parameter    | Description      | Param Type  | DataType                | Required | Default
 ------------ | ---------------- | ----------- | ----------------------- | -------- | -------
-id           | `id` of user     | URL         | String                  | TRUE     |  
+id           | `id` of user     | URL         | String                  | TRUE     |
 factor       | Factor           | Body        | [Factor](#factor-model) | TRUE     |
 
 ##### Response Parameters
@@ -927,8 +927,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "phoneNumber": "+1-555-415-1337"
   },
   "_links": {
-    "next": {
-      "name": "activate",
+    "activate": {
       "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP/lifecycle/activate",
       "hints": {
         "allow": [
@@ -1002,8 +1001,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "credentialId": "isaac@example.org"
   },
   "_links": {
-    "next": {
-      "name": "activate",
+    "activate": {
       "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/lifecycle/activate",
       "hints": {
         "allow": [
@@ -1080,8 +1078,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "credentialId": "isaac@example.org"
   },
   "_links": {
-    "next": {
-      "name": "activate",
+    "activate": {
       "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/lifecycle/activate",
       "hints": {
         "allow": [
@@ -1152,7 +1149,7 @@ passCode     | OTP generated by device                             | Body       
 
 If the passcode is correct you will receive the [Factor](#factor-model) with an `ACTIVE` status.
 
-If the passcode is invalid you will receive a `403 Forbidden` status code with the following error: 
+If the passcode is invalid you will receive a `403 Forbidden` status code with the following error:
 
 ~~~ json
 {
@@ -1245,7 +1242,7 @@ passCode     | OTP sent to mobile device                           | Body       
 
 If the passcode is correct you will receive the [Factor](#factor-model) with an `ACTIVE` status.
 
-If the passcode is invalid you will receive a `403 Forbidden` status code with the following error: 
+If the passcode is invalid you will receive a `403 Forbidden` status code with the following error:
 
 ~~~ json
 {
@@ -1353,4 +1350,3 @@ curl -v -H "Authorization: SSWS yourtoken" \
 {:.api .api-response .api-response-example}
 
 `204 No Content`
-

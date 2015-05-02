@@ -7,7 +7,7 @@ Here is how to configure Okta:
 
 1.  Log in to your Okta organization as a user with administrative
     privileges.
-    
+
     If you don't have an Okta organization, you can create a free Okta
     Developer Edition organization here:
     <https://www.okta.com/developer/signup/>
@@ -44,7 +44,7 @@ Here is how to configure Okta:
     ~~~
 
     Then click the green "Next" button
-    
+
     ![SAML Settings](/assets/img/spring-security-saml-okta-configure-settings.png)
 
 
@@ -65,7 +65,7 @@ Here is how to configure Okta:
 11. Right-click on the "People" section of the "Spring Security SAML"
     application and select "Open Link In New Tab" (so that you can come
     back to the "Sign On" section later).
-    
+
     In the new tab that opens, click on the "Assign Application" button
     ![Assign Application](/assets/img/spring-security-saml-okta-assign-people-to-application.png)
 
@@ -81,4 +81,3 @@ Here is how to configure Okta:
 14. You are now ready to proceed to the next section. Make sure that the
     link you copied in step \#9 is still in your clipboard, as you will
     need it in the next section.
-

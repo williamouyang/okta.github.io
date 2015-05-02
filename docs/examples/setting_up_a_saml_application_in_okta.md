@@ -13,7 +13,7 @@ Here is how to set up a SAML application in Okta:
 
 1.  Log in to your Okta organization as a user with administrative
     privileges.
-    
+
     If you don't have an Okta organization, you can create a free Okta
     Developer Edition organization here:
     <https://www.okta.com/developer/signup/>
@@ -53,7 +53,7 @@ Here is how to set up a SAML application in Okta:
       3. "Email" set to "${user.email}"
 
     - Then click the green "Next" button
-    
+
     ![SAML Settings](/assets/img/example-saml-application-okta-configure-settings.png)
 
 
@@ -74,7 +74,7 @@ Here is how to set up a SAML application in Okta:
 11. Right-click on the "People" section of the "Example SAML Application"
     application and select "Open Link In New Tab" (so that you can come
     back to the "Sign On" section later).
-    
+
     In the new tab that opens, click on the "Assign Application" button
     ![Assign Application](/assets/img/example-saml-application-okta-assign-people-to-application.png)
 
@@ -89,4 +89,3 @@ Here is how to set up a SAML application in Okta:
 
 14. You are now ready to configure SAML in your application. The information in the tab you
     opened in step \#10 contains the information that you'll need to configure SAML in your application.
-

@@ -39,7 +39,7 @@ Use the following instructions to integrate your app into the Okta Application N
 
 * Is supporting single sign-on making you anxious? Use our [Single Sign-On with Okta](/docs/getting_started/saml_guidance.html) tools which includes toolkits and even a tool for testing your SAML configuration.
 
-* Ready to offload user on-boarding with Okta? Find recommendations on building APIs for user creation, update, and deactivation in our (Building a Well-Managed Cloud Application)[https://www.okta.com/resources/whitepaper-bwmca-thank-you.html]  guide
+* Ready to offload user on-boarding with Okta? Find recommendations on building APIs for user creation, update, and deactivation in our [Building a Well-Managed Cloud Application](https://www.okta.com/resources/whitepaper-bwmca-thank-you.html) guide.
 
 ### 2. Integrate Your App
 

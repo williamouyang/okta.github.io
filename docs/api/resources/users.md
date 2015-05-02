@@ -173,7 +173,7 @@ Specifies a password for a user.  A password value is a **write-only** property.
 
 Attribute | DataType | MinLength         | MaxLength | Nullable | Unique | Validation
 --------- | -------- | ----------------- | --------- | -------- | ------ | -----------------
-value     | String   | *Password Policy* | 40        | TRUE     | FALSE  | *Password Policy* 
+value     | String   | *Password Policy* | 40        | TRUE     | FALSE  | *Password Policy*
 
 ##### Default Password Policy
 
@@ -876,7 +876,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users</span>
 
-Enumerates users in your organization with pagination.  A subset of users can be returned that match a supported filter expression or query. 
+Enumerates users in your organization with pagination.  A subset of users can be returned that match a supported filter expression or query.
 
 - [List Users with Defaults](#list-users-with-defaults)
 - [List Users with Search](#list-users-with-search)
@@ -904,7 +904,7 @@ after     | Specifies the pagination cursor for the next page of users          
 The following expressions are supported for users with the `filter` query parameter:
 
 Filter                                         | Description
----------------------------------------------- | ------------------------------------------------ 
+---------------------------------------------- | ------------------------------------------------
 `status eq "STAGED"`                           | Users that have a `status` of `STAGED`
 `status eq "PROVISIONED"`                      | Users that have a `status` of `PROVISIONED`
 `status eq "ACTIVE"`                           | Users that have a `status` of `ACTIVE`
@@ -940,7 +940,7 @@ Users updated after 06/01/2013 but before 01/01/2014
 Users updated after 06/01/2013 but before 01/01/2014 with a status of `ACTIVE`
 
     filter=lastUpdated gt "2013-06-27T16:35:28.000Z" and lastUpdated lt "2013-07-04T16:35:28.000Z" and status eq "ACTIVE"
-    
+
 Users updated after 06/01/2013 but with a status of `LOCKED_OUT` or `RECOVERY`
 
     filter=lastUpdated gt "2013-06-27T16:35:28.000Z" and (status eq "LOCKED_OUT" or status eq "RECOVERY")
@@ -1058,7 +1058,7 @@ Link: <https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limi
                 "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
             }
         }
-    }    
+    }
 ]
 ~~~
 
@@ -1132,7 +1132,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
                 "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
             }
         }
-    }    
+    }
 ]
 ~~~
 
@@ -1205,7 +1205,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
                 "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
             }
         }
-    }    
+    }
 ]
 ~~~
 
@@ -1281,7 +1281,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
                 "href": "https://your-domain.okta.com/api/v1/users/000ub0oNGTSWTBKOLGLNR/credentials/change_password"
             }
         }
-    }    
+    }
 ]
 ~~~
 
@@ -1294,7 +1294,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 Update a user's profile and/or credentials.
 
-> All profile attributes must be specified when updating a user's profile with this method. Any attribute not specified 
+> All profile attributes must be specified when updating a user's profile with this method. Any attribute not specified
 is deleted. Do not use this method for partial updates.
 
 ##### Request Parameters
@@ -1306,7 +1306,7 @@ id          | `id` of user to update      | URL        | String                 
 profile     | Updated profile for user    | Body       | [Profile Object](#profile-object)         | FALSE    |
 credentials | Update credentials for user | Body       | [Credentials Object](#credentials-object) | FALSE    |
 
-`profile` and `credentials` can be updated independently or with a single request. 
+`profile` and `credentials` can be updated independently or with a single request.
 
 > All profile attributes must be specified when updating a user's profile.  **Partial updates are not supported**!
 
@@ -1396,13 +1396,13 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }
-~~~   
+~~~
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:id*</span>
 
-Update a user's profile and/or credentials. Use this method for a partial update. 
+Update a user's profile and/or credentials. Use this method for a partial update.
 
-> Only the profile attributes to change must be specified when updating a user's profile with this method. Any attribute not specified 
+> Only the profile attributes to change must be specified when updating a user's profile with this method. Any attribute not specified
 is unchanged. Use this method for partial updates.
 
 ##### Request Parameters
@@ -1414,7 +1414,7 @@ id          | `id` of user to update      | URL        | String                 
 profile     | Updated profile for user    | Body       | [Profile Object](#profile-object)         | FALSE    |
 credentials | Update credentials for user | Body       | [Credentials Object](#credentials-object) | FALSE    |
 
-`profile` and `credentials` can be updated independently or with a single request. 
+`profile` and `credentials` can be updated independently or with a single request.
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -1498,7 +1498,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }
-~~~  
+~~~
 
 
 #### Set Password
@@ -1581,7 +1581,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }
-~~~    
+~~~
 
 #### Set Recovery Question & Answer
 {:.api .api-operation}
@@ -1664,7 +1664,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ~~~
 
-## Related Resources    
+## Related Resources
 
 ### Get Assigned App Links
 {:.api .api-operation}
@@ -1777,7 +1777,7 @@ Array of [Groups](groups.html)
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/groups" 
+-X GET "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/groups"
 ~~~
 
 ##### Response Example
@@ -1786,14 +1786,14 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~json
 [
   {
-    "id": "0gabcd1234", 
+    "id": "0gabcd1234",
     "profile": {
       "name": "Cloud App Users",
-      "description": "Users can access cloud apps" 
+      "description": "Users can access cloud apps"
     }
-  }, 
+  },
   {
-    "id": "0gefgh5678", 
+    "id": "0gefgh5678",
     "profile": {
       "name": "Internal App Users",
       "description": "Users can access internal apps"
@@ -1849,7 +1849,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json    
+~~~ json
 {
   "activationUrl": "https://your-domain.okta.com/welcome/XE6wE17zmphl3KqAPFxO"
 }
@@ -2115,7 +2115,7 @@ id           | `id` of user                                                 | UR
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Returns an empty object by default. 
+Returns an empty object by default.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -2138,7 +2138,7 @@ Content-Type: application/json
 
 
 ## Credential Operations
-  
+
 ### Forgot Password
 {:.api .api-operation}
 
@@ -2157,7 +2157,7 @@ sendEmail    | Sends a forgot password email to the user if `true` | Query      
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Returns an empty object by default. When `sendEmail` is `false`, returns a link for the user to reset their password. 
+Returns an empty object by default. When `sendEmail` is `false`, returns a link for the user to reset their password.
 
 ~~~json
 {
@@ -2186,7 +2186,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:id*/credentials/forgot_password</span>
-  
+
 Sets a new password for a user by validating the user's answer to their current recovery question.  This operation can only be performed on users with a valid [recovery question credential](#recovery-question-object) and have an `ACTIVE` status.
 
 > This operation is intended for applications that need to implement their own forgot password flow.  You are responsible for mitigation of all security risks such as phishing and replay attacks.  Best-practice is to generate a short-lived one-time token (OTT) that is sent to a verified email account.
@@ -2217,8 +2217,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password" \
 -d \
 '{
-    "password": { "value": "MyN3wP@55w0rd" }, 
-    "recovery_question": { "answer": "Cowboy Dan" } 
+    "password": { "value": "MyN3wP@55w0rd" },
+    "recovery_question": { "answer": "Cowboy Dan" }
 }'
 ~~~
 
@@ -2274,7 +2274,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -d \
 '{
     "oldPassword": { "value": "GoAw@y123" },
-    "newPassword": { "value": "MyN3wP@55w0rd" } 
+    "newPassword": { "value": "MyN3wP@55w0rd" }
 }'
 ~~~
 
@@ -2329,11 +2329,11 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question" \
 -d \
 '{
-    "password": { "value": "GoAw@y123" }, 
+    "password": { "value": "GoAw@y123" },
     "recovery_question": {
       "question" : "What happens when I update my question?",
-      "answer": "My recovery credentials are updated" 
-    } 
+      "answer": "My recovery credentials are updated"
+    }
 }'
 ~~~
 
