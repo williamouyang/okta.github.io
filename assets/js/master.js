@@ -15,18 +15,18 @@
 			if (!_isIE)
 			{
 				$prevTarget
-					.removeClass("fadeInLeft")
-					.removeClass("fadeInRight")
-					.removeClass("fadeOutLeft")
-					.removeClass("fadeOutRight")
-					.removeClass("animated");
+				.removeClass("fadeInLeft")
+				.removeClass("fadeInRight")
+				.removeClass("fadeOutLeft")
+				.removeClass("fadeOutRight")
+				.removeClass("animated");
 
 				$currentTarget
-					.removeClass("fadeInLeft")
-					.removeClass("fadeInRight")
-					.removeClass("fadeOutLeft")
-					.removeClass("fadeOutRight")
-					.removeClass("animated");
+				.removeClass("fadeInLeft")
+				.removeClass("fadeInRight")
+				.removeClass("fadeOutLeft")
+				.removeClass("fadeOutRight")
+				.removeClass("animated");
 			}
 
 			$prevTarget.css({
@@ -68,30 +68,38 @@
 		}
 		
 	});
-	
-	$("#primary-nav").pacNav({
-		childSelector: "> ul > li",
-		offsetWidth: 50
-	});
-	
-	$("#primary-nav").on("click", ".has-dropdown > a", function(e) {
-		e.preventDefault();
-		e.stopPropagation();
-		
-		$(this).parent().toggleClass("dropdown-active");
-	});
-	
-	$("#primary-nav").on("click", ".has-dropdown > .dropdown-window", function(e) {
-		e.preventDefault();
-		e.stopPropagation();
-	});
-	
-	$("#primary-nav").on("click", ".has-dropdown > .dropdown-window a", function(e) {
-		e.stopPropagation();
-	});
-	
-	$(window).bind("click", function() {
-		$("#primary-nav .has-dropdown").removeClass("dropdown-active");
-	});
-	
+
+$("#primary-nav").pacNav({
+	childSelector: "> ul > li",
+	offsetWidth: 50
+});
+
+$("#primary-nav").on("click", ".has-dropdown > a", function(e) {
+	e.preventDefault();
+	e.stopPropagation();
+
+	$(this).parent().toggleClass("dropdown-active");
+});
+
+$("#primary-nav").on("click", ".has-dropdown > .dropdown-window", function(e) {
+	e.preventDefault();
+	e.stopPropagation();
+});
+
+$("#primary-nav").on("click", ".has-dropdown > .dropdown-window a", function(e) {
+	e.stopPropagation();
+});
+
+$(window).bind("click", function() {
+	$("#primary-nav .has-dropdown").removeClass("dropdown-active");
+});
+
+$(window).on('resize', function(){
+	var win = $(this);
+	var navWidth = $('#primary-nav').width();
+	var searchInput = $('.gsc-input-focus'); 
+	$(searchInput).width(navWidth);
+});
+
 })(jQuery);
+

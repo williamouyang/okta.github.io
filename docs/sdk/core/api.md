@@ -6,7 +6,7 @@ title: API
 
 <section class="section--full-width section--sdk">
 	<div class="wrap">
-		<article>
+		<article class="col-1-3">
 			<div class="sdk-img">
 				<a class="thumbnail net" href="/">
 				</a>
@@ -30,7 +30,7 @@ title: API
 				<a href="http://www.nuget.org/packages/Okta.Core.Client/" class="btn">Download SDK</a>
 			</div>
 		</article>
-		<article>
+		<article class="col-1-3">
 			<div class="sdk-img">
 				<a class="thumbnail powershell" href="/">
 				</a>
@@ -48,7 +48,7 @@ title: API
 				<a href="https://chocolatey.org/packages/Okta.Core.Automation" class="btn">Download SDK</a>
 			</div>
 		</article>
-		<article>
+		<article class="col-1-3">
 			<div class="sdk-img">
 				<a class="thumbnail java"  href="/">
 				</a>
@@ -68,9 +68,12 @@ title: API
 </section>
 
 <style>
-	footer {
+	footer-xxx {
 		position: absolute !important;
 		width: 100%;
 		bottom: 0;
+	}
+	#scroll-top-button {
+		display: none;
 	}
 </style>

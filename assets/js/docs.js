@@ -33,6 +33,8 @@ $('#myScrollspy').on('activate.bs.scrollspy', function() {
   };
 
   var linkifyAnchors = function (level, container) {
+    if (level.length > 0)
+    {
   	var headers = container.getElementsByTagName("h" + level);
   	for (var h = 0; h < headers.length; h++) {
   		var header = headers[h];
@@ -42,6 +44,7 @@ $('#myScrollspy').on('activate.bs.scrollspy', function() {
   			header.appendChild(anchorForId(header.id), header);
   	}
   }
+}
 };
 
 var body = document.getElementById('docs-body');
@@ -153,5 +156,10 @@ for (var level = 1; level <= 6; level++) {
 		console.log("clicked");
 		// $('.gsc-container ').toggleClass('hide');
 	});
+
+  $('.toggle-menu').click(function(e){
+    e.preventDefault();
+    $('.sticky-nav--sidebar, body').toggleClass('toggled');
+  });
 
 });

@@ -15,7 +15,7 @@
 	{% if page.css %}<link rel="stylesheet" href="{{ "assets/css/" | prepend: site.baseurl | append: page.css }}.css">{% endif %}
 	<link rel="stylesheet" href="{{ "assets/css/responsive.css" | prepend: site.baseurl }}">
 
-	<script type="text/javascript" defer="defer" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" defer="defer" src="{{ "assets/js/jquery.min.js" | prepend: site.baseurl }}"></script>
 	<script type="text/javascript" defer="defer" src="{{ "assets/js/tabber.js" | prepend: site.baseurl }}"></script>
 	<script type="text/javascript" defer="defer" src="{{ "assets/js/pacnav.js" | prepend: site.baseurl }}"></script>
 	<script type="text/javascript" defer="defer" src="{{ "assets/js/master.js" | prepend: site.baseurl }}"></script>

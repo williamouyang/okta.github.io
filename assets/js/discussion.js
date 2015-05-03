@@ -8,13 +8,11 @@ $(function() {
       showNone($('#stack-overflow'));
     })
     .always(function() {
-      // consume
   });
 
   var listTopics = function(data, container) {
     var $ul = $('<ul class="recent-list">');
     $.each(data.items, function(item, idx) {
-    	console.log(this);
       var $li = $('<li>' + idx),
           $a = $('<a>');
       $a.attr({
