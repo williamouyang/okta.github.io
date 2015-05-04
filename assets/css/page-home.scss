@@ -39,18 +39,20 @@
 }
 
 #uptime {
-	background-image: url(/assets/images/section-bg--home-map.png);
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: auto 100%;
-	
+	.wrap {
+		background-image: url(/assets/images/section-bg--home-map.png);
+		background-position: center bottom;
+		background-repeat: no-repeat;
+		background-size: 1100px auto;
+	}
+		
 	h2, p {
 		@include centeredMaxWidth(780px);
 	}
 	
 	.trailing-link {
 		display: block;
-		margin-top: 240px;
+		margin-top: 260px;
 	}
 }
 
