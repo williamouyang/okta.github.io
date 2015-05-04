@@ -1,6 +1,7 @@
 ---
 layout: docs_page
 title: Factors (MFA)
+redirect_from: "/docs/api/rest/factors.html"
 ---
 
 * Will be replaced with the ToC

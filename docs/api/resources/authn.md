@@ -1,6 +1,7 @@
 ---
 layout: docs_page
 title: Authentication
+redirect_from: "/docs/api/rest/authn.html"
 ---
 
 * Will be replaced with the ToC

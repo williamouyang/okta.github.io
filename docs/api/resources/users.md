@@ -1,6 +1,7 @@
 ---
 layout: docs_page
 title: Users
+redirect_from: "docs/api/rest/users.html"
 ---
 
 * Will be replaced with the ToC

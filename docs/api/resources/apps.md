@@ -1,6 +1,7 @@
 ---
 layout: docs_page
 title: Apps
+redirect_from: "/docs/api/rest/apps.html"
 ---
 
 * Will be replaced with the ToC

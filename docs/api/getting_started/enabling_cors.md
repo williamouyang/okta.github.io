@@ -1,6 +1,7 @@
 ---
 layout: docs_page
 title: Enabling CORS
+redirect_from: "/docs/getting_started/enabling_cors.html"
 ---
 
 * Will be replaced with the ToC

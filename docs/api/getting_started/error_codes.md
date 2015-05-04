@@ -1,6 +1,8 @@
 ---
 layout: docs_page
 title: Error Codes
+redirect_from: "/docs/getting_started/error_codes.html"
+
 ---
 
 * Will be replaced with the ToC

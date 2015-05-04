@@ -1,6 +1,7 @@
 ---
 layout: docs_page
 title: Sessions
+redirect_from: "/docs/api/rest/sessions.html"
 ---
 
 * Will be replaced with the ToC

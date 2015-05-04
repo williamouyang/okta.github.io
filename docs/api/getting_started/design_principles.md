@@ -1,6 +1,7 @@
 ---
 layout: docs_page
 title: Design Principles
+redirect_from: "/docs/getting_started/design_principles.html"
 ---
 
 * Will be replaced with the ToC

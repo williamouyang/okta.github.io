@@ -1,6 +1,7 @@
 ---
 layout: docs_page
 title: Events
+redirect_from: "/docs/api/rest/events.html"
 ---
 
 * Will be replaced with the ToC

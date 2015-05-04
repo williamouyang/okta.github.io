@@ -1,6 +1,7 @@
 ---
 layout: docs_page
 title: Groups
+redirect_from: "/docs/api/rest/groups.html"
 ---
 
 * Will be replaced with the ToC

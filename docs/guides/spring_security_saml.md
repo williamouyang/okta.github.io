@@ -2,6 +2,7 @@
 layout: docs_page
 title: Spring Security SAML (Java)
 excerpt: Guidance on how to SAML-enable your application using open source Spring Security library.
+redirect_from: "/docs/examples/spring_security_saml.html"
 ---
 
 This guide describes how to use [Spring Security

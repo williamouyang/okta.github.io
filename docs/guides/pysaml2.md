@@ -11,6 +11,7 @@ saml_library: PySAML2
 saml_library_url: https://github.com/rohe/pysaml2
 github_url: git@github.com:jpf/okta-pysaml2-example.git
 github_repo_name: okta-pysaml2-example
+redirect_from: "/docs/examples/pysaml2.html"
 ---
 
 This guide describes how to use [{{ page.saml_library }}]({{ page.saml_library_url }}) to add support

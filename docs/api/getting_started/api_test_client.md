@@ -1,6 +1,7 @@
 ---
 layout: docs_page
 title: API Test Client
+redirect_from: "/docs/getting_started/api_test_client.html"
 ---
 
 * Will be replaced with the ToC

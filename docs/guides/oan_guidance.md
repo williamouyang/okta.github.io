@@ -2,6 +2,8 @@
 layout: docs_page
 title: Okta Application Network
 excerpt: Become a member of the Okta Application Network.  Enhance your identity integration and improve adoption with your customers.
+redirect_from: "/docs/getting_started/oan_guidance.html"
+
 ---
 
 * Will be replaced with the ToC
