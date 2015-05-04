@@ -413,3 +413,11 @@
 	}
 }
 
+//  Hide google remarketing code
+ iframe[name='google_conversion_frame'] { 
+    height: 0 !important;
+    width: 0 !important; 
+    line-height: 0 !important; 
+    font-size: 0 !important;
+    float: left;
+}
