@@ -22,6 +22,11 @@ $('#myScrollspy').on('activate.bs.scrollspy', function() {
 	}
 });
 
+$('#myScrollspy').hover(function() {
+    $("body").css("overflow","hidden");
+}, function() {
+     $("body").css("overflow","auto");
+});
 
 var anchorForId = function (id) {
  var anchor = document.createElement("a");
