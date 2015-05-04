@@ -1,6 +1,7 @@
 ---
 layout: master
 css: layout-docs
+js: docs
 ---
 
 {% assign github_page_url = site.github_base_url | append: page.path %}
@@ -67,5 +68,8 @@ css: layout-docs
 <style>
 	.toggle-menu {
 		display: none !important;
+	}
+	body {
+		overflow: hidden;
 	}
 </style>

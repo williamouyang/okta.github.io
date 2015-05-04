@@ -76,4 +76,7 @@ title: API
 	#scroll-top-button {
 		display: none;
 	}
+	body {
+		overflow: hidden;
+	}
 </style>
