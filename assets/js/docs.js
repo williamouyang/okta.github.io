@@ -4,7 +4,6 @@ $(function() {
 	var offset = $('.site-header').height() + $('#sticky-nav').height() + 40;
 	$('body').scrollspy({ target: '#myScrollspy', offset:  offset });
 
-// listen for scrollspy events on the navigation element itself
 $('#myScrollspy').on('activate.bs.scrollspy', function() {
 	var selected = $('#myScrollspy .nav').children('li.active');
 	if (selected.children('ul').length > 0 )
@@ -24,26 +23,24 @@ $('#myScrollspy').on('activate.bs.scrollspy', function() {
 });
 
 
-  var anchorForId = function (id) {
-  	var anchor = document.createElement("a");
-  	anchor.className = "header-link";
-  	anchor.href      = "#" + id;
-  	anchor.innerHTML = "<i class=\"fa fa-link\"></i>";
-  	return anchor;
-  };
+var anchorForId = function (id) {
+ var anchor = document.createElement("a");
+ anchor.className = "header-link";
+ anchor.href      = "#" + id;
+ anchor.innerHTML = "<i class=\"fa fa-link\"></i>";
+ return anchor;
+};
 
-  var linkifyAnchors = function (level, container) {
-    if (level.length > 0)
-    {
-  	var headers = container.getElementsByTagName("h" + level);
-  	for (var h = 0; h < headers.length; h++) {
-  		var header = headers[h];
+var linkifyAnchors = function (level, container) {
 
-  		if (typeof header.id !== "undefined" && header.id !== "" &&
-  			header.className.indexOf("no-link") !== 0) {
-  			header.appendChild(anchorForId(header.id), header);
-  	}
-  }
+ var headers = container.getElementsByTagName("h" + level);
+ for (var h = 0; h < headers.length; h++) {
+  var header = headers[h];
+
+  if (typeof header.id !== "undefined" && header.id !== "" &&
+   header.className.indexOf("no-link") !== 0) {
+   header.appendChild(anchorForId(header.id), header);
+}
 }
 };
 
@@ -52,21 +49,19 @@ for (var level = 1; level <= 6; level++) {
 	linkifyAnchors(level, body);
 }
 
-  // ------------------------  DYNAMIC ANCHOR ADJUST FOR FIXED TOPNAV
+var fixedNavHeight = 180;
 
-  var fixedNavHeight = 180;
+$('a[href*=#]:not([href=#])').click(function() {
+ if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+  && location.hostname == this.hostname) {
 
-  $('a[href*=#]:not([href=#])').click(function() {
-  	if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
-  		&& location.hostname == this.hostname) {
-
-  		var target = $(this.hash);
-  	target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-  	if (target.length) {
-  		$('html,body').scrollTop(target.offset().top - fixedNavHeight);
-  		return false;
-  	}
-  }
+  var target = $(this.hash);
+target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+if (target.length) {
+  $('html,body').scrollTop(target.offset().top - fixedNavHeight);
+  return false;
+}
+}
 });
 
   // Executed on page load with URL containing an anchor tag.
@@ -77,11 +72,6 @@ for (var level = 1; level <= 6; level++) {
   		return false;
   	}
   };
-
-  // // ------------------------ SIDENAV
-
-
-  // ------------------------ SCROLL TO TOP BUTTON
 
   var scrolled = false,
   $docsBody = $('body'),
@@ -103,13 +93,7 @@ for (var level = 1; level <= 6; level++) {
   		else {
   			$scroller.removeClass('on');
   		}
-  		// if($(window).scrollTop() + $(window).height() < $(document).height()) {
-	   //     $scroller.css('bottom', 20);
-	   // }
-	   // else
-	   // 		$scroller.css('bottom', $('.site-footer').outerHeight());
-
-  	}
+    }
   }, 250);
 
   // ------------------------ CORS TEST
@@ -151,15 +135,9 @@ for (var level = 1; level <= 6; level++) {
   	});
   });
 
-
-	$('.gsc-trigger').click(function() {
-		console.log("clicked");
-		// $('.gsc-container ').toggleClass('hide');
-	});
-
-  $('.toggle-menu').click(function(e){
-    e.preventDefault();
-    $('.sticky-nav--sidebar, body').toggleClass('toggled');
-  });
+$('.toggle-menu').click(function(e){
+  e.preventDefault();
+  $('.sticky-nav--sidebar, body').toggleClass('toggled');
+});
 
 });
