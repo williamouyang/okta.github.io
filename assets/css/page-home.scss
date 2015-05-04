@@ -14,6 +14,16 @@
 	background-repeat: no-repeat;
 	background-size: 434px;
 	padding: 30px 0 190px;
+	
+	.button--large {
+		> span {
+			display: none;
+		}
+		
+		&:after {
+			content: "Get a Free Account";
+		}
+	}
 }
 
 #features {
@@ -79,6 +89,16 @@
 	 #valprop {
 		background-size: 651px;
 		padding-bottom: 290px;
+		
+		.button--large {
+			> span {
+				display: inline;
+			}
+			
+			&:after {
+				display: none;
+			}
+		}
 	}
 	
 	#features {	
