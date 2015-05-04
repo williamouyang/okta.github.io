@@ -40,7 +40,7 @@
 			display: block;
 			height: 30px;
 			position: absolute;
-			right: ($gutterWidth * 1/4) + 175px;
+			right: ($gutterWidth * 1/4) + 180px;
 			display: none;
 			@include breakpoint(small) {
 				display: block;
