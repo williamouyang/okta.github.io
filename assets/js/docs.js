@@ -22,6 +22,12 @@ $('#myScrollspy').on('activate.bs.scrollspy', function() {
 	}
 });
 
+$('#docs-sidebar-wrap a').click(function(e){
+  console.log("clicked");
+  if ($('body').hasClass('toggled'))
+      $('.toggled').removeClass('toggled');
+});
+
 $('#myScrollspy').hover(function() {
     $("body").css("overflow","hidden");
 }, function() {

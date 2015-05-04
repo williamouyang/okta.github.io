@@ -68,15 +68,7 @@ title: API
 </section>
 
 <style>
-	footer-xxx {
-		position: absolute !important;
-		width: 100%;
-		bottom: 0;
-	}
 	#scroll-top-button {
 		display: none;
-	}
-	body {
-		overflow: hidden;
 	}
 </style>
