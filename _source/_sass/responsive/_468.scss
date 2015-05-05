@@ -1,0 +1,38 @@
+/*
+ * _header.scss
+ ------------------------------------------------------------ */
+.site-header .cta-button {
+	display: block;
+}
+
+.site-header .search-button {
+	right: ($gutterWidth * 1/4) + 180px;
+}
+
+.site-nav {
+	right: ($gutterWidth * 1/4) + 230px;
+}
+
+
+/*
+ * _typography.scss
+ ------------------------------------------------------------ */
+body {
+	font-size: $intermediaryFontSize;
+}
+
+
+/*
+ * _layout.scss
+ ------------------------------------------------------------ */
+#bottom-cta {	
+	.button--large {
+		> span {
+			display: inline;
+		}
+		
+		&:after {
+			display: none;
+		}
+	}
+}

@@ -1,0 +1,44 @@
+
+{% assign section = page.path | split: '/' %}
+{% assign section_name = section[2] | replace: '.md', '' %}
+{% assign section_name_api = section[3] | replace: '.md', '' %}
+
+{% assign page_name = page.title | replace: ' ', '_' | downcase %}
+
+<div id="docs-sidebar-wrap" id="sidebar-wrapper">
+	<div class="docs-sidebar-block" id="myScrollspy" >
+		{% for nav in site.data.docs %}
+			{% assign section_title = section[1] | split: '/' %}
+				{% if nav.section contains section[1] %}
+				<h2>
+					{{ nav.title }}
+				</h2>
+
+				{% for item in nav.pages %}
+					{% for doc_page in site.pages %}
+						{% if doc_page.layout == 'docs_page' %}
+						{% assign name = doc_page.path | replace: '.md', '' | split: '/' | last | downcase %}
+							{% if name == item %}
+								{% if item  == section_name or item == section_name_api %}
+								<ul class="nav sidebar-nav nav-title">
+									<li data-name="{{ doc_page.title }}" {% if page_name == name %}class="on"{% endif %}>
+										<a href="/docs/{{ nav.section }}/{{ item }}.html">{{ doc_page.title }}</a>
+									</li>
+								</ul>
+									{{ content | toc_generate }}
+								{% else %}
+								<ul class="nav sidebar-nav" data-item="{{ item }}" data-section="{{ section_name_api }}">
+									<li data-name="{{ doc_page.title }}" {% if page_name == name %}class="on"{% endif %}>
+										<a href="/docs/{{ nav.section }}/{{ item }}.html">{{ doc_page.title }}</a>
+									</li>
+								</ul>
+								{% endif %}
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				{% endfor %}
+			{% endif %}
+		{% endfor %}
+	</ul>
+</div>
+</div>

@@ -1,0 +1,17 @@
+---
+layout: master
+css: page-blog
+show_bottom_cta: true
+---
+
+<section id="blog-index" class="section--full-width index">
+
+	<div class="wrap blog">
+		{% for post in site.posts %}
+		{% assign author = site.data.authors[post.author] %}
+		{% capture _post_content %}{{ post.content }}{% endcapture %}
+		{% include blog_post.html post_content=_post_content %}
+		{% endfor %}
+	</div>
+
+</section>

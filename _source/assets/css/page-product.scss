@@ -1,0 +1,111 @@
+---
+---
+
+@charset "UTF-8";
+
+@import
+	"variables",
+	"mixins"
+;
+
+
+#valprop {
+	padding-left: ($gutterWidth * 1/4);
+	padding-right: ($gutterWidth * 1/4);
+	
+	h1 {
+		@include centeredMaxWidth(980px);
+		text-align: center;
+	}
+	
+	.wrap {
+		background-image: url(/assets/images/valprop-bg--features.png);
+		background-position: center bottom;
+		background-repeat: no-repeat;
+		background-size: 100%;
+		max-width: 1100px;
+		padding-bottom: 160px;
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+#features {
+	h2, p {
+		@include centeredMaxWidth(900px);
+	}
+}
+
+#mfa {
+	.row {
+		@include centeredMaxWidth(900px);
+	}
+	
+	.col-1-2 + .col-1-2 {
+		border-top: 1px solid mix($colorGrey, $colorBlueLight, 50%);
+		padding-top: 30px;
+	}
+}
+
+#sso {
+	.wrap {
+		@include centeredMaxWidth(800px);
+	}
+}
+
+#logs {
+	background-image: url(/assets/images/section-bg--features-logs.jpg);
+	background-position: center bottom;
+	background-repeat: no-repeat;
+	background-size: 540px;
+	padding-bottom: 240px;
+	
+	header {
+		@include centeredMaxWidth(900px);
+	}
+}
+
+@include breakpoint(extra-small) {
+	#valprop .wrap {
+		padding-bottom: 220px;
+	}
+	
+	#logs {
+		background-size: 720px;
+		padding-bottom: 300px;
+	}
+}
+
+@include breakpoint(small) {
+	#valprop .wrap {
+		padding-bottom: 260px;
+	}
+	
+	#logs {
+		background-size: 800px;
+		padding-bottom: 340px;
+	}
+}
+
+@include breakpoint(medium) {
+	#valprop .wrap {
+		padding-bottom: 320px;
+	}
+	
+	#mfa .col-1-2 + .col-1-2 {
+		border-top: 0;
+		padding-top: 0;
+	}
+	
+	#logs {
+		background-size: 1100px;
+		padding-bottom: 440px;
+	}
+}
+
+@include breakpoint(large) {
+	#logs {
+		background-size: 1240px;
+		padding-bottom: 500px;
+	}
+}

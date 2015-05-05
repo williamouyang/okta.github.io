@@ -1,149 +1,347 @@
----
-layout: home
-title: Home
-body_id: home
----
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<head>
+	
+	<head>
 
-<div class="valprop-home">
-  <div class="container-narrow">
-    <div class="row">
-      <div class="col-xs-7 ">
-        <h1 class="valprop-title home-header mrg-top-60">Identity and Access Management Platform for Developers</h1>
-      </div>
-      <div class="col-xs-5 " style="margin-top: 15px;">
-        <a href="{{ site.signup_url }}" class="button mrg-right-30 mrg-top-60 button-padding">Get Started</a>
-        <a href="/features" class="button-empty mrg-top-60 button-padding">Features</a>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="terminal-os-x">
-          <div id="window">
-            <div id="toolbar">
-              <div class="top">
-                <div id="lights">
-                  <div class="light red">
-                    <div class="glyph"></div>
-                    <div class="shine"></div>
-                    <div class="glow"></div>
-                  </div>
-                  <div class="light yellow">
-                    <div class="glyph"></div>
-                    <div class="shine"></div>
-                    <div class="glow"></div>
-                  </div>
-                  <div class="light green">
-                    <div class="glyph"></div>
-                    <div class="shine"></div>
-                    <div class="glow"></div>
-                  </div>
-                </div>
-                <div id="title">
-                  Terminal
-                </div>
-                <div id="bubble">
-                  <div class="shine"></div>
-                  <div class="glow"></div>
-                </div>
-              </div>
-            </div>
-            <div id="body">
-              <p class="lastlogin"><span class="dollar"></span>Last login: <span id="last-login-date"></span> on console </p>
-              <p class="terminal-command">
-                <span class="dollar"></span>The Okta Platform delivers all the power of Okta, for developers.<br />
-                <span class="dollar"></span>With the Okta REST API developers can build secure, scalable, and <br />
-                <span class="dollar"></span>robust identity and access management into any application that can <br /><span class="dollar"></span>send an HTTP request.
-                <span class="cursor"></span>
-              </p>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="/favicon.ico">
+	<title>Okta Developer</title>
+	<meta name="description" content="Secure, scalable, and highly available authentication and user management for any app.
+">
 
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="container-narrow" id="benefits-grid">
-  <div class="row featured-row row-1">
-    <div class="col-xs-4">
-      <div class="row">
-        <div class="col-xs-2">
-          <span class="circle home-blue"><span class="home-users"></span></span>
-        </div>
-        <div class="col-xs-10">
-          <h4 class="home-featured-title">Manage your users and groups</h4>
-        </div>
-      </div>
-      <p class="featured-desc">Avoid the hassle of deploying your own LDAP solution. Okta provides a robust cloud directory and supports the full user lifecycle.</p>
-      <p class="mrg-top-20"><a class="learnmore button-white" href="features#users">Learn more</a></p>
-    </div>
-    <div class="col-xs-4">
-      <div class="row">
-        <div class="col-xs-2">
-          <span class="circle home-purple"><span class="home-multiple"></span></span>
-        </div>
-        <div class="col-xs-10">
-          <h4 class="home-featured-title">Create a rich user profile from multiple data sources</h4>
-        </div>
-      </div>
-      <p class="featured-desc">Centralize user attributes from any source or directory into one view of the user. Okta also keeps multiple user profile sources in sync.</p>
-      <p class="mrg-top-20"><a class="learnmore button-white" href="features#providers">Learn more</a></p>
-    </div>
-    <div class="col-xs-4">
-      <div class="row">
-        <div class="col-xs-2">
-          <span class="circle home-cyan"><span class="home-secure"></span></span>
-        </div>
-        <div class="col-xs-10">
-          <h4 class="home-featured-title">Secure access to your application</h4>
-        </div>
-      </div>
-      <p class="featured-desc">Securely authenticate users and manage their sessions. For extra security, use Okta’s multifactor authentication options.</p>
-      <p class="mrg-top-20"><a class="learnmore button-white" href="features#secure">Learn more</a></p>
-    </div>
-  </div><!-- /.row -->
+	<link rel="canonical" href="http://developer.okta.com">
+
+	<link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/assets/css/animate.css">
+	<link rel="stylesheet" href="/assets/css/master.css">
+	<link rel="stylesheet" href="/assets/css/page-home.css">
+	<link rel="stylesheet" href="/assets/css/responsive.css">
+
+	<script type="text/javascript" defer="defer" src="/assets/js/jquery.min.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/tabber.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/pacnav.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/master.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/scrollspy.js"></script>
+
+	
+	<!-- TypeKit -->
+	<script src="//use.typekit.net/pls8pog.js"></script>
+	<script>try{Typekit.load();}catch(e){}</script>
+	<!-- GA -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-15777010-3', 'auto');
+		ga('send', 'pageview');
+	</script>
+</head>
+
+	
+<body>
+	
+	<header class="site-header">
+	<div class="wrap">
+
+		<h1 class="site-title"><a href="/">Okta Developer</a></h1>
+
+		<nav id="primary-nav" class="site-nav loaded">
+			<ul>
+				<li><a href="/product/">Product</a></li>
+				<li><a href="/pricing/">Pricing</a></li>
+				<li><a href="/customers/">Customers</a></li>
+				<li><a href="/docs/guides/overview.html">Docs</a></li>
+				<li><a href="/discussion/">Discussion</a></li>
+				<li class="has-dropdown"><a href="#">Support</a>
+					<div class="dropdown-window">
+						<p class="stack-overflow">
+							Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a>.<br />
+							We'll answer it within 24 hours.
+						</p>
+						<p class="email">
+							Email us:<br />
+							<a href="mailto:developers@okta.com">developers@okta.com</a>
+						</p>
+						<p class="tel">
+							Call us:<br />
+							<a href="tel:18777227871">1 (877) 722-7871</a>
+						</p>
+					</div>
+				</li>
+			</ul>
+		</nav>
+
+		<a href="/search" class="gsc-trigger search-button"></a>
 
 
+		<div class="search-container">
+			<div class="gsc-container">
+				<script defer="defer">
+					(function() {
+						var cx = '005121479574088032773:mmh_vhv8uns';
+						var gcse = document.createElement('script');
+						gcse.type = 'text/javascript';
+						gcse.async = true;
+						gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+						'//cse.google.com/cse.js?cx=' + cx;
+						var s = document.getElementsByTagName('script')[0];
+						s.parentNode.insertBefore(gcse, s);
+					})();
+				</script>
+				<gcse:searchbox-only resultsUrl="/search" enableAutoComplete="true"></gcse:searchbox-only>
+			</div>
+		</div>
+		<a href="https://www.okta.com/developer/signup/" class="cta-button button--small">Get Started</a>
 
-  <div class="row featured-row row-2">
-    <div class="col-xs-4">
-      <div class="row">
-        <div class="col-xs-2">
-          <span class="circle home-yellow"><span class="home-check"></span></span>
-        </div>
-        <div class="col-xs-10">
-          <h4 class="home-featured-title">Enable single sign-on to all your applications</h4>
-        </div>
-      </div>
-      <p class="featured-desc">Leverage thousands of app integrations to implement single sign-on for your users. Integrate your own apps in minutes.</p>
-      <p class="mrg-top-20"><a class="learnmore button-white" href="features#sso">Learn more</a></p>
-    </div>
-    <div class="col-xs-4">
-      <div class="row">
-        <div class="col-xs-2">
-          <span class="circle home-green"><span class="home-partners"></span></span>
-        </div>
-        <div class="col-xs-10">
-          <h4 class="home-featured-title">Integrate your existing user stores</h4>
-        </div>
-      </div>
-      <p class="featured-desc">Easily connect any number of existing user stores and migrate to Okta as a user store over time.</p>
-      <p class="mrg-top-20"><a class="learnmore button-white" href="features#partners">Learn more</a></p>
-    </div>
-    <div class="col-xs-4">
-      <div class="row">
-        <div class="col-xs-2">
-          <span class="circle home-orange"><span class="home-providers"></span></span>
-        </div>
-        <div class="col-xs-10">
-          <h4 class="home-featured-title">Integrate with external identity providers</h4>
-        </div>
-      </div>
-      <p class="featured-desc">Easily enable authentication and authorization against external identity providers through standard federation protocols, including SAML.</p>
-      <p class="mrg-top-20"><a class="learnmore button-white" href="features#providers">Learn more</a></p>
-    </div>
-  </div><!-- /.row -->
-</div> <!-- /.container-narrow -->
+	</div>
+</header>
+
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P6JKVN"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P6JKVN');</script>
+<!-- End Google Tag Manager -->
 
 
+	
+	<div class="page-content">
+		
+		
+		<section id="valprop" class="section--full-width bg--dark-blue">
+			<div class="wrap">
+				
+				<header>
+					<h1>The Identity Platform for Developers</h1>
+					<p class="text--large">Secure, scalable, and highly available authentication and user management for any app.</p>
+				</header>
+				
+				<a href="https://www.okta.com/developer/signup/" class="button--large"><span>Get a Free Developer Account</span></a>
+			
+			</div>
+		</section>
+		
+			
+		<section id="features" class="section--full-width text-align--center">
+	<div class="wrap">
+	
+		<div class="row">
+			<a href="/product/" class="col-1-3">
+				
+				<h2 class="h5 text--small">Authenticate users to any<br />identity source</h2>
+				<p><img class="responsive--full-width" src="/assets/images/graphics/identity-sources.png" /></p>
+				<p>Manage and authenticate users in Okta or connect an identity source</p>
+				
+			</a>
+			
+			<a href="/product/#sso" class="col-1-3">
+				
+				<h2 class="h5 text--small">Connect apps together<br />with single sign-on</h2>
+				<p><img class="responsive--full-width" src="/assets/images/graphics/sso.png" /></p>
+				<p>Give users one username, one password, and one session across all apps</p>
+				
+			</a>
+			
+			<a href="/product/#mfa" class="col-1-3">
+				
+				<h2 class="h5 text--small">Increase security with<br />multi-factor authentication</h2>
+				<p><img class="responsive--full-width" src="/assets/images/graphics/mfa.png" /></p>
+				<p>Integrate with existing tokens, or use Okta’s built-in factors</p>
+				
+			</a>
+		</div>
+	
+	</div>
+</section>
 
+<section id="uptime" class="section--full-width bg--light-blue text-align--center">
+	<div class="wrap">
+	
+		<header>
+			<h2>Architected for Zero Downtime at Scale</h2>
+			<p class="text--large">Never taken offline for scheduled maintenance or any other reason. Connecting millions of people to thousands of applications in 185 countries. Trusted by thousands of organizations.</p>
+		</header>
+		
+		<p><a href="http://trust.okta.com" target="_blank" class="trailing-link">See Okta's Service Stats</a></p>
+	
+	</div>
+</section>
+
+<section id="security" class="section--full-width">
+	<div class="wrap">
+	
+		<header class="text-align--center">
+			<h2>Designed, Built, and Maintained by Security Experts</h2>
+			<p class="text--large text-align--center">Protecting user profiles and authentication requires constant attention. Our team is on the job.</p>
+		</header>
+		
+		<div class="row">
+			<div class="col-1-3">
+				
+				<img class="responsive--full-width" src="/assets/images/graphics/shield.png" />
+				
+			</div>
+			
+			<div class="col-2-3">
+				
+				<ul class="list--with-bullets text--large">
+					<li>Secure development practices & operations</li>
+					<li>Compute, network, & physical security</li>
+					<li>Independent audit & certification</li>
+				</ul>
+			
+			</div>
+		</div>
+	
+	</div>
+</section>
+
+<section id="sdk" class="section--full-width text-align--center">
+	<div class="wrap">
+	
+		<header>
+			<h2>Delivered with Expert Support, Guides, Code Samples, and SDKs</h2>
+		</header>
+		
+		<div class="row">
+			<a class="col-1-3" href="mailto:developers@okta.com">
+				<img class="responsive--full-width" src="/assets/images/icons/large-cloud.png" width="150" />
+				We're Here to Help
+			</a>
+			
+			<a class="col-1-3" href="/docs/examples/dotnet_sample_application.html">
+				<img class="responsive--full-width" src="/assets/images/icons/large-app.png" width="150" />
+				Visit the Sample App
+			</a>
+			
+			<a class="col-1-3" href="/docs/sdk/core/api.html">
+				<img class="responsive--full-width" src="/assets/images/icons/large-lightning.png" width="150" />
+				Download an SDK
+			</a>
+		</div>
+	
+	</div>
+</section>
+
+<section id="customers" class="section--full-width bg--light-grey text-align--center">
+	<div class="wrap">
+		
+		<header>
+			<h2 class="h5 text--small">Trusted by Developers at Leading Organizations</h2>
+		</header>
+		
+		<div class="row">
+			<div class="col-1-4">
+				
+				<a href="/customers/" class="logo-placard">
+					<img src="/assets/images/logos/adobe.png" />
+				</a>
+				
+			</div>
+			<div class="col-1-4">
+				
+				<a href="/customers/" class="logo-placard">
+					<img src="/assets/images/logos/informatica.png" />
+				</a>
+				
+			</div>
+			<div class="col-1-4">
+				
+				<a href="/customers/" class="logo-placard">
+					<img src="/assets/images/logos/advent.png" />
+				</a>
+				
+			</div>
+			<div class="col-1-4">
+				
+				<a href="/customers/" class="logo-placard">
+					<img src="/assets/images/logos/rotary.png" />
+				</a>
+				
+			</div>
+		</div>
+		
+	</div>
+</section>
+		
+		
+		<section id="bottom-cta" class="section--full-width bg--blue text-align--center">
+			<div class="wrap">
+			
+				<header>
+					<h2>Get Started with Okta Now!</h2>
+					<p class="text--medium">Your identity layer is ready to go. Getting started takes just a few minutes.</p>
+				</header>
+				
+				<a href="https://www.okta.com/developer/signup/" class="button--large"><span>Get a Free Developer Account</span></a>
+			
+			</div>
+		</section>
+		
+			
+	</div>
+	
+	<!-- Remarketing tag -->
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		var google_conversion_id = 1006913831;
+		var google_custom_params = window.google_tag_params;
+		var google_remarketing_only = true;
+		/* ]]> */
+	</script>
+	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+	</script>
+	<noscript>
+		<div style="display:inline;">
+			<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"/>
+		</div>
+	</noscript>
+<!-- End Remarketing tag -->
+
+<!-- Crazy Egg Tracking -->
+<script type="text/javascript">
+setTimeout(function(){var a=document.createElement("script");
+var b=document.getElementsByTagName("script")[0];
+a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+</script>
+<!-- End Crazy Egg Tracking -->
+
+<footer class="site-footer">
+	<div class="wrap">
+
+		<ul>
+			<li><a href="http://www.okta.com" target="_blank">Okta.com</a></li>
+			<li><a href="/blog">Blog</a></li>
+			<li><a href="/terms/">Terms &amp; Conditions</a></li>
+			<li><a href="/privacy/">Privacy Policy</a></li>
+			<li><a href="http://okta.com/developer/contact/">Contact Sales</a></li>
+			<li><a href="mailto:developers@okta.com">Contact Support</a></li>
+		</ul>
+
+		<ul>
+			<li><a class="icon-with-hover--github" href="http://github.com/okta" target="_blank">Github</a></li>
+			<li><a class="icon-with-hover--twitter" href="http://twitter.com/okta" target="_blank">Twitter</a></li>
+			<li><a class="icon-with-hover--stack-overflow" href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a></li>
+			<li><a class="icon-with-hover--rss" href="http://feeds.feedburner.com/OktaBlog" target="_blank">News</a></li>
+			<li><a class="icon-with-hover--help" href="http://community.okta.com" target="_blank">Help</a></li>
+		</ul>
+
+	</div>
+</footer>
+
+	
+</body>
+	
+</html>

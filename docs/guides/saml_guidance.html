@@ -1,0 +1,2119 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<head>
+	
+	<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="/favicon.ico">
+	<title>Single Sign-On with Okta &raquo; Okta Developer</title>
+	<meta name="description" content="Learn how to Single Sign-On enable your web and mobile application whether you are an ISV or IT - looking to federate authentication for your application.">
+
+	<link rel="canonical" href="http://developer.okta.com/docs/guides/saml_guidance.html">
+
+	<link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/assets/css/animate.css">
+	<link rel="stylesheet" href="/assets/css/master.css">
+	<link rel="stylesheet" href="/assets/css/layout-docs.css">
+	<link rel="stylesheet" href="/assets/css/responsive.css">
+
+	<script type="text/javascript" defer="defer" src="/assets/js/jquery.min.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/tabber.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/pacnav.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/master.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/scrollspy.js"></script>
+
+	<script type="text/javascript" defer="defer" src="/assets/js/docs.js"></script>
+	<!-- TypeKit -->
+	<script src="//use.typekit.net/pls8pog.js"></script>
+	<script>try{Typekit.load();}catch(e){}</script>
+	<!-- GA -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-15777010-3', 'auto');
+		ga('send', 'pageview');
+	</script>
+</head>
+
+	
+<body>
+	
+	<header class="site-header">
+	<div class="wrap">
+
+		<h1 class="site-title"><a href="/">Okta Developer</a></h1>
+
+		<nav id="primary-nav" class="site-nav loaded">
+			<ul>
+				<li><a href="/product/">Product</a></li>
+				<li><a href="/pricing/">Pricing</a></li>
+				<li><a href="/customers/">Customers</a></li>
+				<li><a href="/docs/guides/overview.html">Docs</a></li>
+				<li><a href="/discussion/">Discussion</a></li>
+				<li class="has-dropdown"><a href="#">Support</a>
+					<div class="dropdown-window">
+						<p class="stack-overflow">
+							Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a>.<br />
+							We'll answer it within 24 hours.
+						</p>
+						<p class="email">
+							Email us:<br />
+							<a href="mailto:developers@okta.com">developers@okta.com</a>
+						</p>
+						<p class="tel">
+							Call us:<br />
+							<a href="tel:18777227871">1 (877) 722-7871</a>
+						</p>
+					</div>
+				</li>
+			</ul>
+		</nav>
+
+		<a href="/search" class="gsc-trigger search-button"></a>
+
+
+		<div class="search-container">
+			<div class="gsc-container">
+				<script defer="defer">
+					(function() {
+						var cx = '005121479574088032773:mmh_vhv8uns';
+						var gcse = document.createElement('script');
+						gcse.type = 'text/javascript';
+						gcse.async = true;
+						gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+						'//cse.google.com/cse.js?cx=' + cx;
+						var s = document.getElementsByTagName('script')[0];
+						s.parentNode.insertBefore(gcse, s);
+					})();
+				</script>
+				<gcse:searchbox-only resultsUrl="/search" enableAutoComplete="true"></gcse:searchbox-only>
+			</div>
+		</div>
+		<a href="https://www.okta.com/developer/signup/" class="cta-button button--small">Get Started</a>
+
+	</div>
+</header>
+
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P6JKVN"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P6JKVN');</script>
+<!-- End Google Tag Manager -->
+
+
+	
+	<div class="page-content">
+		
+		
+			
+		
+
+<section class="section--with-sidebar docs-page">
+	<aside id="sidebar-wrapper" class="sticky-nav--sidebar">
+
+		
+
+
+
+
+
+
+<div id="docs-sidebar-wrap" id="sidebar-wrapper">
+	<div class="docs-sidebar-block" id="myScrollspy" >
+		
+			
+				
+				<h2>
+					Guides
+				</h2>
+
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav nav-title">
+									<li data-name="Single Sign-On with Okta" >
+										<a href="/docs/guides/saml_guidance.html">Single Sign-On with Okta</a>
+									</li>
+								</ul>
+									<div id="gen-toc-container"><div class="gen-toc" id="gen-toc"><div class="gen-toc-title hide"><h2><div id="gen-toctitle" class="caret2 hide">Single Sign-On with Okta</div></h2></div><ul class="nav sidebar-nav"><li class="gen-toc_level-1 toc_section-1"><a href="#introduction"><span class="gen-toctext">Introduction</span></a></li><li class="gen-toc_level-1 toc_section-2"><a href="#authentication"><span class="gen-toctext">Authentication</span></a></li><li class="gen-toc_level-1 toc_section-3"><a href="#federated-identity"><span class="gen-toctext">Federated Identity</span></a></li><li class="gen-toc_level-1 toc_section-4"><a href="#planning-for-saml"><span class="gen-toctext">Planning for SAML</span></a></li><li class="gen-toc_level-1 toc_section-5"><a href="#planning-checklist"><span class="gen-toctext">Planning Checklist</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-6"><a href="#understanding-the-role-of-a-service-provider"><span class="gen-toctext">Understanding the role of a Service Provider</span></a></li><li class="gen-toc_level-2 toc_section-7"><a href="#single-idp-vs-multiple-idps"><span class="gen-toctext">Single IDP vs Multiple IDPs</span></a></li><li class="gen-toc_level-2 toc_section-8"><a href="#understanding-sp-initiated-login-flow"><span class="gen-toctext">Understanding SP-initiated Login Flow</span></a></li><li class="gen-toc_level-2 toc_section-9"><a href="#exposing-saml-configuration-in-sp"><span class="gen-toctext">Exposing SAML configuration in SP</span></a></li><li class="gen-toc_level-2 toc_section-10"><a href="#enabling-saml-for-everyone-vs-a-subset-of-users"><span class="gen-toctext">Enabling SAML for everyone vs a subset of users</span></a></li><li class="gen-toc_level-2 toc_section-11"><a href="#implementing-a-backdoor"><span class="gen-toctext">Implementing a “backdoor”</span></a></li></ul></li><li class="gen-toc_level-1 toc_section-12"><a href="#saml-for-mobile-native-apps"><span class="gen-toctext">SAML for Mobile Native Apps</span></a></li><li class="gen-toc_level-1 toc_section-13"><a href="#supporting-okta-mobile-connect"><span class="gen-toctext">Supporting Okta Mobile Connect</span></a></li><li class="gen-toc_level-1 toc_section-14"><a href="#saml-toolkits"><span class="gen-toctext">SAML Toolkits</span></a></li><li class="gen-toc_level-1 toc_section-15"><a href="#reference"><span class="gen-toctext">Reference</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-16"><a href="#saml-20"><span class="gen-toctext">SAML 2.0</span></a></li></ul></li></ul></div></div>
+								
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="oan_guidance" data-section="">
+									<li data-name="Okta Application Network" >
+										<a href="/docs/guides/oan_guidance.html">Okta Application Network</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="spring_security_saml" data-section="">
+									<li data-name="Spring Security SAML (Java)" >
+										<a href="/docs/guides/spring_security_saml.html">Spring Security SAML (Java)</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="pysaml2" data-section="">
+									<li data-name="PySAML2 (Python)" >
+										<a href="/docs/guides/pysaml2.html">PySAML2 (Python)</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+					
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="add_mfa" data-section="">
+									<li data-name="Add Multi-Factor Authentication to your App with the Okta Platform" >
+										<a href="/docs/guides/add_mfa.html">Add Multi-Factor Authentication to your App with the Okta Platform</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+			
+		
+			
+				
+		
+			
+				
+		
+			
+				
+		
+			
+				
+		
+	</ul>
+</div>
+</div>
+
+	</aside>
+
+	<div id="docs-body" class="body docs-body">
+
+		<nav id="sticky-nav" class="sticky-nav--top no-flexbox">
+
+			
+
+	<a href="#" class="toggle-menu"></a>
+	<a  class="on"  href="/docs/guides/overview.html">
+		Guides
+	</a>
+	<a  href="/docs/api/getting_started/design_principles.html">
+		API
+	</a>
+	<a  href="/docs/sdk/core/api.html">
+		SDKs
+	</a>
+	<a  href="/docs/examples/session_cookie.html">
+		Examples
+	</a>
+
+
+		</nav>
+
+		<a href="#docs-body" id="scroll-top-button">Scroll to Top</a>
+
+		
+		<header>
+			<a href="https://github.com/okta/okta.github.io/tree/master/_source/docs/guides/saml_guidance.md" target="_blank" class="btn btn-default btn-sm btn-github"><i class="fa fa-github"></i> Edit on GitHub</a>
+			<h1 class="h3">Single Sign-On with Okta</h1>
+		</header>
+		
+
+		<ul class="list-unstyled toc" id="markdown-toc">
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#authentication">Authentication</a></li>
+  <li><a href="#federated-identity">Federated Identity</a></li>
+  <li><a href="#planning-for-saml">Planning for SAML</a></li>
+  <li><a href="#planning-checklist">Planning Checklist</a>    <ul>
+      <li><a href="#understanding-the-role-of-a-service-provider">Understanding the role of a Service Provider</a></li>
+      <li><a href="#single-idp-vs-multiple-idps">Single IDP vs Multiple IDPs</a></li>
+      <li><a href="#understanding-sp-initiated-login-flow">Understanding SP-initiated Login Flow</a></li>
+      <li><a href="#exposing-saml-configuration-in-sp">Exposing SAML configuration in SP</a></li>
+      <li><a href="#enabling-saml-for-everyone-vs-a-subset-of-users">Enabling SAML for everyone vs a subset of users</a></li>
+      <li><a href="#implementing-a-backdoor">Implementing a “backdoor”</a></li>
+    </ul>
+  </li>
+  <li><a href="#saml-for-mobile-native-apps">SAML for Mobile Native Apps</a></li>
+  <li><a href="#supporting-okta-mobile-connect">Supporting Okta Mobile Connect</a></li>
+  <li><a href="#saml-toolkits">SAML Toolkits</a></li>
+  <li><a href="#reference">Reference</a>    <ul>
+      <li><a href="#saml-20">SAML 2.0</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Traditionally, enterprise applications are deployed and run within the company network.  To obtain information about users such as user profile and group information, many of these applications are built to integrate with corporate directories such as Microsoft Active Directory.  More importantly, a user’s credentials are typically stored and validated using the directory.  For example, if you use SharePoint and Exchange that are running on premises, your login credentials are your Active Directory credentials.</p>
+
+<p>However, with increased collaboration and the move towards the cloud, many applications have moved beyond the boundaries of a company’s domain.   Federated Authentication is the solution to this problem.</p>
+
+<h2 id="authentication">Authentication</h2>
+
+<p>Before diving into federated authentication, we need to understand what authentication really means.  Authentication defines the way a user is identified and validated through some sort of credentials as part of a login flow.  Most applications will present a login page to an end user, allowing him to specify a username and a password.  In some cases, additional information may be required in order to locate the user - like a company ID or a client code.  This information allows the application to narrow down the search of the username applicable to the provided info.  This is often used to allow the same username to exist across multiple tenants belonging to different customers.</p>
+
+<p>Most applications will have a user store (DB or LDAP) containing amongst many things - user profile information and credentials.  During login, the credentials are validated against this backend user store.  The advantage of this approach is that it is simple as everything is managed within the application, providing a single and consistent way to authenticate an end user.  However, if a user needs to access multiple applications where each app requires a different set of credentials, it becomes a hassle for the end user.  Firstly, the user will need to remember different passwords – in addition to any other corporate password (eg. AD password) that may already exist.   The user is now forced to maintain separate usernames and passwords, dealing with different password policies and expirations.  It also creates a headache for administrators and ISVs when application users continue to have access to applications when access should have been revoked.</p>
+
+<h2 id="federated-identity">Federated Identity</h2>
+
+<p>Federated Identity started with the need to support application access spanning outside a company or organization boundary.  Imagine a relationship between a juice company (JuiceCo) selling its product to a large supermarket chain (BigMart).  As an employee of JuiceCo, you need to access an application provided by BigMart to manage the relationship and monitor supplies and sales.</p>
+
+<p>In this case, BigMart (who is providing this application) will need to take care of user authentication.  The simple way is to require a different user name and password from users working at JuiceCo.  But think about all the users that this application will need to maintain – including all the other suppliers and their users needing to access the application.</p>
+
+<p>A more elegant way to solve this problem is to allow JuiceCo and every other supplier to share or “federate” the identities with BigMart.  As an employee of JuiceCo, you already have a corporate identity and credentials, What Federated Identity provides is a secure way for the supermarket chain (Service Provider) to externalize authentication by integrating with its suppliers’ existing identity infrastructure (Identity Provider).  This type of use case is what led to the birth of federated protocols such as <a href="http://en.wikipedia.org/wiki/Security_Assertion_Markup_Language">Secure Assertion Markup Languange (SAML)</a>.</p>
+
+<p>See <a href="http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-tech-overview-2.0.html">Security Assertion Markup Language (SAML) V2.0 Technical Overview</a> for a in-depth overview.</p>
+
+<h2 id="planning-for-saml">Planning for SAML</h2>
+
+<p>SAML is mostly used as a web-based authentication mechanism as it relies on the browser being used as an agent that brokers the authentication flow.  At high-level, the authentication flow of SAML looks like this</p>
+
+<p><img src="/assets/img/saml_guidance_saml_flow.png" alt="SAML Flow" title="SAML Flow" /></p>
+
+<p>We are now ready to introduce some common SAML terms.  We will go into the technical details of these later – but it is important to understand the high-level concept during the planning stage.</p>
+
+<ul>
+  <li>
+    <p><strong>A Service Provider (SP)</strong> is the entity providing the service – typically in the form of an application</p>
+  </li>
+  <li>
+    <p><strong>An Identity Provider (IDP)</strong> is the entity providing the identities including the ability to authenticate a user.  The Identity Provider typically also contains the user profile – additional information about the user such as first name, last name, job code, phone number, address, etc.  Depending on the application, some service providers may require a very simple profile (username, email) while others may require a richer set of user data (job code, department, address, location, manager, etc.</p>
+  </li>
+  <li>
+    <p><strong>A SAML Request</strong>, also known as an authentication request, is generated by the Service Provider to “request” for an authentication.</p>
+  </li>
+  <li>
+    <p><strong>A SAML Response</strong> is generated by the Identity Provider.  It contains the actual assertion of the authenticated user.  In addition, a SAML Response may contain additional information such as user profile information and group/role information depending on what the Service Provider can support</p>
+  </li>
+  <li>
+    <p><strong>A Service Provider Initiated (SP-initiated)</strong> login describes the SAML login flow when initiated by the Service Provider.  This is typically triggered when the end user tries to access a resource or login directly on the Service Provider side – ie. The browser is trying to access a protected resource on the Service Provider side.</p>
+  </li>
+  <li>
+    <p><strong>An Identity Provider Initiated (IDP-initiated)</strong> login describes the SAML login flow initiated by the Identity Provider.  The SAML flow is not triggered due to a redirection from the Service Provider.  The Identity Provider initiates a SAML Response that is redirected to the Service Provider to assert the user’s identity.</p>
+  </li>
+</ul>
+
+<p>A couple of key things to note:</p>
+
+<ol>
+  <li>
+    <p>The Service Provider never directly interacts with the Identity Provider.  A browser acts as the agent to carries out all the redirections.</p>
+  </li>
+  <li>
+    <p>The Service Provider needs to know which Identity Provider to redirect to before it has any idea who the user is.</p>
+  </li>
+  <li>
+    <p>The Service Provider does not know who the user is until the SAML assertion comes back from the Identity Provider.</p>
+  </li>
+  <li>
+    <p>This flow does not have to start from the Service Provider.  An Identity Provider can initiate an authentication flow.</p>
+  </li>
+  <li>
+    <p>The SAML authentication flow is asynchronous.  The Service Provider does not know if the Identity Provider will ever complete the entire flow.  Because of this, the Service Provider does not maintain any state of any authentication requests generated.  When the Service Provider receives a response from an Identity Provider, the response must contain all the necessary information.</p>
+  </li>
+</ol>
+
+<h2 id="planning-checklist">Planning Checklist</h2>
+
+<p>While the SAML protocol is a standard, there are different ways to implement it based on the nature of your application.  The following is a checklist that will guide you through some of key considerations.</p>
+
+<ol>
+  <li>
+    <p>Understanding the role of a Service Provider</p>
+  </li>
+  <li>
+    <p>Single IDP vs Multiple IDPs</p>
+  </li>
+  <li>
+    <p>Understanding SP-initiated Login Flow</p>
+  </li>
+  <li>
+    <p>Exposing SAML configuration in SP</p>
+  </li>
+  <li>
+    <p>Enabling SAML for everyone vs a subset of users</p>
+  </li>
+  <li>
+    <p>Implementing a “backdoor”</p>
+  </li>
+</ol>
+
+<h3 id="understanding-the-role-of-a-service-provider">Understanding the role of a Service Provider</h3>
+
+<p>A SAML IDP generates a SAML response based on configuration that is mutually agreed upon by the IDP and the SP.  Upon receiving the SAML assertion, SP needs to validate that the assertion comes from a valid IDP and then parses the necessary information from the assertion – the username, attributes, etc.</p>
+
+<p>In order to do this, the SP requires at a minimum the following:</p>
+
+<ul>
+  <li>Certificate – SP needs to obtain the public certificate from the IDP to validate the signature.  The certificate is stored on the SP side and used whenever a SAML response arrives</li>
+  <li>ACS Endpoint – Assertion Consumer Service URL – often referred to simply as the SP login URL.  This is the endpoint provided by the SP where SAML responses are posted.  SP needs to provide this information to the IDP</li>
+  <li>IDP Login URL – This is the endpoint on the IDP side where SAML requests are posted.  SP needs to obtain this information from the IDP.</li>
+</ul>
+
+<p>The easiest way to implement SAML is to leverage an OpenSource SAML toolkits.  At the end of this article, we have included a list of recommended toolkits for several languages.  These toolkits provide the logic to digest the information in an incoming SAML Response.  In addition, if SP needs to support SP-initiated Login flow, the toolkits also provide the logic to generate an appropriate SAML Authentication Request.</p>
+
+<h3 id="single-idp-vs-multiple-idps">Single IDP vs Multiple IDPs</h3>
+
+<p>If you are building an internal app and you want to SAML-enable it in order to integrate with your corporate SAML identity provider, then you are looking at supporting only a single IDP.  In this case, your app only needs to deal with a single set of IDP metadata (cert, endpoints, etc).</p>
+
+<p><img src="/assets/img/saml_guidance_one_idp.png" alt="Single IDP" title="Single IDP" /></p>
+
+<p>If you are an ISV building an enterprise SaaS product – or if you are building an external facing website/portal/community for your customers and partners, then you need to look at supporting multiple IDPs.  This is the typical use case for many SaaS ISVs needing to integrate with customers’ corporate identity infrastructure.  Depending on the architecture of your application, you need to think about ways to store the SAML configuration (eg. Certificates, IDP login URLs) from each identity provider – and also providing the needed SP information for each.</p>
+
+<p><img src="/assets/img/saml_guidance_many_idp.png" alt="Many IDPs" title="Many IDPs" /></p>
+
+<p>A key consideration involves the ACSurl endpoint on the SP side where SAML responses are posted. It is possible to expose a single endpoint even when dealing with multiple IDPs.  For a single-instance multi-tenant application where the tenancy is not defined in the URL (ie. via a subdomain, for eg.) this might be a simpler way to implement.  However, you must then rely on additional information in the SAML response to figure out which IDP is trying to authenticate (eg. using the IssuerID).  If your application is architected in a multi-tenant fashion with domain information in the URL – (eg. <em>https://domain1.myISV.com</em> or <em>https://www.myISV.com/domain1</em>), then having an ACSurl endpoint for each subdomain might be a good option since the URL itself identifies the domain.</p>
+
+<p><img src="/assets/img/saml_guidance_many_idp_subdomain.png" alt="SP with subdomains" title="SPs with Subdomains" /></p>
+
+<h3 id="understanding-sp-initiated-login-flow">Understanding SP-initiated Login Flow</h3>
+
+<p>As discussed earlier, an IDP-initiated login flow starts from the IDP.  Since it begins on the IDP side, there is no additional context about what the user is trying to access on the SP side other than the fact that the user is trying to get authenticated and access the SP.  Typically, once the user is authenticated, the browser will be taken to a generic landing page in the SP.</p>
+
+<p>In an SP-initiated flow, the user tries to access a protected resource directly on the SP side without the IDP being aware of the attempt.  Two issues arise.  First is the need to identify the right IDP if authentication of a federated identity is needed.  With SP-initiated login, the SP initially does not know anything about the identity.  As a developer, you need to figure out how the SP can figure out which IDP should be receiving the SAML request.  In some cases, if your application URLs contain subdomain information that is mapped to a unique tenant and IDP, then the resource link being hit is enough to identify the IDP.  If this isn’t the case, then you might need to prompt for additional information from the end user – for eg. a user id, email or a company id – something that allows the SP to figure out which IDP the user attempting to access the resource belongs to.  Remember, you are only prompting for an identifier – not credentials.</p>
+
+<p>Another issue with SP-initated login flow is the support for deep-links. Most applications support deep-links.  For eg., you might receive a link to a document that resides on a content management system.  Ideally, if you need to authenticate prior to accessing the document, you would like to be taken to the document immediately after authentication.</p>
+
+<p>SAML is an asynchronous protocol by design.  The SP-initiated login begins the flow by generating a SAML Authentication Request that gets redirected to the IDP.  At this point, the SP does not store any information about the request.  When the SAML response comes back from the IDP, the SP wouldn’t know anything about the initial deep-link that triggered the authentication request.  Luckily, SAML supports this with a parameter called RelayState.</p>
+
+<p>A RelayState is an HTTP parameter that can be included as part of the SAML request and SAML response.  In an SP-initiated login flow, the SP can set the RelayState parameter in the SAML request with additional information about the request.  A SAML IDP, upon receiving the SAML request, will take the RelayState value and simply attach it back as a HTTP parameter in the SAML response after the user has been authenticated.  This way, when the round trip completes, the SP can use the RelayState information to get additional context about the initial SAML authentication request.</p>
+
+<p>In the case of a deeplink, the SP will set the RelayState of the SAML request with the deep-link value.  When the SAML response comes back, the SP can use the RelayState value and take the authenticated user to the right resource.  Here is an example of the flow.</p>
+
+<p><img src="/assets/img/saml_guidance_deeplink.png" alt="SP-initiated Login with Deep Link" title="SP-initiated flow with Deep Link" /></p>
+
+<h3 id="exposing-saml-configuration-in-sp">Exposing SAML configuration in SP</h3>
+
+<p>As discussed before, SP needs the IDP configuration in order to complete the SAML setup.  While many ISVs choose to do this via support and email, the better way to do this is by exposing a self-service admin page for your customer’s IT administrator to enable SAML.  SAML supports metadata on both the IDP and SP side.  One way to configure the IDP/SP relationship on the SP side is to build the ability to receive an IDP metadata file and the ability to generate an SP metadata file for consumption by the IDP.  This is the preferred method.</p>
+
+<p>However, some ISVs choose to allow configuration of several key SAML parameters directly rather than through a metadata file.  Typical parameters would include the IDP redirect URL (for SAML Request), IssuerID, IDP Logout URL.  The SP must also allow the IDP public certificate to be uploaded or saved.</p>
+
+<p>Using metadata file is preferred because it can handle any future additions/enhancements in your SAML support without making UI changes that would otherwise be required if you expose specific SAML configuration parameters in your UI.</p>
+
+<h3 id="enabling-saml-for-everyone-vs-a-subset-of-users">Enabling SAML for everyone vs a subset of users</h3>
+
+<p>Depending on the nature of your application, there might be reasons to allow only a subset of users to be SAML enabled.  Imagine an application that is accessed by internal employees and external users like partners.  The employees may SAML into the app while the external users may use a separate set of credentials.
+Even in cases where the intent is to have all the users of a particular tenant to be SAML-enabled, it might be useful to enable just a subset of users during proof-of-concept, testing and roll-out to test out authentication with a smaller subset of users before going-live for the entire population.</p>
+
+<h3 id="implementing-a-backdoor">Implementing a “backdoor”</h3>
+
+<p>This is particularly important where the entire population is intended to be SAML-enabled in your application.  Sometimes, there might be a mistake in the SAML configuration – or something changes in SAML IDP endpoints.  In any case, you do not want to completely locked out.  Having a backdoor available for administrator(s) to be able to lock into the system becomes extremely important.  This is often accomplished by having a “secret” login URL that does not trigger a SAML redirection when accessed. Typically, the administrator will use a username/password to login in and make the necessary changes to fix the problem.</p>
+
+<h2 id="saml-for-mobile-native-apps">SAML for Mobile Native Apps</h2>
+
+<p>With SAML being an HTTP-based protocol, supporting SAML in a native mobile app may seem tricky.  You can actually achieve this quite easily by including an embedded webview in your native app to support the HTTP redirects.  When launching the webview, make sure you hit a URL on the SP side that will trigger a SAML redirect back to the IDP.  From this point on, the webview will carry out the SP-initiated login flow as it would happen in a browser.  When the SP finally receives the SAML response and authenticates the user successfully, your native app can leave the webview and proceed with the rest of the login bootstrap which typically involves some sort of a token (eg. OAuth) being generated and stored by the native app for subsequent access.  This is a fairly common approach used by many ISVs to support SAML integration with enterprises.</p>
+
+<p>For more details, see the <a href="https://github.com/okta/okta-mobile-connect">technical overview for Okta Mobile Connect</a>.</p>
+
+<h2 id="supporting-okta-mobile-connect">Supporting Okta Mobile Connect</h2>
+
+<p><em>For iOS</em></p>
+
+<p>Okta Mobile Connect allows native mobile apps to have seamless SSO support much like browser SSO experience.  Prerequisite is to support SAML in your native app using the embedded webview as described above.  Once that is accomplished, by implementing the following two characteristics, your application will work with Okta Mobile Connect.</p>
+
+<ol>
+  <li>The embedded web browser used for SAML authentication requests allows requests to be made to Okta’s URL schemes: “oktasso://” and “okta://”</li>
+  <li>The application has a registered URL scheme and supports being called by this URL scheme.</li>
+</ol>
+
+<p>When you are finished, publish your app to the App Store. Contact <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;">&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;</a> to register your app to enable Okta Mobile Connect for your app in the Okta Application Network.</p>
+
+<blockquote>
+  <p>Coming Soon - Android support</p>
+</blockquote>
+
+<h2 id="saml-toolkits">SAML Toolkits</h2>
+
+<p>There are many available OpenSource toolkits that implement the SAML 2.0 specificaiton for the WebSSO Profile for Service Providers in different programming languages.  The following is a list of recommended toolkits:</p>
+
+<ul>
+  <li>Java: <a href="https://shibboleth.net/products/opensaml-java.html">OpenSAML</a></li>
+  <li>Java/Spring: <a href="/docs/examples/spring_security_saml.html">Spring Security SAML</a></li>
+  <li>Ruby: <a href="https://rubygems.org/gems/ruby-saml">Ruby-SAML</a></li>
+  <li>Python: <a href="https://pypi.python.org/pypi/pysaml2">PySAML2</a></li>
+  <li>PHP: <a href="https://simplesamlphp.org/">SimpleSAMLphp</a></li>
+</ul>
+
+<h2 id="reference">Reference</h2>
+
+<h3 id="saml-20">SAML 2.0</h3>
+
+<ul>
+  <li><a href="http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf">Assertions and Protocols for the OASIS Security Assertion Markup Language (SAML) V2.0</a></li>
+  <li><a href="http://docs.oasis-open.org/security/saml/v2.0/saml-bindings-2.0-os.pdf">Bindings for the OASIS Security Assertion Markup Language (SAML) V2.0</a></li>
+  <li><a href="http://docs.oasis-open.org/security/saml/v2.0/saml-profiles-2.0-os.pdf">Profiles for the OASIS Security Assertion Markup Language (SAML) V2.0</a></li>
+</ul>
+
+
+
+	</div>
+</section>
+		
+		
+			
+	</div>
+	
+	<!-- Remarketing tag -->
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		var google_conversion_id = 1006913831;
+		var google_custom_params = window.google_tag_params;
+		var google_remarketing_only = true;
+		/* ]]> */
+	</script>
+	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+	</script>
+	<noscript>
+		<div style="display:inline;">
+			<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"/>
+		</div>
+	</noscript>
+<!-- End Remarketing tag -->
+
+<!-- Crazy Egg Tracking -->
+<script type="text/javascript">
+setTimeout(function(){var a=document.createElement("script");
+var b=document.getElementsByTagName("script")[0];
+a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+</script>
+<!-- End Crazy Egg Tracking -->
+
+<footer class="site-footer">
+	<div class="wrap">
+
+		<ul>
+			<li><a href="http://www.okta.com" target="_blank">Okta.com</a></li>
+			<li><a href="/blog">Blog</a></li>
+			<li><a href="/terms/">Terms &amp; Conditions</a></li>
+			<li><a href="/privacy/">Privacy Policy</a></li>
+			<li><a href="http://okta.com/developer/contact/">Contact Sales</a></li>
+			<li><a href="mailto:developers@okta.com">Contact Support</a></li>
+		</ul>
+
+		<ul>
+			<li><a class="icon-with-hover--github" href="http://github.com/okta" target="_blank">Github</a></li>
+			<li><a class="icon-with-hover--twitter" href="http://twitter.com/okta" target="_blank">Twitter</a></li>
+			<li><a class="icon-with-hover--stack-overflow" href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a></li>
+			<li><a class="icon-with-hover--rss" href="http://feeds.feedburner.com/OktaBlog" target="_blank">News</a></li>
+			<li><a class="icon-with-hover--help" href="http://community.okta.com" target="_blank">Help</a></li>
+		</ul>
+
+	</div>
+</footer>
+
+	
+</body>
+	
+</html>

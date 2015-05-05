@@ -1,0 +1,49 @@
+# -- GUIDES
+- section: guides
+  slug: guides
+  title: Guides
+  pages:
+    - overview
+    - saml_guidance
+    - oan_guidance
+    - spring_security_saml
+    - pysaml2
+    - add_mfa
+
+# -- APIS
+- section: api/getting_started
+  slug: api
+  title: Getting Started
+  pages:
+    - design_principles
+    - error_codes
+    - getting_a_token
+    - enabling_cors
+    - api_test_client
+
+- section: api/resources
+  slug: api
+  title: Resources
+  pages:
+    - authn
+    - factors
+    - users
+    - groups
+    - sessions
+    - apps
+    - events
+
+# -- SDK
+- section: sdk/core
+  slug: sdk
+  title: SDKs
+  pages:
+    - api
+
+# -- EXAMPLES
+- section: examples
+  slug: examples
+  title: Examples
+  pages:
+    - session_cookie
+    - dotnet_sample_application
