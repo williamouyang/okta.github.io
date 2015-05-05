@@ -1,46 +1,112 @@
 /*
-Error: Invalid CSS after "@charset "utf-8"": expected "{", was ";"
-        on line 4 of ./assets/css/page-home.scss
+ * Layout
+ ------------------------------------------------------------ */
+/*
+ * Colors
+ ------------------------------------------------------------ */
+/*
+ * Typography
+ ------------------------------------------------------------ */
+#valprop {
+  background-image: url(/assets/images/valprop-bg--home-mobile.png);
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: 434px;
+  padding: 30px 0 190px; }
+  #valprop .button--large > span {
+    display: none; }
+  #valprop .button--large:after {
+    content: "Get a Free Account"; }
 
-1: ---
-2: ---
-3: 
-4: @charset "utf-8";
-5: 
-6: @import
-7: 	"variables",
-8: 	"mixins"
-9: ;
+#features .row {
+  margin-left: auto;
+  margin-right: auto; }
+#features .col-1-3 + .col-1-3 {
+  border-top: 1px solid #c1c1c1;
+  padding-top: 30px; }
 
-Backtrace:
-./assets/css/page-home.scss:4
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/scss/parser.rb:1165:in `expected'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/scss/parser.rb:1101:in `expected'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/scss/parser.rb:1096:in `tok!'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/scss/parser.rb:641:in `block'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/scss/parser.rb:635:in `ruleset'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/scss/parser.rb:660:in `block_child'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/scss/parser.rb:650:in `block_contents'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/scss/parser.rb:117:in `stylesheet'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/scss/parser.rb:42:in `parse'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/engine.rb:393:in `_to_tree'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/engine.rb:368:in `_render_with_sourcemap'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/engine.rb:285:in `render_with_sourcemap'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/plugin/compiler.rb:490:in `update_stylesheet'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/plugin/compiler.rb:209:in `each'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/plugin/compiler.rb:293:in `watch'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/plugin.rb:108:in `method_missing'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/exec/sass_scss.rb:370:in `watch_or_update'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/exec/sass_scss.rb:50:in `process_result'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/exec/base.rb:52:in `parse'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/exec/base.rb:19:in `parse!'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/bin/sass:13:in `<top (required)>'
-/usr/bin/sass:23:in `load'
-/usr/bin/sass:23:in `<main>'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: Invalid CSS after \"@charset \"utf-8\"\": expected \"{\", was \";\"\A         on line 4 of ./assets/css/page-home.scss\A \A 1: ---\A 2: ---\A 3: \A 4: @charset \"utf-8\";\A 5: \A 6: @import\A 7: 	\"variables\",\A 8: 	\"mixins\"\A 9: ;"; }
+#uptime .wrap {
+  background-image: url(/assets/images/section-bg--home-map.png);
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: 1100px auto; }
+#uptime h2, #uptime p {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 780px; }
+#uptime .trailing-link {
+  display: block;
+  margin-top: 260px; }
+
+#security .wrap {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 840px; }
+#security p {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 700px; }
+#security .col-1-3 {
+  padding: 0 20%; }
+
+#sdk h2, #sdk p, #sdk .row {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 840px; }
+#sdk a {
+  display: block;
+  font-weight: 500;
+  text-decoration: none;
+  text-transform: uppercase; }
+  #sdk a img {
+    margin-bottom: 20px; }
+
+@media screen and (min-width: 468px) {
+  #valprop {
+    background-size: 651px;
+    padding-bottom: 290px; }
+    #valprop .button--large > span {
+      display: inline; }
+    #valprop .button--large:after {
+      display: none; }
+
+  #features img.responsive--full-width {
+    max-width: 408px; }
+
+  #security .col-1-3 {
+    padding: 0 30px;
+    width: 33.33333%; }
+  #security .col-2-3 {
+    margin-top: 0;
+    width: 66.66667%; }
+
+  #sdk .col-1-3 {
+    margin-top: 0;
+    width: 33.33333%; }
+
+  #customers .col-1-4 {
+    width: 50%; }
+    #customers .col-1-4 + .col-1-4 {
+      margin-top: 60px; }
+      #customers .col-1-4 + .col-1-4:nth-child(2) {
+        margin-top: 0; } }
+@media screen and (min-width: 768px) {
+  #valprop {
+    background-size: 868px;
+    padding: 50px 0 380px; }
+
+  #features .col-1-3 + .col-1-3 {
+    border-top: 0;
+    padding-top: 0; }
+  #features img.responsive--full-width {
+    max-width: 100%; } }
+@media screen and (min-width: 992px) {
+  #valprop {
+    background-image: url(/assets/images/valprop-bg--home.png);
+    background-size: 1300px;
+    padding: 80px 0 220px; }
+
+  #customers .col-1-4 {
+    width: 25%; }
+    #customers .col-1-4 + .col-1-4 {
+      margin-top: 0; } }

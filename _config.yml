@@ -8,11 +8,13 @@ baseurl: "/"
 url: "http://developer.okta.com"
 
 gems:
-  - jekyll-compass
   - jekyll-redirect-from
 
 # -- standard exclusions
 exclude: [Gemfile, Gemfile.lock, README.md]
+
+source: _source
+destination: _site
 
 markdown: kramdown
 markdown_ext: md

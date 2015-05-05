@@ -1,0 +1,208 @@
+.clearfix {
+	overflow: inherit;
+	zoom: 1;
+}
+
+.logo-placard {
+	background: #fff;
+	border-bottom: 2px solid $colorGreyLight;
+	display: block;
+	height: 120px;
+	line-height: 120px;
+	padding: 30px;
+	text-align: center;
+	
+	img {
+		display: inline-block;
+		max-height: 100%;
+		max-width: 100%;
+		vertical-align: middle;
+	}
+}
+
+[class*=button--] {
+	background: $colorGreen;
+	border: 1px solid $colorGreenDark;
+	border-radius: 3px;
+	box-shadow: none;
+	box-sizing: border-box;
+	color: $colorWhite;
+	cursor: pointer;
+	display: inline-block;
+	font-weight: 500;
+	height: 40px;
+	line-height: 40px;
+	padding: 0 20px;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: none;
+	text-transform: uppercase;
+	transition: 0.2s all;
+	
+	&:active, &:focus, &:hover {
+		background: mix($colorGreen, $colorWhite, 90%);
+		border-color: mix($colorGreenDark, $colorWhite, 90%);
+		color: $colorWhite;
+	}
+}
+
+.button--small {
+	@include scaleDownFontSizeBy(0.8);
+}
+
+.button--large {
+	height: 65px;
+	line-height: 65px;
+	padding: 0 40px;
+}
+
+.tabber {
+	@extend .clearfix;
+	border: solid $colorGreyLight;
+	border-width: 1px 0;
+	margin-bottom: 40px;
+	
+	> ul {
+		@extend .wrap;
+		box-sizing: border-box;
+		padding: 0;
+	}
+	
+	li {
+		box-sizing: border-box;
+		
+		+ li {
+			border-top: 1px solid $colorGreyLighter;
+		}
+	}
+	
+	a {
+		border-bottom: 4px solid transparent;
+		color: #000;
+		display: block;
+		padding: 12px;
+		text-decoration: none;
+		vertical-align: middle;
+		
+		&:active, &:focus, &:hover {
+			border-bottom-color: $colorGreyLight;
+		}
+		
+		&.active {
+			border-bottom-color: $colorBlue;
+			
+			i {
+				background-position: bottom;
+			}
+		}
+		
+		i, span {
+			display: inline-block;
+			vertical-align: middle;
+		}
+		
+		i {
+			border: solid #fff;
+			border-width: 11px 0;
+			height: 26px;
+			margin-right: 12px;
+		}
+	}
+}
+
+.tabber-targets {
+	> * {
+		float: left;
+		margin-right: -100%;
+		position: relative;
+		width: 100%;
+	}
+}
+
+.btn {
+	@include defaultTransition();
+	@include scaleDownFontSizeBy(0.4);
+	background: none;
+	border: 1px solid $colorGreyLight;
+	border-radius: 3px;
+	color: $colorBlack;
+	display: inline-block;
+	padding: .4em .8em;
+	text-decoration: none;
+	
+	&:active,
+	&:focus,
+	&:hover {
+		background: none;
+		border-color: $colorBlue;
+		color: $colorBlueDark;
+	}
+}
+
+.hide {
+	display: none;
+}
+
+[class*=icon-with-hover--] {
+	background: no-repeat top;
+	background-size: 53px;
+	display: inline-block;
+	height: 53px;
+	overflow: hidden;
+	text-indent: 100%;
+	transition: none;
+	white-space: nowrap;
+	width: 53px;
+	
+	&:active, &:focus, &:hover {
+		background-position: bottom;
+	}
+}
+
+.icon-with-hover--github {
+	background-image: url(/assets/images/icons/rounded-github--grey-with-hover.png);
+}
+
+.icon-with-hover--twitter {
+	background-image: url(/assets/images/icons/rounded-twitter--grey-with-hover.png);
+}
+
+.icon-with-hover--stack-overflow {
+	background-image: url(/assets/images/icons/rounded-stackoverflow--grey-with-hover.png);
+}
+
+.icon-with-hover--rss {
+	background-image: url(/assets/images/icons/rounded-rss--grey-with-hover.png);
+}
+
+.icon-with-hover--help {
+	background-image: url(/assets/images/icons/rounded-help--grey-with-hover.png);
+}
+
+[class*=icon-small--] {
+	background: no-repeat top;
+	background-size: 26px;
+	display: inline-block;
+	height: 26px;
+	width: 26px;
+}
+
+.icon-small--okta {
+	background-image: url(/assets/images/icons/flat-okta--with-hover.png);
+}
+
+.icon-small--folder {
+	background-image: url(/assets/images/icons/flat-folder--with-hover.png);
+}
+
+.icon-small--updown {
+	background-image: url(/assets/images/icons/flat-updown--with-hover.png);
+}
+
+.icon-small--db {
+	background-image: url(/assets/images/icons/flat-database--with-hover.png);
+}
+
+.icon-small--social {
+	background-image: url(/assets/images/icons/flat-twitter--with-hover.png);
+}

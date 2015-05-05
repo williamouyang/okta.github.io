@@ -1,0 +1,2164 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<head>
+	
+	<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="/favicon.ico">
+	<title>Spring Security SAML (Java) &raquo; Okta Developer</title>
+	<meta name="description" content="Guidance on how to SAML-enable your application using open source Spring Security library.">
+
+	<link rel="canonical" href="http://developer.okta.com/docs/guides/spring_security_saml.html">
+
+	<link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/assets/css/animate.css">
+	<link rel="stylesheet" href="/assets/css/master.css">
+	<link rel="stylesheet" href="/assets/css/layout-docs.css">
+	<link rel="stylesheet" href="/assets/css/responsive.css">
+
+	<script type="text/javascript" defer="defer" src="/assets/js/jquery.min.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/tabber.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/pacnav.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/master.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/scrollspy.js"></script>
+
+	<script type="text/javascript" defer="defer" src="/assets/js/docs.js"></script>
+	<!-- TypeKit -->
+	<script src="//use.typekit.net/pls8pog.js"></script>
+	<script>try{Typekit.load();}catch(e){}</script>
+	<!-- GA -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-15777010-3', 'auto');
+		ga('send', 'pageview');
+	</script>
+</head>
+
+	
+<body>
+	
+	<header class="site-header">
+	<div class="wrap">
+
+		<h1 class="site-title"><a href="/">Okta Developer</a></h1>
+
+		<nav id="primary-nav" class="site-nav loaded">
+			<ul>
+				<li><a href="/product/">Product</a></li>
+				<li><a href="/pricing/">Pricing</a></li>
+				<li><a href="/customers/">Customers</a></li>
+				<li><a href="/docs/guides/overview.html">Docs</a></li>
+				<li><a href="/discussion/">Discussion</a></li>
+				<li class="has-dropdown"><a href="#">Support</a>
+					<div class="dropdown-window">
+						<p class="stack-overflow">
+							Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a>.<br />
+							We'll answer it within 24 hours.
+						</p>
+						<p class="email">
+							Email us:<br />
+							<a href="mailto:developers@okta.com">developers@okta.com</a>
+						</p>
+						<p class="tel">
+							Call us:<br />
+							<a href="tel:18777227871">1 (877) 722-7871</a>
+						</p>
+					</div>
+				</li>
+			</ul>
+		</nav>
+
+		<a href="/search" class="gsc-trigger search-button"></a>
+
+
+		<div class="search-container">
+			<div class="gsc-container">
+				<script defer="defer">
+					(function() {
+						var cx = '005121479574088032773:mmh_vhv8uns';
+						var gcse = document.createElement('script');
+						gcse.type = 'text/javascript';
+						gcse.async = true;
+						gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+						'//cse.google.com/cse.js?cx=' + cx;
+						var s = document.getElementsByTagName('script')[0];
+						s.parentNode.insertBefore(gcse, s);
+					})();
+				</script>
+				<gcse:searchbox-only resultsUrl="/search" enableAutoComplete="true"></gcse:searchbox-only>
+			</div>
+		</div>
+		<a href="https://www.okta.com/developer/signup/" class="cta-button button--small">Get Started</a>
+
+	</div>
+</header>
+
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P6JKVN"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P6JKVN');</script>
+<!-- End Google Tag Manager -->
+
+
+	
+	<div class="page-content">
+		
+		
+			
+		
+
+<section class="section--with-sidebar docs-page">
+	<aside id="sidebar-wrapper" class="sticky-nav--sidebar">
+
+		
+
+
+
+
+
+
+<div id="docs-sidebar-wrap" id="sidebar-wrapper">
+	<div class="docs-sidebar-block" id="myScrollspy" >
+		
+			
+				
+				<h2>
+					Guides
+				</h2>
+
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="saml_guidance" data-section="">
+									<li data-name="Single Sign-On with Okta" >
+										<a href="/docs/guides/saml_guidance.html">Single Sign-On with Okta</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="oan_guidance" data-section="">
+									<li data-name="Okta Application Network" >
+										<a href="/docs/guides/oan_guidance.html">Okta Application Network</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav nav-title">
+									<li data-name="Spring Security SAML (Java)" >
+										<a href="/docs/guides/spring_security_saml.html">Spring Security SAML (Java)</a>
+									</li>
+								</ul>
+									<div id="gen-toc-container"><div class="gen-toc" id="gen-toc"><div class="gen-toc-title hide"><h2><div id="gen-toctitle" class="caret2 hide">Spring Security SAML (Java)</div></h2></div><ul class="nav sidebar-nav"><li class="gen-toc_level-1 toc_section-1"><a href="#installing-the-spring-security-saml-sample-application"><span class="gen-toctext">Installing the Spring Security SAML sample application</span></a></li><li class="gen-toc_level-1 toc_section-2"><a href="#configuring-okta-to-work-with-spring-security-saml"><span class="gen-toctext">Configuring Okta to work with Spring Security SAML</span></a></li><li class="gen-toc_level-1 toc_section-3"><a href="#configuring-spring-security-saml-to-work-with-okta"><span class="gen-toctext">Configuring Spring Security SAML to work with Okta</span></a></li><li class="gen-toc_level-1 toc_section-4"><a href="#test-the-saml-integration"><span class="gen-toctext">Test the SAML integration</span></a></li><li class="gen-toc_level-1 toc_section-5"><a href="#next-steps"><span class="gen-toctext">Next steps</span></a></li></ul></div></div>
+								
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="pysaml2" data-section="">
+									<li data-name="PySAML2 (Python)" >
+										<a href="/docs/guides/pysaml2.html">PySAML2 (Python)</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+					
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="add_mfa" data-section="">
+									<li data-name="Add Multi-Factor Authentication to your App with the Okta Platform" >
+										<a href="/docs/guides/add_mfa.html">Add Multi-Factor Authentication to your App with the Okta Platform</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+			
+		
+			
+				
+		
+			
+				
+		
+			
+				
+		
+			
+				
+		
+	</ul>
+</div>
+</div>
+
+	</aside>
+
+	<div id="docs-body" class="body docs-body">
+
+		<nav id="sticky-nav" class="sticky-nav--top no-flexbox">
+
+			
+
+	<a href="#" class="toggle-menu"></a>
+	<a  class="on"  href="/docs/guides/overview.html">
+		Guides
+	</a>
+	<a  href="/docs/api/getting_started/design_principles.html">
+		API
+	</a>
+	<a  href="/docs/sdk/core/api.html">
+		SDKs
+	</a>
+	<a  href="/docs/examples/session_cookie.html">
+		Examples
+	</a>
+
+
+		</nav>
+
+		<a href="#docs-body" id="scroll-top-button">Scroll to Top</a>
+
+		
+		<header>
+			<a href="https://github.com/okta/okta.github.io/tree/master/docs/guides/spring_security_saml.md" target="_blank" class="btn btn-default btn-sm btn-github"><i class="fa fa-github"></i> Edit on GitHub</a>
+			<h1 class="h3">Spring Security SAML (Java)</h1>
+		</header>
+		
+
+		<p>This guide describes how to use <a href="http://projects.spring.io/spring-security-saml/">Spring Security
+SAML</a> to add support
+for Okta (via SAML) to Java applications that use the Spring
+framework.</p>
+
+<p>In this guide, you will learn how to install and configure the sample
+application that is included with Spring Security SAML. Once you have
+completed integrating Okta with the sample application, you will know
+what you will need to do to integrate Okta into your production
+application.</p>
+
+<p>This guide assumes that you are familiar with the basics of Java
+software development: editing text files, using the command line, and
+running Tomcat, Maven or Gradle.</p>
+
+<p>If you’re already familiar with Okta and Spring, you can skip to the
+section titled “Configuring Spring Security SAML to work with Okta”.</p>
+
+<ul class="list-unstyled toc" id="markdown-toc">
+  <li><a href="#installing-the-spring-security-saml-sample-application">Installing the Spring Security SAML sample application</a></li>
+  <li><a href="#configuring-okta-to-work-with-spring-security-saml">Configuring Okta to work with Spring Security SAML</a></li>
+  <li><a href="#configuring-spring-security-saml-to-work-with-okta">Configuring Spring Security SAML to work with Okta</a></li>
+  <li><a href="#test-the-saml-integration">Test the SAML integration</a></li>
+  <li><a href="#next-steps">Next steps</a></li>
+</ul>
+
+<h2 id="installing-the-spring-security-saml-sample-application">Installing the Spring Security SAML sample application</h2>
+
+<p>This section covers what you need to do to install and configure Tomcat
+from scratch on Mac OS X. If you already have Tomcat on your system, you
+can skip to Step 2 below.</p>
+
+<p>How to install the Spring Security SAML sample application on Mac OS X:</p>
+
+<ol>
+  <li>
+    <p>If it’s not already installed, install Tomcat
+with <a href="http://brew.sh/">Homebrew</a> using these directions:
+<a href="http://blog.bolshchikov.net/post/50277857673/installing-tomcat-on-macos-with-homebrew">http://blog.bolshchikov.net/post/50277857673/installing-tomcat-on-macos-with-homebrew</a></p>
+  </li>
+  <li>
+    <p>Set up the Spring Security SAML sample application on Tomcat using
+these directions:
+<a href="http://docs.spring.io/spring-security-saml/docs/1.0.x/reference/html/chapter-quick-start.html#quick-start-steps">http://docs.spring.io/spring-security-saml/docs/1.0.x/reference/html/chapter-quick-start.html#quick-start-steps</a></p>
+
+    <ul>
+      <li>Skip the steps where you modify the <code>securityContext.xml</code> file. Normally, you
+shouldn’t skip this step. However, for purpose of simplicity, we
+will edit that file later in this guide.</li>
+      <li>For the “Compilation” step, make sure that your working
+directory is the “sample” sub-directory of the
+“spring-security-saml” directory.</li>
+    </ul>
+
+    <pre>
+    $ pwd
+    ~/spring-security-saml/sample
+</pre>
+    <ul>
+      <li>Instead of running the commands in the “Deployment”
+section, use the command below to copy the compiled
+spring-security-saml2-sample.war file to the Tomcat directory
+you set up earlier</li>
+    </ul>
+
+    <pre>
+    cp target/spring-security-saml2-sample.war /Library/Tomcat/webapps/
+</pre>
+  </li>
+  <li>
+    <p>Start Tomcat</p>
+
+    <pre><code class="language-shell">$ /Library/Tomcat/bin/startup.sh
+</code></pre>
+  </li>
+  <li>
+    <p>Load the Spring Security SAML sample application by opening this URL:
+<a href="http://localhost:8080/spring-security-saml2-sample">http://localhost:8080/spring-security-saml2-sample</a></p>
+
+    <p>If everything worked, you will see a page that looks like this:</p>
+
+    <p><img src="/assets/img/spring-security-saml-sample-application-screenshot.png" alt="Screenshot of the Spring SAML Sample application" /></p>
+  </li>
+</ol>
+
+<h2 id="configuring-okta-to-work-with-spring-security-saml">Configuring Okta to work with Spring Security SAML</h2>
+
+<p>Before we can configure Spring Security SAML we need to set up an
+application in Okta that will connect to Spring Security SAML.</p>
+
+<p>In SAML terminology, what we are doing here is configuring Okta, our
+SAML Identity Provider (SAML IdP), with the details of Spring Security
+SAML, the new SAML Service Provider (SAML SP) that you will be creating
+next.</p>
+
+<p>Here is how to configure Okta:</p>
+
+<ol>
+  <li>
+    <p>Log in to your Okta organization as a user with administrative
+privileges.</p>
+
+    <p>If you don’t have an Okta organization, you can create a free Okta
+Developer Edition organization here:
+<a href="https://www.okta.com/developer/signup/">https://www.okta.com/developer/signup/</a></p>
+  </li>
+  <li>
+    <p>Click on the blue “Admin” button
+<img src="/assets/img/okta-admin-ui-button-admin.png" alt="Admin" /></p>
+  </li>
+  <li>
+    <p>Click on the “Add Applications” shortcut
+<img src="/assets/img/okta-admin-ui-add-applications.png" alt="Add Applications" /></p>
+  </li>
+  <li>
+    <p>Click on the green “Create New App” button
+<img src="/assets/img/okta-admin-ui-button-create-new-app.png" alt="Create New App" /></p>
+  </li>
+  <li>
+    <p>In the dialog that opens, select the “SAML 2.0” option, then click
+the green “Create” button
+<img src="/assets/img/okta-admin-ui-create-new-application-integration.png" alt="Create a New Application Integration" /></p>
+  </li>
+  <li>
+    <p>In Step 1 “General Settings”, enter “Spring Security SAML” in the
+“App name” field, then click the green “Next” button.
+<img src="/assets/img/spring-security-saml-okta-general-settings.png" alt="General Settings" /></p>
+  </li>
+  <li>
+    <p>In Step 2 “Configure SAML”,
+Paste the URL below into the “Single sign on URL” field:</p>
+
+    <pre><code class="language-shell">http://localhost:8080/spring-security-saml2-sample/saml/SSO
+</code></pre>
+
+    <p>Then paste the URL below into the “Audience URI (SP Entity ID)”
+field:</p>
+
+    <pre><code class="language-shell">http://localhost:8080/spring-security-saml2-sample/saml/metadata
+</code></pre>
+
+    <p>Then click the green “Next” button</p>
+
+    <p><img src="/assets/img/spring-security-saml-okta-configure-settings.png" alt="SAML Settings" /></p>
+  </li>
+  <li>
+    <p>In Step 3 “Feedback”, click the checkbox next to the text “This is
+an internal application that we created”, then click the green
+“Finish” button.
+<img src="/assets/img/okta-admin-ui-new-application-step-3-feedback.png" alt="App type" /></p>
+  </li>
+  <li>
+    <p>You will now see the “Sign On” section of your newly created “Spring
+Security SAML” application.</p>
+  </li>
+  <li>
+    <p>Keep this page open it a separate tab or browser window. You will
+need to return to this page later in this guide and copy the
+“Identity Provider metadata” link. (To copy the that link, right
+click on the “Identity Provider metadata” link and select “Copy”)
+<img src="/assets/img/okta-admin-ui-identity-provider-metadata-link.png" alt="Sign on methods" /></p>
+  </li>
+  <li>
+    <p>Right-click on the “People” section of the “Spring Security SAML”
+application and select “Open Link In New Tab” (so that you can come
+back to the “Sign On” section later).</p>
+
+    <p>In the new tab that opens, click on the “Assign Application” button
+<img src="/assets/img/spring-security-saml-okta-assign-people-to-application.png" alt="Assign Application" /></p>
+  </li>
+  <li>
+    <p>A dialog titled “Assign Spring Security SAML to up to 500 people”
+will open. Type your username into the search box, select the
+checkbox next to your username, then click the green “Next” button
+<img src="/assets/img/okta-admin-ui-confirm-assignments.png" alt="People search box" /></p>
+  </li>
+  <li>
+    <p>You will be prompted to “Enter user-specific attributes”. Just click
+the green “Confirm Assignments” button to keep the defaults.
+<img src="/assets/img/spring-security-saml-okta-confirm-assignments.png" alt="Enter user attributes" /></p>
+  </li>
+  <li>
+    <p>You are now ready to proceed to the next section. Make sure that the
+link you copied in step #9 is still in your clipboard, as you will
+need it in the next section.</p>
+  </li>
+</ol>
+
+<h2 id="configuring-spring-security-saml-to-work-with-okta">Configuring Spring Security SAML to work with Okta</h2>
+
+<p>Now that you have configured a “Spring Security SAML” application, you
+are ready to configure Spring Security SAML to work with Okta. In this
+section we will use the “Identity Provider metadata” link from the
+section above to configure Spring Security SAML. Once you’ve completed
+these steps, you’ll have a working example of connecting Okta to Spring.</p>
+
+<ol>
+  <li>
+    <p>Open the <code>securityContext.xml</code> file in your favorite text editor.
+If you followed the instructions above for “Installing the Spring
+Security SAML sample application” on Mac OS X, this file will be
+located here at
+<code>/Library/Tomcat/webapps/spring-security-saml2-sample/WEB-INF/securityContext.xml</code>
+(Normally, you would do this step <em>before</em> running Maven or Gradle
+to create the .war file you deploy to Tomcat. In this case, I’m
+having you edit the file in the Tomcat path directly, since it’s
+easier to make small changes and test them this way).</p>
+  </li>
+  <li>
+    <p>Once you’ve opened the <code>securityContext.xml</code> file, add the XML below
+to the end of the tag identified by this CSS selector syntax:
+<code>#metadata &gt; constructor-arg &gt; list</code>.</p>
+
+    <pre><code class="language-xml">&lt;bean class="org.opensaml.saml2.metadata.provider.HTTPMetadataProvider"&gt;
+  &lt;!-- URL containing the metadata --&gt;
+  &lt;constructor-arg&gt;
+    &lt;!-- This URL should look something like this: https://example.okta.com/app/abc0defghijK1lmN23o4/sso/saml/metadata --&gt;
+    &lt;value type="java.lang.String"&gt;{metadata-url}&lt;/value&gt;
+  &lt;/constructor-arg&gt;
+  &lt;!-- Timeout for metadata loading in ms --&gt;
+  &lt;constructor-arg&gt;
+    &lt;value type="int"&gt;5000&lt;/value&gt;
+  &lt;/constructor-arg&gt;
+  &lt;property name="parserPool" ref="parserPool"/&gt;
+&lt;/bean&gt;
+</code></pre>
+  </li>
+  <li>
+    <p>Make sure to replace the contents of <code>{metdata-url}</code> with the link
+that you copied in step #9 of the “Configuring Okta to work with
+Spring Security SAML” instructions above!**</p>
+  </li>
+  <li>
+    <p>Save the <code>securityContext.xml</code> file, then restart Tomcat</p>
+  </li>
+  <li>
+    <p>If you are using Mac OS X, you can restart Tomcat using the commands
+below:</p>
+
+    <pre><code class="language-shell">$ /Library/Tomcat/bin/shutdown.sh
+$ /Library/Tomcat/bin/startup.sh
+</code></pre>
+  </li>
+</ol>
+
+<h2 id="test-the-saml-integration">Test the SAML integration</h2>
+
+<p>Now that you’ve set up an application in Okta and configured the Spring
+Security SAML example application to use that application, you’re ready
+to test it out.</p>
+
+<p>There are two ways to test a SAML application: Starting from the Spring
+application (“SP initiated”) and starting from Okta (“IdP initiated”).
+You will be testing both methods. In both cases, you will know of the
+test worked when you see a screen that looks like the one below:</p>
+
+<p><img src="/assets/img/spring-security-saml-authenticated-user.png" alt="Authenticated user" /></p>
+
+<ol>
+  <li>
+    <p>Login from the Spring Security SAML sample application (This is
+known as an “SP initiated” login)</p>
+
+    <ul>
+      <li>
+        <p>Open the sample application in your browser:
+<a href="http://localhost:8080/spring-security-saml2-sample">http://localhost:8080/spring-security-saml2-sample</a></p>
+      </li>
+      <li>
+        <p>Select the Okta IdP from the list
+It will be a URL that starts with “http://www.okta.com/”</p>
+      </li>
+      <li>
+        <p>Click the “Start single sign-on” button.
+<img src="/assets/img/spring-security-saml-idp-selection.png" alt="Start single sign-on" /></p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Login from Okta (This is known as an “IdP initiated” login)</p>
+
+    <ul>
+      <li>
+        <p>Log in to your Okta organization</p>
+      </li>
+      <li>
+        <p>Click the button for the application you created in the
+“Configuring Okta to work with Spring Security SAML” section
+above:
+<img src="/assets/img/spring-security-saml-okta-chiclet.png" alt="Spring Security SAML" /></p>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<p>If you’re able to get to the “Authenticated User” page using both of the
+methods above, then you’re done.</p>
+
+<p>Congratulations on getting Okta working with Spring!</p>
+
+<h2 id="next-steps">Next steps</h2>
+
+<p>At this point, you
+should understand how to set up an application in Okta and how to
+configure Spring to work with that Okta application.</p>
+
+<p>Once you have Okta working with the Spring Security SAML sample application,
+the next step is to move the configuration in
+<code>securityContext.xml</code> file for your production application.
+The specifics of how this will work will
+be different depending on how your application is set up.</p>
+
+<p>If you want to learn more about SAML and what you should consider when writing a SAML implementation, our
+in-depth <a href="http://developer.okta.com/docs/getting_started/saml_guidance.html">SAML guidance</a>
+is a great place to learn more.</p>
+
+<p>Finally, if you got this far into this guide and still have questions,
+please reach out to me at: joel.franusic@okta.com</p>
+
+
+	</div>
+</section>
+		
+		
+			
+	</div>
+	
+	<!-- Remarketing tag -->
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		var google_conversion_id = 1006913831;
+		var google_custom_params = window.google_tag_params;
+		var google_remarketing_only = true;
+		/* ]]> */
+	</script>
+	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+	</script>
+	<noscript>
+		<div style="display:inline;">
+			<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"/>
+		</div>
+	</noscript>
+<!-- End Remarketing tag -->
+
+<!-- Crazy Egg Tracking -->
+<script type="text/javascript">
+setTimeout(function(){var a=document.createElement("script");
+var b=document.getElementsByTagName("script")[0];
+a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+</script>
+<!-- End Crazy Egg Tracking -->
+
+<footer class="site-footer">
+	<div class="wrap">
+
+		<ul>
+			<li><a href="http://www.okta.com" target="_blank">Okta.com</a></li>
+			<li><a href="/blog">Blog</a></li>
+			<li><a href="/terms/">Terms &amp; Conditions</a></li>
+			<li><a href="/privacy/">Privacy Policy</a></li>
+			<li><a href="http://okta.com/developer/contact/">Contact Sales</a></li>
+			<li><a href="mailto:developers@okta.com">Contact Support</a></li>
+		</ul>
+
+		<ul>
+			<li><a class="icon-with-hover--github" href="http://github.com/okta" target="_blank">Github</a></li>
+			<li><a class="icon-with-hover--twitter" href="http://twitter.com/okta" target="_blank">Twitter</a></li>
+			<li><a class="icon-with-hover--stack-overflow" href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a></li>
+			<li><a class="icon-with-hover--rss" href="http://feeds.feedburner.com/OktaBlog" target="_blank">News</a></li>
+			<li><a class="icon-with-hover--help" href="http://community.okta.com" target="_blank">Help</a></li>
+		</ul>
+
+	</div>
+</footer>
+
+	
+</body>
+	
+</html>

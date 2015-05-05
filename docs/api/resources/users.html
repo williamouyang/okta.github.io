@@ -1,0 +1,6585 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<head>
+	
+	<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="/favicon.ico">
+	<title>Users &raquo; Okta Developer</title>
+	<meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+	<link rel="canonical" href="http://developer.okta.com/docs/api/resources/users.html">
+
+	<link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/assets/css/animate.css">
+	<link rel="stylesheet" href="/assets/css/master.css">
+	<link rel="stylesheet" href="/assets/css/layout-docs.css">
+	<link rel="stylesheet" href="/assets/css/responsive.css">
+
+	<script type="text/javascript" defer="defer" src="/assets/js/jquery.min.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/tabber.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/pacnav.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/master.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/scrollspy.js"></script>
+
+	<script type="text/javascript" defer="defer" src="/assets/js/docs.js"></script>
+	<!-- TypeKit -->
+	<script src="//use.typekit.net/pls8pog.js"></script>
+	<script>try{Typekit.load();}catch(e){}</script>
+	<!-- GA -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-15777010-3', 'auto');
+		ga('send', 'pageview');
+	</script>
+</head>
+
+	
+<body>
+	
+	<header class="site-header">
+	<div class="wrap">
+
+		<h1 class="site-title"><a href="/">Okta Developer</a></h1>
+
+		<nav id="primary-nav" class="site-nav loaded">
+			<ul>
+				<li><a href="/product/">Product</a></li>
+				<li><a href="/pricing/">Pricing</a></li>
+				<li><a href="/customers/">Customers</a></li>
+				<li><a href="/docs/guides/overview.html">Docs</a></li>
+				<li><a href="/discussion/">Discussion</a></li>
+				<li class="has-dropdown"><a href="#">Support</a>
+					<div class="dropdown-window">
+						<p class="stack-overflow">
+							Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a>.<br />
+							We'll answer it within 24 hours.
+						</p>
+						<p class="email">
+							Email us:<br />
+							<a href="mailto:developers@okta.com">developers@okta.com</a>
+						</p>
+						<p class="tel">
+							Call us:<br />
+							<a href="tel:18777227871">1 (877) 722-7871</a>
+						</p>
+					</div>
+				</li>
+			</ul>
+		</nav>
+
+		<a href="/search" class="gsc-trigger search-button"></a>
+
+
+		<div class="search-container">
+			<div class="gsc-container">
+				<script defer="defer">
+					(function() {
+						var cx = '005121479574088032773:mmh_vhv8uns';
+						var gcse = document.createElement('script');
+						gcse.type = 'text/javascript';
+						gcse.async = true;
+						gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+						'//cse.google.com/cse.js?cx=' + cx;
+						var s = document.getElementsByTagName('script')[0];
+						s.parentNode.insertBefore(gcse, s);
+					})();
+				</script>
+				<gcse:searchbox-only resultsUrl="/search" enableAutoComplete="true"></gcse:searchbox-only>
+			</div>
+		</div>
+		<a href="https://www.okta.com/developer/signup/" class="cta-button button--small">Get Started</a>
+
+	</div>
+</header>
+
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P6JKVN"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P6JKVN');</script>
+<!-- End Google Tag Manager -->
+
+
+	
+	<div class="page-content">
+		
+		
+			
+		
+
+<section class="section--with-sidebar docs-page">
+	<aside id="sidebar-wrapper" class="sticky-nav--sidebar">
+
+		
+
+
+
+
+
+
+<div id="docs-sidebar-wrap" id="sidebar-wrapper">
+	<div class="docs-sidebar-block" id="myScrollspy" >
+		
+			
+				
+		
+			
+				
+				<h2>
+					Getting Started
+				</h2>
+
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="design_principles" data-section="users">
+									<li data-name="Design Principles" >
+										<a href="/docs/api/getting_started/design_principles.html">Design Principles</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="error_codes" data-section="users">
+									<li data-name="Error Codes" >
+										<a href="/docs/api/getting_started/error_codes.html">Error Codes</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="getting_a_token" data-section="users">
+									<li data-name="Getting a Token" >
+										<a href="/docs/api/getting_started/getting_a_token.html">Getting a Token</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="enabling_cors" data-section="users">
+									<li data-name="Enabling CORS" >
+										<a href="/docs/api/getting_started/enabling_cors.html">Enabling CORS</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="api_test_client" data-section="users">
+									<li data-name="API Test Client" >
+										<a href="/docs/api/getting_started/api_test_client.html">API Test Client</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+			
+		
+			
+				
+				<h2>
+					Resources
+				</h2>
+
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="authn" data-section="users">
+									<li data-name="Authentication" >
+										<a href="/docs/api/resources/authn.html">Authentication</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="factors" data-section="users">
+									<li data-name="Factors (MFA)" >
+										<a href="/docs/api/resources/factors.html">Factors (MFA)</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav nav-title">
+									<li data-name="Users" class="on">
+										<a href="/docs/api/resources/users.html">Users</a>
+									</li>
+								</ul>
+									<div id="gen-toc-container"><div class="gen-toc" id="gen-toc"><div class="gen-toc-title hide"><h2><div id="gen-toctitle" class="caret2 hide">Users</div></h2></div><ul class="nav sidebar-nav"><li class="gen-toc_level-1 toc_section-1"><a href="#overview"><span class="gen-toctext">Overview</span></a></li><li class="gen-toc_level-1 toc_section-2"><a href="#user-model"><span class="gen-toctext">User Model</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-3"><a href="#example"><span class="gen-toctext">Example</span></a></li><li class="gen-toc_level-2 toc_section-4"><a href="#metadata-attributes"><span class="gen-toctext">Metadata Attributes</span></a></li><li class="gen-toc_level-2 toc_section-5"><a href="#user-status"><span class="gen-toctext">User Status</span></a></li><li class="gen-toc_level-2 toc_section-6"><a href="#profile-object"><span class="gen-toctext">Profile Object</span></a></li><li class="gen-toc_level-2 toc_section-7"><a href="#credentials-object"><span class="gen-toctext">Credentials Object</span></a></li><li class="gen-toc_level-2 toc_section-8"><a href="#links-object"><span class="gen-toctext">Links Object</span></a></li></ul></li><li class="gen-toc_level-1 toc_section-9"><a href="#user-operations"><span class="gen-toctext">User Operations</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-10"><a href="#create-user"><span class="gen-toctext">Create User</span></a></li><li class="gen-toc_level-2 toc_section-11"><a href="#get-user"><span class="gen-toctext">Get User</span></a></li><li class="gen-toc_level-2 toc_section-12"><a href="#list-users"><span class="gen-toctext">List Users</span></a></li><li class="gen-toc_level-2 toc_section-13"><a href="#update-user"><span class="gen-toctext">Update User</span></a></li></ul></li><li class="gen-toc_level-1 toc_section-14"><a href="#related-resources"><span class="gen-toctext">Related Resources</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-15"><a href="#get-assigned-app-links"><span class="gen-toctext">Get Assigned App Links</span></a></li><li class="gen-toc_level-2 toc_section-16"><a href="#get-member-groups"><span class="gen-toctext">Get Member Groups</span></a></li></ul></li><li class="gen-toc_level-1 toc_section-17"><a href="#lifecycle-operations"><span class="gen-toctext">Lifecycle Operations</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-18"><a href="#activate-user"><span class="gen-toctext">Activate User</span></a></li><li class="gen-toc_level-2 toc_section-19"><a href="#deactivate-user"><span class="gen-toctext">Deactivate User</span></a></li><li class="gen-toc_level-2 toc_section-20"><a href="#unlock-user"><span class="gen-toctext">Unlock User</span></a></li><li class="gen-toc_level-2 toc_section-21"><a href="#reset-password"><span class="gen-toctext">Reset Password</span></a></li><li class="gen-toc_level-2 toc_section-22"><a href="#expire-password"><span class="gen-toctext">Expire Password</span></a></li><li class="gen-toc_level-2 toc_section-23"><a href="#reset-factors"><span class="gen-toctext">Reset Factors</span></a></li></ul></li><li class="gen-toc_level-1 toc_section-24"><a href="#credential-operations"><span class="gen-toctext">Credential Operations</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-25"><a href="#forgot-password"><span class="gen-toctext">Forgot Password</span></a></li><li class="gen-toc_level-2 toc_section-26"><a href="#change-password"><span class="gen-toctext">Change Password</span></a></li><li class="gen-toc_level-2 toc_section-27"><a href="#change-recovery-question"><span class="gen-toctext">Change Recovery Question</span></a></li></ul></li></ul></div></div>
+								
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="groups" data-section="users">
+									<li data-name="Groups" >
+										<a href="/docs/api/resources/groups.html">Groups</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="sessions" data-section="users">
+									<li data-name="Sessions" >
+										<a href="/docs/api/resources/sessions.html">Sessions</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="apps" data-section="users">
+									<li data-name="Apps" >
+										<a href="/docs/api/resources/apps.html">Apps</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="events" data-section="users">
+									<li data-name="Events" >
+										<a href="/docs/api/resources/events.html">Events</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+			
+		
+			
+				
+		
+			
+				
+		
+	</ul>
+</div>
+</div>
+
+	</aside>
+
+	<div id="docs-body" class="body docs-body">
+
+		<nav id="sticky-nav" class="sticky-nav--top no-flexbox">
+
+			
+
+	<a href="#" class="toggle-menu"></a>
+	<a  href="/docs/guides/overview.html">
+		Guides
+	</a>
+	<a  class="on"  href="/docs/api/getting_started/design_principles.html">
+		API
+	</a>
+	<a  href="/docs/sdk/core/api.html">
+		SDKs
+	</a>
+	<a  href="/docs/examples/session_cookie.html">
+		Examples
+	</a>
+
+
+		</nav>
+
+		<a href="#docs-body" id="scroll-top-button">Scroll to Top</a>
+
+		
+		<header>
+			<a href="https://github.com/okta/okta.github.io/tree/master/docs/api/resources/users.md" target="_blank" class="btn btn-default btn-sm btn-github"><i class="fa fa-github"></i> Edit on GitHub</a>
+			<h1 class="h3">Users</h1>
+		</header>
+		
+
+		<ul class="list-unstyled toc" id="markdown-toc">
+  <li><a href="#overview">Overview</a></li>
+  <li><a href="#user-model">User Model</a>    <ul>
+      <li><a href="#example">Example</a></li>
+      <li><a href="#metadata-attributes">Metadata Attributes</a></li>
+      <li><a href="#user-status">User Status</a></li>
+      <li><a href="#profile-object">Profile Object</a></li>
+      <li><a href="#credentials-object">Credentials Object</a></li>
+      <li><a href="#links-object">Links Object</a></li>
+    </ul>
+  </li>
+  <li><a href="#user-operations">User Operations</a>    <ul>
+      <li><a href="#create-user">Create User</a></li>
+      <li><a href="#get-user">Get User</a></li>
+      <li><a href="#list-users">List Users</a></li>
+      <li><a href="#update-user">Update User</a></li>
+    </ul>
+  </li>
+  <li><a href="#related-resources">Related Resources</a>    <ul>
+      <li><a href="#get-assigned-app-links">Get Assigned App Links</a></li>
+      <li><a href="#get-member-groups">Get Member Groups</a></li>
+    </ul>
+  </li>
+  <li><a href="#lifecycle-operations">Lifecycle Operations</a>    <ul>
+      <li><a href="#activate-user">Activate User</a></li>
+      <li><a href="#deactivate-user">Deactivate User</a></li>
+      <li><a href="#unlock-user">Unlock User</a></li>
+      <li><a href="#reset-password">Reset Password</a></li>
+      <li><a href="#expire-password">Expire Password</a></li>
+      <li><a href="#reset-factors">Reset Factors</a></li>
+    </ul>
+  </li>
+  <li><a href="#credential-operations">Credential Operations</a>    <ul>
+      <li><a href="#forgot-password">Forgot Password</a></li>
+      <li><a href="#change-password">Change Password</a></li>
+      <li><a href="#change-recovery-question">Change Recovery Question</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="overview">Overview</h2>
+
+<p>The Okta User API provides operations to manage users in your organization.</p>
+
+<h2 id="user-model">User Model</h2>
+
+<h3 id="example">Example</h3>
+
+<pre><code class="language-json">{
+    "id": "00ub0oNGTSWTBKOLGLNR",
+    "status": "ACTIVE",
+    "created": "2013-06-24T16:39:18.000Z",
+    "activated": "2013-06-24T16:39:19.000Z",
+    "statusChanged": "2013-06-24T16:39:19.000Z",
+    "lastLogin": "2013-06-24T17:39:19.000Z",
+    "lastUpdated": "2013-06-27T16:35:28.000Z",
+    "passwordChanged": "2013-06-24T16:39:19.000Z",
+    "profile": {
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
+        "login": "isaac@example.org",
+        "mobilePhone": "555-415-1337"
+    },
+    "credentials": {
+        "password": {},
+        "recovery_question": {
+            "question": "Who's a major player in the cowboy scene?"
+        },
+        "provider": {
+            "type": "OKTA",
+            "name": "OKTA"
+        }
+    },
+    "_links": {
+        "resetPassword": {
+            "href": "https://your-domain.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+        },
+        "resetFactors": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+        },
+        "expirePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+        },
+        "forgotPassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+        },
+        "changeRecoveryQuestion": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+        },
+        "deactivate": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+        },
+        "changePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+        }
+    }
+}
+</code></pre>
+
+<h3 id="metadata-attributes">Metadata Attributes</h3>
+
+<p>The User model defines several <strong>read-only</strong> attributes:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td>unique key for user</td>
+      <td>String</td>
+      <td>FALSE</td>
+    </tr>
+    <tr>
+      <td>status</td>
+      <td>current status of user</td>
+      <td><code>STAGED</code>, <code>PROVISIONED</code>, <code>ACTIVE</code>, <code>RECOVERY</code>, <code>LOCKED_OUT</code>, <code>PASSWORD_EXPIRED</code>, or <code>DEPROVISIONED</code></td>
+      <td>FALSE</td>
+    </tr>
+    <tr>
+      <td>created</td>
+      <td>timestamp when user was created</td>
+      <td>Date</td>
+      <td>FALSE</td>
+    </tr>
+    <tr>
+      <td>activated</td>
+      <td>timestamp when transition to <code>ACTIVE</code> status completed</td>
+      <td>Date</td>
+      <td>TRUE</td>
+    </tr>
+    <tr>
+      <td>statusChanged</td>
+      <td>timestamp when status last changed</td>
+      <td>Date</td>
+      <td>TRUE</td>
+    </tr>
+    <tr>
+      <td>lastLogin</td>
+      <td>timestamp of last login</td>
+      <td>Date</td>
+      <td>TRUE</td>
+    </tr>
+    <tr>
+      <td>lastUpdated</td>
+      <td>timestamp when user was last updated</td>
+      <td>Date</td>
+      <td>FALSE</td>
+    </tr>
+    <tr>
+      <td>passwordChanged</td>
+      <td>timestamp when password last changed</td>
+      <td>Date</td>
+      <td>TRUE</td>
+    </tr>
+    <tr>
+      <td>transitioningToStatus</td>
+      <td>target status of an inprogress asynchronous status transition</td>
+      <td><code>PROVISIONED</code>, <code>ACTIVE</code>, or <code>DEPROVISIONED</code></td>
+      <td>TRUE</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>Metadata attributes are only available after a user is created</p>
+</blockquote>
+
+<blockquote>
+  <p><code>activated</code> timestamp will only be available for users activated after <em>06/30/2013</em>.</p>
+</blockquote>
+
+<blockquote>
+  <p><code>statusChanged</code> and <code>lastLogin</code> timestamps will be missing for users created before <em>06/30/2013</em>.  They will be updated on next status change or login.</p>
+</blockquote>
+
+<h3 id="user-status">User Status</h3>
+
+<p><img src="/assets/img/okta-user-status.png" alt="STAGED, PROVISIONED, ACTIVE, RECOVERY, LOCKED_OUT, PASSWORD_EXPIRED, or DEPROVISIONED" title="Okta User Status Diagram" /></p>
+
+<h3 id="profile-object">Profile Object</h3>
+
+<p>Specifies <a href="#standard-attributes">standard</a> and <a href="#custom-attributes">custom</a> profile attributes for a user.</p>
+
+<pre><code class="language-json">{
+   "profile": {
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
+        "login": "isaac@example.org",
+        "mobilePhone": "555-415-1337",
+        "customAttribute": true,
+        "moreCustomAttribs": "Yes we can!"
+    }
+}
+</code></pre>
+
+<h4 id="standard-attributes">Standard Attributes</h4>
+
+<p>All profiles have the following attributes:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>DataType</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>login</td>
+      <td>String</td>
+      <td>5</td>
+      <td>100</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td><a href="http://tools.ietf.org/html/rfc6531#section-3.3">RFC 6531 section 3.3</a></td>
+    </tr>
+    <tr>
+      <td>email</td>
+      <td>String</td>
+      <td>5</td>
+      <td>100</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td><a href="http://tools.ietf.org/html/rfc5322#section-3.2.3">RFC 5322 section 3.2.3</a></td>
+    </tr>
+    <tr>
+      <td>secondEmail</td>
+      <td>String</td>
+      <td>5</td>
+      <td>100</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td><a href="http://tools.ietf.org/html/rfc5322#section-3.2.3">RFC 5322 section 3.2.3</a></td>
+    </tr>
+    <tr>
+      <td>firstName</td>
+      <td>String</td>
+      <td>1</td>
+      <td>50</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>lastName</td>
+      <td>String</td>
+      <td>1</td>
+      <td>50</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>mobilePhone</td>
+      <td>String</td>
+      <td>0</td>
+      <td>100</td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="okta-login">Okta Login</h5>
+
+<p>Every user within your Okta organization must have a unique identifier for a login.  This constraint applies to all users you import from other systems or applications such as Active Directory.  Your organization is the top-level namespace to mix and match logins from all your connected applications or directories.  Careful consideration of naming conventions for your login identifier will make it easier to onboard new applications in the future.</p>
+
+<p>Okta has a default ambiguous name resolution policy for logins.  Users can login with their non-qualified short-name (e.g. <code>isaac</code> with login <em>isaac@example.org</em>) as long as the short-name is still unique within the organization.</p>
+
+<blockquote>
+  <p>Avoid using a <code>login</code> with a <code>/</code> character.  Although <code>/</code> is a valid character according to <a href="http://tools.ietf.org/html/rfc6531#section-3.3">RFC 6531 section 3.3</a>, a user with this character in their <code>login</code> cannot be fetched by <code>login</code> (<a href="#get-user-with-id">see Get User by ID</a>) due to security risks with escaping this character.</p>
+</blockquote>
+
+<h4 id="custom-attributes">Custom Attributes</h4>
+
+<p>Custom attributes may be added to a user profile.  Custom attributes must be single-value (non-array) and have a data type of <code>Number</code>, <code>String</code>, <code>Boolean</code>, or <code>null</code>.</p>
+
+<h3 id="credentials-object">Credentials Object</h3>
+
+<p>Specifies credentials for a user.  Credential types and requirements vary depending on the operation and security policy of the organization.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>DataType</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>password</td>
+      <td><a href="#password-object">Password Object</a></td>
+      <td> </td>
+      <td> </td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>recovery_question</td>
+      <td><a href="#recovery-question-object">Recovery Question Object</a></td>
+      <td> </td>
+      <td> </td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>provider</td>
+      <td><a href="#provider-object">Provider Object</a></td>
+      <td> </td>
+      <td> </td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>Some credential values are <strong>write-only</strong></p>
+</blockquote>
+
+<pre><code class="language-json">{
+    "credentials": {
+        "password" : { "value": "GoAw@y123" },
+        "recovery_question": {
+            "question": "Who's a major player in the cowboy scene?",
+            "answer": "Cowboy Dan"
+        },
+        "provider": {
+            "type": "OKTA",
+            "name": "OKTA"
+        }
+    }
+}
+</code></pre>
+
+<h4 id="password-object">Password Object</h4>
+
+<p>Specifies a password for a user.  A password value is a <strong>write-only</strong> property.  When a user has a valid password and a response object contains a password credential, then the Password Object will be a bare object without the <code>value</code> property defined (e.g. <code>password: {}</code>) to indicate that a password value exists.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>DataType</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>value</td>
+      <td>String</td>
+      <td><em>Password Policy</em></td>
+      <td>40</td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td><em>Password Policy</em></td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="default-password-policy">Default Password Policy</h5>
+
+<ul>
+  <li>Must be a minimum of 8 characters</li>
+  <li>Must have a character from the following groups:
+    <ul>
+      <li>Upper case</li>
+      <li>Lower case</li>
+      <li>Digit</li>
+    </ul>
+  </li>
+  <li>Must not contain the user’s login or parts of the the login when split on the following characters: <code>,</code> <code>.</code> <code>_</code> <code>#</code> <code>@</code>
+    <ul>
+      <li><em>For example, a user with login i.brock@example.org will not be able set password brockR0cks! as the password contains the login part brock</em></li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote>
+  <p>Password policy requirements can be modified in the Okta Admin UI <em>(Security -&gt; Policies)</em></p>
+</blockquote>
+
+<h4 id="recovery-question-object">Recovery Question Object</h4>
+
+<p>Specifies a secret question and answer that is validated when a user forgets their password.  The answer property is <strong>write-only</strong>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>DataType</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>question</td>
+      <td>String</td>
+      <td>1</td>
+      <td>100</td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>answer</td>
+      <td>String</td>
+      <td>1</td>
+      <td>100</td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="provider-object">Provider Object</h4>
+
+<p>Specifies the authentication provider that validates the user’s password credential. The user’s current provider is managed by the Delegated Authentication settings for your organization. The provider object is <strong>read-only</strong>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>DataType</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>type</td>
+      <td><code>OKTA</code>, <code>ACTIVE_DIRECTORY</code>,<code>LDAP</code>, or <code>FEDERATION</code></td>
+      <td>1</td>
+      <td>100</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>String</td>
+      <td>1</td>
+      <td>100</td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p><code>ACTIVE_DIRECTORY</code> or <code>LDAP</code> providers specify the directory instance name as the <code>name</code> property.</p>
+</blockquote>
+
+<h3 id="links-object">Links Object</h3>
+
+<p>Specifies link relations (See <a href="http://tools.ietf.org/html/rfc5988">Web Linking</a>) available for the current status of a user.  The Links Object is used for dynamic discovery of related resources and lifecycle or credential operations.  The Links Object is <strong>read-only</strong>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Link Relation Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>self</td>
+      <td>The actual user</td>
+    </tr>
+    <tr>
+      <td>activate</td>
+      <td><a href="#activate-user">Lifecycle action</a> to transition user to <code>ACTIVE</code> status</td>
+    </tr>
+    <tr>
+      <td>deactivate</td>
+      <td><a href="#deactivate-user">Lifecycle action</a> to transition user to <code>DEPROVISIONED</code> status</td>
+    </tr>
+    <tr>
+      <td>resetPassword</td>
+      <td><a href="#reset-password">Lifecycle action</a> to transition user to <code>RECOVERY</code> status</td>
+    </tr>
+    <tr>
+      <td>expirePassword</td>
+      <td><a href="#expire-password">Lifecycle action</a> to transition user to <code>PASSWORD_EXPIRED</code> status</td>
+    </tr>
+    <tr>
+      <td>resetFactors</td>
+      <td><a href="#reset-factors">Lifecycle action</a> to reset all the MFA factors for the user</td>
+    </tr>
+    <tr>
+      <td>unlock</td>
+      <td><a href="#unlock-user">Lifecycle action</a> to returns a user to <code>ACTIVE</code> status when their current status is <code>LOCKED_OUT</code> due to exceeding failed login attempts</td>
+    </tr>
+    <tr>
+      <td>forgotPassword</td>
+      <td><a href="#forgot-password">Resets a user’s password</a> by validating the user’s recovery credential.</td>
+    </tr>
+    <tr>
+      <td>changePassword</td>
+      <td><a href="#change-password">Changes a user’s password</a> validating the user’s current password</td>
+    </tr>
+    <tr>
+      <td>changeRecoveryQuestion</td>
+      <td><a href="#change-recovery-question">Changes a user’s recovery credential</a> by validating the user’s current password</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="user-operations">User Operations</h2>
+
+<h3 class="api api-operation" id="create-user">Create User</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users</span></p>
+
+<p>Creates a new user in your Okta organization with or without credentials:</p>
+
+<ul>
+  <li><a href="#create-user-without-credentials">Create User without Credentials</a></li>
+  <li><a href="#create-user-with-recovery-question">Create User with Recovery Question</a></li>
+  <li><a href="#create-user-with-password">Create User with Password</a></li>
+  <li><a href="#create-user-with-password--recovery-question">Create User with Password &amp; Recovery Question</a></li>
+</ul>
+
+<h5 class="api api-request api-request-params" id="request-parameters">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>activate</td>
+      <td>Executes <a href="#activate-user">activation lifecycle</a> operation when creating the user</td>
+      <td>Query</td>
+      <td>Boolean</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+    </tr>
+    <tr>
+      <td>profile</td>
+      <td>Profile attributes for user</td>
+      <td>Body</td>
+      <td><a href="#profile-object">Profile Object</a></td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>credentials</td>
+      <td>Credentials for user</td>
+      <td>Body</td>
+      <td><a href="#credentials-object">Credentials Object</a></td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters">Response Parameters</h5>
+
+<p>All responses return the created <a href="#user-model">User</a>.  Activation of a user is an asynchronous operation.  The system will perform group reconcilation during activation and assign the user to all applications via direct or inderect relationships (group memberships).  The user will have the <code>transitioningToStatus</code> property with a value of <code>ACTIVE</code> during activation to indicate that the user hasn’t completed the asynchronous operation.  The user will have a <code>status</code> of <code>ACTIVE</code> when the activation process is complete.</p>
+
+<blockquote>
+  <p>The user will be emailed a one-time activation token if activated without a password</p>
+</blockquote>
+
+<blockquote>
+  <p>If the user is assigned to an application that is also configured for provisioning, the activation process will also trigger downstream provisioning to the application.  It is possible for a user to login before these applications have been successfully provisioned for the user</p>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Security Q &amp; A</th>
+      <th style="text-align: center">Password</th>
+      <th style="text-align: center">Activate Query Parameter</th>
+      <th style="text-align: center">User Status</th>
+      <th style="text-align: center">Login Credential</th>
+      <th style="text-align: center">Welcome Screen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">FALSE</td>
+      <td style="text-align: center">STAGED</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">TRUE</td>
+      <td style="text-align: center">PROVISIONED</td>
+      <td style="text-align: center">One-Time Token (Email)</td>
+      <td style="text-align: center">X</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">X</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">FALSE</td>
+      <td style="text-align: center">STAGED</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">X</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">TRUE</td>
+      <td style="text-align: center">PROVISIONED</td>
+      <td style="text-align: center">One-Time Token (Email)</td>
+      <td style="text-align: center">X</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">X</td>
+      <td style="text-align: center">FALSE</td>
+      <td style="text-align: center">STAGED</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">X</td>
+      <td style="text-align: center">TRUE</td>
+      <td style="text-align: center">ACTIVE</td>
+      <td style="text-align: center">Password</td>
+      <td style="text-align: center">X</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">X</td>
+      <td style="text-align: center">X</td>
+      <td style="text-align: center">FALSE</td>
+      <td style="text-align: center">STAGED</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">X</td>
+      <td style="text-align: center">X</td>
+      <td style="text-align: center">TRUE</td>
+      <td style="text-align: center">ACTIVE</td>
+      <td style="text-align: center">Password</td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 class="api api-operation" id="create-user-without-credentials">Create User without Credentials</h4>
+
+<p>Creates a user without a <a href="#password-object">password</a> or <a href="#recovery-question-object">recovery question &amp; answer</a>.  When the user is activated, an email is sent to the user with an activation token that the can be used to complete the activation process.  This is the default flow for new user registration with the Okta Admin UI</p>
+
+<h5 class="api api-request api-request-example" id="request-example">Request Example</h5>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users?activate=false" \
+-d \
+'{
+    "profile": {
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
+        "login": "isaac@example.org",
+        "mobilePhone": "555-415-1337"
+    }
+}'
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example">Response Example</h5>
+
+<pre><code class="language-json">{
+    "id": "00ub0oNGTSWTBKOLGLNR",
+    "status": "STAGED",
+    "created": "2013-07-02T21:36:25.344Z",
+    "activated": null,
+    "statusChanged": null,
+    "lastLogin": null,
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": null,
+    "profile": {
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
+        "login": "isaac@example.org",
+        "mobilePhone": "555-415-1337"
+    },
+    "credentials": {
+        "provider": {
+            "type": "OKTA",
+            "name": "OKTA"
+        }
+    },
+    "_links": {
+        "activate": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"
+        }
+    }
+}
+</code></pre>
+
+<h4 class="api api-operation" id="create-user-with-recovery-question">Create User with Recovery Question</h4>
+
+<p>Creates a user without a <a href="#password-object">password</a>.  When the user is activated, an email is sent to the user with an activation token that the can be used to complete the activation process.  This flow is not common but might be useful if migrating users from an existing user store.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-1">Request Example</h5>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users?activate=false" \
+-d \
+'{
+    "profile": {
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
+        "login": "isaac@example.org",
+        "mobilePhone": "555-415-1337"
+    },
+    "credentials": {
+        "recovery_question": {
+            "question": "Who\'s a major player in the cowboy scene?",
+            "answer": "Cowboy Dan"
+        }
+    }
+}'
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-1">Response Example</h5>
+
+<pre><code class="language-json">{
+    "id": "00ub0oNGTSWTBKOLGLNR",
+    "status": "STAGED",
+    "created": "2013-07-02T21:36:25.344Z",
+    "activated": null,
+    "statusChanged": null,
+    "lastLogin": null,
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": null,
+    "profile": {
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
+        "login": "isaac@example.org",
+        "mobilePhone": "555-415-1337"
+    },
+    "credentials": {
+        "recovery_question": {
+            "question": "Who's a major player in the cowboy scene?"
+        },
+        "provider": {
+            "type": "OKTA",
+            "name": "OKTA"
+        }
+    },
+    "_links": {
+        "activate": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"
+        }
+    }
+}
+</code></pre>
+
+<h4 class="api api-operation" id="create-user-with-password">Create User with Password</h4>
+
+<p>Creates a user without a <a href="#recovery-question-object">recovery question &amp; answer</a>.  The new user will immediately be able to login after activation with the assigned password.  This flow is common when developing a custom user registration experience.</p>
+
+<blockquote>
+  <p>Do not generate or send a one-time activation token when activating users with an assigned password.  Users should login with their assigned password.</p>
+</blockquote>
+
+<h5 class="api api-request api-request-example" id="request-example-2">Request Example</h5>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users?activate=false" \
+-d \
+'{
+    "profile": {
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
+        "login": "isaac@example.org",
+        "mobilePhone": "555-415-1337"
+    },
+    "credentials": {
+        "password" : { "value": "GoAw@y123" }
+    }
+}'
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-2">Response Example</h5>
+
+<pre><code class="language-json">{
+    "id": "00ub0oNGTSWTBKOLGLNR",
+    "status": "STAGED",
+    "created": "2013-07-02T21:36:25.344Z",
+    "activated": null,
+    "statusChanged": null,
+    "lastLogin": null,
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": "2013-07-02T21:36:25.344Z",
+    "profile": {
+      "firstName": "Isaac",
+        "lastName": "Brock",
+        "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
+        "login": "isaac@example.org",
+        "mobilePhone": "555-415-1337"
+    },
+    "credentials": {
+        "password": {},
+        "provider": {
+           "type": "OKTA",
+           "name": "OKTA"
+        }
+    },
+    "_links": {
+        "activate": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"
+        }
+    }
+}
+</code></pre>
+
+<h4 class="api api-operation" id="create-user-with-password--recovery-question">Create User with Password &amp; Recovery Question</h4>
+
+<p>Creates a new user with a <a href="#password-object">password</a> and <a href="#recovery-question-object">recovery question &amp; answer</a>.  The new user will immediately be able to login after activation with the assigned password.  This flow is common when developing a custom user registration experience.</p>
+
+<blockquote>
+  <p>Do not generate or send a one-time activation token when activating users with an assigned password.  Users should login with their assigned password.</p>
+</blockquote>
+
+<h5 class="api api-request api-request-example" id="request-example-3">Request Example</h5>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users?activate=false" \
+-d \
+'{
+    "profile": {
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
+        "login": "isaac@example.org",
+        "mobilePhone": "555-415-1337"
+    },
+    "credentials": {
+        "password" : { "value": "GoAw@y123" },
+        "recovery_question": {
+            "question": "Who\'s a major player in the cowboy scene?",
+            "answer": "Cowboy Dan"
+        }
+    }
+}'
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-3">Response Example</h5>
+
+<pre><code class="language-json">{
+    "id": "00ub0oNGTSWTBKOLGLNR",
+    "status": "STAGED",
+    "created": "2013-07-02T21:36:25.344Z",
+    "activated": null,
+    "statusChanged": null,
+    "lastLogin": null,
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": "2013-07-02T21:36:25.344Z",
+    "profile": {
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
+        "login": "isaac@example.org",
+        "mobilePhone": "555-415-1337"
+    },
+    "credentials": {
+        "password" : {},
+        "recovery_question": {
+            "question": "Who's a major player in the cowboy scene?"
+        },
+        "provider": {
+            "type": "OKTA",
+            "name": "OKTA"
+       }
+    },
+    "_links": {
+        "activate": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"
+        }
+    }
+}
+</code></pre>
+
+<h3 class="api api-operation" id="get-user">Get User</h3>
+
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users/<em>:id</em></span><span class="api-label api-label-cors api-uri-template-cors pull-right"><i class="fa fa-cloud-download"></i> CORS</span></p>
+
+<p>Fetches a user from your Okta organization</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-1">Request Parameters</h5>
+
+<p>Fetch a specific user by <code>id</code>, <code>login</code>, or login shortname <em>(as long as it is unambiguous)</em>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><code>id</code>, <code>login</code>, or <em>login shortname</em> (as long as it is unambiguous)</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>When fetching a user by <code>login</code> or <code>login shortname</code>, you should <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encode</a> the request parameter to ensure special characters are escaped properly.  Logins with a <code>/</code> character can only be fetched by ‘id’ due to URL issues with escaping the <code>/</code> character.</p>
+</blockquote>
+
+<blockquote>
+  <p>You can substitute <em>me</em> for the id to fetch the current user linked to API token or session cookie.</p>
+</blockquote>
+
+<h5 class="api api-response api-response-params" id="response-parameters-1">Response Parameters</h5>
+
+<p>Fetched <a href="#user-model">User</a></p>
+
+<p>Invalid <code>id</code> will return a <code>404 Not Found</code> status code.</p>
+
+<pre><code class="language-ruby">HTTP/1.1 404 Not Found
+Content-Type: application/json
+
+{
+    "errorCode": "E0000007",
+    "errorSummary": "Not found: Resource not found: missing@example.com (User)",
+    "errorLink": "E0000007",
+    "errorId": "oaewgzWY_IaSs6G8Cf2TzzIsA",
+    "errorCauses": []
+}
+</code></pre>
+
+<h4 class="api api-operation" id="get-current-user">Get Current User</h4>
+
+<p>Fetches the current user linked to API token or session cookie</p>
+
+<h5 class="api api-request api-request-example" id="request-example-4">Request Example</h5>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X GET "https://your-domain.okta.com/api/v1/users/me"
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-4">Response Example</h5>
+
+<pre><code class="language-json">{
+    "id": "00ub0oNGTSWTBKOLGLNR",
+    "status": "ACTIVE",
+    "created": "2013-06-24T16:39:18.000Z",
+    "activated": "2013-06-24T16:39:19.000Z",
+    "statusChanged": "2013-06-24T16:39:19.000Z",
+    "lastLogin": "2013-06-24T17:39:19.000Z",
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": "2013-07-02T21:36:25.344Z",
+    "profile": {
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
+        "login": "isaac@example.org",
+        "mobilePhone": "555-415-1337"
+    },
+    "credentials": {
+        "password": {},
+        "recovery_question": {
+            "question": "Who's a major player in the cowboy scene?"
+        },
+        "provider": {
+            "type": "OKTA",
+            "name": "OKTA"
+        }
+    },
+    "_links": {
+        "resetPassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+        },
+        "resetFactors": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+        },
+        "expirePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+        },
+        "forgotPassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+        },
+        "changeRecoveryQuestion": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+        },
+        "deactivate": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+        },
+        "changePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+        }
+    }
+}
+</code></pre>
+
+<h4 class="api api-operation" id="get-user-with-id">Get User with ID</h4>
+
+<p>Fetches a specific user when you know the user’s <code>id</code>. See the filters section below for an example of fetching multiple ids.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-5">Request Example</h5>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X GET "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-5">Response Example</h5>
+
+<pre><code class="language-json">{
+    "id": "00ub0oNGTSWTBKOLGLNR",
+    "status": "ACTIVE",
+    "created": "2013-06-24T16:39:18.000Z",
+    "activated": "2013-06-24T16:39:19.000Z",
+    "statusChanged": "2013-06-24T16:39:19.000Z",
+    "lastLogin": "2013-06-24T17:39:19.000Z",
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": "2013-07-02T21:36:25.344Z",
+    "profile": {
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
+        "login": "isaac@example.org",
+        "mobilePhone": "555-415-1337"
+    },
+    "credentials": {
+        "password": {},
+        "recovery_question": {
+            "question": "Who's a major player in the cowboy scene?"
+        },
+        "provider": {
+            "type": "OKTA",
+            "name": "OKTA"
+        }
+    },
+    "_links": {
+        "resetPassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+        },
+        "resetFactors": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+        },
+        "expirePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+        },
+        "forgotPassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+        },
+        "changeRecoveryQuestion": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+        },
+        "deactivate": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+        },
+        "changePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+        }
+    }
+}
+</code></pre>
+
+<h4 class="api api-operation" id="get-user-with-login">Get User with Login</h4>
+
+<p>Fetches a specific user when you know the user’s <code>login</code></p>
+
+<blockquote>
+  <p>When fetching a user by <code>login</code>, you should <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encode</a> the request parameter to ensure special characters are escaped properly.  Logins with a <code>/</code> character can only be fetched by ‘id’ due to URL issues with escaping the <code>/</code> character.</p>
+</blockquote>
+
+<h5 class="api api-request api-request-example" id="request-example-6">Request Example</h5>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X GET "https://your-domain.okta.com/api/v1/users/isaac%40example.org"
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-6">Response Example</h5>
+
+<pre><code class="language-json">{
+    "id": "00ub0oNGTSWTBKOLGLNR",
+    "status": "ACTIVE",
+    "created": "2013-06-24T16:39:18.000Z",
+    "activated": "2013-06-24T16:39:19.000Z",
+    "statusChanged": "2013-06-24T16:39:19.000Z",
+    "lastLogin": "2013-06-24T17:39:19.000Z",
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": "2013-07-02T21:36:25.344Z",
+    "profile": {
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
+        "login": "isaac@example.org",
+        "mobilePhone": "555-415-1337"
+    },
+    "credentials": {
+        "password": {},
+        "recovery_question": {
+            "question": "Who's a major player in the cowboy scene?"
+        },
+        "provider": {
+          "type": "OKTA",
+          "name": "OKTA"
+        }
+    },
+    "_links": {
+        "resetPassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+        },
+        "resetFactors": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+        },
+        "expirePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+        },
+        "forgotPassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+        },
+        "changeRecoveryQuestion": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+        },
+        "deactivate": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+        },
+        "changePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+        }
+    }
+}
+</code></pre>
+
+<h4 class="api api-operation" id="get-user-with-login-shortname">Get User with Login Shortname</h4>
+
+<p>Fetches a specific user when you know the user’s <code>login shortname</code> and the shortname is unique within the organization</p>
+
+<blockquote>
+  <p>When fetching a user by <code>login shortname</code>, you should <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encode</a> the request parameter to ensure special characters are escaped properly.  Logins with a <code>/</code> character can only be fetched by ‘id’ due to URL issues with escaping the <code>/</code> character.</p>
+</blockquote>
+
+<h5 class="api api-request api-request-example" id="request-example-7">Request Example</h5>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X GET "https://your-domain.okta.com/api/v1/users/isaac"
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-7">Response Example</h5>
+
+<pre><code class="language-json">{
+    "id": "00ub0oNGTSWTBKOLGLNR",
+    "status": "ACTIVE",
+    "created": "2013-06-24T16:39:18.000Z",
+    "activated": "2013-06-24T16:39:19.000Z",
+    "statusChanged": "2013-06-24T16:39:19.000Z",
+    "lastLogin": "2013-06-24T17:39:19.000Z",
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": "2013-07-02T21:36:25.344Z",
+    "profile": {
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
+        "login": "isaac@example.org",
+        "mobilePhone": "555-415-1337"
+    },
+    "credentials": {
+        "password": {},
+        "recovery_question": {
+            "question": "Who's a major player in the cowboy scene?"
+        },
+        "provider": {
+            "type": "OKTA",
+            "name": "OKTA"
+        }
+    },
+    "_links": {
+        "resetPassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+        },
+        "resetFactors": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+        },
+        "expirePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+        },
+        "forgotPassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+        },
+        "changeRecoveryQuestion": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+        },
+        "deactivate": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+        },
+        "changePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+        }
+    }
+}
+</code></pre>
+
+<h3 class="api api-operation" id="list-users">List Users</h3>
+
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users</span></p>
+
+<p>Enumerates users in your organization with pagination.  A subset of users can be returned that match a supported filter expression or query.</p>
+
+<ul>
+  <li><a href="#list-users-with-defaults">List Users with Defaults</a></li>
+  <li><a href="#list-users-with-search">List Users with Search</a></li>
+  <li><a href="#list-users-updated-after-timestamp">List Users Updated after Timestamp</a></li>
+  <li><a href="#list-users-with-status">List Users with Status</a></li>
+</ul>
+
+<h5 class="api api-request api-request-params" id="request-parameters-2">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>q</td>
+      <td>Searches <code>firstName</code>, <code>lastName</code>, and <code>email</code> attributes of users for matching value</td>
+      <td>Query</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>limit</td>
+      <td>Specified the number of results</td>
+      <td>Query</td>
+      <td>Number</td>
+      <td>FALSE</td>
+      <td>200</td>
+    </tr>
+    <tr>
+      <td>filter</td>
+      <td><a href="/docs/getting_started/design_principles.html#filtering">Filter expression</a> for users</td>
+      <td>Query</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>after</td>
+      <td>Specifies the pagination cursor for the next page of users</td>
+      <td>Query</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>The <code>after</code> cursor should treated as an opaque value and obtained through the next link relation. See <a href="/docs/getting_started/design_principles.html#pagination">Pagination</a></p>
+</blockquote>
+
+<blockquote>
+  <p>Search currently performs a startsWith match but it should be considered an implementation detail and may change without notice in the future</p>
+</blockquote>
+
+<blockquote>
+  <p>The limit of 200 applies to new organizations and will be rolled out to existing organizations over time.</p>
+</blockquote>
+
+<h6 id="filters">Filters</h6>
+
+<p>The following expressions are supported for users with the <code>filter</code> query parameter:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Filter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>status eq "STAGED"</code></td>
+      <td>Users that have a <code>status</code> of <code>STAGED</code></td>
+    </tr>
+    <tr>
+      <td><code>status eq "PROVISIONED"</code></td>
+      <td>Users that have a <code>status</code> of <code>PROVISIONED</code></td>
+    </tr>
+    <tr>
+      <td><code>status eq "ACTIVE"</code></td>
+      <td>Users that have a <code>status</code> of <code>ACTIVE</code></td>
+    </tr>
+    <tr>
+      <td><code>status eq "RECOVERY"</code></td>
+      <td>Users that have a <code>status</code> of <code>RECOVERY</code></td>
+    </tr>
+    <tr>
+      <td><code>status eq "PASSWORD_EXPIRED"</code></td>
+      <td>Users that have a <code>status</code> of <code>PASSWORD_EXPIRED</code></td>
+    </tr>
+    <tr>
+      <td><code>status eq "LOCKED_OUT"</code></td>
+      <td>Users that have a <code>status</code> of <code>LOCKED_OUT</code></td>
+    </tr>
+    <tr>
+      <td><code>status eq "DEPROVISIONED"</code></td>
+      <td>Users that have a <code>status</code> of <code>DEPROVISIONED</code></td>
+    </tr>
+    <tr>
+      <td><code>lastUpdated lt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"</code></td>
+      <td>Users last updated before a specific datetime</td>
+    </tr>
+    <tr>
+      <td><code>lastUpdated eq "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"</code></td>
+      <td>Users last updated at a specific datetime</td>
+    </tr>
+    <tr>
+      <td><code>lastUpdated gt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"</code></td>
+      <td>Users last updated after a specific datetime</td>
+    </tr>
+    <tr>
+      <td><code>id eq "00u1ero7vZFVEIYLWPBN"</code></td>
+      <td>Users with a specified <code>id</code></td>
+    </tr>
+    <tr>
+      <td><code>profile.login eq "login@example.com"</code></td>
+      <td>Users with a specified <code>login</code></td>
+    </tr>
+    <tr>
+      <td><code>profile.email eq "email@example.com"</code></td>
+      <td>Users with a specified <code>email</code>*</td>
+    </tr>
+    <tr>
+      <td><code>profile.firstName eq "John"</code></td>
+      <td>Users with a specified <code>firstName</code>*</td>
+    </tr>
+    <tr>
+      <td><code>profile.lastName eq "Smith" </code></td>
+      <td>Users with a specified <code>lastName</code>*</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>* If filtering by <code>email</code>, <code>lastName</code>, or <code>firstName</code>, Okta recommends the <a href="#list-users-with-search">User query API</a>. These profile filters are here for your convenience.</p>
+
+<p>See <a href="/docs/getting_started/design_principles.html#filtering">Filtering</a> for more information on expressions</p>
+
+<blockquote>
+  <p>All filters must be <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encoded</a> where <code>filter=lastUpdated gt "2013-06-01T00:00:00.000Z"</code> is encoded as <code>filter=lastUpdated%20gt%20%222013-06-01T00:00:00.000Z%22</code></p>
+</blockquote>
+
+<p><strong>Filter Examples</strong></p>
+
+<p>Users with status of <code>LOCKED_OUT</code></p>
+
+<pre><code>filter=status eq "LOCKED_OUT"
+</code></pre>
+
+<p>Users updated after 06/01/2013 but before 01/01/2014</p>
+
+<pre><code>filter=lastUpdated gt "2013-06-01T00:00:00.000Z" and lastUpdated lt "2014-01-01T00:00:00.000Z"
+</code></pre>
+
+<p>Users updated after 06/01/2013 but before 01/01/2014 with a status of <code>ACTIVE</code></p>
+
+<pre><code>filter=lastUpdated gt "2013-06-27T16:35:28.000Z" and lastUpdated lt "2013-07-04T16:35:28.000Z" and status eq "ACTIVE"
+</code></pre>
+
+<p>Users updated after 06/01/2013 but with a status of <code>LOCKED_OUT</code> or <code>RECOVERY</code></p>
+
+<pre><code>filter=lastUpdated gt "2013-06-27T16:35:28.000Z" and (status eq "LOCKED_OUT" or status eq "RECOVERY")
+</code></pre>
+
+<h5 class="api api-response api-response-params" id="response-parameters-2">Response Parameters</h5>
+
+<p>Array of <a href="#user-model">User</a></p>
+
+<h4 class="api api-operation" id="list-users-with-defaults">List Users with Defaults</h4>
+
+<p>Enumerates all users that do not have a status of <code>DEPROVISIONED</code></p>
+
+<p>The default user limit is set to a very high number due to historical reasons which is no longer valid for most organizations.  This will change in a future version of this API.  The recommended page limit is now <code>limit=200</code>.</p>
+
+<blockquote>
+  <p>If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller <code>limit</code> and page the results (See <a href="/docs/getting_started/design_principles.html#pagination">Pagination</a>)</p>
+</blockquote>
+
+<h5 class="api api-request api-request-example" id="request-example-8">Request Example</h5>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X GET "https://your-domain.okta.com/api/v1/users?limit=200"
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-8">Response Example</h5>
+
+<pre><code class="language-ruby">HTTP/1.1 200 OK
+Content-Type: application/json
+Link: &lt;https://your-domain.okta.com/api/v1/users?limit=200&gt;; rel="self"
+Link: &lt;https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&amp;limit=200&gt;; rel="next"
+
+[
+    {
+        "id": "00ub0oNGTSWTBKOLGLNR",
+        "status": "STAGED",
+        "created": "2013-07-02T21:36:25.344Z",
+        "activated": null,
+        "statusChanged": null,
+        "lastLogin": null,
+        "lastUpdated": "2013-07-02T21:36:25.344Z",
+        "passwordChanged": "2013-07-02T21:36:25.344Z",
+        "profile": {
+            "firstName": "Isaac",
+            "lastName": "Brock",
+            "email": "isaac@example.org",
+            "secondEmail": "isaac2@example.org",
+            "login": "isaac@example.org",
+            "mobilePhone": "555-415-1337"
+        },
+        "credentials": {
+            "provider": {
+               "type": "OKTA",
+               "name": "OKTA"
+            }
+        },
+        "_links": {
+            "activate": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"
+            }
+        }
+    },
+    {
+        "id": "00ub0oNGTSWTBKOLGLNR",
+        "status": "ACTIVE",
+        "created": "2013-06-24T16:39:18.000Z",
+        "activated": "2013-06-24T16:39:19.000Z",
+        "statusChanged": "2013-06-24T16:39:19.000Z",
+        "lastLogin": "2013-06-24T17:39:19.000Z",
+        "lastUpdated": "2013-07-02T21:36:25.344Z",
+        "passwordChanged": "2013-07-02T21:36:25.344Z",
+        "profile": {
+            "firstName": "Eric",
+            "lastName": "Judy",
+            "email": "eric@example.org",
+            "secondEmail": "isaac2@example.org",
+            "login": "eric@example.org",
+            "mobilePhone": "555-415-2011"
+        },
+        "credentials": {
+            "password": {},
+            "recovery_question": {
+                "question": "The stars are projectors?"
+            },
+            "provider": {
+                "type": "OKTA",
+                "name": "OKTA"
+            }
+        },
+        "_links": {
+            "resetPassword": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+            },
+            "resetFactors": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+            },
+            "expirePassword": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+            },
+            "forgotPassword": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+            },
+            "changeRecoveryQuestion": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+            },
+            "deactivate": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+            },
+            "changePassword": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+            }
+        }
+    }
+]
+</code></pre>
+
+<h4 class="api api-operation" id="list-users-with-search">List Users with Search</h4>
+
+<p>Searches for user by <code>firstName</code>, <code>lastName</code>, or <code>email</code> value.  This operation is ideal for implementing a people picker. This operation does not support pagination.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-9">Request Example</h5>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X GET "https://your-domain.okta.com/api/v1/users?q=er&amp;limit=1"
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-9">Response Example</h5>
+
+<pre><code class="language-json">[
+    {
+        "id": "00ub0oNGTSWTBKOLGLNR",
+        "status": "ACTIVE",
+        "created": "2013-06-24T16:39:18.000Z",
+        "activated": "2013-06-24T16:39:19.000Z",
+        "statusChanged": "2013-06-24T16:39:19.000Z",
+        "lastLogin": "2013-06-24T17:39:19.000Z",
+        "lastUpdated": "2013-07-02T21:36:25.344Z",
+        "passwordChanged": "2013-07-02T21:36:25.344Z",
+        "profile": {
+            "firstName": "Eric",
+            "lastName": "Judy",
+            "email": "eric@example.org",
+            "secondEmail": "eric2@example.org",
+            "login": "eric@example.org",
+            "mobilePhone": "555-415-2011"
+        },
+        "credentials": {
+            "password": {},
+            "recovery_question": {
+                "question": "The stars are projectors?"
+            },
+            "provider": {
+                "type": "OKTA",
+                "name": "OKTA"
+            }
+        },
+        "_links": {
+            "resetPassword": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+            },
+            "resetFactors": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+            },
+            "expirePassword": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+            },
+            "forgotPassword": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+            },
+            "changeRecoveryQuestion": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+            },
+            "deactivate": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+            },
+            "changePassword": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+            }
+        }
+    }
+]
+</code></pre>
+
+<h4 class="api api-operation" id="list-users-updated-after-timestamp">List Users Updated after Timestamp</h4>
+
+<p>Enumerates all users that have been updated since a specific timestamp.  Use this operation when implementing a background synchronization job and you want to poll for changes.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-10">Request Example</h5>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X GET "https://your-domain.okta.com/api/v1/users?filter=lastUpdated+gt+\"2013-07-01T00:00:00.000Z\""
+</code></pre>
+
+<h5 id="response-example-10">Response Example</h5>
+
+<pre><code class="language-json">[
+    {
+        "id": "00ub0oNGTSWTBKOLGLNR",
+        "status": "ACTIVE",
+        "created": "2013-06-24T16:39:18.000Z",
+        "activated": "2013-06-24T16:39:19.000Z",
+        "statusChanged": "2013-06-24T16:39:19.000Z",
+        "lastLogin": "2013-06-24T17:39:19.000Z",
+        "lastUpdated": "2013-07-02T21:36:25.344Z",
+        "passwordChanged": "2013-07-02T21:36:25.344Z",
+        "profile": {
+            "firstName": "Eric",
+            "lastName": "Judy",
+            "email": "eric@example.org",
+            "secondEmail": "eric2@example.org",
+            "login": "eric@example.org",
+            "mobilePhone": "555-415-2011"
+        },
+        "credentials": {
+            "password": {},
+            "recovery_question": {
+                "question": "The stars are projectors?"
+            },
+            "provider": {
+                "type": "OKTA",
+                "name": "OKTA"
+            }
+        },
+        "_links": {
+            "resetPassword": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+            },
+            "resetFactors": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+            },
+            "expirePassword": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+            },
+            "forgotPassword": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+            },
+            "changeRecoveryQuestion": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+            },
+            "deactivate": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+            },
+            "changePassword": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+            }
+        }
+    }
+]
+</code></pre>
+
+<h4 class="api api-operation" id="list-users-with-status">List Users with Status</h4>
+
+<p>Enumerates all users that have a specific status.</p>
+
+<blockquote>
+  <p>Users with a status of <code>DEPROVISIONED</code> are not enumerated by default and must be explicitly requested with a status filter.</p>
+</blockquote>
+
+<h5 class="api api-request api-request-example" id="request-example-11">Request Example</h5>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X GET "https://your-domain.okta.com/api/v1/users?filter=status+eq+\"ACTIVE\"+or+status+eq+\"RECOVERY\""
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-11">Response Example</h5>
+
+<pre><code class="language-json">[
+    {
+        "id": "00ub0oNGTSWTBKOLGLNR",
+        "status": "ACTIVE",
+        "created": "2013-06-24T16:39:18.000Z",
+        "activated": "2013-06-24T16:39:19.000Z",
+        "statusChanged": "2013-06-24T16:39:19.000Z",
+        "lastLogin": "2013-06-24T17:39:19.000Z",
+        "lastUpdated": "2013-07-02T21:36:25.344Z",
+        "passwordChanged": "2013-07-02T21:36:25.344Z",
+        "profile": {
+            "firstName": "Eric",
+            "lastName": "Judy",
+            "email": "eric@example.org",
+            "secondEmail": "eric2@example.org",
+            "login": "eric@example.org",
+            "mobilePhone": "555-415-2011"
+        },
+        "credentials": {
+            "password": {},
+            "recovery_question": {
+                "question": "The stars are projectors?"
+            },
+            "provider": {
+                "type": "OKTA",
+                "name": "OKTA"
+            }
+        },
+        "_links": {
+            "resetPassword": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+            },
+            "resetFactors": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+            },
+            "expirePassword": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+            },
+            "forgotPassword": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+            },
+            "changeRecoveryQuestion": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+            },
+            "deactivate": {
+                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+            },
+            "changePassword": {
+                "href": "https://your-domain.okta.com/api/v1/users/000ub0oNGTSWTBKOLGLNR/credentials/change_password"
+            }
+        }
+    }
+]
+</code></pre>
+
+<h3 class="api api-operation" id="update-user">Update User</h3>
+
+<blockquote>
+  <p>Use the POST method to make a partial update. Use the PUT method to delete unspecified attributes.</p>
+</blockquote>
+
+<p><span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /users/<em>:id</em></span></p>
+
+<p>Update a user’s profile and/or credentials.</p>
+
+<blockquote>
+  <p>All profile attributes must be specified when updating a user’s profile with this method. Any attribute not specified
+is deleted. Do not use this method for partial updates.</p>
+</blockquote>
+
+<h5 class="api api-request api-request-params" id="request-parameters-3">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><code>id</code> of user to update</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>profile</td>
+      <td>Updated profile for user</td>
+      <td>Body</td>
+      <td><a href="#profile-object">Profile Object</a></td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>credentials</td>
+      <td>Update credentials for user</td>
+      <td>Body</td>
+      <td><a href="#credentials-object">Credentials Object</a></td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code>profile</code> and <code>credentials</code> can be updated independently or with a single request.</p>
+
+<blockquote>
+  <p>All profile attributes must be specified when updating a user’s profile.  <strong>Partial updates are not supported</strong>!</p>
+</blockquote>
+
+<h5 class="api api-response api-response-params" id="response-parameters-3">Response Parameters</h5>
+
+<p>Updated <a href="#user-model">User</a></p>
+
+<h4 class="api api-operation" id="update-profile">Update Profile</h4>
+
+<h5 class="api api-request api-request-example" id="request-example-12">Request Example</h5>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X PUT "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR" \
+-d \
+'{
+    "profile": {
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
+        "login": "isaac.brock@example.org",
+        "mobilePhone": "555-415-1337",
+        "isManager": false
+    }
+}'
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-12">Response Example</h5>
+
+<pre><code class="language-json">{
+    "id": "00ub0oNGTSWTBKOLGLNR",
+    "status": "ACTIVE",
+    "created": "2013-06-24T16:39:18.000Z",
+    "activated": "2013-06-24T16:39:19.000Z",
+    "statusChanged": "2013-06-24T16:39:19.000Z",
+    "lastLogin": "2013-06-24T17:39:19.000Z",
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": "2013-07-02T21:36:25.344Z",
+    "profile": {
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
+        "login": "isaac.brock@example.org",
+        "mobilePhone": "555-415-1337",
+        "isManager": false
+    },
+    "credentials": {
+        "password": {},
+        "recovery_question": {
+            "question": "Who's a major player in the cowboy scene?"
+        },
+        "provider": {
+            "type": "OKTA",
+            "name": "OKTA"
+        }
+    },
+    "_links": {
+        "resetPassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+        },
+        "resetFactors": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+         },
+        "expirePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+        },
+        "forgotPassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+        },
+        "changeRecoveryQuestion": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+        },
+        "deactivate": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+        },
+        "changePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+        }
+    }
+}
+</code></pre>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/<em>:id</em></span></p>
+
+<p>Update a user’s profile and/or credentials. Use this method for a partial update.</p>
+
+<blockquote>
+  <p>Only the profile attributes to change must be specified when updating a user’s profile with this method. Any attribute not specified
+is unchanged. Use this method for partial updates.</p>
+</blockquote>
+
+<h5 class="api api-request api-request-params" id="request-parameters-4">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><code>id</code> of user to update</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>profile</td>
+      <td>Updated profile for user</td>
+      <td>Body</td>
+      <td><a href="#profile-object">Profile Object</a></td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>credentials</td>
+      <td>Update credentials for user</td>
+      <td>Body</td>
+      <td><a href="#credentials-object">Credentials Object</a></td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code>profile</code> and <code>credentials</code> can be updated independently or with a single request.</p>
+
+<h5 class="api api-response api-response-params" id="response-parameters-4">Response Parameters</h5>
+
+<p>Updated <a href="#user-model">User</a></p>
+
+<h4 class="api api-operation" id="update-profile-1">Update Profile</h4>
+
+<h5 class="api api-request api-request-example" id="request-example-13">Request Example</h5>
+
+<p>This example updates the second email field only.</p>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR" \
+-d \
+'{
+    "profile": {
+        "secondEmail": "isaacDirect@example.org"
+    }
+}'
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-13">Response Example</h5>
+
+<pre><code class="language-json">{
+    "id": "00ub0oNGTSWTBKOLGLNR",
+    "status": "ACTIVE",
+    "created": "2013-06-24T16:39:18.000Z",
+    "activated": "2013-06-24T16:39:19.000Z",
+    "statusChanged": "2013-06-24T16:39:19.000Z",
+    "lastLogin": "2013-06-24T17:39:19.000Z",
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": "2013-07-02T21:36:25.344Z",
+    "profile": {
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "email": "isaac@example.org",
+        "secondEmail": "isaacDirect@example.org",
+        "login": "isaac.brock@example.org",
+        "mobilePhone": "555-415-1337",
+        "isManager": false
+    },
+    "credentials": {
+        "password": {},
+        "recovery_question": {
+            "question": "Who's a major player in the cowboy scene?"
+        },
+        "provider": {
+            "type": "OKTA",
+            "name": "OKTA"
+        }
+    },
+    "_links": {
+        "resetPassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+        },
+        "resetFactors": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+         },
+        "expirePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+        },
+        "forgotPassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+        },
+        "changeRecoveryQuestion": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+        },
+        "deactivate": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+        },
+        "changePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+        }
+    }
+}
+</code></pre>
+
+<h4 class="api api-operation" id="set-password">Set Password</h4>
+
+<p>This is an administrative operation and does not validate existing user credentials.  For operations that validate credentials refer to:</p>
+
+<ul>
+  <li><a href="#reset-password">Reset Password</a></li>
+  <li><a href="#forgot-password">Forgot Password</a></li>
+  <li><a href="#change-password">Change Password</a></li>
+</ul>
+
+<h5 class="api api-request api-request-example" id="request-example-14">Request Example</h5>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X PUT "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR" \
+-d \
+'{
+    "credentials": {
+        "password" : { "value": "UpdatedP@55w0rd" }
+    }
+}'
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-14">Response Example</h5>
+
+<pre><code class="language-json">{
+    "id": "00ub0oNGTSWTBKOLGLNR",
+    "status": "ACTIVE",
+    "created": "2013-06-24T16:39:18.000Z",
+    "activated": "2013-06-24T16:39:19.000Z",
+    "statusChanged": "2013-06-24T16:39:19.000Z",
+    "lastLogin": "2013-06-24T17:39:19.000Z",
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": "2013-07-02T21:36:25.344Z",
+    "profile": {
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
+        "login": "isaac@example.org",
+        "mobilePhone": "555-415-1337"
+    },
+    "credentials": {
+        "password": {},
+        "recovery_question": {
+            "question": "Who's a major player in the cowboy scene?"
+        },
+        "provider": {
+             "type": "OKTA",
+             "name": "OKTA"
+        }
+    },
+    "_links": {
+        "resetPassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+        },
+        "resetFactors": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+        },
+        "expirePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+        },
+        "forgotPassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+        },
+        "changeRecoveryQuestion": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+        },
+        "deactivate": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+        },
+        "changePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+        }
+    }
+}
+</code></pre>
+
+<h4 class="api api-operation" id="set-recovery-question--answer">Set Recovery Question &amp; Answer</h4>
+
+<p>This is an administrative operation and does not validate existing user credentials.  See <a href="#change-recovery-question">Change Recovery Question</a> for an operation that requires validation</p>
+
+<h5 class="api api-request api-request-example" id="request-example-15">Request Example</h5>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X PUT "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR" \
+-d \
+'{
+  "credentials": {
+        "recovery_question": {
+            "question": "I have a new recovery question?",
+            "answer": "Yes, I do!"
+        }
+  }
+}'
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-15">Response Example</h5>
+
+<pre><code class="language-json">{
+    "id": "00ub0oNGTSWTBKOLGLNR",
+    "status": "ACTIVE",
+    "created": "2013-06-24T16:39:18.000Z",
+    "activated": "2013-06-24T16:39:19.000Z",
+    "statusChanged": "2013-06-24T16:39:19.000Z",
+    "lastLogin": "2013-06-24T17:39:19.000Z",
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": "2013-07-02T21:36:25.344Z",
+    "profile": {
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
+        "login": "isaac@example.org",
+        "mobilePhone": "555-415-1337"
+    },
+    "credentials": {
+        "password": {},
+        "recovery_question": {
+            "question": "I have a new recovery question?"
+        },
+        "provider": {
+            "type": "OKTA",
+            "name": "OKTA"
+        }
+    },
+    "_links": {
+        "resetPassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+        },
+        "resetFactors": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+        },
+        "expirePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+        },
+        "forgotPassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+        },
+        "changeRecoveryQuestion": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+        },
+        "deactivate": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+        },
+        "changePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+        }
+    }
+}
+</code></pre>
+
+<h2 id="related-resources">Related Resources</h2>
+
+<h3 class="api api-operation" id="get-assigned-app-links">Get Assigned App Links</h3>
+
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users/<em>:id</em>/appLinks</span><span class="api-label api-label-cors pull-right"><i class="fa fa-cloud-download"></i> CORS</span></p>
+
+<p>Fetches appLinks for all direct or indirect (via group membership) assigned applications</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-5">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><code>id</code> of user</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters-5">Response Parameters</h5>
+
+<p>Array of App Links</p>
+
+<h5 class="api api-request api-request-example" id="request-example-16">Request Example</h5>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X GET "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/appLinks"
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-16">Response Example</h5>
+
+<pre><code class="language-json">[
+    {
+        "id": "00ub0oNGTSWTBKOLGLNR",
+        "label": "Google Apps Mail",
+        "linkUrl": "https://your-domain.okta.com/home/google/0oa3omz2i9XRNSRIHBZO/50",
+        "logoUrl": "https://your-domain.okta.com/img/logos/google-mail.png",
+        "appName": "google",
+        "appInstanceId": "0oa3omz2i9XRNSRIHBZO",
+        "appAssignmentId": "0ua3omz7weMMMQJERBKY",
+        "credentialsSetup": false,
+        "hidden": false,
+        "sortOrder": 0
+    },
+    {
+        "id": "00ub0oNGTSWTBKOLGLNR",
+        "label": "Google Apps Calendar",
+        "linkUrl": "https://your-domain.okta.com/home/google/0oa3omz2i9XRNSRIHBZO/54",
+        "logoUrl": "https://your-domain.okta.com/img/logos/google-calendar.png",
+        "appName": "google",
+        "appInstanceId": "0oa3omz2i9XRNSRIHBZO",
+        "appAssignmentId": "0ua3omz7weMMMQJERBKY",
+        "credentialsSetup": false,
+        "hidden": false,
+        "sortOrder": 1
+    },
+    {
+        "id": "00ub0oNGTSWTBKOLGLNR",
+        "label": "Box",
+        "linkUrl": "https://your-domain.okta.com/home/boxnet/0oa3ompioiQCSTOYXVBK/72",
+        "logoUrl": "https://your-domain.okta.com/img/logos/box.png",
+        "appName": "boxnet",
+        "appInstanceId": "0oa3ompioiQCSTOYXVBK",
+        "appAssignmentId": "0ua3omx46lYEZLPPRWBO",
+        "credentialsSetup": false,
+        "hidden": false,
+        "sortOrder": 3
+    },
+    {
+        "id": "00ub0oNGTSWTBKOLGLNR",
+        "label": "Salesforce.com",
+        "linkUrl": "https://your-domain.okta.com/home/salesforce/0oa12ecnxtBQMKOXJSMF/46",
+        "logoUrl": "https://your-domain.okta.com/img/logos/salesforce_logo.png",
+        "appName": "salesforce",
+        "appInstanceId": "0oa12ecnxtBQMKOXJSMF",
+        "appAssignmentId": "0ua173qgj5VAVOBQMCVB",
+        "credentialsSetup": true,
+        "hidden": false,
+        "sortOrder": 2
+    }
+]
+</code></pre>
+
+<h3 class="api api-operation" id="get-member-groups">Get Member Groups</h3>
+
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users/<em>:id</em>/groups</span><span class="api-label api-label-cors pull-right"><i class="fa fa-cloud-download"></i> CORS</span></p>
+
+<p>Fetches the groups of which the user is a member.</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-6">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><code>id</code> of user</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters-6">Response Parameters</h5>
+
+<p>Array of <a href="groups.html">Groups</a></p>
+
+<h5 class="api api-request api-request-example" id="request-example-17">Request Example</h5>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X GET "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/groups"
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-17">Response Example</h5>
+
+<pre><code class="language-json">[
+  {
+    "id": "0gabcd1234",
+    "profile": {
+      "name": "Cloud App Users",
+      "description": "Users can access cloud apps"
+    }
+  },
+  {
+    "id": "0gefgh5678",
+    "profile": {
+      "name": "Internal App Users",
+      "description": "Users can access internal apps"
+    }
+  }
+]
+</code></pre>
+
+<h2 id="lifecycle-operations">Lifecycle Operations</h2>
+
+<p>Lifecycle operations are non-idempotent operations that initiate a state transition for a user’s status.  Some operations are asynchronous while others are synchronous.  The user’s current status limits what operations are allowed.  For example, you can’t unlock a user that is <code>ACTIVE</code>.</p>
+
+<h3 class="api api-operation" id="activate-user">Activate User</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/<em>:id</em>/lifecycle/activate</span></p>
+
+<p>Activates a user.  This operation can only be performed on users with a <code>STAGED</code> status.  Activation of a user is an asynchronous operation.  The user will have the <code>transitioningToStatus</code> property with a value of <code>ACTIVE</code> during activation to indicate that the user hasn’t completed the asynchronous operation.  The user will have a status of <code>ACTIVE</code> when the activation process is complete.</p>
+
+<blockquote>
+  <p>Users that do not have a password must complete the welcome flow by visiting the activation link to complete the transition to <code>ACTIVE</code> status.</p>
+</blockquote>
+
+<h5 class="api api-request api-request-params" id="request-parameters-7">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><code>id</code> of user</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>sendEmail</td>
+      <td>Sends an activation email to the user if <code>true</code></td>
+      <td>Query</td>
+      <td>Boolean</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters-7">Response Parameters</h5>
+
+<p>Returns empty object by default. When <code>sendEmail</code> is <code>false</code>, returns an activation link for the user to set up their account.</p>
+
+<pre><code class="language-json">{
+  "activationUrl": "https://your-domain.okta.com/welcome/XE6wE17zmphl3KqAPFxO""
+}
+</code></pre>
+
+<blockquote>
+  <p>If a password was set before the user was activated, then user must login with with their password and not the activation link</p>
+</blockquote>
+
+<h5 class="api api-request api-request-example" id="request-example-18">Request Example</h5>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate?sendEmail=false"
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-18">Response Example</h5>
+
+<pre><code class="language-json">{
+  "activationUrl": "https://your-domain.okta.com/welcome/XE6wE17zmphl3KqAPFxO"
+}
+</code></pre>
+
+<h3 class="api api-operation" id="deactivate-user">Deactivate User</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/<em>:id</em>/lifecycle/deactivate</span></p>
+
+<p>Deactivates a user.  This operation can only be performed on users that do not have a <code>DEPROVISIONED</code> status.  Deactivation of a user is an asynchronous operation.  The user will have the <code>transitioningToStatus</code> property with a value of <code>DEPROVISIONED</code> during deactivation to indicate that the user hasn’t completed the asynchronous operation.  The user will have a status of <code>DEPROVISIONED</code> when the deactivation process is complete.</p>
+
+<blockquote>
+  <p>Deactivating a user is a <strong>destructive</strong> operation.  The user will be deprovisioned from all assigned applications which may destroy their data such as email or files.  <strong>This action cannot be recovered!</strong></p>
+</blockquote>
+
+<h5 class="api api-request api-request-params" id="request-parameters-8">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><code>id</code> of user</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters-8">Response Parameters</h5>
+
+<p>Returns an empty object.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-19">Request Example</h5>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-19">Response Example</h5>
+
+<pre><code class="language-ruby">HTTP/1.1 200 OK
+Content-Type: application/json
+</code></pre>
+
+<h3 class="api api-operation" id="unlock-user">Unlock User</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/<em>:id</em>/lifecycle/unlock</span></p>
+
+<p>Unlocks a user with a <code>LOCKED_OUT</code> status and returns them to <code>ACTIVE</code> status.  Users will be able to login with their current password.</p>
+
+<blockquote>
+  <p>This operation currently only works with Okta-mastered users and does not support directory-mastered accounts such as Active Directory.</p>
+</blockquote>
+
+<h5 class="api api-request api-request-params" id="request-parameters-9">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><code>id</code> of user</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters-9">Response Parameters</h5>
+
+<p>Returns an empty object</p>
+
+<h5 id="request-example-20">Request Example</h5>
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/unlock"
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-20">Response Example</h5>
+
+<pre><code class="language-ruby">HTTP/1.1 200 OK
+Content-Type: application/json
+</code></pre>
+
+<h3 class="api api-operation" id="reset-password">Reset Password</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/<em>:id</em>/lifecycle/reset_password</span></p>
+
+<p>Generates a one-time token (OTT) that can be used to reset a user’s password.  The OTT link can be automatically emailed to the user or returned to the API caller and distributed using a custom flow.</p>
+
+<p>This operation will transition the user to the status of <code>RECOVERY</code> and the user will not be able to login or initiate a forgot password flow until they complete the reset flow.</p>
+
+<p><strong>Note:</strong> You can also use this API to convert a user with the Okta Credential Provider to a use a Federated Provider. After this conversion, the user cannot directly sign in with password. The second example demonstrate this usage.</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-10">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><code>id</code> of user</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>sendEmail</td>
+      <td>Sends reset password email to the user if <code>true</code></td>
+      <td>Query</td>
+      <td>Boolean</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters-10">Response Parameters</h5>
+
+<p>Returns an empty object by default. When <code>sendEmail</code> is <code>false</code>, returns a link for the user to reset their password.</p>
+
+<pre><code class="language-json">{
+  "resetPasswordUrl": "https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"
+}
+</code></pre>
+
+<h5 class="api api-request api-request-example" id="request-example-21">Request Example</h5>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password?sendEmail=false"
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-21">Response Example</h5>
+
+<pre><code class="language-json">{
+  "resetPasswordUrl": "https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"
+}
+</code></pre>
+
+<h5 class="api api-request api-request-example" id="request-example-convert-a-user-to-a-federated-user">Request Example (Convert a User to a Federated User)</h5>
+
+<p>To convert a user to a federated user, pass <code>FEDERATED</code> as the <strong><em>provider</em></strong> in the <a href="#provider-object">Provider Object</a>. The <code>sendEmail</code>
+parameter must be false or omitted for this type of conversion.</p>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/user/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password?provider=FEDERATION&amp;sendEmail=false"
+
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-22">Response Example</h5>
+
+<pre><code class="language-json">{
+  "resetPasswordUrl": "https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"
+}
+</code></pre>
+
+<h3 class="api api-operation" id="expire-password">Expire Password</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/<em>:id</em>/lifecycle/expire_password</span></p>
+
+<p>This operation will transition the user to the status of <code>PASSWORD_EXPIRED</code> and the user will be required to change their password at their next login. If <code>tempPassword</code> is passed, the user’s password is reset to a temporary password that is returned, and then the temporary password is expired.</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-11">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><code>id</code> of user</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>tempPassword</td>
+      <td>Sets the user’s password to a temporary password,  if <code>true</code></td>
+      <td>Query</td>
+      <td>Boolean</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters-11">Response Parameters</h5>
+
+<p>Returns an the complete user object by default. When <code>tempPassword</code> is <code>true</code>, returns the temporary password.</p>
+
+<pre><code class="language-json">{
+    "tempPassword": "HR076gb6"
+}
+</code></pre>
+
+<h5 class="api api-request api-request-example" id="request-example-22">Request Example</h5>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password?tempPassword=false"
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-23">Response Example</h5>
+
+<pre><code class="language-json">{
+    "id": "00ub0oNGTSWTBKOLGLNR",
+    "status": "ACTIVE",
+    "created": "2013-06-24T16:39:18.000Z",
+    "activated": "2013-06-24T16:39:19.000Z",
+    "statusChanged": "2013-06-24T16:39:19.000Z",
+    "lastLogin": "2013-06-24T17:39:19.000Z",
+    "lastUpdated": "2013-06-27T16:35:28.000Z",
+    "passwordChanged": "2013-06-24T16:39:19.000Z",
+    "profile": {
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "email": "isaac@example.org",
+        "secondEmail": "isaac2@example.org",
+        "login": "isaac@example.org",
+        "mobilePhone": "555-415-1337"
+    },
+    "credentials": {
+        "password": {},
+        "recovery_question": {
+            "question": "Who's a major player in the cowboy scene?"
+        },
+        "provider": {
+            "type": "OKTA",
+            "name": "OKTA"
+        }
+    },
+    "_links": {
+        "resetPassword": {
+            "href": "https://your-domain.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+        },
+        "resetFactors": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+        },
+        "expirePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+        },
+        "forgotPassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+        },
+        "changeRecoveryQuestion": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+        },
+        "deactivate": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+        },
+        "changePassword": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+        }
+    }
+}
+</code></pre>
+
+<h3 class="api api-operation" id="reset-factors">Reset Factors</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/<em>:id</em>/lifecycle/reset_factors</span></p>
+
+<p>This operation resets all factors for the specified user. All MFA factor enrollments returned to the unenrolled state. The user’s status remains ACTIVE. This link is present only if the user is currently enrolled in one or more MFA factors.</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-12">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><code>id</code> of user</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters-12">Response Parameters</h5>
+
+<p>Returns an empty object by default.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-23">Request Example</h5>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors”
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-24">Response Example</h5>
+
+<pre><code class="language-ruby">HTTP/1.1 200 OK
+Content-Type: application/json
+</code></pre>
+
+<h2 id="credential-operations">Credential Operations</h2>
+
+<h3 class="api api-operation" id="forgot-password">Forgot Password</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/<em>:id</em>/lifecycle/forgot_password</span></p>
+
+<p>Generates a one-time token (OTT) that can be used to reset a user’s password.  The user will be required to validate their security question’s answer when visiting the reset link.  This operation can only be performed on users with a valid <a href="#recovery-question-object">recovery question credential</a> and have an <code>ACTIVE</code> status.</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-13">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><code>id</code> of user</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>sendEmail</td>
+      <td>Sends a forgot password email to the user if <code>true</code></td>
+      <td>Query</td>
+      <td>Boolean</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters-13">Response Parameters</h5>
+
+<p>Returns an empty object by default. When <code>sendEmail</code> is <code>false</code>, returns a link for the user to reset their password.</p>
+
+<pre><code class="language-json">{
+  "resetPasswordUrl": "https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"
+}
+</code></pre>
+<blockquote>
+  <p>This operation does not affect the status of the user.</p>
+</blockquote>
+
+<h5 class="api api-request api-request-example" id="request-example-24">Request Example</h5>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/forgot_password?sendEmail=false"
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-25">Response Example</h5>
+
+<pre><code class="language-json">{
+  "resetPasswordUrl": "https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"
+}
+</code></pre>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/<em>:id</em>/credentials/forgot_password</span></p>
+
+<p>Sets a new password for a user by validating the user’s answer to their current recovery question.  This operation can only be performed on users with a valid <a href="#recovery-question-object">recovery question credential</a> and have an <code>ACTIVE</code> status.</p>
+
+<blockquote>
+  <p>This operation is intended for applications that need to implement their own forgot password flow.  You are responsible for mitigation of all security risks such as phishing and replay attacks.  Best-practice is to generate a short-lived one-time token (OTT) that is sent to a verified email account.</p>
+</blockquote>
+
+<h5 class="api api-request api-request-params" id="request-parameters-14">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><code>id</code> of user</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>password</td>
+      <td>New password for user</td>
+      <td>Body</td>
+      <td><a href="#password-object">Password Object</a></td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>recovery_question</td>
+      <td>Answer to user’s current recovery question</td>
+      <td>Body</td>
+      <td><a href="#recovery-question-object">Recovery Question Object</a></td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters-14">Response Parameters</h5>
+
+<p><a href="#credentials-object">Credentials</a> of the user</p>
+
+<blockquote>
+  <p>This operation does not affect the status of the user.</p>
+</blockquote>
+
+<h5 class="api api-request api-request-example" id="request-example-25">Request Example</h5>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password" \
+-d \
+'{
+    "password": { "value": "MyN3wP@55w0rd" },
+    "recovery_question": { "answer": "Cowboy Dan" }
+}'
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-26">Response Example</h5>
+
+<pre><code class="language-json">{
+    "credentials": {
+        "password": {},
+        "recovery_question": {
+            "question": "Who's a major player in the cowboy scene?"
+        },
+        "provider": {
+           "type": "OKTA",
+           "name": "OKTA"
+        }
+    }
+}
+</code></pre>
+
+<h3 class="api api-operation" id="change-password">Change Password</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/<em>:id</em>/credentials/change_password</span></p>
+
+<p>Changes a user’s password by validating the user’s current password.  This operation can only be performed on users in <code>STAGED</code>, <code>ACTIVE</code>, <code>PASSWORD_EXPIRED</code>, or <code>RECOVERY</code> status that have a valid <a href="#password-object">password credential</a></p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-15">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><code>id</code> of user</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>oldPassword</td>
+      <td>Current password for user</td>
+      <td>Body</td>
+      <td><a href="#password-object">Password Object</a></td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>newPassword</td>
+      <td>New password for user</td>
+      <td>Body</td>
+      <td><a href="#password-object">Password Object</a></td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters-15">Response Parameters</h5>
+
+<p><a href="#credentials-object">Credentials</a> of the user</p>
+
+<blockquote>
+  <p>The user will transition to <code>ACTIVE</code> status when successfully invoked in <code>RECOVERY</code> status</p>
+</blockquote>
+
+<h5 class="api api-request api-request-example" id="request-example-26">Request Example</h5>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password" \
+-d \
+'{
+    "oldPassword": { "value": "GoAw@y123" },
+    "newPassword": { "value": "MyN3wP@55w0rd" }
+}'
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-27">Response Example</h5>
+
+<pre><code class="language-json">{
+    "credentials": {
+        "password": {},
+        "recovery_question": {
+            "question": "Who's a major player in the cowboy scene?"
+        },
+        "provider": {
+           "type": "OKTA",
+           "name": "OKTA"
+        }
+    }
+}
+</code></pre>
+
+<h3 class="api api-operation" id="change-recovery-question">Change Recovery Question</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/<em>:id</em>/credentials/change_recovery_question</span></p>
+
+<p>Changes a user’s recovery question &amp; answer credential by validating the user’s current password.  This operation can only be performed on users in <strong>STAGED</strong>, <strong>ACTIVE</strong> or <strong>RECOVERY</strong> <code>status</code> that have a valid <a href="#password-object">password credential</a></p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-16">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><code>id</code> of user</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>password</td>
+      <td>Current password for user</td>
+      <td>Body</td>
+      <td><a href="#password-object">Password Object</a></td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>recovery_question</td>
+      <td>New recovery question &amp; answer for user</td>
+      <td>Body</td>
+      <td><a href="#recovery-question-object">Recovery Question Object</a></td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters-16">Response Parameters</h5>
+
+<p><a href="#credentials-object">Credentials</a> of the user</p>
+
+<blockquote>
+  <p>This operation does not affect the status of the user.</p>
+</blockquote>
+
+<h5 class="api api-request api-request-example" id="request-example-27">Request Example</h5>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question" \
+-d \
+'{
+    "password": { "value": "GoAw@y123" },
+    "recovery_question": {
+      "question" : "What happens when I update my question?",
+      "answer": "My recovery credentials are updated"
+    }
+}'
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-28">Response Example</h5>
+
+<pre><code class="language-json">{
+    "credentials": {
+        "password": {},
+        "recovery_question": {
+            "question": "What happens when I update my question?"
+        },
+        "provider": {
+           "type": "OKTA",
+           "name": "OKTA"
+        }
+    }
+}
+</code></pre>
+
+
+	</div>
+</section>
+		
+		
+			
+	</div>
+	
+	<!-- Remarketing tag -->
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		var google_conversion_id = 1006913831;
+		var google_custom_params = window.google_tag_params;
+		var google_remarketing_only = true;
+		/* ]]> */
+	</script>
+	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+	</script>
+	<noscript>
+		<div style="display:inline;">
+			<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"/>
+		</div>
+	</noscript>
+<!-- End Remarketing tag -->
+
+<!-- Crazy Egg Tracking -->
+<script type="text/javascript">
+setTimeout(function(){var a=document.createElement("script");
+var b=document.getElementsByTagName("script")[0];
+a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+</script>
+<!-- End Crazy Egg Tracking -->
+
+<footer class="site-footer">
+	<div class="wrap">
+
+		<ul>
+			<li><a href="http://www.okta.com" target="_blank">Okta.com</a></li>
+			<li><a href="/blog">Blog</a></li>
+			<li><a href="/terms/">Terms &amp; Conditions</a></li>
+			<li><a href="/privacy/">Privacy Policy</a></li>
+			<li><a href="http://okta.com/developer/contact/">Contact Sales</a></li>
+			<li><a href="mailto:developers@okta.com">Contact Support</a></li>
+		</ul>
+
+		<ul>
+			<li><a class="icon-with-hover--github" href="http://github.com/okta" target="_blank">Github</a></li>
+			<li><a class="icon-with-hover--twitter" href="http://twitter.com/okta" target="_blank">Twitter</a></li>
+			<li><a class="icon-with-hover--stack-overflow" href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a></li>
+			<li><a class="icon-with-hover--rss" href="http://feeds.feedburner.com/OktaBlog" target="_blank">News</a></li>
+			<li><a class="icon-with-hover--help" href="http://community.okta.com" target="_blank">Help</a></li>
+		</ul>
+
+	</div>
+</footer>
+
+	
+</body>
+	
+</html>
