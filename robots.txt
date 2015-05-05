@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /.rvmrc
+Disallow: /_config.yml
+Disallow: /CNAME
+Disallow: /search.json
+
+

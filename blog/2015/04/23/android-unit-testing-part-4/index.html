@@ -1,0 +1,390 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<head>
+	
+	<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="/favicon.ico">
+	<title>Android Unit Testing Part IV&#58; Mocking &raquo; Okta Developer</title>
+	<meta name="description" content="This is the third of a four part series on Android Unit Testing. Inthe last two articles I discussed the general principles of havinggoodtestsand the way to ...">
+
+	<link rel="canonical" href="http://developer.okta.com/blog/2015/04/23/android-unit-testing-part-4">
+
+	<link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/assets/css/animate.css">
+	<link rel="stylesheet" href="/assets/css/master.css">
+	<link rel="stylesheet" href="/assets/css/page-blog.css">
+	<link rel="stylesheet" href="/assets/css/responsive.css">
+
+	<script type="text/javascript" defer="defer" src="/assets/js/jquery.min.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/tabber.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/pacnav.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/master.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/scrollspy.js"></script>
+
+	
+	<!-- TypeKit -->
+	<script src="//use.typekit.net/pls8pog.js"></script>
+	<script>try{Typekit.load();}catch(e){}</script>
+	<!-- GA -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-15777010-3', 'auto');
+		ga('send', 'pageview');
+	</script>
+</head>
+
+	
+<body>
+	
+	<header class="site-header">
+	<div class="wrap">
+
+		<h1 class="site-title"><a href="/">Okta Developer</a></h1>
+
+		<nav id="primary-nav" class="site-nav loaded">
+			<ul>
+				<li><a href="/product/">Product</a></li>
+				<li><a href="/pricing/">Pricing</a></li>
+				<li><a href="/customers/">Customers</a></li>
+				<li><a href="/docs/guides/overview.html">Docs</a></li>
+				<li><a href="/discussion/">Discussion</a></li>
+				<li class="has-dropdown"><a href="#">Support</a>
+					<div class="dropdown-window">
+						<p class="stack-overflow">
+							Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a>.<br />
+							We'll answer it within 24 hours.
+						</p>
+						<p class="email">
+							Email us:<br />
+							<a href="mailto:developers@okta.com">developers@okta.com</a>
+						</p>
+						<p class="tel">
+							Call us:<br />
+							<a href="tel:18777227871">1 (877) 722-7871</a>
+						</p>
+					</div>
+				</li>
+			</ul>
+		</nav>
+
+		<a href="/search" class="gsc-trigger search-button"></a>
+
+
+		<div class="search-container">
+			<div class="gsc-container">
+				<script defer="defer">
+					(function() {
+						var cx = '005121479574088032773:mmh_vhv8uns';
+						var gcse = document.createElement('script');
+						gcse.type = 'text/javascript';
+						gcse.async = true;
+						gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+						'//cse.google.com/cse.js?cx=' + cx;
+						var s = document.getElementsByTagName('script')[0];
+						s.parentNode.insertBefore(gcse, s);
+					})();
+				</script>
+				<gcse:searchbox-only resultsUrl="/search" enableAutoComplete="true"></gcse:searchbox-only>
+			</div>
+		</div>
+		<a href="https://www.okta.com/developer/signup/" class="cta-button button--small">Get Started</a>
+
+	</div>
+</header>
+
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P6JKVN"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P6JKVN');</script>
+<!-- End Google Tag Manager -->
+
+
+	
+	<div class="page-content">
+		
+		
+			
+		<section id="blog-post" class="section--full-width">
+
+	
+
+	
+	
+	
+
+
+	<div class="blog">
+		<section >
+<div class="wrap">
+	<article class="post-block">
+
+
+
+	  <header class="post-title-block">
+	    <h1><a href="/blog/2015/04/23/android-unit-testing-part-4">Android Unit Testing Part IV&#58; Mocking</a></h1>
+	    <div class="attribution">
+	      <img src="/assets/img/avatar-victor_ronin.png"
+	           alt="avatar-victor_ronin.png"
+	           class="author-avatar">
+	      <address>Victor Ronin</address>
+	      <span class="sepr">&middot;</span>
+	      <time datetime="2015-04-23">
+	      April 23, 2015
+	      </time>
+	    </div>
+	  </header>
+
+	  <section class="post-content">
+	    <p><em>This is the third of a four part series on Android Unit Testing. In
+the last two articles I discussed the <a href="https://www.okta.com/blog/2015/01/android-unit-testing-part-i-what-makes-strong-test-automation/">general principles of having
+good
+tests</a>
+and the way to <a href="/blog/2015/04/07/android-unit-testing-part-2">run Android tests on JVM making them
+fast</a> and <a href="/blog/2015/04/14/android-unit-testing-part-3/">how to make
+your code less coupled</a>. 
+This article will explain how to make tests isolated.</em></p>
+
+<p>We need to mock a dependency, inject it, and then modify our test to
+indicate that we are not testing an end-to-end scenario anymore, but
+are now testing just one class at a time.</p>
+
+<ul>
+  <li>
+    <p>Modify application Gradle file</p>
+
+    <p>Add the following code under the dependency section:</p>
+
+    <pre><code>androidTestCompile ‘org.easymock:easymock:3.1'
+</code></pre>
+  </li>
+  <li>
+    <p>Replace <code>FooTest</code> with the following code:</p>
+
+    <pre><code>package com.example.myapplication;
+     
+import junit.framework.Assert;
+      
+import org.easymock.EasyMockSupport;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+    
+import static org.easymock.EasyMock.expect;
+    
+@RunWith(RobolectricTestRunner.class)
+public class FooTest extends EasyMockSupport {
+    Foo sut;
+    
+    // Mocks
+    Bar barMock;
+    
+    @Before
+    public void setUp() {
+        sut = new Foo();
+    
+        // Create mocks
+        barMock = createMock(Bar.class);
+    
+        // Inject mock
+        InjectHelper.injectMock(sut, barMock);
+    }
+    
+    @Test
+    public void testGetFoo_returns4() {
+        // Arrange
+        expect(barMock.getBar()).andReturn(4);
+        replayAll();
+    
+        // Act
+        int actualResult = sut.getFoo();
+    
+        // Assert
+        verifyAll();
+        Assert.assertEquals(4, actualResult);
+    }
+}
+</code></pre>
+  </li>
+  <li>
+    <p>Create a class <code>InjectHelper</code> under <code>androidTest</code></p>
+
+    <p>(I believe the original code for injecting fields is from <strong>Spring</strong>; however, it was modified afterwards.)</p>
+
+    <pre><code>package com.example.myapplication;
+      
+import java.lang.reflect.Field;
+import javax.inject.Inject;
+    
+public class InjectHelper {
+        
+    @SuppressWarnings("unchecked")
+    public static void injectMock(Object target, Object mock)
+    {
+        Class targetClass = target.getClass();
+        do {
+            Field[] fields = targetClass.getDeclaredFields();
+            // Iterate through all members
+            for (Field field : fields) {
+                // Skip all non injectable members
+                if (field.getAnnotation(Inject.class) == null)
+                    continue;
+    
+                // Make private/prptected members accessible
+                field.setAccessible(true);
+    
+                // Get a class of the member
+                Class injectedClass = field.getType();
+                Class mockClass = mock.getClass();
+    
+                // Check that mock is essentially the same class
+                if (!injectedClass.isAssignableFrom(mockClass))
+                    continue;
+    
+                try {
+                    // Inject mock
+                    field.set(target, mock);
+                } catch (IllegalAccessException e)
+                {
+                    throw new RuntimeException(e);
+                }
+    
+                // return accessibility
+                field.setAccessible(false);
+            }
+            targetClass = targetClass.getSuperclass();
+        }
+        while (targetClass != null &amp;&amp; targetClass != Object.class);
+    }
+}
+</code></pre>
+
+    <p><strong>Woo-Hoo! We are finally done!</strong></p>
+
+    <p>Now, your tests are:</p>
+
+    <ul>
+      <li><strong>fast</strong> — they are executed on a JVM and don’t require going to the network or a persistent layer.</li>
+      <li><strong>repeatable</strong> — they don’t depend on emulator stability or network quality.</li>
+      <li>(potentially!) <strong>simple</strong> and <strong>consistent</strong> — there is a lot of good information out there on how to write good unit tests.</li>
+      <li><strong>independent</strong> — since the persistent layer isn’t used, one test won’t influence another.</li>
+    </ul>
+
+    <p>In addition to all of this awesomeness, your code should actually be
+better off, too. Hopefully writing unit tests will force you to
+simplify classes with too many dependencies and more carefully think
+through interfaces.</p>
+
+    <p>Thanks!</p>
+
+    <p>Let me mention several people who helped me to put this article
+together: <a href="https://www.linkedin.com/pub/william-dawson/43/140/837">Wills Dawson</a> made the initial move to use Robolectric,
+<a href="https://www.linkedin.com/in/nadeemlinkedin">Nadeem Khan</a> figured out all those pesky details about usage of
+Robolectric, and <a href="https://www.linkedin.com/pub/hans-reichenbach/20/94b/5b8">Hans Reichenbach</a> put a lot of these integration
+steps in writing on our wiki. Thanks guys!</p>
+
+    <p><a href="https://github.com/vronin-okta/okta_blog_samples/tree/master/android_unit_testing">https://github.com/vronin-okta/okta_blog_samples/tree/master/android_unit_testing</a></p>
+  </li>
+</ul>
+
+
+	  </section>
+
+
+
+	</article>
+</div>
+</section>
+
+
+	</div>
+
+</section>
+
+
+		
+		
+		<section id="bottom-cta" class="section--full-width bg--blue text-align--center">
+			<div class="wrap">
+			
+				<header>
+					<h2>Get Started with Okta Now!</h2>
+					<p class="text--medium">Your identity layer is ready to go. Getting started takes just a few minutes.</p>
+				</header>
+				
+				<a href="https://www.okta.com/developer/signup/" class="button--large">Get a Free Developer Account</a>
+			
+			</div>
+		</section>
+		
+			
+	</div>
+	
+	<!-- Remarketing tag -->
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		var google_conversion_id = 1006913831;
+		var google_custom_params = window.google_tag_params;
+		var google_remarketing_only = true;
+		/* ]]> */
+	</script>
+	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+	</script>
+	<noscript>
+		<div style="display:inline;">
+			<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"/>
+		</div>
+	</noscript>
+<!-- End Remarketing tag -->
+
+<!-- Crazy Egg Tracking -->
+<script type="text/javascript">
+setTimeout(function(){var a=document.createElement("script");
+var b=document.getElementsByTagName("script")[0];
+a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+</script>
+<!-- End Crazy Egg Tracking -->
+
+<footer class="site-footer">
+	<div class="wrap">
+
+		<ul>
+			<li><a href="http://www.okta.com" target="_blank">Okta.com</a></li>
+			<li><a href="/blog">Blog</a></li>
+			<li><a href="/terms/">Terms &amp; Conditions</a></li>
+			<li><a href="/privacy/">Privacy Policy</a></li>
+			<li><a href="http://okta.com/developer/contact/">Contact Sales</a></li>
+			<li><a href="mailto:developers@okta.com">Contact Support</a></li>
+		</ul>
+
+		<ul>
+			<li><a class="icon-with-hover--github" href="http://github.com/okta" target="_blank">Github</a></li>
+			<li><a class="icon-with-hover--twitter" href="http://twitter.com/okta" target="_blank">Twitter</a></li>
+			<li><a class="icon-with-hover--stack-overflow" href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a></li>
+			<li><a class="icon-with-hover--rss" href="http://feeds.feedburner.com/OktaBlog" target="_blank">News</a></li>
+			<li><a class="icon-with-hover--help" href="http://community.okta.com" target="_blank">Help</a></li>
+		</ul>
+
+	</div>
+</footer>
+
+	
+</body>
+	
+</html>

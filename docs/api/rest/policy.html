@@ -1,0 +1,8572 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<head>
+	
+	<head>
+	
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Policy &raquo; Okta Developer</title>
+	<meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+	
+	<link rel="canonical" href="http://developer.okta.com/docs/api/rest/policy.html">
+	
+	<link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/assets/css/animate.css">
+	<link rel="stylesheet" href="/assets/css/master.css">
+	<link rel="stylesheet" href="/assets/css/layout-docs.css">
+	
+	<script type="text/javascript" defer="defer" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/tabber.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/pacnav.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/master.js"></script>
+	
+</head>
+
+	
+<body>
+	
+	<svg style="display:none;">
+<defs>
+
+	<g id="shape-twitter" viewBox="0 0 100 82">
+		<path d="M62.624,0.967C53.588,4.22,47.876,12.606,48.526,21.788l0.217,3.542l-3.615-0.434
+			c-13.158-1.663-24.653-7.302-34.412-16.772L5.944,3.426l-1.229,3.47c-2.602,7.736-0.939,15.905,4.482,21.4
+			c2.892,3.036,2.241,3.47-2.747,1.662c-1.735-0.578-3.254-1.012-3.398-0.795c-0.506,0.507,1.229,7.085,2.603,9.687
+			c1.88,3.615,5.711,7.157,9.905,9.254l3.542,1.662l-4.193,0.073c-4.048,0-4.192,0.073-3.76,1.592
+			c1.446,4.7,7.158,9.688,13.52,11.855l4.482,1.519l-3.904,2.315c-5.784,3.323-12.58,5.204-19.375,5.35
+			c-3.253,0.07-5.928,0.359-5.928,0.576c0,0.722,8.82,4.771,13.953,6.362c15.399,4.699,33.689,2.675,47.426-5.35
+			c9.76-5.712,19.519-17.062,24.074-28.051c2.458-5.855,4.915-16.555,4.915-21.688c0-3.326,0.217-3.76,4.267-7.736
+			c2.385-2.313,4.627-4.844,5.061-5.566c0.724-1.374,0.651-1.374-3.036-0.145c-6.146,2.169-7.013,1.879-3.978-1.374
+			c2.241-2.313,4.917-6.506,4.917-7.735c0-0.217-1.084,0.145-2.313,0.795c-1.301,0.723-4.193,1.808-6.362,2.458l-3.903,1.229
+			l-3.543-2.386c-1.951-1.302-4.699-2.748-6.145-3.181C71.589-0.334,65.95-0.189,62.624,0.967z"/>
+	</g>
+	
+	<g id="shape-linkedin" viewBox="0 0 100 96">
+		<path d="M35,96h-0.432H56V59.067c0-1.898,0.135-3.752,0.703-5.095c1.568-3.749,5.285-7.64,11.221-7.64
+			C75.664,46.333,79,52.12,79,60.548V96h21V58.14c0-19.307-10.589-28.517-24.644-28.517C63.817,29.623,58.737,36,55.888,40H56v-9H35"
+			/>
+		<path d="M23,96V31H1v65H23z M12,22.27c7,0,12.091-4.939,12.091-11.16C23.997,4.796,19.477,0,12.117,0
+			C4.805,0,0.004,4.638,0.004,11c0,6.173,4.648,11,11.818,11H12V22.27z"/>
+	</g>
+	
+	<g id="shape-googleplus" viewBox="0 0 100 85">
+		<polygon points="100,16 84,16 84,0 78,0 78,16 62,16 62,22 78,22 78,38 84,38 84,22 100,22 	"/>
+		<path d="M43.681,48.895c-2.375-1.682-6.913-5.771-6.913-8.171c0-2.817,0.801-4.203,5.039-7.512
+			c4.343-3.396,7.417-7.827,7.417-13.381C49.224,13.227,46.28,8,40.756,5h8.325l5.877-5c0,0-19.695,0-26.261,0
+			C16.924,0,5.847,8.962,5.847,19.289c0,10.561,8.026,19.103,20.003,19.103c0.833,0,1.643-0.006,2.433-0.063
+			c-0.777,1.491-1.332,3.175-1.332,4.913c0,2.932,1.578,5.315,3.573,7.255c-1.51,0-2.964,0.045-4.553,0.045
+			c-14.585,0-25.806,9.29-25.806,18.921c0,9.481,12.304,15.415,26.889,15.415c16.626,0,25.806-9.43,25.806-18.915
+			C52.862,58.354,50.622,53.797,43.681,48.895z M29.654,35.732c-6.767-0.203-13.198-7.568-14.365-16.453
+			C14.12,10.396,18.655,3.594,25.423,3.796C32.186,4,38.617,11.126,39.787,20.011C40.951,28.897,36.415,35.936,29.654,35.732z
+			 M27.002,80.684c-10.081,0-17.359-6.377-17.359-14.046c0-7.513,9.03-13.767,19.109-13.656c2.354,0.023,4.547,0.399,6.534,1.047
+			c5.473,3.803,9.398,5.957,10.507,10.292c0.206,0.881,0.32,1.785,0.32,2.709C46.113,74.692,41.17,80.684,27.002,80.684z"/>
+	</g>
+	
+	<g id="shape-facebook" viewBox="0 0 100 96">
+		<path d="M0,33h10v-4.597v-4.6v-0.767c0-4.428,0.211-11.269,3.431-15.504C16.823,3.047,21.528,0,29.539,0
+				c13.05,0,18.575,1.858,18.575,1.858l-2.575,15.331c0,0-4.1-1.246-8.125-1.246c-4.023,0-7.414,1.438-7.414,5.462v1.629v5.366V33
+				h16.087l-1.149,15H30v52H10V48H0V33"/>
+	</g>
+	
+	<g id="shape-rss" viewBox="0 0 100 100">
+		<path d="M27.72,86.007c0,7.434-6.206,13.458-13.86,13.458C6.206,99.465,0,93.44,0,86.007c0-7.433,6.206-13.458,13.86-13.458
+			C21.515,72.549,27.72,78.574,27.72,86.007z"/>
+		<path d="M0.402,53.667L0.355,34.094C42.188,36.276,65.405,66.209,65.978,100H46.375
+			C46.049,70.298,25.854,54.747,0.402,53.667z"/>
+		<path d="M0.639,21.027L0.07,1.142C64.352,4.126,98.78,50.774,99.213,100l-20.168-0.284
+			C79.927,68.229,56.633,21.961,0.639,21.027z"/>
+	</g>
+	
+	<g id="shape-youtube" viewBox="0 0 100 70">
+		<path d="M12.168,69.479C2.623,67.488,0.18,60.736,0.119,36.177C0.077,18.829,0.799,12.931,3.662,7.245
+			c2.22-4.41,4.891-5.807,12.671-6.625c7.553-0.794,47.692-0.835,63.647-0.064c22.248,1.407,19.718,11.82,19.965,32.467
+			c0.261,21.407-0.317,26.064-3.922,31.521c-3.569,5.409-2.2,5.238-43.563,5.438C31.457,70.089,14.04,69.869,12.168,69.479
+			L12.168,69.479z M66,34L42.5,18.5v32L66,34z"/>
+	</g>
+	
+</defs>
+</svg>
+	<header class="site-header">
+	<div class="wrap">
+		
+		<h1 class="site-title"><a href="/">Okta Developer</a></h1>
+
+		<nav id="primary-nav" class="site-nav">
+			<a href="/features/">Features</a>
+			<a href="#">Pricing</a>
+			<a href="#">Customers</a>
+			<a href="/docs/">Documentation</a>
+			<a href="#">Discussion</a>
+			<a href="#">Support</a>
+		</nav>
+		
+	</div>
+</header>
+	
+	<div class="page-content">
+		
+		
+			
+		
+
+
+
+
+
+<section class="section--with-sidebar docs-page">
+	<aside id="sidebar-wrapper" class="sidebar">
+		
+		
+
+
+
+
+
+
+<div id="docs-sidebar-wrap" id="sidebar-wrapper">
+	<div class="docs-sidebar-block" id="myScrollspy" >
+		
+			
+				
+		
+			
+				
+				<h2>
+					Getting Started
+				</h2>
+
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="design_principles" data-section="policy">
+									<li data-name="Design Principles" >
+										<a href="/docs/api/getting_started/design_principles.html">Design Principles</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="design_principles" data-section="policy">
+									<li data-name="Design Principles" >
+										<a href="/docs/api/getting_started/design_principles.html">Design Principles</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="error_codes" data-section="policy">
+									<li data-name="Error Codes" >
+										<a href="/docs/api/getting_started/error_codes.html">Error Codes</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="error_codes" data-section="policy">
+									<li data-name="Error Codes" >
+										<a href="/docs/api/getting_started/error_codes.html">Error Codes</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="getting_a_token" data-section="policy">
+									<li data-name="Getting a Token" >
+										<a href="/docs/api/getting_started/getting_a_token.html">Getting a Token</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="getting_a_token" data-section="policy">
+									<li data-name="Getting a Token" >
+										<a href="/docs/api/getting_started/getting_a_token.html">Getting a Token</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="enabling_cors" data-section="policy">
+									<li data-name="Enabling CORS" >
+										<a href="/docs/api/getting_started/enabling_cors.html">Enabling CORS</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="enabling_cors" data-section="policy">
+									<li data-name="Enabling CORS" >
+										<a href="/docs/api/getting_started/enabling_cors.html">Enabling CORS</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="api_test_client" data-section="policy">
+									<li data-name="API Test Client" >
+										<a href="/docs/api/getting_started/api_test_client.html">API Test Client</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="api_test_client" data-section="policy">
+									<li data-name="API Test Client" >
+										<a href="/docs/api/getting_started/api_test_client.html">API Test Client</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+				
+			
+		
+			
+				
+				<h2>
+					Resources
+				</h2>
+
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="authn" data-section="policy">
+									<li data-name="Authentication" >
+										<a href="/docs/api/resources/authn.html">Authentication</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="authn" data-section="policy">
+									<li data-name="Authentication" >
+										<a href="/docs/api/resources/authn.html">Authentication</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="factors" data-section="policy">
+									<li data-name="Factors (MFA)" >
+										<a href="/docs/api/resources/factors.html">Factors (MFA)</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="factors" data-section="policy">
+									<li data-name="Factors (MFA)" >
+										<a href="/docs/api/resources/factors.html">Factors (MFA)</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="users" data-section="policy">
+									<li data-name="Users" >
+										<a href="/docs/api/resources/users.html">Users</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="users" data-section="policy">
+									<li data-name="Users" >
+										<a href="/docs/api/resources/users.html">Users</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="groups" data-section="policy">
+									<li data-name="Groups" >
+										<a href="/docs/api/resources/groups.html">Groups</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="groups" data-section="policy">
+									<li data-name="Groups" >
+										<a href="/docs/api/resources/groups.html">Groups</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="sessions" data-section="policy">
+									<li data-name="Sessions" >
+										<a href="/docs/api/resources/sessions.html">Sessions</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="sessions" data-section="policy">
+									<li data-name="Sessions" >
+										<a href="/docs/api/resources/sessions.html">Sessions</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="apps" data-section="policy">
+									<li data-name="Apps" >
+										<a href="/docs/api/resources/apps.html">Apps</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="apps" data-section="policy">
+									<li data-name="Apps" >
+										<a href="/docs/api/resources/apps.html">Apps</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="events" data-section="policy">
+									<li data-name="Events" >
+										<a href="/docs/api/resources/events.html">Events</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="events" data-section="policy">
+									<li data-name="Events" >
+										<a href="/docs/api/resources/events.html">Events</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+				
+			
+		
+			
+				
+		
+			
+				
+		
+	</ul>
+</div>
+</div>
+		
+	</aside>
+	
+	<div id="docs-body" class="body docs-body">
+		
+		<nav id="sticky-nav" class="sticky-nav--page">
+			
+			<a  href="/docs/guides/overview.html">
+				Guides
+			</a>
+			<a  class="active"  href="/docs/api/rest/design_principles.html">
+				API
+			</a>
+			<a  href="/docs/sdk/core/api.html">
+				SDKs
+			</a>
+			<a  href="/docs/examples/session_cookie.html">
+				Examples
+			</a>
+			
+		</nav>
+		
+		<a href="#docs-body" id="scroll-top-button">Scroll to Top</a>
+		
+		
+		<header>
+			<a href="docs/api/rest/policy.md" target="_blank" class="btn btn-default btn-sm btn-github"><i class="fa fa-github"></i> Edit on GitHub</a>
+			<h1 class="h3">Policy</h1>
+		</header>
+		
+		
+		<ul class="list-unstyled toc" id="markdown-toc">
+  <li><a href="#overview">Overview</a></li>
+  <li><a href="#policies">Policies</a>    <ul>
+      <li><a href="#policy-model-and-defaults">Policy Model and Defaults</a>        <ul>
+          <li><a href="#default-policies">Default Policies</a></li>
+          <li><a href="#policy-model">Policy Model</a></li>
+          <li><a href="#policy-object">Policy Object</a></li>
+          <li><a href="#people-object">People Object</a></li>
+          <li><a href="#group-condition-object">Group Condition Object</a></li>
+          <li><a href="#user-condition-object">User Condition Object</a></li>
+          <li><a href="#links-object">Links Object</a></li>
+        </ul>
+      </li>
+      <li><a href="#policy-operations">Policy Operations</a>        <ul>
+          <li><a href="#get-all-policies-by-type">Get All Policies by Type</a>            <ul>
+              <li><a href="#request-parameters">Request Parameters</a>                <ul>
+                  <li><a href="#request-example">Request Example</a></li>
+                  <li><a href="#response-example">Response Example</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#get-a-policy">Get a Policy</a>            <ul>
+              <li><a href="#request-parameters-1">Request Parameters</a>                <ul>
+                  <li><a href="#request-example-1">Request Example</a></li>
+                  <li><a href="#response-example-1">Response Example</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#create-a-policy">Create a Policy</a>            <ul>
+              <li><a href="#request-parameters-2">Request Parameters</a></li>
+              <li><a href="#request-example-2">Request Example</a>                <ul>
+                  <li><a href="#response-example-2">Response Example</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#update-a-policy">Update a Policy</a>            <ul>
+              <li><a href="#request-parameters-3">Request Parameters</a>                <ul>
+                  <li><a href="#request-example-3">Request Example</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#response-parameters">Response Parameters</a></li>
+          <li><a href="#delete-policy">Delete Policy</a>            <ul>
+              <li><a href="#request-parameters-4">Request Parameters</a></li>
+            </ul>
+          </li>
+          <li><a href="#response-parameters-1">Response Parameters</a></li>
+          <li><a href="#activate-a-policy">Activate a Policy</a>            <ul>
+              <li><a href="#request-parameters-5">Request Parameters</a></li>
+              <li><a href="#response-parameters-2">Response Parameters</a></li>
+            </ul>
+          </li>
+          <li><a href="#deactivate-a-policy">Deactivate a Policy</a>            <ul>
+              <li><a href="#request-parameters-6">Request Parameters</a></li>
+              <li><a href="#response-parameters-3">Response Parameters</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#rules">Rules</a>    <ul>
+      <li><a href="#rules-model-and-defaults">Rules Model and Defaults</a>        <ul>
+          <li><a href="#default-rules">Default Rules</a></li>
+          <li><a href="#rules-object">Rules Object</a></li>
+          <li><a href="#conditions">Conditions</a></li>
+          <li><a href="#actions">Actions</a></li>
+        </ul>
+      </li>
+      <li><a href="#rules-operations">Rules Operations</a>        <ul>
+          <li><a href="#get-policy-rules">Get Policy Rules</a>            <ul>
+              <li><a href="#request-parameters-7">Request Parameters</a>                <ul>
+                  <li><a href="#response-example-3">Response Example</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#get-a-rule">Get a Rule</a>            <ul>
+              <li><a href="#request-parameters-8">Request Parameters</a></li>
+              <li><a href="#response-parameters-4">Response Parameters</a></li>
+            </ul>
+          </li>
+          <li><a href="#create-rule">Create Rule</a>            <ul>
+              <li><a href="#request-parameters-9">Request Parameters</a>                <ul>
+                  <li><a href="#request-example-4">Request Example</a></li>
+                  <li><a href="#response-example-4">Response Example</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#update-a-rule">Update a Rule</a>            <ul>
+              <li><a href="#request-parameters-10">Request Parameters</a>                <ul>
+                  <li><a href="#request-example-5">Request Example</a></li>
+                  <li><a href="#response-example-5">Response Example</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#activate-a-rule">Activate a Rule</a>            <ul>
+              <li><a href="#request-parameters-11">Request Parameters</a></li>
+              <li><a href="#response-parameters-5">Response Parameters</a></li>
+            </ul>
+          </li>
+          <li><a href="#deactivate-a-rule">Deactivate a Rule</a>            <ul>
+              <li><a href="#request-parameters-12">Request Parameters</a></li>
+              <li><a href="#response-parameters-6">Response Parameters</a></li>
+            </ul>
+          </li>
+          <li><a href="#delete-a-rule">Delete a Rule</a>            <ul>
+              <li><a href="#request-parameters-13">Request Parameters</a></li>
+              <li><a href="#response-parameters-7">Response Parameters</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="overview">Overview</h1>
+
+<p>The Okta Policy API enables you to peform policy and rule operations. These operation apply to various policies including Okta Signon.</p>
+
+<p>This API supports the following <strong>policy operations</strong>:</p>
+
+<ul>
+  <li>Get all policies of a specific type</li>
+  <li>Create, read, update, and delete a policy</li>
+  <li>Activate and deactivate a policy</li>
+</ul>
+
+<p>This API supports the following <strong>rule operations</strong>:</p>
+
+<ul>
+  <li>Get all rules for a policy</li>
+  <li>Create, read, update, and delete a rule for a policy</li>
+  <li>Activate and deactivate a rule</li>
+</ul>
+
+<blockquote>
+  <p>This API is currently in <strong>Early Access (EA)</strong> status.</p>
+</blockquote>
+
+<h1 id="policies">Policies</h1>
+
+<h2 id="policy-model-and-defaults">Policy Model and Defaults</h2>
+
+<h3 id="default-policies">Default Policies</h3>
+
+<p>There is always a default policy created for each type of policy. The default policy applies to any users for whom other policies in the org do not apply. This ensures that there is always a policy to apply to a user in all situations. </p>
+
+<ul>
+  <li>
+    <p>A default policy is required and cannot be deleted.</p>
+  </li>
+  <li>
+    <p>The default policy is always the last policy in the priority order. Any added policies of this type have higher priority than the default policy. </p>
+  </li>
+  <li>
+    <p>The default policy always has one default rule that cannot be deleted. It is always the last rule in the priority order. If you add rules to the default policy, they have a higher priority than the default rule. For information on default rules, see <a href="#rules-model-and-defaults">Rules Model and Defaults</a>.</p>
+  </li>
+  <li>
+    <p>The <code>system</code> attribute determines whether a policy is created by a system or by a user.</p>
+  </li>
+</ul>
+
+<h3 id="policy-model">Policy Model</h3>
+
+<p>Policies and rules are ordered numerically by priority. This priority determines the order in which they are searched for a context match. The highest priority policy has a priorityOrder of 1.</p>
+
+<p>For example, assume the following conditions are in effect.</p>
+
+<ul>
+  <li>Rule A has priority 1 and applies to RADIUS VPN scenarios.</li>
+  <li>Rule B has priority 2 and applies to ON_NETWORK scenarios.</li>
+</ul>
+
+<p>Because Rule A has a higher priority, even though requests are coming from ON_NETWORK due to VPN,
+the action in Rule A is taken, and Rule B is not evaluated.</p>
+
+<h3 id="policy-object">Policy Object</h3>
+
+<p>The Policy model defines several attributes:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td>Identifier for the policy</td>
+      <td>String</td>
+      <td>No</td>
+      <td>Assigned</td>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>Policy type –  must be <code>OKTA_SIGN_ON</code></td>
+      <td>String</td>
+      <td>Yes</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>Name for the policy</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>description</td>
+      <td>Description for the policy</td>
+      <td>String</td>
+      <td>No</td>
+      <td>Null</td>
+    </tr>
+    <tr>
+      <td>priorityOrder</td>
+      <td>Priority for the policy</td>
+      <td>Int</td>
+      <td>No</td>
+      <td>Last / Lowest Priority</td>
+    </tr>
+    <tr>
+      <td>system</td>
+      <td>Whether or not the policy is the default</td>
+      <td>Boolean</td>
+      <td>No</td>
+      <td>false</td>
+    </tr>
+    <tr>
+      <td>status</td>
+      <td>Status of the policy: ACTIVE or INACTIVE</td>
+      <td>String</td>
+      <td>No</td>
+      <td>“ACTIVE”</td>
+    </tr>
+    <tr>
+      <td>created</td>
+      <td>Timestamp when the policy was created</td>
+      <td>Date</td>
+      <td>No</td>
+      <td>Assigned</td>
+    </tr>
+    <tr>
+      <td>lastUpdated</td>
+      <td>Timestamp when the policy was last modified</td>
+      <td>Date</td>
+      <td>No</td>
+      <td>Assigned</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="people-object">People Object</h3>
+
+<p>The people condition identifies users and groups that are used together. For policies, you can only include a group.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>groups</td>
+      <td>The group condition</td>
+      <td>Group Condition</td>
+      <td>No</td>
+      <td>Include Everyone</td>
+    </tr>
+    <tr>
+      <td>users</td>
+      <td>The user condition</td>
+      <td>User Condition</td>
+      <td>No</td>
+      <td>Empty</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="group-condition-object">Group Condition Object</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>include</td>
+      <td>The groups to be included</td>
+      <td>Collection of String</td>
+      <td>No</td>
+      <td>Everyone Group (if exclude is empty)</td>
+    </tr>
+    <tr>
+      <td>exclude</td>
+      <td>The groups to be excluded</td>
+      <td>Collection of String</td>
+      <td>No</td>
+      <td>Empty</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="user-condition-object">User Condition Object</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>include</td>
+      <td>The users to be included</td>
+      <td>Collection of String</td>
+      <td>No</td>
+      <td>Empty</td>
+    </tr>
+    <tr>
+      <td>exclude</td>
+      <td>The users to be excluded</td>
+      <td>Collection of String</td>
+      <td>No</td>
+      <td>Empty</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="links-object">Links Object</h3>
+
+<p>Specifies link relations (See <a href="http://tools.ietf.org/html/rfc5988">Web Linking</a>) available for the current policy.  The Links Object is used for dynamic discovery of related resources.  The Links Object is <strong>read-only</strong>.</p>
+
+<p>Specified link </p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Link Relation Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>self</td>
+      <td>The policy or rule</td>
+    </tr>
+    <tr>
+      <td>activate</td>
+      <td>Action to activate a policy or rule</td>
+    </tr>
+    <tr>
+      <td>deactivate</td>
+      <td>Action to deactivate a policy or rule</td>
+    </tr>
+    <tr>
+      <td>rules</td>
+      <td>Rules objects for a policy only</td>
+    </tr>
+    <tr>
+      <td>policy</td>
+      <td>Policy object for a rule only</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="policy-operations">Policy Operations</h2>
+
+<h3 class="api api-operation" id="get-all-policies-by-type">Get All Policies by Type</h3>
+
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies?type={type}</span></p>
+
+<h4 id="request-parameters">Request Parameters</h4>
+
+<p>The policy type described in the <a href="#policy-object">Policy Object</a> is required.</p>
+
+<h5 class="api api-request api-request-example" id="request-example">Request Example</h5>
+
+<p>GET api/v1/policies?type=OKTA_SIGN_ON</p>
+
+<h5 class="api api-response api-response-example" id="response-example">Response Example</h5>
+
+<pre><code class="language-json">{
+        "type": "OKTA_SIGN_ON",
+        "id": "00oewwEGGIFFQTUCFCVJ",
+        "status": "ACTIVE",
+        "name": "Legacy Policy",
+        "description": "The legacy policy contains any existing settings from the legacy Okta Sign On Policy",
+        "priorityOrder": 1,
+        "system": false,
+        "conditions": {
+            "people": {
+                "groups": {
+                    "include": [
+                        "00oewwEGGIFFQTUCFCVJ"
+                    ]
+                }
+            }
+        },
+        "created": "2014-10-09T00:06:07.000Z",
+        "lastUpdated": "2014-10-09T00:06:07.000Z",
+        "_links": {
+            "self": {
+                "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ",
+                "hints": {
+                    "allow": [
+                        "GET",
+                        "PUT",
+                        "DELETE"
+                    ]
+                }
+            },
+            "deactivate": {
+                "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/lifecycle/deactivate",
+                "hints": {
+                    "allow": [
+                        "POST"
+                    ]
+                }
+            },
+            "rules": {
+                "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/rules",
+                "hints": {
+                    "allow": [
+                        "GET",
+                        "POST"
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "type": "OKTA_SIGN_ON",
+        "id": "11oewwEGGIFFQTUCFCVJ",
+        "status": "ACTIVE",
+        "name": "Default Policy",
+        "description": "The default policy applies in all situations if no other policy applies.",
+        "priorityOrder": 2,
+        "system": true,
+        "conditions": {
+            "people": {
+                "groups": {
+                    "include": [
+                        "01oewwEGGIFFQTUCFCVJ"
+                    ]
+                }
+            }
+        },
+        "created": "2014-10-09T00:06:06.000Z",
+        "lastUpdated": "2014-10-09T00:06:07.000Z",
+        "_links": {
+            "self": {
+                "href": "https:/your-domain.okta.com/api/v1/policies/01oewwEGGIFFQTUCFCVJ",
+                "hints": {
+                    "allow": [
+                        "GET",
+                        "PUT"
+                    ]
+                }
+            },
+            "rules": {
+                "href": "https:/your-domain.okta.com/api/v1/policies/01oewwEGGIFFQTUCFCVJ/rules",
+                "hints": {
+                    "allow": [
+                        "GET",
+                        "POST"
+                    ]
+                }
+            }
+        }
+    }
+</code></pre>
+
+<h3 class="api api-operation" id="get-a-policy">Get a Policy</h3>
+
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/{id}</span></p>
+
+<p>Gets an existing policy.</p>
+
+<h4 id="request-parameters-1">Request Parameters</h4>
+
+<p>The policy id described in the <a href="#policy-object">Policy Object</a> is required.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-1">Request Example</h5>
+
+<p>GET api/v1/policies/00oewwEGGIFFQTUCFCVJ</p>
+
+<h5 class="api api-response api-response-example" id="response-example-1">Response Example</h5>
+
+<pre><code class="language-json">{
+    "type": "OKTA_SIGN_ON",
+    "id": "00oewwEGGIFFQTUCFCVJ",
+    "status": "ACTIVE",
+    "name": "Legacy Policy",
+    "description": "The legacy policy contains any existing settings from the legacy Okta Sign On Policy",
+    "priorityOrder": 1,
+    "system": false,
+    "conditions": {
+        "people": {
+            "groups": {
+                "include": [
+                    "00oewwEGGIFFQTUCFCVJ"
+                ]
+            }
+        }
+    },
+    "created": "2014-10-09T00:06:07.000Z",
+    "lastUpdated": "2014-10-09T00:06:07.000Z",
+    "_links": {
+        "self": {
+            "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ",
+            "hints": {
+                "allow": [
+                    "GET",
+                    "PUT",
+                    "DELETE"
+                ]
+            }
+        },
+        "deactivate": {
+            "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/lifecycle/deactivate",
+            "hints": {
+                "allow": [
+                    "POST"
+                ]
+            }
+        },
+        "rules": {
+            "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/rules",
+            "hints": {
+                "allow": [
+                    "GET",
+                    "POST"
+                ]
+            }
+        }
+    }
+}
+</code></pre>
+
+<h3 class="api api-operation" id="create-a-policy">Create a Policy</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies</span></p>
+
+<p>Creates a new policy with no rules.</p>
+
+<h4 id="request-parameters-2">Request Parameters</h4>
+
+<p>The policy name, description, and type described in the <a href="#policy-object">Policy Object</a> are required. The policy name cannot be the same as the name of an existing policy.</p>
+
+<h4 id="request-example-2">Request Example</h4>
+
+<pre><code class="language-json">{
+  "name": "New Okta Sign On Policy",
+  "description": "API created policy",
+  "type": "OKTA_SIGN_ON"
+}
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-2">Response Example</h5>
+
+<pre><code class="language-json">{
+    "type": "OKTA_SIGN_ON",
+    "id": "00oewwEGGIFFQTUCFCVJ",
+    "status": "ACTIVE",
+    "name": "New Okta Sign On Policy",
+    "description": "API created policy",
+    "priorityOrder": 2,
+    "system": false,
+    "conditions": {
+        "people": {
+            "groups": {
+                "include": [
+                    "00oewwEGGIFFQTUCFCVJ"
+                ]
+            }
+        }
+    },
+    "created": "2014-10-13T22:53:12.000Z",
+    "lastUpdated": "2014-10-13T22:53:12.000Z",
+    "_links": {
+        "self": {
+            "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ",
+            "hints": {
+                "allow": [
+                    "GET",
+                    "PUT",
+                    "DELETE"
+                ]
+            }
+        },
+        "deactivate": {
+            "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/lifecycle/deactivate",
+            "hints": {
+                "allow": [
+                    "POST"
+                ]
+            }
+        },
+        "rules": {
+            "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/rules",
+            "hints": {
+                "allow": [
+                    "GET",
+                    "POST"
+                ]
+            }
+        }
+    }
+}
+</code></pre>
+
+<h3 class="api api-operation" id="update-a-policy">Update a Policy</h3>
+
+<p><span class="api-uri-template api-uri-put"><span class="api-label">PUT </span> /api/v1/policies/{id}</span></p>
+
+<p>Updates an existing policy.</p>
+
+<h4 id="request-parameters-3">Request Parameters</h4>
+
+<p>The policy id described in the <a href="#policy-object">Policy Object</a> is required.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-3">Request Example</h5>
+
+<p>The example below shows the required items. You can add other items in the <a href="#policy-object">Policy Object</a> as desired.</p>
+
+<p><strong>Note:</strong> This is a strict PUT. Any missing item is set to its default value. For example if <code>priorityOrder</code> is missing from the policy body, the item moves to the lowest priority order in the policy. If the group assignment is missing, the policy is reassigned to the Everyone group.</p>
+
+<pre><code class="language-json">{
+  "name": "My Updated Policy",
+  "description": "This is my policy",
+  "type": "OKTA_SIGN_ON"
+}
+</code></pre>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<pre><code class="language-json">{
+    "type": "OKTA_SIGN_ON",
+    "id": "00oewwEGGIFFQTUCFCVJ",
+    "status": "ACTIVE",
+    "name": "My Updated Policy",
+    "description": "This is my policy",
+    "priorityOrder": 2,
+    "system": false,
+    "conditions": {
+        "people": {
+            "groups": {
+                "include": [
+                    "00g6fud2wSIIWCLSPYVR"
+                ]
+            }
+        }
+    },
+    "created": "2014-10-13T22:53:12.000Z",
+    "lastUpdated": "2014-10-13T23:55:46.000Z",
+    "_links": {
+        "self": {
+            "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ",
+            "hints": {
+                "allow": [
+                    "GET",
+                    "PUT",
+                    "DELETE"
+                ]
+            }
+        },
+        "deactivate": {
+            "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/lifecycle/deactivate",
+            "hints": {
+                "allow": [
+                    "POST"
+                ]
+            }
+        },
+        "rules": {
+            "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/rules",
+            "hints": {
+                "allow": [
+                    "GET",
+                    "POST"
+                ]
+            }
+        }
+    }
+}
+</code></pre>
+
+<h3 class="api api-operation" id="delete-policy">Delete Policy</h3>
+
+<p><span class="api-uri-template api-uri-delete"><span class="api-label">Delete </span> /api/v1/policies/{id}</span></p>
+
+<p>Deletes a policy and all rules associated with it.</p>
+
+<h4 id="request-parameters-4">Request Parameters</h4>
+
+<p>The policy id described in the <a href="#policy-object">Policy Object</a> is required.</p>
+
+<h3 id="response-parameters-1">Response Parameters</h3>
+
+<p>None. Status 204 No Content is returned when the deletion is successful.</p>
+
+<h3 class="api api-operation" id="activate-a-policy">Activate a Policy</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST </span>/api/v1/policies/{id}/lifecycle/activate</span></p>
+
+<p>Activates the specified policy.</p>
+
+<h4 id="request-parameters-5">Request Parameters</h4>
+
+<p>The policy id described in the <a href="#policy-object">Policy Object</a> is required.</p>
+
+<h4 id="response-parameters-2">Response Parameters</h4>
+
+<p>None. Status 204 No Content is returned when the activation is successful.</p>
+
+<h3 class="api api-operation" id="deactivate-a-policy">Deactivate a Policy</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST </span>/api/v1/policies/{id}/lifecycle/deactivate</span></p>
+
+<p>Deactivates the specified policy.</p>
+
+<h4 id="request-parameters-6">Request Parameters</h4>
+
+<p>The policy id described in the <a href="#policy-object">Policy Object</a> is required.</p>
+
+<h4 id="response-parameters-3">Response Parameters</h4>
+
+<p>None. Status 204 No Content is returned when the deactivation is successful.</p>
+
+<h1 id="rules">Rules</h1>
+
+<h2 id="rules-model-and-defaults">Rules Model and Defaults</h2>
+
+<h3 id="default-rules">Default Rules</h3>
+
+<ul>
+  <li>
+    <p>Only the default policy contains a default rule. The default rule cannot be edited or deleted.</p>
+  </li>
+  <li>
+    <p>The default rule is required and always is the last rule in the priority order. If you add rules to the default policy, they have a higher priority than the default rule.</p>
+  </li>
+  <li>
+    <p>The <code>system</code> attribute determines whether a rule is created by a system or by a user. The default rule is the only rule that has this attribute.</p>
+  </li>
+</ul>
+
+<h3 id="rules-object">Rules Object</h3>
+
+<p>The Rules model defines several attributes:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td>Identifier for the rule</td>
+      <td>String</td>
+      <td>No</td>
+      <td>Assigned</td>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>Rule type –  must be <code>SIGN_ON</code></td>
+      <td>String</td>
+      <td>Yes</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>Name for the rule</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>status</td>
+      <td>Status of the rule: <code>ACTIVE</code> or <code>INACTIVE</code></td>
+      <td>String</td>
+      <td>No</td>
+      <td><code>ACTIVE</code></td>
+    </tr>
+    <tr>
+      <td>priorityOrder</td>
+      <td>Priority for the rule</td>
+      <td>Int</td>
+      <td>No</td>
+      <td>Last / Lowest Priority</td>
+    </tr>
+    <tr>
+      <td>system</td>
+      <td>Whether or not the rule is the default</td>
+      <td>Boolean</td>
+      <td>No</td>
+      <td>false</td>
+    </tr>
+    <tr>
+      <td>created</td>
+      <td>Timestamp when the rule was created</td>
+      <td>Date</td>
+      <td>No</td>
+      <td>Assigned</td>
+    </tr>
+    <tr>
+      <td>lastUpdated</td>
+      <td>Timestamp when the rule was last modified</td>
+      <td>Date</td>
+      <td>No</td>
+      <td>Assigned</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="conditions">Conditions</h3>
+
+<p>Rule conditions include the people, user, and group conditions from the policy model in addition to:</p>
+
+<p><strong>Network Condition Body</strong></p>
+
+<p>Specifies a network segment.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>connection</td>
+      <td><code>ANYWHERE</code>, <code>ON_NETWORK</code>, or <code>OFF_NETWORK</code></td>
+      <td>String</td>
+      <td>No</td>
+      <td>Empty</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>AuthContext Condition Body</strong></p>
+
+<p>Specifies an authentication entry point.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>authType</td>
+      <td><code>ANY</code> or <code>RADIUS</code></td>
+      <td>String</td>
+      <td>No</td>
+      <td>Empty</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="actions">Actions</h3>
+
+<p><strong>Signon Action</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>access</td>
+      <td><code>ALLOW</code> or <code>DENY</code></td>
+      <td>String</td>
+      <td>YES</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>requireFactor</td>
+      <td><code>true</code> or <code>false</code></td>
+      <td>Boolean</td>
+      <td>NO</td>
+      <td><code>false</code></td>
+    </tr>
+    <tr>
+      <td>factorPromptMode</td>
+      <td><code>DEVICE</code>, <code>SESSION</code> or <code>ALWAYS</code></td>
+      <td>String</td>
+      <td>When requireFactor = <code>true</code></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>factorLifetime</td>
+      <td>How long until factor times out</td>
+      <td>Int</td>
+      <td>When factorPromptMode = <code>SESSION</code></td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="rules-operations">Rules Operations</h2>
+
+<h3 class="api api-operation" id="get-policy-rules">Get Policy Rules</h3>
+
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/{policyId}/rules</span></p>
+
+<p>Retrieves all rules for a specified policy. </p>
+
+<h4 id="request-parameters-7">Request Parameters</h4>
+
+<p>The policy id described in the <a href="#policy-object">Policy Object</a> is required.</p>
+
+<h5 class="api api-response api-response-example" id="response-example-3">Response Example</h5>
+
+<pre><code class="language-json">{
+        "type": "SIGN_ON",
+        "id": "00oewwEGGIFFQTUCFRUL",
+        "status": "ACTIVE",
+        "name": "Legacy Rule",
+        "priorityOrder": 1,
+        "created": "2014-10-09T00:06:07.000Z",
+        "lastUpdated": "2014-10-09T00:06:07.000Z",
+        "system": false,
+        "conditions": {
+            "people": {
+                "users": {
+                    "exclude": []
+                }
+            },
+            "network": {
+                "connection": "ANYWHERE"
+            },
+            "authContext": {
+                "authType": "ANY"
+            }
+        },
+        "actions": {
+            "signon": {
+                "access": "ALLOW",
+                "requireFactor": true,
+                "factorPromptMode": "ALWAYS"
+            }
+        }
+    }
+</code></pre>
+
+<h3 class="api api-operation" id="get-a-rule">Get a Rule</h3>
+
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/{policyId}/rules/{ruleId}</span></p>
+
+<p>Retrieves the specified rule for a specified policy. The returned <code>id</code> is the rule id.</p>
+
+<h4 id="request-parameters-8">Request Parameters</h4>
+
+<p>The policy id described in the <a href="#policy-object">Policy Object</a> and the rule id described in the <a href="#rules-object">Rules Object</a> are both required.</p>
+
+<h4 id="response-parameters-4">Response Parameters</h4>
+
+<pre><code class="language-json">{
+    "type": "SIGN_ON",
+    "id": "0pr2saywjsXMDPGASRRH",
+    "status": "ACTIVE",
+    "name": "Legacy Rule",
+    "priorityOrder": 1,
+    "created": "2014-10-09T00:06:07.000Z",
+    "lastUpdated": "2014-10-09T00:06:07.000Z",
+    "system": false,
+    "conditions": {
+        "people": {
+            "users": {
+                "exclude": []
+            }
+        },
+        "network": {
+            "connection": "ANYWHERE"
+        },
+        "authContext": {
+            "authType": "ANY"
+        }
+    },
+    "actions": {
+        "signon": {
+            "access": "ALLOW",
+            "requireFactor": true,
+            "factorPromptMode": "ALWAYS"
+        }
+    }
+}
+</code></pre>
+
+<h3 class="api api-operation" id="create-rule">Create Rule</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/{policyId}/rules</span></p>
+
+<p>Creates a new rule for a specified policy. The returned <code>id</code> is the rule id.</p>
+
+<h4 id="request-parameters-9">Request Parameters</h4>
+
+<p>The policy id described in the <a href="#policy-object">Policy Object</a> is required.</p>
+
+<h5 class="api api-resquest api-request-example" id="request-example-4">Request Example</h5>
+
+<pre><code class="language-json"> {
+  "name": "mySignOnPolicyRule",
+  "type": "SIGN_ON",
+  "conditions": {
+    "network": {
+      "connection": "OFF_NETWORK"
+    },
+    "authContext": {
+      "authType": "RADIUS"
+    }
+  },
+  "actions": {
+    "signon": {
+      "access": "ALLOW",
+      "requireFactor": true,
+      "factorPromptMode": "SESSION",
+      "factorLifetime": 1
+    }
+  }
+}
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-4">Response Example</h5>
+
+<pre><code class="language-json">{
+    "type": "SIGN_ON",
+    "id": "0pr2saywjsXMDPGASRRH",
+    "status": "ACTIVE",
+    "name": "mySignOnPolicyRule",
+    "priorityOrder": 2,
+    "created": "2014-10-14T17:17:42.000Z",
+    "lastUpdated": "2014-10-14T17:17:42.000Z",
+    "system": false,
+    "conditions": {
+        "network": {
+            "connection": "OFF_NETWORK"
+        },
+        "authContext": {
+            "authType": "RADIUS"
+        }
+    },
+    "actions": {
+        "signon": {
+            "access": "ALLOW",
+            "requireFactor": true,
+            "factorPromptMode": "SESSION",
+            "factorLifetime": 1
+        }
+    }
+} 
+</code></pre>
+
+<h3 class="api api-operation" id="update-a-rule">Update a Rule</h3>
+
+<p><span class="api-uri-template api-uri-put"><span class="api-label">PUT </span> /api/v1/policies/{policyId}/rules/{ruleId}</span></p>
+
+<p>Updates the specified rule for the specified policy. </p>
+
+<h4 id="request-parameters-10">Request Parameters</h4>
+
+<p>The policy id described in the <a href="#policy-object">Policy Object</a> and the rule id described in the <a href="#rules-object">Rules Object</a> are both required.</p>
+
+<h5 class="api api-resquest api-request-example" id="request-example-5">Request Example</h5>
+
+<p><strong>Note:</strong> This is a strict PUT. Any missing item is set to its default value. For example if <code>priorityOrder</code> is missing, the item moves to the lowest priority order in the policy. </p>
+
+<pre><code class="language-json">{
+  "name": "mySignOnPolicyRule",
+  "type": "SIGN_ON",
+  "conditions": {
+    "people": {
+      "users": {
+        "exclude": []
+      }
+    },
+    "network": {
+      "connection": "OFF_NETWORK"
+    },
+    "authContext": {
+      "authType": "RADIUS"
+    }
+  },
+  "actions": {
+    "signon": {
+      "access": "ALLOW",
+      "requireFactor": false,
+      "factorPromptMode": "SESSION",
+      "factorLifetime": 1
+    }
+  }
+}
+</code></pre>
+
+<h5 class="api api-response api-response-example" id="response-example-5">Response Example</h5>
+
+<pre><code class="language-json">{
+    "type": "SIGN_ON",
+    "id": "0pr2t4by8wWYZMLJMGEM",
+    "status": "ACTIVE",
+    "name": "mySignOnPolicyRule",
+    "priorityOrder": 2,
+    "created": "2014-10-14T17:17:42.000Z",
+    "lastUpdated": "2014-10-14T20:51:24.000Z",
+    "system": false,
+    "conditions": {
+        "people": {
+            "users": {
+                "exclude": []
+            }
+        },
+        "network": {
+            "connection": "OFF_NETWORK"
+        },
+        "authContext": {
+            "authType": "RADIUS"
+        }
+    },
+    "actions": {
+        "signon": {
+            "access": "ALLOW",
+            "requireFactor": false
+        }
+    }
+}
+</code></pre>
+
+<h3 class="api api-operation" id="activate-a-rule">Activate a Rule</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/{policyId}/rules/{ruleId}/lifecycle/activate</span></p>
+
+<p>Activates the specified rule for the specified policy. </p>
+
+<h4 id="request-parameters-11">Request Parameters</h4>
+
+<p>The policy id described in the <a href="#policy-object">Policy Object</a> and the rule id described in the <a href="#rules-object">Rules Object</a> are both required.</p>
+
+<h4 id="response-parameters-5">Response Parameters</h4>
+
+<p>None. Status 204 No Content is returned when the activation is successful.</p>
+
+<h3 class="api api-operation" id="deactivate-a-rule">Deactivate a Rule</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/{policyId}/rules/{ruleId}/lifecycle/deactivate</span></p>
+
+<p>Deactivates the specified rule for the specified policy. </p>
+
+<h4 id="request-parameters-12">Request Parameters</h4>
+
+<p>The policy id described in the <a href="#policy-object">Policy Object</a> and the rule id described in the <a href="#rules-object">Rules Object</a> are both required.</p>
+
+<h4 id="response-parameters-6">Response Parameters</h4>
+
+<p>None. Status 204 No Content is returned when the deactivation is successful.</p>
+
+<h3 class="api api-operation" id="delete-a-rule">Delete a Rule</h3>
+
+<p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE </span> /api/v1/policies/{policyId}/rules/{ruleId}</span></p>
+
+<p>Deletes the specified rule for the specified policy. </p>
+
+<h4 id="request-parameters-13">Request Parameters</h4>
+
+<p>TThe policy id described in the <a href="#policy-object">Policy Object</a> and the rule id described in the <a href="#rules-object">Rules Object</a> are both required.</p>
+
+<h4 id="response-parameters-7">Response Parameters</h4>
+
+<p>None. Status 204 No Content is returned when the deletion is successful.</p>
+
+
+		
+		
+		
+
+		
+		
+
+			<ul class="list-unstyled docs-index-list">
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li data-name="Design Principles">
+					<a href="/docs/api/getting_started/design_principles.html">Design Principles</a>
+					<div class="excerpt">Versioning Compatibility rules for input parameters Compatibility rules for JSON responses URL Namespace Media Types HTTP Verbs GET POST PUT DELETE Errors Authentication Pagination Link Header Filtering Operators Attribute Operators...</div>
+				</li>
+				
+				
+				
+				
+				
+				
+				<li data-name="Design Principles">
+					<a href="/docs/api/getting_started/design_principles.html">Design Principles</a>
+					<div class="excerpt">Versioning Compatibility rules for input parameters Compatibility rules for JSON responses URL Namespace Media Types Character Sets HTTP Verbs GET POST PUT DELETE Errors Authentication Pagination Link Header Filtering Operators...</div>
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li data-name="Error Codes">
+					<a href="/docs/api/getting_started/error_codes.html">Error Codes</a>
+					<div class="excerpt">Overview Okta Error Codes Listed by Error Code Okta Error Codes Listed by HTTP Return Code Overview This document provides further information about the errors that the Okta API returns....</div>
+				</li>
+				
+				
+				
+				
+				
+				
+				<li data-name="Error Codes">
+					<a href="/docs/api/getting_started/error_codes.html">Error Codes</a>
+					<div class="excerpt">Overview Okta Error Codes Listed by Error Code Okta Error Codes Listed by HTTP Return Code Overview This document provides further information about the errors that the Okta API returns....</div>
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li data-name="Getting a Token">
+					<a href="/docs/api/getting_started/getting_a_token.html">Getting a Token</a>
+					<div class="excerpt">Overview Token Expiration Token Deactivation Overview Administrators can generate tokens to access the API via the Security &gt; API section of the admin application. Note, tokens generated by this mechanism...</div>
+				</li>
+				
+				
+				
+				
+				
+				
+				<li data-name="Getting a Token">
+					<a href="/docs/api/getting_started/getting_a_token.html">Getting a Token</a>
+					<div class="excerpt">Overview Token Expiration Token Deactivation Overview Administrators can generate tokens to access the API via the Security &gt; API section of the admin application. Note, tokens generated by this mechanism...</div>
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li data-name="Enabling CORS">
+					<a href="/docs/api/getting_started/enabling_cors.html">Enabling CORS</a>
+					<div class="excerpt">Overview API Support Browser Support Granting Cross-Origin Access to Websites Testing Request Examples XMLHttpRequest jQuery Response Example Chrome Safari Firefox Internet Explorer Additional Resources Overview Cross-Origin Resource Sharing (CORS) is...</div>
+				</li>
+				
+				
+				
+				
+				
+				
+				<li data-name="Enabling CORS">
+					<a href="/docs/api/getting_started/enabling_cors.html">Enabling CORS</a>
+					<div class="excerpt">Overview API Support Browser Support Granting Cross-Origin Access to Websites Testing Request Examples XMLHttpRequest jQuery Response Example Chrome Safari Firefox Internet Explorer Additional Resources Overview Cross-Origin Resource Sharing (CORS) is...</div>
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li data-name="API Test Client">
+					<a href="/docs/api/getting_started/api_test_client.html">API Test Client</a>
+					<div class="excerpt">Postman Prerequisites Setup Collections Sample Requests Postman Postman is an awesome REST API test client that a lot of people at Okta use to test the Okta API. We have...</div>
+				</li>
+				
+				
+				
+				
+				
+				
+				<li data-name="API Test Client">
+					<a href="/docs/api/getting_started/api_test_client.html">API Test Client</a>
+					<div class="excerpt">Postman Prerequisites Setup Collections Sample Requests Postman Postman is an awesome REST API test client that a lot of people at Okta use to test the Okta API. We have...</div>
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</ul>
+		
+
+		
+		
+
+			<ul class="list-unstyled docs-index-list">
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li data-name="Authentication">
+					<a href="/docs/api/resources/authn.html">Authentication</a>
+					<div class="excerpt">Overview Authentication Model Authentication Status Tokens State Token Recovery Token Session Token Factor Result Links Object Embedded Resources User Object User Profile Object Recovery Question Object Factor Object Factor Embedded...</div>
+				</li>
+				
+				
+				
+				
+				
+				
+				<li data-name="Authentication">
+					<a href="/docs/api/resources/authn.html">Authentication</a>
+					<div class="excerpt">Overview Authentication Model Authentication Status Tokens State Token Recovery Token Session Token Factor Result Links Object Embedded Resources User Object User Profile Object Recovery Question Object Factor Object Factor Embedded...</div>
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li data-name="Factors (MFA)">
+					<a href="/docs/api/resources/factors.html">Factors (MFA)</a>
+					<div class="excerpt">Overview Factor Model Factor Type Provider Type Supported Factors Factor Profile Object Question Profile SMS Profile TOTP Profile Links Object Embedded Resources TOTP Factor Activation Object Factor Verify Result Object...</div>
+				</li>
+				
+				
+				
+				
+				
+				
+				<li data-name="Factors (MFA)">
+					<a href="/docs/api/resources/factors.html">Factors (MFA)</a>
+					<div class="excerpt">Overview Factor Model Factor Type Provider Type Supported Factors Factor Profile Object Question Profile SMS Profile TOTP Profile Links Object Embedded Resources TOTP Factor Activation Object Factor Verify Result Object...</div>
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li data-name="Users">
+					<a href="/docs/api/resources/users.html">Users</a>
+					<div class="excerpt">* Will be replaced with the ToC {:toc .list-unstyled .toc} ## Overview The Okta User API provides operations to manage users in your organization. ## User Model ### Example ~~~...</div>
+				</li>
+				
+				
+				
+				
+				
+				
+				<li data-name="Users">
+					<a href="/docs/api/resources/users.html">Users</a>
+					<div class="excerpt">* Will be replaced with the ToC {:toc .list-unstyled .toc} ## Overview The Okta User API provides operations to manage users in your organization. ## User Model ### Example ~~~...</div>
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li data-name="Groups">
+					<a href="/docs/api/resources/groups.html">Groups</a>
+					<div class="excerpt">Overview Group Model Example Group Attributes Profile Object ObjectClass: okta:user_group ObjectClass: okta:windows_security_principal Links Object Group Operations Add Group Request Parameters Response Parameters Request Example Response Example Get Group Request Parameters...</div>
+				</li>
+				
+				
+				
+				
+				
+				
+				<li data-name="Groups">
+					<a href="/docs/api/resources/groups.html">Groups</a>
+					<div class="excerpt">Overview Group Model Example Group Attributes Profile Object ObjectClass: okta:user_group ObjectClass: okta:windows_security_principal Links Object Group Operations Add Group Request Parameters Response Parameters Request Example Response Example Get Group Request Parameters...</div>
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li data-name="Sessions">
+					<a href="/docs/api/resources/sessions.html">Sessions</a>
+					<div class="excerpt">* Will be replaced with the ToC {:toc .list-unstyled .toc} ## Overview Okta uses a cookie-based authentication mechanism to maintain a [user's](users.html) authentication session across web requests. The Okta Session...</div>
+				</li>
+				
+				
+				
+				
+				
+				
+				<li data-name="Sessions">
+					<a href="/docs/api/resources/sessions.html">Sessions</a>
+					<div class="excerpt">* Will be replaced with the ToC {:toc .list-unstyled .toc} ## Overview Okta uses a cookie-based authentication mechanism to maintain a [user's](users.html) authentication session across web requests. The Okta Session...</div>
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li data-name="Apps">
+					<a href="/docs/api/resources/apps.html">Apps</a>
+					<div class="excerpt">Overview The Okta Application API provides operations to manage applications and/or assignments to users or groups for your organization. Application Model Example { "id": "0oabhnUQFYHMBNVSVXMV", "name": "template_saml_2_0", "label": "Example SAML...</div>
+				</li>
+				
+				
+				
+				
+				
+				
+				<li data-name="Apps">
+					<a href="/docs/api/resources/apps.html">Apps</a>
+					<div class="excerpt">Overview Application Model Example Application Attributes App Names &amp; Settings Features SignOn Modes Accessibility Object Visibility Object Hide Object AppLinks Object Application Credentials Object Authentication Schemes UserName Template Object Built-In...</div>
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li data-name="Events">
+					<a href="/docs/api/resources/events.html">Events</a>
+					<div class="excerpt">Overview Event Model Example Attributes Action Object Action Categories Action ObjectTypes Application Authentication Application User Management Application Group Management Delegated Authentication Rich Client Authentication Admin Appplication Applications Credential Recovery Application...</div>
+				</li>
+				
+				
+				
+				
+				
+				
+				<li data-name="Events">
+					<a href="/docs/api/resources/events.html">Events</a>
+					<div class="excerpt">Overview Event Model Example Attributes Action Object Action Categories Action ObjectTypes Application Authentication Application User Management Application Group Management Delegated Authentication Rich Client Authentication Admin Appplication Applications Credential Recovery Application...</div>
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</ul>
+		
+
+		
+		
+
+		
+		
+
+		
+		
+	</div>
+</section>
+		
+		
+			
+	</div>
+	
+	<footer class="site-footer">
+	<div class="wrap">
+	
+		<ul>
+			<li><a href="#">Okta.com</a></li>
+			<li><a href="#">Terms & Conditions</a></li>
+			<li><a href="#">Privacy Policy</a></li>
+			<li><a href="#">Contact Sales</a></li>
+			<li><a href="#">Contact Support</a></li>
+		</ul>
+		
+		<ul class="social-links"">
+			<li><a href="http://twitter.com/okta">
+				<svg viewBox="0 0 100 82"><use xlink:href="#shape-twitter"></use></svg>
+			</a></li>
+			<li><a href="http://www.facebook.com/oktaidentity">
+				<svg viewBox="-23 0 100 96"><use xlink:href="#shape-facebook"></use></svg>
+			</a></li>
+			<li><a href="http://www.linkedin.com/company/okta-inc.">
+				<svg viewBox="0 1 100 96"><use xlink:href="#shape-linkedin"></use></svg>
+			</a></li>
+			<li><a href="http://www.youtube.com/user/OktaInc">
+				<svg viewBox="0 0 100 70"><use xlink:href="#shape-youtube"></use></svg>
+			</a></li>
+			<li><a href="http://plus.google.com/u/0/108139509898948278735">
+				<svg viewBox="0 0 100 85"><use xlink:href="#shape-googleplus"></use></svg>
+			</a></li>
+			<li><a href="http://feeds.feedburner.com/OktaBlog">
+				<svg viewBox="0 0 100 100"><use xlink:href="#shape-rss"></use></svg>
+			</a></li>
+		</ul>
+	
+	</div>
+</footer>
+
+	
+</body>
+	
+</html>
