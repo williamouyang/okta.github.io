@@ -34,3 +34,5 @@ reload_views.rb
 
 .bundle
 bin/*
+npm-debug.log
+.sass-cache
