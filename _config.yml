@@ -13,6 +13,9 @@ gems:
 # -- standard exclusions
 exclude: [Gemfile, Gemfile.lock, README.md]
 
+source: _source
+destination: _site
+
 markdown: kramdown
 markdown_ext: md
 

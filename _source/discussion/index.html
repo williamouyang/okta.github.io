@@ -1,0 +1,31 @@
+---
+layout:   master
+title:    Discussions
+js: discussion
+css: page-discussion
+valprop: {
+	title: "Discussions",
+	description: "The Okta team actively answers questions on Stack Overflow throughout the day. Please use this forum to post any questions you have.",
+	cta_label: "Go to Stack Overflow",
+	show_cta: true
+}
+cta_link: "http://stackoverflow.com/search?q=okta"
+show_bottom_cta: true
+---
+
+<section class="section--full-width text-align--center">
+	<div class="wrap">
+
+		<form class="form--discussion" target="_blank" action="http://stackoverflow.com/search">
+			<span class="input-group-addon search-icon"></span>
+			<input class="input--search" id="focusedInput" type="text" placeholder="Search the Stack Overflow forum" autocomplete="on" name="q">
+		</form>
+
+		<h3 class="recent-subtitle"><strong>Popular Discussions on Stack Overflow</strong></h3>
+
+		<div id="stack-overflow" class="recent-discussions">
+
+		</div>
+	</div>
+</section>
+

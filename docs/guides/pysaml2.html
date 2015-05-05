@@ -1,0 +1,2043 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<head>
+	
+	<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="/favicon.ico">
+	<title>PySAML2 (Python) &raquo; Okta Developer</title>
+	<meta name="description" content="Guidance on how to SAML-enable your Python application using open source PySAML2.">
+
+	<link rel="canonical" href="http://developer.okta.com/docs/guides/pysaml2.html">
+
+	<link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/assets/css/animate.css">
+	<link rel="stylesheet" href="/assets/css/master.css">
+	<link rel="stylesheet" href="/assets/css/layout-docs.css">
+	<link rel="stylesheet" href="/assets/css/responsive.css">
+
+	<script type="text/javascript" defer="defer" src="/assets/js/jquery.min.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/tabber.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/pacnav.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/master.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/scrollspy.js"></script>
+
+	<script type="text/javascript" defer="defer" src="/assets/js/docs.js"></script>
+	<!-- TypeKit -->
+	<script src="//use.typekit.net/pls8pog.js"></script>
+	<script>try{Typekit.load();}catch(e){}</script>
+	<!-- GA -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-15777010-3', 'auto');
+		ga('send', 'pageview');
+	</script>
+</head>
+
+	
+<body>
+	
+	<header class="site-header">
+	<div class="wrap">
+
+		<h1 class="site-title"><a href="/">Okta Developer</a></h1>
+
+		<nav id="primary-nav" class="site-nav loaded">
+			<ul>
+				<li><a href="/product/">Product</a></li>
+				<li><a href="/pricing/">Pricing</a></li>
+				<li><a href="/customers/">Customers</a></li>
+				<li><a href="/docs/guides/overview.html">Docs</a></li>
+				<li><a href="/discussion/">Discussion</a></li>
+				<li class="has-dropdown"><a href="#">Support</a>
+					<div class="dropdown-window">
+						<p class="stack-overflow">
+							Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a>.<br />
+							We'll answer it within 24 hours.
+						</p>
+						<p class="email">
+							Email us:<br />
+							<a href="mailto:developers@okta.com">developers@okta.com</a>
+						</p>
+						<p class="tel">
+							Call us:<br />
+							<a href="tel:18777227871">1 (877) 722-7871</a>
+						</p>
+					</div>
+				</li>
+			</ul>
+		</nav>
+
+		<a href="/search" class="gsc-trigger search-button"></a>
+
+
+		<div class="search-container">
+			<div class="gsc-container">
+				<script defer="defer">
+					(function() {
+						var cx = '005121479574088032773:mmh_vhv8uns';
+						var gcse = document.createElement('script');
+						gcse.type = 'text/javascript';
+						gcse.async = true;
+						gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+						'//cse.google.com/cse.js?cx=' + cx;
+						var s = document.getElementsByTagName('script')[0];
+						s.parentNode.insertBefore(gcse, s);
+					})();
+				</script>
+				<gcse:searchbox-only resultsUrl="/search" enableAutoComplete="true"></gcse:searchbox-only>
+			</div>
+		</div>
+		<a href="https://www.okta.com/developer/signup/" class="cta-button button--small">Get Started</a>
+
+	</div>
+</header>
+
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P6JKVN"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P6JKVN');</script>
+<!-- End Google Tag Manager -->
+
+
+	
+	<div class="page-content">
+		
+		
+			
+		
+
+<section class="section--with-sidebar docs-page">
+	<aside id="sidebar-wrapper" class="sticky-nav--sidebar">
+
+		
+
+
+
+
+
+
+<div id="docs-sidebar-wrap" id="sidebar-wrapper">
+	<div class="docs-sidebar-block" id="myScrollspy" >
+		
+			
+				
+				<h2>
+					Guides
+				</h2>
+
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="saml_guidance" data-section="">
+									<li data-name="Single Sign-On with Okta" >
+										<a href="/docs/guides/saml_guidance.html">Single Sign-On with Okta</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="oan_guidance" data-section="">
+									<li data-name="Okta Application Network" >
+										<a href="/docs/guides/oan_guidance.html">Okta Application Network</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="spring_security_saml" data-section="">
+									<li data-name="Spring Security SAML (Java)" >
+										<a href="/docs/guides/spring_security_saml.html">Spring Security SAML (Java)</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav nav-title">
+									<li data-name="PySAML2 (Python)" >
+										<a href="/docs/guides/pysaml2.html">PySAML2 (Python)</a>
+									</li>
+								</ul>
+									<div id="gen-toc-container"><div class="gen-toc" id="gen-toc"><div class="gen-toc-title hide"><h2><div id="gen-toctitle" class="caret2 hide">PySAML2 (Python)</div></h2></div><ul class="nav sidebar-nav"><li class="gen-toc_level-1 toc_section-1"><a href="#configuring-okta-to-work-with-pysaml2"><span class="gen-toctext">Configuring Okta to work with PySAML2</span></a></li><li class="gen-toc_level-1 toc_section-2"><a href="#configuring-pysaml2-to-work-with-okta"><span class="gen-toctext">Configuring PySAML2 to work with Okta</span></a></li><li class="gen-toc_level-1 toc_section-3"><a href="#test-the-saml-integration"><span class="gen-toctext">Test the SAML integration</span></a></li><li class="gen-toc_level-1 toc_section-4"><a href="#next-steps"><span class="gen-toctext">Next Steps</span></a></li></ul></div></div>
+								
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+					
+						
+					
+						
+						
+							
+								
+								<ul class="nav sidebar-nav" data-item="add_mfa" data-section="">
+									<li data-name="Add Multi-Factor Authentication to your App with the Okta Platform" >
+										<a href="/docs/guides/add_mfa.html">Add Multi-Factor Authentication to your App with the Okta Platform</a>
+									</li>
+								</ul>
+								
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+						
+							
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+			
+		
+			
+				
+		
+			
+				
+		
+			
+				
+		
+			
+				
+		
+	</ul>
+</div>
+</div>
+
+	</aside>
+
+	<div id="docs-body" class="body docs-body">
+
+		<nav id="sticky-nav" class="sticky-nav--top no-flexbox">
+
+			
+
+	<a href="#" class="toggle-menu"></a>
+	<a  class="on"  href="/docs/guides/overview.html">
+		Guides
+	</a>
+	<a  href="/docs/api/getting_started/design_principles.html">
+		API
+	</a>
+	<a  href="/docs/sdk/core/api.html">
+		SDKs
+	</a>
+	<a  href="/docs/examples/session_cookie.html">
+		Examples
+	</a>
+
+
+		</nav>
+
+		<a href="#docs-body" id="scroll-top-button">Scroll to Top</a>
+
+		
+		<header>
+			<a href="https://github.com/okta/okta.github.io/tree/master/docs/guides/pysaml2.md" target="_blank" class="btn btn-default btn-sm btn-github"><i class="fa fa-github"></i> Edit on GitHub</a>
+			<h1 class="h3">PySAML2 (Python)</h1>
+		</header>
+		
+
+		<p>This guide describes how to use <a href="https://github.com/rohe/pysaml2">PySAML2</a> to add support
+for Okta (via SAML) to applications written in Python. Please note that while the example in this guide uses
+<a href="http://flask.pocoo.org/">Flask</a>, the concepts presented here are general enough to use in other Python frameworks.</p>
+
+<p>This guide describes how to install and configure an example
+application that demonstrates how to use PySAML2 in a Flask application.
+After you have Okta working with the example application,
+adapt the example code for your production environment.</p>
+
+<p>This guide assumes that you are familiar with the basics of Python
+software development: using the command line, editing text files,
+using <a href="https://virtualenv.pypa.io/en/latest/">virtualenv</a>, and using
+<a href="https://en.wikipedia.org/wiki/Pip_%28package_manager%29">pip</a>.</p>
+
+<p>If you’re already familiar with Okta, you can skip to the
+section titled “Configuring PySAML2 to work with Okta.”</p>
+
+<ul class="list-unstyled toc" id="markdown-toc">
+  <li><a href="#configuring-okta-to-work-with-pysaml2">Configuring Okta to work with PySAML2</a></li>
+  <li><a href="#configuring-pysaml2-to-work-with-okta">Configuring PySAML2 to work with Okta</a></li>
+  <li><a href="#test-the-saml-integration">Test the SAML integration</a></li>
+  <li><a href="#next-steps">Next Steps</a></li>
+</ul>
+
+<h2 id="configuring-okta-to-work-with-pysaml2">Configuring Okta to work with PySAML2</h2>
+
+<p>Before you can configure your application and PySAML2 set up an
+Okta “<a href="https://support.okta.com/articles/Knowledge_Article/27838096-Okta-Terminology">chiclet</a>” (application icon) that enables an Okta user to sign in to your to your application with SAML and PySAML2.</p>
+
+<p>To set up Okta to connect to your application, follow the
+<a href="setting_up_a_saml_application_in_okta.html">setting up a SAML application in Okta</a>
+guide. As noted in the instructions, there are two steps to change:</p>
+
+<ul>
+  <li><em>In step #6</em>: Use <strong><em>PySAML2 Example</em></strong> instead of <strong><em>Example SAML application</em></strong> .</li>
+  <li>
+    <p><em>In step #7</em>: When entering the URL</p>
+
+    <pre><code class="language-shell">http://example.com/saml/sso/example-okta-com
+</code></pre>
+
+    <p>use the following:</p>
+
+    <pre><code class="language-shell">http://localhost:5000/saml/sso/example-okta-com
+</code></pre>
+
+    <p><strong>Note:</strong> “5000” is the port that Flask uses by default, if you are using a different port number, change “5000” to the port number you are using.</p>
+  </li>
+</ul>
+
+<h2 id="configuring-pysaml2-to-work-with-okta">Configuring PySAML2 to work with Okta</h2>
+
+<p>Now that you have configured the PySAML2 Example “chiclet” in your Okta organization, you
+are ready to configure PySAML2 to work with your Okta organization. In this
+section wuse the “Identity Provider metadata” link from the
+section above to configure PySAML2. After completing
+the following steps, you will have a working example of connecting Okta to a sample Python application using PySAML2.</p>
+
+<ol>
+  <li>
+    <p>Download the example application for Python:</p>
+
+    <pre><code class="language-shell">$ git clone git@github.com:jpf/okta-pysaml2-example.git
+</code></pre>
+  </li>
+  <li>
+    <p><code>cd</code> to the <code>okta-pysaml2-example</code> directory.</p>
+
+    <pre><code class="language-shell">$ cd okta-pysaml2-example
+</code></pre>
+  </li>
+  <li>
+    <p>Open the <code>app.py</code> file in your favorite text editor.</p>
+
+    <pre><code class="language-shell">$ $EDITOR app.py
+</code></pre>
+  </li>
+  <li>
+    <p>After opening the <code>app.py</code> file, modify the contents of the <code>metadata_url_for</code> dictionary as shown below.</p>
+
+    <pre><code class="language-python">metadata_url_for = {
+    'example-okta-com': '{metadata-url}'
+}
+</code></pre>
+  </li>
+  <li>
+    <p>Be sure to replace the contents of <code>{metdata-url}</code> with the link
+that you copied in step #10 of the
+“<a href="setting_up_a_saml_application_in_okta.html">Setting up a SAML application in Okta</a>”
+instructions that you followed above!</p>
+
+    <p>Note: The contents of <code>{metadata-url}</code> should look similar to: <code>https://example.oktapreview.com/app/a0b1c2deFGHIJKLMNOPQ/sso/saml/metadata</code></p>
+  </li>
+  <li>
+    <p>Install the dependencies; for example, Python SAML SP:</p>
+
+    <pre><code class="language-shell">$ virtualenv venv
+$ source venv/bin/activate
+$ pip install -r requirements.txt
+</code></pre>
+  </li>
+  <li>
+    <p>Start the Python example:</p>
+
+    <pre><code class="language-shell">$ python app.py
+</code></pre>
+  </li>
+</ol>
+
+<h2 id="test-the-saml-integration">Test the SAML integration</h2>
+
+<p>Now that you have set up an application in your Okta organization and have
+configured PySAML2 to work with your Okta organization, it is ready to test.</p>
+
+<p>There are two ways to test a SAML application:</p>
+
+<ol>
+  <li>Starting from the example Python application (“SP initiated”).</li>
+  <li>Starting from Okta (“IdP initiated”).</li>
+</ol>
+
+<p>You will use both methods to test your application. In each case, you will know iff the
+test worked when you see a screen that looks like the one below:</p>
+
+<p><img src="/assets/img/pysaml2-authenticated-user.png" alt="Authenticated user" /></p>
+
+<ol>
+  <li>
+    <p>Login from the Okta PySAML2 example application (This is
+known as an <strong>SP-initiated login</strong>.)</p>
+
+    <ul>
+      <li>
+        <p>Start the example application from the command line:</p>
+
+        <pre><code class="language-shell">$ source venv/bin/activate
+$ python app.py
+</code></pre>
+      </li>
+      <li>
+        <p>Open the example application in your browser:
+<a href="http://localhost:5000/">http://localhost:5000/</a></p>
+      </li>
+      <li>
+        <p>Click on the link for your Okta IdP.</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Login from Okta (This is known as an <strong>IdP-initiated” login</strong>.)</p>
+
+    <ul>
+      <li>
+        <p>Start the example application from the command line:</p>
+
+        <pre><code class="language-shell">$ source venv/bin/activate
+$ python app.py
+</code></pre>
+      </li>
+      <li>
+        <p>Sign in to your Okta organization.</p>
+      </li>
+      <li>
+        <p>Click the button for the application you created earlier
+“Configuring Okta to work with PySAML2” section
+above:
+<img src="/assets/img/pysaml2-example-okta-chiclet.png" alt="PySAML2 Example" /></p>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<p>If you can to get to the “Logged in” page using both of the
+methods above, the test are successful.</p>
+
+<p>Congratulations on getting Okta working with PySAML2!</p>
+
+<h2 id="next-steps">Next Steps</h2>
+
+<p>At this point, you should be familiar with setting up a SAML enabled application
+to work with an Okta organization and how to configure PySAML2 to work with Okta.</p>
+
+<p>After you have your Okta organization working with the example Python
+application, the next step is to take the example code and move
+it to your production application. The specifics of how this works is
+different depending on how your application is set
+up. Pay special attention to the notes in the <code>app.py</code> file. For
+example, on a production system, the contents of the
+<code>metadata_url_for</code> dictionary cannot be hard coded, but must come
+from a dynamic datastore.</p>
+
+<p>If you want to learn more about SAML and what to consider when writing a SAML implementation, Okta’s
+in-depth <a href="http://developer.okta.com/docs/getting_started/saml_guidance.html">SAML guidance</a>
+is a great place to learn more.</p>
+
+<p>Finally, if you got this far in this guide and still have questions,
+please reach out to me at: joel.franusic@okta.com.</p>
+
+
+	</div>
+</section>
+		
+		
+			
+	</div>
+	
+	<!-- Remarketing tag -->
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		var google_conversion_id = 1006913831;
+		var google_custom_params = window.google_tag_params;
+		var google_remarketing_only = true;
+		/* ]]> */
+	</script>
+	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+	</script>
+	<noscript>
+		<div style="display:inline;">
+			<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"/>
+		</div>
+	</noscript>
+<!-- End Remarketing tag -->
+
+<!-- Crazy Egg Tracking -->
+<script type="text/javascript">
+setTimeout(function(){var a=document.createElement("script");
+var b=document.getElementsByTagName("script")[0];
+a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+</script>
+<!-- End Crazy Egg Tracking -->
+
+<footer class="site-footer">
+	<div class="wrap">
+
+		<ul>
+			<li><a href="http://www.okta.com" target="_blank">Okta.com</a></li>
+			<li><a href="/blog">Blog</a></li>
+			<li><a href="/terms/">Terms &amp; Conditions</a></li>
+			<li><a href="/privacy/">Privacy Policy</a></li>
+			<li><a href="http://okta.com/developer/contact/">Contact Sales</a></li>
+			<li><a href="mailto:developers@okta.com">Contact Support</a></li>
+		</ul>
+
+		<ul>
+			<li><a class="icon-with-hover--github" href="http://github.com/okta" target="_blank">Github</a></li>
+			<li><a class="icon-with-hover--twitter" href="http://twitter.com/okta" target="_blank">Twitter</a></li>
+			<li><a class="icon-with-hover--stack-overflow" href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a></li>
+			<li><a class="icon-with-hover--rss" href="http://feeds.feedburner.com/OktaBlog" target="_blank">News</a></li>
+			<li><a class="icon-with-hover--help" href="http://community.okta.com" target="_blank">Help</a></li>
+		</ul>
+
+	</div>
+</footer>
+
+	
+</body>
+	
+</html>

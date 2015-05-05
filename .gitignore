@@ -27,7 +27,7 @@ classes
 reload_views.rb
 
 
-/_site
+_site/*
 
 .sass-cache
 .bundle
