@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="/favicon.ico">
 	<title>Blog &raquo; Okta Developer</title>
-	<meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+	<meta name="description" content="Secure, scalable, and highly available authentication and user management for any app.
 ">
 
 	<link rel="canonical" href="http://developer.okta.com/blog">
@@ -566,34 +566,43 @@ androidTestCompile(‘org.robolectric:robolectric:2.3')
   <li>
     <p>Add this section:</p>
 
-    <pre><code class="language-java">robolectric { 
-        include '**/*Test.class'
+    <div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>robolectric { 
+        include <span class="string"><span class="delimiter">'</span><span class="content">**/*Test.class</span><span class="delimiter">'</span></span>
 }
-</code></pre>
+</pre></div>
+</div>
+    </div>
   </li>
   <li>
     <p>Create the code that you want to test</p>
 
     <p>Modify <code>MainActivity</code>. Add the following code to it:</p>
 
-    <pre><code class="language-java">private Foo foo = new Foo();
-public int getSomething() {
-    return foo.getFoo();
+    <div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="directive">private</span> Foo foo = <span class="keyword">new</span> Foo();
+<span class="directive">public</span> <span class="type">int</span> getSomething() {
+    <span class="keyword">return</span> foo.getFoo();
 }
-</code></pre>
+</pre></div>
+</div>
+    </div>
 
     <p>Add the <code>Foo</code> class:</p>
 
-    <pre><code class="language-java">package com.example.myapplication;
+    <div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="keyword">package</span> <span class="namespace">com.example.myapplication</span>;
       
-public class Foo { 
-    Bar bar = new Bar();
+<span class="directive">public</span> <span class="type">class</span> <span class="class">Foo</span> { 
+    Bar bar = <span class="keyword">new</span> Bar();
         
-    public int getFoo() { 
-        return bar.getBar(); 
+    <span class="directive">public</span> <span class="type">int</span> getFoo() { 
+        <span class="keyword">return</span> bar.getBar(); 
     }
 }
-</code></pre>
+</pre></div>
+</div>
+    </div>
   </li>
   <li>
     <p>Add the <code>Bar</code> class:</p>
