@@ -302,7 +302,7 @@ h6:hover .header-link {
   display: inline-block;
   margin-bottom: 0;
   vertical-align: middle;
-  width: 40%; }
+  width: 50%; }
 
 .form-cors-test .input-group {
   display: inline-table;
@@ -315,7 +315,8 @@ h6:hover .header-link {
 .btn-primary {
   color: #ffffff;
   background-color: #428bca;
-  border-color: #357ebd; }
+  border-color: #357ebd;
+  padding: 1em .8em; }
 
 .input-group {
   position: relative;
@@ -328,7 +329,7 @@ h6:hover .header-link {
   padding-left: 0; }
 
 .input-group .form-control {
-  width: 50%;
+  width: 100%;
   margin-bottom: 0; }
 
 .form-control {

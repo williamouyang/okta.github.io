@@ -409,7 +409,7 @@ h6:hover .header-link {
 	display:inline-block;
 	margin-bottom:0;
 	vertical-align:middle;
-  width: 40%;
+  width: 50%;
 }
 
 .form-cors-test .input-group {
@@ -426,6 +426,7 @@ h6:hover .header-link {
   color: #ffffff;
   background-color: #428bca;
   border-color: #357ebd;
+  padding: 1em .8em;
 }
 
 .input-group {
@@ -441,7 +442,7 @@ h6:hover .header-link {
 }
 
 .input-group .form-control {
-  width: 50%;
+  width: 100%;
   margin-bottom: 0;
 }
 

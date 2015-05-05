@@ -279,6 +279,10 @@ body {
   margin-left: auto;
   margin-right: auto;
   max-width: 660px; }
+#bottom-cta .button--large > span {
+  display: none; }
+#bottom-cta .button--large:after {
+  content: "Get a Free Account"; }
 
 img.responsive--full-width {
   display: block;
