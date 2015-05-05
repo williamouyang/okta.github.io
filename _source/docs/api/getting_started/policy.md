@@ -1,6 +1,7 @@
 ---
 layout: docs_page
 title: Policy
+redirect_from: "/docs/getting_started/policy.html"
 ---
 
 * Will be replaced with the ToC

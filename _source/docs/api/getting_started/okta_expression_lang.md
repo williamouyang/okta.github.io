@@ -1,6 +1,7 @@
 ---
 layout: docs_page
 title: Okta Expression Language
+redirect_from: "/docs/getting_started/okta_expression_lang.html"
 ---
 
 * Will be replaced with the ToC

@@ -1,6 +1,7 @@
 ---
 layout: docs_page
 title: Factors Administration
+redirect_from: "/docs/getting_started/factor_admin.html"
 ---
 
 * Will be replaced with the ToC

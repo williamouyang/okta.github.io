@@ -1,6 +1,7 @@
 ---
 layout: docs_page
 title: Tokens
+redirect_from: "/docs/getting_started/tokens.html"
 ---
 
 * Will be replaced with the ToC
