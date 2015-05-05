@@ -8,7 +8,6 @@ baseurl: "/"
 url: "http://developer.okta.com"
 
 gems:
-  - jekyll-compass
   - jekyll-redirect-from
 
 # -- standard exclusions

@@ -27,7 +27,7 @@
 	}
 
 	a {
-		@include scaleDownFontSizeBy(1/2);
+		@include scaleDownFontSizeBy(0.4);
 		color: $colorGreyLight;
 		text-decoration: none;
 

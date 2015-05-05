@@ -1,7 +1,7 @@
 ---
 ---
 
-@charset "utf-8";
+@charset "UTF-8";
 
 @import
 "variables",
@@ -65,7 +65,7 @@ body {
 		justify-content: space-between;
 		text-align: center;
 		a {
-			@include scaleDownFontSizeBy(1);
+			@include scaleDownFontSizeBy(0.8);
 			border-right: 1px solid $colorGreyLight;
 			box-sizing: border-box;
 			-webkit-flex: 1;
@@ -155,7 +155,7 @@ body {
 		}
 
 		.btn {
-			@include scaleDownFontSizeBy(1.25);
+			@include scaleDownFontSizeBy(1.2);
 			float: right;
 			position: relative;
 			text-decoration: none;
@@ -190,12 +190,12 @@ body {
 	}
 
 	h3 {
-		@include scaleUpFontSizeBy(1);
+		@include scaleUpFontSizeBy(0.8);
 		margin-top: 25px;
 	}
 
 	h4 {
-		@include scaleUpFontSizeBy(1/2);
+		@include scaleUpFontSizeBy(0.4);
 	}
 
 	h5, h6 {
@@ -214,7 +214,7 @@ body {
 	}
 
 	table {
-		@include scaleDownFontSizeBy(1/2);
+		@include scaleDownFontSizeBy(0.4);
 		margin: 20px auto;
 		width: 98%;
 		border: 1px dotted #f0f0f0;

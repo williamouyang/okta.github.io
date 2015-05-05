@@ -47,7 +47,7 @@
 }
 
 .button--small {
-	@include scaleDownFontSizeBy(1);
+	@include scaleDownFontSizeBy(0.8);
 }
 
 .button--large {
@@ -121,7 +121,7 @@
 
 .btn {
 	@include defaultTransition();
-	@include scaleDownFontSizeBy(1/2);
+	@include scaleDownFontSizeBy(0.4);
 	background: none;
 	border: 1px solid $colorGreyLight;
 	border-radius: 3px;

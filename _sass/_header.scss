@@ -169,7 +169,7 @@
 	}
 
 	> ul > li > a, > .pac-nav--desktop > ul > li > a {
-		@include scaleDownFontSizeBy(1/2);
+		@include scaleDownFontSizeBy(0.4);
 		color: #333;
 		display: inline-block;
 		font-weight: 500;
@@ -302,7 +302,7 @@
 		z-index: 5;
 
 		> p {
-			@include scaleDownFontSizeBy(3/4);
+			@include scaleDownFontSizeBy(0.8);
 			background: no-repeat top left;
 			border-bottom: 1px solid $colorGreyLighter;
 			height: 40px;

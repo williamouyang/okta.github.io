@@ -43,3 +43,17 @@ $fontColor:				#666;
 $fontFamily:			"proxima-nova", "ProximaNova Light", Helvetica, Arial, sans-serif;
 $lineHeight:			1.5;
 $sizingRatio:			1.225;
+
+// pre-calculated the powers used to remove compass dependency
+$calculatedPower_0_4:	1.085; // pow(sizingRatio, 0.4)
+$calculatedPower_0_8:	1.176; // pow(sizingRatio, 0.8)
+$calculatedPower_1_2:	1.276; // pow(sizingRatio, 1.2)
+$calculatedPower_1_6:	1.384; // pow(sizingRatio, 1.6)
+$calculatedPower_2_0:	1.501; // pow(sizingRatio, 2.0)
+$calculatedPower_2_4:	1.628; // pow(sizingRatio, 2.4)
+$calculatedPower_2_8:	1.765; // pow(sizingRatio, 2.8)
+$calculatedPower_3_2:	1.914; // pow(sizingRatio, 3.2)
+$calculatedPower_3_6:	2.076; // pow(sizingRatio, 3.6)
+$calculatedPower_4_0:	2.252; // pow(sizingRatio, 4.0)
+$calculatedPower_4_4:	2.442; // pow(sizingRatio, 4.4)
+$calculatedPower_4_8:	2.649; // pow(sizingRatio, 4.8)
