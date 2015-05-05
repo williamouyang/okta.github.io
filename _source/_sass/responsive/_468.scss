@@ -20,3 +20,19 @@
 body {
 	font-size: $intermediaryFontSize;
 }
+
+
+/*
+ * _layout.scss
+ ------------------------------------------------------------ */
+#bottom-cta {	
+	.button--large {
+		> span {
+			display: inline;
+		}
+		
+		&:after {
+			display: none;
+		}
+	}
+}

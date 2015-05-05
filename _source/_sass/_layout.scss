@@ -98,6 +98,16 @@ body {
 	.wrap {
 		@include centeredMaxWidth(660px);
 	}
+	
+	.button--large {
+		> span {
+			display: none;
+		}
+		
+		&:after {
+			content: "Get a Free Account";
+		}
+	}
 }
 
 img.responsive--full-width {
