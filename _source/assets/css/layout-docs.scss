@@ -298,6 +298,10 @@ h6:hover .header-link {
 
 /* -------------------------- API */
 
+#cors-test {
+  display: inline-block;
+}
+
 .api:before {
 	font-family: fontawesome;
 	margin-right: 8px;
@@ -405,9 +409,16 @@ h6:hover .header-link {
 	margin-bottom:20px
 }
 
+.form-group {
+  &:before {
+    display: table;
+    content: " ";
+    clear: both;
+  }
+}
+
 .form-cors-test .form-group {
 	display:inline-block;
-	margin-bottom:0;
 	vertical-align:middle;
   width: 50%;
 }
@@ -418,8 +429,8 @@ h6:hover .header-link {
 }
 
 .cors-test-result {
-	width:425px;
-	padding-left:15px
+	padding-left: 30px;
+  width: 80%;
 }
 
 .btn-primary {
@@ -446,7 +457,22 @@ h6:hover .header-link {
   margin-bottom: 0;
 }
 
-
+.form-horizontal {
+  .control-label {
+    padding-top: 7px;
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: right;
+}
+label {
+  display: inline-block;
+  margin: 5px 0;
+  font-weight: bold;
+}
+.form-control-static {
+  padding-top: 7px;
+}
+}
 .form-control {
   display: block;
   width: 50%;
@@ -506,6 +532,28 @@ h6:hover .header-link {
   background-color: #eeeeee;
   border: 1px solid #cccccc;
   border-radius: 4px;
+}
+
+.panel {
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-default > .panel-heading {
+  color: #333333;
+  background-color: #f5f5f5;
+  border-color: #dddddd;
+}
+
+.panel-heading {
+  padding: 10px 15px;
+  border-bottom: 1px solid transparent;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
 }
 
 #docs {
