@@ -298,18 +298,35 @@ h6:hover .header-link {
 .api-uri-template-cors {
   margin-top: 10px; }
 
-.form-cors-test {
-  margin-bottom: 20px; }
+.panel-default {
+  border-color: #dddddd; }
 
 .form-group:before {
   display: table;
   content: " ";
   clear: both; }
 
-.form-cors-test .form-group {
-  display: inline-block;
-  vertical-align: middle;
-  width: 50%; }
+.form-horizontal .form-group:before, .form-horizontal .form-group:after {
+  display: table;
+  content: " "; }
+
+.form-horizontal .form-group:after {
+  clear: both; }
+
+.panel-body:after {
+  clear: both; }
+
+.panel-body:before, .panel-body:after {
+  display: table;
+  content: " "; }
+
+.form-cors-test {
+  margin-bottom: 20px; }
+  .form-cors-test .form-group {
+    display: inline-block;
+    vertical-align: middle;
+    width: 50%;
+    margin-bottom: 15px; }
 
 .form-cors-test .input-group {
   display: inline-table;
@@ -408,7 +425,7 @@ h6:hover .header-link {
 .panel {
   margin-bottom: 20px;
   background-color: #ffffff;
-  border: 1px solid transparent;
+  border: 1px solid #dddddd;
   border-radius: 4px;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); }

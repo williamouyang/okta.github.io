@@ -1,4 +1,3 @@
-
 $(function() {
 	$('.closed').hide();
 	var offset = $('.site-header').height() + $('#sticky-nav').height() + 40;
