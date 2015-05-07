@@ -1,6 +1,7 @@
 ---
 layout: docs_page
 title: Enabling CORS
+underscore: true
 redirect_from: "/docs/getting_started/enabling_cors.html"
 ---
 
@@ -163,62 +164,62 @@ SCRIPT7002: XMLHttpRequest: Network Error 0x80070005, Access is denied.
     <div class="panel-body">
       <div class="form-horizontal" role="form">
         <div class="form-group">
-          <label class="col-sm-3 control-label">ID</label>
-          <div class="col-sm-9">
+          <label class="col-1-3 control-label">ID</label>
+          <div class="col-2-3">
             <p class="form-control-static"><%= user.id %></p>
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-3 control-label">Status</label>
-          <div class="col-sm-9">
+          <label class="col-1-3 control-label">Status</label>
+          <div class="col-2-3">
             <p class="form-control-static"><%= user.status %></p>
           </div>
         </div>            
         <div class="form-group">
-          <label class="col-sm-3 control-label">Login</label>
-          <div class="col-sm-9">
+          <label class="col-1-3 control-label">Login</label>
+          <div class="col-2-3">
             <p class="form-control-static"><%= user.profile.login %></p>
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-3 control-label">Email</label>
-          <div class="col-sm-9">
+          <label class="col-1-3 control-label">Email</label>
+          <div class="col-2-3">
             <p class="form-control-static"><%= user.profile.email %></p>
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-3 control-label">First Name</label>
-          <div class="col-sm-9">
+          <label class="col-1-3 control-label">First Name</label>
+          <div class="col-2-3">
             <p class="form-control-static"><%= user.profile.firstName %></p>
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-3 control-label">Last Name</label>
-          <div class="col-sm-9">
+          <label class="col-1-3 control-label">Last Name</label>
+          <div class="col-2-3">
             <p class="form-control-static"><%= user.profile.lastName %></p>
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-3 control-label">Mobile Phone</label>
-          <div class="col-sm-9">
+          <label class="col-1-3 control-label">Mobile Phone</label>
+          <div class="col-2-3">
             <p class="form-control-static"><%= user.profile.mobilePhone %></p>
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-3 control-label">Created</label>
-          <div class="col-sm-9">
+          <label class="col-1-3 control-label">Created</label>
+          <div class="col-2-3">
             <p class="form-control-static"><%= user.created %></p>
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-3 control-label">Updated</label>
-          <div class="col-sm-9">
+          <label class="col-1-3 control-label">Updated</label>
+          <div class="col-2-3">
             <p class="form-control-static"><%= user.lastUpdated %></p>
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-3 control-label">Last Login</label>
-          <div class="col-sm-9">
+          <label class="col-1-3 control-label">Last Login</label>
+          <div class="col-2-3">
             <p class="form-control-static"><%= user.lastLogin %></p>
           </div>
         </div>  
