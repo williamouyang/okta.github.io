@@ -86,4 +86,4 @@ title: TITLE_CASE_NAME_OF_SECTION
 ### Authors
 
 1.  Create an entry in _sources/_data/authors.yml
-2.  Put avatar image in assets/img. Make sure aspect ratio of image is square.
+2.  Put avatar image in _source/assets/img. Make sure aspect ratio of image is square.
