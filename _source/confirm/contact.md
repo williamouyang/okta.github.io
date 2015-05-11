@@ -1,6 +1,9 @@
 ---
-layout: confirm
+layout: page
 title: "We'll be in touch shortly"
+valprop: {
+	title: "We'll be in touch shortly"
+}
 ---
 
 
