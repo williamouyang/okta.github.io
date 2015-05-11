@@ -135,6 +135,385 @@
 
 
 	  <header class="post-title-block">
+	    <h1><a href="/blog/2015/05/08/software-engineering-design-principles">Okta Software Engineering Design Principles</a></h1>
+	    <div class="attribution">
+	      <img src="/assets/img/avatar-jon_todd.jpg"
+	           alt="avatar-jon_todd.jpg"
+	           class="author-avatar">
+	      <address>Jon Todd</address>
+	      <span class="sepr">&middot;</span>
+	      <time datetime="2015-05-08">
+	      May 8, 2015
+	      </time>
+	    </div>
+	  </header>
+
+	  <section class="post-content">
+	    <p>Okta has been an agile development shop since the beginning. One important
+aspect of being agile is enabling a mix of bottom-up and top-down decision
+making where high level vision and strategy is clearly communicated to enable
+teams to autonomously deliver value while also feeding back learnings from the
+trenches to inform the high level goals.<sup id="fnref:the-knowledge-creating-company"><a href="#fn:the-knowledge-creating-company" class="footnote">1</a></sup> This
+document collects much of the tacit engineering design principles we’ve used to
+guide development at Okta and continues to evolve as we experiment and learn.</p>
+
+<h2 id="create-user-value">1. Create User Value</h2>
+
+<p>First and foremost, writing software is about creating value for users. This
+seems pretty straight forward, but as systems evolve and become more complex we
+start to introduce more abstraction and layering which brings us further away
+from the concrete problem we’re trying to solve. It’s important to keep in mind
+the reason you’re writing software in the first place and use the understanding
+of your audience to inform priority.</p>
+
+<p>At Okta, our entire company is aligned on this principle because our #1 core
+value is <a href="https://www.okta.com/customers/focus-on-customer-success.html">customer
+success</a>.  In
+practice this means there’s almost always a bunch of customers eager to beta a
+new feature we’re working on. We collaborate closely with customers while we’re
+building features and are able to get their feedback as we iterate and get
+changes out the door in weekly sprints.</p>
+
+<p><img src="http://imgs.xkcd.com/comics/the_general_problem.png" alt="xkcd - pass the salt" /></p>
+
+<h2 id="keep-it-simple">2. Keep it Simple</h2>
+
+<blockquote>
+  <p>Everything should be made as simple as possible, but no simpler — Albert
+  Einstein </p>
+</blockquote>
+
+<p>This is a truism that’s been around for ages and it goes hand in hand with the
+first principle.  If it doesn’t add value to your users now, <a href="http://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it">you ain’t gonna
+need it - YAGNI</a>!</p>
+
+<p>We’ve all encountered overly complex code where it’s nearly impossible to reason
+about what it does. Part of this confusion comes from the fact that it’s
+generally <a href="http://www.joelonsoftware.com/articles/fog0000000069.html">easier to read code than to write
+it</a> but beyond 
+that, there’s clearly fundamental qualities of some code which makes it
+more intuitive than other code. There’s a lot of prior are on this topic but a
+great place to start is the book <a href="http://books.google.com/books?id=dwSfGQAACAAJ">Clean
+Code</a> by Robert C. Martin aka
+Uncle Bob. The book breaks down the various qualities of code which make it
+intuitive and provides a framework for reasoning about the quality of code. </p>
+
+<p>Here are some guiding principles about writing clean code we use in practice
+which are also covered in the book.</p>
+
+<ul>
+  <li>Clean code makes intent clear, use comments when code isn’t expressive enough</li>
+  <li>Clean code can be read and enhanced by others (or the author after a few
+years)</li>
+  <li>Clean code provides one way, rather than many, to do a particular task</li>
+  <li>Clean code is idomatic</li>
+  <li>Clean code is broken into pieces which each do one thing and do it well</li>
+</ul>
+
+<p>At the end of the day you can read all the books you want on writing clean code
+but, like any craft, there’s no substitute for experience. Every engineer is
+constantly honing their skills and at Okta, we rely heavily on code reviews and pair
+programming to help hone each other’s skills. </p>
+
+<p><img src="/assets/img/2015-05-08-software-engineering-design-principles-code_quality_wtfs_per_minute.jpg" alt="wtfs per minute" /></p>
+
+<h2 id="know-thy-service-with-data">3. Know Thy-Service With Data</h2>
+
+<p>In the world of “big data” this point needs little explanation. We collect a
+massive amount of operational data about our systems to:</p>
+
+<ul>
+  <li>Monitor health</li>
+  <li>Monitor performance</li>
+  <li>Debug issues</li>
+  <li>Audit security</li>
+  <li>Make decisions</li>
+</ul>
+
+<p>With every new feature we add, developers are responsible for ensuring that
+their designs provide visibility into these dimensions. In order to make this as
+simple as possible we’ve invested in the following: </p>
+
+<ul>
+  <li>Runtime logging control filtering by level, class, tenant, user </li>
+  <li>Creation of dashboards and alerts is self-service </li>
+  <li>Every developer has access to metrics and anonymous unstructured data</li>
+  <li>Request ID generated at edge is passed along at every layer of stack for
+correlation</li>
+  <li>Automation platform for common operational tasks like taking threaddumps</li>
+</ul>
+
+<p>Some of the technologies we use to gain visibility are: PagerDuty, RedShift,
+Zabbix, ThousandEyes, Boundary, Pingdom, App Dynamics, Splunk, ELK, S3.</p>
+
+<h2 id="make-failure-cheap">4. Make Failure Cheap</h2>
+
+<p>Every software system will experience failures and all code has bugs. While we
+constantly work at having fewer, it’s unrealistic to assume they won’t occur. So
+in addition to investing in prevention, we invest in making failure cheap.</p>
+
+<p>When it comes to the cost of failure, it becomes significantly more expensive to
+fix a failure the further out on the development time line going from
+requirements gathering through development &amp; testing out to running in
+production.<sup id="fnref:agile-cost-curve"><a href="#fn:agile-cost-curve" class="footnote">2</a></sup> </p>
+
+<p><img src="/assets/img/2015-05-08-software-engineering-design-principles-agile-cost-curve.png" alt="cost curve of development" /></p>
+
+<p>One fundamental we take from both Agile and XP is to invest in pushing failure
+as early in the development time line as possible. We mitigate failures from
+poor requirements gathering by iterating quickly with the customer as described in
+Principle 1. Once we get to design and development we make failure cheap through: </p>
+
+<ul>
+  <li>Design reviews with stake holders ahead of writing code </li>
+  <li>TDD - developers write all tests for their code, test isn’t a separate phase
+from development </li>
+  <li>Keeping master stable - check-in to master is gated by passing all unit,
+functional and UI tests </li>
+  <li>Developers can trigger CI on any topic branch, CI is massively parallelized
+over a cloud of fast machines</li>
+</ul>
+
+<p>Since our testing phase is done during development the next phase is production
+deployments. At this phase we reduce the cost of failure by:</p>
+
+<ul>
+  <li>Hiding beta features behind flags in the code</li>
+  <li>Incremental rollout first to test accounts and then in batches of customers</li>
+  <li>Automated deployment process</li>
+  <li>Code and infrastructure is forward and backward compatible allowing
+rollback</li>
+  <li>Health check and automatically remove down nodes</li>
+  <li>Return a degraded / read-only response over nothing at all</li>
+</ul>
+
+<blockquote>
+  <p>An escalator can never break; it can only becomr stairs – Mitch Hedberg</p>
+</blockquote>
+
+<h2 id="automate-everything">5. Automate Everything</h2>
+
+<p>This one is pretty self explanatory. If you perform a task routinely, it should
+be automated. These are automation principles we follow:</p>
+
+<ul>
+  <li>Automate every aspect of the deployment including long running db migrations</li>
+  <li>All artifacts are immutable and versioned</li>
+  <li>All code modules get depenendcies automatically from central artifact server</li>
+  <li>Creation of base images and provisioning of new hardware is automated</li>
+  <li>All forms of testing are automated </li>
+  <li>Development environment setup is automated</li>
+</ul>
+
+<p>Tools we use:</p>
+
+<ul>
+  <li>AWS - Automated provisioning of hardware </li>
+  <li>Chef - Configuration managment</li>
+  <li>Ansible - Automated deployment orchestration</li>
+  <li>Jenkins - Continuous integration</li>
+  <li>Gearman - To get Jenkins to scale</li>
+  <li>Docker - Containerizing services</li>
+</ul>
+
+<h2 id="with-performance-less-is-more">6. With Performance, Less is More</h2>
+
+<p>We find especially with performance, there are typically huge wins to be had in
+up front design decisions which may come at very little to no cost. Our design
+mantras for performance are:</p>
+
+<ol>
+  <li>Don’t do it</li>
+  <li>Do it, but don’t do it again</li>
+  <li>Do it less</li>
+  <li>Do it later</li>
+  <li>Do it when they’re not looking</li>
+  <li>Do it concurrently</li>
+  <li>Do it cheaper</li>
+</ol>
+
+<p>In practice we implement a number of strategies to limit risk to poorly
+performing code:</p>
+
+<ul>
+  <li>Major new features and performance tunings live behind feature flags allowing
+slow rollout and tuning in real life environment</li>
+  <li>Chunk everything that scales on order of N. When N is controlled by customer
+enforce limits and design for infinity.</li>
+  <li>Slow query and frequent query monitoring to detect poor access patterns</li>
+</ul>
+
+<p><img style="max-width:300px" src="/assets/img/2015-05-08-software-engineering-design-principles-more_is_less.jpg" alt="if less is more, does that mean more is less?" /></p>
+
+<h3 id="reference">Reference</h3>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:the-knowledge-creating-company">
+      <p>Ikujiro Nonaka, and Hirotaka Takeuchi. The Knowledge Creating Company. Oxford University Press, 1995. Print. https://books.google.com/books/about/The_Knowledge_creating_Company.html?id=B-qxrPaU1-MC <a href="#fnref:the-knowledge-creating-company" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:agile-cost-curve">
+      <p>Scott Ambler. Examining the Agile Cost of Change Curve. Website. http://www.agilemodeling.com/essays/costOfChange.htm <a href="#fnref:agile-cost-curve" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+	  </section>
+
+
+
+	</article>
+</div>
+</section>
+
+
+		
+		
+		
+		<section >
+<div class="wrap">
+	<article class="post-block">
+
+
+
+	  <header class="post-title-block">
+	    <h1><a href="/blog/2015/05/08/productionalizing-active-mq">Productionalizing ActiveMQ</a></h1>
+	    <div class="attribution">
+	      <img src="/assets/img/avatar-hector_aguilar.jpg"
+	           alt="avatar-hector_aguilar.jpg"
+	           class="author-avatar">
+	      <address>Hector Aguilar</address>
+	      <span class="sepr">&middot;</span>
+	      <time datetime="2015-05-08">
+	      May 8, 2015
+	      </time>
+	    </div>
+	  </header>
+
+	  <section class="post-content">
+	    <p>This is our story about working with ActiveMQ, an open-source version of the Java Messaging Service (JMS) API. We use ActiveMQ as the message broker among our app servers.</p>
+
+<p>It wasn’t easy. To overcome the challenges we faced with ActiveMQ, we are greatly indebted to a very thorough description of an <a href="https://bugs.openjdk.java.net/browse/JDK-8054446">OpenJDK bug</a>, as well as some other <a href="https://svn.apache.org/repos/asf/harmony/standard/classlib/trunk/modules/concurrent/src/main/java/java/util/concurrent/ConcurrentLinkedQueue.java">online resources</a>. If you’re having problems with ActiveMQ, read on. Maybe our story can help you.</p>
+
+<h2 id="growing-pains">Growing Pains</h2>
+
+<p>Our problems with ActiveMQ date back all the way to 2012. Issues included high memory and CPU usage, message timeout errors, and message queue delays.</p>
+
+<p>Let’s pick up the action in the spring 2014. In that period we saw a new wave of timeout storms and message queue delays. These were caused by a combination of our mixed ActiveMQ configuration (broker <strong>5.4.1</strong>, client <strong>5.7</strong>), and increasing traffic on our site.</p>
+
+<p>Of course we welcomed the growth in traffic as a byproduct of our growing business. And although we did plan to address our mixed ActiveMQ configuration, we decided to delay doing so at that time, opting instead to tune the configuration by increasing the maximum session size from 500 to 2000, and the page size from 200 to 2000 messages. Increasing the page size served to minimize “hung queue” scenarios — a side effect of using <a href="http://docs.oracle.com/cd/E19798-01/821-1841/bncer/index.html">message selectors</a>.</p>
+
+<h2 id="another-inflection-point">Another Inflection Point</h2>
+
+<p>Business and site traffic continued to grow, contributing to another inflection point in the fall of 2014. Timeout storms, CPU spikes, and memory issues returned.</p>
+
+<p>We could no longer put off upgrading to a newer version of ActiveMQ.</p>
+
+<p>We decided to skip versions 5.7 and 5.8 in favor of 5.10 for two reasons: 5.7 was considered unstable, and 5.10 provided improved failover performance.</p>
+
+<p>Would an upgrade finally bring the stability that had eluded so far?</p>
+
+<h2 id="when-upgrades-bite-back">When Upgrades Bite Back</h2>
+
+<p>Unfortunately, no. Within 24 hours of upgrading to 5.10, memory usage soared, CPUs spiked, and instability returned. Note the dramatic CPU spikes in the following screenshot.</p>
+
+<p><img style="width:80%" src="/assets/img/2015-05-08-productionalizing-active-mq-cpu-graph-1.png" alt="Active MQ CPU" /></p>
+
+<p>To prevent these issues from impacting customers, we were forced to restart brokers, always an option of
+last resort. Restarting brokers is a delicate operation, and can entail a less-than-smooth failover,
+risking message loss.</p>
+
+<p>We immediately increased memory, but ran out again within a day or two.</p>
+
+<h2 id="searching-for-the-root-cause">Searching for the Root Cause</h2>
+
+<p>An online search turned up an <a href="https://bugs.openjdk.java.net/browse/JDK-8054446">OpenJDK bug</a> that identified an out of memory issue in the
+<em>ConcurrentLinkedQueue</em>, which is a class in the <strong>java.util.concurrent</strong> package included in <strong>JVM version 1.6</strong>.
+When working properly, <em>ConcurrentLinkedQueue</em> allows elements to be added and removed from the queue in a
+thread-safe manner.</p>
+
+<p>The bug caused a null object to be created whenever an element at the end of the queue was added and
+then deleted. This behavior is particularly unfavorable to the way we use queuing. We call ActiveMQ
+to create and destroy objects in the queue very quickly, tens of millions of times a day, as users
+and agents connect to Okta. As a result, null objects rapidly fill up the queue, memory usage soars,
+and CPUs spike.</p>
+
+<h2 id="conference-call">Conference Call</h2>
+
+<p>With the site at risk of impacting customer authentication, several key engineers, including Hector
+Aguilar, Okta’s CTO and SVP of Engineering, met on a Saturday afternoon conference call to find a
+solution to this critical problem. Discussion was intense, and our options were few and unappealing:
+(a) revert all the way back to broker version 5.4.1, or (b) upgrade to broker version 5.11, which
+was still unreleased and might introduce new problems.</p>
+
+<p>As team members recall, Hector said very little during the first half of the meeting.</p>
+
+<p>A bug in the JVM surprised Hector, as critical JVM bugs are relatively rare. Fortunately, the
+OpenJDK bug we’d found included a very thorough description of the problem, as well as sample code
+to reproduce it.</p>
+
+<p>Initially motivated by curiosity, Hector analyzed the code and the bug description. He saw where the
+problem was, and then checked online to see if it had been fixed in newer JDK versions. He saw that
+several things were changing in the class, and that others had attempted to resolve the bug in
+different ways, but none that would solve our particular problem. Hector developed a very simple fix
+of his own, trying to remain consistent with the work of others. He then verified his fix using the
+provided sample code.</p>
+
+<p>The JVM has a mechanism called endorsed libraries that allows developers to override an existing
+class with a new class, effectively patching the JVM. Hector used this mechanism, packaged his fix
+into a jar file, tried it against ActiveMQ, and found that it worked.</p>
+
+<p>The mood and direction of the meeting shifted dramatically when Hector said, “Guys, I have a wild
+idea. What if we patch the JVM?” To most of us, this seemed like a novel approach, maybe even a long
+shot, as none of us had patched a JVM before.</p>
+
+<h2 id="the-fix">The Fix</h2>
+
+<p>Hector sent his JVM patch and sample code to the team and walked us through it. First, he explained
+why some of the other attempts at a solution would not fix our particular problem. Then, he
+demonstrated how his override effectively patched the original faulty removal method. Members of the
+team volunteered to test the override at scale with our simulated environments. Within a few hours,
+we were fairly sure that Hector’s fix would work.</p>
+
+<h2 id="deploying-the-patch">Deploying the Patch</h2>
+
+<p>We deployed the patch and restarted brokers. It was a success! ActiveMQ no longer ran out of memory
+and the CPU spikes ceased.</p>
+
+<p><img style="width:80%" src="/assets/img/2015-05-08-productionalizing-active-mq-cpu-graph-2.png" alt="Active MQ CPU" /></p>
+
+<p>Some minor memory leaks remained, but they were eliminated by upgrading to <strong>java-1.7.0</strong>.</p>
+
+<h2 id="stable-and-looking-at-other-solutions">Stable, and looking at other solutions</h2>
+
+<p>Patching the ConcurrentLinkedQueue with ActiveMQ v5.10 and upgrading to java-1.7.0 provided
+acceptable stability and faster failover performance. While this is a significant improvement over
+where we were last fall, our goal is zero failover time, which ActiveMQ cannot deliver. So, we
+continue to explore other messaging solutions.</p>
+
+<p>In telling our story, we couldn’t resist tooting our own horn a bit. How many CTOs actually get
+their hands dirty battling challenges to their products? Our CTO doesn’t code very often, but when
+he does, he patches the JVM.</p>
+
+	  </section>
+
+
+
+	</article>
+</div>
+</section>
+
+
+		
+		
+		
+		<section >
+<div class="wrap">
+	<article class="post-block">
+
+
+
+	  <header class="post-title-block">
 	    <h1><a href="/blog/2015/04/23/android-unit-testing-part-4">Android Unit Testing Part IV&#58; Mocking</a></h1>
 	    <div class="attribution">
 	      <img src="/assets/img/avatar-victor_ronin.png"
@@ -568,43 +947,34 @@ androidTestCompile(‘org.robolectric:robolectric:2.3')
   <li>
     <p>Add this section:</p>
 
-    <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>robolectric { 
-        include <span class="string"><span class="delimiter">'</span><span class="content">**/*Test.class</span><span class="delimiter">'</span></span>
+    <pre><code class="language-java">robolectric { 
+        include '**/*Test.class'
 }
-</pre></div>
-</div>
-    </div>
+</code></pre>
   </li>
   <li>
     <p>Create the code that you want to test</p>
 
     <p>Modify <code>MainActivity</code>. Add the following code to it:</p>
 
-    <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="directive">private</span> Foo foo = <span class="keyword">new</span> Foo();
-<span class="directive">public</span> <span class="type">int</span> getSomething() {
-    <span class="keyword">return</span> foo.getFoo();
+    <pre><code class="language-java">private Foo foo = new Foo();
+public int getSomething() {
+    return foo.getFoo();
 }
-</pre></div>
-</div>
-    </div>
+</code></pre>
 
     <p>Add the <code>Foo</code> class:</p>
 
-    <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="keyword">package</span> <span class="namespace">com.example.myapplication</span>;
+    <pre><code class="language-java">package com.example.myapplication;
       
-<span class="directive">public</span> <span class="type">class</span> <span class="class">Foo</span> { 
-    Bar bar = <span class="keyword">new</span> Bar();
+public class Foo { 
+    Bar bar = new Bar();
         
-    <span class="directive">public</span> <span class="type">int</span> getFoo() { 
-        <span class="keyword">return</span> bar.getBar(); 
+    public int getFoo() { 
+        return bar.getBar(); 
     }
 }
-</pre></div>
-</div>
-    </div>
+</code></pre>
   </li>
   <li>
     <p>Add the <code>Bar</code> class:</p>
