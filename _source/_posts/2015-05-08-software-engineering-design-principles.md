@@ -43,7 +43,7 @@ need it - YAGNI](http://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it)!
 
 We've all encountered overly complex code where it's nearly impossible to reason
 about what it does. Part of this confusion comes from the fact that it's
-generally [easier to read code than to write
+generally [harder to read code than to write
 it](http://www.joelonsoftware.com/articles/fog0000000069.html) but beyond 
 that, there's clearly fundamental qualities of some code which makes it
 more intuitive than other code. There's a lot of prior are on this topic but a
@@ -132,7 +132,7 @@ deployments. At this phase we reduce the cost of failure by:
 * Health check and automatically remove down nodes
 * Return a degraded / read-only response over nothing at all
 
-> An escalator can never break; it can only becomr stairs -- Mitch Hedberg
+> An escalator can never break; it can only become stairs -- Mitch Hedberg
 
 ## 5. Automate Everything
 
