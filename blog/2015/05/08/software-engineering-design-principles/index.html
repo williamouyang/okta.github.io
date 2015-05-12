@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="/favicon.ico">
 	<title>Okta Software Engineering Design Principles &raquo; Okta Developer</title>
-	<meta name="description" content="Okta has been an agile development shop since the beginning. One importantaspect of being agile is enabling a mix of bottom-up and top-down decisionmaking wh...">
+	<meta name="description" content="Okta has been an agile development shop since the beginning. One importantaspect of being agile is enabling a mix of bottom-up and top-down decisionmaking. S...">
 
 	<link rel="canonical" href="http://developer.okta.com/blog/2015/05/08/software-engineering-design-principles">
 
@@ -154,28 +154,29 @@
 	  <section class="post-content">
 	    <p>Okta has been an agile development shop since the beginning. One important
 aspect of being agile is enabling a mix of bottom-up and top-down decision
-making where high level vision and strategy is clearly communicated to enable
-teams to autonomously deliver value while also feeding back learnings from the
-trenches to inform the high level goals.<sup id="fnref:the-knowledge-creating-company"><a href="#fn:the-knowledge-creating-company" class="footnote">1</a></sup> This
-document collects much of the tacit engineering design principles we’ve used to
-guide development at Okta and continues to evolve as we experiment and learn.</p>
+making. Specifically where high level vision and strategy is clearly
+communicated enabling teams to autonomously deliver value while also feeding back
+learnings from the trenches to inform the high level
+goals.<sup id="fnref:the-knowledge-creating-company"><a href="#fn:the-knowledge-creating-company" class="footnote">1</a></sup> Below are the tacit engineering design
+principles we’ve used to guide development at Okta. They continue to evolve
+as we experiment and learn.</p>
 
 <h2 id="create-user-value">1. Create User Value</h2>
 
 <p>First and foremost, writing software is about creating value for users. This
-seems pretty straight forward, but as systems evolve and become more complex we
-start to introduce more abstraction and layering which brings us further away
+seems straight forward, but as systems evolve and become more complex we
+start introducing more abstraction and layering which brings us further away
 from the concrete problem we’re trying to solve. It’s important to keep in mind
-the reason you’re writing software in the first place and use the understanding
-of your audience to inform priority.</p>
+the reason for writing software in the first place and use the understanding
+of the audience to inform priority.</p>
 
 <p>At Okta, our entire company is aligned on this principle because our #1 core
 value is <a href="https://www.okta.com/customers/focus-on-customer-success.html">customer
 success</a>.  In
-practice this means there’s almost always a bunch of customers eager to beta a
-new feature we’re working on. We collaborate closely with customers while we’re
-building features and are able to get their feedback as we iterate and get
-changes out the door in weekly sprints.</p>
+practice this means there’s almost always a number of customers eager to beta a
+new feature we’re working on. We collaborate closely with customers while
+building features allowing for continuous feedback as we iterate and get
+changes out in weekly sprints.</p>
 
 <p><img src="http://imgs.xkcd.com/comics/the_general_problem.png" alt="xkcd - pass the salt" /></p>
 
@@ -186,44 +187,46 @@ changes out the door in weekly sprints.</p>
   Einstein </p>
 </blockquote>
 
-<p>This is a truism that’s been around for ages and it goes hand in hand with the
-first principle.  If it doesn’t add value to your users now, <a href="http://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it">you ain’t gonna
+<p>This truism has been around for ages, and it goes hand-in-hand with the
+first principle.  If it doesn’t add value to users now, <a href="http://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it">you ain’t gonna
 need it - YAGNI</a>!</p>
 
-<p>We’ve all encountered overly complex code where it’s nearly impossible to reason
-about what it does. Part of this confusion comes from the fact that it’s
+<p>We all encounter overly complex code where it’s nearly impossible to reason
+about what it does. Part of this confusion is because it’s
 generally <a href="http://www.joelonsoftware.com/articles/fog0000000069.html">harder to read code than to write
 it</a> but beyond 
-that, there’s clearly fundamental qualities of some code which makes it
-more intuitive than other code. There’s a lot of prior are on this topic but a
-great place to start is the book <a href="http://books.google.com/books?id=dwSfGQAACAAJ">Clean
-Code</a> by Robert C. Martin aka
-Uncle Bob. The book breaks down the various qualities of code which make it
-intuitive and provides a framework for reasoning about the quality of code. </p>
+that, there are clearly fundamental qualities of some code making it
+more intuitive than other code. There’s a lot of prior art on this topic and a
+great place to start is <a href="http://books.google.com/books?id=dwSfGQAACAAJ">Clean
+Code</a> by Robert C. Martin, aka
+Uncle Bob. The book breaks down the qualities of code which make it
+intuitive, and provides a framework for reasoning about code quality. </p>
 
 <p>Here are some guiding principles about writing clean code we use in practice
 which are also covered in the book.</p>
 
+<p>Clean code:</p>
+
 <ul>
-  <li>Clean code makes intent clear, use comments when code isn’t expressive enough</li>
-  <li>Clean code can be read and enhanced by others (or the author after a few
+  <li>makes intent clear, use comments when code isn’t expressive enough</li>
+  <li>can be read and enhanced by others (or the author after a few
 years)</li>
-  <li>Clean code provides one way, rather than many, to do a particular task</li>
-  <li>Clean code is idomatic</li>
-  <li>Clean code is broken into pieces which each do one thing and do it well</li>
+  <li>provides one way, rather than many, to do a particular task</li>
+  <li>is idomatic</li>
+  <li>is broken into pieces which each does one thing and does it well</li>
 </ul>
 
-<p>At the end of the day you can read all the books you want on writing clean code
-but, like any craft, there’s no substitute for experience. Every engineer is
-constantly honing their skills and at Okta, we rely heavily on code reviews and pair
-programming to help hone each other’s skills. </p>
+<p>At the end of the day there is no substitue for experience, like any craft,
+writing clean code takes practice. At Okta every engineer is constantly honing
+their skills, we rely heavily on code reviews and pair programming to help hone
+each other’s skills. </p>
 
 <p><img src="/assets/img/2015-05-08-software-engineering-design-principles-code_quality_wtfs_per_minute.jpg" alt="wtfs per minute" /></p>
 
 <h2 id="know-thy-service-with-data">3. Know Thy-Service With Data</h2>
 
-<p>In the world of “big data” this point needs little explanation. We collect a
-massive amount of operational data about our systems to:</p>
+<p>In the world of “big data” this point needs little explanation. Okta collects
+massive amounts of operational data about our systems to:</p>
 
 <ul>
   <li>Monitor health</li>
