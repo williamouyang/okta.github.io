@@ -208,12 +208,12 @@ which are also covered in the book.</p>
 <p>Clean code:</p>
 
 <ul>
-  <li>makes intent clear, use comments when code isn’t expressive enough</li>
-  <li>can be read and enhanced by others (or the author after a few
+  <li>Makes intent clear, use comments when code isn’t expressive enough</li>
+  <li>Can be read and enhanced by others (or the author after a few
 years)</li>
-  <li>provides one way, rather than many, to do a particular task</li>
-  <li>is idomatic</li>
-  <li>is broken into pieces which each does one thing and does it well</li>
+  <li>Provides one way, rather than many, to do a particular task</li>
+  <li>Is idomatic</li>
+  <li>Is broken into pieces which each does one thing and does it well</li>
 </ul>
 
 <p>At the end of the day there is no substitue for experience, like any craft,
@@ -237,46 +237,46 @@ massive amounts of operational data about our systems to:</p>
 </ul>
 
 <p>With every new feature we add, developers are responsible for ensuring that
-their designs provide visibility into these dimensions. In order to make this as
-simple as possible we’ve invested in the following: </p>
+their designs provide visibility into these dimensions. In order to make this an
+efficient process we’ve invested in: </p>
 
 <ul>
-  <li>Runtime logging control filtering by level, class, tenant, user </li>
+  <li>Runtime logging control toggling by level, class, tenant, user </li>
   <li>Creation of dashboards and alerts is self-service </li>
   <li>Every developer has access to metrics and anonymous unstructured data</li>
   <li>Request ID generated at edge is passed along at every layer of stack for
 correlation</li>
-  <li>Automation platform for common operational tasks like taking threaddumps</li>
+  <li>Engineering control panel for common operational tasks like taking threaddumps</li>
 </ul>
 
-<p>Some of the technologies we use to gain visibility are: PagerDuty, RedShift,
+<p>Technologies we use to gain visibility include: PagerDuty, RedShift,
 Zabbix, ThousandEyes, Boundary, Pingdom, App Dynamics, Splunk, ELK, S3.</p>
 
 <h2 id="make-failure-cheap">4. Make Failure Cheap</h2>
 
 <p>Every software system will experience failures and all code has bugs. While we
-constantly work at having fewer, it’s unrealistic to assume they won’t occur. So
+constantly work at having fewer, it’s unrealistic to assume they won’t occur. So,
 in addition to investing in prevention, we invest in making failure cheap.</p>
 
-<p>When it comes to the cost of failure, it becomes significantly more expensive to
-fix a failure the further out on the development time line going from
-requirements gathering through development &amp; testing out to running in
-production.<sup id="fnref:agile-cost-curve"><a href="#fn:agile-cost-curve" class="footnote">2</a></sup> </p>
+<p>The cost of failure becomes significantly more expensive 
+further out on the development timeline. Making adjustments 
+during requirements gather and design are significantly cheaper than 
+finding issues in production.<sup id="fnref:agile-cost-curve"><a href="#fn:agile-cost-curve" class="footnote">2</a></sup> </p>
 
 <p><img src="/assets/img/2015-05-08-software-engineering-design-principles-agile-cost-curve.png" alt="cost curve of development" /></p>
 
 <p>One fundamental we take from both Agile and XP is to invest in pushing failure
-as early in the development time line as possible. We mitigate failures from
+as early in the development timeline as possible. We mitigate failures from
 poor requirements gathering by iterating quickly with the customer as described in
 Principle 1. Once we get to design and development we make failure cheap through: </p>
 
 <ul>
-  <li>Design reviews with stake holders ahead of writing code </li>
-  <li>TDD - developers write all tests for their code, test isn’t a separate phase
+  <li>Design reviews with stakeholders ahead of writing code </li>
+  <li>TDD - developers write all tests for their code; test isn’t a separate phase
 from development </li>
   <li>Keeping master stable - check-in to master is gated by passing all unit,
 functional and UI tests </li>
-  <li>Developers can trigger CI on any topic branch, CI is massively parallelized
+  <li>Developers can trigger CI on any topic branch; CI is massively parallelized
 over a cloud of fast machines</li>
 </ul>
 
@@ -299,7 +299,7 @@ rollback</li>
 
 <h2 id="automate-everything">5. Automate Everything</h2>
 
-<p>This one is pretty self explanatory. If you perform a task routinely, it should
+<p>All tasks performed routinely should
 be automated. These are automation principles we follow:</p>
 
 <ul>

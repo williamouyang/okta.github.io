@@ -58,12 +58,12 @@ which are also covered in the book.
 
 Clean code:
 
-* makes intent clear, use comments when code isn't expressive enough
-* can be read and enhanced by others (or the author after a few
+* Makes intent clear, use comments when code isn't expressive enough
+* Can be read and enhanced by others (or the author after a few
   years)
-* provides one way, rather than many, to do a particular task
-* is idomatic
-* is broken into pieces which each does one thing and does it well
+* Provides one way, rather than many, to do a particular task
+* Is idomatic
+* Is broken into pieces which each does one thing and does it well
 
 At the end of the day there is no substitue for experience, like any craft,
 writing clean code takes practice. At Okta every engineer is constantly honing
@@ -85,43 +85,43 @@ massive amounts of operational data about our systems to:
 * Make decisions
 
 With every new feature we add, developers are responsible for ensuring that
-their designs provide visibility into these dimensions. In order to make this as
-simple as possible we've invested in the following: 
+their designs provide visibility into these dimensions. In order to make this an
+efficient process we've invested in: 
 
-* Runtime logging control filtering by level, class, tenant, user 
+* Runtime logging control toggling by level, class, tenant, user 
 * Creation of dashboards and alerts is self-service 
 * Every developer has access to metrics and anonymous unstructured data
 * Request ID generated at edge is passed along at every layer of stack for
   correlation
-* Automation platform for common operational tasks like taking threaddumps
+* Engineering control panel for common operational tasks like taking threaddumps
 
-Some of the technologies we use to gain visibility are: PagerDuty, RedShift,
+Technologies we use to gain visibility include: PagerDuty, RedShift,
 Zabbix, ThousandEyes, Boundary, Pingdom, App Dynamics, Splunk, ELK, S3.
 
 ## 4. Make Failure Cheap 
 
 Every software system will experience failures and all code has bugs. While we
-constantly work at having fewer, it's unrealistic to assume they won't occur. So
+constantly work at having fewer, it's unrealistic to assume they won't occur. So,
 in addition to investing in prevention, we invest in making failure cheap.
 
-When it comes to the cost of failure, it becomes significantly more expensive to
-fix a failure the further out on the development time line going from
-requirements gathering through development &amp; testing out to running in
-production.[^agile-cost-curve] 
+The cost of failure becomes significantly more expensive 
+further out on the development timeline. Making adjustments 
+during requirements gather and design are significantly cheaper than 
+finding issues in production.[^agile-cost-curve] 
 
 ![cost curve of development](/assets/img/2015-05-08-software-engineering-design-principles-agile-cost-curve.png)
 
 One fundamental we take from both Agile and XP is to invest in pushing failure
-as early in the development time line as possible. We mitigate failures from
+as early in the development timeline as possible. We mitigate failures from
 poor requirements gathering by iterating quickly with the customer as described in
 Principle 1. Once we get to design and development we make failure cheap through: 
 
-* Design reviews with stake holders ahead of writing code 
-* TDD - developers write all tests for their code, test isn't a separate phase
+* Design reviews with stakeholders ahead of writing code 
+* TDD - developers write all tests for their code; test isn't a separate phase
   from development 
 * Keeping master stable - check-in to master is gated by passing all unit,
   functional and UI tests 
-* Developers can trigger CI on any topic branch, CI is massively parallelized
+* Developers can trigger CI on any topic branch; CI is massively parallelized
   over a cloud of fast machines
 
 Since our testing phase is done during development the next phase is production
@@ -139,7 +139,7 @@ deployments. At this phase we reduce the cost of failure by:
 
 ## 5. Automate Everything
 
-This one is pretty self explanatory. If you perform a task routinely, it should
+All tasks performed routinely should
 be automated. These are automation principles we follow:
 
 * Automate every aspect of the deployment including long running db migrations
