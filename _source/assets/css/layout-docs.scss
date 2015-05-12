@@ -871,7 +871,15 @@ h6:hover .header-link {
 			white-space: pre;
 		}
 	}
-
+	ol {
+		margin: 0 0 10px 20px;
+		list-style: decimal; 
+		img {
+			max-width: 700px;
+			display: block;
+			margin: inherit;
+		}
+	}
 	.CodeRay pre {
 		white-space: pre;
 		word-wrap: normal;

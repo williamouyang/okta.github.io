@@ -718,6 +718,13 @@ h6:hover .header-link {
     overflow: auto; }
     .docs-body pre code {
       white-space: pre; }
+  .docs-body ol {
+    margin: 0 0 10px 20px;
+    list-style: decimal; }
+    .docs-body ol img {
+      max-width: 700px;
+      display: block;
+      margin: inherit; }
   .docs-body .CodeRay pre {
     white-space: pre;
     word-wrap: normal;
