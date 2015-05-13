@@ -25,13 +25,14 @@
   slug: api
   title: Resources
   pages:
-    - authn
-    - factors
-    - users
-    - groups
-    - sessions
     - apps
+    - authn
     - events
+    - factors
+    - groups
+    - roles
+    - sessions
+    - users
 
 # -- SDK
 - section: sdk/core
