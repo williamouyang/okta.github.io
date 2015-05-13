@@ -1073,9 +1073,10 @@ input:focus {outline:0;}
 			background-position: center;
 		}
 		.powershell {
-			background: $colorCyan url(/assets/img/microsoft-net.png) no-repeat;
+			background: transparent url(/assets/img/powershell.png) no-repeat;
 			background-size: 75px;
 			background-position: center;
+			border: 1px solid;
 		}
 		.java {
 			background: $colorOrange url(/assets/img/java.png) no-repeat;
@@ -1084,17 +1085,10 @@ input:focus {outline:0;}
 		}
 	}
 	.content {
-		// text-align: center;
 		margin: 0 auto;
-		// width: 220px;
 	}
 }
-.sticky-nav--sidebar, .docs-body {
-	// transition: all 0.3s ease-out;
-	// overflow-y: auto;
-	// -webkit-overflow-scrolling: touch;
-	// -ms-overflow-style: none;
-}
+
 .toggle-menu {
 	color: #ccc;
 	text-decoration: none;
