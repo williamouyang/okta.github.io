@@ -72,11 +72,11 @@ Fetches all roles for the specified resource.
 {:.api .api-request .api-request-example}
 
 ~~~http
-curl -v -H "Authorization: SSWS {{ "{{your-token" }}}}" \ 
+curl -v -H "Authorization: SSWS {{ "{{apikey" }}}}" \ 
   -H "Accept: application/json" \ 
   -H "Content-Type: application/json" \ 
   -H "Cache-Control: no-cache" \
-  -X GET https://your-domain.okta.com/api/v1/users/{{ "{{userId" }}}}/roles
+  -X GET https://{{ "{{subDomain" }}}}.okta.com/api/v1/users/{{ "{{userId" }}}}/roles
 ~~~
 
 ##### Response Example
@@ -112,11 +112,11 @@ In this example the requestor specifies the target resources for the role to inc
 {:.api .api-request .api-request-example}
 
 ~~~http
-curl -v -H "Authorization: SSWS your-token" \ 
+curl -v -H "Authorization: SSWS {{ "{{apikey" }}}}" \ 
   -H "Accept: application/json" \ 
   -H "Content-Type: application/json" \ 
   -H "Cache-Control: no-cache" \
-  -X GET https://your-domain.okta.com/api/v1/users/{{userId}}/roles?expand=targets/groups,targets/apps
+  -X GET https://{{ "{{subDomain" }}}}.okta.com/api/v1/users/{{userId}}/roles?expand=targets/groups,targets/apps
 ~~~
 
 ##### Response Example
@@ -218,11 +218,11 @@ Assigns a specified role to a specified user.
 {:.api .api-request .api-request-example}
 
 ~~~http
-curl -v -H "Authorization: SSWS {{ "{{your-token" }}}}" \ 
+curl -v -H "Authorization: SSWS "{{ "{{apikey" }}}}" \ 
   -H "Accept: application/json" \ 
   -H "Content-Type: application/json" \ 
   -H "Cache-Control: no-cache" \
-  -X POST https://your-domain.okta.com/api/v1/users/{{ "{{userId" }}}}/roles \
+  -X POST https://{{ "{{subDomain" }}}}.okta.com/api/v1/users/{{ "{{userId" }}}}/roles \
   -d \
   '{
     "type": "{{ "{{roleType" }}}}"
@@ -258,20 +258,21 @@ Removes a role from a specified user.
 {:.api .api-request .api-request-example}
 
 ~~~http
-curl -v -H "Authorization: SSWS your-token" \ 
+curl -v -i -H "Authorization: SSWS {{ "{{apikey" }}}}" \ 
   -H "Accept: application/json" \ 
   -H "Content-Type: application/json" \ 
   -H "Cache-Control: no-cache" \
-  -X DELETE https://your-domain.okta.com/api/v1/users/{{userId}}/roles/{{roleId}} 
+  -X DELETE https://{{ "{{subDomain" }}}}.okta.com/api/v1/users/{{ "{{userId" }}}}/roles/{{ "{{roleId" }}}}
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
+
 ~~~http
-HTTP/1.1 204 No Content
+`HTTP/1.1 204 No Content`
 ~~~
 
-> `HTTP/1.1 404 Not Found' status is returned if role is not found
+> `HTTP/1.1 404 Not Found` status is returned if role is not found
 
 ~~~json
 {
@@ -294,19 +295,19 @@ Adds a specified group to a role.
 {:.api .api-request .api-request-example}
 
 ~~~http
-curl -v -H "Authorization: SSWS your-token" \ 
+curl -v -H "Authorization: SSWS {{ "{{apikey" }}}}" \ 
   -H "Accept: application/json" \ 
   -H "Content-Type: application/json" \ 
   -H "Cache-Control: no-cache" \
-  -X PUT https://your-domain.okta.com/api/v1/roles/{{roleId}}/targets/groups/{{groupId}}
+  -X PUT https://{{ "{{subDomain" }}}}.okta.com/api/v1/roles/{{roleId}}/targets/groups/{{groupId}}
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
+
 ~~~http
 HTTP/1.1 204 No Content
 ~~~
-
 
 > Currently only supported by `USER_ADMIN`.  Returns `HTTP/1.1 405 Method Not Allowed` if the role does not support the target resource constraint.
 
@@ -378,20 +379,20 @@ Fetches all groups targets for a role. Standard paging and limits are supported.
       "logo": [
         {
           "name": "medium",
-          "href": "https:/your-domain.okta.com/img/logos/groups/workday-medium.png",
+          "href": "https:/{{ "{{subDomain" }}}}.okta.com/img/logos/groups/workday-medium.png",
           "type": "image/png"
         },
         {
           "name": "large",
-          "href": "https:/your-domain.okta.com/img/logos/groups/workday-large.png",
+          "href": "https:/{{ "{{subDomain" }}}}.okta.com/img/logos/groups/workday-large.png",
           "type": "image/png"
         }
       ],
       "users": {
-        "href": "https:/your-domain.okta.com/api/v1/groups/00gg9oZUHKTGCQNKJLUJ/users"
+        "href": "https:/{{ "{{subDomain" }}}}.okta.com/api/v1/groups/00gg9oZUHKTGCQNKJLUJ/users"
       },
       "apps": {
-        "href": "https:/your-domain.okta.com/api/v1/groups/00gg9oZUHKTGCQNKJLUJ/apps"
+        "href": "https:/{{ "{{subDomain" }}}}.okta.com/api/v1/groups/00gg9oZUHKTGCQNKJLUJ/apps"
       }
     }
   },
@@ -409,20 +410,20 @@ Fetches all groups targets for a role. Standard paging and limits are supported.
       "logo": [
         {
           "name": "medium",
-          "href": "https:/your-domain.okta.com/img/logos/groups/workday-medium.png",
+          "href": "https:/{{ "{{subDomain" }}}}.okta.com/img/logos/groups/workday-medium.png",
           "type": "image/png"
         },
         {
           "name": "large",
-          "href": "https:/your-domain.okta.com/img/logos/groups/workday-large.png",
+          "href": "https:/{{ "{{subDomain" }}}}.okta.com/img/logos/groups/workday-large.png",
           "type": "image/png"
         }
       ],
       "users": {
-        "href": "https:/your-domain.okta.com/api/v1/groups/00gg9kSDGSJOWIBDIWRF/users"
+        "href": "https:/{{ "{{subDomain" }}}}.okta.com/api/v1/groups/00gg9kSDGSJOWIBDIWRF/users"
       },
       "apps": {
-        "href": "https:/your-domain.okta.com/api/v1/groups/00gg9kSDGSJOWIBDIWRF/apps"
+        "href": "https:/{{ "{{subDomain" }}}}.okta.com/api/v1/groups/00gg9kSDGSJOWIBDIWRF/apps"
       }
     }
   },
@@ -440,20 +441,20 @@ Fetches all groups targets for a role. Standard paging and limits are supported.
       "logo": [
         {
           "name": "medium",
-          "href": "https:/your-domain.okta.com/img/logos/groups/workday-medium.png",
+          "href": "https:/{{ "{{subDomain" }}}}.okta.com/img/logos/groups/workday-medium.png",
           "type": "image/png"
         },
         {
           "name": "large",
-          "href": "https:/your-domain.okta.com/img/logos/groups/workday-large.png",
+          "href": "https:/{{ "{{subDomain" }}}}.okta.com/img/logos/groups/workday-large.png",
           "type": "image/png"
         }
       ],
       "users": {
-        "href": "https:/your-domain.okta.com/api/v1/groups/00gg9mNOTHEWJYPVNVIX/users"
+        "href": "https:/{{ "{{subDomain" }}}}.okta.com/api/v1/groups/00gg9mNOTHEWJYPVNVIX/users"
       },
       "apps": {
-        "href": "https:/your-domain.okta.com/api/v1/groups/00gg9mNOTHEWJYPVNVIX/apps"
+        "href": "https:/{{ "{{subDomain" }}}}.okta.com/api/v1/groups/00gg9mNOTHEWJYPVNVIX/apps"
       }
     }
   }
@@ -525,11 +526,11 @@ Fetches all app targets for a role. Standard paging and limits are supported.
 
 ~~~http
 curl -X GET \
-  -H "Authorization: SSWS your-token" \
+  -H "Authorization: SSWS {{ "{{apikey" }}}}" \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
   -H "Cache-Control: no-cache" \
-  -X GET https://your-domain.oktapreview.com/api/v1/users/{{userId}}/roles/{{roleId}}/targets/catalog/apps
+  -X GET https://{{ "{{subDomain" }}}}.oktapreview.com/api/v1/users/{{userId}}/roles/{{roleId}}/targets/catalog/apps
 ~~~
 
 ##### Response Example
@@ -568,7 +569,7 @@ curl -X GET \
 			"logo": [
 				{
 					"name": "medium",
-					"href": "https:/your-domain.okta.com/img/logos/salesforce_logo.png",
+					"href": "https:/{{ "{{subDomain" }}}}.okta.com/img/logos/salesforce_logo.png",
 					"type": "image/png"
 				}
 			]
