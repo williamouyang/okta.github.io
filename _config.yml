@@ -1,7 +1,6 @@
 title: Okta Developer
 email: cody@flickerbox.com
-description: >
- Secure, scalable, and highly available authentication and user management for any app.
+description: "Secure, scalable, and highly available authentication and user management for any app."
 baseurl: "/"
 url: "http://developer.okta.com"
 

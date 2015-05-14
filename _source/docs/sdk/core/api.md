@@ -8,7 +8,7 @@ title: API
 	<div class="wrap">
 		<article class="col-1-3">
 			<div class="sdk-img">
-				<a class="thumbnail net" href="/">
+				<a class="thumbnail net" href="http://www.nuget.org/packages/Okta.Core.Client/" target="_blank">
 				</a>
 			</div>
 			<div class="content">
@@ -27,17 +27,17 @@ title: API
 						<a class="" href="https://github.com/okta/okta-music-store">Sample App</a>
 					</li>
 				</ul>
-				<a href="http://www.nuget.org/packages/Okta.Core.Client/" class="btn">Download SDK</a>
+				<a href="http://www.nuget.org/packages/Okta.Core.Client/" class="btn" target="_blank">Download SDK</a>
 			</div>
 		</article>
 		<article class="col-1-3">
 			<div class="sdk-img">
-				<a class="thumbnail powershell" href="/">
+				<a class="thumbnail powershell" href="https://chocolatey.org/packages/Okta.Core.Automation" target="_blank">
 				</a>
 			</div>
 			<div class="content">
 				<ul class="sdk-list">
-									<li>.NET SDK</li>
+					<li>PowerShell SDK</li>
 					<li>
 						<a class="" href="https://github.com/okta/oktasdk-csharp/tree/master/Okta.Core.Automation">Documentation</a>
 					</li>
@@ -45,23 +45,22 @@ title: API
 						<a class="" href="https://github.com/okta/oktasdk-csharp">GitHub</a>
 					</li>
 				</ul>
-				<a href="https://chocolatey.org/packages/Okta.Core.Automation" class="btn">Download SDK</a>
+				<a href="https://chocolatey.org/packages/Okta.Core.Automation" class="btn" target="_blank">Download SDK</a>
 			</div>
 		</article>
 		<article class="col-1-3">
 			<div class="sdk-img">
-				<a class="thumbnail java"  href="/">
+				<a class="thumbnail java"  href="https://github.com/okta/oktasdk-java" target="_blank">
 				</a>
 			</div>
 			<div class="content">
 				<ul class="sdk-list">
-									<li>.NET SDK</li>
-
+					<li>.NET SDK</li>
 					<li>
 						<a class="" href="https://github.com/okta/oktasdk-java">GitHub</a>
 					</li>
 				</ul>
-				<a href="https://github.com/okta/oktasdk-java" class="btn">Download SDK</a>
+				<a href="https://github.com/okta/oktasdk-java" class="btn" target="_blank">Download SDK</a>
 			</div>
 		</article>
 	</div>

@@ -87,3 +87,23 @@ title: TITLE_CASE_NAME_OF_SECTION
 
 1.  Create an entry in _source/_data/authors.yml
 2.  Put avatar image in _source/assets/img. Make sure aspect ratio of image is square.
+
+### Posts
+
+1. Clone repository
+    * root folder './' are the files served by github.
+    * '_source' folder contains the source files.
+    * '_site' is still ignored
+2. Make changes under '_source'
+3. Compile the site locally.
+4. Preview using locahost:4000
+5. rsync files from '_site' to root folder './'
+    ```rsync -r _site/ ./```
+6. Commit/push to github. Github won't compile the site
+
+**Specific Questions**
+Q: Why do we need 2 branches 
+A: We don't. Everything is now under one branch, "master".
+
+Q: Why can’t we just checkin _site on master branch with the compiled site.  
+A:  Github will not serve a specific folder, in this case the compiled version under '_site'.
