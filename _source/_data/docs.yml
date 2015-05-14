@@ -6,6 +6,7 @@
     - overview
     - saml_guidance
     - oan_guidance
+    - okta_mobile_connect
     - spring_security_saml
     - pysaml2
     - add_mfa
@@ -25,13 +26,14 @@
   slug: api
   title: Resources
   pages:
-    - authn
-    - factors
-    - users
-    - groups
-    - sessions
     - apps
+    - authn
     - events
+    - factors
+    - groups
+    - roles
+    - sessions
+    - users
 
 # -- SDK
 - section: sdk/core
