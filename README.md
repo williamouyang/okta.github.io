@@ -17,6 +17,53 @@ http://jekyllrb.com/
 5. Change CNAME with the right subdomain
 6. Visit `http://localhost:4000` in your browser
 
+## Contribution Process
+
+Okta uses the
+"[GitHub Flow](https://guides.github.com/introduction/flow/)"
+workflow for contributions.
+
+Please read the linked
+[GitHub Flow](https://guides.github.com/introduction/flow/)
+document to learn the details of that workflow.
+
+Here is a high level overview of the GitHub flow:
+
+1.  (Optional) Fork this repository
+2.  *Create a branch* using the `git checkout -b $BRANCH_NAME` command.
+    Replace `$BRANCH_NAME` with what you want your branch to be named.
+3.  *Add commits* to your branch using the `git add` and `git commit -m ""` commands.
+    Push your commits to your branch with the `git push` command (for
+    example: `git push origin $BRANCH_NAME`)
+4.  *Open a Pull Request*
+    [using the GitHub UI](https://help.github.com/articles/using-pull-requests/).
+5.  *Discuss and review your code* using the GitHub UI.
+6.  Once your Pull Request has been reviewed and approved, one of the
+    project owners for this site will *merge and deploy* your Pull
+    Request.
+
+### Details for the "Add commits" step
+
+1. Clone repository using `git clone`
+    * root folder './' are the files served by github.
+    * '_source' folder contains the source files.
+    * '_site' is still ignored
+2. Create a branch for your changes using `git checkout -b $BRANCH_NAME`
+3. Make changes under '_source'
+4. Serve the site locally using the `jekyll serve -w` command.
+5. Preview using <http://locahost:4000>
+
+### Details for the "merge and deploy" step
+
+After accepting a pull request, a project owner will do the following:
+
+1. Pull down the latest changes using `git pull origin master`
+2. Compile the site locally using the `jekyll build` command.
+3. rsync files from '_site' to root folder './' with the `rsync -r _site/ ./` command.
+4. Add the updated files using the `git add` command.
+5. /push to GitHub using `git push orign master` note that GitHub won't compile the site.
+
+
 ## Authoring Guide
 
 ### Pages
@@ -88,22 +135,7 @@ title: TITLE_CASE_NAME_OF_SECTION
 1.  Create an entry in _source/_data/authors.yml
 2.  Put avatar image in _source/assets/img. Make sure aspect ratio of image is square.
 
-### Posts
 
-1. Clone repository
-    * root folder './' are the files served by github.
-    * '_source' folder contains the source files.
-    * '_site' is still ignored
-2. Make changes under '_source'
-3. Compile the site locally.
-4. Preview using locahost:4000
-5. rsync files from '_site' to root folder './'
-    ```rsync -r _site/ ./```
-6. Commit/push to github. Github won't compile the site
-
-**Specific Questions**
-Q: Why do we need 2 branches 
-A: We don't. Everything is now under one branch, "master".
-
-Q: Why can’t we just checkin _site on master branch with the compiled site.  
-A:  Github will not serve a specific folder, in this case the compiled version under '_site'.
+**FAQ**
+Q: Why can’t we just check in `_site` on the master branch with the compiled site.  
+A: GitHub will not serve a specific folder, so this won't work.
