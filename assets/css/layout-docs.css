@@ -718,6 +718,13 @@ h6:hover .header-link {
     overflow: auto; }
     .docs-body pre code {
       white-space: pre; }
+  .docs-body ol {
+    margin: 0 0 10px 20px;
+    list-style: decimal; }
+    .docs-body ol img {
+      max-width: 700px;
+      display: block;
+      margin: inherit; }
   .docs-body .CodeRay pre {
     white-space: pre;
     word-wrap: normal;
@@ -944,9 +951,10 @@ input:focus {
     background-size: 75px;
     background-position: center; }
   .section--sdk article .powershell {
-    background: #0acacc url(/assets/img/microsoft-net.png) no-repeat;
+    background: transparent url(/assets/img/powershell.png) no-repeat;
     background-size: 75px;
-    background-position: center; }
+    background-position: center;
+    border: 1px solid; }
   .section--sdk article .java {
     background: #fc5f35 url(/assets/img/java.png) no-repeat;
     background-size: auto 75px;
