@@ -959,6 +959,11 @@ input:focus {
     background: #fc5f35 url(/assets/img/java.png) no-repeat;
     background-size: auto 75px;
     background-position: center; }
+  .section--sdk article .python {
+    background: transparent url(/assets/img/python.png) no-repeat;
+    background-size: auto 85px;
+    background-position: center;
+    border: 1px solid; }
   .section--sdk .content {
     margin: 0 auto; }
 
