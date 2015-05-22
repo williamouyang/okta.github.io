@@ -30,9 +30,8 @@ victor_ronin:
   display_name: Victor
   avatar: avatar-victor_ronin.png
   email: victor.ronin@okta.com
-  web: http://example.com
-  twitter: https://twitter.com/example
-  github: https://github.com/example
+  web: http://victorronin.com/en/
+  github: https://github.com/vronin
 
 jon_todd:
   full_name: Jon Todd
