@@ -60,8 +60,8 @@ After accepting a pull request, a project owner will do the following:
 1. Pull down the latest changes using `git pull origin master`
 2. Compile the site locally using the `jekyll build` command.
 3. rsync files from '_site' to root folder './' with the `rsync -r _site/ ./` command.
-4. Add the updated files using the `git add` command.
-5. /push to GitHub using `git push orign master` note that GitHub won't compile the site.
+4. Add the updated files using the `git add .` command.
+5. /push to GitHub using `git push origin master` note that GitHub won't compile the site.
 
 
 ## Authoring Guide
