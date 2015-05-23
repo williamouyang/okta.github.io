@@ -1024,6 +1024,23 @@ input:focus {outline:0;}
 		}
 
 	}
+	.col-1-4 {
+		margin-top: 0px;
+		padding-top: 30px;
+		@include breakpoint(extra-small) {
+			width: 50%;
+		}
+		@include breakpoint(small) {
+			width: 50%;
+		}
+		@include breakpoint(medium) {
+			width: 50%;
+		}
+		@include breakpoint(large) {
+			width: 100% * 1/4;
+		}
+
+	}
 	article {
 		.sdk-list {
 			list-style: none;
@@ -1082,6 +1099,12 @@ input:focus {outline:0;}
 			background: $colorOrange url(/assets/img/java.png) no-repeat;
 			background-size: auto 75px;
 			background-position: center;
+		}
+		.python {
+			background: transparent url(/assets/img/python.png) no-repeat;
+			background-size: auto 85px;
+			background-position: center;
+			border: 1px solid;
 		}
 	}
 	.content {

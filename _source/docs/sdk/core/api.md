@@ -6,7 +6,7 @@ title: API
 
 <section class="section--full-width section--sdk">
 	<div class="wrap">
-		<article class="col-1-3">
+		<article class="col-1-4">
 			<div class="sdk-img">
 				<a class="thumbnail net" href="http://www.nuget.org/packages/Okta.Core.Client/" target="_blank">
 				</a>
@@ -30,7 +30,7 @@ title: API
 				<a href="http://www.nuget.org/packages/Okta.Core.Client/" class="btn" target="_blank">Download SDK</a>
 			</div>
 		</article>
-		<article class="col-1-3">
+		<article class="col-1-4">
 			<div class="sdk-img">
 				<a class="thumbnail powershell" href="https://chocolatey.org/packages/Okta.Core.Automation" target="_blank">
 				</a>
@@ -48,14 +48,14 @@ title: API
 				<a href="https://chocolatey.org/packages/Okta.Core.Automation" class="btn" target="_blank">Download SDK</a>
 			</div>
 		</article>
-		<article class="col-1-3">
+		<article class="col-1-4">
 			<div class="sdk-img">
 				<a class="thumbnail java"  href="https://github.com/okta/oktasdk-java" target="_blank">
 				</a>
 			</div>
 			<div class="content">
 				<ul class="sdk-list">
-					<li>.NET SDK</li>
+					<li>Java SDK</li>
 					<li>
 						<a class="" href="https://github.com/okta/oktasdk-java">GitHub</a>
 					</li>
@@ -63,6 +63,24 @@ title: API
 				<a href="https://github.com/okta/oktasdk-java" class="btn" target="_blank">Download SDK</a>
 			</div>
 		</article>
+        <article class="col-1-4">
+            <div class="sdk-img">
+				<a class="thumbnail python"  href="https://pypi.python.org/pypi/okta" target="_blank">
+				</a>
+            </div>
+            <div class="content">
+                <ul class="sdk-list">
+                    <li>Python SDK</li>
+                    <li>
+                        <a class="" href="/docs/sdk/core/python_api_sdk/">Documentation</a>
+                    </li>
+                    <li>
+                        <a class="" href="https://github.com/okta/oktasdk-python">GitHub</a>
+                    </li>
+                </ul>
+                <a href="https://pypi.python.org/pypi/okta" class="btn" target="_blank">Download SDK</a>
+            </div>
+        </article>
 	</div>
 </section>
 
