@@ -62,6 +62,15 @@ and generate the final site content.
 7. Git commit and push changes to github. When ready for review create a pull request and mention the users you want to
    review your changes.
 
+### Resolving conflicts with "upstream"
+
+If you are making changes in a fork, here is how to make a clean Pull Request against "upstream"
+
+1. [sync your fork](https://help.github.com/articles/fork-a-repo/#keep-your-fork-synced) to https://github.com/okta/okta.github.io/
+   The command `git remote add upstream git@github.com:okta/okta.github.io.git` is the key part of this step.
+2. After running `git fetch upstream` in the guide above, run this command to pull down changes from upstream:
+   `git merge -s recursive -X theirs upstream/master`
+
 ## Contribution Process
 
 Okta uses the
