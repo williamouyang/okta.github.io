@@ -131,13 +131,15 @@
 <div class="wrap">
 	<article class="post-block">
 	  <header class="post-title-block">
-	    <h1><a href="/blog/2015/05/22/tcmalloc">Tcmalloc</a></h1>
+	    <h1><a href="/blog/2015/05/22/tcmalloc">How Okta Chased Down Severe System CPU Contention in MySQL</a></h1>
 	    <div class="attribution">
-	      <img src="/assets/img/"
-	           alt=""
+	      <img src="/assets/img/avatar-okta_logo.jpg"
+	           alt="avatar-okta_logo.jpg"
 	           class="author-avatar">
-	      <address></address>
+	      <address>Okta Staff</address>
 	      &nbsp;
+		  
+		    <a class="social_link" href="https://github.com/okta"><i class="fa fa-github-square"></i></a>
 		  
 		  
 		  
@@ -150,14 +152,7 @@
 	  </header>
 
 	  <section class="post-content">
-	    <hr />
-<p>layout: blog_post
-title: Productionalizing ActiveMQ
-author: okta_generic_blogger
-tags: [activemq, jvm]
-—</p>
-
-<p>Do you know what it’s like to fix a problem only to encounter a new one? Have you ever set off a chain reaction of problems and fixes, where each solution exposes a deeper issue? In technology, cascades like these are common, often painful, and occasionally welcome. </p>
+	    <p>Sometimes fixing a problem causes or reveals a new one. And sometimes this sets off a chain reaction of problems and fixes, where each solution exposes a deeper issue. In technology, cascades like these are common, often painful, and occasionally welcome. </p>
 
 <p>Our battle against CPU contention last fall is a good example of such a cascade. What began as a buffer pool adjustment triggered a series of issues and fixes that generated plenty of stress, but ultimately strengthened our platform. </p>
 
@@ -649,14 +644,12 @@ he does, he patches the JVM.</p>
 	      <address>Victor Ronin</address>
 	      &nbsp;
 		  
-		    <a class="social_link" href="https://github.com/example"><i class="fa fa-github-square"></i></a>
-		  
-		  
-		    <a class="social_link" href="https://twitter.com/example"><i class="fa fa-twitter-square"></i></a>
+		    <a class="social_link" href="https://github.com/vronin"><i class="fa fa-github-square"></i></a>
 		  
 		  
 		  
-		    <a class="social_link" href="http://example.com"><i class="fa fa-external-link-square"></i></a>
+		  
+		    <a class="social_link" href="http://victorronin.com/en/"><i class="fa fa-external-link-square"></i></a>
 		  
 	      <span class="sepr">&middot;</span>
 	      <time datetime="2015-04-23">
@@ -843,14 +836,12 @@ steps in writing on our wiki. Thanks guys!</p>
 	      <address>Victor Ronin</address>
 	      &nbsp;
 		  
-		    <a class="social_link" href="https://github.com/example"><i class="fa fa-github-square"></i></a>
-		  
-		  
-		    <a class="social_link" href="https://twitter.com/example"><i class="fa fa-twitter-square"></i></a>
+		    <a class="social_link" href="https://github.com/vronin"><i class="fa fa-github-square"></i></a>
 		  
 		  
 		  
-		    <a class="social_link" href="http://example.com"><i class="fa fa-external-link-square"></i></a>
+		  
+		    <a class="social_link" href="http://victorronin.com/en/"><i class="fa fa-external-link-square"></i></a>
 		  
 	      <span class="sepr">&middot;</span>
 	      <time datetime="2015-04-14">
@@ -1029,14 +1020,12 @@ how to make tests isolated. You can also check out the full code at
 	      <address>Victor Ronin</address>
 	      &nbsp;
 		  
-		    <a class="social_link" href="https://github.com/example"><i class="fa fa-github-square"></i></a>
-		  
-		  
-		    <a class="social_link" href="https://twitter.com/example"><i class="fa fa-twitter-square"></i></a>
+		    <a class="social_link" href="https://github.com/vronin"><i class="fa fa-github-square"></i></a>
 		  
 		  
 		  
-		    <a class="social_link" href="http://example.com"><i class="fa fa-external-link-square"></i></a>
+		  
+		    <a class="social_link" href="http://victorronin.com/en/"><i class="fa fa-external-link-square"></i></a>
 		  
 	      <span class="sepr">&middot;</span>
 	      <time datetime="2015-04-07">
@@ -1101,43 +1090,34 @@ androidTestCompile(‘org.robolectric:robolectric:2.3')
   <li>
     <p>Add this section:</p>
 
-    <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>robolectric { 
-        include <span class="string"><span class="delimiter">'</span><span class="content">**/*Test.class</span><span class="delimiter">'</span></span>
+    <pre><code class="language-java">robolectric { 
+        include '**/*Test.class'
 }
-</pre></div>
-</div>
-    </div>
+</code></pre>
   </li>
   <li>
     <p>Create the code that you want to test</p>
 
     <p>Modify <code>MainActivity</code>. Add the following code to it:</p>
 
-    <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="directive">private</span> Foo foo = <span class="keyword">new</span> Foo();
-<span class="directive">public</span> <span class="type">int</span> getSomething() {
-    <span class="keyword">return</span> foo.getFoo();
+    <pre><code class="language-java">private Foo foo = new Foo();
+public int getSomething() {
+    return foo.getFoo();
 }
-</pre></div>
-</div>
-    </div>
+</code></pre>
 
     <p>Add the <code>Foo</code> class:</p>
 
-    <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="keyword">package</span> <span class="namespace">com.example.myapplication</span>;
+    <pre><code class="language-java">package com.example.myapplication;
       
-<span class="directive">public</span> <span class="type">class</span> <span class="class">Foo</span> { 
-    Bar bar = <span class="keyword">new</span> Bar();
+public class Foo { 
+    Bar bar = new Bar();
         
-    <span class="directive">public</span> <span class="type">int</span> getFoo() { 
-        <span class="keyword">return</span> bar.getBar(); 
+    public int getFoo() { 
+        return bar.getBar(); 
     }
 }
-</pre></div>
-</div>
-    </div>
+</code></pre>
   </li>
   <li>
     <p>Add the <code>Bar</code> class:</p>
