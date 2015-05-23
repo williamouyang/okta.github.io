@@ -1,0 +1,983 @@
+<ul class="list-unstyled toc" id="markdown-toc">
+  <li><a href="#overview">Overview</a>    <ul>
+      <li><a href="#factor-model">Factor Model</a>        <ul>
+          <li><a href="#factor-type">Factor Type</a></li>
+          <li><a href="#provider-type">Provider Type</a></li>
+        </ul>
+      </li>
+      <li><a href="#factor-operations">Factor Operations</a>        <ul>
+          <li><a href="#factors">Factors</a>            <ul>
+              <li><a href="#request-parameters">Request Parameters</a></li>
+              <li><a href="#response-example">Response Example</a></li>
+            </ul>
+          </li>
+          <li><a href="#factors-catalog">Factors Catalog</a>            <ul>
+              <li><a href="#request-parameters-1">Request Parameters</a></li>
+              <li><a href="#response-example-1">Response Example</a></li>
+            </ul>
+          </li>
+          <li><a href="#reset-factor">Reset Factor</a>            <ul>
+              <li><a href="#request-parameters-2">Request Parameters</a></li>
+              <li><a href="#response-example-2">Response Example</a></li>
+            </ul>
+          </li>
+          <li><a href="#questions">Questions</a>            <ul>
+              <li><a href="#request-parameters-3">Request Parameters</a></li>
+              <li><a href="#response-parameters">Response Parameters</a></li>
+              <li><a href="#response-example-3">Response Example</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#factor-management-operations">Factor Management Operations</a>        <ul>
+          <li><a href="#enroll-factor">Enroll Factor</a>            <ul>
+              <li><a href="#request-parameters-4">Request Parameters</a></li>
+              <li><a href="#request-examples">Request Examples</a></li>
+              <li><a href="#response-example-4">Response Example</a></li>
+            </ul>
+          </li>
+          <li><a href="#factor-activation">Factor Activation</a>            <ul>
+              <li><a href="#request-parameters-5">Request Parameters</a></li>
+              <li><a href="#request-example">Request Example</a></li>
+            </ul>
+          </li>
+          <li><a href="#verify-factors">Verify Factors</a>            <ul>
+              <li><a href="#request-parameters-6">Request Parameters</a></li>
+              <li><a href="#request-example-1">Request Example</a></li>
+            </ul>
+          </li>
+          <li><a href="#reset-factors">Reset Factors</a>            <ul>
+              <li><a href="#request-parameters-7">Request Parameters</a></li>
+              <li><a href="#response-example-5">Response Example</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="overview">Overview</h2>
+
+<p>Multifactor authentication (MFA) provides an additional layer of security for your enterprise applications. Okta provides the following factors:</p>
+
+<ul>
+  <li>
+    <p>Okta Verify – To sign in, you must start the Okta Verify app on your mobile device to generate a six-digit code that you use to sign into your org. The numbers are generated using the industry standard Time-Based One-Time Password Algorithm.</p>
+  </li>
+  <li>
+    <p>Google Authenticator – To sign in, you must start the Google Authenticator app on your mobile device to generate a six-digit code that you use to sign into your org. The numbers are generated using the industry standard Time-Based One-Time Password Algorithm. The allowable clock skew is two minutes. After five unsuccessful attempts regardless of the time between the attempts the user account is locked and must be reset by an administrator. </p>
+  </li>
+  <li>
+    <p>SMS Authentication – To sign in, you must enter a security token that is sent to your mobile device.</p>
+  </li>
+  <li>
+    <p>Symantec VIP – Available for free in the United States and Canada in both enterprise and SSO editions, this factor enables you to use the VIP Manager tool to obtain a certificate that you use to sign in.</p>
+  </li>
+  <li>
+    <p>Security question – To sign in, users must enter the correct response to a security question that they select from a list of possible questions.</p>
+  </li>
+</ul>
+
+<p>Operations are divided into two groups.</p>
+
+<ul>
+  <li>Factor Operations - get, list, and delete extra verification factors for end users that are part of their user profiles.</li>
+  <li>Factor Lifecycle Operations - enroll, activate, and verify factors and a general reset of all factors.</li>
+</ul>
+
+<h3 id="factor-model">Factor Model</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>Data Type</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td>Id of the User Factor</td>
+      <td>Body</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>factorType</td>
+      <td>MFA Type</td>
+      <td>Body</td>
+      <td><a href="#factor-type">FactorType</a></td>
+      <td>TRUE</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>provider</td>
+      <td>Provider of the factor</td>
+      <td>Body</td>
+      <td><a href="#provider-type">ProviderType</a></td>
+      <td>TRUE</td>
+      <td>okta</td>
+    </tr>
+    <tr>
+      <td>status</td>
+      <td>Status of the Factor</td>
+      <td>Body</td>
+      <td>Factor Status</td>
+      <td>Yes</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>created</td>
+      <td>Creation Timestamp</td>
+      <td>Body</td>
+      <td>Timestamp</td>
+      <td>Yes</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>lastUpdated</td>
+      <td>Last Update Timestamp</td>
+      <td>Body</td>
+      <td>Timestamp</td>
+      <td>Yes</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>profile</td>
+      <td>Profile information</td>
+      <td>Body</td>
+      <td>Profile Information</td>
+      <td>TRUE</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>_links</td>
+      <td>Resources related to the User Factor</td>
+      <td>Body</td>
+      <td>JSON HAL</td>
+      <td>Optional</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>_embedded</td>
+      <td>Objects related to the Enrollment</td>
+      <td>Body</td>
+      <td>JSON HAL</td>
+      <td>Optional</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>Some attributes are available only after enrollment in a factor.</p>
+</blockquote>
+
+<h5 id="factor-type">Factor Type</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Factor Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>orn:okta:factor:types:sms</td>
+      <td>SMS</td>
+    </tr>
+    <tr>
+      <td>orn:okta:factor:types:call</td>
+      <td>Call</td>
+    </tr>
+    <tr>
+      <td>orn:okta:factor:types:hotp</td>
+      <td>Hardware Token</td>
+    </tr>
+    <tr>
+      <td>orn:okta:factor:types:sotp</td>
+      <td>Software Token</td>
+    </tr>
+    <tr>
+      <td>orn:okta:factor:types:question</td>
+      <td>Question</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="provider-type">Provider Type</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Provider</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>OKTA</td>
+      <td>Okta</td>
+    </tr>
+    <tr>
+      <td>RSA</td>
+      <td>Okta RSA Integration</td>
+    </tr>
+    <tr>
+      <td>SYMANTEC</td>
+      <td>Okta Symantec Integration</td>
+    </tr>
+    <tr>
+      <td>GOOGLE</td>
+      <td>Okta Google Integration</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The following parameters are used in factor lifecycle responses.</p>
+
+<h3 id="factor-operations">Factor Operations</h3>
+
+<h4 class="api api-operation" id="factors">Factors</h4>
+
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/<em>:id</em>/factors</span></p>
+
+<p>Returns all the active factors for the specified user.</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><code>id</code> of user</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-example" id="response-example">Response Example</h5>
+
+<p>Returns all types of factor that are active for the user. In this example, the user has three factor types, specifically: questions, Okta token, and SMS.</p>
+
+<pre><code class="language-json">    {
+        "id": "ufs2bysphxKODSZKWVCT",
+        "factorType": "question",
+        "provider": "OKTA",
+        "status": "ACTIVE",
+        "created": "2014-04-15T18:10:06.000Z",
+        "lastUpdated": "2014-04-15T18:10:06.000Z",
+        "profile": {
+            "question": "favorite_art_piece",
+            "questionText": "What is your favorite piece of art?"
+        },
+        "_links": {
+            "questions": {
+                "href": "https://company.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/questions",
+                "hints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            },
+            "self": {
+                "href": "https://company.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/ufs2bysphxKODSZKWVCT",
+                "hints": {
+                    "allow": [
+                        "GET",
+                        "DELETE"
+                    ]
+                }
+            },
+            "user": {
+                "href": "https://company.okta.com/api/v1/users/00u6fud33CXDPBXULRNG",
+                "hints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "id": "ostf2gsyictRQDSGTDZE",
+        "factorType": "token:software:totp",
+        "provider": "OKTA",
+        "status": "PENDING_ACTIVATION",
+        "created": "2014-06-27T20:27:33.000Z",
+        "lastUpdated": "2014-06-27T20:27:33.000Z",
+        "profile": {
+            "credentialId": "oclouditude@okta.com"
+        },
+        "_links": {
+            "next": {
+                "name": "activate",
+                "href": "https://company.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/ostf2gsyictRQDSGTDZE/activate",
+                "hints": {
+                    "allow": [
+                        "POST"
+                    ]
+                }
+            },
+            "self": {
+                "href": "https://company.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/ostf2gsyictRQDSGTDZE",
+                "hints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            },
+            "user": {
+                "href": "https://company.okta.com/api/v1/users/00u6fud33CXDPBXULRNG",
+                "hints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        },
+        "_embedded": {
+            "activation": {
+                "timeStep": 30,
+                "sharedSecret": "HE64TMLL2IUZW2ZLB",
+                "encoding": "base32",
+                "keyLength": 16
+            }
+        }
+    },
+    {
+        "id": "sms2gt8gzgEBPUWBIFHN",
+        "factorType": "sms",
+        "provider": "OKTA",
+        "status": "ACTIVE",
+        "created": "2014-06-27T20:27:26.000Z",
+        "lastUpdated": "2014-06-27T20:27:26.000Z",
+        "profile": {
+            "phoneNumber": "+12135551212”
+        },
+        "_links": {
+            "verify": {
+                "href": "https://company.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/sms2gt8gzgEBPUWBIFHN/verify",
+                "hints": {
+                    "allow": [
+                        "POST"
+                    ]
+                }
+            },
+            "self": {
+                "href": "https://company.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/sms2gt8gzgEBPUWBIFHN",
+                "hints": {
+                    "allow": [
+                        "GET",
+                        "DELETE"
+                    ]
+                }
+            },
+            "user": {
+                "href": "https://company.okta.com/api/v1/users/00u6fud33CXDPBXULRNG",
+                "hints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        }
+    }
+</code></pre>
+
+<h4 id="factors-catalog">Factors Catalog</h4>
+
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/<em>:id</em>/factors/catalog</span></p>
+
+<p>Returns all the types of factors that can be assigned for the specified user.</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-1">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><code>id</code> of user</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-example" id="response-example-1">Response Example</h5>
+
+<p>Returns all types of factor that can be assigned for the user. In this example, the user has four factor types available, specifically: questions, Okta token, Google token, and SMS.</p>
+
+<pre><code class="language-json">    {
+        "factorType": "question",
+        "provider": "OKTA",
+        "_links": {
+            "questions": {
+                "href": "https://company.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/questions",
+                "hints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            },
+            "enroll": {
+                "href": "https://company.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors",
+                "hints": {
+                    "allow": [
+                        "POST"
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "factorType": "token:software:totp",
+        "provider": "OKTA",
+        "_links": {
+            "enroll": {
+                "href": "https://company.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors",
+                "hints": {
+                    "allow": [
+                        "POST"
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "factorType": "token:software:totp",
+        "provider": "GOOGLE",
+        "_links": {
+            "enroll": {
+                "href": "https://company.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors",
+                "hints": {
+                    "allow": [
+                        "POST"
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "factorType": "sms",
+        "provider": "OKTA",
+        "_links": {
+            "enroll": {
+                "href": "https://company.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors",
+                "hints": {
+                    "allow": [
+                        "POST"
+                    ]
+                }
+            }
+        }
+    }
+</code></pre>
+
+<h4 id="reset-factor">Reset Factor</h4>
+
+<p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/users/<em>:id</em>/factors/<em>:factorID</em></span></p>
+
+<p>Resets a factor for the specified user.</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-2">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><code>id</code> of user</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>factorID</td>
+      <td>The id of the factor to reset</td>
+      <td>Body</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-example" id="response-example-2">Response Example</h5>
+
+<p>Status 204 No Content - The server successfully processed the request, but did not return any content.</p>
+
+<h4 id="questions">Questions</h4>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/<em>:id</em>/lifecycle/questions</span></p>
+
+<p>Returns all additional security questions available for a user and the question id.</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-3">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><code>id</code> of user</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters">Response Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>question</td>
+      <td>question id</td>
+      <td>String</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>questionText</td>
+      <td>the text of the security question</td>
+      <td>String</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-example" id="response-example-3">Response Example</h5>
+
+<p>Returns all additional security questions available for a user and the question id.</p>
+
+<pre><code class="language-json">{
+        "question": "disliked_food",
+        "questionText": "What is the food you least liked as a child?"
+    },
+    {
+        "question": "name_of_first_plush_toy",
+        "questionText": "What is the name of your first stuffed animal?"
+    },
+    {
+        "question": "first_award",
+        "questionText": "What did you earn your first medal or award for?"
+    },
+    {
+        "question": "favorite_security_question",
+        "questionText": "What is your favorite security question?"
+    },
+    {
+        "question": "favorite_toy",
+        "questionText": "What is the toy/stuffed animal you liked the most as a kid?"
+    },
+    {
+        "question": "first_computer_game",
+        "questionText": "What was the first computer game you played?"
+    },
+    {
+        "question": "favorite_movie_quote",
+        "questionText": "What is your favorite movie quote?"
+    },
+    {
+        "question": "first_sports_team_mascot",
+        "questionText": "What was the mascot of the first sports team you played on?"
+    },
+    {
+        "question": "first_music_purchase",
+        "questionText": "What music album or song did you first purchase?"
+    },
+    {
+        "question": "favorite_art_piece",
+        "questionText": "What is your favorite piece of art?"
+    }
+</code></pre>
+
+<h3 id="factor-management-operations">Factor Management Operations</h3>
+
+<p>There are factor management operations for the following six factors: questions, SMS factor, Okta soft token, Google authenticator, RSA factor, and Symantec VIP. </p>
+
+<ul>
+  <li>SMS factor, Okta soft token, and Google authenticator have enroll, activate, and reset operations. </li>
+  <li>Question, RSA factor, and Symantec VIP have enroll and reset operations only.</li>
+</ul>
+
+<p>The <strong>factors</strong> api is used to enroll and activate all factors.</p>
+
+<h4 class="api api-operation" id="enroll-factor">Enroll Factor</h4>
+
+<p><span class="api-uri-template api-uri-put"><span class="api-label">POST</span> /api/v1/users/<em>:id</em>/factors</span></p>
+
+<p>Enrolls the specified user in a specified factor. </p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-4">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><code>id</code> of user</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>factor</td>
+      <td>Factor to enroll</td>
+      <td><a href="#Factor-Type">Factor Types</a></td>
+      <td>Body</td>
+      <td>Factor</td>
+      <td>TRUE</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-request api-request-example" id="request-examples">Request Examples</h5>
+
+<p>Enroll Question</p>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users/factors
+-d \
+'{
+        "factorType": "question",
+        "provider": "okta",
+        "profile": {
+            "question": "name_of_first_plush_toy",
+            "answer": "plush_toy"
+        }
+}'
+</code></pre>
+
+<p>Enroll SMS Factor</p>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users/factors
+-d \
+'{
+  "factorType"     : "sms",
+  "provider" : "okta",
+  "profile"  : {
+    "phoneNumber" :  "+1 213 555 1212"
+  }
+}'
+</code></pre>
+
+<p>Enroll Okta Soft Token</p>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users/factors
+-d \
+'{
+  "factorType"   : "token:software:totp",
+  "provider" : "okta"
+}'
+</code></pre>
+
+<p>Enroll Google Authenticator</p>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users/factors
+-d \
+'{
+  "factorType"   : "token:software:totp",
+  "provider" : "google"
+}'
+</code></pre>
+
+<p>Enroll RSA Factor</p>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users/factors
+-d \
+'{
+	"factorType": "token:hardware",
+    "provider": "okta:rsa",
+    "profile": {
+    	"credentialId": "gooduser"
+    },
+    "verify": {
+  		"passCode": "gooduser"
+    }
+}'
+</code></pre>
+
+<p>Enroll Symantec VIP</p>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users/factors
+-d \
+'{
+	"factorType": "token",
+    "provider": "okta:symantec",
+    "profile": {
+    	"credentialId": "TEST_TOKEN_ID"
+    },
+    "verify": {
+  		"passCode": "875492",
+        "nextPassCode":"678191"
+    }
+}'
+</code></pre>
+
+<h5 id="response-example-4">Response Example</h5>
+
+<p>The responses are the same as the responses for /api/v1/users/<em>:id</em>/factors that returns all the active factors for a user, but only contains the one particular factor in which the user is enrolled.</p>
+
+<h4 class="api api-operation" id="factor-activation">Factor Activation</h4>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/<em>:id</em>/factors/<em>:factorID</em>/activate</span></p>
+
+<p>SMS factors, Okta soft tokens, and Google authenticator tokens require activation after a user is enrolled.</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-5">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><code>id</code> of user</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>factorID</td>
+      <td>The <code>id</code> returned from Enroll Factor</td>
+      <td>String</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>passCode</td>
+      <td>The activation code supplied by the provider</td>
+      <td>Body</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-request api-request-example" id="request-example">Request Example</h5>
+
+<p>Activates an SMS token.</p>
+
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users/454ub0oNGTSWTBKOLGLNR/factors/sms2gt8888EBPUWBIFH/activate"
+-d \
+'{
+	"passCode" : "123456" 
+ }
+
+#####Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+    {
+	   "factorType": "token",
+       "provider": "okta:symantec",
+       "profile": {
+       "credentialId": "TEST_TOKEN_ID"
+       "verify": {
+  		   "passCode": "875492",
+           "nextPassCode":"678191"
+       }
+    }
+</code></pre>
+
+<h4 id="verify-factors">Verify Factors</h4>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/<em>:id</em>/factors/<em>:factorID</em>/verify</span></p>
+
+<p>Questions and SMS tokens require verification after activating the factor. </p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-6">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><code>id</code> of user</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>factorID</td>
+      <td>The <code>id</code> returned from Enroll Factor</td>
+      <td>String</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Pass the <code>id</code> and <code>factorID</code> to begin the verification challenge. Include the following body parameters to answer the challenge.</p>
+
+<h5 class="api api-request api-request-params" id="request-example-1">Request Example</h5>
+
+<p>SMS Token Verification Answer</p>
+
+<pre><code class="language-json">    {
+        "passCode": "935661"
+    }
+</code></pre>
+
+<p>Question Verification Answer</p>
+
+<pre><code class="language-json">    {
+        "answer": "question"
+    }
+</code></pre>
+
+<h4 id="reset-factors">Reset Factors</h4>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/<em>:id</em>/lifecycle/reset_factors</span></p>
+
+<p>Resets all extra verification factors that are setup for the specified user. </p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-7">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><code>id</code> of user</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-example" id="response-example-5">Response Example</h5>
+
+<p>Status 204 No Content – The server successfully processed the request, but did not return any content.</p>
+
