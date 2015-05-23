@@ -166,8 +166,8 @@
 
 <h2 id="tuning-the-database">Tuning the database</h2>
 
-<p>As a first step, we tuned our MySQL database to fully utilize the amount of RAM in our server instances. At that time we were running with a relatively small buffer pool
-compared to the amount of available RAM. This meant we were sacrificing both performance and money.  Increasing the size of the buffer pool decreased page response times and nearly eliminated disk reads.</p>
+<p>As a first step, we tuned our MySQL database to fully utilize the amount of RAM in our server instances. We had been running with a relatively small buffer pool
+compared to the amount of available RAM, which meant that we were sacrificing both performance and money.  Increasing the size of the buffer pool decreased page response times and nearly eliminated disk reads.</p>
 
 <p><img style="width:50%" src="/assets/img/EliminateDiskReads.png" alt="Almost eliminated disk reads" /></p>
 
@@ -175,8 +175,9 @@ compared to the amount of available RAM. This meant we were sacrificing both per
 
 <p>Despite the buffer pool adjustment, we continued to see significant CPU contention. In response, we doubled the size of our servers (244 GB of RAM, 32 CPU cores, and 2 x 320 GB HDDs). CPU contention decreased (see the trough in the following image), but probably because of the Thanksgiving holiday, not the additional hardware.</p>
 
-<p>After the holiday, CPU spikes returned, now worse than ever. Page render time slowed down, queries against the database took longer, and jobs backed up. 
-<img style="width:55%" src="/assets/img/Thanksgiving.png" alt="Thanksgiving holiday" /></p>
+<p>After the holiday, CPU spikes returned, now worse than ever. Page render time slowed down, queries against the database took longer, and jobs backed up. </p>
+
+<p><img style="width:50%" src="/assets/img/Thanksgiving.png" alt="Thanksgiving holiday" /></p>
 
 <p><strong>Note:</strong> Flat areas in the graph showing no CPU usage indicate periods when we were running on a secondary server.</p>
 
@@ -220,7 +221,7 @@ compared to the amount of available RAM. This meant we were sacrificing both per
 
 <p>Which is why THP is so wrong for our platform. By late 2014 we were using 95% of the RAM and 58% of the 32 CPU cores in our servers . In order to store all of those tiny transaction IDs, we were rewriting memory so rapidly that THP’s efforts to move pages around couldn’t keep up. Clearly, standard 4kb blocks were much more efficient for us than the larger page size that THP was “helping” us with. So we turned THP off. The following image tells the story.</p>
 
-<p><img style="width:60%" src="/assets/img/TCMalloc.png" alt="TCMalloc" /></p>
+<p><img style="width:40%" src="/assets/img/TCMalloc.png" alt="TCMalloc" /></p>
 
 <p><strong>Note:</strong> Flat areas in the graph showing no CPU usage indicate periods when we were running on a secondary server.</p>
 
@@ -228,7 +229,7 @@ compared to the amount of available RAM. This meant we were sacrificing both per
 
 <h2 id="lessons-learned">Lessons learned</h2>
 
-<p>Beyond the technical lessons we learned during this period, we were reminded that it pays off sometimes to stay the course. We were at times tempted to pull back, but moving forward ultimately paid off as each improvement we made exposed the inadequacy (for our platform) of a downstream component. </p>
+<p>Beyond the technical lessons we learned during this period, we were reminded that sometimes the best thing to do is stay the course. At times we were tempted to pull back, but moving forward ultimately paid off as each improvement we made exposed the inadequacy (for our platform) of a downstream component. </p>
 
 
 	  </section>
