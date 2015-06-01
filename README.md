@@ -64,7 +64,7 @@ and generate the final site content.
 
 ### Resolving conflicts with "upstream"
 
-If you are making changes in a fork, here is how to make a clean Pull Request against "upstream"
+If you are making changes in a fork, here is how to make a clean Pull Request against "upstream":
 
 1. [sync your fork](https://help.github.com/articles/fork-a-repo/#keep-your-fork-synced) to https://github.com/okta/okta.github.io/
    The command `git remote add upstream git@github.com:okta/okta.github.io.git` is the key part of this step.
@@ -74,21 +74,21 @@ If you are making changes in a fork, here is how to make a clean Pull Request ag
 ## Contribution Process
 
 Okta uses the
-"[GitHub Flow](https://guides.github.com/introduction/flow/)"
+[GitHub Flow](https://guides.github.com/introduction/flow/)
 workflow for contributions.
 
 Please read the linked
 [GitHub Flow](https://guides.github.com/introduction/flow/)
 document to learn the details of that workflow.
 
-Here is a high level overview of the GitHub flow:
+Here is a high-level overview of the GitHub flow:
 
-1.  (Optional) Fork this repository
+1.  (Optional) Fork this repository.
 2.  *Create a branch* using the `git checkout -b $BRANCH_NAME` command.
-    Replace `$BRANCH_NAME` with what you want your branch to be named.
+    Replace `$BRANCH_NAME` with your branch name.
 3.  *Add commits* to your branch using the `git add` and `git commit -m ""` commands.
     Push your commits to your branch with the `git push` command (for
-    example: `git push origin $BRANCH_NAME`)
+    example: `git push origin $BRANCH_NAME`).
 4.  *Open a Pull Request*
     [using the GitHub UI](https://help.github.com/articles/using-pull-requests/).
 5.  *Discuss and review your code* using the GitHub UI.
@@ -98,25 +98,25 @@ Here is a high level overview of the GitHub flow:
 
 ### Details for the "Add commits" step
 
-1. Clone repository using `git clone`
-    * root folder './' are the files served by github.
-    * '_source' folder contains the source files.
-    * '_site' is still ignored
-2. Create a branch for your changes using `git checkout -b $BRANCH_NAME`
-3. Make changes under '_source'
+1. Clone repository using `git clone` - the files are organized in this repository as follows:
+    * The root folder `./` contains the files served by GitHub.
+    * `_source` folder contains the source files.
+    * `_site` is still ignored.
+2. Create a branch for your changes using `git checkout -b $BRANCH_NAME` to create a branch for your changes.
+3. Make changes under the `_source` directory.
 4. Serve the site locally using the `jekyll serve -w` command.
-5. Preview using <http://locahost:4000>
+5. Preview using <http://locahost:4000>.
 
 ### Details for the "merge and deploy" step
 
-After accepting a pull request, a project owner will do the following:
+Do the following after accepting a pull request:
 
-1. Pull down the latest changes using `git pull origin master`
+1. Pull down the latest changes using `git pull origin master` to pull down the latest changes.
 2. Compile the site locally using the `jekyll build` command.
-3. rsync files from '_site' to root folder './' with the `rsync -r _site/ ./` command.
+3. rsync files from the `_site` directory to repository root directory `./` with the `rsync -r _site/ ./` command.
 4. Add the updated files using the `git add .` command.
-5. Commit the updated files using the `git commit -m "YOUR MESSAGE HERE"` command.
-6. /push to GitHub using `git push origin master` note that GitHub won't compile the site.
+5. Commit the updated files using the `git commit -m "your message here"` command.
+6. Push to GitHub using `git push origin master` to push to GitHub. Note that GitHub will not compile the site.
 
 
 ## Authoring Guide
