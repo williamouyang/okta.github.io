@@ -6,6 +6,7 @@
     - overview
     - saml_guidance
     - oan_guidance
+    - okta_mobile_connect
     - spring_security_saml
     - pysaml2
     - add_mfa
