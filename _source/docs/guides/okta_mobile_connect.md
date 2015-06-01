@@ -29,16 +29,17 @@ your mobile app: -->
 ## If your app is already SAML-enabled
 
 If your mobile app already supports logging in via SAML, it may already work
-with Okta Mobile Connect. The "Concur", "Salesforce", and "Yammer" are
-examples of apps that worked with Okta Mobile Connect without any need
-for special modification.
+with Okta Mobile Connect. The *Concur*, *Salesforce*, and *Yammer* are
+examples of apps that worked with Okta Mobile Connect without special
+modification.
 
 To work with Okta Mobile Connect, your mobile app needs to meet the
 criteria below:
+
 1. It must support SAML authentication via an embedded web view that
    allows any URL to be called from inside the embedded web view.
-3. It must have a URI scheme registered for the app that, when called,
-   only returns app to foreground.
+2. It must have a URI scheme registered for the app that only returns
+   the app to foreground when called.
 
 If your app meets these two criteria, you are encouraged to submit it
 to Okta for testing by sending an email to <developers@okta.com> with
@@ -50,15 +51,15 @@ the following information:
 
   _(For example: "https://itunes.apple.com/us/app/example/id123456789")_
 
-* The URI Scheme that will return this app to the foreground
+* The URI Scheme that returns this app to the foreground.
 
   _(For example: "example://" )_
 
 * Instructions for testing your app.
 
   *Please provide any instructions and credentials needed to configure
-   SAML as Okta will need to change the SAML settings in your app to
-   point at testing servers.*
+   SAML. Okta will change the SAML settings in your app to
+   point to testing servers.*
 
 <!--
 If your app meets these two criteria, you are encouraged to submit it
@@ -95,8 +96,7 @@ Instructions for testing your app
 ## If your SAML-enabled app does not work
 
 The only way to be certain that your SAML-enabled mobile app works
-with Okta Mobile Connect is to have it tested by Okta, using the form
-above.
+with Okta Mobile Connect is to have it tested by Okta.
 
 With that in mind, here are the most common reasons why an existing
 SAML-enabled mobile app might not work with Okta Mobile Connect:
@@ -105,13 +105,13 @@ SAML-enabled mobile app might not work with Okta Mobile Connect:
   is registered for the app.
 * Calling the URL Scheme for the app doesn't simply return the app to
   the foreground. To work with Okta Mobile Connect your app must have
-  a URL Scheme that, when called, will return your app to the embedded
-  web view that handles the SAML authentication. Meaning, calling that
+  a URL Scheme that returns your app to the embedded
+  web view that handles SAML authentication. Calling the
   URL Scheme should be functionally equivalent to the user returning
   your app to the foreground.
 * The embedded web view for SAML authentication only allows specific
   URLs to be called in the embedded web view. The embedded web view
-  must allow the "okta://" and "oktasso://" URL Schemes to be called.
+  must allow the **okta://** and **oktasso://** URL Schemes to be called.
 
 ## If your app is not SAML-enabled
 
@@ -126,7 +126,7 @@ Okta has documentation to help in both of these scenarios:
 * If you need to add SAML support to your software, start with
 Okta's [Single Sign-On guidance](/docs/guides/saml_guidance.html).
 
-* If your website already supports SAML, and you're looking to add
+* If your website already supports SAML, and you want to add
 SAML support to your mobile app, start with the
 [technical overview of Okta Mobile Connect](https://github.com/okta/okta-mobile-connect){:target="_blank"},
 which includes an example of how to add SAML support to an iOS app.
