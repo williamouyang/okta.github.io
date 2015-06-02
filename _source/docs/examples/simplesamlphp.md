@@ -1,52 +1,46 @@
 ---
 layout: docs_page
 title: SimpleSAMLphp (PHP)
-chiclet_name: SimpleSAMLphp Example
-programming_language: PHP
-saml_library: SimpleSAMLphp
-saml_library_url: https://simplesamlphp.org/
-saml_library_github_url: git@github.com:simplesamlphp/simplesamlphp.git
-github_url: git@github.com:jpf/okta-simplesamlphp-example.git
 support_email: developers@okta.com
 ---
 
 This guide describes how to use
-[{{ page.saml_library }}]({{ page.saml_library_url }})
+[SimpleSAMLphp](https://simplesamlphp.org/)
 to add support for Okta (via SAML) to applications written in
-{{ page.programming_language }}.
+PHP.
 Please note that while the example application in this guide uses plain PHP,
 the concepts presented here are general enough to use in other
-{{ page.programming_language }} frameworks.
+PHP frameworks.
 
 In this guide, you will install and configure an example
-application which demonstrates how to use {{ page.saml_library }} in a simple
-{{ page.programming_language }} application.
+application which demonstrates how to use SimpleSAMLphp in a simple
+PHP application.
 After you have Okta working with the example application,
 you will need to adapt the example code to your production environment.
 
 It is assumed that you are familiar with the basics of
-{{ page.programming_language }} software development as well as using the
+PHP software development as well as using the
 command line and editing text files.
 
 If you're already familiar with Okta, you can skip to the
-section titled "Configuring {{ page.saml_library }} to work with Okta."
+section titled "Configuring SimpleSAMLphp to work with Okta."
 
 * Will be replaced with the ToC
 {:toc .list-unstyled .toc}
 
-## Configuring Okta to work with {{ page.saml_library }}
+## Configuring Okta to work with SimpleSAMLphp
 
-Before you can configure the example application and {{ page.saml_library }}
+Before you can configure the example application and SimpleSAMLphp
 you will need to set up an Okta
 "[chiclet](https://support.okta.com/articles/Knowledge_Article/27838096-Okta-Terminology)"
 (application icon) that an Okta user would select to sign in to your to your
-application using SAML via {{ page.saml_library }}.
+application using SAML via SimpleSAMLphp.
 
 To set up Okta to connect to your application, follow the guide to
 [setting up a SAML application in Okta](setting_up_a_saml_application_in_okta.html).
 As you follow the instructions, there are two steps where you will do things differently:
 
-* *In step \#6*: Use ***{{ page.chiclet_name }}*** instead "Example SAML application"
+* *In step \#6*: Use ***SimpleSAMLphp Example*** instead "Example SAML application"
 * *In step \#7*: Instead of entering the URL: `http://example.com/saml/sso/example-okta-com`
 
   Use the following URLs:
@@ -64,15 +58,15 @@ As you follow the instructions, there are two steps where you will do things dif
     `http://localhost/okta-simplesamlphp-example/?saml_sso=example-okta-com`
 
 
-## Configuring {{ page.saml_library }} to work with Okta
+## Configuring SimpleSAMLphp to work with Okta
 
-Now that you have configured the "chiclet" for "{{ page.chiclet_name }}" in
-your Okta organization, you are ready to configure {{ page.saml_library }}
+Now that you have configured the "chiclet" for "SimpleSAMLphp Example" in
+your Okta organization, you are ready to configure SimpleSAMLphp
 to work with your Okta organization. In this
 section we will use the "Identity Provider metadata" link from the
-section above to configure {{ page.saml_library }}. After completing
+section above to configure SimpleSAMLphp. After completing
 the following steps, you will have a working example of connecting
-Okta to a sample {{ page.programming_language }} application using {{ page.saml_library }}.
+Okta to a sample PHP application using SimpleSAMLphp.
 
 Start by following the [instructions for installing
 SimpleSAMLphp](https://simplesamlphp.org/docs/stable/simplesamlphp-install).
@@ -104,8 +98,8 @@ PHP, reconfiguring Apache, and creating some symbolic links.
    $ cd ~
    $ mkdir simplesamlphp
    $ cd simplesamlphp
-   $ git clone {{ page.saml_library_github_url }}
-   $ git clone {{ page.github_url }}
+   $ git clone git@github.com:simplesamlphp/simplesamlphp.git
+   $ git clone git@github.com:jpf/okta-simplesamlphp-example.git
    ~~~
 
 2. Install php56 and php56-mcrypt with [homebrew](http://brew.sh/).
@@ -235,11 +229,11 @@ PHP, reconfiguring Apache, and creating some symbolic links.
 ## Test the SAML integration
 
 Now that you have set up a "chiclet" in your Okta organization and have
-configured {{ page.saml_library }} to work with your Okta organization, it is ready to test.
+configured SimpleSAMLphp to work with your Okta organization, it is ready to test.
 
 There are two ways to test a SAML application:
 
-1. Starting from the example {{ page.programming_language }} application ("SP initiated").
+1. Starting from the example PHP application ("SP initiated").
 2. Starting from Okta ("IdP initiated").
 
 You will use both methods to test your application. In each case, you will know if the
@@ -248,7 +242,7 @@ test worked when you see a screen that looks like the one below:
 ![Authenticated user](/assets/img/example-application-authenticated-user.png)
 
 
-1.  Login from the Okta {{ page.saml_library }} example application (This is
+1.  Login from the Okta SimpleSAMLphp example application (This is
     known as an **SP-initiated login**.)
 
     -   Open the example application in your browser:
@@ -263,14 +257,14 @@ test worked when you see a screen that looks like the one below:
     -   Sign in to your Okta organization.
 
     -   Click the button for the application you created earlier
-        "Configuring Okta to work with {{ page.saml_library }}" section
+        "Configuring Okta to work with SimpleSAMLphp" section
         above:
-        ![{{ page.chiclet_name }}](/assets/img/simplesamlphp-example-okta-chiclet.png)
+        ![SimpleSAMLphp Example](/assets/img/simplesamlphp-example-okta-chiclet.png)
 
 You will know that your testing was successful if are able to get to the "Logged in" 
 page pictured above using both "SP initated" and "IdP initated" login.
 
-Congratulations on getting Okta working with {{ page.saml_library }}!
+Congratulations on getting Okta working with SimpleSAMLphp!
 
 <!--
 ## Cleanup
@@ -301,10 +295,10 @@ it by uncommenting the section above.
 ## Next Steps
 
 At this point, you should be familiar with setting up a SAML enabled application
-to work with an Okta organization and how to configure {{ page.saml_library }} to work with Okta.
+to work with an Okta organization and how to configure SimpleSAMLphp to work with Okta.
 
 After you have your Okta organization working with the example
-{{ page.programming_language}} application, your next step will be to take the
+PHP application, your next step will be to take the
 example code and move it to your production application. The specifics of how
 this works will be different depending on how your application is set up. 
 Pay special attention to the notes in the `index.php` file. 
