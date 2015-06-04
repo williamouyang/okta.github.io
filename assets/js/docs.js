@@ -1,6 +1,6 @@
 $(function() {
 	$('.closed').hide();
-	var offset = $('.site-header').height() + $('#sticky-nav').height() + 40;
+	var offset = $('.site-header').height() + $('#sticky-nav').height() + 50;
 	$('body').scrollspy({ target: '#myScrollspy', offset:  offset });
 
 	$('#myScrollspy').on('activate.bs.scrollspy', function() {
