@@ -22,7 +22,7 @@
 								{% if item  == section_name or item == section_name_api %}
 								<ul class="nav sidebar-nav nav-title">
 									<li data-name="{{ doc_page.title }}" {% if page_name == name %}class="on"{% endif %}>
-										<a href="/docs/{{ nav.section }}/{{ item }}.html">{{ doc_page.title }}</a>
+										<a id="toc_current_doc" href="/docs/{{ nav.section }}/{{ item }}.html">{{ doc_page.title }}</a>
 									</li>
 								</ul>
 									{{ content | toc_generate }}

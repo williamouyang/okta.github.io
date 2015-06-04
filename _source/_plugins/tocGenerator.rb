@@ -3,7 +3,7 @@ require 'nokogiri'
 module Jekyll
   module TOCGenerator
   	TOGGLE_HTML = '<h2><div id="gen-toctitle" class="caret2 hide">%1</div>%2</h2>'
-    TOC_CONTAINER_HTML = '<div id="gen-toc-container"><div class="gen-toc" id="gen-toc"><div class="gen-toc-title hide">%1</div><ul class="nav sidebar-nav">%2</ul></div></div>'
+    TOC_CONTAINER_HTML = '<div id="gen-toc-container"><div class="gen-toc" id="gen-toc"><div class="gen-toc-title hide">%1</div><ul class="nav sidebar-nav hide">%2</ul></div></div>'
     HIDE_HTML = '<span class="gen-toctoggle">[<a id="gen-toctogglelink" class="internal" href="#">%1</a>]</span>'
 
    def toc_generate(html)
