@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*
  * Layout
  ------------------------------------------------------------ */
@@ -66,7 +67,7 @@ body {
       position: relative;
       text-decoration: none; }
       .section--with-sidebar .sticky-nav--top a.on, .section--with-sidebar .sticky-nav--top a:active, .section--with-sidebar .sticky-nav--top a:focus, .section--with-sidebar .sticky-nav--top a:hover {
-        color: black; }
+        color: #000; }
         .section--with-sidebar .sticky-nav--top a.on:after, .section--with-sidebar .sticky-nav--top a:active:after, .section--with-sidebar .sticky-nav--top a:focus:after, .section--with-sidebar .sticky-nav--top a:hover:after {
           background: #818081;
           bottom: 0;
@@ -84,7 +85,7 @@ body {
         width: 25%; }
         .no-flexbox .section--with-sidebar .sticky-nav--top a.toggle-menu {
           display: none; }
-    @media screen and (min-width: 0 \0) {
+    @media screen and (min-width: 0\0) {
       .section--with-sidebar .sticky-nav--top {
         display: table;
         width: 75%; }
@@ -229,16 +230,16 @@ h6:hover .header-link {
   color: #090; }
 
 .api-request-params:before {
-  content: "\f18e"; }
+  content: ""; }
 
 .api-response-params:before {
-  content: "\f190"; }
+  content: ""; }
 
 .api-request-example:before {
-  content: "\f0a9"; }
+  content: ""; }
 
 .api-response-example:before {
-  content: "\f0a8"; }
+  content: ""; }
 
 .api-label {
   color: #ffffff;
@@ -248,7 +249,7 @@ h6:hover .header-link {
   white-space: nowrap;
   vertical-align: baseline;
   border-radius: .25em;
-  background: #445566; }
+  background: #456; }
 
 .api-label-small {
   font-size: 80%; }
@@ -271,16 +272,16 @@ h6:hover .header-link {
     margin-right: 5px; }
 
 .api-uri-get em {
-  color: #009900; }
+  color: #090; }
 
 .api-uri-get .api-label {
-  background: #009900; }
+  background: #090; }
 
 .api-uri-post em {
-  color: #f39c44; }
+  color: #F39C44; }
 
 .api-uri-post .api-label {
-  background: #f39c44; }
+  background: #F39C44; }
 
 .api-uri-put em {
   color: #0069aa; }
@@ -525,7 +526,7 @@ h6:hover .header-link {
   color: #999999; }
 
 .sidebar-nav > .sidebar-brand a:hover {
-  color: white; }
+  color: #fff; }
 
 .docs-sidebar-block {
   max-height: 100%;
