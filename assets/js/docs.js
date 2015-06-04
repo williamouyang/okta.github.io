@@ -1,6 +1,6 @@
 $(function() {
 	$('.closed').hide();
-	var offset = $('.site-header').height() + $('#sticky-nav').height() + 50;
+	var offset = $('.site-header').height() + $('#sticky-nav').height() + 30;
 	$('body').scrollspy({ target: '#myScrollspy', offset:  offset });
 
 	$('#myScrollspy').on('activate.bs.scrollspy', function() {
@@ -57,7 +57,7 @@ $(function() {
 		linkifyAnchors(level, body);
 	}
 
-	var fixedNavHeight = 180;
+	var fixedNavHeight = 160;
 
 	$('a[href*=#]:not([href=#])').click(function() {
 		if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
