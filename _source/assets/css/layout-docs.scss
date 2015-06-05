@@ -23,7 +23,7 @@ body {
 .section--with-sidebar {
 	border-left: $sideBarWidth solid $colorBlueDark;
 	position: relative;
-
+	-webkit-transition: all 0.3s ease-in-out;
 	.sticky-nav--sidebar {
 		left: 0;
 		position: fixed;
@@ -32,7 +32,7 @@ body {
 		background-color: $colorBlueDark;
 		z-index: 100;
 		height: 100%;
-		overflow-y: auto;
+		// overflow-y: auto;
 		ul {
 			margin-top: 0;
 		}
@@ -91,23 +91,23 @@ body {
 		}
 		.no-flexbox & {
 			display: table;
-			width: 75%;
+			width: 80%;
 			a {
 				display: table-cell;
-				width: 25%;
+				width: 20%;
 				&.toggle-menu {
-					display: none;
+					display: block;
 				}
 			}
 		}
 		@media screen and (min-width:0\0) {
 			display: table;
-			width: 75%;
+			width: 80%;
 			a {
 				display: table-cell;
-				width: 25%;
+				width: 20%;
 				&.toggle-menu {
-					display: none;
+					display: block;
 				}
 			}
 		}
@@ -122,6 +122,7 @@ body {
 }
 
 .docs-body {
+	-webkit-transition: all 0.3s ease-in-out;
 	.docs-index-list {
 		margin-left: 10px;
 
@@ -681,10 +682,10 @@ h6:hover .header-link {
 	color:#fff
 }
 
-.docs-sidebar-block {
-	max-height: 100%;
+#docs-sidebar-wrap {
+	max-height: 80%;
 	overflow-y: auto;
-	padding-bottom: 400px;
+	padding-bottom: 300px;
 }
 
 .excerpt {
@@ -1113,7 +1114,7 @@ input:focus {outline:0;}
 	font-size: 50px;
 	float: left;
 	display: block;
-	display: none;
+	// display: none;
 	transition: opacity 0.3s ease-out;
 }
 .toggle-menu:hover {
@@ -1128,6 +1129,68 @@ input:focus {outline:0;}
 	font-weight: normal;
 	text-decoration: inherit;
 }
+
+body {
+	&.toggled {
+		.toggle-menu:before {
+			content: "\f205";
+		}
+		#sticky-nav {
+			left: $sideBarWidth;
+			a {
+				// display: none;
+				&:first-child {
+					display: block;
+				}
+			}
+		}
+		.section--with-sidebar {
+			border-left: 0;
+		}
+		.sticky-nav--sidebar.toggled {
+			width: $sideBarWidth;
+		}
+		.section--with-sidebar {
+			border-left: $sideBarWidth solid $colorBlueDark;
+		}
+		.section--with-sidebar .sticky-nav--sidebar {
+			width: 0;
+			-webkit-transition: all 0.3s ease-in-out;
+		}
+		#sticky-nav {
+			left: 0;
+			-webkit-transition: all 0.3s ease-in-out;
+			a {
+				&:first-child {
+					display: block;
+				}
+			}
+		}
+
+		.section--with-sidebar {
+			border-left: 0;
+		}
+		.sticky-nav--sidebar.toggled  {
+			& > .docs-body {
+				overflow: hidden;
+				width: $sideBarWidth;
+			}
+		}
+
+		.docs-body {
+			left: 0;
+		}
+
+		.toggle-menu {
+			z-index: 1;
+			opacity: 1;
+			display: block;
+		}
+	}
+	
+}
+
+
 @media all and (max-width: 768px) {
 	.btn-github {
 		display: none;
