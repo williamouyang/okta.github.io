@@ -24,7 +24,7 @@ $(function() {
 		}
 	});
 
-	$('#docs-sidebar-wrap a').click(function(e){
+	$('#docs-sidebar-wrap a').not('#toc_current_doc').click(function(e){
 		if ($('body').hasClass('toggled'))
 			$('.toggled').removeClass('toggled');
 	});
