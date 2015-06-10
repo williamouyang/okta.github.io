@@ -89,8 +89,8 @@ compared to the amount of available RAM, which meant that we were sacrificing bo
 
 </description>
         <pubDate>Fri, 22 May 2015 00:00:00 -0700</pubDate>
-        <link>http://developer.okta.com//blog/2015/05/22/tcmalloc</link>
-        <guid isPermaLink="true">http://developer.okta.com//blog/2015/05/22/tcmalloc</guid>
+        <link>http://developer.okta.com/blog/2015/05/22/tcmalloc</link>
+        <guid isPermaLink="true">http://developer.okta.com/blog/2015/05/22/tcmalloc</guid>
       </item>
     
       <item>
@@ -308,8 +308,8 @@ enforce limits and design for infinity.&lt;/li&gt;
 &lt;/div&gt;
 </description>
         <pubDate>Fri, 08 May 2015 00:00:00 -0700</pubDate>
-        <link>http://developer.okta.com//blog/2015/05/08/software-engineering-design-principles</link>
-        <guid isPermaLink="true">http://developer.okta.com//blog/2015/05/08/software-engineering-design-principles</guid>
+        <link>http://developer.okta.com/blog/2015/05/08/software-engineering-design-principles</link>
+        <guid isPermaLink="true">http://developer.okta.com/blog/2015/05/08/software-engineering-design-principles</guid>
       </item>
     
       <item>
@@ -414,8 +414,8 @@ their hands dirty tackling product issues? Our CTO doesn’t code very often, bu
 he does, he patches the JVM.&lt;/p&gt;
 </description>
         <pubDate>Fri, 08 May 2015 00:00:00 -0700</pubDate>
-        <link>http://developer.okta.com//blog/2015/05/08/productionalizing-active-mq</link>
-        <guid isPermaLink="true">http://developer.okta.com//blog/2015/05/08/productionalizing-active-mq</guid>
+        <link>http://developer.okta.com/blog/2015/05/08/productionalizing-active-mq</link>
+        <guid isPermaLink="true">http://developer.okta.com/blog/2015/05/08/productionalizing-active-mq</guid>
       </item>
     
       <item>
@@ -574,8 +574,8 @@ steps in writing on our wiki. Thanks guys!&lt;/p&gt;
 
 </description>
         <pubDate>Thu, 23 Apr 2015 00:00:00 -0700</pubDate>
-        <link>http://developer.okta.com//blog/2015/04/23/android-unit-testing-part-4</link>
-        <guid isPermaLink="true">http://developer.okta.com//blog/2015/04/23/android-unit-testing-part-4</guid>
+        <link>http://developer.okta.com/blog/2015/04/23/android-unit-testing-part-4</link>
+        <guid isPermaLink="true">http://developer.okta.com/blog/2015/04/23/android-unit-testing-part-4</guid>
       </item>
     
       <item>
@@ -726,8 +726,8 @@ how to make tests isolated. You can also check out the full code at
 
 </description>
         <pubDate>Tue, 14 Apr 2015 00:00:00 -0700</pubDate>
-        <link>http://developer.okta.com//blog/2015/04/14/android-unit-testing-part-3</link>
-        <guid isPermaLink="true">http://developer.okta.com//blog/2015/04/14/android-unit-testing-part-3</guid>
+        <link>http://developer.okta.com/blog/2015/04/14/android-unit-testing-part-3</link>
+        <guid isPermaLink="true">http://developer.okta.com/blog/2015/04/14/android-unit-testing-part-3</guid>
       </item>
     
       <item>
@@ -922,8 +922,8 @@ check out the full code at &lt;a href=&quot;https://github.com/vronin-okta/okta_
 
 </description>
         <pubDate>Tue, 07 Apr 2015 00:00:00 -0700</pubDate>
-        <link>http://developer.okta.com//blog/2015/04/07/android-unit-testing-part-2</link>
-        <guid isPermaLink="true">http://developer.okta.com//blog/2015/04/07/android-unit-testing-part-2</guid>
+        <link>http://developer.okta.com/blog/2015/04/07/android-unit-testing-part-2</link>
+        <guid isPermaLink="true">http://developer.okta.com/blog/2015/04/07/android-unit-testing-part-2</guid>
       </item>
     
   </channel>

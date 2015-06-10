@@ -8,9 +8,6 @@
 /*
  * Typography
  ------------------------------------------------------------ */
-::-webkit-scrollbar {
-  display: none; }
-
 body {
   height: 100%;
   display: flex;
@@ -22,13 +19,13 @@ body {
   flex: 1; }
 
 .section--with-sidebar {
-  border-left: 350px solid #004169;
+  border-left: 260px solid #004169;
   position: relative; }
   .section--with-sidebar .sticky-nav--sidebar {
     left: 0;
     position: fixed;
     top: 81px;
-    width: 350px;
+    width: 260px;
     background-color: #004169;
     z-index: 100;
     height: 100%;
@@ -44,7 +41,7 @@ body {
     display: flex;
     height: 60px;
     justify-content: space-between;
-    left: 350px;
+    left: 260px;
     position: fixed;
     right: 0;
     text-align: center;
@@ -452,7 +449,7 @@ h6:hover .header-link {
   margin: 20px 0 5px 0; }
 
 .sidebar-nav {
-  width: 350px;
+  width: 260px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -1010,7 +1007,7 @@ input:focus {
   body.toggled .toggle-menu:before {
     content: "\f205"; }
   body.toggled #sticky-nav {
-    left: 350px; }
+    left: 260px; }
     body.toggled #sticky-nav a {
       display: none; }
       body.toggled #sticky-nav a:first-child {
@@ -1018,9 +1015,9 @@ input:focus {
   body.toggled .section--with-sidebar {
     border-left: 0; }
   body.toggled .sticky-nav--sidebar.toggled {
-    width: 350px; }
+    width: 260px; }
   body.toggled .section--with-sidebar {
-    border-left: 350px solid #004169; }
+    border-left: 260px solid #004169; }
   body #sticky-nav {
     left: 0; }
     body #sticky-nav a:first-child {
@@ -1032,7 +1029,7 @@ input:focus {
 
   .sticky-nav--sidebar.toggled > .docs-body {
     overflow: hidden;
-    width: 350px; }
+    width: 260px; }
 
   .docs-body {
     left: 0; }
