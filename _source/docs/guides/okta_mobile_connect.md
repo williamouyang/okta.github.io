@@ -29,9 +29,8 @@ your mobile app: -->
 ## If your app is already SAML-enabled
 
 If your mobile app already supports logging in via SAML, it may already work
-with Okta Mobile Connect. The *Concur*, *Salesforce*, and *Yammer* are
-examples of apps that worked with Okta Mobile Connect without special
-modification.
+with Okta Mobile Connect. Many ISVs with SAML-enabled mobile apps are
+able to work with Okta Mobile Connect without special modification.
 
 To work with Okta Mobile Connect, your mobile app needs to meet the
 criteria below:
