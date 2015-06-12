@@ -61,7 +61,9 @@ vimarsh_karbhari:
     display_name: Vimarsh
     avatar: avatar-vimarsh_karbhari.jpg
     email: vimarsh.karbhari@okta.com
-    github: 
+    web: https://medium.com/@vimarshk/
+    twitter: https://twitter.com/VimarshApi
+    github: https://github.com/vimarshkarbhari-okta
 
 okta_generic_blogger:
   full_name: Okta Staff
