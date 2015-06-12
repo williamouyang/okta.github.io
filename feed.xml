@@ -18,7 +18,7 @@
 
 &lt;hr /&gt;
 
-&lt;p&gt;These days, making sure your product solves problems that customers face everyday is not just a &lt;em&gt;good idea&lt;/em&gt;, it’s &lt;strong&gt;table stakes&lt;/strong&gt;. And the bar is rising constantly. The more products improve, the less consumers are willing to tolerate bad experiences. With the consumerization of the enterprise, the importance of product design and favorable user experiences is indispensable to every kind of product distribution model. &lt;/p&gt;
+&lt;p&gt;These days, making sure your product solves problems that customers face everyday is not just a &lt;em&gt;good idea&lt;/em&gt;, it’s &lt;strong&gt;table stakes&lt;/strong&gt;. And the bar is rising constantly. The more products improve, the less customers are willing to tolerate bad experiences. With the consumerization of the enterprise, the importance of product design and favorable user experiences is indispensable to every kind of product distribution model. &lt;/p&gt;
 
 &lt;p&gt;Two of the most important aspects of the product are Product Status/Trust and Customer Support. Having dissected both of these from many angles in my recent work, I know that businesses neglect them at their peril. &lt;/p&gt;
 
@@ -43,13 +43,11 @@
 
 &lt;p&gt;Once users get their hands on a product, they often find new ways to use it that the founders never imagined. This experimentation can shape the future of products and platforms. This is especially true of products that also provide APIs. The growth of B2B2C, B2C2B and other hybrid distribution models means that you are putting your product in front of many different types of audiences, including direct customers, partners, resellers, channel partners, and early and late stage prospects. Understanding how all of these audiences report on the service, interpret the SLA, and react to downtime is crucial if you want to create products that users value.&lt;/p&gt;
 
-&lt;h3 id=&quot;know-the-technical-constraints&quot;&gt;Know the technical constraints &lt;/h3&gt;
+&lt;h3 id=&quot;be-highly-available-but-prepare-for-risk&quot;&gt;Be highly available but prepare for risk &lt;/h3&gt;
 
 &lt;p&gt;It is a truism that one cannot solve for all technical constraints. Choosing the right platform on which to build your Product and Status/Trust pages is very important, but hosting both pages on the same platform risks both being down at the same time if your site crashes. &lt;/p&gt;
 
-&lt;h3 id=&quot;be-highly-available-but-prepare-for-risk&quot;&gt;Be highly available but prepare for risk&lt;/h3&gt;
-
-&lt;p&gt;You cannot afford to let your Trust/Status page go down, so high availability is key. Nonetheless, you must have a &lt;strong&gt;risk mitigation plan&lt;/strong&gt; just in case the page ever &lt;em&gt;does&lt;/em&gt; go down. And make sure that you are monitoring your Trust/Status page with enterprise-class monitoring tools. &lt;/p&gt;
+&lt;p&gt;Obviously, you cannot afford to let your Trust/Status page go down, so &lt;strong&gt;high availability&lt;/strong&gt; is key. But just in case the page ever &lt;em&gt;does&lt;/em&gt; go down, you need a &lt;strong&gt;risk mitigation plan&lt;/strong&gt;. Central to this is making sure that you are contsantly monitoring your Trust/Status page with enterprise-class monitoring tools. &lt;/p&gt;
 
 &lt;h3 id=&quot;send-rapid-robust-and-consistent-notifications&quot;&gt;Send rapid, robust, and consistent notifications&lt;/h3&gt;
 &lt;p&gt;In the event of trust page problems, make sure that you have ways to easily and automatically notify customers and site ops as soon as issues are detected. Employ RSS, Twitter, and other channels to notify customers; invest in monitoring tools to notify site ops.&lt;/p&gt;
@@ -60,8 +58,9 @@
 
 &lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
 
-&lt;p&gt;Designing and developing the Trust Page has taught me much in the last few months. I’d be happy to hear from you on this topic, so feel free to send comments or questions.&lt;/p&gt;
+&lt;p&gt;Designing and developing the Trust Page has taught me much in the last few months. I’d be happy to hear from you on this topic, so please feel free to send comments or questions to &lt;a href=&quot;&amp;#109;&amp;#097;&amp;#105;&amp;#108;&amp;#116;&amp;#111;:&amp;#118;&amp;#105;&amp;#109;&amp;#097;&amp;#114;&amp;#115;&amp;#104;&amp;#046;&amp;#107;&amp;#097;&amp;#114;&amp;#098;&amp;#104;&amp;#097;&amp;#114;&amp;#105;&amp;#064;&amp;#111;&amp;#107;&amp;#116;&amp;#097;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&quot;&gt;&amp;#118;&amp;#105;&amp;#109;&amp;#097;&amp;#114;&amp;#115;&amp;#104;&amp;#046;&amp;#107;&amp;#097;&amp;#114;&amp;#098;&amp;#104;&amp;#097;&amp;#114;&amp;#105;&amp;#064;&amp;#111;&amp;#107;&amp;#116;&amp;#097;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&lt;/a&gt;.&lt;/p&gt;
 
+&lt;p&gt;&lt;em&gt;The Trust Page is the work of an amazing team that includes Tim Gu, Shawn Gupta, Nathan Tate, Wendy Liao, and myself.&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 11 Jun 2015 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2015/06/11/trustpage</link>
