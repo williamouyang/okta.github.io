@@ -145,7 +145,7 @@ $(function() {
 
 	$('.toggle-menu').click(function(e){
 		e.preventDefault();
-		$('.sticky-nav--sidebar, body').toggleClass('toggled');
+		$('body').toggleClass('toggled');
 	});
 
 	$('#toc_current_doc').click(function(e){

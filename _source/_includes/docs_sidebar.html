@@ -4,8 +4,8 @@
 {% assign section_name_api = section[3] | replace: '.md', '' %}
 
 {% assign page_name = page.title | replace: ' ', '_' | downcase %}
-
-<div id="docs-sidebar-wrap" id="sidebar-wrapper">
+<span class="toggle-menu"></span>
+<div id="sidebar-wrapper">
 	<div class="docs-sidebar-block" id="myScrollspy" >
 		{% for nav in site.data.docs %}
 			{% assign section_title = section[1] | split: '/' %}
