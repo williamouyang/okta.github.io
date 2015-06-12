@@ -7,6 +7,68 @@
     <atom:link href="http://developer.okta.com/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>The New Age of Trust</title>
+        <description>&lt;p&gt;I recently read an excellent &lt;a href=&quot;http://www.viabilify.com/blog/trust&quot;&gt;article&lt;/a&gt; about how amazing products shape the &lt;strong&gt;trust relationship&lt;/strong&gt; with customers. I think great products are the &lt;em&gt;first step&lt;/em&gt; in building a trust relationship. And like other aspects of the product that are derived from the product but are not physically part of it, the trust relationship is now more important than ever before.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;When you use a product, every engagement with that product has a direct correlation with your perception of the value of that product. — From &lt;a href=&quot;http://www.viabilify.com/blog/trust&quot;&gt;Product Loyalty Follows Trust Like Form Follows Function&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;These days, making sure your product solves problems that customers face everyday is not just a &lt;em&gt;good idea&lt;/em&gt;, it’s &lt;strong&gt;table stakes&lt;/strong&gt;. And the bar is rising constantly. The more products improve, the less consumers are willing to tolerate bad experiences. With the consumerization of the enterprise, the importance of product design and favorable user experiences is indispensable to every kind of product distribution model. &lt;/p&gt;
+
+&lt;p&gt;Two of the most important aspects of the product are Product Status/Trust and Customer Support. Having dissected both of these from many angles in my recent work, I know that businesses neglect them at their peril. &lt;/p&gt;
+
+&lt;h3 id=&quot;communicate-transparently&quot;&gt;Communicate transparently&lt;/h3&gt;
+
+&lt;p&gt;The Product Status/Trust page is the first place customers visit on your site when they have a problem. Consider yourself lucky if the customer only had an problem with a browser (like cache), or an issue with their laptop. For more serious issues, customers expect transparency and effective communication from the Product Status/Trust page. They want information that communicates exactly what the problem is. &lt;/p&gt;
+
+&lt;h3 id=&quot;serve-multiple-audiences&quot;&gt;Serve multiple audiences&lt;/h3&gt;
+&lt;p&gt;A Product Status/Trust page is also one of the first places that prospects are likely to visit. In fact, when the product is gaining momentum, prospect traffic may exceed customer traffic. &lt;/p&gt;
+
+&lt;p&gt;I’ve rarely seen a Status/Trust page actually serve both customers and prospects effectively. The key is to find the correct balance. As the product becomes popular, customers and prospects visit the page with very different mindsets. &lt;/p&gt;
+
+&lt;p&gt;For customers, the Status/Trust page must be the source of truth for issues, downtime, and root cause analysis. This requires radical transparency and effective communication. &lt;/p&gt;
+
+&lt;p&gt;For prospects, the Status/Trust page must do at least the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Display all the information they need to make an informed decision &lt;/li&gt;
+  &lt;li&gt;Make them love the product even more&lt;/li&gt;
+  &lt;li&gt;Serve as an effective talking point for your sales reps&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Once users get their hands on a product, they often find new ways to use it that the founders never imagined. This experimentation can shape the future of products and platforms. This is especially true of products that also provide APIs. The growth of B2B2C, B2C2B and other hybrid distribution models means that you are putting your product in front of many different types of audiences, including direct customers, partners, resellers, channel partners, and early and late stage prospects. Understanding how all of these audiences report on the service, interpret the SLA, and react to downtime is crucial if you want to create products that users value.&lt;/p&gt;
+
+&lt;h3 id=&quot;know-the-technical-constraints&quot;&gt;Know the technical constraints &lt;/h3&gt;
+
+&lt;p&gt;It is a truism that one cannot solve for all technical constraints. Choosing the right platform on which to build your Product and Status/Trust pages is very important, but hosting both pages on the same platform risks both being down at the same time if your site crashes. &lt;/p&gt;
+
+&lt;h3 id=&quot;be-highly-available-but-prepare-for-risk&quot;&gt;Be highly available but prepare for risk&lt;/h3&gt;
+
+&lt;p&gt;You cannot afford to let your Trust/Status page go down, so high availability is key. Nonetheless, you must have a &lt;strong&gt;risk mitigation plan&lt;/strong&gt; just in case the page ever &lt;em&gt;does&lt;/em&gt; go down. And make sure that you are monitoring your Trust/Status page with enterprise-class monitoring tools. &lt;/p&gt;
+
+&lt;h3 id=&quot;send-rapid-robust-and-consistent-notifications&quot;&gt;Send rapid, robust, and consistent notifications&lt;/h3&gt;
+&lt;p&gt;In the event of trust page problems, make sure that you have ways to easily and automatically notify customers and site ops as soon as issues are detected. Employ RSS, Twitter, and other channels to notify customers; invest in monitoring tools to notify site ops.&lt;/p&gt;
+
+&lt;p&gt;If you send notifications manually, take care not to introduce human error when the site is having issues, as these are usually chaotic periods for your ops team. &lt;/p&gt;
+
+&lt;p&gt;Realize that many of your customers will probably check your trust page &lt;em&gt;and&lt;/em&gt; call support, so it’s important that the trust page and the support team provide the same information. This also argues for ensuring that your support team is a key stakeholder in the development of your trust page. &lt;/p&gt;
+
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;Designing and developing the Trust Page has taught me much in the last few months. I’d be happy to hear from you on this topic, so feel free to send comments or questions.&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 11 Jun 2015 00:00:00 -0700</pubDate>
+        <link>http://developer.okta.com/blog/2015/06/11/trustpage</link>
+        <guid isPermaLink="true">http://developer.okta.com/blog/2015/06/11/trustpage</guid>
+      </item>
+    
+      <item>
         <title>How Okta Chased Down Severe System CPU Contention in MySQL</title>
         <description>&lt;p&gt;Sometimes fixing a problem causes or reveals a new one. And sometimes this sets off a chain reaction of problems and fixes, where each solution exposes a deeper issue. In technology, cascades like these are common, often painful, and occasionally welcome. &lt;/p&gt;
 
