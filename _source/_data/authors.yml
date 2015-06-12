@@ -61,12 +61,12 @@ vimarsh_karbhari:
     display_name: Vimarsh
     avatar: avatar-vimarsh_karbhari.jpg
     email: vimarsh.karbhari@okta.com
-    github: https://github.com/vimarshkarbhari-okta
+    github: 
 
 okta_generic_blogger:
   full_name: Okta Staff
   display_name: Okta Staff
   avatar: avatar-okta_logo.jpg
   email: eng_docs@okta.com
-  github: https://github.com/okta
+  
 
