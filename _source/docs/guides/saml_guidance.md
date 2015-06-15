@@ -142,29 +142,22 @@ This is particularly important where the entire population is intended to be SAM
 
 With SAML being an HTTP-based protocol, supporting SAML in a native mobile app may seem tricky.  You can actually achieve this quite easily by including an embedded webview in your native app to support the HTTP redirects.  When launching the webview, make sure you hit a URL on the SP side that will trigger a SAML redirect back to the IDP.  From this point on, the webview will carry out the SP-initiated login flow as it would happen in a browser.  When the SP finally receives the SAML response and authenticates the user successfully, your native app can leave the webview and proceed with the rest of the login bootstrap which typically involves some sort of a token (eg. OAuth) being generated and stored by the native app for subsequent access.  This is a fairly common approach used by many ISVs to support SAML integration with enterprises.
 
-For more details, see the [technical overview for Okta Mobile Connect](https://github.com/okta/okta-mobile-connect).
+For more details, see the [technical overview for Okta Mobile Connect](/docs/guides/okta_mobile_connect.html).
 
-## Supporting Okta Mobile Connect
+## Testing SAML
 
-*For iOS*
+Use the [Okta SAML validation tool](http://saml.oktadev.com/) to speed up the process of developing a SAML SP.
 
-Okta Mobile Connect allows native mobile apps to have seamless SSO support much like browser SSO experience.  Prerequisite is to support SAML in your native app using the embedded webview as described above.  Once that is accomplished, by implementing the following two characteristics, your application will work with Okta Mobile Connect.
-
-1. The embedded web browser used for SAML authentication requests allows requests to be made to Okta’s URL schemes: “oktasso://” and “okta://”
-2. The application has a registered URL scheme and supports being called by this URL scheme.
-
-When you are finished, publish your app to the App Store. Contact <developer@okta.com> to register your app to enable Okta Mobile Connect for your app in the Okta Application Network.
-
-> Coming Soon - Android support
+This tool makes it easy for you to send SAML Requests to your SAML SP, it allows you to quickly change the contents of the SAML requests and simplifies the process of debugging SAML issues by automatically decoding SAML payloads and displaying server headers for you.
 
 ## SAML Toolkits
 
 There are many available OpenSource toolkits that implement the SAML 2.0 specificaiton for the WebSSO Profile for Service Providers in different programming languages.  The following is a list of recommended toolkits:
 
 - Java: [OpenSAML](https://shibboleth.net/products/opensaml-java.html)
-- Java/Spring: [Spring Security SAML](/docs/examples/spring_security_saml.html)
+- Java/Spring: [Spring Security SAML](/docs/guides/spring_security_saml.html)
 - Ruby: [Ruby-SAML](https://rubygems.org/gems/ruby-saml)
-- Python: [PySAML2](https://pypi.python.org/pypi/pysaml2)
+- Python: [PySAML2](/docs/guides/pysaml2.html)
 - PHP: [SimpleSAMLphp](https://simplesamlphp.org/)
 
 ## Reference
