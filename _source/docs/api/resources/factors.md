@@ -802,7 +802,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/verify</span>
 
-Verifies a `push` factor. First, send a request to the device. When successfully sent, you are in a waiting state. Then, poll the device for a response or a timeout.
+Verifies a `push` factor. First, send a request to the device. When successfully sent, you are in a waiting state. Then, poll for user action.
 
 <u>Start the Verify Transaction</u>
 
@@ -868,6 +868,8 @@ Parameter    | Description                                         | Param Type 
 uid          | `id` of user                                        | URL        | String   | TRUE     |
 fid          | `id` of factor                                      | URL        | String   | TRUE     |
 tid          | `id` of transaction                                 | URL        | String   | TRUE     |
+
+The <em>tid</em> is available in a returned link.
 
 #### Response Parameters
 {:.api .api-response .api-response-params}
