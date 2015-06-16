@@ -19,8 +19,6 @@ The API is targeted for developers who want to build their own end-to-end login 
 
 - **Recovery** allows users to securely reset their password if they've forgotten it, or unlock their account if it has been locked out due to excessive failed login attempts. This functionality is subject to the security policy set by the administrator.
 
-> This API is currently in **Early Access (EA)** status.
-
 ## Authentication Model
 
 The Authentication API is a *stateful* API that implements a finite state machine with defined states and required transitions between those states.  State is transferred with a `stateToken` that is issued for each authentication or recovery transaction and must be passed with each request.  The Authentication API leverages the [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) format to publish `next` and `prev` links for the current transaction state which should be used to transition the state machine.  
