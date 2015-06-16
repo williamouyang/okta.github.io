@@ -40,7 +40,7 @@ Before you can configure your application and {{ page.saml_library }} set up an
 Okta "[chiclet](https://support.okta.com/articles/Knowledge_Article/27838096-Okta-Terminology)" (application icon) that enables an Okta user to sign in to your to your application with SAML and {{ page.saml_library }}.
 
 To set up Okta to connect to your application, follow the
-[setting up a SAML application in Okta](../examples/setting_up_a_saml_application_in_okta.html)
+[setting up a SAML application in Okta](../guides/setting_up_a_saml_application_in_okta.html)
 guide. As noted in the instructions, there are two steps to change:
 
 * *In step \#6*: Use ***{{ page.chiclet_name }}*** instead of ***Example SAML application*** .

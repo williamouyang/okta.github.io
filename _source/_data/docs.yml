@@ -10,6 +10,7 @@
     - spring_security_saml
     - pysaml2
     - add_mfa
+    - setting_up_a_saml_application_in_okta
 
 # -- APIS
 - section: api/getting_started
