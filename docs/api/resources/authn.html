@@ -4065,10 +4065,6 @@
   </li>
 </ul>
 
-<blockquote>
-  <p>This API is currently in <strong>Early Access (EA)</strong> status.</p>
-</blockquote>
-
 <h2 id="authentication-model">Authentication Model</h2>
 
 <p>The Authentication API is a <em>stateful</em> API that implements a finite state machine with defined states and required transitions between those states.  State is transferred with a <code>stateToken</code> that is issued for each authentication or recovery transaction and must be passed with each request.  The Authentication API leverages the <a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a> format to publish <code>next</code> and <code>prev</code> links for the current transaction state which should be used to transition the state machine.  </p>
