@@ -115,6 +115,9 @@ body {
 }
 
 .docs-body {
+	.btn-github {
+		margin-top: 20px;
+	}
 	.docs-index-list {
 		margin-left: 10px;
 
@@ -136,10 +139,11 @@ body {
 
 		h1 {
 			padding-bottom: 0;
-			margin: 0;
 			border: 0 none;
-			// width: 80%;
 			display: inline-block;
+			&:first-child {
+				margin-top: 10px;
+			}
 		}
 
 		.btn {
@@ -571,16 +575,16 @@ h6:hover .header-link {
 }
 
 #sidebar-wrapper {
-	overflow-y: auto;
+	overflow: auto;
 	h2 {
 		color: white;
 		font-size: 14px;
 		padding: 8px 10px 8px 30px;
 		text-transform: uppercase;
 		font-weight: 600;
-		margin: 10px 0 5px 0;
+		margin: 20px 0 0 0;
 		&:first-child {
-			margin: 12px 0;
+			margin: 75px 0 0 0;
 		}
 	}
 } 
@@ -684,7 +688,7 @@ h6:hover .header-link {
 .docs-sidebar-block {
 	max-height: 100%;
 	overflow-y: auto;
-	padding-bottom: 400px;
+	padding-bottom: 250px;
 }
 
 .excerpt {
@@ -1112,32 +1116,41 @@ input:focus {outline:0;}
 	text-decoration: none;
 	position: absolute;
 	right: 0;
-	background-color: #012134;
-	border-bottom: 1px solid #012134;
+	background-color: $colorGreyLighter;
+	// border-bottom: 1px solid $colorGreyLight;
+	border-bottom: solid $colorGreyLight;
+	border-width: 0 0 1px 1px;
 	cursor: pointer;
+	width: $sideBarWidth;
+	text-align: left;
+	color: $oktaBlue;
+	&:hover {
+		color: $colorBlueDark;
+	}
+	&:before {
+		text-align: center;
+		content: "\003008";
+		vertical-align: middle;
+		display: inline-block;
+		height: 60px;
+		line-height: normal;
+		font-size: 24px;
+		width: 60px;
+		left: -6px;
+		top: 16px;
+		position: relative;
+	}
 }
-.toggle-menu:hover {
-	color: #fff;
-}
-.toggle-menu:before {
-	text-align: center;
-	content: "\003008";
-	vertical-align: middle;
-	display: inline-block;
-	height: 60px;
-	line-height: normal;
-	font-size: 38px;
-	width: 60px;
-	left: -10px;
-  	top: 8px;
-  	position: relative;
-}
+
 
 body {
 	&.toggled {
-		.toggle-menu:before {
-			content: "\003009";
-			left: 10px;
+		.toggle-menu {
+			text-align: right;
+			&:before {
+				content: "\003009";
+				left: 10px;
+			}
 		}
 		#sticky-nav {
 			left: $sideBarWidth;
@@ -1212,13 +1225,13 @@ body {
 		}
 	}
 	#sticky-nav {
-				a {
-					display: none;
-					&:first-child {
-						display: block;
-					}
-				}
+		a {
+			display: none;
+			&:first-child {
+				display: block;
 			}
+		}
+	}
 	.sticky-nav--sidebar.toggled  {
 		& > .docs-body {
 			overflow: hidden;

@@ -29,12 +29,6 @@ $(function() {
 			$('.toggled').removeClass('toggled');
 	});
 
-	$('#myScrollspy').hover(function() {
-		$("body").css("overflow","hidden");
-	}, function() {
-		$("body").css("overflow","auto");
-	});
-
 	var anchorForId = function (id) {
 		var anchor = document.createElement("a");
 		anchor.className = "header-link";
