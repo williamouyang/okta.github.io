@@ -1659,7 +1659,7 @@ In this example, the a response from the user is pending and has not timed out.
 #### Response Example
 {:.api .api-response .api-response-example}
 
-In this example, the user has reponsed and activation is complete.
+In this example, the user has responded and activation is complete.
 
 ~~~ json
 {
@@ -1708,7 +1708,7 @@ In this example, the user has reponsed and activation is complete.
 #### Response Example
 {:.api .api-response .api-response-example}
 
-In this example, the user has not reponsed and the request timed out.
+In this example, the user has not responded and the request timed out.
 
 ~~~ json
 {

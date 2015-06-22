@@ -1451,7 +1451,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn/factors/sms1o51EADOTFXHHBXBP/lifecycle/activate
+-X POST "https://your-domain.okta.com/api/v1/authn/factors/sms1o51EADOTFXHHBXBP/lifecycle/activate/sms
 -d \
 '{
   "stateToken": "00wlafXU2GV9I3tNvDNkOA1thqM5gDwCOgHID_-Iej",
@@ -1514,7 +1514,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
             "send": [
               {
                 "name": "email",
-                "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP/lifecycle/activate/email",
+                "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfh52xcuft3J4uZc0g3/lifecycle/activate/email",
                 "hints": {
                   "allow": [
                     "POST"
@@ -1523,7 +1523,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
               },
               {
                 "name": "sms",
-                "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP/lifecycle/activate/sms",
+                "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfh52xcuft3J4uZc0g3/lifecycle/activate/sms",
                 "hints": {
                   "allow": [
                     "POST"
@@ -1748,16 +1748,15 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -d \
 '{
   "stateToken": "00wlafXU2GV9I3tNvDNkOA1thqM5gDwCOgHID_-Iej"
-}
 }'
 ~~~
 
-<strong>Three reponse examples are shown, WAITING state, SUCCESS, and TIMEOUT.</strong>
+<strong>Three response examples are shown, WAITING state, SUCCESS, and TIMEOUT.</strong>
 
-<strong>Note:</strong> When activation expires, the <em>next</em> link relation reverts to activate. The embedded activation object is intentionally missing during timout.
+<strong>Note:</strong> When activation expires, the <em>next</em> link relation reverts to activate. The embedded activation object is intentionally missing during timeout.
 
 
-##### Response Example
+##### Response Example – Waiting
 {:.api .api-response .api-response-example}
 
 ~~~json
@@ -1848,7 +1847,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ~~~
 
-##### Response Example
+##### Response Example – Success
 {:.api .api-response .api-response-example}
 
 ~~~json
@@ -1872,7 +1871,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ~~~
 
-##### Response Example
+##### Response Example – Timeout
 {:.api .api-response .api-response-example}
 
 ~~~json
@@ -1931,6 +1930,28 @@ curl -v -H "Authorization: SSWS yourtoken" \
   }
 }
 ~~~
+
+#### Reactivate a Factor
+
+To reactivate a factor after it has expired, make a factor activation request with the **reActivate** request parameter set to true.
+The responses are the same as for factor activation.
+
+##### Request Example – SMS Factor
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn/factors/sms1o51EADOTFXHHBXBP/lifecycle/activate?reActivate=true
+-d \
+'{
+  "stateToken": "00wlafXU2GV9I3tNvDNkOA1thqM5gDwCOgHID_-Iej",
+  "passCode": "123456"
+}'
+~~~
+
+
 
 ### Verify Factor
 
