@@ -4,7 +4,7 @@
 {% assign section_name_api = section[3] | replace: '.md', '' %}
 
 {% assign page_name = page.title | replace: ' ', '_' | downcase %}
-<div style="overflow-y: auto; height: 100%">
+<div class="scrollable">
 	<span class="toggle-menu"></span>
 	<div id="sidebar-wrapper">
 		<div class="docs-sidebar-block" id="myScrollspy" >
@@ -42,6 +42,5 @@
 			{% endfor %}
 		</ul>
 	</div>
-	<!-- <div style="position: absolute; height: 250px; bottom: 0; width: 260px;"></div> -->
 	</div>
 </div>
