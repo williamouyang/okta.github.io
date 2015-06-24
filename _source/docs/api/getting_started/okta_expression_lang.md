@@ -9,7 +9,7 @@ redirect_from: "/docs/getting_started/okta_expression_lang.html"
 
 ## Overview
 
-Expressions allow you to reference, transform, and combine attributes before you store them on a user profile or before passing them to an application for authentication or provisioning.  For example, you might use a custom expression to create a username by stripping @company.com from an email address.  Or you might combine `firstName` and `lastName` attributes into a single `displayName` attribute.
+Expressions allow you to reference, transform and combine attributes before you store them on a user profile or before passing them to an application for authentication or provisioning.  For example, you might use a custom expression to create a username by stripping @company.com from an email address.  Or you might combine `firstName` and `lastName` attributes into a single `displayName` attribute.
 
 This document details the features and syntax of Okta's Expression Language which can be used throughout the Okta Admin Console and API. This document will be updated over time as new capabilities are added to the language.  Okta's expression language is based on [SpEL](http://docs.spring.io/spring/docs/3.0.x/reference/expressions.html) and uses a subset of functionalities offered by SpEL.
 
@@ -117,6 +117,28 @@ Function  | Return Type | Example | Input | Output
 **Note:**  Convert.toInt(double) rounds the passed numeric value either up or down to the nearest integer. Be sure to consider
 integer type range limitations when converting from a number to an integer with this function.
 
+### Group Functions
+
+Function  | Return Type | Example | Output
+--------- | ----------- | ------- | -------
+`isMemberOfGroupName` | Boolean | `isMemberOfGroupName("group1")` | **True**, if the user under consideration is a member of *group1'; otherwise, **False**.
+`isMemberOfGroup` | Boolean | `isMemberOfGroupName("groupId")` | **True**, if the user under consideration is a member of group with id *groupId*; otherwise,  **False**.
+`isMemberOfAnyGroup` | Boolean | `isMemberOfAnyGroup("groupId1", "groupId2", "groupId3")` | **True**, if the user under consideration is a member of any groups with ids *groupId1*, *groupId2* or *groupId3*; otherwise **False**.
+`isMemberOfGroupNameStartsWith` | Boolean | `isMemberOfGroupNameStartsWith("San Fr")` | **True**, if the user under consideration is a member of any groups with names that starts with *San Fr*; otherwise,  **False**.
+`isMemberOfGroupNameContains` | Boolean | `isMemberOfGroupNameContains("admin")` | **True**, if the user under consideration is a member of any groups with names that contains *admin*; otherwise,  **False**.
+`isMemberOfGroupNameRegex` | Boolean | `isMemberOfGroupNameRegex("/.*admin.*")` | **True**, if the user under consideration is a member of any groups with names that contain *admin*; otherwise,  **False**.
+
+### Manager/Assistant Functions
+
+Function  | Description | Example 
+--------- | ----------- | ------- 
+`getManagerUser(managerSource).$attribute` | Gets the manager's Okta user attribute values | getManagerUser("active_directory").firstName
+`getManagerAppUser(managerSource, attributeSource).$attribute` | Gets the manager's app user attribute values for the app user of any appinstance. | getManagerAppUser("active_directory","google").firstName
+`getAssistantUser(assistantSource).$attribute` | Gets the assistant's Okta user attribute values. | getAssistantUser("active_directory").firstName
+`getAssistantAppUser(assistantSource, attributeSource).$attribute` | Gets the assistant's app user attribute values for the app user of any appinstance. | getAssistantAppUser("active_directory","google").firstName
+
+> Pass the correct **app name** for the *managerSource*, *assistantSource*, and *attributeSource* parameters.<br />
+> Note: At this time, only **active_directory** is supported for *managerSource* and *assistantSource*.
 
 ### Directory and Workday Functions
 
