@@ -79,6 +79,7 @@ This document provides further information about the errors that the Okta API re
 |<a name="E0000061"></a>E0000061|Tab error.|403|
 |<a name="E0000063"></a>E0000063|Invalid combination of parameters specified.|400|
 |<a name="E0000064"></a>E0000064|Password is expired and must be changed.|401|
+|<a name="E0000069"></a>E0000069|User Locked.|403|
 |<a name="E0000081"></a>E0000081|Cannot modify the test attribute because it is a reserved attribute for this application.|400|
 
 
@@ -114,7 +115,7 @@ This document provides further information about the errors that the Okta API re
 <tr><td>E0000011</td><td>Invalid token provided.</td></tr>
 <tr><td>E0000015</td><td>You do not have permission to access the feature you are requesting.</td></tr>
 <tr><td>E0000064</td><td>Password is expired and must be changed.</td></tr>
-<tr><td rowspan="21" bgcolor="#FFFFFF"><strong>403</strong></td><td>E0000005</td><td>Invalid session.</td></tr>
+<tr><td rowspan="22" bgcolor="#FFFFFF"><strong>403</strong></td><td>E0000005</td><td>Invalid session.</td></tr>
 <tr><td>E0000006</td><td>You do not have permission to perform the requested action.</td></tr>
 <tr><td>E0000013</td><td>Invalid client app ID.</td></tr>
 <tr><td>E0000014</td><td>Update of credentials failed.</td></tr>
@@ -135,6 +136,7 @@ This document provides further information about the errors that the Okta API re
 <tr><td>E0000057</td><td>Access to this application is denied due to a policy.</td></tr>
 <tr><td>E0000058</td><td>Access to this application requires MFA.</td></tr>
 <tr><td>E0000061</td><td>Tab error.</td></tr>
+<tr><td>E0000069</td><td>User Locked.</td></tr>
 <tr><td rowspan="7" bgcolor="#FFFFFF"><strong>404</strong></td><td>E0000007</td><td>Not found.</td></tr>
 <tr><td>E0000008</td><td>The requested path was not found.</td></tr>
 <tr><td>E0000012</td><td>Unsupported media type.</td></tr>
