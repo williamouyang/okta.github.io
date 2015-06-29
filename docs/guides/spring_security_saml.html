@@ -2587,8 +2587,11 @@ the section titled “Configuring Spring Security SAML to work with Okta”.</p>
       <li>
         <p>Use <code>git clone</code> to clone the extention locally</p>
 
-        <pre><code class="language-shell">git clone https://github.com/spring-projects/spring-security-saml.git
-</code></pre>
+        <div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>git clone https://github.com/spring-projects/spring-security-saml.git
+</pre></div>
+</div>
+        </div>
       </li>
     </ul>
   </li>
@@ -2599,15 +2602,21 @@ the section titled “Configuring Spring Security SAML to work with Okta”.</p>
       <li>
         <p>Use <code>git clone</code> to clone this repository locally</p>
 
-        <pre><code class="language-shell">git clone https://github.com/nshobayo/okta-SpringSAML.git
-</code></pre>
+        <div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>git clone https://github.com/nshobayo/okta-SpringSAML.git
+</pre></div>
+</div>
+        </div>
       </li>
       <li>
         <p>Use the command below to copy the sample Okta application into the Extension’s “src” folder</p>
 
-        <pre><code class="language-shell">rm -rf spring-security-saml/sample/src/main
+        <div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>rm -rf spring-security-saml/sample/src/main
 cp -r okta-SpringSAML/src/main spring-security-saml/sample/src
-</code></pre>
+</pre></div>
+</div>
+        </div>
       </li>
     </ul>
   </li>
@@ -2618,14 +2627,20 @@ cp -r okta-SpringSAML/src/main spring-security-saml/sample/src
       <li>
         <p>Make sure your working directory is the <code>sample</code> subdirectory of the <code>spring-security-saml</code> directory </p>
 
-        <pre><code class="language-shell">cd spring-security-saml/sample
-</code></pre>
+        <div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>cd spring-security-saml/sample
+</pre></div>
+</div>
+        </div>
       </li>
       <li>
         <p>To compile </p>
 
-        <pre><code class="language-shell">../gradlew build install
-</code></pre>
+        <div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>../gradlew build install
+</pre></div>
+</div>
+        </div>
       </li>
     </ul>
 
@@ -2646,8 +2661,11 @@ cp -r okta-SpringSAML/src/main spring-security-saml/sample/src
       <li>
         <p>Assuming your current directory is <code>spring-security-saml/sample</code> Use the command below to copy the compiled <code>spring-security-SAML2-sample.war</code> file to the Tomcat directory you set up in step one</p>
 
-        <pre><code class="language-shell"> cp build/libs/spring-security-SAML2-sample.war /Library/Tomcat/webapps/
-</code></pre>
+        <div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre> cp build/libs/spring-security-SAML2-sample.war /Library/Tomcat/webapps/
+</pre></div>
+</div>
+        </div>
       </li>
     </ul>
   </li>
@@ -2658,8 +2676,11 @@ cp -r okta-SpringSAML/src/main spring-security-saml/sample/src
       <li>
         <p>Use the command below to start Tomcat</p>
 
-        <pre><code class="language-shell"> /Library/Tomcat/bin/startup.sh
-</code></pre>
+        <div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre> /Library/Tomcat/bin/startup.sh
+</pre></div>
+</div>
+        </div>
       </li>
     </ul>
   </li>
@@ -2722,14 +2743,20 @@ the green “Create” button
     <p>In Step 2 “Configure SAML”,
 Paste the URL below into the “Single sign on URL” field:</p>
 
-    <pre><code class="language-shell">http://localhost:8080/spring-security-saml2-sample/saml/SSO
-</code></pre>
+    <div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>http://localhost:8080/spring-security-saml2-sample/saml/SSO
+</pre></div>
+</div>
+    </div>
 
     <p>Then paste the URL below into the “Audience URI (SP Entity ID)”
 field:</p>
 
-    <pre><code class="language-shell">http://localhost:8080/spring-security-saml2-sample/saml/metadata
-</code></pre>
+    <div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>http://localhost:8080/spring-security-saml2-sample/saml/metadata
+</pre></div>
+</div>
+    </div>
 
     <p>Attributes of the user to be sent in each SAML assertion can be added under “Attribute Statements” during this step if desired. Theses attribute values can be derived and used from the SP side.</p>
 
@@ -2805,19 +2832,22 @@ easier to make small changes and test them this way).</p>
 to the end of the tag identified by this CSS selector syntax:
 <code>#metadata &gt; constructor-arg &gt; list</code>.</p>
 
-    <pre><code class="language-xml">&lt;bean class="org.opensaml.saml2.metadata.provider.HTTPMetadataProvider"&gt;
-  &lt;!-- URL containing the metadata --&gt;
-  &lt;constructor-arg&gt;
-    &lt;!-- This URL should look something like this: https://example.okta.com/app/abc0defghijK1lmN23o4/sso/saml/metadata --&gt;
-    &lt;value type="java.lang.String"&gt;{metadata-url}&lt;/value&gt;
-  &lt;/constructor-arg&gt;
-  &lt;!-- Timeout for metadata loading in ms --&gt;
-  &lt;constructor-arg&gt;
-    &lt;value type="int"&gt;5000&lt;/value&gt;
-  &lt;/constructor-arg&gt;
-  &lt;property name="parserPool" ref="parserPool"/&gt;
-&lt;/bean&gt;
-</code></pre>
+    <div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;bean</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.opensaml.saml2.metadata.provider.HTTPMetadataProvider</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+  <span class="comment">&lt;!-- URL containing the metadata --&gt;</span>
+  <span class="tag">&lt;constructor-arg&gt;</span>
+    <span class="comment">&lt;!-- This URL should look something like this: https://example.okta.com/app/abc0defghijK1lmN23o4/sso/saml/metadata --&gt;</span>
+    <span class="tag">&lt;value</span> <span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">java.lang.String</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>{metadata-url}<span class="tag">&lt;/value&gt;</span>
+  <span class="tag">&lt;/constructor-arg&gt;</span>
+  <span class="comment">&lt;!-- Timeout for metadata loading in ms --&gt;</span>
+  <span class="tag">&lt;constructor-arg&gt;</span>
+    <span class="tag">&lt;value</span> <span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">int</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>5000<span class="tag">&lt;/value&gt;</span>
+  <span class="tag">&lt;/constructor-arg&gt;</span>
+  <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">parserPool</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">ref</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">parserPool</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+<span class="tag">&lt;/bean&gt;</span>
+</pre></div>
+</div>
+    </div>
   </li>
   <li>
     <p>Make sure to replace the contents of <code>{metdata-url}</code> with the link
@@ -2831,9 +2861,12 @@ Spring Security SAML” instructions above!**</p>
     <p>If you are using Mac OS X, you can restart Tomcat using the commands
 below:</p>
 
-    <pre><code class="language-shell"> /Library/Tomcat/bin/shutdown.sh
+    <div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre> /Library/Tomcat/bin/shutdown.sh
  /Library/Tomcat/bin/startup.sh
-</code></pre>
+</pre></div>
+</div>
+    </div>
   </li>
 </ol>
 

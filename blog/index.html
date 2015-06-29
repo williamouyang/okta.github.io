@@ -1182,34 +1182,43 @@ androidTestCompile(‘org.robolectric:robolectric:2.3')
   <li>
     <p>Add this section:</p>
 
-    <pre><code class="language-java">robolectric { 
-        include '**/*Test.class'
+    <div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>robolectric { 
+        include <span class="string"><span class="delimiter">'</span><span class="content">**/*Test.class</span><span class="delimiter">'</span></span>
 }
-</code></pre>
+</pre></div>
+</div>
+    </div>
   </li>
   <li>
     <p>Create the code that you want to test</p>
 
     <p>Modify <code>MainActivity</code>. Add the following code to it:</p>
 
-    <pre><code class="language-java">private Foo foo = new Foo();
-public int getSomething() {
-    return foo.getFoo();
+    <div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="directive">private</span> Foo foo = <span class="keyword">new</span> Foo();
+<span class="directive">public</span> <span class="type">int</span> getSomething() {
+    <span class="keyword">return</span> foo.getFoo();
 }
-</code></pre>
+</pre></div>
+</div>
+    </div>
 
     <p>Add the <code>Foo</code> class:</p>
 
-    <pre><code class="language-java">package com.example.myapplication;
+    <div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="keyword">package</span> <span class="namespace">com.example.myapplication</span>;
       
-public class Foo { 
-    Bar bar = new Bar();
+<span class="directive">public</span> <span class="type">class</span> <span class="class">Foo</span> { 
+    Bar bar = <span class="keyword">new</span> Bar();
         
-    public int getFoo() { 
-        return bar.getBar(); 
+    <span class="directive">public</span> <span class="type">int</span> getFoo() { 
+        <span class="keyword">return</span> bar.getBar(); 
     }
 }
-</code></pre>
+</pre></div>
+</div>
+    </div>
   </li>
   <li>
     <p>Add the <code>Bar</code> class:</p>

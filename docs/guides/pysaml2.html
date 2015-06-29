@@ -2569,13 +2569,19 @@ guide. As noted in the instructions, there are two steps to change:</p>
   <li>
     <p><em>In step #7</em>: When entering the URL</p>
 
-    <pre><code class="language-shell">http://example.com/saml/sso/example-okta-com
-</code></pre>
+    <div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>http://example.com/saml/sso/example-okta-com
+</pre></div>
+</div>
+    </div>
 
     <p>use the following:</p>
 
-    <pre><code class="language-shell">http://localhost:5000/saml/sso/example-okta-com
-</code></pre>
+    <div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>http://localhost:5000/saml/sso/example-okta-com
+</pre></div>
+</div>
+    </div>
 
     <p><strong>Note:</strong> “5000” is the port that Flask uses by default, if you are using a different port number, change “5000” to the port number you are using.</p>
   </li>
@@ -2593,28 +2599,40 @@ the following steps, you will have a working example of connecting Okta to a sam
   <li>
     <p>Download the example application for Python:</p>
 
-    <pre><code class="language-shell">$ git clone git@github.com:jpf/okta-pysaml2-example.git
-</code></pre>
+    <div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>$ git clone git@github.com:jpf/okta-pysaml2-example.git
+</pre></div>
+</div>
+    </div>
   </li>
   <li>
     <p><code>cd</code> to the <code>okta-pysaml2-example</code> directory.</p>
 
-    <pre><code class="language-shell">$ cd okta-pysaml2-example
-</code></pre>
+    <div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>$ cd okta-pysaml2-example
+</pre></div>
+</div>
+    </div>
   </li>
   <li>
     <p>Open the <code>app.py</code> file in your favorite text editor.</p>
 
-    <pre><code class="language-shell">$ $EDITOR app.py
-</code></pre>
+    <div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>$ $EDITOR app.py
+</pre></div>
+</div>
+    </div>
   </li>
   <li>
     <p>After opening the <code>app.py</code> file, modify the contents of the <code>metadata_url_for</code> dictionary as shown below.</p>
 
-    <pre><code class="language-python">metadata_url_for = {
-    'example-okta-com': '{metadata-url}'
+    <div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>metadata_url_for = {
+    <span class="string"><span class="delimiter">'</span><span class="content">example-okta-com</span><span class="delimiter">'</span></span>: <span class="string"><span class="delimiter">'</span><span class="content">{metadata-url}</span><span class="delimiter">'</span></span>
 }
-</code></pre>
+</pre></div>
+</div>
+    </div>
   </li>
   <li>
     <p>Be sure to replace the contents of <code>{metdata-url}</code> with the link
@@ -2627,16 +2645,22 @@ instructions that you followed above!</p>
   <li>
     <p>Install the dependencies; for example, Python SAML SP:</p>
 
-    <pre><code class="language-shell">$ virtualenv venv
+    <div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>$ virtualenv venv
 $ source venv/bin/activate
 $ pip install -r requirements.txt
-</code></pre>
+</pre></div>
+</div>
+    </div>
   </li>
   <li>
     <p>Start the Python example:</p>
 
-    <pre><code class="language-shell">$ python app.py
-</code></pre>
+    <div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>$ python app.py
+</pre></div>
+</div>
+    </div>
   </li>
 </ol>
 
@@ -2666,9 +2690,12 @@ known as an <strong>SP-initiated login</strong>.)</p>
       <li>
         <p>Start the example application from the command line:</p>
 
-        <pre><code class="language-shell">$ source venv/bin/activate
+        <div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>$ source venv/bin/activate
 $ python app.py
-</code></pre>
+</pre></div>
+</div>
+        </div>
       </li>
       <li>
         <p>Open the example application in your browser:
@@ -2686,9 +2713,12 @@ $ python app.py
       <li>
         <p>Start the example application from the command line:</p>
 
-        <pre><code class="language-shell">$ source venv/bin/activate
+        <div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>$ source venv/bin/activate
 $ python app.py
-</code></pre>
+</pre></div>
+</div>
+        </div>
       </li>
       <li>
         <p>Sign in to your Okta organization.</p>
