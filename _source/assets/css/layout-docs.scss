@@ -15,8 +15,8 @@ body {
 	flex-direction: column;
 	-ms-overflow-style: none;
 }
-.page-content {
-	flex: 1;
+.page-content {   
+	flex: 1;      
 }
 
 .section--with-sidebar {
@@ -99,18 +99,18 @@ body {
 		}
 		.no-flexbox & {
 			display: table;
-			width: 75%;
+			width: 80%;
 			a {
 				display: table-cell;
-				width: 25%;
+				width: 20%;
 			}
 		}
 		@media screen and (min-width:0\0) {
 			display: table;
-			width: 75%;
+			width: 80%;
 			a {
 				display: table-cell;
-				width: 25%;
+				width: 20%;
 			}
 		}
 
@@ -609,7 +609,7 @@ h6:hover .header-link {
 }
 
 #gen-toc-container, .nav-title {
-	background-color: #012134;
+	background-color: $oktaDarkBlue;
 }
 
 .nav-title li {
@@ -620,7 +620,7 @@ h6:hover .header-link {
 	padding-left: 0;
 	&.closed {
 		display: none;
-		background-color: #012134 !important;
+		background-color: $oktaDarkBlue !important;
 	}
 	li {
 		list-style: none;
@@ -1130,16 +1130,15 @@ input:focus {outline:0;}
 	text-decoration: none;
 	position: absolute;
 	right: 0;
-	background-color: $colorGreyLighter;
-	// border-bottom: 1px solid $colorGreyLight;
+	background-color: $oktaDarkBlue;
 	border-bottom: solid $colorGreyLight;
 	border-width: 0 0 1px 1px;
 	cursor: pointer;
 	width: $sideBarWidth;
 	text-align: left;
-	color: $oktaBlue;
+	color: white;
 	&:hover {
-		color: $colorBlueDark;
+		color: $colorBlue;
 	}
 	&:before {
 		text-align: center;
