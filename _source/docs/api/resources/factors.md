@@ -606,380 +606,6 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ]
 ~~~
 
-## Factor Verification Operations
-
-### Verify Security Question Factor
-{:.api .api-operation}
-
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/verify</span>
-
-Verifies an answer to a `question` factor.
-
-#### Request Parameters
-{:.api .api-request .api-request-params}
-
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
-uid          | `id` of user                                        | URL        | String   | TRUE     |
-fid          | `id` of factor                                      | URL        | String   | TRUE     |
-answer       | answer to security question                         | Body       | String   | TRUE     |
-
-#### Response Parameters
-{:.api .api-response .api-response-params}
-
-Parameter    | Description                                         | Param Type | DataType                                            | Required | Default
------------- | --------------------------------------------------- | ---------- | --------------------------------------------------- | -------- | -------
-result       | verification result                                 | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
-
-If the `answer` is invalid you will receive a `403 Forbidden` status code with the following error:
-
-~~~ json
-{
-  "errorCode": "E0000068",
-  "errorSummary": "Invalid Passcode/Answer",
-  "errorLink": "E0000068",
-  "errorId": "oaei_IfXcpnTHit_YEKGInpFw",
-  "errorCauses": [
-    {
-      "errorSummary": "Your answer doesn't match our records. Please try again."
-    }
-  ]
-}
-~~~
-
-#### Request Example
-{:.api .api-request .api-request-example}
-
-~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ufs1pe3ISGKGPYKXRBKK/verify
--d \
-'{
-  "answer": "mayonnaise"
-}'
-~~~
-
-#### Response Example
-{:.api .api-response .api-response-example}
-
-~~~ json
-{
-  "factorResult": "SUCCESS"
-}
-~~~
-
-
-### Verify SMS Factor
-{:.api .api-operation}
-
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/verify</span>
-
-Verifies an OTP for a `sms` factor.
-
-#### Request Parameters
-{:.api .api-request .api-request-params}
-
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
-uid          | `id` of user                                        | URL        | String   | TRUE     |
-fid          | `id` of factor                                      | URL        | String   | TRUE     |
-passCode     | OTP sent to device                                  | Body       | String   | FALSE    |
-
-> If you omit `passCode` in the request a new OTP will be sent to the device, otherwise the request will attempt to verify the `passCode`
-
-#### Response Parameters
-{:.api .api-response .api-response-params}
-
-Parameter    | Description                                         | Param Type | DataType                                            | Required | Default
------------- | --------------------------------------------------- | ---------- | --------------------------------------------------- | -------- | -------
-result       | verification result                                 | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
-
-If the passcode is invalid you will receive a `403 Forbidden` status code with the following error:
-
-~~~ json
-{
-  "errorCode": "E0000068",
-  "errorSummary": "Invalid Passcode/Answer",
-  "errorLink": "E0000068",
-  "errorId": "oaei_IfXcpnTHit_YEKGInpFw",
-  "errorCauses": [
-    {
-      "errorSummary": "Your passcode doesn't match our records. Please try again."
-    }
-  ]
-}
-~~~
-
-#### Request Example
-{:.api .api-request .api-request-example}
-
-~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf17zuKEUMYQAQGCOV/verify
--d \
-'{
-  "passCode": "123456"
-}'
-~~~
-
-#### Response Example
-{:.api .api-response .api-response-example}
-
-~~~ json
-{
-  "factorResult": "SUCCESS"
-}
-~~~
-
-### Verify TOTP Factor
-{:.api .api-operation}
-
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/verify</span>
-
-Verifies an OTP for a `token:software:totp` factor.
-
-#### Request Parameters
-{:.api .api-request .api-request-params}
-
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
-uid          | `id` of user                                        | URL        | String   | TRUE     |
-fid          | `id` of factor                                      | URL        | String   | TRUE     |
-passCode     | OTP generated by device                             | Body       | String   | TRUE     |
-
-#### Response Parameters
-{:.api .api-response .api-response-params}
-
-Parameter    | Description                                         | Param Type | DataType                                            | Required | Default
------------- | --------------------------------------------------- | ---------- | --------------------------------------------------- | -------- | -------
-result       | verification result                                 | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
-
-If the passcode is invalid you will receive a `403 Forbidden` status code with the following error:
-
-~~~ json
-{
-  "errorCode": "E0000068",
-  "errorSummary": "Invalid Passcode/Answer",
-  "errorLink": "E0000068",
-  "errorId": "oaei_IfXcpnTHit_YEKGInpFw",
-  "errorCauses": [
-    {
-      "errorSummary": "Your passcode doesn't match our records. Please try again."
-    }
-  ]
-}
-~~~
-
-#### Request Example
-{:.api .api-request .api-request-example}
-
-~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf17zuKEUMYQAQGCOV/verify
--d \
-'{
-  "passCode": "123456"
-}'
-~~~
-
-#### Response Example
-{:.api .api-response .api-response-example}
-
-~~~ json
-{
-  "factorResult": "SUCCESS"
-}
-~~~
-
-### Verify Push Factor
-{:.api .api-operation}
-
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/verify</span>
-
-Verifies a `push` factor. First, send a request to the device. When successfully sent, you are in a waiting state. Then, poll for user action.
-
-##### Start the Verify Transaction
-
-#### Request Parameters
-{:.api .api-request .api-request-params}
-
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
-uid          | `id` of user                                        | URL        | String   | TRUE     |
-fid          | `id` of factor                                      | URL        | String   | TRUE     |
-
-
-#### Response Parameters
-{:.api .api-response .api-response-params}
-
-Parameter    | Description                                         | Param Type | DataType                                            | Required | Default
------------- | --------------------------------------------------- | ---------- | --------------------------------------------------- | -------- | -------
-factorResult | result of verification result                       | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
-
-
-#### Response Example
-{:.api .api-response .api-response-example}
-
-~~~ json
-{
-    "factorResult": "TIMEOUT",
-    "_links": {
-        "verify": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/verify",
-            "hints": {
-                "allow": [
-                    "POST"
-                ]
-            }
-        },
-        "factor": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3",
-            "hints": {
-                "allow": [
-                    "get",
-                    "DELETE"
-                ]
-            }
-        }
-    }
-}
-~~~
-
-##### Poll the Verify Transaction
-
-### Verify Transaction
-{:.api .api-operation}
-
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors/*:fid*/transactions/*:tid*/verify
-
-Polls the verify transaction. There are four response examples showing a waiting state, a successful verification, a timeout, and a rejected verification.
-
-#### Request Parameters
-{:.api .api-request .api-request-params}
-
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
-uid          | `id` of user                                        | URL        | String   | TRUE     |
-fid          | `id` of factor                                      | URL        | String   | TRUE     |
-tid          | `id` of transaction                                 | URL        | String   | TRUE     |
-
-The <em>tid</em> is available in a returned link.
-
-#### Response Parameters
-{:.api .api-response .api-response-params}
-
-Parameter    | Description                                         | Param Type | DataType                                            | Required | Default
------------- | --------------------------------------------------- | ---------- | --------------------------------------------------- | -------- | -------
-factorResult | result of verification result                       | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
-
-
-#### Response Example
-{:.api .api-response .api-response-example}
-
-##### Waiting State
-
-~~~ json
-{
-  "expiresAt": "2015-04-01T15:57:32.000Z",
-  "factorResult": "WAITING",
-  "_links": {
-    "poll": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/transactions/mst1eiHghhPxf0yhp0g",
-      "hints": {
-        "allow": [
-          "GET"
-        ]
-      }
-    },
-    "cancel": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/transactions/mst1eiHghhPxf0yhp0g",
-      "hints": {
-        "allow": [
-          "DELETE"
-        ]
-      }
-    }
-  }
-}
-~~~
-
-#### Response Example
-{:.api .api-response .api-response-example}
-
-##### Approved
-
-~~~ json
-{
-  "factorResult": "SUCCESS"
-}
-~~~
-
-#### Response Example
-{:.api .api-response .api-response-example}
-
-##### Timeout
-
-~~~ json
-{
-  "factorResult": "TIMEOUT",
-  "_links": {
-    "verify": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/verify",
-      "hints": {
-        "allow": [
-          "POST"
-        ]
-      }
-    },
-    "factor": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3",
-      "hints": {
-        "allow": [
-          "GET",
-          "DELETE"
-        ]
-      }
-    }
-  }
-}
-~~~
-
-#### Response Example
-{:.api .api-response .api-response-example}
-
-##### Rejected
-
-~~~ json
-{
-  "factorResult": "REJECTED",
-  "_links": {
-    "verify": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/verify",
-      "hints": {
-        "allow": [
-          "POST"
-        ]
-      }
-    },
-    "factor": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3",
-      "hints": {
-        "allow": [
-          "GET",
-          "DELETE"
-        ]
-      }
-    }
-  }
-}
-~~~
-
 ## Factor Lifecycle Operations
 
 ### Enroll Factor
@@ -1306,10 +932,10 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ~~~
 
-#### Enroll User with a Push Factor
+#### Enroll User with an Okta Verify Push Factor
 {:.api .api-operation}
 
-Enrolls a user with the Okta `push` factor. The factor must be [activated](#activate-push-factor) after enrollment by following the `activate` link relation to complete the enrollment process.
+Enrolls a user with the Okta verify `push` factor. The factor must be [activated](#activate-push-factor) after enrollment by following the `activate` link relation to complete the enrollment process.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1400,7 +1026,7 @@ The `sms` and `token:software:totp` [factor types](#factor-types) require activa
 
 - [Activate TOTP Factor](#activate-totp-factor)
 - [Activate SMS Factor](#activate-sms-factor)
-- [Activate Push Factor](#activate-push-factor)
+- [Activate Okta Verify Push Factor](#activate-push-factor)
 
 #### Activate TOTP Factor
 {:.api .api-operation}
@@ -1588,7 +1214,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ~~~
 
-#### Activate Push Factor
+#### Activate Okta Verify Push Factor
 {:.api .api-operation}
 
 Poll the device to verify activation for a `push` factor is complete.  There are three response examples showing pending activation, successful activation, and a timed out request.
@@ -1761,3 +1387,379 @@ curl -v -H "Authorization: SSWS yourtoken" \
 {:.api .api-response .api-response-example}
 
 `204 No Content`
+
+## Factor Verification Operations
+
+### Verify Security Question Factor
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/verify</span>
+
+Verifies an answer to a `question` factor.
+
+#### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter    | Description                                         | Param Type | DataType | Required | Default
+------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
+uid          | `id` of user                                        | URL        | String   | TRUE     |
+fid          | `id` of factor                                      | URL        | String   | TRUE     |
+answer       | answer to security question                         | Body       | String   | TRUE     |
+
+#### Response Parameters
+{:.api .api-response .api-response-params}
+
+Parameter    | Description                                         | Param Type | DataType                                            | Required | Default
+------------ | --------------------------------------------------- | ---------- | --------------------------------------------------- | -------- | -------
+result       | verification result                                 | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
+
+If the `answer` is invalid you will receive a `403 Forbidden` status code with the following error:
+
+~~~ json
+{
+  "errorCode": "E0000068",
+  "errorSummary": "Invalid Passcode/Answer",
+  "errorLink": "E0000068",
+  "errorId": "oaei_IfXcpnTHit_YEKGInpFw",
+  "errorCauses": [
+    {
+      "errorSummary": "Your answer doesn't match our records. Please try again."
+    }
+  ]
+}
+~~~
+
+#### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ufs1pe3ISGKGPYKXRBKK/verify
+-d \
+'{
+  "answer": "mayonnaise"
+}'
+~~~
+
+#### Response Example
+{:.api .api-response .api-response-example}
+
+~~~ json
+{
+  "factorResult": "SUCCESS"
+}
+~~~
+
+
+### Verify SMS Factor
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/verify</span>
+
+Verifies an OTP for a `sms` factor.
+
+#### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter    | Description                                         | Param Type | DataType | Required | Default
+------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
+uid          | `id` of user                                        | URL        | String   | TRUE     |
+fid          | `id` of factor                                      | URL        | String   | TRUE     |
+passCode     | OTP sent to device                                  | Body       | String   | FALSE    |
+
+> If you omit `passCode` in the request a new OTP will be sent to the device, otherwise the request will attempt to verify the `passCode`
+
+#### Response Parameters
+{:.api .api-response .api-response-params}
+
+Parameter    | Description                                         | Param Type | DataType                                            | Required | Default
+------------ | --------------------------------------------------- | ---------- | --------------------------------------------------- | -------- | -------
+result       | verification result                                 | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
+
+If the passcode is invalid you will receive a `403 Forbidden` status code with the following error:
+
+~~~ json
+{
+  "errorCode": "E0000068",
+  "errorSummary": "Invalid Passcode/Answer",
+  "errorLink": "E0000068",
+  "errorId": "oaei_IfXcpnTHit_YEKGInpFw",
+  "errorCauses": [
+    {
+      "errorSummary": "Your passcode doesn't match our records. Please try again."
+    }
+  ]
+}
+~~~
+
+#### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf17zuKEUMYQAQGCOV/verify
+-d \
+'{
+  "passCode": "123456"
+}'
+~~~
+
+#### Response Example
+{:.api .api-response .api-response-example}
+
+~~~ json
+{
+  "factorResult": "SUCCESS"
+}
+~~~
+
+### Verify TOTP Factor
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/verify</span>
+
+Verifies an OTP for a `token:software:totp` factor.
+
+#### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter    | Description                                         | Param Type | DataType | Required | Default
+------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
+uid          | `id` of user                                        | URL        | String   | TRUE     |
+fid          | `id` of factor                                      | URL        | String   | TRUE     |
+passCode     | OTP generated by device                             | Body       | String   | TRUE     |
+
+#### Response Parameters
+{:.api .api-response .api-response-params}
+
+Parameter    | Description                                         | Param Type | DataType                                            | Required | Default
+------------ | --------------------------------------------------- | ---------- | --------------------------------------------------- | -------- | -------
+result       | verification result                                 | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
+
+If the passcode is invalid you will receive a `403 Forbidden` status code with the following error:
+
+~~~ json
+{
+  "errorCode": "E0000068",
+  "errorSummary": "Invalid Passcode/Answer",
+  "errorLink": "E0000068",
+  "errorId": "oaei_IfXcpnTHit_YEKGInpFw",
+  "errorCauses": [
+    {
+      "errorSummary": "Your passcode doesn't match our records. Please try again."
+    }
+  ]
+}
+~~~
+
+#### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf17zuKEUMYQAQGCOV/verify
+-d \
+'{
+  "passCode": "123456"
+}'
+~~~
+
+#### Response Example
+{:.api .api-response .api-response-example}
+
+~~~ json
+{
+  "factorResult": "SUCCESS"
+}
+~~~
+
+### Verify an Okta Verify Push Factor
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/verify</span>
+
+Verifies a `push` factor. First, send a request to the device. When successfully sent, you are in a waiting state. Then, poll for user action.
+
+##### Start the Verify Transaction
+
+#### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter    | Description                                         | Param Type | DataType | Required | Default
+------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
+uid          | `id` of user                                        | URL        | String   | TRUE     |
+fid          | `id` of factor                                      | URL        | String   | TRUE     |
+
+
+#### Response Parameters
+{:.api .api-response .api-response-params}
+
+Parameter    | Description                                         | Param Type | DataType                                            | Required | Default
+------------ | --------------------------------------------------- | ---------- | --------------------------------------------------- | -------- | -------
+factorResult | result of verification result                       | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
+
+
+#### Response Example
+{:.api .api-response .api-response-example}
+
+~~~ json
+{
+    "factorResult": "TIMEOUT",
+    "_links": {
+        "verify": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/verify",
+            "hints": {
+                "allow": [
+                    "POST"
+                ]
+            }
+        },
+        "factor": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3",
+            "hints": {
+                "allow": [
+                    "get",
+                    "DELETE"
+                ]
+            }
+        }
+    }
+}
+~~~
+
+##### Poll the Verify Transaction
+
+### Verify Transaction
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors/*:fid*/transactions/*:tid*/verify
+
+Polls the verify transaction. There are four response examples showing a waiting state, a successful verification, a timeout, and a rejected verification.
+
+#### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter    | Description                                         | Param Type | DataType | Required | Default
+------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
+uid          | `id` of user                                        | URL        | String   | TRUE     |
+fid          | `id` of factor                                      | URL        | String   | TRUE     |
+tid          | `id` of transaction                                 | URL        | String   | TRUE     |
+
+The <em>tid</em> is available in a returned link.
+
+#### Response Parameters
+{:.api .api-response .api-response-params}
+
+Parameter    | Description                                         | Param Type | DataType                                            | Required | Default
+------------ | --------------------------------------------------- | ---------- | --------------------------------------------------- | -------- | -------
+factorResult | result of verification result                       | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
+
+
+#### Response Example
+{:.api .api-response .api-response-example}
+
+##### Waiting State
+
+~~~ json
+{
+  "expiresAt": "2015-04-01T15:57:32.000Z",
+  "factorResult": "WAITING",
+  "_links": {
+    "poll": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/transactions/mst1eiHghhPxf0yhp0g",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    },
+    "cancel": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/transactions/mst1eiHghhPxf0yhp0g",
+      "hints": {
+        "allow": [
+          "DELETE"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+#### Response Example
+{:.api .api-response .api-response-example}
+
+##### Approved
+
+~~~ json
+{
+  "factorResult": "SUCCESS"
+}
+~~~
+
+#### Response Example
+{:.api .api-response .api-response-example}
+
+##### Timeout
+
+~~~ json
+{
+  "factorResult": "TIMEOUT",
+  "_links": {
+    "verify": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/verify",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "factor": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3",
+      "hints": {
+        "allow": [
+          "GET",
+          "DELETE"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+#### Response Example
+{:.api .api-response .api-response-example}
+
+##### Rejected
+
+~~~ json
+{
+  "factorResult": "REJECTED",
+  "_links": {
+    "verify": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/verify",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "factor": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3",
+      "hints": {
+        "allow": [
+          "GET",
+          "DELETE"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+
