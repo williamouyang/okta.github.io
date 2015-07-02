@@ -974,7 +974,7 @@ Enrolls a user with a [factor](factors.html#supported-factors) assigned by their
 - [Enroll User with Okta SMS Factor](#enroll-user-with-okta-sms-factor)
 - [Enroll User with Okta Verify Factor](#enroll-user-with-okta-verify-factor)
 - [Enroll User with Google Authenticator Factor](#enroll-user-with-google-authenticator-factor)
-- [Enroll User with Push Factor](#enroll-user-with-push-factor)
+- [Enroll User with Okta Verify Push Factor](#enroll-user-with-push-factor)
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -1327,10 +1327,10 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ~~~
 
-#### Enroll User with Push Factor
+#### Enroll User with Okta Verify Push Factor
 {:.api .api-operation}
 
-Enrolls a user with a push factor.  The factor must be [activated](#activate-push-factor) after enrollment by following the `next` link relation to complete the enrollment process.
+Enrolls a user with an Okta verify push factor.  The factor must be [activated](#activate-push-factor) after enrollment by following the `next` link relation to complete the enrollment process.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1575,7 +1575,7 @@ The `sms` and `token:software:totp` [factor types](factors.html#factor-types) re
 
 - [Activate TOTP Factor](#activate-totp-factor)
 - [Activate SMS Factor](#activate-sms-factor)
-- [Activate Push Factor](#activate-push-factor)
+- [Activate Okta Verify Push Factor](#activate-push-factor)
 
 #### Activate TOTP Factor
 {:.api .api-operation}
@@ -1731,7 +1731,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ~~~
 
-#### Activate Push Factor
+#### Activate Okta Verify Push Factor
 {:.api .api-operation}
 
 Polls for device activation.
@@ -1933,9 +1933,6 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 #### Reactivate a Factor
 
-To reactivate a factor after it has expired, make a factor activation request with the **reActivate** request parameter set to true.
-The responses are the same as for factor activation.
-
 ##### Request Example – SMS Factor
 {:.api .api-request .api-request-example}
 
@@ -1946,9 +1943,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -X POST "https://your-domain.okta.com/api/v1/authn/factors/sms1o51EADOTFXHHBXBP/lifecycle/activate?reActivate=true
 -d \
 '{
-  "stateToken": "00wlafXU2GV9I3tNvDNkOA1thqM5gDwCOgHID_-Iej",
-  "passCode": "123456"
-}'
+  "stateToken": "00wlafXU2GV9I3tNvDNkOA1thqM5gDwCOgHID_-Iej"
+ }'
 ~~~
 
 
@@ -1960,7 +1956,7 @@ Verifies an enrolled factor for an authentication transaction with the `MFA_REQU
 - [Verify Security Question Factor](#verify-security-question-factor)
 - [Verify SMS Factor](#verify-sms-factor)
 - [Verify TOTP Factor](#verify-totp-factor)
-- [Verify Push Factor](#verify-push-factor)
+- [Verify Okta Verify Push Factor](#verify-push-factor)
 
 #### Verify Security Question Factor
 {:.api .api-operation}
@@ -2283,12 +2279,12 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ~~~
 
-### Verify Push Factor
+### Verify Okta Verify Push Factor
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/factors/*:fid*/verify</span>
 
-After verifying, repeat the call to poll the device for a user reponse. 
+After starting verification, repeat the call to poll the device for a user response. 
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2386,9 +2382,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ~~~
 
-<u>Response from Poll for Verification Complete</u>
+##### Response from Poll for Verification Complete
 
-The following response examples show different states: SUCCESS and TIMEOUT.
+The following response example shows the SUCCESS state.
 
 ##### Response Example
 {:.api .api-response .api-response-example}
@@ -2413,7 +2409,12 @@ The following response examples show different states: SUCCESS and TIMEOUT.
   }
 }
 ~~~
-&nbsp;
+
+The following response example shows the TIMEOUT state.
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
 ~~~json
 {
   "stateToken": "00lT7DEzQaeP6mv1_y3pdXjNEONzk83mXX-yhgEdVQ",

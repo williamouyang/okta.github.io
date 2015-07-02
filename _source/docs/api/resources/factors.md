@@ -804,7 +804,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 Verifies a `push` factor. First, send a request to the device. When successfully sent, you are in a waiting state. Then, poll for user action.
 
-<u>Start the Verify Transaction</u>
+##### Start the Verify Transaction
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -851,7 +851,7 @@ factorResult | result of verification result                       | Body       
 }
 ~~~
 
-<u>Poll the Verify Transaction</u>
+##### Poll the Verify Transaction
 
 ### Verify Transaction
 {:.api .api-operation}
@@ -882,7 +882,7 @@ factorResult | result of verification result                       | Body       
 #### Response Example
 {:.api .api-response .api-response-example}
 
-Waiting State
+##### Waiting State
 
 ~~~ json
 {
@@ -890,7 +890,7 @@ Waiting State
   "factorResult": "WAITING",
   "_links": {
     "poll": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/verify/mst1eiHghhPxf0yhp0g",
+      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/transactions/mst1eiHghhPxf0yhp0g",
       "hints": {
         "allow": [
           "GET"
@@ -898,7 +898,7 @@ Waiting State
       }
     },
     "cancel": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/verify/mst1eiHghhPxf0yhp0g",
+      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/transactions/mst1eiHghhPxf0yhp0g",
       "hints": {
         "allow": [
           "DELETE"
@@ -912,7 +912,7 @@ Waiting State
 #### Response Example
 {:.api .api-response .api-response-example}
 
-Approved
+##### Approved
 
 ~~~ json
 {
@@ -923,7 +923,7 @@ Approved
 #### Response Example
 {:.api .api-response .api-response-example}
 
-Timeout
+##### Timeout
 
 ~~~ json
 {
@@ -953,7 +953,7 @@ Timeout
 #### Response Example
 {:.api .api-response .api-response-example}
 
-Rejected
+##### Rejected
 
 ~~~ json
 {
