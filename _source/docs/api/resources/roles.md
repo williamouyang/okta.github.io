@@ -211,7 +211,7 @@ curl -v -H "Authorization: SSWS {{ "{{apikey" }}}}" \
 ### Assign Role to User
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /user/:uid/roles</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/:uid/roles</span>
 
 Assigns a specified role to a specified user.
 
@@ -251,7 +251,7 @@ curl -v -H "Authorization: SSWS "{{ "{{apikey" }}}}" \
 ### Unassign Role from User
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /user/:uid/roles/:rid</span>
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /users/:uid/roles/:rid</span>
 
 Removes a role from a specified user.
 
@@ -290,7 +290,7 @@ curl -v -i -H "Authorization: SSWS {{ "{{apikey" }}}}" \
 
 Adds a specified group to a role.
 
-<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /user/:uid/roles/:rid/targets/groups/:gid</span>
+<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /users/:uid/roles/:rid/targets/groups/:gid</span>
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -337,7 +337,7 @@ HTTP/1.1 204 No Content
 ## Remove Group Target from Role
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /user/:uid/roles/:rid/targets/groups/:gid</span>
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /users/:uid/roles/:rid/targets/groups/:gid</span>
 
 
 ##### Request Example
@@ -354,7 +354,7 @@ HTTP/1.1 204 No Content
 ### List Group Targets for Role
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /user/:uid/roles/:rid/targets/groups</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users/:uid/roles/:rid/targets/groups</span>
 
 Fetches all groups targets for a role. Standard paging and limits are supported.
 
@@ -466,7 +466,7 @@ Fetches all groups targets for a role. Standard paging and limits are supported.
 ### Add App Target to Role
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /user/:uid/roles/:rid/targets/apps/:app_name</span>
+<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /users/:uid/roles/:rid/targets/apps/:app_name</span>
 
 Adds a specified app to a role.
 
@@ -501,7 +501,7 @@ HTTP/1.1 204 No Content
 ### Remove App Target from Role
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /user/:uid/roles/:rid/targets/apps/:app_name</span>
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /users/:uid/roles/:rid/targets/apps/:app_name</span>
 
 Removes an app target from a role.
 
@@ -518,7 +518,7 @@ HTTP/1.1 204 No Content
 ### List App Targets for Role
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /user/:uid/roles/:rid/targets/apps</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users/:uid/roles/:rid/targets/apps</span>
 
 Fetches all app targets for a role. Standard paging and limits are supported.
 
