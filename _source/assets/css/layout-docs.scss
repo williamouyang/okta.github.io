@@ -97,10 +97,10 @@ body {
 				}
 			}
 		}
-		.no-flexbox & {
+		.no-flexbox {
 			display: table;
 			width: 80%;
-			a {
+			&a {
 				display: table-cell;
 				width: 20%;
 			}
@@ -124,7 +124,6 @@ body {
 }
 
 .docs-body {
-
 	.btn-github {
 		margin-top: 20px;
 	}
@@ -171,7 +170,6 @@ body {
 		margin-top: 20px;
 		margin-bottom: 10px;
 	}
-
 
 	h1 {
 		@include scaleUpFontSizeBy(4);
@@ -1260,5 +1258,18 @@ body {
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
 	.page-content {
 		flex: 0 1 auto;
+	}
+}
+// For IE
+.no-flexbox {
+	.toggled {
+		.sticky-nav--top {
+			display: table !important;
+			width: 100% !important;
+			a {
+				display: table-cell;
+				width: auto !important;
+			}
+		}
 	}
 }
