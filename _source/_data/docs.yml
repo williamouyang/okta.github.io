@@ -33,6 +33,7 @@
     - factors
     - groups
     - roles
+    - schema
     - sessions
     - users
 
