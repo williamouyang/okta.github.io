@@ -31,6 +31,7 @@
 
   
     <link rel="top" title="Okta Python SDK 0.1 documentation" href="index.html"/>
+        <link rel="next" title="Okta Clients" href="api/clients/index.html"/>
         <link rel="prev" title="Installation" href="installation.html"/> 
 
   
@@ -62,17 +63,24 @@
         
           
           
-              <ul class="simple">
-</ul>
-<ul class="simple">
-</ul>
-<ul class="current">
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Quickstart</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#create-a-client">Create a client</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#create-a-user">Create a user</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#activate-a-user">Activate a user</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#loop-through-a-list">Loop through a list</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/clients/index.html">Okta Clients</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/clients/AppInstanceClient.html"><code class="docutils literal"><span class="pre">AppInstanceClient</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/clients/AuthClient.html"><code class="docutils literal"><span class="pre">AuthClient</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/clients/EventsClient.html"><code class="docutils literal"><span class="pre">EventsClient</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/clients/FactorsAdminClient.html"><code class="docutils literal"><span class="pre">FactorsAdminClient</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/clients/FactorsClient.html"><code class="docutils literal"><span class="pre">FactorsClient</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/clients/SessionsClient.html"><code class="docutils literal"><span class="pre">SessionsClient</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/clients/UserGroupsClient.html"><code class="docutils literal"><span class="pre">UserGroupsClient</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/clients/UsersClient.html"><code class="docutils literal"><span class="pre">UsersClient</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -114,7 +122,7 @@
 <h1>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="create-a-client">
 <h2>Create a client<a class="headerlink" href="#create-a-client" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">okta.UsersClient</span> <span class="kn">import</span> <span class="n">UsersClient</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">okta</span> <span class="kn">import</span> <span class="n">UsersClient</span>
 
 <span class="n">usersClient</span> <span class="o">=</span> <span class="n">UsersClient</span><span class="p">(</span><span class="s">&quot;https://example.okta.com&quot;</span><span class="p">,</span> <span class="s">&quot;EXAMPLE_KEY&quot;</span><span class="p">)</span>
 </pre></div>
@@ -122,10 +130,13 @@
 </div>
 <div class="section" id="create-a-user">
 <h2>Create a user<a class="headerlink" href="#create-a-user" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">login</span><span class="o">=</span><span class="s">&#39;example@example.com&#39;</span><span class="p">,</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">okta.models.user</span> <span class="kn">import</span> <span class="n">User</span> <span class="c"># Include with other imports above</span>
+
+<span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">login</span><span class="o">=</span><span class="s">&#39;example@example.com&#39;</span><span class="p">,</span>
             <span class="n">email</span><span class="o">=</span><span class="s">&#39;example@example.com&#39;</span><span class="p">,</span>
             <span class="n">firstName</span><span class="o">=</span><span class="s">&#39;Saml&#39;</span><span class="p">,</span>
             <span class="n">lastName</span><span class="o">=</span><span class="s">&#39;Jackson&#39;</span><span class="p">)</span>
+
 <span class="n">user</span> <span class="o">=</span> <span class="n">usersClient</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">activate</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -161,6 +172,8 @@
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="api/clients/index.html" class="btn btn-neutral float-right" title="Okta Clients">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="installation.html" class="btn btn-neutral" title="Installation"><span class="fa fa-arrow-circle-left"></span> Previous</a>

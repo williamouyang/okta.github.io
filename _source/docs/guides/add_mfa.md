@@ -27,9 +27,8 @@ to your app with the Okta Platform.
 
 The Okta Platform gives you the flexibility to deploy Okta’s built-in
 factors, or integrate with existing tokens. Native factors include
-SMS, and the Okta Verify soft token for iOS and Android. Integrations
-include Google Authenticator, RSA SecurID, Symantec VIP, and Duo
-Security.
+SMS, and the Okta Verify app for iOS and Android. Integrations include
+Google Authenticator, RSA SecurID, Symantec VIP, and Duo Security.
 
 Let’s get started!
 

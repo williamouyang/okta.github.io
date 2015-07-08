@@ -1,0 +1,991 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Okta Developer</title>
+    <description>Secure, scalable, and highly available authentication and user management for any app.</description>
+    <link>http://developer.okta.com</link>
+    <atom:link href="http://developer.okta.com/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>The New Age of Trust</title>
+        <description>&lt;p&gt;I recently read an excellent &lt;a href=&quot;http://www.viabilify.com/blog/trust&quot;&gt;article&lt;/a&gt; about how amazing products shape the &lt;strong&gt;trust relationship&lt;/strong&gt; with customers. I think great products are the &lt;em&gt;first step&lt;/em&gt; in building a trust relationship. And like other aspects of the product that are derived from the product but are not physically part of it, the trust relationship is now more important than ever before.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;When you use a product, every engagement with that product has a direct correlation with your perception of the value of that product. — From &lt;a href=&quot;http://www.viabilify.com/blog/trust&quot;&gt;Product Loyalty Follows Trust Like Form Follows Function&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;These days, making sure your product solves problems that customers face everyday is not just a &lt;em&gt;good idea&lt;/em&gt;, it’s &lt;strong&gt;table stakes&lt;/strong&gt;. And the bar is rising constantly. The more products improve, the less customers are willing to tolerate bad experiences. With the consumerization of the enterprise, the importance of product design and favorable user experiences is indispensable to every kind of product distribution model. &lt;/p&gt;
+
+&lt;p&gt;Two of the most important aspects of the product are Product Status/Trust and Customer Support. Having dissected both of these from many angles in my recent work, I know that businesses neglect them at their peril. &lt;/p&gt;
+
+&lt;h3 id=&quot;communicate-transparently&quot;&gt;Communicate transparently&lt;/h3&gt;
+
+&lt;p&gt;The Product Status/Trust page is the first place customers visit on your site when they have a problem. Consider yourself lucky if the customer only had an problem with a browser (like cache), or an issue with their laptop. For more serious issues, customers expect transparency and effective communication from the Product Status/Trust page. They want information that communicates exactly what the problem is. &lt;/p&gt;
+
+&lt;h3 id=&quot;serve-multiple-audiences&quot;&gt;Serve multiple audiences&lt;/h3&gt;
+&lt;p&gt;A Product Status/Trust page is also one of the first places that prospects are likely to visit. In fact, when the product is gaining momentum, prospect traffic may exceed customer traffic. &lt;/p&gt;
+
+&lt;p&gt;I’ve rarely seen a Status/Trust page actually serve both customers and prospects effectively. The key is to find the correct balance. As the product becomes popular, customers and prospects visit the page with very different mindsets. &lt;/p&gt;
+
+&lt;p&gt;For customers, the Status/Trust page must be the source of truth for issues, downtime, and root cause analysis. This requires radical transparency and effective communication. &lt;/p&gt;
+
+&lt;p&gt;For prospects, the Status/Trust page must do at least the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Display all the information they need to make an informed decision &lt;/li&gt;
+  &lt;li&gt;Make them love the product even more&lt;/li&gt;
+  &lt;li&gt;Serve as an effective talking point for your sales reps&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Once users get their hands on a product, they often find new ways to use it that the founders never imagined. This experimentation can shape the future of products and platforms. This is especially true of products that also provide APIs. The growth of B2B2C, B2C2B and other hybrid distribution models means that you are putting your product in front of many different types of audiences, including direct customers, partners, resellers, channel partners, and early and late stage prospects. Understanding how all of these audiences report on the service, interpret the SLA, and react to downtime is crucial if you want to create products that users value.&lt;/p&gt;
+
+&lt;h3 id=&quot;be-highly-available-but-prepare-for-risk&quot;&gt;Be highly available but prepare for risk &lt;/h3&gt;
+
+&lt;p&gt;It is a truism that one cannot solve for all technical constraints. Choosing the right platform on which to build your Product and Status/Trust pages is very important, but hosting both pages on the same platform risks both being down at the same time if your site crashes. &lt;/p&gt;
+
+&lt;p&gt;Obviously, you cannot afford to let your Trust/Status page go down, so &lt;strong&gt;high availability&lt;/strong&gt; is key. But just in case the page ever &lt;em&gt;does&lt;/em&gt; go down, you need a &lt;strong&gt;risk mitigation plan&lt;/strong&gt;. Central to this is making sure that you are contsantly monitoring your Trust/Status page with enterprise-class monitoring tools. &lt;/p&gt;
+
+&lt;h3 id=&quot;send-rapid-robust-and-consistent-notifications&quot;&gt;Send rapid, robust, and consistent notifications&lt;/h3&gt;
+&lt;p&gt;In the event of trust page problems, make sure that you have ways to easily and automatically notify customers and site ops as soon as issues are detected. Employ RSS, Twitter, and other channels to notify customers; invest in monitoring tools to notify site ops.&lt;/p&gt;
+
+&lt;p&gt;If you send notifications manually, take care not to introduce human error when the site is having issues, as these are usually chaotic periods for your ops team. &lt;/p&gt;
+
+&lt;p&gt;Realize that many of your customers will probably check your trust page &lt;em&gt;and&lt;/em&gt; call support, so it’s important that the trust page and the support team provide the same information. This also argues for ensuring that your support team is a key stakeholder in the development of your trust page. &lt;/p&gt;
+
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;Designing and developing the Trust Page has taught me much in the last few months. I’d be happy to hear from you on this topic, so please feel free to send comments or questions to &lt;a href=&quot;&amp;#109;&amp;#097;&amp;#105;&amp;#108;&amp;#116;&amp;#111;:&amp;#118;&amp;#105;&amp;#109;&amp;#097;&amp;#114;&amp;#115;&amp;#104;&amp;#046;&amp;#107;&amp;#097;&amp;#114;&amp;#098;&amp;#104;&amp;#097;&amp;#114;&amp;#105;&amp;#064;&amp;#111;&amp;#107;&amp;#116;&amp;#097;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&quot;&gt;&amp;#118;&amp;#105;&amp;#109;&amp;#097;&amp;#114;&amp;#115;&amp;#104;&amp;#046;&amp;#107;&amp;#097;&amp;#114;&amp;#098;&amp;#104;&amp;#097;&amp;#114;&amp;#105;&amp;#064;&amp;#111;&amp;#107;&amp;#116;&amp;#097;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;The Trust Page is the work of an amazing team that includes Tim Gu, Shawn Gupta, Nathan Tate, Wendy Liao, and myself.&lt;/em&gt;&lt;/p&gt;
+</description>
+        <pubDate>Thu, 11 Jun 2015 00:00:00 -0700</pubDate>
+        <link>http://developer.okta.com/blog/2015/06/11/trustpage</link>
+        <guid isPermaLink="true">http://developer.okta.com/blog/2015/06/11/trustpage</guid>
+      </item>
+    
+      <item>
+        <title>How Okta Chased Down Severe System CPU Contention in MySQL</title>
+        <description>&lt;p&gt;Sometimes fixing a problem causes or reveals a new one. And sometimes this sets off a chain reaction of problems and fixes, where each solution exposes a deeper issue. In technology, cascades like these are common, often painful, and occasionally welcome. &lt;/p&gt;
+
+&lt;p&gt;Our battle against CPU contention last fall is a good example of such a cascade. What began as a buffer pool adjustment triggered a series of issues and fixes that generated plenty of stress, but ultimately strengthened our platform. &lt;/p&gt;
+
+&lt;p&gt;Underlying each of the challenges we faced in that period was the huge amount of business our Sales organization had closed in late summer and early Fall of 2014. Growth brought a dramatic increase in the number of new customers running large import jobs and new orgs running agents. &lt;/p&gt;
+
+&lt;p&gt;As problems go, growing pains are good problems to have. But they usually come at a cost: the increased traffic caused significant CPU contention, as shown in the following image. &lt;/p&gt;
+
+&lt;p&gt;&lt;img style=&quot;width:55%&quot; src=&quot;/assets/img/Pre-buffer_adjustment.png&quot; alt=&quot;Before tuning the database&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Those red and yellow spikes in late October, 2014 seized our attention and spurred an aggressive response from Okta’s site operations team. The team took immediate action to prevent this situation from getting worse and potentially causing a issue with our site.&lt;/p&gt;
+
+&lt;h2 id=&quot;tuning-the-database&quot;&gt;Tuning the database&lt;/h2&gt;
+
+&lt;p&gt;As a first step, we tuned our MySQL database to fully utilize the amount of RAM in our server instances. We had been running with a relatively small buffer pool
+compared to the amount of available RAM, which meant that we were sacrificing both performance and money.  Increasing the size of the buffer pool decreased page response times and nearly eliminated disk reads.&lt;/p&gt;
+
+&lt;p&gt;&lt;img style=&quot;width:50%&quot; src=&quot;/assets/img/EliminateDiskReads.png&quot; alt=&quot;Almost eliminated disk reads&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;doubling-hardware-resources&quot;&gt;Doubling hardware resources&lt;/h2&gt;
+
+&lt;p&gt;Despite the buffer pool adjustment, we continued to see significant CPU contention. In response, we doubled the size of our servers (244 GB of RAM, 32 CPU cores, and 2 x 320 GB HDDs). CPU contention decreased (see the trough in the following image), but probably because of the Thanksgiving holiday, not the additional hardware.&lt;/p&gt;
+
+&lt;p&gt;After the holiday, CPU spikes returned, now worse than ever. Page render time slowed down, queries against the database took longer, and jobs backed up. &lt;/p&gt;
+
+&lt;p&gt;&lt;img style=&quot;width:50%&quot; src=&quot;/assets/img/Thanksgiving.png&quot; alt=&quot;Thanksgiving holiday&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Flat areas in the graph showing no CPU usage indicate periods when we were running on a secondary server.&lt;/p&gt;
+
+&lt;p&gt;Why did CPU contention increase after we’d doubled the CPUs? Shouldn’t it have decreased?&lt;/p&gt;
+
+&lt;h2 id=&quot;kernel-mutex-bottleneck&quot;&gt;Kernel mutex bottleneck&lt;/h2&gt;
+
+&lt;p&gt;The alarming amount of yellow in our graphs showed extremely high &lt;strong&gt;system CPU usage&lt;/strong&gt; (and &lt;strong&gt;user CPU usage&lt;/strong&gt; was also too high). Clearly, the operating system was working very hard at &lt;em&gt;something&lt;/em&gt;. The metrics we pulled revealed that all the InnoDB threads were busy waiting on the kernel mutex. We had known that kernel mutex was a bottleneck even before we’d doubled hardware resources, but we hadn’t understood why. &lt;/p&gt;
+
+&lt;p&gt;A closer look at the MySQL source code showed that kernel mutex was trying to allocate memory to all of our transactions. This is perfectly normal behavior, but it proved to be very limiting in our case because we perform approximately 85,000 transactions per minute. The kernel has to create a transaction ID for each transaction and allocate a tiny block of memory in RAM before giving it to the thread handling the transaction.&lt;/p&gt;
+
+&lt;p&gt;Now we knew why doubling the number of CPUs caused greater contention: instead of  providing transaction IDs and associated memory to approximately 24 InnoDB threads, kernel mutex was now working like mad to provide IDs and memory to approximately 48 InnoDB threads. Imagine having a single toll booth on a 16 lane highway and then &lt;em&gt;doubling the number of lanes&lt;/em&gt;. &lt;/p&gt;
+
+&lt;p&gt;In the discussions that followed, some called for rolling back to the smaller machines, reasoning that fewer threads would mean less CPU contention. Others believed that rolling backward would be a mistake, arguing that our business growth required the more powerful servers in any case, and that doubling the number of CPUs was not itself a problem, but rather part of the ultimate solution because it exposed the root cause of the extreme system CPU usage. &lt;/p&gt;
+
+&lt;p&gt;The right course – the one we ultimately took – was to stick with the more powerful servers and tune them properly.&lt;/p&gt;
+
+&lt;h2 id=&quot;adopting-tcmalloc&quot;&gt;Adopting TCMalloc&lt;/h2&gt;
+
+&lt;p&gt;We quickly found several resources online, including a &lt;a href=&quot;http://goog-perftools.sourceforge.net/doc/tcmalloc.html&quot;&gt;key blog post&lt;/a&gt; about &lt;strong&gt;TCMalloc&lt;/strong&gt; (Thread-Caching Memory Allocation) and an article about &lt;a href=&quot;http://www.olivierdoucet.info/blog/2012/05/19/debugging-a-mysql-stall/&quot;&gt;debugging MySQL&lt;/a&gt;. &lt;/p&gt;
+
+&lt;p&gt;Traditional memory allocation schemes, like the &lt;strong&gt;glibc&lt;/strong&gt; malloc that we were then using, employ a mutex to prevent concurrent access to the transaction ID counter.  Preventing concurrency is totally wrong for a multi-core, multi-thread architecture like ours.  &lt;/p&gt;
+
+&lt;p&gt;In contrast, TCMalloc allocates a small pool of memory to each CPU core. Individual processor threads obtain RAM directly from their core, ideally from the L2 cache nearest the thread’s section of the CPU. This sounded promising, so we switched to TCMalloc.&lt;/p&gt;
+
+&lt;p&gt;Following the switch, things looked pretty good. User CPU decreased dramatically, never to return to the +50% usage we’d seen before.  We had finally solved the memory allocation bottleneck. If we hadn’t doubled the number of CPUs, we wouldn’t have found the problem that lead us to adopt TCMalloc.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Had we finally solved our scalability problem?&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;transparent-huge-pages-thanks-for-your-helpplease-dont-help&quot;&gt;Transparent Huge Pages: Thanks for your help…please don’t help&lt;/h2&gt;
+
+&lt;p&gt;By the next morning &lt;strong&gt;CPU contention was worse&lt;/strong&gt;. &lt;/p&gt;
+
+&lt;p&gt;The alarmingly high system CPU usage that we’d seen in the previous 3 months was always due to MySQL using kernel mutex. But since we’d fixed that problem, &lt;em&gt;what the heck was this?&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;We discussed turning off TCMalloc, but that would’ve been a mistake. Implementing TCMalloc was a critical link in the chain of problems and solutions that ultimately strengthened our platform.&lt;/p&gt;
+
+&lt;p&gt;We discovered very quickly that the culprit this time was a &lt;em&gt;khugepaged&lt;/em&gt; enabled by a Linux kernel flag called &lt;strong&gt;Transparent Huge Pages&lt;/strong&gt; (THP; turned on by default in most Linux distributions). Huge pages are designed to improve performance by helping the operating system manage large amounts of memory. They effectively increase the page size from the standard 4kb to 2MB or 1Gb (depending on how it is configured). &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;THP&lt;/strong&gt; makes huge pages easier to use by, among other things, arranging your memory into larger chunks.  It works great for app servers that are not performing memory-intensive operations.&lt;/p&gt;
+
+&lt;p&gt;Which is why THP is so wrong for our platform. By late 2014 we were using 95% of the RAM and 58% of the 32 CPU cores in our servers . In order to store all of those tiny transaction IDs, we were rewriting memory so rapidly that THP’s efforts to move pages around couldn’t keep up. Clearly, standard 4kb blocks were much more efficient for us than the larger page size that THP was “helping” us with. So we turned THP off. The following image tells the story.&lt;/p&gt;
+
+&lt;p&gt;&lt;img style=&quot;width:40%&quot; src=&quot;/assets/img/TCMalloc.png&quot; alt=&quot;TCMalloc&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Flat areas in the graph showing no CPU usage indicate periods when we were running on a secondary server.&lt;/p&gt;
+
+&lt;p&gt;In a sense, encountering the dramatic effect of THP, an operating system problem, was clarifying. It validated our previous remedies, and turning it off definitely strengthened our platform.&lt;/p&gt;
+
+&lt;h2 id=&quot;lessons-learned&quot;&gt;Lessons learned&lt;/h2&gt;
+
+&lt;p&gt;Beyond the technical lessons we learned during this period, we were reminded that sometimes the best thing to do is stay the course. At times we were tempted to pull back, but moving forward ultimately paid off as each improvement we made exposed the inadequacy (for our platform) of a downstream component. &lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 22 May 2015 00:00:00 -0700</pubDate>
+        <link>http://developer.okta.com/blog/2015/05/22/tcmalloc</link>
+        <guid isPermaLink="true">http://developer.okta.com/blog/2015/05/22/tcmalloc</guid>
+      </item>
+    
+      <item>
+        <title>Okta Software Engineering Design Principles</title>
+        <description>&lt;p&gt;Okta has been an agile development shop since the beginning. One important
+aspect of being agile is enabling a mix of bottom-up and top-down decision
+making. Specifically where high level vision and strategy is clearly
+communicated enabling teams to autonomously deliver value while also feeding back
+learnings from the trenches to inform the high level
+goals.&lt;sup id=&quot;fnref:the-knowledge-creating-company&quot;&gt;&lt;a href=&quot;#fn:the-knowledge-creating-company&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; Below are the tacit engineering design
+principles we’ve used to guide development at Okta. They continue to evolve
+as we experiment and learn.&lt;/p&gt;
+
+&lt;h2 id=&quot;create-user-value&quot;&gt;1. Create User Value&lt;/h2&gt;
+
+&lt;p&gt;First and foremost, writing software is about creating value for users. This
+seems straight forward, but as systems evolve and become more complex we
+start introducing more abstraction and layering which brings us further away
+from the concrete problem we’re trying to solve. It’s important to keep in mind
+the reason for writing software in the first place and use the understanding
+of the audience to inform priority.&lt;/p&gt;
+
+&lt;p&gt;At Okta, our entire company is aligned on this principle because our #1 core
+value is &lt;a href=&quot;https://www.okta.com/customers/focus-on-customer-success.html&quot;&gt;customer
+success&lt;/a&gt;.  In
+practice this means there’s almost always a number of customers eager to beta a
+new feature we’re working on. We collaborate closely with customers while
+building features allowing for continuous feedback as we iterate and get
+changes out in weekly sprints.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://imgs.xkcd.com/comics/the_general_problem.png&quot; alt=&quot;xkcd - pass the salt&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;keep-it-simple&quot;&gt;2. Keep it Simple&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Everything should be made as simple as possible, but no simpler — Albert
+  Einstein &lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This truism has been around for ages, and it goes hand-in-hand with the
+first principle.  If it doesn’t add value to users now, &lt;a href=&quot;http://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it&quot;&gt;you ain’t gonna
+need it - YAGNI&lt;/a&gt;!&lt;/p&gt;
+
+&lt;p&gt;We all encounter overly complex code where it’s nearly impossible to reason
+about what it does. Part of this confusion is because it’s
+generally &lt;a href=&quot;http://www.joelonsoftware.com/articles/fog0000000069.html&quot;&gt;harder to read code than to write
+it&lt;/a&gt; but beyond 
+that, there are clearly fundamental qualities of some code making it
+more intuitive than other code. There’s a lot of prior art on this topic and a
+great place to start is &lt;a href=&quot;http://books.google.com/books?id=dwSfGQAACAAJ&quot;&gt;Clean
+Code&lt;/a&gt; by Robert C. Martin, aka
+Uncle Bob. The book breaks down the qualities of code which make it
+intuitive, and provides a framework for reasoning about code quality. &lt;/p&gt;
+
+&lt;p&gt;Here are some guiding principles about writing clean code we use in practice
+which are also covered in the book.&lt;/p&gt;
+
+&lt;p&gt;Clean code:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Makes intent clear, use comments when code isn’t expressive enough&lt;/li&gt;
+  &lt;li&gt;Can be read and enhanced by others (or the author after a few
+years)&lt;/li&gt;
+  &lt;li&gt;Provides one way, rather than many, to do a particular task&lt;/li&gt;
+  &lt;li&gt;Is idomatic&lt;/li&gt;
+  &lt;li&gt;Is broken into pieces which each does one thing and does it well&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;At the end of the day there is no substitue for experience, like any craft,
+writing clean code takes practice. At Okta every engineer is constantly honing
+their skills, we rely heavily on code reviews and pair programming to help hone
+each other’s skills. &lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/2015-05-08-software-engineering-design-principles-code_quality_wtfs_per_minute.jpg&quot; alt=&quot;wtfs per minute&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;know-thy-service-with-data&quot;&gt;3. Know Thy-Service With Data&lt;/h2&gt;
+
+&lt;p&gt;In the world of “big data” this point needs little explanation. Okta collects
+massive amounts of operational data about our systems to:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Monitor health&lt;/li&gt;
+  &lt;li&gt;Monitor performance&lt;/li&gt;
+  &lt;li&gt;Debug issues&lt;/li&gt;
+  &lt;li&gt;Audit security&lt;/li&gt;
+  &lt;li&gt;Make decisions&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;With every new feature we add, developers are responsible for ensuring that
+their designs provide visibility into these dimensions. In order to make this an
+efficient process we’ve invested in: &lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Runtime logging control toggling by level, class, tenant, user &lt;/li&gt;
+  &lt;li&gt;Creation of dashboards and alerts is self-service &lt;/li&gt;
+  &lt;li&gt;Every developer has access to metrics and anonymous unstructured data&lt;/li&gt;
+  &lt;li&gt;Request ID generated at edge is passed along at every layer of stack for
+correlation&lt;/li&gt;
+  &lt;li&gt;Engineering control panel for common operational tasks like taking threaddumps&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Technologies we use to gain visibility include: PagerDuty, RedShift,
+Zabbix, ThousandEyes, Boundary, Pingdom, App Dynamics, Splunk, ELK, S3.&lt;/p&gt;
+
+&lt;h2 id=&quot;make-failure-cheap&quot;&gt;4. Make Failure Cheap&lt;/h2&gt;
+
+&lt;p&gt;Every software system will experience failures and all code has bugs. While we
+constantly work at having fewer, it’s unrealistic to assume they won’t occur. So,
+in addition to investing in prevention, we invest in making failure cheap.&lt;/p&gt;
+
+&lt;p&gt;The cost of failure becomes significantly more expensive 
+further out on the development timeline. Making adjustments 
+during requirements gather and design are significantly cheaper than 
+finding issues in production.&lt;sup id=&quot;fnref:agile-cost-curve&quot;&gt;&lt;a href=&quot;#fn:agile-cost-curve&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; &lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/2015-05-08-software-engineering-design-principles-agile-cost-curve.png&quot; alt=&quot;cost curve of development&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;One fundamental we take from both Agile and XP is to invest in pushing failure
+as early in the development timeline as possible. We mitigate failures from
+poor requirements gathering by iterating quickly with the customer as described in
+Principle 1. Once we get to design and development we make failure cheap through: &lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Design reviews with stakeholders ahead of writing code &lt;/li&gt;
+  &lt;li&gt;TDD - developers write all tests for their code; test isn’t a separate phase
+from development &lt;/li&gt;
+  &lt;li&gt;Keeping master stable - check-in to master is gated by passing all unit,
+functional and UI tests &lt;/li&gt;
+  &lt;li&gt;Developers can trigger CI on any topic branch; CI is massively parallelized
+over a cloud of fast machines&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Since our testing phase is done during development the next phase is production
+deployments. At this phase we reduce the cost of failure by:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Hiding beta features behind flags in the code&lt;/li&gt;
+  &lt;li&gt;Incremental rollout first to test accounts and then in batches of customers&lt;/li&gt;
+  &lt;li&gt;Automated deployment process&lt;/li&gt;
+  &lt;li&gt;Code and infrastructure is forward and backward compatible allowing
+rollback&lt;/li&gt;
+  &lt;li&gt;Health check and automatically remove down nodes&lt;/li&gt;
+  &lt;li&gt;Return a degraded / read-only response over nothing at all&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;An escalator can never break; it can only become stairs – Mitch Hedberg&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;automate-everything&quot;&gt;5. Automate Everything&lt;/h2&gt;
+
+&lt;p&gt;All tasks performed routinely should
+be automated. These are automation principles we follow:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Automate every aspect of the deployment including long running db migrations&lt;/li&gt;
+  &lt;li&gt;All artifacts are immutable and versioned&lt;/li&gt;
+  &lt;li&gt;All code modules get dependencies automatically from central artifact server&lt;/li&gt;
+  &lt;li&gt;Creation of base images and provisioning of new hardware is automated&lt;/li&gt;
+  &lt;li&gt;All forms of testing are automated &lt;/li&gt;
+  &lt;li&gt;Development environment setup is automated&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Tools we use:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;AWS - Automated provisioning of hardware &lt;/li&gt;
+  &lt;li&gt;Chef - Configuration managment&lt;/li&gt;
+  &lt;li&gt;Ansible - Automated deployment orchestration&lt;/li&gt;
+  &lt;li&gt;Jenkins - Continuous integration&lt;/li&gt;
+  &lt;li&gt;Gearman - To get Jenkins to scale&lt;/li&gt;
+  &lt;li&gt;Docker - Containerizing services&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;with-performance-less-is-more&quot;&gt;6. With Performance, Less is More&lt;/h2&gt;
+
+&lt;p&gt;We find especially with performance, there are typically huge wins to be had in
+up front design decisions which may come at very little to no cost. Our design
+mantras for performance are:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Don’t do it&lt;/li&gt;
+  &lt;li&gt;Do it, but don’t do it again&lt;/li&gt;
+  &lt;li&gt;Do it less&lt;/li&gt;
+  &lt;li&gt;Do it later&lt;/li&gt;
+  &lt;li&gt;Do it when they’re not looking&lt;/li&gt;
+  &lt;li&gt;Do it concurrently&lt;/li&gt;
+  &lt;li&gt;Do it cheaper&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;In practice we implement a number of strategies to limit risk to poorly
+performing code:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Major new features and performance tunings live behind feature flags allowing
+slow rollout and tuning in real life environment&lt;/li&gt;
+  &lt;li&gt;Chunk everything that scales on order of N. When N is controlled by customer
+enforce limits and design for infinity.&lt;/li&gt;
+  &lt;li&gt;Slow query and frequent query monitoring to detect poor access patterns&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img style=&quot;max-width:300px&quot; src=&quot;/assets/img/2015-05-08-software-engineering-design-principles-more_is_less.jpg&quot; alt=&quot;if less is more, does that mean more is less?&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;reference&quot;&gt;Reference&lt;/h3&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:the-knowledge-creating-company&quot;&gt;
+      &lt;p&gt;Ikujiro Nonaka, and Hirotaka Takeuchi. The Knowledge Creating Company. Oxford University Press, 1995. Print. https://books.google.com/books/about/The_Knowledge_creating_Company.html?id=B-qxrPaU1-MC &lt;a href=&quot;#fnref:the-knowledge-creating-company&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:agile-cost-curve&quot;&gt;
+      &lt;p&gt;Scott Ambler. Examining the Agile Cost of Change Curve. Website. http://www.agilemodeling.com/essays/costOfChange.htm &lt;a href=&quot;#fnref:agile-cost-curve&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Fri, 08 May 2015 00:00:00 -0700</pubDate>
+        <link>http://developer.okta.com/blog/2015/05/08/software-engineering-design-principles</link>
+        <guid isPermaLink="true">http://developer.okta.com/blog/2015/05/08/software-engineering-design-principles</guid>
+      </item>
+    
+      <item>
+        <title>Productionalizing ActiveMQ</title>
+        <description>&lt;p&gt;This post describes our odyssey with ActiveMQ, an open-source version of the Java Messaging Service (JMS) API. We use ActiveMQ as the message broker among our app servers.&lt;/p&gt;
+
+&lt;p&gt;First, a word of thanks. To overcome the challenges we faced with ActiveMQ, we are greatly indebted to a very thorough description of an &lt;a href=&quot;https://bugs.openjdk.java.net/browse/JDK-8054446&quot;&gt;OpenJDK bug&lt;/a&gt;, as well as some other &lt;a href=&quot;https://svn.apache.org/repos/asf/harmony/standard/classlib/trunk/modules/concurrent/src/main/java/java/util/concurrent/ConcurrentLinkedQueue.java&quot;&gt;online resources&lt;/a&gt;. If you’re having problems with ActiveMQ, read on. Maybe our story can help you.&lt;/p&gt;
+
+&lt;h2 id=&quot;growing-pains&quot;&gt;Growing Pains&lt;/h2&gt;
+
+&lt;p&gt;Our problems with ActiveMQ date all the way back to 2012. They centered around high memory and CPU usage, message timeout errors, and message queue delays.&lt;/p&gt;
+
+&lt;p&gt;Let’s pick up the action in the spring 2014. At that time we were battling a new wave of timeout storms and message queue delays caused by our mixed ActiveMQ configuration (broker &lt;strong&gt;5.4.1&lt;/strong&gt;, client &lt;strong&gt;5.7&lt;/strong&gt;) and increasing traffic on our site.&lt;/p&gt;
+
+&lt;p&gt;Of course we welcomed the growth in traffic as a byproduct of our growing business. And although we did plan to address our mixed ActiveMQ configuration, we decided to delay doing so at that time, opting instead to tune the configuration. So we increased the maximum session size from 500 to 2000, and the page size from 200 to 2000 messages. Increasing the page size served to minimize “hung queue” scenarios — a side effect of using &lt;a href=&quot;http://docs.oracle.com/cd/E19798-01/821-1841/bncer/index.html&quot;&gt;message selectors&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;another-inflection-point&quot;&gt;Another Inflection Point&lt;/h2&gt;
+
+&lt;p&gt;Business and site traffic continued to grow, contributing to another inflection point in the fall of 2014. Timeout storms, CPU spikes, and memory issues returned. It was clear that we could no longer put off upgrading to a newer version of ActiveMQ.&lt;/p&gt;
+
+&lt;p&gt;We decided to skip versions 5.7 and 5.8 in favor of 5.10, mainly because 5.7 was considered unstable, and 5.10 provided improved failover performance.&lt;/p&gt;
+
+&lt;p&gt;Would this upgrade finally deliver the stability that had eluded us for so long?&lt;/p&gt;
+
+&lt;h2 id=&quot;when-upgrades-bite-back&quot;&gt;When Upgrades Bite Back&lt;/h2&gt;
+
+&lt;p&gt;Unfortunately, no. Within 24 hours, memory usage soared, CPUs spiked, and instability returned. Note the dramatic CPU spikes in the following screenshot.&lt;/p&gt;
+
+&lt;p&gt;&lt;img style=&quot;width:50%&quot; src=&quot;/assets/img/2015-05-08-productionalizing-active-mq-cpu-graph-1.png&quot; alt=&quot;Active MQ CPU&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;To prevent these issues from impacting customers, we were forced to restart brokers, which is always an option of
+last resort. Restarting brokers is a delicate operation, which can entail a less-than-smooth failover,
+risking message loss.&lt;/p&gt;
+
+&lt;p&gt;We immediately increased memory, but within a day or two we ran out of memory again.&lt;/p&gt;
+
+&lt;h2 id=&quot;searching-for-the-root-cause&quot;&gt;Searching for the Root Cause&lt;/h2&gt;
+
+&lt;p&gt;An online search turned up an &lt;a href=&quot;https://bugs.openjdk.java.net/browse/JDK-8054446&quot;&gt;OpenJDK bug&lt;/a&gt; that identified an out of memory issue in the
+&lt;em&gt;ConcurrentLinkedQueue&lt;/em&gt;, which is a class in the &lt;strong&gt;java.util.concurrent&lt;/strong&gt; package included in &lt;strong&gt;JVM version 1.6&lt;/strong&gt;.
+When working properly, &lt;em&gt;ConcurrentLinkedQueue&lt;/em&gt; allows elements to be added and removed from the queue in a
+thread-safe manner.&lt;/p&gt;
+
+&lt;p&gt;The bug caused a null object to be created whenever an element at the end of the queue was added and
+then deleted. This behavior is particularly unfavorable to the way we use queuing. We call ActiveMQ
+to create and destroy objects in the queue very quickly, tens of millions of times a day, as users
+and agents connect to Okta. As a result, null objects rapidly fill up the queue, memory usage soars,
+and CPUs spike.&lt;/p&gt;
+
+&lt;h2 id=&quot;conference-call&quot;&gt;Conference Call&lt;/h2&gt;
+
+&lt;p&gt;With the site at risk of impacting customer authentication, several key engineers, including Hector
+Aguilar, Okta’s CTO and SVP of Engineering, met on a Saturday afternoon conference call. Discussion was intense, and our options were few and unappealing:
+(a) revert all the way back to broker version 5.4.1, or (b) upgrade to broker version 5.11, which
+was still unreleased and might introduce new problems.&lt;/p&gt;
+
+&lt;p&gt;As team members recall, Hector said very little during the first half of the meeting.&lt;/p&gt;
+
+&lt;p&gt;A bug in the JVM surprised Hector, as critical JVM bugs are relatively rare. Fortunately, the
+OpenJDK bug we’d found included a very thorough description of the problem, as well as sample code
+to reproduce it.&lt;/p&gt;
+
+&lt;p&gt;Initially motivated by curiosity, Hector analyzed the code and the bug description. He saw where the
+problem was, and then checked online to see if it had been fixed in newer JDK versions. He noticed that
+several things were changing in the class, and that others had attempted to resolve the bug in
+different ways, but none that would solve our particular problem. Hector developed a very simple fix
+of his own, trying to remain consistent with the work of others. He then verified his fix using the
+provided sample code.&lt;/p&gt;
+
+&lt;p&gt;The JVM has a mechanism called &lt;em&gt;endorsed libraries&lt;/em&gt; that allows developers to override an existing
+class with a new class, effectively patching the JVM. Hector used this mechanism, packaged his fix
+into a jar file, tried it against ActiveMQ, and found that it worked.&lt;/p&gt;
+
+&lt;p&gt;The mood and direction of the meeting shifted dramatically when Hector said, &lt;em&gt;“Guys, I have a wild
+idea. What if we patch the JVM?”&lt;/em&gt; As none of us had ever patched a JVM before, this seemed like a novel approach, even a long
+shot.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-fix&quot;&gt;The Fix&lt;/h2&gt;
+
+&lt;p&gt;Hector sent his JVM patch and sample code to the team and walked us through it. First, he explained
+why the other attempted fixes wouldn’t solve our particular problem. He then demonstrated how his override effectively patched the original (faulty) removal method. Members of the
+team volunteered to test the override at scale with our simulated environments. Within a few hours,
+we were fairly sure that Hector’s fix would work.&lt;/p&gt;
+
+&lt;h2 id=&quot;deploying-the-patch&quot;&gt;Deploying the Patch&lt;/h2&gt;
+
+&lt;p&gt;We deployed the patch and restarted brokers. It was a success! ActiveMQ no longer ran out of memory
+and the CPU spikes ceased.&lt;/p&gt;
+
+&lt;p&gt;&lt;img style=&quot;width:50%&quot; src=&quot;/assets/img/2015-05-08-productionalizing-active-mq-cpu-graph-2.png&quot; alt=&quot;Active MQ CPU&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Some minor memory leaks remained, but these were eliminated by upgrading to &lt;strong&gt;java-1.7.0&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;stable-and-looking-at-other-solutions&quot;&gt;Stable, and looking at other solutions&lt;/h2&gt;
+
+&lt;p&gt;Patching the &lt;em&gt;ConcurrentLinkedQueue&lt;/em&gt; with ActiveMQ v5.10 and upgrading to java-1.7.0 provided
+acceptable stability and faster failover performance. While this is a significant improvement over
+where we were last fall, our goal is &lt;strong&gt;zero failover time&lt;/strong&gt;, which ActiveMQ cannot deliver. So, we’re exploring other messaging solutions.&lt;/p&gt;
+
+&lt;p&gt;In telling our story, we couldn’t resist tooting our own horn a bit. How many CTOs actually get
+their hands dirty tackling product issues? Our CTO doesn’t code very often, but when
+he does, he patches the JVM.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 08 May 2015 00:00:00 -0700</pubDate>
+        <link>http://developer.okta.com/blog/2015/05/08/productionalizing-active-mq</link>
+        <guid isPermaLink="true">http://developer.okta.com/blog/2015/05/08/productionalizing-active-mq</guid>
+      </item>
+    
+      <item>
+        <title>Android Unit Testing Part IV&amp;#58; Mocking</title>
+        <description>&lt;p&gt;&lt;em&gt;This is the third of a four part series on Android Unit Testing. In
+the last two articles I discussed the &lt;a href=&quot;https://www.okta.com/blog/2015/01/android-unit-testing-part-i-what-makes-strong-test-automation/&quot;&gt;general principles of having
+good
+tests&lt;/a&gt;
+and the way to &lt;a href=&quot;/blog/2015/04/07/android-unit-testing-part-2&quot;&gt;run Android tests on JVM making them
+fast&lt;/a&gt; and &lt;a href=&quot;/blog/2015/04/14/android-unit-testing-part-3/&quot;&gt;how to make
+your code less coupled&lt;/a&gt;. 
+This article will explain how to make tests isolated.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;We need to mock a dependency, inject it, and then modify our test to
+indicate that we are not testing an end-to-end scenario anymore, but
+are now testing just one class at a time.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Modify application Gradle file&lt;/p&gt;
+
+    &lt;p&gt;Add the following code under the dependency section:&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;androidTestCompile ‘org.easymock:easymock:3.1&#39;
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Replace &lt;code&gt;FooTest&lt;/code&gt; with the following code:&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;package com.example.myapplication;
+     
+import junit.framework.Assert;
+      
+import org.easymock.EasyMockSupport;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+    
+import static org.easymock.EasyMock.expect;
+    
+@RunWith(RobolectricTestRunner.class)
+public class FooTest extends EasyMockSupport {
+    Foo sut;
+    
+    // Mocks
+    Bar barMock;
+    
+    @Before
+    public void setUp() {
+        sut = new Foo();
+    
+        // Create mocks
+        barMock = createMock(Bar.class);
+    
+        // Inject mock
+        InjectHelper.injectMock(sut, barMock);
+    }
+    
+    @Test
+    public void testGetFoo_returns4() {
+        // Arrange
+        expect(barMock.getBar()).andReturn(4);
+        replayAll();
+    
+        // Act
+        int actualResult = sut.getFoo();
+    
+        // Assert
+        verifyAll();
+        Assert.assertEquals(4, actualResult);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create a class &lt;code&gt;InjectHelper&lt;/code&gt; under &lt;code&gt;androidTest&lt;/code&gt;&lt;/p&gt;
+
+    &lt;p&gt;(I believe the original code for injecting fields is from &lt;strong&gt;Spring&lt;/strong&gt;; however, it was modified afterwards.)&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;package com.example.myapplication;
+      
+import java.lang.reflect.Field;
+import javax.inject.Inject;
+    
+public class InjectHelper {
+        
+    @SuppressWarnings(&quot;unchecked&quot;)
+    public static void injectMock(Object target, Object mock)
+    {
+        Class targetClass = target.getClass();
+        do {
+            Field[] fields = targetClass.getDeclaredFields();
+            // Iterate through all members
+            for (Field field : fields) {
+                // Skip all non injectable members
+                if (field.getAnnotation(Inject.class) == null)
+                    continue;
+    
+                // Make private/prptected members accessible
+                field.setAccessible(true);
+    
+                // Get a class of the member
+                Class injectedClass = field.getType();
+                Class mockClass = mock.getClass();
+    
+                // Check that mock is essentially the same class
+                if (!injectedClass.isAssignableFrom(mockClass))
+                    continue;
+    
+                try {
+                    // Inject mock
+                    field.set(target, mock);
+                } catch (IllegalAccessException e)
+                {
+                    throw new RuntimeException(e);
+                }
+    
+                // return accessibility
+                field.setAccessible(false);
+            }
+            targetClass = targetClass.getSuperclass();
+        }
+        while (targetClass != null &amp;amp;&amp;amp; targetClass != Object.class);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+    &lt;p&gt;&lt;strong&gt;Woo-Hoo! We are finally done!&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;Now, your tests are:&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;fast&lt;/strong&gt; — they are executed on a JVM and don’t require going to the network or a persistent layer.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;repeatable&lt;/strong&gt; — they don’t depend on emulator stability or network quality.&lt;/li&gt;
+      &lt;li&gt;(potentially!) &lt;strong&gt;simple&lt;/strong&gt; and &lt;strong&gt;consistent&lt;/strong&gt; — there is a lot of good information out there on how to write good unit tests.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;independent&lt;/strong&gt; — since the persistent layer isn’t used, one test won’t influence another.&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;In addition to all of this awesomeness, your code should actually be
+better off, too. Hopefully writing unit tests will force you to
+simplify classes with too many dependencies and more carefully think
+through interfaces.&lt;/p&gt;
+
+    &lt;p&gt;Thanks!&lt;/p&gt;
+
+    &lt;p&gt;Let me mention several people who helped me to put this article
+together: &lt;a href=&quot;https://www.linkedin.com/pub/william-dawson/43/140/837&quot;&gt;Wills Dawson&lt;/a&gt; made the initial move to use Robolectric,
+&lt;a href=&quot;https://www.linkedin.com/in/nadeemlinkedin&quot;&gt;Nadeem Khan&lt;/a&gt; figured out all those pesky details about usage of
+Robolectric, and &lt;a href=&quot;https://www.linkedin.com/pub/hans-reichenbach/20/94b/5b8&quot;&gt;Hans Reichenbach&lt;/a&gt; put a lot of these integration
+steps in writing on our wiki. Thanks guys!&lt;/p&gt;
+
+    &lt;p&gt;&lt;a href=&quot;https://github.com/vronin-okta/okta_blog_samples/tree/master/android_unit_testing&quot;&gt;https://github.com/vronin-okta/okta_blog_samples/tree/master/android_unit_testing&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Thu, 23 Apr 2015 00:00:00 -0700</pubDate>
+        <link>http://developer.okta.com/blog/2015/04/23/android-unit-testing-part-4</link>
+        <guid isPermaLink="true">http://developer.okta.com/blog/2015/04/23/android-unit-testing-part-4</guid>
+      </item>
+    
+      <item>
+        <title>Android Unit Testing Part III&amp;#58; Disintegration</title>
+        <description>&lt;p&gt;&lt;em&gt;This is the third of a four part series on Android Unit Testing. In
+the last two articles I discussed the &lt;a href=&quot;https://www.okta.com/blog/2015/01/android-unit-testing-part-i-what-makes-strong-test-automation/&quot;&gt;general principles of having
+good
+tests&lt;/a&gt;
+and the way to &lt;a href=&quot;/blog/2015/04/07/android-unit-testing-part-2&quot;&gt;run Android tests on JVM making them
+fast&lt;/a&gt;. This
+part will show how to make your Android code less heavily
+coupled. This is a preparation step to ensure that your tests are
+isolated from each other.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;We want to test each unit of work separately to make sure that each
+piece of our machinery is working properly. We need to be able to
+inject all dependencies into classes under the test (instead of this
+class instantiating a production dependency). I am not a fan of
+manual dependency injection (i.e., passing them through a
+constructor or setters). Such a manual method requires a lot of code
+and drags all dependencies through multiple classes to inject them
+into the end class.&lt;/p&gt;
+
+&lt;p&gt;There are a lot of dependency injection frameworks for Android out
+there: Dagger, RoboGuice, SpringAndroid, Guice, and Transfuse are a
+few. I won’t go into a detailed comparison, but I like Dagger the
+most because it provides compile time injection, and doesn’t
+influence runtime (specifically startup time) too much.&lt;/p&gt;
+
+&lt;p&gt;Again, here there are detailed tutorials at the end of this post and
+my summary is below:&lt;/p&gt;
+
+&lt;h2 id=&quot;my-summary&quot;&gt;My Summary&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Modify the application Gradle file&lt;/p&gt;
+
+    &lt;p&gt;Add the following code under the dependency section:&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;compile &#39;com.squareup.dagger:dagger:1.2.1&#39;
+provided &#39;com.squareup.dagger:dagger-compiler:1.2.1&#39;
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Modify the manifest&lt;/p&gt;
+
+    &lt;p&gt;Add the following code to the Application tags:&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;android:name=“.MyApplication&quot;
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create the classes&lt;/p&gt;
+
+    &lt;p&gt;Add the &lt;code&gt;MyApplication&lt;/code&gt; class.&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;public class MyApplication extends Application {
+    private ObjectGraph applicationGraph;
+    
+    @Override
+    public void onCreate() {
+        super.onCreate();
+            
+        applicationGraph = ObjectGraph.create(getModules().toArray());
+    }
+    
+    protected List&amp;lt;Object&amp;gt; getModules() {
+        return Arrays.&amp;lt;Object&amp;gt;asList(
+                new MyModule(this)
+        );
+    }
+    public void inject(Object object) {
+        applicationGraph.inject(object);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Add the &lt;code&gt;MyModule&lt;/code&gt; class.&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;package com.example.myapplication;
+      
+import dagger.Module;
+import dagger.Provides;
+    
+@Module(
+        injects = {
+                MainActivity.class
+        }
+)
+public class MyModule {
+    private final MyApplication application;
+        
+    public MyModule(MyApplication application) {
+        this.application = application;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Modify &lt;code&gt;MainActivity&lt;/code&gt; and replace code &lt;code&gt;private Foo
+foo = new Foo();&lt;/code&gt; with:&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;@Inject
+Foo foo;
+&lt;/code&gt;&lt;/pre&gt;
+
+    &lt;p&gt;and add following code to &lt;code&gt;onCreate()&lt;/code&gt;:&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;// This will inject all @Inject members 
+// recursively for everything what is marked as @Inject
+((MyApplication)getApplicationContext()).inject(this);
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Modify the &lt;code&gt;Foo&lt;/code&gt; class and replace code &lt;code&gt;Bar bar = new Bar();&lt;/code&gt; with:&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;@Inject
+Bar bar;
+&lt;/code&gt;&lt;/pre&gt;
+
+    &lt;p&gt;Modify Bar class and add&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;@Inject
+Bar() {
+}
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Now, instances of &lt;code&gt;Foo&lt;/code&gt; and &lt;code&gt;Bar&lt;/code&gt; are
+automatically injected in the runtime. However, your test will fail
+with NPE, because the Foo class has a Bar dependency which wasn’t
+delivered. I.e., we don’t want it injected by Dagger -— we want mocked
+dependency, not a real one.&lt;/p&gt;
+
+&lt;h2 id=&quot;resources&quot;&gt;Resources&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://antonioleiva.com/dependency-injection-android-dagger-part-1/&quot;&gt;Dependency injection on Android: Dagger (Part 1)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://antonioleiva.com/dagger-android-part-2/&quot;&gt;Dependency injection on Android: Dagger (Part 2)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Stay tuned for the final part of our series, where I will show you
+how to make tests isolated. You can also check out the full code at
+&lt;a href=&quot;https://github.com/vronin-okta/okta_blog_samples/tree/master/android_unit_testing&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 14 Apr 2015 00:00:00 -0700</pubDate>
+        <link>http://developer.okta.com/blog/2015/04/14/android-unit-testing-part-3</link>
+        <guid isPermaLink="true">http://developer.okta.com/blog/2015/04/14/android-unit-testing-part-3</guid>
+      </item>
+    
+      <item>
+        <title>Android Unit Testing Part II&amp;#58; Escaping Dalvik’s Hold</title>
+        <description>&lt;p&gt;&lt;em&gt;This is the second of a four part series on Android Unit Testing. In
+these posts, we’ll walk through the key steps engineers should take
+to make Android test fast by running them on JVM (versus running
+them on emulator).&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;For background information on the importance of Android testing, &lt;a href=&quot;https://www.okta.com/blog/2015/01/android-unit-testing-part-i-what-makes-strong-test-automation/&quot;&gt;visit Part I of the series&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;It appears that the need to run tests on an Android device or an
+emulator has concerned Android engineers for almost as long as Android
+has existed – and &lt;a href=&quot;https://www.linkedin.com/pub/christian-williams/8/4/30b&quot;&gt;Christian Williams&lt;/a&gt; created &lt;a href=&quot;http://robolectric.org/&quot;&gt;Robolectric&lt;/a&gt; to solve
+this problem. Robolectric allows you to run unmodified test code
+(referring to Android specific classes) on your desktop (in a JVM)
+instead of running them on an emulator or device in the Android
+Virtual Machine, or &lt;a href=&quot;http://en.wikipedia.org/wiki/Dalvik_%28software%29&quot;&gt;Dalvik&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I have listed several good tutorials at the end of this post that
+illustrate exactly how this can be done, but they also include some
+details you may not yet need. So, use the tutorial links for details,
+but check out “My Summary” for a short overview of what you need to
+do:&lt;/p&gt;
+
+&lt;h2 id=&quot;my-summary&quot;&gt;My Summary&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create a new project in Android Studio (I used Studio 0.8.14)&lt;/p&gt;
+
+    &lt;p&gt;Choose as example Blank Activity project.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Modify the TOP Gradle file&lt;/p&gt;
+
+    &lt;p&gt;Add the following code to the dependencies section:&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;classpath &#39;org.robolectric:robolectric-gradle-plugin:0.12.+&#39;
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Modify the application Gradle file&lt;/p&gt;
+
+    &lt;p&gt;Add the following code under &lt;code&gt;apply plugin: ‘com.android.application&#39;&lt;/code&gt;:&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;apply plugin: ‘robolectric&#39;
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Add the following under the dependencies section:&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;androidTestCompile(&#39;junit:junit:4.11&#39;)
+androidTestCompile(‘org.robolectric:robolectric:2.3&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Add this section:&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-coderay&quot;&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;robolectric { 
+        include &lt;span class=&quot;string&quot;&gt;&lt;span class=&quot;delimiter&quot;&gt;&#39;&lt;/span&gt;&lt;span class=&quot;content&quot;&gt;**/*Test.class&lt;/span&gt;&lt;span class=&quot;delimiter&quot;&gt;&#39;&lt;/span&gt;&lt;/span&gt;
+}
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create the code that you want to test&lt;/p&gt;
+
+    &lt;p&gt;Modify &lt;code&gt;MainActivity&lt;/code&gt;. Add the following code to it:&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-coderay&quot;&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;directive&quot;&gt;private&lt;/span&gt; Foo foo = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Foo();
+&lt;span class=&quot;directive&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;type&quot;&gt;int&lt;/span&gt; getSomething() {
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; foo.getFoo();
+}
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;p&gt;Add the &lt;code&gt;Foo&lt;/code&gt; class:&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-coderay&quot;&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;keyword&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;namespace&quot;&gt;com.example.myapplication&lt;/span&gt;;
+      
+&lt;span class=&quot;directive&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;type&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;Foo&lt;/span&gt; { 
+    Bar bar = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Bar();
+        
+    &lt;span class=&quot;directive&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;type&quot;&gt;int&lt;/span&gt; getFoo() { 
+        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; bar.getBar(); 
+    }
+}
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Add the &lt;code&gt;Bar&lt;/code&gt; class:&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;package com.example.myapplication;
+    
+public class Bar {
+        
+    public int getBar() { 
+        return 4; 
+    } 
+}
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create a test&lt;/p&gt;
+
+    &lt;p&gt;Delete the &lt;code&gt;ApplicationTest&lt;/code&gt; file.&lt;/p&gt;
+
+    &lt;p&gt;Create the following &lt;code&gt;FooTest&lt;/code&gt; class under your &lt;code&gt;androidTest&lt;/code&gt;:&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;package com.example.myapplication;
+    
+import junit.framework.Assert;
+    
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+    
+@RunWith(RobolectricTestRunner.class)
+public class FooTest {
+    Foo sut;
+        
+    @Before
+    public void setUp() {
+        sut = new Foo();
+    }
+    
+    @Test
+    public void testGetFoo_returns4() {
+        // Arrange
+            
+        // Act
+        int actualResult = sut.getFoo();
+            
+        // Assert
+        Assert.assertEquals(4, actualResult);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create the configuration&lt;/p&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;Create a &lt;strong&gt;gradle&lt;/strong&gt; configuration.&lt;/li&gt;
+      &lt;li&gt;Set “&lt;strong&gt;Tests&lt;/strong&gt;” as a name.&lt;/li&gt;
+      &lt;li&gt;Choose the top gradle file as a project.&lt;/li&gt;
+      &lt;li&gt;Type &lt;em&gt;test&lt;/em&gt; in &lt;strong&gt;Tasks&lt;/strong&gt;.&lt;/li&gt;
+    &lt;/ol&gt;
+
+    &lt;p&gt;Now, without launching the emulator, you can run this configuration
+and see that your test has passed. It is much faster than before—and
+repeatable. You can put this under build automation and it will
+totally work.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;JVM&lt;/p&gt;
+
+    &lt;p&gt;There are alternative ways to run the test on a JVM. For example,
+you can create a &lt;strong&gt;JUnit&lt;/strong&gt; task and ensure that all your tests and
+classes don’t touch any Android specific classes. However, this is
+not easy, as you must design all your code with this restriction in
+mind.&lt;/p&gt;
+
+    &lt;p&gt;The changes which we did to run on JVM are great, but we are still
+facing the limitations of using integration tests. For example, if
+the implementation of a &lt;code&gt;Bar&lt;/code&gt; class changes and now uses the network,
+you might start seeing flakiness in the &lt;code&gt;testGetFoo_returns4&lt;/code&gt; test
+because of a bad network connection.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;additional-resources&quot;&gt;Additional Resources&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/codepath/android_guides/wiki/Robolectric-Installation-for-Unit-Testing&quot;&gt;Robolectric Installation for Unit Testing&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.peterfriese.de/android-testing-with-robolectric/&quot;&gt;Android Testing With Robolectric&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/robolectric/robolectric-gradle-plugin&quot;&gt;Robolectric Gradle Plugin&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Stay tuned for part three of our series, where I will show you how
+to achieve test isolation using dependency injection. You can also
+check out the full code at &lt;a href=&quot;https://github.com/vronin-okta/okta_blog_samples/tree/master/android_unit_testing&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 07 Apr 2015 00:00:00 -0700</pubDate>
+        <link>http://developer.okta.com/blog/2015/04/07/android-unit-testing-part-2</link>
+        <guid isPermaLink="true">http://developer.okta.com/blog/2015/04/07/android-unit-testing-part-2</guid>
+      </item>
+    
+  </channel>
+</rss>

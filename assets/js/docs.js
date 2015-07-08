@@ -1,10 +1,11 @@
 $(function() {
 	$('.closed').hide();
-	var offset = $('.site-header').height() + $('#sticky-nav').height() + 40;
+	var offset = $('.site-header').height() + $('#sticky-nav').height() + 30;
 	$('body').scrollspy({ target: '#myScrollspy', offset:  offset });
 
 	$('#myScrollspy').on('activate.bs.scrollspy', function() {
 		var selected = $('#myScrollspy .nav').children('li.active');
+		selected.parent('.nav').removeClass('hide');
 		if (selected.children('ul').length > 0 )
 		{
 			if (selected.children('ul').children('li').hasClass('active'))
@@ -13,7 +14,9 @@ $(function() {
 				selected.children('ul').show();
 			}
 			else
+			{
 				$('#myScrollspy .nav').children('li:not(.active)').children('ul').hide();
+			}
 		}
 		if (!$('.closed').children('li').hasClass('active') && !$('#gen-toc-container .sidebar-nav li').hasClass('clicked'))
 		{
@@ -21,15 +24,9 @@ $(function() {
 		}
 	});
 
-	$('#docs-sidebar-wrap a').click(function(e){
+	$('#docs-sidebar-wrap a').not('#toc_current_doc').click(function(e){
 		if ($('body').hasClass('toggled'))
 			$('.toggled').removeClass('toggled');
-	});
-
-	$('#myScrollspy').hover(function() {
-		$("body").css("overflow","hidden");
-	}, function() {
-		$("body").css("overflow","auto");
 	});
 
 	var anchorForId = function (id) {
@@ -57,7 +54,7 @@ $(function() {
 		linkifyAnchors(level, body);
 	}
 
-	var fixedNavHeight = 180;
+	var fixedNavHeight = 160;
 
 	$('a[href*=#]:not([href=#])').click(function() {
 		if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
@@ -85,6 +82,9 @@ $(function() {
 
 	$(window).scroll(function() {
 		scrolled = true;
+		if ($(window).scrollTop() <= 40 && !($('.on a').hasClass('clicked'))) {
+			$('#gen-toc-container .nav').addClass('hide');
+		}
 	});
 
 	setInterval(function() {
@@ -137,9 +137,16 @@ $(function() {
 		});
 	});
 
-$('.toggle-menu').click(function(e){
-	e.preventDefault();
-	$('.sticky-nav--sidebar, body').toggleClass('toggled');
-});
+	$('.toggle-menu').click(function(e){
+		e.preventDefault();
+		$('.sticky-nav--sidebar, body').toggleClass('toggled');
+	});
+
+	$('#toc_current_doc').click(function(e){
+		e.preventDefault();
+		$('#gen-toc-container .nav').toggleClass('hide');
+		$(this).toggleClass('clicked');
+		return false;
+	});
 
 });
