@@ -33,33 +33,8 @@ js: docs
 		{{ content }}
 		<section class="docs-content">
 			<div class="inner-content">
-				{{ content }}
-				{% for nav in site.data.docs %}
-				{% if nav.section contains "guides" %}
-
-				<ul class="list-unstyled docs-index-list bulletsless">
-					{% for item in nav.pages %}
-					{% for page in site.pages %}
-					{% if page.layout == 'docs_page' %}
-					{% assign name = page.path | replace: '.md', '' | split: '/' | last | downcase %}
-					{% if name == item  and name != 'overview' %}
-					{% assign excerpt = page.excerpt %}
-					{% if excerpt == blank %}
-					{% assign excerpt = page.content | strip_html | truncatewords: 30  %}
-					{% endif %}
-
-					<li data-name="{{ page.title }}">
-						<a href="/docs/{{ nav.section }}/{{ item }}.html">{{ page.title }}</a>
-						<div class="excerpt">{{ excerpt }}</div>
-					</li>
-					{% endif %}
-					{% endif %}
-					{% endfor %}
-					{% endfor %}
-				</ul>
-				{% endif %}
-
-				{% endfor %}
+				<!-- Work around to remove blank lines -->
+				{{ content }}{% for nav in site.data.docs %}{% if nav.section contains "guides" %}<ul class="list-unstyled docs-index-list bulletsless">{% for item in nav.pages %}{% for page in site.pages %}{% if page.layout == 'docs_page' %}{% assign name = page.path | replace: '.md', '' | split: '/' | last | downcase %}{% if name == item  and name != 'overview' %}{% assign excerpt = page.excerpt %}	{% if excerpt == blank %}{% assign excerpt = page.content | strip_html | truncatewords: 30  %}{% endif %}<li data-name="{{ page.title }}"><a href="/docs/{{ nav.section }}/{{ item }}.html">{{ page.title }}</a><div class="excerpt">{{ excerpt }}</div></li>{% endif %}{% endif %}{% endfor %}{% endfor %}</ul>{% endif %}{% endfor %}
 			</div>
 		</section>
 	</div>
