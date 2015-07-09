@@ -11,7 +11,7 @@
 body {
   height: 100%;
   display: flex;
-  min-height: 100vh;
+  min-height: 100%;
   flex-direction: column;
   -ms-overflow-style: none; }
 
@@ -28,12 +28,18 @@ body {
     width: 260px;
     background-color: #004169;
     z-index: 100;
-    height: 100%;
-    overflow-y: auto; }
+    height: 100%; }
     .section--with-sidebar .sticky-nav--sidebar ul {
       margin-top: 0; }
     .section--with-sidebar .sticky-nav--sidebar h2 {
       margin-bottom: 0; }
+  .section--with-sidebar .scrollable {
+    overflow-y: auto;
+    height: 100%; }
+  .section--with-sidebar .scrollable::-webkit-scrollbar {
+    display: none;
+    width: 0 !important;
+    -ms-overflow-style: none; }
   .section--with-sidebar .sticky-nav--top {
     background: #f1f1f1;
     border: solid #c1c1c1;
@@ -74,26 +80,24 @@ body {
           left: 0;
           right: 0;
           position: absolute; }
-    .no-flexbox .section--with-sidebar .sticky-nav--top {
+    .section--with-sidebar .sticky-nav--top .no-flexbox {
       display: table;
-      width: 75%; }
-      .no-flexbox .section--with-sidebar .sticky-nav--top a {
+      width: 80%; }
+      .section--with-sidebar .sticky-nav--top .no-flexboxa {
         display: table-cell;
-        width: 25%; }
-        .no-flexbox .section--with-sidebar .sticky-nav--top a.toggle-menu {
-          display: none; }
+        width: 20%; }
     @media screen and (min-width: 0\0) {
       .section--with-sidebar .sticky-nav--top {
         display: table;
-        width: 75%; }
+        width: 80%; }
         .section--with-sidebar .sticky-nav--top a {
           display: table-cell;
-          width: 25%; }
-          .section--with-sidebar .sticky-nav--top a.toggle-menu {
-            display: none; } }
+          width: 20%; } }
   .section--with-sidebar .active .closed {
     display: block !important; }
 
+.docs-body .btn-github {
+  margin-top: 20px; }
 .docs-body .docs-index-list {
   margin-left: 10px; }
   .docs-body .docs-index-list li:before {
@@ -110,9 +114,10 @@ body {
   border-bottom: 1px solid #888; }
   .docs-body header h1 {
     padding-bottom: 0;
-    margin: 0;
     border: 0 none;
     display: inline-block; }
+    .docs-body header h1:first-child {
+      margin-top: 10px; }
   .docs-body header .btn {
     font-size: 0.7837em;
     float: right;
@@ -441,12 +446,17 @@ h6:hover .header-link {
 #docs {
   background: white; }
 
-#sidebar-wrapper h2 {
-  color: #7aa633;
-  font-size: 18px;
-  padding: 8px 10px 8px 30px;
-  text-transform: uppercase;
-  margin: 20px 0 5px 0; }
+#sidebar-wrapper {
+  overflow: auto; }
+  #sidebar-wrapper h2 {
+    color: white;
+    font-size: 14px;
+    padding: 8px 10px 8px 30px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 20px 0 0 0; }
+    #sidebar-wrapper h2:first-child {
+      margin: 75px 0 0 0; }
 
 .sidebar-nav {
   width: 260px;
@@ -528,7 +538,7 @@ h6:hover .header-link {
 .docs-sidebar-block {
   max-height: 100%;
   overflow-y: auto;
-  padding-bottom: 400px; }
+  padding-bottom: 170px; }
 
 .excerpt {
   padding-left: 40px; }
@@ -876,6 +886,9 @@ h6:hover .header-link {
     text-decoration: none;
     background: #fafafa; }
 
+.site-footer {
+  padding: 30px 0 !important; }
+
 #page--docs-guides-overview #docs-body ul {
   list-style: none; }
   #page--docs-guides-overview #docs-body ul li {
@@ -980,64 +993,97 @@ input:focus {
     margin: 0 auto; }
 
 .toggle-menu {
-  color: #ccc;
+  color: white;
   text-decoration: none;
-  font-size: 50px;
-  float: left;
-  display: block;
-  display: none;
-  transition: opacity 0.3s ease-out; }
+  position: absolute;
+  right: 0;
+  background-color: #012134;
+  border-bottom: solid #c1c1c1;
+  border-width: 0 0 1px 1px;
+  cursor: pointer;
+  width: 260px;
+  text-align: left;
+  color: white; }
+  .toggle-menu:hover {
+    color: #016aab; }
+  .toggle-menu:before {
+    text-align: center;
+    content: "\003008";
+    vertical-align: middle;
+    display: inline-block;
+    height: 60px;
+    line-height: normal;
+    font-size: 24px;
+    width: 60px;
+    left: -6px;
+    top: 16px;
+    position: relative; }
 
-.toggle-menu:hover {
-  color: #fff; }
-
-.toggle-menu:before {
-  text-align: center;
-  font-size: 24px;
-  content: "\f204";
-  font-family: fontawesome;
-  font-style: normal;
-  font-weight: normal;
-  text-decoration: inherit; }
+body.toggled .toggle-menu {
+  text-align: right; }
+  body.toggled .toggle-menu:before {
+    content: "\003009";
+    left: 10px; }
+body.toggled #sticky-nav {
+  left: 260px; }
+  body.toggled #sticky-nav a:first-child {
+    display: block; }
+body.toggled .docs-sidebar-block {
+  display: none; }
+body.toggled .section--with-sidebar {
+  border-left: 0; }
+body.toggled .sticky-nav--sidebar.toggled {
+  width: 260px; }
+body.toggled .section--with-sidebar {
+  border-left: 260px solid #004169; }
+body.toggled .section--with-sidebar .sticky-nav--sidebar {
+  width: 60px;
+  background-color: white;
+  height: 60px; }
+body.toggled #sticky-nav {
+  left: 60px; }
+  body.toggled #sticky-nav a:first-child {
+    display: block; }
+body.toggled .section--with-sidebar {
+  border-left: 0; }
+body.toggled .sticky-nav--sidebar.toggled > .docs-body {
+  overflow: hidden;
+  width: 260px; }
 
 @media all and (max-width: 768px) {
   .btn-github {
     display: none; }
 
-  body.toggled .toggle-menu:before {
-    content: "\f205"; }
   body.toggled #sticky-nav {
     left: 260px; }
     body.toggled #sticky-nav a {
-      display: none; }
+      display: block; }
       body.toggled #sticky-nav a:first-child {
         display: block; }
   body.toggled .section--with-sidebar {
     border-left: 0; }
-  body.toggled .sticky-nav--sidebar.toggled {
+  body.toggled .sticky-nav--sidebar {
     width: 260px; }
-  body.toggled .section--with-sidebar {
-    border-left: 260px solid #004169; }
-  body #sticky-nav {
-    left: 0; }
-    body #sticky-nav a:first-child {
+  body.toggled #sticky-nav {
+    left: 60px; }
+
+  #sticky-nav a {
+    display: none; }
+    #sticky-nav a:first-child {
       display: block; }
-  body .section--with-sidebar .sticky-nav--sidebar {
-    width: 0; }
-  body .section--with-sidebar {
-    border-left: 0; }
 
   .sticky-nav--sidebar.toggled > .docs-body {
     overflow: hidden;
     width: 260px; }
 
   .docs-body {
-    left: 0; }
-
-  .toggle-menu {
-    z-index: 1;
-    opacity: 1;
-    display: block; } }
+    left: 0; } }
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
   .page-content {
     flex: 0 1 auto; } }
+.no-flexbox .toggled .sticky-nav--top {
+  display: table !important;
+  width: 100% !important; }
+  .no-flexbox .toggled .sticky-nav--top a {
+    display: table-cell;
+    width: auto !important; }
