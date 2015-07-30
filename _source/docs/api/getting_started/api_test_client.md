@@ -11,6 +11,8 @@ redirect_from: "/docs/getting_started/api_test_client.html"
 
 [Postman](http://getpostman.com) is an awesome REST API test client that a lot of people at Okta use to test the Okta API.  We have built templates for all of the Okta APIs that makes playing with the Okta APIs simple and easy if you don't have time to practice your *Command Line Fu* with [cURL](http://en.wikipedia.org/wiki/CURL)
 
+![Postman Chrome Web Store](/assets/img/postman-chrome-web-store.png)
+
 ### Prerequisites
 
 - Chrome Web Browser
@@ -91,7 +93,7 @@ Once you have setup your Postman environment, you can import pre-built collectio
     Users          | https://www.getpostman.com/collections/f4e7ed3d0e949e2acd82
     Groups         | https://www.getpostman.com/collections/14a2be97e21c780fdd7c
     Sessions       | https://www.getpostman.com/collections/e2552b9f3fec5d190fad
-    Apps           | https://www.getpostman.com/collections/cbd0d3e4ae4361208345
+    Apps           | [Okta Apps Collection](./collections/OktaApps.json.postman_collection "Okta Apps Collection")
     Events         | https://www.getpostman.com/collections/f0a1d03c249fc6cac0c0
     Authentication | https://www.getpostman.com/collections/005bc1ffcf4302fe4346
     Factors        | https://www.getpostman.com/collections/920850db85b2c8681f6b
