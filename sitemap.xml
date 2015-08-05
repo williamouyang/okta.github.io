@@ -44,7 +44,7 @@
     </url>
     <url>
         <loc>http://developer.okta.com/docs/api/getting_started/api_test_client.html</loc>
-        <lastmod>2015-07-13T15:00:11-07:00</lastmod>
+        <lastmod>2015-08-04T11:20:17-07:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/api/resources/apps.html</loc>
@@ -101,11 +101,11 @@
         <lastmod>2015-07-13T15:00:11-07:00</lastmod>
     </url>
     <url>
-        <loc>http://developer.okta.com/customers/</loc>
+        <loc>http://developer.okta.com/blog/</loc>
         <lastmod>2015-07-13T15:00:11-07:00</lastmod>
     </url>
     <url>
-        <loc>http://developer.okta.com/blog/</loc>
+        <loc>http://developer.okta.com/discussion/</loc>
         <lastmod>2015-07-13T15:00:11-07:00</lastmod>
     </url>
     <url>
@@ -117,7 +117,7 @@
         <lastmod>2015-07-13T15:00:11-07:00</lastmod>
     </url>
     <url>
-        <loc>http://developer.okta.com/discussion/</loc>
+        <loc>http://developer.okta.com/customers/</loc>
         <lastmod>2015-07-13T15:00:11-07:00</lastmod>
     </url>
     <url>
@@ -149,8 +149,8 @@
         <lastmod>2015-06-22T16:55:51-07:00</lastmod>
     </url>
     <url>
-        <loc>http://developer.okta.com/docs/api/getting_started/</loc>
-        <lastmod>2015-06-22T16:55:51-07:00</lastmod>
+        <loc>http://developer.okta.com/customers/advent/</loc>
+        <lastmod>2015-07-13T15:00:11-07:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/customers/rotary/</loc>
@@ -165,7 +165,7 @@
         <lastmod>2015-06-22T16:55:51-07:00</lastmod>
     </url>
     <url>
-        <loc>http://developer.okta.com/customers/advent/</loc>
+        <loc>http://developer.okta.com/customers/rentpath/</loc>
         <lastmod>2015-07-13T15:00:11-07:00</lastmod>
     </url>
     <url>
@@ -181,8 +181,8 @@
         <lastmod>2015-06-22T16:55:51-07:00</lastmod>
     </url>
     <url>
-        <loc>http://developer.okta.com/customers/rentpath/</loc>
-        <lastmod>2015-07-13T15:00:11-07:00</lastmod>
+        <loc>http://developer.okta.com/docs/api/getting_started/</loc>
+        <lastmod>2015-06-22T16:55:51-07:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/sdk/</loc>
@@ -206,7 +206,7 @@
     </url>
     <url>
         <loc>http://developer.okta.com/docs/api/getting_started/okta_expression_lang.html</loc>
-        <lastmod>2015-07-13T15:00:11-07:00</lastmod>
+        <lastmod>2015-08-04T17:38:38-07:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/guides/okta_mobile_connect.html</loc>
