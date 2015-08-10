@@ -88,15 +88,20 @@ Once you have setup your Postman environment, you can import pre-built collectio
 
     **Import the following templates:**
 
-    API            | Postman Template
-    -------------- | ---------------------------------------------------------
-    Users          | https://www.getpostman.com/collections/f4e7ed3d0e949e2acd82
-    Groups         | https://www.getpostman.com/collections/14a2be97e21c780fdd7c
-    Sessions       | https://www.getpostman.com/collections/e2552b9f3fec5d190fad
-    Apps           | [Okta Apps Collection](./collections/OktaApps.json.postman_collection "Okta Apps Collection")
-    Events         | https://www.getpostman.com/collections/f0a1d03c249fc6cac0c0
-    Authentication | https://www.getpostman.com/collections/005bc1ffcf4302fe4346
-    Factors        | https://www.getpostman.com/collections/920850db85b2c8681f6b
+|--------------------+---------------------------------------------------------------------------------------------------|
+| Resource           | Postman Collection                                                                                |
+|:-------------------|:--------------------------------------------------------------------------------------------------|
+| apps               | [apps](/docs/api/getting_started/collections/oktaApps.json "Okta Apps")                           |
+| authn              | [authn](/docs/api/getting_started/collections/oktaAuthn.json "Okta Authentication")               |
+| events             | [events](/docs/api/getting_started/collections/oktaEvents.json "Okta Events")                     |
+| factors            | [factors](/docs/api/getting_started/collections/oktaFactors.json "Okta Factors")                  |
+| groups             | [groups](/docs/api/getting_started/collections/oktaGroups.json "Okta Groups")                     |
+| idps               | [idps](/docs/api/getting_started/collections/oktaIdPs.json "Okta Identity Providers")             |
+| policies           | [policies](/docs/api/getting_started/collections/oktaPolicies.json "Okta Policies")               |
+| schema             | [schema](/docs/api/getting_started/collections/oktaSchema.json "Okta Schema")                     |
+| sessions           | [sessions](/docs/api/getting_started/collections/oktaSessions.json "Okta Sessions")               |
+| users              | [users](/docs/api/getting_started/collections/oktaUsers.json "Okta Users")                        |
+|--------------------+---------------------------------------------------------------------------------------------------|
 
 ### Sample Requests
 
