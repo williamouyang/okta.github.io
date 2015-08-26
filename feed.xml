@@ -848,34 +848,43 @@ androidTestCompile(‘org.robolectric:robolectric:2.3&#39;)
   &lt;li&gt;
     &lt;p&gt;Add this section:&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code class=&quot;language-java&quot;&gt;robolectric { 
-        include &#39;**/*Test.class&#39;
+    &lt;div class=&quot;highlighter-coderay&quot;&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;robolectric { 
+        include &lt;span class=&quot;string&quot;&gt;&lt;span class=&quot;delimiter&quot;&gt;&#39;&lt;/span&gt;&lt;span class=&quot;content&quot;&gt;**/*Test.class&lt;/span&gt;&lt;span class=&quot;delimiter&quot;&gt;&#39;&lt;/span&gt;&lt;/span&gt;
 }
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Create the code that you want to test&lt;/p&gt;
 
     &lt;p&gt;Modify &lt;code&gt;MainActivity&lt;/code&gt;. Add the following code to it:&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code class=&quot;language-java&quot;&gt;private Foo foo = new Foo();
-public int getSomething() {
-    return foo.getFoo();
+    &lt;div class=&quot;highlighter-coderay&quot;&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;directive&quot;&gt;private&lt;/span&gt; Foo foo = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Foo();
+&lt;span class=&quot;directive&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;type&quot;&gt;int&lt;/span&gt; getSomething() {
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; foo.getFoo();
 }
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+    &lt;/div&gt;
 
     &lt;p&gt;Add the &lt;code&gt;Foo&lt;/code&gt; class:&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code class=&quot;language-java&quot;&gt;package com.example.myapplication;
+    &lt;div class=&quot;highlighter-coderay&quot;&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;keyword&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;namespace&quot;&gt;com.example.myapplication&lt;/span&gt;;
       
-public class Foo { 
-    Bar bar = new Bar();
+&lt;span class=&quot;directive&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;type&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;Foo&lt;/span&gt; { 
+    Bar bar = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Bar();
         
-    public int getFoo() { 
-        return bar.getBar(); 
+    &lt;span class=&quot;directive&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;type&quot;&gt;int&lt;/span&gt; getFoo() { 
+        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; bar.getBar(); 
     }
 }
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Add the &lt;code&gt;Bar&lt;/code&gt; class:&lt;/p&gt;
