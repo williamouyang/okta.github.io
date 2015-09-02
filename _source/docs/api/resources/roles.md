@@ -1,6 +1,6 @@
 ---
 layout: docs_page
-title: Roles Administration
+title: Admin Roles
 author: Benjamin Wesson
 ---
 
@@ -9,7 +9,7 @@ author: Benjamin Wesson
 
 ## Overview
 
-The Okta Roles API provides operations to assign roles to users, apps, and groups to manage administrative access rights. 
+The Okta Roles API provides operations to assign roles to users, apps, and groups to manage administrative access rights.
 
 ## Roles Model
 
@@ -29,7 +29,7 @@ The Okta Roles API provides operations to assign roles to users, apps, and group
           "groups": [
           ],
           "apps": [
-          ]       
+          ]
       }
   }
 }
@@ -73,9 +73,9 @@ Fetches all roles for the specified resource.
 {:.api .api-request .api-request-example}
 
 ~~~http
-curl -v -H "Authorization: SSWS {{ "{{apikey" }}}}" \ 
-  -H "Accept: application/json" \ 
-  -H "Content-Type: application/json" \ 
+curl -v -H "Authorization: SSWS {{ "{{apikey" }}}}" \
+  -H "Accept: application/json" \
+  -H "Content-Type: application/json" \
   -H "Cache-Control: no-cache" \
   -X GET https://{{ "{{subDomain" }}}}.okta.com/api/v1/users/{{ "{{userId" }}}}/roles
 ~~~
@@ -113,9 +113,9 @@ In this example the requestor specifies the target resources for the role to inc
 {:.api .api-request .api-request-example}
 
 ~~~http
-curl -v -H "Authorization: SSWS {{ "{{apikey" }}}}" \ 
-  -H "Accept: application/json" \ 
-  -H "Content-Type: application/json" \ 
+curl -v -H "Authorization: SSWS {{ "{{apikey" }}}}" \
+  -H "Accept: application/json" \
+  -H "Content-Type: application/json" \
   -H "Cache-Control: no-cache" \
   -X GET https://{{ "{{subDomain" }}}}.okta.com/api/v1/users/{{ "{{userId" }}}}/roles?expand=targets/groups,targets/apps
 ~~~
@@ -219,9 +219,9 @@ Assigns a specified role to a specified user.
 {:.api .api-request .api-request-example}
 
 ~~~http
-curl -v -H "Authorization: SSWS "{{ "{{apikey" }}}}" \ 
-  -H "Accept: application/json" \ 
-  -H "Content-Type: application/json" \ 
+curl -v -H "Authorization: SSWS "{{ "{{apikey" }}}}" \
+  -H "Accept: application/json" \
+  -H "Content-Type: application/json" \
   -H "Cache-Control: no-cache" \
   -X POST https://{{ "{{subDomain" }}}}.okta.com/api/v1/users/{{ "{{userId" }}}}/roles \
   -d \
@@ -259,9 +259,9 @@ Removes a role from a specified user.
 {:.api .api-request .api-request-example}
 
 ~~~http
-curl -v -i -H "Authorization: SSWS {{ "{{apikey" }}}}" \ 
-  -H "Accept: application/json" \ 
-  -H "Content-Type: application/json" \ 
+curl -v -i -H "Authorization: SSWS {{ "{{apikey" }}}}" \
+  -H "Accept: application/json" \
+  -H "Content-Type: application/json" \
   -H "Cache-Control: no-cache" \
   -X DELETE https://{{ "{{subDomain" }}}}.okta.com/api/v1/users/{{ "{{userId" }}}}/roles/{{ "{{roleId" }}}}
 ~~~
@@ -296,9 +296,9 @@ Adds a specified group to a role.
 {:.api .api-request .api-request-example}
 
 ~~~http
-curl -v -H "Authorization: SSWS {{ "{{apikey" }}}}" \ 
-  -H "Accept: application/json" \ 
-  -H "Content-Type: application/json" \ 
+curl -v -H "Authorization: SSWS {{ "{{apikey" }}}}" \
+  -H "Accept: application/json" \
+  -H "Content-Type: application/json" \
   -H "Cache-Control: no-cache" \
   -X PUT https://{{ "{{subDomain" }}}}.okta.com/api/v1/roles/{{roleId}}/targets/groups/{{groupId}}
 ~~~

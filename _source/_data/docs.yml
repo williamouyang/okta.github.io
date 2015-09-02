@@ -8,6 +8,7 @@
     - getting_a_token
     - enabling_cors
     - api_test_client
+    - okta_expression_lang
 
 - section: api/resources
   slug: api
