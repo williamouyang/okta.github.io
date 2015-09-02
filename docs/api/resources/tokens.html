@@ -13,10 +13,10 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="/favicon.ico">
-	<title>Setting up a SAML application in Okta | Okta Developer</title>
+	<title>Tokens | Okta Developer</title>
 	<meta name="description" content="Secure, scalable, and highly available authentication and user management for any app.">
 
-	<link rel="canonical" href="http://developer.okta.com/docs/guides/setting_up_a_saml_application_in_okta.html">
+	<link rel="canonical" href="http://developer.okta.com/docs/api/resources/tokens.html">
 
 	<link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/assets/css/animate.css">
@@ -135,7 +135,7 @@
 	<span class="toggle-menu"></span>
 	<div id="sidebar-wrapper">
 		<div class="docs-sidebar-block" id="myScrollspy" >
-		<h2>Guides</h2>                                                                                                        <ul class="nav sidebar-nav" data-item="saml_guidance" data-section=""><li data-name="Single Sign-On with Okta" ><a href="/docs/guides/saml_guidance.html">Single Sign-On with Okta</a></li></ul>                                                <ul class="nav sidebar-nav" data-item="oan_guidance" data-section=""><li data-name="Okta Application Network" ><a href="/docs/guides/oan_guidance.html">Okta Application Network</a></li></ul>                                                                <ul class="nav sidebar-nav" data-item="okta_mobile_connect" data-section=""><li data-name="Okta Mobile Connect" ><a href="/docs/guides/okta_mobile_connect.html">Okta Mobile Connect</a></li></ul>                                                                                <ul class="nav sidebar-nav" data-item="spring_security_saml" data-section=""><li data-name="Spring Security SAML (Java)" ><a href="/docs/guides/spring_security_saml.html">Spring Security SAML (Java)</a></li></ul>                                            <ul class="nav sidebar-nav" data-item="pysaml2" data-section=""><li data-name="PySAML2 (Python)" ><a href="/docs/guides/pysaml2.html">PySAML2 (Python)</a></li></ul>                      <ul class="nav sidebar-nav" data-item="add_mfa" data-section=""><li data-name="Add Multi-Factor Authentication to your App with the Okta Platform" ><a href="/docs/guides/add_mfa.html">Add Multi-Factor Authentication to your App with the Okta Platform</a></li></ul>                                                                                                              <ul class="nav sidebar-nav nav-title"><li data-name="Setting up a SAML application in Okta" class="on"><a id="toc_current_doc" href="/docs/guides/setting_up_a_saml_application_in_okta.html">Setting up a SAML application in Okta</a></li></ul>        
+		<h2>Getting Started</h2>              <ul class="nav sidebar-nav" data-item="design_principles" data-section="tokens"><li data-name="Design Principles" ><a href="/docs/api/getting_started/design_principles.html">Design Principles</a></li></ul>                                                                  <ul class="nav sidebar-nav" data-item="error_codes" data-section="tokens"><li data-name="Error Codes" ><a href="/docs/api/getting_started/error_codes.html">Error Codes</a></li></ul>                                                                    <ul class="nav sidebar-nav" data-item="getting_a_token" data-section="tokens"><li data-name="Getting a Token" ><a href="/docs/api/getting_started/getting_a_token.html">Getting a Token</a></li></ul>                                                  <ul class="nav sidebar-nav" data-item="enabling_cors" data-section="tokens"><li data-name="Enabling CORS" ><a href="/docs/api/getting_started/enabling_cors.html">Enabling CORS</a></li></ul>                                                <ul class="nav sidebar-nav" data-item="api_test_client" data-section="tokens"><li data-name="API Test Client" ><a href="/docs/api/getting_started/api_test_client.html">API Test Client</a></li></ul>                                                      <h2>Resources</h2>        <ul class="nav sidebar-nav" data-item="apps" data-section="tokens"><li data-name="Apps" ><a href="/docs/api/resources/apps.html">Apps</a></li></ul>                                                              <ul class="nav sidebar-nav" data-item="authn" data-section="tokens"><li data-name="Authentication" ><a href="/docs/api/resources/authn.html">Authentication</a></li></ul>                                                                        <ul class="nav sidebar-nav" data-item="events" data-section="tokens"><li data-name="Events" ><a href="/docs/api/resources/events.html">Events</a></li></ul>                                                                <ul class="nav sidebar-nav" data-item="factors" data-section="tokens"><li data-name="Factors (MFA)" ><a href="/docs/api/resources/factors.html">Factors (MFA)</a></li></ul>                                                                <ul class="nav sidebar-nav" data-item="groups" data-section="tokens"><li data-name="Groups" ><a href="/docs/api/resources/groups.html">Groups</a></li></ul>                                                                        <ul class="nav sidebar-nav" data-item="roles" data-section="tokens"><li data-name="Roles Administration" ><a href="/docs/api/resources/roles.html">Roles Administration</a></li></ul>                                                                <ul class="nav sidebar-nav" data-item="schema" data-section="tokens"><li data-name="Schema" ><a href="/docs/api/resources/schema.html">Schema</a></li></ul>                                                                <ul class="nav sidebar-nav" data-item="sessions" data-section="tokens"><li data-name="Sessions" ><a href="/docs/api/resources/sessions.html">Sessions</a></li></ul>                                                                      <ul class="nav sidebar-nav" data-item="users" data-section="tokens"><li data-name="Users" ><a href="/docs/api/resources/users.html">Users</a></li></ul>
 		</div>
 	</div>
 </div>
@@ -147,10 +147,10 @@
 		<nav id="sticky-nav" class="sticky-nav--top">
 
 			
-	<a  href="/docs/api/getting_started/design_principles.html">
+	<a  class="on"  href="/docs/api/getting_started/design_principles.html">
 		API
 	</a>
-	<a  class="on"  href="/docs/guides/saml_guidance.html">
+	<a  href="/docs/guides/saml_guidance.html">
 		Guides
 	</a>
 	<a  href="/docs/examples/session_cookie.html">
@@ -167,121 +167,74 @@
 
 		
 		<header>
-			<a href="https://github.com/okta/okta.github.io/tree/master/_source/docs/guides/setting_up_a_saml_application_in_okta.md" target="_blank" class="btn btn-default btn-sm btn-github"><i class="fa fa-github"></i> Edit on GitHub</a>
-			<h1 class="h3">Setting up a SAML application in Okta</h1>
+			<a href="https://github.com/okta/okta.github.io/tree/master/_source/docs/api/resources/tokens.md" target="_blank" class="btn btn-default btn-sm btn-github"><i class="fa fa-github"></i> Edit on GitHub</a>
+			<h1 class="h3">Tokens</h1>
 		</header>
 		
 
-		<p>The first step in configuring an application to support SAML based Single Sign-On from Okta is to set up an application in Okta.</p>
-
-<p>In SAML terminology, what you will be doing doing here is configuring Okta (your
-SAML Identity Provider or “SAML IdP”), with the details of your application
-(the new SAML Service Provider or “SAML SP”).</p>
-
-<p>Here is how to set up a SAML application in Okta:</p>
-
-<ol>
-  <li>
-    <p>Log in to your Okta organization as a user with administrative
-privileges.</p>
-
-    <p>If you don’t have an Okta organization, you can create a free Okta
-Developer Edition organization here:
-<a href="https://www.okta.com/developer/signup/">https://www.okta.com/developer/signup/</a></p>
+		<ul class="list-unstyled toc" id="markdown-toc">
+  <li><a href="#create-tokens">Create tokens</a>    <ul>
+      <li><a href="#post-tokens">POST /tokens</a></li>
+    </ul>
   </li>
-  <li>
-    <p>Click on the blue “Admin” button
-<img src="/assets/img/okta-admin-ui-button-admin.png" alt="Admin" /></p>
+  <li><a href="#revoke-tokens">Revoke tokens</a>    <ul>
+      <li><a href="#delete-tokens">DELETE /tokens</a></li>
+    </ul>
   </li>
-  <li>
-    <p>Click on the “Add Applications” shortcut
-<img src="/assets/img/okta-admin-ui-add-applications.png" alt="Add Applications" /></p>
-  </li>
-  <li>
-    <p>Click on the green “Create New App” button
-<img src="/assets/img/okta-admin-ui-button-create-new-app.png" alt="Create New App" /></p>
-  </li>
-  <li>
-    <p>In the dialog that opens, select the “SAML 2.0” option, then click
-the green “Create” button
-<img src="/assets/img/okta-admin-ui-create-new-application-integration.png" alt="Create a New Application Integration" /></p>
-  </li>
-  <li>
-    <p>In Step 1 “General Settings”, enter “Example SAML Application” in the
-“App name” field, then click the green “Next” button.
-<img src="/assets/img/example-saml-application-okta-general-settings.png" alt="General Settings" /></p>
-  </li>
-  <li>
-    <p>In Step 2 “Configure SAML”</p>
+</ul>
 
-    <ul>
-      <li>
-        <p>Paste the URL below into the “Single sign on URL” and “Audience URI (SP Entity ID)” fields:</p>
+<p><em>Note:  This API is <strong>deprecated</strong>. Please see <a href="/docs/getting_started/getting_a_token.html">Getting an API Token</a></em></p>
 
-        <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>http://example.com/saml/sso/example-okta-com
+<h2 id="create-tokens">Create tokens</h2>
+
+<h3 id="post-tokens">POST /tokens</h3>
+
+<p>Create a token.  This API does not require any token-based authentication to access.</p>
+
+<h4 id="request-example">Request Example</h4>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>curl -v -<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Content-type:application/json</span><span class="delimiter">&quot;</span></span> \
+-<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Accept:application/json</span><span class="delimiter">&quot;</span></span> \
+-<span class="constant">X</span> <span class="constant">POST</span> <span class="key">https</span>:<span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span>your-subdomain.okta.com/api/v1/tokens/ \
+-d \
+<span class="string"><span class="delimiter">'</span><span class="content">{
+  &quot;username&quot;: &quot;user8u3VOJBREVQHBTAS@asdf.com&quot;,
+  &quot;password&quot;: &quot;SecretPass&quot;,
+  &quot;clientAppId&quot;: &quot;capalkhfadflkjh&quot;,
+  &quot;deviceName&quot;: &quot;Sample Device Name&quot;
+}</span><span class="delimiter">'</span></span>
 </pre></div>
 </div>
-        </div>
-      </li>
-      <li>
-        <p>Click “Show Advanced Settings”</p>
+</div>
 
-        <p>Change the value of “Request compression” to “Compressed”.</p>
-      </li>
-      <li>In the “Attribute Statements” section, add three attribute statements:
-        <ol>
-          <li>“FirstName” set to “${user.firstName}”</li>
-          <li>“LastName” set to “${user.lastName}”</li>
-          <li>“Email” set to “${user.email}”</li>
-        </ol>
-      </li>
-      <li>Then click the green “Next” button</li>
-    </ul>
+<h4 id="response-example">Response Example</h4>
 
-    <p><img src="/assets/img/example-saml-application-okta-configure-settings.png" alt="SAML Settings" /></p>
-  </li>
-  <li>
-    <p>In Step 3 “Feedback”, click the checkbox next to the text “This is
-an internal application that we created”, then click the green
-“Finish” button.
-<img src="/assets/img/okta-admin-ui-new-application-step-3-feedback.png" alt="App type" /></p>
-  </li>
-  <li>
-    <p>You will now see the “Sign On” section of your newly created “Example
-SAML Application” application.</p>
-  </li>
-  <li>
-    <p>Keep this page open it a separate tab or browser window. You will
-need to return to this page later in this guide and copy the
-“Identity Provider metadata” link. (To copy the that link, right
-click on the “Identity Provider metadata” link and select “Copy”)
-<img src="/assets/img/okta-admin-ui-identity-provider-metadata-link.png" alt="Sign on methods" /></p>
-  </li>
-  <li>
-    <p>Right-click on the “People” section of the “Example SAML Application”
-application and select “Open Link In New Tab” (so that you can come
-back to the “Sign On” section later).</p>
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>{
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">token</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">00F-MBcxD2SC8tzXDCDZm2a04qtXLcFqtlrrPu6eVtxRs</span><span class="delimiter">&quot;</span></span>
+}
+</pre></div>
+</div>
+</div>
 
-    <p>In the new tab that opens, click on the “Assign Application” button
-<img src="/assets/img/example-saml-application-okta-assign-people-to-application.png" alt="Assign Application" /></p>
-  </li>
-  <li>
-    <p>A dialog titled “Assign Example SAML Application to up to 500 people”
-will open. Type your username into the search box, select the
-checkbox next to your username, then click the green “Next” button
-<img src="/assets/img/okta-admin-ui-confirm-assignments.png" alt="People search box" /></p>
-  </li>
-  <li>
-    <p>You will be prompted to “Enter user-specific attributes”. Just click
-the green “Confirm Assignments” button to keep the defaults.
-<img src="/assets/img/example-saml-application-okta-confirm-assignments.png" alt="Enter user attributes" /></p>
-  </li>
-  <li>
-    <p>You are now ready to configure SAML in your application. The information in the tab you
-opened in step #10 contains the information that you’ll need to configure SAML in your application.</p>
-  </li>
-</ol>
+<h2 id="revoke-tokens">Revoke tokens</h2>
+
+<h3 id="delete-tokens">DELETE /tokens</h3>
+
+<p>Revokes the token that is being used to authenticate to the API.</p>
+
+<h4 id="request-example-1">Request Example</h4>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>curl -v -<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Content-type:application/json</span><span class="delimiter">&quot;</span></span> \
+-<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Authorization:SSWS 00F-MBcxD2SC8tzXDCDZm2a04qtXLcFqtlrrPu6eVtxRs</span><span class="delimiter">&quot;</span></span> \
+-<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Accept:application/json</span><span class="delimiter">&quot;</span></span> \
+-<span class="constant">X</span> <span class="constant">DELETE</span> <span class="key">https</span>:<span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span>your-subdomain.okta.com/api/v1/tokens/
+</pre></div>
+</div>
+</div>
+
 
 	</div>
 	
