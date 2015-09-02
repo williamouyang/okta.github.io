@@ -1,3 +1,3 @@
 ---
-redirect_to: "/docs/guides/overview.html"
+redirect_to: "/docs/api/getting_started/design_principles.html"
 ---
