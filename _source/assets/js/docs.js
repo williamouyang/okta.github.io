@@ -149,4 +149,14 @@ $(function() {
 		return false;
 	});
 
+	// Expand ToC on Page Load
+	$(document).ready(function() {
+		$('#gen-toc-container .nav').toggleClass('hide');
+		$('#toc_current_doc').toggleClass('clicked');
+	});
+
+	// Highlist subnav item on click
+	$('#gen-toc-container .sidebar-nav li a').click(function() {
+		$(this).toggleClass('active');
+	});
 });

@@ -721,7 +721,11 @@ h6:hover .header-link {
 }
 
 .sidebar-nav li.active {
-	background:#0c87c9
+	background:#0c87c9;
+
+	a.active:hover {
+		background: #0c87c9
+	}
 }
 
 #gen-toc-container .sidebar-nav li a {
@@ -752,6 +756,10 @@ h6:hover .header-link {
 	max-height: 100%;
 	overflow-y: auto;
 	padding-bottom: 170px;
+}
+
+#toc_current_doc {
+	background-color: #00131f;
 }
 
 .excerpt {
