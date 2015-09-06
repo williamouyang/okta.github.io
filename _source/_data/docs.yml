@@ -14,15 +14,15 @@
   slug: api
   title: Resources
   pages:
-    - apps
     - authn
-    - events
+    - sessions
+    - users
     - factors
     - groups
     - roles
-    - schema
-    - sessions
-    - users
+    - apps
+    - schemas
+    - events
 
 # -- GUIDES
 - section: guides

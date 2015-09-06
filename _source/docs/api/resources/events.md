@@ -53,7 +53,7 @@ Every organization has a system log that maintains a history of actions performe
          "objectType":"User"
       }
    ]
-   
+
 }
 ~~~
 
@@ -61,35 +61,38 @@ Every organization has a system log that maintains a history of actions performe
 
 The Event model is a ***read-only*** object and has a fixed set of attributes:
 
-Attribute | Description | DataType | Nullable
----- | --- | --- | ---
-eventId | Unique key for event | String | FALSE
-published | Timestamp when event was published | Date | TRUE
-requestId | Identifies the request | String | TRUE
-sessionId | Session in which the event occurred | String | TRUE
-action | Identifies the action that the event describes | [Action Object](#action-object) | FALSE
-actors | Describes zero or more entities that performed the action | Array of [Actor Object](#actor-object) | TRUE
-targets | Describes zero or more entities that the action was performed against | Array of [Target Object](#target-object) | TRUE
+|-----------+-----------------------------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+| Property  | Description                                                           | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| -------   | --------------------------------------------------------------------- | ---------------------------------------------------------------| -------- | ------ | -------- | --------- | --------- | ---------- |
+| eventId   | Unique key for event                                                  | String                                                         | FALSE    | TRUE   | TRUE     |           |           |            |
+| published | Timestamp when event was published                                    | Date                                                           | FALSE    | TRUE   | TRUE     | 1         | 255       |            |
+| requestId | Identifies the request                                                | String                                                         | TRUE     | FALSE  | TRUE     | 1         | 50        |            |
+| sessionId | Session in which the event occurred                                   | String                                                         | TRUE     | FALSE  | TRUE     |           |           |            |
+| action    | Identifies the action that the event describes                        | [Action Object](#action-object)                                | FALSE    | FALSE  | TRUE     |           |           |            |
+| actors    | Describes zero or more entities that performed the action             | Array of [Actor Object](#actor-object)                         | FALSE    | FALSE  | TRUE     |           |           |            |
+| targets   | Describes zero or more entities that the action was performed against | Array of [Target Object](#target-object)                       | TRUE     | FALSE  | TRUE     |           |           |            |
+| _links    | discoverable resources related to the event                           | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
+| _embedded | embedded resources related to the event                               | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
+|-----------+-----------------------------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
 
 > The actor and/or target of an event is dependent on the action performed. Not all events have an actor or target.
 
-> A single requestID can identify multiple events.
-
-> The sessionID can identify multiple requests. Use the sessionID to link events and requests that occurred in the same session.
-
+> The `sessionId` can identify multiple requests.  A single `requestId` can identify multiple events.  Use the `sessionId` to link events and requests that occurred in the same session.
 
 ### Action Object
 
 Describes an activity that published an event
 
-Attribute | Description | DataType | Nullable
---- | --- | --- | ---
-message | Description of an action | String | FALSE
-categories | [Categories](#action-categories) for an action | Array of String | FALSE
-objectType | Identifies the [unique type](#action-objecttypes) of an action | String | FALSE
-requestUri | Uri of the request that generated the event. | String | TRUE
+|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
+| Property   | Description                                                    | DataType        | Nullable | Default | MinLength | MaxLength | Validation |
+| ---------- | -------------------------------------------------------------- | --------------- | -------- | ------- | --------- | --------- | ---------- |
+| message    | Description of an action                                       | String          | FALSE    |         |           |           |            |
+| categories | [Categories](#action-categories) for an action                 | Array of String | FALSE    |         |           |           |            |
+| objectType | Identifies the [unique type](#action-objecttypes) of an action | String          | FALSE    |         |           |           |            |
+| requestUri | Uri of the request that generated the event.                   | String          | TRUE     |         |           |           |            |  
+|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
 
-> Actions that do not define any categories will have an zero element array value.
+> Actions that do not define any categories will have a zero element array value.
 
 ~~~  json
 {
@@ -301,7 +304,7 @@ core.user.config.user_creation.failure |
 ##### User Impersonation
 
 ObjectType | Description
---- | ---
+----------------------------------------- | ---
 core.user.impersonation.session.initiated |
 core.user.impersonation.session.ended |
 core.user.impersonation.grant.enabled |
@@ -310,8 +313,8 @@ core.user.impersonation.grant.revoked |
 
 ##### User Administrator Roles
 
-ObjectType | Description
---- | ---
+ObjectType                        | Description
+--------------------------------- | ---
 core.user.admin_privilege.granted |
 core.user.admin_privilege.revoked |
 
@@ -319,11 +322,13 @@ core.user.admin_privilege.revoked |
 
 Actor of an event
 
-Attribute | Description | DataType | Nullable
---- | --- | --- | ---
-id | Unique key for actor| String | FALSE
-displayName | Name of actor used for display purposes | String | FALSE
-objectType | [User](#user-objecttype) or [Client](#client-objecttype)  | String | FALSE
+|-------------+----------------------------------------------------------+----------+----------+---------+-----------+-----------+------------|
+| Property    | Description                                              | DataType | Nullable | Default | MinLength | MaxLength | Validation |
+| ----------- | ---------------------------------------------------------| -------- | -------- | ------- | --------- | --------- | ---------- |
+| id          | Unique key for actor                                     | String   | FALSE    |         |           |           |            |
+| displayName | Name of actor used for display purposes                  | String   | TRUE     |         |           |           |            |
+| objectType  | [User](#user-objecttype) or [Client](#client-objecttype) | String   | FALSE    |         |           |           |            |
+|-------------+----------------------------------------------------------+----------+----------+---------+-----------+-----------+------------|
 
 > The schema of an actor is dependent on the actor's `objectType`
 
@@ -331,11 +336,13 @@ objectType | [User](#user-objecttype) or [Client](#client-objecttype)  | String 
 
 Target of an event
 
-Attribute | Description | DataType | Nullable
---- | --- | --- | ---
-id | Unique key for target| String | FALSE
-displayName | Name of target used for display purposes | String | FALSE
-objectType | [User](#user-objecttype) or [AppInstance](#appinstance-objecttype) | String | FALSE
+|-------------+--------------------------------------------------------------------+----------+----------+---------+-----------+-----------+------------|
+| Property    | Description                                                        | DataType | Nullable | Default | MinLength | MaxLength | Validation |
+| ----------- | ------------------------------------------------------------------ | -------- | -------- | ------- | --------- | --------- | ---------- |
+| id          | Unique key for target                                              | String   | FALSE    |         |           |           |            |
+| displayName | Name of target used for display purposes                           | String   | TRUE     |         |           |           |            |
+| objectType  | [User](#user-objecttype) or [AppInstance](#appinstance-objecttype) | String   | FALSE    |         |           |           |            |
+|-------------+--------------------------------------------------------------------+----------+----------+---------+-----------+-----------+------------|
 
 > The schema of a target is dependent on the actor's `objectType`
 
@@ -345,18 +352,20 @@ objectType | [User](#user-objecttype) or [AppInstance](#appinstance-objecttype) 
 
 A denormalized reference to a [User](users.html#user-model).
 
-Attribute | Description | DataType | Nullable
---- | --- | --- | ---
-id | Unique key for [user](users.html#user-model) | String | FALSE
-objectType | User | String | FALSE
-displayName | [User's](users.html#profile-object) first and last name | String | FALSE
-login | Unique login for [user](users.html#user-model) | String | FALSE
+|-------------+---------------------------------------------------------+----------+----------+---------+-----------+-----------+------------|
+| Property    | Description                                             | DataType | Nullable | Default | MinLength | MaxLength | Validation |
+| ----------- | ------------------------------------------------------- | -------- | -------- | ------- | --------- | --------- | ---------- |
+| id          | Unique key for [user](users.html#user-model)            | String   | FALSE    |         |           |           |            |
+| displayName | [User's](users.html#profile-object) first and last name | String   | TRUE     |         |           |           |            |
+| login       | Unique login for [user](users.html#user-model)          | String   | TRUE     |         |           |           |            |
+| objectType  | Type of object                                          | `User`   | FALSE    |         |           |           |            |
+|-------------+---------------------------------------------------------+----------+----------+---------+-----------+-----------+------------|
 
 ~~~ json
 {
     "id": "00u3gjksoiRGRAZHLSYV",
     "displayName": "Jon Stewart",
-    "login": "user@example.org",
+    "login": "jon@example.com",
     "objectType": "User"
 }
 ~~~
@@ -367,11 +376,13 @@ login | Unique login for [user](users.html#user-model) | String | FALSE
 
 A denormalized reference to an application
 
-Attribute | Description | DataType | Nullable
---- | --- | --- | ---
-id | Unique key for application | String | FALSE
-objectType | AppInstance | String | FALSE
-displayName | Label of application | String | FALSE
+|-------------+-------------------------------------------+---------------+----------+---------+-----------+-----------|
+| Property    | Description                               | DataType      | Nullable | Default | MinLength | MaxLength |
+| ----------- | ----------------------------------------- | ------------- | -------- | ------- | --------- | --------- |
+| id          | Unique key for [app](apps.html#app-model  | String        | FALSE    |         |           |           |
+| displayName | [App's](apps.html#app-model) label        | String        | TRUE     |         |           |           |
+| objectType  | Type of object                            | `AppInstance` | FALSE    |         |           |           |
+|-------------+-------------------------------------------+---------------+----------+---------+-----------+-----------|
 
 ~~~ json
 {
@@ -387,13 +398,14 @@ displayName | Label of application | String | FALSE
 
 A denormalized reference to a client such as a browser
 
-Attribute | Description | DataType | Nullable
---- | --- | --- | ---
-id | User agent of client | String | FALSE
-objectType | Client | String | FALSE
-displayName | Name of client | String | FALSE
-ipAddress | IP Address of client | String | TRUE
-
+|-------------+-----------------------+----------+----------+---------+-----------+-----------|
+| Property    | Description           | DataType | Nullable | Default | MinLength | MaxLength |
+| ----------- | --------------------- | ---------| -------- | ------- | --------- | --------- |
+| id          | User agent of client  | String   | FALSE    |         |           |           |
+| displayName | Name of client        | String   | TRUE     |         |           |           |
+| ipAddress   | IP Address of client  | String   | TRUE     |         |           |           |
+| objectType  | Type of object        | `Client` | FALSE    |         |           |           |
+|-------------+---------------------  +----------+----------+---------+-----------+-----------|
 
 ~~~ json
 {
@@ -475,17 +487,18 @@ Array of [Events](#event-model)
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization:SSWS yourtoken" \
--H "Accept:application/json" \
--H "Content-type:application/json" \
--X GET https://your-domain.okta.com/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z\&limit=3
+~~~sh
+curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z\&limit=3"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ ruby
+~~~http
 HTTP/1.1 200 OK
 Content-Type: application/json
 Link: <https://your-domain.okta.com/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z&limit=3>; rel="self"

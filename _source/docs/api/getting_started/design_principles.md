@@ -38,7 +38,7 @@ The `apiversion` is is currently v1.
 
 The API currently only supports JSON as an exchange format.  Be sure to set both the Content-Type and Accept headers for every request as `application/json`.
 
-All Date objects are returned in ISO 8601 format:
+All Date objects are returned in [ISO 8601 format](https://tools.ietf.org/html/rfc3339):
 
     YYYY-MM-DDTHH:mm:ss.SSSZ
 
@@ -124,7 +124,7 @@ Param    | Description
 
 Pagination links are included in the [Link header](http://tools.ietf.org/html/rfc5988) of responses. It is **important** to follow these Link header values instead of constructing your own URLs as query parameters or  cursor formats may change without notice.
 
-~~~ ruby
+~~~ http
 HTTP/1.1 200 OK
 Link: <https://yoursubdomain.okta.com/api/v1/users?after=00ubfjQEMYBLRUWIEDKK; rel="next",
   <https://yoursubdomain.okta.com/api/v1/users?after=00ub4tTFYKXCCZJSGFKM>; rel="self"
@@ -190,8 +190,6 @@ Operator | Description | Behavior
 
 Filters must be evaluated using standard order of operations. Attribute operators have the highest precedence, followed by the grouping operator (i.e, parentheses), followed by the logical `AND` operator, followed by the logical `OR` operator.
 
-
-
 ## Hypermedia
 
 Resources in the Okta API use hypermedia for "discoverability".  Hypermedia enables API clients to navigate  resources by following links like a web browser instead of hard-coding URLs in your application.  Links are identified by link relations which are named keys. Link relations describe what resources are available and how they can be interacted with.  Each resource may publish a set of link relationships based on the state of the resource.  For example, the status of a user in the [User API](/docs/api/rest/users.html#links-object) will govern which lifecycle operations are permitted.  Only the permitted operations will be published a lifecycle operations.
@@ -229,8 +227,6 @@ Object whose property names are link relation types (as defined by [RFC5988](htt
 }
 ~~~
 
-
-
 ## Rate Limiting
 
 The number of API requests for an organization is limited for all APIs based on your edition.
@@ -243,7 +239,7 @@ The following three headers are set in each response:
 
 `X-Rate-Limit-Reset` - the remaining time in the current rate-limit window before the rate limit resets, in UTC epoch seconds.
 
-~~~ ruby
+~~~ http
 HTTP/1.1 200 OK
 X-RateLimit-Limit: 20
 X-RateLimit-Remaining: 15

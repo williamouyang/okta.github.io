@@ -7,18 +7,18 @@ redirect_from: "/docs/getting_started/api_test_client.html"
 * Will be replaced with the ToC
 {:toc .list-unstyled .toc}
 
-## Postman
+## Overview
 
 [Postman](http://getpostman.com) is an awesome REST API test client that a lot of people at Okta use to test the Okta API.  We have built templates for all of the Okta APIs that makes playing with the Okta APIs simple and easy if you don't have time to practice your *Command Line Fu* with [cURL](http://en.wikipedia.org/wiki/CURL)
 
 ![Postman Chrome Web Store](/assets/img/postman-chrome-web-store.png)
 
-### Prerequisites
+## Prerequisites
 
 - Chrome Web Browser
 - [API Key created in the Okta Admin UI](/docs/getting_started/getting_a_token.html)
 
-### Setup
+## Setup
 
 1. [Download Postman Chrome Extension](https://chrome.google.com/webstore/detail/postman-rest-client-packa/fhbjgbiflinjbdggehcddcbncdddomop)
 2. Launch **Postman** with new Chrome App Launcher
@@ -62,7 +62,7 @@ redirect_from: "/docs/getting_started/api_test_client.html"
 
         ![Preview Environment](/assets/img/postman-ui-preview-env.png "Preview Environment")
 
-### Collections
+## Collections
 
 Once you have setup your Postman environment, you can import pre-built collections for the Okta APIs
 
@@ -91,8 +91,7 @@ Once you have setup your Postman environment, you can import pre-built collectio
 3. Click **Collections** to view your imported collections
   ![View Collections](/assets/img/postman-ui-collections.png "View Collections")
 
-
-### Requests
+## Requests
 
 The imported collections contain URLs and JSON request bodies that have sample data with variables such as **\{\{id\}\}**.  You will need to replace URL and body variables with ids of specific resources for your specific organization.  This can usually be accomplished by first listing a resource collection with a search or filter, than copying the `id` of a specific resource.  See API documentation for the specific request for details.
 

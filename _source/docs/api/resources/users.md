@@ -15,7 +15,7 @@ The Okta User API provides operations to manage users in your organization.
 
 ### Example
 
-~~~ json
+~~~json
 {
     "id": "00ub0oNGTSWTBKOLGLNR",
     "status": "ACTIVE",
@@ -26,12 +26,29 @@ The Okta User API provides operations to manage users in your organization.
     "lastUpdated": "2013-06-27T16:35:28.000Z",
     "passwordChanged": "2013-06-24T16:39:19.000Z",
     "profile": {
+        "login": "isaac.brock@example.com",
         "firstName": "Isaac",
         "lastName": "Brock",
-        "email": "isaac@example.org",
-        "secondEmail": "isaac2@example.org",
-        "login": "isaac@example.org",
-        "mobilePhone": "555-415-1337"
+        "nickName": "issac",
+        "displayName": "Isaac Brock",
+        "email": "isaac.brock@example.com",
+        "secondEmail": "isaac@example.org",
+        "profileUrl": "http://www.example.com/profile",
+        "preferredLanguage": "en-US",
+        "userType": "Employee",
+        "organization": "Okta",
+        "title": "Director",
+        "division": "R&D",
+        "department": "Engineering",
+        "costCenter": "10",
+        "employeeNumber": "187",
+        "mobilePhone": "+1-555-415-1337",
+        "primaryPhone": "+1-555-514-1337",
+        "streetAddress": "301 Brannan St.",
+        "city": "San Francisco",
+        "state": "CA",
+        "zipCode": "94107",
+        "countryCode": "US"
     },
     "credentials": {
         "password": {},
@@ -69,93 +86,141 @@ The Okta User API provides operations to manage users in your organization.
 }
 ~~~
 
-### Metadata Attributes
+### User Properties
 
-The User model defines several **read-only** attributes:
+The User model defines several **read-only** properties:
 
-Attribute             | Description                                                   | DataType                                                                                            | Nullable
---------------------- | ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | -----
-id                    | unique key for user                                           | String                                                                                              | FALSE
-status                | current status of user                                        | `STAGED`, `PROVISIONED`, `ACTIVE`, `RECOVERY`, `LOCKED_OUT`, `PASSWORD_EXPIRED`, or `DEPROVISIONED` | FALSE
-created               | timestamp when user was created                               | Date                                                                                                | FALSE
-activated             | timestamp when transition to `ACTIVE` status completed        | Date                                                                                                | TRUE
-statusChanged         | timestamp when status last changed                            | Date                                                                                                | TRUE
-lastLogin             | timestamp of last login                                       | Date                                                                                                | TRUE
-lastUpdated           | timestamp when user was last updated                          | Date                                                                                                | FALSE
-passwordChanged       | timestamp when password last changed                          | Date                                                                                                | TRUE
-transitioningToStatus | target status of an inprogress asynchronous status transition | `PROVISIONED`, `ACTIVE`, or `DEPROVISIONED`                                                         | TRUE
+|-----------------------+-----------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+| Property              | Description                                                     | DataType                                                                                            | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| --------------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------| -------- | ------ | -------- | --------- | --------- | ---------- |
+| id                    | unique key for user                                             | String                                                                                              | FALSE    | TRUE   | TRUE     |           |           |            |
+| status                | current [status](#user-status) of user                          | `STAGED`, `PROVISIONED`, `ACTIVE`, `RECOVERY`, `LOCKED_OUT`, `PASSWORD_EXPIRED`, or `DEPROVISIONED` | FALSE    | FALSE  | TRUE     |           |           |            |
+| created               | timestamp when user was created                                 | Date                                                                                                | FALSE    | FALSE  | TRUE     |           |           |            |
+| activated             | timestamp when transition to `ACTIVE` status completed          | Date                                                                                                | FALSE    | FALSE  | TRUE     |           |           |            |
+| statusChanged         | timestamp when status last changed                              | Date                                                                                                | TRUE     | FALSE  | TRUE     |           |           |            |
+| lastLogin             | timestamp of last login                                         | Date                                                                                                | TRUE     | FALSE  | TRUE     |           |           |            |
+| lastUpdated           | timestamp when user was last updated                            | Date                                                                                                | FALSE    | FALSE  | TRUE     |           |           |            |
+| passwordChanged       | timestamp when password last changed                            | Date                                                                                                | TRUE     | FALSE  | TRUE     |           |           |            |
+| transitioningToStatus | target status of an in-progress asynchronous status transition  | `PROVISIONED`, `ACTIVE`, or `DEPROVISIONED`                                                         | TRUE     | FALSE  | TRUE     |           |           |            |
+| profile               | user profile properties                                         | [Profile Object](#profile-object)                                                                   | FALSE    | FALSE  | FALSE    |           |           |            |
+| credentials           | user's primary authentication and recovery credentials          | [Credentials Object](#credentials-object)                                                           | FALSE    | FALSE  | FALSE    |           |           |            |
+| _embedded             | [embedded resources](#embedded-object) related to the user      | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                                      | TRUE     | FALSE  | TRUE     |           |           |            |
+| _links                | [link relations](#links-object) for the user's current `status` | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                                      | TRUE     | FALSE  | TRUE     |           |           |            |
+|-----------------------+-----------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
 
-> Metadata attributes are only available after a user is created
+> Metadata properties such as `id`, `status`, timestamps, `_links`, and `_embedded` are only available after a user is created.
 
-> `activated` timestamp will only be available for users activated after *06/30/2013*.
-
-> `statusChanged` and `lastLogin` timestamps will be missing for users created before *06/30/2013*.  They will be updated on next status change or login.
+> `activated` timestamp will only be available for users activated after *06/30/2013*.<br>
+> `statusChanged` and `lastLogin` timestamps will be missing for users created before *06/30/2013* and updated on next status change or login.
 
 ### User Status
+
+The following diagram shows the state model for a user:
 
 ![STAGED, PROVISIONED, ACTIVE, RECOVERY, LOCKED_OUT, PASSWORD_EXPIRED, or DEPROVISIONED](/assets/img/okta-user-status.png "Okta User Status Diagram")
 
 ### Profile Object
 
-Specifies [standard](#standard-attributes) and [custom](#custom-attributes) profile attributes for a user.
+Specifies [standard](#standard-profile-properties) and [custom](#custom-profile-properties) profile properties for a user.
 
-~~~ json
+~~~json
 {
-   "profile": {
-        "firstName": "Isaac",
-        "lastName": "Brock",
-        "email": "isaac@example.org",
-        "secondEmail": "isaac2@example.org",
-        "login": "isaac@example.org",
-        "mobilePhone": "555-415-1337",
-        "customAttribute": true,
-        "moreCustomAttribs": "Yes we can!"
-    }
+  "profile": {
+      "login": "isaac.brock@example.com",
+      "firstName": "Isaac",
+      "lastName": "Brock",
+      "nickName": "issac",
+      "displayName": "Isaac Brock",
+      "email": "isaac.brock@example.com",
+      "secondEmail": "isaac@example.org",
+      "profileUrl": "http://www.example.com/profile",
+      "preferredLanguage": "en-US",
+      "userType": "Employee",
+      "organization": "Okta",
+      "title": "Director",
+      "division": "R&D",
+      "department": "Engineering",
+      "costCenter": "10",
+      "employeeNumber": "187",
+      "mobilePhone": "+1-555-415-1337",
+      "primaryPhone": "+1-555-514-1337",
+      "streetAddress": "301 Brannan St.",
+      "city": "San Francisco",
+      "state": "CA",
+      "zipCode": "94107",
+      "countryCode": "US"
+  }
 }
 ~~~
 
-#### Standard Attributes
+#### Default Profile Properties
 
-All profiles have the following attributes:
+The default user profile is based on the [System for Cross-Domain Identity Management: Core Schema](https://tools.ietf.org/html/draft-ietf-scim-core-schema-22#section-4.1.1) and has following standard properties:
 
-Attribute   | DataType | MinLength | MaxLength | Nullable | Unique | Validation
------------ | -------- | --------- | --------- | -------- | ------ | ----------
-login       | String   | 5         | 100       | FALSE    | TRUE   | [RFC 6531 section 3.3](http://tools.ietf.org/html/rfc6531#section-3.3)
-email       | String   | 5         | 100       | FALSE    | TRUE   | [RFC 5322 section 3.2.3](http://tools.ietf.org/html/rfc5322#section-3.2.3)
-secondEmail | String   | 5         | 100       | TRUE    | TRUE   | [RFC 5322 section 3.2.3](http://tools.ietf.org/html/rfc5322#section-3.2.3)
-firstName   | String   | 1         | 50        | FALSE    | FALSE  |
-lastName    | String   | 1         | 50        | FALSE    | FALSE  |
-mobilePhone | String   | 0         | 100       | TRUE     | FALSE  |
+|-------------------+------------------------------------------------------------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+-------------------------------------------------------------------------------------------------------------------|
+| Property          | Description                                                                                                                  | DataType | Nullable | Unique | Readonly | MinLength | MaxLength | Validation                                                                                                        |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------ | -------- | --------- | --------- | ----------------------------------------------------------------------------------------------------------------- |
+| login             | unique identifier for the user (`username`)                                                                                  | String   | FALSE    | TRUE   | FALSE    | 5         | 100       | [RFC 6531 Section 3.3](http://tools.ietf.org/html/rfc6531#section-3.3)                                            |
+| email             | primary email address of user                                                                                                | String   | FALSE    | TRUE   | FALSE    | 5         | 100       | [RFC 5322 Section 3.2.3](http://tools.ietf.org/html/rfc5322#section-3.2.3)                                        |
+| secondEmail       | secondary email address of user typically used for account recovery                                                          | String   | TRUE     | TRUE   | FALSE    | 5         | 100       | [RFC 5322 Section 3.2.3](http://tools.ietf.org/html/rfc5322#section-3.2.3)                                        |
+| firstName         | given name of the user (`givenName`)                                                                                         | String   | FALSE    | FALSE  | FALSE    | 1         | 50        |                                                                                                                   |
+| lastName          | family name of the user (`familyName`)                                                                                       | String   | FALSE    | FALSE  | FALSE    | 1         | 50        |                                                                                                                   |
+| middleName        | middle name(s) of the user                                                                                                   | String   | FALSE    | FALSE  | FALSE    |           |           |                                                                                                                   |
+| honorificPrefix   | honorific prefix(es) of the user, or title in most Western languages                                                         | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+| honorificSuffix   | honorific suffix(es) of the user                                                                                             | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+| title             | user's title, such as "Vice President"                                                                                       | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+| displayName       | name of the user, suitable for display to end-users                                                                          | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+| nickName          | casual way to address the user in real life                                                                                  | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+| profileUrl        | url of user's online profile (e.g. a web page)                                                                               | String   | TRUE     | FALSE  | FALSE    |           |           | [URL](https://tools.ietf.org/html/rfc1808)                                                                        |
+| primaryPhone      | primary phone number of user such as home number                                                                             | String   | TRUE     | FALSE  | FALSE    | 0         | 100       |                                                                                                                   |
+| mobilePhone       | mobile phone number of user                                                                                                  | String   | TRUE     | FALSE  | FALSE    | 0         | 100       |                                                                                                                   |
+| streetAddress     | full street address component of user's address                                                                              | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+| city              | city or locality component of user's address (`locality`)                                                                    | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+| state             | state or region component of user's address (`region`)                                                                       | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+| zipCode           | zipcode or postal code component of user's address (`postalCode`)                                                            | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+| countryCode       | country name component of user's address (`country`)                                                                         | String   | TRUE     | FALSE  | FALSE    |           |           | [ISO 3166-1 alpha 2 "short" code format](https://tools.ietf.org/html/draft-ietf-scim-core-schema-22#ref-ISO3166)  |
+| postalAddress     | mailing address component of user's address                                                                                  | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+| preferredLanguage | user's preferred written or spoken languages                                                                                 | String   | TRUE     | FALSE  | FALSE    |           |           | [RFC 7231 Section 5.3.5](https://tools.ietf.org/html/rfc7231#section-5.3.5)                                       |
+| locale            | user's default location for purposes of localizing items such as currency, date time format, numerical representations, etc. | String   | TRUE     | FALSE  | FALSE    |           |           | [RFC 5646](https://tools.ietf.org/html/rfc5646)                                                                   |
+| timezone          | user's time zone                                                                                                             | String   | TRUE     | FALSE  | FALSE    |           |           | [IANA Time Zone database format](https://tools.ietf.org/html/rfc6557)                                             |
+| userType          | used to identify the organization to user relationship such as "Employee" or "Contractor"                                    | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+| employeeNumber    | organization or company assigned unique identifier for the user                                                              | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+| costCenter        | name of a cost center assigned to user                                                                                       | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+| organization      | name of user's organization                                                                                                  | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+| division          | name of user's division                                                                                                      | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+| department        | name of user's department                                                                                                    | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+| managerId         | `id` of a user's manager                                                                                                     | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+| manager           | displayName of the user's manager                                                                                            | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
+|-------------------+------------------------------------------------------------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+-------------------------------------------------------------------------------------------------------------------|
 
 ##### Okta Login
 
 Every user within your Okta organization must have a unique identifier for a login.  This constraint applies to all users you import from other systems or applications such as Active Directory.  Your organization is the top-level namespace to mix and match logins from all your connected applications or directories.  Careful consideration of naming conventions for your login identifier will make it easier to onboard new applications in the future.
 
-Okta has a default ambiguous name resolution policy for logins.  Users can login with their non-qualified short-name (e.g. `isaac` with login *isaac@example.org*) as long as the short-name is still unique within the organization.
+Okta has a default ambiguous name resolution policy for logins.  Users can login with their non-qualified short-name (e.g. `isaac` with login *isaac.brock@example.com*) as long as the short-name is still unique within the organization.
 
-> Avoid using a `login` with a `/` character.  Although `/` is a valid character according to [RFC 6531 section 3.3](http://tools.ietf.org/html/rfc6531#section-3.3), a user with this character in their `login` cannot be fetched by `login` ([see Get User by ID](#get-user-with-id)) due to security risks with escaping this character.
+> Avoid using a `login` with a `/` character.  Although `/` is a valid character according to [RFC 6531 section 3.3](http://tools.ietf.org/html/rfc6531#section-3.3), a user with this character in their `login` cannot be fetched by `login` ([see Get User by ID](#get-user-with-id)) due to security risks with escaping this character in URI paths.
 
-#### Custom Attributes
+#### Custom Profile Properties
 
-Custom attributes may be added to a user profile.  Custom attributes must be single-value (non-array) and have a data type of `Number`, `String`, `Boolean`, or `null`.
+User profiles may be extended with custom properties but the attribute must first be added to the user profile schema before it can be referenced.  You can use the Profile Editor in the Admin UI or the [Schemas API](./schemas.html) to manage schema extensions.
 
 ### Credentials Object
 
-Specifies credentials for a user.  Credential types and requirements vary depending on the operation and security policy of the organization.
+Specifies primary authentication and recovery credentials for a user.  Credential types and requirements vary depending on the provider and security policy of the organization.
 
-Attribute         | DataType                                              | MinLength | MaxLength | Nullable | Unique | Validation
------------------ | ----------------------------------------------------- | --------- | --------- | -------- | -------| ----------
-password          | [Password Object](#password-object)                   |           |           | TRUE     | FALSE  |
-recovery_question | [Recovery Question Object](#recovery-question-object) |           |           | TRUE     | FALSE  |
-provider          | [Provider Object](#provider-object)                   |           |           | TRUE     | FALSE  |
+|-------------------+-------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+| Property          | DataType                                              | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| ----------------- | ----------------------------------------------------- | -------- | -------| -------- | --------- | --------- | ---------- |
+| password          | [Password Object](#password-object)                   | TRUE     | FALSE  | FALSE    |           |           |            |
+| recovery_question | [Recovery Question Object](#recovery-question-object) | TRUE     | FALSE  | FALSE    |           |           |            |
+| provider          | [Provider Object](#provider-object)                   | FALSE    | FALSE  | TRUE     |           |           |            |
+|-------------------+-------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
 
-
-> Some credential values are **write-only**
-
-~~~ json
+~~~json
 {
     "credentials": {
-        "password" : { "value": "GoAw@y123" },
+        "password" : { "value": "tlpWENT2m" },
         "recovery_question": {
             "question": "Who's a major player in the cowboy scene?",
             "answer": "Cowboy Dan"
@@ -172,9 +237,11 @@ provider          | [Provider Object](#provider-object)                   |     
 
 Specifies a password for a user.  A password value is a **write-only** property.  When a user has a valid password and a response object contains a password credential, then the Password Object will be a bare object without the `value` property defined (e.g. `password: {}`) to indicate that a password value exists.
 
-Attribute | DataType | MinLength         | MaxLength | Nullable | Unique | Validation
---------- | -------- | ----------------- | --------- | -------- | ------ | -----------------
-value     | String   | *Password Policy* | 40        | TRUE     | FALSE  | *Password Policy*
+|-----------+----------+----------+--------+----------+-------------------+-----------+-------------------|
+| Property  | DataType | Nullable | Unique | Readonly | MinLength         | MaxLength | Validation        |
+| --------- | -------- | -------- | ------ | -------- | ----------------- | --------- | ----------------- |
+| value     | String   | TRUE     | FALSE  | FALSE    | *Password Policy* | 40        | *Password Policy* |
+|-----------+----------+----------+--------+----------+-------------------+-----------+-------------------|
 
 ##### Default Password Policy
 
@@ -184,27 +251,31 @@ value     | String   | *Password Policy* | 40        | TRUE     | FALSE  | *Pass
   - Lower case
   - Digit
 - Must not contain the user's login or parts of the the login when split on the following characters: `,` `.` `_` `#` `@`
-  - *For example, a user with login i.brock@example.org will not be able set password brockR0cks! as the password contains the login part brock*
+  - *For example, a user with login isaac.brock@example.com will not be able set password brockR0cks! as the password contains the login part brock*
 
 > Password policy requirements can be modified in the Okta Admin UI *(Security -> Policies)*
 
 #### Recovery Question Object
 
-Specifies a secret question and answer that is validated when a user forgets their password.  The answer property is **write-only**.
+Specifies a secret question and answer that is validated when a user forgets their password or unlocks their account.  The answer property is **write-only**.
 
-Attribute | DataType | MinLength | MaxLength | Nullable | Unique | Validation
---------- | -------- | --------- | --------- | -------- | ------ | ----------
-question  | String   | 1         | 100       | TRUE     | FALSE  |
-answer    | String   | 1         | 100       | TRUE     | FALSE  |
+|-----------+----------+----------+--------+----------+-----------+-----------+------------|
+| Property  | DataType | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| --------- | -------- | -------- | ------ | -------- | --------- | --------- | ---------- |
+| question  | String   | TRUE     | FALSE  | FALSE    | 1         | 100       |            |
+| answer    | String   | TRUE     | FALSE  | FALSE    | 1         | 100       |            |
+|-----------+----------+----------+--------+----------+-----------+-----------+------------|
 
 #### Provider Object
 
 Specifies the authentication provider that validates the user's password credential. The user's current provider is managed by the Delegated Authentication settings for your organization. The provider object is **read-only**.
 
-Attribute | DataType | MinLength | MaxLength | Nullable | Unique | Validation
---------- | -------- | --------- | --------- | -------- | ------ | ----------
-type      | `OKTA`, `ACTIVE_DIRECTORY`,`LDAP`, or `FEDERATION`     | 1         | 100       | FALSE    | FALSE  |
-name      | String   | 1         | 100       | TRUE     | FALSE  |
+|-----------+----------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+| Property  | DataType                                           | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| --------- | -------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
+| type      | `OKTA`, `ACTIVE_DIRECTORY`,`LDAP`, or `FEDERATION` | FALSE    | FALSE  | TRUE     |           |           |            |
+| name      | String                                             | TRUE     | FALSE  | TRUE     |           |           |            |
+|-----------+----------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
 
 > `ACTIVE_DIRECTORY` or `LDAP` providers specify the directory instance name as the `name` property.
 
@@ -212,18 +283,20 @@ name      | String   | 1         | 100       | TRUE     | FALSE  |
 
 Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the current status of a user.  The Links Object is used for dynamic discovery of related resources and lifecycle or credential operations.  The Links Object is **read-only**.
 
-Link Relation Type     | Description
----------------------- | -----------
-self                   | The actual user
-activate               | [Lifecycle action](#activate-user) to transition user to `ACTIVE` status
-deactivate             | [Lifecycle action](#deactivate-user) to transition user to `DEPROVISIONED` status
-resetPassword          | [Lifecycle action](#reset-password) to transition user to `RECOVERY` status
-expirePassword         | [Lifecycle action](#expire-password) to transition user to `PASSWORD_EXPIRED` status
-resetFactors           | [Lifecycle action](#reset-factors) to reset all the MFA factors for the user
-unlock                 | [Lifecycle action](#unlock-user) to returns a user to `ACTIVE` status when their current status is `LOCKED_OUT` due to exceeding failed login attempts
-forgotPassword         | [Resets a user's password](#forgot-password) by validating the user's recovery credential.
-changePassword         | [Changes a user's password](#change-password) validating the user's current password
-changeRecoveryQuestion | [Changes a user's recovery credential](#change-recovery-question) by validating the user's current password
+|------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Link Relation Type     | Description                                                                                                                                               |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| self                   | The actual user                                                                                                                                           |
+| activate               | [Lifecycle action](#activate-user) to transition user to `ACTIVE` status                                                                                  |
+| deactivate             | [Lifecycle action](#deactivate-user) to transition user to `DEPROVISIONED` status                                                                         |
+| resetPassword          | [Lifecycle action](#reset-password) to transition user to `RECOVERY` status                                                                               |
+| expirePassword         | [Lifecycle action](#expire-password) to transition user to `PASSWORD_EXPIRED` status                                                                      |
+| resetFactors           | [Lifecycle action](#reset-factors) to reset all the MFA factors for the user                                                                              |
+| unlock                 | [Lifecycle action](#unlock-user) to returns a user to `ACTIVE` status when their current status is `LOCKED_OUT` due to exceeding failed login attempts    |
+| forgotPassword         | [Resets a user's password](#forgot-password) by validating the user's recovery credential.                                                                |
+| changePassword         | [Changes a user's password](#change-password) validating the user's current password                                                                      |
+| changeRecoveryQuestion | [Changes a user's recovery credential](#change-recovery-question) by validating the user's current password                                               |
+|------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 
 ## User Operations
 
@@ -245,7 +318,7 @@ Creates a new user in your Okta organization with or without credentials:
 Parameter   | Description                                                                      | Param Type | DataType                                  | Required | Default
 ----------- | -------------------------------------------------------------------------------- | ---------- | ----------------------------------------- | -------- | -------
 activate    | Executes [activation lifecycle](#activate-user) operation when creating the user | Query      | Boolean                                   | FALSE    | TRUE
-profile     | Profile attributes for user                                                      | Body       | [Profile Object](#profile-object)         | TRUE     |
+profile     | Profile properties for user                                                      | Body       | [Profile Object](#profile-object)         | TRUE     |
 credentials | Credentials for user                                                             | Body       | [Credentials Object](#credentials-object) | FALSE    |
 
 ##### Response Parameters
@@ -257,16 +330,18 @@ All responses return the created [User](#user-model).  Activation of a user is a
 
 > If the user is assigned to an application that is also configured for provisioning, the activation process will also trigger downstream provisioning to the application.  It is possible for a user to login before these applications have been successfully provisioned for the user
 
-Security Q & A | Password | Activate Query Parameter | User Status | Login Credential | Welcome Screen
-:-: | :-: | :-: | :-------: | :------------------: | :-:
-    |     |FALSE|STAGED     |                      |
-    |     |TRUE |PROVISIONED|One-Time Token (Email)|X
-X   |     |FALSE|STAGED     |                      |
-X   |     |TRUE |PROVISIONED|One-Time Token (Email)|X
-    |X    |FALSE|STAGED     |                      |
-    |X    |TRUE |ACTIVE     |Password              |X
-X   |X    |FALSE|STAGED     |                      |
-X   |X    |TRUE |ACTIVE     |Password              |
+|----------------+----------+--------------------------+---------------+------------------------+----------------|
+| Security Q & A | Password | Activate Query Parameter | User Status   | Login Credential       | Welcome Screen |
+| :------------: | :------: | :----------------------: | :-----------: | :--------------------: | :------------: |
+|                |          | FALSE                    | `STAGED`      |                        |                |
+|                |          | TRUE                     | `PROVISIONED` | One-Time Token (Email) | X              |
+| X              |          | FALSE                    | `STAGED`      |                        |                |
+| X              |          | TRUE                     | `PROVISIONED` | One-Time Token (Email) | X              |
+|                | X        | FALSE                    | `STAGED`      |                        |                |
+|                | X        | TRUE                     | `ACTIVE`      | Password               | X              |
+| X              | X        | FALSE                    | `STAGED`      |                        |                |
+| X              | X        | TRUE                     | `ACTIVE`      | Password               |                |
+|----------------+----------+--------------------------+---------------+------------------------+----------------|
 
 #### Create User without Credentials
 {:.api .api-operation}
@@ -276,28 +351,26 @@ Creates a user without a [password](#password-object) or [recovery question & an
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/users?activate=false" \
--d \
-'{
-    "profile": {
-        "firstName": "Isaac",
-        "lastName": "Brock",
-        "email": "isaac@example.org",
-        "secondEmail": "isaac2@example.org",
-        "login": "isaac@example.org",
-        "mobilePhone": "555-415-1337"
-    }
-}'
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "profile": {
+    "firstName": "Isaac",
+    "lastName": "Brock",
+    "email": "isaac.brock@example.com",
+    "login": "isaac.brock@example.com",
+    "mobilePhone": "555-415-1337"
+  }
+}' "https://${org}.okta.com/api/v1/users?activate=false"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
     "id": "00ub0oNGTSWTBKOLGLNR",
     "status": "STAGED",
@@ -310,9 +383,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "profile": {
         "firstName": "Isaac",
         "lastName": "Brock",
-        "email": "isaac@example.org",
-        "secondEmail": "isaac2@example.org",
-        "login": "isaac@example.org",
+        "email": "isaac.brock@example.com",
+        "login": "isaac.brock@example.com",
         "mobilePhone": "555-415-1337"
     },
     "credentials": {
@@ -337,34 +409,32 @@ Creates a user without a [password](#password-object).  When the user is activat
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/users?activate=false" \
--d \
-'{
-    "profile": {
-        "firstName": "Isaac",
-        "lastName": "Brock",
-        "email": "isaac@example.org",
-        "secondEmail": "isaac2@example.org",
-        "login": "isaac@example.org",
-        "mobilePhone": "555-415-1337"
-    },
-    "credentials": {
-        "recovery_question": {
-            "question": "Who\'s a major player in the cowboy scene?",
-            "answer": "Cowboy Dan"
-        }
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "profile": {
+    "firstName": "Isaac",
+    "lastName": "Brock",
+    "email": "isaac.brock@example.com",
+    "login": "isaac.brock@example.com",
+    "mobilePhone": "555-415-1337"
+  },
+  "credentials": {
+    "recovery_question": {
+      "question": "Who'\''s a major player in the cowboy scene?",
+      "answer": "Cowboy Dan"
     }
-}'
+  }
+}' "https://${org}.okta.com/api/v1/users?activate=false"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
     "id": "00ub0oNGTSWTBKOLGLNR",
     "status": "STAGED",
@@ -377,9 +447,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "profile": {
         "firstName": "Isaac",
         "lastName": "Brock",
-        "email": "isaac@example.org",
-        "secondEmail": "isaac2@example.org",
-        "login": "isaac@example.org",
+        "email": "isaac.brock@example.com",
+        "login": "isaac.brock@example.com",
         "mobilePhone": "555-415-1337"
     },
     "credentials": {
@@ -409,31 +478,29 @@ Creates a user without a [recovery question & answer](#recovery-question-object)
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/users?activate=false" \
--d \
-'{
-    "profile": {
-        "firstName": "Isaac",
-        "lastName": "Brock",
-        "email": "isaac@example.org",
-        "secondEmail": "isaac2@example.org",
-        "login": "isaac@example.org",
-        "mobilePhone": "555-415-1337"
-    },
-    "credentials": {
-        "password" : { "value": "GoAw@y123" }
-    }
-}'
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "profile": {
+    "firstName": "Isaac",
+    "lastName": "Brock",
+    "email": "isaac.brock@example.com",
+    "login": "isaac.brock@example.com",
+    "mobilePhone": "555-415-1337"
+  },
+  "credentials": {
+    "password" : { "value": "tlpWENT2m" }
+  }
+}' "https://${org}.okta.com/api/v1/users?activate=false"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
     "id": "00ub0oNGTSWTBKOLGLNR",
     "status": "STAGED",
@@ -446,9 +513,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "profile": {
       "firstName": "Isaac",
         "lastName": "Brock",
-        "email": "isaac@example.org",
-        "secondEmail": "isaac2@example.org",
-        "login": "isaac@example.org",
+        "email": "isaac.brock@example.com",
+        "login": "isaac.brock@example.com",
         "mobilePhone": "555-415-1337"
     },
     "credentials": {
@@ -476,35 +542,33 @@ Creates a new user with a [password](#password-object) and [recovery question & 
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/users?activate=false" \
--d \
-'{
-    "profile": {
-        "firstName": "Isaac",
-        "lastName": "Brock",
-        "email": "isaac@example.org",
-        "secondEmail": "isaac2@example.org",
-        "login": "isaac@example.org",
-        "mobilePhone": "555-415-1337"
-    },
-    "credentials": {
-        "password" : { "value": "GoAw@y123" },
-        "recovery_question": {
-            "question": "Who\'s a major player in the cowboy scene?",
-            "answer": "Cowboy Dan"
-        }
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "profile": {
+    "firstName": "Isaac",
+    "lastName": "Brock",
+    "email": "isaac.brock@example.com",
+    "login": "isaac.brock@example.com",
+    "mobilePhone": "555-415-1337"
+  },
+  "credentials": {
+    "password" : { "value": "tlpWENT2m" },
+    "recovery_question": {
+      "question": "Who'\''s a major player in the cowboy scene?",
+      "answer": "Cowboy Dan"
     }
-}'
+  }
+}' "https://${org}.okta.com/api/v1/users?activate=false"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
     "id": "00ub0oNGTSWTBKOLGLNR",
     "status": "STAGED",
@@ -517,9 +581,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "profile": {
         "firstName": "Isaac",
         "lastName": "Brock",
-        "email": "isaac@example.org",
-        "secondEmail": "isaac2@example.org",
-        "login": "isaac@example.org",
+        "email": "isaac.brock@example.com",
+        "login": "isaac.brock@example.com",
         "mobilePhone": "555-415-1337"
     },
     "credentials": {
@@ -567,7 +630,7 @@ Fetched [User](#user-model)
 
 Invalid `id` will return a `404 Not Found` status code.
 
-~~~ ruby
+~~~http
 HTTP/1.1 404 Not Found
 Content-Type: application/json
 
@@ -588,17 +651,18 @@ Fetches the current user linked to API token or session cookie
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/users/me"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/me"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
     "id": "00ub0oNGTSWTBKOLGLNR",
     "status": "ACTIVE",
@@ -611,9 +675,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "profile": {
         "firstName": "Isaac",
         "lastName": "Brock",
-        "email": "isaac@example.org",
-        "secondEmail": "isaac2@example.org",
-        "login": "isaac@example.org",
+        "email": "isaac.brock@example.com",
+        "login": "isaac.brock@example.com",
         "mobilePhone": "555-415-1337"
     },
     "credentials": {
@@ -660,17 +723,18 @@ Fetches a specific user when you know the user's `id`. See the filters section b
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
     "id": "00ub0oNGTSWTBKOLGLNR",
     "status": "ACTIVE",
@@ -683,9 +747,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "profile": {
         "firstName": "Isaac",
         "lastName": "Brock",
-        "email": "isaac@example.org",
-        "secondEmail": "isaac2@example.org",
-        "login": "isaac@example.org",
+        "email": "isaac.brock@example.com",
+        "login": "isaac.brock@example.com",
         "mobilePhone": "555-415-1337"
     },
     "credentials": {
@@ -734,17 +797,18 @@ Fetches a specific user when you know the user's `login`
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/users/isaac%40example.org"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/isaac.brock@example.com"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
     "id": "00ub0oNGTSWTBKOLGLNR",
     "status": "ACTIVE",
@@ -757,9 +821,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "profile": {
         "firstName": "Isaac",
         "lastName": "Brock",
-        "email": "isaac@example.org",
-        "secondEmail": "isaac2@example.org",
-        "login": "isaac@example.org",
+        "email": "isaac.brock@example.com",
+        "login": "isaac.brock@example.com",
         "mobilePhone": "555-415-1337"
     },
     "credentials": {
@@ -808,17 +871,18 @@ Fetches a specific user when you know the user's `login shortname` and the short
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/users/isaac"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/isaac.brock"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
     "id": "00ub0oNGTSWTBKOLGLNR",
     "status": "ACTIVE",
@@ -831,9 +895,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "profile": {
         "firstName": "Isaac",
         "lastName": "Brock",
-        "email": "isaac@example.org",
-        "secondEmail": "isaac2@example.org",
-        "login": "isaac@example.org",
+        "email": "isaac.brock@example.com",
+        "login": "isaac.brock@example.com",
         "mobilePhone": "555-415-1337"
     },
     "credentials": {
@@ -887,18 +950,16 @@ Enumerates users in your organization with pagination.  A subset of users can be
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter | Description                                                                          | Param Type | DataType | Required | Default
---------- | ------------------------------------------------------------------------------------ | ---------- | -------- | -------- | -------
-q         | Searches `firstName`, `lastName`, and `email` attributes of users for matching value | Query      | String   | FALSE    |
-limit     | Specified the number of results                                                      | Query      | Number   | FALSE    | 200
-filter    | [Filter expression](/docs/getting_started/design_principles.html#filtering) for users   | Query      | String   | FALSE    |
-after     | Specifies the pagination cursor for the next page of users                           | Query      | String   | FALSE    |
+Parameter | Description                                                                           | Param Type | DataType | Required | Default
+--------- | ------------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------
+q         | Searches `firstName`, `lastName`, and `email` properties of users for matching value  | Query      | String   | FALSE    |
+limit     | Specified the number of results                                                       | Query      | Number   | FALSE    | 200
+filter    | [Filter expression](/docs/getting_started/design_principles.html#filtering) for users | Query      | String   | FALSE    |
+after     | Specifies the pagination cursor for the next page of users                            | Query      | String   | FALSE    |
 
 > The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination)
 
 > Search currently performs a startsWith match but it should be considered an implementation detail and may change without notice in the future
-
-> The limit of 200 applies to new organizations and will be rolled out to existing organizations over time.
 
 ###### Filters
 
@@ -913,9 +974,9 @@ Filter                                         | Description
 `status eq "PASSWORD_EXPIRED"`                 | Users that have a `status` of `PASSWORD_EXPIRED`
 `status eq "LOCKED_OUT"`                       | Users that have a `status` of `LOCKED_OUT`
 `status eq "DEPROVISIONED"`                    | Users that have a `status` of `DEPROVISIONED`
-`lastUpdated lt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Users last updated before a specific datetime
-`lastUpdated eq "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Users last updated at a specific datetime
-`lastUpdated gt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Users last updated after a specific datetime
+`lastUpdated lt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Users last updated before a specific timestamp
+`lastUpdated eq "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Users last updated at a specific timestamp
+`lastUpdated gt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Users last updated after a specific timestamp
 `id eq "00u1ero7vZFVEIYLWPBN"`                 | Users with a specified `id`
 `profile.login eq "login@example.com"`         | Users with a specified `login`
 `profile.email eq "email@example.com"`         | Users with a specified `email`*
@@ -963,17 +1024,18 @@ The default user limit is set to a very high number due to historical reasons wh
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/users?limit=200"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users?limit=200"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ ruby
+~~~http
 HTTP/1.1 200 OK
 Content-Type: application/json
 Link: <https://your-domain.okta.com/api/v1/users?limit=200>; rel="self"
@@ -992,9 +1054,8 @@ Link: <https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limi
         "profile": {
             "firstName": "Isaac",
             "lastName": "Brock",
-            "email": "isaac@example.org",
-            "secondEmail": "isaac2@example.org",
-            "login": "isaac@example.org",
+            "email": "isaac.brock@example.com",
+            "login": "isaac.brock@example.com",
             "mobilePhone": "555-415-1337"
         },
         "credentials": {
@@ -1021,9 +1082,9 @@ Link: <https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limi
         "profile": {
             "firstName": "Eric",
             "lastName": "Judy",
-            "email": "eric@example.org",
-            "secondEmail": "isaac2@example.org",
-            "login": "eric@example.org",
+            "email": "eric.judy@example.com",
+            "secondEmail": "eric@example.org",
+            "login": "eric.judy@example.com",
             "mobilePhone": "555-415-2011"
         },
         "credentials": {
@@ -1071,11 +1132,12 @@ Searches for user by `firstName`, `lastName`, or `email` value.  This operation 
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/users?q=er&limit=1"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users?q=eric&limit=1"
 ~~~
 
 ##### Response Example
@@ -1095,9 +1157,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "profile": {
             "firstName": "Eric",
             "lastName": "Judy",
-            "email": "eric@example.org",
-            "secondEmail": "eric2@example.org",
-            "login": "eric@example.org",
+            "email": "eric.judy@example.com",
+            "secondEmail": "eric@example.org",
+            "login": "eric.judy@example.com",
             "mobilePhone": "555-415-2011"
         },
         "credentials": {
@@ -1145,11 +1207,12 @@ Enumerates all users that have been updated since a specific timestamp.  Use thi
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/users?filter=lastUpdated+gt+\"2013-07-01T00:00:00.000Z\""
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users?filter=lastUpdated+gt+\"2013-07-01T00:00:00.000Z\""
 ~~~
 
 ##### Response Example
@@ -1168,9 +1231,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "profile": {
             "firstName": "Eric",
             "lastName": "Judy",
-            "email": "eric@example.org",
-            "secondEmail": "eric2@example.org",
-            "login": "eric@example.org",
+            "email": "eric.judy@example.com",
+            "secondEmail": "eric@example.org",
+            "login": "eric.judy@example.com",
             "mobilePhone": "555-415-2011"
         },
         "credentials": {
@@ -1220,11 +1283,12 @@ Enumerates all users that have a specific status.
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/users?filter=status+eq+\"ACTIVE\"+or+status+eq+\"RECOVERY\""
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users?filter=status+eq+\"ACTIVE\"+or+status+eq+\"RECOVERY\""
 ~~~
 
 ##### Response Example
@@ -1244,9 +1308,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "profile": {
             "firstName": "Eric",
             "lastName": "Judy",
-            "email": "eric@example.org",
-            "secondEmail": "eric2@example.org",
-            "login": "eric@example.org",
+            "email": "eric.judy@example.com",
+            "secondEmail": "eric@example.org",
+            "login": "eric.judy@example.com",
             "mobilePhone": "555-415-2011"
         },
         "credentials": {
@@ -1289,14 +1353,14 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Update User
 {:.api .api-operation}
 
-> Use the POST method to make a partial update. Use the PUT method to delete unspecified attributes.
+> Use the `POST` method to make a partial update and the `PUT` method to delete unspecified properties.
 
 <span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /users/*:id*</span>
 
-Update a user's profile and/or credentials.
+Update a user's profile and/or credentials using strict-update semantics
 
-> All profile attributes must be specified when updating a user's profile with this method. Any attribute not specified
-is deleted. Do not use this method for partial updates.
+> All profile properties must be specified when updating a user's profile with a `PUT` method. Any attribute not specified
+in the request will be deleted. **Do not use `PUT` method for partial updates.**
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -1307,9 +1371,7 @@ id          | `id` of user to update      | URL        | String                 
 profile     | Updated profile for user    | Body       | [Profile Object](#profile-object)         | FALSE    |
 credentials | Update credentials for user | Body       | [Credentials Object](#credentials-object) | FALSE    |
 
-`profile` and `credentials` can be updated independently or with a single request.
-
-> All profile attributes must be specified when updating a user's profile.  **Partial updates are not supported**!
+`profile` and `credentials` can be updated independently or together with a single request.
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -1322,29 +1384,26 @@ Updated [User](#user-model)
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X PUT \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X PUT "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR" \
--d \
-'{
-    "profile": {
-        "firstName": "Isaac",
-        "lastName": "Brock",
-        "email": "isaac@example.org",
-        "secondEmail": "isaac2@example.org",
-        "login": "isaac.brock@example.org",
-        "mobilePhone": "555-415-1337",
-        "isManager": false
-    }
-}'
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "profile": {
+    "firstName": "Isaac",
+    "lastName": "Brock",
+    "email": "isaac.brock@update.example.com",
+    "login": "isaac.brock@example.com",
+    "mobilePhone": "555-415-1337"
+  }
+}' "https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
     "id": "00ub0oNGTSWTBKOLGLNR",
     "status": "ACTIVE",
@@ -1352,16 +1411,14 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "activated": "2013-06-24T16:39:19.000Z",
     "statusChanged": "2013-06-24T16:39:19.000Z",
     "lastLogin": "2013-06-24T17:39:19.000Z",
-    "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "lastUpdated": "2015-07-02T21:36:25.344Z",
     "passwordChanged": "2013-07-02T21:36:25.344Z",
     "profile": {
         "firstName": "Isaac",
         "lastName": "Brock",
-        "email": "isaac@example.org",
-        "secondEmail": "isaac2@example.org",
-        "login": "isaac.brock@example.org",
-        "mobilePhone": "555-415-1337",
-        "isManager": false
+        "email": "isaac.brock@update.example.com",
+        "login": "isaac.brock@example.com",
+        "mobilePhone": "555-415-1337"
     },
     "credentials": {
         "password": {},
@@ -1401,10 +1458,10 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:id*</span>
 
-Update a user's profile and/or credentials. Use this method for a partial update.
+Update a user's profile and/or credentials with partial update semantics.
 
-> Only the profile attributes to change must be specified when updating a user's profile with this method. Any attribute not specified
-is unchanged. Use this method for partial updates.
+> Only the profile properties specified in the request will be modified when using the `POST` method. Any attribute not specified
+in the request will not be modified or deleted. **Use `POST` method for partial updates.**
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -1428,25 +1485,22 @@ Updated [User](#user-model)
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-This example updates the second email field only.
-
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR" \
--d \
-'{
-    "profile": {
-        "secondEmail": "isaacDirect@example.org"
-    }
-}'
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "profile": {
+    "email": "isaac.brock@update.example.com"
+  }
+}' "https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
     "id": "00ub0oNGTSWTBKOLGLNR",
     "status": "ACTIVE",
@@ -1454,16 +1508,14 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "activated": "2013-06-24T16:39:19.000Z",
     "statusChanged": "2013-06-24T16:39:19.000Z",
     "lastLogin": "2013-06-24T17:39:19.000Z",
-    "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "lastUpdated": "2015-07-02T21:36:25.344Z",
     "passwordChanged": "2013-07-02T21:36:25.344Z",
     "profile": {
         "firstName": "Isaac",
         "lastName": "Brock",
-        "email": "isaac@example.org",
-        "secondEmail": "isaacDirect@example.org",
-        "login": "isaac.brock@example.org",
-        "mobilePhone": "555-415-1337",
-        "isManager": false
+        "email": "isaac.brock@update.example.com",
+        "login": "isaac.brock@example.com",
+        "mobilePhone": "555-415-1337"
     },
     "credentials": {
         "password": {},
@@ -1514,17 +1566,16 @@ This is an administrative operation and does not validate existing user credenti
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X PUT "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR" \
--d \
-'{
-    "credentials": {
-        "password" : { "value": "UpdatedP@55w0rd" }
-    }
-}'
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "credentials": {
+    "password" : { "value": "uTVM,TPw55" }
+  }
+}' "https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
 ~~~
 
 ##### Response Example
@@ -1543,9 +1594,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "profile": {
         "firstName": "Isaac",
         "lastName": "Brock",
-        "email": "isaac@example.org",
-        "secondEmail": "isaac2@example.org",
-        "login": "isaac@example.org",
+        "email": "isaac.brock@example.com",
+        "login": "isaac.brock@example.com",
         "mobilePhone": "555-415-1337"
     },
     "credentials": {
@@ -1592,20 +1642,19 @@ This is an administrative operation and does not validate existing user credenti
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X PUT "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR" \
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "credentials": {
-        "recovery_question": {
-            "question": "I have a new recovery question?",
-            "answer": "Yes, I do!"
-        }
+    "recovery_question": {
+      "question": "How many roads must a man walk down?",
+      "answer": "forty two"
+    }
   }
-}'
+}' "https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
 ~~~
 
 ##### Response Example
@@ -1624,9 +1673,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "profile": {
         "firstName": "Isaac",
         "lastName": "Brock",
-        "email": "isaac@example.org",
-        "secondEmail": "isaac2@example.org",
-        "login": "isaac@example.org",
+        "email": "isaac.brock@example.com",
+        "login": "isaac.brock@example.com",
         "mobilePhone": "555-415-1337"
     },
     "credentials": {
@@ -1689,11 +1737,12 @@ Array of App Links
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/appLinks"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/appLinks"
 ~~~
 
 ##### Response Example
@@ -1774,11 +1823,12 @@ Array of [Groups](groups.html)
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/groups"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/groups"
 ~~~
 
 ##### Response Example
@@ -1831,7 +1881,7 @@ Returns empty object by default. When `sendEmail` is `false`, returns an activat
 
 ~~~json
 {
-  "activationUrl": "https://your-domain.okta.com/welcome/XE6wE17zmphl3KqAPFxO""
+  "activationUrl": "https://your-domain.okta.com/welcome/XE6wE17zmphl3KqAPFxO"
 }
 ~~~
 
@@ -1840,17 +1890,18 @@ Returns empty object by default. When `sendEmail` is `false`, returns an activat
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate?sendEmail=false"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate?sendEmail=false"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
   "activationUrl": "https://your-domain.okta.com/welcome/XE6wE17zmphl3KqAPFxO"
 }
@@ -1880,17 +1931,18 @@ Returns an empty object.
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ ruby
+~~~http
 HTTP/1.1 200 OK
 Content-Type: application/json
 ~~~
@@ -1917,17 +1969,19 @@ id        | `id` of user | URL        | String   | TRUE     |
 Returns an empty object
 
 ##### Request Example
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/unlock"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/unlock"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ ruby
+~~~http
 HTTP/1.1 200 OK
 Content-Type: application/json
 ~~~
@@ -1965,11 +2019,12 @@ Returns an empty object by default. When `sendEmail` is `false`, returns a link 
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password?sendEmail=false"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password?sendEmail=false"
 ~~~
 
 ##### Response Example
@@ -1987,12 +2042,12 @@ curl -v -H "Authorization: SSWS yourtoken" \
 To convert a user to a federated user, pass `FEDERATED` as the ***provider*** in the [Provider Object](#provider-object). The `sendEmail`
 parameter must be false or omitted for this type of conversion.
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/user/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password?provider=FEDERATION&sendEmail=false"
-
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password?provider=FEDERATION&sendEmail=false"
 ~~~
 
 ##### Response Example
@@ -2003,8 +2058,6 @@ curl -v -H "Authorization: SSWS yourtoken" \
   "resetPasswordUrl": "https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"
 }
 ~~~
-
-
 
 ### Expire Password
 {:.api .api-operation}
@@ -2035,7 +2088,7 @@ Returns an the complete user object by default. When `tempPassword` is `true`, r
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
+~~~ shell
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -2045,7 +2098,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
     "id": "00ub0oNGTSWTBKOLGLNR",
     "status": "ACTIVE",
@@ -2058,9 +2111,8 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "profile": {
         "firstName": "Isaac",
         "lastName": "Brock",
-        "email": "isaac@example.org",
-        "secondEmail": "isaac2@example.org",
-        "login": "isaac@example.org",
+        "email": "isaac.brock@example.com",
+        "login": "isaac.brock@example.com",
         "mobilePhone": "555-415-1337"
     },
     "credentials": {
@@ -2121,29 +2173,28 @@ Returns an empty object by default.
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors”
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ ruby
+~~~http
 HTTP/1.1 200 OK
 Content-Type: application/json
 ~~~
-
-
 
 ## Credential Operations
 
 ### Forgot Password
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:id*/lifecycle/forgot_password</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:id*/credentials/forgot_password</span>
 
 Generates a one-time token (OTT) that can be used to reset a user's password.  The user will be required to validate their security question's answer when visiting the reset link.  This operation can only be performed on users with a valid [recovery question credential](#recovery-question-object) and have an `ACTIVE` status.
 
@@ -2165,16 +2216,18 @@ Returns an empty object by default. When `sendEmail` is `false`, returns a link 
   "resetPasswordUrl": "https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"
 }
 ~~~
+
 > This operation does not affect the status of the user.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/forgot_password?sendEmail=false"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password?sendEmail=false"
 ~~~
 
 ##### Response Example
@@ -2211,16 +2264,15 @@ recovery_question | Answer to user's current recovery question | Body       | [R
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password" \
--d \
-'{
-    "password": { "value": "MyN3wP@55w0rd" },
-    "recovery_question": { "answer": "Cowboy Dan" }
-}'
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "password": { "value": "uTVM,TPw55" },
+  "recovery_question": { "answer": "Cowboy Dan" }
+}' "https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
 ~~~
 
 ##### Response Example
@@ -2267,16 +2319,15 @@ newPassword | New password for user     | Body       | [Password Object](#passwo
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password" \
--d \
-'{
-    "oldPassword": { "value": "GoAw@y123" },
-    "newPassword": { "value": "MyN3wP@55w0rd" }
-}'
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "oldPassword": { "value": "tlpWENT2m" },
+  "newPassword": { "value": "uTVM,TPw55" }
+}' "https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
 ~~~
 
 ##### Response Example
@@ -2323,19 +2374,18 @@ recovery_question | New recovery question & answer for user | Body       | [Reco
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question" \
--d \
-'{
-    "password": { "value": "GoAw@y123" },
-    "recovery_question": {
-      "question" : "What happens when I update my question?",
-      "answer": "My recovery credentials are updated"
-    }
-}'
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "password": { "value": "tlpWENT2m" },
+  "recovery_question": {
+    "question": "How many roads must a man walk down?",
+    "answer": "forty two"
+  }
+}' "https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
 ~~~
 
 ##### Response Example
@@ -2346,7 +2396,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "credentials": {
         "password": {},
         "recovery_question": {
-            "question": "What happens when I update my question?"
+            "question": "How many roads must a man walk down?"
         },
         "provider": {
            "type": "OKTA",

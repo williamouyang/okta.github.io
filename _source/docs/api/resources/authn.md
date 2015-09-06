@@ -9,7 +9,7 @@ redirect_from: "/docs/api/rest/authn.html"
 
 ## Overview
 
-The Okta Authentication API provides operations to authenticate users, perform multi-factor enrollment and verification, recover forgotten passwords, and unlock accounts. It can be used as a standalone API to provide the identity layer on top of your existing application, or it can be integrated with the Okta [Sessions API](sessions.html) to obtain an Okta [session cookie](#/docs/examples/session_cookie.html) and access apps within Okta.  
+The Okta Authentication API provides operations to authenticate users, perform multi-factor enrollment and verification, recover forgotten passwords, and unlock accounts. It can be used as a standalone API to provide the identity layer on top of your existing application, or it can be integrated with the Okta [Sessions API](sessions.html) to obtain an Okta [session cookie](#/docs/examples/session_cookie.html) and access apps within Okta.
 
 The API is targeted for developers who want to build their own end-to-end login experience to replace the built-in Okta login experience and addresses the following key scenarios:
 
@@ -21,18 +21,18 @@ The API is targeted for developers who want to build their own end-to-end login 
 
 ## Authentication Model
 
-The Authentication API is a *stateful* API that implements a finite state machine with defined states and required transitions between those states.  State is transferred with a `stateToken` that is issued for each authentication or recovery transaction and must be passed with each request.  The Authentication API leverages the [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) format to publish `next` and `prev` links for the current transaction state which should be used to transition the state machine.  
+The Authentication API is a *stateful* API that implements a finite state machine with defined states and required transitions between those states.  State is transferred with a `stateToken` that is issued for each authentication or recovery transaction and must be passed with each request.  The Authentication API leverages the [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) format to publish `next` and `prev` links for the current transaction state which should be used to transition the state machine.
 
-
-Attribute     | Description                                                                                           | DataType                                                       | MinLength | MaxLength | Nullable | Unique | Readonly
-------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | --------- | --------- | -------- | ------ | --------
-stateToken    | ephemeral token that encodes the current state of an authentication or recovery transaction           | String                                                         |           |           | TRUE     | FALSE  | TRUE
-expiresAt     | lifetime of the `stateToken`, `recoveryToken`, or `sessionToken` (See [Tokens](#tokens))              | Date                                                           |           |           | TRUE     | FALSE  | TRUE
-status        | current state of the  transaction                                                                     | [Authentication Status](#authentication-status)                |           |           | FALSE    | FALSE  | TRUE
-relayState    | Optional state value that is persisted for the lifetime of the authentication or recovery transaction | String                                                         |           | 2048      | TRUE     | FALSE  | TRUE
-_embedded     | [embedded resources](#embedded-resources) for the current `status`                                    | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) |           |           | TRUE     | FALSE  | TRUE
-_links        | [link relations](#links-object) for the current `status`                                              | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) |           |           | TRUE     | FALSE  | TRUE
- 
+|---------------+-------------------------------------------------------------------------------------------------------+----------------------------------------------------------------+----------+----------+-----------+-----------+------------|
+| Property      | Description                                                                                           | DataType                                                       | Nullable | Readonly | MinLength | MaxLength | Validation |
+| ------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | -------- | -------- | --------- | --------- | ---------- |
+| stateToken    | ephemeral token that encodes the current state of an authentication or recovery transaction           | String                                                         | TRUE     | TRUE     |           |           |            |
+| expiresAt     | lifetime of the `stateToken`, `recoveryToken`, or `sessionToken` (See [Tokens](#tokens))              | Date                                                           | TRUE     | TRUE     |           |           |            |
+| status        | current state of the  transaction                                                                     | [Authentication Status](#authentication-status)                | FALSE    | TRUE     |           |           |            |
+| relayState    | Optional state value that is persisted for the lifetime of the authentication or recovery transaction | String                                                         | TRUE     | TRUE     |           | 2048      |            |
+| _embedded     | [embedded resources](#embedded-resources) for the current `status`                                    | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | TRUE     |           |           |            |
+| _links        | [link relations](#links-object) for the current `status`                                              | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | TRUE     |           |           |            |
+|---------------+-------------------------------------------------------------------------------------------------------+----------------------------------------------------------------+----------+----------+-----------+-----------+------------|
 
 ### Authentication Status
 
@@ -40,17 +40,19 @@ _links        | [link relations](#links-object) for the current `status`        
 
 An authentication or recovery transaction has one of the following statuses:
 
-Value               | Description                                                                              | Next Action
-------------------- | ---------------------------------------------------------------------------------------- |
-PASSWORD_EXPIRED    | The user's password was successfully validated but is expired.                           | POST to the `next` link relation to [change the user's expired password](#change-expired-password).
-RECOVERY            | The user has requested a recovery token to reset their password or unlock their account. | POST to the `next` link relation to [answer the user's recovery question](#answer-recovery-question).
-PASSWORD_RESET      | The user successfully answered their recovery question and must to set a new password.   | POST to the `next` link relation to [reset the user's password](#reset-password).
-LOCKED_OUT          | The user account is locked; self-service unlock or admin unlock is required.             | POST to the `unlock` link relation to perform a [self-service unlock](#unlock-account).
-MFA_ENROLL          | The user must select and enroll an available factor for additional verification.         | POST to the `enroll` link relation for a specific factor to [enroll the factor](#enroll-factor).
-MFA_ENROLL_ACTIVATE | The user must activate the factor to complete enrollment.                                | POST to the `next` link relation to [activate the factor](#activate-factor).
-MFA_REQUIRED        | The user must provide additional verification with a previously enrolled factor.         | POST to the `verify` link relation for a specific factor to [provide additional verification](#verify-factor).
-MFA_CHALLENGE       | The user must verify the factor-specific challenge.                                      | POST to the `verify` link relation to [verify the factor](#verify-factor).
-SUCCESS             | The transaction has completed successfully                                               |
+|---------------------+------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------|
+| Value               | Description                                                                              | Next Action                                                                                                    |
+| ------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------|
+| PASSWORD_EXPIRED    | The user's password was successfully validated but is expired.                           | POST to the `next` link relation to [change the user's expired password](#change-expired-password).            |
+| RECOVERY            | The user has requested a recovery token to reset their password or unlock their account. | POST to the `next` link relation to [answer the user's recovery question](#answer-recovery-question).          |
+| PASSWORD_RESET      | The user successfully answered their recovery question and must to set a new password.   | POST to the `next` link relation to [reset the user's password](#reset-password).                              |
+| LOCKED_OUT          | The user account is locked; self-service unlock or admin unlock is required.             | POST to the `unlock` link relation to perform a [self-service unlock](#unlock-account).                        |
+| MFA_ENROLL          | The user must select and enroll an available factor for additional verification.         | POST to the `enroll` link relation for a specific factor to [enroll the factor](#enroll-factor).               |
+| MFA_ENROLL_ACTIVATE | The user must activate the factor to complete enrollment.                                | POST to the `next` link relation to [activate the factor](#activate-factor).                                   |
+| MFA_REQUIRED        | The user must provide additional verification with a previously enrolled factor.         | POST to the `verify` link relation for a specific factor to [provide additional verification](#verify-factor). |
+| MFA_CHALLENGE       | The user must verify the factor-specific challenge.                                      | POST to the `verify` link relation to [verify the factor](#verify-factor).                                     |
+| SUCCESS             | The transaction has completed successfully                                               |                                                                                                                |
+|---------------------+------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------|
 
 You can advance the authentication or recovery transaction to the next status by posting a **status-specific** request to the the `next` link relation published in the [JSON HAL links object](#links-object) for the response.  [Enrolling a factor](#enroll-factor) and [verifying a factor](#verify-factor) do not have `next` link relationships as the end-user must make a selection of which factor to enroll or verify.
 
@@ -88,7 +90,6 @@ You can advance the authentication or recovery transaction to the next status by
 }
 ~~~
 
-
 ### Tokens
 
 Authentication API operations will return different token types depending on the [status](#authentication-status) of the authentication or recovery transaction.
@@ -108,11 +109,11 @@ HTTP/1.1 401 Unauthorized
 Content-Type: application/json
 
 {
-    "errorCode": "E0000011",
-    "errorSummary": "Invalid token provided",
-    "errorLink": "E0000011",
-    "errorId": "oaeY-4G_TBUTBSZAn9n7oZCfw",
-    "errorCauses": []
+  "errorCode": "E0000011",
+  "errorSummary": "Invalid token provided",
+  "errorLink": "E0000011",
+  "errorId": "oaeY-4G_TBUTBSZAn9n7oZCfw",
+  "errorCauses": []
 }
 ~~~
 
@@ -152,30 +153,33 @@ One-time token issued as `sessionToken` response parameter when an authenticatio
 - The token can be exchanged for a session with the [Session API](sessions.html#create-session) or converted to a [session cookie](/docs/examples/session_cookie.html).
 - The lifetime of the `sessionToken` is the same as the lifetime of a user's session and managed by the organization's security policy.
 
-### Factor Result 
+### Factor Result
 
 The `MFA_CHALLENGE` state can return an additional attribute **factorResult** that provides additional context for the last factor verification attempt. The following table shows the possible values for this attribute.
 
-factorResult           | Description
----------------------- | -------------------------------------------------------------------------------------------------------------------------------
-`WAITING`              | Factor verification has started but not yet completed (e.g user hasn't answered phone call yet)
-`CANCELLED`            | Factor verification was canceled by user
-`TIMEOUT`              | Unable to verify factor within the allowed time window
-`TIME_WINDOW_EXCEEDED` | Factor was successfully verified but outside of the computed time window.  Another verification is required in current time window.
-`PASSCODE_REPLAYED`    | Factor was previously verified within the same time window.  User must wait another time window and retry with a new verification.
-`ERROR`                | Unexpected server error occurred verifying factor.
-
+|------------------------+-------------------------------------------------------------------------------------------------------------------------------------|
+| factorResult           | Description                                                                                                                         |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------|
+| `WAITING`              | Factor verification has started but not yet completed (e.g user hasn't answered phone call yet)                                     |
+| `CANCELLED`            | Factor verification was canceled by user                                                                                            |
+| `TIMEOUT`              | Unable to verify factor within the allowed time window                                                                              |
+| `TIME_WINDOW_EXCEEDED` | Factor was successfully verified but outside of the computed time window.  Another verification is required in current time window. |
+| `PASSCODE_REPLAYED`    | Factor was previously verified within the same time window.  User must wait another time window and retry with a new verification.  |
+| `ERROR`                | Unexpected server error occurred verifying factor.                                                                                  |
+|------------------------+-------------------------------------------------------------------------------------------------------------------------------------|
 
 ### Links Object
 
 Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the current authentication status using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  These links are used to transition the [authentication status](#authentication-status) of the [state token](#state-token).
 
-Link Relation Type | Description
------------------- | -----------------------------------------------------------------------------------------------------------
-next               | Transitions the authentication state machine to the next state.  **Note: The `name` of the link relationship will provide a hint of the next operation required**
-prev               | Transitions the authentication state machine to the previous state.
-cancel             | Cancels the current authentication transaction and revokes the [state token](#state-token).
-resend             | Resends a challenge or OTP to a device
+|--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Link Relation Type | Description                                                                                                                                                       |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| next               | Transitions the authentication state machine to the next state.  **Note: The `name` of the link relationship will provide a hint of the next operation required** |
+| prev               | Transitions the authentication state machine to the previous state.                                                                                               |
+| cancel             | Cancels the current authentication transaction and revokes the [state token](#state-token).                                                                       |
+| resend             | Resends a challenge or OTP to a device                                                                                                                            |
+|--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
 > The Links Object is **read-only**
 
@@ -183,23 +187,25 @@ resend             | Resends a challenge or OTP to a device
 
 ### User Object
 
-A subset of attributes of a [User](users.html#user-model) is available after successful primary authentication or during recovery.
+A subset of properties of a [User](users.html#user-model) is available after successful primary authentication or during recovery.
 
-Attribute         | Description              | DataType                                              | MinLength | MaxLength | Nullable | Unique | Readonly
------------------ | ------------------------ | ----------------------------------------------------- | --------- | --------- | -------- | ------ | --------
-id                | unique key for user      | String                                                |           |           | FALSE    | TRUE   | TRUE
-profile           | user's profile           | [User Profile Object](#user-profile-object)           |           |           | FALSE    | FALSE  | TRUE
-recovery_question | user's recovery question | [Recovery Question Object](#recovery-question-object) |           |           | TRUE     | FALSE  | TRUE
+|-------------------+--------------------------+-------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+| Property          | Description              | DataType                                              | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| ----------------- | ------------------------ | ----------------------------------------------------- | -------- | ------ | -------- | --------- | ----------| ---------- |
+| id                | unique key for user      | String                                                | FALSE    | TRUE   | TRUE     |           |           |            |
+| profile           | user's profile           | [User Profile Object](#user-profile-object)           | FALSE    | FALSE  | TRUE     |           |           |            |
+| recovery_question | user's recovery question | [Recovery Question Object](#recovery-question-object) | TRUE     | FALSE  | TRUE     |           |           |            |
+|-------------------+--------------------------+-------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
 
 ~~~json
 {
  "id": "00udnlQDVLVRIVXESCMZ",
  "profile": {
-      "username": "isaac@example.org",
-      "firstName":"Isaac",
-      "lastName": "Brock",
-      "locale": "en_US",
-      "timeZone": "America/Los_Angeles"
+    "username": "dade.murphy@example.com",
+    "firstName":"Dade",
+    "lastName": "Murphy",
+    "locale": "en_US",
+    "timeZone": "America/Los_Angeles"
  },
  "recovery_question": {
     "question": "Who's a major player in the cowboy scene?"
@@ -209,37 +215,42 @@ recovery_question | user's recovery question | [Recovery Question Object](#recov
 
 #### User Profile Object
 
-Subset of [profile attributes](users.html#profile-object) for a user
+Subset of [profile properties](users.html#profile-object) for a user
 
-Attribute | Description                                                                                                                 | DataType                                                                                            | MinLength | MaxLength | Nullable | Unique | Readonly
---------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------- | --------- | -------- | ------ | --------
-username  | unique username for user                                                                                                    | String                                                                                              | 5         | 100       | FALSE    | TRUE   | TRUE
-firstName | first name of user                                                                                                          | String                                                                                              | 1         | 50        | FALSE    | FALSE  | TRUE
-lastName  | last name of user                                                                                                           | String                                                                                              | 1         | 50        | FALSE    | FALSE  | TRUE
-locale    | user's preferred display formatting for localizing items such as currency, date time format, numerical representations, etc | ISO 639-1 two letter language code, an underscore, and the ISO 3166-1 two letter country code (en_US) | 5         | 5         | FALSE    | FALSE  | TRUE
-timeZone  | user's time zone in the "[Olson](https://en.wikipedia.org/wiki/Tz_database)" timezone database format                                                                    | "Area/Location" of "Olson" timezone                                                                 |           |           | FALSE    | FALSE  | TRUE
+|-----------+------------------------------------------------------------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+-----------------------------------------------------------------------|
+| Property  | Description                                                                                                                  | DataType | Nullable | Unique | Readonly | MinLength | MaxLength | Validation                                                            |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------| -------- | ------ | -------- | --------- | --------- | --------------------------------------------------------------------- |
+| username  | unique username for user                                                                                                     | String   | FALSE    | TRUE   | TRUE     |           |           |                                                                       |
+| firstName | first name of user                                                                                                           | String   | FALSE    | FALSE  | TRUE     |           |           |                                                                       |
+| lastName  | last name of user                                                                                                            | String   | FALSE    | FALSE  | TRUE     |           |           |                                                                       |
+| locale    | user's default location for purposes of localizing items such as currency, date time format, numerical representations, etc. | String   | TRUE     | FALSE  | TRUE     |           |           | [RFC 5646](https://tools.ietf.org/html/rfc5646)                       |
+| timezone  | user's time zone                                                                                                             | String   | TRUE     | FALSE  | TRUE     |           |           | [IANA Time Zone database format](https://tools.ietf.org/html/rfc6557) |
+|-----------+------------------------------------------------------------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+-----------------------------------------------------------------------|
 
 #### Recovery Question Object
 
 User's recovery question used for verification of a recovery transaction
 
-Attribute         | Description              | DataType | MinLength | MaxLength | Nullable | Unique | Readonly
------------------ | ------------------------ | -------- | --------- | --------- | -------- | ------ | --------
-question          | user's recovery question | String   |           |           | FALSE    | TRUE   | TRUE
-
+|-------------------+--------------------------+ ---------+----------+--------+----------|-----------+-----------+------------|
+| Property          | Description              | DataType | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| ----------------- | ------------------------ | -------- | -------- | ------ | -------- | --------- | --------- | ---------- |
+| question          | user's recovery question | String   | FALSE    | TRUE   | TRUE     |           |           |            |
+|-------------------+--------------------------+ ---------+----------+--------+----------|-----------+-----------+------------|
 
 ### Factor Object
 
-A subset of attributes of a supported [Factor](factors.html#factor-model)
+A subset [Factor](factors.html#factor-model) properties
 
-Attribute     | Description                                                            | DataType                                                       | MinLength | MaxLength | Nullable | Unique | Readonly
-------------- | ---------------------------------------------------------------------- | -------------------------------------------------------------- | --------- | --------- | -------- | ------ | --------
-id            | unique key for factor                                                  | String                                                         |           |           | TRUE     | TRUE   | TRUE
-factorType    | type of factor                                                         | [Factor Type](factors.html#factor-type)                        |           |           | FALSE    | TRUE   | TRUE
-provider      | factor provider                                                        | [Provider Type](factors.html#provider-type)                    |           |           | FALSE    | TRUE   | TRUE
-profile       | profile of a [supported factor](factors.html#supported-factors)        | [Factor Profile Object](factors.html#factor-profile-object)    |           |           | TRUE     | FALSE  | TRUE
-_embedded     | [embedded resources](#factor-embedded-resources) related to the factor | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) |           |           | TRUE     | FALSE  | TRUE
-_links        | [discoverable resources](#factor-links-object) for the factor          | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) |           |           | TRUE     | FALSE  | TRUE
+|----------------+-------------------------------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+| Property       | Description                                                             | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| -------------- | ----------------------------------------------------------------------- | -------------------------------------------------------------- | -------- | ------ | ---------| --------- | --------- | ---------- |
+| id             | unique key for factor                                                   | String                                                         | TRUE     | TRUE   | TRUE     |           |           |            |
+| factorType     | type of factor                                                          | [Factor Type](factors.html#factor-type)                        | FALSE    | TRUE   | TRUE     |           |           |            |
+| provider       | factor provider                                                         | [Provider Type](factors.html#provider-type)                    | FALSE    | TRUE   | TRUE     |           |           |            |
+| profile        | profile of a [supported factor](factors.html#supported-factors)         | [Factor Profile Object](factors.html#factor-profile-object)    | TRUE     | FALSE  | TRUE     |           |           |            |
+| _embedded      | [embedded resources](#factor-embedded-resources) related to the factor  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
+| _links         | [discoverable resources](#factor-links-object) for the factor           | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
+|----------------+-------------------------------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
 
 ~~~json
 {
@@ -247,17 +258,17 @@ _links        | [discoverable resources](#factor-links-object) for the factor   
   "factorType": "token:software:totp",
   "provider": "OKTA",
   "profile": {
-      "credentialId": "isaac@example.org"
+    "credentialId": "dade.murphy@example.com"
   },
   "_links": {
-      "verify": {
-          "href": "https://your-domain.okta.com/api/v1/authn/factors/ostfm3hPNYSOIOIVTQWY/verify",
-          "hints": {
-              "allow": [
-                  "POST"
-              ]
-          }
+    "verify": {
+      "href": "https://your-domain.okta.com/api/v1/authn/factors/ostfm3hPNYSOIOIVTQWY/verify",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
       }
+    }
   }
 }
 ~~~
@@ -268,41 +279,48 @@ _links        | [discoverable resources](#factor-links-object) for the factor   
 
 TOTP factors when activated have an embedded verification object which describes the [TOTP](http://tools.ietf.org/html/rfc6238) algorithm parameters.
 
-Attribute     | Description                                       | DataType                                                       | MinLength | MaxLength | Nullable | Unique | Readonly
-------------- | ------------------------------------------------- | -------------------------------------------------------------- | --------- | --------- | -------- | ------ | --------
-timeStep      | time-step size for TOTP                           | String                                                         |           |           | FALSE    | FALSE  | TRUE
-sharedSecret  | unique secret key for prover                      | String                                                         |           |           | FALSE    | FALSE  | TRUE
-encoding      | encoding of `sharedSecret`                        | `base32` or `base64`                                           |           |           | FALSE    | FALSE  | TRUE
-keyLength     | number of digits in an HOTP value                 | Number                                                         |           |           | FALSE    | FALSE  | TRUE
-_links        | discoverable resources related to the activation  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) |           |           | TRUE     | FALSE  | TRUE
- 
+|----------------+---------------------------------------------------+----------------------------------------------------------------+----------|--------|----------|-----------|-----------+------------|
+| Property       | Description                                       | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| -------------- | ------------------------------------------------- | -------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
+| timeStep       | time-step size for TOTP                           | String                                                         | FALSE    | FALSE  | TRUE     |           |           |            |
+| sharedSecret   | unique secret key for prover                      | String                                                         | FALSE    | FALSE  | TRUE     |           |           |            |
+| encoding       | encoding of `sharedSecret`                        | `base32` or `base64`                                           | FALSE    | FALSE  | TRUE     |           |           |            |
+| keyLength      | number of digits in an HOTP value                 | Number                                                         | FALSE    | FALSE  | TRUE     |           |           |            |
+| _links         | discoverable resources related to the activation  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
+|----------------+---------------------------------------------------+----------------------------------------------------------------+----------|--------|----------|-----------|-----------+------------|
+
 ~~~ json
- "activation": {
+{
+  "activation": {
     "timeStep": 30,
     "sharedSecret": "HE64TMLL2IUZW2ZLB",
     "encoding": "base32",
     "keyLength": 6
-} 
+  }
+}
 ~~~
 
 ###### TOTP Activation Links Object
 
 Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the TOTP activation object using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  This object is used for dynamic discovery of related resources and operations.
 
-Link Relation Type | Description
------------------- | -----------------------------------------------------------------------------------------------------------
-qrcode             | QR code that encodes the TOTP parameters that can be used for enrollment
-
+|--------------------+--------------------------------------------------------------------------|
+| Link Relation Type | Description                                                              |
+| ------------------ | ------------------------------------------------------------------------ |
+| qrcode             | QR code that encodes the TOTP parameters that can be used for enrollment |
+|--------------------+--------------------------------------------------------------------------|
 
 ##### Phone Object
 
 The phone object describes previously enrolled phone numbers for the `sms` factor or for account recovery.
 
-Attribute     | Description          | DataType                                      | MinLength | MaxLength | Nullable | Unique | Readonly
-------------- | -------------------- | --------------------------------------------- | --------- | --------- | -------- | ------ | --------
-id            | unique key for phone | String                                        |           |           | FALSE    | TRUE   | TRUE
-profile       | profile of phone     | [Phone Profile Object](#phone-profile-object) |           |           | FALSE    | FALSE  | TRUE
-status        | status of phone      | `ACTIVE` or `INACTIVE`                        |           |           | FALSE    | FALSE  | TRUE
+|---------------+----------------------+-----------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+| Property      | Description          | DataType                                      | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| ------------- | -------------------- | --------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
+| id            | unique key for phone | String                                        | FALSE    | TRUE   | TRUE     |           |           |            |
+| profile       | profile of phone     | [Phone Profile Object](#phone-profile-object) | FALSE    | FALSE  | TRUE     |           |           |            |
+| status        | status of phone      | `ACTIVE` or `INACTIVE`                        | FALSE    | FALSE  | TRUE     |           |           |            |
+|---------------+----------------------+-----------------------------------------------+----------+--------+----------+-----------+-----------+------------|
 
 ~~~json
 {
@@ -316,25 +334,28 @@ status        | status of phone      | `ACTIVE` or `INACTIVE`                   
 
 ###### Phone Profile Object
 
-Attribute     | Description          | DataType | MinLength | MaxLength | Nullable | Unique | Readonly
-------------- | -------------------- | ---------| --------- | --------- | -------- | ------ | --------
-phoneNumber   | masked phone number  | String   |           |           | FALSE    | FALSE  | TRUE
+|---------------+----------------------|----------+----------|--------|----------|-----------|-----------+------------|
+| Property      | Description          | DataType | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| ------------- | -------------------- | ---------| -------- | ------ | -------- | --------- | --------- | ---------- |
+| phoneNumber   | masked phone number  | String   | FALSE    | FALSE  | TRUE     |           |           |            |
+|---------------+----------------------|----------+----------|--------|----------|-----------|-----------+------------|
 
 ##### Factor Links Object
 
 Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the factor using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  This object is used for dynamic discovery of related resources and operations.
 
-Link Relation Type | Description
------------------- | -----------------------------------------------------------------------------------------------------------
-enroll             | [Enrolls a factor](#enroll-factor)
-verify             | [Verifies a factor](#verify-factor)
-questions          | Lists all possible questions for the `question` factor type
-resend             | Resends a challenge or OTP to a device
+|--------------------+--------------------------------------------------------------|
+| Link Relation Type | Description                                                  |
+| ------------------ | -------------------------------------------------------------|
+| enroll             | [Enrolls a factor](#enroll-factor)                           |
+| verify             | [Verifies a factor](#verify-factor)                          |
+| questions          | Lists all possible questions for the `question` factor type  |
+| resend             | Resends a challenge or OTP to a device                       |
+|--------------------+--------------------------------------------------------------|
 
 > The Links Object is **read-only**
 
 ## Authentication Operations
-
 
 ### Primary Authentication
 {:.api .api-operation}
@@ -354,12 +375,12 @@ Every authentication transaction starts with primary authentication which valida
 #### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter   | Description                                                                                            | Param Type | DataType                          | MaxLength | Required | Default
------------ | ------------------------------------------------------------------------------------------------------ | ---------- | --------------------------------- | --------- | -------- |
-username    | User's non-qualified short-name (e.g. isaac) or unique fully-qualified login (e.g issac@example.org)   | Body       | String                            |           | TRUE     |
-password    | User's password credential                                                                             | Body       | String                            |           | TRUE     |
-relayState  | Optional state value that is persisted for the lifetime of the authentication transaction              | Body       | String                            | 2048      | FALSE    |
-context     | Provides additional context for the authentication transaction                                         | Body       | [Context Object](#context-object) |           | FALSE    |
+Parameter   | Description                                                                                            | Param Type | DataType                          | Required | Default | MaxLength
+----------- | ------------------------------------------------------------------------------------------------------ | ---------- | --------------------------------- | -------- | ------- | ---------
+username    | User's non-qualified short-name (e.g. Dade) or unique fully-qualified login (e.g issac@example.org)   | Body       | String                            | TRUE     |         |
+password    | User's password credential                                                                             | Body       | String                            | TRUE     |         |
+relayState  | Optional state value that is persisted for the lifetime of the authentication transaction              | Body       | String                            | FALSE    |         | 2048
+context     | Provides additional context for the authentication transaction                                         | Body       | [Context Object](#context-object) | FALSE    |         |
 
 ##### Context Object
 
@@ -371,7 +392,7 @@ ipAddress   | IP Address of the user                                            
 userAgent   | User Agent of the user                                              | Body       | String                            | FALSE    |
 deviceToken | A globally unique ID identifying the device of the user             | Body       | String                            | FALSE    |
 
-> Sign-On Security Policy may optionally require MFA based on network location.  Overriding HTTP request context is a highly privileged operation that should be limited to trusted web applications.  
+> Sign-On Security Policy may optionally require MFA based on network location.  Overriding HTTP request context is a highly privileged operation that should be limited to trusted web applications.
 
 ###### Device Token
 
@@ -382,7 +403,7 @@ You must always pass the same `deviceToken` for a user's device with every authe
 
 [Authentication Object](#authentication-model) for the next [authentication status](#authentication-status).
 
-If the username or password is invalid you will receive a `401 Unauthorized` status code with the following error: 
+If the username or password is invalid you will receive a `401 Unauthorized` status code with the following error:
 
 ~~~http
 HTTP/1.1 401 Unauthorized
@@ -406,21 +427,20 @@ Authenticates a user with an invalid username or password.
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn
--d \
-'{
-  "username": "isaac@example.org",
-  "password" : "GoAw@y123",
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "username": "dade.murphy@example.com",
+  "password" : "tlpWENT2m",
   "relayState": "/myapp/some/deep/link/i/want/to/return/to",
   "context": {
     "ipAddress": "192.168.12.11",
     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3)",
     "deviceToken": "26q43Ak9Eh04p7H6Nnx0m69JqYOrfVBY"
   }
-}'
+}' "https://${org}.okta.com/api/v1/authn"
 ~~~
 
 ##### Response Example
@@ -447,21 +467,20 @@ Authenticates a user with an expired password.  The user must [change their expi
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn
--d \
-'{
-  "username": "isaac@example.org",
-  "password" : "GoAw@y123",
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "username": "dade.murphy@example.com",
+  "password" : "tlpWENT2m",
   "relayState": "/myapp/some/deep/link/i/want/to/return/to",
   "context": {
     "ipAddress": "192.168.12.11",
     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3)",
     "deviceToken": "26q43Ak9Eh04p7H6Nnx0m69JqYOrfVBY"
   }
-}'
+}' "https://${org}.okta.com/api/v1/authn"
 ~~~
 
 ##### Response Example
@@ -477,9 +496,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
@@ -515,21 +534,20 @@ Authenticates a user that is not assigned to a Sign-On Policy with a MFA challen
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn
--d \
-'{
-  "username": "isaac@example.org",
-  "password": "GoAw@y123",
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "username": "dade.murphy@example.com",
+  "password" : "tlpWENT2m",
   "relayState": "/myapp/some/deep/link/i/want/to/return/to",
   "context": {
     "ipAddress": "192.168.12.11",
     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3)",
     "deviceToken": "26q43Ak9Eh04p7H6Nnx0m69JqYOrfVBY"
   }
-}'
+}' "https://${org}.okta.com/api/v1/authn"
 ~~~
 
 ##### Response Example
@@ -545,9 +563,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
@@ -564,21 +582,20 @@ Authenticates a user that has previously enrolled a factor for additional verifi
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn
--d \
-'{
-  "username": "isaac@example.org",
-  "password": "GoAw@y123",
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "username": "dade.murphy@example.com",
+  "password" : "tlpWENT2m",
   "relayState": "/myapp/some/deep/link/i/want/to/return/to",
   "context": {
     "ipAddress": "192.168.12.11",
     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3)",
     "deviceToken": "26q43Ak9Eh04p7H6Nnx0m69JqYOrfVBY"
   }
-}'
+}' "https://${org}.okta.com/api/v1/authn"
 ~~~
 
 ##### Response Example
@@ -594,9 +611,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
@@ -626,7 +643,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "factorType": "token",
         "provider": "RSA",
         "profile": {
-          "credentialId": "isaac@example.org"
+          "credentialId": "dade.murphy@example.com"
         },
         "_links": {
           "verify": {
@@ -644,7 +661,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "factorType": "token:software:totp",
         "provider": "GOOGLE",
         "profile": {
-          "credentialId": "isaac@example.org"
+          "credentialId": "dade.murphy@example.com"
         },
         "_links": {
           "verify": {
@@ -662,7 +679,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "factorType": "token:software:totp",
         "provider": "OKTA",
         "profile": {
-          "credentialId": "isaac@example.org"
+          "credentialId": "dade.murphy@example.com"
         },
         "_links": {
           "verify": {
@@ -716,21 +733,20 @@ Authenticates a user assigned to a Sign-On Policy with a MFA challenge requireme
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn
--d \
-'{
-  "username": "isaac@example.org",
-  "password": "GoAw@y123",
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "username": "dade.murphy@example.com",
+  "password" : "tlpWENT2m",
   "relayState": "/myapp/some/deep/link/i/want/to/return/to",
   "context": {
     "ipAddress": "192.168.12.11",
     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3)",
     "deviceToken": "26q43Ak9Eh04p7H6Nnx0m69JqYOrfVBY"
   }
-}'
+}' "https://${org}.okta.com/api/v1/authn"
 ~~~
 
 ##### Response Example
@@ -746,9 +762,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
@@ -866,7 +882,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/credentials/change_password
 
-Okta enforces changing expired passwords during authentication when primary authentication returns the `PASSWORD_EXPIRED` status.  The user must change their existing password by posting a new password to the `next` link relation to successfully complete authentication.  
+Okta enforces changing expired passwords during authentication when primary authentication returns the `PASSWORD_EXPIRED` status.  The user must change their existing password by posting a new password to the `next` link relation to successfully complete authentication.
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -882,7 +898,7 @@ newPassword | New password for user                               | Body       |
 
 [Authentication Object](#authentication-model) for the next [authentication status](#authentication-status).
 
-If the `oldPassword` is invalid you will receive a `403 Forbidden` status code with the following error: 
+If the `oldPassword` is invalid you will receive a `403 Forbidden` status code with the following error:
 
 ~~~http
 HTTP/1.1 403 Forbidden
@@ -901,7 +917,7 @@ Content-Type: application/json
 }
 ~~~
 
-If the `newPassword` does not meet password policy requirements, you will receive a `403 Forbidden` status code with the following error: 
+If the `newPassword` does not meet password policy requirements, you will receive a `403 Forbidden` status code with the following error:
 
 ~~~http
 HTTP/1.1 403 Forbidden
@@ -924,16 +940,15 @@ Content-Type: application/json
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn/credentials/change_password
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "stateToken": "00s1pd3bZuOv-meJE13hz1B7SZl5EGc14Ii_CTBIYd",
-  "oldPassword": "GoAw@y123",
+  "oldPassword": "tlpWENT2m",
   "newPassword": "Ch-ch-ch-ch-Changes!"
-}'
+}' "https://${org}.okta.com/api/v1/authn/credentials/change_password"
 ~~~
 
 ##### Response Example
@@ -949,9 +964,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
@@ -966,7 +981,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/factors
 
-Enrolls a user with a [factor](factors.html#supported-factors) assigned by their administrator.  The operation is only available for users that have not previously enrolled a factor and have transitioned to the `MFA_ENROLL` [authentication status](#authentication-status). 
+Enrolls a user with a [factor](factors.html#supported-factors) assigned by their administrator.  The operation is only available for users that have not previously enrolled a factor and have transitioned to the `MFA_ENROLL` [authentication status](#authentication-status).
 
 - [Enroll User with Security Question](#enroll-user-with-security-question)
 - [Enroll User with Okta SMS Factor](#enroll-user-with-okta-sms-factor)
@@ -980,10 +995,10 @@ Enrolls a user with a [factor](factors.html#supported-factors) assigned by their
 Parameter   | Description                                                      | Param Type  | DataType                                                     | Required | Default
 ----------- | ---------------------------------------------------------------- | ----------- | -------------------------------------------------------------| -------- | -------
 stateToken  | [state token](#state-token) for current transaction              | Body        | String                                                       | TRUE     |
-factorType  | type of factor                                                   | Body        | [Factor Type](factors.html#factor-type)                      | TRUE     |          
-provider    | factor provider                                                  | Body        | [Provider Type](factors.html#provider-type)                  | TRUE     |          
-profile     | profile of a [supported factor](factors.html#supported-factors)  | Body        | [Factor Profile Object](factors.html#factor-profile-object)  | TRUE     |          
-  
+factorType  | type of factor                                                   | Body        | [Factor Type](factors.html#factor-type)                      | TRUE     |
+provider    | factor provider                                                  | Body        | [Provider Type](factors.html#provider-type)                  | TRUE     |
+profile     | profile of a [supported factor](factors.html#supported-factors)  | Body        | [Factor Profile Object](factors.html#factor-profile-object)  | TRUE     |
+
 #### Response Parameters
 {:.api .api-response .api-response-params}
 
@@ -1002,12 +1017,11 @@ Enrolls a user with the Okta `question` factor and [question profile](factors.ht
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn/factors
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "stateToken": "00Z20ZhXVrmyR3z8R-m77BvknHyckWCy5vNwEA6huD",
   "factorType": "question",
   "provider": "OKTA",
@@ -1015,8 +1029,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "question": "name_of_first_plush_toy",
     "answer": "blah"
   }
-}'
+}' "https://${org}.okta.com/api/v1/authn/factors"
 ~~~
+
 
 ##### Response Example
 {:.api .api-response .api-response-example}
@@ -1031,9 +1046,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
@@ -1052,19 +1067,18 @@ Enrolls a user with the Okta `sms` factor and a [SMS profile](factors.html#sms-p
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn/factors
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "stateToken": "00Z20ZhXVrmyR3z8R-m77BvknHyckWCy5vNwEA6huD",
   "factorType": "sms",
   "provider": "OKTA",
   "profile": {
     "phoneNumber": "+1-555-415-1337"
   }
-}'
+}' "https://${org}.okta.com/api/v1/authn/factors"
 ~~~
 
 ##### Response Example
@@ -1080,9 +1094,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
@@ -1146,16 +1160,15 @@ Enrolls a user with the Okta `token:software:totp` factor.  The factor must be [
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn/factors
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "stateToken": "00Z20ZhXVrmyR3z8R-m77BvknHyckWCy5vNwEA6huD",
   "factorType": "token:software:totp",
   "provider": "OKTA"
-}'
+}' "https://${org}.okta.com/api/v1/authn/factors"
 ~~~
 
 ##### Response Example
@@ -1171,9 +1184,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
@@ -1183,7 +1196,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
       "factorType": "token:software:totp",
       "provider": "OKTA",
       "profile": {
-        "credentialId": "isaac@example.org"
+        "credentialId": "dade.murphy@example.com"
       },
       "_embedded": {
         "activation": {
@@ -1240,16 +1253,15 @@ Enrolls a user with the Google `token:software:totp` factor.  The factor must be
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn/factors
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "stateToken": "00Z20ZhXVrmyR3z8R-m77BvknHyckWCy5vNwEA6huD",
   "factorType": "token:software:totp",
   "provider": "OKTA"
-}'
+}' "https://${org}.okta.com/api/v1/authn/factors"
 ~~~
 
 ##### Response Example
@@ -1265,9 +1277,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
@@ -1277,7 +1289,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
       "factorType": "token:software:totp",
       "provider": "GOOGLE",
       "profile": {
-        "credentialId": "isaac@example.org"
+        "credentialId": "dade.murphy@example.com"
       },
       "_embedded": {
         "activation": {
@@ -1334,16 +1346,15 @@ Enrolls a user with an Okta verify push factor.  The factor must be [activated](
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn/factors
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "stateToken": "00Z20ZhXVrmyR3z8R-m77BvknHyckWCy5vNwEA6huD",
   "factorType": "push",
   "provider": "OKTA"
-}'
+}' "https://${org}.okta.com/api/v1/authn/factors"
 ~~~
 
 ##### Response Example
@@ -1360,9 +1371,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
@@ -1400,7 +1411,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
                     "POST"
                   ]
                 }
-              }              
+              }
             ]
           }
         }
@@ -1437,40 +1448,35 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ~~~
 
-<strong>Note: </strong> If the user cannot scan the QR code using the Okta Verify Push mobile app, then use the following methods to enroll by email or SMS.
-
-
+> If the user cannot scan the QR code using the Okta Verify Push mobile app, then use the following methods to enroll by email or SMS.
 
 ##### Request Example to Send SMS Link
 {:.api .api-request .api-request-example}
 
-
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn/factors/sms1o51EADOTFXHHBXBP/lifecycle/activate/sms
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "stateToken": "00wlafXU2GV9I3tNvDNkOA1thqM5gDwCOgHID_-Iej",
   "profile": {
     "phoneNumber": "+1-555-415-1337"
   }
-}'
+}' "https://${org}.okta.com/api/v1/authn/factors/sms1o51EADOTFXHHBXBP/lifecycle/activate/sms"
 ~~~
 
 ##### Request Example to Send Link by Email
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn/factors/opf1o51EADOTFXHHBXBP/lifecycle/activate/email
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "stateToken": "00wlafXU2GV9I3tNvDNkOA1thqM5gDwCOgHID_-Iej"
-}'
+}' "https://${org}.okta.com/api/v1/authn/factors/opf1o51EADOTFXHHBXBP/lifecycle/activate/email"
 ~~~
 
 ##### Response Example
@@ -1487,9 +1493,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
@@ -1527,7 +1533,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
                     "POST"
                   ]
                 }
-              }              
+              }
             ]
           }
         }
@@ -1594,7 +1600,7 @@ passCode     | OTP generated by device                              | Body      
 
 [Authentication Object](#authentication-model) for the next [authentication status](#authentication-status).
 
-If the passcode is invalid you will receive a `403 Forbidden` status code with the following error: 
+If the passcode is invalid you will receive a `403 Forbidden` status code with the following error:
 
 ~~~http
 HTTP/1.1 403 Forbidden
@@ -1617,15 +1623,14 @@ Content-Type: application/json
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn/factors/ostf1fmaMGJLMNGNLIVG/lifecycle/activate
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "stateToken": "00wlafXU2GV9I3tNvDNkOA1thqM5gDwCOgHID_-Iej",
   "passCode": "123456"
-}'
+}' "https://${org}.okta.com/api/v1/authn/factors/ostf1fmaMGJLMNGNLIVG/lifecycle/activate"
 ~~~
 
 #### Response Example
@@ -1641,9 +1646,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
@@ -1671,7 +1676,7 @@ passCode     | OTP sent to mobile device                           | Body       
 
 [Authentication Object](#authentication-model) for the next [authentication status](#authentication-status).
 
-If the passcode is invalid you will receive a `403 Forbidden` status code with the following error: 
+If the passcode is invalid you will receive a `403 Forbidden` status code with the following error:
 
 ~~~http
 HTTP/1.1 403 Forbidden
@@ -1694,15 +1699,14 @@ Content-Type: application/json
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn/factors/sms1o51EADOTFXHHBXBP/lifecycle/activate
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "stateToken": "00wlafXU2GV9I3tNvDNkOA1thqM5gDwCOgHID_-Iej",
   "passCode": "123456"
-}'
+}' "https://${org}.okta.com/api/v1/authn/factors/sms1o51EADOTFXHHBXBP/lifecycle/activate"
 ~~~
 
 ##### Response Example
@@ -1718,9 +1722,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
@@ -1737,22 +1741,19 @@ Polls for device activation.
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn/factors/sms1o51EADOTFXHHBXBP/lifecycle/activate
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "stateToken": "00wlafXU2GV9I3tNvDNkOA1thqM5gDwCOgHID_-Iej"
-}'
+}' "https://${org}.okta.com/api/v1/authn/factors/sms1o51EADOTFXHHBXBP/lifecycle/activate"
 ~~~
 
-<strong>Three response examples are shown, WAITING state, SUCCESS, and TIMEOUT.</strong>
+**Three response examples are shown, `WAITING` state, `SUCCESS`, and `TIMEOUT`.**
 
-<strong>Note:</strong> When activation expires, the <em>next</em> link relation reverts to activate. The embedded activation object is intentionally missing during timeout.
-
+> When activation expires, the *next* link relation reverts to activate. The embedded activation object is intentionally missing during timeout.
 
 ##### Response Example – Waiting
 {:.api .api-response .api-response-example}
@@ -1768,9 +1769,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
@@ -1808,13 +1809,13 @@ curl -v -H "Authorization: SSWS yourtoken" \
                     "POST"
                   ]
                 }
-              }              
+              }
             ]
           }
         }
       }
     }
-  },  
+  },
   "_links": {
     "next": {
       "name": "poll",
@@ -1858,9 +1859,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
@@ -1883,9 +1884,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
@@ -1898,7 +1899,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
       }
     }
-  },  
+  },
   "_links": {
     "next": {
       "name": "activate",
@@ -1935,17 +1936,14 @@ curl -v -H "Authorization: SSWS yourtoken" \
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn/factors/sms1o51EADOTFXHHBXBP/lifecycle/activate?reActivate=true
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "stateToken": "00wlafXU2GV9I3tNvDNkOA1thqM5gDwCOgHID_-Iej"
- }'
+}' "https://${org}.okta.com/api/v1/authn/factors/sms1o51EADOTFXHHBXBP/lifecycle/activate?reActivate=true"
 ~~~
-
-
 
 ### Verify Factor
 
@@ -1977,7 +1975,7 @@ answer       | answer to security question                         | Body       
 
 [Authentication Object](#authentication-model) for the next [authentication status](#authentication-status).
 
-If the `answer` is invalid you will receive a `403 Forbidden` status code with the following error: 
+If the `answer` is invalid you will receive a `403 Forbidden` status code with the following error:
 
 ~~~json
 {
@@ -1997,15 +1995,14 @@ If the `answer` is invalid you will receive a `403 Forbidden` status code with t
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn/factors/ufs1pe3ISGKGPYKXRBKK/verify
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "stateToken": "00wlafXU2GV9I3tNvDNkOA1thqM5gDwCOgHID_-Iej",
   "answer": "mayonnaise"
-}'
+}' "https://${org}.okta.com/api/v1/authn/factors/ufs1pe3ISGKGPYKXRBKK/verify"
 ~~~
 
 ##### Response Example
@@ -2021,9 +2018,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
@@ -2053,7 +2050,7 @@ passCode     | OTP sent to device                                  | Body       
 
 [Authentication Object](#authentication-model) for the next [authentication status](#authentication-status).
 
-If the `passCode` is invalid you will receive a `403 Forbidden` status code with the following error: 
+If the `passCode` is invalid you will receive a `403 Forbidden` status code with the following error:
 
 ~~~json
 {
@@ -2069,7 +2066,6 @@ If the `passCode` is invalid you will receive a `403 Forbidden` status code with
 }
 ~~~
 
-
 ##### Send SMS OTP
 
 Omit `passCode` in the request to sent an OTP to the device
@@ -2078,14 +2074,13 @@ Omit `passCode` in the request to sent an OTP to the device
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn/factors/sms193zUBEROPBNZKPPE/verify
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "stateToken": "00wlafXU2GV9I3tNvDNkOA1thqM5gDwCOgHID_-Iej"
-}'
+}' "https://${org}.okta.com/api/v1/authn/factors/sms193zUBEROPBNZKPPE/verify"
 ~~~
 
 ###### Response Example
@@ -2101,9 +2096,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
@@ -2166,15 +2161,14 @@ Specify `passCode` in the request to verify the factor.
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn/factors/sms193zUBEROPBNZKPPE/verify
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "stateToken": "00wlafXU2GV9I3tNvDNkOA1thqM5gDwCOgHID_-Iej",
   "passCode": "657866"
-}'
+}' "https://${org}.okta.com/api/v1/authn/factors/sms193zUBEROPBNZKPPE/verify"
 ~~~
 
 ###### Response Example
@@ -2190,9 +2184,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
@@ -2222,7 +2216,7 @@ passCode     | OTP sent to device                                  | Body       
 
 [Authentication Object](#authentication-model) for the next [authentication status](#authentication-status).
 
-If the passcode is invalid you will receive a `403 Forbidden` status code with the following error: 
+If the passcode is invalid you will receive a `403 Forbidden` status code with the following error:
 
 ~~~json
 {
@@ -2242,15 +2236,14 @@ If the passcode is invalid you will receive a `403 Forbidden` status code with t
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn/factors/ostfm3hPNYSOIOIVTQWY/verify
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "stateToken": "00wlafXU2GV9I3tNvDNkOA1thqM5gDwCOgHID_-Iej",
   "passCode": "657866"
-}'
+}' "https://${org}.okta.com/api/v1/authn/factors/ostfm3hPNYSOIOIVTQWY/verify"
 ~~~
 
 ###### Response Example
@@ -2266,9 +2259,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
@@ -2282,7 +2275,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/factors/*:fid*/verify</span>
 
-After starting verification, repeat the call to poll the device for a user response. 
+After starting verification, repeat the call to poll the device for a user response.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2290,21 +2283,20 @@ After starting verification, repeat the call to poll the device for a user respo
 Parameter    | Description                                         | Param Type | DataType | Required | Default
 ------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
 fid          | `id` of factor returned from enrollment             | URL        | String   | TRUE     |
-stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE     
+stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE
 
 
 ##### Request Example
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn/factors/ufs1pe3ISGKGPYKXRBKK/verify
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "stateToken": "00wlafXU2GV9I3tNvDNkOA1thqM5gDwCOgHID_-Iej"
-}'
+}' "https://${org}.okta.com/api/v1/authn/factors/ufs1pe3ISGKGPYKXRBKK/verify"
 ~~~
 
 ##### Response Example
@@ -2321,9 +2313,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
@@ -2377,6 +2369,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
       }
     ]
+  }
 }
 ~~~
 
@@ -2397,9 +2390,9 @@ The following response example shows the SUCCESS state.
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
@@ -2424,9 +2417,9 @@ The following response example shows the TIMEOUT state.
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
@@ -2439,7 +2432,7 @@ The following response example shows the TIMEOUT state.
 
       }
     }
-  },  
+  },
   "_links": {
     "next": {
       "name": "activate",
@@ -2484,10 +2477,10 @@ Issues a [recovery token](#recovery-token) for a given user that can be used to 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter   | Description                                                                                            | Param Type | DataType                          | MaxLength | Required | Default
------------ | ------------------------------------------------------------------------------------------------------ | ---------- | --------------------------------- | --------- | -------- |
-username    | User's non-qualified short-name (e.g. isaac) or unique fully-qualified login (e.g issac@example.org)   | Body       | String                            |           | TRUE     |
-relayState  | Optional state value that is persisted for the lifetime of the recovery transaction                    | Body       | String                            | 2048      | FALSE    |
+Parameter   | Description                                                                                            | Param Type | DataType                          | Required | Default | MaxLength
+----------- | ------------------------------------------------------------------------------------------------------ | ---------- | --------------------------------- | -------- |-------- | ---------
+username    | User's non-qualified short-name (e.g. Dade) or unique fully-qualified login (e.g issac@example.org)   | Body       | String                            | TRUE     |         |
+relayState  | Optional state value that is persisted for the lifetime of the recovery transaction                    | Body       | String                            | FALSE    |         | 2048
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -2500,15 +2493,14 @@ You will receive a `404 Not Found` status code if the `username` requested is no
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn/recovery/password
--d \
-'{
-  "username": "isaac@example.org",
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "username": "dade.murphy@example.com",
   "relayState": "/myapp/some/deep/link/i/want/to/return/to"
-}'
+}' "https://${org}.okta.com/api/v1/authn/recovery/password"
 ~~~
 
 ##### Response Example
@@ -2524,9 +2516,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
@@ -2568,10 +2560,10 @@ Issues a [recovery token](#recovery-token) for a user that can be used to unlock
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter   | Description                                                                                            | Param Type | DataType                          | MaxLength | Required | Default
------------ | ------------------------------------------------------------------------------------------------------ | ---------- | --------------------------------- | --------- | -------- |
-username    | User's non-qualified short-name (e.g. isaac) or unique fully-qualified login (e.g issac@example.org)   | Body       | String                            |           | TRUE     |
-relayState  | Optional state value that is persisted for the lifetime of the recovery transaction                    | Body       | String                            | 2048      | FALSE    |
+Parameter   | Description                                                                                            | Param Type | DataType                          | Required | Default | MaxLength
+----------- | ------------------------------------------------------------------------------------------------------ | ---------- | --------------------------------- | -------- | ------- | ---------
+username    | User's non-qualified short-name (e.g. Dade) or unique fully-qualified login (e.g issac@example.org)   | Body       | String                            | TRUE     |         |
+relayState  | Optional state value that is persisted for the lifetime of the recovery transaction                    | Body       | String                            | FALSE    |         | 2048
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -2584,15 +2576,14 @@ You will receive a `404 Not Found` status code if the `username` requested is no
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn/recovery/unlock
--d \
-'{
-  "username": "isaac@example.org",
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "username": "dade.murphy@example.com",
   "relayState": "/myapp/some/deep/link/i/want/to/return/to"
-}'
+}' "https://${org}.okta.com/api/v1/authn/recovery/unlock"
 ~~~
 
 ##### Response Example
@@ -2608,9 +2599,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
@@ -2643,7 +2634,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/recovery/token</span>
 
-Validates a [recovery token](#recovery-token) that was distributed to the end-user to continue the recovery transaction. 
+Validates a [recovery token](#recovery-token) that was distributed to the end-user to continue the recovery transaction.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2676,14 +2667,13 @@ Content-Type: application/json
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn/recovery/token
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "recoveryToken": "/myapp/some/deep/link/i/want/to/return/to"
-}'
+}' "https://${org}.okta.com/api/v1/authn/recovery/token"
 ~~~
 
 ##### Response Example
@@ -2699,9 +2689,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       },
@@ -2732,7 +2722,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ~~~
 
-### Answer Recovery Question 
+### Answer Recovery Question
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/recovery/answer</span>
@@ -2771,15 +2761,14 @@ Content-Type: application/json
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn/recovery/answer
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "stateToken": "00lMJySRYNz3u_rKQrsLvLrzxiARgivP8FB_1gpmVb",
   "answer": "Cowboy Dan"
-}'
+}' "https://${org}.okta.com/api/v1/authn/recovery/answer"
 ~~~
 
 ##### Response Example
@@ -2795,9 +2784,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
@@ -2825,7 +2814,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ~~~
 
-### Reset Password 
+### Reset Password
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/credentials/reset_password</span>
@@ -2883,15 +2872,14 @@ Content-Type: application/json
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn/credentials/reset_password
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "stateToken": "00lMJySRYNz3u_rKQrsLvLrzxiARgivP8FB_1gpmVb",
   "newPassword": "Ch-ch-ch-ch-Changes!"
-}'
+}' "https://${org}.okta.com/api/v1/authn/credentials/reset_password"
 ~~~
 
 ##### Response Example
@@ -2907,9 +2895,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
@@ -2940,14 +2928,13 @@ stateToken   | [state token](#state-token) for a transaction       | Body       
 [Authentication Object](#authentication-model) for the current [authentication status](#authentication-status).
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "stateToken": "00lMJySRYNz3u_rKQrsLvLrzxiARgivP8FB_1gpmVb"
-}'
+}' "https://${org}.okta.com/api/v1/authn"
 ~~~
 
 ##### Response Example
@@ -2963,9 +2950,9 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "user": {
       "id": "00ub0oNGTSWTBKOLGLNR",
       "profile": {
-        "login": "isaac@example.org",
-        "firstName": "Isaac",
-        "lastName": "Brock",
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
@@ -3031,14 +3018,13 @@ Parameter    | Description                                                      
 relayState   | Optional state value that was persisted for the authentication or recovery transaction | Body       | String   | TRUE     |
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/authn/cancel
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "stateToken": "00lMJySRYNz3u_rKQrsLvLrzxiARgivP8FB_1gpmVb"
-}'
+}' 'https://${org}.okta.com/api/v1/cancel'
 ~~~
 
 ##### Response Example

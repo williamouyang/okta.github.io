@@ -1,7 +1,6 @@
 ---
 layout: docs_page
 title: Admin Roles
-author: Benjamin Wesson
 ---
 
 * Will be replaced with the ToC
@@ -9,7 +8,7 @@ author: Benjamin Wesson
 
 ## Overview
 
-The Okta Roles API provides operations to assign roles to users, apps, and groups to manage administrative access rights.
+The Okta Administrator Roles API provides operations to manage administrative role assignments for a user/
 
 ## Roles Model
 
@@ -17,34 +16,24 @@ The Okta Roles API provides operations to assign roles to users, apps, and group
 
 ~~~json
 {
-  "id": "ra1fh0JWDDWIHIZYPGOB",
-  "label": "Super Administrator",
-  "desciptiodn": "optional role description",
-  "type": "SUPER_ADMIN" | "ORG_ADMIN" | "APP_ADMIN" | "USER_ADMIN" | "READ_ONLY_ADMIN",
-  "status":"ACTIVE",
-  "created":"2014-08-15T08:02:17.000Z",
-  "lastUpdated":"2014-09-04T17:54:03.000Z",
-  "_embedded": {
-      "targets": {
-          "groups": [
-          ],
-          "apps": [
-          ]
-      }
-  }
+  "id": "ra1b7aguRQ7e5iKYb0g4",
+  "label": "Read-only Administrator",
+  "type": "READ_ONLY_ADMIN",
+  "status": "ACTIVE",
+  "created": "2015-09-04T03:27:16.000Z",
+  "lastUpdated": "2015-09-04T03:27:16.000Z"
 }
 ~~~
 
-### Metadata Attributes
+### Role Properties
 
-The User model defines several **read-only** attributes:
+The role model defines several **read-only** properties:
 
 |-----------------------+--------------------------------------------+------------+-----------+-----------|
-| Attribute             | Description                                |  DataType  | Read Only |  Nullable |
+| Property              | Description                                |  DataType  | Read Only |  Nullable |
 |:--------------------- |:-------------------------------------------|:----------:|:---------:|:---------:|
 | id                    | unique key for role                        |   String   |   FALSE   |   FALSE   |
 | label                 | the label for the role                     |   String   |   FALSE   |   FALSE   |
-| description           | an optional role description               |   String   |   FALSE   |   TRUE    |
 | type                  | the role type                              |   String   |   FALSE   |   FALSE   |
 | status                | current status of role                     |   String   |   FALSE   |   FALSE   |
 | created               | timestamp when role was created            |    Date    |   TRUE    |   FALSE   |
@@ -53,7 +42,7 @@ The User model defines several **read-only** attributes:
 
 > Role `types` are `SUPER_ADMIN`, `ORG_ADMIN`, `APP_ADMIN`, `USER_ADMIN`, `READ_ONLY_ADMIN`. A `HTTP/1.1 404 Not Found` status will be returned if any other role type is submitted.
 
-> Metadata attributes are READ ONLY.
+> Metadata properties are READ ONLY.
 
 ## User Operations
 
@@ -77,7 +66,7 @@ curl -v -H "Authorization: SSWS {{ "{{apikey" }}}}" \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
   -H "Cache-Control: no-cache" \
-  -X GET https://{{ "{{subDomain" }}}}.okta.com/api/v1/users/{{ "{{userId" }}}}/roles
+  -X GET https:///your-domain.okta.com.okta.com/api/v1/users/{{ "{{userId" }}}}/roles
 ~~~
 
 ##### Response Example
@@ -117,7 +106,7 @@ curl -v -H "Authorization: SSWS {{ "{{apikey" }}}}" \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
   -H "Cache-Control: no-cache" \
-  -X GET https://{{ "{{subDomain" }}}}.okta.com/api/v1/users/{{ "{{userId" }}}}/roles?expand=targets/groups,targets/apps
+  -X GET https:///your-domain.okta.com.okta.com/api/v1/users/{{ "{{userId" }}}}/roles?expand=targets/groups,targets/apps
 ~~~
 
 ##### Response Example
@@ -223,7 +212,7 @@ curl -v -H "Authorization: SSWS "{{ "{{apikey" }}}}" \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
   -H "Cache-Control: no-cache" \
-  -X POST https://{{ "{{subDomain" }}}}.okta.com/api/v1/users/{{ "{{userId" }}}}/roles \
+  -X POST https:///your-domain.okta.com.okta.com/api/v1/users/{{ "{{userId" }}}}/roles \
   -d \
   '{
     "type": "{{ "{{roleType" }}}}"
@@ -263,7 +252,7 @@ curl -v -i -H "Authorization: SSWS {{ "{{apikey" }}}}" \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
   -H "Cache-Control: no-cache" \
-  -X DELETE https://{{ "{{subDomain" }}}}.okta.com/api/v1/users/{{ "{{userId" }}}}/roles/{{ "{{roleId" }}}}
+  -X DELETE https:///your-domain.okta.com.okta.com/api/v1/users/{{ "{{userId" }}}}/roles/{{ "{{roleId" }}}}
 ~~~
 
 ##### Response Example
@@ -300,7 +289,7 @@ curl -v -H "Authorization: SSWS {{ "{{apikey" }}}}" \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
   -H "Cache-Control: no-cache" \
-  -X PUT https://{{ "{{subDomain" }}}}.okta.com/api/v1/roles/{{roleId}}/targets/groups/{{groupId}}
+  -X PUT https:///your-domain.okta.com.okta.com/api/v1/roles/{{roleId}}/targets/groups/{{groupId}}
 ~~~
 
 ##### Response Example
@@ -380,20 +369,20 @@ Fetches all groups targets for a role. Standard paging and limits are supported.
       "logo": [
         {
           "name": "medium",
-          "href": "https:/{{ "{{subDomain" }}}}.okta.com/img/logos/groups/workday-medium.png",
+          "href": "https://your-domain.okta.com.okta.com/img/logos/groups/workday-medium.png",
           "type": "image/png"
         },
         {
           "name": "large",
-          "href": "https:/{{ "{{subDomain" }}}}.okta.com/img/logos/groups/workday-large.png",
+          "href": "https://your-domain.okta.com.okta.com/img/logos/groups/workday-large.png",
           "type": "image/png"
         }
       ],
       "users": {
-        "href": "https:/{{ "{{subDomain" }}}}.okta.com/api/v1/groups/00gg9oZUHKTGCQNKJLUJ/users"
+        "href": "https://your-domain.okta.com.okta.com/api/v1/groups/00gg9oZUHKTGCQNKJLUJ/users"
       },
       "apps": {
-        "href": "https:/{{ "{{subDomain" }}}}.okta.com/api/v1/groups/00gg9oZUHKTGCQNKJLUJ/apps"
+        "href": "https://your-domain.okta.com.okta.com/api/v1/groups/00gg9oZUHKTGCQNKJLUJ/apps"
       }
     }
   },
@@ -411,20 +400,20 @@ Fetches all groups targets for a role. Standard paging and limits are supported.
       "logo": [
         {
           "name": "medium",
-          "href": "https:/{{ "{{subDomain" }}}}.okta.com/img/logos/groups/workday-medium.png",
+          "href": "https://your-domain.okta.com.okta.com/img/logos/groups/workday-medium.png",
           "type": "image/png"
         },
         {
           "name": "large",
-          "href": "https:/{{ "{{subDomain" }}}}.okta.com/img/logos/groups/workday-large.png",
+          "href": "https://your-domain.okta.com.okta.com/img/logos/groups/workday-large.png",
           "type": "image/png"
         }
       ],
       "users": {
-        "href": "https:/{{ "{{subDomain" }}}}.okta.com/api/v1/groups/00gg9kSDGSJOWIBDIWRF/users"
+        "href": "https://your-domain.okta.com.okta.com/api/v1/groups/00gg9kSDGSJOWIBDIWRF/users"
       },
       "apps": {
-        "href": "https:/{{ "{{subDomain" }}}}.okta.com/api/v1/groups/00gg9kSDGSJOWIBDIWRF/apps"
+        "href": "https://your-domain.okta.com.okta.com/api/v1/groups/00gg9kSDGSJOWIBDIWRF/apps"
       }
     }
   },
@@ -442,20 +431,20 @@ Fetches all groups targets for a role. Standard paging and limits are supported.
       "logo": [
         {
           "name": "medium",
-          "href": "https:/{{ "{{subDomain" }}}}.okta.com/img/logos/groups/workday-medium.png",
+          "href": "https://your-domain.okta.com.okta.com/img/logos/groups/workday-medium.png",
           "type": "image/png"
         },
         {
           "name": "large",
-          "href": "https:/{{ "{{subDomain" }}}}.okta.com/img/logos/groups/workday-large.png",
+          "href": "https://your-domain.okta.com.okta.com/img/logos/groups/workday-large.png",
           "type": "image/png"
         }
       ],
       "users": {
-        "href": "https:/{{ "{{subDomain" }}}}.okta.com/api/v1/groups/00gg9mNOTHEWJYPVNVIX/users"
+        "href": "https://your-domain.okta.com.okta.com/api/v1/groups/00gg9mNOTHEWJYPVNVIX/users"
       },
       "apps": {
-        "href": "https:/{{ "{{subDomain" }}}}.okta.com/api/v1/groups/00gg9mNOTHEWJYPVNVIX/apps"
+        "href": "https://your-domain.okta.com.okta.com/api/v1/groups/00gg9mNOTHEWJYPVNVIX/apps"
       }
     }
   }
@@ -531,7 +520,7 @@ curl -X GET \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
   -H "Cache-Control: no-cache" \
-  -X GET https://{{ "{{subDomain" }}}}.oktapreview.com/api/v1/users/{{userId}}/roles/{{roleId}}/targets/catalog/apps
+  -X GET https:///your-domain.okta.com.oktapreview.com/api/v1/users/{{userId}}/roles/{{roleId}}/targets/catalog/apps
 ~~~
 
 ##### Response Example
@@ -542,7 +531,7 @@ curl -X GET \
 [
 	{
 		"name": "salesforce",
-		"displayName": "Salesforce.com"
+		"displayName": "Salesforce.com",
 		"description": "Salesforce.com",
 		"status": "ACTIVE",
 		"lastUpdated": "2014-10-06T22:56:48.000Z",
@@ -570,7 +559,7 @@ curl -X GET \
 			"logo": [
 				{
 					"name": "medium",
-					"href": "https:/{{ "{{subDomain" }}}}.okta.com/img/logos/salesforce_logo.png",
+					"href": "https://your-domain.okta.com.okta.com/img/logos/salesforce_logo.png",
 					"type": "image/png"
 				}
 			]

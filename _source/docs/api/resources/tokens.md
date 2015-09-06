@@ -18,7 +18,7 @@ Create a token.  This API does not require any token-based authentication to acc
 
 #### Request Example
 
-~~~ ruby
+~~~ shell
 curl -v -H "Content-type:application/json" \
 -H "Accept:application/json" \
 -X POST https://your-subdomain.okta.com/api/v1/tokens/ \
@@ -49,7 +49,7 @@ Revokes the token that is being used to authenticate to the API.
 
 #### Request Example
 
-~~~ ruby
+~~~ shell
 curl -v -H "Content-type:application/json" \
 -H "Authorization:SSWS 00F-MBcxD2SC8tzXDCDZm2a04qtXLcFqtlrrPu6eVtxRs" \
 -H "Accept:application/json" \

@@ -15,7 +15,7 @@ The Okta Groups API provides operations to manage your organization groups and t
 
 ### Example
 
-~~~ json
+~~~json
 {
     "id": "00g1emaKYZTWRYYRRTSK",
     "objectClass": [
@@ -50,31 +50,36 @@ The Okta Groups API provides operations to manage your organization groups and t
 
 ### Group Attributes
 
-All groups have the following attributes:
+All groups have the following properties:
 
-Attribute   | Description                                                  | DataType                                                       | MinLength | MaxLength | Nullable | Unique | Readonly
------------ | ------------------------------------------------------------ | -------------------------------------------------------------- | --------- | --------- | -------- | ------ | --------
-id          | unique key for group                                         | String                                                         |           |           | FALSE    | TRUE   | TRUE
-objectClass | determines the group's `profile`                             | Array of String                                                | 1         |           | TRUE     | FALSE  | TRUE
-profile     | the group's profile attributes                               | [Profile Object](#profile-object)                              |           |           | FALSE    | FALSE  | FALSE
-_links      | [discoverable resources](#links-object) related to the group | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) |           |           | TRUE     | FALSE  | TRUE
+|--------------+--------------------------------------------------------------+----------------------------------------------------------------+----------|--------|----------|-----------|-----------+------------|
+| Property     | Description                                                  | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| ------------ | ------------------------------------------------------------ | -------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
+| id           | unique key for group                                         | String                                                         | FALSE    | TRUE   | TRUE     |           |           |            |
+| objectClass  | determines the group's `profile`                             | Array of String                                                | TRUE     | FALSE  | TRUE     | 1         |           |            |
+| profile      | the group's profile properties                               | [Profile Object](#profile-object)                              | FALSE    | FALSE  | FALSE    |           |           |            |
+| _links       | [discoverable resources](#links-object) related to the group | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
+| _embedded    | [embedded resources](#embedded-object) related to the group  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
+|--------------+--------------------------------------------------------------+----------------------------------------------------------------+----------|--------|----------|-----------|-----------+------------|
 
 > `id`, `objectClass`, and `_links` are only available after a group is created
 
 ### Profile Object
 
-Specifies required and optional attributes for a group.  The `objectClass` of group determines what additional attributes are available.
+Specifies required and optional properties for a group.  The `objectClass` of group determines what additional properties are available.
 
 #### ObjectClass: okta:user_group
 
 Profile for any group that is **not** imported from Active Directory
 
-Attribute   | Description              | DataType | MinLength | MaxLength | Nullable | Readonly
------------ | ------------------------ | -------- | --------- | --------- | -------- | --------
-name        | name of the group        | String   | 1         | 255       | FALSE    | FALSE
-description | description of the group | String   | 0         | 1024      | TRUE     | FALSE
+|-------------+--------------------------+----------+----------+----------+-----------+-----------+------------|
+| Property    | Description              | DataType | Nullable | Readonly | MinLength | MaxLength | Validation |
+| ----------- | ------------------------ | -------- | -------- | -------- | --------- | --------- | ---------- |
+| name        | name of the group        | String   | FALSE    | FALSE    | 1         | 255       |            |
+| description | description of the group | String   | TRUE     | FALSE    | 0         | 1024      |            |
+|-------------+--------------------------+----------+----------+----------+-----------+-----------+------------|
 
-~~~ json
+~~~json
 {
     "name": "West Coast",
     "description": "Straight Outta Compton"
@@ -85,16 +90,18 @@ description | description of the group | String   | 0         | 1024      | TRUE
 
 Profile for a group that is imported from Active Directory
 
-Attribute                  | Description                                            | DataType | Nullable  | Readonly
--------------------------- | ------------------------------------------------------ | -------- | --------- | --------
-name                       | name of the windows group                              | String   | FALSE     | TRUE
-description                | description of the windows group                       | String   | FALSE     | TRUE
-samAccountName             | pre-windows 2000 name of the windows group             | String   | FALSE     | TRUE
-dn                         | the distinguished name of the windows group            | String   | FALSE     | TRUE
-windowsDomainQualifiedName | fully-qualified name of the windows group              | String   | FALSE     | TRUE
-externalId                 | base-64 encoded GUID (objectGUID) of the windows group | String   | FALSE     | TRUE
+|----------------------------+--------------------------------------------------------+----------+-----------+----------+-----------+-----------+------------|
+| Property                   | Description                                            | DataType | Nullable  | Readonly | MinLength | MaxLength | Validation |
+| -------------------------- | ------------------------------------------------------ | -------- | --------- | -------- | --------- | --------- | ---------- |
+| name                       | name of the windows group                              | String   | FALSE     | TRUE     |           |           |            |
+| description                | description of the windows group                       | String   | FALSE     | TRUE     |           |           |            |
+| samAccountName             | pre-windows 2000 name of the windows group             | String   | FALSE     | TRUE     |           |           |            |
+| dn                         | the distinguished name of the windows group            | String   | FALSE     | TRUE     |           |           |            |
+| windowsDomainQualifiedName | fully-qualified name of the windows group              | String   | FALSE     | TRUE     |           |           |            |
+| externalId                 | base-64 encoded GUID (objectGUID) of the windows group | String   | FALSE     | TRUE     |           |           |            |
+|----------------------------+--------------------------------------------------------+----------+-----------+----------+-----------+-----------+------------|
 
-~~~ json
+~~~json
 {
     "profile": {
         "name": "West Coast Users",
@@ -111,12 +118,14 @@ externalId                 | base-64 encoded GUID (objectGUID) of the windows gr
 
 Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the group using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  This object is used for dynamic discovery of related resources and lifecycle operations.  The Links Object is **read-only**.
 
-Link Relation Type | Description
------------------- | -----------
-self               | The primary URL for the group
-logo               | Provides links to logo images for the group if available
-users              | Provides [group member operations](#group-member-operations) for the group
-apps               | Lists all [applications](apps.html#application-model) that are assigned to the group. See [Application Group Operations](apps.html#application-group-operations)
+|--------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Link Relation Type | Description                                                                                                                                                      |
+| ------------------ | -----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| self               | The primary URL for the group                                                                                                                                    |
+| logo               | Provides links to logo images for the group if available                                                                                                         |
+| users              | Provides [group member operations](#group-member-operations) for the group                                                                                       |
+| apps               | Lists all [applications](apps.html#application-model) that are assigned to the group. See [Application Group Operations](apps.html#application-group-operations) |
+|--------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
 ## Group Operations
 
@@ -144,24 +153,23 @@ The created [Group](#group-model).
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization:SSWS yourtoken" \
--H "Accept:application/json" \
--H "Content-type:application/json" \
--X POST https://your-domain.okta.com/api/v1/groups \
--d \
-'{
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "profile": {
     "name": "West Coast",
     "description": "Straight Outta Compton"
   }
-}'
+}' "https://${org}.okta.com/api/v1/groups"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
     "id": "00gevhYMOEIQMDAPUQGQ",
     "objectClass": [
@@ -216,16 +224,18 @@ Fetched [Group](#group-model)
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X GET \
 -H "Accept: application/json" \
--X GET "https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ"
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
     "id": "00gevhYMOEIQMDAPUQGQ",
     "objectClass": [
@@ -273,7 +283,7 @@ Enumerates groups in your organization with pagination. A subset of groups can b
 
 Parameter | Description                                                 | ParamType | DataType | Required | Default
 --------- | ----------------------------------------------------------- | --------- | -------- | -------- | -------
-q         | Searches the `name` attribute of groups for matching value  | Query     | String   | FALSE    |
+q         | Searches the `name` property  of groups for matching value  | Query     | String   | FALSE    |
 limit     | Specifies the number of group results in a page             | Query     | Number   | FALSE    | 10000
 after     | Specifies the pagination cursor for the next page of groups | Query     | String   | FALSE    |
 
@@ -296,16 +306,18 @@ The default group limit is set to a very high number due to historical reasons w
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X GET \
 -H "Accept: application/json" \
--X GET "https://your-domain.okta.com/api/v1/groups?limit=200"
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/groups?limit=200"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ ruby
+~~~http
 HTTP/1.1 200 OK
 Content-Type: application/json
 Link: <https://your-domain.okta.com/api/v1/groups?limit=200>; rel="self"
@@ -387,16 +399,18 @@ Searches for groups by `name` in your organization.
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X GET \
 -H "Accept: application/json" \
--X GET "https://your-domain.okta.com/api/v1/groups?q=West&limit=1"
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/groups?q=West&limit="
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 [
   {
       "id": "00gevhYMOEIQMDAPUQGQ",
@@ -448,7 +462,7 @@ Parameter | Description                   | ParamType | DataType                
 id        | id of the group to update     | URL       | String                            | TRUE     |
 profile   | Updated profile for the group | Body      | [Profile Object](#profile-object) | TRUE     |
 
-> All profile attributes must be specified when updating a user's profile.  **partial updates are not supported!**
+> All profile properties must be specified when updating a user's profile.  **partial updates are not supported!**
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -458,24 +472,23 @@ Updated [Group](#group-model)
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X PUT \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X PUT "https://your-domain.okta.com/api/v1/groups/00ub0oNGTSWTBKOLGLNR" \
--d \
-'{
-    "profile": {
-        "name": "Ameliorate Name",
-        "description": "Amended description",
-    }
-}'
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "profile": {
+    "name": "Ameliorate Name",
+    "description": "Amended description",
+  }
+}' "https://${org}.okta.com/api/v1/groups/00ub0oNGTSWTBKOLGLNR"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
     "id": "00ub0oNGTSWTBKOLGLNR",
     "objectClass": [
@@ -511,8 +524,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Remove Group
 {:.api .api-operation}
 
-#### DELETE /groups/*:id*
-{:.api .uri-tempalate}
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /groups/*:id*</span>
 
 Removes an Okta group from your organization.
 
@@ -533,16 +545,19 @@ N/A
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X DELETE \
 -H "Accept: application/json" \
--X DELETE "https://your-domain.okta.com/api/v1/groups/00ub0oNGTSWTBKOLGLNR"
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/groups/00ub0oNGTSWTBKOLGLNR"
 ~~~
+
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ ruby
+~~~http
 HTTP/1.1 204 No Content
 ~~~
 
@@ -578,16 +593,18 @@ Array of [Users](users.html#user-model)
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X GET \
 -H "Accept: application/json" \
--X GET "https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/users?limit=2"
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/users?limit=2"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ ruby
+~~~http
 HTTP/1.1 200 OK
 Content-Type: application/json
 Link: <https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/users?limit=2>; rel="self"
@@ -686,16 +703,18 @@ N/A
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization:SSWS yourtoken" \
--H "Accept:application/json" \
--X PUT https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/users/00u1f96ECLNVOKVMUSEA
+~~~sh
+curl -v -X PUT \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/users/00u1f96ECLNVOKVMUSEA"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ ruby
+~~~http
 HTTP/1.1 204 No Content
 ~~~
 
@@ -724,16 +743,18 @@ N/A
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization:SSWS yourtoken" \
--H "Accept:application/json" \
--X DELETE https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/users/00u1f96ECLNVOKVMUSEA
+~~~sh
+curl -v -X DELETE \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/users/00u1f96ECLNVOKVMUSEA"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ ruby
+~~~http
 HTTP/1.1 204 No Content
 ~~~
 
@@ -765,16 +786,18 @@ Array of [Applications](apps.html#application-model)
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization:SSWS yourtoken" \
--H "Accept:application/json" \
--X GET https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/apps
+~~~sh
+curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/apps"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ ruby
+~~~http
 HTTP/1.1 200 OK
 Content-Type: application/json
 Link: <https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/apps>; rel="self"

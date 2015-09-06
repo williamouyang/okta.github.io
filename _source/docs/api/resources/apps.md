@@ -15,7 +15,7 @@ The Okta Application API provides operations to manage applications and/or assig
 
 ### Example
 
-~~~ json
+~~~json
 {
   "id": "0oabhnUQFYHMBNVSVXMV",
   "name": "template_saml_2_0",
@@ -100,29 +100,30 @@ The Okta Application API provides operations to manage applications and/or assig
 }
 ~~~
 
-### Application Attributes
+### Application Properties
 
-All applications have the following attributes:
+All applications have the following properties:
 
-Attribute     | Description                                | DataType                                                          | MinLength | MaxLength | Nullable | Unique | Readonly
-------------- | ------------------------------------------ | ----------------------------------------------------------------- | --------- | --------- | -------- | ------ | --------
-id            | unique key for app                         | String                                                            |           |           | FALSE    | TRUE   | TRUE
-name          | unique key for app definition              | String ([App Names & Settings](#app-names--settings))             | 1         | 255       | FALSE    | TRUE   | TRUE
-label         | unique user-defined display name for app   | String                                                            | 1         | 50        | FALSE    | TRUE   | FALSE
-created       | timestamp when app was created             | Date                                                              |           |           | FALSE    | FALSE  | TRUE
-lastUpdated   | timestamp when app was last updated        | Date                                                              |           |           | FALSE    | FALSE  | TRUE
-status        | status of app                              | `ACTIVE` or `INACTIVE`                                            |           |           | FALSE    | FALSE  | TRUE
-features      | enabled app features                       | [Features](#features)                                             |           |           | TRUE     | FALSE  | FALSE
-signOnMode    | authentication mode of app                 | [SignOn Mode](#signon-modes)                                      |           |           | FALSE    | FALSE  | FALSE
-accessibility | access settings for app                    | [Accessibility Object](#accessibility-object)                     |           |           | TRUE     | FALSE  | FALSE
-visibility    | visibility settings for app                | [Visibility Object](#visibility-object)                           |           |           | TRUE     | FALSE  | FALSE
-credentials   | credentials for the specified `signOnMode` | [Application Credentials Object](#application-credentials-object) |           |           | TRUE     | FALSE  | FALSE
-settings      | settings for app                           | Object ([App Names & Settings](#app-names--settings))             |           |           | TRUE     | FALSE  | FALSE
-_links        | discoverable resources related to the app  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)    |           |           | TRUE     | FALSE  | TRUE
-_embedded     | embedded resources related to the app      | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)    |           |           | TRUE     | FALSE  | TRUE
+|----------------+--------------------------------------------+-------------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+| Property       | Description                                | DataType                                                          | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| -------------- | ------------------------------------------ | ----------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
+| id             | unique key for app                         | String                                                            | FALSE    | TRUE   | TRUE     |           |           |            |
+| name           | unique key for app definition              | String ([App Names & Settings](#app-names--settings))             | FALSE    | TRUE   | TRUE     | 1         | 255       |            |
+| label          | unique user-defined display name for app   | String                                                            | FALSE    | TRUE   | FALSE    | 1         | 50        |            |
+| created        | timestamp when app was created             | Date                                                              | FALSE    | FALSE  | TRUE     |           |           |            |
+| lastUpdated    | timestamp when app was last updated        | Date                                                              | FALSE    | FALSE  | TRUE     |           |           |            |
+| status         | status of app                              | `ACTIVE` or `INACTIVE`                                            | FALSE    | FALSE  | TRUE     |           |           |            |
+| features       | enabled app features                       | [Features](#features)                                             | TRUE     | FALSE  | FALSE    |           |           |            |
+| signOnMode     | authentication mode of app                 | [SignOn Mode](#signon-modes)                                      | FALSE    | FALSE  | FALSE    |           |           |            |
+| accessibility  | access settings for app                    | [Accessibility Object](#accessibility-object)                     | TRUE     | FALSE  | FALSE    |           |           |            |
+| visibility     | visibility settings for app                | [Visibility Object](#visibility-object)                           | TRUE     | FALSE  | FALSE    |           |           |            |
+| credentials    | credentials for the specified `signOnMode` | [Application Credentials Object](#application-credentials-object) | TRUE     | FALSE  | FALSE    |           |           |            |
+| settings       | settings for app                           | Object ([App Names & Settings](#app-names--settings))             | TRUE     | FALSE  | FALSE    |           |           |            |
+| _links         | discoverable resources related to the app  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)    | TRUE     | FALSE  | TRUE     |           |           |            |
+| _embedded      | embedded resources related to the app      | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)    | TRUE     | FALSE  | TRUE     |           |           |            |
+|----------------+--------------------------------------------+-------------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
 
 > `id`, `created`, `lastUpdated`, `status`, `_links`, and `_embedded` are only available after an app is created
-
 
 #### App Names & Settings
 
@@ -130,15 +131,17 @@ The Okta Application Network (OAN) defines the catalog of applications that can 
 
 The catalog is currently not exposed via an API.  While additional apps may be added via the API, only the following template applications are documented:
 
-Name                | Example
-------------------- | ---------------------------------------------------------
-bookmark            | [Add Bookmark Application](#add-bookmark-application)
-template_basic_auth | [Add Basic Authentication Application](#add-basic-authentication-application)
-template_swa        | [Add Plugin SWA Application](#add-plugin-swa-application)
-template_swa3field  | [Add Plugin SWA (3 Field) Application](#add-plugin-swa-3-field-application)
-tempalte_sps        | [Add SWA Application (No Plugin)](#add-swa-application-no-plugin)
-template_saml_2_0   | [Add SAML 2.0 Application](#add-saml-20-application)
-template_wsfed      | [Add WS-Federation Application](#add-ws-federation-application)
+|---------------------+-------------------------------------------------------------------------------|
+| Name                | Example                                                                       |
+| ------------------- | ------------------------------------------------------------------------------|
+| bookmark            | [Add Bookmark Application](#add-bookmark-application)                         |
+| template_basic_auth | [Add Basic Authentication Application](#add-basic-authentication-application) |
+| template_swa        | [Add Plugin SWA Application](#add-plugin-swa-application)                     |
+| template_swa3field  | [Add Plugin SWA (3 Field) Application](#add-plugin-swa-3-field-application)   |
+| tempalte_sps        | [Add SWA Application (No Plugin)](#add-swa-application-no-plugin)             |
+| template_saml_2_0   | [Add SAML 2.0 Application](#add-saml-20-application)                          |
+| template_wsfed      | [Add WS-Federation Application](#add-ws-federation-application)               |
+|---------------------+-------------------------------------------------------------------------------|
 
 The current workaround is to manually configure the desired application via the Okta Admin UI in a preview (sandbox) organization and view the application via [Get Application](#get-application)
 
@@ -152,18 +155,20 @@ Applications may support optional provisioning features on a per-app basis.
 
 The list of provisioning features an app may support are:
 
-App Feature            | Admin UI Name          | Description
----------------------- | ---------------------- | -----------------------------
-IMPORT_NEW_USERS       | User Import            | Creates or links a user in Okta to a user from the application.
-IMPORT_PROFILE_UPDATES | User Import            | Updates a linked user's app profile during manual or scheduled imports.
-PROFILE_MASTERING      | Profile Master         | Designates the app as the identity lifecycle and profile attribute authority for linked users.  The user's profile in Okta is *read-only*
-IMPORT_USER_SCHEMA     |                        | Discovers the profile schema for a user from the app automatically
-PUSH_NEW_USERS         | Create Users           | Creates or links a user account in the application when assigning the app to a user in Okta.      
-PUSH_PROFILE_UPDATES   | Update User Attributes | Updates a user's profile in the app when the user's profile changes in Okta (Profile Master).
-PUSH_USER_DEACTIVATION | Deactivate Users       | Deactivates a user's account in the app when unassigned from the app in Okta or deactivated.
-REACTIVATE_USERS       | Deactivate Users       | Reactivates an existing inactive user when provisioning a user to the app.
-PUSH_PASSWORD_UPDATES  | Sync Okta Password     | Updates the user's app password when their password changes in Okta.
-GROUP_PUSH             | Group Push             | Creates or links a group in the app when a mapping is defined for a group in Okta.  Okta is the the master for group memberships and all group members in Okta who are also assigned to the app will be synced as group members to the app.
+|------------------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| App Feature            | Admin UI Name          | Description                                                                                                                                                                                                                                    |
+| ---------------------- | ---------------------- | -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| IMPORT_NEW_USERS       | User Import            | Creates or links a user in Okta to a user from the application.                                                                                                                                                                                |
+| IMPORT_PROFILE_UPDATES | User Import            | Updates a linked user's app profile during manual or scheduled imports.                                                                                                                                                                        |
+| PROFILE_MASTERING      | Profile Master         | Designates the app as the identity lifecycle and profile attribute authority for linked users.  The user's profile in Okta is *read-only*                                                                                                      |
+| IMPORT_USER_SCHEMA     |                        | Discovers the profile schema for a user from the app automatically                                                                                                                                                                             |
+| PUSH_NEW_USERS         | Create Users           | Creates or links a user account in the application when assigning the app to a user in Okta.                                                                                                                                                   |
+| PUSH_PROFILE_UPDATES   | Update User Properties | Updates a user's profile in the app when the user's profile changes in Okta (Profile Master).                                                                                                                                                  |
+| PUSH_USER_DEACTIVATION | Deactivate Users       | Deactivates a user's account in the app when unassigned from the app in Okta or deactivated.                                                                                                                                                   |
+| REACTIVATE_USERS       | Deactivate Users       | Reactivates an existing inactive user when provisioning a user to the app.                                                                                                                                                                     |  
+| PUSH_PASSWORD_UPDATES  | Sync Okta Password     | Updates the user's app password when their password changes in Okta.                                                                                                                                                                           |
+| GROUP_PUSH             | Group Push             | Creates or links a group in the app when a mapping is defined for a group in Okta.  Okta is the the master for group memberships and all group members in Okta who are also assigned to the app will be synced as group members to the app.    |
+|------------------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
 #### SignOn Modes
 
@@ -171,15 +176,17 @@ Applications support a limited set of sign-on modes that specify how a user is a
 
 The list of possible modes an app may support are:
 
-Mode                  | Description
---------------------- | -------------------------------------------------------
-BOOKMARK              | Just a bookmark (no-authentication)
-BASIC_AUTH            | HTTP Basic Authentication with Okta Browser Plugin
-BROWSER_PLUGIN        | Secure Web Authentication (SWA) with Okta Browser Plugin
-SECURE_PASSWORD_STORE | Secure Web Authentication (SWA) with POST (plugin not required)
-SAML_2_0              | Federated Authentication with SAML 2.0 WebSSO
-WS_FEDERATION         | Federated Authentication with WS-Federation Passive Requestor Profile
-Custom                | App-Specific SignOn Mode
+|-----------------------+-------------------------------------------------------------------------|
+| Mode                  | Description                                                             |
+| --------------------- | ------------------------------------------------------------------------|
+| BOOKMARK              | Just a bookmark (no-authentication)                                     |
+| BASIC_AUTH            | HTTP Basic Authentication with Okta Browser Plugin                      |
+| BROWSER_PLUGIN        | Secure Web Authentication (SWA) with Okta Browser Plugin                |
+| SECURE_PASSWORD_STORE | Secure Web Authentication (SWA) with POST (plugin not required)         |
+| SAML_2_0              | Federated Authentication with SAML 2.0 WebSSO                           |
+| WS_FEDERATION         | Federated Authentication with WS-Federation Passive Requestor Profile   |
+| Custom                | App-Specific SignOn Mode                                                |
+|-----------------------+-------------------------------------------------------------------------|
 
 This setting modifies the same settings as the `Sign On` tab when editing an application in your Okta Administration app.
 
@@ -187,12 +194,17 @@ This setting modifies the same settings as the `Sign On` tab when editing an app
 
 Specifies access settings for the application.
 
-Attribute        | Description                                | DataType | MinLength | MaxLength | Nullable | Default
----------------- | ------------------------------------------ | -------- | --------- | --------- | -------- | -------
-selfService      | Enable self-service application assignment | Boolean  |           |           | TRUE     | FALSE
-errorRedirectUrl | Custom error page for this application     | String   |           |           | TRUE     | NULL (Global Error Page)
+|------------------+--------------------------------------------+----------+----------+---------+-----------+-----------+------------|
+| Property         | Description                                | DataType | Nullable | Default | MinLength | MaxLength | Validation |
+| ---------------- | ------------------------------------------ | -------- | -------- | ------- | --------- | --------- | ---------- |
+| selfService      | Enable self-service application assignment | Boolean  | TRUE     | FALSE   |           |           |            |
+| errorRedirectUrl | Custom error page for this application     | String   | TRUE     | NULL    |           |           |            |
+| loginRedirectUrl | Custom login page for this application     | String   | TRUE     | NULL    |           |           |            |
+|------------------+--------------------------------------------+----------+----------+---------+-----------+------------------------|
 
-~~~ json
+> The `errorRedirectUrl` and `loginRedirectUrl` default to the organization default pages when empty
+
+~~~json
 {
   "accessibility": {
     "selfService": false,
@@ -206,13 +218,15 @@ errorRedirectUrl | Custom error page for this application     | String   |      
 
 Specifies visibility settings for the application.
 
-Attribute         | Description                                        | DataType                            | MinLength | MaxLength | Nullable | Default
------------------ | -------------------------------------------------- | ----------------------------------- | --------- | --------- | -------- | -------
-autoSubmitToolbar | Automatically log in when user lands on login page | Boolean                             |           |           | FALSE    | FALSE
-hide              | Hides this app for specific end-user apps          | [Hide Object](#hide-object)         |           |           | FALSE    |
-appLinks          | Displays specific appLinks for the app             | [AppLinks Object](#applinks-object) |           |           | FALSE    |
+|-------------------+----------------------------------------------------|-------------------------------------+----------+---------|-----------|-----------+------------|
+| Property          | Description                                        | DataType                            | Nullable | Default | MinLength | MaxLength | Validation |
+| ----------------- | -------------------------------------------------- | ----------------------------------- | -------- | ------- | --------- | --------- | ---------- |
+| autoSubmitToolbar | Automatically log in when user lands on login page | Boolean                             | FALSE    | FALSE   |           |           |            |
+| hide              | Hides this app for specific end-user apps          | [Hide Object](#hide-object)         | FALSE    | FALSE   |           |           |            |
+| appLinks          | Displays specific appLinks for the app             | [AppLinks Object](#applinks-object) | FALSE    |         |           |           |            |
+|-------------------+----------------------------------------------------|-------------------------------------+----------+---------|-----------|-----------+------------|
 
-~~~ json
+~~~json
 {
   "visibility": {
     "autoSubmitToolbar": false,
@@ -229,10 +243,12 @@ appLinks          | Displays specific appLinks for the app             | [AppLin
 
 #### Hide Object
 
-Attribute | Description                                        | DataType | Nullable | Default
---------- | -------------------------------------------------- | -------- | -------- | -------
-iOS       | Okta Mobile for iOS or Android (pre-dates Android) | Boolean  | FALSE    | FALSE
-web       | Okta Web Browser Home Page                         | Boolean  | FALSE    | FALSE
+|-----------+----------------------------------------------------|----------|----------|---------|-----------|-----------+------------|
+| Property  | Description                                        | DataType | Nullable | Default | MinLength | MaxLength | Validation |
+| --------- | -------------------------------------------------- | -------- | -------- | ------- | --------- | --------- | ---------- |
+| iOS       | Okta Mobile for iOS or Android (pre-dates Android) | Boolean  | FALSE    | FALSE   |           |           |            |
+| web       | Okta Web Browser Home Page                         | Boolean  | FALSE    | FALSE   |           |           |            |
+|-----------+----------------------------------------------------|----------|----------|---------|-----------|-----------+------------|
 
 #### AppLinks Object
 
@@ -242,14 +258,16 @@ Each application defines 1 or more appLinks that can be published. AppLinks can 
 
 Specifies credentials and scheme for the application's `signOnMode`.
 
-Attribute        | Description                                                                  | DataType                                              | MinLength | MaxLength | Nullable | Default
----------------- | ---------------------------------------------------------------------------- | ----------------------------------------------------- | --------- | --------- | -------- | -------
-scheme           | Determines how credentials are managed for the `signOnMode`                  | [Authentication Scheme](#authentication-schemes)      |           |           | TRUE     | NULL           
-userNameTemplate | Template used to generate a user’s username when the application is assigned via a group or directly to a user | [UserName Template Object](#username-template-object) |           |           | TRUE     | *Okta UserName*
-userName         | Shared username for app                                                      | String                                                | 1         | 100       | TRUE     | NULL
-password         | Shared password for app                                                      | [Password Object](#password-object)                   |           |           | TRUE     | NULL
+|------------------+----------------------------------------------------------------------------------------------------------------+-------------------------------------------------------+----------+-----------------+-----------+-----------+------------|
+| Property         | Description                                                                                                    | DataType                                              | Nullable | Default         | MinLength | MaxLength | Validation |
+| ---------------- | -------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- | -------- | --------------- | --------- | --------- | ---------- |
+| scheme           | Determines how credentials are managed for the `signOnMode`                                                    | [Authentication Scheme](#authentication-schemes)      | TRUE     |                 |           |           |            |
+| userNameTemplate | Template used to generate a user’s username when the application is assigned via a group or directly to a user | [UserName Template Object](#username-template-object) | TRUE     | *Okta UserName* |           |           |            |
+| userName         | Shared username for app                                                                                        | String                                                | TRUE     |                 | 1         | 100       |            |
+| password         | Shared password for app                                                                                        | [Password Object](#password-object)                   | TRUE     |                 |           |           |            |
+|------------------+----------------------------------------------------------------------------------------------------------------+-------------------------------------------------------+----------+-----------------+-----------+-----------+------------|
 
-~~~ json
+~~~json
 {
   "credentials": {
     "scheme": "SHARED_USERNAME_AND_PASSWORD",
@@ -267,12 +285,14 @@ password         | Shared password for app                                      
 
 Applications that are configured with the `BASIC_AUTH`, `BROWSER_PLUGIN`, or `SECURE_PASSWORD_STORE`  have credentials vaulted by Okta and can be configured with the following schemes:
 
-Scheme                       | Description                                                               | Shared UserName | Shared Password | App UserName   | App Password
----------------------------- | ------------------------------------------------------------------------- | --------------- | --------------- | -------------- | -----------------------
-SHARED_USERNAME_AND_PASSWORD | Users share a single username and password set by administrator           | Admin:R/W       | Admin:W         |                |
-EXTERNAL_PASSWORD_SYNC       | Administrator sets username, password is the same as user's Okta password |                 |                 | Admin:R/W      | *Current User Password*
-EDIT_USERNAME_AND_PASSWORD   | User sets username and password                                           |                 |                 | Admin/User:R/W | Admin/User:W
-EDIT_PASSWORD_ONLY           | Administrator sets username, user sets password                           |                 |                 | Admin:R/W      | Admin/User:W
+|------------------------------+---------------------------------------------------------------------------+-----------------+-----------------+------------------+--------------------------|
+| Scheme                       | Description                                                               | Shared UserName | Shared Password | App UserName     | App Password             |
+| ---------------------------- | ------------------------------------------------------------------------- | --------------- | --------------- | ---------------- | -------------------------|
+| SHARED_USERNAME_AND_PASSWORD | Users share a single username and password set by administrator           | Admin:`R/W`     | Admin:`W`       |                  |                          |
+| EXTERNAL_PASSWORD_SYNC       | Administrator sets username, password is the same as user's Okta password |                 |                 | Admin:`R/W`      | *Current User Password*  |
+| EDIT_USERNAME_AND_PASSWORD   | User sets username and password                                           |                 |                 | Admin/User:`R/W` | Admin/User:`W`           |
+| EDIT_PASSWORD_ONLY           | Administrator sets username, user sets password                           |                 |                 | Admin:`R/W`      | Admin/User:`W`           |
+|------------------------------+---------------------------------------------------------------------------+-----------------+-----------------+------------------+--------------------------|
 
 > `BOOKMARK`, `SAML_2_0`, and `WS_FEDERATION` signOnModes do not support an authentication scheme as they use a federated SSO protocol.  The `scheme` property should be omitted for apps with these signOnModes
 
@@ -280,15 +300,17 @@ EDIT_PASSWORD_ONLY           | Administrator sets username, user sets password  
 
 Specifies the template used to generate a user's username when the application is assigned via a group or directly to a user
 
-Attribute  | Description                             | DataType                         | MinLength | MaxLength | Nullable | Default
----------- | --------------------------------------- | -------------------------------- | --------- | --------- | -------- | ----------------
-template   | mapping expression for username         | String                           |           | 1024      | TRUE     | `${source.login}`
-type       | type of mapping expression              | `NONE`,  `BUILT_IN`, or `CUSTOM` |           |           | FALSE    | BUILT_IN
-userSuffix | suffix for built-in mapping expressions | String                           |           |           | TRUE     | NULL
+|------------+-----------------------------------------+----------------------------------+----------+-------------------+-----------+-----------+------------|
+| Property   | Description                             | DataType                         | Nullable | Default           | MinLength | MaxLength | Validation |
+| ---------- | --------------------------------------- | -------------------------------- | -------- | ----------------- | --------- | ----------| ---------- |
+| template   | mapping expression for username         | String                           | TRUE     | `${source.login}` |           | 1024      |            |
+| type       | type of mapping expression              | `NONE`,  `BUILT_IN`, or `CUSTOM` | FALSE    | BUILT_IN          |           |           |            |
+| userSuffix | suffix for built-in mapping expressions | String                           | TRUE     | NULL              |           |           |            |
+|------------+-----------------------------------------+----------------------------------+----------+-------------------+-----------+-----------+------------|
 
 > You must use the `CUSTOM` type when defining your own expression that is not built-in
 
-~~~ json
+~~~json
 {
   "userNameTemplate": {
     "template": "${source.login}",
@@ -301,52 +323,59 @@ userSuffix | suffix for built-in mapping expressions | String                   
 
 The following expressions are built-in and may be used with the `BUILT_IN` template type:
 
-Name                            | Template Expression
-------------------------------- | ---------------------------------------------
-Okta username                   | ${source.login}
-Okta username prefix            | ${fn:substringBefore(source.login, ""@"")}
-Email                           | ${source.email}
-Email prefix                    | ${fn:substringBefore(source.email, ""@"")}
-Email (lowercase)               | ${fn:toLowerCase(source.email)}
-AD SAM Account Name             | ${source.samAccountName}
-AD SAM Account Name (lowercase) | ${fn:toLowerCase(source.samAccountName)}
-AD User Principal Name          | ${source.userName}
-AD User Principal Name prefix   | ${fn:substringBefore(source.userName, ""@"")}
-AD Employee ID                  | ${source.employeeID}
-LDAP UID + custom suffix        | ${source.userName}${instance.userSuffix}
+|---------------------------------+-----------------------------------------------|
+| Name                            | Template Expression                           |
+| ------------------------------- | ----------------------------------------------|
+| Okta username                   | ${source.login}                               |
+| Okta username prefix            | ${fn:substringBefore(source.login, ""@"")}    |
+| Email                           | ${source.email}                               |
+| Email prefix                    | ${fn:substringBefore(source.email, ""@"")}    |
+| Email (lowercase)               | ${fn:toLowerCase(source.email)}               |
+| AD SAM Account Name             | ${source.samAccountName}                      |
+| AD SAM Account Name (lowercase) | ${fn:toLowerCase(source.samAccountName)}      |
+| AD User Principal Name          | ${source.userName}                            |
+| AD User Principal Name prefix   | ${fn:substringBefore(source.userName, ""@"")} |
+| AD Employee ID                  | ${source.employeeID}                          |
+| LDAP UID + custom suffix        | ${source.userName}${instance.userSuffix}      |
+|---------------------------------+-----------------------------------------------|
 
 ### Password Object
 
 Specifies a password for a user.  A password value is a **write-only** property.  When a user has a valid password and a response object contains a password credential, then the Password Object will be a bare object without the `value`  property defined (e.g. `password: {}` ) to indicate that a password value exists.
 
-Attribute | DataType | MinLength | MaxLength | Nullable | Unique | Validation
---------- | -------- | --------- | --------- | -------- | ------ | ----------
-value     | String   |           |           | TRUE     | FALSE  |
+|-----------+-------------+----------+----------+---------+-----------+-----------+------------|
+| Property  | Description | DataType | Nullable | Default | MinLength | MaxLength | Validation |
+| --------- | ----------- | -------- | -------- | ------- | --------- | --------- | ---------- |
+| value     |             | String   | TRUE     |         |           |           |            |
+|-----------+-------------+----------+----------+---------+-----------+-----------+------------|
 
 ### Application Links Object
 
 Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the current status of an application using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  This object is used for dynamic discovery of related resources and lifecycle operations.  The Links Object is **read-only**.
 
-Link Relation Type | Description
------------------- | -----------
-self               | The actual application
-activate           | [Lifecycle action](#activate-application) to transition application to `ACTIVE` status
-deactivate         | [Lifecycle action](#deactivate-application) to transition application to `INACTIVE` status
-metadata           | Protocol-specific metadata document for the configured `SignOnMode`
-users              | [User](#application-user-operations) assignments for application
-groups             | [Group](#application-group-operations) assignments for application
-logo               | Application logo image
+|--------------------+---------------------------------------------------------------------------------------------|
+| Link Relation Type | Description                                                                                 |
+| ------------------ | --------------------------------------------------------------------------------------------|
+| self               | The actual application                                                                      |
+| activate           | [Lifecycle action](#activate-application) to transition application to `ACTIVE` status      |
+| deactivate         | [Lifecycle action](#deactivate-application) to transition application to `INACTIVE` status  |
+| metadata           | Protocol-specific metadata document for the configured `SignOnMode`                         |
+| users              | [User](#application-user-operations) assignments for application                            |
+| groups             | [Group](#application-group-operations) assignments for application                          |
+| logo               | Application logo image                                                                      |
+|--------------------+---------------------------------------------------------------------------------------------|
 
 ### Notifications Object
 
-Specifies notifications settings for the application. The VPN notification feature allows admins to communicate a requirement for signing into VPN-required apps. 
+Specifies notifications settings for the application. The VPN notification feature allows admins to communicate a requirement for signing into VPN-required apps.
 
-Attribute         | Description                                        | DataType                            | MinLength | MaxLength | Nullable | Default
------------------ | -------------------------------------------------- | ----------------------------------- | --------- | --------- | -------- | -------
-vpn  | VPN notification settings        | [VPN Object](#vpn-object)         |           |           | FALSE    |
+|-------------------+----------------------------------------------------+------------------------------------------------------+----------+---------+-----------+-----------+------------|
+| Property          | Description                                        | DataType                                             | Nullable | Default | MinLength | MaxLength | Validation |
+| ----------------- | -------------------------------------------------- | ---------------------------------------------------- | -------- | ------- | --------- | --------- | ---------- |
+| vpn               | VPN notification settings                          | [VPN Notification Object](#vpn-notification-object)  | FALSE    |         |           |           |            |
+|-------------------+----------------------------------------------------+------------------------------------------------------+----------+---------+-----------+-----------+------------|
 
-
-~~~ json
+~~~json
 {
   "notifications": {
     "vpn": {
@@ -357,30 +386,35 @@ vpn  | VPN notification settings        | [VPN Object](#vpn-object)         |   
       "helpUrl": "http:/www.help-site.example.com"
      }
    }
- } 
+ }
 ~~~
 
-#### VPN Object
+#### VPN Notification Object
 
-Attribute | Description                                        | DataType | Nullable | Default
---------- | -------------------------------------------------- | -------- | -------- | -------
-network   | The network connections for the VPN.              |  [Network Object](#network-object)      | FALSE   | 
-message   | An optional message to your end users.             | String   | TRUE     | null
-helpurl   | An optional URL to help page URL to assist your end users in signing into your company VPN. If you are using Juniper IVE as the VPN, this is where you can insert an embed link for the Juniper IVE SAML app. | String | TRUE | null
+Specifies properties for a VPN notification
+
+|-----------+--------------------------------------------------------------------------------------------+-----------------------------------+----------+---------+-----------+-----------+------------|
+| Property  | Description                                                                                | DataType                          | Nullable | Default | MinLength | MaxLength | Validation |
+| --------- | ------------------------------------------------------------------------------------------ | --------------------------------  | -------- | ------- | --------- | ----------| ---------- |
+| network   | The network connections for the VPN.                                                       | [Network Object](#network-object) | FALSE    |         |           |           |            |
+| message   | An optional message to your end users.                                                     | String                            | TRUE     |         |           |           |            |
+| helpurl   | An optional URL to help page URL to assist your end users in signing into your company VPN | String                            | TRUE     |         |           |           |            |
+|-----------+--------------------------------------------------------------------------------------------+-----------------------------------+----------+---------+-----------+-----------+------------|
 
 #### Network Object
 
-Attribute | Description                                        | DataType | Nullable | Default
---------- | -------------------------------------------------- | -------- | -------- | -------
-connection | The VPN settings on the app. Choices are shown below.| String  | FALSE    | DISABLED
+|------------+-------------------------------------------------------+--------------------------------------------------------+----------+------------+-----------+-----------+------------|
+| Property   | Description                                           | DataType                                               | Nullable | Default    | MinLength | MaxLength | Validation |
+| ---------- | ----------------------------------------------------- | ------------------------------------------------------ | -------- | -----------| --------- | ----------| ---------- |
+| connection | The VPN settings on the app. Choices are shown below. | `DISABLED`, `ANYWHERE`, `ON_NETWORK`, or `OFF_NETWORK` | FALSE    | `DISABLED` |           |           |            |
+|------------+-------------------------------------------------------+--------------------------------------------------------+----------+------------+-----------+-----------+------------|
 
-There are four choices for the `connection` attribute.
+There are four choices for the `connection` property.
 
  - `DISABLED` – The default state. Retain this setting for apps that do not require a VPN connection.
  - `ANYWHERE` – Displays VPN connection information regardless of the browser's client IP. The notification appears before the end user can access the app.
  - `ON_NETWORK` – Displays VPN connection information only when a browser's client IP matches the configured Pubic Gateway IPs. The notification appears before the end user can access the app.
  - `OFF_NETWORK` – Displays VPN connection information only when the browser's client IP does not match the configured Pubic Gateway IPs. The notification appears before the end user can access the app.
-
 
 ## Application User Model
 
@@ -388,7 +422,7 @@ The application user model defines a user's app-specific profile and credentials
 
 ### Example
 
-~~~ json
+~~~json
 {
   "id": "00u11z6WHMYCGPCHCRFK",
   "externalId": "70c14cc17d3745e8a9f98d599a68329c",
@@ -427,25 +461,28 @@ The application user model defines a user's app-specific profile and credentials
 }
 ~~~
 
-### Application User Attributes
+### Application User Properties
 
-All application user assignments have the following attributes:
+All application user assignments have the following properties:
 
-Attribute       | Description                                                  | DataType                                                                    | MinLength | MaxLength | Nullable | Unique | Readonly
---------------- | ----------------------------------------------------------   | --------------------------------------------------------------------------- | --------- | --------- | -------- | ------ | --------
-id              | unique key of [User](Users.html)                             | String                                                                      |           |           | FALSE    | TRUE   | TRUE
-externalId      | id of user in target app *(must be imported or provisioned)* | String                                                                      |           | 512       | TRUE     | TRUE   | TRUE
-created         | timestamp when app user was created                          | Date                                                                        |           |           | FALSE    | FALSE  | TRUE
-lastUpdated     | timestamp when app user was last updated                     | Date                                                                        |           |           | FALSE    | FALSE  | TRUE
-scope           | toggles the assignment between user or group scope           | `USER` or `GROUP`                                                           |           |           | FALSE    | FALSE  | FALSE
-status          | status of app user                                           | `STAGED`, `PROVISIONED`, `ACTIVE`, `INACTIVE`, or `DEPROVISIONED`           |           |           | FALSE    | FALSE  | TRUE
-statusChanged   | timestamp when status was last changed                       | Date                                                                        |           |           | TRUE     | FALSE  | TRUE
-passwordChanged | timestamp when app password last changed                     | Date                                                                        |           |           | TRUE     | FALSE  | TRUE
-syncState       | synchronization state for app user                           | `DISABLED`, `OUT_OF_SYNC`, `SYNCING`, `SYNCHRONIZED`, `ERROR`               |           |           | FALSE    | FALSE  | TRUE
-lastSync        | timestamp when last sync operation was executed              | Date                                                                        |           |           | TRUE     | FALSE  | TRUE
-credentials     | credentials for assigned app                                 | [Application User Credentials Object](#application-user-credentials-object) |           |           | TRUE     | FALSE  | FALSE
-profile         | app-specific profile for the user                            | [Application User Profile Object](#application-user-profile-object)         |           |           | FALSE    | FALSE  | TRUE
-_links          | discoverable resources related to the app user               | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-05)              |           |           | TRUE     | FALSE  | TRUE
+|------------------+--------------------------------------------------------------+-----------------------------------------------------------------------------|----------|--------|----------|-----------|-----------+------------|
+| Property         | Description                                                  | DataType                                                                    | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| ---------------- | ------------------------------------------------------------ | --------------------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
+| id               | unique key of [User](Users.html)                             | String                                                                      | FALSE    | TRUE   | TRUE     |           |           |            |
+| externalId       | id of user in target app *(must be imported or provisioned)* | String                                                                      | TRUE     | TRUE   | TRUE     |           | 512       |            |
+| created          | timestamp when app user was created                          | Date                                                                        | FALSE    | FALSE  | TRUE     |           |           |            |
+| lastUpdated      | timestamp when app user was last updated                     | Date                                                                        | FALSE    | FALSE  | TRUE     |           |           |            |
+| scope            | toggles the assignment between user or group scope           | `USER` or `GROUP`                                                           | FALSE    | FALSE  | FALSE    |           |           |            |
+| status           | status of app user                                           | `STAGED`, `PROVISIONED`, `ACTIVE`, `INACTIVE`, or `DEPROVISIONED`           | FALSE    | FALSE  | TRUE     |           |           |            |
+| statusChanged    | timestamp when status was last changed                       | Date                                                                        | TRUE     | FALSE  | TRUE     |           |           |            |
+| passwordChanged  | timestamp when app password last changed                     | Date                                                                        | TRUE     | FALSE  | TRUE     |           |           |            |
+| syncState        | synchronization state for app user                           | `DISABLED`, `OUT_OF_SYNC`, `SYNCING`, `SYNCHRONIZED`, `ERROR`               | FALSE    | FALSE  | TRUE     |           |           |            |
+| lastSync         | timestamp when last sync operation was executed              | Date                                                                        | TRUE     | FALSE  | TRUE     |           |           |            |
+| credentials      | credentials for assigned app                                 | [Application User Credentials Object](#application-user-credentials-object) | TRUE     | FALSE  | FALSE    |           |           |            |
+| profile          | app-specific profile for the user                            | [Application User Profile Object](#application-user-profile-object)         | FALSE    | FALSE  | TRUE     |           |           |            |
+| _links           | discoverable resources related to the app user               | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)              | TRUE     | FALSE  | TRUE     |           |           |            |
+| _embedded        | embedded resources related to the app user                   | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)              | TRUE     | FALSE  | TRUE     |           |           |            |
+|------------------+--------------------------------------------------------------+-----------------------------------------------------------------------------|----------|--------|----------|-----------|-----------+------------|
 
 > `lastSync` is only updated for applications with the `IMPORT_PROFILE_UPDATES` or `PUSH PROFILE_UPDATES` feature
 
@@ -454,7 +491,7 @@ _links          | discoverable resources related to the app user               |
 Users in Okta are linked to a user in a target application via an `externalId`.  Okta anchors an user with his or her `externalId` during an import or provisioning synchronization event.  Okta uses the native app-specific identifier or primary key for the user as the `externalId`.  The `externalId` is selected during import when the user is confirmed (reconciled) or during provisioning when the user has been successfully created in the target application.
 
 > SSO Application Assignments (e.g. SAML or SWA) do not have an `externalId` as they are not synchronized with the application.
-  
+
 #### Application User Status
 
 ##### Single Sign-On
@@ -471,18 +508,20 @@ User provisioning in Okta is an asynchronous background job that is triggered du
 
 1. User is assigned to an application that has `PUSH_NEW_USERS` feature enabled
     * Application user will have a `STAGED` status with no `externalId` while the background provisioning job is queued.
-2. When the background provisioning job completes successfully, the application user transitions to the `PROVISIONED` status. 
+2. When the background provisioning job completes successfully, the application user transitions to the `PROVISIONED` status.
     * Application user is assigned an `externalId` when successfully provisioned in target application.  The `externalId` should be immutable for the life of the assignment
 3. If the background provisioning job completes with an error, the application user remains with the `STAGED` status but will have `syncState` as `ERROR`.  A provisioning task is created in the Okta Admin UI that must be resolved to retry the job.
 
 When the `PUSH_PROFILE_UPDATES` feature is enabled, updates to an upstream profile are pushed downstream to the application according to profile mastering priority.  The app user's `syncState` will have the following values:
 
-syncState    | Description
------------- | ----------- 
-OUT_OF_SYNC  | Application user has changes that have not been pushed to the target application
-SYNCING      | Background provisioning job is running to update the user's profile in the target application
-SYNCHRONIZED | All changes to the app user profile have successfully been synchronized with the target application
-ERROR        | Background provisioning job failed to update the user's profile in the target application. A provisioning task is created in the Okta Admin UI that must be resolved to retry the job.
+|--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| syncState    | Description                                                                                                                                                                            |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| OUT_OF_SYNC  | Application user has changes that have not been pushed to the target application                                                                                                       |
+| SYNCING      | Background provisioning job is running to update the user's profile in the target application                                                                                          |
+| SYNCHRONIZED | All changes to the app user profile have successfully been synchronized with the target application                                                                                    |
+| ERROR        | Background provisioning job failed to update the user's profile in the target application. A provisioning task is created in the Okta Admin UI that must be resolved to retry the job. |
+|--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
 > User provisioning currently must be configured via the Okta Admin UI and is only available to with specific editions.
 
@@ -490,12 +529,14 @@ ERROR        | Background provisioning job failed to update the user's profile i
 
 Specifies a user's credentials for the application.  The [Authentication Scheme](#authentication-schemes) of the application determines whether a userName or password can be assigned to a user.
 
-Attribute | Description      | DataType                            | MinLength | MaxLength | Nullable | Default
---------- | ---------------- | ----------------------------------- | --------- | --------- | -------- | ---
-userName  | username for app | String                              | 1         | 100       | TRUE     | NULL
-password  | password for app | [Password Object](#password-object) |           |           | TRUE     | NULL
+|-----------+------------------+-------------------------------------+----------+---------+-----------+-----------+------------|
+| Property  | Description      | DataType                            | Nullable | Default | MinLength | MaxLength | Validation |
+| --------- | ---------------- | ----------------------------------- | -------- | ------- | --------- | --------- | ---------- |
+| userName  | username for app | String                              | TRUE     |         | 1         | 100       |            |
+| password  | password for app | [Password Object](#password-object) | TRUE     |         |           |           |            |
+|-----------+------------------+-------------------------------------+----------+---------+-----------+-----------+------------|
 
-~~~ json
+~~~json
 {
   "credentials": {
     "userName": "test",
@@ -508,7 +549,7 @@ password  | password for app | [Password Object](#password-object) |           |
 
 If you attempt to assign a username or password to an application with an incompatible [Authentication Scheme](#authentication-schemes) you will receive the following error:
 
-~~~ json
+~~~json
 {
   "errorCode": "E0000041",
   "errorSummary": "Credentials should not be set on this resource based on the scheme.",
@@ -524,7 +565,7 @@ If you attempt to assign a username or password to an application with an incomp
 
 ### Application User Profile Object
 
-Application User profiles are app-specific but may be customized by the Profile Editor in the Okta Admin UI. SSO apps typically don't support a user profile while apps with [user provisioning features](#features) have an app-specific profiles with optional and/or required attributes.  Any profile attribute visible in the Okta Admin UI for an application assignment can also be assigned via the API. Some attributes are reference attributes and imported from the target application and only allow specific values to be configured.
+Application User profiles are app-specific but may be customized by the Profile Editor in the Okta Admin UI. SSO apps typically don't support a user profile while apps with [user provisioning features](#features) have an app-specific profiles with optional and/or required properties.  Any profile properties visible in the Okta Admin UI for an application assignment can also be assigned via the API. Some properties are reference properties and imported from the target application and only allow specific values to be configured.
 
 #### Profile Editor
 
@@ -538,7 +579,7 @@ Application User profiles are app-specific but may be customized by the Profile 
 
 #### Example Profile Object
 
-~~~ json
+~~~json
 {
   "profile": {
     "secondEmail": null,
@@ -553,13 +594,13 @@ Application User profiles are app-specific but may be customized by the Profile 
     "profile": "Standard User"
   }
 }
-~~~ 
+~~~
 
 ## Application Group Model
 
 ### Example
 
-~~~ json
+~~~json
 {
   "id": "00gbkkGFFWZDLCNTAGQR",
   "lastUpdated": "2013-09-11T15:56:58.000Z",
@@ -572,17 +613,19 @@ Application User profiles are app-specific but may be customized by the Profile 
 }
 ~~~
 
-### Application Group Attributes
+### Application Group Properties
 
-All application groups have the following attributes:
+All application groups have the following properties:
 
-Attribute   | Description                                     | DataType                                                       | MinLength | MaxLength | Nullable | Unique | Readonly
------------ | ----------------------------------------------- | -------------------------------------------------------------- | --------- | --------- | -------- | ------ | --------
-id          | unique key of group                             | String                                                         |           |           | FALSE    | TRUE   | TRUE
-lastUpdated | timestamp when app group was last updated       | Date                                                           |           |           | FALSE    | FALSE  | TRUE
-priority    | priority of group assignment                    | Number                                                         | 0         | 100       | TRUE     | FALSE  | FALSE
-_links      | discoverable resources related to the app group | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-05) |           |           | TRUE     | FALSE  | TRUE
-
+|--------------+-------------------------------------------------+----------------------------------------------------------------|----------+--------|----------|-----------|-----------+------------|
+| Property     | Description                                     | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| ------------ | ----------------------------------------------- | -------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
+| id           | unique key of group                             | String                                                         | FALSE    | TRUE   | TRUE     |           |           |            |
+| lastUpdated  | timestamp when app group was last updated       | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
+| priority     | priority of group assignment                    | Number                                                         | TRUE     | FALSE  | FALSE    | 0         | 100       |            |
+| _links       | discoverable resources related to the app group | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-05) | TRUE     | FALSE  | TRUE     |           |           |            |
+| _embedded    | embedded resources related to the app group     | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
+|--------------+-------------------------------------------------+----------------------------------------------------------------|----------+--------|----------|-----------|-----------+------------|
 
 ## Application Operations
 
@@ -613,7 +656,7 @@ Adds an new bookmark application to your organization.
 ##### Settings
 {:.api .api-request .api-request-params}
 
-Attribute          | Description                                             | DataType | Nullable | Unique | Validation
+Parameter          | Description                                             | DataType | Nullable | Unique | Validation
 ------------------ | ------------------------------------------------------- | -------- | -------- | ------ | ----------------------------------------
 url                | The URL of the launch page for this app                 | String   | FALSE    | FALSE  | [URL](http://tools.ietf.org/html/rfc3986)
 requestIntegration | Would you like Okta to add an integration for this app? | Boolean  | FALSE    | FALSE  |
@@ -621,13 +664,12 @@ requestIntegration | Would you like Okta to add an integration for this app? | B
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/apps" \
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "name": "bookmark",
   "label": "Sample Bookmark App",
   "signOnMode": "BOOKMARK",
@@ -637,13 +679,13 @@ curl -v -H "Authorization: SSWS yourtoken" \
       "url": "https://example.com/bookmark.htm"
     }
   }
-}'
+}' "https://${org}.okta.com/api/v1/apps"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
   "id": "0oafxqCAJWWGELFTYASJ",
   "name": "bookmark",
@@ -711,7 +753,7 @@ Adds an new application that uses HTTP Basic Authentication Scheme and requires 
 ##### Settings
 {:.api .api-request .api-request-params}
 
-Attribute | Description                                     | DataType | Nullable | Unique | Validation
+Parameter | Description                                     | DataType | Nullable | Unique | Validation
 --------- | ----------------------------------------------- | -------- | -------- | ------ | ----------------------------------------
 url       | The URL of the login page for this app          | String   | FALSE    | FALSE  | [URL](http://tools.ietf.org/html/rfc3986)
 authURL   | The URL of the authenticating site for this app | String   | FALSE    | FALSE  | [URL](http://tools.ietf.org/html/rfc3986)
@@ -719,13 +761,12 @@ authURL   | The URL of the authenticating site for this app | String   | FALSE  
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/apps" \
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "name": "template_basic_auth",
   "label": "Sample Basic Auth App",
   "signOnMode": "BASIC_AUTH",
@@ -735,13 +776,13 @@ curl -v -H "Authorization: SSWS yourtoken" \
       "authURL": "https://example.com/auth.html"
     }
   }
-}'
+}' "https://${org}.okta.com/api/v1/apps"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
   "id": "0oafwvZDWJKVLDCUWUAC",
   "name": "template_basic_auth",
@@ -810,7 +851,7 @@ Adds a SWA application that requires a browser plugin.
 ##### Settings
 {:.api .api-request .api-request-params}
 
-Attribute     | Description                                           | DataType | Nullable | Unique | Validation
+Parameter     | Description                                           | DataType | Nullable | Unique | Validation
 ------------- | ----------------------------------------------------- | -------- | -------- | ------ | ----------------------------------------
 url           | The URL of the login page for this app                | String   | FALSE    | FALSE  | [URL](http://tools.ietf.org/html/rfc3986)
 usernameField | CSS selector for the username field in the login form | String   | FALSE    | FALSE  |
@@ -820,13 +861,12 @@ buttonField   | CSS selector for the login button in the login form   | String  
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/apps" \
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "name": "template_swa",
   "label": "Sample Plugin App",
   "signOnMode": "BROWSER_PLUGIN",
@@ -838,13 +878,13 @@ curl -v -H "Authorization: SSWS yourtoken" \
       "url": "https://example.com/login.html"
     }
   }
-}'
+}' "https://${org}.okta.com/api/v1/apps"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
   "id": "0oabkvBLDEKCNXBGYUAS",
   "name": "template_swa",
@@ -915,7 +955,7 @@ Adds a SWA application that requires a browser plugin and supports 3 CSS selecto
 ##### Settings
 {:.api .api-request .api-request-params}
 
-Attribute          | Description                                           | DataType | Nullable | Unique | Validation
+Parameter          | Description                                           | DataType | Nullable | Unique | Validation
 ------------------ | ----------------------------------------------------- | -------- | -------- | ------ | ----------------------------------------
 url                | The URL of the login page for this app                | String   | FALSE    | FALSE  | [URL](http://tools.ietf.org/html/rfc3986)
 usernameField      | CSS selector for the username field in the login form | String   | FALSE    | FALSE  |
@@ -927,13 +967,12 @@ extraFieldValue    | Value for extra field form field                      | Str
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X "POST https://your-domain.okta.com/api/v1/apps" \
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "name": "template_swa3field",
   "label": "Sample Plugin App",
   "signOnMode": "BROWSER_PLUGIN",
@@ -947,13 +986,13 @@ curl -v -H "Authorization: SSWS yourtoken" \
       "extraFieldValue": "SOMEVALUE"
     }
   }
-}'
+}' "https://${org}.okta.com/api/v1/apps"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
   "id": "0oabkvBLDEKCNXBGYUAS",
   "name": "template_swa",
@@ -1026,7 +1065,7 @@ Adds a SWA application that uses HTTP POST and does not require a browser plugin
 ##### Settings
 {:.api .api-request .api-request-params}
 
-Attribute           | Description                                           | DataType  | Nullable | Unique | Validation
+Parameter           | Description                                           | DataType  | Nullable | Unique | Validation
 ------------------- | ----------------------------------------------------- | --------- | -------- | ------ | ----------------------------------------
 url                 | The URL of the login page for this app                | String    | FALSE    | FALSE  | [URL](http://tools.ietf.org/html/rfc3986)
 usernameField       | CSS selector for the username field in the login form | String    | FALSE    | FALSE  |
@@ -1042,13 +1081,12 @@ optionalField3Value | Name of the optional value in the login form          | St
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/apps" \
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "name": "template_sps",
   "label": "Example SWA App",
   "signOnMode": "SECURE_PASSWORD_STORE",
@@ -1065,13 +1103,13 @@ curl -v -H "Authorization: SSWS yourtoken" \
       "optionalField3Value": "finalvalue"
     }
   }
-}'
+}' "https://${org}.okta.com/api/v1/apps"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
   "id": "0oafywQDNMXLYDBIHQTT",
   "name": "template_sps",
@@ -1147,13 +1185,12 @@ Adds a SAML 2.0 WebSSO application
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/apps" \
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "name": "template_saml_2_0",
   "label": "Example SAML App",
   "signOnMode": "SAML_2_0",
@@ -1176,7 +1213,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
       "attributeStatements": null
     }
   }
-}'
+}' "https://${org}.okta.com/api/v1/apps"
 ~~~
 
 #### Add WS-Federation Application
@@ -1187,13 +1224,12 @@ Adds a WS-Federation Passive Requestor Profile application with a SAML 2.0 token
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/apps" \
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "name": "template_wsfed",
   "label": "Sample WS-Fed App",
   "signOnMode": "WS_FEDERATION",
@@ -1213,7 +1249,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
       "usernameAttribute": "username"
     }
   }
-}'
+}' "https://${org}.okta.com/api/v1/apps"
 ~~~
 
 ### Get Application
@@ -1238,17 +1274,18 @@ Fetched [Application](#application-model)
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
   "id": "0oabizCHPNYALCHDUIOD",
   "name": "template_saml_2_0",
@@ -1384,17 +1421,18 @@ Enumerates all apps added to your organization
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/apps"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/apps"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 [
   {
     "id": "0oabizCHPNYALCHDUIOD",
@@ -1540,19 +1578,20 @@ Enumerates all applications assigned to a user and optionally embeds their [Appl
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/apps?filter=user.id+eq+\"00ucw2RPGIUNTDQOYPOF\"&expand=user/00ucw2RPGIUNTDQOYPOF"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/apps?filter=user.id+eq+\"00ucw2RPGIUNTDQOYPOF\"&expand=user/00ucw2RPGIUNTDQOYPOF"
 ~~~
 
-> The `expand=user/:id` query parameter optionally return the user's [Application User](#application-user-model) information  in the response body's `_embedded` property. 
+> The `expand=user/:id` query parameter optionally return the user's [Application User](#application-user-model) information  in the response body's `_embedded` property.
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 [
   {
     "id": "0oabizCHPNYALCHDUIOD",
@@ -1749,17 +1788,18 @@ Enumerates all applications assigned to a group
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/apps?filter=group.id+eq+\"00gckgEHZXOUDGDJLYLG\""
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/apps?filter=group.id+eq+\"00gckgEHZXOUDGDJLYLG\""
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 [
   {
     "id": "0oabkvBLDEKCNXBGYUAS",
@@ -1839,7 +1879,7 @@ Parameter | Description         | Param Type | DataType                         
 id        | id of app to update | URL        | String                            | TRUE     |
 app       | Updated app         | Body       | [Application](#application-model) | FALSE    |
 
-> All attributes must be specified when updating an app.  **Delta updates are not supported.**
+> All properties must be specified when updating an app.  **Delta updates are not supported.**
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -1854,13 +1894,12 @@ Configures the `EDIT_USERNAME_AND_PASSWORD` scheme for a SWA application with a 
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X PUT \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X PUT "https://your-domain.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS" \
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "name": "template_swa",
   "label": "Sample Plugin App",
   "status": "ACTIVE",
@@ -1895,13 +1934,13 @@ curl -v -H "Authorization: SSWS yourtoken" \
       "url": "https://example.com/login.html"
     }
   }
-}'
+}' "https://${org}.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
   "id": "0oabkvBLDEKCNXBGYUAS",
   "name": "template_swa",
@@ -1972,13 +2011,12 @@ Configures the `EDIT_PASSWORD_ONLY` scheme for a SWA application with a username
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X PUT \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X PUT "https://your-domain.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS" \
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "name": "template_swa",
   "label": "Sample Plugin App",
   "status": "ACTIVE",
@@ -2013,13 +2051,13 @@ curl -v -H "Authorization: SSWS yourtoken" \
       "url": "https://example.com/login.html"
     }
   }
-}'
+}' "https://${org}.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
   "id": "0oabkvBLDEKCNXBGYUAS",
   "name": "template_swa",
@@ -2090,13 +2128,12 @@ Configures the `EXTERNAL_PASSWORD_SYNC` scheme for a SWA application with a user
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X PUT \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X PUT "https://your-domain.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS" \
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "name": "template_swa",
   "label": "Sample Plugin App",
   "status": "ACTIVE",
@@ -2131,13 +2168,13 @@ curl -v -H "Authorization: SSWS yourtoken" \
       "url": "https://example.com/login.html"
     }
   }
-}'
+}' "https://${org}.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
   "id": "0oabkvBLDEKCNXBGYUAS",
   "name": "template_swa",
@@ -2208,13 +2245,12 @@ Configures the `SHARED_USERNAME_AND_PASSWORD` scheme for a SWA application with 
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X PUT \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X PUT "https://your-domain.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS" \
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "name": "template_swa",
   "label": "Sample Plugin App",
   "status": "ACTIVE",
@@ -2253,13 +2289,13 @@ curl -v -H "Authorization: SSWS yourtoken" \
       "url": "https://example.com/login.html"
     }
   }
-}'
+}' "https://${org}.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
 ~~~
 
 ##### Response Example
 {:.api .reponse}
 
-~~~ json
+~~~json
 {
   "id": "0oabkvBLDEKCNXBGYUAS",
   "name": "template_swa",
@@ -2348,23 +2384,24 @@ An empty JSON object `{}`
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X DELETE "https://your-domain.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ ruby
+~~~ http
 HTTP/1.1 204 No Content
 ~~~
 
 If the application has an `ACTIVE` status you will receive an error response.
 
-~~~ ruby
+~~~ http
 HTTP/1.1 403 Forbidden
 Content-Type: application/json
 
@@ -2405,17 +2442,18 @@ An empty JSON object `{}`
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/activate"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/activate"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {}
 ~~~
 
@@ -2441,17 +2479,18 @@ An empty JSON object `{}`
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {}
 ~~~
 
@@ -2484,13 +2523,12 @@ appuser   | user's [credentials](#application-user-credentials-object) for the a
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users" \
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "id": "00ud4tVDDXYVKPXKVLCO",
   "scope": "USER",
   "credentials": {
@@ -2499,13 +2537,13 @@ curl -v -H "Authorization: SSWS yourtoken" \
       "value": "correcthorsebatterystaple"
     }
   }
-}'
+}' "https://${org}.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
   "id": "00u15s1KDETTQMQYABRL",
   "externalId": null,
@@ -2537,7 +2575,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /apps/*:aid*/users</span>
 
-Assigns an user to an application with [credentials](#application-user-credentials-object) and an app-specific [profile](#application-user-profile-object). Profile mappings defined for the application are first applied before applying any profile attributes specified in the request.
+Assigns an user to an application with [credentials](#application-user-credentials-object) and an app-specific [profile](#application-user-profile-object). Profile mappings defined for the application are first applied before applying any profile properties specified in the request.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2548,19 +2586,19 @@ aid       | unique key of [Application](#application-model)                     
 appuser   | user's [credentials](#application-user-credentials-object) and [profile](#application-user-profile-object) for the app | Body       | [Application User](#application-user-model) | FALSE    |
 
 > The [Application User](#application-user-model) must specify the user's `id` and should omit [credentials](#application-user-credentials-object) for applications with [SignOn Modes](#signon-modes) or [Authentication Schemes](#authentication-schemes) that do not require or support credentials.
-> 
-> *You can only specify profile attributes that are not defined by profile mappings when Universal Directory is enabled.*
+>
+> *You can only specify profile properties that are not defined by profile mappings when Universal Directory is enabled.*
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
 [Application User](#application-user-model) with user profile mappings applied
 
-Your request will be rejected with a `403 Forbidden` status for applications with the `PUSH_NEW_USERS` or `PUSH_PROFILE_UPDATES` features enabled if the request specifies a value for an attribute that is defined by an application user profile mapping (Universal Directory) and the value for the attribute does not match the output of the mapping.  
+Your request will be rejected with a `403 Forbidden` status for applications with the `PUSH_NEW_USERS` or `PUSH_PROFILE_UPDATES` features enabled if the request specifies a value for an attribute that is defined by an application user profile mapping (Universal Directory) and the value for the attribute does not match the output of the mapping.
 
-*It is recommended to omit mapped attributes during assignment to minimize assignment errors.*
+*It is recommended to omit mapped properties during assignment to minimize assignment errors.*
 
-~~~ json
+~~~json
 {
   "errorCode": "E0000075",
   "errorSummary": "Cannot modify the firstName attribute because it has a field mapping and profile push is enabled.",
@@ -2573,13 +2611,12 @@ Your request will be rejected with a `403 Forbidden` status for applications wit
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users" \
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "id": "00u15s1KDETTQMQYABRL",
   "scope": "USER",
   "credentials": {
@@ -2592,13 +2629,13 @@ curl -v -H "Authorization: SSWS yourtoken" \
       "role": "Developer",
       "profile": "Standard User"
   }
-}'
+}' "https://${org}.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
   "id": "00u13okQOVWZJGDOAUVR",
   "externalId": "005o0000000ogQ9AAI",
@@ -2659,17 +2696,18 @@ uid       | unique key of assigned [User](users.html)       | URL        | Strin
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users/00ud4tVDDXYVKPXKVLCO"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users/00ud4tVDDXYVKPXKVLCO"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
   "id": "00u13okQOVWZJGDOAUVR",
   "externalId": "005o0000000ogQ9AAI",
@@ -2733,17 +2771,18 @@ Array of [Application Users](#application-user-model)
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 [
   {
     "id": "00ui2sVIFZNCNKFFNBPM",
@@ -2839,7 +2878,7 @@ appuser   | user's [credentials](#application-user-credentials-object) for app |
 
 Your request will be rejected with a `400 Bad Request` status if you attempt to assign a username or password to an application with an incompatible [Authentication Scheme](#authentication-schemes)
 
-~~~ json
+~~~json
 {
   "errorCode": "E0000041",
   "errorSummary": "Credentials should not be set on this resource based on the scheme.",
@@ -2856,26 +2895,25 @@ Your request will be rejected with a `400 Bad Request` status if you attempt to 
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users/00ud4tVDDXYVKPXKVLCO" \
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "credentials": {
     "userName": "user@example.com",
     "password": {
       "value": "updatedP@55word"
     }
   }
-}'
+}' "https://${org}.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users/00ud4tVDDXYVKPXKVLCO"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
   "id": "00ud4tVDDXYVKPXKVLCO",
   "externalId": null,
@@ -2924,11 +2962,11 @@ appuser   | credentials for app                             | Body       | [Appl
 
 [Application User](#application-user-model) with user profile mappings applied
 
-Your request will be rejected with a `403 Forbidden` status for applications with the `PUSH_NEW_USERS` or `PUSH_PROFILE_UPDATES` features enabled if the request specifies a value for an attribute that is defined by an application user profile mapping (Universal Directory) and the value for the attribute does not match the output of the mapping.  
+Your request will be rejected with a `403 Forbidden` status for applications with the `PUSH_NEW_USERS` or `PUSH_PROFILE_UPDATES` features enabled if the request specifies a value for an attribute that is defined by an application user profile mapping (Universal Directory) and the value for the attribute does not match the output of the mapping.
 
-> The Okta API currently doesn't support entity tags for conditional updates.  It is only safe to fetch the most recent profile with [Get Assigned User for Application](#get-assigned-user-for-application), apply your profile update, then `POST` back the updated profile as long as you are the **only** user updating a user's application profile.  
+> The Okta API currently doesn't support entity tags for conditional updates.  It is only safe to fetch the most recent profile with [Get Assigned User for Application](#get-assigned-user-for-application), apply your profile update, then `POST` back the updated profile as long as you are the **only** user updating a user's application profile.
 
-~~~ json
+~~~json
 {
   "errorCode": "E0000075",
   "errorSummary": "Cannot modify the firstName attribute because it has a field mapping and profile push is enabled.",
@@ -2941,13 +2979,12 @@ Your request will be rejected with a `403 Forbidden` status for applications wit
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users/00ud4tVDDXYVKPXKVLCO" \
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "profile": {
     "salesforceGroups": [
       "Partner"
@@ -2955,13 +2992,13 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "role": "Developer",
     "profile": "Gold Partner User"
   }
-}'
+}' "https://${org}.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users/00ud4tVDDXYVKPXKVLCO"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
   "id": "00ujsgVNDRESKKXERBUJ",
   "externalId": "005o0000000uqJaAAI",
@@ -3024,17 +3061,18 @@ An empty JSON object `{}`
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X DELETE "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users/00ud4tVDDXYVKPXKVLCO"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users/00ud4tVDDXYVKPXKVLCO"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {}
 ~~~
 
@@ -3064,20 +3102,19 @@ All responses return the assigned [Application Group](#application-group-model).
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X PUT \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X PUT "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/groups/00gbkkGFFWZDLCNTAGQR" \
--d \
-'{
-}'
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+}' "https://${org}.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/groups/00gbkkGFFWZDLCNTAGQR"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
   "id": "00gbkkGFFWZDLCNTAGQR",
   "lastUpdated": "2013-10-02T07:38:20.000Z",
@@ -3108,17 +3145,18 @@ Fetched [Application Group](#application-group-model)
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/groups/00gbkkGFFWZDLCNTAGQR"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/groups/00gbkkGFFWZDLCNTAGQR"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
   "id": "00gbkkGFFWZDLCNTAGQR",
   "lastUpdated": "2013-10-02T07:38:20.000Z",
@@ -3152,17 +3190,18 @@ Array of [Application Groups](#application-group-model)
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/groups"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/groups"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 [
   {
     "id": "00gbkkGFFWZDLCNTAGQR",
@@ -3200,16 +3239,17 @@ An empty JSON object `{}`
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ ruby
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X DELETE "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/groups/00gbkkGFFWZDLCNTAGQR"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/groups/00gbkkGFFWZDLCNTAGQR"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {}
 ~~~

@@ -18,21 +18,21 @@ The Factors API contains three types of operations.
  - **Factor Lifecycle Operations** &ndash; Enroll, activate, and reset factors.
  - **Factor Verification Operations** &ndash; Verify a factor
 
-> This API is currently in **Early Access (EA)** status.
-
 ## Factor Model
 
-Attribute     | Description                                                     | DataType                                                                       | MinLength | MaxLength | Nullable | Unique | Readonly
-------------- | --------------------------------------------------------------- | ------------------------------------------------------------------------------ | --------- | --------- | -------- | ------ | --------
-id            | unique key for factor                                           | String                                                                         |           |           | FALSE    | TRUE   | TRUE
-factorType    | type of factor                                                  | [Factor Type](#factor-type)                                                    |           |           | FALSE    | TRUE   | TRUE
-provider      | factor provider                                                 | [Provider Type](#Provider-Type)                                                |           |           | FALSE    | TRUE   | TRUE
-status        | status of factor                                                | `NOT_SETUP`, `PENDING_ACTIVATION`, `ENROLLED`, `ACTIVE`, `INACTIVE`, `EXPIRED` |           |           | FALSE    | FALSE  | TRUE
-created       | timestamp when factor was created                               | Date                                                                           |           |           | FALSE    | FALSE  | TRUE
-lastUpdated   | timestamp when factor was last updated                          | Date                                                                           |           |           | FALSE    | FALSE  | TRUE
-profile       | profile of a [supported factor](#supported-factors)             | [Factor Profile Object](#factor-profile-object)                                |           |           | TRUE     | FALSE  | FALSE
-_links        | [discoverable resources](#links-object) related to the factor   | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                 |           |           | TRUE     | FALSE  | TRUE
-_embedded     | [embedded resources](#embedded-object) related to the factor    | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                 |           |           | TRUE     | FALSE  | TRUE
+|----------------+-----------------------------------------------------------------+--------------------------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+| Property       | Description                                                     | DataType                                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| -------------- | --------------------------------------------------------------- | ------------------------------------------------------------------------------ | -------- | ------ | -------- | --------- | --------- | ---------- |
+| id             | unique key for factor                                           | String                                                                         | FALSE    | TRUE   | TRUE     |           |           |            |
+| factorType     | type of factor                                                  | [Factor Type](#factor-type)                                                    | FALSE    | TRUE   | TRUE     |           |           |            |
+| provider       | factor provider                                                 | [Provider Type](#Provider-Type)                                                | FALSE    | TRUE   | TRUE     |           |           |            |
+| status         | status of factor                                                | `NOT_SETUP`, `PENDING_ACTIVATION`, `ENROLLED`, `ACTIVE`, `INACTIVE`, `EXPIRED` | FALSE    | FALSE  | TRUE     |           |           |            |
+| created        | timestamp when factor was created                               | Date                                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
+| lastUpdated    | timestamp when factor was last updated                          | Date                                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
+| profile        | profile of a [supported factor](#supported-factors)             | [Factor Profile Object](#factor-profile-object)                                | TRUE     | FALSE  | FALSE    |           |           |            |
+| _links         | [discoverable resources](#links-object) related to the factor   | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                 | TRUE     | FALSE  | TRUE     |           |           |            |
+| _embedded      | [embedded resources](#embedded-object) related to the factor    | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                 | TRUE     | FALSE  | TRUE     |           |           |            |
+|----------------+-----------------------------------------------------------------+--------------------------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
 
 > `id`, `created`, `lastUpdated`, `status`, `_links`, and `_embedded` are only available after a factor is enrolled.
 
@@ -40,39 +40,45 @@ _embedded     | [embedded resources](#embedded-object) related to the factor    
 
 The following factor types are supported:
 
-Factor Type           | Description
---------------------- | -----------
-`push`                | Allows the end user to provide a second authentication factor by tapping an approval button 
-`sms`                 | SMS
-`token`               | Software or hardware one-time password [OTP](http://en.wikipedia.org/wiki/One-time_password) device
-`token:software:totp` | Software [Time-based One-time Password (TOTP)](http://en.wikipedia.org/wiki/Time-based_One-time_Password_Algorithm)
-`token:hardware`      | Hardware one-time password [OTP](http://en.wikipedia.org/wiki/One-time_password) device
-`question`            | Additional security question
+|-----------------------+---------------------------------------------------------------------------------------------------------------------|
+| Factor Type           | Description                                                                                                         |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------|
+| `push`                | Out-of-band verification via push notification to a device and transaction verification with digital signature      |
+| `sms`                 | Software [OTP](http://en.wikipedia.org/wiki/One-time_password) sent via SMS to a registered phone number            |
+| `token`               | Software or hardware one-time password [OTP](http://en.wikipedia.org/wiki/One-time_password) device                 |
+| `token:software:totp` | Software [Time-based One-time Password (TOTP)](http://en.wikipedia.org/wiki/Time-based_One-time_Password_Algorithm) |
+| `token:hardware`      | Hardware one-time password [OTP](http://en.wikipedia.org/wiki/One-time_password) device                             |
+| `question`            | Additional knowledge based security question                                                                        |
+|-----------------------+---------------------------------------------------------------------------------------------------------------------|
 
 ### Provider Type
 
 The following providers are supported:
 
-Provider   | Description
----------- | -----------------------------
-`OKTA`     | Okta
-`RSA`      | RSA SecurID Integration
-`SYMANTEC` | Symantec VIP Integration
-`GOOGLE`   | Google Integration
+|------------+-------------------------------|
+| Provider   | Description                   |
+| ---------- | ----------------------------- |
+| `OKTA`     | Okta                          |
+| `RSA`      | RSA SecurID Integration       |
+| `SYMANTEC` | Symantec VIP Integration      |
+| `GOOGLE`   | Google Integration            |
+|------------+-------------------------------|
 
 ### Supported Factors
 
 The following providers support the following factor types:
 
-Provider   | Factor Type
----------- | -----------------------------
-`OKTA`     | `push`
-`OKTA`     | `question`
-`OKTA`     | `sms`
-`OKTA`     | `token:software:totp`
-`GOOGLE`   | `token:software:totp`
-`SYMANTEC` | `token`
-`RSA`      | `token`
+|------------+------------------------|
+| Provider   | Factor Type            |
+| ---------- | -----------------------|
+| `OKTA`     | `push`                 |
+| `OKTA`     | `question`             |
+| `OKTA`     | `sms`                  |
+| `OKTA`     | `token:software:totp`  |
+| `GOOGLE`   | `token:software:totp`  |
+| `SYMANTEC` | `token`                |
+| `RSA`      | `token`                |
+|------------+------------------------|
 
 ### Factor Profile Object
 
@@ -82,16 +88,20 @@ Profiles are specific to the [factor type](#factor-type)
 
 Specifies the profile for a `question` factor
 
-Attribute     | Description               | DataType  | MinLength | MaxLength | Nullable | Unique | Readonly
-------------- | ------------------------- | --------- | --------- | --------- | -------- | -------| ----------
-question      | unique key for question   | String    |           |           | FALSE    | TRUE   | TRUE
-questionText  | display text for question | String    |           |           | FALSE    | FALSE  | TRUE
-answer        | answer to question        | String    |           |           | TRUE     | FALSE  | FALSE
+|---------------+---------------------------+-----------+---------+---------+----------+-----------+-----------+------------|
+| Property      | Description               | DataType  | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| ------------- | ------------------------- | --------- | -------- | -------| -------- | --------- | --------- | ---------- |
+| question      | unique key for question   | String    | FALSE    | TRUE   | TRUE     |           |           |            |
+| questionText  | display text for question | String    | FALSE    | FALSE  | TRUE     |           |           |            |
+| answer        | answer to question        | String    | TRUE     | FALSE  | FALSE    |           |           |            |
+|---------------+---------------------------+-----------+---------+---------+----------+-----------+-----------+------------|
 
-~~~ json
-"profile": {
-  "question": "favorite_art_piece",
-  "questionText": "What is your favorite piece of art?"
+~~~json
+{
+  "profile": {
+    "question": "favorite_art_piece",
+    "questionText": "What is your favorite piece of art?"
+  }
 }
 ~~~
 
@@ -99,13 +109,17 @@ answer        | answer to question        | String    |           |           | 
 
 Specifies the profile for a `sms` factor
 
-Attribute     | Description                     | DataType                                                        | MinLength | MaxLength | Nullable | Unique  | Readonly
-------------- | -------------------------       | --------------------------------------------------------------- | --------- | --------- | -------- | ------- | ----------
-phoneNumber   | phone number of mobile device   | String [E.164 formatted](http://en.wikipedia.org/wiki/E.164)    |           | 15        | FALSE    | TRUE    | FALSE
+|---------------+-------------------------------+-----------------------------------------------------------------+----------+---------+----------+-----------+-----------+------------|
+| Property      | Description                   | DataType                                                        | Nullable | Unique  | Readonly | MinLength | MaxLength | Validation |
+| ------------- | ----------------------------- | --------------------------------------------------------------- | -------- | ------- | -------- | --------- | --------- | ---------- |
+| phoneNumber   | phone number of mobile device | String [E.164 formatted](http://en.wikipedia.org/wiki/E.164)    | FALSE    | TRUE    | FALSE    |           | 15        |            |
+|---------------+-------------------------------+-----------------------------------------------------------------+----------+---------+----------+-----------+-----------+------------|
 
-~~~ json
-"profile": {
-  "phoneNumber": "+1-555-415-1337"
+~~~json
+{
+  "profile": {
+    "phoneNumber": "+1-555-415-1337"
+  }
 }
 ~~~
 
@@ -117,13 +131,17 @@ For example, to convert a US phone number (415 599 2671) to E.164 format, one wo
 
 Specifies the profile for a `token:software:totp` factor
 
-Attribute     | Description                     | DataType  | MinLength | MaxLength | Nullable | Unique  | Readonly
-------------- | -------------------------       | --------- | --------- | --------- | -------- | ------- | ----------
-credentialId  | unique id for instance          | String    |           |           | FALSE    | FALSE   | TRUE
+|---------------+--------------------+-----------+----------+---------+----------+-----------+-----------+------------|
+| Property      | Description        | DataType  | Nullable | Unique  | Readonly | MinLength | MaxLength | Validation |
+| ------------- | ------------------ | --------- | -------- | ------- | -------- | --------- | --------- | ---------- |
+| credentialId  | id for credential  | String    | FALSE    | FALSE   | TRUE     |           |           |            |
+|---------------+--------------------+-----------+----------+---------+----------+-----------+-----------+------------|
 
-~~~ json
-"profile": {
-  "credentialId": "isaac@example.org"
+~~~json
+{
+  "profile": {
+    "credentialId": "dade.murphy@example.com"
+  }
 }
 ~~~
 
@@ -131,12 +149,14 @@ credentialId  | unique id for instance          | String    |           |       
 
 Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the current status of a factor using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  This object is used for dynamic discovery of related resources and lifecycle operations.
 
-Link Relation Type | Description
------------------- | -----------
-self               | The actual factor
-activate           | [Lifecycle action](#activate-factor) to transition factor to `ACTIVE` status
-deactivate         | [Lifecycle action](#deactivate-factor) to transition factor to `INACTIVE` status
-questions          | List of questions for the `question` factor type
+|--------------------+--------------------------------------------------------------------------------- |
+| Link Relation Type | Description                                                                      |
+| ------------------ | -------------------------------------------------------------------------------- |
+| self               | The actual factor                                                                |
+| activate           | [Lifecycle action](#activate-factor) to transition factor to `ACTIVE` status     |
+| deactivate         | [Lifecycle action](#deactivate-factor) to transition factor to `INACTIVE` status |
+| questions          | List of questions for the `question` factor type                                 |
+|--------------------+--------------------------------------------------------------------------------- |
 
 > The Links Object is **read-only**
 
@@ -146,46 +166,53 @@ questions          | List of questions for the `question` factor type
 
 TOTP factors when activated have an embedded verification object which describes the [TOTP](http://tools.ietf.org/html/rfc6238) algorithm parameters.
 
-Attribute     | Description                                       | DataType                                                       | MinLength | MaxLength | Nullable | Unique | Readonly
-------------- | ------------------------------------------------- | -------------------------------------------------------------- | --------- | --------- | -------- | ------ | --------
-timeStep      | time-step size for TOTP                           | String                                                         |           |           | FALSE    | FALSE  | TRUE
-sharedSecret  | unique secret key for prover                      | String                                                         |           |           | FALSE    | FALSE  | TRUE
-encoding      | encoding of `sharedSecret`                        | `base32` or `base64`                                           |           |           | FALSE    | FALSE  | TRUE
-keyLength     | number of digits in an HOTP value                 | Number                                                         |           |           | FALSE    | FALSE  | TRUE
-_links        | discoverable resources related to the activation  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) |           |           | TRUE     | FALSE  | TRUE
+|----------------+---------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+| Property       | Description                                       | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| -------------- | ------------------------------------------------- | -------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
+| timeStep       | time-step size for TOTP                           | String                                                         | FALSE    | FALSE  | TRUE     |           |           |            |
+| sharedSecret   | unique secret key for prover                      | String                                                         | FALSE    | FALSE  | TRUE     |           |           |            |
+| encoding       | encoding of `sharedSecret`                        | `base32` or `base64`                                           | FALSE    | FALSE  | TRUE     |           |           |            |
+| keyLength      | number of digits in an HOTP value                 | Number                                                         | FALSE    | FALSE  | TRUE     |           |           |            |
+| _links         | discoverable resources related to the activation  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
+|----------------+---------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
 
-~~~ json
-"activation": {
-  "timeStep": 30,
-  "sharedSecret": "HE64TMLL2IUZW2ZLB",
-  "encoding": "base32",
-  "keyLength": 6
+~~~json
+{
+  "activation": {
+    "timeStep": 30,
+    "sharedSecret": "HE64TMLL2IUZW2ZLB",
+    "encoding": "base32",
+    "keyLength": 6
+  }
 }
 ~~~
 
 ### Factor Verify Result Object
 
-Attribute     | Description                                       | DataType                                                       | MinLength | MaxLength | Nullable | Unique | Readonly
-------------- | ------------------------------------------------- | -------------------------------------------------------------- | --------- | --------- | -------- | ------ | --------
-factorResult  | result of factor verification                     | [Factor Result](#factor-result)                                |           |           | FALSE    | FALSE  | TRUE
-factorMessage | optional display message for factor verification  | String                                                         |           |           | TRUE     | FALSE  | TRUE
+|---------------+---------------------------------------------------+---------------------------------+----------+--------+----------|-----------|-----------+------------|
+| Property      | Description                                       | DataType                        | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| ------------- | ------------------------------------------------- | ------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
+| factorResult  | result of factor verification                     | [Factor Result](#factor-result) | FALSE    | FALSE  | TRUE     |           |           |            |
+| factorMessage | optional display message for factor verification  | String                          | TRUE     | FALSE  | TRUE     |           |           |            |
+|---------------+---------------------------------------------------+---------------------------------+----------+--------+----------|-----------|-----------+------------|
 
 #### Factor Result
 
 Specifies the result status of a factor verification attempt
 
-factorResult           | Description
----------------------- | -------------------------------------------------------------------------------------------------------------------------------
-`SUCCESS`              | Factor was successfully verified
-`CHALLENGE`            | Another verification is required
-`WAITING`              | Factor verification has started but not yet completed (e.g user hasn't answered phone call yet)
-`FAILED`               | Factor verification failed
-`CANCELLED`            | Factor verification was canceled by user
-`TIMEOUT`              | Unable to verify factor within the allowed time window
-`TIME_WINDOW_EXCEEDED` | Factor was successfully verified but outside of the computed time window.  Another verification is required in current time window.
-`PASSCODE_REPLAYED`    | Factor was previously verified within the same time window.  User must wait another time window and retry with a new verification.
-`ERROR`                | Unexpected server error occurred verifying factor.
-
+|------------------------+-------------------------------------------------------------------------------------------------------------------------------------|
+| factorResult           | Description                                                                                                                         |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------|
+| `SUCCESS`              | Factor was successfully verified                                                                                                    |
+| `CHALLENGE`            | Another verification is required                                                                                                    |
+| `WAITING`              | Factor verification has started but not yet completed (e.g user hasn't answered phone call yet)                                     |
+| `FAILED`               | Factor verification failed                                                                                                          |
+| `CANCELLED`            | Factor verification was canceled by user                                                                                            |
+| `TIMEOUT`              | Unable to verify factor within the allowed time window                                                                              |
+| `TIME_WINDOW_EXCEEDED` | Factor was successfully verified but outside of the computed time window.  Another verification is required in current time window. |
+| `PASSCODE_REPLAYED`    | Factor was previously verified within the same time window.  User must wait another time window and retry with a new verification.  |
+| `ERROR`                | Unexpected server error occurred verifying factor.                                                                                  |
+|------------------------+-------------------------------------------------------------------------------------------------------------------------------------|
 
 ## Factor Operations
 
@@ -213,10 +240,11 @@ fid          | `id` of factor                                      | URL        
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/ufs2bysphxKODSZKWVCT"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/ufs2bysphxKODSZKWVCT"
 ~~~
 
 #### Response Example
@@ -286,10 +314,11 @@ Array of [Factors](#factor-model)
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors"
 ~~~
 
 #### Response Example
@@ -344,7 +373,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "created": "2014-06-27T20:27:33.000Z",
     "lastUpdated": "2014-06-27T20:27:33.000Z",
     "profile": {
-      "credentialId": "isaac@example.org"
+      "credentialId": "dade.murphy@example.com"
     },
     "_links": {
       "next": {
@@ -446,10 +475,11 @@ Array of [Factors](#factor-model)
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/catalog"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/catalog"
 ~~~
 
 #### Response Example
@@ -571,19 +601,22 @@ uid          | `id` of user                                        | URL        
 
 Array of Questions
 
-Attribute     | Description               | DataType  | MinLength | MaxLength | Nullable | Unique | Readonly
-------------- | ------------------------- | --------- | --------- | --------- | -------- | -------| ----------
-question      | unique key for question   | String    |           |           | FALSE    | TRUE   | TRUE
-questionText  | display text for question | String    |           |           | FALSE    | FALSE  | TRUE
+|---------------+---------------------------+-----------+----------+--------+----------+-----------+-----------+------------|
+| Property      | Description               | DataType  | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| ------------- | ------------------------- | --------- | -------- | -------| -------- | --------- | --------- | ---------- |
+| question      | unique key for question   | String    | FALSE    | TRUE   | TRUE     |           |           |            |
+| questionText  | display text for question | String    | FALSE    | FALSE  | TRUE     |           |           |            |
+|---------------+---------------------------+-----------+----------+--------+----------+-----------+-----------+------------|
 
 #### Request Example
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/questions"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/questions"
 ~~~
 
 #### Response Example
@@ -641,25 +674,24 @@ Enrolls a user with the Okta `question` factor and [question profile](#question-
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "factorType": "question",
   "provider": "OKTA",
   "profile": {
     "question": "disliked_food",
     "answer": "mayonnaise"
   }
-}'
+}' "https://${org}.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
   "id": "ufs1o01OTMGHLAJPVHDZ",
   "factorType": "question",
@@ -710,24 +742,23 @@ Enrolls a user with the Okta `sms` factor and a [SMS profile](#sms-profile).  A 
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "factorType": "sms",
   "provider": "OKTA",
   "profile": {
     "phoneNumber": "+1-555-415-1337"
   }
-}'
+}' "https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
   "id": "mbl1nz9JHJGHWRKMTLHP",
   "factorType": "sms",
@@ -787,21 +818,20 @@ Enrolls a user with the Okta `token:software:totp` factor.  The factor must be [
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "factorType": "token:software:totp",
   "provider": "OKTA"
-}'
+}' "https://${org}.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
   "id": "ostf1fmaMGJLMNGNLIVG",
   "factorType": "token:software:totp",
@@ -810,7 +840,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
   "created": "2014-07-16T16:13:56.000Z",
   "lastUpdated": "2014-07-16T16:13:56.000Z",
   "profile": {
-    "credentialId": "isaac@example.org"
+    "credentialId": "dade.murphy@example.com"
   },
   "_links": {
     "activate": {
@@ -864,21 +894,20 @@ Enrolls a user with the Google `token:software:totp` factor.  The factor must be
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "factorType": "token:software:totp",
   "provider": "GOOGLE"
-}'
+}' "https://${org}.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
   "id": "ostf1fmaMGJLMNGNLIVG",
   "factorType": "token:software:totp",
@@ -887,7 +916,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
   "created": "2014-07-16T16:13:56.000Z",
   "lastUpdated": "2014-07-16T16:13:56.000Z",
   "profile": {
-    "credentialId": "isaac@example.org"
+    "credentialId": "dade.murphy@example.com"
   },
   "_links": {
     "activate": {
@@ -940,22 +969,21 @@ Enrolls a user with the Okta verify `push` factor. The factor must be [activated
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ json
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "factorType": "push",
   "provider": "OKTA",
-}'
+}' "https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
   "id": "mbl1nz9JHJGHWRKMTLHP",
   "factorType": "push",
@@ -1049,7 +1077,7 @@ If the passcode is correct you will receive the [Factor](#factor-model) with an 
 
 If the passcode is invalid you will receive a `403 Forbidden` status code with the following error:
 
-~~~ json
+~~~json
 {
   "errorCode": "E0000068",
   "errorSummary": "Invalid Passcode/Answer",
@@ -1067,20 +1095,19 @@ If the passcode is invalid you will receive a `403 Forbidden` status code with t
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/lifecycle/activate
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "passCode": "123456"
-}'
+}' "https://${org}.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf1fmaMGJLMNGNLIVG/lifecycle/activate"
 ~~~
 
 #### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
   "id": "ostf1fmaMGJLMNGNLIVG",
   "factorType": "token:software:totp",
@@ -1089,7 +1116,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
   "created": "2014-07-16T16:13:56.000Z",
   "lastUpdated": "2014-08-06T00:31:07.000Z",
   "profile": {
-    "credentialId": "isaac@example.org"
+    "credentialId": "dade.murphy@example.com"
   },
   "_links": {
     "verify": {
@@ -1142,7 +1169,7 @@ If the passcode is correct you will receive the [Factor](#factor-model) with an 
 
 If the passcode is invalid you will receive a `403 Forbidden` status code with the following error:
 
-~~~ json
+~~~json
 {
   "errorCode": "E0000068",
   "errorSummary": "Invalid Passcode/Answer",
@@ -1160,20 +1187,19 @@ If the passcode is invalid you will receive a `403 Forbidden` status code with t
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/sms1o51EADOTFXHHBXBP/lifecycle/activate
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "passCode": "123456"
-}'
+}' "https://${org}.okta.com/api/v1/users/users/00u15s1KDETTQMQYABRL/factors/sms1o51EADOTFXHHBXBP/lifecycle/activate"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
   "id": "sms1o51EADOTFXHHBXBP",
   "factorType": "sms",
@@ -1241,7 +1267,7 @@ factorResult | result of verification result                       | Body       
 
 In this example, the a response from the user is pending and has not timed out.
 
-~~~ json
+~~~json
 {
   "expiresAt": "2015-04-01T15:57:32.000Z",
   "factorResult": "WAITING",
@@ -1276,7 +1302,7 @@ In this example, the a response from the user is pending and has not timed out.
             "POST"
           ]
         }
-      }              
+      }
     ]
   }
 }
@@ -1287,7 +1313,7 @@ In this example, the a response from the user is pending and has not timed out.
 
 In this example, the user has responded and activation is complete.
 
-~~~ json
+~~~json
 {
   "id": "opfh52xcuft3J4uZc0g3",
   "factorType": "push",
@@ -1318,7 +1344,7 @@ In this example, the user has responded and activation is complete.
           "POST"
         ]
       }
-    },    
+    },
     "user": {
       "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3",
       "hints": {
@@ -1336,7 +1362,7 @@ In this example, the user has responded and activation is complete.
 
 In this example, the user has not responded and the request timed out.
 
-~~~ json
+~~~json
 {
   "factorResult": "TIMEOUT",
   "_links": {
@@ -1377,10 +1403,11 @@ fid          | `id` of the factor to reset                         | URL        
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X DELETE "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/ufs1o01OTMGHLAJPVHDZ"
 ~~~
 
 #### Response Example
@@ -1415,7 +1442,7 @@ result       | verification result                                 | Body       
 
 If the `answer` is invalid you will receive a `403 Forbidden` status code with the following error:
 
-~~~ json
+~~~json
 {
   "errorCode": "E0000068",
   "errorSummary": "Invalid Passcode/Answer",
@@ -1433,20 +1460,19 @@ If the `answer` is invalid you will receive a `403 Forbidden` status code with t
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ufs1pe3ISGKGPYKXRBKK/verify
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "answer": "mayonnaise"
-}'
+}' "https://${org}.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ufs1pe3ISGKGPYKXRBKK/verify"
 ~~~
 
 #### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
   "factorResult": "SUCCESS"
 }
@@ -1480,7 +1506,7 @@ result       | verification result                                 | Body       
 
 If the passcode is invalid you will receive a `403 Forbidden` status code with the following error:
 
-~~~ json
+~~~json
 {
   "errorCode": "E0000068",
   "errorSummary": "Invalid Passcode/Answer",
@@ -1498,20 +1524,19 @@ If the passcode is invalid you will receive a `403 Forbidden` status code with t
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf17zuKEUMYQAQGCOV/verify
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "passCode": "123456"
-}'
+}' "https://${org}.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf17zuKEUMYQAQGCOV/verify"
 ~~~
 
 #### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
   "factorResult": "SUCCESS"
 }
@@ -1542,7 +1567,7 @@ result       | verification result                                 | Body       
 
 If the passcode is invalid you will receive a `403 Forbidden` status code with the following error:
 
-~~~ json
+~~~json
 {
   "errorCode": "E0000068",
   "errorSummary": "Invalid Passcode/Answer",
@@ -1560,20 +1585,19 @@ If the passcode is invalid you will receive a `403 Forbidden` status code with t
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -H "Authorization: SSWS yourtoken" \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf17zuKEUMYQAQGCOV/verify
--d \
-'{
+-H "Authorization: SSWS ${api_token}" \
+-d '{
   "passCode": "123456"
-}'
+}' "https://${org}.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf17zuKEUMYQAQGCOV/verify"
 ~~~
 
 #### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
   "factorResult": "SUCCESS"
 }
@@ -1608,7 +1632,7 @@ factorResult | result of verification result                       | Body       
 #### Response Example
 {:.api .api-response .api-response-example}
 
-~~~ json
+~~~json
 {
     "factorResult": "TIMEOUT",
     "_links": {
@@ -1651,7 +1675,7 @@ uid          | `id` of user                                        | URL        
 fid          | `id` of factor                                      | URL        | String   | TRUE     |
 tid          | `id` of transaction                                 | URL        | String   | TRUE     |
 
-The <em>tid</em> is available in a returned link.
+> You should always use the `poll` link relation and never manually contruct your own URL
 
 #### Response Parameters
 {:.api .api-response .api-response-params}
@@ -1660,13 +1684,12 @@ Parameter    | Description                                         | Param Type 
 ------------ | --------------------------------------------------- | ---------- | --------------------------------------------------- | -------- | -------
 factorResult | result of verification result                       | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
 
-
 #### Response Example
 {:.api .api-response .api-response-example}
 
 ##### Waiting State
 
-~~~ json
+~~~json
 {
   "expiresAt": "2015-04-01T15:57:32.000Z",
   "factorResult": "WAITING",
@@ -1696,7 +1719,7 @@ factorResult | result of verification result                       | Body       
 
 ##### Approved
 
-~~~ json
+~~~json
 {
   "factorResult": "SUCCESS"
 }
@@ -1707,7 +1730,7 @@ factorResult | result of verification result                       | Body       
 
 ##### Timeout
 
-~~~ json
+~~~json
 {
   "factorResult": "TIMEOUT",
   "_links": {
@@ -1737,7 +1760,7 @@ factorResult | result of verification result                       | Body       
 
 ##### Rejected
 
-~~~ json
+~~~json
 {
   "factorResult": "REJECTED",
   "_links": {
@@ -1761,5 +1784,3 @@ factorResult | result of verification result                       | Body       
   }
 }
 ~~~
-
-

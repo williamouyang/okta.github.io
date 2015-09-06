@@ -59,6 +59,7 @@ $(function() {
 	$('a[href*=#]:not([href=#])').click(function() {
 		if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
 
+			window.location.hash = this.hash;
 			var target = $(this.hash);
 			target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
 			if (target.length) {
@@ -155,7 +156,7 @@ $(function() {
 		$('#toc_current_doc').toggleClass('clicked');
 	});
 
-	// Highlist subnav item on click
+	// Highlight subnav item on click
 	$('#gen-toc-container .sidebar-nav li a').click(function() {
 		$(this).toggleClass('active');
 	});
