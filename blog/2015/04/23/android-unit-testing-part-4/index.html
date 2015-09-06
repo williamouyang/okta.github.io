@@ -176,13 +176,14 @@ are now testing just one class at a time.</p>
 
     <p>Add the following code under the dependency section:</p>
 
-    <pre><code>androidTestCompile ‘org.easymock:easymock:3.1'
+    <div class="highlighter-rouge"><pre class="highlight"><code>androidTestCompile ‘org.easymock:easymock:3.1'
 </code></pre>
+    </div>
   </li>
   <li>
     <p>Replace <code>FooTest</code> with the following code:</p>
 
-    <pre><code>package com.example.myapplication;
+    <div class="highlighter-rouge"><pre class="highlight"><code>package com.example.myapplication;
      
 import junit.framework.Assert;
       
@@ -227,13 +228,14 @@ public class FooTest extends EasyMockSupport {
     }
 }
 </code></pre>
+    </div>
   </li>
   <li>
     <p>Create a class <code>InjectHelper</code> under <code>androidTest</code></p>
 
     <p>(I believe the original code for injecting fields is from <strong>Spring</strong>; however, it was modified afterwards.)</p>
 
-    <pre><code>package com.example.myapplication;
+    <div class="highlighter-rouge"><pre class="highlight"><code>package com.example.myapplication;
       
 import java.lang.reflect.Field;
 import javax.inject.Inject;
@@ -280,6 +282,7 @@ public class InjectHelper {
     }
 }
 </code></pre>
+    </div>
 
     <p><strong>Woo-Hoo! We are finally done!</strong></p>
 

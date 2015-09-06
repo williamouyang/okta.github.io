@@ -769,13 +769,14 @@ are now testing just one class at a time.</p>
 
     <p>Add the following code under the dependency section:</p>
 
-    <pre><code>androidTestCompile ‘org.easymock:easymock:3.1'
+    <div class="highlighter-rouge"><pre class="highlight"><code>androidTestCompile ‘org.easymock:easymock:3.1'
 </code></pre>
+    </div>
   </li>
   <li>
     <p>Replace <code>FooTest</code> with the following code:</p>
 
-    <pre><code>package com.example.myapplication;
+    <div class="highlighter-rouge"><pre class="highlight"><code>package com.example.myapplication;
      
 import junit.framework.Assert;
       
@@ -820,13 +821,14 @@ public class FooTest extends EasyMockSupport {
     }
 }
 </code></pre>
+    </div>
   </li>
   <li>
     <p>Create a class <code>InjectHelper</code> under <code>androidTest</code></p>
 
     <p>(I believe the original code for injecting fields is from <strong>Spring</strong>; however, it was modified afterwards.)</p>
 
-    <pre><code>package com.example.myapplication;
+    <div class="highlighter-rouge"><pre class="highlight"><code>package com.example.myapplication;
       
 import java.lang.reflect.Field;
 import javax.inject.Inject;
@@ -873,6 +875,7 @@ public class InjectHelper {
     }
 }
 </code></pre>
+    </div>
 
     <p><strong>Woo-Hoo! We are finally done!</strong></p>
 
@@ -978,24 +981,26 @@ my summary is below:</p>
 
     <p>Add the following code under the dependency section:</p>
 
-    <pre><code>compile 'com.squareup.dagger:dagger:1.2.1'
+    <div class="highlighter-rouge"><pre class="highlight"><code>compile 'com.squareup.dagger:dagger:1.2.1'
 provided 'com.squareup.dagger:dagger-compiler:1.2.1'
 </code></pre>
+    </div>
   </li>
   <li>
     <p>Modify the manifest</p>
 
     <p>Add the following code to the Application tags:</p>
 
-    <pre><code>android:name=“.MyApplication"
+    <div class="highlighter-rouge"><pre class="highlight"><code>android:name=“.MyApplication"
 </code></pre>
+    </div>
   </li>
   <li>
     <p>Create the classes</p>
 
     <p>Add the <code>MyApplication</code> class.</p>
 
-    <pre><code>public class MyApplication extends Application {
+    <div class="highlighter-rouge"><pre class="highlight"><code>public class MyApplication extends Application {
     private ObjectGraph applicationGraph;
     
     @Override
@@ -1015,11 +1020,12 @@ provided 'com.squareup.dagger:dagger-compiler:1.2.1'
     }
 }
 </code></pre>
+    </div>
   </li>
   <li>
     <p>Add the <code>MyModule</code> class.</p>
 
-    <pre><code>package com.example.myapplication;
+    <div class="highlighter-rouge"><pre class="highlight"><code>package com.example.myapplication;
       
 import dagger.Module;
 import dagger.Provides;
@@ -1037,35 +1043,40 @@ public class MyModule {
     }
 }
 </code></pre>
+    </div>
   </li>
   <li>
     <p>Modify <code>MainActivity</code> and replace code <code>private Foo
 foo = new Foo();</code> with:</p>
 
-    <pre><code>@Inject
+    <div class="highlighter-rouge"><pre class="highlight"><code>@Inject
 Foo foo;
 </code></pre>
+    </div>
 
     <p>and add following code to <code>onCreate()</code>:</p>
 
-    <pre><code>// This will inject all @Inject members 
+    <div class="highlighter-rouge"><pre class="highlight"><code>// This will inject all @Inject members 
 // recursively for everything what is marked as @Inject
 ((MyApplication)getApplicationContext()).inject(this);
 </code></pre>
+    </div>
   </li>
   <li>
     <p>Modify the <code>Foo</code> class and replace code <code>Bar bar = new Bar();</code> with:</p>
 
-    <pre><code>@Inject
+    <div class="highlighter-rouge"><pre class="highlight"><code>@Inject
 Bar bar;
 </code></pre>
+    </div>
 
     <p>Modify Bar class and add</p>
 
-    <pre><code>@Inject
+    <div class="highlighter-rouge"><pre class="highlight"><code>@Inject
 Bar() {
 }
 </code></pre>
+    </div>
   </li>
 </ul>
 
@@ -1160,33 +1171,34 @@ do:</p>
 
     <p>Add the following code to the dependencies section:</p>
 
-    <pre><code>classpath 'org.robolectric:robolectric-gradle-plugin:0.12.+'
+    <div class="highlighter-rouge"><pre class="highlight"><code>classpath 'org.robolectric:robolectric-gradle-plugin:0.12.+'
 </code></pre>
+    </div>
   </li>
   <li>
     <p>Modify the application Gradle file</p>
 
     <p>Add the following code under <code>apply plugin: ‘com.android.application'</code>:</p>
 
-    <pre><code>apply plugin: ‘robolectric'
+    <div class="highlighter-rouge"><pre class="highlight"><code>apply plugin: ‘robolectric'
 </code></pre>
+    </div>
   </li>
   <li>
     <p>Add the following under the dependencies section:</p>
 
-    <pre><code>androidTestCompile('junit:junit:4.11')
+    <div class="highlighter-rouge"><pre class="highlight"><code>androidTestCompile('junit:junit:4.11')
 androidTestCompile(‘org.robolectric:robolectric:2.3')
 </code></pre>
+    </div>
   </li>
   <li>
     <p>Add this section:</p>
 
-    <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>robolectric { 
-        include <span class="string"><span class="delimiter">'</span><span class="content">**/*Test.class</span><span class="delimiter">'</span></span>
-}
-</pre></div>
-</div>
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="n">robolectric</span> <span class="o">{</span> 
+        <span class="n">include</span> <span class="err">'</span><span class="o">**/*</span><span class="n">Test</span><span class="o">.</span><span class="na">class</span><span class="err">'</span>
+<span class="o">}</span>
+</code></pre>
     </div>
   </li>
   <li>
@@ -1194,35 +1206,31 @@ androidTestCompile(‘org.robolectric:robolectric:2.3')
 
     <p>Modify <code>MainActivity</code>. Add the following code to it:</p>
 
-    <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="directive">private</span> Foo foo = <span class="keyword">new</span> Foo();
-<span class="directive">public</span> <span class="type">int</span> getSomething() {
-    <span class="keyword">return</span> foo.getFoo();
-}
-</pre></div>
-</div>
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="n">Foo</span> <span class="n">foo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Foo</span><span class="o">();</span>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getSomething</span><span class="p">(</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">foo</span><span class="o">.</span><span class="na">getFoo</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre>
     </div>
 
     <p>Add the <code>Foo</code> class:</p>
 
-    <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="keyword">package</span> <span class="namespace">com.example.myapplication</span>;
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">myapplication</span><span class="o">;</span>
       
-<span class="directive">public</span> <span class="type">class</span> <span class="class">Foo</span> { 
-    Bar bar = <span class="keyword">new</span> Bar();
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Foo</span> <span class="o">{</span> 
+    <span class="n">Bar</span> <span class="n">bar</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Bar</span><span class="o">();</span>
         
-    <span class="directive">public</span> <span class="type">int</span> getFoo() { 
-        <span class="keyword">return</span> bar.getBar(); 
-    }
-}
-</pre></div>
-</div>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="n">getFoo</span><span class="o">()</span> <span class="o">{</span> 
+        <span class="k">return</span> <span class="n">bar</span><span class="o">.</span><span class="na">getBar</span><span class="o">();</span> 
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
     </div>
   </li>
   <li>
     <p>Add the <code>Bar</code> class:</p>
 
-    <pre><code>package com.example.myapplication;
+    <div class="highlighter-rouge"><pre class="highlight"><code>package com.example.myapplication;
     
 public class Bar {
         
@@ -1231,6 +1239,7 @@ public class Bar {
     } 
 }
 </code></pre>
+    </div>
   </li>
   <li>
     <p>Create a test</p>
@@ -1239,7 +1248,7 @@ public class Bar {
 
     <p>Create the following <code>FooTest</code> class under your <code>androidTest</code>:</p>
 
-    <pre><code>package com.example.myapplication;
+    <div class="highlighter-rouge"><pre class="highlight"><code>package com.example.myapplication;
     
 import junit.framework.Assert;
     
@@ -1269,6 +1278,7 @@ public class FooTest {
     }
 }
 </code></pre>
+    </div>
   </li>
   <li>
     <p>Create the configuration</p>

@@ -200,14 +200,16 @@ the section titled “Configuring Spring Security SAML to work with Okta”.</p>
 <p><a href="http://www.oracle.com/technetwork/java/javase/overview/index.html">Java 1.6+ SDK</a>
 	- Check using the command below </p>
 
-<pre><code>java -version
+<div class="highlighter-rouge"><pre class="highlight"><code>java -version
 </code></pre>
+</div>
 
 <p><a href="https://maven.apache.org/download.cgi">Apache Maven</a>
 	- Check using the command  below</p>
 
-<pre><code>mvn --version
+<div class="highlighter-rouge"><pre class="highlight"><code>mvn --version
 </code></pre>
+</div>
 
 <h2 id="installation">Installation</h2>
 
@@ -226,12 +228,10 @@ the section titled “Configuring Spring Security SAML to work with Okta”.</p>
 
     <ul>
       <li>
-        <p>Use <code>git clone</code> to clone the extention locally</p>
+        <p>Use <code class="highlighter-rouge">git clone</code> to clone the extention locally</p>
 
-        <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>git clone https://github.com/spring-projects/spring-security-saml.git
-</pre></div>
-</div>
+        <div class="highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/spring-projects/spring-security-saml.git
+</code></pre>
         </div>
       </li>
     </ul>
@@ -241,22 +241,18 @@ the section titled “Configuring Spring Security SAML to work with Okta”.</p>
 
     <ul>
       <li>
-        <p>Use <code>git clone</code> to clone this repository locally</p>
+        <p>Use <code class="highlighter-rouge">git clone</code> to clone this repository locally</p>
 
-        <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>git clone https://github.com/nshobayo/okta-SpringSAML.git
-</pre></div>
-</div>
+        <div class="highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/nshobayo/okta-SpringSAML.git
+</code></pre>
         </div>
       </li>
       <li>
         <p>Use the command below to copy the sample Okta application into the Extension’s “src” folder</p>
 
-        <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>rm -rf spring-security-saml/sample/src/main
+        <div class="highlighter-rouge"><pre class="highlight"><code>rm -rf spring-security-saml/sample/src/main
 cp -r okta-SpringSAML/src/main spring-security-saml/sample/src
-</pre></div>
-</div>
+</code></pre>
         </div>
       </li>
     </ul>
@@ -266,33 +262,29 @@ cp -r okta-SpringSAML/src/main spring-security-saml/sample/src
 
     <ul>
       <li>
-        <p>Make sure your working directory is the <code>sample</code> subdirectory of the <code>spring-security-saml</code> directory </p>
+        <p>Make sure your working directory is the <code class="highlighter-rouge">sample</code> subdirectory of the <code class="highlighter-rouge">spring-security-saml</code> directory </p>
 
-        <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>cd spring-security-saml/sample
-</pre></div>
-</div>
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="nb">cd </span>spring-security-saml/sample
+</code></pre>
         </div>
       </li>
       <li>
         <p>To compile </p>
 
-        <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>../gradlew build install
-</pre></div>
-</div>
+        <div class="highlighter-rouge"><pre class="highlight"><code>../gradlew build install
+</code></pre>
         </div>
       </li>
     </ul>
 
-    <p>This task compiles, tests, and assembles the code into a <code>.war</code> file.</p>
+    <p>This task compiles, tests, and assembles the code into a <code class="highlighter-rouge">.war</code> file.</p>
 
     <p>A succesful build should look something like this:</p>
 
     <p><img src="/assets/img/spring-security-saml-build.png" alt="succesful build" /></p>
 
     <ul>
-      <li>Your compiled war archive file, <code>spring-security-SAML2-sample.war</code>, can be found in directory <code>build/libs/</code></li>
+      <li>Your compiled war archive file, <code class="highlighter-rouge">spring-security-SAML2-sample.war</code>, can be found in directory <code class="highlighter-rouge">build/libs/</code></li>
     </ul>
   </li>
   <li>
@@ -300,12 +292,10 @@ cp -r okta-SpringSAML/src/main spring-security-saml/sample/src
 
     <ul>
       <li>
-        <p>Assuming your current directory is <code>spring-security-saml/sample</code> Use the command below to copy the compiled <code>spring-security-SAML2-sample.war</code> file to the Tomcat directory you set up in step one</p>
+        <p>Assuming your current directory is <code class="highlighter-rouge">spring-security-saml/sample</code> Use the command below to copy the compiled <code class="highlighter-rouge">spring-security-SAML2-sample.war</code> file to the Tomcat directory you set up in step one</p>
 
-        <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre> cp build/libs/spring-security-SAML2-sample.war /Library/Tomcat/webapps/
-</pre></div>
-</div>
+        <div class="highlighter-rouge"><pre class="highlight"><code> cp build/libs/spring-security-SAML2-sample.war /Library/Tomcat/webapps/
+</code></pre>
         </div>
       </li>
     </ul>
@@ -317,10 +307,8 @@ cp -r okta-SpringSAML/src/main spring-security-saml/sample/src
       <li>
         <p>Use the command below to start Tomcat</p>
 
-        <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre> /Library/Tomcat/bin/startup.sh
-</pre></div>
-</div>
+        <div class="highlighter-rouge"><pre class="highlight"><code> /Library/Tomcat/bin/startup.sh
+</code></pre>
         </div>
       </li>
     </ul>
@@ -384,19 +372,15 @@ the green “Create” button
     <p>In Step 2 “Configure SAML”,
 Paste the URL below into the “Single sign on URL” field:</p>
 
-    <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>http://localhost:8080/spring-security-saml2-sample/saml/SSO
-</pre></div>
-</div>
+    <div class="highlighter-rouge"><pre class="highlight"><code>http://localhost:8080/spring-security-saml2-sample/saml/SSO
+</code></pre>
     </div>
 
     <p>Then paste the URL below into the “Audience URI (SP Entity ID)”
 field:</p>
 
-    <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>http://localhost:8080/spring-security-saml2-sample/saml/metadata
-</pre></div>
-</div>
+    <div class="highlighter-rouge"><pre class="highlight"><code>http://localhost:8080/spring-security-saml2-sample/saml/metadata
+</code></pre>
     </div>
 
     <p>Attributes of the user to be sent in each SAML assertion can be added under “Attribute Statements” during this step if desired. Theses attribute values can be derived and used from the SP side.</p>
@@ -458,55 +442,51 @@ these steps, you’ll have a working example of connecting Okta to Spring.</p>
 
 <ol>
   <li>
-    <p>Open the <code>securityContext.xml</code> file in your favorite text editor.
+    <p>Open the <code class="highlighter-rouge">securityContext.xml</code> file in your favorite text editor.
 If you followed the instructions above for “Installing the Spring
 Security SAML sample application” on Mac OS X, this file will be
 located here at
-<code>/Library/Tomcat/webapps/spring-security-saml2-sample/WEB-INF/securityContext.xml</code>
+<code class="highlighter-rouge">/Library/Tomcat/webapps/spring-security-saml2-sample/WEB-INF/securityContext.xml</code>
 (Normally, you would do this step <em>before</em> running Maven or Gradle
 to create the .war file you deploy to Tomcat. In this case, I’m
 having you edit the file in the Tomcat path directly, since it’s
 easier to make small changes and test them this way).</p>
   </li>
   <li>
-    <p>Once you’ve opened the <code>securityContext.xml</code> file, add the XML below
+    <p>Once you’ve opened the <code class="highlighter-rouge">securityContext.xml</code> file, add the XML below
 to the end of the tag identified by this CSS selector syntax:
-<code>#metadata &gt; constructor-arg &gt; list</code>.</p>
+<code class="highlighter-rouge">#metadata &gt; constructor-arg &gt; list</code>.</p>
 
-    <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="tag">&lt;bean</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.opensaml.saml2.metadata.provider.HTTPMetadataProvider</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
-  <span class="comment">&lt;!-- URL containing the metadata --&gt;</span>
-  <span class="tag">&lt;constructor-arg&gt;</span>
-    <span class="comment">&lt;!-- This URL should look something like this: https://example.okta.com/app/abc0defghijK1lmN23o4/sso/saml/metadata --&gt;</span>
-    <span class="tag">&lt;value</span> <span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">java.lang.String</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>{metadata-url}<span class="tag">&lt;/value&gt;</span>
-  <span class="tag">&lt;/constructor-arg&gt;</span>
-  <span class="comment">&lt;!-- Timeout for metadata loading in ms --&gt;</span>
-  <span class="tag">&lt;constructor-arg&gt;</span>
-    <span class="tag">&lt;value</span> <span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">int</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>5000<span class="tag">&lt;/value&gt;</span>
-  <span class="tag">&lt;/constructor-arg&gt;</span>
-  <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">parserPool</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">ref</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">parserPool</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
-<span class="tag">&lt;/bean&gt;</span>
-</pre></div>
-</div>
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"org.opensaml.saml2.metadata.provider.HTTPMetadataProvider"</span><span class="nt">&gt;</span>
+  <span class="c">&lt;!-- URL containing the metadata --&gt;</span>
+  <span class="nt">&lt;constructor-arg&gt;</span>
+    <span class="c">&lt;!-- This URL should look something like this: https://example.okta.com/app/abc0defghijK1lmN23o4/sso/saml/metadata --&gt;</span>
+    <span class="nt">&lt;value</span> <span class="na">type=</span><span class="s">"java.lang.String"</span><span class="nt">&gt;</span>{metadata-url}<span class="nt">&lt;/value&gt;</span>
+  <span class="nt">&lt;/constructor-arg&gt;</span>
+  <span class="c">&lt;!-- Timeout for metadata loading in ms --&gt;</span>
+  <span class="nt">&lt;constructor-arg&gt;</span>
+    <span class="nt">&lt;value</span> <span class="na">type=</span><span class="s">"int"</span><span class="nt">&gt;</span>5000<span class="nt">&lt;/value&gt;</span>
+  <span class="nt">&lt;/constructor-arg&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"parserPool"</span> <span class="na">ref=</span><span class="s">"parserPool"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre>
     </div>
   </li>
   <li>
-    <p>Make sure to replace the contents of <code>{metdata-url}</code> with the link
+    <p>Make sure to replace the contents of <code class="highlighter-rouge"><span class="p">{</span><span class="err">metdata-url</span><span class="p">}</span></code> with the link
 that you copied in step #9 of the “Configuring Okta to work with
 Spring Security SAML” instructions above!**</p>
   </li>
   <li>
-    <p>Save the <code>securityContext.xml</code> file, then restart Tomcat</p>
+    <p>Save the <code class="highlighter-rouge">securityContext.xml</code> file, then restart Tomcat</p>
   </li>
   <li>
     <p>If you are using Mac OS X, you can restart Tomcat using the commands
 below:</p>
 
-    <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre> /Library/Tomcat/bin/shutdown.sh
+    <div class="highlighter-rouge"><pre class="highlight"><code> /Library/Tomcat/bin/shutdown.sh
  /Library/Tomcat/bin/startup.sh
-</pre></div>
-</div>
+</code></pre>
     </div>
   </li>
 </ol>
@@ -571,7 +551,7 @@ methods above, then you’re done.</p>
 
 <p>At this point you should be familiar with setting up SAML enabled application to work with an Okta organization and how to configure Spring Security SAML to work with Okta.</p>
 
-<p>After you have Okta working with the example Spring Security SAML application, the next step is to take the example code and move it to your production application. The specifics of how this works is different depending on how your application is set up. Pay special attention to the <code>securityContext.xml</code> which allows you to add more IDPs to the app as well as control page redirects. Before any changes are made to the <code>securityContext.xml</code> file, you should consider reading the <a href="http://docs.spring.io/spring-security-saml/docs/1.0.x/reference/html/">Spring Security SAML reference documents</a> which provides a detailed overview of all the components and features of Spring Security SAML.</p>
+<p>After you have Okta working with the example Spring Security SAML application, the next step is to take the example code and move it to your production application. The specifics of how this works is different depending on how your application is set up. Pay special attention to the <code class="highlighter-rouge">securityContext.xml</code> which allows you to add more IDPs to the app as well as control page redirects. Before any changes are made to the <code class="highlighter-rouge">securityContext.xml</code> file, you should consider reading the <a href="http://docs.spring.io/spring-security-saml/docs/1.0.x/reference/html/">Spring Security SAML reference documents</a> which provides a detailed overview of all the components and features of Spring Security SAML.</p>
 
 <p>If you want to learn more about configuring in SAML and what to consider when writing a SAML application, Okta’s in-depth <a href="http://developer.okta.com/docs/getting_started/saml_guidance.html">SAML guidance</a> is great place to learn more.</p>
 

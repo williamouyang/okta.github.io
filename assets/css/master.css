@@ -120,7 +120,7 @@ a {
   transition: 0.2s all;
   color: #016aab; }
   a:active, a:focus, a:hover {
-    color: #4d96c4; }
+    color: #4d97c4; }
 
 b, strong {
   font-weight: 500; }
@@ -695,8 +695,8 @@ iframe[name='google_conversion_frame'] {
   text-transform: uppercase;
   transition: 0.2s all; }
   [class*=button--]:active, [class*=button--]:focus, [class*=button--]:hover {
-    background: #87b042;
-    border-color: #557f43;
+    background: #87b142;
+    border-color: #567f44;
     color: #fff; }
 
 .button--small {

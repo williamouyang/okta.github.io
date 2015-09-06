@@ -500,13 +500,14 @@ are now testing just one class at a time.&lt;/p&gt;
 
     &lt;p&gt;Add the following code under the dependency section:&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt;androidTestCompile ‘org.easymock:easymock:3.1&#39;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;androidTestCompile ‘org.easymock:easymock:3.1&#39;
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Replace &lt;code&gt;FooTest&lt;/code&gt; with the following code:&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt;package com.example.myapplication;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;package com.example.myapplication;
      
 import junit.framework.Assert;
       
@@ -551,13 +552,14 @@ public class FooTest extends EasyMockSupport {
     }
 }
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Create a class &lt;code&gt;InjectHelper&lt;/code&gt; under &lt;code&gt;androidTest&lt;/code&gt;&lt;/p&gt;
 
     &lt;p&gt;(I believe the original code for injecting fields is from &lt;strong&gt;Spring&lt;/strong&gt;; however, it was modified afterwards.)&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt;package com.example.myapplication;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;package com.example.myapplication;
       
 import java.lang.reflect.Field;
 import javax.inject.Inject;
@@ -604,6 +606,7 @@ public class InjectHelper {
     }
 }
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
 
     &lt;p&gt;&lt;strong&gt;Woo-Hoo! We are finally done!&lt;/strong&gt;&lt;/p&gt;
 
@@ -677,24 +680,26 @@ my summary is below:&lt;/p&gt;
 
     &lt;p&gt;Add the following code under the dependency section:&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt;compile &#39;com.squareup.dagger:dagger:1.2.1&#39;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;compile &#39;com.squareup.dagger:dagger:1.2.1&#39;
 provided &#39;com.squareup.dagger:dagger-compiler:1.2.1&#39;
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Modify the manifest&lt;/p&gt;
 
     &lt;p&gt;Add the following code to the Application tags:&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt;android:name=“.MyApplication&quot;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;android:name=“.MyApplication&quot;
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Create the classes&lt;/p&gt;
 
     &lt;p&gt;Add the &lt;code&gt;MyApplication&lt;/code&gt; class.&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt;public class MyApplication extends Application {
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public class MyApplication extends Application {
     private ObjectGraph applicationGraph;
     
     @Override
@@ -714,11 +719,12 @@ provided &#39;com.squareup.dagger:dagger-compiler:1.2.1&#39;
     }
 }
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Add the &lt;code&gt;MyModule&lt;/code&gt; class.&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt;package com.example.myapplication;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;package com.example.myapplication;
       
 import dagger.Module;
 import dagger.Provides;
@@ -736,35 +742,40 @@ public class MyModule {
     }
 }
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Modify &lt;code&gt;MainActivity&lt;/code&gt; and replace code &lt;code&gt;private Foo
 foo = new Foo();&lt;/code&gt; with:&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt;@Inject
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@Inject
 Foo foo;
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
 
     &lt;p&gt;and add following code to &lt;code&gt;onCreate()&lt;/code&gt;:&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt;// This will inject all @Inject members 
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// This will inject all @Inject members 
 // recursively for everything what is marked as @Inject
 ((MyApplication)getApplicationContext()).inject(this);
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Modify the &lt;code&gt;Foo&lt;/code&gt; class and replace code &lt;code&gt;Bar bar = new Bar();&lt;/code&gt; with:&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt;@Inject
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@Inject
 Bar bar;
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
 
     &lt;p&gt;Modify Bar class and add&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt;@Inject
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@Inject
 Bar() {
 }
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -827,33 +838,34 @@ do:&lt;/p&gt;
 
     &lt;p&gt;Add the following code to the dependencies section:&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt;classpath &#39;org.robolectric:robolectric-gradle-plugin:0.12.+&#39;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;classpath &#39;org.robolectric:robolectric-gradle-plugin:0.12.+&#39;
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Modify the application Gradle file&lt;/p&gt;
 
     &lt;p&gt;Add the following code under &lt;code&gt;apply plugin: ‘com.android.application&#39;&lt;/code&gt;:&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt;apply plugin: ‘robolectric&#39;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apply plugin: ‘robolectric&#39;
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Add the following under the dependencies section:&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt;androidTestCompile(&#39;junit:junit:4.11&#39;)
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;androidTestCompile(&#39;junit:junit:4.11&#39;)
 androidTestCompile(‘org.robolectric:robolectric:2.3&#39;)
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Add this section:&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-coderay&quot;&gt;&lt;div class=&quot;CodeRay&quot;&gt;
-  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;robolectric { 
-        include &lt;span class=&quot;string&quot;&gt;&lt;span class=&quot;delimiter&quot;&gt;&#39;&lt;/span&gt;&lt;span class=&quot;content&quot;&gt;**/*Test.class&lt;/span&gt;&lt;span class=&quot;delimiter&quot;&gt;&#39;&lt;/span&gt;&lt;/span&gt;
-}
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;robolectric&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; 
+        &lt;span class=&quot;n&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;**/*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&#39;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
     &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
@@ -861,35 +873,31 @@ androidTestCompile(‘org.robolectric:robolectric:2.3&#39;)
 
     &lt;p&gt;Modify &lt;code&gt;MainActivity&lt;/code&gt;. Add the following code to it:&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-coderay&quot;&gt;&lt;div class=&quot;CodeRay&quot;&gt;
-  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;directive&quot;&gt;private&lt;/span&gt; Foo foo = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Foo();
-&lt;span class=&quot;directive&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;type&quot;&gt;int&lt;/span&gt; getSomething() {
-    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; foo.getFoo();
-}
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Foo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getSomething&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getFoo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
     &lt;/div&gt;
 
     &lt;p&gt;Add the &lt;code&gt;Foo&lt;/code&gt; class:&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-coderay&quot;&gt;&lt;div class=&quot;CodeRay&quot;&gt;
-  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;keyword&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;namespace&quot;&gt;com.example.myapplication&lt;/span&gt;;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;myapplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
       
-&lt;span class=&quot;directive&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;type&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;Foo&lt;/span&gt; { 
-    Bar bar = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Bar();
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Foo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; 
+    &lt;span class=&quot;n&quot;&gt;Bar&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Bar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
         
-    &lt;span class=&quot;directive&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;type&quot;&gt;int&lt;/span&gt; getFoo() { 
-        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; bar.getBar(); 
-    }
-}
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getFoo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; 
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getBar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; 
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
     &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Add the &lt;code&gt;Bar&lt;/code&gt; class:&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt;package com.example.myapplication;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;package com.example.myapplication;
     
 public class Bar {
         
@@ -898,6 +906,7 @@ public class Bar {
     } 
 }
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Create a test&lt;/p&gt;
@@ -906,7 +915,7 @@ public class Bar {
 
     &lt;p&gt;Create the following &lt;code&gt;FooTest&lt;/code&gt; class under your &lt;code&gt;androidTest&lt;/code&gt;:&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt;package com.example.myapplication;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;package com.example.myapplication;
     
 import junit.framework.Assert;
     
@@ -936,6 +945,7 @@ public class FooTest {
     }
 }
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Create the configuration&lt;/p&gt;

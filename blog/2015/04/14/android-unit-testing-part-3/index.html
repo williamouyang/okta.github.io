@@ -193,24 +193,26 @@ my summary is below:</p>
 
     <p>Add the following code under the dependency section:</p>
 
-    <pre><code>compile 'com.squareup.dagger:dagger:1.2.1'
+    <div class="highlighter-rouge"><pre class="highlight"><code>compile 'com.squareup.dagger:dagger:1.2.1'
 provided 'com.squareup.dagger:dagger-compiler:1.2.1'
 </code></pre>
+    </div>
   </li>
   <li>
     <p>Modify the manifest</p>
 
     <p>Add the following code to the Application tags:</p>
 
-    <pre><code>android:name=“.MyApplication"
+    <div class="highlighter-rouge"><pre class="highlight"><code>android:name=“.MyApplication"
 </code></pre>
+    </div>
   </li>
   <li>
     <p>Create the classes</p>
 
     <p>Add the <code>MyApplication</code> class.</p>
 
-    <pre><code>public class MyApplication extends Application {
+    <div class="highlighter-rouge"><pre class="highlight"><code>public class MyApplication extends Application {
     private ObjectGraph applicationGraph;
     
     @Override
@@ -230,11 +232,12 @@ provided 'com.squareup.dagger:dagger-compiler:1.2.1'
     }
 }
 </code></pre>
+    </div>
   </li>
   <li>
     <p>Add the <code>MyModule</code> class.</p>
 
-    <pre><code>package com.example.myapplication;
+    <div class="highlighter-rouge"><pre class="highlight"><code>package com.example.myapplication;
       
 import dagger.Module;
 import dagger.Provides;
@@ -252,35 +255,40 @@ public class MyModule {
     }
 }
 </code></pre>
+    </div>
   </li>
   <li>
     <p>Modify <code>MainActivity</code> and replace code <code>private Foo
 foo = new Foo();</code> with:</p>
 
-    <pre><code>@Inject
+    <div class="highlighter-rouge"><pre class="highlight"><code>@Inject
 Foo foo;
 </code></pre>
+    </div>
 
     <p>and add following code to <code>onCreate()</code>:</p>
 
-    <pre><code>// This will inject all @Inject members 
+    <div class="highlighter-rouge"><pre class="highlight"><code>// This will inject all @Inject members 
 // recursively for everything what is marked as @Inject
 ((MyApplication)getApplicationContext()).inject(this);
 </code></pre>
+    </div>
   </li>
   <li>
     <p>Modify the <code>Foo</code> class and replace code <code>Bar bar = new Bar();</code> with:</p>
 
-    <pre><code>@Inject
+    <div class="highlighter-rouge"><pre class="highlight"><code>@Inject
 Bar bar;
 </code></pre>
+    </div>
 
     <p>Modify Bar class and add</p>
 
-    <pre><code>@Inject
+    <div class="highlighter-rouge"><pre class="highlight"><code>@Inject
 Bar() {
 }
 </code></pre>
+    </div>
   </li>
 </ul>
 

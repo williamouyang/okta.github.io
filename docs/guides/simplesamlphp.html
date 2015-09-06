@@ -218,7 +218,7 @@ As you follow the instructions, there are two steps where you will do things dif
 <ul>
   <li><em>In step #6</em>: Use <strong><em>SimpleSAMLphp Example</em></strong> instead “Example SAML application”</li>
   <li>
-    <p><em>In step #7</em>: Instead of entering the URL: <code>http://example.com/saml/sso/example-okta-com</code></p>
+    <p><em>In step #7</em>: Instead of entering the URL: <code class="highlighter-rouge">http://example.com/saml/sso/example-okta-com</code></p>
 
     <p>Use the following URLs:</p>
 
@@ -226,17 +226,17 @@ As you follow the instructions, there are two steps where you will do things dif
       <li>
         <p>In the “Single sign on URL” field, use:</p>
 
-        <p><code>http://localhost/simplesamlphp/www/module.php/saml/sp/saml2-acs.php/example-okta-com</code></p>
+        <p><code class="highlighter-rouge">http://localhost/simplesamlphp/www/module.php/saml/sp/saml2-acs.php/example-okta-com</code></p>
       </li>
       <li>
         <p>In the “Audience URI (SP Entity ID)” field, use instead:</p>
 
-        <p><code>http://localhost/simplesamlphp/www/module.php/saml/sp/metadata.php/example-okta-com</code></p>
+        <p><code class="highlighter-rouge">http://localhost/simplesamlphp/www/module.php/saml/sp/metadata.php/example-okta-com</code></p>
       </li>
       <li>
         <p>For the “Relay State” field, use:</p>
 
-        <p><code>http://localhost/okta-simplesamlphp-example/?saml_sso=example-okta-com</code></p>
+        <p><code class="highlighter-rouge">http://localhost/okta-simplesamlphp-example/?saml_sso=example-okta-com</code></p>
       </li>
     </ul>
   </li>
@@ -259,8 +259,8 @@ SimpleSAMLphp</a>.</p>
 installation might require you to make some custom configuration changes.
 In particular, this guide assumes that you have PHP running on your local
 machine (“localhost”) and that you have installed SimpleSAMLphp in a
-directory named <code>simplesamlphp</code> in the location specified by the
-<code>DocumentRoot</code> directive in your Apache configuration.  If you are
+directory named <code class="highlighter-rouge">simplesamlphp</code> in the location specified by the
+<code class="highlighter-rouge">DocumentRoot</code> directive in your Apache configuration.  If you are
 developing remotely, or have installed SimpleSAMLphp in a different
 location, you will need to use different configuration URLs that take
 that into account.</p>
@@ -275,62 +275,70 @@ PHP, reconfiguring Apache, and creating some symbolic links.</p>
 
 <ol>
   <li>
-    <p>Install SimpleSAMLphp to the <code>~/simplesamlphp</code> directory.</p>
+    <p>Install SimpleSAMLphp to the <code class="highlighter-rouge">~/simplesamlphp</code> directory.</p>
 
     <p>When you follow the directions for installing SimpleSAMLphp,
-install it to a directory named <code>simplesamlphp</code> in your home directory.</p>
+install it to a directory named <code class="highlighter-rouge">simplesamlphp</code> in your home directory.</p>
 
-    <pre><code>$ cd ~
+    <div class="highlighter-rouge"><pre class="highlight"><code>$ cd ~
 $ mkdir simplesamlphp
 $ cd simplesamlphp
 $ git clone git@github.com:simplesamlphp/simplesamlphp.git
 $ git clone git@github.com:jpf/okta-simplesamlphp-example.git
 </code></pre>
+    </div>
   </li>
   <li>
     <p>Install php56 and php56-mcrypt with <a href="http://brew.sh/">homebrew</a>.</p>
 
-    <pre><code>$ brew install php56
+    <div class="highlighter-rouge"><pre class="highlight"><code>$ brew install php56
 $ brew install php56-mcrypt
 </code></pre>
+    </div>
   </li>
   <li>
-    <p>Edit <code>httpd.conf</code> to use the new version of PHP that you installed with homebrew.</p>
+    <p>Edit <code class="highlighter-rouge">httpd.conf</code> to use the new version of PHP that you installed with homebrew.</p>
 
-    <pre><code>$ sudo $EDITOR /etc/apache2/httpd.conf
+    <div class="highlighter-rouge"><pre class="highlight"><code>$ sudo $EDITOR /etc/apache2/httpd.conf
 </code></pre>
+    </div>
 
     <p>Find this line:</p>
 
-    <pre><code>LoadModule php5_module libexec/apache2/libphp5.so
+    <div class="highlighter-rouge"><pre class="highlight"><code>LoadModule php5_module libexec/apache2/libphp5.so
 </code></pre>
+    </div>
 
     <p>and change it to this:</p>
 
-    <pre><code>LoadModule php5_module /usr/local/Cellar/php56/5.6.7/libexec/apache2/libphp5.so
+    <div class="highlighter-rouge"><pre class="highlight"><code>LoadModule php5_module /usr/local/Cellar/php56/5.6.7/libexec/apache2/libphp5.so
 </code></pre>
+    </div>
   </li>
   <li>
-    <p>Find the <code>DocumentRoot</code> for your setup of Apache.</p>
+    <p>Find the <code class="highlighter-rouge">DocumentRoot</code> for your setup of Apache.</p>
 
-    <pre><code>$ grep ^DocumentRoot /etc/apache2/httpd.conf
+    <div class="highlighter-rouge"><pre class="highlight"><code>$ grep ^DocumentRoot /etc/apache2/httpd.conf
 </code></pre>
+    </div>
   </li>
   <li>
-    <p><code>cd</code> to the <code>DocumentRoot</code> directory.</p>
+    <p><code class="highlighter-rouge">cd</code> to the <code class="highlighter-rouge">DocumentRoot</code> directory.</p>
 
-    <p>Assuming that the command above returned <code>DocumentRoot "/Library/WebServer/Documents"</code>, <br />
-then <code>cd</code> to that directory</p>
+    <p>Assuming that the command above returned <code class="highlighter-rouge">DocumentRoot "/Library/WebServer/Documents"</code>, <br />
+then <code class="highlighter-rouge">cd</code> to that directory</p>
 
-    <pre><code>$ cd /Library/WebServer/Documents
+    <div class="highlighter-rouge"><pre class="highlight"><code>$ cd /Library/WebServer/Documents
 </code></pre>
+    </div>
   </li>
   <li>
-    <p>Add symbolic links from <code>DocumentRoot</code> to your <code>simplesamlphp</code> and <code>okta-simplesamlphp-example</code> directories.</p>
+    <p>Add symbolic links from <code class="highlighter-rouge">DocumentRoot</code> to your <code class="highlighter-rouge">simplesamlphp</code> and <code class="highlighter-rouge">okta-simplesamlphp-example</code> directories.</p>
 
-    <pre><code>$ sudo ln -s ~/simplesamlphp/simplesamlphp .
+    <div class="highlighter-rouge"><pre class="highlight"><code>$ sudo ln -s ~/simplesamlphp/simplesamlphp .
 $ sudo ln -s ~/simplesamlphp/okta-simplesamlphp-example .
 </code></pre>
+    </div>
   </li>
 </ol>
 
@@ -338,85 +346,89 @@ $ sudo ln -s ~/simplesamlphp/okta-simplesamlphp-example .
 
 <ol>
   <li>
-    <p><code>cd</code> to the directory you set up earlier.</p>
+    <p><code class="highlighter-rouge">cd</code> to the directory you set up earlier.</p>
 
-    <pre><code>$ cd ~/simplesamlphp
+    <div class="highlighter-rouge"><pre class="highlight"><code>$ cd ~/simplesamlphp
 </code></pre>
+    </div>
   </li>
   <li>
     <p>Copy the modified SimpleSAMLphp configuration files from the example application
-to the nested <code>simplesamlphp</code> directory.</p>
+to the nested <code class="highlighter-rouge">simplesamlphp</code> directory.</p>
 
-    <pre><code>$ cp okta-simplesamlphp-example/saml-autoconfig.php simplesamlphp/
+    <div class="highlighter-rouge"><pre class="highlight"><code>$ cp okta-simplesamlphp-example/saml-autoconfig.php simplesamlphp/
 $ mkdir simplesamlphp/config
 $ cp simplesamlphp/config-templates/config.php simplesamlphp/config/
 $ cp okta-simplesamlphp-example/authsources.php simplesamlphp/config/
 $ mkdir simplesamlphp/metadata
 $ cp okta-simplesamlphp-example/saml20-idp-remote.php simplesamlphp/metadata/
 </code></pre>
+    </div>
   </li>
   <li>
     <p>Install the PHP dependencies for SimpleSAMLphp using <a href="https://getcomposer.org/">Composer</a></p>
 
-    <pre><code>$ brew install homebrew/php/composer
+    <div class="highlighter-rouge"><pre class="highlight"><code>$ brew install homebrew/php/composer
 $ cd ~/simplesamlphp/simplesamlphp
 $ composer install
 </code></pre>
+    </div>
   </li>
   <li>
-    <p>Open the <code>config.php</code> configuration file for SimpleSAMLphp in your favorite text editor.</p>
+    <p>Open the <code class="highlighter-rouge">config.php</code> configuration file for SimpleSAMLphp in your favorite text editor.</p>
 
     <p>Run this command:</p>
 
-    <pre><code>$ $EDITOR config/config.php
+    <div class="highlighter-rouge"><pre class="highlight"><code>$ $EDITOR config/config.php
 </code></pre>
+    </div>
 
     <p>Then, from inside of your text editor, do the folowing:</p>
 
     <ul>
       <li>
-        <p>Search for <code>baseurlpath</code> and change the value to <code>'/simplesamlphp/www/'</code></p>
+        <p>Search for <code class="highlighter-rouge">baseurlpath</code> and change the value to <code class="highlighter-rouge">'/simplesamlphp/www/'</code></p>
       </li>
       <li>
-        <p>Search for <code>auth.adminpassword</code> and change the value to a secure password.</p>
+        <p>Search for <code class="highlighter-rouge">auth.adminpassword</code> and change the value to a secure password.</p>
       </li>
       <li>
-        <p>Search for <code>secretsalt</code> and change the value to something random.</p>
+        <p>Search for <code class="highlighter-rouge">secretsalt</code> and change the value to something random.</p>
 
         <p>There is an example command in for generating a “secret salt” in the
-<code>config.php</code> file. If that doesn’t work for you, try the one below:</p>
+<code class="highlighter-rouge">config.php</code> file. If that doesn’t work for you, try the one below:</p>
 
-        <pre><code>$ dd if=/dev/urandom bs=1 count=48 2&gt; /dev/null | openssl base64
+        <div class="highlighter-rouge"><pre class="highlight"><code>$ dd if=/dev/urandom bs=1 count=48 2&gt; /dev/null | openssl base64
 </code></pre>
+        </div>
       </li>
     </ul>
   </li>
   <li>
-    <p>Open the the <code>saml-autoconfig.php</code> file for SimpleSAMLphp in your favorite text editor.</p>
+    <p>Open the the <code class="highlighter-rouge">saml-autoconfig.php</code> file for SimpleSAMLphp in your favorite text editor.</p>
 
     <p>Run this command:</p>
 
-    <pre><code>$ $EDITOR saml-autoconfig.php
+    <div class="highlighter-rouge"><pre class="highlight"><code>$ $EDITOR saml-autoconfig.php
 </code></pre>
-
-    <p>Then, using your text editor, modify the contents of the <code>metadata_url_for</code> array as shown below:</p>
-
-    <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="local-variable">$metadata_url_for</span> = <span class="predefined">array</span>(
-    <span class="string"><span class="delimiter">'</span><span class="content">example-okta-com</span><span class="delimiter">'</span></span>: <span class="string"><span class="delimiter">'</span><span class="content">{metadata-url}</span><span class="delimiter">'</span></span>
-);
-</pre></div>
-</div>
     </div>
 
-    <p>Be sure to replace the contents of <code>{metdata-url}</code> with the link
+    <p>Then, using your text editor, modify the contents of the <code class="highlighter-rouge">metadata_url_for</code> array as shown below:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>$metadata_url_for = array(
+    'example-okta-com': '{metadata-url}'
+);
+</code></pre>
+    </div>
+
+    <p>Be sure to replace the contents of <code class="highlighter-rouge"><span class="p">{</span><span class="err">metdata-url</span><span class="p">}</span></code> with the link
 that you copied in step #10 of the
 “<a href="setting_up_a_saml_application_in_okta.html">Setting up a SAML application in Okta</a>”
 instructions that you followed above!</p>
 
     <blockquote>
-      <p>Note: The contents of <code>{metadata-url}</code> should look similar to this:
-<code>https://example.oktapreview.com/app/a0b1c2deFGHIJKLMNOPQ/sso/saml/metadata</code></p>
+      <p>Note: The contents of <code class="highlighter-rouge"><span class="p">{</span><span class="err">metadata-url</span><span class="p">}</span></code> should look similar to this:
+<code class="highlighter-rouge">https://example.oktapreview.com/app/a0b1c2deFGHIJKLMNOPQ/sso/saml/metadata</code></p>
     </blockquote>
   </li>
 </ol>
@@ -511,8 +523,8 @@ to work with an Okta organization and how to configure SimpleSAMLphp to work wit
 PHP application, your next step will be to take the
 example code and move it to your production application. The specifics of how
 this works will be different depending on how your application is set up. 
-Pay special attention to the notes in the <code>index.php</code> file. 
-For example, on a production system, the contents of the <code>metadata_url_for</code> 
+Pay special attention to the notes in the <code class="highlighter-rouge">index.php</code> file. 
+For example, on a production system, the contents of the <code class="highlighter-rouge">metadata_url_for</code> 
 array should not be hard coded, but should come from a dynamic datastore.</p>
 
 <p>If you want to learn more about SAML and what to consider when writing a 

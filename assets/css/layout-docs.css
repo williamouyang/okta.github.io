@@ -19,23 +19,22 @@ body {
   flex: 1; }
 
 .section--with-sidebar {
-  border-left: 260px solid #004169;
+  border-left: 270px solid #004169;
   position: relative; }
   .section--with-sidebar .sticky-nav--sidebar {
     left: 0;
     position: fixed;
     top: 81px;
-    width: 260px;
+    width: 270px;
     background-color: #004169;
     z-index: 100;
-    height: 100%; }
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden; }
     .section--with-sidebar .sticky-nav--sidebar ul {
       margin-top: 0; }
     .section--with-sidebar .sticky-nav--sidebar h2 {
       margin-bottom: 0; }
-  .section--with-sidebar .scrollable {
-    overflow-y: auto;
-    height: 100%; }
   .section--with-sidebar .scrollable::-webkit-scrollbar {
     display: none;
     width: 0 !important;
@@ -47,7 +46,7 @@ body {
     display: flex;
     height: 60px;
     justify-content: space-between;
-    left: 260px;
+    left: 270px;
     position: fixed;
     right: 0;
     text-align: center;
@@ -132,14 +131,14 @@ body {
     font-size: 22px;
     color: #353435;
     margin: 2em 0 1em;
-    border-bottom: 1px solid #273742;
+    border-bottom: 1px solid #283742;
     border-bottom: 1px solid #567;
     padding-bottom: .5em; }
     .docs-body h2:first-child {
       margin: 48px 0 24px; }
   .docs-body h3, .docs-body h4, .docs-body h5, .docs-body h6 {
     margin-top: 25px;
-    color: #1a3a4f; }
+    color: #1b3b4f; }
   .docs-body h3 {
     font-size: 1.176em;
     font-size: 18px;
@@ -505,7 +504,7 @@ h6:hover .header-link {
       margin: 75px 0 0 0; }
 
 .sidebar-nav {
-  width: 260px;
+  width: 270px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -594,7 +593,9 @@ h6:hover .header-link {
 
 .docs-body {
   /* -------------------------- PYGMENTS */
-  /* Comment */
+  /*
+  .hll  { background-color: #ffffcc; }
+  .c    { color: #999988; font-style: italic; } /* Comment */
   /* Error */
   /* Keyword */
   /* Operator */
@@ -683,16 +684,11 @@ h6:hover .header-link {
     white-space: pre;
     word-wrap: normal;
     overflow-x: auto; }
-  .docs-body .hll {
-    background-color: #ffffcc; }
-  .docs-body .c {
-    color: #999988;
-    font-style: italic; }
   .docs-body .err {
     color: #a61717;
     background-color: #e3d2d2; }
   .docs-body .k {
-    color: #000000; }
+    color: #FF7640; }
   .docs-body .o {
     color: #000000; }
   .docs-body .cm {
@@ -741,11 +737,11 @@ h6:hover .header-link {
   .docs-body .kt {
     color: #445588; }
   .docs-body .m {
-    color: #009999; }
+    color: #FF7640; }
   .docs-body .s {
-    color: #d01040; }
+    color: #1C6297; }
   .docs-body .na {
-    color: #008080; }
+    color: #5691BF; }
   .docs-body .nb {
     color: #0086B3; }
   .docs-body .nc {
@@ -757,17 +753,17 @@ h6:hover .header-link {
   .docs-body .ni {
     color: #800080; }
   .docs-body .ne {
-    color: #900; }
+    color: #FFB149; }
   .docs-body .nf {
-    color: #990000; }
+    color: #FF7640; }
   .docs-body .nl {
-    color: #990000; }
+    color: #0C87C9; }
   .docs-body .nn {
     color: #555555; }
   .docs-body .nt {
     color: #456; }
   .docs-body .nv {
-    color: #008080; }
+    color: #FFB149; }
   .docs-body .ow {
     color: #000000; }
   .docs-body .w {
@@ -787,11 +783,11 @@ h6:hover .header-link {
   .docs-body .sd {
     color: #d01040; }
   .docs-body .s2 {
-    color: #393; }
+    color: #0C87C9; }
   .docs-body .se {
-    color: #393; }
+    color: #0C87C9; }
   .docs-body .sh {
-    color: #963; }
+    color: #0C87C9; }
   .docs-body .si {
     color: #d01040; }
   .docs-body .sx {
@@ -934,7 +930,7 @@ h6:hover .header-link {
   border-bottom: solid #c1c1c1;
   border-width: 0 0 1px 1px;
   cursor: pointer;
-  width: 260px;
+  width: 270px;
   text-align: left;
   color: white; }
   .toggle-menu:hover {
@@ -958,7 +954,7 @@ body.toggled .toggle-menu {
     content: "\003009";
     left: 10px; }
 body.toggled #sticky-nav {
-  left: 260px; }
+  left: 270px; }
   body.toggled #sticky-nav a:first-child {
     display: block; }
 body.toggled .docs-sidebar-block {
@@ -966,9 +962,9 @@ body.toggled .docs-sidebar-block {
 body.toggled .section--with-sidebar {
   border-left: 0; }
 body.toggled .sticky-nav--sidebar.toggled {
-  width: 260px; }
+  width: 270px; }
 body.toggled .section--with-sidebar {
-  border-left: 260px solid #004169; }
+  border-left: 270px solid #004169; }
 body.toggled .section--with-sidebar .sticky-nav--sidebar {
   width: 60px;
   background-color: white;
@@ -981,14 +977,14 @@ body.toggled .section--with-sidebar {
   border-left: 0; }
 body.toggled .sticky-nav--sidebar.toggled > .docs-body {
   overflow: hidden;
-  width: 260px; }
+  width: 270px; }
 
 @media all and (max-width: 768px) {
   .btn-github {
     display: none; }
 
   body.toggled #sticky-nav {
-    left: 260px; }
+    left: 270px; }
     body.toggled #sticky-nav a {
       display: block; }
       body.toggled #sticky-nav a:first-child {
@@ -996,7 +992,7 @@ body.toggled .sticky-nav--sidebar.toggled > .docs-body {
   body.toggled .section--with-sidebar {
     border-left: 0; }
   body.toggled .sticky-nav--sidebar {
-    width: 260px; }
+    width: 270px; }
   body.toggled #sticky-nav {
     left: 60px; }
 
@@ -1007,7 +1003,7 @@ body.toggled .sticky-nav--sidebar.toggled > .docs-body {
 
   .sticky-nav--sidebar.toggled > .docs-body {
     overflow: hidden;
-    width: 260px; }
+    width: 270px; }
 
   .docs-body {
     left: 0; } }
