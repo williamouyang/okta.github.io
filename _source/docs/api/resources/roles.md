@@ -8,9 +8,9 @@ title: Admin Roles
 
 ## Overview
 
-The Okta Administrator Roles API provides operations to manage administrative role assignments for a user/
+The Okta Administrator Roles API provides operations to manage administrative role assignments for a user.
 
-## Roles Model
+## Role Model
 
 ### Example
 
@@ -29,44 +29,68 @@ The Okta Administrator Roles API provides operations to manage administrative ro
 
 The role model defines several **read-only** properties:
 
-|-----------------------+--------------------------------------------+------------+-----------+-----------|
-| Property              | Description                                |  DataType  | Read Only |  Nullable |
-|:--------------------- |:-------------------------------------------|:----------:|:---------:|:---------:|
-| id                    | unique key for role                        |   String   |   FALSE   |   FALSE   |
-| label                 | the label for the role                     |   String   |   FALSE   |   FALSE   |
-| type                  | the role type                              |   String   |   FALSE   |   FALSE   |
-| status                | current status of role                     |   String   |   FALSE   |   FALSE   |
-| created               | timestamp when role was created            |    Date    |   TRUE    |   FALSE   |
-| lastUpdated           | timestamp when status last changed         |    Date    |   TRUE    |   FALSE   |
-|-----------------------+--------------------------------------------+------------+-----------+-----------|
+|--------------+-------------------------------------------------------+-------------------------------------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+| Property     | Description                                           | DataType                                                                                  | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| ---------    | ----------------------------------------------------- | ----------------------------------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
+| id           | unique key for the role assignment                    | String                                                                                    | FALSE    | TRUE   | TRUE     |           |           |            |
+| label        | display name of role                                  | String                                                                                    | FALSE    | FALSE  | TRUE     |           |           |            |
+| type         | type of role                                          | `SUPER_ADMIN`, `ORG_ADMIN`, `APP_ADMIN`, `USER_ADMIN`, `MOBILE_ADMIN`, `READ_ONLY_ADMIN`  | FALSE    | FALSE  | TRUE     |           |           |            |
+| status       | status of role assignment                             | `ACTIVE`                                                                                  | FALSE    | FALSE  | TRUE     |           |           |            |
+| created      | timestamp when app user was created                   | Date                                                                                      | FALSE    | FALSE  | TRUE     |           |           |            |
+| lastUpdated  | timestamp when app user was last updated              | Date                                                                                      | FALSE    | FALSE  | TRUE     |           |           |            |
+| _embedded    | embedded resources related to the role assignment     | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                            | TRUE     | FALSE  | TRUE     |           |           |            |
+| _links       | discoverable resources related to the role assignment | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                            | TRUE     | FALSE  | TRUE     |           |           |            |
+|--------------+-------------------------------------------------------+-------------------------------------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
 
-> Role `types` are `SUPER_ADMIN`, `ORG_ADMIN`, `APP_ADMIN`, `USER_ADMIN`, `READ_ONLY_ADMIN`. A `HTTP/1.1 404 Not Found` status will be returned if any other role type is submitted.
+#### Role Types
 
-> Metadata properties are READ ONLY.
+Some roles support optional targets that constrain the role to a specific set of groups or apps.  If an optional target is not specified, then the role assignment is unbounded (e.g applies to all groups or apps).
 
-## User Operations
+Refer to the [product documentation](https://support.okta.com/articles/Knowledge_Article/99850906-Administrator-Roles) for a complete definition of permissions granted to each role.
 
-### List Assigned Roles
+|-------------------+------------------------------|-------------------------+
+| Role Type         | Label                        | Optional Targets        |
+| ----------------- | -----------------------------| ------------------------|
+| `SUPER_ADMIN`     | Super Administrator          |                         |
+| `ORG_ADMIN`       | Organizational Administrator |                         |                  
+| `APP_ADMIN`       | Application Administrator    | Apps                    |
+| `USER_ADMIN`      | User Administrator           | [Groups](./groups/html) |
+| `MOBILE_ADMIN`    | Mobile Administrator         |                         |
+| `READ_ONLY_ADMIN` | Read-only Administrator      |                         |
+|-------------------+------------------------------|-------------------------+
+
+> The `USER_ADMIN` role is [Early Access](https://support.okta.com/articles/Knowledge_Article/The-User-Admin-Role)
+
+## Role Assignment Operations
+
+### List Roles Assigned to User
 {:.api .api-operation}
-
-Fetches all roles for the specified resource.
-
-- [Get Assigned Roles for a User](#get-assigned-roles-for-a-user)
-- [Get Roles for Groups and Apps for a User](#get-roles-for-groups-and-apps-for-a-user)
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users/:uid/roles</span>
 
-#### Get Assigned Roles for a User
+Lists all roles assigned to a user.
 
-##### Request Example
+#### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter    | Description                                         | Param Type | DataType | Required | Default
+------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
+uid          | `id` of user                                        | URL        | String   | TRUE     |
+
+#### Response Parameters
+{:.api .api-response .api-response-params}
+
+Array of [Role](#role-model)
+
+#### Request Example
 {:.api .api-request .api-request-example}
 
-~~~http
-curl -v -H "Authorization: SSWS {{ "{{apikey" }}}}" \
-  -H "Accept: application/json" \
-  -H "Content-Type: application/json" \
-  -H "Cache-Control: no-cache" \
-  -X GET https:///your-domain.okta.com.okta.com/api/v1/users/{{ "{{userId" }}}}/roles
+~~~sh
+curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/roles"
 ~~~
 
 ##### Response Example
@@ -75,148 +99,57 @@ curl -v -H "Authorization: SSWS {{ "{{apikey" }}}}" \
 ~~~json
 [
   {
-    "id": "ra1fh0JWDDWIHIZYPGOB",
-    "label": "Super Administrator",
-    "type": "ORG_ADMIN",
-    "status": "ACTIVE",
-    "created": "2014-08-15T08:02:17.000Z",
-    "lastUpdated": "2014-09-04T17:54:03.000Z"
-  },
-  {
-    "id": "ra1fh0JWDDWIHIZYPGOB",
-    "label": "Super Administrator",
-    "type": "APP_ADMIN",
-    "status": "ACTIVE",
-    "created": "2014-08-15T08:02:17.000Z",
-    "lastUpdated": "2014-09-04T17:54:03.000Z"
-  }
-]
-~~~
-
-
-#### Get Roles for Groups and Apps for a User
-
-In this example the requestor specifies the target resources for the role to include in the response.
-
-##### Request Example
-{:.api .api-request .api-request-example}
-
-~~~http
-curl -v -H "Authorization: SSWS {{ "{{apikey" }}}}" \
-  -H "Accept: application/json" \
-  -H "Content-Type: application/json" \
-  -H "Cache-Control: no-cache" \
-  -X GET https:///your-domain.okta.com.okta.com/api/v1/users/{{ "{{userId" }}}}/roles?expand=targets/groups,targets/apps
-~~~
-
-##### Response Example
-{:.api .api-response .api-response-example}
-
-~~~json
-[
-  {
-    "id": "ra1fh0JWDDWIHIZYPGOB",
+    "id": "ra1b8aahBZuGJRRa30g4",
     "label": "Organization Administrator",
     "type": "ORG_ADMIN",
     "status": "ACTIVE",
-    "created": "2014-08-15T08:02:17.000Z",
-    "lastUpdated": "2014-09-04T17:54:03.000Z",
-    "_embedded": {
-      "targets": {
-        "groups": [
-          {
-            "id": "00gg9mNOTHEWJYPVNVIX",
-            "objectClass": [
-              ""
-            ],
-            "type": "APP_GROUP",
-            "profile": {
-              "name": "AD_EMEA",
-              "description": "Create AD account for new users under ou=EMEA"
-            }
-          }
-        ]
-      }
-    }
+    "created": "2015-09-06T14:55:11.000Z",
+    "lastUpdated": "2015-09-06T14:55:11.000Z"
   },
   {
-    "id": "ra1fh0JWDDWIHIZYPGOB",
-    "label": "App Administrator",
+    "id": "IFIFAX2BIRGUSTQ",
+    "label": "Application Administrator",
     "type": "APP_ADMIN",
     "status": "ACTIVE",
-    "created": "2014-08-15T08:02:17.000Z",
-    "lastUpdated": "2014-09-04T17:54:03.000Z",
-    "_embedded": {
-      "targets": {
-        "apps": [
-          {
-            "id": "0oag8wHJYBOVOCFFPOXO",
-            "name": "workday",
-            "label": "Workday",
-            "status": "ACTIVE",
-            "lastUpdated": "2014-08-22T12:22:43.000Z",
-            "created": "2014-08-15T04:50:24.000Z",
-            "accessibility": {
-              "selfService": false,
-              "errorRedirectUrl": null
-            },
-            "visibility": {
-              "autoSubmitToolbar": true,
-              "hide": {
-                "iOS": false,
-                "web": false
-              },
-              "appLinks": {
-                "login": true
-              }
-            },
-            "features": [
-              "IMPORT_PROFILE_UPDATES",
-              "PROFILE_MASTERING",
-              "IMPORT_NEW_USERS"
-            ],
-            "signOnMode": "SECURE_PASSWORD_STORE",
-            "credentials": {
-              "scheme": "EDIT_USERNAME_AND_PASSWORD",
-              "userNameTemplate": {
-                "template": "${source.login}",
-                "type": "BUILT_IN"
-              }
-            },
-            "settings": {
-              "app": {
-                "siteURL": "https://impl.workday.com/okta_dpt1/login.flex"
-              }
-            }
-          }
-        ]
-      }
-    }
+    "created": "2015-09-06T14:55:11.000Z",
+    "lastUpdated": "2015-09-06T14:55:11.000Z"
   }
 ]
 ~~~
-
 
 ### Assign Role to User
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/:uid/roles</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/roles</span>
 
-Assigns a specified role to a specified user.
+Assigns a role to a user.
 
-##### Request Example
+#### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter    | Description            | Param Type | DataType                 | Required | Default
+------------ | ---------------------- | ---------- | ------------------------ | -------- | -------
+uid          | `id` of user           | URL        | String                   | TRUE     |
+type         | type of role to assign | Body       | [Role Type](#Role Types) | TRUE     |
+
+#### Response Parameters
+{:.api .api-response .api-response-params}
+
+Assigned [Role](#role-model)
+
+#### Request Example
 {:.api .api-request .api-request-example}
 
-~~~http
-curl -v -H "Authorization: SSWS "{{ "{{apikey" }}}}" \
-  -H "Accept: application/json" \
-  -H "Content-Type: application/json" \
-  -H "Cache-Control: no-cache" \
-  -X POST https:///your-domain.okta.com.okta.com/api/v1/users/{{ "{{userId" }}}}/roles \
-  -d \
-  '{
-    "type": "{{ "{{roleType" }}}}"
-  }'
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  {
+      "type": "SUPER_ADMIN"
+  }
+}' "https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/roles"
 ~~~
 
 ##### Response Example
@@ -224,131 +157,96 @@ curl -v -H "Authorization: SSWS "{{ "{{apikey" }}}}" \
 
 ~~~json
 {
-  "id": "ra1fh0JWDDWIHIZYPGOB",
-  "label": "Super Administrator",
-  "desciption": "optional role description",
+  "id": "ra1b8anIk7rx7em7L0g4",
+  "label": "Super Organization Administrator",
   "type": "SUPER_ADMIN",
   "status": "ACTIVE",
-  "created": "2014-08-15T08:02:17.000Z",
-  "lastUpdated": "2014-09-04T17:54:03.000Z"
+  "created": "2015-09-06T15:28:47.000Z",
+  "lastUpdated": "2015-09-06T15:28:47.000Z"
 }
 ~~~
-
-> `HTTP/1.1 409 Conflict` status is returned if the role is already assigned to the user.
-
 
 ### Unassign Role from User
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /users/:uid/roles/:rid</span>
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /users/*:uid*/roles/*:rid*</span>
 
-Removes a role from a specified user.
+Unassigns a role from a user.
 
-##### Request Example
-{:.api .api-request .api-request-example}
+#### Request Parameters
+{:.api .api-request .api-request-params}
 
-~~~http
-curl -v -i -H "Authorization: SSWS {{ "{{apikey" }}}}" \
-  -H "Accept: application/json" \
-  -H "Content-Type: application/json" \
-  -H "Cache-Control: no-cache" \
-  -X DELETE https:///your-domain.okta.com.okta.com/api/v1/users/{{ "{{userId" }}}}/roles/{{ "{{roleId" }}}}
-~~~
+Parameter    | Description            | Param Type | DataType                 | Required | Default
+------------ | ---------------------- | ---------- | ------------------------ | -------- | -------
+uid          | `id` of user           | URL        | String                   | TRUE     |
+rid          | `id` of role           | URL        | String                   | TRUE     |
 
-##### Response Example
-{:.api .api-response .api-response-example}
+#### Response Parameters
+{:.api .api-response .api-response-params}
 
-~~~http
-`HTTP/1.1 204 No Content`
-~~~
-
-> `HTTP/1.1 404 Not Found` status is returned if role is not found
-
-~~~json
-{
-  "errorCode":"E0000007",
-  "errorSummary":"Not found: Resource not found: IFIFAX2BIRGUSTQ (RoleAssignment)",
-  "errorLink":"E0000007",
-  "errorId":"oaeQ4VKa-AoSJODmiIGVtmljg",
-  "errorCauses":[]
-}
-~~~
-
-### Add Group Target to Role
-{:.api .api-operation}
-
-Adds a specified group to a role.
-
-<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /users/:uid/roles/:rid/targets/groups/:gid</span>
-
-##### Request Example
-{:.api .api-request .api-request-example}
-
-~~~http
-curl -v -H "Authorization: SSWS {{ "{{apikey" }}}}" \
-  -H "Accept: application/json" \
-  -H "Content-Type: application/json" \
-  -H "Cache-Control: no-cache" \
-  -X PUT https:///your-domain.okta.com.okta.com/api/v1/roles/{{roleId}}/targets/groups/{{groupId}}
-~~~
-
-##### Response Example
-{:.api .api-response .api-response-example}
-
-~~~http
+~~~ http
 HTTP/1.1 204 No Content
 ~~~
 
-> Currently only supported by `USER_ADMIN`.  Returns `HTTP/1.1 405 Method Not Allowed` if the role does not support the target resource constraint.
-
-~~~json
-{
-  "errorCode": "E0000091",
-  "errorSummary": "The provided role type was not the same as required role type.",
-  "errorLink": "E0000091",
-  "errorId": "oaesASHFAzISfOao4MyCCtqpQ",
-  "errorCauses": [ ]
-}
-~~~
-
-> A `HTTP/1.1 405 Method Not Allowed` message is also returned if the app target is invalid.
-
-~~~json
-{
-  "errorCode": "E0000022",
-  "errorSummary": "The endpoint does not support the provided HTTP method",
-  "errorLink": "E0000022",
-  "errorId": "oaeBTnlOBB2SQuiLICp_EPO9Q",
-  "errorCauses": [ ]
-}
-~~~
-
-## Remove Group Target from Role
-{:.api .api-operation}
-
-<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /users/:uid/roles/:rid/targets/groups/:gid</span>
-
-
-##### Request Example
+#### Request Example
 {:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X DELETE \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/roles/ra1b8anIk7rx7em7L0g4"
+~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~http
+~~~ http
 HTTP/1.1 204 No Content
 ~~~
 
+## Role Target Operations
 
-### List Group Targets for Role
+### User Admin Role Group Targets
+
+#### List Group Targets for User Admin Role
+
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users/:uid/roles/:rid/targets/groups</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users/*:uid*/roles/*:rid*/targets/groups</span>
 
-Fetches all groups targets for a role. Standard paging and limits are supported.
+Lists all group targets for a `USER_ADMIN` role assignment.
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter    | Description                                                  | Param Type | DataType                 | Required | Default
+------------ | ------------------------------------------------------------ | ---------- | ------------------------ | -------- | -------
+uid          | `id` of user                                                 | URL        | String                   | TRUE     |
+rid          | `id` of role                                                 | URL        | String                   | TRUE     |
+limit        | Specifies the number of results for a page                   | Query      | Number                   | FALSE    | 20
+after        | Specifies the pagination cursor for the next page of targets | Query      | String                   | FALSE    |
+
+> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination)
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+Array of [Groups](./groups.html)
+
+> If the role is not scoped to specific group targets, an empty array `[]` is returned.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/roles/KVJUKUS7IFCE2SKO/targets/groups"
+~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
@@ -356,214 +254,322 @@ Fetches all groups targets for a role. Standard paging and limits are supported.
 ~~~json
 [
   {
-    "id": "00gg9oZUHKTGCQNKJLUJ",
+    "id": "00g1emaKYZTWRYYRRTSK",
     "objectClass": [
-      ""
+      "okta:user_group"
     ],
-    "type": "APP_GROUP",
     "profile": {
-      "name": "AD_AMER",
-      "description": "Create AD account for new users under ou=AMER"
+      "name": "West Coast Users",
+      "description": "Straight Outta Compton"
     },
     "_links": {
       "logo": [
         {
+          "href": "https://example.okta.com/img/logos/groups/okta-medium.png",
           "name": "medium",
-          "href": "https://your-domain.okta.com.okta.com/img/logos/groups/workday-medium.png",
           "type": "image/png"
         },
         {
+          "href": "https://example.okta.com/img/logos/groups/okta-large.png",
           "name": "large",
-          "href": "https://your-domain.okta.com.okta.com/img/logos/groups/workday-large.png",
           "type": "image/png"
         }
       ],
       "users": {
-        "href": "https://your-domain.okta.com.okta.com/api/v1/groups/00gg9oZUHKTGCQNKJLUJ/users"
+        "href": "https://example.okta.com/api/v1/groups/00g1emaKYZTWRYYRRTSK/users"
       },
       "apps": {
-        "href": "https://your-domain.okta.com.okta.com/api/v1/groups/00gg9oZUHKTGCQNKJLUJ/apps"
-      }
-    }
-  },
-    {
-    "id": "00gg9kSDGSJOWIBDIWRF",
-    "objectClass": [
-      ""
-    ],
-    "type": "APP_GROUP",
-    "profile": {
-      "name": "AD_APAC",
-      "description": "Create AD account for new users under ou=APAC"
-    },
-    "_links": {
-      "logo": [
-        {
-          "name": "medium",
-          "href": "https://your-domain.okta.com.okta.com/img/logos/groups/workday-medium.png",
-          "type": "image/png"
-        },
-        {
-          "name": "large",
-          "href": "https://your-domain.okta.com.okta.com/img/logos/groups/workday-large.png",
-          "type": "image/png"
-        }
-      ],
-      "users": {
-        "href": "https://your-domain.okta.com.okta.com/api/v1/groups/00gg9kSDGSJOWIBDIWRF/users"
-      },
-      "apps": {
-        "href": "https://your-domain.okta.com.okta.com/api/v1/groups/00gg9kSDGSJOWIBDIWRF/apps"
-      }
-    }
-  },
-  {
-    "id": "00gg9mNOTHEWJYPVNVIX",
-    "objectClass": [
-      ""
-    ],
-    "type": "APP_GROUP",
-    "profile": {
-      "name": "AD_EMEA",
-      "description": "Create AD account for new users under ou=EMEA"
-    },
-    "_links": {
-      "logo": [
-        {
-          "name": "medium",
-          "href": "https://your-domain.okta.com.okta.com/img/logos/groups/workday-medium.png",
-          "type": "image/png"
-        },
-        {
-          "name": "large",
-          "href": "https://your-domain.okta.com.okta.com/img/logos/groups/workday-large.png",
-          "type": "image/png"
-        }
-      ],
-      "users": {
-        "href": "https://your-domain.okta.com.okta.com/api/v1/groups/00gg9mNOTHEWJYPVNVIX/users"
-      },
-      "apps": {
-        "href": "https://your-domain.okta.com.okta.com/api/v1/groups/00gg9mNOTHEWJYPVNVIX/apps"
+        "href": "https://example.okta.com/api/v1/groups/00g1emaKYZTWRYYRRTSK/apps"
       }
     }
   }
 ]
 ~~~
 
+#### Add Group Target to User Admin Role
 
-### Add App Target to Role
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /users/:uid/roles/:rid/targets/apps/:app_name</span>
+<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /users/*:uid*/roles/*:rid*/targets/groups/*:gid*</span>
 
-Adds a specified app to a role.
+Adds a group target for a `USER_ADMIN` role assignment.
 
-> Currently, only the `APP_ADMIN` role is supported.   `HTTP/1.1 405 Method Not Allowed` is returned if the role doesn't support the target resource constraint.
+> Adding the first group target changes the scope of the role assignment from applying to all targets to only applying to the specified target.
 
-> Important:  If no app targets are specified, the app admin role is targeted to <b>all</b> apps!
+##### Request Parameters
+{:.api .api-request .api-request-params}
 
-##### Request Example
-{:.api .api-request .api-request-example}
+Parameter    | Description                                                  | Param Type | DataType                 | Required | Default
+------------ | ------------------------------------------------------------ | ---------- | ------------------------ | -------- | -------
+uid          | `id` of user                                                 | URL        | String                   | TRUE     |
+rid          | `id` of role                                                 | URL        | String                   | TRUE     |
+gid          | `id` of group target to scope role assignment                | URL        | String                   | TRUE     |
 
-##### Response Example
-{:.api .api-response .api-response-example}
+##### Response Parameters
+{:.api .api-response .api-response-params}
 
-~~~http
+~~~ http
 HTTP/1.1 204 No Content
 ~~~
 
-> Currently only supported by `APP_ADMIN` type.  Returns `HTTP/1.1 405 Method Not Allowed` if the role doesn't support the target resource constraint
-
-~~~json
-{
-  "errorCode": "E0000091",
-  "errorSummary": "The provided role type was not the same as required role type.",
-  "errorLink": "E0000091",
-  "errorId": "oaesASHFAzISfOao4MyCCtqpQ",
-  "errorCauses": [ ]
-}
-~~~
-
-> Note:  If no app targets are specified the app admin role is targeted to all apps!
-
-### Remove App Target from Role
-{:.api .api-operation}
-
-<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /users/:uid/roles/:rid/targets/apps/:app_name</span>
-
-Removes an app target from a role.
-
 ##### Request Example
 {:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X PUT \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/roles/KVJUKUS7IFCE2SKO/targets/groups/00garkxjAHDYPFcsP0g4"
+~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~http
+~~~ http
 HTTP/1.1 204 No Content
 ~~~
 
-### List App Targets for Role
+#### Remove Group Target from User Admin Role
+
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users/:uid/roles/:rid/targets/apps</span>
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /users/*:uid*/roles/*:rid*/targets/groups/*:gid*</span>
 
-Fetches all app targets for a role. Standard paging and limits are supported.
+Removes a group target from a `USER_ADMIN` role assignment.
+
+> Removing the last group target changes the scope of the role assignment from only applying to specific groups targets to applying to **all** group targets.
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter    | Description                                                  | Param Type | DataType                 | Required | Default
+------------ | ------------------------------------------------------------ | ---------- | ------------------------ | -------- | -------
+uid          | `id` of user                                                 | URL        | String                   | TRUE     |
+rid          | `id` of role                                                 | URL        | String                   | TRUE     |
+gid          | `id` of group target for role assignment                     | URL        | String                   | TRUE     |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+~~~ http
+HTTP/1.1 204 No Content
+~~~
 
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~http
-curl -X GET \
-  -H "Authorization: SSWS {{ "{{apikey" }}}}" \
-  -H "Accept: application/json" \
-  -H "Content-Type: application/json" \
-  -H "Cache-Control: no-cache" \
-  -X GET https:///your-domain.okta.com.oktapreview.com/api/v1/users/{{userId}}/roles/{{roleId}}/targets/catalog/apps
+~~~sh
+curl -v -X DELETE \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/roles/KVJUKUS7IFCE2SKO/targets/groups/00garkxjAHDYPFcsP0g4"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
+~~~ http
+HTTP/1.1 204 No Content
+~~~
+
+### App Admin Role App Targets
+
+#### List App Targets for App Admin Role
+
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users/*:uid*/roles/*:rid*/targets/catalog/apps</span>
+
+Lists all app targets for an `APP_ADMIN` role assignment.
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter    | Description                                                  | Param Type | DataType                 | Required | Default
+------------ | ------------------------------------------------------------ | ---------- | ------------------------ | -------- | -------
+uid          | `id` of user                                                 | URL        | String                   | TRUE     |
+rid          | `id` of role                                                 | URL        | String                   | TRUE     |
+limit        | Specifies the number of results for a page                   | Query      | Number                   | FALSE    | 20
+after        | Specifies the pagination cursor for the next page of targets | Query      | String                   | FALSE    |
+
+> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination)
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+Array of Catalog Apps
+
+> If the role is not scoped to specific apps in the catalog, an empty array `[]` is returned.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/roles/KVJUKUS7IFCE2SKO/targets/catalog/apps"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~json
 [
-	{
-		"name": "salesforce",
-		"displayName": "Salesforce.com",
-		"description": "Salesforce.com",
-		"status": "ACTIVE",
-		"lastUpdated": "2014-10-06T22:56:48.000Z",
-		"created": "2014-10-06T22:56:43.000Z",
-		"category": "CRM",
-		"verificationStatus": "OKTA_VERIFIED",
-		"website": "http://www.salesforce.com",
-		"signOnModes": [
-			"BOOKMARK",
-			"BASIC_AUTH",
-			"BROWSER_PLUGIN",
-			"SECURE_PASSWORD_STORE",
-			"SAML_2_0",
-			"WS_FEDERATION",
-			"CUSTOM"
-		],
-		"features": [
-			"PUSH_NEW_USERS",
-			"PUSH_USER_DEACTIVATION",
-			"REACTIVATE_USERS",
-			"PUSH_PROFILE_UPDATES",
-			"IMPORT_NEW_USERS"
-		],
-		"_links": {
-			"logo": [
-				{
-					"name": "medium",
-					"href": "https://your-domain.okta.com.okta.com/img/logos/salesforce_logo.png",
-					"type": "image/png"
-				}
-			]
-		}
-	}
+  {
+    "name": "salesforce",
+    "displayName": "Salesforce.com",
+    "description": "Salesforce",
+    "status": "ACTIVE",
+    "lastUpdated": "2014-06-03T16:17:13.000Z",
+    "category": "CRM",
+    "verificationStatus": "OKTA_VERIFIED",
+    "website": "http://www.salesforce.com",
+    "signOnModes": [
+      "SAML_2_0"
+    ],
+    "features": [
+      "IMPORT_NEW_USERS",
+      "IMPORT_PROFILE_UPDATES",
+      "IMPORT_USER_SCHEMA",
+      "PROFILE_MASTERING",
+      "PUSH_NEW_USERS",
+      "PUSH_PASSWORD_UPDATES",
+      "PUSH_PROFILE_UPDATES",
+      "PUSH_USER_DEACTIVATION",
+      "REACTIVATE_USERS"
+    ],
+    "_links": {
+      "logo": [
+        {
+          "name": "medium",
+          "href": "http://rain.okta1.com:1802/img/logos/salesforce_logo.png",
+          "type": "image/png"
+        }
+      ]
+    }
+  },
+  {
+    "name": "boxnet",
+    "displayName": "Box",
+    "description": "Cloud storage.",
+    "status": "ACTIVE",
+    "lastUpdated": "2014-06-03T16:17:13.000Z",
+    "category": "CM",
+    "verificationStatus": "OKTA_VERIFIED",
+    "website": "http://www.box.net",
+    "signOnModes": [
+      "SAML_2_0"
+    ],
+    "features": [
+      "GROUP_PUSH",
+      "IMPORT_NEW_USERS",
+      "IMPORT_PROFILE_UPDATES",
+      "PUSH_NEW_USERS",
+      "PUSH_PROFILE_UPDATES",
+      "PUSH_USER_DEACTIVATION",
+      "REACTIVATE_USERS"
+    ],
+    "_links": {
+      "logo": [
+        {
+          "name": "medium",
+          "href": "http://rain.okta1.com:1802/img/logos/box.png",
+          "type": "image/png"
+        }
+      ]
+    }
+  }
 ]
+~~~
+
+#### Add App Target to App Admin Role
+
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /users/*:uid*/roles/*:rid*/targets/catalog/apps/*:appName*</span>
+
+Adds an app target for an `APP_ADMIN` role assignment.
+
+> Adding the first app target changes the scope of the role assignment from applying to all app targets to only applying to the specified target.
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter    | Description                                                  | Param Type | DataType                 | Required | Default
+------------ | ------------------------------------------------------------ | ---------- | ------------------------ | -------- | -------
+uid          | `id` of user                                                 | URL        | String                   | TRUE     |
+rid          | `id` of role                                                 | URL        | String                   | TRUE     |
+appName      | `name` of app target from catalog to scope role assignment   | URL        | String                   | TRUE     |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+~~~ http
+HTTP/1.1 204 No Content
+~~~
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X PUT \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/roles/KVJUKUS7IFCE2SKO/targets/catalog/apps/amazon_aws"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~ http
+HTTP/1.1 204 No Content
+~~~
+
+#### Remove App Target from App Admin Role
+
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /users/*:uid*/roles/*:rid*/targets/catalog/apps/*:appName*</span>
+
+Removes an app target from an `APP_ADMIN` role assignment.
+
+> Removing the last app target changes the scope of the role assignment from only applying to specific app targets to applying to **all** app targets.
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter    | Description                              | Param Type | DataType                 | Required | Default
+------------ | ---------------------------------------- | ---------- | ------------------------ | -------- | -------
+uid          | `id` of user                             | URL        | String                   | TRUE     |
+rid          | `id` of role                             | URL        | String                   | TRUE     |
+appName      | `name` of app target for role assignment | URL        | String                   | TRUE     |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+~~~ http
+HTTP/1.1 204 No Content
+~~~
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X DELETE \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/roles/KVJUKUS7IFCE2SKO/targets/catalog/apps/amazon_aws"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~ http
+HTTP/1.1 204 No Content
 ~~~
