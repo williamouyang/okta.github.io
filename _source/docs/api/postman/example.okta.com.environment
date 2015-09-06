@@ -127,6 +127,41 @@
 			"type": "text",
 			"name": "relayState",
 			"enabled": true
+		},
+		{
+			"key": "deviceToken",
+			"value": "",
+			"type": "text",
+			"name": "deviceToken",
+			"enabled": true
+		},
+		{
+			"key": "appName",
+			"value": "amazon_aws",
+			"type": "text",
+			"name": "appName",
+			"enabled": true
+		},
+		{
+			"key": "idpId",
+			"value": "",
+			"type": "text",
+			"name": "idpId",
+			"enabled": true
+		},
+		{
+			"key": "roleId",
+			"value": "",
+			"type": "text",
+			"name": "roleId",
+			"enabled": true
+		},
+		{
+			"key": "redirectUrl",
+			"value": "",
+			"type": "text",
+			"name": "redirectUrl",
+			"enabled": true
 		}
 	],
 	"timestamp": 1416323955193,
