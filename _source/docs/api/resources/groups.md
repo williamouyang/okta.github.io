@@ -22,8 +22,8 @@ The Okta Groups API provides operations to manage your organization groups and t
         "okta:user_group"
     ],
     "profile": {
-        "name": "Cloud Users",
-        "description": "Users that can access cloud apps"
+        "name": "West Coast Users",
+        "description": "Straight Outta Compton"
     },
     "_links": {
         "logo": [
@@ -81,7 +81,7 @@ Profile for any group that is **not** imported from Active Directory
 
 ~~~json
 {
-    "name": "West Coast",
+    "name": "West Coast Users",
     "description": "Straight Outta Compton"
 }
 ~~~
@@ -106,7 +106,7 @@ Profile for a group that is imported from Active Directory
     "profile": {
         "name": "West Coast Users",
         "description": "example.com/West Coast/West Coast Users",
-        "samAccountName": "West Coast",
+        "samAccountName": "West Coast Users",
         "dn": "CN=West Coast Users,OU=West Coast,DC=example,DC=com",
         "windowsDomainQualifiedName": "EXAMPLE\\West Coast Users",
         "externalId": "VKzYZ1C+IkSZxIWlrW5ITg=="
@@ -160,7 +160,7 @@ curl -v -X POST \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
   "profile": {
-    "name": "West Coast",
+    "name": "West Coast Users",
     "description": "Straight Outta Compton"
   }
 }' "https://${org}.okta.com/api/v1/groups"
@@ -176,7 +176,7 @@ curl -v -X POST \
         "okta:user_group"
     ],
     "profile": {
-        "name": "West Coast",
+        "name": "West Coast Users",
         "description": "Straight Outta Compton"
     },
     "_links": {
@@ -242,7 +242,7 @@ curl -v -X GET \
         "okta:user_group"
     ],
     "profile": {
-        "name": "West Coast",
+        "name": "West Coast Users",
         "description": "Straight Outta Compton"
     },
     "_links": {
@@ -330,7 +330,7 @@ Link: <https://your-domain.okta.com/api/v1/groups?after=00ud4tVDDXYVKPXKVLCO&lim
           "okta:user_group"
       ],
       "profile": {
-          "name": "West Coast",
+          "name": "West Coast Users",
           "description": "Straight Outta Compton"
       },
       "_links": {
@@ -418,7 +418,7 @@ curl -v -X GET \
           "okta:user_group"
       ],
       "profile": {
-          "name": "West Coast",
+          "name": "West Coast Users",
           "description": "Straight Outta Compton"
       },
       "_links": {

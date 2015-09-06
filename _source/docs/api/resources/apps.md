@@ -480,8 +480,8 @@ All application user assignments have the following properties:
 | lastSync         | timestamp when last sync operation was executed              | Date                                                                        | TRUE     | FALSE  | TRUE     |           |           |            |
 | credentials      | credentials for assigned app                                 | [Application User Credentials Object](#application-user-credentials-object) | TRUE     | FALSE  | FALSE    |           |           |            |
 | profile          | app-specific profile for the user                            | [Application User Profile Object](#application-user-profile-object)         | FALSE    | FALSE  | TRUE     |           |           |            |
-| _links           | discoverable resources related to the app user               | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)              | TRUE     | FALSE  | TRUE     |           |           |            |
 | _embedded        | embedded resources related to the app user                   | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)              | TRUE     | FALSE  | TRUE     |           |           |            |
+| _links           | discoverable resources related to the app user               | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)              | TRUE     | FALSE  | TRUE     |           |           |            |
 |------------------+--------------------------------------------------------------+-----------------------------------------------------------------------------|----------|--------|----------|-----------|-----------+------------|
 
 > `lastSync` is only updated for applications with the `IMPORT_PROFILE_UPDATES` or `PUSH PROFILE_UPDATES` feature
@@ -1377,7 +1377,7 @@ Enumerates apps added to your organization with pagination. A subset of apps can
 
 Parameter | Description                                                                                                      | Param Type | DataType | Required | Default
 --------- | ---------------------------------------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------
-limit     | Specified the number of results for a page                                                                       | Query      | Number   | FALSE    | 20
+limit     | Specifies the number of results for a page                                                                       | Query      | Number   | FALSE    | 20
 filter    | Filters apps by `status`, `user.id`, or `group.id` expression                                                    | Query      | String   | FALSE    |
 after     | Specifies the pagination cursor for the next page of apps                                                        | Query      | String   | FALSE    |
 expand    | Traverses `users` link relationship and optionally embeds [Application User](#application-user-model) resource   | Query      | String   | FALSE    |
