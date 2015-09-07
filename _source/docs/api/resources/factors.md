@@ -4,10 +4,6 @@ title: Factors (MFA)
 redirect_from: "/docs/api/rest/factors.html"
 ---
 
-* Will be replaced with the ToC
-{:toc .list-unstyled .toc}
-
-
 # Overview
 
 The Okta Factors API provides operations to enroll, manage, and verify factors for multi-factor authentication (MFA).  It is optimized for both administrative and end-user account management, but may also be used verify a factor at any time on-demand.

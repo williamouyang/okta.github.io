@@ -4,9 +4,6 @@ title: Policy
 redirect_from: "/docs/getting_started/policy.html"
 ---
 
-* Will be replaced with the ToC
-{:toc .list-unstyled .toc}
-
 # Overview
 
 The Okta Policy API enables you to peform policy and rule operations. These operation apply to various policies including Okta Signon.
@@ -31,11 +28,11 @@ This API supports the following **rule operations**:
 
 ### Default Policies
 
-There is always a default policy created for each type of policy. The default policy applies to any users for whom other policies in the org do not apply. This ensures that there is always a policy to apply to a user in all situations. 
+There is always a default policy created for each type of policy. The default policy applies to any users for whom other policies in the org do not apply. This ensures that there is always a policy to apply to a user in all situations.
 
  - A default policy is required and cannot be deleted.
 
- - The default policy is always the last policy in the priority order. Any added policies of this type have higher priority than the default policy. 
+ - The default policy is always the last policy in the priority order. Any added policies of this type have higher priority than the default policy.
 
  - The default policy always has one default rule that cannot be deleted. It is always the last rule in the priority order. If you add rules to the default policy, they have a higher priority than the default rule. For information on default rules, see [Rules Model and Defaults](#rules-model-and-defaults).
 
@@ -58,15 +55,15 @@ the action in Rule A is taken, and Rule B is not evaluated.
 The Policy model defines several attributes:
 
 Parameter | Description | Data Type | Required | Default
-| --- | --- | --- | --- 
-id | Identifier for the policy | String | No | Assigned 
-type | Policy type –  must be `OKTA_SIGN_ON` | String | Yes | 
-name | Name for the policy | String | Yes | 
-description | Description for the policy | String | No | Null 
-priorityOrder | Priority for the policy | Int | No | Last / Lowest Priority 
-system | Whether or not the policy is the default | Boolean | No | false 
-status | Status of the policy: ACTIVE or INACTIVE | String | No | "ACTIVE" 
-created | Timestamp when the policy was created | Date | No | Assigned 
+| --- | --- | --- | ---
+id | Identifier for the policy | String | No | Assigned
+type | Policy type –  must be `OKTA_SIGN_ON` | String | Yes |
+name | Name for the policy | String | Yes |
+description | Description for the policy | String | No | Null
+priorityOrder | Priority for the policy | Int | No | Last / Lowest Priority
+system | Whether or not the policy is the default | Boolean | No | false
+status | Status of the policy: ACTIVE or INACTIVE | String | No | "ACTIVE"
+created | Timestamp when the policy was created | Date | No | Assigned
 lastUpdated | Timestamp when the policy was last modified | Date | No | Assigned
 
 ### People Object
@@ -74,14 +71,14 @@ lastUpdated | Timestamp when the policy was last modified | Date | No | Assigned
 The people condition identifies users and groups that are used together. For policies, you can only include a group.
 
 Parameter | Description | Data Type | Required | Default
-| --- | --- | --- | --- 
-groups | The group condition | Group Condition | No | Include Everyone 
+| --- | --- | --- | ---
+groups | The group condition | Group Condition | No | Include Everyone
 users  | The user condition  | User Condition  | No | Empty
 
 ### Group Condition Object
 
 Parameter | Description | Data Type | Required | Default
-| --- | --- | --- | --- 
+| --- | --- | --- | ---
 include	| The groups to be included |	Collection of String	| No |	Everyone Group (if exclude is empty)
 exclude	| The groups to be excluded	| Collection of String	| No	| Empty
 
@@ -89,7 +86,7 @@ exclude	| The groups to be excluded	| Collection of String	| No	| Empty
 ### User Condition Object
 
 Parameter | Description | Data Type | Required | Default
-| --- | --- | --- | --- 
+| --- | --- | --- | ---
 include	| The users to be included	| Collection of String	| No	| Empty
 exclude	| The users to be excluded	| Collection of String	| No	| Empty
 
@@ -97,7 +94,7 @@ exclude	| The users to be excluded	| Collection of String	| No	| Empty
 
 Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the current policy.  The Links Object is used for dynamic discovery of related resources.  The Links Object is **read-only**.
 
-Specified link 
+Specified link
 
 Link Relation Type     | Description
 ---------------------- | -----------
@@ -511,14 +508,14 @@ None. Status 204 No Content is returned when the deactivation is successful.
 The Rules model defines several attributes:
 
 Parameter | Description | Data Type | Required | Default
-| --- | --- | --- | --- 
-id | Identifier for the rule | String | No | Assigned 
-type | Rule type –  must be `SIGN_ON` | String | Yes | 
-name | Name for the rule | String | Yes | 
-status | Status of the rule: `ACTIVE` or `INACTIVE` | String | No | `ACTIVE` 
-priorityOrder | Priority for the rule | Int | No | Last / Lowest Priority 
-system | Whether or not the rule is the default | Boolean | No | false 
-created | Timestamp when the rule was created | Date | No | Assigned 
+| --- | --- | --- | ---
+id | Identifier for the rule | String | No | Assigned
+type | Rule type –  must be `SIGN_ON` | String | Yes |
+name | Name for the rule | String | Yes |
+status | Status of the rule: `ACTIVE` or `INACTIVE` | String | No | `ACTIVE`
+priorityOrder | Priority for the rule | Int | No | Last / Lowest Priority
+system | Whether or not the rule is the default | Boolean | No | false
+created | Timestamp when the rule was created | Date | No | Assigned
 lastUpdated | Timestamp when the rule was last modified | Date | No | Assigned
 
 ### Conditions
@@ -530,7 +527,7 @@ Rule conditions include the people, user, and group conditions from the policy m
 Specifies a network segment.
 
 Parameter |	Description	| Data Type	|  Required	|  Default
-| --- | --- | --- | --- 
+| --- | --- | --- | ---
 connection	|  `ANYWHERE`, `ON_NETWORK`, or `OFF_NETWORK` | 	String	| No	|  Empty
 
 **AuthContext Condition Body**
@@ -538,7 +535,7 @@ connection	|  `ANYWHERE`, `ON_NETWORK`, or `OFF_NETWORK` | 	String	| No	|  Empty
 Specifies an authentication entry point.
 
 Parameter | Description | DataType  |  Required |  Default
-| --- | --- | --- | --- 
+| --- | --- | --- | ---
 authType	| `ANY` or `RADIUS`	| String	| No	| Empty
 
 ### Actions
@@ -546,11 +543,11 @@ authType	| `ANY` or `RADIUS`	| String	| No	| Empty
 **Signon Action**
 
 Parameter | Description | Data Type  |  Required |  Default
-| --- | --- | --- | --- 
-access	| `ALLOW` or `DENY`	| String	| YES	
+| --- | --- | --- | ---
+access	| `ALLOW` or `DENY`	| String	| YES
 requireFactor	| `true` or `false`	| Boolean	| NO	| `false`
-factorPromptMode	| `DEVICE`, `SESSION` or `ALWAYS`	| String	| When requireFactor = `true`	
-factorLifetime	| How long until factor times out	| Int	| When factorPromptMode = `SESSION`	
+factorPromptMode	| `DEVICE`, `SESSION` or `ALWAYS`	| String	| When requireFactor = `true`
+factorLifetime	| How long until factor times out	| Int	| When factorPromptMode = `SESSION`
 
 ## Rules Operations
 
@@ -559,7 +556,7 @@ factorLifetime	| How long until factor times out	| Int	| When factorPromptMode =
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/{policyId}/rules</span>
 
-Retrieves all rules for a specified policy. 
+Retrieves all rules for a specified policy.
 
 #### Request Parameters
 
@@ -647,7 +644,7 @@ The policy id described in the [Policy Object](#policy-object) and the rule id d
 }
 ~~~
 
-### Create Rule 
+### Create Rule
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/{policyId}/rules</span>
@@ -713,7 +710,7 @@ The policy id described in the [Policy Object](#policy-object) is required.
             "factorLifetime": 1
         }
     }
-} 
+}
 ~~~
 
 ### Update a Rule
@@ -721,7 +718,7 @@ The policy id described in the [Policy Object](#policy-object) is required.
 
 <span class="api-uri-template api-uri-put"><span class="api-label">PUT </span> /api/v1/policies/{policyId}/rules/{ruleId}</span>
 
-Updates the specified rule for the specified policy. 
+Updates the specified rule for the specified policy.
 
 #### Request Parameters
 
@@ -730,7 +727,7 @@ The policy id described in the [Policy Object](#policy-object) and the rule id d
 ##### Request Example
 {:.api .api-resquest .api-request-example}
 
-**Note:** This is a strict PUT. Any missing item is set to its default value. For example if `priorityOrder` is missing, the item moves to the lowest priority order in the policy. 
+**Note:** This is a strict PUT. Any missing item is set to its default value. For example if `priorityOrder` is missing, the item moves to the lowest priority order in the policy.
 
 ~~~json
 {
@@ -800,7 +797,7 @@ The policy id described in the [Policy Object](#policy-object) and the rule id d
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/{policyId}/rules/{ruleId}/lifecycle/activate</span>
 
-Activates the specified rule for the specified policy. 
+Activates the specified rule for the specified policy.
 
 #### Request Parameters
 
@@ -815,7 +812,7 @@ None. Status 204 No Content is returned when the activation is successful.
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/{policyId}/rules/{ruleId}/lifecycle/deactivate</span>
 
-Deactivates the specified rule for the specified policy. 
+Deactivates the specified rule for the specified policy.
 
 #### Request Parameters
 
@@ -830,7 +827,7 @@ None. Status 204 No Content is returned when the deactivation is successful.
 
 <span class="api-uri-template api-uri-delete"><span class="api-label">DELETE </span> /api/v1/policies/{policyId}/rules/{ruleId}</span>
 
-Deletes the specified rule for the specified policy. 
+Deletes the specified rule for the specified policy.
 
 #### Request Parameters
 
@@ -839,4 +836,3 @@ TThe policy id described in the [Policy Object](#policy-object) and the rule id 
 #### Response Parameters
 
 None. Status 204 No Content is returned when the deletion is successful.
-

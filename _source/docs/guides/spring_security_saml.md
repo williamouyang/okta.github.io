@@ -5,13 +5,15 @@ excerpt: Guidance on how to SAML-enable your application using open source Sprin
 redirect_from: "/docs/examples/spring_security_saml.html"
 ---
 
+## Overview
+
 This guide describes how to use Spring Security SAML to add support
 for Okta (via SAML) to Java applications that use the Spring framework.
 In this guide, you will learn how to install and configure an Okta
-SAML application. 
+SAML application.
 
 This guide assumes that you are familiar
-with the basics of Java software development: editing text files, 
+with the basics of Java software development: editing text files,
 using the command line, and running Tomcat, Maven or Gradle.
 
 If you’re already familiar with Okta and Spring, you can skip to
@@ -20,18 +22,18 @@ the section titled “Configuring Spring Security SAML to work with Okta”.
 * Will be replaced with the ToC
 {:toc .list-unstyled .toc}
 
-## Requirements 
+## Requirements
 
 Please make sure the following are installed before starting installation:
 
 [Java 1.6+ SDK](http://www.oracle.com/technetwork/java/javase/overview/index.html)
-	- Check using the command below 
-	
+	- Check using the command below
+
 	java -version
 
 [Apache Maven](https://maven.apache.org/download.cgi)
 	- Check using the command  below
-	
+
 	mvn --version
 
 
@@ -41,7 +43,7 @@ This section covers what you need to do to install and configure Tomcat from scr
 
 How to install the Spring Security SAML sample Okta application on Mac OS X:
 
-1. **Installing Tomcat** 
+1. **Installing Tomcat**
 	- If it’s not already installed, install Tomcat with Homebrew using these directions: <http://blog.bolshchikov.net/post/50277857673/installing-tomcat-on-macos-with-homebrew>
 
 
@@ -49,42 +51,42 @@ How to install the Spring Security SAML sample Okta application on Mac OS X:
 
 	- Use `git clone` to clone the extention locally
 
-	  ~~~ shell 
+	  ~~~ shell
 	  git clone https://github.com/spring-projects/spring-security-saml.git
 	  ~~~
 
 
 3. **Downloading sample application**
-	
+
 	- Use `git clone` to clone this repository locally
-	
+
 	  ~~~ shell
 	  git clone https://github.com/nshobayo/okta-SpringSAML.git
-	  ~~~ 
+	  ~~~
 
 	- Use the command below to copy the sample Okta application into the Extension's "src" folder
-	
-	  ~~~ shell 
+
+	  ~~~ shell
 	  rm -rf spring-security-saml/sample/src/main
 	  cp -r okta-SpringSAML/src/main spring-security-saml/sample/src
-	  ~~~ 
+	  ~~~
 
 4. **Compilation**
-	
-	- Make sure your working directory is the `sample` subdirectory of the `spring-security-saml` directory 
-	
-	  ~~~ shell 
-	  cd spring-security-saml/sample
-	  ~~~ 
 
-	- To compile 
-	
-	  ~~~ shell 
+	- Make sure your working directory is the `sample` subdirectory of the `spring-security-saml` directory
+
+	  ~~~ shell
+	  cd spring-security-saml/sample
+	  ~~~
+
+	- To compile
+
+	  ~~~ shell
 	  ../gradlew build install
 	  ~~~  
 
 	This task compiles, tests, and assembles the code into a `.war` file.
-	
+
 	A succesful build should look something like this:
 
 	![succesful build](/assets/img/spring-security-saml-build.png)
@@ -94,27 +96,27 @@ How to install the Spring Security SAML sample Okta application on Mac OS X:
 
 
 5. **Deployment**
-	
+
 	- Assuming your current directory is `spring-security-saml/sample` Use the command below to copy the compiled `spring-security-SAML2-sample.war` file to the Tomcat directory you set up in step one
-	
+
 	  ~~~ shell
 	cp build/libs/spring-security-SAML2-sample.war /Library/Tomcat/webapps/
-	  ~~~ 
+	  ~~~
 
 
 6. **Starting Tomcat**
-	
+
 	- Use the command below to start Tomcat
-	
+
 	  ~~~ shell    
 	/Library/Tomcat/bin/startup.sh
-	  ~~~ 
+	  ~~~
 
-	
+
 7. **Starting Application**
 	- Load the Spring SAML application by opening this Link: [Sample App](http://localhost:8080/spring-security-saml2-sample/saml/discovery?entityID=http%3A%2F%2Flocalhost%3A8080%2Fspring-security-saml2-sample%2Fsaml%2Fmetadata&returnIDParam=idp)
 	- **Note:** Links on app will not be functional as of yet because we have not yet configured any IDPs. Full app functionality  will be completed after the "Configuring Spring Security SAML to work with Okta" section.
-	
+
 	Here's what it should look like:
 
 	![App Running](/assets/img/spring-security-saml-intro.png)

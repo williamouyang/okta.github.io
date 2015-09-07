@@ -4,11 +4,7 @@ title: Tokens
 redirect_from: "/docs/getting_started/tokens.html"
 ---
 
-* Will be replaced with the ToC
-{:toc .list-unstyled .toc}
-
-*Note:  This API is **deprecated**. Please see [Getting an API Token](/docs/getting_started/getting_a_token.html)*
-
+> This API is **deprecated**. Please see [Getting an API Token](/docs/getting_started/getting_a_token.html)*
 
 ## Create tokens
 
@@ -55,4 +51,3 @@ curl -v -H "Content-type:application/json" \
 -H "Accept:application/json" \
 -X DELETE https://your-subdomain.okta.com/api/v1/tokens/
 ~~~
-

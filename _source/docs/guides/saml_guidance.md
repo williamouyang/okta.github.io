@@ -5,9 +5,6 @@ excerpt: Learn how to Single Sign-On enable your web and mobile application whet
 redirect_from: "/docs/getting_started/saml_guidance.html"
 ---
 
-* Will be replaced with the ToC
-{:toc .list-unstyled .toc}
-
 ## Introduction
 
 Traditionally, enterprise applications are deployed and run within the company network.  To obtain information about users such as user profile and group information, many of these applications are built to integrate with corporate directories such as Microsoft Active Directory.  More importantly, a user’s credentials are typically stored and validated using the directory.  For example, if you use SharePoint and Exchange that are running on premises, your login credentials are your Active Directory credentials.
@@ -167,6 +164,3 @@ There are many available OpenSource toolkits that implement the SAML 2.0 specifi
 - [Assertions and Protocols for the OASIS Security Assertion Markup Language (SAML) V2.0](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)
 - [Bindings for the OASIS Security Assertion Markup Language (SAML) V2.0](http://docs.oasis-open.org/security/saml/v2.0/saml-bindings-2.0-os.pdf)
 - [Profiles for the OASIS Security Assertion Markup Language (SAML) V2.0](http://docs.oasis-open.org/security/saml/v2.0/saml-profiles-2.0-os.pdf)
-
-
-

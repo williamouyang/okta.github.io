@@ -4,9 +4,6 @@ title: API Test Client
 redirect_from: "/docs/getting_started/api_test_client.html"
 ---
 
-* Will be replaced with the ToC
-{:toc .list-unstyled .toc}
-
 ## Overview
 
 [Postman](http://getpostman.com) is an awesome REST API test client that a lot of people at Okta use to test the Okta API.  We have built templates for all of the Okta APIs that makes playing with the Okta APIs simple and easy if you don't have time to practice your *Command Line Fu* with [cURL](http://en.wikipedia.org/wiki/CURL)

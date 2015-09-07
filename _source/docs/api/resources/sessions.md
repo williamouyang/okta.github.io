@@ -4,9 +4,6 @@ title: Sessions
 redirect_from: "/docs/api/rest/sessions.html"
 ---
 
-* Will be replaced with the ToC
-{:toc .list-unstyled .toc}
-
 ## Overview
 
 Okta uses a cookie-based authentication mechanism to maintain a user's authentication session across web requests.  The Okta Sessions API provides operations to create and manage authentication sessions for users in your Okta organization.

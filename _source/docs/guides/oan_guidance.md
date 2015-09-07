@@ -6,9 +6,6 @@ redirect_from: "/docs/getting_started/oan_guidance.html"
 
 ---
 
-* Will be replaced with the ToC
-{:toc .list-unstyled .toc}
-
 ## Overview
 
 

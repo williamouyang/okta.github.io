@@ -5,9 +5,6 @@ redirect_from: "/docs/getting_started/error_codes.html"
 
 ---
 
-* Will be replaced with the ToC
-{:toc .list-unstyled .toc}
-
 ## Overview
 
 This document provides further information about the errors that the Okta API returns. The first table is listed by error code, and the second table is listed by HTTP return code.
@@ -152,8 +149,4 @@ This document provides further information about the errors that the Okta API re
 <tr><td>E0000059</td><td>The connector configuration could not be tested. Make sure that the URL and Authentication Parameters are correct, and that there is an implementation available at the URL provided.</td></tr>
 <tr><td rowspan="1" bgcolor="#FFFFFF"><strong>501</strong></td><td>E0000052</td><td>Endpoint not implemented.</td></tr>
 <tr><td rowspan="1" bgcolor="#FFFFFF"><strong>503</strong></td><td>E0000010</td><td>Service is in read-only mode.</td></tr>
-</table> 
-
-
-
-
+</table>

@@ -4,9 +4,6 @@ title: Groups
 redirect_from: "/docs/api/rest/groups.html"
 ---
 
-* Will be replaced with the ToC
-{:toc .list-unstyled .toc}
-
 ## Overview
 
 The Okta Groups API provides operations to manage your organization groups and their user members.

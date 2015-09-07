@@ -4,9 +4,6 @@ title: Authentication
 redirect_from: "/docs/api/rest/authn.html"
 ---
 
-* Will be replaced with the ToC
-{:toc .list-unstyled .toc}
-
 ## Overview
 
 The Okta Authentication API provides operations to authenticate users, perform multi-factor enrollment and verification, recover forgotten passwords, and unlock accounts. It can be used as a standalone API to provide the identity layer on top of your existing application, or it can be integrated with the Okta [Sessions API](sessions.html) to obtain an Okta [session cookie](#/docs/examples/session_cookie.html) and access apps within Okta.
@@ -375,12 +372,12 @@ Every authentication transaction starts with primary authentication which valida
 #### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter   | Description                                                                                            | Param Type | DataType                          | Required | Default | MaxLength
------------ | ------------------------------------------------------------------------------------------------------ | ---------- | --------------------------------- | -------- | ------- | ---------
-username    | User's non-qualified short-name (e.g. Dade) or unique fully-qualified login (e.g issac@example.org)   | Body       | String                            | TRUE     |         |
-password    | User's password credential                                                                             | Body       | String                            | TRUE     |         |
-relayState  | Optional state value that is persisted for the lifetime of the authentication transaction              | Body       | String                            | FALSE    |         | 2048
-context     | Provides additional context for the authentication transaction                                         | Body       | [Context Object](#context-object) | FALSE    |         |
+Parameter   | Description                                                                                                      | Param Type | DataType                          | Required | Default | MaxLength
+----------- | ---------------------------------------------------------------------------------------------------------------- | ---------- | --------------------------------- | -------- | ------- | ---------
+username    | User's non-qualified short-name (e.g. dade.murphy) or unique fully-qualified login (e.g dade.murphy@example.com) | Body       | String                            | TRUE     |         |
+password    | User's password credential                                                                                       | Body       | String                            | TRUE     |         |
+relayState  | Optional state value that is persisted for the lifetime of the authentication transaction                        | Body       | String                            | FALSE    |         | 2048
+context     | Provides additional context for the authentication transaction                                                   | Body       | [Context Object](#context-object) | FALSE    |         |
 
 ##### Context Object
 
@@ -2283,7 +2280,7 @@ After starting verification, repeat the call to poll the device for a user respo
 Parameter    | Description                                         | Param Type | DataType | Required | Default
 ------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
 fid          | `id` of factor returned from enrollment             | URL        | String   | TRUE     |
-stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE
+stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
 
 
 ##### Request Example
@@ -2375,7 +2372,7 @@ curl -v -X POST \
 
 ##### Response from Poll for Verification Complete
 
-The following response example shows the SUCCESS state.
+The following response example shows the `SUCCESS` state.
 
 ##### Response Example
 {:.api .api-response .api-response-example}
@@ -2477,10 +2474,10 @@ Issues a [recovery token](#recovery-token) for a given user that can be used to 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter   | Description                                                                                            | Param Type | DataType                          | Required | Default | MaxLength
------------ | ------------------------------------------------------------------------------------------------------ | ---------- | --------------------------------- | -------- |-------- | ---------
-username    | User's non-qualified short-name (e.g. Dade) or unique fully-qualified login (e.g issac@example.org)   | Body       | String                            | TRUE     |         |
-relayState  | Optional state value that is persisted for the lifetime of the recovery transaction                    | Body       | String                            | FALSE    |         | 2048
+Parameter   | Description                                                                                                      | Param Type | DataType                          | Required | Default | MaxLength
+----------- | ---------------------------------------------------------------------------------------------------------------- | ---------- | --------------------------------- | -------- |-------- | ---------
+username    | User's non-qualified short-name (e.g. dade.murphy) or unique fully-qualified login (e.g dade.murphy@example.com) | Body       | String                            | TRUE     |         |
+relayState  | Optional state value that is persisted for the lifetime of the recovery transaction                              | Body       | String                            | FALSE    |         | 2048
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -2560,10 +2557,10 @@ Issues a [recovery token](#recovery-token) for a user that can be used to unlock
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter   | Description                                                                                            | Param Type | DataType                          | Required | Default | MaxLength
------------ | ------------------------------------------------------------------------------------------------------ | ---------- | --------------------------------- | -------- | ------- | ---------
-username    | User's non-qualified short-name (e.g. Dade) or unique fully-qualified login (e.g issac@example.org)   | Body       | String                            | TRUE     |         |
-relayState  | Optional state value that is persisted for the lifetime of the recovery transaction                    | Body       | String                            | FALSE    |         | 2048
+Parameter   | Description                                                                                                      | Param Type | DataType                          | Required | Default | MaxLength
+----------- | ---------------------------------------------------------------------------------------------------------------- | ---------- | --------------------------------- | -------- | ------- | ---------
+username    | User's non-qualified short-name (e.g. dade.murphy) or unique fully-qualified login (e.g dade.murphy@example.com) | Body       | String                            | TRUE     |         |
+relayState  | Optional state value that is persisted for the lifetime of the recovery transaction                              | Body       | String                            | FALSE    |         | 2048
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}

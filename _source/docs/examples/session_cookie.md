@@ -3,9 +3,6 @@ layout: docs_page
 title: Session Cookie
 ---
 
-* Will be replaced with the ToC
-{:toc .list-unstyled .toc}
-
 ## Overview
 
 Okta utilizes a non-persistent HTTP session cookie to provide access to your Okta organization and applications across web requests for an interactive user-agents such as a browser.  This document provides examples for programmatically retrieving and setting a session cookie for different deployment scenarios to provide SSO capabilities for custom web applications built on the Okta platform.

@@ -4,9 +4,6 @@ title: Add Multi-Factor Authentication to your App with the Okta Platform
 excerpt: An introduction to using Okta's Multi-Factor Authentication (MFA) API to add MFA to an existing application.
 ---
 
-* Will be replaced with the ToC
-{:toc .list-unstyled .toc}
-
 ## Introduction
 
 Application developers and organizations are increasingly

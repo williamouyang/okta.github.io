@@ -4,9 +4,6 @@ title: Apps
 redirect_from: "/docs/api/rest/apps.html"
 ---
 
-* Will be replaced with the ToC
-{:toc .list-unstyled .toc}
-
 ## Overview
 
 The Okta Application API provides operations to manage applications and/or assignments to users or groups for your organization.

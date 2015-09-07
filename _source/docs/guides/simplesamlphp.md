@@ -4,6 +4,8 @@ title: SimpleSAMLphp (PHP)
 support_email: developers@okta.com
 ---
 
+## Overview
+
 This guide describes how to use
 [SimpleSAMLphp](https://simplesamlphp.org/)
 to add support for Okta (via SAML) to applications written in
@@ -120,7 +122,7 @@ PHP, reconfiguring Apache, and creating some symbolic links.
    ~~~
    LoadModule php5_module libexec/apache2/libphp5.so
    ~~~
-   
+
    and change it to this:
 
    ~~~
@@ -261,7 +263,7 @@ test worked when you see a screen that looks like the one below:
         above:
         ![SimpleSAMLphp Example](/assets/img/simplesamlphp-example-okta-chiclet.png)
 
-You will know that your testing was successful if are able to get to the "Logged in" 
+You will know that your testing was successful if are able to get to the "Logged in"
 page pictured above using both "SP initated" and "IdP initated" login.
 
 Congratulations on getting Okta working with SimpleSAMLphp!
@@ -300,13 +302,13 @@ to work with an Okta organization and how to configure SimpleSAMLphp to work wit
 After you have your Okta organization working with the example
 PHP application, your next step will be to take the
 example code and move it to your production application. The specifics of how
-this works will be different depending on how your application is set up. 
-Pay special attention to the notes in the `index.php` file. 
-For example, on a production system, the contents of the `metadata_url_for` 
+this works will be different depending on how your application is set up.
+Pay special attention to the notes in the `index.php` file.
+For example, on a production system, the contents of the `metadata_url_for`
 array should not be hard coded, but should come from a dynamic datastore.
 
-If you want to learn more about SAML and what to consider when writing a 
-SAML implementation, Okta's in-depth 
+If you want to learn more about SAML and what to consider when writing a
+SAML implementation, Okta's in-depth
 [SAML guidance](http://developer.okta.com/docs/getting_started/saml_guidance.html)
 is a great place to learn more.
 

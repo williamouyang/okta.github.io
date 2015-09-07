@@ -3,9 +3,6 @@ layout: docs_page
 title: Schemas
 ---
 
-* Will be replaced with the ToC
-{:toc .list-unstyled .toc}
-
 ## Overview
 
 Okta's [Universal Directory](https://support.okta.com/articles/Knowledge_Article/About-Universal-Directory) allows administrators to define custom user profiles for Okta users and applications.  Okta has adopted a subset [JSON Schema Draft 4](https://tools.ietf.org/html/draft-zyp-json-schema-04) as the schema language to describe and validate extensible user profiles. [JSON Schema](http://json-schema.org/) is a lightweight declarative format for describing the structure, constraints, and validation of JSON documents.

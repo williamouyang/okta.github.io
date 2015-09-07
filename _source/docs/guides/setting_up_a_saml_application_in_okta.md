@@ -3,6 +3,8 @@ layout: docs_page
 title: Setting up a SAML application in Okta
 ---
 
+## Overview
+
 The first step in configuring an application to support SAML based Single Sign-On from Okta is to set up an application in Okta.
 
 In SAML terminology, what you will be doing doing here is configuring Okta (your

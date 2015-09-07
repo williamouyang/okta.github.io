@@ -4,9 +4,6 @@ title: Okta Expression Language
 redirect_from: "/docs/getting_started/okta_expression_lang.html"
 ---
 
-* Will be replaced with the ToC
-{:toc .list-unstyled .toc}
-
 ## Overview
 
 Expressions allow you to reference, transform and combine attributes before you store them on a user profile or before passing them to an application for authentication or provisioning.  For example, you might use a custom expression to create a username by stripping @company.com from an email address.  Or you might combine `firstName` and `lastName` attributes into a single `displayName` attribute.
@@ -142,15 +139,15 @@ Time.now  | (String timeZoneId, String format) | String      | Time.now() | 2015
 
 The following old style IDs are supported: GMT, WET, CET, MET, ECT, EET, MIT, HST, AST, PST, MST, PNT, CST, EST, IET, PRT, CNT, AGT, BET, ART, CAT, EAT, NET, PLT, IST, BST, VST, CTT, JST, ACT, AET, SST, NST.
 
-The following new style IDs are supported: UTC, WET, CET, CET, CET, EET, Pacific/Apia, Pacific/Honolulu, America/Anchorage, America/Los_Angeles, America/Denver, America/Phoenix, America/Chicago, 
-America/New_York, America/Indiana/Indianapolis, America/Puerto_Rico, America/St_Johns, America/Argentina/Buenos_Aires, America/Sao_Paulo, Africa/Cairo, 
-Africa/Harare, Africa/Addis_Ababa, Asia/Yerevan, Asia/Karachi, Asia/Kolkata, Asia/Dhaka, Asia/Ho_Chi_Minh, Asia/Shanghai, Asia/Tokyo, Australia/Darwin, 
+The following new style IDs are supported: UTC, WET, CET, CET, CET, EET, Pacific/Apia, Pacific/Honolulu, America/Anchorage, America/Los_Angeles, America/Denver, America/Phoenix, America/Chicago,
+America/New_York, America/Indiana/Indianapolis, America/Puerto_Rico, America/St_Johns, America/Argentina/Buenos_Aires, America/Sao_Paulo, Africa/Cairo,
+Africa/Harare, Africa/Addis_Ababa, Asia/Yerevan, Asia/Karachi, Asia/Kolkata, Asia/Dhaka, Asia/Ho_Chi_Minh, Asia/Shanghai, Asia/Tokyo, Australia/Darwin,
 Australia/Sydney, Pacific/Guadalcanal, Pacific/Auckland.
 
 ### Manager/Assistant Functions
 
-Function  | Description | Example 
---------- | ----------- | ------- 
+Function  | Description | Example
+--------- | ----------- | -------
 `getManagerUser(managerSource).$attribute` | Gets the manager's Okta user attribute values | getManagerUser("active_directory").firstName
 `getManagerAppUser(managerSource, attributeSource).$attribute` | Gets the manager's app user attribute values for the app user of any appinstance. | getManagerAppUser("active_directory","google").firstName
 `getAssistantUser(assistantSource).$attribute` | Gets the assistant's Okta user attribute values. | getAssistantUser("active_directory").firstName

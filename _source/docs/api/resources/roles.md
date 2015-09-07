@@ -3,9 +3,6 @@ layout: docs_page
 title: Admin Roles
 ---
 
-* Will be replaced with the ToC
-{:toc .list-unstyled .toc}
-
 ## Overview
 
 The Okta Administrator Roles API provides operations to manage administrative role assignments for a user.

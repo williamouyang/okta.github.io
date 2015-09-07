@@ -4,6 +4,8 @@ title: Okta Mobile Connect
 excerpt: Learn how to Single Sign-On enable your native mobile app.
 ---
 
+## Overview
+
 Okta Mobile Connect enables single sign-on for native mobile
 apps that support SAML. Once users have established a session in
 [Okta Mobile](https://itunes.apple.com/us/app/okta-mobile/id580709251){:target="_blank"},
