@@ -232,6 +232,10 @@ body {
 		text-decoration: underline;
 	}
 
+	a.btn {
+		text-decoration: none;
+	}
+
 	img {
 		display: block;
 		max-width: 100%;
@@ -249,7 +253,7 @@ body {
 	}
 
 	ol {
-		margin: 0 0 10px 20px;
+		margin: 0 0 10px 30px;
 		list-style: decimal;
 		img {
 			margin: inherit;
@@ -267,19 +271,23 @@ body {
 		line-height: 20px;
 	}
 
-	tr {
-		border-bottom: 1px dotted #999;
-	}
-
 	th {
-		font-size: 12px;
+		font-size: 13px;
 		text-align: left;
 		background: #eee;
 		padding: 5px;
-		font-style: italic;
 		font-weight: bold;
 		vertical-align: top;
 		word-break: normal;
+		background: #e1eff6;
+		color: #1b3b4f;
+	}
+
+	tr {
+		border-bottom: 1px dotted #999;
+		&:nth-child(even) {
+		    background-color: #F7FBFD;
+		}
 	}
 
 	input:focus {outline:0;}
@@ -324,23 +332,6 @@ body {
 		}
 	}
 }
-
-// OLD STYLE , Still in use
-#toc-title {
-	font-size: 14px;
-	font-weight: 700;
-	color: #456;
-	border: 0 none;
-	padding: 0;
-	margin: 0;
-	margin-bottom: 1em;
-	&:before {
-		font-family: fontawesome;
-		content: '\f02d';
-		margin-right: 5px;
-	}
-}
-
 
 .header-link {
 	position: relative;
@@ -644,11 +635,13 @@ h6:hover .header-link {
 	border-top-left-radius: 3px;
 }
 
+/* -------------------------- sidebar */
+
 #sidebar-wrapper {
 	overflow: auto;
 	h2 {
-		color: white;
-		font-size: 14px;
+		color: #7aa633;
+		font-size: 15px;
 		padding: 8px 10px 8px 30px;
 		text-transform: uppercase;
 		font-weight: 600;
@@ -659,105 +652,110 @@ h6:hover .header-link {
 	}
 }
 
-.sidebar-nav {
-	width: $sideBarWidth;
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	top: 0;
-	bottom: 0;
-}
-
-#gen-toc-container, .nav-title {
-	background-color: $oktaDarkBlue;
-}
-
-.nav-title li {
-	margin-bottom: 0;
-}
-
-.sidebar-nav ul {
-	padding-left: 0;
-	&.closed {
-		display: none;
-		background-color: $oktaDarkBlue !important;
-	}
-	li {
-		list-style: none;
-		margin-bottom: 0px;
-	}
-}
-
-
-.sidebar-nav h2 {
-	color: #7aa633;
-	font-size: 18px;
-	font-weight: 500;
-	cursor: pointer;
-	margin-bottom: 5px;
-}
-.sidebar-nav li a {
-	display: block;
-	text-decoration: none;
-	color: white;
-	padding: 4px 10px 4px 30px;
-	&:hover {
-		text-decoration: none;
-		color: #fff;
-		background: #00131f
-	}
-}
-
-
-.sidebar-nav li ul li a {
-	display:block;
-	text-decoration:none;
-	color:#cccccc!important;
-	padding:4px 10px 4px 55px!important
-}
-
-.sidebar-nav li ul li.active a {
-	color:white!important;
-	background:#0c87c9!important
-}
-
-.sidebar-nav li.active {
-	background:#0c87c9;
-
-	a.active:hover {
-		background: #0c87c9
-	}
-}
-
-#gen-toc-container .sidebar-nav li a {
-	color:white;
-	font-size:16px;
-	padding-left:40px
-}
-
-.sidebar-nav li a:active,.sidebar-nav li a:focus {
-	text-decoration:none
-}
-
-.sidebar-nav>.sidebar-brand {
-	height:65px;
-	font-size:18px;
-	line-height:60px
-}
-
-.sidebar-nav>.sidebar-brand a {
-	color:#999999
-}
-
-.sidebar-nav>.sidebar-brand a:hover {
-	color:#fff
-}
-
 .docs-sidebar-block {
 	max-height: 100%;
 	overflow-y: auto;
 	padding-bottom: 170px;
 }
+
+.sidebar-nav {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	top: 0;
+	bottom: 0;
+
+	h2 {
+		color: #7aa633;
+		font-size: 18px;
+		font-weight: 500;
+		cursor: pointer;
+		margin-bottom: 5px;
+	}
+
+	ul {
+		padding-left: 0;
+		&.closed {
+			display: none;
+			background-color: $oktaDarkBlue !important;
+		}
+		li {
+			list-style: none;
+			margin-bottom: 0px;
+		}
+	}
+
+	li {
+		a {
+			display: block;
+			text-decoration: none;
+			color: white;
+			padding: 4px 10px 4px 30px;
+			&:hover {
+				text-decoration: none;
+				color: #fff;
+				background: #00131f
+			}
+			&:active,
+			&:focus {
+				text-decoration:none
+			}
+		}
+
+		ul li {
+			a {
+				display:block;
+				text-decoration:none;
+				color:#cccccc!important;
+				padding:4px 10px 4px 55px!important
+			}
+			&.active {
+				a {
+					color:white!important;
+					background:#0c87c9!important
+				}
+			}
+		}
+
+		>.sidebar-brand {
+			height:65px;
+			font-size:18px;
+			line-height:60px;
+
+			a {
+				color:#999999;
+				&:hover {
+					color:#fff
+				}
+			}
+		}
+
+		&.nav-title li {
+			margin-bottom: 0;
+		}
+
+		&.active {
+			background:#0c87c9;
+			> a:hover {
+				background: #0C87C9;
+				color: white;
+			}
+		}
+	}
+}
+
+#gen-toc-container {
+	background-color: $oktaDarkBlue;
+	.nav-title {
+		background-color: $oktaDarkBlue;
+	}
+	.sidebar-nav li a {
+		color:white;
+		font-size:16px;
+		padding-left:40px
+	}
+}
+
 
 #toc_current_doc {
 	background-color: #00131f;
@@ -1097,6 +1095,7 @@ body {
 			width: 60px;
 			background-color: white;
 			height: 60px;
+			overflow: hidden;
 		}
 		#sticky-nav {
 			left: 60px;
@@ -1106,7 +1105,6 @@ body {
 				}
 			}
 		}
-
 		.section--with-sidebar {
 			border-left: 0;
 		}
