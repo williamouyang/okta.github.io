@@ -4,9 +4,9 @@
 <!--[if IE 8 ]>    <html class="ie8 no-flexbox"> <![endif]-->
 <!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
 <!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
-<!--[if (gt IE 10)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern"> <!--<![endif]-->
 <head>
-	
+
 	<head>
 
 	<meta charset="utf-8">
@@ -47,9 +47,15 @@
 	</script>
 </head>
 
-	
-<body>
-	
+
+
+
+  
+  
+  
+
+<body id="docs">
+
 	<header class="site-header">
 	<div class="wrap">
 
@@ -116,11 +122,11 @@
 })(window,document,'script','dataLayer','GTM-P6JKVN');</script>
 <!-- End Google Tag Manager -->
 
-	
+
 	<div class="page-content">
+
 		
-		
-			
+
 		
 
 <section class="section--with-sidebar docs-page">
@@ -142,7 +148,7 @@
 
 	</aside>
 
-	<div id="docs-body" class="body docs-body">
+	<div id="docs-body" class="docs-body">
 
 		<nav id="sticky-nav" class="sticky-nav--top">
 
@@ -172,33 +178,7 @@
 		</header>
 		
 
-		<ul class="list-unstyled toc" id="markdown-toc">
-  <li><a href="#overview">Overview</a></li>
-  <li><a href="#referencing-user-attributes">Referencing User Attributes</a>    <ul>
-      <li><a href="#okta-user-profile">Okta user profile</a></li>
-      <li><a href="#application-user-profile">Application user profile</a></li>
-    </ul>
-  </li>
-  <li><a href="#referencing-application-and-organization-properties">Referencing Application and Organization Properties</a>    <ul>
-      <li><a href="#application-properties">Application properties</a></li>
-      <li><a href="#organization-properties">Organization properties</a></li>
-    </ul>
-  </li>
-  <li><a href="#functions">Functions</a>    <ul>
-      <li><a href="#string-functions">String Functions</a></li>
-      <li><a href="#array-functions">Array Functions</a></li>
-      <li><a href="#conversion-functions">Conversion Functions</a></li>
-      <li><a href="#group-functions">Group Functions</a></li>
-      <li><a href="#time-functions">Time Functions</a></li>
-      <li><a href="#managerassistant-functions">Manager/Assistant Functions</a></li>
-      <li><a href="#directory-and-workday-functions">Directory and Workday Functions</a></li>
-    </ul>
-  </li>
-  <li><a href="#constants-and-operators">Constants and Operators</a></li>
-  <li><a href="#popular-expressions">Popular Expressions</a></li>
-</ul>
-
-<h2 id="overview">Overview</h2>
+		<h2 id="overview">Overview</h2>
 
 <p>Expressions allow you to reference, transform and combine attributes before you store them on a user profile or before passing them to an application for authentication or provisioning.  For example, you might use a custom expression to create a username by stripping @company.com from an email address.  Or you might combine <code class="highlighter-rouge">firstName</code> and <code class="highlighter-rouge">lastName</code> attributes into a single <code class="highlighter-rouge">displayName</code> attribute.</p>
 
@@ -700,9 +680,9 @@ integer type range limitations when converting from a number to an integer with 
 
 <p>The following old style IDs are supported: GMT, WET, CET, MET, ECT, EET, MIT, HST, AST, PST, MST, PNT, CST, EST, IET, PRT, CNT, AGT, BET, ART, CAT, EAT, NET, PLT, IST, BST, VST, CTT, JST, ACT, AET, SST, NST.</p>
 
-<p>The following new style IDs are supported: UTC, WET, CET, CET, CET, EET, Pacific/Apia, Pacific/Honolulu, America/Anchorage, America/Los_Angeles, America/Denver, America/Phoenix, America/Chicago, 
-America/New_York, America/Indiana/Indianapolis, America/Puerto_Rico, America/St_Johns, America/Argentina/Buenos_Aires, America/Sao_Paulo, Africa/Cairo, 
-Africa/Harare, Africa/Addis_Ababa, Asia/Yerevan, Asia/Karachi, Asia/Kolkata, Asia/Dhaka, Asia/Ho_Chi_Minh, Asia/Shanghai, Asia/Tokyo, Australia/Darwin, 
+<p>The following new style IDs are supported: UTC, WET, CET, CET, CET, EET, Pacific/Apia, Pacific/Honolulu, America/Anchorage, America/Los_Angeles, America/Denver, America/Phoenix, America/Chicago,
+America/New_York, America/Indiana/Indianapolis, America/Puerto_Rico, America/St_Johns, America/Argentina/Buenos_Aires, America/Sao_Paulo, Africa/Cairo,
+Africa/Harare, Africa/Addis_Ababa, Asia/Yerevan, Asia/Karachi, Asia/Kolkata, Asia/Dhaka, Asia/Ho_Chi_Minh, Asia/Shanghai, Asia/Tokyo, Australia/Darwin,
 Australia/Sydney, Pacific/Guadalcanal, Pacific/Auckland.</p>
 
 <h3 id="managerassistant-functions">Manager/Assistant Functions</h3>
@@ -958,10 +938,13 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
 </footer>
 
 </section>
+
+
 		
-		
-			
-	</div>	
-</body>
+
+	</div>
+
 	
+</body>
+
 </html>

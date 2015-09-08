@@ -4,9 +4,9 @@
 <!--[if IE 8 ]>    <html class="ie8 no-flexbox"> <![endif]-->
 <!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
 <!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
-<!--[if (gt IE 10)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern"> <!--<![endif]-->
 <head>
-	
+
 	<head>
 
 	<meta charset="utf-8">
@@ -47,9 +47,15 @@
 	</script>
 </head>
 
-	
-<body>
-	
+
+
+
+  
+  
+  
+
+<body id="docs">
+
 	<header class="site-header">
 	<div class="wrap">
 
@@ -116,11 +122,11 @@
 })(window,document,'script','dataLayer','GTM-P6JKVN');</script>
 <!-- End Google Tag Manager -->
 
-	
+
 	<div class="page-content">
+
 		
-		
-			
+
 		
 
 <section class="section--with-sidebar docs-page">
@@ -142,7 +148,7 @@
 
 	</aside>
 
-	<div id="docs-body" class="body docs-body">
+	<div id="docs-body" class="docs-body">
 
 		<nav id="sticky-nav" class="sticky-nav--top">
 
@@ -172,56 +178,7 @@
 		</header>
 		
 
-		<ul class="list-unstyled toc" id="markdown-toc">
-  <li><a href="#overview">Overview</a></li>
-  <li><a href="#policies">Policies</a>    <ul>
-      <li><a href="#policy-model-and-defaults">Policy Model and Defaults</a>        <ul>
-          <li><a href="#default-policies">Default Policies</a></li>
-          <li><a href="#policy-model">Policy Model</a></li>
-          <li><a href="#policy-object">Policy Object</a></li>
-          <li><a href="#people-object">People Object</a></li>
-          <li><a href="#group-condition-object">Group Condition Object</a></li>
-          <li><a href="#user-condition-object">User Condition Object</a></li>
-          <li><a href="#links-object">Links Object</a></li>
-        </ul>
-      </li>
-      <li><a href="#policy-operations">Policy Operations</a>        <ul>
-          <li><a href="#get-all-policies-by-type">Get All Policies by Type</a></li>
-          <li><a href="#get-a-policy">Get a Policy</a></li>
-          <li><a href="#create-a-policy">Create a Policy</a></li>
-          <li><a href="#update-a-policy">Update a Policy</a></li>
-          <li><a href="#response-parameters">Response Parameters</a></li>
-          <li><a href="#delete-policy">Delete Policy</a></li>
-          <li><a href="#response-parameters-1">Response Parameters</a></li>
-          <li><a href="#activate-a-policy">Activate a Policy</a></li>
-          <li><a href="#deactivate-a-policy">Deactivate a Policy</a></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><a href="#rules">Rules</a>    <ul>
-      <li><a href="#rules-model-and-defaults">Rules Model and Defaults</a>        <ul>
-          <li><a href="#default-rules">Default Rules</a></li>
-          <li><a href="#rules-object">Rules Object</a></li>
-          <li><a href="#conditions">Conditions</a></li>
-          <li><a href="#actions">Actions</a></li>
-        </ul>
-      </li>
-      <li><a href="#rules-operations">Rules Operations</a>        <ul>
-          <li><a href="#get-policy-rules">Get Policy Rules</a></li>
-          <li><a href="#get-a-rule">Get a Rule</a></li>
-          <li><a href="#create-rule">Create Rule</a></li>
-          <li><a href="#update-a-rule">Update a Rule</a></li>
-          <li><a href="#activate-a-rule">Activate a Rule</a></li>
-          <li><a href="#deactivate-a-rule">Deactivate a Rule</a></li>
-          <li><a href="#delete-a-rule">Delete a Rule</a></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<h1 id="overview">Overview</h1>
+		<h1 id="overview">Overview</h1>
 
 <p>The Okta Policy API enables you to peform policy and rule operations. These operation apply to various policies including Okta Signon.</p>
 
@@ -251,14 +208,14 @@
 
 <h3 id="default-policies">Default Policies</h3>
 
-<p>There is always a default policy created for each type of policy. The default policy applies to any users for whom other policies in the org do not apply. This ensures that there is always a policy to apply to a user in all situations. </p>
+<p>There is always a default policy created for each type of policy. The default policy applies to any users for whom other policies in the org do not apply. This ensures that there is always a policy to apply to a user in all situations.</p>
 
 <ul>
   <li>
     <p>A default policy is required and cannot be deleted.</p>
   </li>
   <li>
-    <p>The default policy is always the last policy in the priority order. Any added policies of this type have higher priority than the default policy. </p>
+    <p>The default policy is always the last policy in the priority order. Any added policies of this type have higher priority than the default policy.</p>
   </li>
   <li>
     <p>The default policy always has one default rule that cannot be deleted. It is always the last rule in the priority order. If you add rules to the default policy, they have a higher priority than the default rule. For information on default rules, see <a href="#rules-model-and-defaults">Rules Model and Defaults</a>.</p>
@@ -459,7 +416,7 @@ the action in Rule A is taken, and Rule B is not evaluated.</p>
 
 <p>Specifies link relations (See <a href="http://tools.ietf.org/html/rfc5988">Web Linking</a>) available for the current policy.  The Links Object is used for dynamic discovery of related resources.  The Links Object is <strong>read-only</strong>.</p>
 
-<p>Specified link </p>
+<p>Specified link</p>
 
 <table>
   <thead>
@@ -1060,7 +1017,7 @@ the action in Rule A is taken, and Rule B is not evaluated.</p>
 
 <p><span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/{policyId}/rules</span></p>
 
-<p>Retrieves all rules for a specified policy. </p>
+<p>Retrieves all rules for a specified policy.</p>
 
 <h4 id="request-parameters-7">Request Parameters</h4>
 
@@ -1208,7 +1165,7 @@ the action in Rule A is taken, and Rule B is not evaluated.</p>
             </span><span class="nt">"factorLifetime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w"> 
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
 
@@ -1216,7 +1173,7 @@ the action in Rule A is taken, and Rule B is not evaluated.</p>
 
 <p><span class="api-uri-template api-uri-put"><span class="api-label">PUT </span> /api/v1/policies/{policyId}/rules/{ruleId}</span></p>
 
-<p>Updates the specified rule for the specified policy. </p>
+<p>Updates the specified rule for the specified policy.</p>
 
 <h4 id="request-parameters-10">Request Parameters</h4>
 
@@ -1224,7 +1181,7 @@ the action in Rule A is taken, and Rule B is not evaluated.</p>
 
 <h5 class="api api-resquest api-request-example" id="request-example-5">Request Example</h5>
 
-<p><strong>Note:</strong> This is a strict PUT. Any missing item is set to its default value. For example if <code class="highlighter-rouge">priorityOrder</code> is missing, the item moves to the lowest priority order in the policy. </p>
+<p><strong>Note:</strong> This is a strict PUT. Any missing item is set to its default value. For example if <code class="highlighter-rouge">priorityOrder</code> is missing, the item moves to the lowest priority order in the policy.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mySignOnPolicyRule"</span><span class="p">,</span><span class="w">
@@ -1292,7 +1249,7 @@ the action in Rule A is taken, and Rule B is not evaluated.</p>
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/{policyId}/rules/{ruleId}/lifecycle/activate</span></p>
 
-<p>Activates the specified rule for the specified policy. </p>
+<p>Activates the specified rule for the specified policy.</p>
 
 <h4 id="request-parameters-11">Request Parameters</h4>
 
@@ -1306,7 +1263,7 @@ the action in Rule A is taken, and Rule B is not evaluated.</p>
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/{policyId}/rules/{ruleId}/lifecycle/deactivate</span></p>
 
-<p>Deactivates the specified rule for the specified policy. </p>
+<p>Deactivates the specified rule for the specified policy.</p>
 
 <h4 id="request-parameters-12">Request Parameters</h4>
 
@@ -1320,7 +1277,7 @@ the action in Rule A is taken, and Rule B is not evaluated.</p>
 
 <p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE </span> /api/v1/policies/{policyId}/rules/{ruleId}</span></p>
 
-<p>Deletes the specified rule for the specified policy. </p>
+<p>Deletes the specified rule for the specified policy.</p>
 
 <h4 id="request-parameters-13">Request Parameters</h4>
 
@@ -1329,7 +1286,6 @@ the action in Rule A is taken, and Rule B is not evaluated.</p>
 <h4 id="response-parameters-7">Response Parameters</h4>
 
 <p>None. Status 204 No Content is returned when the deletion is successful.</p>
-
 
 	</div>
 	
@@ -1383,10 +1339,13 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
 </footer>
 
 </section>
+
+
 		
-		
-			
-	</div>	
-</body>
+
+	</div>
+
 	
+</body>
+
 </html>

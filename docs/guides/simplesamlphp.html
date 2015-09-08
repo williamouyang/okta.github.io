@@ -4,9 +4,9 @@
 <!--[if IE 8 ]>    <html class="ie8 no-flexbox"> <![endif]-->
 <!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
 <!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
-<!--[if (gt IE 10)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern"> <!--<![endif]-->
 <head>
-	
+
 	<head>
 
 	<meta charset="utf-8">
@@ -47,9 +47,15 @@
 	</script>
 </head>
 
-	
-<body>
-	
+
+
+
+  
+  
+  
+
+<body id="docs">
+
 	<header class="site-header">
 	<div class="wrap">
 
@@ -116,11 +122,11 @@
 })(window,document,'script','dataLayer','GTM-P6JKVN');</script>
 <!-- End Google Tag Manager -->
 
-	
+
 	<div class="page-content">
+
 		
-		
-			
+
 		
 
 <section class="section--with-sidebar docs-page">
@@ -142,7 +148,7 @@
 
 	</aside>
 
-	<div id="docs-body" class="body docs-body">
+	<div id="docs-body" class="docs-body">
 
 		<nav id="sticky-nav" class="sticky-nav--top">
 
@@ -172,7 +178,9 @@
 		</header>
 		
 
-		<p>This guide describes how to use
+		<h2 id="overview">Overview</h2>
+
+<p>This guide describes how to use
 <a href="https://simplesamlphp.org/">SimpleSAMLphp</a>
 to add support for Okta (via SAML) to applications written in
 PHP.
@@ -194,6 +202,7 @@ command line and editing text files.</p>
 section titled “Configuring SimpleSAMLphp to work with Okta.”</p>
 
 <ul class="list-unstyled toc" id="markdown-toc">
+  <li><a href="#overview">Overview</a></li>
   <li><a href="#configuring-okta-to-work-with-simplesamlphp">Configuring Okta to work with SimpleSAMLphp</a></li>
   <li><a href="#configuring-simplesamlphp-to-work-with-okta">Configuring SimpleSAMLphp to work with Okta</a>    <ul>
       <li><a href="#notes-for-installing-simplesamlphp-on-mac-os-x">Notes for installing SimpleSAMLphp on Mac OS X</a></li>
@@ -483,7 +492,7 @@ above:
   </li>
 </ol>
 
-<p>You will know that your testing was successful if are able to get to the “Logged in” 
+<p>You will know that your testing was successful if are able to get to the “Logged in”
 page pictured above using both “SP initated” and “IdP initated” login.</p>
 
 <p>Congratulations on getting Okta working with SimpleSAMLphp!</p>
@@ -522,13 +531,13 @@ to work with an Okta organization and how to configure SimpleSAMLphp to work wit
 <p>After you have your Okta organization working with the example
 PHP application, your next step will be to take the
 example code and move it to your production application. The specifics of how
-this works will be different depending on how your application is set up. 
-Pay special attention to the notes in the <code class="highlighter-rouge">index.php</code> file. 
-For example, on a production system, the contents of the <code class="highlighter-rouge">metadata_url_for</code> 
+this works will be different depending on how your application is set up.
+Pay special attention to the notes in the <code class="highlighter-rouge">index.php</code> file.
+For example, on a production system, the contents of the <code class="highlighter-rouge">metadata_url_for</code>
 array should not be hard coded, but should come from a dynamic datastore.</p>
 
-<p>If you want to learn more about SAML and what to consider when writing a 
-SAML implementation, Okta’s in-depth 
+<p>If you want to learn more about SAML and what to consider when writing a
+SAML implementation, Okta’s in-depth
 <a href="http://developer.okta.com/docs/getting_started/saml_guidance.html">SAML guidance</a>
 is a great place to learn more.</p>
 
@@ -587,10 +596,13 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
 </footer>
 
 </section>
+
+
 		
-		
-			
-	</div>	
-</body>
+
+	</div>
+
 	
+</body>
+
 </html>

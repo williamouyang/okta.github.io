@@ -1,4 +1,7 @@
 $(function() {
+
+	var fixedNavHeight = 180;
+
 	$('.closed').hide();
 	var offset = $('.site-header').height() + $('#sticky-nav').height() + 40;
 	$('body').scrollspy({ target: '#myScrollspy', offset:  offset });
@@ -29,32 +32,32 @@ $(function() {
 			$('.toggled').removeClass('toggled');
 	});
 
-	var anchorForId = function (id) {
-		var anchor = document.createElement("a");
-		anchor.className = "header-link";
-		anchor.href      = "#" + id;
-		anchor.innerHTML = "<i class=\"fa fa-link\"></i>";
-		return anchor;
-	};
+	var linkify = function() {
+		var anchorForId = function (id) {
+			var anchor = document.createElement("a");
+			anchor.className = "header-link";
+			anchor.href      = "#" + id;
+			anchor.innerHTML = "<i class=\"fa fa-link\"></i>";
+			return anchor;
+		};
 
-	var linkifyAnchors = function (level, container) {
+		var linkifyAnchors = function (level, container) {
 
-		var headers = container.getElementsByTagName("h" + level);
-		for (var h = 0; h < headers.length; h++) {
-			var header = headers[h];
+			var headers = container.getElementsByTagName("h" + level);
+			for (var h = 0; h < headers.length; h++) {
+				var header = headers[h];
 
-			if (typeof header.id !== "undefined" && header.id !== "" && header.className.indexOf("no-link") !== 0) {
-				header.appendChild(anchorForId(header.id), header);
+				if (typeof header.id !== "undefined" && header.id !== "" && header.className.indexOf("no-link") !== 0) {
+					header.appendChild(anchorForId(header.id), header);
+				}
 			}
+		};
+
+		var body = document.getElementById('docs-body');
+		for (var level = 1; level <= 6; level++) {
+			linkifyAnchors(level, body);
 		}
-	};
-
-	var body = document.getElementById('docs-body');
-	for (var level = 1; level <= 6; level++) {
-		linkifyAnchors(level, body);
-	}
-
-	var fixedNavHeight = 180;
+	}();
 
 	$('a[href*=#]:not([href=#])').click(function() {
 		if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
@@ -79,7 +82,6 @@ $(function() {
 	var scrolled = false,
 	$docsBody = $('body'),
 	$scroller = $('#scroll-top-button');
-
 
 	$(window).scroll(function() {
 		scrolled = true;
@@ -141,6 +143,7 @@ $(function() {
 	$('.toggle-menu').click(function(e){
 		e.preventDefault();
 		$('body').toggleClass('toggled');
+		$('#sidebar-wrapper-aside').scrollTop(0);
 	});
 
 	$('#toc_current_doc').click(function(e){
@@ -154,10 +157,14 @@ $(function() {
 	$(document).ready(function() {
 		$('#gen-toc-container .nav').toggleClass('hide');
 		$('#toc_current_doc').toggleClass('clicked');
-	});
-
-	// Highlight subnav item on click
-	$('#gen-toc-container .sidebar-nav li a').click(function() {
-		$(this).toggleClass('active');
+		// Scroll to hash
+		if (window.location.hash !== '') {
+			var target = $(window.location.hash);
+			if (target.length) {
+				setTimeout(function() {
+					$('body').scrollTop(target.offset().top - fixedNavHeight);
+				}, 50);
+			}
+		}
 	});
 });

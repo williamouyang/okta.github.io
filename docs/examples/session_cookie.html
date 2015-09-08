@@ -4,9 +4,9 @@
 <!--[if IE 8 ]>    <html class="ie8 no-flexbox"> <![endif]-->
 <!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
 <!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
-<!--[if (gt IE 10)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern"> <!--<![endif]-->
 <head>
-	
+
 	<head>
 
 	<meta charset="utf-8">
@@ -47,9 +47,15 @@
 	</script>
 </head>
 
-	
-<body>
-	
+
+
+
+  
+  
+  
+
+<body id="docs">
+
 	<header class="site-header">
 	<div class="wrap">
 
@@ -116,11 +122,11 @@
 })(window,document,'script','dataLayer','GTM-P6JKVN');</script>
 <!-- End Google Tag Manager -->
 
-	
+
 	<div class="page-content">
+
 		
-		
-			
+
 		
 
 <section class="section--with-sidebar docs-page">
@@ -142,7 +148,7 @@
 
 	</aside>
 
-	<div id="docs-body" class="body docs-body">
+	<div id="docs-body" class="docs-body">
 
 		<nav id="sticky-nav" class="sticky-nav--top">
 
@@ -172,28 +178,7 @@
 		</header>
 		
 
-		<ul class="list-unstyled toc" id="markdown-toc">
-  <li><a href="#overview">Overview</a></li>
-  <li><a href="#retrieving-a-session-cookie-by-visiting-a-session-redirect-link">Retrieving a session cookie by visiting a session redirect link</a>    <ul>
-      <li><a href="#validate-credentials--retrieve-a-one-time-token">Validate credentials &amp; retrieve a one-time token</a></li>
-      <li><a href="#visit-session-redirect-url-with-the-one-time-token">Visit session redirect URL with the one-time token</a></li>
-    </ul>
-  </li>
-  <li><a href="#retrieving-a-session-cookie-by-visiting-an-application-embed-link">Retrieving a session cookie by visiting an application embed link</a>    <ul>
-      <li><a href="#validate-credentials--retrieve-a-one-time-token-1">Validate credentials &amp; retrieve a one-time token</a></li>
-      <li><a href="#visit-an-embed-link-with-the-one-time-token">Visit an embed link with the one-time token</a></li>
-      <li><a href="#initiate-a-saml-sso-with-the-one-time-token">Initiate a SAML SSO with the one-time token</a></li>
-      <li><a href="#initiate-a-ws-federation-sso-with-the-one-time-token">Initiate a WS-Federation SSO with the one-time token</a></li>
-    </ul>
-  </li>
-  <li><a href="#retrieving-a-session-cookie-with-a-hidden-image">Retrieving a session cookie with a hidden image</a>    <ul>
-      <li><a href="#validate-credentials--retrieve-a-session-cookie-image-url">Validate credentials &amp; retrieve a session cookie image URL</a></li>
-      <li><a href="#add-image-tag-with-session-cookie-image-url">Add image tag with session cookie image URL</a></li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="overview">Overview</h2>
+		<h2 id="overview">Overview</h2>
 
 <p>Okta utilizes a non-persistent HTTP session cookie to provide access to your Okta organization and applications across web requests for an interactive user-agents such as a browser.  This document provides examples for programmatically retrieving and setting a session cookie for different deployment scenarios to provide SSO capabilities for custom web applications built on the Okta platform.</p>
 
@@ -490,10 +475,13 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
 </footer>
 
 </section>
+
+
 		
-		
-			
-	</div>	
-</body>
+
+	</div>
+
 	
+</body>
+
 </html>

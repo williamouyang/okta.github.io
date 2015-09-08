@@ -4,9 +4,9 @@
 <!--[if IE 8 ]>    <html class="ie8 no-flexbox"> <![endif]-->
 <!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
 <!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
-<!--[if (gt IE 10)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern"> <!--<![endif]-->
 <head>
-	
+
 	<head>
 
 	<meta charset="utf-8">
@@ -47,9 +47,15 @@
 	</script>
 </head>
 
-	
-<body>
-	
+
+
+
+  
+  
+  
+
+<body id="docs">
+
 	<header class="site-header">
 	<div class="wrap">
 
@@ -116,11 +122,11 @@
 })(window,document,'script','dataLayer','GTM-P6JKVN');</script>
 <!-- End Google Tag Manager -->
 
-	
+
 	<div class="page-content">
+
 		
-		
-			
+
 		
 
 <section class="section--with-sidebar docs-page">
@@ -142,7 +148,7 @@
 
 	</aside>
 
-	<div id="docs-body" class="body docs-body">
+	<div id="docs-body" class="docs-body">
 
 		<nav id="sticky-nav" class="sticky-nav--top">
 
@@ -172,16 +178,7 @@
 		</header>
 		
 
-		<ul class="list-unstyled toc" id="markdown-toc">
-  <li><a href="#overview">Overview</a></li>
-  <li><a href="#api-support">API Support</a></li>
-  <li><a href="#browser-support">Browser Support</a></li>
-  <li><a href="#granting-cross-origin-access-to-websites">Granting Cross-Origin Access to Websites</a></li>
-  <li><a href="#testing">Testing</a></li>
-  <li><a href="#additional-resources">Additional Resources</a></li>
-</ul>
-
-<h2 id="overview">Overview</h2>
+		<h2 id="overview">Overview</h2>
 
 <p><a href="http://en.wikipedia.org/wiki/Cross-Origin_Resource_Sharing">Cross-Origin Resource Sharing (CORS)</a> is a mechanism that allows a web page to make an AJAX call using <a href="http://en.wikipedia.org/wiki/XMLHttpRequest">XMLHttpRequest (XHR)</a> to a domain that is  different from the one from where the script was loaded.  Such “cross-domain” requests would otherwise be forbidden by web browsers, per the <a href="http://en.wikipedia.org/wiki/Same_origin_policy">same origin security policy</a>.  CORS defines a <a href="http://www.w3.org/TR/cors/">standardized</a> way in which the browser and the server can interact to determine whether or not to allow the cross-origin request</p>
 
@@ -324,7 +321,7 @@
 
 <div class="highlighter-rouge"><pre class="highlight"><code>SEC7118: XMLHttpRequest for https://your-domain.okta.com/api/v1/users/me required Cross Origin Resource Sharing (CORS).
 
-SEC7120: Origin https://your-domain.okta.com not found in Access-Control-Allow-Origin header. 
+SEC7120: Origin https://your-domain.okta.com not found in Access-Control-Allow-Origin header.
 
 SCRIPT7002: XMLHttpRequest: Network Error 0x80070005, Access is denied.
 </code></pre>
@@ -461,10 +458,13 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
 </footer>
 
 </section>
+
+
 		
-		
-			
-	</div>	
-</body>
+
+	</div>
+
 	
+</body>
+
 </html>

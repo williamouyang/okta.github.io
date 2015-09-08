@@ -4,9 +4,9 @@
 <!--[if IE 8 ]>    <html class="ie8 no-flexbox"> <![endif]-->
 <!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
 <!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
-<!--[if (gt IE 10)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern"> <!--<![endif]-->
 <head>
-	
+
 	<head>
 
 	<meta charset="utf-8">
@@ -47,9 +47,15 @@
 	</script>
 </head>
 
-	
-<body>
-	
+
+
+
+  
+  
+  
+
+<body id="docs">
+
 	<header class="site-header">
 	<div class="wrap">
 
@@ -116,11 +122,11 @@
 })(window,document,'script','dataLayer','GTM-P6JKVN');</script>
 <!-- End Google Tag Manager -->
 
-	
+
 	<div class="page-content">
+
 		
-		
-			
+
 		
 
 <section class="section--with-sidebar docs-page">
@@ -142,7 +148,7 @@
 
 	</aside>
 
-	<div id="docs-body" class="body docs-body">
+	<div id="docs-body" class="docs-body">
 
 		<nav id="sticky-nav" class="sticky-nav--top">
 
@@ -172,30 +178,7 @@
 		</header>
 		
 
-		<ul class="list-unstyled toc" id="markdown-toc">
-  <li><a href="#introduction">Introduction</a></li>
-  <li><a href="#authentication">Authentication</a></li>
-  <li><a href="#federated-identity">Federated Identity</a></li>
-  <li><a href="#planning-for-saml">Planning for SAML</a></li>
-  <li><a href="#planning-checklist">Planning Checklist</a>    <ul>
-      <li><a href="#understanding-the-role-of-a-service-provider">Understanding the role of a Service Provider</a></li>
-      <li><a href="#single-idp-vs-multiple-idps">Single IDP vs Multiple IDPs</a></li>
-      <li><a href="#understanding-sp-initiated-login-flow">Understanding SP-initiated Login Flow</a></li>
-      <li><a href="#exposing-saml-configuration-in-sp">Exposing SAML configuration in SP</a></li>
-      <li><a href="#enabling-saml-for-everyone-vs-a-subset-of-users">Enabling SAML for everyone vs a subset of users</a></li>
-      <li><a href="#implementing-a-backdoor">Implementing a “backdoor”</a></li>
-    </ul>
-  </li>
-  <li><a href="#saml-for-mobile-native-apps">SAML for Mobile Native Apps</a></li>
-  <li><a href="#testing-saml">Testing SAML</a></li>
-  <li><a href="#saml-toolkits">SAML Toolkits</a></li>
-  <li><a href="#reference">Reference</a>    <ul>
-      <li><a href="#saml-20">SAML 2.0</a></li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="introduction">Introduction</h2>
+		<h2 id="introduction">Introduction</h2>
 
 <p>Traditionally, enterprise applications are deployed and run within the company network.  To obtain information about users such as user profile and group information, many of these applications are built to integrate with corporate directories such as Microsoft Active Directory.  More importantly, a user’s credentials are typically stored and validated using the directory.  For example, if you use SharePoint and Exchange that are running on premises, your login credentials are your Active Directory credentials.</p>
 
@@ -386,7 +369,6 @@ Even in cases where the intent is to have all the users of a particular tenant t
   <li><a href="http://docs.oasis-open.org/security/saml/v2.0/saml-profiles-2.0-os.pdf">Profiles for the OASIS Security Assertion Markup Language (SAML) V2.0</a></li>
 </ul>
 
-
 	</div>
 	
 <!-- Remarketing tag -->
@@ -439,10 +421,13 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
 </footer>
 
 </section>
+
+
 		
-		
-			
-	</div>	
-</body>
+
+	</div>
+
 	
+</body>
+
 </html>
