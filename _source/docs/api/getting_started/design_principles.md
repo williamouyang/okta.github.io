@@ -123,7 +123,7 @@ Pagination links are included in the [Link header](http://tools.ietf.org/html/rf
 
 ~~~ http
 HTTP/1.1 200 OK
-Link: <https://yoursubdomain.okta.com/api/v1/users?after=00ubfjQEMYBLRUWIEDKK; rel="next",
+Link: <https://yoursubdomain.okta.com/api/v1/users?after=00ubfjQEMYBLRUWIEDKK>; rel="next",
   <https://yoursubdomain.okta.com/api/v1/users?after=00ub4tTFYKXCCZJSGFKM>; rel="self"
 ~~~
 
