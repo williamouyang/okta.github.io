@@ -4,6 +4,8 @@ title: Okta Sign-In Widget
 excerpt: Easily add Okta capabilities to your website.
 ---
 
+> This widget is currently in **Early Access (EA)** status.
+
 ![Screenshot of basic Okta Sign-In Widget](/assets/img/okta-signin.png)
 
 # Introduction
@@ -53,7 +55,7 @@ Another feature of the Okta Sign-In Widget is notifying users when their passwor
 and prompting them to update their password before allowing them to
 log in.
 
-![img](/assets/img/okta-signin-password-expired.png)
+![Screenshot of Okta Sign-In Widget password expired dialog](/assets/img/okta-signin-password-expired.png)
 
 ## Validation and error handling
 
@@ -61,7 +63,7 @@ Finally, the Okta Sign-In Widget comes with extensive support for validating use
 input as well as handling every imaginable error condition which
 might occur in a user login flow.
 
-![img](/assets/img/okta-signin-validation-failure.png)
+![Screenshot of Okta Sign-In Widget displaying validation error ](/assets/img/okta-signin-validation-failure.png)
 
 # A simple example
 
