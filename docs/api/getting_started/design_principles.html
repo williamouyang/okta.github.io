@@ -301,7 +301,7 @@ with no <code class="highlighter-rouge">body</code> param, be sure to set the <c
 
 <p>Requests that return a list of resources may support paging.  Pagination is based on cursor and not on page number. The cursor is opaque to the client and specified in either the <code class="highlighter-rouge">?before</code> or <code class="highlighter-rouge">?after</code> query parameter.  For some resources, you can also set a custom page size with the <code class="highlighter-rouge">?limit</code> parameter.</p>
 
-<p>Note that for technical reasons not all APIs respect pagination or the <code class="highlighter-rouge">?limit</code> parameter, see the <a href="/docs/api/rest/events.html">Events API</a> for example.</p>
+<p>Note that for technical reasons not all APIs respect pagination or the <code class="highlighter-rouge">?limit</code> parameter, see the <a href="/docs/api/resources/events.html">Events API</a> for example.</p>
 
 <table>
   <thead>
@@ -331,7 +331,7 @@ with no <code class="highlighter-rouge">body</code> param, be sure to set the <c
 <p>Pagination links are included in the <a href="http://tools.ietf.org/html/rfc5988">Link header</a> of responses. It is <strong>important</strong> to follow these Link header values instead of constructing your own URLs as query parameters or  cursor formats may change without notice.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Link</span><span class="p">:</span> <span class="s">&lt;https://yoursubdomain.okta.com/api/v1/users?after=00ubfjQEMYBLRUWIEDKK; rel="next",</span>
+<span class="na">Link</span><span class="p">:</span> <span class="s">&lt;https://yoursubdomain.okta.com/api/v1/users?after=00ubfjQEMYBLRUWIEDKK&gt;; rel="next",</span>
 <span class="s">  &lt;https://yoursubdomain.okta.com/api/v1/users?after=00ub4tTFYKXCCZJSGFKM&gt;; rel="self"</span>
 </code></pre>
 </div>
@@ -361,7 +361,7 @@ with no <code class="highlighter-rouge">body</code> param, be sure to set the <c
   </tbody>
 </table>
 
-<p>When you first make an API call and get a cursor-paged list of objects, the end of the list will be the point at which you do not receive another <code class="highlighter-rouge">next</code> link value with the response. The behavior is different in the <a href="/docs/api/rest/events.html">Events API</a>. In the <a href="/docs/api/rest/events.html">Events API</a>, the next link always exists, since that connotation is more like a cursor or stream of data. The other APIs are primarily fixed data lengths.</p>
+<p>When you first make an API call and get a cursor-paged list of objects, the end of the list will be the point at which you do not receive another <code class="highlighter-rouge">next</code> link value with the response. The behavior is different in the <a href="/docs/api/resources/events.html">Events API</a>. In the <a href="/docs/api/resources/events.html">Events API</a>, the next link always exists, since that connotation is more like a cursor or stream of data. The other APIs are primarily fixed data lengths.</p>
 
 <h2 id="filtering">Filtering</h2>
 
@@ -492,7 +492,7 @@ filter=firstName eq "john"
 
 <h2 id="hypermedia">Hypermedia</h2>
 
-<p>Resources in the Okta API use hypermedia for “discoverability”.  Hypermedia enables API clients to navigate  resources by following links like a web browser instead of hard-coding URLs in your application.  Links are identified by link relations which are named keys. Link relations describe what resources are available and how they can be interacted with.  Each resource may publish a set of link relationships based on the state of the resource.  For example, the status of a user in the <a href="/docs/api/rest/users.html#links-object">User API</a> will govern which lifecycle operations are permitted.  Only the permitted operations will be published a lifecycle operations.</p>
+<p>Resources in the Okta API use hypermedia for “discoverability”.  Hypermedia enables API clients to navigate  resources by following links like a web browser instead of hard-coding URLs in your application.  Links are identified by link relations which are named keys. Link relations describe what resources are available and how they can be interacted with.  Each resource may publish a set of link relationships based on the state of the resource.  For example, the status of a user in the <a href="/docs/api/resources/users.html#links-object">User API</a> will govern which lifecycle operations are permitted.  Only the permitted operations will be published a lifecycle operations.</p>
 
 <p>The Okta API had incorporated <a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON Hypertext Application Language</a> or HAL format as the foundation for hypermedia “discoverability.  HAL provides a set of conventions for expressing hyperlinks in JSON responses representing two simple concepts: Resources and Links.</p>
 
