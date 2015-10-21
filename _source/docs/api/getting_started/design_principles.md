@@ -109,7 +109,7 @@ The Okta API currently requires the custom HTTP authentication scheme `SSWS` for
 
 Requests that return a list of resources may support paging.  Pagination is based on cursor and not on page number. The cursor is opaque to the client and specified in either the `?before` or `?after` query parameter.  For some resources, you can also set a custom page size with the `?limit` parameter.
 
-Note that for technical reasons not all APIs respect pagination or the `?limit` parameter, see the [Events API](/docs/api/rest/events.html) for example.
+Note that for technical reasons not all APIs respect pagination or the `?limit` parameter, see the [Events API](/docs/api/resources/events.html) for example.
 
 Param    | Description
 -------- | ------------
@@ -135,7 +135,7 @@ Link Relation Type | Description
 `next`             | Specifies the URL of the immediate next page of results.
 `prev`             | Specifies the URL of the immediate previous page of results.
 
-When you first make an API call and get a cursor-paged list of objects, the end of the list will be the point at which you do not receive another `next` link value with the response. The behavior is different in the [Events API](/docs/api/rest/events.html). In the [Events API](/docs/api/rest/events.html), the next link always exists, since that connotation is more like a cursor or stream of data. The other APIs are primarily fixed data lengths.
+When you first make an API call and get a cursor-paged list of objects, the end of the list will be the point at which you do not receive another `next` link value with the response. The behavior is different in the [Events API](/docs/api/resources/events.html). In the [Events API](/docs/api/resources/events.html), the next link always exists, since that connotation is more like a cursor or stream of data. The other APIs are primarily fixed data lengths.
 
 ## Filtering
 
@@ -189,7 +189,7 @@ Filters must be evaluated using standard order of operations. Attribute operator
 
 ## Hypermedia
 
-Resources in the Okta API use hypermedia for "discoverability".  Hypermedia enables API clients to navigate  resources by following links like a web browser instead of hard-coding URLs in your application.  Links are identified by link relations which are named keys. Link relations describe what resources are available and how they can be interacted with.  Each resource may publish a set of link relationships based on the state of the resource.  For example, the status of a user in the [User API](/docs/api/rest/users.html#links-object) will govern which lifecycle operations are permitted.  Only the permitted operations will be published a lifecycle operations.
+Resources in the Okta API use hypermedia for "discoverability".  Hypermedia enables API clients to navigate  resources by following links like a web browser instead of hard-coding URLs in your application.  Links are identified by link relations which are named keys. Link relations describe what resources are available and how they can be interacted with.  Each resource may publish a set of link relationships based on the state of the resource.  For example, the status of a user in the [User API](/docs/api/resources/users.html#links-object) will govern which lifecycle operations are permitted.  Only the permitted operations will be published a lifecycle operations.
 
 The Okta API had incorporated [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) or HAL format as the foundation for hypermedia "discoverability.  HAL provides a set of conventions for expressing hyperlinks in JSON responses representing two simple concepts: Resources and Links.
 

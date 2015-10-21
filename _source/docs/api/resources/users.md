@@ -951,7 +951,7 @@ Parameter | Description                                                         
 --------- | ------------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------
 q         | Searches `firstName`, `lastName`, and `email` properties of users for matching value  | Query      | String   | FALSE    |
 limit     | Specified the number of results                                                       | Query      | Number   | FALSE    | 200
-filter    | [Filter expression](/docs/getting_started/design_principles.html#filtering) for users | Query      | String   | FALSE    |
+filter    | [Filter expression](/docs/api/getting_started/design_principles.html#filtering) for users | Query      | String   | FALSE    |
 after     | Specifies the pagination cursor for the next page of users                            | Query      | String   | FALSE    |
 
 > The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination)
@@ -982,7 +982,7 @@ Filter                                         | Description
 
 \* If filtering by `email`, `lastName`, or `firstName`, Okta recommends the [User query API](#list-users-with-search). These profile filters are here for your convenience.
 
-See [Filtering](/docs/getting_started/design_principles.html#filtering) for more information on expressions
+See [Filtering](/docs/api/getting_started/design_principles.html#filtering) for more information on expressions
 
 > All filters must be [URL encoded](http://en.wikipedia.org/wiki/Percent-encoding) where `filter=lastUpdated gt "2013-06-01T00:00:00.000Z"` is encoded as `filter=lastUpdated%20gt%20%222013-06-01T00:00:00.000Z%22`
 

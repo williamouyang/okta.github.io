@@ -20,7 +20,7 @@ There are two main area of focus – Authentication and Provisioning. You need t
 
 Your application needs to support Federated Single Sign-On, a common approach for an application to rely on an external identity provider. For web-based applications, Security Assertion Markup Language (SAML) is the standard. For mobile applications, many mobile solution vendors offer proprietary SDKs to provide support. Okta offers Okta Mobile Connect which is based on the SAML protocol.
 
-For details on how to federate your application with SAML and Okta Mobile Connect, go to our [Single Sign-On with Okta](/docs/getting_started/saml_guidance.html) section for additional guidance.
+For details on how to federate your application with SAML and Okta Mobile Connect, go to our [Single Sign-On with Okta](/docs/guides/saml_guidance.html) section for additional guidance.
 
 ### Provisioning
 
@@ -36,7 +36,7 @@ Use the following instructions to integrate your app into the Okta Application N
 
 ### 1. Review Pre-Integration Resources
 
-* Is supporting single sign-on making you anxious? Use our [Single Sign-On with Okta](/docs/getting_started/saml_guidance.html) tools which includes toolkits and even a tool for testing your SAML configuration.
+* Is supporting single sign-on making you anxious? Use our [Single Sign-On with Okta](/docs/guides/saml_guidance.html) tools which includes toolkits and even a tool for testing your SAML configuration.
 
 * Ready to offload user on-boarding with Okta? Find recommendations on building APIs for user creation, update, and deactivation in our [Building a Well-Managed Cloud Application](https://www.okta.com/resources/whitepaper-bwmca-thank-you.html) guide.
 

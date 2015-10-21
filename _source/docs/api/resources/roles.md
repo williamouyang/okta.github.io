@@ -51,7 +51,7 @@ Refer to the [product documentation](https://support.okta.com/articles/Knowledge
 | `SUPER_ADMIN`     | Super Administrator          |                         |
 | `ORG_ADMIN`       | Organizational Administrator |                         |                  
 | `APP_ADMIN`       | Application Administrator    | Apps                    |
-| `USER_ADMIN`      | User Administrator           | [Groups](./groups/html) |
+| `USER_ADMIN`      | User Administrator           | [Groups](./groups.html) |
 | `MOBILE_ADMIN`    | Mobile Administrator         |                         |
 | `READ_ONLY_ADMIN` | Read-only Administrator      |                         |
 |-------------------+------------------------------|-------------------------+

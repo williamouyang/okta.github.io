@@ -1379,7 +1379,7 @@ filter    | Filters apps by `status`, `user.id`, or `group.id` expression       
 after     | Specifies the pagination cursor for the next page of apps                                                        | Query      | String   | FALSE    |
 expand    | Traverses `users` link relationship and optionally embeds [Application User](#application-user-model) resource   | Query      | String   | FALSE    |
 
-> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination)
+> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination)
 
 ###### Filters
 
@@ -2758,7 +2758,7 @@ aid       | unique key of [Application](#application-model)                  | U
 limit     | specifies the number of results for a page                       | Query      | Number   | FALSE    | 20
 after     | specifies the pagination cursor for the next page of assignments | Query      | String   | FALSE    |
 
-> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination)
+> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination)
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -3177,7 +3177,7 @@ aid       | unique key of [Application](#application-model)                  | U
 limit     | Specifies the number of results for a page                       | Query      | Number   | FALSE    | 20
 after     | Specifies the pagination cursor for the next page of assignments | Query      | String   | FALSE    |
 
-> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination)
+> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination)
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}

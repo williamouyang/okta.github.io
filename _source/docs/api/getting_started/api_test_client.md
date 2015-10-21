@@ -13,7 +13,7 @@ redirect_from: "/docs/getting_started/api_test_client.html"
 ## Prerequisites
 
 - Chrome Web Browser
-- [API Key created in the Okta Admin UI](/docs/getting_started/getting_a_token.html)
+- [API Key created in the Okta Admin UI](/docs/api/getting_started/getting_a_token.html)
 
 ## Setup
 

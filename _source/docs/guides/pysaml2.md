@@ -98,7 +98,7 @@ the following steps, you will have a working example of connecting Okta to a sam
 
 5.  Be sure to replace the contents of `{metdata-url}` with the link
     that you copied in step \#10 of the
-    "[Setting up a SAML application in Okta](../examples/setting_up_a_saml_application_in_okta.html)"
+    "[Setting up a SAML application in Okta](../guides/setting_up_a_saml_application_in_okta.html)"
     instructions that you followed above!
 
     Note: The contents of `{metadata-url}` should look similar to: `https://example.oktapreview.com/app/a0b1c2deFGHIJKLMNOPQ/sso/saml/metadata`
