@@ -191,7 +191,6 @@ Copy this to a file named `login-to-okta.html`:
       <script src="https://example.okta.com/js/mvc/login/okta-login.js" type="text/javascript"></script>
       <link href="https://example.okta.com/css/login/okta-login.css" type="text/css" rel="stylesheet">
       <link href="https://example.okta.com/css/login/okta-theme.css" type="text/css" rel="stylesheet">
-      <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" type="text/css" rel="stylesheet">
     </head>
     <body>
       <!-- Render the login widget here -->
@@ -305,9 +304,11 @@ Here are two things for you to try:
     "invalid" as the password. You should see an error.
 2.  Try using a valid user name and password. If everything works,
     you will be redirected to <https://example.com>.
+3.  [Configure Multifactor Authentication](https://support.okta.com/help/articles/Knowledge_Article/27315047-Configuring-Multifactor-Authentication)
+    for your Okta org and try logging in using the Okta Sign-In Widget.
     
-    If you are redirected, then it works! Your next step will then
-    be to configure the Okta Sign-In Widget for your specific requirements.
+    If you are redirected when you log in successfully, then it works!
+    Your next step is to configure the Okta Sign-In Widget for your specific requirements.
 
 # Customization
 
