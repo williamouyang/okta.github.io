@@ -4,8 +4,6 @@ title: Social Authentication
 excerpt: Setting up an Okta Social Authentication provider
 ---
 
-# Setting up an Okta Social Authentication provider
-
 1.  Click the blue "Admin" button to get into the Okta Administrator view.
 2.  From the "Security" menu, select "Identity Providers".
 3.  Use the "Add Identity Provider" drop-down menu to select the
@@ -73,16 +71,6 @@ excerpt: Setting up an Okta Social Authentication provider
         
         An example link to a modified payroll application.
     
-    **NOTE**: The contents of the `redirect_uris` array **MUST** be an
-    SSL ("https") URL.
-    
-    Instructions for enabling SSL on your web server is outside of
-    the scope of this document, however an easy way to do this is to
-    use [CloudFlare to add SSL](https://support.cloudflare.com/hc/en-us/articles/200170516-How-do-I-add-SSL-to-my-site-) to your server. If you are developing a
-    service on your own computer that is running on
-    "`http://localhost`", you can use the wonderful [ngrok](https://ngrok.com/) service to
-    create an SSL enabled tunnel for your "`http://localhost`" URL.
-    
     Here is what the body of your POST request should look like:
     
         {
@@ -107,6 +95,8 @@ excerpt: Setting up an Okta Social Authentication provider
         "token_endpoint_auth_method": "private_key_jwt",
         "jwks_uri": "https://static.example.com/certs/public.jwks"
         }
+    
+    > The contents of the `redirect_uris` array **MUST** be an SSL ("https") URL. Instructions for enabling SSL on your web server is outside of the scope of this document, however an easy way to do this is to use [CloudFlare to add SSL](https://support.cloudflare.com/hc/en-us/articles/200170516-How-do-I-add-SSL-to-my-site-) to your server. If you are developing a service on your own computer that is running on "`http://localhost`", you can use the wonderful [ngrok](https://ngrok.com/) service to create an SSL enabled tunnel for your "`http://localhost`" URL.
     
     After you click the "Send" button in Postman, you will see a JSON
     response from Okta, which will look like the response below. Find
@@ -145,11 +135,11 @@ excerpt: Setting up an Okta Social Authentication provider
     in the next step.
 7.  Create a Social Auth Login URL
     1.  Append the `client_id` you copied above into the Social Auth
-        "Login URL" the value of a `client_id` GET parameter.
+        "Login URL" as the value of a GET parameter name `client_id`.
         
         For example, your Social Auth "Login URL" should now look something like this:
         `https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&client_id=AbcDE0fGHI1jk2LM34no`
-    2.  Add the `scope`, `response_type` GET parameters to the Social Auth Login URL in the step above.
+    2.  Add the `scope` and `response_type` GET parameters to the Social Auth Login URL in the step above.
         
         To do this, simply append this string to the end of your
         Social Auth "Login URL": `&scope=openid%20email%20profile&response_type=id_token`
@@ -162,11 +152,10 @@ excerpt: Setting up an Okta Social Authentication provider
         URL".
         
         The last required GET parameter you need to add to your URL is
-        the `redirect_url` parameter. The value of this parameter is
-        where Okta will return a user to after they
-        have finished authenticating against their Social
-        Authentication provider. Note that this URL must match one of
-        the URLs in the `redirect_uris` array that you configured in the step above. 
+        the `redirect_url` parameter. The value of this GET parameter is
+        where Okta will return a user to after the user
+        has finished authenticating against their Social
+        Authentication provider. Note that this URL **must** start with "https" and **must** match one of the URLs in the `redirect_uris` array that you configured previously. 
         
         After adding the `redirect_url` GET parameter to 
         your URL, it should look something like this:
