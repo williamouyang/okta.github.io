@@ -421,7 +421,7 @@ a[class*=col-] {
     display: none; }
 
 .site-title {
-  background: url(/assets/images/logo.png) no-repeat center;
+  background: url(/assets/images/logo-new.png?151028) no-repeat center;
   background-size: auto 44px;
   display: block;
   float: left;

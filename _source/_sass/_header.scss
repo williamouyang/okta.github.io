@@ -75,7 +75,7 @@
 			background-color: white !important;
 			color: black;
 			margin-right: 40px;
-			
+
 			// @include breakpoint(extra-small) {
 			// 	width: 340px;
 			// }
@@ -88,11 +88,11 @@
 			@include breakpoint(large) {
 				width: 700px;
 			}
-			
-			
+
+
 		}
 	}
-	
+
 }
 
 .gsc-search-button {
@@ -115,7 +115,7 @@
 }
 
 .site-title {
-	background: url(/assets/images/logo.png) no-repeat center;
+	background: url(/assets/images/logo-new.png?151028) no-repeat center;
 	background-size: auto 44px;
 	display: block;
 	float: left;
@@ -414,10 +414,10 @@
 }
 
 //  Hide google remarketing code
- iframe[name='google_conversion_frame'] { 
+ iframe[name='google_conversion_frame'] {
     height: 0 !important;
-    width: 0 !important; 
-    line-height: 0 !important; 
+    width: 0 !important;
+    line-height: 0 !important;
     font-size: 0 !important;
     float: left;
 }
