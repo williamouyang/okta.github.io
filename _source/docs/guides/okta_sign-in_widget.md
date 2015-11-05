@@ -82,12 +82,13 @@ and easily set up a fully featured login experience:
     <body>
       <div id="okta-login-container"></div>
       <script type="text/javascript">
-        var oktaSignIn = new OktaSignIn({baseUrl: 'https://example.okta.com'});
+        var baseUrl = 'https://example.okta.com';
+        var oktaSignIn = new OktaSignIn({baseUrl: baseUrl});
     
         oktaSignIn.renderEl(
           { el: '#okta-login-container' },
           function (res) {
-            if (res.status === 'SUCCESS') { res.session.setCookieAndRedirect('https://example.com/'); }
+            if (res.status === 'SUCCESS') { res.session.setCookieAndRedirect('https://example.okta.com'); }
           }
         );
       </script>
@@ -122,7 +123,8 @@ For example, if your Okta organization is "`acme.okta.com`" you
 would replace the string "`example.okta.com`" below with
 "`acme.okta.com`":
 
-    var oktaSignIn = new OktaSignIn({baseUrl: 'https://example.okta.com'});
+    var baseUrl = 'https://example.okta.com';
+    var oktaSignIn = new OktaSignIn({baseUrl: baseUrl});
 
 Finally, the lines below actually render the the Okta Sign-In
 Widget. Note that the value for `el` can be whatever `id` that you 
@@ -188,8 +190,8 @@ Copy this to a file named `login-to-okta.html`:
           <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
       <![endif]-->
     
-      <script src="https://example.okta.com/js/mvc/login/okta-login.js" type="text/javascript"></script>
-      <link href="https://example.okta.com/css/login/okta-login.css" type="text/css" rel="stylesheet">
+      <script src="https://example.okta.com/js/sdk/okta-sign-in-1.0.0.min.js" type="text/javascript"></script>
+      <link href="https://example.okta.com/js/sdk/okta-sign-in-1.0.0.min.css" type="text/css" rel="stylesheet">
       <link href="https://example.okta.com/css/login/okta-theme.css" type="text/css" rel="stylesheet">
     </head>
     <body>
@@ -198,7 +200,8 @@ Copy this to a file named `login-to-okta.html`:
     
       <!-- Script to init the widget -->
       <script>
-        var oktaSignIn = new OktaSignIn({baseUrl: 'https://example.okta.com'});
+        var baseUrl = 'https://example.okta.com';
+        var oktaSignIn = new OktaSignIn({baseUrl: baseUrl});
     
         oktaSignIn.renderEl(
           { el: '#okta-login-container' },
@@ -245,6 +248,7 @@ There are four lines that you will need to modify in
         <link href="https://example.okta.com/js/sdk/okta-theme-1.0.0.css" type="text/css" rel="stylesheet">
 4.  The string passed as the `baseUrl` to the `OktaSignIn` constructor:
     
+        var baseUrl = 'https://example.okta.com';
         var oktaSignIn = new OktaSignIn({baseUrl: 'https://example.okta.com'});
 
 ## Copy the HTML to a web server
@@ -268,6 +272,7 @@ If you are a Node.js developer, you might be more comfortable
 running a simple HTTP server in Node.js, which you can do as follows:
 
     $ npm install -g http-server
+    
     $ http-server
 
 ## Configuring CORS support on your Okta organization
@@ -334,16 +339,16 @@ Most important is understanding how the widget is created. The
 the Okta Sign-In Widget is created when the `renderEl()` Javascript
 method is called. When the the `renderEl()` method is called, the
 the Okta Sign-In Widget will be created as a `<div>` tag with an
-`id` of `okta-login` which will be inserted inside of the tag that
+`id` of `okta-login-container` which will be inserted inside of the tag that
 you specified in the `el` option to `renderEl` method.
 
 Here is what the opening tag for the the Okta Sign-In Widget will look like:
 
-    <div id="okta-login" class="auth-container main-container no-beacon">
+    <div id="okta-login-container" class="auth-container main-container no-beacon">
 
 Customization of the HTML *surrounding* the the Okta Sign-In Widget 
 is up to you. Customization of the widget itself will be done on
-the `#okta-login` selector and its child elements.
+the `#okta-login-container` selector and its child elements.
 
 A full list of the CSS selectors that you can use to style the
 the Okta Sign-In Widget are in the [okta-theme.css](https://example.okta.com/css/login/okta-theme.css) file. We strongly
@@ -370,7 +375,7 @@ the `login-to-okta.html` file that you created above.
         background-size: cover;
       }
     
-      #container #okta-login .button {
+      #container #okta-login-container .button {
         color: #ffffff;
         background-color: #3a3f44;
         border-color: #3a3f44;
@@ -411,6 +416,7 @@ see what these customizations do by copying this code into your
 web browser. A full list of the supported customization options
 are below.
 
+    var oktaSignIn = new OktaSignIn({
     return new OktaSignIn({
       baseUrl: baseUrl,
       logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/7/7e/Oldacmelogo.png/200px-Oldacmelogo.png',
@@ -434,7 +440,7 @@ are below.
     
       // See the contents of the 'okta-theme-1.0.0.css' file for a full list of labels.
       labels: {
-        'primaryauth.title': 'Acme Partner Login,
+        'primaryauth.title': 'Acme Partner Login',
         'primaryauth.username': 'Partner ID',
         'primaryauth.username.tooltip': 'Enter your @ partner.com ID',
         'primaryauth.password': 'Password',
