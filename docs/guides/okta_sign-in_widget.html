@@ -252,10 +252,10 @@ and easily set up a fully featured login experience:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>&lt;head&gt;
   &lt;!-- Core widget js and css --&gt;
-  &lt;script src="https://example.okta.com/js/sdk/okta-sign-in-1.0.0.min.js" type="text/javascript"&gt;&lt;/script&gt;
-  &lt;link href="https://example.okta.com/js/sdk/okta-sign-in-1.0.0.min.css" type="text/css" rel="stylesheet"&gt;
+  &lt;script src="https://example.okta.com/js/sdk/okta-sign-in-1.0.2.min.js" type="text/javascript"&gt;&lt;/script&gt;
+  &lt;link href="https://example.okta.com/js/sdk/okta-sign-in-1.0.2.min.css" type="text/css" rel="stylesheet"&gt;
   &lt;!-- Customizable css theme options. Link your own customized copy of this file or override styles in-line --&gt;
-  &lt;link href="https://example.okta.com/js/sdk/okta-theme-1.0.0.css" type="text/css" rel="stylesheet"&gt;
+  &lt;link href="https://example.okta.com/js/sdk/okta-theme-1.0.2.css" type="text/css" rel="stylesheet"&gt;
 &lt;/head&gt;
 &lt;body&gt;
   &lt;div id="okta-login-container"&gt;&lt;/div&gt;
@@ -277,11 +277,11 @@ and easily set up a fully featured login experience:</p>
 <p>Here is what is happening in the HTML above: </p>
 
 <p>First, in the <code class="highlighter-rouge">&lt;head&gt;</code>
-tag, we include the  <code class="highlighter-rouge">okta-sign-in-1.0.0.min.js</code> and
-<code class="highlighter-rouge">okta-sign-in-1.0.0.min.css</code> files. These files have all of the
+tag, we include the  <code class="highlighter-rouge">okta-sign-in-1.0.2.min.js</code> and
+<code class="highlighter-rouge">okta-sign-in-1.0.2.min.css</code> files. These files have all of the
 logic for the the Okta Sign-In Widget. </p>
 
-<p>We also include the <code class="highlighter-rouge">okta-theme-1.0.0.css</code> file, which contains all
+<p>We also include the <code class="highlighter-rouge">okta-theme-1.0.2.css</code> file, which contains all
 of the styling information for the the Okta Sign-In Widget.</p>
 
 <p>Underneath those files, we add a <code class="highlighter-rouge">&lt;div&gt;</code> tag with an “<code class="highlighter-rouge">id</code>” of
@@ -376,8 +376,8 @@ will have a lot more in-depth configuration.</p>
       &lt;script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"&gt;&lt;/script&gt;
   &lt;![endif]--&gt;</span>
 
-  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://example.okta.com/js/sdk/okta-sign-in-1.0.0.min.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
-  <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://example.okta.com/js/sdk/okta-sign-in-1.0.0.min.css"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://example.okta.com/js/sdk/okta-sign-in-1.0.2.min.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://example.okta.com/js/sdk/okta-sign-in-1.0.2.min.css"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://example.okta.com/css/login/okta-theme.css"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
@@ -429,21 +429,21 @@ Developer Edition organization, your domain will be something like
   <li>
     <p>The <code class="highlighter-rouge">&lt;script&gt;</code> tag for <code class="highlighter-rouge">okta-sign-in.js</code>:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>&lt;script src="https://example.okta.com/js/sdk/okta-sign-in-1.0.0.min.js" type="text/javascript"&gt;&lt;/script&gt;
+    <div class="highlighter-rouge"><pre class="highlight"><code>&lt;script src="https://example.okta.com/js/sdk/okta-sign-in-1.0.2.min.js" type="text/javascript"&gt;&lt;/script&gt;
 </code></pre>
     </div>
   </li>
   <li>
     <p>The <code class="highlighter-rouge">&lt;link&gt;</code> tag for <code class="highlighter-rouge">okta-sign-in.css</code>:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>&lt;link href="https://example.okta.com/js/sdk/okta-sign-in-1.0.0.min.css" type="text/css" rel="stylesheet"&gt;
+    <div class="highlighter-rouge"><pre class="highlight"><code>&lt;link href="https://example.okta.com/js/sdk/okta-sign-in-1.0.2.min.css" type="text/css" rel="stylesheet"&gt;
 </code></pre>
     </div>
   </li>
   <li>
     <p>The <code class="highlighter-rouge">&lt;link&gt;</code> tag for <code class="highlighter-rouge">okta-theme.css</code>:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>&lt;link href="https://example.okta.com/js/sdk/okta-theme-1.0.0.css" type="text/css" rel="stylesheet"&gt;
+    <div class="highlighter-rouge"><pre class="highlight"><code>&lt;link href="https://example.okta.com/js/sdk/okta-theme-1.0.2.css" type="text/css" rel="stylesheet"&gt;
 </code></pre>
     </div>
   </li>
@@ -612,11 +612,11 @@ the <code class="highlighter-rouge">login-to-okta.html</code> file that you crea
 
 <p>While the example above demonstrates how to using an in-page style
 tag, we strongly encourage you to create your own stylesheet by
-copying the <code class="highlighter-rouge">okta-theme-1.0.0.css</code> file onto your own website, and
+copying the <code class="highlighter-rouge">okta-theme-1.0.2.css</code> file onto your own website, and
 update that file as needed. Here is what that might look like in
 your HTML:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;link href="https://your-website.example.com/static/css/custom-okta-theme-1.0.0.css" type="text/css" rel="stylesheet"&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;link href="https://your-website.example.com/static/css/custom-okta-theme-1.0.2.css" type="text/css" rel="stylesheet"&gt;
 </code></pre>
 </div>
 
@@ -658,7 +658,7 @@ return new OktaSignIn({
     ]
   },
 
-  // See the contents of the 'okta-theme-1.0.0.css' file for a full list of labels.
+  // See the contents of the 'okta-theme-1.0.2.css' file for a full list of labels.
   labels: {
     'primaryauth.title': 'Acme Partner Login',
     'primaryauth.username': 'Partner ID',
