@@ -151,11 +151,13 @@ This tool makes it easy for you to send SAML Requests to your SAML SP, it allows
 
 There are many available OpenSource toolkits that implement the SAML 2.0 specificaiton for the WebSSO Profile for Service Providers in different programming languages.  The following is a list of recommended toolkits:
 
+- [.NET Framework](https://en.wikipedia.org/wiki/.NET_Framework_version_history) 4.5 or above: [Kentor Authentication Services](https://github.com/KentorIT/authservices#kentor-authentication-services)
+- .NET Framework 4 or below: [ComponentSpace SAML 2.0](http://www.componentspace.com/SAMLv20.aspx) - Paid software, licenses start at $299
 - Java: [OpenSAML](https://shibboleth.net/products/opensaml-java.html)
 - Java/Spring: [Spring Security SAML](/docs/guides/spring_security_saml.html)
-- Ruby: [Ruby-SAML](https://rubygems.org/gems/ruby-saml)
+- PHP: [SimpleSAMLphp](/docs/guides/simplesamlphp.html)
 - Python: [PySAML2](/docs/guides/pysaml2.html)
-- PHP: [SimpleSAMLphp](https://simplesamlphp.org/)
+- Ruby: [Ruby-SAML](https://rubygems.org/gems/ruby-saml)
 
 ## Reference
 
