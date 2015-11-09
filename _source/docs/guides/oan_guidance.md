@@ -132,13 +132,13 @@ A: Currently, the App Wizard does not support extra login fields. Create an app 
 
 **Q: Does Okta support single logout / single sign-out (SAML protocol)?**
 
-A: No, Okta does not currently support single logout / single sign-out (SAML protocol).
+A: Yes. For more information, see [Using the App Integration Wizard](https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard#SAML_Single_Logout_section).
 
 <br/>
 
 **Q: Is the IDP session time out a setting that an Okta admin can change? And if so, can it be changed on a per application basis, or is it a global setting for all of the user’s applications?**
 
-A: Yes, the session time out default is 2 hours but can be customized by the hour or minute by the Okta administrator. This session time out is an IDP setting – and therefire, it is global and applies to all applications.
+A: Yes, the session time out default is 2 hours but can be customized by the hour or minute by the Okta administrator. This session time out is an IDP setting – and therefore, it is global and applies to all applications.
 
 <br/>
 
