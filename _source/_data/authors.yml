@@ -6,7 +6,7 @@ benjamin_wesson:
   web: http://developer.okta.com
   twitter: https://twitter.com/benjaminwesson
   github: https://github.com/benjaminwesson-okta
-  
+
 doug:
   full_name: Doug Lee
   display_name: Doug
@@ -43,12 +43,12 @@ jon_todd:
   github: https://github.com/jontodd
 
 hector_aguilar:
-  full_name: Hector Aguilar 
-  display_name: Hector 
+  full_name: Hector Aguilar
+  display_name: Hector
   avatar: avatar-hector_aguilar.jpg
   email: haguilar@okta.com
   github: https://github.com/haguilar-okta
-  
+
 matt_loughran:
   full_name: Matt Loughran
   display_name: Matt Loughran
@@ -57,18 +57,24 @@ matt_loughran:
   github: https://github.com/mattloughran-okta
 
 vimarsh_karbhari:
-    full_name: Vimarsh Karbhari
-    display_name: Vimarsh
-    avatar: avatar-vimarsh_karbhari.jpg
-    email: vimarsh.karbhari@okta.com
-    web: https://medium.com/@vimarshk/
-    twitter: https://twitter.com/VimarshApi
-    github: https://github.com/vimarshkarbhari-okta
+  full_name: Vimarsh Karbhari
+  display_name: Vimarsh
+  avatar: avatar-vimarsh_karbhari.jpg
+  email: vimarsh.karbhari@okta.com
+  web: https://medium.com/@vimarshk/
+  twitter: https://twitter.com/VimarshApi
+  github: https://github.com/vimarshkarbhari-okta
+
+william_dawson:
+  full_name: William Dawson
+  display_name: Wils Dawson
+  avatar: avatar-william_dawson.jpg
+  email: wdawson@okta.com
+  twitter: https://twitter.com/wilsdawson
+  github: https://github.com/wdawson
 
 okta_generic_blogger:
   full_name: Okta Staff
   display_name: Okta Staff
   avatar: avatar-okta_logo.jpg
   email: eng_docs@okta.com
-  
-
