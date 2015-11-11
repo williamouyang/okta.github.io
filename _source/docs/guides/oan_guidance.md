@@ -43,7 +43,7 @@ Use the following instructions to integrate your app into the Okta Application N
 ### 2. Integrate Your App
 
 * Sign up for an Okta [developer account](https://www.okta.com/developer/signup/).
-* Use the [App Wizard](https://support.okta.com/articles/Knowledge_Article/27560008-Using-the-App-Integration-Wizard) to integrate single sign-on after you sign into Okta as an admin. For more details, see our videos for [SAML](https://www.youtube.com/watch?v=rQpUsRe0Jxw) and [SWA](https://www.youtube.com/watch?v=FoyhQEwOnqg).
+* Use the [App Wizard](https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard) to integrate single sign-on after you sign into Okta as an admin. For more details, see our videos for [SAML](https://www.youtube.com/watch?v=rQpUsRe0Jxw) and [SWA](https://www.youtube.com/watch?v=FoyhQEwOnqg).
 * Currently provisioning integrations are custom-built by Okta. Email <oan@okta.com> to submit a request for your app.
 * Get Stuck? See our *Okta Application Network FAQs* below.
 
