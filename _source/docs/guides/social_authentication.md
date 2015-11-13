@@ -4,14 +4,52 @@ title: Social Authentication
 excerpt: Setting up an Okta Social Authentication provider
 ---
 
+# Overview
+
+Okta Social Authentication allows Okta to integrate with a Social Identity Provider such as Facebook or LinkedIn.  These integrations support the following features:
+
+*User Registration leveraging the user profile from a Social Provider*
+
+  - Onboarding new users through a Social Provider.
+  - Capturing the Social Profile attributes from a Social Provider user and storing those attributes in Okta's Universal Directory.
+
+*User Authentication delegated to a Social Provider*
+
+  - Leveraging Social Identity provider for user authentication, thus eliminating the need to store an additional username and password for that user
+
+*Ongoing profile update from the Social Provider*
+
+  - Enable user profile updates from the linked Social Provider when user profile changes on the Social Provider
+  
+*Linking of existing Okta account to a Social Provider identity*
+
+  - Provide a flow for users with an existing local account to 
+
+*Call-out during registration/linking for custom logic*
+
+  - Support common use cases where additional logic is required during registration or linking. For example: prompting a user for additional attributes before linking their account, or enabling a customized validation or confirmation flow
+  - OAuth scope configuration to control which Social Provider profile attributes are linked to Okta
+
+The following diagram shows a high-level architecture of Okta Social Authentication for your application:
+
+<img src="/assets/img/social_authentication_flow.png" alt="Social Authentication Flow" width="800px" />
+
+Advantages of using Okta Social Authentication include:
+
+- Easy configuration of providers in the Okta Admin UI.
+- Simplieified integration with Social Providers through Okta, no need to register your own application directly with the provider.
+- Consistent user management, users from social providers reside in same Okta Universal Directory as all of your other users.
+
+# Setting up a Social Authentication provider in Okta
+
 1.  Click the blue "Admin" button to get into the Okta Administrator view.
 2.  From the "Security" menu, select "Identity Providers".
 3.  Use the "Add Identity Provider" drop-down menu to select the
     Identity Provider that you want to configure.
     The options for social authentication providers are:
-    -   Facebook
-    -   Google
-    -   LinkedIn
+    -   [Facebook](http://saml-doc.okta.com/IdentityProvider_Docs/Facebook_Identity_Provider_Setup.html)
+    -   [Google](http://saml-doc.okta.com/IdentityProvider_Docs/Google_Identity_Provider_Setup.html)
+    -   [LinkedIn](http://saml-doc.okta.com/IdentityProvider_Docs/LinkedIn_Identity_Provider_Setup.html)
 4.  Configure your Social Authentication provider:
     -   **Name**: We suggest using the name you would
         expect to see on a button, something like "Log in to Facebook".
