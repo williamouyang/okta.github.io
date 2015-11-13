@@ -141,7 +141,7 @@
 	<span class="toggle-menu"></span>
 	<div id="sidebar-wrapper">
 		<div class="docs-sidebar-block" id="myScrollspy" >
-		<h2>Guides</h2>                                                                                                              <ul class="nav sidebar-nav" data-item="saml_guidance" data-section=""><li data-name="Single Sign-On with Okta" ><a href="/docs/guides/saml_guidance.html">Single Sign-On with Okta</a></li></ul>                                                  <ul class="nav sidebar-nav" data-item="oan_guidance" data-section=""><li data-name="Okta Application Network" ><a href="/docs/guides/oan_guidance.html">Okta Application Network</a></li></ul>                                                                    <ul class="nav sidebar-nav" data-item="okta_mobile_connect" data-section=""><li data-name="Okta Mobile Connect" ><a href="/docs/guides/okta_mobile_connect.html">Okta Mobile Connect</a></li></ul>                                                                  <ul class="nav sidebar-nav" data-item="okta_sign-in_widget" data-section=""><li data-name="Okta Sign-In Widget" ><a href="/docs/guides/okta_sign-in_widget.html">Okta Sign-In Widget</a></li></ul>                                                                                      <ul class="nav sidebar-nav" data-item="spring_security_saml" data-section=""><li data-name="Spring Security SAML (Java)" ><a href="/docs/guides/spring_security_saml.html">Spring Security SAML (Java)</a></li></ul>                                              <ul class="nav sidebar-nav" data-item="pysaml2" data-section=""><li data-name="PySAML2 (Python)" ><a href="/docs/guides/pysaml2.html">PySAML2 (Python)</a></li></ul>                        <ul class="nav sidebar-nav" data-item="add_mfa" data-section=""><li data-name="Add Multi-Factor Authentication to your App with the Okta Platform" ><a href="/docs/guides/add_mfa.html">Add Multi-Factor Authentication to your App with the Okta Platform</a></li></ul>                                                                                                                    <ul class="nav sidebar-nav" data-item="setting_up_a_saml_application_in_okta" data-section=""><li data-name="Setting up a SAML application in Okta" ><a href="/docs/guides/setting_up_a_saml_application_in_okta.html">Setting up a SAML application in Okta</a></li></ul>          
+		<h2>Guides</h2>                                                                                                              <ul class="nav sidebar-nav" data-item="saml_guidance" data-section=""><li data-name="Single Sign-On with Okta" ><a href="/docs/guides/saml_guidance.html">Single Sign-On with Okta</a></li></ul>                                                  <ul class="nav sidebar-nav" data-item="oan_guidance" data-section=""><li data-name="Okta Application Network" ><a href="/docs/guides/oan_guidance.html">Okta Application Network</a></li></ul>                                                                    <ul class="nav sidebar-nav" data-item="okta_mobile_connect" data-section=""><li data-name="Okta Mobile Connect" ><a href="/docs/guides/okta_mobile_connect.html">Okta Mobile Connect</a></li></ul>                                                                  <ul class="nav sidebar-nav" data-item="okta_sign-in_widget" data-section=""><li data-name="Okta Sign-In Widget" ><a href="/docs/guides/okta_sign-in_widget.html">Okta Sign-In Widget</a></li></ul>                                                                                    <ul class="nav sidebar-nav nav-title"><li data-name="Social Authentication" class="on"><a id="toc_current_doc" href="/docs/guides/social_authentication.html">Social Authentication</a></li></ul>                                                                  <ul class="nav sidebar-nav" data-item="spring_security_saml" data-section=""><li data-name="Spring Security SAML (Java)" ><a href="/docs/guides/spring_security_saml.html">Spring Security SAML (Java)</a></li></ul>                                              <ul class="nav sidebar-nav" data-item="pysaml2" data-section=""><li data-name="PySAML2 (Python)" ><a href="/docs/guides/pysaml2.html">PySAML2 (Python)</a></li></ul>                        <ul class="nav sidebar-nav" data-item="add_mfa" data-section=""><li data-name="Add Multi-Factor Authentication to your App with the Okta Platform" ><a href="/docs/guides/add_mfa.html">Add Multi-Factor Authentication to your App with the Okta Platform</a></li></ul>                                                                                                                    <ul class="nav sidebar-nav" data-item="setting_up_a_saml_application_in_okta" data-section=""><li data-name="Setting up a SAML application in Okta" ><a href="/docs/guides/setting_up_a_saml_application_in_okta.html">Setting up a SAML application in Okta</a></li></ul>          
 		</div>
 	</div>
 </div>
@@ -178,9 +178,55 @@
 		</header>
 		
 
-		<blockquote>
-  <p>Social Authentication is currently in <strong>Early Access (EA)</strong> status.</p>
-</blockquote>
+		<h1 id="overview">Overview</h1>
+
+<p>Okta Social Authentication allows Okta to integrate with a Social Identity Provider such as Facebook or LinkedIn.  These integrations support the following features:</p>
+
+<p><em>User Registration leveraging the user profile from a Social Provider</em></p>
+
+<ul>
+  <li>Onboarding new users through a Social Provider.</li>
+  <li>Capturing the Social Profile attributes from a Social Provider user and storing those attributes in Okta’s Universal Directory.</li>
+</ul>
+
+<p><em>User Authentication delegated to a Social Provider</em></p>
+
+<ul>
+  <li>Leveraging Social Identity provider for user authentication, thus eliminating the need to store an additional username and password for that user</li>
+</ul>
+
+<p><em>Ongoing profile update from the Social Provider</em></p>
+
+<ul>
+  <li>Enable user profile updates from the linked Social Provider when user profile changes on the Social Provider</li>
+</ul>
+
+<p><em>Linking of existing Okta account to a Social Provider identity</em></p>
+
+<ul>
+  <li>Provide a flow for users with an existing local account to </li>
+</ul>
+
+<p><em>Call-out during registration/linking for custom logic</em></p>
+
+<ul>
+  <li>Support common use cases where additional logic is required during registration or linking. For example: prompting a user for additional attributes before linking their account, or enabling a customized validation or confirmation flow</li>
+  <li>OAuth scope configuration to control which Social Provider profile attributes are linked to Okta</li>
+</ul>
+
+<p>The following diagram shows a high-level architecture of Okta Social Authentication for your application:</p>
+
+<p><img src="/assets/img/social_authentication_flow.png" alt="Social Authentication Flow" width="800px" /></p>
+
+<p>Advantages of using Okta Social Authentication include:</p>
+
+<ul>
+  <li>Easy configuration of providers in the Okta Admin UI.</li>
+  <li>Simplieified integration with Social Providers through Okta, no need to register your own application directly with the provider.</li>
+  <li>Consistent user management, users from social providers reside in same Okta Universal Directory as all of your other users.</li>
+</ul>
+
+<h1 id="setting-up-a-social-authentication-provider-in-okta">Setting up a Social Authentication provider in Okta</h1>
 
 <ol>
   <li>Click the blue “Admin” button to get into the Okta Administrator view.</li>
@@ -189,9 +235,9 @@
 Identity Provider that you want to configure.
 The options for social authentication providers are:
     <ul>
-      <li>Facebook</li>
-      <li>Google</li>
-      <li>LinkedIn</li>
+      <li><a href="http://saml-doc.okta.com/IdentityProvider_Docs/Facebook_Identity_Provider_Setup.html">Facebook</a></li>
+      <li><a href="http://saml-doc.okta.com/IdentityProvider_Docs/Google_Identity_Provider_Setup.html">Google</a></li>
+      <li><a href="http://saml-doc.okta.com/IdentityProvider_Docs/LinkedIn_Identity_Provider_Setup.html">LinkedIn</a></li>
     </ul>
   </li>
   <li>Configure your Social Authentication provider:
