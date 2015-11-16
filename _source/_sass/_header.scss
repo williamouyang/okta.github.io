@@ -1,6 +1,6 @@
 .site-header {
 	background: #fff;
-	border-bottom: 1px solid $colorGreyLight;
+	border-bottom: 3px solid $colorGreyLight;
 	box-sizing: border-box;
 	height: $headerHeight;
 	left: 0;
@@ -116,7 +116,7 @@
 
 .site-title {
 	background: url(/assets/images/logo-new.png?151028) no-repeat center;
-	background-size: auto 44px;
+	background-size: auto 34px;
 	display: block;
 	float: left;
 	height: $headerHeight - 1;

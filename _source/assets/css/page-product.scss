@@ -12,12 +12,12 @@
 #valprop {
 	padding-left: ($gutterWidth * 1/4);
 	padding-right: ($gutterWidth * 1/4);
-	
+
 	h1 {
 		@include centeredMaxWidth(980px);
 		text-align: center;
 	}
-	
+
 	.wrap {
 		background-image: url(/assets/images/valprop-bg--features.png);
 		background-position: center bottom;
@@ -37,10 +37,14 @@
 }
 
 #mfa {
+	h2 {
+		color: white;
+	}
 	.row {
 		@include centeredMaxWidth(900px);
+		color: white;
 	}
-	
+
 	.col-1-2 + .col-1-2 {
 		border-top: 1px solid mix($colorGrey, $colorBlueLight, 50%);
 		padding-top: 30px;
@@ -53,13 +57,28 @@
 	}
 }
 
+#oan {
+	h2 {
+		color: $colorBlue;
+	}
+	h3 {
+		color: $colorBlue;
+	}
+	.row {
+		color: $colorBlue;
+	}
+	p {
+		color: $fontColor;
+	}
+}
+
 #logs {
 	background-image: url(/assets/images/section-bg--features-logs.jpg);
 	background-position: center bottom;
 	background-repeat: no-repeat;
 	background-size: 540px;
 	padding-bottom: 240px;
-	
+
 	header {
 		@include centeredMaxWidth(900px);
 	}
@@ -69,7 +88,7 @@
 	#valprop .wrap {
 		padding-bottom: 220px;
 	}
-	
+
 	#logs {
 		background-size: 720px;
 		padding-bottom: 300px;
@@ -80,7 +99,7 @@
 	#valprop .wrap {
 		padding-bottom: 260px;
 	}
-	
+
 	#logs {
 		background-size: 800px;
 		padding-bottom: 340px;
@@ -91,12 +110,12 @@
 	#valprop .wrap {
 		padding-bottom: 320px;
 	}
-	
+
 	#mfa .col-1-2 + .col-1-2 {
 		border-top: 0;
 		padding-top: 0;
 	}
-	
+
 	#logs {
 		background-size: 1100px;
 		padding-bottom: 440px;
