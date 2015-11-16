@@ -4,35 +4,84 @@ title: Factors (MFA)
 redirect_from: "/docs/api/rest/factors.html"
 ---
 
-# Overview
+## Overview
 
 The Okta Factors API provides operations to enroll, manage, and verify factors for multi-factor authentication (MFA).  It is optimized for both administrative and end-user account management, but may also be used verify a factor at any time on-demand.
 
 The Factors API contains three types of operations.
 
- - **Factor Operations** &ndash; List factors and security questions.
- - **Factor Lifecycle Operations** &ndash; Enroll, activate, and reset factors.
- - **Factor Verification Operations** &ndash; Verify a factor
+ - **[Factor Operations](#factor-operations)** &ndash; List factors and security questions.
+ - **[Factor Lifecycle Operations](#factor-lifecycle-operations)** &ndash; Enroll, activate, and reset factors.
+ - **[Factor Verification Operations](#factor-verification-operations)** &ndash; Verify a factor
 
 ## Factor Model
 
-|----------------+-----------------------------------------------------------------+--------------------------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
-| Property       | Description                                                     | DataType                                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| -------------- | --------------------------------------------------------------- | ------------------------------------------------------------------------------ | -------- | ------ | -------- | --------- | --------- | ---------- |
-| id             | unique key for factor                                           | String                                                                         | FALSE    | TRUE   | TRUE     |           |           |            |
-| factorType     | type of factor                                                  | [Factor Type](#factor-type)                                                    | FALSE    | TRUE   | TRUE     |           |           |            |
-| provider       | factor provider                                                 | [Provider Type](#Provider-Type)                                                | FALSE    | TRUE   | TRUE     |           |           |            |
-| status         | status of factor                                                | `NOT_SETUP`, `PENDING_ACTIVATION`, `ENROLLED`, `ACTIVE`, `INACTIVE`, `EXPIRED` | FALSE    | FALSE  | TRUE     |           |           |            |
-| created        | timestamp when factor was created                               | Date                                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
-| lastUpdated    | timestamp when factor was last updated                          | Date                                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
-| profile        | profile of a [supported factor](#supported-factors)             | [Factor Profile Object](#factor-profile-object)                                | TRUE     | FALSE  | FALSE    |           |           |            |
-| _links         | [discoverable resources](#links-object) related to the factor   | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                 | TRUE     | FALSE  | TRUE     |           |           |            |
-| _embedded      | [embedded resources](#embedded-object) related to the factor    | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                 | TRUE     | FALSE  | TRUE     |           |           |            |
-|----------------+-----------------------------------------------------------------+--------------------------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+### Example
+
+~~~json
+{
+  "id": "smsk33ujQ59REImFX0g3",
+  "factorType": "sms",
+  "provider": "OKTA",
+  "status": "ACTIVE",
+  "created": "2015-02-04T07:07:25.000Z",
+  "lastUpdated": "2015-02-04T07:07:25.000Z",
+  "profile": {
+    "phoneNumber": "+1415551337"
+  },
+  "_links": {
+    "verify": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/smsk33ujQ59REImFX0g3/verify",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "self": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/smsk33ujQ59REImFX0g3",
+      "hints": {
+        "allow": [
+          "GET",
+          "DELETE"
+        ]
+      }
+    },
+    "user": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+
+### Factor Properties
+
+Factors have the following properties:
+
+|----------------+------------------------------------------------------------------+--------------------------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+| Property       | Description                                                      | DataType                                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| -------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------ | -------- | ------ | -------- | --------- | --------- | ---------- |
+| id             | unique key for factor                                            | String                                                                         | FALSE    | TRUE   | TRUE     |           |           |            |
+| factorType     | type of factor                                                   | [Factor Type](#factor-type)                                                    | FALSE    | TRUE   | TRUE     |           |           |            |
+| provider       | factor provider                                                  | [Provider Type](#provider-type)                                                | FALSE    | TRUE   | TRUE     |           |           |            |
+| status         | status of factor                                                 | `NOT_SETUP`, `PENDING_ACTIVATION`, `ENROLLED`, `ACTIVE`, `INACTIVE`, `EXPIRED` | FALSE    | FALSE  | TRUE     |           |           |            |
+| created        | timestamp when factor was created                                | Date                                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
+| lastUpdated    | timestamp when factor was last updated                           | Date                                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
+| profile        | profile of a [supported factor](#supported-factors-for-providers)| [Factor Profile Object](#factor-profile-object)                                | TRUE     | FALSE  | FALSE    |           |           |            |
+| verify         | optional verification  for factor enrollment                     | [Factor Verification Object](#factor-verification-object)                      | TRUE     | FALSE  | FALSE    |           |           |            |
+| _links         | [discoverable resources](#links-object) related to the factor    | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                 | TRUE     | FALSE  | TRUE     |           |           |            |
+| _embedded      | [embedded resources](#embedded-resources) related to the factor  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                 | TRUE     | FALSE  | TRUE     |           |           |            |
+|----------------+------------------------------------------------------------------+--------------------------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
 
 > `id`, `created`, `lastUpdated`, `status`, `_links`, and `_embedded` are only available after a factor is enrolled.
 
-### Factor Type
+#### Factor Type
 
 The following factor types are supported:
 
@@ -41,13 +90,14 @@ The following factor types are supported:
 | --------------------- | --------------------------------------------------------------------------------------------------------------------|
 | `push`                | Out-of-band verification via push notification to a device and transaction verification with digital signature      |
 | `sms`                 | Software [OTP](http://en.wikipedia.org/wiki/One-time_password) sent via SMS to a registered phone number            |
-| `token`               | Software or hardware one-time password [OTP](http://en.wikipedia.org/wiki/One-time_password) device                 |
+| `token`               | Software or hardware [One-time Password (OTP)](http://en.wikipedia.org/wiki/One-time_password) device               |
 | `token:software:totp` | Software [Time-based One-time Password (TOTP)](http://en.wikipedia.org/wiki/Time-based_One-time_Password_Algorithm) |
 | `token:hardware`      | Hardware one-time password [OTP](http://en.wikipedia.org/wiki/One-time_password) device                             |
 | `question`            | Additional knowledge based security question                                                                        |
+| `web`                 | HTML inline frame (iframe) for embedding verification from a 3rd party                                              |
 |-----------------------+---------------------------------------------------------------------------------------------------------------------|
 
-### Provider Type
+#### Provider Type
 
 The following providers are supported:
 
@@ -55,14 +105,16 @@ The following providers are supported:
 | Provider   | Description                   |
 | ---------- | ----------------------------- |
 | `OKTA`     | Okta                          |
-| `RSA`      | RSA SecurID Integration       |
-| `SYMANTEC` | Symantec VIP Integration      |
-| `GOOGLE`   | Google Integration            |
+| `RSA`      | RSA SecurID                   |
+| `SYMANTEC` | Symantec VIP                  |
+| `GOOGLE`   | Google                        |
+| `DUO`      | Duo Security                  |
+| `YUBICO`   | Yubico                        |
 |------------+-------------------------------|
 
-### Supported Factors
+#### Supported Factors for Providers
 
-The following providers support the following factor types:
+Each provider only supports a subset of factor types.  The following table lists the factor types supported for each provider:
 
 |------------+------------------------|
 | Provider   | Factor Type            |
@@ -74,6 +126,8 @@ The following providers support the following factor types:
 | `GOOGLE`   | `token:software:totp`  |
 | `SYMANTEC` | `token`                |
 | `RSA`      | `token`                |
+| `DUO`      | `web`                  |
+| `YUBICO`   | `token:hardware`       |
 |------------+------------------------|
 
 ### Factor Profile Object
@@ -123,9 +177,10 @@ E.164 numbers can have a maximum of fifteen digits and are usually written as fo
 
 For example, to convert a US phone number (415 599 2671) to E.164 format, one would need to add the ‘+’ prefix and the country code (which is 1) in front of the number (+1 415 599 2671). In the UK and many other countries internationally, local dialing requires the addition of a 0 in front of the subscriber number. However, to use E.164 formatting, this 0 must be removed. A number such as 020 7183 8750 in the UK would be formatted as +44 20 7183 8750.
 
-#### TOTP Profile
 
-Specifies the profile for a `token:software:totp` factor
+#### Token Profile
+
+Specifies the profile for a `token`, `token:hardware`, `token:software`, or `token:software:totp` factor
 
 |---------------+--------------------+-----------+----------+---------+----------+-----------+-----------+------------|
 | Property      | Description        | DataType  | Nullable | Unique  | Readonly | MinLength | MaxLength | Validation |
@@ -141,6 +196,44 @@ Specifies the profile for a `token:software:totp` factor
 }
 ~~~
 
+#### Web Profile
+
+Specifies the profile for a `web` factor
+
+|---------------+--------------------+-----------+----------+---------+----------+-----------+-----------+------------|
+| Property      | Description        | DataType  | Nullable | Unique  | Readonly | MinLength | MaxLength | Validation |
+| ------------- | ------------------ | --------- | -------- | ------- | -------- | --------- | --------- | ---------- |
+| credentialId  | id for credential  | String    | FALSE    | FALSE   | TRUE     |           |           |            |
+|---------------+--------------------+-----------+----------+---------+----------+-----------+-----------+------------|
+
+~~~json
+{
+  "profile": {
+    "credentialId": "dade.murphy@example.com"
+  }
+}
+~~~
+
+### Factor Verification Object
+
+Specifies additional verification data for `token` or `token:hardware` factors
+
+|---------------+----------------------------+-----------+----------+---------+----------+-----------+-----------+------------|
+| Property      | Description                | DataType  | Nullable | Unique  | Readonly | MinLength | MaxLength | Validation |
+| ------------- | -------------------------- | --------- | -------- | ------- | -------- | --------- | --------- | ---------- |
+| passCode     | OTP for current time window | String    | FALSE    | FALSE   | FALSE    |           |           |            |
+| nextPassCode | OTP for next time window    | String    | TRUE     | FALSE   | FALSE    |           |           |            |
+|--------------+-----------------------------+-----------+----------+---------+----------+-----------+-----------+------------|
+
+~~~json
+{
+  "verify": {
+    "passCode": "875498",
+    "nextPassCode": "678195"
+  }
+}
+~~~
+
 ### Links Object
 
 Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the current status of a factor using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  This object is used for dynamic discovery of related resources and lifecycle operations.
@@ -150,8 +243,11 @@ Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988))
 | ------------------ | -------------------------------------------------------------------------------- |
 | self               | The actual factor                                                                |
 | activate           | [Lifecycle action](#activate-factor) to transition factor to `ACTIVE` status     |
-| deactivate         | [Lifecycle action](#deactivate-factor) to transition factor to `INACTIVE` status |
 | questions          | List of questions for the `question` factor type                                 |
+| verify             | [Verify the factor](#factor-verification-operations)                             |
+| send               | List of delivery options to send an activation or factor challenge               |
+| resend             | List of delivery options to resend activation or factor challenge                |
+| poll               | Polls factor for completion of activation of verification                        |
 |--------------------+--------------------------------------------------------------------------------- |
 
 > The Links Object is **read-only**
@@ -160,7 +256,7 @@ Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988))
 
 ### TOTP Factor Activation Object
 
-TOTP factors when activated have an embedded verification object which describes the [TOTP](http://tools.ietf.org/html/rfc6238) algorithm parameters.
+TOTP factors when activated have an embedded activation object which describes the [TOTP](http://tools.ietf.org/html/rfc6238) algorithm parameters.
 
 |----------------+---------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
 | Property       | Description                                       | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
@@ -183,7 +279,68 @@ TOTP factors when activated have an embedded verification object which describes
 }
 ~~~
 
+### Push Factor Activation Object
+
+Push factors must complete activation on the device by scanning the QR code or visiting activation link sent via email or sms.
+
+|----------------+---------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+| Property       | Description                                       | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| -------------- | ------------------------------------------------- | -------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
+| expiresAt      | lifetime of activation                            | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
+| factorResult   | result of factor activation                       | `WAITING`, `CANCELLED`, `TIMEOUT`, or `ERROR`                  | FALSE    | FALSE  | TRUE     |           |           |            |
+| _links         | discoverable resources related to the activation  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | FALSE    | FALSE  | TRUE     |           |           |            |
+|----------------+---------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+
+~~~json
+{
+  "activation": {
+    "expiresAt": "2015-11-13T07:44:22.000Z",
+    "factorResult": "WAITING",
+    "_links": {
+      "send": [
+        {
+          "name": "email",
+          "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/lifecycle/activate/email",
+          "hints": {
+            "allow": [
+              "POST"
+            ]
+          }
+        },
+        {
+          "name": "sms",
+          "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/lifecycle/activate/sms",
+          "hints": {
+            "allow": [
+              "POST"
+            ]
+          }
+        }
+      ],
+      "qrcode": {
+        "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/qr/00Ji8qVBNJD4LmjYy1WZO2VbNqvvPdaCVua-1qjypa",
+        "type": "image/png"
+      }
+    }
+  }
+}
+~~~
+
+#### Push Factor Activation Links Object
+
+Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the push factor activation object using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  This object is used for dynamic discovery of related resources and operations.
+
+|--------------------+------------------------------------------------------------------------------------|
+| Link Relation Type | Description                                                                        |
+| ------------------ | ---------------------------------------------------------------------------------- |
+| qrcode             | QR code that encodes the push activation code needed for enrollment on the device  |
+| send               | Sends an activation link via `email` or `sms` for users who can't scan the QR code |
+|--------------------+------------------------------------------------------------------------------------|
+
+
 ### Factor Verify Result Object
+
+Describes the outcome of a factor verification request
 
 |---------------+---------------------------------------------------+---------------------------------+----------+--------+----------|-----------|-----------+------------|
 | Property      | Description                                       | DataType                        | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
@@ -194,15 +351,16 @@ TOTP factors when activated have an embedded verification object which describes
 
 #### Factor Result
 
-Specifies the result status of a factor verification attempt
+Specifies the status of a factor verification attempt
 
 |------------------------+-------------------------------------------------------------------------------------------------------------------------------------|
-| factorResult           | Description                                                                                                                         |
+| Result                 | Description                                                                                                                         |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------|
 | `SUCCESS`              | Factor was successfully verified                                                                                                    |
 | `CHALLENGE`            | Another verification is required                                                                                                    |
 | `WAITING`              | Factor verification has started but not yet completed (e.g user hasn't answered phone call yet)                                     |
 | `FAILED`               | Factor verification failed                                                                                                          |
+| `REJECTED`             | Factor verification was denied by user                                                                                              |
 | `CANCELLED`            | Factor verification was canceled by user                                                                                            |
 | `TIMEOUT`              | Unable to verify factor within the allowed time window                                                                              |
 | `TIME_WINDOW_EXCEEDED` | Factor was successfully verified but outside of the computed time window.  Another verification is required in current time window. |
@@ -240,7 +398,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/ufs2bysphxKODSZKWVCT"
+"https://${org}.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ufs2bysphxKODSZKWVCT"
 ~~~
 
 #### Response Example
@@ -259,7 +417,7 @@ curl -v -X GET \
   },
   "_links": {
     "verify": {
-      "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/sms2gt8gzgEBPUWBIFHN/verify",
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/sms2gt8gzgEBPUWBIFHN/verify",
       "hints": {
         "allow": [
           "POST"
@@ -267,7 +425,7 @@ curl -v -X GET \
       }
     },
     "self": {
-      "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/sms2gt8gzgEBPUWBIFHN",
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/sms2gt8gzgEBPUWBIFHN",
       "hints": {
         "allow": [
           "GET",
@@ -276,7 +434,7 @@ curl -v -X GET \
       }
     },
     "user": {
-      "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG",
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL",
       "hints": {
         "allow": [
           "GET"
@@ -314,7 +472,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors"
+"https://${org}.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors"
 ~~~
 
 #### Response Example
@@ -335,7 +493,7 @@ curl -v -X GET \
     },
     "_links": {
       "questions": {
-        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/questions",
+        "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/questions",
         "hints": {
           "allow": [
             "GET"
@@ -343,7 +501,7 @@ curl -v -X GET \
         }
       },
       "self": {
-        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/ufs2bysphxKODSZKWVCT",
+        "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ufs2bysphxKODSZKWVCT",
         "hints": {
           "allow": [
             "GET",
@@ -352,7 +510,7 @@ curl -v -X GET \
         }
       },
       "user": {
-        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG",
+        "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL",
         "hints": {
           "allow": [
             "GET"
@@ -374,7 +532,7 @@ curl -v -X GET \
     "_links": {
       "next": {
         "name": "activate",
-        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/ostf2gsyictRQDSGTDZE/lifecycle/activate",
+        "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf2gsyictRQDSGTDZE/lifecycle/activate",
         "hints": {
           "allow": [
             "POST"
@@ -382,7 +540,7 @@ curl -v -X GET \
         }
       },
       "self": {
-        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/ostf2gsyictRQDSGTDZE",
+        "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf2gsyictRQDSGTDZE",
         "hints": {
           "allow": [
             "GET"
@@ -390,7 +548,7 @@ curl -v -X GET \
         }
       },
       "user": {
-        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG",
+        "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL",
         "hints": {
           "allow": [
             "GET"
@@ -419,7 +577,7 @@ curl -v -X GET \
     },
     "_links": {
       "verify": {
-        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/sms2gt8gzgEBPUWBIFHN/verify",
+        "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/sms2gt8gzgEBPUWBIFHN/verify",
         "hints": {
           "allow": [
             "POST"
@@ -427,7 +585,7 @@ curl -v -X GET \
         }
       },
       "self": {
-        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/sms2gt8gzgEBPUWBIFHN",
+        "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/sms2gt8gzgEBPUWBIFHN",
         "hints": {
           "allow": [
             "GET",
@@ -436,7 +594,7 @@ curl -v -X GET \
         }
       },
       "user": {
-        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG",
+        "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL",
         "hints": {
           "allow": [
             "GET"
@@ -453,7 +611,7 @@ curl -v -X GET \
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors/catalog
 
-Enumerates all the [supported factors](#supported-factors) that can be enrolled for the specified user.
+Enumerates all the [supported factors](#supported-factors-for-providers) that can be enrolled for the specified user.
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -475,7 +633,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/catalog"
+"https://${org}.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/catalog"
 ~~~
 
 #### Response Example
@@ -488,7 +646,7 @@ curl -v -X GET \
     "provider": "OKTA",
     "_links": {
       "questions": {
-        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/questions",
+        "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/questions",
         "hints": {
           "allow": [
             "GET"
@@ -496,7 +654,7 @@ curl -v -X GET \
         }
       },
       "enroll": {
-        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors",
+        "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors",
         "hints": {
           "allow": [
             "POST"
@@ -510,7 +668,7 @@ curl -v -X GET \
     "provider": "OKTA",
     "_links": {
       "enroll": {
-        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors",
+        "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors",
         "hints": {
           "allow": [
             "POST"
@@ -524,7 +682,7 @@ curl -v -X GET \
     "provider": "GOOGLE",
     "_links": {
       "enroll": {
-        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors",
+        "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors",
         "hints": {
           "allow": [
             "POST"
@@ -538,7 +696,7 @@ curl -v -X GET \
     "provider": "OKTA",
     "_links": {
       "enroll": {
-        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors",
+        "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors",
         "hints": {
           "allow": [
             "POST"
@@ -552,7 +710,7 @@ curl -v -X GET \
     "provider": "RSA",
     "_links": {
       "enroll": {
-        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors",
+        "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors",
         "hints": {
           "allow": [
             "POST"
@@ -566,7 +724,7 @@ curl -v -X GET \
     "provider": "SYMANTEC",
     "_links": {
       "enroll": {
-        "href": "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors",
+        "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors",
         "hints": {
           "allow": [
             "POST"
@@ -612,7 +770,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/questions"
+"https://${org}.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/questions"
 ~~~
 
 #### Response Example
@@ -642,7 +800,16 @@ curl -v -X GET \
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:id*/factors
 
-Enrolls a user with a supported [factor](#list-factors-to-enroll) for the specified user.
+Enrolls a user with a supported [factor](#list-factors-to-enroll).
+
+- [Enroll Okta Security Question Factor](#enroll-okta-security-question-factor)
+- [Enroll Okta SMS Factor](#enroll-okta-sms-factor)
+- [Enroll Okta Verify TOTP Factor](#enroll-okta-verify-totp-factor)
+- [Enroll Okta Verify Push Factor](#enroll-okta-verify-push-factor)
+- [Enroll Google Authenticator Factor](#enroll-google-authenticator-factor)
+- [Enroll RSA SecurID Factor](#enroll-rsa-securid-factor)
+- [Enroll Symantec VIP Factor](#enroll-symantec-vip-factor)
+- [Enroll YubiKey Factor](#enroll-yubikey-factor)
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -657,12 +824,12 @@ factor       | Factor           | Body        | [Factor](#factor-model) | TRUE  
 
 All responses return the enrolled [Factor](#factor-model) with a status of either `PENDING_ACTIVATION` or `ACTIVE`.
 
-> Some [factor types](#factor-types) require [activation](#activate-factor) to complete the enrollment process
+> Some [factor types](#factor-type) require [activation](#activate-factor) to complete the enrollment process
 
-#### Enroll User with Security Question
+#### Enroll Okta Security Question Factor
 {:.api .api-operation}
 
-Enrolls a user with the Okta `question` factor and [question profile](#question-profile).
+Enrolls a user with the `question` factor and [question profile](#question-profile).
 
 > Security Question factor does not require activation and is `ACTIVE` after enrollment
 
@@ -729,7 +896,7 @@ curl -v -X POST \
 }
 ~~~
 
-#### Enroll User with Okta SMS Factor
+#### Enroll Okta SMS Factor
 {:.api .api-operation}
 
 Enrolls a user with the Okta `sms` factor and a [SMS profile](#sms-profile).  A text message with an OTP is sent to the device during enrollment and must be [activated](#activate-sms-factor) by following the `activate` link relation to complete the enrollment process.
@@ -748,7 +915,7 @@ curl -v -X POST \
   "profile": {
     "phoneNumber": "+1-555-415-1337"
   }
-}' "https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors"
+}' "https://${org}.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors"
 ~~~
 
 ##### Response Example
@@ -805,10 +972,10 @@ curl -v -X POST \
 }
 ~~~
 
-#### Enroll User with Okta Verify Factor
+#### Enroll Okta Verify TOTP Factor
 {:.api .api-operation}
 
-Enrolls a user with the Okta `token:software:totp` factor.  The factor must be [activated](#activate-totp-factor) after enrollment by following the `activate` link relation to complete the enrollment process.
+Enrolls a user with an Okta `token:software:totp` factor.  The factor must be [activated](#activate-totp-factor) after enrollment by following the `activate` link relation to complete the enrollment process.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -881,7 +1048,100 @@ curl -v -X POST \
 }
 ~~~
 
-#### Enroll User with Google Authenticator Factor
+#### Enroll Okta Verify Push Factor
+{:.api .api-operation}
+
+Enrolls a user with the Okta verify `push` factor. The factor must be [activated on the device](#activate-push-factor) by scanning the QR code or visiting the activation link sent via email or sms.
+
+> Use the published activation links to embed the QR code or distribute an activation `email` or `sms`
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "factorType": "push",
+  "provider": "OKTA",
+}' "https://${org}.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "id": "opfbtzzrjgwauUsxO0g4",
+  "factorType": "push",
+  "provider": "OKTA",
+  "status": "PENDING_ACTIVATION",
+  "created": "2015-11-13T07:34:22.000Z",
+  "lastUpdated": "2015-11-13T07:34:22.000Z",
+  "_links": {
+    "poll": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/lifecycle/activate/poll",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "self": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    },
+    "user": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    }
+  },
+  "_embedded": {
+    "activation": {
+      "expiresAt": "2015-11-13T07:44:22.000Z",
+      "factorResult": "WAITING",
+      "_links": {
+        "send": [
+          {
+            "name": "email",
+            "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/lifecycle/activate/email",
+            "hints": {
+              "allow": [
+                "POST"
+              ]
+            }
+          },
+          {
+            "name": "sms",
+            "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/lifecycle/activate/sms",
+            "hints": {
+              "allow": [
+                "POST"
+              ]
+            }
+          }
+        ],
+        "qrcode": {
+          "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/qr/00Ji8qVBNJD4LmjYy1WZO2VbNqvvPdaCVua-1qjypa",
+          "type": "image/png"
+        }
+      }
+    }
+  }
+}
+~~~
+
+#### Enroll Google Authenticator Factor
 {:.api .api-operation}
 
 Enrolls a user with the Google `token:software:totp` factor.  The factor must be [activated](#activate-totp-factor) after enrollment by following the `activate` link relation to complete the enrollment process.
@@ -957,10 +1217,10 @@ curl -v -X POST \
 }
 ~~~
 
-#### Enroll User with an Okta Verify Push Factor
+#### Enroll RSA SecurID Factor
 {:.api .api-operation}
 
-Enrolls a user with the Okta verify `push` factor. The factor must be [activated](#activate-push-factor) after enrollment by following the `activate` link relation to complete the enrollment process.
+Enrolls a user with a RSA SecurID factor and a [token profile](#token-profile).  RSA tokens must be verified with the [current pin+passcode](#factor-verification-object) as part of the enrollment request.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -971,9 +1231,15 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-  "factorType": "push",
-  "provider": "OKTA",
-}' "https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors"
+  "factorType": "token",
+  "provider": "RSA",
+  "profile": {
+    "credentialId": "dade.murphy@example.com"
+  },
+  "verify": {
+    "passCode": "5275875498",
+  }
+}' "https://${org}.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors"
 ~~~
 
 ##### Response Example
@@ -981,28 +1247,18 @@ curl -v -X POST \
 
 ~~~json
 {
-  "id": "mbl1nz9JHJGHWRKMTLHP",
-  "factorType": "push",
-  "provider": "OKTA",
-  "status": "PENDING_ACTIVATION",
-  "created": "2015-04-05T20:59:49.000Z",
-  "lastUpdated": "2015-04-06T03:59:49.000Z",
+  "id": "rsabtznMn6cp94ez20g4",
+  "factorType": "token",
+  "provider": "RSA",
+  "status": "ACTIVE",
+  "created": "2015-11-13T07:05:53.000Z",
+  "lastUpdated": "2015-11-13T07:05:53.000Z",
   "profile": {
-      "credentialId": "nag@test.com",
-      "keys": [
-        {
-          "kty": "PKIX",
-          "use": "sig",
-          "kid": "default",
-          "x5c": [
-              null
-            ]
-          }
-        ]
+    "credentialId": "dade.murphy@example.com"
   },
   "_links": {
-    "activate": {
-      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP/lifecycle/activate",
+    "verify": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/rsabtznMn6cp94ez20g4/verify",
       "hints": {
         "allow": [
           "POST"
@@ -1010,10 +1266,11 @@ curl -v -X POST \
       }
     },
     "self": {
-      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP",
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/rsabtznMn6cp94ez20g4",
       "hints": {
         "allow": [
-          "GET"
+          "GET",
+          "DELETE"
         ]
       }
     },
@@ -1024,21 +1281,146 @@ curl -v -X POST \
           "GET"
         ]
       }
-    },
-    "qrcode": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/qr/00CnAHABTzHh9hjEij9qcteMrOoeFLK6evHruUH7p9",
-      "type": "image/png"
-    }
-  },
-  "_embedded": {
-    "activation": {
-      "links": null,
-      "deviceActivationToken": "I17JQoOqbYOPH_lMWK5F"
     }
   }
 }
 ~~~
 
+#### Enroll Symantec VIP Factor
+{:.api .api-operation}
+
+Enrolls a user with a Symantec VIP factor and a [token profile](#token-profile).  Symantec tokens must be verified with the [current and next passcodes](#factor-verification-object) as part of the enrollment request.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "factorType": "token",
+  "provider": "SYMANTEC",
+  "profile": {
+    "credentialId": "VSMT14393584"
+  },
+  "verify": {
+    "passCode": "875498",
+    "nextPassCode": "678195"
+  }
+}' "https://${org}.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "id": "ufvbtzgkYaA7zTKdQ0g4",
+  "factorType": "token",
+  "provider": "SYMANTEC",
+  "status": "ACTIVE",
+  "created": "2015-11-13T06:52:08.000Z",
+  "lastUpdated": "2015-11-13T06:52:08.000Z",
+  "profile": {
+    "credentialId": "VSMT14393584"
+  },
+  "_links": {
+    "verify": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ufvbtzgkYaA7zTKdQ0g4/verify",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "self": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ufvbtzgkYaA7zTKdQ0g4",
+      "hints": {
+        "allow": [
+          "GET",
+          "DELETE"
+        ]
+      }
+    },
+    "user": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+#### Enroll YubiKey Factor
+{:.api .api-operation}
+
+Enrolls a user with a YubiCo factor (YubiKey).  YubiKeys must be verified with the [current passcode](#factor-verification-object) as part of the enrollment request.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "factorType": "token:hardware",
+  "provider": "YUBICO",
+  "verify": {
+    "passCode": "cccccceukngdfgkukfctkcvfidnetljjiknckkcjulji"
+  }
+}' "https://${org}.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "id": "ykfbty3BJeBgUi3750g4",
+  "factorType": "token:hardware",
+  "provider": "YUBICO",
+  "status": "ACTIVE",
+  "created": "2015-11-13T05:27:49.000Z",
+  "lastUpdated": "2015-11-13T05:27:49.000Z",
+  "profile": {
+    "credentialId": "000004102994"
+  },
+  "_links": {
+    "verify": {
+      "href": "https://${org}.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ykfbty3BJeBgUi3750g4/verify",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "self": {
+      "href": "hhttps://${org}.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ykfbty3BJeBgUi3750g4",
+      "hints": {
+        "allow": [
+          "GET",
+          "DELETE"
+        ]
+      }
+    },
+    "user": {
+      "href": "https://${org}.okta.com/api/v1/users/00u15s1KDETTQMQYABRL",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    }
+  }
+}
+~~~
 
 
 ### Activate Factor
@@ -1046,11 +1428,11 @@ curl -v -X POST \
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/lifecycle/activate</span>
 
-The `sms` and `token:software:totp` [factor types](#factor-types) require activation to complete the enrollment process.
+The `sms` and `token:software:totp` [factor types](#factor-type) require activation to complete the enrollment process.
 
 - [Activate TOTP Factor](#activate-totp-factor)
 - [Activate SMS Factor](#activate-sms-factor)
-- [Activate Okta Verify Push Factor](#activate-push-factor)
+- [Activate Push Factor](#activate-push-factor)
 
 #### Activate TOTP Factor
 {:.api .api-operation}
@@ -1236,32 +1618,32 @@ curl -v -X POST \
 }
 ~~~
 
-#### Activate Okta Verify Push Factor
+#### Activate Push Factor
 {:.api .api-operation}
 
-Poll the device to verify activation for a `push` factor is complete.  There are three response examples showing pending activation, successful activation, and a timed out request.
+Activation of `push` factors are asynchronous and must be polled for completion when the `factorResult` returns a `WAITING` status.
+
+Activations have a short lifetime (minutes) and will `TIMEOUT` if they are not completed before the `expireAt` timestamp.  Use the published `activate` link to restart the activation process if the activation is expired.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
-uid          | `id` of user                                        | URL        | String   | TRUE     |
-fid          | `id` of factor returned from enrollment             | URL        | String   | TRUE     |
+Parameter | Description    | Param Type | DataType | Required | Default
+--------- | -------------- | ---------- | -------- | -------- | -------
+uid       | `id` of user   | URL        | String   | TRUE     |
+fid       | `id` of factor | URL        | String   | TRUE     |
 
 
 #### Response Parameters
 {:.api .api-response .api-response-params}
 
-Parameter    | Description                                         | Param Type | DataType                                            | Required | Default
------------- | --------------------------------------------------- | ---------- | --------------------------------------------------- | -------- | -------
-factorResult | result of verification result                       | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
+Parameter        | Description                    | Param Type | DataType                                                        | Required | Default
+---------------- | ------------------------------ | ---------- | --------------------------------------------------------------- | -------- | -------
+activationResult | asynchronous activation result | Body       | [Push Factor Activation Object](#push-factor-activation-object) | TRUE     |
 
 
-#### Response Example
+#### Response Example (Waiting)
 {:.api .api-response .api-response-example}
-
-In this example, the a response from the user is pending and has not timed out.
 
 ~~~json
 {
@@ -1269,21 +1651,21 @@ In this example, the a response from the user is pending and has not timed out.
   "factorResult": "WAITING",
   "_links": {
     "poll": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/lifecycle/activate",
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/lifecycle/activate",
       "hints": {
         "allow": [
           "POST"
         ]
       }
-    },  
+    },
     "qrcode": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/qr/00fukNElRS_Tz6k-CFhg3pH4KO2dj2guhmaapXWbc4",
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/qr/00fukNElRS_Tz6k-CFhg3pH4KO2dj2guhmaapXWbc4",
       "type": "image/png"
     },
     "send": [
       {
         "name": "email",
-        "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP/lifecycle/activate/email",
+        "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/lifecycle/activate/email",
         "hints": {
           "allow": [
             "POST"
@@ -1292,7 +1674,7 @@ In this example, the a response from the user is pending and has not timed out.
       },
       {
         "name": "sms",
-        "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP/lifecycle/activate/sms",
+        "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/lifecycle/activate/sms",
         "hints": {
           "allow": [
             "POST"
@@ -1304,73 +1686,70 @@ In this example, the a response from the user is pending and has not timed out.
 }
 ~~~
 
-#### Response Example
+#### Response Example (Timeout)
 {:.api .api-response .api-response-example}
-
-In this example, the user has responded and activation is complete.
 
 ~~~json
 {
-  "id": "opfh52xcuft3J4uZc0g3",
-  "factorType": "push",
-  "provider": "OKTA",
-  "status": "ACTIVE",
-  "created": "2015-04-01T15:57:32.000Z",
-  "lastUpdated": "2015-04-01T16:04:56.000Z",
-  "profile": {
-    "platform": "IOS",
-    "deviceType": "SMARTPHONE",
-    "name": "brock iPhone",
-    "version": "8.1"
-  },
-  "_links": {
-    "self": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3",
-      "hints": {
-        "allow": [
-          "GET",
-          "DELETE"
-        ]
-      }
-    },
-    "verify": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/verify",
-      "hints": {
-        "allow": [
-          "POST"
-        ]
-      }
-    },
-    "user": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3",
-      "hints": {
-        "allow": [
-          "GET"
-        ]
-      }
+    "factorResult": "TIMEOUT",
+    "_links": {
+        "activate": {
+            "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/lifecycle/activate",
+            "hints": {
+                "allow": [
+                    "POST"
+                ]
+            }
+        }
     }
-  }
 }
 ~~~
 
-#### Response Example
+#### Response Example (Activated)
 {:.api .api-response .api-response-example}
-
-In this example, the user has not responded and the request timed out.
 
 ~~~json
 {
-  "factorResult": "TIMEOUT",
-  "_links": {
-    "activate": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/lifecycle/activate",
-      "hints": {
-        "allow": [
-          "POST"
-        ]
-      }
+    "id": "opf3hkfocI4JTLAju0g4",
+    "factorType": "push",
+    "provider": "OKTA",
+    "status": "ACTIVE",
+    "created": "2015-03-16T18:01:28.000Z",
+    "lastUpdated": "2015-08-27T14:25:17.000Z",
+    "profile": {
+      "credentialId": "dade.murphy@example.com",
+      "deviceType": "SmartPhone_IPhone",
+      "name": "Gibson",
+      "platform": "IOS",
+      "version": "9.0"
+    },
+    "_links": {
+        "verify": {
+            "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/verify",
+            "hints": {
+                "allow": [
+                    "POST"
+                ]
+            }
+        },
+        "self": {
+            "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4",
+            "hints": {
+                "allow": [
+                    "GET",
+                    "DELETE"
+                ]
+            }
+        },
+        "user": {
+            "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL",
+            "hints": {
+                "allow": [
+                    "GET"
+                ]
+            }
+        }
     }
-  }
 }
 ~~~
 
@@ -1380,7 +1759,7 @@ In this example, the user has not responded and the request timed out.
 
 <span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/users/*:uid*/factors/*:fid*
 
-Resets a factor for the specified user.
+Unenrolls an existing factor for the specified user allowing the user to enroll a new factor.
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -1403,7 +1782,7 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors/ufs1o01OTMGHLAJPVHDZ"
+"https://${org}.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ufs1o01OTMGHLAJPVHDZ"
 ~~~
 
 #### Response Example
@@ -1434,7 +1813,7 @@ answer       | answer to security question                         | Body       
 
 Parameter    | Description                                         | Param Type | DataType                                            | Required | Default
 ------------ | --------------------------------------------------- | ---------- | --------------------------------------------------- | -------- | -------
-result       | verification result                                 | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
+factorResult | verification result                                 | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
 
 If the `answer` is invalid you will receive a `403 Forbidden` status code with the following error:
 
@@ -1498,7 +1877,7 @@ passCode     | OTP sent to device                                  | Body       
 
 Parameter    | Description                                         | Param Type | DataType                                            | Required | Default
 ------------ | --------------------------------------------------- | ---------- | --------------------------------------------------- | -------- | -------
-result       | verification result                                 | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
+factorResult | verification result                                 | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
 
 If the passcode is invalid you will receive a `403 Forbidden` status code with the following error:
 
@@ -1559,7 +1938,7 @@ passCode     | OTP generated by device                             | Body       
 
 Parameter    | Description                                         | Param Type | DataType                                            | Required | Default
 ------------ | --------------------------------------------------- | ---------- | --------------------------------------------------- | -------- | -------
-result       | verification result                                 | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
+factorResult | verification result                                 | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
 
 If the passcode is invalid you will receive a `403 Forbidden` status code with the following error:
 
@@ -1599,14 +1978,14 @@ curl -v -X POST \
 }
 ~~~
 
-### Verify an Okta Verify Push Factor
+### Verify Push Factor
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/verify</span>
 
-Verifies a `push` factor. First, send a request to the device. When successfully sent, you are in a waiting state. Then, poll for user action.
+Creates a new verification transaction and sends an asynchronous push notification to the device for the user to approve or reject.  You must [poll the transaction](#poll-for-verify-transaction-completion) to determine when it completes or expires.
 
-##### Start the Verify Transaction
+##### Start new Verify Transaction
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -1620,70 +1999,13 @@ fid          | `id` of factor                                      | URL        
 #### Response Parameters
 {:.api .api-response .api-response-params}
 
-Parameter    | Description                                         | Param Type | DataType                                            | Required | Default
------------- | --------------------------------------------------- | ---------- | --------------------------------------------------- | -------- | -------
-factorResult | result of verification result                       | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
+Parameter    | Description                                                          | Param Type | DataType                                             | Required | Default
+------------ | -------------------------------------------------------------------- | ---------- | ---------------------------------------------------- | -------- | -------
+factorResult | verification result (`WAITING`, `SUCCESS`, `REJECTED`, or `TIMEOUT`) | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
 
 
 #### Response Example
 {:.api .api-response .api-response-example}
-
-~~~json
-{
-    "factorResult": "TIMEOUT",
-    "_links": {
-        "verify": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/verify",
-            "hints": {
-                "allow": [
-                    "POST"
-                ]
-            }
-        },
-        "factor": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3",
-            "hints": {
-                "allow": [
-                    "get",
-                    "DELETE"
-                ]
-            }
-        }
-    }
-}
-~~~
-
-##### Poll the Verify Transaction
-
-### Verify Transaction
-{:.api .api-operation}
-
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors/*:fid*/transactions/*:tid*/verify
-
-Polls the verify transaction. There are four response examples showing a waiting state, a successful verification, a timeout, and a rejected verification.
-
-#### Request Parameters
-{:.api .api-request .api-request-params}
-
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
-uid          | `id` of user                                        | URL        | String   | TRUE     |
-fid          | `id` of factor                                      | URL        | String   | TRUE     |
-tid          | `id` of transaction                                 | URL        | String   | TRUE     |
-
-> You should always use the `poll` link relation and never manually contruct your own URL
-
-#### Response Parameters
-{:.api .api-response .api-response-params}
-
-Parameter    | Description                                         | Param Type | DataType                                            | Required | Default
------------- | --------------------------------------------------- | ---------- | --------------------------------------------------- | -------- | -------
-factorResult | result of verification result                       | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
-
-#### Response Example
-{:.api .api-response .api-response-example}
-
-##### Waiting State
 
 ~~~json
 {
@@ -1691,7 +2013,7 @@ factorResult | result of verification result                       | Body       
   "factorResult": "WAITING",
   "_links": {
     "poll": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/transactions/mst1eiHghhPxf0yhp0g",
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfh52xcuft3J4uZc0g3/transactions/mst1eiHghhPxf0yhp0g",
       "hints": {
         "allow": [
           "GET"
@@ -1699,7 +2021,7 @@ factorResult | result of verification result                       | Body       
       }
     },
     "cancel": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/transactions/mst1eiHghhPxf0yhp0g",
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfh52xcuft3J4uZc0g3/transactions/mst1eiHghhPxf0yhp0g",
       "hints": {
         "allow": [
           "DELETE"
@@ -1710,10 +2032,61 @@ factorResult | result of verification result                       | Body       
 }
 ~~~
 
-#### Response Example
+#### Poll for Verify Transaction Completion
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users/*:uid*/factors/*:fid*/transactions/*:tid*
+
+Polls a push verification transaction for completion.  The transaction will have a result of `WAITING`, `SUCCESS`, `REJECTED`, or `TIMEOUT`.
+
+> You should always use the `poll` link relation and never manually construct your own URL
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter    | Description         | Param Type | DataType | Required | Default
+------------ | ------------------- | ---------- | -------- | -------- | -------
+uid          | `id` of user        | URL        | String   | TRUE     |
+fid          | `id` of factor      | URL        | String   | TRUE     |
+tid          | `id` of transaction | URL        | String   | TRUE     |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+Parameter    | Description         | Param Type | DataType                                             | Required | Default
+------------ | ------------------- | ---------- | ---------------------------------------------------- | -------- | -------
+factorResult | verification result | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
+
+##### Response Example (Waiting)
 {:.api .api-response .api-response-example}
 
-##### Approved
+~~~json
+{
+  "expiresAt": "2015-04-01T15:57:32.000Z",
+  "factorResult": "WAITING",
+  "_links": {
+    "poll": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfh52xcuft3J4uZc0g3/transactions/mst1eiHghhPxf0yhp0g",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    },
+    "cancel": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfh52xcuft3J4uZc0g3/transactions/mst1eiHghhPxf0yhp0g",
+      "hints": {
+        "allow": [
+          "DELETE"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+#### Response Example (Approved)
+{:.api .api-response .api-response-example}
 
 ~~~json
 {
@@ -1721,17 +2094,15 @@ factorResult | result of verification result                       | Body       
 }
 ~~~
 
-#### Response Example
+#### Response Example (Rejected)
 {:.api .api-response .api-response-example}
-
-##### Timeout
 
 ~~~json
 {
-  "factorResult": "TIMEOUT",
+  "factorResult": "REJECTED",
   "_links": {
     "verify": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/verify",
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfh52xcuft3J4uZc0g3/verify",
       "hints": {
         "allow": [
           "POST"
@@ -1739,7 +2110,7 @@ factorResult | result of verification result                       | Body       
       }
     },
     "factor": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3",
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfh52xcuft3J4uZc0g3",
       "hints": {
         "allow": [
           "GET",
@@ -1751,17 +2122,15 @@ factorResult | result of verification result                       | Body       
 }
 ~~~
 
-#### Response Example
+#### Response Example (Timeout)
 {:.api .api-response .api-response-example}
-
-##### Rejected
 
 ~~~json
 {
-  "factorResult": "REJECTED",
+  "factorResult": "TIMEOUT",
   "_links": {
     "verify": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/verify",
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfh52xcuft3J4uZc0g3/verify",
       "hints": {
         "allow": [
           "POST"
@@ -1769,7 +2138,7 @@ factorResult | result of verification result                       | Body       
       }
     },
     "factor": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3",
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfh52xcuft3J4uZc0g3",
       "hints": {
         "allow": [
           "GET",
@@ -1778,5 +2147,66 @@ factorResult | result of verification result                       | Body       
       }
     }
   }
+}
+~~~
+
+### Verify Token Factor
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/verify</span>
+
+Verifies an OTP for a `token` or `token:hardware` factor.
+
+#### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter    | Description                                         | Param Type | DataType | Required | Default
+------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
+uid          | `id` of user                                        | URL        | String   | TRUE     |
+fid          | `id` of factor                                      | URL        | String   | TRUE     |
+passCode     | OTP generated by device                             | Body       | String   | TRUE     |
+
+#### Response Parameters
+{:.api .api-response .api-response-params}
+
+Parameter    | Description                                         | Param Type | DataType                                             | Required | Default
+------------ | --------------------------------------------------- | ---------- | ---------------------------------------------------- | -------- | -------
+factorResult | verification result                                 | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
+
+If the passcode is invalid you will receive a `403 Forbidden` status code with the following error:
+
+~~~json
+{
+  "errorCode": "E0000068",
+  "errorSummary": "Invalid Passcode/Answer",
+  "errorLink": "E0000068",
+  "errorId": "oaei_IfXcpnTHit_YEKGInpFw",
+  "errorCauses": [
+    {
+      "errorSummary": "Your passcode doesn't match our records. Please try again."
+    }
+  ]
+}
+~~~
+
+#### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "passCode": "123456"
+}' "https://${org}.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/ostf17zuKEUMYQAQGCOV/verify"
+~~~
+
+#### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "factorResult": "SUCCESS"
 }
 ~~~
