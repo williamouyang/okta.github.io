@@ -416,36 +416,38 @@ see what these customizations do by copying this code into your
 web browser. A full list of the supported customization options
 are below.
 
-    var oktaSignIn = new OktaSignIn({
-      baseUrl: baseUrl,
-      logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/7/7e/Oldacmelogo.png/200px-Oldacmelogo.png',
-    
-      features: {
-        securityImage: false,
-        rememberMe: true,
-        smsRecovery: true,
-        selfServiceUnlock: true
-      },
-    
-      helpLinks: {
-        help: 'http://acme.example.com/custom/help/page',
-        forgotPassword: 'http://acme.example.com/custom/forgot/pass/page',
-        unlock: 'http://acme.example.com/custom/unlock/page',
-        custom: [
-          { text: 'Dehydrated Boulders Support', href: 'http://acme.example.com/support/dehydrated-boulders' },
-          { text: 'Rocket Sled Questions', href: 'http://acme.example.com/questions/rocket-sled' }
-        ]
-      },
-    
-      // See the contents of the 'okta-theme-1.0.2.css' file for a full list of labels.
-      labels: {
-        'primaryauth.title': 'Acme Partner Login',
-        'primaryauth.username': 'Partner ID',
-        'primaryauth.username.tooltip': 'Enter your @ partner.com ID',
-        'primaryauth.password': 'Password',
-        'primaryauth.password.tooltip': 'Super secret password'
-      }
-    });
+~~~ javascript
+var oktaSignIn = new OktaSignIn({
+  baseUrl: baseUrl,
+  logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/7/7e/Oldacmelogo.png/200px-Oldacmelogo.png',
+
+  features: {
+    securityImage: false,
+    rememberMe: true,
+    smsRecovery: true,
+    selfServiceUnlock: true
+  },
+
+  helpLinks: {
+    help: 'http://acme.example.com/custom/help/page',
+    forgotPassword: 'http://acme.example.com/custom/forgot/pass/page',
+    unlock: 'http://acme.example.com/custom/unlock/page',
+    custom: [
+      { text: 'Dehydrated Boulders Support', href: 'http://acme.example.com/support/dehydrated-boulders' },
+      { text: 'Rocket Sled Questions', href: 'http://acme.example.com/questions/rocket-sled' }
+    ]
+  },
+
+  // See the contents of the 'okta-theme-1.0.2.css' file for a full list of labels.
+  labels: {
+    'primaryauth.title': 'Acme Partner Login',
+    'primaryauth.username': 'Partner ID',
+    'primaryauth.username.tooltip': 'Enter your @ partner.com ID',
+    'primaryauth.password': 'Password',
+    'primaryauth.password.tooltip': 'Super secret password'
+  }
+});
+~~~
 
 ### Configurable features
 
