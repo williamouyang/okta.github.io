@@ -636,36 +636,36 @@ see what these customizations do by copying this code into your
 web browser. A full list of the supported customization options
 are below.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>var oktaSignIn = new OktaSignIn({
-  baseUrl: baseUrl,
-  logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/7/7e/Oldacmelogo.png/200px-Oldacmelogo.png',
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">oktaSignIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span>
+  <span class="na">baseUrl</span><span class="p">:</span> <span class="nx">baseUrl</span><span class="p">,</span>
+  <span class="na">logo</span><span class="p">:</span> <span class="s1">'https://upload.wikimedia.org/wikipedia/en/thumb/7/7e/Oldacmelogo.png/200px-Oldacmelogo.png'</span><span class="p">,</span>
 
-  features: {
-    securityImage: false,
-    rememberMe: true,
-    smsRecovery: true,
-    selfServiceUnlock: true
-  },
+  <span class="na">features</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">securityImage</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">rememberMe</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="na">smsRecovery</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="na">selfServiceUnlock</span><span class="p">:</span> <span class="kc">true</span>
+  <span class="p">},</span>
 
-  helpLinks: {
-    help: 'http://acme.example.com/custom/help/page',
-    forgotPassword: 'http://acme.example.com/custom/forgot/pass/page',
-    unlock: 'http://acme.example.com/custom/unlock/page',
-    custom: [
-      { text: 'Dehydrated Boulders Support', href: 'http://acme.example.com/support/dehydrated-boulders' },
-      { text: 'Rocket Sled Questions', href: 'http://acme.example.com/questions/rocket-sled' }
-    ]
-  },
+  <span class="na">helpLinks</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">help</span><span class="p">:</span> <span class="s1">'http://acme.example.com/custom/help/page'</span><span class="p">,</span>
+    <span class="na">forgotPassword</span><span class="p">:</span> <span class="s1">'http://acme.example.com/custom/forgot/pass/page'</span><span class="p">,</span>
+    <span class="na">unlock</span><span class="p">:</span> <span class="s1">'http://acme.example.com/custom/unlock/page'</span><span class="p">,</span>
+    <span class="na">custom</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span> <span class="na">text</span><span class="p">:</span> <span class="s1">'Dehydrated Boulders Support'</span><span class="p">,</span> <span class="na">href</span><span class="p">:</span> <span class="s1">'http://acme.example.com/support/dehydrated-boulders'</span> <span class="p">},</span>
+      <span class="p">{</span> <span class="na">text</span><span class="p">:</span> <span class="s1">'Rocket Sled Questions'</span><span class="p">,</span> <span class="na">href</span><span class="p">:</span> <span class="s1">'http://acme.example.com/questions/rocket-sled'</span> <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
 
-  // See the contents of the 'okta-theme-1.0.2.css' file for a full list of labels.
-  labels: {
-    'primaryauth.title': 'Acme Partner Login',
-    'primaryauth.username': 'Partner ID',
-    'primaryauth.username.tooltip': 'Enter your @ partner.com ID',
-    'primaryauth.password': 'Password',
-    'primaryauth.password.tooltip': 'Super secret password'
-  }
-});
+  <span class="c1">// See the contents of the 'okta-theme-1.0.2.css' file for a full list of labels.</span>
+  <span class="na">labels</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'primaryauth.title'</span><span class="p">:</span> <span class="s1">'Acme Partner Login'</span><span class="p">,</span>
+    <span class="s1">'primaryauth.username'</span><span class="p">:</span> <span class="s1">'Partner ID'</span><span class="p">,</span>
+    <span class="s1">'primaryauth.username.tooltip'</span><span class="p">:</span> <span class="s1">'Enter your @ partner.com ID'</span><span class="p">,</span>
+    <span class="s1">'primaryauth.password'</span><span class="p">:</span> <span class="s1">'Password'</span><span class="p">,</span>
+    <span class="s1">'primaryauth.password.tooltip'</span><span class="p">:</span> <span class="s1">'Super secret password'</span>
+  <span class="p">}</span>
+<span class="p">});</span>
 </code></pre>
 </div>
 

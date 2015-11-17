@@ -221,13 +221,13 @@
   <tbody>
     <tr>
       <td><code class="highlighter-rouge">$appuser.$attribute</code></td>
-      <td><code class="highlighter-rouge">$appUser</code> explicit reference to specific app<br /><code class="highlighter-rouge">$attribute</code> the attribute variable name</td>
+      <td><code class="highlighter-rouge">$appuser</code> explicit reference to specific app<br /><code class="highlighter-rouge">$attribute</code> the attribute variable name</td>
       <td>zendesk.firstName<br />active_directory.managerUpn<br />google_apps.email</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">appuser.$attribute</code></td>
-      <td><code class="highlighter-rouge">appUser</code> implicit reference to in-context app<br /><code class="highlighter-rouge">$attribute</code> the attribute variable name</td>
-      <td>appUser.firstName</td>
+      <td><code class="highlighter-rouge">appuser</code> implicit reference to in-context app<br /><code class="highlighter-rouge">$attribute</code> the attribute variable name</td>
+      <td>appuser.firstName</td>
     </tr>
   </tbody>
 </table>
@@ -307,105 +307,105 @@
       <td><code class="highlighter-rouge">String.stringSwitch</code></td>
       <td>(String input, String defaultString, String… keyValuePairs)</td>
       <td>String</td>
-      <td>String.stringSwitch(“This is a test”, “default”, “key1”, “value1”)</td>
+      <td><code class="highlighter-rouge">String.stringSwitch("This is a test", "default", "key1", "value1")</code></td>
       <td>default</td>
     </tr>
     <tr>
       <td> </td>
       <td> </td>
       <td> </td>
-      <td>String.stringSwitch(“This is a test”, “default”, “is”, “value1”)</td>
+      <td><code class="highlighter-rouge">String.stringSwitch("This is a test", "default", "is", "value1")</code></td>
       <td>value1</td>
     </tr>
     <tr>
       <td> </td>
       <td> </td>
       <td> </td>
-      <td>String.stringSwitch(“This is a test”, “default”, “key1”, “value1”, “test”, “value2”)</td>
+      <td><code class="highlighter-rouge">String.stringSwitch("This is a test", "default", "key1", "value1", "test", "value2")</code></td>
       <td>value2</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">String.stringContains</code></td>
       <td>(String input, String searchString)</td>
       <td>Boolean</td>
-      <td>String.stringContains(“This is a test”, “test”) </td>
+      <td><code class="highlighter-rouge">String.stringContains("This is a test", "test")</code> </td>
       <td>true</td>
     </tr>
     <tr>
       <td> </td>
       <td> </td>
       <td> </td>
-      <td>String.stringContains(“This is a test”, “doesn’tExist”)</td>
+      <td><code class="highlighter-rouge">String.stringContains("This is a test", "doesn'tExist")</code></td>
       <td>false</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">String.removeSpaces</code></td>
       <td>(String input)</td>
       <td>String</td>
-      <td>String.removeSpaces(“This is a test”)</td>
+      <td><code class="highlighter-rouge">String.removeSpaces("This is a test")</code></td>
       <td>Thisisatest</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">String.join</code></td>
       <td>(String separator, String… strings)</td>
       <td>String</td>
-      <td>String.join(“,”, “This”, “is”, “a”, “test”)</td>
+      <td><code class="highlighter-rouge">String.join(",", "This", "is", "a", "test")</code></td>
       <td>This,is,a,test</td>
     </tr>
     <tr>
       <td> </td>
       <td> </td>
       <td> </td>
-      <td>String.join(“”, “This”, “is”, “a”, “test”)</td>
+      <td><code class="highlighter-rouge">String.join("", "This", "is", "a", "test")</code></td>
       <td>Thisisatest</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">String.len</code></td>
       <td>(String input)</td>
       <td>Integer</td>
-      <td>String.len(“This”)</td>
+      <td><code class="highlighter-rouge">String.len("This")</code></td>
       <td>4</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">String.append</code></td>
       <td>(String str, String suffix)</td>
       <td>String</td>
-      <td>String.append(“This is”, “ a test”)</td>
+      <td><code class="highlighter-rouge">String.append("This is", " a test")</code></td>
       <td>This is a test</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">String.toUpperCase</code></td>
       <td>(String input)</td>
       <td>String</td>
-      <td>String.toUpperCase(“This”)</td>
+      <td><code class="highlighter-rouge">String.toUpperCase("This")</code></td>
       <td>THIS</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">String.toLowerCase</code></td>
       <td>(String input)</td>
       <td>String</td>
-      <td>String.toLowerCase(“ThiS”)</td>
+      <td><code class="highlighter-rouge">String.toLowerCase("ThiS")</code></td>
       <td>this</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">String.substringBefore</code></td>
       <td>(String input, String searchString)</td>
       <td>String</td>
-      <td>String.substringBefore(“abc@okta.com”, “@”)</td>
+      <td><code class="highlighter-rouge">String.substringBefore("abc@okta.com", "@")</code></td>
       <td>abc</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">String.substringAfter</code></td>
       <td>(String input, String searchString)</td>
       <td>String</td>
-      <td>String.substringAfter(“abc@okta.com”, “@”)</td>
+      <td><code class="highlighter-rouge">String.substringAfter("abc@okta.com", "@")</code></td>
       <td>okta.com</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">String.substring </code></td>
       <td>(String input, int startIndex, int endIndex)</td>
       <td>String</td>
-      <td>String.substring(“This is a test”, 2, 9)</td>
+      <td><code class="highlighter-rouge">String.substring("This is a test", 2, 9)</code></td>
       <td>is is a</td>
     </tr>
   </tbody>
@@ -445,7 +445,7 @@
       <td><code class="highlighter-rouge">substringAfter(string, string)</code></td>
       <td><code class="highlighter-rouge">substringAfter(user.email, '@')</code></td>
       <td>alex@okta.com</td>
-      <td>@okta.com</td>
+      <td>okta.com</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">substring(string, int, int)</code></td>
@@ -471,37 +471,37 @@
     <tr>
       <td><code class="highlighter-rouge">Arrays.add(array, value)</code></td>
       <td>Array</td>
-      <td>Arrays.add({10, 20, 30}, 40)</td>
+      <td><code class="highlighter-rouge">Arrays.add({10, 20, 30}, 40)</code></td>
       <td>{10, 20, 30, 40}</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">Arrays.remove(array, value)</code></td>
       <td>Array</td>
-      <td>Arrays.remove({10, 20, 30}, 20)</td>
+      <td><code class="highlighter-rouge">Arrays.remove({10, 20, 30}, 20)</code></td>
       <td>{10, 30}</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">Arrays.clear(array)</code></td>
       <td>Array</td>
-      <td>Arrays.clear({10, 20, 30})</td>
+      <td><code class="highlighter-rouge">Arrays.clear({10, 20, 30})</code></td>
       <td>{ }</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">Arrays.get(array, position)</code></td>
       <td>-</td>
-      <td>Arrays.get({1,2,3},0)</td>
+      <td><code class="highlighter-rouge">Arrays.get({0,1,2,3},0)</code></td>
       <td>0</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">Arrays.flatten(list of values)</code></td>
       <td>Array</td>
-      <td>Arrays.flatten(10, {20, 30}, 40)</td>
+      <td><code class="highlighter-rouge">Arrays.flatten(10, {20, 30}, 40)</code></td>
       <td>{10, 20, 30, 40}</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">Arrays.contains(array, value)</code></td>
       <td>Boolean</td>
-      <td>Arrays.contains({10, 20, 30}, 10)</td>
+      <td><code class="highlighter-rouge">Arrays.contains({10, 20, 30}, 10)</code></td>
       <td>true</td>
     </tr>
     <tr>
@@ -513,7 +513,7 @@
     <tr>
       <td><code class="highlighter-rouge">Arrays.size(array)</code></td>
       <td>Integer</td>
-      <td>Arrays.size({10, 20, 30})</td>
+      <td><code class="highlighter-rouge">Arrays.size({10, 20, 30})</code></td>
       <td>3</td>
     </tr>
     <tr>
@@ -525,7 +525,7 @@
     <tr>
       <td><code class="highlighter-rouge">Arrays.isEmpty(array)</code></td>
       <td>Boolean</td>
-      <td>Arrays.isEmpty({10, 20})</td>
+      <td><code class="highlighter-rouge">Arrays.isEmpty({10, 20})</code></td>
       <td>false</td>
     </tr>
     <tr>
@@ -605,7 +605,7 @@ integer type range limitations when converting from a number to an integer with 
     <tr>
       <td><code class="highlighter-rouge">isMemberOfGroup</code></td>
       <td>Boolean</td>
-      <td><code class="highlighter-rouge">isMemberOfGroupName("groupId")</code></td>
+      <td><code class="highlighter-rouge">isMemberOfGroup("groupId")</code></td>
       <td><strong>True</strong>, if the user under consideration is a member of group with id <em>groupId</em>; otherwise,  <strong>False</strong>.</td>
     </tr>
     <tr>
@@ -652,21 +652,21 @@ integer type range limitations when converting from a number to an integer with 
       <td>Time.now</td>
       <td>(String timeZoneId, String format)</td>
       <td>String</td>
-      <td>Time.now()</td>
+      <td><code class="highlighter-rouge">Time.now()</code></td>
       <td>2015-07-31T17:18:37.979Z (Current time, UTC format)</td>
     </tr>
     <tr>
       <td> </td>
       <td> </td>
       <td> </td>
-      <td>Time.now(“EST”)</td>
+      <td><code class="highlighter-rouge">Time.now("EST")</code></td>
       <td>2015-07-31T13:30:49.964-04:00 (Specified time zone)</td>
     </tr>
     <tr>
       <td> </td>
       <td> </td>
       <td> </td>
-      <td>Time.now(“EST”,”YYYY-MM-dd HH:mm:ss”)</td>
+      <td><code class="highlighter-rouge">Time.now("EST","YYYY-MM-dd HH:mm:ss")</code></td>
       <td>2015-07-31 13:36:48 (Specified time zone and format, military time)</td>
     </tr>
   </tbody>
@@ -699,22 +699,22 @@ Australia/Sydney, Pacific/Guadalcanal, Pacific/Auckland.</p>
     <tr>
       <td><code class="highlighter-rouge">getManagerUser(managerSource).$attribute</code></td>
       <td>Gets the manager’s Okta user attribute values</td>
-      <td>getManagerUser(“active_directory”).firstName</td>
+      <td><code class="highlighter-rouge">getManagerUser("active_directory").firstName</code></td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">getManagerAppUser(managerSource, attributeSource).$attribute</code></td>
       <td>Gets the manager’s app user attribute values for the app user of any appinstance.</td>
-      <td>getManagerAppUser(“active_directory”,”google”).firstName</td>
+      <td><code class="highlighter-rouge">getManagerAppUser("active_directory","google").firstName</code></td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">getAssistantUser(assistantSource).$attribute</code></td>
       <td>Gets the assistant’s Okta user attribute values.</td>
-      <td>getAssistantUser(“active_directory”).firstName</td>
+      <td><code class="highlighter-rouge">getAssistantUser("active_directory").firstName</code></td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">getAssistantAppUser(assistantSource, attributeSource).$attribute</code></td>
       <td>Gets the assistant’s app user attribute values for the app user of any appinstance.</td>
-      <td>getAssistantAppUser(“active_directory”,”google”).firstName</td>
+      <td><code class="highlighter-rouge">getAssistantAppUser("active_directory","google").firstName</code></td>
     </tr>
   </tbody>
 </table>
@@ -767,31 +767,31 @@ Note: At this time, only <strong>active_directory</strong> is supported for <em>
   <tbody>
     <tr>
       <td>Refer to a <code class="highlighter-rouge">String</code> constant</td>
-      <td>‘Hello world’</td>
+      <td><code class="highlighter-rouge">'Hello world'</code></td>
     </tr>
     <tr>
       <td>Refer to a <code class="highlighter-rouge">Integer</code> constant</td>
-      <td>1234</td>
+      <td><code class="highlighter-rouge">1234</code></td>
     </tr>
     <tr>
       <td>Refer to a <code class="highlighter-rouge">Number</code> constant</td>
-      <td>3.141</td>
+      <td><code class="highlighter-rouge">3.141</code></td>
     </tr>
     <tr>
       <td>Refer to a <code class="highlighter-rouge">Boolean</code> constant</td>
-      <td>true</td>
+      <td><code class="highlighter-rouge">true</code></td>
     </tr>
     <tr>
       <td>Concatenate two strings</td>
-      <td><code class="highlighter-rouge">user.firstName</code>+<code class="highlighter-rouge">user.lastName</code></td>
+      <td><code class="highlighter-rouge">user.firstName + user.lastName</code></td>
     </tr>
     <tr>
       <td>Concatenate two strings with space</td>
-      <td><code class="highlighter-rouge">user.firstName</code>+” “+<code class="highlighter-rouge">user.lastName</code></td>
+      <td><code class="highlighter-rouge">user.firstName + " " + user.lastName</code></td>
     </tr>
     <tr>
       <td>Ternary operator example:<br />If group code is 123, assign value of Sales, else assign Other</td>
-      <td>user.groupCode==123?’Sales’:’Other’</td>
+      <td><code class="highlighter-rouge">user.groupCode == 123 ? 'Sales' : 'Other'</code></td>
     </tr>
   </tbody>
 </table>
@@ -873,13 +873,13 @@ Note: At this time, only <strong>active_directory</strong> is supported for <em>
     </tr>
     <tr>
       <td>Workday ID</td>
-      <td><code class="highlighter-rouge">hasWorkdayUser()?findWorkdayUser().employeeID:null</code></td>
+      <td><code class="highlighter-rouge">hasWorkdayUser() ? findWorkdayUser().employeeID : null</code></td>
       <td>123456</td>
       <td>Check if user has a Workday assignment, and if so, return their Workday employee ID.</td>
     </tr>
     <tr>
       <td>Active Directory UPN</td>
-      <td><code class="highlighter-rouge">hasDirectoryUser()?findDirectoryUser().managerUPN:null</code></td>
+      <td><code class="highlighter-rouge">hasDirectoryUser() ? findDirectoryUser().managerUPN : null</code></td>
       <td>bob@okta.com</td>
       <td>Check if user has an Active Directory assignment, and if so, return their Active Directory manager UPN.</td>
     </tr>
