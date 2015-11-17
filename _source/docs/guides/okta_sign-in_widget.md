@@ -416,6 +416,7 @@ see what these customizations do by copying this code into your
 web browser. A full list of the supported customization options
 are below.
 
+~~~ javascript
     var oktaSignIn = new OktaSignIn({
       baseUrl: baseUrl,
       logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/7/7e/Oldacmelogo.png/200px-Oldacmelogo.png',
@@ -446,6 +447,7 @@ are below.
         'primaryauth.password.tooltip': 'Super secret password'
       }
     });
+~~~
 
 ### Configurable features
 
