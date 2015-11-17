@@ -10,7 +10,7 @@ excerpt: Easily add Okta capabilities to your website.
 
 # Introduction
 
-The Okta Sign-In Widget is a Javascript widget from Okta that gives
+The Okta Sign-In Widget is a JavaScript widget from Okta that gives
 you a fully featured and customizable login experience which
 can be used to authenticate users on any web site.
 
@@ -108,13 +108,13 @@ Underneath those files, we add a `<div>` tag with an "`id`" of
 `okta-login-container`  &#x2013; you can use any "`id`" value in this tag,
 we are just using `okta-login-container` here for the sake of clarity.
 
-Next, we add some Javascript code to insert the the Okta Sign-In Widget
+Next, we add some JavaScript code to insert the the Okta Sign-In Widget
 into the `okta-login-container` tag. In this short example, this
-Javascript is included at the end of the file. However, when you use
+JavaScript is included at the end of the file. However, when you use
 this code on your own website, you will need to run these functions
 in the parts of your code that are run when the DOM is ready.
 
-Here is what that Javascript code is doing: First, the line below
+Here is what that JavaScript code is doing: First, the line below
 initializes the the Okta Sign-In Widget object, note that 
 the `baseUrl` value **MUST** be the domain for *your* Okta
 organization.
@@ -249,7 +249,7 @@ There are four lines that you will need to modify in
 4.  The string passed as the `baseUrl` to the `OktaSignIn` constructor:
     
         var baseUrl = 'https://example.okta.com';
-        var oktaSignIn = new OktaSignIn({baseUrl: 'https://example.okta.com'});
+        var oktaSignIn = new OktaSignIn({baseUrl: baseUrl});
 
 ## Copy the HTML to a web server
 
@@ -321,13 +321,13 @@ In the example above, you set up a very basic version of
 the Okta Sign-In Widget. Now that you've seen it in action, it's time to
 start configuring the widget for your specific needs.
 
-the Okta Sign-In Widget is fully customizable via CSS and Javascript. 
+the Okta Sign-In Widget is fully customizable via CSS and JavaScript. 
 Stylistic customizations, changing the way that the widget looks, is
 done via CSS. Customization of widget features, the way that the
-widget works, and text labels for the widget are done via Javascript. 
+widget works, and text labels for the widget are done via JavaScript. 
 
 The sections below go into detail on how to customize
-the Okta Sign-In Widget using CSS and Javascript.
+the Okta Sign-In Widget using CSS and JavaScript.
 
 ## Customizing style with CSS
 
@@ -336,7 +336,7 @@ and feel" of the the Okta Sign-In Widget.
 
 Before you get started, it is useful to know how the widget works.
 Most important is understanding how the widget is created. The
-the Okta Sign-In Widget is created when the `renderEl()` Javascript
+the Okta Sign-In Widget is created when the `renderEl()` JavaScript
 method is called. When the the `renderEl()` method is called, the
 the Okta Sign-In Widget will be created as a `<div>` tag with an
 `id` of `okta-login-container` which will be inserted inside of the tag that
@@ -400,7 +400,7 @@ your HTML:
 
     <link href="https://your-website.example.com/static/css/custom-okta-theme-1.0.2.css" type="text/css" rel="stylesheet">
 
-## Customizing widget features and text labels with Javascript
+## Customizing widget features and text labels with JavaScript
 
 The configuration options that are passed to the `OktaSignIn()`
 constructor are used to configure the functionality and text labels
@@ -417,7 +417,6 @@ web browser. A full list of the supported customization options
 are below.
 
     var oktaSignIn = new OktaSignIn({
-    return new OktaSignIn({
       baseUrl: baseUrl,
       logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/7/7e/Oldacmelogo.png/200px-Oldacmelogo.png',
     
@@ -492,6 +491,9 @@ are below.
         mobile phone number to recovery their password using an SMS.
         
         Defaults to **false**
+    -   `selfServiceUnlock`
+        
+        [TBD]
 -   `helpLinks`
     
     The options in the `helpLinks` object set alternate links to be
@@ -505,7 +507,6 @@ are below.
           help: 'http://acme.example.com/custom/help/page',
           custom: [
             { text: 'Dehydrated Boulders Support', href: 'http://acme.example.com/support/dehydrated-boulders' },
-        
           ]
         }
     
