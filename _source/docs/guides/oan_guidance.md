@@ -13,58 +13,72 @@ With over 4000 pre-integrated applications, the Okta Application Network (OAN) p
 
 ![OAN Intro](/assets/img/oan_guidance_intro.png "OAN Intro")
 
-There are two main area of focus – Authentication and Provisioning. You need to support at least one of these features in order to be part of Okta Application Network. Okta strongly recommends that you implement both.
+There are two main area of focus – Single Sign-On and Provisioning. You need to support at least one of these features in order to be part of Okta Application Network. Okta strongly recommends that you implement both. 
 
 
-### Authentication
+## Single Sign-On
 
-Your application needs to support Federated Single Sign-On, a common approach for an application to rely on an external identity provider. For web-based applications, Security Assertion Markup Language (SAML) is the standard. For mobile applications, many mobile solution vendors offer proprietary SDKs to provide support. Okta offers Okta Mobile Connect which is based on the SAML protocol.
+Your application needs to support Federated Single Sign-On, a common approach for an application to rely on an external identity provider. For web-based applications, Security Assertion Markup Language (SAML) is the standard. For mobile applications, many mobile solution vendors offer proprietary SDKs to provide support. Okta offers [Okta Mobile Connect](/docs/guides/okta_mobile_connect.html) which is based on the SAML protocol.
 
 For details on how to federate your application with SAML and Okta Mobile Connect, go to our [Single Sign-On with Okta](/docs/guides/saml_guidance.html) section for additional guidance.
 
-### Provisioning
 
-Single sign-on is just one aspect of federation. First, an account for the user must be created to grant access to your application. In order to “automate” this process, your application should expose APIs to manage the account lifecycle that account creation, user profile updates, authorization settings (such as groups or roles), account deactivation, etc.
+### Single Sign-On: Building an Integration with Okta
 
-While many ISVs use proprietary APIs, Okta recommends that you implement your API using the Simple Cloud Identity Management protocol which supports all of the key features needed in provisioning.
+Use the following instructions to support single sign-on for app in the public-facing Okta Application Network:
 
-For details on how to implement provisioning for your application, go to our “… SCIM Guidance page”
+### 1. Prepare Your Application
 
-## Getting Started
-
-Use the following instructions to integrate your app into the Okta Application Network:
-
-### 1. Review Pre-Integration Resources
-
-* Is supporting single sign-on making you anxious? Use our [Single Sign-On with Okta](/docs/guides/saml_guidance.html) tools which includes toolkits and even a tool for testing your SAML configuration.
-
-* Ready to offload user on-boarding with Okta? Find recommendations on building APIs for user creation, update, and deactivation in our [Building a Well-Managed Cloud Application](https://www.okta.com/resources/whitepaper-bwmca-thank-you.html) guide.
+* Use Okta’s [Single Sign-On with Okta](/docs/guides/saml_guidance.html) guide for best practices on supporting SAML in your app which includes toolkits and testing tools.
 
 ### 2. Integrate Your App
 
 * Sign up for an Okta [developer account](https://www.okta.com/developer/signup/).
-* Use the [App Wizard](https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard) to integrate single sign-on after you sign into Okta as an admin. For more details, see our videos for [SAML](https://www.youtube.com/watch?v=rQpUsRe0Jxw) and [SWA](https://www.youtube.com/watch?v=FoyhQEwOnqg).
+* In your Okta account (make sure you are signed in as an admin), use the [App Wizard](https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard) to build a Single Sign-on integration with Okta. For the more visually inclined, see our videos for [SAML](https://www.youtube.com/watch?v=rQpUsRe0Jxw) and [SWA](https://www.youtube.com/watch?v=FoyhQEwOnqg).
+* Note: In the SAML Wizard step #3 Feedback, be sure to identify yourself as a Partner (“I'm a software vendor. I'd like to integrate my app with Okta”) and that you want to your app reviewed and promoted to the OAN (“Yes, my app integration is ready for public use in the Okta Application Network”)
 * Currently provisioning integrations are custom-built by Okta. Email <oan@okta.com> to submit a request for your app.
 * Get Stuck? See our *Okta Application Network FAQs* below.
 
-### 3. Partner with Okta
-Already integrated? Become an [Okta App Partner](https://www.okta.com/partners). Benefits include direct access to Okta support, marketing support, and a free version of Okta for your app.
+### 3. Need Help?
 
-### 4. Need Help?
+Get stuck or have questions? See our Okta Application Network FAQs (below), email <oan@okta.com> or post your questions on [stackoverflow](https://stackoverflow.com).
 
-Ask questions and get help by emailing <developers@okta.com> or post your questions on [stackoverflow](https://stackoverflow.com).
+### 4. Partner with Okta (Optional)
+
+Already part of the Okta App Network but looking for a more “go-to-market” partnership? Contact us about becoming an [Okta App Partner](https://www.okta.com/partners/). App Partners are fully integrated with Okta and get access to great benefits like marketing support and a free version of Okta for your app.
+
+
+## Provisioning
+
+Single sign-on is just one aspect of federation. First, an account for the user must be created to grant access to your application. In order to “automate” this process, your application should expose APIs to manage the account lifecycle that account creation, user profile updates, authorization settings (such as groups or roles), account deactivation, etc.
+
+While many ISVs use proprietary APIs, Okta recommends that you implement your API using the [Simple Cloud Identity Management protocol](http://www.simplecloud.info/) (SCIM) which supports all of the key features needed in provisioning.
+
+
+### Provisioning: Building an Integration with Okta
+
+With the new Cloud Provisioning Connector (CPC) Program, you can now build and support a provisioning integration between your application and Okta. At a high level, the CPC program let’s you choose between two technical approaches for building the integration, each with it’s own advantages:
+
+ | **Java Connector** | **SCIM**
+-------- | ----------- | --------
+**What is it?**  | Connector written in Java that takes Okta provisioning signals and translates them into your service’s User API. The Connector is built and managed by the ISV (you) and hosted in the Okta service. Typical development effort is ~1-3 man-weeks. | Okta SCIM 1.1/2.0 Client interfaces directly with compatible SCIM 1.1/2.0 Server APIs. The integration is just a template that is configured. No coding required.
+**Who is it designed for?** | ISVs with an existing proprietary API for user operations. You want maximum flexibility and do not plan on supporting the SCIM standard. | ISVs that: a) currently support the SCIM standard; b) plan to support the SCIM standard; c) don’t already have proprietary APIs for user operations.
+**How do I get started?** |Email <oan@okta.com> and express interest in developing using Java Connector. We’ll share the SDK and additional program details. `Note: We are only accepting a limited number of ISV partners into the Java Connector program to start. Please try to share some details on customer demand and urgency (e.g. # of joint customers that would benefit, deployment deadlines) in your email.` | Okta support for SCIM is coming in March 2016. If you are interested in being part of the SCIM Beta reply to <oan@okta.com> and we’ll add you to the list. We’ll reach back out with additional SCIM documentation and SCIM Beta details by March 2016.
+
+Interested in provisioning with Okta but have general questions about the approaches above? Email us at <oan@okta.com>
+
 
 ##Okta Application Network FAQs
 
 **Q: Do I need to contact Okta first to start integrating my application?**
 
-A: You should start by enabling SSO and provisioning with your application. Use the material on this site to help with your implementation. There are instructions on how to test your implementation as well.
+A: No, the materials here should be enough to help you get started. You should start by enabling [SAML](/docs/guides/saml_guidance.html) with your application. Then test your app integration and submit for review by Okta with the [App Wizard](https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard). Get stuck or have questions? Email oan@okta.com.
 
 <br/>
 
 **Q: I am having issues integrating my app or have questions about single sign-on support in my app. How do I contact Okta?**
 
-A: If you have any technical questions, you can submit them to <developers@okta.com> or post your questions on [stackoverflow](https://stackoverflow.com).
+A: If you have any technical questions, you can submit them to <oan@okta.com> or post your questions on [stackoverflow](https://stackoverflow.com).
 
 <br/>
 
@@ -114,7 +128,7 @@ A: There are two different levels of app integrations in the OAN – Okta Verifi
 
 **Q: I’m setting up a SAML 2.0 app using the App Wizard and we have different domains for each customer. How do you manage these types of situations?**
 
-A: Currently, the App Wizard does not support custom domains. Create an app using the Template SAML 2.0 Application. In order to promote your Template App to the Okta Application Network, please email a screenshot of the configured app details to oan@okta.com with your app name in the subject line.
+A: Currently, the App Wizard does not support custom domains. Create an app integration as you normally would using the [App Wizard](https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard). In step #3 Feedback, please try to include in the “How to enable SAML” section or email oan@okta.com. Our team will work with you to add this functionality when they begin to work with you.
 
 <br/>
 
@@ -144,10 +158,10 @@ A: Yes, the session time out default is 2 hours but can be customized by the hou
 
 **Q: My app is now in OAN, what is the user experience for a joint customer that wants to set up SSO and Account Provisioning for my app in the Okta interface?**
 
-A: Okta creates unique SAML configuration documentation for each application in the OAN so each will be different but for a sample, see our instructions for “How to Configure SAML 2.0 in Slack” as an example. Also, if you haven’t already done so, sign up for an Okta developer account and you can test drive the Okta user experience yourself.
+A: Okta creates unique SAML configuration documentation for each application in the OAN so each will be different but for a sample, see our instructions for [How to Configure SAML 2.0 in Slack](http://saml-doc.okta.com/SAML_Docs/How-to-Configure-SAML-2.0-for-Slack.html) as an example. Also, if you haven’t already done so, sign up for an Okta [developer account](https://www.okta.com/developer/signup/) and you can test drive the Okta user experience yourself.
 
 <br/>
 
 **Q: In general, how can I get familiar with the Okta product?**
 
-A: To get started, check out our Training Resources or Okta Academy on Youtube. Also see the Okta Help Center for FAQs and support articles and the Okta Community. App Partners are eligible for live Okta 101 sessions as well, please email <oan@okta.com> if you are interested.
+A: To get started, check out the [Okta Help Center](https://support.okta.com/help) or [Okta Academy](https://www.youtube.com/playlist?list=PLIid085fSVdurJ8l_UgfNGJohaSW6w97p) on Youtube. App Partners are eligible for live Okta 101 sessions as well, please email oan@okta.com if you are interested.
