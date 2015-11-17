@@ -26,8 +26,8 @@ In addition to an Okta user profile, all users have separate Application user pr
 
 Syntax  | Definitions | Examples
 -------- | ---------- | ------------
-`$appuser.$attribute` | `$appUser` explicit reference to specific app<br>`$attribute` the attribute variable name | zendesk.firstName<br>active_directory.managerUpn<br>google_apps.email
-`appuser.$attribute` | `appUser` implicit reference to in-context app<br>`$attribute` the attribute variable name | appUser.firstName
+`$appuser.$attribute` | `$appuser` explicit reference to specific app<br>`$attribute` the attribute variable name | zendesk.firstName<br>active_directory.managerUpn<br>google_apps.email
+`appuser.$attribute` | `appuser` implicit reference to in-context app<br>`$attribute` the attribute variable name | appuser.firstName
 
 > With Universal Directory, there are about 30 attributes in the base Okta profile and any number of custom attributes can be added.  All App user profiles have a username attribute and possibly others depending on the application.   To find a full list of Okta user and App user attributes and their variable names, go to People > Profile Editor.  If you're not yet using Universal Directory, contact your Support or Professional Services team.
 
