@@ -492,8 +492,10 @@ are below.
         
         Defaults to **false**
     -   `selfServiceUnlock`
-        
-        [TBD]
+
+        When set to **true**, this will give users the option to perform a self-service password reset.
+
+	Defaults to **false**
 -   `helpLinks`
     
     The options in the `helpLinks` object set alternate links to be
