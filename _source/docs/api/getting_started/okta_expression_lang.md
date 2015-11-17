@@ -59,21 +59,21 @@ Okta offers a variety of functions to manipulate attributes or properties to gen
 
 Function | Input Parameter Signature | Return Type | Example | Output
 -------- | ------------------------- | ----------- | ------- | ------
-`String.stringSwitch` | (String input, String defaultString, String... keyValuePairs) | String | String.stringSwitch("This is a test", "default", "key1", "value1")| default
- | | | String.stringSwitch("This is a test", "default", "is", "value1")| value1
- | | | String.stringSwitch("This is a test", "default", "key1", "value1", "test", "value2") | value2
-`String.stringContains` | (String input, String searchString) | Boolean |String.stringContains("This is a test", "test")  | true
- | | | String.stringContains("This is a test", "doesn'tExist") | false
-`String.removeSpaces` | (String input) | String | String.removeSpaces("This is a test") | Thisisatest
-`String.join` | (String separator, String... strings) | String | String.join(",", "This", "is", "a", "test") | This,is,a,test
- | | | String.join("", "This", "is", "a", "test") | Thisisatest
-`String.len` | (String input) | Integer | String.len("This") | 4
-`String.append` | (String str, String suffix) | String | String.append("This is", " a test") | This is a test
-`String.toUpperCase` | (String input) | String | String.toUpperCase("This") | THIS
-`String.toLowerCase` | (String input) | String | String.toLowerCase("ThiS") | this
-`String.substringBefore` | (String input, String searchString) | String | String.substringBefore("abc@okta.com", "@") | abc
-`String.substringAfter` | (String input, String searchString) | String | String.substringAfter("abc@okta.com", "@") | okta.com
-`String.substring `| (String input, int startIndex, int endIndex) | String | String.substring("This is a test", 2, 9) | is is a
+`String.stringSwitch` | (String input, String defaultString, String... keyValuePairs) | String | `String.stringSwitch("This is a test", "default", "key1", "value1")`| default
+ | | | `String.stringSwitch("This is a test", "default", "is", "value1")`| value1
+ | | | `String.stringSwitch("This is a test", "default", "key1", "value1", "test", "value2")` | value2
+`String.stringContains` | (String input, String searchString) | Boolean |`String.stringContains("This is a test", "test")`  | true
+ | | | `String.stringContains("This is a test", "doesn'tExist")` | false
+`String.removeSpaces` | (String input) | String | `String.removeSpaces("This is a test")` | Thisisatest
+`String.join` | (String separator, String... strings) | String | `String.join(",", "This", "is", "a", "test")` | This,is,a,test
+ | | | `String.join("", "This", "is", "a", "test")` | Thisisatest
+`String.len` | (String input) | Integer | `String.len("This")` | 4
+`String.append` | (String str, String suffix) | String | `String.append("This is", " a test")` | This is a test
+`String.toUpperCase` | (String input) | String | `String.toUpperCase("This")` | THIS
+`String.toLowerCase` | (String input) | String | `String.toLowerCase("ThiS")` | this
+`String.substringBefore` | (String input, String searchString) | String | `String.substringBefore("abc@okta.com", "@")` | abc
+`String.substringAfter` | (String input, String searchString) | String | `String.substringAfter("abc@okta.com", "@")` | okta.com
+`String.substring `| (String input, int startIndex, int endIndex) | String | `String.substring("This is a test", 2, 9)` | is is a
 
 The following deprecated functions perform some of the same tasks as the ones in the above table.
 
@@ -82,23 +82,23 @@ Function  | Example | Input | Output
 `toUppercase(string)` | `toUppercase(source.firstName)` | Alexander | ALEXANDER
 `toLowercase(string)` | `toLowercase(source.firstName)` | AlexANDER | alexander
 `substringBefore(string, string)` | `substringBefore(user.email, '@')` | alex@okta.com | alex
-`substringAfter(string, string)` | `substringAfter(user.email, '@')` | alex@okta.com | @okta.com
+`substringAfter(string, string)` | `substringAfter(user.email, '@')` | alex@okta.com | okta.com
 `substring(string, int, int)` | `substring(source.firstName, 1, 4)` | Alexander | lex
 
 ### Array Functions
 
 Function  | Return Type | Example | Output
 -------- | ---------| --------- | --------
-`Arrays.add(array, value)` | Array | Arrays.add({10, 20, 30}, 40) | {10, 20, 30, 40}
-`Arrays.remove(array, value)` | Array | Arrays.remove({10, 20, 30}, 20) | {10, 30}
-`Arrays.clear(array)` | Array | Arrays.clear({10, 20, 30}) | { }
-`Arrays.get(array, position)` | - | Arrays.get({1,2,3},0) | 0
-`Arrays.flatten(list of values)` | Array | Arrays.flatten(10, {20, 30}, 40) | {10, 20, 30, 40}
-`Arrays.contains(array, value)` | Boolean | Arrays.contains({10, 20, 30}, 10) | true
+`Arrays.add(array, value)` | Array | `Arrays.add({10, 20, 30}, 40)` | {10, 20, 30, 40}
+`Arrays.remove(array, value)` | Array | `Arrays.remove({10, 20, 30}, 20)` | {10, 30}
+`Arrays.clear(array)` | Array | `Arrays.clear({10, 20, 30})` | { }
+`Arrays.get(array, position)` | - | `Arrays.get({0,1,2,3},0)` | 0
+`Arrays.flatten(list of values)` | Array | `Arrays.flatten(10, {20, 30}, 40)` | {10, 20, 30, 40}
+`Arrays.contains(array, value)` | Boolean | `Arrays.contains({10, 20, 30}, 10)` | true
  |  | Arrays.contains({10, 20, 30}, 50) | false
-`Arrays.size(array)` | Integer | Arrays.size({10, 20, 30}) | 3
+`Arrays.size(array)` | Integer | `Arrays.size({10, 20, 30})` | 3
  |  | Arrays.size(NULL) | 0
-`Arrays.isEmpty(array)` | Boolean | Arrays.isEmpty({10, 20}) | false
+`Arrays.isEmpty(array)` | Boolean | `Arrays.isEmpty({10, 20})` | false
  |  | Arrays.isEmpty(NULL) | true
 
 
@@ -119,7 +119,7 @@ integer type range limitations when converting from a number to an integer with 
 Function  | Return Type | Example | Output
 --------- | ----------- | ------- | -------
 `isMemberOfGroupName` | Boolean | `isMemberOfGroupName("group1")` | **True**, if the user under consideration is a member of *group1'; otherwise, **False**.
-`isMemberOfGroup` | Boolean | `isMemberOfGroupName("groupId")` | **True**, if the user under consideration is a member of group with id *groupId*; otherwise,  **False**.
+`isMemberOfGroup` | Boolean | `isMemberOfGroup("groupId")` | **True**, if the user under consideration is a member of group with id *groupId*; otherwise,  **False**.
 `isMemberOfAnyGroup` | Boolean | `isMemberOfAnyGroup("groupId1", "groupId2", "groupId3")` | **True**, if the user under consideration is a member of any groups with ids *groupId1*, *groupId2* or *groupId3*; otherwise **False**.
 `isMemberOfGroupNameStartsWith` | Boolean | `isMemberOfGroupNameStartsWith("San Fr")` | **True**, if the user under consideration is a member of any groups with names that starts with *San Fr*; otherwise,  **False**.
 `isMemberOfGroupNameContains` | Boolean | `isMemberOfGroupNameContains("admin")` | **True**, if the user under consideration is a member of any groups with names that contains *admin*; otherwise,  **False**.
@@ -129,9 +129,9 @@ Function  | Return Type | Example | Output
 
 Function  | Input Parameter Signature | Return Type | Example | Output
 --------- | ------------------------- | ----------- | ------- | -------
-Time.now  | (String timeZoneId, String format) | String      | Time.now() | 2015-07-31T17:18:37.979Z (Current time, UTC format)
-| | | Time.now("EST") | 2015-07-31T13:30:49.964-04:00 (Specified time zone)
-| | | Time.now("EST","YYYY-MM-dd HH:mm:ss") | 2015-07-31 13:36:48 (Specified time zone and format, military time)
+Time.now  | (String timeZoneId, String format) | String      | `Time.now()` | 2015-07-31T17:18:37.979Z (Current time, UTC format)
+| | | `Time.now("EST")` | 2015-07-31T13:30:49.964-04:00 (Specified time zone)
+| | | `Time.now("EST","YYYY-MM-dd HH:mm:ss")` | 2015-07-31 13:36:48 (Specified time zone and format, military time)
 
 >Both input parameters are optional. The time zone ID supports both new and old style formats, listed below. The third example shows how to specify the military time format.
 
@@ -148,10 +148,10 @@ Australia/Sydney, Pacific/Guadalcanal, Pacific/Auckland.
 
 Function  | Description | Example
 --------- | ----------- | -------
-`getManagerUser(managerSource).$attribute` | Gets the manager's Okta user attribute values | getManagerUser("active_directory").firstName
-`getManagerAppUser(managerSource, attributeSource).$attribute` | Gets the manager's app user attribute values for the app user of any appinstance. | getManagerAppUser("active_directory","google").firstName
-`getAssistantUser(assistantSource).$attribute` | Gets the assistant's Okta user attribute values. | getAssistantUser("active_directory").firstName
-`getAssistantAppUser(assistantSource, attributeSource).$attribute` | Gets the assistant's app user attribute values for the app user of any appinstance. | getAssistantAppUser("active_directory","google").firstName
+`getManagerUser(managerSource).$attribute` | Gets the manager's Okta user attribute values | `getManagerUser("active_directory").firstName`
+`getManagerAppUser(managerSource, attributeSource).$attribute` | Gets the manager's app user attribute values for the app user of any appinstance. | `getManagerAppUser("active_directory","google").firstName`
+`getAssistantUser(assistantSource).$attribute` | Gets the assistant's Okta user attribute values. | `getAssistantUser("active_directory").firstName`
+`getAssistantAppUser(assistantSource, attributeSource).$attribute` | Gets the assistant's app user attribute values for the app user of any appinstance. | `getAssistantAppUser("active_directory","google").firstName`
 
 > Pass the correct **app name** for the *managerSource*, *assistantSource*, and *attributeSource* parameters.<br />
 > Note: At this time, only **active_directory** is supported for *managerSource* and *assistantSource*.
@@ -171,13 +171,13 @@ The functions above are often used in tandem to check whether a user has an AD o
 
 Common Actions  | Example
 ----------------| --------
-Refer to a `String` constant | 'Hello world'
-Refer to a `Integer` constant | 1234
-Refer to a `Number` constant | 3.141
-Refer to a `Boolean` constant | true
-Concatenate two strings | `user.firstName`+`user.lastName`
-Concatenate two strings with space | `user.firstName`+" "+`user.lastName`
-Ternary operator example:<br>If group code is 123, assign value of Sales, else assign Other | user.groupCode==123?'Sales':'Other'
+Refer to a `String` constant | `'Hello world'`
+Refer to a `Integer` constant | `1234`
+Refer to a `Number` constant | `3.141`
+Refer to a `Boolean` constant | `true`
+Concatenate two strings | `user.firstName + user.lastName`
+Concatenate two strings with space | `user.firstName + " " + user.lastName`
+Ternary operator example:<br>If group code is 123, assign value of Sales, else assign Other | `user.groupCode == 123 ? 'Sales' : 'Other'`
 
 ## Popular Expressions
 
@@ -199,5 +199,5 @@ Lower Case First Initial + Lower Case Lastname with Separator | `toLowerCase(sub
 Email Domain + Email Prefix with Separator | `toUpperCase(substringBefore( substringAfter(user.email, "@"), ".")) + "\" + substringBefore( user.email, "@")` | GMAIL\winston.churchill | Obtain Email value. From result, parse everything after the "@ character". From result, parse everything before the "." character. Convert to uppercase. Append a backslash "\" character. Obtain the email value again. From result, parse for everything before the "@" character.
 Email Domain + Lowercase First Initial and Lastname with Separator | `toUpperCase(substringBefore( substringAfter(user.email, "@"), ".")) + "\" + toLowerCase(substring( user.firstName, 0, 1)) + toLowerCase(user.lastName)` | GMAIL\wchurchill | Obtain Email value. From result, parse everything after the "@ character". From result, parse everything before the "." character. Convert to uppercase. Append a backslash "\" character. Obtain the Firstname value. From result, retrieve characters greater than position 0 thru position 1, including position 1. Convert it to lowercase. Obtain the Lastname value and convert it to lowercase.
 Static Domain + Email Prefix with Separator | `"XDOMAIN\" + toLowerCase(substring( user.firstName, 0, 1)) + toLowerCase(user.lastName)` | XDOMAIN\wchurchill | Add "XDOMAIN" string. Append a backslash "\" character. Obtain the Firstname value. From result, retrieve characters greater than position 0 thru position 1, including position 1. Convert it to lowercase. Obtain the Lastname value. Convert it to lowercase.
-Workday ID | `hasWorkdayUser()?findWorkdayUser().employeeID:null` | 123456 | Check if user has a Workday assignment, and if so, return their Workday employee ID.
-Active Directory UPN | `hasDirectoryUser()?findDirectoryUser().managerUPN:null` | bob@okta.com | Check if user has an Active Directory assignment, and if so, return their Active Directory manager UPN.
+Workday ID | `hasWorkdayUser() ? findWorkdayUser().employeeID : null` | 123456 | Check if user has a Workday assignment, and if so, return their Workday employee ID.
+Active Directory UPN | `hasDirectoryUser() ? findDirectoryUser().managerUPN : null` | bob@okta.com | Check if user has an Active Directory assignment, and if so, return their Active Directory manager UPN.
