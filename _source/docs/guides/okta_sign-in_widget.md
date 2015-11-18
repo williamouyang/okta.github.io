@@ -34,7 +34,7 @@ of factors and comes with built-in support for all of the factors listed below:
 -   Google Authenticator
 -   RSA SecureID
 -   Symantec VIP
--   DUO Security
+-   Duo Security
 -   SMS Authentication
 -   Security Question
 
@@ -72,39 +72,41 @@ Sign-In Widget is to look at a simple example of the HTML
 needed to get it working. The HTML below shows you how the quickly
 and easily set up a fully featured login experience:
 
-    <head>
-      <!-- Core widget js and css -->
-      <script src="https://example.okta.com/js/sdk/okta-sign-in-1.0.2.min.js" type="text/javascript"></script>
-      <link href="https://example.okta.com/js/sdk/okta-sign-in-1.0.2.min.css" type="text/css" rel="stylesheet">
-      <!-- Customizable css theme options. Link your own customized copy of this file or override styles in-line -->
-      <link href="https://example.okta.com/js/sdk/okta-theme-1.0.2.css" type="text/css" rel="stylesheet">
-    </head>
-    <body>
-      <div id="okta-login-container"></div>
-      <script type="text/javascript">
-        var baseUrl = 'https://example.okta.com';
-        var oktaSignIn = new OktaSignIn({baseUrl: baseUrl});
-    
-        oktaSignIn.renderEl(
-          { el: '#okta-login-container' },
-          function (res) {
-            if (res.status === 'SUCCESS') { res.session.setCookieAndRedirect('https://example.okta.com'); }
-          }
-        );
-      </script>
-    </body>
+~~~ html
+<head>
+	<!-- Core widget js and css -->
+	<script src="https://example.okta.com/js/sdk/okta-sign-in-1.0.2.min.js" type="text/javascript"></script>
+	<link href="https://example.okta.com/js/sdk/okta-sign-in-1.0.2.min.css" type="text/css" rel="stylesheet">
+	<!-- Customizable css theme options. Link your own customized copy of this file or override styles in-line -->
+	<link href="https://example.okta.com/js/sdk/okta-theme-1.0.2.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+	<div id="okta-login-container"></div>
+	<script type="text/javascript">
+		var baseUrl = 'https://example.okta.com';
+		var oktaSignIn = new OktaSignIn({baseUrl: baseUrl});
+		
+		oktaSignIn.renderEl(
+		  { el: '#okta-login-container' },
+		  function (res) {
+		    if (res.status === 'SUCCESS') { res.session.setCookieAndRedirect('https://example.okta.com'); }
+		  }
+		);
+	</script>
+</body>
+~~~
 
 Here is what is happening in the HTML above: 
 
 First, in the `<head>`
 tag, we include the  `okta-sign-in-1.0.2.min.js` and
 `okta-sign-in-1.0.2.min.css` files. These files have all of the
-logic for the the Okta Sign-In Widget. 
+logic for the Okta Sign-In Widget. 
 
 We also include the `okta-theme-1.0.2.css` file, which contains all
 of the styling information for the the Okta Sign-In Widget.
 
-Underneath those files, we add a `<div>` tag with an "`id`" of
+In the `<body>`, we add a `<div>` tag with an "`id`" of
 `okta-login-container`  &#x2013; you can use any "`id`" value in this tag,
 we are just using `okta-login-container` here for the sake of clarity.
 
@@ -123,22 +125,26 @@ For example, if your Okta organization is "`acme.okta.com`" you
 would replace the string "`example.okta.com`" below with
 "`acme.okta.com`":
 
-    var baseUrl = 'https://example.okta.com';
-    var oktaSignIn = new OktaSignIn({baseUrl: baseUrl});
+~~~ javascript
+var baseUrl = 'https://example.okta.com';
+var oktaSignIn = new OktaSignIn({baseUrl: baseUrl});
+~~~
 
 Finally, the lines below actually render the the Okta Sign-In
 Widget. Note that the value for `el` can be whatever `id` that you 
-specify, also note that we only define a "success" callback. In a
+specify, also note that we only define a "SUCCESS" callback. In a
 production environment, you will want to handle statuses beyond
-"SUCCESS", you will likely also want to define an "error"
+"SUCCESS", you will likely also want to define an "ERROR"
 callback as well. 
 
-    oktaSignIn.renderEl(
-      { el: '#okta-login-container' },
-      function (res) {
-        if (res.status === 'SUCCESS') { res.session.setCookieAndRedirect('https://example.com/'); }
-      }
-    );
+~~~ javascript
+oktaSignIn.renderEl(
+  { el: '#okta-login-container' },
+  function (res) {
+    if (res.status === 'SUCCESS') { res.session.setCookieAndRedirect('https://example.com/'); }
+  }
+);
+~~~
 
 # An in-depth example
 
@@ -247,9 +253,11 @@ There are four lines that you will need to modify in
     
         <link href="https://example.okta.com/js/sdk/okta-theme-1.0.2.css" type="text/css" rel="stylesheet">
 4.  The string passed as the `baseUrl` to the `OktaSignIn` constructor:
-    
-        var baseUrl = 'https://example.okta.com';
-        var oktaSignIn = new OktaSignIn({baseUrl: baseUrl});
+
+~~~ javascript
+var baseUrl = 'https://example.okta.com';
+var oktaSignIn = new OktaSignIn({baseUrl: baseUrl});
+~~~
 
 ## Copy the HTML to a web server
 
@@ -339,12 +347,12 @@ Most important is understanding how the widget is created. The
 the Okta Sign-In Widget is created when the `renderEl()` JavaScript
 method is called. When the the `renderEl()` method is called, the
 the Okta Sign-In Widget will be created as a `<div>` tag with an
-`id` of `okta-login-container` which will be inserted inside of the tag that
+`id` of `okta-sign-in` which will be inserted inside of the tag that
 you specified in the `el` option to `renderEl` method.
 
 Here is what the opening tag for the the Okta Sign-In Widget will look like:
 
-    <div id="okta-login-container" class="auth-container main-container no-beacon">
+    <div id="okta-sign-in" class="auth-container main-container no-beacon">
 
 Customization of the HTML *surrounding* the the Okta Sign-In Widget 
 is up to you. Customization of the widget itself will be done on
@@ -364,31 +372,33 @@ can style the the Okta Sign-In Widget. You can try out this CSS yourself
 by copying the `<style>` tag below into the `<head>` section of
 the `login-to-okta.html` file that you created above.
 
-    <style>
-      body {
-        background-image: url('https://farm9.staticflickr.com/8332/8451032652_b2bf0bdadc_h.jpg');
-        background-repeat: no-repeat;
-        background-position: center center fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-      }
-    
-      #container #okta-login-container .button {
-        color: #ffffff;
-        background-color: #3a3f44;
-        border-color: #3a3f44;
-        background-image: -webkit-linear-gradient(#484e55, #3a3f44 60%, #313539);
-        background-image: -o-linear-gradient(#484e55, #3a3f44 60%, #313539);
-        background-image: -webkit-gradient(linear, left top, left bottom, from(#484e55), color-stop(60%, #3a3f44), to(#313539));
-        background-image: linear-gradient(#484e55, #3a3f44 60%, #313539);
-        background-repeat: no-repeat;
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff484e55', endColorstr='#ff313539', GradientType=0);
-        -webkit-filter: none;
-        filter: none;
-      }
-    </style>
+~~~ html
+<style>
+  body {
+    background-image: url('https://farm9.staticflickr.com/8332/8451032652_b2bf0bdadc_h.jpg');
+    background-repeat: no-repeat;
+    background-position: center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+  #container #okta-login-container .button {
+    color: #ffffff;
+    background-color: #3a3f44;
+    border-color: #3a3f44;
+    background-image: -webkit-linear-gradient(#484e55, #3a3f44 60%, #313539);
+    background-image: -o-linear-gradient(#484e55, #3a3f44 60%, #313539);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#484e55), color-stop(60%, #3a3f44), to(#313539));
+    background-image: linear-gradient(#484e55, #3a3f44 60%, #313539);
+    background-repeat: no-repeat;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff484e55', endColorstr='#ff313539', GradientType=0);
+    -webkit-filter: none;
+    filter: none;
+  }
+</style>
+~~~
 
 ### Advice for hosting your own CSS
 
@@ -494,10 +504,10 @@ var oktaSignIn = new OktaSignIn({
         
         Defaults to **false**
     -   `selfServiceUnlock`
-
+				
         When set to **true**, this will give users the option to perform a self-service password reset.
-
-	Defaults to **false**
+				
+				Defaults to **false**
 -   `helpLinks`
     
     The options in the `helpLinks` object set alternate links to be
