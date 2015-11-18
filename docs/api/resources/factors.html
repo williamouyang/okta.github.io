@@ -1824,6 +1824,26 @@
 </span></code></pre>
 </div>
 
+<h6 id="rate-limit">Rate Limit</h6>
+
+<p><code class="highlighter-rouge">429 Too Many Requests</code> status code may be returned if you attempt to resend a SMS challenge (OTP) within the same time window.</p>
+
+<p><em>The current rate limit is 1 SMS challenge per device every 30 seconds.</em></p>
+
+<blockquote>
+  <p>Okta will round-robin between SMS providers with every resend request to help ensure delivery of SMS OTP across different carriers</p>
+</blockquote>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000047"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"API call exceeded rate limit due to too many requests."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"errorLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000047"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"errorId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oaeneEaQF8qQrepOWHSkdoejw"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"errorCauses"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
 <h4 class="api api-operation" id="enroll-okta-verify-totp-factor">Enroll Okta Verify TOTP Factor</h4>
 
 <p>Enrolls a user with an Okta <code class="highlighter-rouge">token:software:totp</code> factor.  The factor must be <a href="#activate-totp-factor">activated</a> after enrollment by following the <code class="highlighter-rouge">activate</code> link relation to complete the enrollment process.</p>
@@ -2937,6 +2957,24 @@
       </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your passcode doesn't match our records. Please try again."</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p><code class="highlighter-rouge">429 Too Many Requests</code> status code may be returned if you attempt to resend a SMS challenge (OTP) within the same time window.</p>
+
+<p><em>The current rate limit is 1 SMS challenge per device every 30 seconds.</em></p>
+
+<blockquote>
+  <p>Okta will round-robin between SMS providers with every resend request to help ensure delivery of SMS OTP across different carriers</p>
+</blockquote>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000047"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"API call exceeded rate limit due to too many requests."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"errorLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000047"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"errorId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oaeneEaQF8qQrepOWHSkdoejw"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"errorCauses"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
