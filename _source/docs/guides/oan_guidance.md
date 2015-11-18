@@ -59,11 +59,11 @@ While many ISVs use proprietary APIs, Okta recommends that you implement your AP
 
 With the new Cloud Provisioning Connector (CPC) Program, you can now build and support a provisioning integration between your application and Okta. At a high level, the CPC program let’s you choose between two technical approaches for building the integration, each with it’s own advantages:
 
- | **Java Connector** | **SCIM**
+| | **Java Connector** | **SCIM**
 -------- | ----------- | --------
-**What is it?**  | Connector written in Java that takes Okta provisioning signals and translates them into your service’s User API. The Connector is built and managed by the ISV (you) and hosted in the Okta service. Typical development effort is ~1-3 man-weeks. | Okta SCIM 1.1/2.0 Client interfaces directly with compatible SCIM 1.1/2.0 Server APIs. The integration is just a template that is configured. No coding required.
+**What is it?**  | Connector written in Java that takes Okta provisioning signals and translates them into your service’s User API. The Connector is built and managed by the ISV (you) and hosted in the Okta service. Typical development effort is ~1-3 man-weeks. | Okta's SCIM 1.1/2.0 Client will interface directly with compatible SCIM 1.1/2.0 Servers. The integration is just a template that is configured. No coding required.
 **Who is it designed for?** | ISVs with an existing proprietary API for user operations. You want maximum flexibility and do not plan on supporting the SCIM standard. | ISVs that: a) currently support the SCIM standard; b) plan to support the SCIM standard; c) don’t already have proprietary APIs for user operations.
-**How do I get started?** |Email <oan@okta.com> and express interest in developing using Java Connector. We’ll share the SDK and additional program details. `Note: We are only accepting a limited number of ISV partners into the Java Connector program to start. Please try to share some details on customer demand and urgency (e.g. # of joint customers that would benefit, deployment deadlines) in your email.` | Okta support for SCIM is coming in March 2016. If you are interested in being part of the SCIM Beta reply to <oan@okta.com> and we’ll add you to the list. We’ll reach back out with additional SCIM documentation and SCIM Beta details by March 2016.
+**How do I get started?** |Email <oan@okta.com> and express interest in developing using Java Connector. We’ll share the SDK and additional program details. **Note: We are only accepting a limited number of ISV partners into the Java Connector program to start.** Please try to share some details on customer demand and urgency (e.g. # of joint customers that would benefit, deployment deadlines) in your email. | Okta support for SCIM is coming in March 2016. If you are interested in being part of the SCIM Beta reply to <oan@okta.com> and we’ll add you to the list. We’ll reach back out with additional SCIM documentation and SCIM Beta details by March 2016.
 
 Interested in provisioning with Okta but have general questions about the approaches above? Email us at <oan@okta.com>
 
@@ -164,4 +164,4 @@ A: Okta creates unique SAML configuration documentation for each application in 
 
 **Q: In general, how can I get familiar with the Okta product?**
 
-A: To get started, check out the [Okta Help Center](https://support.okta.com/help) or [Okta Academy](https://www.youtube.com/playlist?list=PLIid085fSVdurJ8l_UgfNGJohaSW6w97p) on Youtube. App Partners are eligible for live Okta 101 sessions as well, please email oan@okta.com if you are interested.
+A: To get started, check out the [Okta Help Center](https://support.okta.com/help) or [Okta Academy on YouTube](https://www.youtube.com/playlist?list=PLIid085fSVdurJ8l_UgfNGJohaSW6w97p). App Partners are eligible for live Okta 101 sessions as well, please email oan@okta.com if you are interested.
