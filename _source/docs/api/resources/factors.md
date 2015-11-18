@@ -972,6 +972,24 @@ curl -v -X POST \
 }
 ~~~
 
+###### Rate Limit
+
+`429 Too Many Requests` status code may be returned if you attempt to resend a SMS challenge (OTP) within the same time window.
+
+*The current rate limit is 1 SMS challenge per device every 30 seconds.*
+
+> Okta will round-robin between SMS providers with every resend request to help ensure delivery of SMS OTP across different carriers
+
+~~~json
+{
+    "errorCode": "E0000047",
+    "errorSummary": "API call exceeded rate limit due to too many requests.",
+    "errorLink": "E0000047",
+    "errorId": "oaeneEaQF8qQrepOWHSkdoejw",
+    "errorCauses": []
+}
+~~~
+
 #### Enroll Okta Verify TOTP Factor
 {:.api .api-operation}
 
@@ -1892,6 +1910,22 @@ If the passcode is invalid you will receive a `403 Forbidden` status code with t
       "errorSummary": "Your passcode doesn't match our records. Please try again."
     }
   ]
+}
+~~~
+
+`429 Too Many Requests` status code may be returned if you attempt to resend a SMS challenge (OTP) within the same time window.
+
+*The current rate limit is 1 SMS challenge per device every 30 seconds.*
+
+> Okta will round-robin between SMS providers with every resend request to help ensure delivery of SMS OTP across different carriers
+
+~~~json
+{
+    "errorCode": "E0000047",
+    "errorSummary": "API call exceeded rate limit due to too many requests.",
+    "errorLink": "E0000047",
+    "errorId": "oaeneEaQF8qQrepOWHSkdoejw",
+    "errorCauses": []
 }
 ~~~
 
