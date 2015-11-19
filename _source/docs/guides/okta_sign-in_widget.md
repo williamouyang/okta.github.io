@@ -254,10 +254,8 @@ There are four lines that you will need to modify in
         <link href="https://example.okta.com/js/sdk/okta-theme-1.0.2.css" type="text/css" rel="stylesheet">
 4.  The string passed as the `baseUrl` to the `OktaSignIn` constructor:
 
-~~~ javascript
-var baseUrl = 'https://example.okta.com';
-var oktaSignIn = new OktaSignIn({baseUrl: baseUrl});
-~~~
+        var baseUrl = 'https://example.okta.com';
+        var oktaSignIn = new OktaSignIn({baseUrl: baseUrl});
 
 ## Copy the HTML to a web server
 
@@ -504,10 +502,10 @@ var oktaSignIn = new OktaSignIn({
         
         Defaults to **false**
     -   `selfServiceUnlock`
-				
+	
         When set to **true**, this will give users the option to perform a self-service password reset.
-				
-				Defaults to **false**
+	
+        Defaults to **false**
 -   `helpLinks`
     
     The options in the `helpLinks` object set alternate links to be
