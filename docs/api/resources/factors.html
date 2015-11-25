@@ -2594,6 +2594,16 @@
   </tbody>
 </table>
 
+<h4 class="api api-request api-request-example" id="request-example-14">Request Example</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/lifecycle/activate"</span>
+</code></pre>
+</div>
+
 <h4 class="api api-response api-response-example" id="response-example-waiting">Response Example (Waiting)</h4>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
@@ -2745,7 +2755,7 @@
 
 <p><code class="highlighter-rouge">204 No Content</code></p>
 
-<h4 class="api api-request api-request-example" id="request-example-14">Request Example</h4>
+<h4 class="api api-request api-request-example" id="request-example-15">Request Example</h4>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X DELETE <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2849,7 +2859,7 @@
 </span></code></pre>
 </div>
 
-<h4 class="api api-request api-request-example" id="request-example-15">Request Example</h4>
+<h4 class="api api-request api-request-example" id="request-example-16">Request Example</h4>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2979,7 +2989,7 @@
 </span></code></pre>
 </div>
 
-<h4 class="api api-request api-request-example" id="request-example-16">Request Example</h4>
+<h4 class="api api-request api-request-example" id="request-example-17">Request Example</h4>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3087,7 +3097,7 @@
 </span></code></pre>
 </div>
 
-<h4 class="api api-request api-request-example" id="request-example-17">Request Example</h4>
+<h4 class="api api-request api-request-example" id="request-example-18">Request Example</h4>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3148,6 +3158,10 @@
   </tbody>
 </table>
 
+<blockquote>
+  <p>The client <code class="highlighter-rouge">IP Address</code> &amp; <code class="highlighter-rouge">User Agent</code> of the HTTP request is captured and sent in the push notification as additional context.  You should always send a valid <code class="highlighter-rouge">User-Agent</code> HTTP header when verifying a push factor.</p>
+</blockquote>
+
 <h4 class="api api-response api-response-params" id="response-parameters-12">Response Parameters</h4>
 
 <table>
@@ -3172,6 +3186,17 @@
     </tr>
   </tbody>
 </table>
+
+<h4 class="api api-request api-request-example" id="request-example-19">Request Example</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+-H <span class="s2">"User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/verify"</span>
+</code></pre>
+</div>
 
 <h4 class="api api-response api-response-example" id="response-example-18">Response Example</h4>
 
@@ -3453,7 +3478,7 @@
 </span></code></pre>
 </div>
 
-<h4 class="api api-request api-request-example" id="request-example-18">Request Example</h4>
+<h4 class="api api-request api-request-example" id="request-example-20">Request Example</h4>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
