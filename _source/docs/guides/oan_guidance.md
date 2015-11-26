@@ -25,7 +25,7 @@ For details on how to federate your application with SAML and Okta Mobile Connec
 
 ### Single Sign-On: Building an Integration with Okta
 
-Use the following instructions to support single sign-on for app in the public-facing Okta Application Network:
+Use the following instructions to support single sign-on for your app in the public-facing Okta Application Network:
 
 ### 1. Prepare Your Application
 
@@ -36,8 +36,6 @@ Use the following instructions to support single sign-on for app in the public-f
 * Sign up for an Okta [developer account](https://www.okta.com/developer/signup/).
 * In your Okta account (make sure you are signed in as an admin), use the [App Wizard](https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard) to build a Single Sign-on integration with Okta. For the more visually inclined, see our videos for [SAML](https://www.youtube.com/watch?v=rQpUsRe0Jxw) and [SWA](https://www.youtube.com/watch?v=FoyhQEwOnqg).
 * Note: In the SAML Wizard step #3 Feedback, be sure to identify yourself as a Partner (“I'm a software vendor. I'd like to integrate my app with Okta”) and that you want to your app reviewed and promoted to the OAN (“Yes, my app integration is ready for public use in the Okta Application Network”)
-* Currently provisioning integrations are custom-built by Okta. Email <oan@okta.com> to submit a request for your app.
-* Get Stuck? See our *Okta Application Network FAQs* below.
 
 ### 3. Need Help?
 
