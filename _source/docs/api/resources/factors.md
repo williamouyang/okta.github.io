@@ -2038,7 +2038,9 @@ Parameter    | Description                                         | Param Type 
 uid          | `id` of user                                        | URL        | String   | TRUE     |
 fid          | `id` of factor                                      | URL        | String   | TRUE     |
 
-> The client `IP Address` & `User Agent` of the HTTP request is captured and sent in the push notification as additional context.  You should always send a valid `User-Agent` HTTP header when verifying a push factor.
+> The client `IP Address` & `User Agent` of the HTTP request is automatically captured and sent in the push notification as additional context.  You should always send a valid `User-Agent` HTTP header when verifying a push factor.
+
+> The **public IP address** of your application must be whitelisted in your [org's network security settings](https://support.okta.com/help/articles/Knowledge_Article/27529977-Using-the-Okta-Security-Page#Obey) as a trusted gateway in order to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header.
 
 #### Response Parameters
 {:.api .api-response .api-response-params}
@@ -2055,7 +2057,8 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
--H "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+-H "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36" \
+-H "X-Forwarded-For: 23.235.46.133" \
 "https://${org}.okta.com/api/v1/users/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/verify"
 ~~~
 
