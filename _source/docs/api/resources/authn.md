@@ -12,7 +12,7 @@ The API is targeted for developers who want to build their own end-to-end login 
 
 - **Primary authentication** allows you to verify username and password credentials for a user.
 
-- **Multifactor authentication** (MFA) strengthens the security of password-based authentication by requiring additional verification of another factor such as a temporary one-time password or an SMS passcode. The Auth API supports user enrollment with MFA factors enabled by the administrator, as well as MFA challenges based on your Sign-On security policy.
+- **Multifactor authentication** (MFA) strengthens the security of password-based authentication by requiring additional verification of another factor such as a temporary one-time password or an SMS passcode. The Authentication API supports user enrollment with MFA factors enabled by the administrator, as well as MFA challenges based on your **Okta Sign-On Policy**.
 
 - **Recovery** allows users to securely reset their password if they've forgotten it, or unlock their account if it has been locked out due to excessive failed login attempts. This functionality is subject to the security policy set by the administrator.
 
@@ -20,7 +20,9 @@ The API is targeted for developers who want to build their own end-to-end login 
 
 ### Application Types
 
-The behavior of the Okta Authentication API varies depending on the type of application.
+The behavior of the Okta Authentication API varies depending on the type of your application and your org's security policies such as the **Okta Sign-On Policy**, **MFA Enrollment Policy**, or **Password Policy**.
+
+> Policy evaluation is conditional on the [client request context](../getting_started/design_principles.html#client-request-context) such as IP address.
 
 #### Public Application
 
@@ -28,7 +30,9 @@ Public applications are any application that anonymously start an authentication
 
 #### Trusted Application
 
-Trusted applications are backend applications that act as authentication broker or login portal for your Okta organization and start an authentication or recovery transaction with an admin API token.  Trusted Applications  may implement their own recovery flows and primary authentication process and may receive additional metadata about the user before primary authentication has successfully completed.
+Trusted applications are backend applications that act as authentication broker or login portal for your Okta organization and may start an authentication or recovery transaction with an administrator API token.  Trusted apps  may implement their own recovery flows and primary authentication process and may receive additional metadata about the user before primary authentication has successfully completed.
+
+> Trusted web applications may need to override [client request context](../getting_started/design_principles.html#client-request-context) to forward the originating client context for the user.
 
 ## Transaction Model
 
@@ -200,38 +204,6 @@ One-time token issued as `sessionToken` response parameter when an authenticatio
 
 - The token can be exchanged for a session with the [Session API](sessions.html#create-session-with-session-token) or converted to a [session cookie](/docs/examples/session_cookie.html).
 - The lifetime of the `sessionToken` is the same as the lifetime of a user's session and managed by the organization's security policy.
-
-### Request Context
-
-Authentication or recovery transactions by default derive request context directly from the HTTP request and client TCP socket.  Request context is used to evaluate policies such as **Okta Sign-On** and provide client information for troubleshooting and auditing purposes.
-
-[Trusted web applications](#trusted-application) such as an external portal or proxy may need to override this context to forward the originating context for the user.
-
-#### User Agent
-
-Okta supports the standard `User-Agent` HTTP header to identify the user's browser or application.
-
-#### IP Address
-
-Okta supports the standard `X-Forwarded-For` HTTP header to forward the originating client's IP address
-
-> The **public IP address** of your trusted web application must be whitelisted in your [org's network security settings](https://support.okta.com/help/articles/Knowledge_Article/27529977-Using-the-Okta-Security-Page#Obey) as a trusted gateway in order to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header.
-
-#### Context Object
-
-The context object allows [trusted web applications](#trusted-application) such as an external portal to pass additional context for the authentication or recovery transaction
-
-> Overriding context such as `deviceToken` is a highly privileged operation limited to trusted web applications and requires making authentication or recovery requests with a valid *admin API token*.
-
-|-------------+-------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+------------|
-| Property    | Description                                                             | DataType | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| ----------- | ----------------------------------------------------------------------- | -------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| deviceToken | A globally unique ID identifying the user's client device or user agent | String   | TRUE     | FALSE  | FALSE    |           | 32        |            |
-|-------------+-------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+------------|
-
-> You must always pass the same `deviceToken` for a user's device with every authentication request for **per-device** or **per-session** Sign-On Policy factor challenges.  If the `deviceToken` is absent or does not match the previous `deviceToken`, the user will be challenged every-time instead of **per-device** or **per-session**.
-
-It is recommend that you generate a UUID or GUID for each client and persist the `deviceToken` as a persistent cookie or HTML5 localStorage item scoped to your web application's origin.
 
 ### Factor Result
 
@@ -599,6 +571,21 @@ The authentication transaction [state machine](#transaction-state) can be modifi
 | warnBeforePasswordExpired  | Transitions transaction to `PASSWORD_WARN` state before `SUCCESS` if the user's password is about to expire and within their password policy warn period   | Boolean  | TRUE     | FALSE  | FALSE    |           |           |            |
 |----------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+------------|
 
+##### Context Object
+
+The context object allows [trusted web applications](#trusted-application) such as an external portal to pass additional context for the authentication or recovery transaction.
+
+> Overriding context such as `deviceToken` is a highly privileged operation limited to trusted web applications and requires making authentication or recovery requests with a valid *administrator API token*.
+
+|-------------+-------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+------------|
+| Property    | Description                                                             | DataType | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| ----------- | ----------------------------------------------------------------------- | -------- | -------- | ------ | -------- | --------- | --------- | ---------- |
+| deviceToken | A globally unique ID identifying the user's client device or user agent | String   | TRUE     | FALSE  | FALSE    |           | 32        |            |
+|-------------+-------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+------------|
+
+> You must always pass the same `deviceToken` for a user's device with every authentication request for **per-device** or **per-session** Sign-On Policy factor challenges.  If the `deviceToken` is absent or does not match the previous `deviceToken`, the user will be challenged every-time instead of **per-device** or **per-session**.
+
+It is recommend that you generate a UUID or GUID for each client and persist the `deviceToken` as a persistent cookie or HTML5 localStorage item scoped to your web application's origin.
 
 #### Response Parameters
 {:.api .api-response .api-response-params}
@@ -1054,11 +1041,11 @@ User is assigned to a **MFA Policy** that requires enrollment during sign-on and
 
 #### Primary Authentication with Trusted Application
 
-Authenticates a user via a [trusted application](#trusted-application) or proxy that overrides [request context](#request-context).
+Authenticates a user via a [trusted application](#trusted-application) or proxy that overrides [client request context](../getting_started/design_principles.html#client-request-context).
 
 > Specifying your own `deviceToken` is a highly privileged operation limited to trusted web applications and requires making authentication requests with a valid *admin API token*.
 
-> The **public IP address** of your [trusted application](#trusted-application) must be whitelisted as a gateway IP address to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header
+> The **public IP address** of your [trusted application](#trusted-application) must be [whitelisted as a gateway IP address](../getting_started/design_principles.html#ip-address) to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -3215,7 +3202,7 @@ Allows a [trusted application](#trusted-application) such as an external portal 
 
 > Directly obtaining a `recoveryToken` is a highly privileged operation that requires an administrator API token and should be restricted to trusted web applications.  Anyone that obtains a `recoveryToken` for a user and knows the answer to a user's recovery question can reset their password or unlock their account.
 
-> The **public IP address** of your [trusted application](#trusted-application) must be [whitelisted as a gateway IP address](#ip-address) to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header
+> The **public IP address** of your [trusted application](#trusted-application) must be [whitelisted as a gateway IP address](../getting_started/design_principles.html#ip-address) to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -3433,9 +3420,9 @@ curl -v -X POST \
 
 Allows a [trusted application](#trusted-application) such as an external portal to implement it's own primary authentication process and directly obtain a [recovery token](#recovery-token) for a user given just the user's identifier.
 
-> Directly obtaining a `recoveryToken` is a highly privileged operation that requires an administrator API token and should be restricted to trusted web applications.  Anyone that obtains a `recoveryToken` for a user and knows the answer to a user's recovery question can reset their password or unlock their account.
+> Directly obtaining a `recoveryToken` is a highly privileged operation that requires an administrator API token and should be restricted to [trusted web applications](#trusted-application).  Anyone that obtains a `recoveryToken` for a user and knows the answer to a user's recovery question can reset their password or unlock their account.
 
-> The **public IP address** of your [trusted application](#trusted-application) must be [whitelisted as a gateway IP address](#ip-address) to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header.
+> The **public IP address** of your [trusted application](#trusted-application) must be [whitelisted as a gateway IP address](../getting_started/design_principles.html#ip-address) to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header
 
 ##### Request Example
 {:.api .api-request .api-request-example}

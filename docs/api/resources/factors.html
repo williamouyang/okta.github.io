@@ -3159,11 +3159,11 @@
 </table>
 
 <blockquote>
-  <p>The client <code class="highlighter-rouge">IP Address</code> &amp; <code class="highlighter-rouge">User Agent</code> of the HTTP request is automatically captured and sent in the push notification as additional context.  You should always send a valid <code class="highlighter-rouge">User-Agent</code> HTTP header when verifying a push factor.</p>
+  <p>The client <code class="highlighter-rouge">IP Address</code> &amp; <code class="highlighter-rouge">User Agent</code> of the HTTP request is automatically captured and sent in the push notification as additional context.<br />You should <a href="../getting_started/design_principles.html#user-agent">always send a valid User-Agent HTTP header</a> when verifying a push factor.</p>
 </blockquote>
 
 <blockquote>
-  <p>The <strong>public IP address</strong> of your application must be whitelisted in your <a href="https://support.okta.com/help/articles/Knowledge_Article/27529977-Using-the-Okta-Security-Page#Obey">org’s network security settings</a> as a trusted gateway in order to forward the user agent’s original IP address with the <code class="highlighter-rouge">X-Forwarded-For</code> HTTP header.</p>
+  <p>The <strong>public IP address</strong> of your application must be <a href="../getting_started/design_principles.html#ip-address">whitelisted as a gateway IP address</a> to forward the user agent’s original IP address with the <code class="highlighter-rouge">X-Forwarded-For</code> HTTP header</p>
 </blockquote>
 
 <h4 class="api api-response api-response-params" id="response-parameters-12">Response Parameters</h4>

@@ -66,7 +66,24 @@ with no `body` param, be sure to set the `Content-Length` header to zero.
 
 Used for deleting resources.
 
-> Any PUT or POST request with no Content-Length header nor a body will return a 411 error.  To get around this, either include a Content-Length: 0 header
+> Any PUT or POST request with no Content-Length header nor a body will return a 411 error.  To get around this, include a `Content-Length: 0` header
+
+## Client Request Context
+
+Okta will derive client request context directly from the HTTP request headers and client TCP socket.  Request context is used to evaluate policies such as **Okta Sign-On Policy** and provide client information for [troubleshooting and auditing](../resources/events.html#client-objecttype) purposes.
+
+### User Agent
+
+Okta supports the standard `User-Agent` HTTP header to identify the user's browser or application.  You should always send a `User-Agent` string to uniquely identify your client application and version such as `Oktaprise/1.1`.
+
+> If your application is acting as a gateway or proxy, you should forward the `User-Agent` of the originating client with your API requests
+
+### IP Address
+
+The **public IP address** of your application will be automatically used as the client IP address for your request. Okta supports the standard `X-Forwarded-For` HTTP header to forward the originating client's IP address if your application is behind a proxy server or acting as a login portal or gateway.
+
+> The **public IP address** of your trusted web application must be whitelisted in your [org's network security settings](https://support.okta.com/help/articles/Knowledge_Article/27529977-Using-the-Okta-Security-Page#Obey) as a trusted gateway in order to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header.
+
 
 ## Errors
 
