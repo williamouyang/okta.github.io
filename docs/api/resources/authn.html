@@ -649,7 +649,7 @@
 <p>Okta supports the standard <code class="highlighter-rouge">X-Forwarded-For</code> HTTP header to forward the originating client’s IP address</p>
 
 <blockquote>
-  <p>The IP address of your trusted web application request must be whitelisted in your <a href="https://support.okta.com/help/articles/Knowledge_Article/27529977-Using-the-Okta-Security-Page#Obey">org’s network security settings</a> as a trusted gateway in order to forward the user agent’s original IP address with the <code class="highlighter-rouge">X-Forwarded-For</code> HTTP header.</p>
+  <p>The <strong>public IP address</strong> of your trusted web application must be whitelisted in your <a href="https://support.okta.com/help/articles/Knowledge_Article/27529977-Using-the-Okta-Security-Page#Obey">org’s network security settings</a> as a trusted gateway in order to forward the user agent’s original IP address with the <code class="highlighter-rouge">X-Forwarded-For</code> HTTP header.</p>
 </blockquote>
 
 <h4 id="context-object">Context Object</h4>
@@ -2229,7 +2229,7 @@
 </blockquote>
 
 <blockquote>
-  <p>The IP address of your HTTP request must be whitelisted as a gateway IP address to forward the user agent’s original IP address with the <code class="highlighter-rouge">X-Forwarded-For</code> HTTP header</p>
+  <p>The <strong>public IP address</strong> of your <a href="#trusted-application">trusted application</a> must be whitelisted as a gateway IP address to forward the user agent’s original IP address with the <code class="highlighter-rouge">X-Forwarded-For</code> HTTP header</p>
 </blockquote>
 
 <h5 class="api api-request api-request-example" id="request-example-1">Request Example</h5>
@@ -4665,7 +4665,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </blockquote>
 
 <blockquote>
-  <p>The IP address of your HTTP request must be <a href="#ip-address">whitelisted as a gateway IP address</a> to forward the user agent’s original IP address with the <code class="highlighter-rouge">X-Forwarded-For</code> HTTP header</p>
+  <p>The <strong>public IP address</strong> of your <a href="#trusted-application">trusted application</a> must be <a href="#ip-address">whitelisted as a gateway IP address</a> to forward the user agent’s original IP address with the <code class="highlighter-rouge">X-Forwarded-For</code> HTTP header</p>
 </blockquote>
 
 <h5 class="api api-request api-request-example" id="request-example-21">Request Example</h5>
@@ -4931,7 +4931,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </blockquote>
 
 <blockquote>
-  <p>The IP address of your HTTP request must be <a href="#ip-address">whitelisted as a gateway IP address</a> to forward the user agent’s original IP address with the <code class="highlighter-rouge">X-Forwarded-For</code> HTTP header.</p>
+  <p>The <strong>public IP address</strong> of your <a href="#trusted-application">trusted application</a> must be <a href="#ip-address">whitelisted as a gateway IP address</a> to forward the user agent’s original IP address with the <code class="highlighter-rouge">X-Forwarded-For</code> HTTP header.</p>
 </blockquote>
 
 <h5 class="api api-request api-request-example" id="request-example-23">Request Example</h5>

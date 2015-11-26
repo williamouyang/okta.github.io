@@ -215,7 +215,7 @@ Okta supports the standard `User-Agent` HTTP header to identify the user's brows
 
 Okta supports the standard `X-Forwarded-For` HTTP header to forward the originating client's IP address
 
-> The IP address of your trusted web application request must be whitelisted in your [org's network security settings](https://support.okta.com/help/articles/Knowledge_Article/27529977-Using-the-Okta-Security-Page#Obey) as a trusted gateway in order to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header.
+> The **public IP address** of your trusted web application must be whitelisted in your [org's network security settings](https://support.okta.com/help/articles/Knowledge_Article/27529977-Using-the-Okta-Security-Page#Obey) as a trusted gateway in order to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header.
 
 #### Context Object
 
@@ -1058,7 +1058,7 @@ Authenticates a user via a [trusted application](#trusted-application) or proxy 
 
 > Specifying your own `deviceToken` is a highly privileged operation limited to trusted web applications and requires making authentication requests with a valid *admin API token*.
 
-> The IP address of your HTTP request must be whitelisted as a gateway IP address to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header
+> The **public IP address** of your [trusted application](#trusted-application) must be whitelisted as a gateway IP address to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -3215,7 +3215,7 @@ Allows a [trusted application](#trusted-application) such as an external portal 
 
 > Directly obtaining a `recoveryToken` is a highly privileged operation that requires an administrator API token and should be restricted to trusted web applications.  Anyone that obtains a `recoveryToken` for a user and knows the answer to a user's recovery question can reset their password or unlock their account.
 
-> The IP address of your HTTP request must be [whitelisted as a gateway IP address](#ip-address) to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header
+> The **public IP address** of your [trusted application](#trusted-application) must be [whitelisted as a gateway IP address](#ip-address) to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -3435,7 +3435,7 @@ Allows a [trusted application](#trusted-application) such as an external portal 
 
 > Directly obtaining a `recoveryToken` is a highly privileged operation that requires an administrator API token and should be restricted to trusted web applications.  Anyone that obtains a `recoveryToken` for a user and knows the answer to a user's recovery question can reset their password or unlock their account.
 
-> The IP address of your HTTP request must be [whitelisted as a gateway IP address](#ip-address) to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header.
+> The **public IP address** of your [trusted application](#trusted-application) must be [whitelisted as a gateway IP address](#ip-address) to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
