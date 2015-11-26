@@ -232,7 +232,7 @@
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"resetPassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"resetFactors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"</span><span class="w">
@@ -838,7 +838,7 @@
 
 <p>Every user within your Okta organization must have a unique identifier for a login.  This constraint applies to all users you import from other systems or applications such as Active Directory.  Your organization is the top-level namespace to mix and match logins from all your connected applications or directories.  Careful consideration of naming conventions for your login identifier will make it easier to onboard new applications in the future.</p>
 
-<p>Okta has a default ambiguous name resolution policy for logins.  Users can login with their non-qualified short-name (e.g. <code class="highlighter-rouge">isaac</code> with login <em>isaac.brock@example.com</em>) as long as the short-name is still unique within the organization.</p>
+<p>Okta has a default ambiguous name resolution policy for logins.  Users can login with their non-qualified shortname (e.g. <code class="highlighter-rouge">isaac.brock</code> with login <em>isaac.brock@example.com</em>) as long as the shortname is still unique within the organization.</p>
 
 <blockquote>
   <p>Avoid using a <code class="highlighter-rouge">login</code> with a <code class="highlighter-rouge">/</code> character.  Although <code class="highlighter-rouge">/</code> is a valid character according to <a href="http://tools.ietf.org/html/rfc6531#section-3.3">RFC 6531 section 3.3</a>, a user with this character in their <code class="highlighter-rouge">login</code> cannot be fetched by <code class="highlighter-rouge">login</code> (<a href="#get-user-with-id">see Get User by ID</a>) due to security risks with escaping this character in URI paths.</p>
@@ -2021,13 +2021,13 @@
 
 <p>Users updated after 06/01/2013 but before 01/01/2014 with a status of <code class="highlighter-rouge">ACTIVE</code></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>filter=lastUpdated gt "2013-06-27T16:35:28.000Z" and lastUpdated lt "2013-07-04T16:35:28.000Z" and status eq "ACTIVE"
+<div class="highlighter-rouge"><pre class="highlight"><code>filter=lastUpdated gt "2013-06-01T00:00:00.000Z" and lastUpdated lt "2014-01-01T00:00:00.000Z" and status eq "ACTIVE"
 </code></pre>
 </div>
 
 <p>Users updated after 06/01/2013 but with a status of <code class="highlighter-rouge">LOCKED_OUT</code> or <code class="highlighter-rouge">RECOVERY</code></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>filter=lastUpdated gt "2013-06-27T16:35:28.000Z" and (status eq "LOCKED_OUT" or status eq "RECOVERY")
+<div class="highlighter-rouge"><pre class="highlight"><code>filter=lastUpdated gt "2013-06-01T00:00:00.000Z" and (status eq "LOCKED_OUT" or status eq "RECOVERY")
 </code></pre>
 </div>
 
@@ -2232,7 +2232,7 @@
 </code></pre>
 </div>
 
-<h5 id="response-example-10">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-10">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -3127,7 +3127,7 @@ in the request will not be modified or deleted. <strong>Use <code class="highlig
 
 <p>Returns an empty object</p>
 
-<h5 id="request-example-20">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-20">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3287,10 +3287,11 @@ parameter must be false or omitted for this type of conversion.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-22">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -H <span class="s2">"Authorization: SSWS yourtoken"</span> <span class="se">\</span>
+<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--X POST <span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password?tempPassword=false"</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password?tempPassword=false"</span>
 </code></pre>
 </div>
 
@@ -3324,7 +3325,7 @@ parameter must be false or omitted for this type of conversion.</p>
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"resetPassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"resetFactors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"</span><span class="w">

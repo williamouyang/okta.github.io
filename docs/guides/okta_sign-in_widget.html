@@ -449,13 +449,13 @@ Developer Edition organization, your domain will be something like
   </li>
   <li>
     <p>The string passed as the <code class="highlighter-rouge">baseUrl</code> to the <code class="highlighter-rouge">OktaSignIn</code> constructor:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>var baseUrl = 'https://example.okta.com';
+var oktaSignIn = new OktaSignIn({baseUrl: baseUrl});
+</code></pre>
+    </div>
   </li>
 </ol>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="s1">'https://example.okta.com'</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">oktaSignIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span><span class="na">baseUrl</span><span class="p">:</span> <span class="nx">baseUrl</span><span class="p">});</span>
-</code></pre>
-</div>
 
 <h2 id="copy-the-html-to-a-web-server">Copy the HTML to a web server</h2>
 
@@ -735,9 +735,7 @@ mobile phone number to recovery their password using an SMS.</p>
 
         <p>When set to <strong>true</strong>, this will give users the option to perform a self-service password reset.</p>
 
-        <div class="highlighter-rouge"><pre class="highlight"><code>    Defaults to **false**
-</code></pre>
-        </div>
+        <p>Defaults to <strong>false</strong></p>
       </li>
     </ul>
   </li>

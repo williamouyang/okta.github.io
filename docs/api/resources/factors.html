@@ -3159,7 +3159,11 @@
 </table>
 
 <blockquote>
-  <p>The client <code class="highlighter-rouge">IP Address</code> &amp; <code class="highlighter-rouge">User Agent</code> of the HTTP request is captured and sent in the push notification as additional context.  You should always send a valid <code class="highlighter-rouge">User-Agent</code> HTTP header when verifying a push factor.</p>
+  <p>The client <code class="highlighter-rouge">IP Address</code> &amp; <code class="highlighter-rouge">User Agent</code> of the HTTP request is automatically captured and sent in the push notification as additional context.  You should always send a valid <code class="highlighter-rouge">User-Agent</code> HTTP header when verifying a push factor.</p>
+</blockquote>
+
+<blockquote>
+  <p>The <strong>public IP address</strong> of your application must be whitelisted in your <a href="https://support.okta.com/help/articles/Knowledge_Article/27529977-Using-the-Okta-Security-Page#Obey">org’s network security settings</a> as a trusted gateway in order to forward the user agent’s original IP address with the <code class="highlighter-rouge">X-Forwarded-For</code> HTTP header.</p>
 </blockquote>
 
 <h4 class="api api-response api-response-params" id="response-parameters-12">Response Parameters</h4>
@@ -3193,7 +3197,8 @@
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
--H <span class="s2">"User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"</span>
+-H <span class="s2">"User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"</span> <span class="se">\</span>
+-H <span class="s2">"X-Forwarded-For: 23.235.46.133"</span> <span class="se">\</span>
 <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/verify"</span>
 </code></pre>
 </div>
