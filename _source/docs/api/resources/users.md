@@ -59,7 +59,7 @@ The Okta User API provides operations to manage users in your organization.
     },
     "_links": {
         "resetPassword": {
-            "href": "https://your-domain.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
         },
         "resetFactors": {
             "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
@@ -194,7 +194,7 @@ The default user profile is based on the [System for Cross-Domain Identity Manag
 
 Every user within your Okta organization must have a unique identifier for a login.  This constraint applies to all users you import from other systems or applications such as Active Directory.  Your organization is the top-level namespace to mix and match logins from all your connected applications or directories.  Careful consideration of naming conventions for your login identifier will make it easier to onboard new applications in the future.
 
-Okta has a default ambiguous name resolution policy for logins.  Users can login with their non-qualified short-name (e.g. `isaac` with login *isaac.brock@example.com*) as long as the short-name is still unique within the organization.
+Okta has a default ambiguous name resolution policy for logins.  Users can login with their non-qualified shortname (e.g. `isaac.brock` with login *isaac.brock@example.com*) as long as the shortname is still unique within the organization.
 
 > Avoid using a `login` with a `/` character.  Although `/` is a valid character according to [RFC 6531 section 3.3](http://tools.ietf.org/html/rfc6531#section-3.3), a user with this character in their `login` cannot be fetched by `login` ([see Get User by ID](#get-user-with-id)) due to security risks with escaping this character in URI paths.
 
@@ -998,11 +998,11 @@ Users updated after 06/01/2013 but before 01/01/2014
 
 Users updated after 06/01/2013 but before 01/01/2014 with a status of `ACTIVE`
 
-    filter=lastUpdated gt "2013-06-27T16:35:28.000Z" and lastUpdated lt "2013-07-04T16:35:28.000Z" and status eq "ACTIVE"
+    filter=lastUpdated gt "2013-06-01T00:00:00.000Z" and lastUpdated lt "2014-01-01T00:00:00.000Z" and status eq "ACTIVE"
 
 Users updated after 06/01/2013 but with a status of `LOCKED_OUT` or `RECOVERY`
 
-    filter=lastUpdated gt "2013-06-27T16:35:28.000Z" and (status eq "LOCKED_OUT" or status eq "RECOVERY")
+    filter=lastUpdated gt "2013-06-01T00:00:00.000Z" and (status eq "LOCKED_OUT" or status eq "RECOVERY")
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -1213,6 +1213,7 @@ curl -v -X GET \
 ~~~
 
 ##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~json
 [
@@ -1966,6 +1967,7 @@ id        | `id` of user | URL        | String   | TRUE     |
 Returns an empty object
 
 ##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~sh
 curl -v -X POST \
@@ -2085,11 +2087,12 @@ Returns an the complete user object by default. When `tempPassword` is `true`, r
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ shell
-curl -v -H "Authorization: SSWS yourtoken" \
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password?tempPassword=false"
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password?tempPassword=false"
 ~~~
 
 ##### Response Example
@@ -2124,7 +2127,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     },
     "_links": {
         "resetPassword": {
-            "href": "https://your-domain.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
         },
         "resetFactors": {
             "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
