@@ -1,15 +1,16 @@
 {
-	"owner": "64678",
-	"lastUpdatedBy": "64678",
-	"lastRevision": 23065957,
-	"team": null,
 	"id": "05649232-8eeb-7fe6-8764-be67a95429ea",
 	"name": "Groups (Okta API)",
 	"description": "The [Okta Groups API](http://developer.okta.com/docs/api/rest/groups.html) provides operations to manage your organization groups and their user members.",
 	"order": [
 		"48b63c93-8599-21f3-31ca-db2ca595e596",
+		"a512fa07-866b-48c3-bac5-32aa746e2934",
 		"e9ffc469-47bf-4900-23ca-d3c11ef42496",
 		"b130d3d4-15aa-4f1b-9bab-ed00386a0e6d",
+		"adeeef71-f867-2821-8885-1230162f6733",
+		"5e79e781-d96b-edaa-d6dc-bbeaf5a8b1e2",
+		"b27cb089-81f8-d921-75ef-426ebfb6367a",
+		"61172828-4be6-8be0-6f21-eca905309bbc",
 		"2fd8abce-ec17-932c-7220-668f2f7a3d60",
 		"b2a4806e-a7f6-e16d-4fd9-87184aac443d",
 		"2b566256-b325-fb28-ba4a-c48eaf27d9e8",
@@ -17,6 +18,11 @@
 		"825eeff3-8511-686f-b167-4274399472b4",
 		"384d0892-1a94-6e07-b6a0-377bb4ee5b5c"
 	],
+	"folders": [],
+	"timestamp": 0,
+	"owner": "64678",
+	"remoteLink": "https://www.getpostman.com/collections/888ea73ebb6a6c6e1ea2",
+	"public": false,
 	"requests": [
 		{
 			"folder": null,
@@ -34,7 +40,7 @@
 			"preRequestScript": "",
 			"tests": "",
 			"currentHelper": "normal",
-			"helperAttributes": "{}",
+			"helperAttributes": {},
 			"collectionId": "05649232-8eeb-7fe6-8764-be67a95429ea"
 		},
 		{
@@ -52,7 +58,7 @@
 			"preRequestScript": "",
 			"tests": "",
 			"currentHelper": "normal",
-			"helperAttributes": "{}",
+			"helperAttributes": {},
 			"collectionId": "05649232-8eeb-7fe6-8764-be67a95429ea",
 			"rawModeData": "{\n  \"profile\": {\n    \"name\": \"Squabble of Users\",\n    \"description\": \"Keep Calm and Single Sign On\"\n  }\n}  "
 		},
@@ -72,7 +78,7 @@
 			"preRequestScript": "",
 			"tests": "",
 			"currentHelper": "normal",
-			"helperAttributes": "{}",
+			"helperAttributes": {},
 			"collectionId": "05649232-8eeb-7fe6-8764-be67a95429ea"
 		},
 		{
@@ -95,6 +101,44 @@
 			"rawModeData": "{\n  \"profile\": {\n    \"name\": \"West Coast Users\",\n    \"description\": \"West Coast Users\"\n  }\n}"
 		},
 		{
+			"id": "5e79e781-d96b-edaa-d6dc-bbeaf5a8b1e2",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/groups?filter=lastUpdated gt \"2015-10-05T00:00:00.000Z\"",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1448741359443,
+			"name": "List Groups with Profile Updated after Timestamp",
+			"description": "",
+			"collectionId": "05649232-8eeb-7fe6-8764-be67a95429ea",
+			"responses": []
+		},
+		{
+			"id": "61172828-4be6-8be0-6f21-eca905309bbc",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/groups?filter=lastUpdated gt \"2015-10-05T00:00:00.000Z\" or lastMembershipUpdated gt \"2015-10-05T00:00:00.000Z\"",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1448741383997,
+			"name": "List Groups Updated after Timestamp",
+			"description": "",
+			"collectionId": "05649232-8eeb-7fe6-8764-be67a95429ea",
+			"responses": []
+		},
+		{
 			"folder": null,
 			"id": "825eeff3-8511-686f-b167-4274399472b4",
 			"name": "Remove User from Group",
@@ -110,7 +154,7 @@
 			"preRequestScript": "",
 			"tests": "",
 			"currentHelper": "normal",
-			"helperAttributes": "{}",
+			"helperAttributes": {},
 			"collectionId": "05649232-8eeb-7fe6-8764-be67a95429ea"
 		},
 		{
@@ -129,8 +173,48 @@
 			"preRequestScript": "",
 			"tests": "",
 			"currentHelper": "normal",
-			"helperAttributes": "{}",
+			"helperAttributes": {},
 			"collectionId": "05649232-8eeb-7fe6-8764-be67a95429ea"
+		},
+		{
+			"id": "a512fa07-866b-48c3-bac5-32aa746e2934",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/groups/{{groupId}}",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"collectionId": "05649232-8eeb-7fe6-8764-be67a95429ea",
+			"data": [],
+			"dataMode": "params",
+			"name": "Get  Group",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1448711266852,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "adeeef71-f867-2821-8885-1230162f6733",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/groups?filter=type eq \"OKTA_GROUP\"",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"collectionId": "05649232-8eeb-7fe6-8764-be67a95429ea",
+			"data": [],
+			"dataMode": "params",
+			"name": "List Groups with Type",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1448710695475,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {}
 		},
 		{
 			"folder": null,
@@ -152,6 +236,25 @@
 			"rawModeData": "{\n  \"profile\": {\n    \"name\": \"iPhone User\",\n    \"description\": \"Example group of iPhone Users\"\n  }\n}"
 		},
 		{
+			"id": "b27cb089-81f8-d921-75ef-426ebfb6367a",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/groups?filter=lastMembershipUpdated gt \"2015-10-05T00:00:00.000Z\"",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1448710961419,
+			"name": "List Groups with Membership  after Timestamp",
+			"description": "",
+			"collectionId": "05649232-8eeb-7fe6-8764-be67a95429ea",
+			"responses": []
+		},
+		{
 			"folder": null,
 			"id": "b2a4806e-a7f6-e16d-4fd9-87184aac443d",
 			"name": "Remove Group",
@@ -167,7 +270,7 @@
 			"preRequestScript": "",
 			"tests": "",
 			"currentHelper": "normal",
-			"helperAttributes": "{}",
+			"helperAttributes": {},
 			"collectionId": "05649232-8eeb-7fe6-8764-be67a95429ea"
 		},
 		{

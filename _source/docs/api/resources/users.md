@@ -947,12 +947,12 @@ Enumerates users in your organization with pagination.  A subset of users can be
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter | Description                                                                           | Param Type | DataType | Required | Default
---------- | ------------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------
-q         | Searches `firstName`, `lastName`, and `email` properties of users for matching value  | Query      | String   | FALSE    |
-limit     | Specified the number of results                                                       | Query      | Number   | FALSE    | 200
+Parameter | Description                                                                               | Param Type | DataType | Required | Default
+--------- | ----------------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------
+q         | Searches `firstName`, `lastName`, and `email` properties of users for matching value      | Query      | String   | FALSE    |
+limit     | Specified the number of results                                                           | Query      | Number   | FALSE    | 200
 filter    | [Filter expression](/docs/api/getting_started/design_principles.html#filtering) for users | Query      | String   | FALSE    |
-after     | Specifies the pagination cursor for the next page of users                            | Query      | String   | FALSE    |
+after     | Specifies the pagination cursor for the next page of users                                | Query      | String   | FALSE    |
 
 > The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination)
 
