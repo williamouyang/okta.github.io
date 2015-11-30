@@ -141,10 +141,10 @@ pre {
 
 .blog blockquote a{
   text-decoration: none;
-  background: #eee;
+  background: $colorLightBlue;
   cursor: pointer;
   padding: 0 3px;
-  color: #c76c0c;
+  color: $colorBrightBlue;
 }
 
 .blog blockquote a:hover{

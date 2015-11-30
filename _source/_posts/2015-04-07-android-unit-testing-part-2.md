@@ -33,112 +33,112 @@ do:
 -   Modify the TOP Gradle file
 
     Add the following code to the dependencies section:
-    
-    ~~~
+
+    ~~~ conf
     classpath 'org.robolectric:robolectric-gradle-plugin:0.12.+'
     ~~~
 -   Modify the application Gradle file
 
-    Add the following code under <code>apply plugin: ‘com.android.application'</code>:
-    
-    ~~~
-    apply plugin: ‘robolectric'
+    Add the following code under `apply plugin: ‘com.android.application'`:
+
+    ~~~ conf
+    apply plugin: 'robolectric'
     ~~~
 -   Add the following under the dependencies section:
-    
-    ~~~
+
+    ~~~ conf
     androidTestCompile('junit:junit:4.11')
-    androidTestCompile(‘org.robolectric:robolectric:2.3')
+    androidTestCompile('org.robolectric:robolectric:2.3')
     ~~~
 
 -   Add this section:
-    
-    ~~~ java
-    robolectric { 
+
+    ~~~ conf
+    robolectric {
             include '**/*Test.class'
     }
     ~~~
 -   Create the code that you want to test
 
-    Modify <code>MainActivity</code>. Add the following code to it:
-    
+    Modify `MainActivity`. Add the following code to it:
+
     ~~~ java
     private Foo foo = new Foo();
     public int getSomething() {
         return foo.getFoo();
     }
     ~~~
-    
-    Add the <code>Foo</code> class:
-    
+
+    Add the `Foo` class:
+
     ~~~ java
     package com.example.myapplication;
-      
-    public class Foo { 
+
+    public class Foo {
         Bar bar = new Bar();
-        
-        public int getFoo() { 
-            return bar.getBar(); 
+
+        public int getFoo() {
+            return bar.getBar();
         }
     }
     ~~~
--   Add the <code>Bar</code> class:
-    
-    ~~~
+-   Add the `Bar` class:
+
+    ~~~ java
     package com.example.myapplication;
-    
+
     public class Bar {
-        
-        public int getBar() { 
-            return 4; 
-        } 
+
+        public int getBar() {
+            return 4;
+        }
     }
     ~~~
 -   Create a test
 
-    Delete the <code>ApplicationTest</code> file.
+    Delete the `ApplicationTest` file.
 
-    Create the following <code>FooTest</code> class under your <code>androidTest</code>:
-    
-    ~~~
+    Create the following `FooTest` class under your `androidTest`:
+
+    ~~~ java
     package com.example.myapplication;
-    
+
     import junit.framework.Assert;
-    
+
     import org.junit.Before;
     import org.junit.Test;
     import org.junit.runner.RunWith;
     import org.robolectric.RobolectricTestRunner;
-    
+
     @RunWith(RobolectricTestRunner.class)
     public class FooTest {
         Foo sut;
-        
+
         @Before
         public void setUp() {
             sut = new Foo();
         }
-    
+
         @Test
         public void testGetFoo_returns4() {
             // Arrange
-            
+
             // Act
             int actualResult = sut.getFoo();
-            
+
             // Assert
             Assert.assertEquals(4, actualResult);
         }
     }
     ~~~
-    
+
 -   Create the configuration
 
     1.  Create a **gradle** configuration.
     2.  Set “**Tests**” as a name.
     3.  Choose the top gradle file as a project.
     4.  Type *test* in **Tasks**.
-    
+
     Now, without launching the emulator, you can run this configuration
     and see that your test has passed. It is much faster than before—and
     repeatable. You can put this under build automation and it will
@@ -151,11 +151,11 @@ do:
     classes don’t touch any Android specific classes. However, this is
     not easy, as you must design all your code with this restriction in
     mind.
-    
+
     The changes which we did to run on JVM are great, but we are still
     facing the limitations of using integration tests. For example, if
-    the implementation of a <code>Bar</code> class changes and now uses the network,
-    you might start seeing flakiness in the <code>testGetFoo_returns4</code> test
+    the implementation of a `Bar` class changes and now uses the network,
+    you might start seeing flakiness in the `testGetFoo_returns4` test
     because of a bad network connection.
 
 ## Additional Resources
@@ -167,4 +167,3 @@ do:
 Stay tuned for part three of our series, where I will show you how
 to achieve test isolation using dependency injection. You can also
 check out the full code at [GitHub](https://github.com/vronin-okta/okta_blog_samples/tree/master/android_unit_testing).
-
