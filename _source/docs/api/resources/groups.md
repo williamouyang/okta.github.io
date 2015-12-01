@@ -63,13 +63,13 @@ All groups have the following properties:
 | lastUpdated           | timestamp when group's `profile` was last updated            | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
 | lastMembershipUpdated | timestamp when group's memberships were last updated         | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
 | objectClass           | determines the group's `profile`                             | Array of String                                                | TRUE     | FALSE  | TRUE     | 1         |           |            |
-| groupType             | determines how a group's profile and memberships are managed | [Group Type](#group-type)                                      | FALSE    | FALSE  | TRUE     |           |           |            |
+| type                  | determines how a group's profile and memberships are managed | [Group Type](#group-type)                                      | FALSE    | FALSE  | TRUE     |           |           |            |
 | profile               | the group's profile properties                               | [Profile Object](#profile-object)                              | FALSE    | FALSE  | FALSE    |           |           |            |
 | _links                | [discoverable resources](#links-object) related to the group | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
 | _embedded             | [embedded resources](#embedded-object) related to the group  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
 |-----------------------+--------------------------------------------------------------+----------------------------------------------------------------+----------|--------|----------|-----------|-----------+------------|
 
-> `id`, `created`, `lastUpdated`, `lastMembershipUpdated`, `objectClass`, and `_links` are only available after a group is created
+> `id`, `created`, `lastUpdated`, `lastMembershipUpdated`, `objectClass`, `type`, and `_links` are only available after a group is created
 
 ### Group Type
 

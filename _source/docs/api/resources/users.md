@@ -14,72 +14,72 @@ The Okta User API provides operations to manage users in your organization.
 
 ~~~json
 {
-    "id": "00ub0oNGTSWTBKOLGLNR",
-    "status": "ACTIVE",
-    "created": "2013-06-24T16:39:18.000Z",
-    "activated": "2013-06-24T16:39:19.000Z",
-    "statusChanged": "2013-06-24T16:39:19.000Z",
-    "lastLogin": "2013-06-24T17:39:19.000Z",
-    "lastUpdated": "2013-06-27T16:35:28.000Z",
-    "passwordChanged": "2013-06-24T16:39:19.000Z",
-    "profile": {
-        "login": "isaac.brock@example.com",
-        "firstName": "Isaac",
-        "lastName": "Brock",
-        "nickName": "issac",
-        "displayName": "Isaac Brock",
-        "email": "isaac.brock@example.com",
-        "secondEmail": "isaac@example.org",
-        "profileUrl": "http://www.example.com/profile",
-        "preferredLanguage": "en-US",
-        "userType": "Employee",
-        "organization": "Okta",
-        "title": "Director",
-        "division": "R&D",
-        "department": "Engineering",
-        "costCenter": "10",
-        "employeeNumber": "187",
-        "mobilePhone": "+1-555-415-1337",
-        "primaryPhone": "+1-555-514-1337",
-        "streetAddress": "301 Brannan St.",
-        "city": "San Francisco",
-        "state": "CA",
-        "zipCode": "94107",
-        "countryCode": "US"
+  "id": "00ub0oNGTSWTBKOLGLNR",
+  "status": "ACTIVE",
+  "created": "2013-06-24T16:39:18.000Z",
+  "activated": "2013-06-24T16:39:19.000Z",
+  "statusChanged": "2013-06-24T16:39:19.000Z",
+  "lastLogin": "2013-06-24T17:39:19.000Z",
+  "lastUpdated": "2013-06-27T16:35:28.000Z",
+  "passwordChanged": "2013-06-24T16:39:19.000Z",
+  "profile": {
+    "login": "isaac.brock@example.com",
+    "firstName": "Isaac",
+    "lastName": "Brock",
+    "nickName": "issac",
+    "displayName": "Isaac Brock",
+    "email": "isaac.brock@example.com",
+    "secondEmail": "isaac@example.org",
+    "profileUrl": "http://www.example.com/profile",
+    "preferredLanguage": "en-US",
+    "userType": "Employee",
+    "organization": "Okta",
+    "title": "Director",
+    "division": "R&D",
+    "department": "Engineering",
+    "costCenter": "10",
+    "employeeNumber": "187",
+    "mobilePhone": "+1-555-415-1337",
+    "primaryPhone": "+1-555-514-1337",
+    "streetAddress": "301 Brannan St.",
+    "city": "San Francisco",
+    "state": "CA",
+    "zipCode": "94107",
+    "countryCode": "US"
+  },
+  "credentials": {
+    "password": {},
+    "recovery_question": {
+      "question": "Who's a major player in the cowboy scene?"
     },
-    "credentials": {
-        "password": {},
-        "recovery_question": {
-            "question": "Who's a major player in the cowboy scene?"
-        },
-        "provider": {
-            "type": "OKTA",
-            "name": "OKTA"
-        }
-    },
-    "_links": {
-        "resetPassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
-        },
-        "resetFactors": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
-        },
-        "expirePassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
-        },
-        "forgotPassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
-        },
-        "changeRecoveryQuestion": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
-        },
-        "deactivate": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
-        },
-        "changePassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
-        }
+    "provider": {
+      "type": "OKTA",
+      "name": "OKTA"
     }
+  },
+  "_links": {
+    "resetPassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+    },
+    "resetFactors": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+    },
+    "expirePassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+    },
+    "forgotPassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+    },
+    "changeRecoveryQuestion": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+    },
+    "deactivate": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+    },
+    "changePassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+    }
+  }
 }
 ~~~
 
@@ -123,29 +123,29 @@ Specifies [standard](#standard-profile-properties) and [custom](#custom-profile-
 ~~~json
 {
   "profile": {
-      "login": "isaac.brock@example.com",
-      "firstName": "Isaac",
-      "lastName": "Brock",
-      "nickName": "issac",
-      "displayName": "Isaac Brock",
-      "email": "isaac.brock@example.com",
-      "secondEmail": "isaac@example.org",
-      "profileUrl": "http://www.example.com/profile",
-      "preferredLanguage": "en-US",
-      "userType": "Employee",
-      "organization": "Okta",
-      "title": "Director",
-      "division": "R&D",
-      "department": "Engineering",
-      "costCenter": "10",
-      "employeeNumber": "187",
-      "mobilePhone": "+1-555-415-1337",
-      "primaryPhone": "+1-555-514-1337",
-      "streetAddress": "301 Brannan St.",
-      "city": "San Francisco",
-      "state": "CA",
-      "zipCode": "94107",
-      "countryCode": "US"
+    "login": "isaac.brock@example.com",
+    "firstName": "Isaac",
+    "lastName": "Brock",
+    "nickName": "issac",
+    "displayName": "Isaac Brock",
+    "email": "isaac.brock@example.com",
+    "secondEmail": "isaac@example.org",
+    "profileUrl": "http://www.example.com/profile",
+    "preferredLanguage": "en-US",
+    "userType": "Employee",
+    "organization": "Okta",
+    "title": "Director",
+    "division": "R&D",
+    "department": "Engineering",
+    "costCenter": "10",
+    "employeeNumber": "187",
+    "mobilePhone": "+1-555-415-1337",
+    "primaryPhone": "+1-555-514-1337",
+    "streetAddress": "301 Brannan St.",
+    "city": "San Francisco",
+    "state": "CA",
+    "zipCode": "94107",
+    "countryCode": "US"
   }
 }
 ~~~
@@ -216,17 +216,19 @@ Specifies primary authentication and recovery credentials for a user.  Credentia
 
 ~~~json
 {
-    "credentials": {
-        "password" : { "value": "tlpWENT2m" },
-        "recovery_question": {
-            "question": "Who's a major player in the cowboy scene?",
-            "answer": "Cowboy Dan"
-        },
-        "provider": {
-            "type": "OKTA",
-            "name": "OKTA"
-        }
+  "credentials": {
+    "password": {
+      "value": "tlpWENT2m"
+    },
+    "recovery_question": {
+      "question": "Who's a major player in the cowboy scene?",
+      "answer": "Cowboy Dan"
+    },
+    "provider": {
+      "type": "OKTA",
+      "name": "OKTA"
     }
+  }
 }
 ~~~
 
@@ -267,12 +269,12 @@ Specifies a secret question and answer that is validated when a user forgets the
 
 Specifies the authentication provider that validates the user's password credential. The user's current provider is managed by the Delegated Authentication settings for your organization. The provider object is **read-only**.
 
-|-----------+----------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
-| Property  | DataType                                           | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| --------- | -------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| type      | `OKTA`, `ACTIVE_DIRECTORY`,`LDAP`, or `FEDERATION` | FALSE    | FALSE  | TRUE     |           |           |            |
-| name      | String                                             | TRUE     | FALSE  | TRUE     |           |           |            |
-|-----------+----------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+|-----------+--------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+| Property  | DataType                                                     | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| --------- | ------------------------------------------------------------ | -------- | ------ | -------- | --------- | --------- | ---------- |
+| type      | `OKTA`, `ACTIVE_DIRECTORY`,`LDAP`, `FEDERATION`, or `SOCIAL` | FALSE    | FALSE  | TRUE     |           |           |            |
+| name      | String                                                       | TRUE     | FALSE  | TRUE     |           |           |            |
+|-----------+--------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
 
 > `ACTIVE_DIRECTORY` or `LDAP` providers specify the directory instance name as the `name` property.
 
@@ -369,32 +371,32 @@ curl -v -X POST \
 
 ~~~json
 {
-    "id": "00ub0oNGTSWTBKOLGLNR",
-    "status": "STAGED",
-    "created": "2013-07-02T21:36:25.344Z",
-    "activated": null,
-    "statusChanged": null,
-    "lastLogin": null,
-    "lastUpdated": "2013-07-02T21:36:25.344Z",
-    "passwordChanged": null,
-    "profile": {
-        "firstName": "Isaac",
-        "lastName": "Brock",
-        "email": "isaac.brock@example.com",
-        "login": "isaac.brock@example.com",
-        "mobilePhone": "555-415-1337"
-    },
-    "credentials": {
-        "provider": {
-            "type": "OKTA",
-            "name": "OKTA"
-        }
-    },
-    "_links": {
-        "activate": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"
-        }
+  "id": "00ub0oNGTSWTBKOLGLNR",
+  "status": "STAGED",
+  "created": "2013-07-02T21:36:25.344Z",
+  "activated": null,
+  "statusChanged": null,
+  "lastLogin": null,
+  "lastUpdated": "2013-07-02T21:36:25.344Z",
+  "passwordChanged": null,
+  "profile": {
+    "firstName": "Isaac",
+    "lastName": "Brock",
+    "email": "isaac.brock@example.com",
+    "login": "isaac.brock@example.com",
+    "mobilePhone": "555-415-1337"
+  },
+  "credentials": {
+    "provider": {
+      "type": "OKTA",
+      "name": "OKTA"
     }
+  },
+  "_links": {
+    "activate": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"
+    }
+  }
 }
 ~~~
 
@@ -433,35 +435,35 @@ curl -v -X POST \
 
 ~~~json
 {
-    "id": "00ub0oNGTSWTBKOLGLNR",
-    "status": "STAGED",
-    "created": "2013-07-02T21:36:25.344Z",
-    "activated": null,
-    "statusChanged": null,
-    "lastLogin": null,
-    "lastUpdated": "2013-07-02T21:36:25.344Z",
-    "passwordChanged": null,
-    "profile": {
-        "firstName": "Isaac",
-        "lastName": "Brock",
-        "email": "isaac.brock@example.com",
-        "login": "isaac.brock@example.com",
-        "mobilePhone": "555-415-1337"
+  "id": "00ub0oNGTSWTBKOLGLNR",
+  "status": "STAGED",
+  "created": "2013-07-02T21:36:25.344Z",
+  "activated": null,
+  "statusChanged": null,
+  "lastLogin": null,
+  "lastUpdated": "2013-07-02T21:36:25.344Z",
+  "passwordChanged": null,
+  "profile": {
+    "firstName": "Isaac",
+    "lastName": "Brock",
+    "email": "isaac.brock@example.com",
+    "login": "isaac.brock@example.com",
+    "mobilePhone": "555-415-1337"
+  },
+  "credentials": {
+    "recovery_question": {
+      "question": "Who's a major player in the cowboy scene?"
     },
-    "credentials": {
-        "recovery_question": {
-            "question": "Who's a major player in the cowboy scene?"
-        },
-        "provider": {
-            "type": "OKTA",
-            "name": "OKTA"
-        }
-    },
-    "_links": {
-        "activate": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"
-        }
+    "provider": {
+      "type": "OKTA",
+      "name": "OKTA"
     }
+  },
+  "_links": {
+    "activate": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"
+    }
+  }
 }
 ~~~
 
@@ -499,33 +501,33 @@ curl -v -X POST \
 
 ~~~json
 {
-    "id": "00ub0oNGTSWTBKOLGLNR",
-    "status": "STAGED",
-    "created": "2013-07-02T21:36:25.344Z",
-    "activated": null,
-    "statusChanged": null,
-    "lastLogin": null,
-    "lastUpdated": "2013-07-02T21:36:25.344Z",
-    "passwordChanged": "2013-07-02T21:36:25.344Z",
-    "profile": {
-      "firstName": "Isaac",
-        "lastName": "Brock",
-        "email": "isaac.brock@example.com",
-        "login": "isaac.brock@example.com",
-        "mobilePhone": "555-415-1337"
-    },
-    "credentials": {
-        "password": {},
-        "provider": {
-           "type": "OKTA",
-           "name": "OKTA"
-        }
-    },
-    "_links": {
-        "activate": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"
-        }
+  "id": "00ub0oNGTSWTBKOLGLNR",
+  "status": "STAGED",
+  "created": "2013-07-02T21:36:25.344Z",
+  "activated": null,
+  "statusChanged": null,
+  "lastLogin": null,
+  "lastUpdated": "2013-07-02T21:36:25.344Z",
+  "passwordChanged": "2013-07-02T21:36:25.344Z",
+  "profile": {
+    "firstName": "Isaac",
+    "lastName": "Brock",
+    "email": "isaac.brock@example.com",
+    "login": "isaac.brock@example.com",
+    "mobilePhone": "555-415-1337"
+  },
+  "credentials": {
+    "password": {},
+    "provider": {
+      "type": "OKTA",
+      "name": "OKTA"
     }
+  },
+  "_links": {
+    "activate": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"
+    }
+  }
 }
 ~~~
 
@@ -567,36 +569,36 @@ curl -v -X POST \
 
 ~~~json
 {
-    "id": "00ub0oNGTSWTBKOLGLNR",
-    "status": "STAGED",
-    "created": "2013-07-02T21:36:25.344Z",
-    "activated": null,
-    "statusChanged": null,
-    "lastLogin": null,
-    "lastUpdated": "2013-07-02T21:36:25.344Z",
-    "passwordChanged": "2013-07-02T21:36:25.344Z",
-    "profile": {
-        "firstName": "Isaac",
-        "lastName": "Brock",
-        "email": "isaac.brock@example.com",
-        "login": "isaac.brock@example.com",
-        "mobilePhone": "555-415-1337"
+  "id": "00ub0oNGTSWTBKOLGLNR",
+  "status": "STAGED",
+  "created": "2013-07-02T21:36:25.344Z",
+  "activated": null,
+  "statusChanged": null,
+  "lastLogin": null,
+  "lastUpdated": "2013-07-02T21:36:25.344Z",
+  "passwordChanged": "2013-07-02T21:36:25.344Z",
+  "profile": {
+    "firstName": "Isaac",
+    "lastName": "Brock",
+    "email": "isaac.brock@example.com",
+    "login": "isaac.brock@example.com",
+    "mobilePhone": "555-415-1337"
+  },
+  "credentials": {
+    "password": {},
+    "recovery_question": {
+      "question": "Who's a major player in the cowboy scene?"
     },
-    "credentials": {
-        "password" : {},
-        "recovery_question": {
-            "question": "Who's a major player in the cowboy scene?"
-        },
-        "provider": {
-            "type": "OKTA",
-            "name": "OKTA"
-       }
-    },
-    "_links": {
-        "activate": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"
-        }
+    "provider": {
+      "type": "OKTA",
+      "name": "OKTA"
     }
+  },
+  "_links": {
+    "activate": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"
+    }
+  }
 }
 ~~~
 
@@ -661,54 +663,54 @@ curl -v -X GET \
 
 ~~~json
 {
-    "id": "00ub0oNGTSWTBKOLGLNR",
-    "status": "ACTIVE",
-    "created": "2013-06-24T16:39:18.000Z",
-    "activated": "2013-06-24T16:39:19.000Z",
-    "statusChanged": "2013-06-24T16:39:19.000Z",
-    "lastLogin": "2013-06-24T17:39:19.000Z",
-    "lastUpdated": "2013-07-02T21:36:25.344Z",
-    "passwordChanged": "2013-07-02T21:36:25.344Z",
-    "profile": {
-        "firstName": "Isaac",
-        "lastName": "Brock",
-        "email": "isaac.brock@example.com",
-        "login": "isaac.brock@example.com",
-        "mobilePhone": "555-415-1337"
+  "id": "00ub0oNGTSWTBKOLGLNR",
+  "status": "ACTIVE",
+  "created": "2013-06-24T16:39:18.000Z",
+  "activated": "2013-06-24T16:39:19.000Z",
+  "statusChanged": "2013-06-24T16:39:19.000Z",
+  "lastLogin": "2013-06-24T17:39:19.000Z",
+  "lastUpdated": "2013-07-02T21:36:25.344Z",
+  "passwordChanged": "2013-07-02T21:36:25.344Z",
+  "profile": {
+    "firstName": "Isaac",
+    "lastName": "Brock",
+    "email": "isaac.brock@example.com",
+    "login": "isaac.brock@example.com",
+    "mobilePhone": "555-415-1337"
+  },
+  "credentials": {
+    "password": {},
+    "recovery_question": {
+      "question": "Who's a major player in the cowboy scene?"
     },
-    "credentials": {
-        "password": {},
-        "recovery_question": {
-            "question": "Who's a major player in the cowboy scene?"
-        },
-        "provider": {
-            "type": "OKTA",
-            "name": "OKTA"
-        }
-    },
-    "_links": {
-        "resetPassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
-        },
-        "resetFactors": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
-        },
-        "expirePassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
-        },
-        "forgotPassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
-        },
-        "changeRecoveryQuestion": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
-        },
-        "deactivate": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
-        },
-        "changePassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
-        }
+    "provider": {
+      "type": "OKTA",
+      "name": "OKTA"
     }
+  },
+  "_links": {
+    "resetPassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+    },
+    "resetFactors": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+    },
+    "expirePassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+    },
+    "forgotPassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+    },
+    "changeRecoveryQuestion": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+    },
+    "deactivate": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+    },
+    "changePassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+    }
+  }
 }
 ~~~
 
@@ -733,54 +735,54 @@ curl -v -X GET \
 
 ~~~json
 {
-    "id": "00ub0oNGTSWTBKOLGLNR",
-    "status": "ACTIVE",
-    "created": "2013-06-24T16:39:18.000Z",
-    "activated": "2013-06-24T16:39:19.000Z",
-    "statusChanged": "2013-06-24T16:39:19.000Z",
-    "lastLogin": "2013-06-24T17:39:19.000Z",
-    "lastUpdated": "2013-07-02T21:36:25.344Z",
-    "passwordChanged": "2013-07-02T21:36:25.344Z",
-    "profile": {
-        "firstName": "Isaac",
-        "lastName": "Brock",
-        "email": "isaac.brock@example.com",
-        "login": "isaac.brock@example.com",
-        "mobilePhone": "555-415-1337"
+  "id": "00ub0oNGTSWTBKOLGLNR",
+  "status": "ACTIVE",
+  "created": "2013-06-24T16:39:18.000Z",
+  "activated": "2013-06-24T16:39:19.000Z",
+  "statusChanged": "2013-06-24T16:39:19.000Z",
+  "lastLogin": "2013-06-24T17:39:19.000Z",
+  "lastUpdated": "2013-07-02T21:36:25.344Z",
+  "passwordChanged": "2013-07-02T21:36:25.344Z",
+  "profile": {
+    "firstName": "Isaac",
+    "lastName": "Brock",
+    "email": "isaac.brock@example.com",
+    "login": "isaac.brock@example.com",
+    "mobilePhone": "555-415-1337"
+  },
+  "credentials": {
+    "password": {},
+    "recovery_question": {
+      "question": "Who's a major player in the cowboy scene?"
     },
-    "credentials": {
-        "password": {},
-        "recovery_question": {
-            "question": "Who's a major player in the cowboy scene?"
-        },
-        "provider": {
-            "type": "OKTA",
-            "name": "OKTA"
-        }
-    },
-    "_links": {
-        "resetPassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
-        },
-        "resetFactors": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
-        },
-        "expirePassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
-        },
-        "forgotPassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
-        },
-        "changeRecoveryQuestion": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
-        },
-        "deactivate": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
-        },
-        "changePassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
-        }
+    "provider": {
+      "type": "OKTA",
+      "name": "OKTA"
     }
+  },
+  "_links": {
+    "resetPassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+    },
+    "resetFactors": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+    },
+    "expirePassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+    },
+    "forgotPassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+    },
+    "changeRecoveryQuestion": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+    },
+    "deactivate": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+    },
+    "changePassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+    }
+  }
 }
 ~~~
 
@@ -807,54 +809,54 @@ curl -v -X GET \
 
 ~~~json
 {
-    "id": "00ub0oNGTSWTBKOLGLNR",
-    "status": "ACTIVE",
-    "created": "2013-06-24T16:39:18.000Z",
-    "activated": "2013-06-24T16:39:19.000Z",
-    "statusChanged": "2013-06-24T16:39:19.000Z",
-    "lastLogin": "2013-06-24T17:39:19.000Z",
-    "lastUpdated": "2013-07-02T21:36:25.344Z",
-    "passwordChanged": "2013-07-02T21:36:25.344Z",
-    "profile": {
-        "firstName": "Isaac",
-        "lastName": "Brock",
-        "email": "isaac.brock@example.com",
-        "login": "isaac.brock@example.com",
-        "mobilePhone": "555-415-1337"
+  "id": "00ub0oNGTSWTBKOLGLNR",
+  "status": "ACTIVE",
+  "created": "2013-06-24T16:39:18.000Z",
+  "activated": "2013-06-24T16:39:19.000Z",
+  "statusChanged": "2013-06-24T16:39:19.000Z",
+  "lastLogin": "2013-06-24T17:39:19.000Z",
+  "lastUpdated": "2013-07-02T21:36:25.344Z",
+  "passwordChanged": "2013-07-02T21:36:25.344Z",
+  "profile": {
+    "firstName": "Isaac",
+    "lastName": "Brock",
+    "email": "isaac.brock@example.com",
+    "login": "isaac.brock@example.com",
+    "mobilePhone": "555-415-1337"
+  },
+  "credentials": {
+    "password": {},
+    "recovery_question": {
+      "question": "Who's a major player in the cowboy scene?"
     },
-    "credentials": {
-        "password": {},
-        "recovery_question": {
-            "question": "Who's a major player in the cowboy scene?"
-        },
-        "provider": {
-          "type": "OKTA",
-          "name": "OKTA"
-        }
-    },
-    "_links": {
-        "resetPassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
-        },
-        "resetFactors": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
-        },
-        "expirePassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
-        },
-        "forgotPassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
-        },
-        "changeRecoveryQuestion": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
-        },
-        "deactivate": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
-        },
-        "changePassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
-        }
+    "provider": {
+      "type": "OKTA",
+      "name": "OKTA"
     }
+  },
+  "_links": {
+    "resetPassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+    },
+    "resetFactors": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+    },
+    "expirePassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+    },
+    "forgotPassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+    },
+    "changeRecoveryQuestion": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+    },
+    "deactivate": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+    },
+    "changePassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+    }
+  }
 }
 ~~~
 
@@ -881,54 +883,54 @@ curl -v -X GET \
 
 ~~~json
 {
-    "id": "00ub0oNGTSWTBKOLGLNR",
-    "status": "ACTIVE",
-    "created": "2013-06-24T16:39:18.000Z",
-    "activated": "2013-06-24T16:39:19.000Z",
-    "statusChanged": "2013-06-24T16:39:19.000Z",
-    "lastLogin": "2013-06-24T17:39:19.000Z",
-    "lastUpdated": "2013-07-02T21:36:25.344Z",
-    "passwordChanged": "2013-07-02T21:36:25.344Z",
-    "profile": {
-        "firstName": "Isaac",
-        "lastName": "Brock",
-        "email": "isaac.brock@example.com",
-        "login": "isaac.brock@example.com",
-        "mobilePhone": "555-415-1337"
+  "id": "00ub0oNGTSWTBKOLGLNR",
+  "status": "ACTIVE",
+  "created": "2013-06-24T16:39:18.000Z",
+  "activated": "2013-06-24T16:39:19.000Z",
+  "statusChanged": "2013-06-24T16:39:19.000Z",
+  "lastLogin": "2013-06-24T17:39:19.000Z",
+  "lastUpdated": "2013-07-02T21:36:25.344Z",
+  "passwordChanged": "2013-07-02T21:36:25.344Z",
+  "profile": {
+    "firstName": "Isaac",
+    "lastName": "Brock",
+    "email": "isaac.brock@example.com",
+    "login": "isaac.brock@example.com",
+    "mobilePhone": "555-415-1337"
+  },
+  "credentials": {
+    "password": {},
+    "recovery_question": {
+      "question": "Who's a major player in the cowboy scene?"
     },
-    "credentials": {
-        "password": {},
-        "recovery_question": {
-            "question": "Who's a major player in the cowboy scene?"
-        },
-        "provider": {
-            "type": "OKTA",
-            "name": "OKTA"
-        }
-    },
-    "_links": {
-        "resetPassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
-        },
-        "resetFactors": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
-        },
-        "expirePassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
-        },
-        "forgotPassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
-        },
-        "changeRecoveryQuestion": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
-        },
-        "deactivate": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
-        },
-        "changePassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
-        }
+    "provider": {
+      "type": "OKTA",
+      "name": "OKTA"
     }
+  },
+  "_links": {
+    "resetPassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+    },
+    "resetFactors": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+    },
+    "expirePassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+    },
+    "forgotPassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+    },
+    "changeRecoveryQuestion": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+    },
+    "deactivate": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+    },
+    "changePassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+    }
+  }
 }
 ~~~
 
@@ -1039,85 +1041,85 @@ Link: <https://your-domain.okta.com/api/v1/users?limit=200>; rel="self"
 Link: <https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limit=200>; rel="next"
 
 [
-    {
-        "id": "00ub0oNGTSWTBKOLGLNR",
-        "status": "STAGED",
-        "created": "2013-07-02T21:36:25.344Z",
-        "activated": null,
-        "statusChanged": null,
-        "lastLogin": null,
-        "lastUpdated": "2013-07-02T21:36:25.344Z",
-        "passwordChanged": "2013-07-02T21:36:25.344Z",
-        "profile": {
-            "firstName": "Isaac",
-            "lastName": "Brock",
-            "email": "isaac.brock@example.com",
-            "login": "isaac.brock@example.com",
-            "mobilePhone": "555-415-1337"
-        },
-        "credentials": {
-            "provider": {
-               "type": "OKTA",
-               "name": "OKTA"
-            }
-        },
-        "_links": {
-            "activate": {
-                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"
-            }
-        }
+  {
+    "id": "00ub0oNGTSWTBKOLGLNR",
+    "status": "STAGED",
+    "created": "2013-07-02T21:36:25.344Z",
+    "activated": null,
+    "statusChanged": null,
+    "lastLogin": null,
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": "2013-07-02T21:36:25.344Z",
+    "profile": {
+      "firstName": "Isaac",
+      "lastName": "Brock",
+      "email": "isaac.brock@example.com",
+      "login": "isaac.brock@example.com",
+      "mobilePhone": "555-415-1337"
     },
-    {
-        "id": "00ub0oNGTSWTBKOLGLNR",
-        "status": "ACTIVE",
-        "created": "2013-06-24T16:39:18.000Z",
-        "activated": "2013-06-24T16:39:19.000Z",
-        "statusChanged": "2013-06-24T16:39:19.000Z",
-        "lastLogin": "2013-06-24T17:39:19.000Z",
-        "lastUpdated": "2013-07-02T21:36:25.344Z",
-        "passwordChanged": "2013-07-02T21:36:25.344Z",
-        "profile": {
-            "firstName": "Eric",
-            "lastName": "Judy",
-            "email": "eric.judy@example.com",
-            "secondEmail": "eric@example.org",
-            "login": "eric.judy@example.com",
-            "mobilePhone": "555-415-2011"
-        },
-        "credentials": {
-            "password": {},
-            "recovery_question": {
-                "question": "The stars are projectors?"
-            },
-            "provider": {
-                "type": "OKTA",
-                "name": "OKTA"
-            }
-        },
-        "_links": {
-            "resetPassword": {
-                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
-            },
-            "resetFactors": {
-                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
-            },
-            "expirePassword": {
-                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
-            },
-            "forgotPassword": {
-                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
-            },
-            "changeRecoveryQuestion": {
-                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
-            },
-            "deactivate": {
-                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
-            },
-            "changePassword": {
-                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
-            }
-        }
+    "credentials": {
+      "provider": {
+        "type": "OKTA",
+        "name": "OKTA"
+      }
+    },
+    "_links": {
+      "activate": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"
+      }
     }
+  },
+  {
+    "id": "00ub0oNGTSWTBKOLGLNR",
+    "status": "ACTIVE",
+    "created": "2013-06-24T16:39:18.000Z",
+    "activated": "2013-06-24T16:39:19.000Z",
+    "statusChanged": "2013-06-24T16:39:19.000Z",
+    "lastLogin": "2013-06-24T17:39:19.000Z",
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": "2013-07-02T21:36:25.344Z",
+    "profile": {
+      "firstName": "Eric",
+      "lastName": "Judy",
+      "email": "eric.judy@example.com",
+      "secondEmail": "eric@example.org",
+      "login": "eric.judy@example.com",
+      "mobilePhone": "555-415-2011"
+    },
+    "credentials": {
+      "password": {},
+      "recovery_question": {
+        "question": "The stars are projectors?"
+      },
+      "provider": {
+        "type": "OKTA",
+        "name": "OKTA"
+      }
+    },
+    "_links": {
+      "resetPassword": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+      },
+      "resetFactors": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+      },
+      "expirePassword": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+      },
+      "forgotPassword": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+      },
+      "changeRecoveryQuestion": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+      },
+      "deactivate": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+      },
+      "changePassword": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+      }
+    }
+  }
 ]
 ~~~
 
@@ -1142,57 +1144,57 @@ curl -v -X GET \
 
 ~~~json
 [
-    {
-        "id": "00ub0oNGTSWTBKOLGLNR",
-        "status": "ACTIVE",
-        "created": "2013-06-24T16:39:18.000Z",
-        "activated": "2013-06-24T16:39:19.000Z",
-        "statusChanged": "2013-06-24T16:39:19.000Z",
-        "lastLogin": "2013-06-24T17:39:19.000Z",
-        "lastUpdated": "2013-07-02T21:36:25.344Z",
-        "passwordChanged": "2013-07-02T21:36:25.344Z",
-        "profile": {
-            "firstName": "Eric",
-            "lastName": "Judy",
-            "email": "eric.judy@example.com",
-            "secondEmail": "eric@example.org",
-            "login": "eric.judy@example.com",
-            "mobilePhone": "555-415-2011"
-        },
-        "credentials": {
-            "password": {},
-            "recovery_question": {
-                "question": "The stars are projectors?"
-            },
-            "provider": {
-                "type": "OKTA",
-                "name": "OKTA"
-            }
-        },
-        "_links": {
-            "resetPassword": {
-                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
-            },
-            "resetFactors": {
-                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
-            },
-            "expirePassword": {
-                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
-            },
-            "forgotPassword": {
-                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
-            },
-            "changeRecoveryQuestion": {
-                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
-            },
-            "deactivate": {
-                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
-            },
-            "changePassword": {
-                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
-            }
-        }
+  {
+    "id": "00ub0oNGTSWTBKOLGLNR",
+    "status": "ACTIVE",
+    "created": "2013-06-24T16:39:18.000Z",
+    "activated": "2013-06-24T16:39:19.000Z",
+    "statusChanged": "2013-06-24T16:39:19.000Z",
+    "lastLogin": "2013-06-24T17:39:19.000Z",
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": "2013-07-02T21:36:25.344Z",
+    "profile": {
+      "firstName": "Eric",
+      "lastName": "Judy",
+      "email": "eric.judy@example.com",
+      "secondEmail": "eric@example.org",
+      "login": "eric.judy@example.com",
+      "mobilePhone": "555-415-2011"
+    },
+    "credentials": {
+      "password": {},
+      "recovery_question": {
+        "question": "The stars are projectors?"
+      },
+      "provider": {
+        "type": "OKTA",
+        "name": "OKTA"
+      }
+    },
+    "_links": {
+      "resetPassword": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+      },
+      "resetFactors": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+      },
+      "expirePassword": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+      },
+      "forgotPassword": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+      },
+      "changeRecoveryQuestion": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+      },
+      "deactivate": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+      },
+      "changePassword": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+      }
     }
+  }
 ]
 ~~~
 
@@ -1217,57 +1219,57 @@ curl -v -X GET \
 
 ~~~json
 [
-    {
-        "id": "00ub0oNGTSWTBKOLGLNR",
-        "status": "ACTIVE",
-        "created": "2013-06-24T16:39:18.000Z",
-        "activated": "2013-06-24T16:39:19.000Z",
-        "statusChanged": "2013-06-24T16:39:19.000Z",
-        "lastLogin": "2013-06-24T17:39:19.000Z",
-        "lastUpdated": "2013-07-02T21:36:25.344Z",
-        "passwordChanged": "2013-07-02T21:36:25.344Z",
-        "profile": {
-            "firstName": "Eric",
-            "lastName": "Judy",
-            "email": "eric.judy@example.com",
-            "secondEmail": "eric@example.org",
-            "login": "eric.judy@example.com",
-            "mobilePhone": "555-415-2011"
-        },
-        "credentials": {
-            "password": {},
-            "recovery_question": {
-                "question": "The stars are projectors?"
-            },
-            "provider": {
-                "type": "OKTA",
-                "name": "OKTA"
-            }
-        },
-        "_links": {
-            "resetPassword": {
-                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
-            },
-            "resetFactors": {
-                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
-            },
-            "expirePassword": {
-                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
-            },
-            "forgotPassword": {
-                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
-            },
-            "changeRecoveryQuestion": {
-                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
-            },
-            "deactivate": {
-                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
-            },
-            "changePassword": {
-                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
-            }
-        }
+  {
+    "id": "00ub0oNGTSWTBKOLGLNR",
+    "status": "ACTIVE",
+    "created": "2013-06-24T16:39:18.000Z",
+    "activated": "2013-06-24T16:39:19.000Z",
+    "statusChanged": "2013-06-24T16:39:19.000Z",
+    "lastLogin": "2013-06-24T17:39:19.000Z",
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": "2013-07-02T21:36:25.344Z",
+    "profile": {
+      "firstName": "Eric",
+      "lastName": "Judy",
+      "email": "eric.judy@example.com",
+      "secondEmail": "eric@example.org",
+      "login": "eric.judy@example.com",
+      "mobilePhone": "555-415-2011"
+    },
+    "credentials": {
+      "password": {},
+      "recovery_question": {
+        "question": "The stars are projectors?"
+      },
+      "provider": {
+        "type": "OKTA",
+        "name": "OKTA"
+      }
+    },
+    "_links": {
+      "resetPassword": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+      },
+      "resetFactors": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+      },
+      "expirePassword": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+      },
+      "forgotPassword": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+      },
+      "changeRecoveryQuestion": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+      },
+      "deactivate": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+      },
+      "changePassword": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+      }
     }
+  }
 ]
 ~~~
 
@@ -1294,57 +1296,57 @@ curl -v -X GET \
 
 ~~~json
 [
-    {
-        "id": "00ub0oNGTSWTBKOLGLNR",
-        "status": "ACTIVE",
-        "created": "2013-06-24T16:39:18.000Z",
-        "activated": "2013-06-24T16:39:19.000Z",
-        "statusChanged": "2013-06-24T16:39:19.000Z",
-        "lastLogin": "2013-06-24T17:39:19.000Z",
-        "lastUpdated": "2013-07-02T21:36:25.344Z",
-        "passwordChanged": "2013-07-02T21:36:25.344Z",
-        "profile": {
-            "firstName": "Eric",
-            "lastName": "Judy",
-            "email": "eric.judy@example.com",
-            "secondEmail": "eric@example.org",
-            "login": "eric.judy@example.com",
-            "mobilePhone": "555-415-2011"
-        },
-        "credentials": {
-            "password": {},
-            "recovery_question": {
-                "question": "The stars are projectors?"
-            },
-            "provider": {
-                "type": "OKTA",
-                "name": "OKTA"
-            }
-        },
-        "_links": {
-            "resetPassword": {
-                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
-            },
-            "resetFactors": {
-                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
-            },
-            "expirePassword": {
-                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
-            },
-            "forgotPassword": {
-                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
-            },
-            "changeRecoveryQuestion": {
-                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
-            },
-            "deactivate": {
-                "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
-            },
-            "changePassword": {
-                "href": "https://your-domain.okta.com/api/v1/users/000ub0oNGTSWTBKOLGLNR/credentials/change_password"
-            }
-        }
+  {
+    "id": "00ub0oNGTSWTBKOLGLNR",
+    "status": "ACTIVE",
+    "created": "2013-06-24T16:39:18.000Z",
+    "activated": "2013-06-24T16:39:19.000Z",
+    "statusChanged": "2013-06-24T16:39:19.000Z",
+    "lastLogin": "2013-06-24T17:39:19.000Z",
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": "2013-07-02T21:36:25.344Z",
+    "profile": {
+      "firstName": "Eric",
+      "lastName": "Judy",
+      "email": "eric.judy@example.com",
+      "secondEmail": "eric@example.org",
+      "login": "eric.judy@example.com",
+      "mobilePhone": "555-415-2011"
+    },
+    "credentials": {
+      "password": {},
+      "recovery_question": {
+        "question": "The stars are projectors?"
+      },
+      "provider": {
+        "type": "OKTA",
+        "name": "OKTA"
+      }
+    },
+    "_links": {
+      "resetPassword": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+      },
+      "resetFactors": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+      },
+      "expirePassword": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+      },
+      "forgotPassword": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+      },
+      "changeRecoveryQuestion": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+      },
+      "deactivate": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+      },
+      "changePassword": {
+        "href": "https://your-domain.okta.com/api/v1/users/000ub0oNGTSWTBKOLGLNR/credentials/change_password"
+      }
     }
+  }
 ]
 ~~~
 
@@ -1403,54 +1405,54 @@ curl -v -X PUT \
 
 ~~~json
 {
-    "id": "00ub0oNGTSWTBKOLGLNR",
-    "status": "ACTIVE",
-    "created": "2013-06-24T16:39:18.000Z",
-    "activated": "2013-06-24T16:39:19.000Z",
-    "statusChanged": "2013-06-24T16:39:19.000Z",
-    "lastLogin": "2013-06-24T17:39:19.000Z",
-    "lastUpdated": "2015-07-02T21:36:25.344Z",
-    "passwordChanged": "2013-07-02T21:36:25.344Z",
-    "profile": {
-        "firstName": "Isaac",
-        "lastName": "Brock",
-        "email": "isaac.brock@update.example.com",
-        "login": "isaac.brock@example.com",
-        "mobilePhone": "555-415-1337"
+  "id": "00ub0oNGTSWTBKOLGLNR",
+  "status": "ACTIVE",
+  "created": "2013-06-24T16:39:18.000Z",
+  "activated": "2013-06-24T16:39:19.000Z",
+  "statusChanged": "2013-06-24T16:39:19.000Z",
+  "lastLogin": "2013-06-24T17:39:19.000Z",
+  "lastUpdated": "2015-07-02T21:36:25.344Z",
+  "passwordChanged": "2013-07-02T21:36:25.344Z",
+  "profile": {
+    "firstName": "Isaac",
+    "lastName": "Brock",
+    "email": "isaac.brock@update.example.com",
+    "login": "isaac.brock@example.com",
+    "mobilePhone": "555-415-1337"
+  },
+  "credentials": {
+    "password": {},
+    "recovery_question": {
+      "question": "Who's a major player in the cowboy scene?"
     },
-    "credentials": {
-        "password": {},
-        "recovery_question": {
-            "question": "Who's a major player in the cowboy scene?"
-        },
-        "provider": {
-            "type": "OKTA",
-            "name": "OKTA"
-        }
-    },
-    "_links": {
-        "resetPassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
-        },
-        "resetFactors": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
-         },
-        "expirePassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
-        },
-        "forgotPassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
-        },
-        "changeRecoveryQuestion": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
-        },
-        "deactivate": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
-        },
-        "changePassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
-        }
+    "provider": {
+      "type": "OKTA",
+      "name": "OKTA"
     }
+  },
+  "_links": {
+    "resetPassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+    },
+    "resetFactors": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+    },
+    "expirePassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+    },
+    "forgotPassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+    },
+    "changeRecoveryQuestion": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+    },
+    "deactivate": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+    },
+    "changePassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+    }
+  }
 }
 ~~~
 
@@ -1500,54 +1502,54 @@ curl -v -X POST \
 
 ~~~json
 {
-    "id": "00ub0oNGTSWTBKOLGLNR",
-    "status": "ACTIVE",
-    "created": "2013-06-24T16:39:18.000Z",
-    "activated": "2013-06-24T16:39:19.000Z",
-    "statusChanged": "2013-06-24T16:39:19.000Z",
-    "lastLogin": "2013-06-24T17:39:19.000Z",
-    "lastUpdated": "2015-07-02T21:36:25.344Z",
-    "passwordChanged": "2013-07-02T21:36:25.344Z",
-    "profile": {
-        "firstName": "Isaac",
-        "lastName": "Brock",
-        "email": "isaac.brock@update.example.com",
-        "login": "isaac.brock@example.com",
-        "mobilePhone": "555-415-1337"
+  "id": "00ub0oNGTSWTBKOLGLNR",
+  "status": "ACTIVE",
+  "created": "2013-06-24T16:39:18.000Z",
+  "activated": "2013-06-24T16:39:19.000Z",
+  "statusChanged": "2013-06-24T16:39:19.000Z",
+  "lastLogin": "2013-06-24T17:39:19.000Z",
+  "lastUpdated": "2015-07-02T21:36:25.344Z",
+  "passwordChanged": "2013-07-02T21:36:25.344Z",
+  "profile": {
+    "firstName": "Isaac",
+    "lastName": "Brock",
+    "email": "isaac.brock@update.example.com",
+    "login": "isaac.brock@example.com",
+    "mobilePhone": "555-415-1337"
+  },
+  "credentials": {
+    "password": {},
+    "recovery_question": {
+      "question": "Who's a major player in the cowboy scene?"
     },
-    "credentials": {
-        "password": {},
-        "recovery_question": {
-            "question": "Who's a major player in the cowboy scene?"
-        },
-        "provider": {
-            "type": "OKTA",
-            "name": "OKTA"
-        }
-    },
-    "_links": {
-        "resetPassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
-        },
-        "resetFactors": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
-         },
-        "expirePassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
-        },
-        "forgotPassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
-        },
-        "changeRecoveryQuestion": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
-        },
-        "deactivate": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
-        },
-        "changePassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
-        }
+    "provider": {
+      "type": "OKTA",
+      "name": "OKTA"
     }
+  },
+  "_links": {
+    "resetPassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+    },
+    "resetFactors": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+    },
+    "expirePassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+    },
+    "forgotPassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+    },
+    "changeRecoveryQuestion": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+    },
+    "deactivate": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+    },
+    "changePassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+    }
+  }
 }
 ~~~
 
@@ -1581,54 +1583,54 @@ curl -v -X POST \
 
 ~~~json
 {
-    "id": "00ub0oNGTSWTBKOLGLNR",
-    "status": "ACTIVE",
-    "created": "2013-06-24T16:39:18.000Z",
-    "activated": "2013-06-24T16:39:19.000Z",
-    "statusChanged": "2013-06-24T16:39:19.000Z",
-    "lastLogin": "2013-06-24T17:39:19.000Z",
-    "lastUpdated": "2013-07-02T21:36:25.344Z",
-    "passwordChanged": "2013-07-02T21:36:25.344Z",
-    "profile": {
-        "firstName": "Isaac",
-        "lastName": "Brock",
-        "email": "isaac.brock@example.com",
-        "login": "isaac.brock@example.com",
-        "mobilePhone": "555-415-1337"
+  "id": "00ub0oNGTSWTBKOLGLNR",
+  "status": "ACTIVE",
+  "created": "2013-06-24T16:39:18.000Z",
+  "activated": "2013-06-24T16:39:19.000Z",
+  "statusChanged": "2013-06-24T16:39:19.000Z",
+  "lastLogin": "2013-06-24T17:39:19.000Z",
+  "lastUpdated": "2013-07-02T21:36:25.344Z",
+  "passwordChanged": "2013-07-02T21:36:25.344Z",
+  "profile": {
+    "firstName": "Isaac",
+    "lastName": "Brock",
+    "email": "isaac.brock@example.com",
+    "login": "isaac.brock@example.com",
+    "mobilePhone": "555-415-1337"
+  },
+  "credentials": {
+    "password": {},
+    "recovery_question": {
+      "question": "Who's a major player in the cowboy scene?"
     },
-    "credentials": {
-        "password": {},
-        "recovery_question": {
-            "question": "Who's a major player in the cowboy scene?"
-        },
-        "provider": {
-             "type": "OKTA",
-             "name": "OKTA"
-        }
-    },
-    "_links": {
-        "resetPassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
-        },
-        "resetFactors": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
-        },
-        "expirePassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
-        },
-        "forgotPassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
-        },
-        "changeRecoveryQuestion": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
-        },
-        "deactivate": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
-        },
-        "changePassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
-        }
+    "provider": {
+      "type": "OKTA",
+      "name": "OKTA"
     }
+  },
+  "_links": {
+    "resetPassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+    },
+    "resetFactors": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+    },
+    "expirePassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+    },
+    "forgotPassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+    },
+    "changeRecoveryQuestion": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+    },
+    "deactivate": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+    },
+    "changePassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+    }
+  }
 }
 ~~~
 
@@ -1660,54 +1662,54 @@ curl -v -X POST \
 
 ~~~json
 {
-    "id": "00ub0oNGTSWTBKOLGLNR",
-    "status": "ACTIVE",
-    "created": "2013-06-24T16:39:18.000Z",
-    "activated": "2013-06-24T16:39:19.000Z",
-    "statusChanged": "2013-06-24T16:39:19.000Z",
-    "lastLogin": "2013-06-24T17:39:19.000Z",
-    "lastUpdated": "2013-07-02T21:36:25.344Z",
-    "passwordChanged": "2013-07-02T21:36:25.344Z",
-    "profile": {
-        "firstName": "Isaac",
-        "lastName": "Brock",
-        "email": "isaac.brock@example.com",
-        "login": "isaac.brock@example.com",
-        "mobilePhone": "555-415-1337"
+  "id": "00ub0oNGTSWTBKOLGLNR",
+  "status": "ACTIVE",
+  "created": "2013-06-24T16:39:18.000Z",
+  "activated": "2013-06-24T16:39:19.000Z",
+  "statusChanged": "2013-06-24T16:39:19.000Z",
+  "lastLogin": "2013-06-24T17:39:19.000Z",
+  "lastUpdated": "2013-07-02T21:36:25.344Z",
+  "passwordChanged": "2013-07-02T21:36:25.344Z",
+  "profile": {
+    "firstName": "Isaac",
+    "lastName": "Brock",
+    "email": "isaac.brock@example.com",
+    "login": "isaac.brock@example.com",
+    "mobilePhone": "555-415-1337"
+  },
+  "credentials": {
+    "password": {},
+    "recovery_question": {
+      "question": "I have a new recovery question?"
     },
-    "credentials": {
-        "password": {},
-        "recovery_question": {
-            "question": "I have a new recovery question?"
-        },
-        "provider": {
-            "type": "OKTA",
-            "name": "OKTA"
-        }
-    },
-    "_links": {
-        "resetPassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
-        },
-        "resetFactors": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
-        },
-        "expirePassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
-        },
-        "forgotPassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
-        },
-        "changeRecoveryQuestion": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
-        },
-        "deactivate": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
-        },
-        "changePassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
-        }
+    "provider": {
+      "type": "OKTA",
+      "name": "OKTA"
     }
+  },
+  "_links": {
+    "resetPassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+    },
+    "resetFactors": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+    },
+    "expirePassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+    },
+    "forgotPassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+    },
+    "changeRecoveryQuestion": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+    },
+    "deactivate": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+    },
+    "changePassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+    }
+  }
 }
 ~~~
 
@@ -1748,54 +1750,54 @@ curl -v -X GET \
 
 ~~~json
 [
-    {
-        "id": "00ub0oNGTSWTBKOLGLNR",
-        "label": "Google Apps Mail",
-        "linkUrl": "https://your-domain.okta.com/home/google/0oa3omz2i9XRNSRIHBZO/50",
-        "logoUrl": "https://your-domain.okta.com/img/logos/google-mail.png",
-        "appName": "google",
-        "appInstanceId": "0oa3omz2i9XRNSRIHBZO",
-        "appAssignmentId": "0ua3omz7weMMMQJERBKY",
-        "credentialsSetup": false,
-        "hidden": false,
-        "sortOrder": 0
-    },
-    {
-        "id": "00ub0oNGTSWTBKOLGLNR",
-        "label": "Google Apps Calendar",
-        "linkUrl": "https://your-domain.okta.com/home/google/0oa3omz2i9XRNSRIHBZO/54",
-        "logoUrl": "https://your-domain.okta.com/img/logos/google-calendar.png",
-        "appName": "google",
-        "appInstanceId": "0oa3omz2i9XRNSRIHBZO",
-        "appAssignmentId": "0ua3omz7weMMMQJERBKY",
-        "credentialsSetup": false,
-        "hidden": false,
-        "sortOrder": 1
-    },
-    {
-        "id": "00ub0oNGTSWTBKOLGLNR",
-        "label": "Box",
-        "linkUrl": "https://your-domain.okta.com/home/boxnet/0oa3ompioiQCSTOYXVBK/72",
-        "logoUrl": "https://your-domain.okta.com/img/logos/box.png",
-        "appName": "boxnet",
-        "appInstanceId": "0oa3ompioiQCSTOYXVBK",
-        "appAssignmentId": "0ua3omx46lYEZLPPRWBO",
-        "credentialsSetup": false,
-        "hidden": false,
-        "sortOrder": 3
-    },
-    {
-        "id": "00ub0oNGTSWTBKOLGLNR",
-        "label": "Salesforce.com",
-        "linkUrl": "https://your-domain.okta.com/home/salesforce/0oa12ecnxtBQMKOXJSMF/46",
-        "logoUrl": "https://your-domain.okta.com/img/logos/salesforce_logo.png",
-        "appName": "salesforce",
-        "appInstanceId": "0oa12ecnxtBQMKOXJSMF",
-        "appAssignmentId": "0ua173qgj5VAVOBQMCVB",
-        "credentialsSetup": true,
-        "hidden": false,
-        "sortOrder": 2
-    }
+  {
+    "id": "00ub0oNGTSWTBKOLGLNR",
+    "label": "Google Apps Mail",
+    "linkUrl": "https://your-domain.okta.com/home/google/0oa3omz2i9XRNSRIHBZO/50",
+    "logoUrl": "https://your-domain.okta.com/img/logos/google-mail.png",
+    "appName": "google",
+    "appInstanceId": "0oa3omz2i9XRNSRIHBZO",
+    "appAssignmentId": "0ua3omz7weMMMQJERBKY",
+    "credentialsSetup": false,
+    "hidden": false,
+    "sortOrder": 0
+  },
+  {
+    "id": "00ub0oNGTSWTBKOLGLNR",
+    "label": "Google Apps Calendar",
+    "linkUrl": "https://your-domain.okta.com/home/google/0oa3omz2i9XRNSRIHBZO/54",
+    "logoUrl": "https://your-domain.okta.com/img/logos/google-calendar.png",
+    "appName": "google",
+    "appInstanceId": "0oa3omz2i9XRNSRIHBZO",
+    "appAssignmentId": "0ua3omz7weMMMQJERBKY",
+    "credentialsSetup": false,
+    "hidden": false,
+    "sortOrder": 1
+  },
+  {
+    "id": "00ub0oNGTSWTBKOLGLNR",
+    "label": "Box",
+    "linkUrl": "https://your-domain.okta.com/home/boxnet/0oa3ompioiQCSTOYXVBK/72",
+    "logoUrl": "https://your-domain.okta.com/img/logos/box.png",
+    "appName": "boxnet",
+    "appInstanceId": "0oa3ompioiQCSTOYXVBK",
+    "appAssignmentId": "0ua3omx46lYEZLPPRWBO",
+    "credentialsSetup": false,
+    "hidden": false,
+    "sortOrder": 3
+  },
+  {
+    "id": "00ub0oNGTSWTBKOLGLNR",
+    "label": "Salesforce.com",
+    "linkUrl": "https://your-domain.okta.com/home/salesforce/0oa12ecnxtBQMKOXJSMF/46",
+    "logoUrl": "https://your-domain.okta.com/img/logos/salesforce_logo.png",
+    "appName": "salesforce",
+    "appInstanceId": "0oa12ecnxtBQMKOXJSMF",
+    "appAssignmentId": "0ua173qgj5VAVOBQMCVB",
+    "credentialsSetup": true,
+    "hidden": false,
+    "sortOrder": 2
+  }
 ]
 ~~~
 
@@ -2100,54 +2102,54 @@ curl -v -X POST \
 
 ~~~json
 {
-    "id": "00ub0oNGTSWTBKOLGLNR",
-    "status": "ACTIVE",
-    "created": "2013-06-24T16:39:18.000Z",
-    "activated": "2013-06-24T16:39:19.000Z",
-    "statusChanged": "2013-06-24T16:39:19.000Z",
-    "lastLogin": "2013-06-24T17:39:19.000Z",
-    "lastUpdated": "2013-06-27T16:35:28.000Z",
-    "passwordChanged": "2013-06-24T16:39:19.000Z",
-    "profile": {
-        "firstName": "Isaac",
-        "lastName": "Brock",
-        "email": "isaac.brock@example.com",
-        "login": "isaac.brock@example.com",
-        "mobilePhone": "555-415-1337"
+  "id": "00ub0oNGTSWTBKOLGLNR",
+  "status": "ACTIVE",
+  "created": "2013-06-24T16:39:18.000Z",
+  "activated": "2013-06-24T16:39:19.000Z",
+  "statusChanged": "2013-06-24T16:39:19.000Z",
+  "lastLogin": "2013-06-24T17:39:19.000Z",
+  "lastUpdated": "2013-06-27T16:35:28.000Z",
+  "passwordChanged": "2013-06-24T16:39:19.000Z",
+  "profile": {
+    "firstName": "Isaac",
+    "lastName": "Brock",
+    "email": "isaac.brock@example.com",
+    "login": "isaac.brock@example.com",
+    "mobilePhone": "555-415-1337"
+  },
+  "credentials": {
+    "password": {},
+    "recovery_question": {
+      "question": "Who's a major player in the cowboy scene?"
     },
-    "credentials": {
-        "password": {},
-        "recovery_question": {
-            "question": "Who's a major player in the cowboy scene?"
-        },
-        "provider": {
-            "type": "OKTA",
-            "name": "OKTA"
-        }
-    },
-    "_links": {
-        "resetPassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
-        },
-        "resetFactors": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
-        },
-        "expirePassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
-        },
-        "forgotPassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
-        },
-        "changeRecoveryQuestion": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
-        },
-        "deactivate": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
-        },
-        "changePassword": {
-            "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
-        }
+    "provider": {
+      "type": "OKTA",
+      "name": "OKTA"
     }
+  },
+  "_links": {
+    "resetPassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+    },
+    "resetFactors": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+    },
+    "expirePassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+    },
+    "forgotPassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+    },
+    "changeRecoveryQuestion": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+    },
+    "deactivate": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+    },
+    "changePassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+    }
+  }
 }
 ~~~
 
@@ -2280,16 +2282,16 @@ curl -v -X POST \
 
 ~~~json
 {
-    "credentials": {
-        "password": {},
-        "recovery_question": {
-            "question": "Who's a major player in the cowboy scene?"
-        },
-        "provider": {
-           "type": "OKTA",
-           "name": "OKTA"
-        }
+  "credentials": {
+    "password": {},
+    "recovery_question": {
+      "question": "Who's a major player in the cowboy scene?"
+    },
+    "provider": {
+      "type": "OKTA",
+      "name": "OKTA"
     }
+  }
 }
 ~~~
 
@@ -2335,16 +2337,16 @@ curl -v -X POST \
 
 ~~~json
 {
-    "credentials": {
-        "password": {},
-        "recovery_question": {
-            "question": "Who's a major player in the cowboy scene?"
-        },
-        "provider": {
-           "type": "OKTA",
-           "name": "OKTA"
-        }
+  "credentials": {
+    "password": {},
+    "recovery_question": {
+      "question": "Who's a major player in the cowboy scene?"
+    },
+    "provider": {
+      "type": "OKTA",
+      "name": "OKTA"
     }
+  }
 }
 ~~~
 
@@ -2393,15 +2395,15 @@ curl -v -X POST \
 
 ~~~json
 {
-    "credentials": {
-        "password": {},
-        "recovery_question": {
-            "question": "How many roads must a man walk down?"
-        },
-        "provider": {
-           "type": "OKTA",
-           "name": "OKTA"
-        }
+  "credentials": {
+    "password": {},
+    "recovery_question": {
+      "question": "How many roads must a man walk down?"
+    },
+    "provider": {
+      "type": "OKTA",
+      "name": "OKTA"
     }
+  }
 }
 ~~~
