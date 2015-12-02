@@ -32,9 +32,9 @@
     </url>
     <url>
         <loc>
-            http://developer.okta.com/blog/2015/10/29/tls-client-authentication-for-services
+            http://developer.okta.com/blog/2015/12/02/tls-client-authentication-for-services
         </loc>
-        <lastmod>2015-12-02T08:44:18-08:00</lastmod>
+        <lastmod>2015-12-02T10:26:54-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/confirm/account.html</loc>
@@ -120,7 +120,7 @@
     </url>
     <url>
         <loc>http://developer.okta.com/</loc>
-        <lastmod>2015-12-02T08:44:18-08:00</lastmod>
+        <lastmod>2015-12-02T10:26:54-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/customers/</loc>
@@ -306,6 +306,12 @@
     </url>
     <url>
         <loc>http://developer.okta.com/docs/api/resources/users.html</loc>
+        <lastmod>2015-12-02T08:29:17-08:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://developer.okta.com/blog/2015/10/29/tls-client-authentication-for-services/
+        </loc>
         <lastmod>2015-12-02T08:29:17-08:00</lastmod>
     </url>
     <url>

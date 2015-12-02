@@ -1,6 +1,8 @@
 ---
 layout: blog_post
 title: TLS Client Authentication for Internal Services
+redirect_from:
+  - /blog/2015/10/29/tls-client-authentication-for-services/
 author: william_dawson
 tags: [networking, security, architecture]
 ---
