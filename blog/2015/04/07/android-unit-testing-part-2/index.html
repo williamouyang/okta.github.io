@@ -198,40 +198,40 @@ do:</p>
 
     <p>Add the following code to the dependencies section:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>classpath 'org.robolectric:robolectric-gradle-plugin:0.12.+'
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="n">classpath</span> <span class="s1">'org.robolectric:robolectric-gradle-plugin:0.12.+'</span>
 </code></pre>
     </div>
   </li>
   <li>
     <p>Modify the application Gradle file</p>
 
-    <p>Add the following code under <code>apply plugin: ‘com.android.application'</code>:</p>
+    <p>Add the following code under <code class="highlighter-rouge">apply plugin: ‘com.android.application'</code>:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>apply plugin: ‘robolectric'
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="n">apply</span> <span class="n">plugin</span>: <span class="s1">'robolectric'</span>
 </code></pre>
     </div>
   </li>
   <li>
     <p>Add the following under the dependencies section:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>androidTestCompile('junit:junit:4.11')
-androidTestCompile(‘org.robolectric:robolectric:2.3')
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="n">androidTestCompile</span>(<span class="s1">'junit:junit:4.11'</span>)
+<span class="n">androidTestCompile</span>(<span class="s1">'org.robolectric:robolectric:2.3'</span>)
 </code></pre>
     </div>
   </li>
   <li>
     <p>Add this section:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="n">robolectric</span> <span class="o">{</span> 
-        <span class="n">include</span> <span class="err">'</span><span class="o">**/*</span><span class="n">Test</span><span class="o">.</span><span class="na">class</span><span class="err">'</span>
-<span class="o">}</span>
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="n">robolectric</span> {
+        <span class="n">include</span> <span class="s1">'**/*Test.class'</span>
+}
 </code></pre>
     </div>
   </li>
   <li>
     <p>Create the code that you want to test</p>
 
-    <p>Modify <code>MainActivity</code>. Add the following code to it:</p>
+    <p>Modify <code class="highlighter-rouge">MainActivity</code>. Add the following code to it:</p>
 
     <div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="n">Foo</span> <span class="n">foo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Foo</span><span class="o">();</span>
 <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getSomething</span><span class="p">(</span><span class="o">)</span> <span class="o">{</span>
@@ -240,70 +240,70 @@ androidTestCompile(‘org.robolectric:robolectric:2.3')
 </code></pre>
     </div>
 
-    <p>Add the <code>Foo</code> class:</p>
+    <p>Add the <code class="highlighter-rouge">Foo</code> class:</p>
 
     <div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">myapplication</span><span class="o">;</span>
-      
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Foo</span> <span class="o">{</span> 
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Foo</span> <span class="o">{</span>
     <span class="n">Bar</span> <span class="n">bar</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Bar</span><span class="o">();</span>
-        
-    <span class="kd">public</span> <span class="kt">int</span> <span class="n">getFoo</span><span class="o">()</span> <span class="o">{</span> 
-        <span class="k">return</span> <span class="n">bar</span><span class="o">.</span><span class="na">getBar</span><span class="o">();</span> 
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="n">getFoo</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">bar</span><span class="o">.</span><span class="na">getBar</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre>
     </div>
   </li>
   <li>
-    <p>Add the <code>Bar</code> class:</p>
+    <p>Add the <code class="highlighter-rouge">Bar</code> class:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>package com.example.myapplication;
-    
-public class Bar {
-        
-    public int getBar() { 
-        return 4; 
-    } 
-}
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">myapplication</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Bar</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="n">getBar</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="mi">4</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
     </div>
   </li>
   <li>
     <p>Create a test</p>
 
-    <p>Delete the <code>ApplicationTest</code> file.</p>
+    <p>Delete the <code class="highlighter-rouge">ApplicationTest</code> file.</p>
 
-    <p>Create the following <code>FooTest</code> class under your <code>androidTest</code>:</p>
+    <p>Create the following <code class="highlighter-rouge">FooTest</code> class under your <code class="highlighter-rouge">androidTest</code>:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>package com.example.myapplication;
-    
-import junit.framework.Assert;
-    
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
-    
-@RunWith(RobolectricTestRunner.class)
-public class FooTest {
-    Foo sut;
-        
-    @Before
-    public void setUp() {
-        sut = new Foo();
-    }
-    
-    @Test
-    public void testGetFoo_returns4() {
-        // Arrange
-            
-        // Act
-        int actualResult = sut.getFoo();
-            
-        // Assert
-        Assert.assertEquals(4, actualResult);
-    }
-}
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">myapplication</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">junit.framework.Assert</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.junit.Before</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.runner.RunWith</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.robolectric.RobolectricTestRunner</span><span class="o">;</span>
+
+<span class="nd">@RunWith</span><span class="o">(</span><span class="n">RobolectricTestRunner</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FooTest</span> <span class="o">{</span>
+    <span class="n">Foo</span> <span class="n">sut</span><span class="o">;</span>
+
+    <span class="nd">@Before</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setUp</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">sut</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Foo</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">testGetFoo_returns4</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// Arrange</span>
+
+        <span class="c1">// Act</span>
+        <span class="kt">int</span> <span class="n">actualResult</span> <span class="o">=</span> <span class="n">sut</span><span class="o">.</span><span class="na">getFoo</span><span class="o">();</span>
+
+        <span class="c1">// Assert</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="n">actualResult</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
     </div>
   </li>
@@ -333,8 +333,8 @@ mind.</p>
 
     <p>The changes which we did to run on JVM are great, but we are still
 facing the limitations of using integration tests. For example, if
-the implementation of a <code>Bar</code> class changes and now uses the network,
-you might start seeing flakiness in the <code>testGetFoo_returns4</code> test
+the implementation of a <code class="highlighter-rouge">Bar</code> class changes and now uses the network,
+you might start seeing flakiness in the <code class="highlighter-rouge">testGetFoo_returns4</code> test
 because of a bad network connection.</p>
   </li>
 </ul>
@@ -350,7 +350,6 @@ because of a bad network connection.</p>
 <p>Stay tuned for part three of our series, where I will show you how
 to achieve test isolation using dependency injection. You can also
 check out the full code at <a href="https://github.com/vronin-okta/okta_blog_samples/tree/master/android_unit_testing">GitHub</a>.</p>
-
 
 	  </section>
 

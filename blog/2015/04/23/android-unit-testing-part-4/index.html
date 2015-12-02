@@ -170,7 +170,7 @@ good
 tests</a>
 and the way to <a href="/blog/2015/04/07/android-unit-testing-part-2">run Android tests on JVM making them
 fast</a> and <a href="/blog/2015/04/14/android-unit-testing-part-3/">how to make
-your code less coupled</a>. 
+your code less coupled</a>.
 This article will explain how to make tests isolated.</em></p>
 
 <p>We need to mock a dependency, inject it, and then modify our test to
@@ -183,111 +183,111 @@ are now testing just one class at a time.</p>
 
     <p>Add the following code under the dependency section:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>androidTestCompile ‘org.easymock:easymock:3.1'
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="n">androidTestCompile</span> <span class="s1">'org.easymock:easymock:3.1'</span>
 </code></pre>
     </div>
   </li>
   <li>
-    <p>Replace <code>FooTest</code> with the following code:</p>
+    <p>Replace <code class="highlighter-rouge">FooTest</code> with the following code:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>package com.example.myapplication;
-     
-import junit.framework.Assert;
-      
-import org.easymock.EasyMockSupport;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
-    
-import static org.easymock.EasyMock.expect;
-    
-@RunWith(RobolectricTestRunner.class)
-public class FooTest extends EasyMockSupport {
-    Foo sut;
-    
-    // Mocks
-    Bar barMock;
-    
-    @Before
-    public void setUp() {
-        sut = new Foo();
-    
-        // Create mocks
-        barMock = createMock(Bar.class);
-    
-        // Inject mock
-        InjectHelper.injectMock(sut, barMock);
-    }
-    
-    @Test
-    public void testGetFoo_returns4() {
-        // Arrange
-        expect(barMock.getBar()).andReturn(4);
-        replayAll();
-    
-        // Act
-        int actualResult = sut.getFoo();
-    
-        // Assert
-        verifyAll();
-        Assert.assertEquals(4, actualResult);
-    }
-}
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">myapplication</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">junit.framework.Assert</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.easymock.EasyMockSupport</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.Before</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.runner.RunWith</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.robolectric.RobolectricTestRunner</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">easymock</span><span class="o">.</span><span class="na">EasyMock</span><span class="o">.</span><span class="na">expect</span><span class="o">;</span>
+
+<span class="nd">@RunWith</span><span class="o">(</span><span class="n">RobolectricTestRunner</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FooTest</span> <span class="kd">extends</span> <span class="n">EasyMockSupport</span> <span class="o">{</span>
+    <span class="n">Foo</span> <span class="n">sut</span><span class="o">;</span>
+
+    <span class="c1">// Mocks</span>
+    <span class="n">Bar</span> <span class="n">barMock</span><span class="o">;</span>
+
+    <span class="nd">@Before</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setUp</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">sut</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Foo</span><span class="o">();</span>
+
+        <span class="c1">// Create mocks</span>
+        <span class="n">barMock</span> <span class="o">=</span> <span class="n">createMock</span><span class="o">(</span><span class="n">Bar</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+
+        <span class="c1">// Inject mock</span>
+        <span class="n">InjectHelper</span><span class="o">.</span><span class="na">injectMock</span><span class="o">(</span><span class="n">sut</span><span class="o">,</span> <span class="n">barMock</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">testGetFoo_returns4</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// Arrange</span>
+        <span class="n">expect</span><span class="o">(</span><span class="n">barMock</span><span class="o">.</span><span class="na">getBar</span><span class="o">()).</span><span class="na">andReturn</span><span class="o">(</span><span class="mi">4</span><span class="o">);</span>
+        <span class="n">replayAll</span><span class="o">();</span>
+
+        <span class="c1">// Act</span>
+        <span class="kt">int</span> <span class="n">actualResult</span> <span class="o">=</span> <span class="n">sut</span><span class="o">.</span><span class="na">getFoo</span><span class="o">();</span>
+
+        <span class="c1">// Assert</span>
+        <span class="n">verifyAll</span><span class="o">();</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="n">actualResult</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
     </div>
   </li>
   <li>
-    <p>Create a class <code>InjectHelper</code> under <code>androidTest</code></p>
+    <p>Create a class <code class="highlighter-rouge">InjectHelper</code> under <code class="highlighter-rouge">androidTest</code></p>
 
     <p>(I believe the original code for injecting fields is from <strong>Spring</strong>; however, it was modified afterwards.)</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>package com.example.myapplication;
-      
-import java.lang.reflect.Field;
-import javax.inject.Inject;
-    
-public class InjectHelper {
-        
-    @SuppressWarnings("unchecked")
-    public static void injectMock(Object target, Object mock)
-    {
-        Class targetClass = target.getClass();
-        do {
-            Field[] fields = targetClass.getDeclaredFields();
-            // Iterate through all members
-            for (Field field : fields) {
-                // Skip all non injectable members
-                if (field.getAnnotation(Inject.class) == null)
-                    continue;
-    
-                // Make private/prptected members accessible
-                field.setAccessible(true);
-    
-                // Get a class of the member
-                Class injectedClass = field.getType();
-                Class mockClass = mock.getClass();
-    
-                // Check that mock is essentially the same class
-                if (!injectedClass.isAssignableFrom(mockClass))
-                    continue;
-    
-                try {
-                    // Inject mock
-                    field.set(target, mock);
-                } catch (IllegalAccessException e)
-                {
-                    throw new RuntimeException(e);
-                }
-    
-                // return accessibility
-                field.setAccessible(false);
-            }
-            targetClass = targetClass.getSuperclass();
-        }
-        while (targetClass != null &amp;&amp; targetClass != Object.class);
-    }
-}
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">myapplication</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.lang.reflect.Field</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.inject.Inject</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">InjectHelper</span> <span class="o">{</span>
+
+    <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"unchecked"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">injectMock</span><span class="o">(</span><span class="n">Object</span> <span class="n">target</span><span class="o">,</span> <span class="n">Object</span> <span class="n">mock</span><span class="o">)</span>
+    <span class="o">{</span>
+        <span class="n">Class</span> <span class="n">targetClass</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="na">getClass</span><span class="o">();</span>
+        <span class="k">do</span> <span class="o">{</span>
+            <span class="n">Field</span><span class="o">[]</span> <span class="n">fields</span> <span class="o">=</span> <span class="n">targetClass</span><span class="o">.</span><span class="na">getDeclaredFields</span><span class="o">();</span>
+            <span class="c1">// Iterate through all members</span>
+            <span class="k">for</span> <span class="o">(</span><span class="n">Field</span> <span class="n">field</span> <span class="o">:</span> <span class="n">fields</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">// Skip all non injectable members</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">field</span><span class="o">.</span><span class="na">getAnnotation</span><span class="o">(</span><span class="n">Inject</span><span class="o">.</span><span class="na">class</span><span class="o">)</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+                    <span class="k">continue</span><span class="o">;</span>
+
+                <span class="c1">// Make private/prptected members accessible</span>
+                <span class="n">field</span><span class="o">.</span><span class="na">setAccessible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+
+                <span class="c1">// Get a class of the member</span>
+                <span class="n">Class</span> <span class="n">injectedClass</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="na">getType</span><span class="o">();</span>
+                <span class="n">Class</span> <span class="n">mockClass</span> <span class="o">=</span> <span class="n">mock</span><span class="o">.</span><span class="na">getClass</span><span class="o">();</span>
+
+                <span class="c1">// Check that mock is essentially the same class</span>
+                <span class="k">if</span> <span class="o">(!</span><span class="n">injectedClass</span><span class="o">.</span><span class="na">isAssignableFrom</span><span class="o">(</span><span class="n">mockClass</span><span class="o">))</span>
+                    <span class="k">continue</span><span class="o">;</span>
+
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="c1">// Inject mock</span>
+                    <span class="n">field</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">target</span><span class="o">,</span> <span class="n">mock</span><span class="o">);</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IllegalAccessException</span> <span class="n">e</span><span class="o">)</span>
+                <span class="o">{</span>
+                    <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+                <span class="o">}</span>
+
+                <span class="c1">// return accessibility</span>
+                <span class="n">field</span><span class="o">.</span><span class="na">setAccessible</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="n">targetClass</span> <span class="o">=</span> <span class="n">targetClass</span><span class="o">.</span><span class="na">getSuperclass</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">targetClass</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">targetClass</span> <span class="o">!=</span> <span class="n">Object</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
     </div>
 
@@ -310,7 +310,7 @@ through interfaces.</p>
     <p>Thanks!</p>
 
     <p>Let me mention several people who helped me to put this article
-together: <a href="https://www.linkedin.com/pub/william-dawson/43/140/837">Wills Dawson</a> made the initial move to use Robolectric,
+together: <a href="https://www.linkedin.com/pub/william-dawson/43/140/837">Wils Dawson</a> made the initial move to use Robolectric,
 <a href="https://www.linkedin.com/in/nadeemlinkedin">Nadeem Khan</a> figured out all those pesky details about usage of
 Robolectric, and <a href="https://www.linkedin.com/pub/hans-reichenbach/20/94b/5b8">Hans Reichenbach</a> put a lot of these integration
 steps in writing on our wiki. Thanks guys!</p>
@@ -318,7 +318,6 @@ steps in writing on our wiki. Thanks guys!</p>
     <p><a href="https://github.com/vronin-okta/okta_blog_samples/tree/master/android_unit_testing">https://github.com/vronin-okta/okta_blog_samples/tree/master/android_unit_testing</a></p>
   </li>
 </ul>
-
 
 	  </section>
 

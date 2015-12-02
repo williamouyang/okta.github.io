@@ -37,33 +37,33 @@ my summary is below:
 -   Modify the application Gradle file
 
     Add the following code under the dependency section:
-    
-    ~~~
+
+    ~~~ conf
     compile 'com.squareup.dagger:dagger:1.2.1'
     provided 'com.squareup.dagger:dagger-compiler:1.2.1'
     ~~~
 -   Modify the manifest
 
     Add the following code to the Application tags:
-    
-    ~~~
-    android:name=“.MyApplication"
+
+    ~~~ conf
+    android:name=".MyApplication"
     ~~~
 -   Create the classes
 
-    Add the <code>MyApplication</code> class.
-    
-    ~~~
+    Add the `MyApplication` class.
+
+    ~~~ java
     public class MyApplication extends Application {
         private ObjectGraph applicationGraph;
-    
+
         @Override
         public void onCreate() {
             super.onCreate();
-            
+
             applicationGraph = ObjectGraph.create(getModules().toArray());
         }
-    
+
         protected List<Object> getModules() {
             return Arrays.<Object>asList(
                     new MyModule(this)
@@ -74,14 +74,14 @@ my summary is below:
         }
     }
     ~~~
--   Add the <code>MyModule</code> class.
-    
-    ~~~
+-   Add the `MyModule` class.
+
+    ~~~ java
     package com.example.myapplication;
-      
+
     import dagger.Module;
     import dagger.Provides;
-    
+
     @Module(
             injects = {
                     MainActivity.class
@@ -89,43 +89,43 @@ my summary is below:
     )
     public class MyModule {
         private final MyApplication application;
-        
+
         public MyModule(MyApplication application) {
             this.application = application;
         }
     }
     ~~~
--   Modify <code>MainActivity</code> and replace code <code>private Foo
-    foo = new Foo();</code> with:
-    
-    ~~~
+-   Modify `MainActivity` and replace code `private Foo
+    foo = new Foo();` with:
+
+    ~~~ java
     @Inject
     Foo foo;
     ~~~
-    
-    and add following code to <code>onCreate()</code>:
-    
+
+    and add following code to `onCreate()`:
+
     ~~~
-    // This will inject all @Inject members 
+    // This will inject all @Inject members
     // recursively for everything what is marked as @Inject
     ((MyApplication)getApplicationContext()).inject(this);
     ~~~
--   Modify the <code>Foo</code> class and replace code <code>Bar bar = new Bar();</code> with:
-    
-    ~~~
+-   Modify the `Foo` class and replace code `Bar bar = new Bar();` with:
+
+    ~~~ java
     @Inject
     Bar bar;
     ~~~
-    
+
     Modify Bar class and add
-    
-    ~~~
+
+    ~~~ java
     @Inject
     Bar() {
     }
     ~~~
 
-Now, instances of <code>Foo</code> and <code>Bar</code> are
+Now, instances of `Foo` and `Bar` are
 automatically injected in the runtime. However, your test will fail
 with NPE, because the Foo class has a Bar dependency which wasn’t
 delivered. I.e., we don’t want it injected by Dagger -— we want mocked
@@ -139,4 +139,3 @@ dependency, not a real one.
 Stay tuned for the final part of our series, where I will show you
 how to make tests isolated. You can also check out the full code at
 [GitHub](https://github.com/vronin-okta/okta_blog_samples/tree/master/android_unit_testing).
-

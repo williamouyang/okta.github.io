@@ -200,8 +200,8 @@ my summary is below:</p>
 
     <p>Add the following code under the dependency section:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>compile 'com.squareup.dagger:dagger:1.2.1'
-provided 'com.squareup.dagger:dagger-compiler:1.2.1'
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="n">compile</span> <span class="s1">'com.squareup.dagger:dagger:1.2.1'</span>
+<span class="n">provided</span> <span class="s1">'com.squareup.dagger:dagger-compiler:1.2.1'</span>
 </code></pre>
     </div>
   </li>
@@ -210,96 +210,96 @@ provided 'com.squareup.dagger:dagger-compiler:1.2.1'
 
     <p>Add the following code to the Application tags:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>android:name=“.MyApplication"
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="n">android</span>:<span class="n">name</span>=<span class="s2">".MyApplication"</span>
 </code></pre>
     </div>
   </li>
   <li>
     <p>Create the classes</p>
 
-    <p>Add the <code>MyApplication</code> class.</p>
+    <p>Add the <code class="highlighter-rouge">MyApplication</code> class.</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>public class MyApplication extends Application {
-    private ObjectGraph applicationGraph;
-    
-    @Override
-    public void onCreate() {
-        super.onCreate();
-            
-        applicationGraph = ObjectGraph.create(getModules().toArray());
-    }
-    
-    protected List&lt;Object&gt; getModules() {
-        return Arrays.&lt;Object&gt;asList(
-                new MyModule(this)
-        );
-    }
-    public void inject(Object object) {
-        applicationGraph.inject(object);
-    }
-}
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">ObjectGraph</span> <span class="n">applicationGraph</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onCreate</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">();</span>
+
+        <span class="n">applicationGraph</span> <span class="o">=</span> <span class="n">ObjectGraph</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">getModules</span><span class="o">().</span><span class="na">toArray</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="kd">protected</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">getModules</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">Arrays</span><span class="o">.&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="n">asList</span><span class="o">(</span>
+                <span class="k">new</span> <span class="n">MyModule</span><span class="o">(</span><span class="k">this</span><span class="o">)</span>
+        <span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">inject</span><span class="o">(</span><span class="n">Object</span> <span class="n">object</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">applicationGraph</span><span class="o">.</span><span class="na">inject</span><span class="o">(</span><span class="n">object</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
     </div>
   </li>
   <li>
-    <p>Add the <code>MyModule</code> class.</p>
+    <p>Add the <code class="highlighter-rouge">MyModule</code> class.</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>package com.example.myapplication;
-      
-import dagger.Module;
-import dagger.Provides;
-    
-@Module(
-        injects = {
-                MainActivity.class
-        }
-)
-public class MyModule {
-    private final MyApplication application;
-        
-    public MyModule(MyApplication application) {
-        this.application = application;
-    }
-}
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">myapplication</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">dagger.Module</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">dagger.Provides</span><span class="o">;</span>
+
+<span class="nd">@Module</span><span class="o">(</span>
+        <span class="n">injects</span> <span class="o">=</span> <span class="o">{</span>
+                <span class="n">MainActivity</span><span class="o">.</span><span class="na">class</span>
+        <span class="o">}</span>
+<span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyModule</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">MyApplication</span> <span class="n">application</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="n">MyModule</span><span class="o">(</span><span class="n">MyApplication</span> <span class="n">application</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">application</span> <span class="o">=</span> <span class="n">application</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
     </div>
   </li>
   <li>
-    <p>Modify <code>MainActivity</code> and replace code <code>private Foo
+    <p>Modify <code class="highlighter-rouge">MainActivity</code> and replace code <code class="highlighter-rouge">private Foo
 foo = new Foo();</code> with:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>@Inject
-Foo foo;
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@Inject</span>
+<span class="n">Foo</span> <span class="n">foo</span><span class="o">;</span>
 </code></pre>
     </div>
 
-    <p>and add following code to <code>onCreate()</code>:</p>
+    <p>and add following code to <code class="highlighter-rouge">onCreate()</code>:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>// This will inject all @Inject members 
+    <div class="highlighter-rouge"><pre class="highlight"><code>// This will inject all @Inject members
 // recursively for everything what is marked as @Inject
 ((MyApplication)getApplicationContext()).inject(this);
 </code></pre>
     </div>
   </li>
   <li>
-    <p>Modify the <code>Foo</code> class and replace code <code>Bar bar = new Bar();</code> with:</p>
+    <p>Modify the <code class="highlighter-rouge">Foo</code> class and replace code <code class="highlighter-rouge">Bar bar = new Bar();</code> with:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>@Inject
-Bar bar;
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@Inject</span>
+<span class="n">Bar</span> <span class="n">bar</span><span class="o">;</span>
 </code></pre>
     </div>
 
     <p>Modify Bar class and add</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>@Inject
-Bar() {
-}
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@Inject</span>
+<span class="n">Bar</span><span class="o">()</span> <span class="o">{</span>
+<span class="o">}</span>
 </code></pre>
     </div>
   </li>
 </ul>
 
-<p>Now, instances of <code>Foo</code> and <code>Bar</code> are
+<p>Now, instances of <code class="highlighter-rouge">Foo</code> and <code class="highlighter-rouge">Bar</code> are
 automatically injected in the runtime. However, your test will fail
 with NPE, because the Foo class has a Bar dependency which wasn’t
 delivered. I.e., we don’t want it injected by Dagger -— we want mocked
@@ -315,7 +315,6 @@ dependency, not a real one.</p>
 <p>Stay tuned for the final part of our series, where I will show you
 how to make tests isolated. You can also check out the full code at
 <a href="https://github.com/vronin-okta/okta_blog_samples/tree/master/android_unit_testing">GitHub</a>.</p>
-
 
 	  </section>
 
