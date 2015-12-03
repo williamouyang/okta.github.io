@@ -289,6 +289,7 @@ Applications that are configured with the `BASIC_AUTH`, `BROWSER_PLUGIN`, or `SE
 | EXTERNAL_PASSWORD_SYNC       | Administrator sets username, password is the same as user's Okta password |                 |                 | Admin:`R/W`      | *Current User Password*  |
 | EDIT_USERNAME_AND_PASSWORD   | User sets username and password                                           |                 |                 | Admin/User:`R/W` | Admin/User:`W`           |
 | EDIT_PASSWORD_ONLY           | Administrator sets username, user sets password                           |                 |                 | Admin:`R/W`      | Admin/User:`W`           |
+| ADMIN_SETS_CREDENTIALS       | Administrator sets username and password                                  |                 |                 | Admin: `R/W`     | Admin: `W`
 |------------------------------+---------------------------------------------------------------------------+-----------------+-----------------+------------------+--------------------------|
 
 > `BOOKMARK`, `SAML_2_0`, and `WS_FEDERATION` signOnModes do not support an authentication scheme as they use a federated SSO protocol.  The `scheme` property should be omitted for apps with these signOnModes
@@ -1963,6 +1964,123 @@ curl -v -X PUT \
   "signOnMode": "BROWSER_PLUGIN",
   "credentials": {
     "scheme": "EDIT_USERNAME_AND_PASSWORD",
+    "userNameTemplate": {
+      "template": "${source.login}",
+      "type": "BUILT_IN"
+    }
+  },
+  "settings": {
+    "app": {
+      "buttonField": "btn-login",
+      "passwordField": "txtbox-password",
+      "usernameField": "txtbox-username",
+      "url": "https://example.com/login.html"
+    }
+  },
+  "_links": {
+    "logo": [
+      {
+        "href": "https:/example.okta.com/img/logos/logo_1.png",
+        "name": "medium",
+        "type": "image/png"
+      }
+    ],
+    "users": {
+      "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/users"
+    },
+    "groups": {
+      "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/groups"
+    },
+    "self": {
+      "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
+    },
+    "deactivate": {
+      "href": "https://example.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
+    }
+  }
+}
+~~~
+
+#### Set SWA Administrator Sets Username and Password
+{:.api .api-operation}
+
+Configures the `ADMIN_SETS_CREDENTIALS` scheme for a SWA application with a username template
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X PUT \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "name": "template_swa",
+  "label": "Sample Plugin App",
+  "status": "ACTIVE",
+  "accessibility": {
+    "selfService": false,
+    "errorRedirectUrl": null
+  },
+  "visibility": {
+    "autoSubmitToolbar": false,
+    "hide": {
+      "iOS": false,
+      "web": false
+    },
+    "appLinks": {
+      "login": true
+    }
+  },
+  "features": [],
+  "signOnMode": "BROWSER_PLUGIN",
+  "credentials": {
+    "scheme": "ADMIN_SETS_CREDENTIALS",
+    "userNameTemplate": {
+      "template": "${source.login}",
+      "type": "BUILT_IN"
+    }
+  },
+  "settings": {
+    "app": {
+      "buttonField": "btn-login",
+      "passwordField": "txtbox-password",
+      "usernameField": "txtbox-username",
+      "url": "https://example.com/login.html"
+    }
+  }
+}' "https://${org}.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "id": "0oabkvBLDEKCNXBGYUAS",
+  "name": "template_swa",
+  "label": "Sample Plugin App",
+  "status": "ACTIVE",
+  "lastUpdated": "2013-10-01T06:28:03.486Z",
+  "created": "2013-09-11T17:46:08.000Z",
+  "accessibility": {
+    "selfService": false,
+    "errorRedirectUrl": null
+  },
+  "visibility": {
+    "autoSubmitToolbar": false,
+    "hide": {
+      "iOS": false,
+      "web": false
+    },
+    "appLinks": {
+      "login": true
+    }
+  },
+  "features": [],
+  "signOnMode": "BROWSER_PLUGIN",
+  "credentials": {
+    "scheme": "ADMIN_SETS_CREDENTIALS",
     "userNameTemplate": {
       "template": "${source.login}",
       "type": "BUILT_IN"
