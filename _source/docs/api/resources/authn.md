@@ -242,7 +242,7 @@ Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988))
 
 ### User Object
 
-A subset of [user properties](users.html#user-model) published in a authentication or recovery transaction after the user successfully completes primary authentication.
+A subset of [user properties](users.html#user-model) published in an authentication or recovery transaction after the user successfully completes primary authentication.
 
 |-------------------+---------------------------------------------+-------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
 | Property          | Description                                 | DataType                                              | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
@@ -258,7 +258,7 @@ A subset of [user properties](users.html#user-model) published in a authenticati
  "id": "00udnlQDVLVRIVXESCMZ",
  "passwordChanged": "2015-09-08T20:14:45.000Z",
  "profile": {
-    "username": "dade.murphy@example.com",
+    "login": "dade.murphy@example.com",
     "firstName":"Dade",
     "lastName": "Murphy",
     "locale": "en_US",
@@ -277,7 +277,7 @@ Subset of [profile properties](users.html#profile-object) for a user
 |-----------+------------------------------------------------------------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+-----------------------------------------------------------------------|
 | Property  | Description                                                                                                                  | DataType | Nullable | Unique | Readonly | MinLength | MaxLength | Validation                                                            |
 | --------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------| -------- | ------ | -------- | --------- | --------- | --------------------------------------------------------------------- |
-| username  | unique username for user                                                                                                     | String   | FALSE    | TRUE   | TRUE     |           |           |                                                                       |
+| login  | unique login for user                                                                                                     | String   | FALSE    | TRUE   | TRUE     |           |           |                                                                       |
 | firstName | first name of user                                                                                                           | String   | FALSE    | FALSE  | TRUE     |           |           |                                                                       |
 | lastName  | last name of user                                                                                                            | String   | FALSE    | FALSE  | TRUE     |           |           |                                                                       |
 | locale    | user's default location for purposes of localizing items such as currency, date time format, numerical representations, etc. | String   | TRUE     | FALSE  | TRUE     |           |           | [RFC 5646](https://tools.ietf.org/html/rfc5646)                       |
@@ -347,7 +347,7 @@ Specifies the password complexity requirements of the assigned password policy
 
 ### Factor Object
 
-A subset of [factor properties](factors.html#factor-model) published in a authentication transaction during `MFA_ENROLL`, `MFA_REQUIRED`, or `MFA_CHALLENGE` states
+A subset of [factor properties](factors.html#factor-model) published in an authentication transaction during `MFA_ENROLL`, `MFA_REQUIRED`, or `MFA_CHALLENGE` states
 
 |----------------+-------------------------------------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
 | Property       | Description                                                                   | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
