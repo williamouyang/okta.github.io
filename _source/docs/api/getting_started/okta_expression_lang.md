@@ -92,14 +92,14 @@ Function  | Return Type | Example | Output
 `Arrays.add(array, value)` | Array | `Arrays.add({10, 20, 30}, 40)` | {10, 20, 30, 40}
 `Arrays.remove(array, value)` | Array | `Arrays.remove({10, 20, 30}, 20)` | {10, 30}
 `Arrays.clear(array)` | Array | `Arrays.clear({10, 20, 30})` | { }
-`Arrays.get(array, position)` | - | `Arrays.get({0,1,2,3},0)` | 0
+`Arrays.get(array, position)` | - | `Arrays.get({0, 1, 2}, 0)` | 0
 `Arrays.flatten(list of values)` | Array | `Arrays.flatten(10, {20, 30}, 40)` | {10, 20, 30, 40}
 `Arrays.contains(array, value)` | Boolean | `Arrays.contains({10, 20, 30}, 10)` | true
- |  | Arrays.contains({10, 20, 30}, 50) | false
+ |  | `Arrays.contains({10, 20, 30}, 50)` | false
 `Arrays.size(array)` | Integer | `Arrays.size({10, 20, 30})` | 3
- |  | Arrays.size(NULL) | 0
+ |  | `Arrays.size(NULL)` | 0
 `Arrays.isEmpty(array)` | Boolean | `Arrays.isEmpty({10, 20})` | false
- |  | Arrays.isEmpty(NULL) | true
+ |  | `Arrays.isEmpty(NULL)` | true
 
 
 ### Conversion Functions
@@ -131,7 +131,7 @@ Function  | Input Parameter Signature | Return Type | Example | Output
 --------- | ------------------------- | ----------- | ------- | -------
 Time.now  | (String timeZoneId, String format) | String      | `Time.now()` | 2015-07-31T17:18:37.979Z (Current time, UTC format)
 | | | `Time.now("EST")` | 2015-07-31T13:30:49.964-04:00 (Specified time zone)
-| | | `Time.now("EST","YYYY-MM-dd HH:mm:ss")` | 2015-07-31 13:36:48 (Specified time zone and format, military time)
+| | | `Time.now("EST", "YYYY-MM-dd HH:mm:ss")` | 2015-07-31 13:36:48 (Specified time zone and format, military time)
 
 >Both input parameters are optional. The time zone ID supports both new and old style formats, listed below. The third example shows how to specify the military time format.
 
@@ -149,9 +149,9 @@ Australia/Sydney, Pacific/Guadalcanal, Pacific/Auckland.
 Function  | Description | Example
 --------- | ----------- | -------
 `getManagerUser(managerSource).$attribute` | Gets the manager's Okta user attribute values | `getManagerUser("active_directory").firstName`
-`getManagerAppUser(managerSource, attributeSource).$attribute` | Gets the manager's app user attribute values for the app user of any appinstance. | `getManagerAppUser("active_directory","google").firstName`
+`getManagerAppUser(managerSource, attributeSource).$attribute` | Gets the manager's app user attribute values for the app user of any appinstance. | `getManagerAppUser("active_directory", "google").firstName`
 `getAssistantUser(assistantSource).$attribute` | Gets the assistant's Okta user attribute values. | `getAssistantUser("active_directory").firstName`
-`getAssistantAppUser(assistantSource, attributeSource).$attribute` | Gets the assistant's app user attribute values for the app user of any appinstance. | `getAssistantAppUser("active_directory","google").firstName`
+`getAssistantAppUser(assistantSource, attributeSource).$attribute` | Gets the assistant's app user attribute values for the app user of any appinstance. | `getAssistantAppUser("active_directory", "google").firstName`
 
 > Pass the correct **app name** for the *managerSource*, *assistantSource*, and *attributeSource* parameters.<br />
 > Note: At this time, only **active_directory** is supported for *managerSource* and *assistantSource*.
