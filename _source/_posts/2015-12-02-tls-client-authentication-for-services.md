@@ -255,7 +255,7 @@ SslConfigurator sslConfig = SslConfigurator.newInstance()
         .trustStore(clientTrustStore)
         .trustStorePassword(password)
 
-        .securityProvider("TLSv1.2");
+        .securityProtocol("TLSv1.2");
 
 SSLContext sslContext = sslConfig.createSSLContext();
 Client client = ClientBuilder.newBuilder().sslContext(sslContext).build();

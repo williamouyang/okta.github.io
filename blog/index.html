@@ -404,7 +404,7 @@ API, but there are equivalents in the 1.X as well as in the Apache HTTP library.
         <span class="o">.</span><span class="na">trustStore</span><span class="o">(</span><span class="n">clientTrustStore</span><span class="o">)</span>
         <span class="o">.</span><span class="na">trustStorePassword</span><span class="o">(</span><span class="n">password</span><span class="o">)</span>
 
-        <span class="o">.</span><span class="na">securityProvider</span><span class="o">(</span><span class="s">"TLSv1.2"</span><span class="o">);</span>
+        <span class="o">.</span><span class="na">securityProtocol</span><span class="o">(</span><span class="s">"TLSv1.2"</span><span class="o">);</span>
 
 <span class="n">SSLContext</span> <span class="n">sslContext</span> <span class="o">=</span> <span class="n">sslConfig</span><span class="o">.</span><span class="na">createSSLContext</span><span class="o">();</span>
 <span class="n">Client</span> <span class="n">client</span> <span class="o">=</span> <span class="n">ClientBuilder</span><span class="o">.</span><span class="na">newBuilder</span><span class="o">().</span><span class="na">sslContext</span><span class="o">(</span><span class="n">sslContext</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
