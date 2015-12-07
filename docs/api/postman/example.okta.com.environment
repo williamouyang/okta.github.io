@@ -73,13 +73,6 @@
 			"enabled": true
 		},
 		{
-			"key": "trustId",
-			"value": "",
-			"type": "text",
-			"name": "trustId",
-			"enabled": true
-		},
-		{
 			"key": "factorId",
 			"value": "",
 			"type": "text",
@@ -161,6 +154,34 @@
 			"value": "",
 			"type": "text",
 			"name": "redirectUrl",
+			"enabled": true
+		},
+		{
+			"key": "keyId",
+			"value": "",
+			"type": "text",
+			"name": "keyId",
+			"enabled": true
+		},
+		{
+			"key": "clientId",
+			"value": "",
+			"type": "text",
+			"name": "clientId",
+			"enabled": true
+		},
+		{
+			"key": "clientSecret",
+			"value": "",
+			"type": "text",
+			"name": "clientSecret",
+			"enabled": true
+		},
+		{
+			"key": "txId",
+			"value": "",
+			"type": "text",
+			"name": "txId",
 			"enabled": true
 		}
 	],
