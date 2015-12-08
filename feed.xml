@@ -7,6 +7,21 @@
     <atom:link href="http://developer.okta.com/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Demystifying OAuth</title>
+        <description>&lt;p&gt;It seems that OAuth 2.0 is everywhere these days. Whether you are building a hot new single page web application (SPA), a native mobile experience, or just trying to integrate with the API economy, you can’t go far without running into the popular authorization framework for REST/APIs and social authentication.&lt;/p&gt;
+
+&lt;p&gt;During &lt;a href=&quot;https://www.okta.com/oktane15/&quot;&gt;Oktane15&lt;/a&gt;, &lt;a href=&quot;https://www.linkedin.com/in/karlmcguinness&quot;&gt;Karl McGuinness&lt;/a&gt;, our Senior Director of Identity, demystified the powerful, yet often misunderstood, world of OAuth 2.0 and shared details on Okta’s growing support for &lt;a href=&quot;http://openid.net/connect/&quot;&gt;OpenID Connect&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.slideshare.net/karl_mcguinness/demystifying-oauth-20&quot;&gt;Slides&lt;/a&gt;&lt;/p&gt;
+
+&lt;iframe src=&quot;https://player.vimeo.com/video/148164438&quot; width=&quot;500&quot; height=&quot;375&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+</description>
+        <pubDate>Mon, 07 Dec 2015 00:00:00 -0800</pubDate>
+        <link>http://developer.okta.com/blog/2015/12/07/oauth</link>
+        <guid isPermaLink="true">http://developer.okta.com/blog/2015/12/07/oauth</guid>
+      </item>
+    
+      <item>
         <title>TLS Client Authentication for Internal Services</title>
         <description>&lt;p&gt;If you’re like me, the most aggravating thing is finding a Stack Overflow
 question that exactly describes the issue you are facing, only to scroll down
