@@ -156,7 +156,7 @@ Dropwizard application connector.&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;:
   &lt;span class=&quot;n&quot;&gt;applicationConnectors&lt;/span&gt;:
     - &lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;: &lt;span class=&quot;n&quot;&gt;https&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;port&lt;/span&gt;: &lt;span class=&quot;m&quot;&gt;443&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;port&lt;/span&gt;: &lt;span class=&quot;m&quot;&gt;8443&lt;/span&gt;
 
     &lt;span class=&quot;c&quot;&gt;# Key store settings
 &lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;keyStorePath&lt;/span&gt;: &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;/&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt;/&lt;span class=&quot;n&quot;&gt;keystore&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;jks&lt;/span&gt;

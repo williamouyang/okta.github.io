@@ -143,7 +143,7 @@ Dropwizard application connector.
 server:
   applicationConnectors:
     - type: https
-    port: 443
+    port: 8443
 
     # Key store settings
     keyStorePath: path/to/keystore.jks
