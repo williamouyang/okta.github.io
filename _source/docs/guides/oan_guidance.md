@@ -34,7 +34,7 @@ Use the following instructions to support single sign-on for your app in the pub
 ### 2. Integrate Your App
 
 * Sign up for an Okta [developer account](https://www.okta.com/developer/signup/).
-* In your Okta account (make sure you are signed in as an admin), use the [App Wizard](https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard) to build a Single Sign-on integration with Okta. For the more visually inclined, see our videos for [SAML](https://www.youtube.com/watch?v=rQpUsRe0Jxw) and [SWA](https://www.youtube.com/watch?v=FoyhQEwOnqg).
+* In your Okta account (make sure you are signed in as an admin), use the [App Wizard](https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard) to build a Single Sign-on integration with Okta. For the more visually inclined, see our [video](https://support.okta.com/help/articles/Knowledge_Article/Adding-Applications-Using-the-Application-Integration-Wizard-AIW?retURL=%2Fhelp%2Fapex%2FKnowledgeArticleJson%3Fc%3DOkta_Documentation%253AAdmin_Basics%26p%3D101%26inline%3D1&popup=true) for using the App Wizard.
 * Note: In the SAML Wizard step #3 Feedback, be sure to identify yourself as a Partner (“I'm a software vendor. I'd like to integrate my app with Okta”) and that you want to your app reviewed and promoted to the OAN (“Yes, my app integration is ready for public use in the Okta Application Network”)
 
 ### 3. Need Help?
@@ -62,6 +62,8 @@ With the new Cloud Provisioning Connector (CPC) Program, you can now build and s
 **What is it?**  | Connector written in Java that takes Okta provisioning signals and translates them into your service’s User API. The Connector is built and managed by the ISV (you) and hosted in the Okta service. Typical development effort is ~1-3 man-weeks. | Okta's SCIM 1.1/2.0 Client will interface directly with compatible SCIM 1.1/2.0 Servers. The integration is just a template that is configured. No coding required.
 **Who is it designed for?** | ISVs with an existing proprietary API for user operations. You want maximum flexibility and do not plan on supporting the SCIM standard. | ISVs that: a) currently support the SCIM standard; b) plan to support the SCIM standard; c) don’t already have proprietary APIs for user operations.
 **How do I get started?** |Email <oan@okta.com> and express interest in developing using Java Connector. We’ll share the SDK and additional program details. **Note: We are only accepting a limited number of ISV partners into the Java Connector program to start.** Please try to share some details on customer demand and urgency (e.g. # of joint customers that would benefit, deployment deadlines) in your email. | Okta support for SCIM is coming in March 2016. If you are interested in being part of the SCIM Beta reply to <oan@okta.com> and we’ll add you to the list. We’ll reach back out with additional SCIM documentation and SCIM Beta details by March 2016.
+
+For more details, see the [Cloud Provisioning Connector Program Overview](https://www.okta.com/sites/default/files/cloud_provisioning_connector_program_overview_v1.pdf).
 
 Interested in provisioning with Okta but have general questions about the approaches above? Email us at <oan@okta.com>
 
