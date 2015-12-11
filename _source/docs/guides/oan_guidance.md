@@ -34,7 +34,7 @@ Use the following instructions to support single sign-on for your app in the pub
 ### 2. Integrate Your App
 
 * Sign up for an Okta [developer account](https://www.okta.com/developer/signup/).
-* In your Okta account (make sure you are signed in as an admin), use the [App Wizard](https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard) to build a Single Sign-on integration with Okta. For the more visually inclined, see our [video](https://support.okta.com/help/articles/Knowledge_Article/Adding-Applications-Using-the-Application-Integration-Wizard-AIW?retURL=%2Fhelp%2Fapex%2FKnowledgeArticleJson%3Fc%3DOkta_Documentation%253AAdmin_Basics%26p%3D101%26inline%3D1&popup=true) for using the App Wizard.
+* In your Okta account (make sure you are signed in as an admin), use the [App Wizard](https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard) to build a Single Sign-on integration with Okta. For the more visually inclined, see our [video](https://support.okta.com/help/articles/Knowledge_Article/Adding-Applications-Using-the-Application-Integration-Wizard-AIW) for using the App Wizard.
 * Note: In the SAML Wizard step #3 Feedback, be sure to identify yourself as a Partner (“I'm a software vendor. I'd like to integrate my app with Okta”) and that you want to your app reviewed and promoted to the OAN (“Yes, my app integration is ready for public use in the Okta Application Network”)
 
 ### 3. Need Help?
