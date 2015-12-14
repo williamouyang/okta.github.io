@@ -40,6 +40,9 @@ The Okta Application API provides operations to manage applications and/or assig
     "userNameTemplate": {
       "template": "${source.login}",
       "type": "BUILT_IN"
+    },
+    "signing": {
+      "kid": "akm5hvbn1vojA9Fsa0h7"
     }
   },
   "settings": {
@@ -260,6 +263,7 @@ Specifies credentials and scheme for the application's `signOnMode`.
 | ---------------- | -------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- | -------- | --------------- | --------- | --------- | ---------- |
 | scheme           | Determines how credentials are managed for the `signOnMode`                                                    | [Authentication Scheme](#authentication-schemes)      | TRUE     |                 |           |           |            |
 | userNameTemplate | Template used to generate a user’s username when the application is assigned via a group or directly to a user | [UserName Template Object](#username-template-object) | TRUE     | *Okta UserName* |           |           |            |
+| signing          | Contains app certificate information                                                                           | [Signing Object](#signing-object)                     | TRUE     |                 |           |           |            |
 | userName         | Shared username for app                                                                                        | String                                                | TRUE     |                 | 1         | 100       |            |
 | password         | Shared password for app                                                                                        | [Password Object](#password-object)                   | TRUE     |                 |           |           |            |
 |------------------+----------------------------------------------------------------------------------------------------------------+-------------------------------------------------------+----------+-----------------+-----------+-----------+------------|
@@ -271,6 +275,9 @@ Specifies credentials and scheme for the application's `signOnMode`.
     "userNameTemplate": {
       "template": "${source.login}",
       "type": "BUILT_IN"
+    },
+    "signing": {
+      "kid": "akm5hvbn1vojA9Fsa0h7"
     },
     "userName": "test",
     "password": {}
@@ -313,6 +320,25 @@ Specifies the template used to generate a user's username when the application i
   "userNameTemplate": {
     "template": "${source.login}",
     "type": "BUILT_IN"
+  }
+}
+~~~
+
+#### Signing Object
+Shows id of app certificate that is used for SSO signing and SAML assertion validation
+
+|------------+-----------------------------------------+----------------------------------+----------+-------------------+-----------+-----------+------------|
+| Property   | Description                             | DataType                         | Nullable | Default           | MinLength | MaxLength | Validation |
+| ---------- | --------------------------------------- | -------------------------------- | -------- | ----------------- | --------- | ----------| ---------- |
+| kid        | app certificate id                      | String                           | TRUE     |                   |           |           |            |
+|------------+-----------------------------------------+----------------------------------+----------+-------------------+-----------+-----------+------------|
+
+> You need to enable `KEY_ROLLOVER` feature to view `kid`, contact customer support for more information
+
+~~~json
+{
+  "signing": {
+    "kid": "akm5hvbn1vojA9Fsa0h7"
   }
 }
 ~~~
@@ -3367,4 +3393,476 @@ curl -v -X DELETE \
 
 ~~~json
 {}
+~~~
+
+## Application Certificate Model
+
+The application certificate model represents an application certificate in [JSON Web Key](https://tools.ietf.org/html/rfc7517) format.
+
+### Example
+
+~~~json
+{
+  "created": "2015-11-20T21:09:30.000Z",
+  "expiresAt": "2017-11-20T21:09:29.000Z",
+  "x5c": [
+    "MIIDmDCCAoCgAwIBAgIGAVEmuwhKMA0GCSqGSIb3DQEBBQUAMIGMMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxDTALBgNVBAMMBHJhaW4xHDAaBgkqhkiG9w0BCQEWDWluZm9Ab2t0YS5jb20wHhcNMTUxMTIwMjEwODMwWhcNMTcxMTIwMjEwOTI5WjCBjDELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xDTALBgNVBAoMBE9rdGExFDASBgNVBAsMC1NTT1Byb3ZpZGVyMQ0wCwYDVQQDDARyYWluMRwwGgYJKoZIhvcNAQkBFg1pbmZvQG9rdGEuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1ml7//IDMpngTKGJJ5qhodUaOY2Yx7k6mCYyETA8wjVfJjWFYVDwfTJ5kB7zbuPBNVDFuLIxMqGyJk3i2/nSBKe1eAC2lv+WK2R5xqSgXNNLlnhR3xMp8ed7TCmrHFRoS46uIBpMfvROij4cmOjVtX1ZGTjdqC8Z8bPg+JiZW9BkBo9sdEIjWjZTzMpmuHJ26EcJkuODFp5jr3/SKv3LvFAjbF5slEXrZLyUFrmSL0AXU6fWszN1llUoPBjS9uSTelOsS4PvBUy/oH1e7vbo8jag68ym2+wbbTw9toOjGcdOcwsT7Phwh0ixjt1/oKnjNvMKHapSr2GoiY8cltkQ2wIDAQABMA0GCSqGSIb3DQEBBQUAA4IBAQBkYvW3dtPU5spAvUUNHZmk76C0GC0Dg+XD15menebia931qeO6o21SJLbcRr+0Doy8p59r8ZmqIj/jJOhCrA0jqiKT+wch/494K6OYz8k3jJ3OtrBQ3OtYJ7gpAq0QuWf/G3tFpH23tW/8VfBtalwPMxiffG9rkFzPYAoNgYHXAGLO5yRz3TC0Z8nkcY5xPO/NAN1gsWvlvTBxf3B06giug7g+szRaReAjpM3WUFz9XG4Hs/EtaqiBFeArWRqWxxO7igmSQEEmlAHYCCoTZ/Atvwa96CqCTlM2Dr45aT1h8tkaVFXl8HGdt1/m8mnw53PbgxvYW2AvN5JBwp9S8c6w"
+  ],
+  "x5t#S256": "CyhOiLD8_9hCFT02nUbkvmlNncBsb31xY_SUbF6fHPA",
+  "kid": "akml95AVptFeCi4zm0g3",
+  "kty": "RSA",
+  "use": "sig"
+}
+~~~
+
+### Application Certificate Properties
+
+|------------------+--------------------------------------------------------------+-----------------------------------------------------------------------------|----------|--------|----------|-----------|-----------+------------|
+| Property         | Description                                                  | DataType                                                                    | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| ---------------- | ------------------------------------------------------------ | --------------------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
+| created          | timestamp when app certificate was created                   | Date                                                                        | FALSE    | FALSE  | TRUE     |           |           |            |
+| expiresAt        | timestamp when app certificate expires                       | Date                                                                        | FALSE    | FALSE  | TRUE     |           |           |            |
+| x5c              | X.509 certificate chain                                      | Array                                                                       | TRUE     | TRUE   | TRUE     |           |           |            |
+| x5t#S256         | X.509 certificate SHA-256 thumbprint                         | String                                                                      | TRUE     | TRUE   | TRUE     |           |           |            |
+| kid              | certificate id                                               | String                                                                      | FALSE    | TRUE   | TRUE     |           |           |            |
+| kty              | cryptographic algorithm family used with the certificate     | String                                                                      | FALSE    | FALSE  | TRUE     |           |           |            |
+| use              | usage of the certificate                                     | String                                                                      | TRUE     | FALSE  | TRUE     |           |           |            |
+|------------------+--------------------------------------------------------------+-----------------------------------------------------------------------------|----------|--------|----------|-----------|-----------+------------|
+
+## Application Certificate Operations
+
+> You need to enable `KEY_ROLLOVER` feature to perform the following operations, it is advised to contact Customer Support before enabling this feature.
+
+### Generate Certificate for Application
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /apps/*:aid*/credentials/keys/generate</span>
+
+Generate certificate for an application
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter     | Description                                     | Param Type | DataType                                      | Required | Default
+------------- | ----------------------------------------------- | ---------- | --------------------------------------------- | -------- | -------
+aid           | unique key of [Application](#application-model) | URL        | String                                        | TRUE     |
+validityYears | validity years since certificate creation date  | Query      | Number                                        | TRUE     |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+Return the generated [Application Certificate](#application-certificate-model).
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+}' "https://${org}.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/credentials/keys/generate?validityYears=2"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~http
+HTTP/1.1 201 Created
+Content-Type: application/json
+Location: https://${org}.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/credentials/keys/akm5hvbbevE341ovl0h7
+
+{
+  "created": "2015-12-10T18:56:23.000Z",
+  "expiresAt": "2017-12-10T18:56:22.000Z",
+  "x5c": [
+    "MIIDqDCCApCgAwIBAgIGAVGNQFX5MA0GCSqGSIb3DQEBBQUAMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTAeFw0xNTEyMTAxODU1MjJaFw0xNzEyMTAxODU2MjJaMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJJjrcnI6cXBiXNq9YDgfYrQe2O5qEHG4MXP8Ue0sMeefFkFEHYHnHUeZCq6WTAGqR+1LFgOl+Eq9We5V+qNlGIfkFkQ3iHGBrIALKqLCd0Et76HicDiegz7j9DtN+lo0hG/gfcw5783L5g5xeQ7zVmCQMkFwoUA0uA3bsfUSrmfORHJL+EMNQT8XIXD8NkG4g6u7ylHVRTLgXbe+W/p04m3EP6l41xl+MhIpBaPxDsyUvcKCNwkZN3aZIin1O9Y4YJuDHxrM64/VtLLp0sC05iawAmfsLunF7rdJAkWUpPn+xkviyNQ3UpvwAYuDr+jKLUdh2reRnm1PezxMIXzBVMCAwEAATANBgkqhkiG9w0BAQUFAAOCAQEARnFIjyitrCGbleFr3KeAwdOyeHiRmgeKupX5ZopgXtcseJoToUIinX5DVw2fVZPahqs0Q7/a0wcVnTRpw6946qZCwKd/PvZ1feVuVEA5Ui3+XvHuSH5xLp7NvYG1snNEvlbN3+NDUMlWj2NEbihowUBt9+UxTpQO3+N08q3aZk3hOZ+tHt+1Te7KEEL/4CM28GZ9MY7fSrS7MAgp1+ZXtn+kRlMrXnQ49qBda37brwDRqmSY9PwNMbev3r+9ZHwxr9W5wXW4Ev4C4xngA7RkVoyDbItSUho0I0M0u/LHuppclnXrw97xyO5Z883eIBvPVjfRcxsJxXJ8jx70ATDskw=="
+  ],
+  "kid": "akm5hvbbevE341ovl0h7",
+  "kty": "RSA",
+  "use": "sig",
+  "x5t#S256": "5GOpy9CQVtfvBmu2T8BHvpKE4OGtC3BuS046t7p9pps"
+}
+~~~
+
+If validityYears is out of range (2 - 10 years), you will receive an error response.
+
+~~~http
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+
+{
+  "errorCode": "E0000001",
+  "errorSummary": "Api validation failed: generateKey",
+  "errorLink": "E0000001",
+  "errorId": "oaeMHrsk2WLTACvPU5T7yQ4yw",
+  "errorCauses": [
+    {
+      "errorSummary": "Validity years out of range. It should be 2 - 10 years"
+    }
+  ]
+}
+~~~
+
+### List Certificates for Application
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /apps/*:aid*/credentials/keys</span>
+
+Enumerates certificates for an Application
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter     | Description                                     | Param Type | DataType                                      | Required | Default
+------------- | ----------------------------------------------- | ---------- | --------------------------------------------- | -------- | -------
+aid           | unique key of [Application](#application-model) | URL        | String                                        | TRUE     |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+Array of [Application Certificate](#application-certificate-model).
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+}' "https://${org}.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/credentials/keys"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+[
+  {
+    "created": "2015-12-10T18:56:23.000Z",
+    "expiresAt": "2017-12-10T18:56:22.000Z",
+    "x5c": [
+      "MIIDqDCCApCgAwIBAgIGAVGNQFX5MA0GCSqGSIb3DQEBBQUAMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTAeFw0xNTEyMTAxODU1MjJaFw0xNzEyMTAxODU2MjJaMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJJjrcnI6cXBiXNq9YDgfYrQe2O5qEHG4MXP8Ue0sMeefFkFEHYHnHUeZCq6WTAGqR+1LFgOl+Eq9We5V+qNlGIfkFkQ3iHGBrIALKqLCd0Et76HicDiegz7j9DtN+lo0hG/gfcw5783L5g5xeQ7zVmCQMkFwoUA0uA3bsfUSrmfORHJL+EMNQT8XIXD8NkG4g6u7ylHVRTLgXbe+W/p04m3EP6l41xl+MhIpBaPxDsyUvcKCNwkZN3aZIin1O9Y4YJuDHxrM64/VtLLp0sC05iawAmfsLunF7rdJAkWUpPn+xkviyNQ3UpvwAYuDr+jKLUdh2reRnm1PezxMIXzBVMCAwEAATANBgkqhkiG9w0BAQUFAAOCAQEARnFIjyitrCGbleFr3KeAwdOyeHiRmgeKupX5ZopgXtcseJoToUIinX5DVw2fVZPahqs0Q7/a0wcVnTRpw6946qZCwKd/PvZ1feVuVEA5Ui3+XvHuSH5xLp7NvYG1snNEvlbN3+NDUMlWj2NEbihowUBt9+UxTpQO3+N08q3aZk3hOZ+tHt+1Te7KEEL/4CM28GZ9MY7fSrS7MAgp1+ZXtn+kRlMrXnQ49qBda37brwDRqmSY9PwNMbev3r+9ZHwxr9W5wXW4Ev4C4xngA7RkVoyDbItSUho0I0M0u/LHuppclnXrw97xyO5Z883eIBvPVjfRcxsJxXJ8jx70ATDskw=="
+    ],
+    "kid": "akm5hvbbevE341ovl0h7",
+    "kty": "RSA",
+    "use": "sig",
+    "x5t#S256": "5GOpy9CQVtfvBmu2T8BHvpKE4OGtC3BuS046t7p9pps"
+  },
+  {
+    "created": "2015-12-10T18:55:35.000Z",
+    "expiresAt": "2045-01-23T02:15:23.000Z",
+    "x5c": [
+      "MIIDqDCCApCgAwIBAgIGAUsUkouzMA0GCSqGSIb3DQEBBQUAMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTAeFw0xNTAxMjMwMjE0MjNaFw00NTAxMjMwMjE1MjNaMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKhmkmKsu3FYeBiJg44aN6Ah3g9gof1cytXJVMnblDUWpLfe/FMUQCssh8Y8NCYRri5jni4efBgk6B3SkC7ymqsOXILIEHSwUYWnAaqDOTxO101mHzryowu1+0PldRNoyTthahpprvAPYlTin9zrDTqFT+WY/zwoaN8H+CfixlW1nM85qF18zYYekkW50MSoHPcfJKe2ywIhPXTYTSBEPcHh8dQEjBrZn7A4qOoDnfOXll8OL7j2O6EVyTtHA0tLJHVLpwI4gSPsXFwEnHltjN57odwYe9yds0BbM/YG9i+am1+3cmZ6Uyd16mLGclrr05o9BHcEZ4ZctV2hr6whbRsCAwEAATANBgkqhkiG9w0BAQUFAAOCAQEAnNlF27gRmhGTQ+GRAvbvYToFRgsIbBAPvRqB2LmEIiQ6UJd602w6uP1sv/zEzBYg4SnMLuVyWgOJ6d71dCvXdIO9mgAq6BaEPjlo0WhGyt+zGrpkMnIX5EwRa64kHydcPRHNA607wVYA96sJdyNJEMzBvjY9fJnfevzzDCN3NWpMS2T6rk6HP5IziI1VuFWY2OUC1kbCqLj1dUgp8koe3ftLL55ZpkAocnVMnrzBveNjgAOAiKTMcyS0bhESph9aVWvuHVZSfTnUjnTPb/4jA2YlB3ED+qaU3aqHwft1KXwZskNXBKXy7lyC+CMoeB3/ncFhSg/UllBooPPS3wYlNA=="
+    ],
+    "kid": "akm5hvbn1vojA9Fsa0h7",
+    "kty": "RSA",
+    "use": "sig",
+    "x5t#S256": "7CCyXWwKzH4P6PoBP91B1S_iIZVzuGffVnUXu-BTYQQ"
+  }
+]
+~~~
+
+### Get Certificate for Application
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /apps/*:aid*/credentials/keys/*:kid*</span>
+
+Get a specific certificate for an application by `kid`
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter     | Description                                                             | Param Type | DataType                                      | Required | Default
+------------- | ----------------------------------------------------------------------- | ---------- | --------------------------------------------- | -------- | -------
+aid           | unique key of [Application](#application-model)                         | URL        | String                                        | TRUE     |
+kid           | unique key of [Application Certificate](#application-certificate-model) | URL        | String                                        | TRUE     |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+[Application Certificate](#application-certificate-model).
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+}' "https://${org}.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/credentials/keys/akm5hvbbevE341ovl0h7"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "created": "2015-12-10T18:56:23.000Z",
+  "expiresAt": "2017-12-10T18:56:22.000Z",
+  "x5c": [
+    "MIIDqDCCApCgAwIBAgIGAVGNQFX5MA0GCSqGSIb3DQEBBQUAMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTAeFw0xNTEyMTAxODU1MjJaFw0xNzEyMTAxODU2MjJaMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJJjrcnI6cXBiXNq9YDgfYrQe2O5qEHG4MXP8Ue0sMeefFkFEHYHnHUeZCq6WTAGqR+1LFgOl+Eq9We5V+qNlGIfkFkQ3iHGBrIALKqLCd0Et76HicDiegz7j9DtN+lo0hG/gfcw5783L5g5xeQ7zVmCQMkFwoUA0uA3bsfUSrmfORHJL+EMNQT8XIXD8NkG4g6u7ylHVRTLgXbe+W/p04m3EP6l41xl+MhIpBaPxDsyUvcKCNwkZN3aZIin1O9Y4YJuDHxrM64/VtLLp0sC05iawAmfsLunF7rdJAkWUpPn+xkviyNQ3UpvwAYuDr+jKLUdh2reRnm1PezxMIXzBVMCAwEAATANBgkqhkiG9w0BAQUFAAOCAQEARnFIjyitrCGbleFr3KeAwdOyeHiRmgeKupX5ZopgXtcseJoToUIinX5DVw2fVZPahqs0Q7/a0wcVnTRpw6946qZCwKd/PvZ1feVuVEA5Ui3+XvHuSH5xLp7NvYG1snNEvlbN3+NDUMlWj2NEbihowUBt9+UxTpQO3+N08q3aZk3hOZ+tHt+1Te7KEEL/4CM28GZ9MY7fSrS7MAgp1+ZXtn+kRlMrXnQ49qBda37brwDRqmSY9PwNMbev3r+9ZHwxr9W5wXW4Ev4C4xngA7RkVoyDbItSUho0I0M0u/LHuppclnXrw97xyO5Z883eIBvPVjfRcxsJxXJ8jx70ATDskw=="
+  ],
+  "kid": "akm5hvbbevE341ovl0h7",
+  "kty": "RSA",
+  "use": "sig",
+  "x5t#S256": "5GOpy9CQVtfvBmu2T8BHvpKE4OGtC3BuS046t7p9pps"
+}
+~~~
+
+### Update Certificate for Application
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /apps/*:aid*</span>
+
+Update application certificate by `kid`
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter     | Description                                                             | Param Type | DataType                                      | Required | Default
+------------- | ----------------------------------------------------------------------- | ---------- | --------------------------------------------- | -------- | -------
+aid           | unique key of [Application](#application-model)                         | URL        | String                                        | TRUE     |
+app           | app with new certificate kid                                            | Body       | [Application](#application-model)             | FALSE    |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+[Application](#application-model) with updated `kid`.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X PUT \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "id": "0oa5hvbn1sjCWW6LW0h7",
+  "name": "10000ft",
+  "label": "10000ft",
+  "status": "ACTIVE",
+  "lastUpdated": "2015-12-10T18:55:46.000Z",
+  "created": "2015-12-10T18:55:35.000Z",
+  "accessibility": {
+    "selfService": false,
+    "errorRedirectUrl": null,
+    "loginRedirectUrl": null
+  },
+  "visibility": {
+    "autoSubmitToolbar": true,
+    "hide": {
+      "iOS": false,
+      "web": false
+    },
+    "appLinks": {
+      "10000ft_link": true
+    }
+  },
+  "features": [],
+  "signOnMode": "BROWSER_PLUGIN",
+  "credentials": {
+    "scheme": "EDIT_USERNAME_AND_PASSWORD",
+    "userNameTemplate": {
+      "template": "${source.login}",
+      "type": "BUILT_IN"
+    },
+    "revealPassword": true,
+    "signing": {
+      "kid": "akm5hvbn1vojA9Fsa0h7"
+    }
+  },
+  "settings": {
+    "app": {},
+    "notifications": {
+      "vpn": {
+        "network": {
+          "connection": "DISABLED"
+        },
+        "message": null,
+        "helpUrl": null
+      }
+    }
+  },
+  "_links": {
+    "logo": [
+      {
+        "name": "medium",
+        "href": "https://op1static.oktacdn.com/bc/globalFileStoreRecord?id=gfs2fushubZAQJUDDKOL",
+        "type": "image/png"
+      }
+    ],
+    "appLinks": [
+      {
+        "name": "10000ft_link",
+        "href": "https://balacomptest.oktapreview.com/home/10000ft/0oa5hvbn1sjCWW6LW0h7/6025",
+        "type": "text/html"
+      }
+    ],
+    "users": {
+      "href": "https://balacomptest.oktapreview.com/api/v1/apps/0oa5hvbn1sjCWW6LW0h7/users"
+    },
+    "deactivate": {
+      "href": "https://balacomptest.oktapreview.com/api/v1/apps/0oa5hvbn1sjCWW6LW0h7/lifecycle/deactivate"
+    },
+    "groups": {
+      "href": "https://balacomptest.oktapreview.com/api/v1/apps/0oa5hvbn1sjCWW6LW0h7/groups"
+    }
+  }
+}' "https://${org}.okta.com/api/v1/apps/0oa5hvbn1sjCWW6LW0h7"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "id": "0oa5hvbn1sjCWW6LW0h7",
+  "name": "10000ft",
+  "label": "10000ft",
+  "status": "ACTIVE",
+  "lastUpdated": "2015-12-14T21:41:09.000Z",
+  "created": "2015-12-10T18:55:35.000Z",
+  "accessibility": {
+    "selfService": false,
+    "errorRedirectUrl": null,
+    "loginRedirectUrl": null
+  },
+  "visibility": {
+    "autoSubmitToolbar": true,
+    "hide": {
+      "iOS": false,
+      "web": false
+    },
+    "appLinks": {
+      "10000ft_link": true
+    }
+  },
+  "features": [],
+  "signOnMode": "BROWSER_PLUGIN",
+  "credentials": {
+    "scheme": "EDIT_USERNAME_AND_PASSWORD",
+    "userNameTemplate": {
+      "template": "${source.login}",
+      "type": "BUILT_IN"
+    },
+    "revealPassword": true,
+    "signing": {
+      "kid": "akm5hvbn1vojA9Fsa0h7"
+    }
+  },
+  "settings": {
+    "app": {},
+    "notifications": {
+      "vpn": {
+        "network": {
+          "connection": "DISABLED"
+        },
+        "message": null,
+        "helpUrl": null
+      }
+    }
+  },
+  "_links": {
+    "logo": [
+      {
+        "name": "medium",
+        "href": "https://op1static.oktacdn.com/bc/globalFileStoreRecord?id=gfs2fushubZAQJUDDKOL",
+        "type": "image/png"
+      }
+    ],
+    "appLinks": [
+      {
+        "name": "10000ft_link",
+        "href": "https://balacomptest.oktapreview.com/home/10000ft/0oa5hvbn1sjCWW6LW0h7/6025",
+        "type": "text/html"
+      }
+    ],
+    "users": {
+      "href": "https://balacomptest.oktapreview.com/api/v1/apps/0oa5hvbn1sjCWW6LW0h7/users"
+    },
+    "deactivate": {
+      "href": "https://balacomptest.oktapreview.com/api/v1/apps/0oa5hvbn1sjCWW6LW0h7/lifecycle/deactivate"
+    },
+    "groups": {
+      "href": "https://balacomptest.oktapreview.com/api/v1/apps/0oa5hvbn1sjCWW6LW0h7/groups"
+    }
+  }
+}
+~~~
+
+### Preview SAML metadata for Application
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /apps/*:aid*/sso/saml/metadata</span>
+
+Preview SAML metadata based on a specific certificate for an application
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter     | Description                                                             | Param Type | DataType                                      | Required | Default
+------------- | ----------------------------------------------------------------------- | ---------- | --------------------------------------------- | -------- | -------
+aid           | unique key of [Application](#application-model)                         | URL        | String                                        | TRUE     |
+kid           | unique key of [Application Certificate](#application-certificate-model) | Query      | String                                        | TRUE     |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+SAML metadata in XML
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+}' "https://${org}.okta.com/api/v1/apps/0oa39sivhvvtqqFbu0h7/sso/saml/metadata?kid=akm5hvk50eF3P3C7b0h7"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~
+<?xml version="1.0" encoding="UTF-8"?>
+<md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" entityID="exk39sivhuytV2D8H0h7">
+    <md:IDPSSODescriptor WantAuthnRequestsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+        <md:KeyDescriptor use="signing">
+            <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                <ds:X509Data>
+                    <ds:X509Certificate>MIIDqDCCApCgAwIBAgIGAVGNO4qeMA0GCSqGSIb3DQEBBQUAMIGUMQswCQYDVQQGEwJVUzETMBEG
+A1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEU
+MBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJ
+ARYNaW5mb0Bva3RhLmNvbTAeFw0xNTEyMTAxODUwMDhaFw0xNzEyMTAxODUxMDdaMIGUMQswCQYD
+VQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsG
+A1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEc
+MBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoC
+ggEBALAakG48bgcTWHdwmVLHig0mkiRejxIVm3wbzrNSJcBruTq2zCYZ1rGfVxTYON8kJqvkXPmv
+kzWKhpEkvhubL+mx29XpXY0AsNIfgcm5xIV56yhXSvlMdqzGo3ciRwoACaF+ClNLxmXK9UTZD89B
+bVVGCG5AEvja0eCQ0GYsO5i9aSI5aTroab8Aew31PuWl/RGQWmjVy8+7P4wwkKKJNKCpxMYDlhfa
+WRp0zwUSbUCO0qEyeAYdZx6CLES4FGrDi/7D6G+ewWC+kbz1tL1XpF2Dcg3+IOlHrV6VWzz3rG39
+v9zFIncjvoQJFDGWhpqGqcmXvgH0Ze3SVcVF01T+bK0CAwEAATANBgkqhkiG9w0BAQUFAAOCAQEA
+AHmnSZ4imjNrIf9wxfQIcqHXEBoJ+oJtd59cw1Ur/YQY9pKXxoglqCQ54ZmlIf4GghlcZhslLO+m
+NdkQVwSmWMh6KLxVM18/xAkq8zyKbMbvQnTjFB7x45bgokwbjhivWqrB5LYHHCVN7k/8mKlS4eCK
+Ci6RGEmErjojr4QN2xV0qAqP6CcGANgpepsQJCzlWucMFKAh0x9Kl8fmiQodfyLXyrebYsVnLrMf
+jxE1b6dg4jKvv975tf5wreQSYZ7m//g3/+NnuDKkN/03HqhV7hTNi1fyctXk8I5Nwgyr+pT5LT2k
+YoEdncuy+GQGzE9yLOhC4HNfHQXpqp2tMPdRlw==</ds:X509Certificate>
+                </ds:X509Data>
+            </ds:KeyInfo>
+        </md:KeyDescriptor>
+        <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</md:NameIDFormat>
+        <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>
+        <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://balacomptest.oktapreview.com/app/salesforce-fedid/exk39sivhuytV2D8H0h7/sso/saml"/>
+        <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://balacomptest.oktapreview.com/app/salesforce-fedid/exk39sivhuytV2D8H0h7/sso/saml"/>
+    </md:IDPSSODescriptor>
+</md:EntityDescriptor>
 ~~~
