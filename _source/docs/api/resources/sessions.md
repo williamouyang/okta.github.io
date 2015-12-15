@@ -30,9 +30,51 @@ Okta provides a very rich [Authentication API](./authn.html) to validate a [user
 
 ~~~ json
 {
-    "id": "000najcYVnjRS2aZG50MpHL4Q",
-    "userId": "00ubgaSARVOQDIOXMORI",
-    "mfaActive": false
+  "id": "000najcYVnjRS2aZG50MpHL4Q",
+  "userId": "00ubgaSARVOQDIOXMORI",
+  "expiresAt": "2015-08-30T18:41:35.818Z",
+  "status": "ACTIVE",
+  "lastPasswordVerification": "2015-08-30T18:41:35.818Z",
+  "lastFactorVerification": "2015-08-30T18:41:35.818Z",
+  "amr": [
+    "pwd",
+    "otp",
+    "mfa"
+  ],
+  "idp": {
+    "id": "00oi5cpnylv792IcF0g3",
+    "type": "OKTA",
+  },
+  "mfaActive": true,
+  "_links": {
+    "self": {
+      "href": "https://your-domain.okta.com/api/v1/sessions/trsAua5UueNQ-queLdV4KAhog",
+      "hints": {
+        "allow": [
+          "GET",
+          "DELETE"
+        ]
+      }
+    },
+    "refresh": {
+      "href": "https://your-domain.okta.com/api/v1/sessions/trsAua5UueNQ-queLdV4KAhog/lifecycle/refresh",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "user": {
+      "name": "Isaac Brock",
+      "href": "https://your-domain.okta.com/api/v1/users/me",
+      "hints": {
+        "allow": [
+          "GET",
+          "POST"
+        ]
+      }
+    }
+  }
 }
 ~~~
 
@@ -40,13 +82,19 @@ Okta provides a very rich [Authentication API](./authn.html) to validate a [user
 
 Sessions have the following properties:
 
-|-----------+-----------------------------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+------------|
-| Property  | Description                                                                                   | DataType | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| --------- | --------------------------------------------------------------------------------------------- | -------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| id        | unique key for the session                                                                    | String   | FALSE    | TRUE   | TRUE     |           |           |            |
-| userId    | unique key for the [user](users.html#get-user-with-id)                                        | String   | FALSE    | TRUE   | TRUE     |           |           |            |
-| mfaActive | indicates whether the user has [enrolled a MFA factor](./factors.html#list-enrolled-factors)  | Boolean  | FALSE    | FALSE  | TRUE     |           |           |            |
-|-----------+-----------------------------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+------------|
+|--------------------------+-----------------------------------------------------------------------------------------------+-------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+| Property                 | Description                                                                                   | DataType                                  | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| ------------------------ | --------------------------------------------------------------------------------------------- | ----------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
+| id                       | unique key for the session                                                                    | String                                    | FALSE    | TRUE   | TRUE     |           |           |            |
+| userId                   | unique key for the [user](users.html#get-user-with-id)                                        | String                                    | FALSE    | TRUE   | TRUE     |           |           |            |
+| expiresAt                | timestamp when session expires                                                                | Date                                      | FALSE    | TRUE   | TRUE     |           |           |            |
+| status                   | current [status](#session-status) of the session                                              | `ACTIVE`, `MFA_REQUIRED`, or `MFA_ENROLL` | FALSE    | TRUE   | TRUE     |           |           |            |
+| lastPasswordVerification | timestamp when user last performed primary authentication (with password)                     | Date                                      | FALSE    | TRUE   | TRUE     |           |           |            |
+| lastFactorVerification   | timestamp when user last performed multi-factor authentication                                | Date                                      | TRUE     | TRUE   | TRUE     |           |           |            |
+| amr                      | authentication method reference                                                               | [AMR Object](#amr-object)                 | FALSE    | FALSE  | TRUE     |           |           |            |
+| idp                      | identity provider used to authenticate the user                                               | [IDP Object](#idp-object)                 | FALSE    | FALSE  | TRUE     |           |           |            |
+| mfaActive                | indicates whether the user has [enrolled a MFA factor](./factors.html#list-enrolled-factors)  | Boolean                                   | FALSE    | FALSE  | TRUE     |           |           |            |
+|--------------------------+-----------------------------------------------------------------------------------------------+-------------------------------------------+----------+--------+----------+-----------+-----------+------------|
 
 #### Optional Session Properties
 
@@ -60,6 +108,51 @@ The [Create Session](#create-session) operation can optionally return the follow
 |----------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
 > The `cookieTokenUrl` is deprecated as modern browsers block cookies set via embedding images from another origin (cross-domain)
+
+### Session Status
+
+The following values are defined for the status of a session:
+
+- `ACTIVE`: the session is established and fully validated 
+- `MFA_REQUIRED`: the session is established but requires second factor verification
+- `MFA_ENROLL`: the session is established but the user needs to enroll in a second factor
+
+### AMR Object
+
+The authentication methods reference ("AMR") specifies what authentication methods were used to establish the session. The value is a JSON array with one or more of the following values:
+
+|----------+-----------------------------------+---------------------------------------------------------------------------|
+| Value    | Description                       | Example                                                                   |
+| -------- | ----------------------------------|---------------------------------------------------------------------------|
+| `pwd`    | Password authentication           | Standard password-based login                                             |
+| `pop`    | Proof of posession of a key       | Okta Verify with Push                                                     |
+| `otp`    | One-time password                 | Okta Verify, Google Authenticator                                         |
+| `sms`    | SMS text message                  | SMS factor                                                                |
+| `kba`    | Knowlege-based authentication     | Security Question factor                                                  |
+| `mfa`    | Multiple factor authentication    | (This value is present whenever any MFA factor verification is performed) |
+|--------- +-----------------------------------+---------------------------------------------------------------------------|
+
+### IDP Object
+
+Specifies the identity provider used to authentication the user.
+
+|-------------+---------------------------------------------------------------+-----------+--------+----------+-----------+-----------+------------|
+| Property    | DataType                                                      | Nullable  | Unique | Readonly | MinLength | MaxLength | Validation |
+| ------------| ------------------------------------------------------------- | --------- | -------| -------- | --------- | --------- | ---------- |
+| id          | String                                                        | FALSE     | FALSE  | TRUE     |           |           |            |
+| type        | `OKTA`, `ACTIVE_DIRECTORY`, `LDAP`, `FEDERATION`, or `SOCIAL` | FALSE     | FALSE  | TRUE     |           |           |            |
+|-------------+---------------------------------------------------------------+-----------+--------+----------+-----------+-----------+------------|
+
+> The `id` will be the org id if the type is `OKTA`; otherwise it will be the IDP instance id.
+
+~~~json
+{
+  "idp": {
+    "id": "0oabhnUQFYHMBNVSVXMV",
+    "type": "ACTIVE_DIRECTORY",
+  }
+}
+~~~
 
 ## Session Operations
 
@@ -122,9 +215,49 @@ curl -v -X POST \
 
 ~~~ json
 {
-  "id": "000rWcxHV-lQUOzBhLJLYTl0Q",
-  "userId": "00uld5QRRGEMJSSQJCUB",
-  "mfaActive": false
+  "id": "000najcYVnjRS2aZG50MpHL4Q",
+  "userId": "00ubgaSARVOQDIOXMORI",
+  "expiresAt": "2015-08-30T18:41:35.818Z",
+  "status": "ACTIVE",
+  "lastPasswordVerification": "2015-08-30T18:41:35.818Z",
+  "lastFactorVerification": "2015-08-30T18:41:35.818Z",
+  "amr": [
+    "pwd"
+  ],
+  "idp": {
+    "id": "00oi5cpnylv792IcF0g3",
+    "type": "OKTA",
+  },
+  "mfaActive": false,
+  "_links": {
+    "self": {
+      "href": "https://your-domain.okta.com/api/v1/sessions/trsAua5UueNQ-queLdV4KAhog",
+      "hints": {
+        "allow": [
+          "GET",
+          "DELETE"
+        ]
+      }
+    },
+    "refresh": {
+      "href": "https://your-domain.okta.com/api/v1/sessions/trsAua5UueNQ-queLdV4KAhog/lifecycle/refresh",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "user": {
+      "name": "Isaac Brock",
+      "href": "https://your-domain.okta.com/api/v1/users/me",
+      "hints": {
+        "allow": [
+          "GET",
+          "POST"
+        ]
+      }
+    }
+  }
 }
 ~~~
 
@@ -178,9 +311,49 @@ curl -v -X PUT \
 
 ~~~ json
 {
-  "id": "000rWcxHV-lQUOzBhLJLYTl0Q",
-  "userId": "00uld5QRRGEMJSSQJCUB",
-  "mfaActive": false
+  "id": "000najcYVnjRS2aZG50MpHL4Q",
+  "userId": "00ubgaSARVOQDIOXMORI",
+  "expiresAt": "2015-08-30T18:41:35.818Z",
+  "status": "ACTIVE",
+  "lastPasswordVerification": "2015-08-30T18:41:35.818Z",
+  "lastFactorVerification": "2015-08-30T18:41:35.818Z",
+  "amr": [
+    "pwd"
+  ],
+  "idp": {
+    "id": "00oi5cpnylv792IcF0g3",
+    "type": "OKTA",
+  },
+  "mfaActive": false,
+  "_links": {
+    "self": {
+      "href": "https://your-domain.okta.com/api/v1/sessions/trsAua5UueNQ-queLdV4KAhog",
+      "hints": {
+        "allow": [
+          "GET",
+          "DELETE"
+        ]
+      }
+    },
+    "refresh": {
+      "href": "https://your-domain.okta.com/api/v1/sessions/trsAua5UueNQ-queLdV4KAhog/lifecycle/refresh",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "user": {
+      "name": "Isaac Brock",
+      "href": "https://your-domain.okta.com/api/v1/users/me",
+      "hints": {
+        "allow": [
+          "GET",
+          "POST"
+        ]
+      }
+    }
+  }
 }
 ~~~
 
