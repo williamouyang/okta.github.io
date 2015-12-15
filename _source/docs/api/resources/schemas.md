@@ -108,7 +108,7 @@ The [User Model](./users.html#user-model) schema is defined using [JSON Schema D
                           "action": "READ_WRITE"
                       }
                   ]
-              }              
+              }
             },
             "required": []
         }
@@ -341,7 +341,7 @@ A given schema property can be assigned a permission for a principal that restri
 ### Get User Schema
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /meta/schemas/users/default</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /meta/schemas/user/default</span>
 
 Fetches the default schema for a User
 
@@ -470,7 +470,7 @@ curl -v -X GET \
 ### Add Property to User Profile Schema
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">POST</span> /meta/schemas/users/default</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">POST</span> /meta/schemas/user/default</span>
 
 Adds one or more [custom user profile properties](#user-profile-schema-property) to the user schema
 
@@ -617,7 +617,7 @@ curl -v -X POST \
                           "action": "READ_WRITE"
                       }
                   ]
-              }              
+              }
             },
             "required": []
         }
@@ -641,7 +641,7 @@ curl -v -X POST \
 ### Update User Profile Schema Property
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">POST</span> /meta/schemas/users/default</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">POST</span> /meta/schemas/user/default</span>
 
 Updates one or more [custom user profile properties](#user-profile-schema-property) in the schema or a [permission](#schema-property-permission-object) for a [user profile base property](#user-profile-base-subschema).
 
@@ -788,7 +788,7 @@ curl -v -X POST \
                           "action": "READ_ONLY"
                       }
                   ]
-              }              
+              }
             },
             "required": []
         }
@@ -812,7 +812,7 @@ curl -v -X POST \
 ### Remove Property from User Profile Schema
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">POST</span> /meta/schemas/users/default</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">POST</span> /meta/schemas/user/default</span>
 
 Removes one or more [custom user profile properties](#user-profile-schema-property) from the user schema
 
@@ -821,7 +821,7 @@ Removes one or more [custom user profile properties](#user-profile-schema-proper
 
 Parameter   | Description                                                    | Param Type | DataType                                                       | Required | Default
 ----------- | -------------------------------------------------------------- | ---------- | -------------------------------------------------------------- | -------- | -------
-definitions | Subschema with one or more custom profile properties to remove | Body       | [User Profile Custom Subschema](user-profile-custom-subschema) | TRUE     |       
+definitions | Subschema with one or more custom profile properties to remove | Body       | [User Profile Custom Subschema](user-profile-custom-subschema) | TRUE     |
 
 > Properties must be explicitly set to `null` to be removed from schema, otherwise the `POST` will be interpreted as a partial update.
 
