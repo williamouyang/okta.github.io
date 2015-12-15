@@ -84,9 +84,9 @@
    * _common.scss
    ------------------------------------------------------------ */
   .tabber > ul {
-    border-left: 1px solid #c1c1c1; }
+    border-left: 1px solid #E6E6E8; }
   .tabber li {
-    border-right: 1px solid #c1c1c1;
+    border-right: 1px solid #E6E6E8;
     float: left;
     width: 20%; }
     .tabber li + li {

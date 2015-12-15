@@ -33,18 +33,30 @@
   margin-right: auto;
   max-width: 900px; }
 
+#mfa h2 {
+  color: white; }
 #mfa .row {
   margin-left: auto;
   margin-right: auto;
-  max-width: 900px; }
+  max-width: 900px;
+  color: white; }
 #mfa .col-1-2 + .col-1-2 {
-  border-top: 1px solid #b0b7ba;
+  border-top: 1px solid #649ab5;
   padding-top: 30px; }
 
 #sso .wrap {
   margin-left: auto;
   margin-right: auto;
   max-width: 800px; }
+
+#oan h2 {
+  color: #007DC1; }
+#oan h3 {
+  color: #007DC1; }
+#oan .row {
+  color: #007DC1; }
+#oan p {
+  color: #5d5d5d; }
 
 #logs {
   background-image: url(/assets/images/section-bg--features-logs.jpg);
