@@ -23,7 +23,7 @@ article {
     content: "";
     display: table; }
   article + article {
-    border-top: 1px solid #c1c1c1;
+    border-top: 1px solid #E6E6E8;
     margin-top: 30px;
     padding-top: 30px; }
   article .thumbnail {
@@ -47,14 +47,14 @@ article {
     height: 100%; }
 
 .sidebar blockquote {
-  border-left: 4px solid #c1c1c1;
+  border-left: 4px solid #E6E6E8;
   margin-bottom: 48px;
   padding-left: 30px; }
 .sidebar ul li {
   padding-left: 36px;
   position: relative; }
   .sidebar ul li:before {
-    background: #7aa82d;
+    background: #4cbf9c;
     border-radius: 3px;
     content: "";
     display: block;

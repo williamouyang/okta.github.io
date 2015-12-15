@@ -1,5 +1,6 @@
 .site-footer {
-	background: $colorGreyDark;
+	background: $colorGreyLighter;
+	border-top: 2px solid $oktaBlue;
 	padding: 30px 0;
 	position: relative;
 	text-align: center;
@@ -27,12 +28,16 @@
 	}
 
 	a {
-		@include scaleDownFontSizeBy(0.4);
-		color: $colorGreyLight;
+		@include scaleUpFontSizeBy(1.8);
+		color: $oktaBlue;
 		text-decoration: none;
 
 		&:active, &:focus, &:hover {
-			color: #fff;
+			color: #oktaBlueHighlight;
 		}
 	}
+}
+
+.icon i {
+	font-size: 48px;
 }

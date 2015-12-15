@@ -34,7 +34,7 @@ p, ul, ol, blockquote {
 }
 
 h1, h2, h3, h4, h5, h6 {
-	color: #353435;
+	color: $oktaBlue;
 	font-weight: 300;
 	line-height: 1.1em;
 	margin: ($lineHeight * $fontSize * 2) 0 ($lineHeight * $fontSize * 1/2);
@@ -96,10 +96,9 @@ h6, .h6 {
 
 a {
 	@include defaultTransition;
-	color: $colorBlue;
-
+	color: $oktaGreen;
 	&:active, &:focus, &:hover {
-		color: mix($colorBlue, #fff, 70%);
+		color: $oktaHighlightGreen;
 	}
 }
 

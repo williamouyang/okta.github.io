@@ -43,7 +43,7 @@ Okta provides a very rich [Authentication API](./authn.html) to validate a [user
   ],
   "idp": {
     "id": "00oi5cpnylv792IcF0g3",
-    "type": "OKTA",
+    "type": "OKTA"
   },
   "mfaActive": true,
   "_links": {
@@ -113,7 +113,7 @@ The [Create Session](#create-session) operation can optionally return the follow
 
 The following values are defined for the status of a session:
 
-- `ACTIVE`: the session is established and fully validated 
+- `ACTIVE`: the session is established and fully validated
 - `MFA_REQUIRED`: the session is established but requires second factor verification
 - `MFA_ENROLL`: the session is established but the user needs to enroll in a second factor
 
@@ -149,7 +149,7 @@ Specifies the identity provider used to authentication the user.
 {
   "idp": {
     "id": "0oabhnUQFYHMBNVSVXMV",
-    "type": "ACTIVE_DIRECTORY",
+    "type": "ACTIVE_DIRECTORY"
   }
 }
 ~~~
@@ -226,7 +226,7 @@ curl -v -X POST \
   ],
   "idp": {
     "id": "00oi5cpnylv792IcF0g3",
-    "type": "OKTA",
+    "type": "OKTA"
   },
   "mfaActive": false,
   "_links": {
@@ -322,7 +322,7 @@ curl -v -X PUT \
   ],
   "idp": {
     "id": "00oi5cpnylv792IcF0g3",
-    "type": "OKTA",
+    "type": "OKTA"
   },
   "mfaActive": false,
   "_links": {
