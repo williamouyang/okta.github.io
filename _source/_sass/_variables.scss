@@ -15,23 +15,28 @@ $breakpointLarge:		1200px;
 /*
  * Colors
  ------------------------------------------------------------ */
-$colorBlue:				#016aab;
-$colorBlueDark:			#004169;
-$colorBlueLight:		#dfedf3;
-$colorGreen:			#7aa82d;
+$colorBlue:				#007DC1;
+$colorBlueDark:			#007DC1;
+$colorBlueLight:		#46b3e9;
+$colorGreen:			#4cbf9c;
 $colorGreenDark:		#43712f;
 $colorGrey:				#818081;
 $colorGreyDark:			#353435;
-$colorGreyLight:		#c1c1c1;
-$colorGreyLighter:		#f1f1f1;
+$colorGreyLight:		#E6E6E8;
+$colorGreyLighter:		#fafafa;
 
 $colorBlack:			#000;
 $colorWhite:			#fff;
 $colorCyan: 			#0acacc;
 $colorOrange:			#fc5f35;
 
-$oktaBlue:				#0069aa;
-$oktaDarkBlue:			#012134;
+
+$oktaHighlightBlue:				#0095e5;
+$oktaBlue:			#007dc1;
+$oktaGreen: #4cbf9c;
+$oktaHighlightGreen: #5ce5bc;
+
+
 
 
 /*
@@ -58,11 +63,14 @@ $mobileFontSize:		14px;
 $intermediaryFontSize:	15px;
 $desktopFontSize:		$fontSize;
 
-$fontColor:				#666;
-$fontFamily:			"proxima-nova", "ProximaNova Light", Helvetica, Arial, sans-serif;
+$fontColor:				#5d5d5d;
+$fontFamily:			proxima-nova, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+$navFontFamily: museo-sans, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 $lineHeight:			1.5;
 $sizingRatio:			1.225;
 $sideBarWidth:			270px;
+
+
 
 
 // pre-calculated the powers used to remove compass dependency

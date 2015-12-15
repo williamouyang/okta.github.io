@@ -5,13 +5,12 @@
 
 .logo-placard {
 	background: #fff;
-	border-bottom: 2px solid $colorGreyLight;
 	display: block;
 	height: 120px;
 	line-height: 120px;
 	padding: 30px;
 	text-align: center;
-	
+
 	img {
 		display: inline-block;
 		max-height: 100%;
@@ -22,7 +21,6 @@
 
 [class*=button--] {
 	background: $colorGreen;
-	border: 1px solid $colorGreenDark;
 	border-radius: 3px;
 	box-shadow: none;
 	box-sizing: border-box;
@@ -38,7 +36,7 @@
 	text-shadow: none;
 	text-transform: uppercase;
 	transition: 0.2s all;
-	
+
 	&:active, &:focus, &:hover {
 		background: mix($colorGreen, $colorWhite, 90%);
 		border-color: mix($colorGreenDark, $colorWhite, 90%);
@@ -61,21 +59,21 @@
 	border: solid $colorGreyLight;
 	border-width: 1px 0;
 	margin-bottom: 40px;
-	
+
 	> ul {
 		@extend .wrap;
 		box-sizing: border-box;
 		padding: 0;
 	}
-	
+
 	li {
 		box-sizing: border-box;
-		
+
 		+ li {
 			border-top: 1px solid $colorGreyLighter;
 		}
 	}
-	
+
 	a {
 		border-bottom: 4px solid transparent;
 		color: #000;
@@ -83,24 +81,25 @@
 		padding: 12px;
 		text-decoration: none;
 		vertical-align: middle;
-		
+
 		&:active, &:focus, &:hover {
 			border-bottom-color: $colorGreyLight;
 		}
-		
+
 		&.active {
+			color: $colorBlue;
 			border-bottom-color: $colorBlue;
-			
+
 			i {
 				background-position: bottom;
 			}
 		}
-		
+
 		i, span {
 			display: inline-block;
 			vertical-align: middle;
 		}
-		
+
 		i {
 			border: solid #fff;
 			border-width: 11px 0;
@@ -117,6 +116,10 @@
 		position: relative;
 		width: 100%;
 	}
+
+	h2 {
+		color: $colorBlue;
+	}
 }
 
 .btn {
@@ -129,13 +132,13 @@
 	display: inline-block;
 	padding: .4em .8em;
 	text-decoration: none;
-	
+
 	&:active,
 	&:focus,
 	&:hover {
 		background: none;
-		border-color: $colorBlue;
-		color: $colorBlueDark;
+		border-color: $oktaGreen;
+		color: $oktaGreen;
 	}
 }
 
@@ -153,7 +156,7 @@
 	transition: none;
 	white-space: nowrap;
 	width: 53px;
-	
+
 	&:active, &:focus, &:hover {
 		background-position: bottom;
 	}

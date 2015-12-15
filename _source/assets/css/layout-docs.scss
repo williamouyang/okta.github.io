@@ -20,7 +20,7 @@ body {
 }
 
 .section--with-sidebar {
-	border-left: $sideBarWidth solid $colorBlueDark;
+	border-left: $sideBarWidth solid $oktaBlue;
 	position: relative;
 
 	.sticky-nav--sidebar {
@@ -28,11 +28,12 @@ body {
 		position: fixed;
 		top: $headerHeight;
 		width: $sideBarWidth;
-		background-color: $colorBlueDark;
+		//background-color: white;
 		z-index: 100;
 		height: 100%;
 		overflow-y: auto;
 		overflow-x: hidden;
+		background: url('/assets/img/okta-aura-bg.png') right top no-repeat;
 		ul {
 			margin-top: 0;
 		}
@@ -52,8 +53,8 @@ body {
 	}
 
 	.sticky-nav--top {
-		background: $colorGreyLighter;
-		border: solid $colorGreyLight;
+		background: white;
+		border: 1px solid $colorGreyLight;
 		border-width: 0 0 1px 1px;
 		display: flex;
 		height: $stickyNavHeight;
@@ -80,15 +81,13 @@ body {
 			line-height: $stickyNavHeight;
 			position: relative;
 			text-decoration: none;
+			color: $colorGrey;
 
 			&.on,
 			&:active,
 			&:focus,
 			&:hover {
-				color: $colorBlack;
-
 				&:after {
-					background: $colorGrey;
 					bottom: 0;
 					content: "";
 					display: block;
@@ -96,6 +95,20 @@ body {
 					left: 0;
 					right: 0;
 					position: absolute;
+				}
+			}
+			&:hover {
+				color: $colorGrey;
+				&:after {
+					background: $colorGrey;
+				}
+			}
+			&.on,
+			&:active,
+			&:focus {
+				color: $oktaGreen;
+				&:after {
+					background: $oktaGreen;
 				}
 			}
 		}
@@ -128,6 +141,7 @@ body {
 .docs-body {
 	overflow: hidden;
 	padding: 70px 40px;
+	max-width: 1400px;
 	// padding-bottom: $sideBarWidth;
 
 	header {
@@ -135,11 +149,17 @@ body {
 		margin-bottom: 2em;
 
 		h1 {
+			color: $fontColor;
 			padding-bottom: 0;
 			border: 0 none;
 			display: inline-block;
 			&:first-child {
 				margin-top: 10px;
+			}
+			&:before {
+				font-family: fontawesome;
+				margin-right: 8px;
+				content: '\f12e';
 			}
 		}
 
@@ -157,54 +177,42 @@ body {
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		font-weight: 500;
-		color: #000;
-	}
-	h1, h2, h3 {
-		margin-top: 20px;
-		margin-bottom: 10px;
+		font-weight: 300;
+		color: $oktaBlue;
+		margin-top: 30px;
+		margin-bottom: 15px;
 	}
 
 	h1 {
-		@include scaleUpFontSizeBy(4);
-		border-bottom: 1px solid $colorGrey;
-		color: $colorGreyDark;
+		font-size: 32px;
+		border-bottom: 1px solid $oktaBlue;
 		padding-bottom: .5em;
 	}
 
 	h2 {
-		@include scaleUpFontSizeBy(2);
-		font-size: 22px;
-		color: $colorGreyDark;
+		font-size: 28px;
 		margin: 2em 0 1em;
-		border-bottom: 1px solid mix($colorBlueDark, $colorGreyDark, 25%);
-		border-bottom: 1px solid #567;
+		border-bottom: 1px solid $oktaBlue;
 		padding-bottom: .5em;
 		&:first-child {
 			margin: 48px 0 24px;
 		}
 	}
 
-	h3, h4, h5, h6 {
-		margin-top: 25px;
-		color: mix($colorBlueDark, $colorGreyDark, 50%);
-	}
-
 	h3 {
-		@include scaleUpFontSizeBy(0.8);
-		font-size: 18px;
-		margin-top: 25px;
-		margin-bottom: 10px;
+		font-size: 26px;
 	}
 
 	h4 {
-		@include scaleUpFontSizeBy(0.4);
-		font-size: 16px;
-		margin-bottom: 10px;
+		font-size: 24px;
 	}
 
-	h5, h6 {
-		font-size: 16px;
+	h5 {
+		font-size: 22px;
+	}
+
+	h5 {
+		font-size: 20px;
 	}
 
 	p {
@@ -217,8 +225,8 @@ body {
 
 	blockquote {
 		margin: 20px 0;
-		border-left: 7px solid #fed;
-		background: #fffaf0;
+		border-left: 7px solid #46B3E9;
+		background: #F7FBFD;
 		padding: 20px;
 		p {
 			color: $colorBlack;
@@ -279,8 +287,8 @@ body {
 		font-weight: bold;
 		vertical-align: top;
 		word-break: normal;
-		background: #e1eff6;
-		color: #1b3b4f;
+		background: $colorBlueLight;
+    color: white;
 	}
 
 	tr {
@@ -306,13 +314,13 @@ body {
 		white-space: normal;
 		padding: 0;
 		background: transparent;
-		color: #000;
+		color: $oktaBlue;
 		font-size: 12px;
 	}
 
 	blockquote code,
 	table code {
-		color: #FF530D;
+		color: $oktaBlue;
 	}
 
 	pre {
@@ -323,7 +331,7 @@ body {
 		color: #333333;
 		word-break: break-all;
 		word-wrap: break-word;
-		background-color: #f5f5f5;
+		background-color: $colorGreyLighter;
 		border-radius: 4px;
 		white-space: pre;
 		overflow: auto;
@@ -365,7 +373,8 @@ h6:hover .header-link {
 }
 
 .api-operation {
-	font-size: 20px;
+	color: $fontColor!important;
+	font-weight: 500!important;
 	&:before {
 		content: '\f12e';
 	}
@@ -373,6 +382,16 @@ h6:hover .header-link {
 
 .api-uri-template em {
 	color: #090;
+}
+
+.api-request {
+	color: $fontColor!important;
+	font-weight: 500!important;
+}
+
+.api-response {
+	color: $fontColor!important;
+	font-weight: 500!important;
 }
 
 .api-request-params:before {
@@ -392,14 +411,15 @@ h6:hover .header-link {
 }
 
 .api-label {
-	color:#ffffff;
-	font-weight:500;
-	padding:.3em .6em;
-	text-align:center;
-	white-space:nowrap;
-	vertical-align:baseline;
-	border-radius:.25em;
-	background:#456
+	color: white;
+	font-weight: 500;
+	padding: 3px 6px;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: baseline;
+	border-radius: .25em;
+	background: $oktaGreen;
+	display: inline-block;
 }
 
 .api-label-small {
@@ -408,13 +428,11 @@ h6:hover .header-link {
 
 .api-uri-template {
 	display:inline-block;
-	padding:.35em .6em .3em 0;
-	margin:10px 0!important;
 	border-top:1px solid #ccc;
 	border-right:1px solid #ccc;
 	border-bottom:1px solid #ccc;
 	border-radius:.25em;
-	line-height:1.1;
+  padding-right: 10px;
 	background:#f5f5f5;
 	em {
 		font-weight:bold
@@ -456,10 +474,6 @@ h6:hover .header-link {
 
 .api-uri-delete .api-label {
 	background:#d9534f
-}
-
-.api-uri-template-cors {
-	margin-top:10px
 }
 
 .panel-default {
@@ -640,14 +654,14 @@ h6:hover .header-link {
 #sidebar-wrapper {
 	overflow: auto;
 	h2 {
-		color: #7aa633;
-		font-size: 15px;
-		padding: 8px 10px 8px 30px;
-		text-transform: uppercase;
-		font-weight: 600;
-		margin: 20px 0 0 0;
+		font-size: 22px;
+		color: white;
+		font-weight: 500;
+		margin-bottom: 10px;
+		margin-left: 25px;
+
 		&:first-child {
-			margin: 75px 0 0 0;
+			margin-top: 75px;
 		}
 	}
 }
@@ -665,19 +679,10 @@ h6:hover .header-link {
 	top: 0;
 	bottom: 0;
 
-	h2 {
-		color: #7aa633;
-		font-size: 18px;
-		font-weight: 500;
-		cursor: pointer;
-		margin-bottom: 5px;
-	}
-
 	ul {
 		padding-left: 0;
 		&.closed {
 			display: none;
-			background-color: $oktaDarkBlue !important;
 		}
 		li {
 			list-style: none;
@@ -690,11 +695,12 @@ h6:hover .header-link {
 			display: block;
 			text-decoration: none;
 			color: white;
+			font-weight: 500;
 			padding: 4px 10px 4px 30px;
 			&:hover {
 				text-decoration: none;
-				color: #fff;
-				background: #00131f
+				color: $oktaBlue;
+				background: white;
 			}
 			&:active,
 			&:focus {
@@ -706,13 +712,11 @@ h6:hover .header-link {
 			a {
 				display:block;
 				text-decoration:none;
-				color:#cccccc!important;
 				padding:4px 10px 4px 55px!important
 			}
 			&.active {
 				a {
-					color:white!important;
-					background:#0c87c9!important
+
 				}
 			}
 		}
@@ -735,30 +739,27 @@ h6:hover .header-link {
 		}
 
 		&.active {
-			background:#0c87c9;
-			> a:hover {
-				background: #0C87C9;
+			> a {
 				color: white;
+				background-color: $colorBlueLight;
 			}
 		}
 	}
 }
 
 #gen-toc-container {
-	background-color: $oktaDarkBlue;
 	.nav-title {
-		background-color: $oktaDarkBlue;
+		background-color: $oktaBlue;
 	}
 	.sidebar-nav li a {
-		color:white;
-		font-size:16px;
-		padding-left:40px
+		padding-left: 40px
 	}
 }
 
 
 #toc_current_doc {
-	background-color: #00131f;
+	background-color: white;
+	color: $oktaBlue;
 }
 
 .excerpt {
@@ -820,7 +821,6 @@ h6:hover .header-link {
 
 	/* -------------------------- PYGMENTS */
 
-	/*
 	.hll  { background-color: #ffffcc; }
 	.c    { color: #999988; font-style: italic; } /* Comment */
 	.err  { color: #a61717; background-color: #e3d2d2; } /* Error */
@@ -840,12 +840,13 @@ h6:hover .header-link {
 	.gs   { }                 /* Generic.Strong */
 	.gu   { color: #aaaaaa; } /* Generic.Subheading */
 	.gt   { color: #aa0000; } /* Generic.Traceback */
-	.kc   { color: #36c;    } /* Keyword.Constant */
-	.kd   { color: #000000; } /* Keyword.Declaration */
-	.kn   { color: #000000; } /* Keyword.Namespace */
-	.kp   { color: #000000; } /* Keyword.Pseudo */
-	.kr   { color: #000000; } /* Keyword.Reserved */
-	.kt   { color: #445588; } /* Keyword.Type */
+	.k    { color: #FF7640  } /* Keyword */
+	.kc   { color: #FF7640  } /* Keyword.Constant */
+	.kd   { color: #FF7640  } /* Keyword.Declaration */
+	.kn   { color: #FF7640  } /* Keyword.Namespace */
+	.kp   { color: #FF7640  } /* Keyword.Pseudo */
+	.kr   { color: #FF7640  } /* Keyword.Reserved */
+	.kt   { color: #FF7640  } /* Keyword.Type */
 	.m    { color: #FF7640; } /* Literal.Number */
 	.s    { color: #1C6297; } /* Literal.String */
 	.na   { color: #5691BF; } /* Name.Attribute */
@@ -855,12 +856,13 @@ h6:hover .header-link {
 	.nd   { color: #3c5d5d; } /* Name.Decorator */
 	.ni   { color: #800080; } /* Name.Entity */
 	.ne   { color: #FFB149; } /* Name.Exception */
-	.nf   { color: #FF7640; } /* Name.Function */
-	.nl   { color: #0C87C9; } /* Name.Label */
+	.nf   { color: #0086B3; } /* Name.Function */
+	.nl   { color: $colorBlueLight; } /* Name.Label */
 	.nn   { color: #555555; } /* Name.Namespace */
 	.nt   { color: #456;    } /* Name.Tag */
 	.nv   { color: #FFB149; } /* Name.Variable */
 	.ow   { color: #000000; } /* Operator.Word */
+	.p    { color: #456; }
 	.w    { color: #bbbbbb; } /* Text.Whitespace */
 	.mf   { color: #009999; } /* Literal.Number.Float */
 	.mh   { color: #009999; } /* Literal.Number.Hex */
@@ -869,13 +871,13 @@ h6:hover .header-link {
 	.sb   { color: #d01040; } /* Literal.String.Backtick */
 	.sc   { color: #d01040; } /* Literal.String.Char */
 	.sd   { color: #d01040; } /* Literal.String.Doc */
-	.s2   { color: #0C87C9; } /* Literal.String.Double */
-	.se   { color: #0C87C9; } /* Literal.String.Escape */
-	.sh   { color: #0C87C9; } /* Literal.String.Heredoc */
+	.s2   { color: $colorBlueLight; } /* Literal.String.Double */
+	.se   { color: $colorBlueLight; } /* Literal.String.Escape */
+	.sh   { color: $colorBlueLight; } /* Literal.String.Heredoc */
 	.si   { color: #d01040; } /* Literal.String.Interpol */
 	.sx   { color: #d01040; } /* Literal.String.Other */
 	.sr   { color: #009926; } /* Literal.String.Regex */
-	.s1   { color: #399;    } /* Literal.String.Single */
+	.s1   { color: #40BF99; } /* Literal.String.Single */
 	.ss   { color: #990073; } /* Literal.String.Symbol */
 	.bp   { color: #999999; } /* Name.Builtin.Pseudo */
 	.vc   { color: #008080; } /* Name.Variable.Class */
@@ -1032,19 +1034,17 @@ h6:hover .header-link {
 }
 
 .toggle-menu {
-	color: white;
 	text-decoration: none;
 	position: absolute;
 	right: 0;
-	background-color: $oktaDarkBlue;
 	border-bottom: solid $colorGreyLight;
 	border-width: 0 0 1px 1px;
 	cursor: pointer;
 	width: $sideBarWidth;
 	text-align: left;
-	color: white;
+	color: $oktaGreen;
 	&:hover {
-		color: $colorBlue;
+		color: $oktaHighlightGreen;
 	}
 	&:before {
 		text-align: center;
@@ -1066,6 +1066,8 @@ body {
 	&.toggled {
 		.toggle-menu {
 			text-align: right;
+			background-color: $oktaBlue;
+			color: $oktaGreen;
 			&:before {
 				content: "\003009";
 				left: 10px;
@@ -1093,7 +1095,6 @@ body {
 		}
 		.section--with-sidebar .sticky-nav--sidebar {
 			width: 60px;
-			background-color: white;
 			height: 60px;
 			overflow: hidden;
 		}
