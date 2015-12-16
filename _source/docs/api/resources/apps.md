@@ -3583,6 +3583,8 @@ curl -v -X DELETE \
 
 Generates a new X.509 certificate for an application key credential
 
+> To update application with the newly generated key credential, see [Update Key Credential](#update-key-credential-for-application)
+
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
