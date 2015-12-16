@@ -258,15 +258,15 @@ Each application defines 1 or more appLinks that can be published. AppLinks can 
 
 Specifies credentials and scheme for the application's `signOnMode`.
 
-|------------------+----------------------------------------------------------------------------------------------------------------+-------------------------------------------------------+----------+-----------------+-----------+-----------+------------|
-| Property         | Description                                                                                                    | DataType                                              | Nullable | Default         | MinLength | MaxLength | Validation |
-| ---------------- | -------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- | -------- | --------------- | --------- | --------- | ---------- |
-| scheme           | Determines how credentials are managed for the `signOnMode`                                                    | [Authentication Scheme](#authentication-schemes)      | TRUE     |                 |           |           |            |
-| userNameTemplate | Template used to generate a user’s username when the application is assigned via a group or directly to a user | [UserName Template Object](#username-template-object) | TRUE     | *Okta UserName* |           |           |            |
-| signing          | Contains app certificate information                                                                           | [Signing Object](#signing-object)                     | TRUE     |                 |           |           |            |
-| userName         | Shared username for app                                                                                        | String                                                | TRUE     |                 | 1         | 100       |            |
-| password         | Shared password for app                                                                                        | [Password Object](#password-object)                   | TRUE     |                 |           |           |            |
-|------------------+----------------------------------------------------------------------------------------------------------------+-------------------------------------------------------+----------+-----------------+-----------+-----------+------------|
+|------------------+----------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+----------+-----------------+-----------+-----------+------------|
+| Property         | Description                                                                                                    | DataType                                                  | Nullable | Default         | MinLength | MaxLength | Validation |
+| ---------------- | -------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- | -------- | --------------- | --------- | --------- | ---------- |
+| scheme           | Determines how credentials are managed for the `signOnMode`                                                    | [Authentication Scheme](#authentication-schemes)          | TRUE     |                 |           |           |            |
+| userNameTemplate | Template used to generate a user’s username when the application is assigned via a group or directly to a user | [UserName Template Object](#username-template-object)     | TRUE     | *Okta UserName* |           |           |            |
+| signing          | Signing credential for the `signOnMode`                                                                        | [Signing Credential Object](#signing-credential-object)   | False    |                 |           |           |            |
+| userName         | Shared username for app                                                                                        | String                                                    | TRUE     |                 | 1         | 100       |            |
+| password         | Shared password for app                                                                                        | [Password Object](#password-object)                       | TRUE     |                 |           |           |            |
+|------------------+----------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+----------+-----------------+-----------+-----------+------------|
 
 ~~~json
 {
@@ -324,14 +324,14 @@ Specifies the template used to generate a user's username when the application i
 }
 ~~~
 
-#### Signing Object
-Shows id of app certificate that is used for SSO signing and SAML assertion validation
+#### Signing Credential Object
+Determines the [key](#application-key-credential-model) used for signing assertions for the `signOnMode`
 
-|------------+-----------------------------------------+----------------------------------+----------+-------------------+-----------+-----------+------------|
-| Property   | Description                             | DataType                         | Nullable | Default           | MinLength | MaxLength | Validation |
-| ---------- | --------------------------------------- | -------------------------------- | -------- | ----------------- | --------- | ----------| ---------- |
-| kid        | app certificate id                      | String                           | TRUE     |                   |           |           |            |
-|------------+-----------------------------------------+----------------------------------+----------+-------------------+-----------+-----------+------------|
+|------------+---------------------------------------------------------------------------------------------+----------------------------------+----------+-------------------+-----------+-----------+------------|
+| Property   | Description                                                                                 | DataType                         | Nullable | Default           | MinLength | MaxLength | Validation |
+| ---------- | ------------------------------------------------------------------------------------------- | -------------------------------- | -------- | ----------------- | --------- | ----------| ---------- |
+| kid        | Reference for key credential in the [app's key store](#application-key-store-operations)    | String                           | FALSE    |                   |           |           |            |
+|------------+---------------------------------------------------------------------------------------------+----------------------------------+----------+-------------------+-----------+-----------+------------|
 
 > You need to enable `KEY_ROLLOVER` feature to view `kid`, contact customer support for more information
 
@@ -2501,6 +2501,148 @@ curl -v -X PUT \
 }
 ~~~
 
+#### Update Key Credential for Application
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /apps/*:aid*</span>
+
+Update [application key credential](#application-key-credential-model) by `kid`
+
+> You need to enable `KEY_ROLLOVER` feature to perform this operation, it is advised to contact Customer Support before enabling this feature.
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter     | Description                                                             | Param Type | DataType                                      | Required | Default
+------------- | ----------------------------------------------------------------------- | ---------- | --------------------------------------------- | -------- | -------
+aid           | unique key of [Application](#application-model)                         | URL        | String                                        | TRUE     |
+app           | app with new key credential kid                                         | Body       | [Application](#application-model)             | FALSE    |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+[Application](#application-model) with updated `kid`.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X PUT \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "name": "zendesk",
+  "label": "Zendesk",
+  "signOnMode": "SAML_2_0",
+  "credentials": {
+    "userNameTemplate": {
+      "template": "${source.login}",
+      "type": "BUILT_IN"
+    },
+    "signing": {
+      "kid": "akmip6HgvTMB1TcKU0g3"
+    }
+  }
+}' "https://${org}.okta.com/api/v1/apps/0oainmLkOL329Jcju0g3"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "id": "0oainmLkOL329Jcju0g3",
+  "name": "zendesk",
+  "label": "Zendesk",
+  "status": "ACTIVE",
+  "lastUpdated": "2015-12-16T00:00:44.000Z",
+  "created": "2015-12-14T18:18:48.000Z",
+  "accessibility": {
+    "selfService": false,
+    "errorRedirectUrl": null,
+    "loginRedirectUrl": null
+  },
+  "licensing": {
+    "seatCount": 0
+  },
+  "visibility": {
+    "autoSubmitToolbar": true,
+    "hide": {
+      "iOS": false,
+      "web": false
+    },
+    "appLinks": {
+      "login": true
+    }
+  },
+  "features": [],
+  "signOnMode": "SAML_2_0",
+  "credentials": {
+    "userNameTemplate": {
+      "template": "${source.login}",
+      "type": "BUILT_IN"
+    },
+    "signing": {
+      "kid": "akmip6HgvTMB1TcKU0g3"
+    }
+  },
+  "settings": {
+    "app": {
+      "companySubDomain": "aaa",
+      "authToken": null
+    },
+    "notifications": {
+      "vpn": {
+        "network": {
+          "connection": "DISABLED"
+        },
+        "message": null,
+        "helpUrl": null
+      }
+    },
+    "signOn": {
+      "defaultRelayState": null
+    }
+  },
+  "_links": {
+    "logo": [
+      {
+        "name": "medium",
+        "href": "http://rain.okta1.com:1802/img/logos/zendesk.png",
+        "type": "image/png"
+      }
+    ],
+    "appLinks": [
+      {
+        "name": "login",
+        "href": "http://rain.okta1.com:1802/home/zendesk/0oainmLkOL329Jcju0g3/120",
+        "type": "text/html"
+      }
+    ],
+    "help": {
+      "href": "http://rain-admin.okta1.com:1802/app/zendesk/0oainmLkOL329Jcju0g3/setup/help/SAML_2_0/external-doc",
+      "type": "text/html"
+    },
+    "users": {
+      "href": "http://rain.okta1.com:1802/api/v1/apps/0oainmLkOL329Jcju0g3/users"
+    },
+    "deactivate": {
+      "href": "http://rain.okta1.com:1802/api/v1/apps/0oainmLkOL329Jcju0g3/lifecycle/deactivate"
+    },
+    "groups": {
+      "href": "http://rain.okta1.com:1802/api/v1/apps/0oainmLkOL329Jcju0g3/groups"
+    },
+    "metadata": {
+      "href": "http://rain.okta1.com:1802/api/v1/apps/0oainmLkOL329Jcju0g3/sso/saml/metadata",
+      "type": "application/xml"
+    }
+  }
+}
+~~~
+
+
+
 ### Delete Application
 {:.api .api-operation}
 
@@ -3395,9 +3537,11 @@ curl -v -X DELETE \
 {}
 ~~~
 
-## Application Certificate Model
+## Application Key Credential Model
 
-The application certificate model represents an application certificate in [JSON Web Key](https://tools.ietf.org/html/rfc7517) format.
+The application key credential model defines a [JSON Web Key](https://tools.ietf.org/html/rfc7517) for a signature or encryption credential for an application.
+
+> Currently only the X.509 JWK format is supported for applications with the `SAML_2_0` sign-on mode.
 
 ### Example
 
@@ -3415,43 +3559,43 @@ The application certificate model represents an application certificate in [JSON
 }
 ~~~
 
-### Application Certificate Properties
+### Application Key Credential (Certificate) Properties
 
 |------------------+--------------------------------------------------------------+-----------------------------------------------------------------------------|----------|--------|----------|-----------|-----------+------------|
 | Property         | Description                                                  | DataType                                                                    | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
 | ---------------- | ------------------------------------------------------------ | --------------------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| created          | timestamp when app certificate was created                   | Date                                                                        | FALSE    | FALSE  | TRUE     |           |           |            |
-| expiresAt        | timestamp when app certificate expires                       | Date                                                                        | FALSE    | FALSE  | TRUE     |           |           |            |
+| created          | timestamp when certificate was created                       | Date                                                                        | FALSE    | FALSE  | TRUE     |           |           |            |
+| expiresAt        | timestamp when certificate expires                           | Date                                                                        | FALSE    | FALSE  | TRUE     |           |           |            |
 | x5c              | X.509 certificate chain                                      | Array                                                                       | TRUE     | TRUE   | TRUE     |           |           |            |
 | x5t#S256         | X.509 certificate SHA-256 thumbprint                         | String                                                                      | TRUE     | TRUE   | TRUE     |           |           |            |
-| kid              | certificate id                                               | String                                                                      | FALSE    | TRUE   | TRUE     |           |           |            |
-| kty              | cryptographic algorithm family used with the certificate     | String                                                                      | FALSE    | FALSE  | TRUE     |           |           |            |
-| use              | usage of the certificate                                     | String                                                                      | TRUE     | FALSE  | TRUE     |           |           |            |
+| kid              | unique identifier for the certificate                        | String                                                                      | FALSE    | TRUE   | TRUE     |           |           |            |
+| kty              | cryptographic algorithm family for the certificate's keypair | String                                                                      | FALSE    | FALSE  | TRUE     |           |           |            |
+| use              | acceptable usage of the certificate                          | String                                                                      | TRUE     | FALSE  | TRUE     |           |           |            |
 |------------------+--------------------------------------------------------------+-----------------------------------------------------------------------------|----------|--------|----------|-----------|-----------+------------|
 
-## Application Certificate Operations
+## Application Key Store Operations
 
 > You need to enable `KEY_ROLLOVER` feature to perform the following operations, it is advised to contact Customer Support before enabling this feature.
 
-### Generate Certificate for Application
+### Generate New Application Key Credential
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /apps/*:aid*/credentials/keys/generate</span>
 
-Generate certificate for an application
+Generates a new X.509 certificate for an application key credential
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter     | Description                                     | Param Type | DataType                                      | Required | Default
-------------- | ----------------------------------------------- | ---------- | --------------------------------------------- | -------- | -------
-aid           | unique key of [Application](#application-model) | URL        | String                                        | TRUE     |
-validityYears | validity years since certificate creation date  | Query      | Number                                        | TRUE     |
+Parameter     | Description                                                                     | Param Type | DataType                                      | Required | Default
+------------- | ------------------------------------------------------------------------------- | ---------- | --------------------------------------------- | -------- | -------
+aid           | unique key of [Application](#application-model)                                 | URL        | String                                        | TRUE     |
+validityYears | expiry of the [Application Key Credential](#application-key-credential-model)   | Query      | Number                                        | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Return the generated [Application Certificate](#application-certificate-model).
+Return the generated [Application Key Credential](#application-key-credential-model).
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -3505,12 +3649,12 @@ Content-Type: application/json
 }
 ~~~
 
-### List Certificates for Application
+### List Key Credentials for Application
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /apps/*:aid*/credentials/keys</span>
 
-Enumerates certificates for an Application
+Enumerates key credentials for an application
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -3522,7 +3666,7 @@ aid           | unique key of [Application](#application-model) | URL        | S
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Array of [Application Certificate](#application-certificate-model).
+Array of [Application Key Credential](#application-key-credential-model).
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -3566,25 +3710,25 @@ curl -v -X GET \
 ]
 ~~~
 
-### Get Certificate for Application
+### Get Key Credential for Application
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /apps/*:aid*/credentials/keys/*:kid*</span>
 
-Get a specific certificate for an application by `kid`
+Gets a specific [application key credential](#application-key-credential-model) by `kid`
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter     | Description                                                             | Param Type | DataType                                      | Required | Default
-------------- | ----------------------------------------------------------------------- | ---------- | --------------------------------------------- | -------- | -------
-aid           | unique key of [Application](#application-model)                         | URL        | String                                        | TRUE     |
-kid           | unique key of [Application Certificate](#application-certificate-model) | URL        | String                                        | TRUE     |
+Parameter     | Description                                                                     | Param Type | DataType                                      | Required | Default
+------------- | ------------------------------------------------------------------------------- | ---------- | --------------------------------------------- | -------- | -------
+aid           | unique key of [Application](#application-model)                                 | URL        | String                                        | TRUE     |
+kid           | unique key of [Application Key Credential](#application-key-credential-model)   | URL        | String                                        | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-[Application Certificate](#application-certificate-model).
+[Application Key Credential](#application-key-credential-model).
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -3615,202 +3759,20 @@ curl -v -X GET \
 }
 ~~~
 
-### Update Certificate for Application
-{:.api .api-operation}
-
-<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /apps/*:aid*</span>
-
-Update application certificate by `kid`
-
-##### Request Parameters
-{:.api .api-request .api-request-params}
-
-Parameter     | Description                                                             | Param Type | DataType                                      | Required | Default
-------------- | ----------------------------------------------------------------------- | ---------- | --------------------------------------------- | -------- | -------
-aid           | unique key of [Application](#application-model)                         | URL        | String                                        | TRUE     |
-app           | app with new certificate kid                                            | Body       | [Application](#application-model)             | FALSE    |
-
-##### Response Parameters
-{:.api .api-response .api-response-params}
-
-[Application](#application-model) with updated `kid`.
-
-##### Request Example
-{:.api .api-request .api-request-example}
-
-~~~sh
-curl -v -X PUT \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
--H "Authorization: SSWS ${api_token}" \
--d '{
-  "id": "0oa5hvbn1sjCWW6LW0h7",
-  "name": "10000ft",
-  "label": "10000ft",
-  "status": "ACTIVE",
-  "lastUpdated": "2015-12-10T18:55:46.000Z",
-  "created": "2015-12-10T18:55:35.000Z",
-  "accessibility": {
-    "selfService": false,
-    "errorRedirectUrl": null,
-    "loginRedirectUrl": null
-  },
-  "visibility": {
-    "autoSubmitToolbar": true,
-    "hide": {
-      "iOS": false,
-      "web": false
-    },
-    "appLinks": {
-      "10000ft_link": true
-    }
-  },
-  "features": [],
-  "signOnMode": "BROWSER_PLUGIN",
-  "credentials": {
-    "scheme": "EDIT_USERNAME_AND_PASSWORD",
-    "userNameTemplate": {
-      "template": "${source.login}",
-      "type": "BUILT_IN"
-    },
-    "revealPassword": true,
-    "signing": {
-      "kid": "akm5hvbn1vojA9Fsa0h7"
-    }
-  },
-  "settings": {
-    "app": {},
-    "notifications": {
-      "vpn": {
-        "network": {
-          "connection": "DISABLED"
-        },
-        "message": null,
-        "helpUrl": null
-      }
-    }
-  },
-  "_links": {
-    "logo": [
-      {
-        "name": "medium",
-        "href": "https://op1static.oktacdn.com/bc/globalFileStoreRecord?id=gfs2fushubZAQJUDDKOL",
-        "type": "image/png"
-      }
-    ],
-    "appLinks": [
-      {
-        "name": "10000ft_link",
-        "href": "https://balacomptest.oktapreview.com/home/10000ft/0oa5hvbn1sjCWW6LW0h7/6025",
-        "type": "text/html"
-      }
-    ],
-    "users": {
-      "href": "https://balacomptest.oktapreview.com/api/v1/apps/0oa5hvbn1sjCWW6LW0h7/users"
-    },
-    "deactivate": {
-      "href": "https://balacomptest.oktapreview.com/api/v1/apps/0oa5hvbn1sjCWW6LW0h7/lifecycle/deactivate"
-    },
-    "groups": {
-      "href": "https://balacomptest.oktapreview.com/api/v1/apps/0oa5hvbn1sjCWW6LW0h7/groups"
-    }
-  }
-}' "https://${org}.okta.com/api/v1/apps/0oa5hvbn1sjCWW6LW0h7"
-~~~
-
-##### Response Example
-{:.api .api-response .api-response-example}
-
-~~~json
-{
-  "id": "0oa5hvbn1sjCWW6LW0h7",
-  "name": "10000ft",
-  "label": "10000ft",
-  "status": "ACTIVE",
-  "lastUpdated": "2015-12-14T21:41:09.000Z",
-  "created": "2015-12-10T18:55:35.000Z",
-  "accessibility": {
-    "selfService": false,
-    "errorRedirectUrl": null,
-    "loginRedirectUrl": null
-  },
-  "visibility": {
-    "autoSubmitToolbar": true,
-    "hide": {
-      "iOS": false,
-      "web": false
-    },
-    "appLinks": {
-      "10000ft_link": true
-    }
-  },
-  "features": [],
-  "signOnMode": "BROWSER_PLUGIN",
-  "credentials": {
-    "scheme": "EDIT_USERNAME_AND_PASSWORD",
-    "userNameTemplate": {
-      "template": "${source.login}",
-      "type": "BUILT_IN"
-    },
-    "revealPassword": true,
-    "signing": {
-      "kid": "akm5hvbn1vojA9Fsa0h7"
-    }
-  },
-  "settings": {
-    "app": {},
-    "notifications": {
-      "vpn": {
-        "network": {
-          "connection": "DISABLED"
-        },
-        "message": null,
-        "helpUrl": null
-      }
-    }
-  },
-  "_links": {
-    "logo": [
-      {
-        "name": "medium",
-        "href": "https://op1static.oktacdn.com/bc/globalFileStoreRecord?id=gfs2fushubZAQJUDDKOL",
-        "type": "image/png"
-      }
-    ],
-    "appLinks": [
-      {
-        "name": "10000ft_link",
-        "href": "https://balacomptest.oktapreview.com/home/10000ft/0oa5hvbn1sjCWW6LW0h7/6025",
-        "type": "text/html"
-      }
-    ],
-    "users": {
-      "href": "https://balacomptest.oktapreview.com/api/v1/apps/0oa5hvbn1sjCWW6LW0h7/users"
-    },
-    "deactivate": {
-      "href": "https://balacomptest.oktapreview.com/api/v1/apps/0oa5hvbn1sjCWW6LW0h7/lifecycle/deactivate"
-    },
-    "groups": {
-      "href": "https://balacomptest.oktapreview.com/api/v1/apps/0oa5hvbn1sjCWW6LW0h7/groups"
-    }
-  }
-}
-~~~
-
 ### Preview SAML metadata for Application
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /apps/*:aid*/sso/saml/metadata</span>
 
-Preview SAML metadata based on a specific certificate for an application
+Preview SAML metadata based on a specific key credential for an application
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter     | Description                                                             | Param Type | DataType                                      | Required | Default
-------------- | ----------------------------------------------------------------------- | ---------- | --------------------------------------------- | -------- | -------
-aid           | unique key of [Application](#application-model)                         | URL        | String                                        | TRUE     |
-kid           | unique key of [Application Certificate](#application-certificate-model) | Query      | String                                        | TRUE     |
+Parameter     | Description                                                                     | Param Type | DataType                                      | Required | Default
+------------- | ------------------------------------------------------------------------------- | ---------- | --------------------------------------------- | -------- | -------
+aid           | unique key of [Application](#application-model)                                 | URL        | String                                        | TRUE     |
+kid           | unique key of [Application Key Credential](#application-key-credential-model)   | Query      | String                                        | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -3822,7 +3784,7 @@ SAML metadata in XML
 
 ~~~sh
 curl -v -X GET \
--H "Accept: application/json" \
+-H "Accept: application/xml" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
