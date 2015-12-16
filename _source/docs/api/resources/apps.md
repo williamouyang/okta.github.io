@@ -2541,8 +2541,6 @@ curl -v -X PUT \
 #### Update Key Credential for Application
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /apps/*:aid*</span>
-
 Update [application key credential](#application-key-credential-model) by `kid`
 
 > You need to enable `KEY_ROLLOVER` feature to perform this operation, it is advised to contact Customer Support before enabling this feature.
@@ -3824,8 +3822,8 @@ YoEdncuy+GQGzE9yLOhC4HNfHQXpqp2tMPdRlw==</ds:X509Certificate>
         </md:KeyDescriptor>
         <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</md:NameIDFormat>
         <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>
-        <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://balacomptest.oktapreview.com/app/salesforce-fedid/exk39sivhuytV2D8H0h7/sso/saml"/>
-        <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://balacomptest.oktapreview.com/app/salesforce-fedid/exk39sivhuytV2D8H0h7/sso/saml"/>
+        <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://example.okta.com/app/sample-app/exk39sivhuytV2D8H0h7/sso/saml"/>
+        <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://example.okta.com/app/sample-app/exk39sivhuytV2D8H0h7/sso/saml"/>
     </md:IDPSSODescriptor>
 </md:EntityDescriptor>
 ~~~
