@@ -4088,8 +4088,6 @@
 
 <h4 class="api api-operation" id="update-key-credential-for-application">Update Key Credential for Application</h4>
 
-<p><span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /apps/<em>:aid</em></span></p>
-
 <p>Update <a href="#application-key-credential-model">application key credential</a> by <code class="highlighter-rouge">kid</code></p>
 
 <blockquote>
@@ -5479,6 +5477,10 @@
 
 <p>Generates a new X.509 certificate for an application key credential</p>
 
+<blockquote>
+  <p>To update application with the newly generated key credential, see <a href="#update-key-credential-for-application">Update Key Credential</a></p>
+</blockquote>
+
 <h5 class="api api-request api-request-params" id="request-parameters-19">Request Parameters</h5>
 
 <table>
@@ -5795,8 +5797,8 @@ YoEdncuy+GQGzE9yLOhC4HNfHQXpqp2tMPdRlw==<span class="nt">&lt;/ds:X509Certificate
         <span class="nt">&lt;/md:KeyDescriptor&gt;</span>
         <span class="nt">&lt;md:NameIDFormat&gt;</span>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress<span class="nt">&lt;/md:NameIDFormat&gt;</span>
         <span class="nt">&lt;md:NameIDFormat&gt;</span>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified<span class="nt">&lt;/md:NameIDFormat&gt;</span>
-        <span class="nt">&lt;md:SingleSignOnService</span> <span class="na">Binding=</span><span class="s">"urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"</span> <span class="na">Location=</span><span class="s">"https://balacomptest.oktapreview.com/app/salesforce-fedid/exk39sivhuytV2D8H0h7/sso/saml"</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;md:SingleSignOnService</span> <span class="na">Binding=</span><span class="s">"urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"</span> <span class="na">Location=</span><span class="s">"https://balacomptest.oktapreview.com/app/salesforce-fedid/exk39sivhuytV2D8H0h7/sso/saml"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;md:SingleSignOnService</span> <span class="na">Binding=</span><span class="s">"urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"</span> <span class="na">Location=</span><span class="s">"https://example.okta.com/app/sample-app/exk39sivhuytV2D8H0h7/sso/saml"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;md:SingleSignOnService</span> <span class="na">Binding=</span><span class="s">"urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"</span> <span class="na">Location=</span><span class="s">"https://example.okta.com/app/sample-app/exk39sivhuytV2D8H0h7/sso/saml"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/md:IDPSSODescriptor&gt;</span>
 <span class="nt">&lt;/md:EntityDescriptor&gt;</span>
 </code></pre>
