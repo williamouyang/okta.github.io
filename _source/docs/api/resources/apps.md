@@ -3574,7 +3574,7 @@ curl -v -X DELETE \
 
 ## Application Key Store Operations
 
-> You need to enable `KEY_ROLLOVER` feature to perform the following operations, it is advised to contact Customer Support before enabling this feature.
+> You need to enable `KEY_ROLLOVER` feature to perform the following operations, `KEY_ROLLOVER` is an Early Access feature, please contact Customer Support to have it enabled.
 
 ### Generate New Application Key Credential
 {:.api .api-operation}
