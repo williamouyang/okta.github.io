@@ -28,7 +28,7 @@ redirect_from: "/docs/getting_started/api_test_client.html"
 
     1. Click the **Import** button in the top toolbar
       ![Import Button](/assets/img/postman-ui-import-button.png "Import Button")
-    2. Select the **Download for link** tab, paste [this URL for the example.okta.com environment](../postman/example.okta.com.environment), and click the **Import** button
+    2. Select the **From URL** tab, paste [this URL for the example.okta.com environment](../postman/example.okta.com.environment), and click the **Import** button
       ![Import Environment](/assets/img/postman-ui-import-env.png "Import Environment")
     3. Select the **No environment** pull-down in the top-right of the UI and select **Manage environments**
         ![Manage Environments](/assets/img/postman-ui-manage-env.png "Manage Environments")
@@ -41,7 +41,7 @@ redirect_from: "/docs/getting_started/api_test_client.html"
         - `email-suffix`: used by request templates for email addresses and logins of new users
         - `subdomain`: *orgname* in https://*orgname*.okta.com
 
-        > We recommend you name the new environment the name of your okta organization such as example.okta.com in case you have both a preview and production organization
+        > We recommend you name the new environment the name of your Okta organization such as example.okta.com in case you have both a preview and production organization
 
         ![Edit Environment](/assets/img/postman-ui-edit-env.png "Edit Environment")
     6. Modify Postman settings to "Retain headers on clicking on links" (Optional)
@@ -67,7 +67,7 @@ Once you have setup your Postman environment, you can import pre-built collectio
 
     ![Import Button](/assets/img/postman-ui-import-button.png "Import Button")
 
-2. Select the **Download for link** tab and import the following URLs:
+2. Select the **From URL** tab and import the following URLs:
 
     |--------------------+-------------------------------------------------------|
     | Resource           | Postman Collection                                    |
@@ -90,10 +90,10 @@ Once you have setup your Postman environment, you can import pre-built collectio
 
 ## Requests
 
-The imported collections contain URLs and JSON request bodies that have sample data with variables such as **\{\{id\}\}**.  You will need to replace URL and body variables with ids of specific resources for your specific organization.  This can usually be accomplished by first listing a resource collection with a search or filter, than copying the `id` of a specific resource.  See API documentation for the specific request for details.
+The imported collections contain URLs and JSON request bodies that have sample data with variables such as **\{\{userId\}\}**.  You will need to replace URL and body variables with ids of specific resources for your specific organization.  This can usually be accomplished by first listing a resource collection with a search or filter, than copying the `id` of a specific resource.  See API documentation for the specific request for details.
 
 --- | ---
-URL templates often have variables such as `url` or `id` | ![URL template with ID](/assets/img/postman-ui-replace-id.png "URL template with ID")
+URL templates often have variables such as `url` or `userId` | ![URL template with ID](/assets/img/postman-ui-replace-id.png "URL template with ID")
 **POST** or **PUT** requests often have variables in the **Body** tab | ![Body environment variable](/assets/img/postman-ui-body-variable.png "Body environment variable")
 You can copy an `id` from a previous response such as a `GET` request and paste it in another request. | ![Copy and replace ID](/assets/img/postman-ui-paste-id.png "Copy and replace ID in URL")
 You can also set environment variables directly from the right-click context menu.  This is recommended so you can re-use the `id` across multiple requests | ![Set environment variable](/assets/img/postman-ui-set-variable-id.png "Set environment variable")
