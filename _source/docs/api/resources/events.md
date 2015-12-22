@@ -141,7 +141,7 @@ app.user_management.push_password_update | Update user's password in application
 app.user_management.push_profile_success | Successfully created or updated user's profile in application
 app.user_management.push_profile_failure | Failed to create or update user's profile in application
 app.user_management.push_new_user | Create new user in application
-app.user_management.push_pending_user`| Queue update of user for application
+app.user_management.push_pending_user | Queue update of user for application
 app.user_management.provision_user | Created or updated user from application
 app.user_management.provision_user_failed | Failed to create or update user from application
 app.user_management.importing_profile | Create or update user's profile from application
@@ -183,9 +183,9 @@ app.user_management.grouppush.mapping.and.groups.deleted.rule.deleted | An exist
 
 ObjectType | Description
 --- | ---
-app.inbound_del_auth.failure.not_supported" | application doesn't support delauth
+app.inbound_del_auth.failure.not_supported | Application doesn't support delauth
 app.inbound_del_auth.failure.instance_not_found | Couldn't find delauth app instance
-app.inbound_del_auth.failure.invalid_request.could_not_parse_credentials | Couldn't parse credentials in del auth request
+app.inbound_del_auth.failure.invalid_request.could_not_parse_credentials | Couldn't parse credentials in delauth request
 app.inbound_del_auth.failure.account_not_found | Inbound delauth account not found
 app.inbound_del_auth.failure.invalid_login_credentials | Inbound delauth, invalid login credentials
 app.inbound_del_auth.login_success | Successful delauth login
@@ -376,8 +376,8 @@ A denormalized reference to an application
 |-------------+-------------------------------------------+---------------+----------+---------+-----------+-----------|
 | Property    | Description                               | DataType      | Nullable | Default | MinLength | MaxLength |
 | ----------- | ----------------------------------------- | ------------- | -------- | ------- | --------- | --------- |
-| id          | Unique key for [app](apps.html#app-model  | String        | FALSE    |         |           |           |
-| displayName | [App's](apps.html#app-model) label        | String        | TRUE     |         |           |           |
+| id          | Unique key for [app](apps.html#application-model) | String        | FALSE    |         |           |           |
+| displayName | [App's](apps.html#application-model) label | String        | TRUE     |         |           |           |
 | objectType  | Type of object                            | `AppInstance` | FALSE    |         |           |           |
 |-------------+-------------------------------------------+---------------+----------+---------+-----------+-----------|
 
@@ -442,12 +442,12 @@ The following expressions are supported for events with the `filter` query param
 
 Filter                                       | Description
 -------------------------------------------- | ------------------------------------------------------------------------------
-`action.objectType eq ":actionType"`         | Events that have a specific [action objectType](#action-objectypes)
+`action.objectType eq ":actionType"`         | Events that have a specific [action objectType](#action-objecttypes)
 `target.objectType eq ":objectType"`         | Events published with a specific [target objectType](#actortarget-objecttypes)
 `target.id eq ":id"`                         | Events published with a specific target id
-`published lt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"` | Events published before a specific datetime
-`published eq "yyyy-MM-dd'T'HH:mm:ss.SSSZ"` | Events published updated at a specific datetime
-`published gt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"` | Events published updated after a specific datetime
+`published lt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Events published before a specific datetime
+`published eq "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Events published updated at a specific datetime
+`published gt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Events published updated after a specific datetime
 
 See [Filtering](/docs/getting_started/design_principles.html#filtering) for more information on expressions
 
