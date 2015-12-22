@@ -14,7 +14,7 @@ This document details the features and syntax of Okta's Expression Language whic
 When you create an Okta expression, you can reference any attribute that lives on an Okta user profile or App user profile.
 
 ###Okta user profile
-Every user has an Okta user profile.  The Okta user profile is the central source of truth for a user's core attributes.  To reference an Okta user profile attribute, just reference `user` and specify the attribute variable name.
+Every user has an Okta user profile.  The Okta user profile is the central source of truth for a user's core attributes.  To reference an Okta user profile attribute, just reference `user` and specify the attribute variable name.  
 
 
 Syntax  | Definitions | Examples
