@@ -445,9 +445,9 @@ Filter                                       | Description
 `action.objectType eq ":actionType"`         | Events that have a specific [action objectType](#action-objectypes)
 `target.objectType eq ":objectType"`         | Events published with a specific [target objectType](#actortarget-objecttypes)
 `target.id eq ":id"`                         | Events published with a specific target id
-`published lt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Events published before a specific datetime
-`published eq "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Events published updated at a specific datetime
-`published gt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Events published updated after a specific datetime
+`published lt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"` | Events published before a specific datetime
+`published eq "yyyy-MM-dd'T'HH:mm:ss.SSSZ"` | Events published updated at a specific datetime
+`published gt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"` | Events published updated after a specific datetime
 
 See [Filtering](/docs/getting_started/design_principles.html#filtering) for more information on expressions
 

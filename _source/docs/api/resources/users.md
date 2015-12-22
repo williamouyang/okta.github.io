@@ -973,9 +973,9 @@ Filter                                         | Description
 `status eq "PASSWORD_EXPIRED"`                 | Users that have a `status` of `PASSWORD_EXPIRED`
 `status eq "LOCKED_OUT"`                       | Users that have a `status` of `LOCKED_OUT`
 `status eq "DEPROVISIONED"`                    | Users that have a `status` of `DEPROVISIONED`
-`lastUpdated lt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Users last updated before a specific timestamp
-`lastUpdated eq "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Users last updated at a specific timestamp
-`lastUpdated gt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Users last updated after a specific timestamp
+`lastUpdated lt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Users last updated before a specific timestamp
+`lastUpdated eq "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Users last updated at a specific timestamp
+`lastUpdated gt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Users last updated after a specific timestamp
 `id eq "00u1ero7vZFVEIYLWPBN"`                 | Users with a specified `id`
 `profile.login eq "login@example.com"`         | Users with a specified `login`
 `profile.email eq "email@example.com"`         | Users with a specified `email`*
