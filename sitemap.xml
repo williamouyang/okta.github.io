@@ -54,11 +54,11 @@
     </url>
     <url>
         <loc>http://developer.okta.com/docs/api/getting_started/api_test_client.html</loc>
-        <lastmod>2015-12-16T11:51:54-08:00</lastmod>
+        <lastmod>2015-12-21T17:38:00-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/api/resources/apps.html</loc>
-        <lastmod>2015-12-17T11:34:12-08:00</lastmod>
+        <lastmod>2015-12-21T17:38:00-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/api/resources/authn.html</loc>
@@ -92,7 +92,7 @@
     </url>
     <url>
         <loc>http://developer.okta.com/docs/api/resources/events.html</loc>
-        <lastmod>2015-12-16T11:51:54-08:00</lastmod>
+        <lastmod>2015-12-21T17:38:00-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/api/resources/factor_admin.html</loc>
@@ -108,7 +108,7 @@
     </url>
     <url>
         <loc>http://developer.okta.com/docs/api/resources/groups.html</loc>
-        <lastmod>2015-12-16T11:51:54-08:00</lastmod>
+        <lastmod>2015-12-21T17:38:00-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/blog/</loc>
@@ -310,57 +310,57 @@
     </url>
     <url>
         <loc>http://developer.okta.com/docs/api/resources/users.html</loc>
-        <lastmod>2015-12-16T11:51:54-08:00</lastmod>
+        <lastmod>2015-12-21T17:38:00-08:00</lastmod>
     </url>
     <url>
         <loc>
             http://developer.okta.com/blog/2015/10/29/tls-client-authentication-for-services/
         </loc>
-        <lastmod>2015-12-16T11:51:54-08:00</lastmod>
+        <lastmod>2015-12-21T17:38:00-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/getting_started/api_test_client.html</loc>
-        <lastmod>2015-12-16T11:51:54-08:00</lastmod>
+        <lastmod>2015-12-21T17:38:00-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/api/rest/apps.html</loc>
-        <lastmod>2015-12-16T11:51:54-08:00</lastmod>
+        <lastmod>2015-12-21T17:38:00-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/api/rest/authn.html</loc>
-        <lastmod>2015-12-16T11:51:54-08:00</lastmod>
+        <lastmod>2015-12-21T17:38:00-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/getting_started/design_principles.html</loc>
-        <lastmod>2015-12-16T11:51:54-08:00</lastmod>
+        <lastmod>2015-12-21T17:38:00-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/getting_started/enabling_cors.html</loc>
-        <lastmod>2015-12-16T11:51:54-08:00</lastmod>
+        <lastmod>2015-12-21T17:38:00-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/getting_started/error_codes.html</loc>
-        <lastmod>2015-12-16T11:51:54-08:00</lastmod>
+        <lastmod>2015-12-21T17:38:00-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/api/rest/events.html</loc>
-        <lastmod>2015-12-16T11:51:54-08:00</lastmod>
+        <lastmod>2015-12-21T17:38:00-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/getting_started/factor_admin.html</loc>
-        <lastmod>2015-12-16T11:51:54-08:00</lastmod>
+        <lastmod>2015-12-21T17:38:00-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/api/rest/factors.html</loc>
-        <lastmod>2015-12-16T11:51:54-08:00</lastmod>
+        <lastmod>2015-12-21T17:38:00-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/getting_started/getting_a_token.html</loc>
-        <lastmod>2015-12-16T11:51:54-08:00</lastmod>
+        <lastmod>2015-12-21T17:38:00-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/api/rest/groups.html</loc>
-        <lastmod>2015-12-16T11:51:54-08:00</lastmod>
+        <lastmod>2015-12-21T17:38:00-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/feed/</loc>
@@ -368,42 +368,42 @@
     </url>
     <url>
         <loc>http://developer.okta.com/features/</loc>
-        <lastmod>2015-12-16T11:51:54-08:00</lastmod>
+        <lastmod>2015-12-21T17:38:00-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/getting_started/oan_guidance.html</loc>
-        <lastmod>2015-12-16T11:51:54-08:00</lastmod>
+        <lastmod>2015-12-21T17:38:00-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/getting_started/okta_expression_lang.html</loc>
-        <lastmod>2015-12-16T11:51:54-08:00</lastmod>
+        <lastmod>2015-12-21T17:38:00-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/getting_started/policy.html</loc>
-        <lastmod>2015-12-16T11:51:54-08:00</lastmod>
+        <lastmod>2015-12-21T17:38:00-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/examples/pysaml2.html</loc>
-        <lastmod>2015-12-16T11:51:54-08:00</lastmod>
+        <lastmod>2015-12-21T17:38:00-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/getting_started/saml_guidance.html</loc>
-        <lastmod>2015-12-16T11:51:54-08:00</lastmod>
+        <lastmod>2015-12-21T17:38:00-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/api/rest/sessions.html</loc>
-        <lastmod>2015-12-16T11:51:54-08:00</lastmod>
+        <lastmod>2015-12-21T17:38:00-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/examples/spring_security_saml.html</loc>
-        <lastmod>2015-12-16T11:51:54-08:00</lastmod>
+        <lastmod>2015-12-21T17:38:00-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/getting_started/tokens.html</loc>
-        <lastmod>2015-12-16T11:51:54-08:00</lastmod>
+        <lastmod>2015-12-21T17:38:00-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/api/rest/users.html</loc>
-        <lastmod>2015-12-16T11:51:54-08:00</lastmod>
+        <lastmod>2015-12-21T17:38:00-08:00</lastmod>
     </url>
 </urlset>

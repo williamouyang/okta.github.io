@@ -205,7 +205,7 @@
     <ol>
       <li>Click the <strong>Import</strong> button in the top toolbar
    <img src="/assets/img/postman-ui-import-button.png" alt="Import Button" title="Import Button" /></li>
-      <li>Select the <strong>Download for link</strong> tab, paste <a href="../postman/example.okta.com.environment">this URL for the example.okta.com environment</a>, and click the <strong>Import</strong> button
+      <li>Select the <strong>From URL</strong> tab, paste <a href="../postman/example.okta.com.environment">this URL for the example.okta.com environment</a>, and click the <strong>Import</strong> button
    <img src="/assets/img/postman-ui-import-env.png" alt="Import Environment" title="Import Environment" /></li>
       <li>Select the <strong>No environment</strong> pull-down in the top-right of the UI and select <strong>Manage environments</strong>
  <img src="/assets/img/postman-ui-manage-env.png" alt="Manage Environments" title="Manage Environments" /></li>
@@ -222,7 +222,7 @@
         </ul>
 
         <blockquote>
-          <p>We recommend you name the new environment the name of your okta organization such as example.okta.com in case you have both a preview and production organization</p>
+          <p>We recommend you name the new environment the name of your Okta organization such as example.okta.com in case you have both a preview and production organization</p>
         </blockquote>
 
         <p><img src="/assets/img/postman-ui-edit-env.png" alt="Edit Environment" title="Edit Environment" /></p>
@@ -264,7 +264,7 @@
     <p><img src="/assets/img/postman-ui-import-button.png" alt="Import Button" title="Import Button" /></p>
   </li>
   <li>
-    <p>Select the <strong>Download for link</strong> tab and import the following URLs:</p>
+    <p>Select the <strong>From URL</strong> tab and import the following URLs:</p>
 
     <table>
       <thead>
@@ -325,12 +325,12 @@
 
 <h2 id="requests">Requests</h2>
 
-<p>The imported collections contain URLs and JSON request bodies that have sample data with variables such as <strong>{{id}}</strong>.  You will need to replace URL and body variables with ids of specific resources for your specific organization.  This can usually be accomplished by first listing a resource collection with a search or filter, than copying the <code class="highlighter-rouge">id</code> of a specific resource.  See API documentation for the specific request for details.</p>
+<p>The imported collections contain URLs and JSON request bodies that have sample data with variables such as <strong>{{userId}}</strong>.  You will need to replace URL and body variables with ids of specific resources for your specific organization.  This can usually be accomplished by first listing a resource collection with a search or filter, than copying the <code class="highlighter-rouge">id</code> of a specific resource.  See API documentation for the specific request for details.</p>
 
 <table>
   <tbody>
     <tr>
-      <td>URL templates often have variables such as <code class="highlighter-rouge">url</code> or <code class="highlighter-rouge">id</code></td>
+      <td>URL templates often have variables such as <code class="highlighter-rouge">url</code> or <code class="highlighter-rouge">userId</code></td>
       <td><img src="/assets/img/postman-ui-replace-id.png" alt="URL template with ID" title="URL template with ID" /></td>
     </tr>
     <tr>
