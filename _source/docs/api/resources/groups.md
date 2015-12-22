@@ -337,12 +337,12 @@ Filter                                                   | Description
 `type eq "OKTA_GROUP"`                                   | Groups that have a `type` of `OKTA_GROUP`
 `type eq "APP_GROUP"`                                    | Groups that have a `type` of `APP_GROUP`
 `type eq "BUILT_IN"`                                     | Groups that have a `type` of `BUILT_IN`
-`lastUpdated lt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"`           | Groups with profile last updated before a specific timestamp
-`lastUpdated eq "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"`           | Groups with profile last updated at a specific timestamp
-`lastUpdated gt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"`           | Groups with profile last updated after a specific timestamp
-`lastMembershipUpdated lt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Groups with memberships last updated before a specific timestamp
-`lastMembershipUpdated eq "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Groups with memberships last updated at a specific timestamp
-`lastMembershipUpdated gt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Groups with memberships last updated after a specific timestamp
+`lastUpdated lt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`            | Groups with profile last updated before a specific timestamp
+`lastUpdated eq "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`            | Groups with profile last updated at a specific timestamp
+`lastUpdated gt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`            | Groups with profile last updated after a specific timestamp
+`lastMembershipUpdated lt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Groups with memberships last updated before a specific timestamp
+`lastMembershipUpdated eq "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Groups with memberships last updated at a specific timestamp
+`lastMembershipUpdated gt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Groups with memberships last updated after a specific timestamp
 `id eq "00g1emaKYZTWRYYRRTSK"`                           | Group with a specified `id`
 
 See [Filtering](/docs/api/getting_started/design_principles.html#filtering) for more information on expressions
