@@ -14,7 +14,7 @@ This document details the features and syntax of Okta's Expression Language whic
 When you create an Okta expression, you can reference any attribute that lives on an Okta user profile or App user profile.
 
 ###Okta user profile
-Every user has an Okta user profile.  The Okta user profile is the central source of truth for a user's core attributes.  To reference an Okta user profile attribute, just reference `user` and specify the attribute variable name.
+Every user has an Okta user profile.  The Okta user profile is the central source of truth for a user's core attributes.  To reference an Okta user profile attribute, just reference `user` and specify the attribute variable name.  
 
 
 Syntax  | Definitions | Examples
@@ -104,6 +104,8 @@ Function  | Return Type | Example | Output
 
 ### Conversion Functions
 
+##### Data Conversion Functions
+
 Function  | Return Type | Example | Input | Output
 -------- | ---------| --------- | -------| --------
 `Convert.toInt(string)` | Integer | `Convert.toInt(val)` | String val = '1234' | 1234
@@ -113,6 +115,19 @@ Function  | Return Type | Example | Input | Output
 
 **Note:**  Convert.toInt(double) rounds the passed numeric value either up or down to the nearest integer. Be sure to consider
 integer type range limitations when converting from a number to an integer with this function.
+
+##### Country Code Conversion Functions
+
+These function convert convert between ISO 3166 2-character country codes, 3-character country codes, and country names.
+
+Function  | Return Type | Example  | Output
+-------- | ---------| --------- |  | --------
+`Iso3166Convert.toAlpha2(string)` | String | `Convert.toAlpha2("IND")`  | "IN"
+`Iso3166Convert.toAlpha3(string)` | String | `Convert.toAlpha3("840")` | "USA"
+`Iso3166Convert.toName(string)` | String | `Convert.toString("IN")` | "INDIA"
+
+**Note:**  All these functions take ISO 2-charter country codes, 3-character codes, and numeric country strings as input. The output is in
+the format specified by the function name.
 
 ### Group Functions
 
