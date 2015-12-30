@@ -202,12 +202,6 @@ Advantages of using Okta Social Authentication include:
         something like this:
         `https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&client_id=AbcDE0fGHI1jk2LM34no&scope=openid%20email%20profile&response_type=id_token&redirect_uri=https://example.okta.com`
     
-    4.  *Optional*: Add a `response_type` GET parameter to configure
-        how the `id_token` is returned to your application.
-        
-        By default the `id_token` is passed in a URL fragment, if you
-        want the `id_token` to be passed in a GET parameter, then
-        append `&response_type=query` to your URL.
 8.  Add the Social Auth Login URL to the page where you want to
     enable Social Auth.
     Using the example URL from above, here is what that might look
