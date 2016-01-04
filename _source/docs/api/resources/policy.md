@@ -546,8 +546,18 @@ Parameter | Description | Data Type  |  Required |  Default
 | --- | --- | --- | ---
 access	| `ALLOW` or `DENY`	| String	| YES
 requireFactor	| `true` or `false`	| Boolean	| NO	| `false`
-factorPromptMode	| `DEVICE`, `SESSION` or `ALWAYS`	| String	| When requireFactor = `true`
-factorLifetime	| How long until factor times out	| Int	| When factorPromptMode = `SESSION`
+factorPromptMode	| `DEVICE`, `SESSION` or `ALWAYS`	| String	| When `requireFactor` = `true`
+factorLifetime	| How long until factor times out	| Int	| When `factorPromptMode` = `SESSION`
+
+### Session
+
+**Session Rules**
+
+Parameter | Description | Data Type  |  Required |  Default
+| --- | --- | --- | ---
+maxSessionIdleMinutes | FIXME | Int| NO | FIXME
+maxSessionLifetimeMinutes | FIXME | Int | NO | FIXME
+usePersistentCookie | FIXME | Boolean | NO | FIXME
 
 ## Rules Operations
 
