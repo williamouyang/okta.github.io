@@ -4,9 +4,11 @@ title: Policy
 redirect_from: "/docs/getting_started/policy.html"
 ---
 
+> This API is currently in **Early Access (EA)** status.
+
 # Overview
 
-The Okta Policy API enables you to peform policy and rule operations. These operation apply to various policies including Okta Signon.
+The Okta Policy API enables you to peform policy and rule operations. These operation apply to various policies including Okta Sign on.
 
 This API supports the following **policy operations**:
 
@@ -14,13 +16,11 @@ This API supports the following **policy operations**:
 * Create, read, update, and delete a policy
 * Activate and deactivate a policy
 
-This API supports the following **rule operations**:
+This API also supports the following **rule operations**:
 
 * Get all rules for a policy
 * Create, read, update, and delete a rule for a policy
 * Activate and deactivate a rule
-
-> This API is currently in **Early Access (EA)** status.
 
 # Policies
 
@@ -28,7 +28,7 @@ This API supports the following **rule operations**:
 
 ### Default Policies
 
-There is always a default policy created for each type of policy. The default policy applies to any users for whom other policies in the org do not apply. This ensures that there is always a policy to apply to a user in all situations.
+There is always a default policy created for each type of policy. The default policy applies to any users for whom other policies in the Okta org do not apply. This ensures that there is always a policy to apply to a user in all situations.
 
  - A default policy is required and cannot be deleted.
 
@@ -40,7 +40,7 @@ There is always a default policy created for each type of policy. The default po
 
 ### Policy Model
 
-Policies and rules are ordered numerically by priority. This priority determines the order in which they are searched for a context match. The highest priority policy has a priorityOrder of 1.
+Policies and rules are ordered numerically by priority. This priority determines the order in which they are searched for a context match. The highest priority policy has a `priorityOrder` of 1.
 
 For example, assume the following conditions are in effect.
 
@@ -109,7 +109,7 @@ policy	| Policy object for a rule only
 ### Get All Policies by Type
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies?type={type}</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies?type=<em>:type</em></span>
 
 #### Request Parameters
 
@@ -219,7 +219,7 @@ GET api/v1/policies?type=OKTA_SIGN_ON
 ### Get a Policy
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/{id}</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/<em>:id</em></span>
 
 Gets an existing policy.
 
@@ -368,7 +368,7 @@ The policy name, description, and type described in the [Policy Object](#policy-
 ### Update a Policy
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-put"><span class="api-label">PUT </span> /api/v1/policies/{id}</span>
+<span class="api-uri-template api-uri-put"><span class="api-label">PUT </span> /api/v1/policies/<em>:id</em></span>
 
 Updates an existing policy.
 
@@ -448,7 +448,7 @@ The example below shows the required items. You can add other items in the [Poli
 ### Delete Policy
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-delete"><span class="api-label">Delete </span> /api/v1/policies/{id}</span>
+<span class="api-uri-template api-uri-delete"><span class="api-label">Delete </span> /api/v1/policies/<em>:id</em></span>
 
 Deletes a policy and all rules associated with it.
 
@@ -463,7 +463,7 @@ None. Status 204 No Content is returned when the deletion is successful.
 ### Activate a Policy
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST </span>/api/v1/policies/{id}/lifecycle/activate</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST </span>/api/v1/policies/<em>:id</em>/lifecycle/activate</span>
 
 Activates the specified policy.
 
@@ -478,7 +478,7 @@ None. Status 204 No Content is returned when the activation is successful.
 ### Deactivate a Policy
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST </span>/api/v1/policies/{id}/lifecycle/deactivate</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST </span>/api/v1/policies/<em>:id</em>/lifecycle/deactivate</span>
 
 Deactivates the specified policy.
 
@@ -554,7 +554,7 @@ factorLifetime	| How long until factor times out	| Int	| When factorPromptMode =
 ### Get Policy Rules
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/{policyId}/rules</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/<em>:policyId</em>/rules</span>
 
 Retrieves all rules for a specified policy.
 
@@ -601,7 +601,7 @@ The policy id described in the [Policy Object](#policy-object) is required.
 ### Get a Rule
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/{policyId}/rules/{ruleId}</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em></span>
 
 Retrieves the specified rule for a specified policy. The returned `id` is the rule id.
 
@@ -647,7 +647,7 @@ The policy id described in the [Policy Object](#policy-object) and the rule id d
 ### Create Rule
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/{policyId}/rules</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/rules</span>
 
 Creates a new rule for a specified policy. The returned `id` is the rule id.
 
@@ -716,7 +716,7 @@ The policy id described in the [Policy Object](#policy-object) is required.
 ### Update a Rule
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-put"><span class="api-label">PUT </span> /api/v1/policies/{policyId}/rules/{ruleId}</span>
+<span class="api-uri-template api-uri-put"><span class="api-label">PUT </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em></span>
 
 Updates the specified rule for the specified policy.
 
@@ -795,7 +795,7 @@ The policy id described in the [Policy Object](#policy-object) and the rule id d
 ### Activate a Rule
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/{policyId}/rules/{ruleId}/lifecycle/activate</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em>/lifecycle/activate</span>
 
 Activates the specified rule for the specified policy.
 
@@ -810,7 +810,7 @@ None. Status 204 No Content is returned when the activation is successful.
 ### Deactivate a Rule
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/{policyId}/rules/{ruleId}/lifecycle/deactivate</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em>/lifecycle/deactivate</span>
 
 Deactivates the specified rule for the specified policy.
 
@@ -825,7 +825,7 @@ None. Status 204 No Content is returned when the deactivation is successful.
 ### Delete a Rule
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE </span> /api/v1/policies/{policyId}/rules/{ruleId}</span>
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em></span>
 
 Deletes the specified rule for the specified policy.
 
