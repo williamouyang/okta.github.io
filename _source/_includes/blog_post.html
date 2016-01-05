@@ -4,9 +4,13 @@
 	  <header class="post-title-block">
 	    <h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
 	    <div class="attribution">
+	      {% for post_author in post.author %}
+	      {% assign author = site.data.authors[post_author] %}
+	      {% if forloop.first %}
 	      <img src="/assets/img/{{ author.avatar }}"
 	           alt="{{ author.avatar }}"
 	           class="author-avatar">
+	      {% endif %}
 	      <address>{{ author.full_name }}</address>
 	      &nbsp;
 		  {% if author.github %}
@@ -21,7 +25,8 @@
 		  {% if author.web%}
 		    <a class="social_link" href="{{ author.web }}"><i class="fa fa-external-link-square"></i></a>
 		  {% endif %}
-	      <span class="sepr">&middot;</span>
+		    <span class="sepr">&middot;</span>
+	      {% endfor %}
 	      <time datetime="{{ post.date | date: '%F'}}">
 	      {{ post.date | date: "%B %-d, %Y" }}
 	      </time>
@@ -37,4 +42,3 @@
 	</article>
 </div>
 </section>
-

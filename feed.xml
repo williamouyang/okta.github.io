@@ -7,6 +7,36 @@
     <atom:link href="http://developer.okta.com/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>REST Service Authorization with JWTs</title>
+        <description>&lt;p&gt;Many companies are adopting micro-services based architectures to promote
+decoupling and separation of concerns in their applications. One inherent
+challenge with breaking applications up into small services is that now each
+service needs to deal with authenticating and authorizing requests made to it.
+&lt;a href=&quot;https://tools.ietf.org/html/rfc7519&quot;&gt;Json Web Tokens (JWTs)&lt;/a&gt; offer a clean
+solution to this problem along with
+&lt;a href=&quot;/blog/2015/12/02/tls-client-authentication-for-services&quot;&gt;TLS client authentication&lt;/a&gt;
+lower down in the stack.&lt;/p&gt;
+
+&lt;p&gt;Wils Dawson and I presented these topics to the &lt;a href=&quot;http://www.meetup.com/sfjava/&quot;&gt;Java User Group&lt;/a&gt;
+at Okta’s HQ in December and are thrilled to offer the
+&lt;a href=&quot;http://www.slideshare.net/JonTodd1/rest-service-authetication-with-tls-jwts&quot;&gt;slides&lt;/a&gt;,
+&lt;a href=&quot;https://github.com/wdawson/dropwizard-auth-example&quot;&gt;code&lt;/a&gt;, and the following
+recording of the presentation. In the talk, we cover authentication and
+authorization both at a server level with TLS and a user level with OAuth 2.0.
+In addition, we explain claims based auth and federation while walking through
+demos for these concepts using Java and Dropwizard. We purposely skipped over
+client (e.g. browser) side authentication as it’s enough material for a future
+talk and focused on solutions for authentication and authorization between
+services within an application.&lt;/p&gt;
+
+&lt;iframe src=&quot;https://player.vimeo.com/video/150714428&quot; width=&quot;500&quot; height=&quot;281&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+</description>
+        <pubDate>Tue, 05 Jan 2016 00:00:00 -0800</pubDate>
+        <link>http://developer.okta.com/blog/2016/01/05/rest-service-auth-jwt</link>
+        <guid isPermaLink="true">http://developer.okta.com/blog/2016/01/05/rest-service-auth-jwt</guid>
+      </item>
+    
+      <item>
         <title>Demystifying OAuth</title>
         <description>&lt;p&gt;It seems that OAuth 2.0 is everywhere these days. Whether you are building a hot new single page web application (SPA), a native mobile experience, or just trying to integrate with the API economy, you can’t go far without running into the popular authorization framework for REST/APIs and social authentication.&lt;/p&gt;
 
@@ -14,7 +44,7 @@
 
 &lt;p&gt;&lt;a href=&quot;http://www.slideshare.net/karl_mcguinness/demystifying-oauth-20&quot;&gt;Slides&lt;/a&gt;&lt;/p&gt;
 
-&lt;iframe src=&quot;https://player.vimeo.com/video/148164438&quot; width=&quot;500&quot; height=&quot;375&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;iframe src=&quot;https://player.vimeo.com/video/148164438&quot; width=&quot;500&quot; height=&quot;281&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 </description>
         <pubDate>Mon, 07 Dec 2015 00:00:00 -0800</pubDate>
         <link>http://developer.okta.com/blog/2015/12/07/oauth</link>
