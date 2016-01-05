@@ -8,7 +8,6 @@ show_bottom_cta: true
 
 	<div class="wrap blog">
 		{% for post in site.posts %}
-		{% assign author = site.data.authors[post.author] %}
 		{% capture _post_content %}{{ post.content }}{% endcapture %}
 		{% include blog_post.html post_content=_post_content %}
 		{% endfor %}

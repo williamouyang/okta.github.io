@@ -129,6 +129,88 @@
 	<div class="wrap blog">
 		
 		
+		<section >
+<div class="wrap">
+	<article class="post-block">
+	  <header class="post-title-block">
+	    <h1><a href="/blog/2016/01/05/rest-service-auth-jwt">REST Service Authorization with JWTs</a></h1>
+	    <div class="attribution">
+	      
+	      
+	      
+	      <img src="/assets/img/avatar-jon_todd.jpg"
+	           alt="avatar-jon_todd.jpg"
+	           class="author-avatar">
+	      
+	      <address>Jon Todd</address>
+	      &nbsp;
+		  
+		    <a class="social_link" href="https://github.com/jontodd"><i class="fa fa-github-square"></i></a>
+		  
+		  
+		    <a class="social_link" href="https://twitter.com/jonrtodd"><i class="fa fa-twitter-square"></i></a>
+		  
+		  
+		  
+		    <a class="social_link" href="http://www.jontodd.com"><i class="fa fa-external-link-square"></i></a>
+		  
+		    <span class="sepr">&middot;</span>
+	      
+	      
+	      
+	      <address>William Dawson</address>
+	      &nbsp;
+		  
+		    <a class="social_link" href="https://github.com/wdawson"><i class="fa fa-github-square"></i></a>
+		  
+		  
+		    <a class="social_link" href="https://twitter.com/wilsdawson"><i class="fa fa-twitter-square"></i></a>
+		  
+		  
+	 		<a class="social_link" href="https://linkedin.com/in/wilsdawson"><i class="fa fa-linkedin-square"></i></a>
+		  
+		  
+		    <span class="sepr">&middot;</span>
+	      
+	      <time datetime="2016-01-05">
+	      January 5, 2016
+	      </time>
+	    </div>
+	  </header>
+
+	  <section class="post-content">
+	    <p>Many companies are adopting micro-services based architectures to promote
+decoupling and separation of concerns in their applications. One inherent
+challenge with breaking applications up into small services is that now each
+service needs to deal with authenticating and authorizing requests made to it.
+<a href="https://tools.ietf.org/html/rfc7519">Json Web Tokens (JWTs)</a> offer a clean
+solution to this problem along with
+<a href="/blog/2015/12/02/tls-client-authentication-for-services">TLS client authentication</a>
+lower down in the stack.</p>
+
+<p>Wils Dawson and I presented these topics to the <a href="http://www.meetup.com/sfjava/">Java User Group</a>
+at Okta’s HQ in December and are thrilled to offer the
+<a href="http://www.slideshare.net/JonTodd1/rest-service-authetication-with-tls-jwts">slides</a>,
+<a href="https://github.com/wdawson/dropwizard-auth-example">code</a>, and the following
+recording of the presentation. In the talk, we cover authentication and
+authorization both at a server level with TLS and a user level with OAuth 2.0.
+In addition, we explain claims based auth and federation while walking through
+demos for these concepts using Java and Dropwizard. We purposely skipped over
+client (e.g. browser) side authentication as it’s enough material for a future
+talk and focused on solutions for authentication and authorization between
+services within an application.</p>
+
+<iframe src="https://player.vimeo.com/video/150714428" width="500" height="281" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+
+	  </section>
+
+
+
+	</article>
+</div>
+</section>
+
+		
 		
 		<section >
 <div class="wrap">
@@ -136,9 +218,13 @@
 	  <header class="post-title-block">
 	    <h1><a href="/blog/2015/12/07/oauth">Demystifying OAuth</a></h1>
 	    <div class="attribution">
+	      
+	      
+	      
 	      <img src="/assets/img/avatar-karl.png"
 	           alt="avatar-karl.png"
 	           class="author-avatar">
+	      
 	      <address>Karl McGuinness</address>
 	      &nbsp;
 		  
@@ -151,7 +237,8 @@
 		  
 		    <a class="social_link" href="https://www.linkedin.com/in/karlmcguinness"><i class="fa fa-external-link-square"></i></a>
 		  
-	      <span class="sepr">&middot;</span>
+		    <span class="sepr">&middot;</span>
+	      
 	      <time datetime="2015-12-07">
 	      December 7, 2015
 	      </time>
@@ -165,7 +252,7 @@
 
 <p><a href="http://www.slideshare.net/karl_mcguinness/demystifying-oauth-20">Slides</a></p>
 
-<iframe src="https://player.vimeo.com/video/148164438" width="500" height="375" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+<iframe src="https://player.vimeo.com/video/148164438" width="500" height="281" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
 
 	  </section>
 
@@ -175,8 +262,6 @@
 </div>
 </section>
 
-
-		
 		
 		
 		<section >
@@ -185,9 +270,13 @@
 	  <header class="post-title-block">
 	    <h1><a href="/blog/2015/12/02/tls-client-authentication-for-services">TLS Client Authentication for Internal Services</a></h1>
 	    <div class="attribution">
+	      
+	      
+	      
 	      <img src="/assets/img/avatar-william_dawson.jpg"
 	           alt="avatar-william_dawson.jpg"
 	           class="author-avatar">
+	      
 	      <address>William Dawson</address>
 	      &nbsp;
 		  
@@ -197,8 +286,11 @@
 		    <a class="social_link" href="https://twitter.com/wilsdawson"><i class="fa fa-twitter-square"></i></a>
 		  
 		  
+	 		<a class="social_link" href="https://linkedin.com/in/wilsdawson"><i class="fa fa-linkedin-square"></i></a>
 		  
-	      <span class="sepr">&middot;</span>
+		  
+		    <span class="sepr">&middot;</span>
+	      
 	      <time datetime="2015-12-02">
 	      December 2, 2015
 	      </time>
@@ -629,8 +721,6 @@ rights reserved.</p>
 </div>
 </section>
 
-
-		
 		
 		
 		<section >
@@ -639,9 +729,13 @@ rights reserved.</p>
 	  <header class="post-title-block">
 	    <h1><a href="/blog/2015/06/11/trustpage">The New Age of Trust</a></h1>
 	    <div class="attribution">
+	      
+	      
+	      
 	      <img src="/assets/img/avatar-vimarsh_karbhari.jpg"
 	           alt="avatar-vimarsh_karbhari.jpg"
 	           class="author-avatar">
+	      
 	      <address>Vimarsh Karbhari</address>
 	      &nbsp;
 		  
@@ -654,7 +748,8 @@ rights reserved.</p>
 		  
 		    <a class="social_link" href="https://medium.com/@vimarshk/"><i class="fa fa-external-link-square"></i></a>
 		  
-	      <span class="sepr">&middot;</span>
+		    <span class="sepr">&middot;</span>
+	      
 	      <time datetime="2015-06-11">
 	      June 11, 2015
 	      </time>
@@ -724,8 +819,6 @@ rights reserved.</p>
 </div>
 </section>
 
-
-		
 		
 		
 		<section >
@@ -734,16 +827,21 @@ rights reserved.</p>
 	  <header class="post-title-block">
 	    <h1><a href="/blog/2015/05/22/tcmalloc">How Okta Chased Down Severe System CPU Contention in MySQL</a></h1>
 	    <div class="attribution">
+	      
+	      
+	      
 	      <img src="/assets/img/avatar-okta_logo.jpg"
 	           alt="avatar-okta_logo.jpg"
 	           class="author-avatar">
+	      
 	      <address>Okta Staff</address>
 	      &nbsp;
 		  
 		  
 		  
 		  
-	      <span class="sepr">&middot;</span>
+		    <span class="sepr">&middot;</span>
+	      
 	      <time datetime="2015-05-22">
 	      May 22, 2015
 	      </time>
@@ -839,8 +937,6 @@ compared to the amount of available RAM, which meant that we were sacrificing bo
 </div>
 </section>
 
-
-		
 		
 		
 		<section >
@@ -849,9 +945,13 @@ compared to the amount of available RAM, which meant that we were sacrificing bo
 	  <header class="post-title-block">
 	    <h1><a href="/blog/2015/05/08/software-engineering-design-principles">Okta Software Engineering Design Principles</a></h1>
 	    <div class="attribution">
+	      
+	      
+	      
 	      <img src="/assets/img/avatar-jon_todd.jpg"
 	           alt="avatar-jon_todd.jpg"
 	           class="author-avatar">
+	      
 	      <address>Jon Todd</address>
 	      &nbsp;
 		  
@@ -864,7 +964,8 @@ compared to the amount of available RAM, which meant that we were sacrificing bo
 		  
 		    <a class="social_link" href="http://www.jontodd.com"><i class="fa fa-external-link-square"></i></a>
 		  
-	      <span class="sepr">&middot;</span>
+		    <span class="sepr">&middot;</span>
+	      
 	      <time datetime="2015-05-08">
 	      May 8, 2015
 	      </time>
@@ -1092,8 +1193,6 @@ enforce limits and design for infinity.</li>
 </div>
 </section>
 
-
-		
 		
 		
 		<section >
@@ -1102,16 +1201,21 @@ enforce limits and design for infinity.</li>
 	  <header class="post-title-block">
 	    <h1><a href="/blog/2015/05/08/productionalizing-active-mq">Productionalizing ActiveMQ</a></h1>
 	    <div class="attribution">
+	      
+	      
+	      
 	      <img src="/assets/img/avatar-okta_logo.jpg"
 	           alt="avatar-okta_logo.jpg"
 	           class="author-avatar">
+	      
 	      <address>Okta Staff</address>
 	      &nbsp;
 		  
 		  
 		  
 		  
-	      <span class="sepr">&middot;</span>
+		    <span class="sepr">&middot;</span>
+	      
 	      <time datetime="2015-05-08">
 	      May 8, 2015
 	      </time>
@@ -1226,8 +1330,6 @@ he does, he patches the JVM.</p>
 </div>
 </section>
 
-
-		
 		
 		
 		<section >
@@ -1236,9 +1338,13 @@ he does, he patches the JVM.</p>
 	  <header class="post-title-block">
 	    <h1><a href="/blog/2015/04/23/android-unit-testing-part-4">Android Unit Testing Part IV&#58; Mocking</a></h1>
 	    <div class="attribution">
+	      
+	      
+	      
 	      <img src="/assets/img/avatar-victor_ronin.png"
 	           alt="avatar-victor_ronin.png"
 	           class="author-avatar">
+	      
 	      <address>Victor Ronin</address>
 	      &nbsp;
 		  
@@ -1249,7 +1355,8 @@ he does, he patches the JVM.</p>
 		  
 		    <a class="social_link" href="http://victorronin.com/en/"><i class="fa fa-external-link-square"></i></a>
 		  
-	      <span class="sepr">&middot;</span>
+		    <span class="sepr">&middot;</span>
+	      
 	      <time datetime="2015-04-23">
 	      April 23, 2015
 	      </time>
@@ -1420,8 +1527,6 @@ steps in writing on our wiki. Thanks guys!</p>
 </div>
 </section>
 
-
-		
 		
 		
 		<section >
@@ -1430,9 +1535,13 @@ steps in writing on our wiki. Thanks guys!</p>
 	  <header class="post-title-block">
 	    <h1><a href="/blog/2015/04/14/android-unit-testing-part-3">Android Unit Testing Part III&#58; Disintegration</a></h1>
 	    <div class="attribution">
+	      
+	      
+	      
 	      <img src="/assets/img/avatar-victor_ronin.png"
 	           alt="avatar-victor_ronin.png"
 	           class="author-avatar">
+	      
 	      <address>Victor Ronin</address>
 	      &nbsp;
 		  
@@ -1443,7 +1552,8 @@ steps in writing on our wiki. Thanks guys!</p>
 		  
 		    <a class="social_link" href="http://victorronin.com/en/"><i class="fa fa-external-link-square"></i></a>
 		  
-	      <span class="sepr">&middot;</span>
+		    <span class="sepr">&middot;</span>
+	      
 	      <time datetime="2015-04-14">
 	      April 14, 2015
 	      </time>
@@ -1611,8 +1721,6 @@ how to make tests isolated. You can also check out the full code at
 </div>
 </section>
 
-
-		
 		
 		
 		<section >
@@ -1621,9 +1729,13 @@ how to make tests isolated. You can also check out the full code at
 	  <header class="post-title-block">
 	    <h1><a href="/blog/2015/04/07/android-unit-testing-part-2">Android Unit Testing Part II&#58; Escaping Dalvik’s Hold</a></h1>
 	    <div class="attribution">
+	      
+	      
+	      
 	      <img src="/assets/img/avatar-victor_ronin.png"
 	           alt="avatar-victor_ronin.png"
 	           class="author-avatar">
+	      
 	      <address>Victor Ronin</address>
 	      &nbsp;
 		  
@@ -1634,7 +1746,8 @@ how to make tests isolated. You can also check out the full code at
 		  
 		    <a class="social_link" href="http://victorronin.com/en/"><i class="fa fa-external-link-square"></i></a>
 		  
-	      <span class="sepr">&middot;</span>
+		    <span class="sepr">&middot;</span>
+	      
 	      <time datetime="2015-04-07">
 	      April 7, 2015
 	      </time>
@@ -1836,7 +1949,6 @@ check out the full code at <a href="https://github.com/vronin-okta/okta_blog_sam
 	</article>
 </div>
 </section>
-
 
 		
 	</div>
