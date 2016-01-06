@@ -118,16 +118,19 @@ integer type range limitations when converting from a number to an integer with 
 
 ##### Country Code Conversion Functions
 
-These function convert convert between ISO 3166 2-character country codes, 3-character country codes, and country names.
+These functions convert between ISO 3166-1 2-character country codes (Alpha 2), 3-character country codes (Alpha 3), numeric country codes, and full ISO country names.
 
 Function  | Return Type | Example  | Output
 -------- | ---------| --------- |  | --------
-`Iso3166Convert.toAlpha2(string)` | String | `Convert.toAlpha2("IND")`  | "IN"
-`Iso3166Convert.toAlpha3(string)` | String | `Convert.toAlpha3("840")` | "USA"
-`Iso3166Convert.toName(string)` | String | `Convert.toString("IN")` | "INDIA"
+`Iso3166Convert.toAlpha2(string)` | String | `Iso3166Convert.toAlpha2("IND")`  | "IN"
+`Iso3166Convert.toAlpha3(string)` | String | `Iso3166Convert.toAlpha3("840")` | "USA"
+`Iso3166Convert.toNumeric(string)` | String | `Iso3166Convert.toNumeric("USA")` | "840"
+`Iso3166Convert.toName(string)` | String | `Iso3166Convert.toString("IN")` | "INDIA"
 
-**Note:**  All these functions take ISO 2-charter country codes, 3-character codes, and numeric country strings as input. The output is in
-the format specified by the function name.
+**Note:**  All these functions take ISO 3166-1 2-character country codes (Alpha 2), 3-character country codes (Alpha 3), and numeric country codes as input. The function determines the input type and returns the output is in the format specified by the function name.
+
+For more information on these codes, see the [ISO 3166-1 online lookup tool](https://www.iso.org/obp/ui/#search/code/).
+
 
 ### Group Functions
 
@@ -144,11 +147,18 @@ Function  | Return Type | Example | Output
 
 Function  | Input Parameter Signature | Return Type | Example | Output
 --------- | ------------------------- | ----------- | ------- | -------
-Time.now  | (String timeZoneId, String format) | String      | `Time.now()` | 2015-07-31T17:18:37.979Z (Current time, UTC format)
+`Time.now`  | (String timeZoneId, String format) | String      | `Time.now()` | 2015-07-31T17:18:37.979Z (Current time, UTC format)
 | | | `Time.now("EST")` | 2015-07-31T13:30:49.964-04:00 (Specified time zone)
 | | | `Time.now("EST", "YYYY-MM-dd HH:mm:ss")` | 2015-07-31 13:36:48 (Specified time zone and format, military time)
+`Time.fromWindowsToIso8601`|(String time)|String|Windows timestamp time as a string (Windows/LDAP timestamp doc)|The passed-in time expressed in ISO 8601 format (specifically the RFC 3339 subset of the ISO standard).
+`Time.fromUnixToIso8601`|(String time)|String|Unix timestamp time as a string (Unix timestamp reference)|The passed-in time expressed in ISO 8601 format (specifically the RFC 3339 subset of the ISO standard).
+`Time.fromStringToIso8601`|(String time, String format)|String|Timestamp time in a human-readable yet machine-parseable arbitrary format format (as defined by Joda time pattern)|The passed-in time expressed in ISO 8601 format (specifically the RFC 3339 subset of the ISO standard).
+`Time.fromIso8601ToWindows`|(String time)|String|ISO 8601 timestamp time as a string|The passed-in time expressed in Windows timestamp format.
+`Time.fromIso8601ToUnix`|(String time)|String|ISO 8601 timestamp time as a string|The passed-in time expressed in Unix timestamp format.
+`Time.fromIso8601ToString`|(String time, String format)|String|ISO 8601 timestamp time, to convert to format using the same Joda time format semantics as fromStringToIso8601|The passed-in time expressed informat format.
 
->Both input parameters are optional. The time zone ID supports both new and old style formats, listed below. The third example shows how to specify the military time format.
+>Both input parameters are optional for the Time.now function. The time zone ID supports both new and old style formats, listed below. The third example for 
+the Time.now function shows how to specify the military time format.
 
 ##### Time Zone IDs
 
