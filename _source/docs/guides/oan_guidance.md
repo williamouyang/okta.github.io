@@ -9,16 +9,16 @@ redirect_from: "/docs/getting_started/oan_guidance.html"
 ## Overview
 
 
-With over 4000 pre-integrated applications, the Okta Application Network (OAN) provides a great way for ISVs to integrate with an enterprise grade identity management solution. The goal of the OAN is to take the burden of integration away from your customers while providing a simple, standards-based methodology for your application to support federated single sign-on, automated provisioning, and directory integration. By integrating with Okta, your application also benefits from other powerful features such as advanced password policy and multi-factor authentication (MFA).
+With over 4000 pre-integrated applications, the [Okta Application Network (OAN)](https://www.okta.com/resources/find-your-apps/) provides a great way for ISVs to integrate with an enterprise grade identity management solution. The goal of the OAN is to take the burden of integration away from your customers while providing a simple, standards-based methodology for your application to support federated single sign-on, automated provisioning, and directory integration. By integrating with Okta, your application also benefits from other powerful features such Okta's integrations with on-prem AD / LDAP infrastructure and multi-factor authentication (MFA).
 
-![OAN Intro](/assets/img/oan_guidance_intro.png "OAN Intro")
+![OAN Overview](https://cloud.githubusercontent.com/assets/3278918/12026582/33986a56-ad70-11e5-96d4-3525cb796367.jpg "OAN Overview")
 
 There are two main area of focus – Single Sign-On and Provisioning. You need to support at least one of these features in order to be part of Okta Application Network. Okta strongly recommends that you implement both. 
 
 
 ## Single Sign-On
 
-Your application needs to support Federated Single Sign-On, a common approach for an application to rely on an external identity provider. For web-based applications, Security Assertion Markup Language (SAML) is the standard. For mobile applications, many mobile solution vendors offer proprietary SDKs to provide support. Okta offers [Okta Mobile Connect](/docs/guides/okta_mobile_connect.html) which is based on the SAML protocol.
+Your application needs to support Federated Single Sign-On, a common approach for an application to rely on an external identity provider. For web-based applications, [Security Assertion Markup Language (SAML)](https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) is the standard. For mobile applications, many mobile solution vendors offer proprietary SDKs to provide support. Okta offers [Okta Mobile Connect](/docs/guides/okta_mobile_connect.html) which is based on the SAML protocol.
 
 For details on how to federate your application with SAML and Okta Mobile Connect, go to our [Single Sign-On with Okta](/docs/guides/saml_guidance.html) section for additional guidance.
 
@@ -37,13 +37,15 @@ Use the following instructions to support single sign-on for your app in the pub
 * In your Okta account (make sure you are signed in as an admin), use the [App Wizard](https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard) to build a Single Sign-on integration with Okta. For the more visually inclined, see our [video](https://support.okta.com/help/articles/Knowledge_Article/Adding-Applications-Using-the-Application-Integration-Wizard-AIW) for using the App Wizard.
 * Note: In the SAML Wizard step #3 Feedback, be sure to identify yourself as a Partner (“I'm a software vendor. I'd like to integrate my app with Okta”) and that you want to your app reviewed and promoted to the OAN (“Yes, my app integration is ready for public use in the Okta Application Network”)
 
+![App Wizard - Feedback](https://cloud.githubusercontent.com/assets/3278918/12026882/a2e71aee-ad73-11e5-9ef4-cd477d2990e7.png "App Wizard - Feedback")
+
 ### 3. Need Help?
 
 Get stuck or have questions? See our Okta Application Network FAQs (below), email <oan@okta.com> or post your questions on [stackoverflow](https://stackoverflow.com).
 
 ### 4. Partner with Okta (Optional)
 
-Already part of the Okta App Network but looking for a more “go-to-market” partnership? Contact us about becoming an [Okta App Partner](https://www.okta.com/partners/). App Partners are fully integrated with Okta and get access to great benefits like marketing support and a free version of Okta for your app.
+Already part of the Okta App Network but looking for a more “go-to-market” partnership? Email oan@okta.com about becoming an [Okta App Partner](https://www.okta.com/partners/). App Partners are fully integrated with Okta and get access to great benefits like marketing support and a free version of Okta for your app.
 
 
 ## Provisioning
@@ -72,7 +74,7 @@ Interested in provisioning with Okta but have general questions about the approa
 
 **Q: Do I need to contact Okta first to start integrating my application?**
 
-A: No, the materials here should be enough to help you get started. You should start by enabling [SAML](/docs/guides/saml_guidance.html) with your application. Then test your app integration and submit for review by Okta with the [App Wizard](https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard). Get stuck or have questions? Email oan@okta.com.
+A: No, the materials here should be enough to help you get started. You should start by enabling [SAML](/docs/guides/saml_guidance.html) with your application. Then test your app integration and submit for review by Okta with the [App Wizard](https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard). Get stuck or have questions? Email <oan@okta.com>.
 
 <br/>
 
@@ -90,7 +92,7 @@ A: Sign up for an [Okta Developer Edition](https://www.okta.com/developer/signup
 
 **Q: Are there any cost associated with joining the Okta Application Network (OAN)?**
 
-A: No, integrating your application with the Okta Application Network is completely FREE. Also, Okta’s paid SSO and Enterprise customers can utilize all application integrations in the OAN free of charge.
+A: No, integrating your application with the Okta Application Network is completely FREE. Also, Okta’s paid customers can utilize all application integrations in the OAN free of charge.
 
 <br/>
 
@@ -100,9 +102,9 @@ A: Absolutely not. Our goal is to help you identity-enable your application usin
 
 <br/>
 
-**Q: My customer is asking for AD (Active Directory) integration. Is that SSO, provisioning, or both?**
+**Q: My customer is asking for AD (Active Directory) integration. If I integrate with Okta, can I connect to my customer's on-prem directory?**
 
-A: AD (and LDAP) play a role in both SSO and provisioning. For SSO, customers often want end users to be able to log into SaaS applications with their corporate password. When you integrate with Okta through SAML, authentication is done by Okta, and Okta supports delegated authentication against AD. For provisioning, Okta acts as a universal directory containing all the information about the AD user. During provisioning, Okta can push information such as user profile, manager, security group membership to your application if needed. Effectively, Okta acts as a cloud representation of your customers' AD that makes integration much simpler for your application.
+A: Yes this is one of the key benefits of developing a pre-built integration with Okta — you can leverage our existing integrations with directories so you don’t have to. By integrating with Okta (for single sign-on and provisioning), you effectively have the ability to integrate with your customer’s on-prem AD or LDAP infrastructure for authentication (log into your cloud app with their corporate password), authorization (use details like AD groups to drive access rights), and provisioning policies.
 
 <br/>
 
@@ -114,15 +116,15 @@ A: SWA was developed by Okta to provide single sign-on for apps that do not supp
 
 **Q: What is the process after I have submitted my app using the App Wizard?**
 
-A: Okta App Integration team reviews all submitted apps. The team will reach out during the testing and documentation process for additional information. When completed, the application is then be promoted to the public Okta Application Network, and you are notified. Typical review time is two weeks. Have you submitted an app but have not heard from Okta? Email <developers@okta.com>.
+A: Okta App Integration team reviews all submitted apps. The team will reach out during the testing and documentation process for additional information. When completed, the application is then be promoted to the public Okta Application Network, and you are notified. Typical review time is two weeks. Have you submitted an app but have not heard from Okta? Email <oan@okta.com>.
 
 <br/>
 
-**Q: What is the difference between Community Created and Okta Verified in the Okta Application Network?**
+**Q: What is the difference between Okta Verified and Community Created in the Okta Application Network?**
 
-A: There are two different levels of app integrations in the OAN – Okta Verified and Community Created. Okta Verified apps have custom configuration documentation and are tested by Okta initially and on an ongoing basis. All other apps are labeled as Community Created and have not been tested and verified by Okta.
+A: There are two different app certification levels in the OAN – Okta Verified and Community Created. Okta Verified apps have custom configuration documentation, Okta has developer/support contacts at the partner company, and the integrations are tested by Okta on an ongoing basis. All other apps are labeled in the Okta Application Network as Community Created and have not been tested and verified by Okta.
 
-![OAN Cert vs Community](/assets/img/oan_guidance_cert_vs_community.png "OAN Cert vs Community")
+![OAN Certification](https://cloud.githubusercontent.com/assets/3278918/12027092/9cab6bd2-ad76-11e5-8372-938b5367ba30.png "OAN Certification")
 
 <br/>
 
@@ -132,9 +134,9 @@ A: Currently, the App Wizard does not support custom domains. Create an app inte
 
 <br/>
 
-**Q: My app currently supports WS-FED for SSO. Can I use the App Wizard?**
+**Q: My app currently supports WS-FED for single sign-on. Can I use the App Wizard?**
 
-A: The Okta App Wizard only supports SAML 2.0 for federated SSO. If your app supports WS-Fed, you will instead need to create a WS-Fed Template App. Once completed, the Template Application you have created will only be able to be used within your account. In order to promote your Template App to the Okta Application Network, please email a screenshot of the configured app details to oan@okta.com with your app name in the subject line.
+A: The Okta App Wizard only supports SAML 2.0 for federated single sign-on. If your app supports WS-Fed, you will instead need to create a [WS-Fed Template App](https://support.okta.com/help/articles/Knowledge_Article/Web-Security-Federation-WS-Fed-Template-Overview). Once completed, the Template Application you have created will only be able to be used within your account. In order to promote your Template App to the Okta Application Network, please email a screenshot of the configured app details to oan@okta.com with your app name in the subject line.
 
 <br/>
 
@@ -156,9 +158,11 @@ A: Yes, the session time out default is 2 hours but can be customized by the hou
 
 <br/>
 
-**Q: My app is now in OAN, what is the user experience for a joint customer that wants to set up SSO and Account Provisioning for my app in the Okta interface?**
+**Q: My app is now in OAN, what is the user experience for a joint customer admin that wants to set up single sign-on and provisioning for my app in the Okta interface?**
 
-A: Okta creates unique SAML configuration documentation for each application in the OAN so each will be different but for a sample, see our instructions for [How to Configure SAML 2.0 in Slack](http://saml-doc.okta.com/SAML_Docs/How-to-Configure-SAML-2.0-for-Slack.html) as an example. Also, if you haven’t already done so, sign up for an Okta [developer account](https://www.okta.com/developer/signup/) and you can test drive the Okta user experience yourself.
+A: Okta creates unique SAML configuration documentation for each application in the OAN so each will be different but for a sample, see our instructions for [How to Configure SAML 2.0 in Salesforce.com](http://saml-doc.okta.com/SAML_Docs/How-to-Configure-SAML-2.0-in-Salesforce.html) as an example. See the [Setting up Salesforce in Okta](https://support.okta.com/help/articles/Knowledge_Article/Setting-Up-Salesforce-in-Okta) video for a step-by-step walk through of all the steps an IT admin would take to configure single sign-on and provisioning for an app.
+
+Also, if you haven’t already done so, sign up for an Okta [developer account](https://www.okta.com/developer/signup/) and you can test drive the Okta user experience yourself.
 
 <br/>
 
