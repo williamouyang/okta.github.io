@@ -33,6 +33,8 @@ The `apiversion` is is currently v1.
 
 ## Media Types
 
+> JSON responses, including errors, may contain user input. To help prevent potential cross-site scripting attacks, make sure to properly escape all values before use in a browser or any HTML context.
+
 The API currently only supports JSON as an exchange format.  Be sure to set both the Content-Type and Accept headers for every request as `application/json`.
 
 All Date objects are returned in [ISO 8601 format](https://tools.ietf.org/html/rfc3339):
@@ -86,6 +88,8 @@ The **public IP address** of your application will be automatically used as the 
 
 
 ## Errors
+
+> JSON responses, including errors, may contain user input. To help prevent potential cross-site scripting attacks, make sure to properly escape all values before use in a browser or any HTML context.
 
 All requests on success will return a 200 status if there is content to return or a 204 status if there is no content to return.
 
