@@ -271,13 +271,13 @@ log in to your Okta org or custom application using their social credentials.</p
     <p>For now, you will need to do this by making HTTP requests
 directly against the Okta API. We suggest using Postman to do
 this. If you haven’t used Postman before, see our <a href="http://developer.okta.com/docs/api/getting_started/api_test_client.html">instructions
-for using Postman with Okta</a> before proceeding. Load our <a href="http://beta.getpostman.com/collections/29494567e8da63a0d5e3">Client
+for using Postman with Okta</a> before proceeding. Load our <a href="https://beta.getpostman.com/collections/2bece1641e75a7d4a222">Client
 Registration Postman Collection</a> into Postman and then use the
 “Create OAuth Client” request to create a new OAuth client on
-Okta, this will make a POST request to the <code class="highlighter-rouge">/api/v1/clients</code> URL
+Okta, this will make a POST request to the <code class="highlighter-rouge">/oauth2/v1/clients</code> URL
 of your Okta org.</p>
 
-    <p>When making the HTTP POST to the <code class="highlighter-rouge">/api/v1/clients</code> URL, you
+    <p>When making the HTTP POST to the <code class="highlighter-rouge">/oauth2/v1/clients</code> URL, you
 should use the default request body, replacing the contents of
 the <code class="highlighter-rouge">redirect_uris</code> with the URLs that your Social Authentication
 provider will be allowed to redirect users to.</p>
