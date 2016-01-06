@@ -79,12 +79,12 @@ Advantages of using Okta Social Authentication include:
     directly against the Okta API. We suggest using Postman to do
     this. If you haven't used Postman before, see our [instructions
     for using Postman with Okta](http://developer.okta.com/docs/api/getting_started/api_test_client.html) before proceeding. Load our [Client
-    Registration Postman Collection](http://beta.getpostman.com/collections/29494567e8da63a0d5e3) into Postman and then use the
+    Registration Postman Collection](https://beta.getpostman.com/collections/2bece1641e75a7d4a222) into Postman and then use the
     "Create OAuth Client" request to create a new OAuth client on
-    Okta, this will make a POST request to the `/api/v1/clients` URL
+    Okta, this will make a POST request to the `/oauth2/v1/clients` URL
     of your Okta org.
     
-    When making the HTTP POST to the `/api/v1/clients` URL, you
+    When making the HTTP POST to the `/oauth2/v1/clients` URL, you
     should use the default request body, replacing the contents of
     the `redirect_uris` with the URLs that your Social Authentication
     provider will be allowed to redirect users to.
