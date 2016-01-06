@@ -61,8 +61,7 @@ The Okta Identity Providers API provides operations to manage federations with e
     },
     "subject": {
       "userNameTemplate": {
-        "template": "idpuser.subjectNameId",
-        "type": "BUILT_IN"
+        "template": "idpuser.subjectNameId"
       },
       "format": [
         "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
