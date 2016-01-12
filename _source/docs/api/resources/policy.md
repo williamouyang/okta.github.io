@@ -16,7 +16,7 @@ This API supports the following **policy operations**:
 * Create, read, update, and delete a policy
 * Activate and deactivate a policy
 
-This API also supports the following **rule operations**:
+This API supports the following **rule operations**:
 
 * Get all rules for a policy
 * Create, read, update, and delete a rule for a policy
@@ -31,11 +31,8 @@ This API also supports the following **rule operations**:
 There is always a default policy created for each type of policy. The default policy applies to any users for whom other policies in the Okta org do not apply. This ensures that there is always a policy to apply to a user in all situations.
 
  - A default policy is required and cannot be deleted.
-
  - The default policy is always the last policy in the priority order. Any added policies of this type have higher priority than the default policy.
-
  - The default policy always has one default rule that cannot be deleted. It is always the last rule in the priority order. If you add rules to the default policy, they have a higher priority than the default rule. For information on default rules, see [Rules Model and Defaults](#rules-model-and-defaults).
-
  - The `system` attribute determines whether a policy is created by a system or by a user.
 
 ### Policy Model
@@ -50,61 +47,179 @@ For example, assume the following conditions are in effect.
 Because Rule A has a higher priority, even though requests are coming from ON_NETWORK due to VPN,
 the action in Rule A is taken, and Rule B is not evaluated.
 
+
 ### Policy Object
+{: #PolicyObject }
 
 The Policy model defines several attributes:
 
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
 id | Identifier for the policy | String | No | Assigned
-type | Policy type –  must be `OKTA_SIGN_ON` | String | Yes |
-name | Name for the policy | String | Yes |
+type | Policy type | `OKTA_SIGN_ON` or `MFA_ENROLL` | Yes | 
+name | Name for the policy | String | Yes | 
+priority | This is set to `1` on system policies, which can not be deleted. | Integer | No | 0
 description | Description for the policy | String | No | Null
 priorityOrder | Priority for the policy | Int | No | Last / Lowest Priority
 system | Whether or not the policy is the default | Boolean | No | false
 status | Status of the policy: ACTIVE or INACTIVE | String | No | "ACTIVE"
+conditions | Conditions for rule | <a href="#ConditionsObject">Conditions Object</a> | No | 
+settings | Settings for rule | <a href="#PolicySettingsObject">Policy Settings Object</a> | No | 
 created | Timestamp when the policy was created | Date | No | Assigned
 lastUpdated | Timestamp when the policy was last modified | Date | No | Assigned
+_links | Hyperlinks | <a href="#LinksObject">Links Object</a> | No | 
+
+
+### Policy Settings Object
+{: #PolicySettingsObject }
+
+
+
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+factors |  | <a href="#PolicyFactorsConfigurationObject">Policy Factors Configuration Object</a> | Yes | 
+
+
+### Policy Factors Configuration Object
+{: #PolicyFactorsConfigurationObject }
+
+
+
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+google_otp | Google Authenticator | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
+okta_otp | Okta Verify TOTP | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
+okta_push | Okta Verify Push | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
+okta_question | Okta Security Question | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
+okta_sms | Okta SMS | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
+rsa_token | RSA Token | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
+symantec_vip | Symantic VIP | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
+
+
+### Policy MFA Factor Object
+{: #PolicyFactorObject }
+
+
+
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+consent |  | <a href="#PolicyFactorConsentObject">Policy Factor Consent Object</a> | No | 
+enroll |  | <a href="#PolicyFactorEnrollObject">Policy Factor Enroll Object</a> | No | 
+
+
+### Policy Factor Enroll Object
+{: #PolicyFactorEnrollObject }
+
+
+
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+self |  | `NOT_ALLOWED`, `OPTIONAL` or `REQUIRED` | Yes | 
+
+
+### Policy Factor Consent Object
+{: #PolicyFactorConsentObject }
+
+
+
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+terms | The format of the consent dialog to be presented. | `TEXT`, `RTF`, `MARKDOWN` or `URL` | No | 
+type | Does the user need to consent to `NONE` or `TERMS_OF_SERVICE`. | String | No | NONE
+value | The contents of the consent dialog. | String | No | 
+
+
+### Conditions Object
+{: #ConditionsObject }
+
+
+
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+authContext |  | <a href="#AuthContextConditionObject">authContext Condition Object</a> | Yes | 
+network |  | <a href="#NetworkConditionObject">Network Condition Object</a> | Yes | 
+people |  | <a href="#PeopleConditionObject">People Condition Object</a> | Yes | 
+
 
 ### People Object
+{: #PeopleObject }
 
 The people condition identifies users and groups that are used together. For policies, you can only include a group.
 
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
-groups | The group condition | Group Condition | No | Include Everyone
-users  | The user condition  | User Condition  | No | Empty
-
-### Group Condition Object
-
-Parameter | Description | Data Type | Required | Default
-| --- | --- | --- | ---
-include	| The groups to be included |	Collection of String	| No |	Everyone Group (if exclude is empty)
-exclude	| The groups to be excluded	| Collection of String	| No	| Empty
+groups | The group condition | String | Yes | 
+users | The user condition | String | Yes | 
 
 
 ### User Condition Object
+{: #UserConditionObject }
+
+
 
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
-include	| The users to be included	| Collection of String	| No	| Empty
-exclude	| The users to be excluded	| Collection of String	| No	| Empty
+include | The users to be included | Array | Yes | 
+exclude | The users to be excluded | Array | Yes | 
+
+
+### Group Condition Object
+{: #GroupConditionObject }
+
+
+
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+include | The groups to be included | Array | Yes | 
+exclude | The groups to be excluded | Array | Yes | 
+
+
+### authContext Condition Object
+{: #AuthContextConditionObject }
+
+Specifies an authentication entry point.
+
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+authType |  | `ANY` or `RADIUS` | No | 
+
+
+### Network Condition Object
+{: #NetworkConditionObject }
+
+Specifies a network segment.
+
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+connection |  | `ANYWHERE`, `ON_NETWORK` or `OFF_NETWORK` | No | 
+
+
+### People Condition Object
+{: #PeopleConditionObject }
+
+
+
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+users |  | <a href="#UserConditionObject">User Condition Object</a> | No | 
+
 
 ### Links Object
+{: #LinksObject }
 
 Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the current policy.  The Links Object is used for dynamic discovery of related resources.  The Links Object is **read-only**.
 
-Specified link
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+self | The policy or rule | String | Yes | 
+activate | Action to activate a policy or rule | String | Yes | 
+deactivate | Action to deactivate a policy or rule | String | Yes | 
+rules | Rules objects for a policy only | String | Yes | 
+policy | Policy object for a rule only | String | Yes | 
 
-Link Relation Type     | Description
----------------------- | -----------
-self	| The policy or rule
-activate	| Action to activate a policy or rule
-deactivate	| Action to deactivate a policy or rule
-rules	| Rules objects for a policy only
-policy	| Policy object for a rule only
 
 ## Policy Operations
+
 
 ### Get All Policies by Type
 {:.api .api-operation}
@@ -113,115 +228,31 @@ policy	| Policy object for a rule only
 
 #### Request Parameters
 
-The policy type described in the [Policy Object](#policy-object) is required.
+The policy id described in the [Policy Object](#policy-object) is required.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-GET api/v1/policies?type=OKTA_SIGN_ON
-
-##### Response Example
-{:.api .api-response .api-response-example}
-
-~~~json
-{
-        "type": "OKTA_SIGN_ON",
-        "id": "00oewwEGGIFFQTUCFCVJ",
-        "status": "ACTIVE",
-        "name": "Legacy Policy",
-        "description": "The legacy policy contains any existing settings from the legacy Okta Sign On Policy",
-        "priorityOrder": 1,
-        "system": false,
-        "conditions": {
-            "people": {
-                "groups": {
-                    "include": [
-                        "00oewwEGGIFFQTUCFCVJ"
-                    ]
-                }
-            }
-        },
-        "created": "2014-10-09T00:06:07.000Z",
-        "lastUpdated": "2014-10-09T00:06:07.000Z",
-        "_links": {
-            "self": {
-                "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ",
-                "hints": {
-                    "allow": [
-                        "GET",
-                        "PUT",
-                        "DELETE"
-                    ]
-                }
-            },
-            "deactivate": {
-                "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/lifecycle/deactivate",
-                "hints": {
-                    "allow": [
-                        "POST"
-                    ]
-                }
-            },
-            "rules": {
-                "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/rules",
-                "hints": {
-                    "allow": [
-                        "GET",
-                        "POST"
-                    ]
-                }
-            }
-        }
-    },
-    {
-        "type": "OKTA_SIGN_ON",
-        "id": "11oewwEGGIFFQTUCFCVJ",
-        "status": "ACTIVE",
-        "name": "Default Policy",
-        "description": "The default policy applies in all situations if no other policy applies.",
-        "priorityOrder": 2,
-        "system": true,
-        "conditions": {
-            "people": {
-                "groups": {
-                    "include": [
-                        "01oewwEGGIFFQTUCFCVJ"
-                    ]
-                }
-            }
-        },
-        "created": "2014-10-09T00:06:06.000Z",
-        "lastUpdated": "2014-10-09T00:06:07.000Z",
-        "_links": {
-            "self": {
-                "href": "https:/your-domain.okta.com/api/v1/policies/01oewwEGGIFFQTUCFCVJ",
-                "hints": {
-                    "allow": [
-                        "GET",
-                        "PUT"
-                    ]
-                }
-            },
-            "rules": {
-                "href": "https:/your-domain.okta.com/api/v1/policies/01oewwEGGIFFQTUCFCVJ/rules",
-                "hints": {
-                    "allow": [
-                        "GET",
-                        "POST"
-                    ]
-                }
-            }
-        }
-    }
+~~~sh
+curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/policies?type={type}"
 ~~~
 
+##### Response Types
+{:.api .api-response .api-response-example}
 
-### Get a Policy
+HTTP 200: 
+<a href="#PolicyObject">Policy Object</a>
+
+
+
+### Delete Policy
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/<em>:id</em></span>
-
-Gets an existing policy.
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE </span> /api/v1/policies/<em>:policyId</em></span>
 
 #### Request Parameters
 
@@ -230,147 +261,138 @@ The policy id described in the [Policy Object](#policy-object) is required.
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-GET api/v1/policies/00oewwEGGIFFQTUCFCVJ
+~~~sh
+curl -v -X DELETE \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/policies/{policyId}"
+~~~
 
-##### Response Example
+##### Response Types
 {:.api .api-response .api-response-example}
 
-~~~json
-{
-    "type": "OKTA_SIGN_ON",
-    "id": "00oewwEGGIFFQTUCFCVJ",
-    "status": "ACTIVE",
-    "name": "Legacy Policy",
-    "description": "The legacy policy contains any existing settings from the legacy Okta Sign On Policy",
-    "priorityOrder": 1,
-    "system": false,
-    "conditions": {
-        "people": {
-            "groups": {
-                "include": [
-                    "00oewwEGGIFFQTUCFCVJ"
-                ]
-            }
-        }
-    },
-    "created": "2014-10-09T00:06:07.000Z",
-    "lastUpdated": "2014-10-09T00:06:07.000Z",
-    "_links": {
-        "self": {
-            "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ",
-            "hints": {
-                "allow": [
-                    "GET",
-                    "PUT",
-                    "DELETE"
-                ]
-            }
-        },
-        "deactivate": {
-            "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/lifecycle/deactivate",
-            "hints": {
-                "allow": [
-                    "POST"
-                ]
-            }
-        },
-        "rules": {
-            "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/rules",
-            "hints": {
-                "allow": [
-                    "GET",
-                    "POST"
-                ]
-            }
-        }
-    }
-}
+HTTP 204: 
+*No Content*
+
+
+
+### Get a Policy
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/<em>:policyId</em></span>
+
+#### Request Parameters
+
+The policy id described in the [Policy Object](#policy-object) is required.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/policies/{policyId}"
 ~~~
+
+##### Response Types
+{:.api .api-response .api-response-example}
+
+HTTP 200: 
+<a href="#PolicyObject">Policy Object</a>
+
+
+
+### Update a Policy
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-put"><span class="api-label">PUT </span> /api/v1/policies/<em>:policyId</em></span>
+
+#### Request Parameters
+
+The policy id described in the [Policy Object](#policy-object) is required.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X PUT \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "name": "Example",
+  "description": "This is an example policy",
+  "conditions": {
+    "people": {
+      "groups": {
+        "include": [
+            "00gab0CDEFGHIJKLMNOP"
+        ]
+      }
+    }
+  }
+}' \
+"https://${org}.okta.com/api/v1/policies/{policyId}"
+~~~
+
+##### Response Types
+{:.api .api-response .api-response-example}
+
+HTTP 200: 
+<a href="#PolicyObject">Policy Object</a>
+
+
 
 ### Create a Policy
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies</span>
 
-Creates a new policy with no rules.
-
 #### Request Parameters
 
-The policy name, description, and type described in the [Policy Object](#policy-object) are required. The policy name cannot be the same as the name of an existing policy.
+The policy id described in the [Policy Object](#policy-object) is required.
 
-#### Request Example
+##### Request Example
+{:.api .api-request .api-request-example}
 
-~~~json
-{
-  "name": "New Okta Sign On Policy",
-  "description": "API created policy",
-  "type": "OKTA_SIGN_ON"
-}
-~~~
-
-##### Response Example
-{:.api .api-response .api-response-example}
-
-
-~~~json
-{
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
     "type": "OKTA_SIGN_ON",
-    "id": "00oewwEGGIFFQTUCFCVJ",
-    "status": "ACTIVE",
-    "name": "New Okta Sign On Policy",
-    "description": "API created policy",
-    "priorityOrder": 2,
+    "name": "Corporate Policy",
+    "description": "Standard policy for every employee",
     "system": false,
     "conditions": {
         "people": {
             "groups": {
                 "include": [
-                    "00oewwEGGIFFQTUCFCVJ"
-                ]
-            }
-        }
-    },
-    "created": "2014-10-13T22:53:12.000Z",
-    "lastUpdated": "2014-10-13T22:53:12.000Z",
-    "_links": {
-        "self": {
-            "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ",
-            "hints": {
-                "allow": [
-                    "GET",
-                    "PUT",
-                    "DELETE"
-                ]
-            }
-        },
-        "deactivate": {
-            "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/lifecycle/deactivate",
-            "hints": {
-                "allow": [
-                    "POST"
-                ]
-            }
-        },
-        "rules": {
-            "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/rules",
-            "hints": {
-                "allow": [
-                    "GET",
-                    "POST"
+                    "00gab0CDEFGHIJKLMNOP"
                 ]
             }
         }
     }
-}
+}' \
+"https://${org}.okta.com/api/v1/policies"
 ~~~
 
+##### Response Types
+{:.api .api-response .api-response-example}
 
-### Update a Policy
+HTTP 204: 
+<a href="#PolicyObject">Policy Object</a>
+
+
+
+### Activate a Policy
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-put"><span class="api-label">PUT </span> /api/v1/policies/<em>:id</em></span>
-
-Updates an existing policy.
+<span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/lifecycle/activate</span>
 
 #### Request Parameters
 
@@ -379,116 +401,51 @@ The policy id described in the [Policy Object](#policy-object) is required.
 ##### Request Example
 {:.api .api-request .api-request-example}
 
-The example below shows the required items. You can add other items in the [Policy Object](#policy-object) as desired.
-
-**Note:** This is a strict PUT. Any missing item is set to its default value. For example if `priorityOrder` is missing from the policy body, the item moves to the lowest priority order in the policy. If the group assignment is missing, the policy is reassigned to the Everyone group.
-
-~~~json
-{
-  "name": "My Updated Policy",
-  "description": "This is my policy",
-  "type": "OKTA_SIGN_ON"
-}
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/policies/{policyId}/lifecycle/activate"
 ~~~
 
-### Response Parameters
+##### Response Types
+{:.api .api-response .api-response-example}
 
-~~~json
-{
-    "type": "OKTA_SIGN_ON",
-    "id": "00oewwEGGIFFQTUCFCVJ",
-    "status": "ACTIVE",
-    "name": "My Updated Policy",
-    "description": "This is my policy",
-    "priorityOrder": 2,
-    "system": false,
-    "conditions": {
-        "people": {
-            "groups": {
-                "include": [
-                    "00g6fud2wSIIWCLSPYVR"
-                ]
-            }
-        }
-    },
-    "created": "2014-10-13T22:53:12.000Z",
-    "lastUpdated": "2014-10-13T23:55:46.000Z",
-    "_links": {
-        "self": {
-            "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ",
-            "hints": {
-                "allow": [
-                    "GET",
-                    "PUT",
-                    "DELETE"
-                ]
-            }
-        },
-        "deactivate": {
-            "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/lifecycle/deactivate",
-            "hints": {
-                "allow": [
-                    "POST"
-                ]
-            }
-        },
-        "rules": {
-            "href": "https:/your-domain.okta.com/api/v1/policies/00oewwEGGIFFQTUCFCVJ/rules",
-            "hints": {
-                "allow": [
-                    "GET",
-                    "POST"
-                ]
-            }
-        }
-    }
-}
-~~~~
+HTTP 204: 
+*No Content is returned when the activation is successful.*
 
-### Delete Policy
-{:.api .api-operation}
 
-<span class="api-uri-template api-uri-delete"><span class="api-label">Delete </span> /api/v1/policies/<em>:id</em></span>
-
-Deletes a policy and all rules associated with it.
-
-#### Request Parameters
-
-The policy id described in the [Policy Object](#policy-object) is required.
-
-### Response Parameters
-
-None. Status 204 No Content is returned when the deletion is successful.
-
-### Activate a Policy
-{:.api .api-operation}
-
-<span class="api-uri-template api-uri-post"><span class="api-label">POST </span>/api/v1/policies/<em>:id</em>/lifecycle/activate</span>
-
-Activates the specified policy.
-
-#### Request Parameters
-
-The policy id described in the [Policy Object](#policy-object) is required.
-
-#### Response Parameters
-
-None. Status 204 No Content is returned when the activation is successful.
 
 ### Deactivate a Policy
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST </span>/api/v1/policies/<em>:id</em>/lifecycle/deactivate</span>
-
-Deactivates the specified policy.
+<span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/lifecycle/deactivate</span>
 
 #### Request Parameters
 
 The policy id described in the [Policy Object](#policy-object) is required.
 
-#### Response Parameters
+##### Request Example
+{:.api .api-request .api-request-example}
 
-None. Status 204 No Content is returned when the deactivation is successful.
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/policies/{policyId}/lifecycle/deactivate"
+~~~
+
+##### Response Types
+{:.api .api-response .api-response-example}
+
+HTTP 200: 
+*No Content is returned when the deactivation is successful.*
+
+
+
+
 
 # Rules
 
@@ -497,146 +454,202 @@ None. Status 204 No Content is returned when the deactivation is successful.
 ### Default Rules
 
  - Only the default policy contains a default rule. The default rule cannot be edited or deleted.
-
  - The default rule is required and always is the last rule in the priority order. If you add rules to the default policy, they have a higher priority than the default rule.
-
  - The `system` attribute determines whether a rule is created by a system or by a user. The default rule is the only rule that has this attribute.
+
+### Rules Object Example
+
+~~~json
+{
+    "actions": {
+        "access": "ALLOW", 
+        "enroll": {
+            "self": "LOGIN"
+        }, 
+        "signon": {
+            "access": "ALLOW", 
+            "factorLifetime": 0, 
+            "factorPromptMode": "ALWAYS", 
+            "requireFactor": false, 
+            "session": {
+                "maxSessionIdleMinutes": 20, 
+                "maxSessionLifetimeMinutes": 200, 
+                "usePersistentCookie": false
+            }
+        }
+    }, 
+    "conditions": {
+        "authContext": {
+            "authType": "ANY"
+        }, 
+        "network": {
+            "connection": "ANYWHERE"
+        }, 
+        "people": {
+            "users": {
+                "exclude": [
+                    "example.user"
+                ], 
+                "include": [
+                    "example.user"
+                ]
+            }
+        }
+    }, 
+    "created": "2010-01-01T00:00:00.000Z", 
+    "id": "abcd1234", 
+    "lastUpdated": "2010-01-01T00:00:00.000Z", 
+    "priorityOrder": {
+        "default": "Last / Lowest Priority", 
+        "description": "Priority for the rule", 
+        "type": "int"
+    }, 
+    "status": "ACTIVE", 
+    "system": true, 
+    "type": "OKTA_SIGN_ON"
+}
+~~~
+
 
 
 ### Rules Object
+{: #RulesObject }
 
 The Rules model defines several attributes:
 
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
 id | Identifier for the rule | String | No | Assigned
-type | Rule type –  must be `SIGN_ON` | String | Yes |
-name | Name for the rule | String | Yes |
-status | Status of the rule: `ACTIVE` or `INACTIVE` | String | No | `ACTIVE`
+type | Rule type | `OKTA_SIGN_ON` or `MFA_ENROLL` | Yes | 
+status | Status of the rule: `ACTIVE` or `INACTIVE` | String | No | ACTIVE
 priorityOrder | Priority for the rule | Int | No | Last / Lowest Priority
 system | Whether or not the rule is the default | Boolean | No | false
 created | Timestamp when the rule was created | Date | No | Assigned
 lastUpdated | Timestamp when the rule was last modified | Date | No | Assigned
+conditions | Conditions for rule | <a href="#ConditionsObject">Conditions Object</a> | No | 
+actions | Actions for rule | <a href="#RulesActionsObject">Actions Object</a> | No | 
 
-### Conditions
 
-Rule conditions include the people, user, and group conditions from the policy model in addition to:
+### Actions Object
+{: #RulesActionsObject }
 
-**Network Condition Body**
+
+
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+access | `ALLOW` or `DENY` | `ALLOW` or `DENY` | Yes | 
+enroll |  | <a href="#RulesActionsEnrollObject">Rules Actions Enroll Object</a> | No | 
+signon |  | <a href="#SignonObject">Signon Action Object</a> | No | 
+
+
+### Rules Actions Enroll Object
+{: #RulesActionsEnrollObject }
+
+
+
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+self | Should the user be enrolled the first time they `LOGIN`, the next time they are `CHALLENGE`d, or `NEVER`? | `CHALLENGE`, `LOGIN` or `NEVER` | Yes | 
+
+
+### Network Condition Object
+{: #NetworkConditionObject }
 
 Specifies a network segment.
 
-Parameter |	Description	| Data Type	|  Required	|  Default
+Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
-connection	|  `ANYWHERE`, `ON_NETWORK`, or `OFF_NETWORK` | 	String	| No	|  Empty
+connection |  | `ANYWHERE`, `ON_NETWORK` or `OFF_NETWORK` | No | 
 
-**AuthContext Condition Body**
+
+### authContext Condition Object
+{: #AuthContextConditionObject }
 
 Specifies an authentication entry point.
 
-Parameter | Description | DataType  |  Required |  Default
+Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
-authType	| `ANY` or `RADIUS`	| String	| No	| Empty
+authType |  | `ANY` or `RADIUS` | No | 
 
-### Actions
 
-**Signon Action**
+### Signon Action Object
+{: #SignonObject }
 
-Parameter | Description | Data Type  |  Required |  Default
+
+
+Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
-access	| `ALLOW` or `DENY`	| String	| YES
-requireFactor	| `true` or `false`	| Boolean	| NO	| `false`
-factorPromptMode	| `DEVICE`, `SESSION` or `ALWAYS`	| String	| When `requireFactor` = `true`
-factorLifetime	| How long until factor times out	| Int	| When `factorPromptMode` = `SESSION`
+access | `ALLOW` or `DENY` | `ALLOW` or `DENY` | Yes | 
+requireFactor |  | Boolean | No | false
+factorPromptMode | `DEVICE`, `SESSION` or `ALWAYS` | `DEVICE`, `SESSION` or `ALWAYS` | No | 
+factorLifetime | How long until factor times out | Int | No | 
+session | Session Rules | <a href="#SignonSessionObject">Signon Session Object</a> | No | 
 
-### Session
 
-**Session Rules**
+### Signon Session Object
+{: #SignonSessionObject }
 
-Parameter | Description | Data Type  |  Required |  Default
+
+
+Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
-maxSessionIdleMinutes | FIXME | Int| NO | FIXME
-maxSessionLifetimeMinutes | FIXME | Int | NO | FIXME
-usePersistentCookie | FIXME | Boolean | NO | FIXME
+maxSessionIdleMinutes | Maximum number of minutes that a user session can be idle before the session is ended. | Int | No | 
+maxSessionLifetimeMinutes | Maximum number of minutes from user login that a user session will be active. Set this to force users to sign-in again after the number of specified minutes. Disable by setting to `0`. | Int | No | 
+usePersistentCookie | If set to `false`, user session cookies will only last the length of a browser session. If set to `true`, user session cookies will last across browser sessions. This setting does not impact Okta Administrator users, who can *never* have persistant session cookies. | Boolean | No | false
+
 
 ## Rules Operations
+
 
 ### Get Policy Rules
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/<em>:policyId</em>/rules</span>
 
-Retrieves all rules for a specified policy.
+#### Request Parameters
+
+The policy id described in the [Policy Object](#policy-object) is required.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/policies/{policyId}/rules"
+~~~
+
+##### Response Types
+{:.api .api-response .api-response-example}
+
+HTTP 200: 
+<a href="#RulesObject">Rules Object</a>
+
+
+
+### Create a rule
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/rules</span>
 
 #### Request Parameters
 
 The policy id described in the [Policy Object](#policy-object) is required.
 
-##### Response Example
-{:.api .api-response .api-response-example}
+##### Request Example
+{:.api .api-request .api-request-example}
 
-~~~json
-{
-        "type": "SIGN_ON",
-        "id": "00oewwEGGIFFQTUCFRUL",
-        "status": "ACTIVE",
-        "name": "Legacy Rule",
-        "priorityOrder": 1,
-        "created": "2014-10-09T00:06:07.000Z",
-        "lastUpdated": "2014-10-09T00:06:07.000Z",
-        "system": false,
-        "conditions": {
-            "people": {
-                "users": {
-                    "exclude": []
-                }
-            },
-            "network": {
-                "connection": "ANYWHERE"
-            },
-            "authContext": {
-                "authType": "ANY"
-            }
-        },
-        "actions": {
-            "signon": {
-                "access": "ALLOW",
-                "requireFactor": true,
-                "factorPromptMode": "ALWAYS"
-            }
-        }
-    }
-~~~
-
-### Get a Rule
-{:.api .api-operation}
-
-<span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em></span>
-
-Retrieves the specified rule for a specified policy. The returned `id` is the rule id.
-
-#### Request Parameters
-
-The policy id described in the [Policy Object](#policy-object) and the rule id described in the [Rules Object](#rules-object) are both required.
-
-#### Response Parameters
-
-~~~json
-{
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
     "type": "SIGN_ON",
-    "id": "0pr2saywjsXMDPGASRRH",
-    "status": "ACTIVE",
-    "name": "Legacy Rule",
-    "priorityOrder": 1,
-    "created": "2014-10-09T00:06:07.000Z",
-    "lastUpdated": "2014-10-09T00:06:07.000Z",
-    "system": false,
+    "name": "Deny",
     "conditions": {
-        "people": {
-            "users": {
-                "exclude": []
-            }
-        },
         "network": {
             "connection": "ANYWHERE"
         },
@@ -646,103 +659,97 @@ The policy id described in the [Policy Object](#policy-object) and the rule id d
     },
     "actions": {
         "signon": {
-            "access": "ALLOW",
-            "requireFactor": true,
-            "factorPromptMode": "ALWAYS"
+            "access": "DENY",
+            "requireFactor": false
         }
     }
-}
+}' \
+"https://${org}.okta.com/api/v1/policies/{policyId}/rules"
 ~~~
 
-### Create Rule
+##### Response Types
+{:.api .api-response .api-response-example}
+
+HTTP 200: 
+<a href="#RulesObject">Rules Object</a>
+
+
+
+### Delete a rule
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/rules</span>
-
-Creates a new rule for a specified policy. The returned `id` is the rule id.
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em></span>
 
 #### Request Parameters
 
 The policy id described in the [Policy Object](#policy-object) is required.
 
 ##### Request Example
-{:.api .api-resquest .api-request-example}
+{:.api .api-request .api-request-example}
 
-~~~json
- {
-  "name": "mySignOnPolicyRule",
-  "type": "SIGN_ON",
-  "conditions": {
-    "network": {
-      "connection": "OFF_NETWORK"
-    },
-    "authContext": {
-      "authType": "RADIUS"
-    }
-  },
-  "actions": {
-    "signon": {
-      "access": "ALLOW",
-      "requireFactor": true,
-      "factorPromptMode": "SESSION",
-      "factorLifetime": 1
-    }
-  }
-}
+~~~sh
+curl -v -X DELETE \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/policies/{policyId}/rules/{ruleId}"
 ~~~
 
-##### Response Example
+##### Response Types
 {:.api .api-response .api-response-example}
 
-~~~json
-{
-    "type": "SIGN_ON",
-    "id": "0pr2saywjsXMDPGASRRH",
-    "status": "ACTIVE",
-    "name": "mySignOnPolicyRule",
-    "priorityOrder": 2,
-    "created": "2014-10-14T17:17:42.000Z",
-    "lastUpdated": "2014-10-14T17:17:42.000Z",
-    "system": false,
-    "conditions": {
-        "network": {
-            "connection": "OFF_NETWORK"
-        },
-        "authContext": {
-            "authType": "RADIUS"
-        }
-    },
-    "actions": {
-        "signon": {
-            "access": "ALLOW",
-            "requireFactor": true,
-            "factorPromptMode": "SESSION",
-            "factorLifetime": 1
-        }
-    }
-}
+HTTP 204: 
+*No Content*
+
+
+
+### Get a rule
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em></span>
+
+#### Request Parameters
+
+The policy id described in the [Policy Object](#policy-object) is required.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/policies/{policyId}/rules/{ruleId}"
 ~~~
 
-### Update a Rule
+##### Response Types
+{:.api .api-response .api-response-example}
+
+HTTP 200: 
+<a href="#RulesObject">Rules Object</a>
+
+
+
+### Update a rule
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-put"><span class="api-label">PUT </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em></span>
 
-Updates the specified rule for the specified policy.
-
 #### Request Parameters
 
-The policy id described in the [Policy Object](#policy-object) and the rule id described in the [Rules Object](#rules-object) are both required.
+The policy id described in the [Policy Object](#policy-object) is required.
 
 ##### Request Example
-{:.api .api-resquest .api-request-example}
+{:.api .api-request .api-request-example}
 
-**Note:** This is a strict PUT. Any missing item is set to its default value. For example if `priorityOrder` is missing, the item moves to the lowest priority order in the policy.
-
-~~~json
-{
-  "name": "mySignOnPolicyRule",
-  "type": "SIGN_ON",
+~~~sh
+curl -v -X PUT \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "name": "My Updated Policy Rule",
   "conditions": {
     "people": {
       "users": {
@@ -750,99 +757,82 @@ The policy id described in the [Policy Object](#policy-object) and the rule id d
       }
     },
     "network": {
-      "connection": "OFF_NETWORK"
+      "connection": "ON_NETWORK"
     },
     "authContext": {
-      "authType": "RADIUS"
+      "authType": "ANY"
     }
   },
   "actions": {
     "signon": {
-      "access": "ALLOW",
-      "requireFactor": false,
-      "factorPromptMode": "SESSION",
-      "factorLifetime": 1
+      "access": "DENY"
     }
   }
-}
+}' \
+"https://${org}.okta.com/api/v1/policies/{policyId}/rules/{ruleId}"
 ~~~
 
-##### Response Example
+##### Response Types
 {:.api .api-response .api-response-example}
 
-~~~json
-{
-    "type": "SIGN_ON",
-    "id": "0pr2t4by8wWYZMLJMGEM",
-    "status": "ACTIVE",
-    "name": "mySignOnPolicyRule",
-    "priorityOrder": 2,
-    "created": "2014-10-14T17:17:42.000Z",
-    "lastUpdated": "2014-10-14T20:51:24.000Z",
-    "system": false,
-    "conditions": {
-        "people": {
-            "users": {
-                "exclude": []
-            }
-        },
-        "network": {
-            "connection": "OFF_NETWORK"
-        },
-        "authContext": {
-            "authType": "RADIUS"
-        }
-    },
-    "actions": {
-        "signon": {
-            "access": "ALLOW",
-            "requireFactor": false
-        }
-    }
-}
-~~~
+HTTP 200: 
+<a href="#RulesObject">Rules Object</a>
 
-### Activate a Rule
+
+
+### Activate A Rule
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em>/lifecycle/activate</span>
 
-Activates the specified rule for the specified policy.
-
 #### Request Parameters
 
-The policy id described in the [Policy Object](#policy-object) and the rule id described in the [Rules Object](#rules-object) are both required.
+The policy id described in the [Policy Object](#policy-object) is required.
 
-#### Response Parameters
+##### Request Example
+{:.api .api-request .api-request-example}
 
-None. Status 204 No Content is returned when the activation is successful.
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/policies/{policyId}/rules/{ruleId}/lifecycle/activate"
+~~~
 
-### Deactivate a Rule
+##### Response Types
+{:.api .api-response .api-response-example}
+
+HTTP 204: 
+*No content*
+
+
+
+### Deactivate A Rule
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em>/lifecycle/deactivate</span>
 
-Deactivates the specified rule for the specified policy.
-
 #### Request Parameters
 
-The policy id described in the [Policy Object](#policy-object) and the rule id described in the [Rules Object](#rules-object) are both required.
+The policy id described in the [Policy Object](#policy-object) is required.
 
-#### Response Parameters
+##### Request Example
+{:.api .api-request .api-request-example}
 
-None. Status 204 No Content is returned when the deactivation is successful.
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/policies/{policyId}/rules/{ruleId}/lifecycle/deactivate"
+~~~
 
-### Delete a Rule
-{:.api .api-operation}
+##### Response Types
+{:.api .api-response .api-response-example}
 
-<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em></span>
+HTTP 204: 
+*No content*
 
-Deletes the specified rule for the specified policy.
 
-#### Request Parameters
 
-TThe policy id described in the [Policy Object](#policy-object) and the rule id described in the [Rules Object](#rules-object) are both required.
-
-#### Response Parameters
-
-None. Status 204 No Content is returned when the deletion is successful.
