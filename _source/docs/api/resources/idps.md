@@ -45,6 +45,13 @@ The Okta Identity Providers API provides operations to manage federations with e
           "scope": "ANY"
         }
       }
+    },
+    "credentials": {
+      "trust": {
+        "issuer": "urn:example:idp",
+        "audience": "https://www.okta.com/saml2/service-provider/spgv32vOnpdyeGSaiUpL",
+        "kid": "164f0d13-be79-4a13-8848-a9450e9abd2c"
+      }
     }
   },
   "policy": {
@@ -70,13 +77,6 @@ The Okta Identity Providers API provides operations to manage federations with e
       "matchType": "USERNAME"
     },
     "maxClockSkew": 120000
-  },
-  "credentials": {
-    "trust": {
-      "issuer": "urn:example:idp",
-      "audience": "https://www.okta.com/saml2/service-provider/spgv32vOnpdyeGSaiUpL",
-      "kid": "164f0d13-be79-4a13-8848-a9450e9abd2c"
-    }
   },
   "_links": {
     "metadata": {
@@ -125,7 +125,6 @@ All Identity Providers have the following properties:
 | lastUpdated   | timestamp when IdP was last updated                          | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
 | protocol      | protocol settings for IdP `type`                             | [Protocol Object](#identity-provider-type)                     | FALSE    | FALSE  | FALSE    |           |           |            |
 | policy        | policy settings for IdP `type`                               | [Policy Object](#identity-provider-type)                       | FALSE    | FALSE  | FALSE    |           |           |            |
-| credentials   | credential settings for IdP `type`                           | [Credentials Object](#identity-provider-type)                  | FALSE    | FALSE  | FALSE    |           |           |            |
 | _links        | [discoverable resources](#links-object) related to the IdP   | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
 | _embedded     | embedded resources related to the IdP                        | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
 |---------------+--------------------------------------------------------------+----------------------------------------------------------------+----------|--------|----------|-----------|-----------+------------|
@@ -162,13 +161,14 @@ IdP-specific protocol settings for endpoints, bindings, and algorithms used to c
 
 Protocol settings for the [SAML 2.0 Authentication Request Protocol](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)
 
-|-------------+------------------------------------------------------------+----------------------------------------------------------+----------+----------+-----------+-----------+------------|
-| Property    | Description                                                | DataType                                                 | Nullable | Readonly | MinLength | MaxLength | Validation |
-| ----------- | ---------------------------------------------------------- | -------------------------------------------------------- | -------- | -------- | --------- | --------- | ---------- |
-| type        | SAML 2.0 protocol                                          | `SAML2`                                                  | FALSE    | TRUE     |           |           |            |
-| endpoints   | SAML 2.0 HTTP binding settings for IdP and SP (Okta)       | [SAML 2.0 Endpoints Object](#saml-20-endpoints-object)   | FALSE    | FALSE    |           |           |            |
-| algorithms  | Settings for signing and verifying SAML messages           | [SAML 2.0 Algorithms Object](#saml-20-algorithms-object) | FALSE    | FALSE    |           |           |            |
-|-------------+------------------------------------------------------------+----------------------------------------------------------+----------+----------+-----------+-----------+------------|
+|-------------+--------------------------------------------------------------------+-------------------------------------------------------------------+----------+----------+-----------+-----------+------------|
+| Property    | Description                                                        | DataType                                                          | Nullable | Readonly | MinLength | MaxLength | Validation |
+| ----------- | ------------------------------------------------------------------ | ----------------------------------------------------------------- | -------- | -------- | --------- | --------- | ---------- |
+| type        | SAML 2.0 protocol                                                  | `SAML2`                                                           | FALSE    | TRUE     |           |           |            |
+| endpoints   | SAML 2.0 HTTP binding settings for IdP and SP (Okta)               | [SAML 2.0 Endpoints Object](#saml-20-endpoints-object)            | FALSE    | FALSE    |           |           |            |
+| algorithms  | Settings for signing and verifying SAML messages                   | [SAML 2.0 Algorithms Object](#saml-20-algorithms-object)          | FALSE    | FALSE    |           |           |            |
+| credentials | Federation trust credentials for verifying assertions from the IdP | [SAML 2.0 Credentials Object](#saml-20-trust-credentials-object)  | FALSE    | FALSE    |           |           |            |
+|-------------+--------------------------------------------------------------------+-------------------------------------------------------------------+----------+----------+-----------+-----------+------------|
 
 ~~~json
 {
@@ -197,6 +197,13 @@ Protocol settings for the [SAML 2.0 Authentication Request Protocol](http://docs
           "algorithm": "SHA-1",
           "scope": "ANY"
         }
+      }
+    },
+    "credentials": {
+      "trust": {
+        "issuer": "urn:example:idp",
+        "audience": "https://www.okta.com/saml2/service-provider/spgv32vOnpdyeGSaiUpL",
+        "kid": "164f0d13-be79-4a13-8848-a9450e9abd2c"
       }
     }
   }
@@ -412,17 +419,45 @@ XML digital signature algorithm settings for verifying `<SAMLResponse>` messages
 | scope       | Specifies whether to verify a `<SAMLResponse>` message or `<Assertion>` element XML digital signature                  | `RESPONSE`, `ASSERTION`, `ANY` | FALSE    | FALSE    |           |           |            |
 |-------------+------------------------------------------------------------------------------------------------------------------------+--------------------------------+----------+----------+-----------+-----------+------------|
 
+###### SAML 2.0 Trust Credentials Object
+
+Federation trust credentials for verifying assertions from the IdP
+
+|---------+--------------------------------------------------------------------------------------------------------+----------+----------+----------+-----------+-----------+--------------------------------------------|
+| Property | Description                                                                                           | DataType | Nullable | Readonly | MinLength | MaxLength | Validation                                 |
+| -------- | ----------------------------------------------------------------------------------------------------- | -------- | -------- | -------- | --------- | --------- | ------------------------------------------ |
+| issuer   | URI that identifies the issuer (IdP) of a SAML `<SAMLResponse>` message `<Assertion>` element         | String   | FALSE    | FALSE    | 1         | 1024      | [URI](https://tools.ietf.org/html/rfc3986) |
+| audience | URI that identifies the target Okta IdP instance (SP) for an `<Assertion>`                            | String   | FALSE    | FALSE    | 1         | 1024      | [URI](https://tools.ietf.org/html/rfc3986) |
+| kid      | [Key ID](#identity-provider-key-store-operations) reference to the IdP's X.509 signature certificate  | String   | FALSE    | FALSE    | 36        | 36        | Valid IdP Key ID reference                 |
+|----------+-------------------------------------------------------------------------------------------------------+----------+----------+----------+-----------+-----------+--------------------------------------------|
+
+~~~json
+{
+  "protocol": {
+    "type": "SAML2",
+    "credentials": {
+      "trust": {
+        "issuer": "urn:example:idp",
+        "audience": "https://www.okta.com/saml2/service-provider/spgv32vOnpdyeGSaiUpL",
+        "kid": "164f0d13-be79-4a13-8848-a9450e9abd2c"
+      }
+    }
+  }
+}
+~~~
+
 #### OAuth 2.0 Protocol
 
 Protocol settings for authentication using the [OAuth 2.0 Authorization Code Flow](https://tools.ietf.org/html/rfc6749#section-4.1)
 
-|-------------+--------------------------------------------------------------------------------------+----------------------------------------------------------+----------+----------+-----------+-----------+------------|
-| Property    | Description                                                                          | DataType                                                 | Nullable | Readonly | MinLength | MaxLength | Validation |
-| ----------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------- | -------- | -------- | --------- | --------- | ---------- |
-| type        | [OAuth 2.0 Authorization Code Flow](https://tools.ietf.org/html/rfc6749#section-4.1) | `OAUTH2`                                                 | FALSE    | TRUE     |           |           |            |
-| endpoints   | Endpoint settings for OAuth 2.0 Authorization Server (AS)                            | [OAuth 2.0 Endpoints Object](#oauth-20-endpoints-object) | TRUE     | TRUE     |           |           |            |
-| scopes      | IdP-defined permission bundles to request delegated access from user                 | Array of String                                          | FALSE    | FALSE    | 1         |           |            |
-|-------------+--------------------------------------------------------------------------------------+----------------------------------------------------------+----------+----------+-----------+-----------+------------|
+|-------------+---------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+----------+----------+-----------+-----------+------------|
+| Property    | Description                                                                                                                     | DataType                                                  | Nullable | Readonly | MinLength | MaxLength | Validation |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- | -------- | -------- | --------- | --------- | ---------- |
+| type        | [OAuth 2.0 Authorization Code Flow](https://tools.ietf.org/html/rfc6749#section-4.1)                                            | `OAUTH2`                                                  | FALSE    | TRUE     |           |           |            |
+| endpoints   | Endpoint settings for OAuth 2.0 Authorization Server (AS)                                                                       | [OAuth 2.0 Endpoints Object](#oauth-20-endpoints-object)  | TRUE     | TRUE     |           |           |            |
+| scopes      | IdP-defined permission bundles to request delegated access from user                                                            | Array of String                                           | FALSE    | FALSE    | 1         |           |            |
+| credentials | Client authentication credentials for an [OAuth 2.0 Authorization Server (AS)](https://tools.ietf.org/html/rfc6749#section-2.3) | [Credentials Object](#oauth-20-client-credentials-object) | FALSE    | FALSE    |           |           |            |
+|-------------+---------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+----------+----------+-----------+-----------+------------|
 
 > Refer to the IdP setup documentation for a list of what scopes are supported [per-IdP provider](#identity-provider-type)
 
@@ -443,34 +478,12 @@ Protocol settings for authentication using the [OAuth 2.0 Authorization Code Flo
     "scopes": [
       "public_profile",
       "email"
-    ]
-  }
-}
-~~~
-
-##### OAuth 2.0 Endpoints Object
-
-The `OAUTH2` protocol supports the `authorization` and `token` endpoints
-
-|---------------+------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------+----------+----------+-----------+-----------+------------|
-| Property      | Description                                                                                                | DataType                                                                                        | Nullable | Readonly | MinLength | MaxLength | Validation |
-| ------------- | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | -------- | -------- | --------- | --------- | ---------- |
-| authorization | IdP Authorization Server (AS) endpoint to request consent from user and obtain an authorization code grant | [OAuth 2.0 Authorization Server Endpoint Object](#oauth-20-authorization-server-endpoint-object)| TRUE     | TRUE     |           |           |            |
-| token         | IdP Authorization Server (AS) endpoint to exchange authorization code grant for an access token            | [OAuth 2.0 Authorization Server Endpoint Object](#oauth-20-authorization-server-endpoint-object)| TRUE     | TRUE     |           |           |            |
-|---------------+------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------+----------+----------+-----------+-----------+------------|
-
-> The IdP Authorization Server (AS) endpoints are currently defined as part of the [IdP provider](#identity-provider-type) and are **read-only**
-
-~~~json
-{
-  "endpoints": {
-    "authorization": {
-      "url": "https://www.facebook.com/dialog/oauth",
-      "binding": "HTTP-REDIRECT"
-    },
-    "token": {
-      "url": "https://graph.facebook.com/v2.5/oauth/access_token",
-      "binding": "HTTP-POST"
+    ],
+    "credentials": {
+      "client": {
+        "client_id": "430731646638-sq6oeve9f6rpm2rne289nukind6f1qgk.apps.googleusercontent.com",
+        "client_secret": "kOgHsuPDawNDSkkaAKvv6SMh"
+      }
     }
   }
 }
@@ -480,13 +493,14 @@ The `OAUTH2` protocol supports the `authorization` and `token` endpoints
 
 Protocol settings for authentication using the [OpenID Connect Protocol](http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth)
 
-|-------------+-------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------+----------+----------+-----------+-----------+------------|
-| Property    | Description                                                                                                 | DataType                                                       | Nullable | Readonly | MinLength | MaxLength | Validation |
-| ----------- | ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | -------- | -------- | --------- | --------- | ---------- |
-| type        | [OpenID Connect Authorization Code Flow](http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth) | `OIDC`                                                         | FALSE    | TRUE     |           |           |            |
-| endpoints   | Endpoint settings for OAuth 2.0 Authorization Server (AS)                                                   | [OAuth 2.0 Endpoints Object](#openid-connect-endpoints-object) | TRUE     | TRUE     |           |           |            |
-| scopes      | OpenID Connect and IdP-defined permission bundles to request delegated access from user                     | Array of String                                                | FALSE    | FALSE    | 1         |           |            |
-|-------------+-------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------+----------+----------+-----------+-----------+------------|
+|-------------+---------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------+----------+----------+-----------+-----------+------------|
+| Property    | Description                                                                                                                     | DataType                                                        | Nullable | Readonly | MinLength | MaxLength | Validation |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | -------- | -------- | --------- | --------- | ---------- |
+| type        | [OpenID Connect Authorization Code Flow](http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth)                     | `OIDC`                                                          | FALSE    | TRUE     |           |           |            |
+| endpoints   | Endpoint settings for OAuth 2.0 Authorization Server (AS)                                                                       | [OAuth 2.0 Endpoints Object](#openid-connect-endpoints-object)  | TRUE     | TRUE     |           |           |            |
+| scopes      | OpenID Connect and IdP-defined permission bundles to request delegated access from user                                         | Array of String                                                 | FALSE    | FALSE    | 1         |           |            |
+| credentials | Client authentication credentials for an [OAuth 2.0 Authorization Server (AS)](https://tools.ietf.org/html/rfc6749#section-2.3) | [Credentials Object](#openid-connect-client-credentials-object) | FALSE    | FALSE    |           |           |            |
+|-------------+---------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------+----------+----------+-----------+-----------+------------|
 
 > Refer to the IdP setup documentation for a list of what scopes are supported [per-IdP provider](#identity-provider-type).  The base `openid` scope is always required.
 
@@ -508,14 +522,20 @@ Protocol settings for authentication using the [OpenID Connect Protocol](http://
       "profile",
       "email",
       "openid"
-    ]
+    ],
+    "credentials": {
+      "client": {
+        "client_id": "430731646638-sq6oeve9f6rpm2rne289nukind6f1qgk.apps.googleusercontent.com",
+        "client_secret": "kOgHsuPDawNDSkkaAKvv6SMh"
+      }
+    }
   }
 }
 ~~~
 
-##### OpenID Connect Endpoints Object
+##### OAuth 2.0 and OpenID Connect Endpoints Object
 
-The `OIDC` protocol supports the `authorization` and `token` endpoints
+The `OAUTH2` and `OIDC` protocols support the `authorization` and `token` endpoints
 
 |---------------+------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------+----------+----------+-----------+-----------+------------|
 | Property      | Description                                                                                                | DataType                                                                                        | Nullable | Readonly | MinLength | MaxLength | Validation |
@@ -528,14 +548,76 @@ The `OIDC` protocol supports the `authorization` and `token` endpoints
 
 ~~~json
 {
-  "endpoints": {
-    "authorization": {
-      "url": "https://accounts.google.com/o/oauth2/auth",
-      "binding": "HTTP-REDIRECT"
-    },
-    "token": {
-      "url": "https://www.googleapis.com/oauth2/v3/token",
-      "binding": "HTTP-POST"
+  "protocol": {
+    "type": "OAUTH2",
+    "endpoints": {
+      "authorization": {
+        "url": "https://www.facebook.com/dialog/oauth",
+        "binding": "HTTP-REDIRECT"
+      },
+      "token": {
+        "url": "https://graph.facebook.com/v2.5/oauth/access_token",
+        "binding": "HTTP-POST"
+      }
+    }
+  }
+}
+~~~
+
+~~~json
+{
+  "protocol": {
+    "type": "OIDC",
+    "endpoints": {
+      "authorization": {
+        "url": "https://accounts.google.com/o/oauth2/auth",
+        "binding": "HTTP-REDIRECT"
+      },
+      "token": {
+        "url": "https://www.googleapis.com/oauth2/v3/token",
+        "binding": "HTTP-POST"
+      }
+    }
+  }
+}
+~~~
+
+##### OAuth 2.0 and Openid Connect Client Credentials Object
+
+Client authentication credentials for an [OAuth 2.0 Authorization Server (AS)](https://tools.ietf.org/html/rfc6749#section-2.3)
+
+|---------------+-------------------------------------------------------------------------------------------------------------+----------+----------+----------+-----------+-----------+------------|
+| Property      | Description                                                                                                 | DataType | Nullable | Readonly | MinLength | MaxLength | Validation |
+| ------------- | ----------------------------------------------------------------------------------------------------------- | -------- | -------- | -------- | --------- | --------- | ---------- |
+| client_id     | [Unique identifier](https://tools.ietf.org/html/rfc6749#section-2.2) issued by AS for the Okta IdP instance | String   | FALSE    | FALSE    | 1         | 1024      |            |
+| client_secret | [Client secret issued](https://tools.ietf.org/html/rfc6749#section-2.3.1) by AS for the Okta IdP instance   | String   | FALSE    | FALSE    | 1         | 1024      |            |
+|---------------+-------------------------------------------------------------------------------------------------------------+----------+----------+----------+-----------+-----------+------------|
+
+> You must perform client registration with the IdP Authorization Server for your Okta IdP instance to obtain client credentials
+
+~~~json
+{
+  "protocol": {
+    "type": "OAUTH2",
+    "credentials": {
+      "client": {
+        "client_id": "399886900205105",
+        "client_secret": "854b2478619d4fcff49f1eb10c78292d"
+      }
+    }
+  }
+}
+~~~
+
+~~~json
+{
+  "protocol": {
+    "type": "OIDC",
+    "credentials": {
+      "client": {
+        "client_id": "430731646638-sq6oeve9f6rpm2rne289nukind6f1qgk.apps.googleusercontent.com",
+        "client_secret": "kOgHsuPDawNDSkkaAKvv6SMh"
+      }
     }
   }
 }
@@ -916,79 +998,6 @@ Specifies the behavior for establishing, validating, and matching a username for
 {
   "userNameTemplate": {
     "template": "idpuser.subjectNameId"
-  }
-}
-~~~
-
-#### Credentials Object
-
-Trust or client credentials for the [IdP provider](#identity-provider-type)
-
-|----------+---------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------+----------+----------+-----------+-----------+------------------------------------------|
-| Property | Description                                                                                                                     | DataType                                                | Nullable | Readonly | MinLength | MaxLength | Validation                               |
-| -------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | -------- | -------- | --------- | --------- | ---------------------------------------- |
-| trust    | Federation trust credentials for verifying assertions from an IdP                                                               | [Trust Credentials Object](#trust-credentials-object)   | TRUE     | FALSE    |           |           | Required for `SAML2` provider            |
-| client   | Client authentication credentials for an [OAuth 2.0 Authorization Server (AS)](https://tools.ietf.org/html/rfc6749#section-2.3) | [Client Credentials Object](#client-credentials-object) | TRUE     | FALSE    |           |           | Required for `OAUTH2` or `OIDC` provider |
-|----------+---------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------+----------+----------+-----------+-----------+------------------------------------------|
-
-##### IdP Type Credentials
-
-The [type of IdP](#identity-provider-type) determines which credential type is supported:
-
-|--------------+--------------------------------------+
-| IdP Type     | Credential Type                      |
-| ------------ | ------------------------------------ |
-| `SAML2`      | [Trust](#trust-credentials-object)   |
-| `FACEBOOK`   | [Client](#client-credentials-object) |
-| `GOOGLE`     | [Client](#client-credentials-object) |
-| `LINKEDIN`   | [Client](#client-credentials-object) |
-|--------------+--------------------------------------+
-
-
-##### Trust Credentials Object
-
-Federation trust credentials for verifying assertions from an IdP
-
-|---------+------------------------------------------------------------------------------------------------+----------+----------+----------+-----------+-----------+--------------------------------------------|
-| Property | Description                                                                                   | DataType | Nullable | Readonly | MinLength | MaxLength | Validation                                 |
-| -------- | --------------------------------------------------------------------------------------------- | -------- | -------- | -------- | --------- | --------- | ------------------------------------------ |
-| issuer   | URI that identifies the issuer (IdP) of a SAML `<SAMLResponse>` message `<Assertion>` element | String   | FALSE    | FALSE    | 1         | 1024      | [URI](https://tools.ietf.org/html/rfc3986) |
-| audience | URI that identifies the target Okta IdP instance (SP) for an `<Assertion>`                    | String   | FALSE    | FALSE    | 1         | 1024      | [URI](https://tools.ietf.org/html/rfc3986) |
-| kid      | Key ID reference to the IdP's X.509 signature certificate                                     | String   | FALSE    | FALSE    | 36        | 36        | Valid IdP Key ID reference                 |
-|----------+-----------------------------------------------------------------------------------------------+----------+----------+----------+-----------+-----------+--------------------------------------------|
-
-~~~json
-{
-  "credentials": {
-    "trust": {
-      "issuer": "urn:example:idp",
-      "audience": "https://www.okta.com/saml2/service-provider/spgv32vOnpdyeGSaiUpL",
-      "kid": "164f0d13-be79-4a13-8848-a9450e9abd2c"
-    }
-  }
-}
-~~~
-
-##### Client Credentials Object
-
-Client authentication credentials for an [OAuth 2.0 Authorization Server (AS)](https://tools.ietf.org/html/rfc6749#section-2.3)
-
-|---------------+-------------------------------------------------------------------------------------------------------------+----------+----------+----------+-----------+-----------+------------|
-| Property      | Description                                                                                                 | DataType | Nullable | Readonly | MinLength | MaxLength | Validation |
-| ------------- | ----------------------------------------------------------------------------------------------------------- | -------- | -------- | -------- | --------- | --------- | ---------- |
-| client_id     | [Unique identifier](https://tools.ietf.org/html/rfc6749#section-2.2) issued by AS for the Okta IdP instance | String   | FALSE    | FALSE    | 1         | 1024      |            |
-| client_secret | [Client secret issued](https://tools.ietf.org/html/rfc6749#section-2.3.1) by AS for the Okta IdP instance   | String   | FALSE    | FALSE    | 1         | 1024      |            |
-|---------------+-------------------------------------------------------------------------------------------------------------+----------+----------+----------+-----------+-----------+------------|
-
-> You must perform client registration with the IdP Authorization Server for your Okta IdP instance to obtain client credentials
-
-~~~json
-{
-  "credentials": {
-    "client": {
-      "client_id": "430731646638-sq6oeve9f6rpm2rne289nukind6f1qgk.apps.googleusercontent.com",
-      "client_secret": "kOgHsuPDawNDSkkaAKvv6SMh"
-    }
   }
 }
 ~~~
@@ -2350,14 +2359,26 @@ curl -v -X GET \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-}' "https://${org}.okta.com/api/v1/idps/credentials/keys/akm5hvbbevE341ovl0h7"
+}' "https://${org}.okta.com/api/v1/idps/credentials/keys/74bb2164-e0c8-4457-862b-7c29ba6cd2c9"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
 ~~~json
-
+{
+  "kid": "74bb2164-e0c8-4457-862b-7c29ba6cd2c9",
+  "created": "2016-01-03T18:15:47.000Z",
+  "lastUpdated": "2016-01-03T18:15:47.000Z",
+  "e": "65537",
+  "n": "101438407598598116085679865987760095721749307901605456708912786847324207000576780508113360584555007890315805735307890113536927352312915634368993759211767770602174860126854831344273970871509573365292777620005537635317282520456901584213746937262823585533063042033441296629204165064680610660631365266976782082747",
+  "kty": "RSA",
+  "use": "sig",
+  "x5c": [
+    "MIIDnjCCAoagAwIBAgIGAVG3MN+PMA0GCSqGSIb3DQEBBQUAMIGPMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxEDAOBgNVBAMMB2V4YW1wbGUxHDAaBgkqhkiG9w0BCQEWDWluZm9Ab2t0YS5jb20wHhcNMTUxMjE4MjIyMjMyWhcNMjUxMjE4MjIyMzMyWjCBjzELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xDTALBgNVBAoMBE9rdGExFDASBgNVBAsMC1NTT1Byb3ZpZGVyMRAwDgYDVQQDDAdleGFtcGxlMRwwGgYJKoZIhvcNAQkBFg1pbmZvQG9rdGEuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtcnyvuVCrsFEKCwHDenS3Ocjed8eWDv3zLtD2K/iZfE8BMj2wpTfn6Ry8zCYey3mWlKdxIybnV9amrujGRnE0ab6Q16v9D6RlFQLOG6dwqoRKuZy33Uyg8PGdEudZjGbWuKCqqXEp+UKALJHV+k4wWeVH8g5d1n3KyR2TVajVJpCrPhLFmq1Il4G/IUnPe4MvjXqB6CpKkog1+ThWsItPRJPAM+RweFHXq7KfChXsYE7Mmfuly8sDQlvBmQyxZnFHVuiPfCvGHJjpvHy11YlHdOjfgqHRvZbmo30+y0X/oY/yV4YEJ00LL6eJWU4wi7ViY3HP6/VCdRjHoRdr5L/DwIDAQABMA0GCSqGSIb3DQEBBQUAA4IBAQCzzhOFkvyYLNFj2WDcq1YqD4sBy1iCia9QpRH3rjQvMKDwQDYWbi6EdOX0TQ/IYR7UWGj+2pXd6v0t33lYtoKocp/4lUvT3tfBnWZ5KnObi+J2uY2teUqoYkASN7F+GRPVOuMVoVgm05ss8tuMb2dLc9vsx93sDt+XlMTv/2qi5VPwaDtqduKkzwW9lUfn4xIMkTiVvCpe0X2HneD2Bpuao3/U8Rk0uiPfq6TooWaoW3kjsmErhEAs9bA7xuqo1KKY9CdHcFhkSsMhoeaZylZHtzbnoipUlQKSLMdJQiiYZQ0bYL83/Ta9fulr1EERICMFt3GUmtYaZZKHpWSfdJp9"
+  ],
+  "x5t": "noocvK-9pzU-n35eimPK16zYEYk"
+}
 ~~~
 
 ### List Keys
@@ -2397,7 +2418,19 @@ curl -v -X GET \
 
 ~~~json
 [
-
+  {
+    "kid": "74bb2164-e0c8-4457-862b-7c29ba6cd2c9",
+    "created": "2016-01-03T18:15:47.000Z",
+    "lastUpdated": "2016-01-03T18:15:47.000Z",
+    "e": "65537",
+    "n": "101438407598598116085679865987760095721749307901605456708912786847324207000576780508113360584555007890315805735307890113536927352312915634368993759211767770602174860126854831344273970871509573365292777620005537635317282520456901584213746937262823585533063042033441296629204165064680610660631365266976782082747",
+    "kty": "RSA",
+    "use": "sig",
+    "x5c": [
+      "MIIDnjCCAoagAwIBAgIGAVG3MN+PMA0GCSqGSIb3DQEBBQUAMIGPMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxEDAOBgNVBAMMB2V4YW1wbGUxHDAaBgkqhkiG9w0BCQEWDWluZm9Ab2t0YS5jb20wHhcNMTUxMjE4MjIyMjMyWhcNMjUxMjE4MjIyMzMyWjCBjzELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xDTALBgNVBAoMBE9rdGExFDASBgNVBAsMC1NTT1Byb3ZpZGVyMRAwDgYDVQQDDAdleGFtcGxlMRwwGgYJKoZIhvcNAQkBFg1pbmZvQG9rdGEuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtcnyvuVCrsFEKCwHDenS3Ocjed8eWDv3zLtD2K/iZfE8BMj2wpTfn6Ry8zCYey3mWlKdxIybnV9amrujGRnE0ab6Q16v9D6RlFQLOG6dwqoRKuZy33Uyg8PGdEudZjGbWuKCqqXEp+UKALJHV+k4wWeVH8g5d1n3KyR2TVajVJpCrPhLFmq1Il4G/IUnPe4MvjXqB6CpKkog1+ThWsItPRJPAM+RweFHXq7KfChXsYE7Mmfuly8sDQlvBmQyxZnFHVuiPfCvGHJjpvHy11YlHdOjfgqHRvZbmo30+y0X/oY/yV4YEJ00LL6eJWU4wi7ViY3HP6/VCdRjHoRdr5L/DwIDAQABMA0GCSqGSIb3DQEBBQUAA4IBAQCzzhOFkvyYLNFj2WDcq1YqD4sBy1iCia9QpRH3rjQvMKDwQDYWbi6EdOX0TQ/IYR7UWGj+2pXd6v0t33lYtoKocp/4lUvT3tfBnWZ5KnObi+J2uY2teUqoYkASN7F+GRPVOuMVoVgm05ss8tuMb2dLc9vsx93sDt+XlMTv/2qi5VPwaDtqduKkzwW9lUfn4xIMkTiVvCpe0X2HneD2Bpuao3/U8Rk0uiPfq6TooWaoW3kjsmErhEAs9bA7xuqo1KKY9CdHcFhkSsMhoeaZylZHtzbnoipUlQKSLMdJQiiYZQ0bYL83/Ta9fulr1EERICMFt3GUmtYaZZKHpWSfdJp9"
+    ],
+    "x5t": "noocvK-9pzU-n35eimPK16zYEYk"
+  }
 ]
 ~~~
 
@@ -2428,7 +2461,7 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/idps/credentials/keys/00ulwodIu7wCfdiVR0g3"
+"https://${org}.okta.com/api/v1/idps/credentials/keys/74bb2164-e0c8-4457-862b-7c29ba6cd2c9"
 ~~~
 
 ##### Response Example
