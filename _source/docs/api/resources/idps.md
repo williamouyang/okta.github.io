@@ -70,9 +70,6 @@ The Okta Identity Providers API provides operations to manage federations with e
       "userNameTemplate": {
         "template": "idpuser.subjectNameId"
       },
-      "format": [
-        "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
-      ],
       "filter": null,
       "matchType": "USERNAME"
     },
@@ -168,6 +165,7 @@ Protocol settings for the [SAML 2.0 Authentication Request Protocol](http://docs
 | endpoints   | SAML 2.0 HTTP binding settings for IdP and SP (Okta)               | [SAML 2.0 Endpoints Object](#saml-20-endpoints-object)            | FALSE    | FALSE    |           |           |            |
 | algorithms  | Settings for signing and verifying SAML messages                   | [SAML 2.0 Algorithms Object](#saml-20-algorithms-object)          | FALSE    | FALSE    |           |           |            |
 | credentials | Federation trust credentials for verifying assertions from the IdP | [SAML 2.0 Credentials Object](#saml-20-trust-credentials-object)  | FALSE    | FALSE    |           |           |            |
+| settings    | Advanced settings for the SAML 2.0 protocol                        | [SAML 2.0 Settings Object](#saml-20-settings-object)              | TRUE     | FALSE    |           |           |            |
 |-------------+--------------------------------------------------------------------+-------------------------------------------------------------------+----------+----------+-----------+-----------+------------|
 
 ~~~json
@@ -205,6 +203,9 @@ Protocol settings for the [SAML 2.0 Authentication Request Protocol](http://docs
         "audience": "https://www.okta.com/saml2/service-provider/spgv32vOnpdyeGSaiUpL",
         "kid": "164f0d13-be79-4a13-8848-a9450e9abd2c"
       }
+    },
+    "settings": {
+        "nameFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient"
     }
   }
 }
@@ -446,6 +447,36 @@ Federation trust credentials for verifying assertions from the IdP
 }
 ~~~
 
+##### SAML 2.0 Settings Object
+
+|-------------+-----------------------------------+-------------+----------+----------+----------------------------------------------------------------------+-------------------------------------------------------|
+| Property    | Description                       | DataType    | Nullable | Readonly | DataType                                                             | Default                                               |
+| ----------- + --------------------------------- + ----------- + -------- + -------- +--------------------------------------------------------------------- + ------------------------------------------------------|
+| nameFormat  | The name identifier format to use | String      | TRUE     | FALSE    | [SAML 2.0 Name Identifier Formats](#saml-20-name-identifier-formats) | urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified |
+|-------------+-----------------------------------+-------------+----------+----------+----------------------------------------------------------------------+-------------------------------------------------------|
+
+~~~json
+{
+  "protocol": {
+    "type": "SAML2",
+    "settings": {
+      "nameFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient"
+    }
+  }
+}
+~~~
+
+##### SAML 2.0 Name Identifier Formats
+
+|--------------------------------------------------------|
+| Options                                                |
+| -------------------------------------------------------|
+| urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified  |
+| urn:oasis:names:tc:SAML:2.0:nameid-format:transient    |
+| urn:oasis:names:tc:SAML:2.0:nameid-format:persistent   |
+| urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress |
+|--------------------------------------------------------|
+
 #### OAuth 2.0 Protocol
 
 Protocol settings for authentication using the [OAuth 2.0 Authorization Code Flow](https://tools.ietf.org/html/rfc6749#section-4.1)
@@ -653,9 +684,6 @@ Client authentication credentials for an [OAuth 2.0 Authorization Server (AS)](h
       "userNameTemplate": {
         "template": "idpuser.subjectNameId"
       },
-      "format": [
-        "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
-      ],
       "filter": null,
       "matchType": "USERNAME"
     },
@@ -956,7 +984,6 @@ Specifies the behavior for establishing, validating, and matching a username for
 | Property         | Description                                                                                                                         | DataType                                               | Nullable | Readonly | MinLength | MaxLength | Validation                                                          |
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ | -------- | -------- | --------- | --------- | ------------------------------------------------------------------- |
 | userNameTemplate | [Okta EL Expression](../getting_started/okta_expression_lang.html) to generate or transform an unique username for the IdP user     | [UserName Template Object](#username-template-object)  | FALSE    | FALSE    |           |           | [Okta EL Expression](../getting_started/okta_expression_lang.html)  |
-| format           | IdP-specific format                                                                                                                 | Array of String                                        | TRUE     | FALSE    |           |           |                                                                     |
 | filter           | Optional [regular expression pattern](https://en.wikipedia.org/wiki/Regular_expression) used to filter untrusted IdP usernames      | String                                                 | TRUE     | FALSE    | 0         | 1024      |                                                                     |
 | matchType        | Determines the Okta user profile attribute match conditions for account linking and authentication of the transformed IdP username  | `USERNAME`, `EMAIL`, or `USERNAME_OR_EMAIL`            | FALSE    | FALSE    |           |           |                                                                     |
 |------------------+-------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------+----------+----------+-----------+-----------+---------------------------------------------------------------------|
@@ -965,7 +992,7 @@ Specifies the behavior for establishing, validating, and matching a username for
 >
 > For example, the filter pattern `(\S+@example\.com)` will only allow users that have a `@example.com` username suffix and would reject assertions that have any other suffix such as `@corp.example.com` or `@partner.com`
 
-> Only `SAML2` IdP providers support `format` and `filter` properties
+> Only `SAML2` IdP providers support the `filter` property
 
 ~~~json
 {
@@ -973,9 +1000,6 @@ Specifies the behavior for establishing, validating, and matching a username for
     "userNameTemplate": {
       "template": "idpuser.subjectNameId"
     },
-    "format": [
-      "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
-    ],
     "filter": null,
     "matchType": "USERNAME"
   }
