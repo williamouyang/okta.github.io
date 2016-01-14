@@ -101,6 +101,22 @@ The Okta Identity Providers API provides operations to manage federations with e
           "GET"
         ]
       }
+    },
+    "activate": {
+      "href": "https://example.okta.com/api/v1/idps/0oa1k5d68qR2954hb0g4/lifecycle/activate",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "deactivate": {
+      "href": "https://example.okta.com/api/v1/idps/0oa1k5d68qR2954hb0g4/lifecycle/deactivate",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
     }
   }
 }
