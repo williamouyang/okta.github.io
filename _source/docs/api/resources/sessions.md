@@ -32,6 +32,7 @@ Okta provides a very rich [Authentication API](./authn.html) to validate a [user
 {
   "id": "000najcYVnjRS2aZG50MpHL4Q",
   "userId": "00ubgaSARVOQDIOXMORI",
+  "login": "user@example.com",
   "expiresAt": "2015-08-30T18:41:35.818Z",
   "status": "ACTIVE",
   "lastPasswordVerification": "2015-08-30T18:41:35.818Z",
@@ -87,6 +88,7 @@ Sessions have the following properties:
 | ------------------------ | --------------------------------------------------------------------------------------------- | ----------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
 | id                       | unique key for the session                                                                    | String                                    | FALSE    | TRUE   | TRUE     |           |           |            |
 | userId                   | unique key for the [user](users.html#get-user-with-id)                                        | String                                    | FALSE    | TRUE   | TRUE     |           |           |            |
+| login                    | unique identifier for the [user](users.html#get-user-with-id)                                 | String                                    | FALSE    | TRUE   | TRUE     |           |           |            |
 | expiresAt                | timestamp when session expires                                                                | Date                                      | FALSE    | TRUE   | TRUE     |           |           |            |
 | status                   | current [status](#session-status) of the session                                              | `ACTIVE`, `MFA_REQUIRED`, or `MFA_ENROLL` | FALSE    | TRUE   | TRUE     |           |           |            |
 | lastPasswordVerification | timestamp when user last performed primary authentication (with password)                     | Date                                      | FALSE    | TRUE   | TRUE     |           |           |            |
@@ -217,6 +219,7 @@ curl -v -X POST \
 {
   "id": "000najcYVnjRS2aZG50MpHL4Q",
   "userId": "00ubgaSARVOQDIOXMORI",
+  "login": "user@example.com",
   "expiresAt": "2015-08-30T18:41:35.818Z",
   "status": "ACTIVE",
   "lastPasswordVerification": "2015-08-30T18:41:35.818Z",
@@ -313,6 +316,7 @@ curl -v -X PUT \
 {
   "id": "000najcYVnjRS2aZG50MpHL4Q",
   "userId": "00ubgaSARVOQDIOXMORI",
+  "login": "user@example.com",
   "expiresAt": "2015-08-30T18:41:35.818Z",
   "status": "ACTIVE",
   "lastPasswordVerification": "2015-08-30T18:41:35.818Z",
