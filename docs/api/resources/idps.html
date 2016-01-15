@@ -216,6 +216,13 @@
           </span><span class="nt">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ANY"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"trust"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"issuer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"urn:example:idp"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"audience"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.okta.com/saml2/service-provider/spgv32vOnpdyeGSaiUpL"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"kid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"164f0d13-be79-4a13-8848-a9450e9abd2c"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"policy"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -232,23 +239,12 @@
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"subject"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"userNameTemplate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"idpuser.subjectNameId"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUILT_IN"</span><span class="w">
+        </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"idpuser.subjectNameId"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"</span><span class="w">
-      </span><span class="p">],</span><span class="w">
       </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nt">"matchType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USERNAME"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"maxClockSkew"</span><span class="p">:</span><span class="w"> </span><span class="mi">120000</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"trust"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"issuer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"urn:example:idp"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"audience"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.okta.com/saml2/service-provider/spgv32vOnpdyeGSaiUpL"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"kid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"164f0d13-be79-4a13-8848-a9450e9abd2c"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -274,6 +270,22 @@
       </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="s2">"GET"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"activate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/api/v1/idps/0oa1k5d68qR2954hb0g4/lifecycle/activate"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"POST"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/api/v1/idps/0oa1k5d68qR2954hb0g4/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"POST"</span><span class="w">
         </span><span class="p">]</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -382,17 +394,6 @@
       <td>policy</td>
       <td>policy settings for IdP <code class="highlighter-rouge">type</code></td>
       <td><a href="#identity-provider-type">Policy Object</a></td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>credentials</td>
-      <td>credential settings for IdP <code class="highlighter-rouge">type</code></td>
-      <td><a href="#identity-provider-type">Credentials Object</a></td>
       <td>FALSE</td>
       <td>FALSE</td>
       <td>FALSE</td>
@@ -539,6 +540,26 @@
       <td> </td>
       <td> </td>
     </tr>
+    <tr>
+      <td>credentials</td>
+      <td>Federation trust credentials for verifying assertions from the IdP</td>
+      <td><a href="#saml-20-trust-credentials-object">SAML 2.0 Credentials Object</a></td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>settings</td>
+      <td>Advanced settings for the SAML 2.0 protocol</td>
+      <td><a href="#saml-20-settings-object">SAML 2.0 Settings Object</a></td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
   </tbody>
 </table>
 
@@ -569,6 +590,16 @@
           </span><span class="nt">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ANY"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"trust"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"issuer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"urn:example:idp"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"audience"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.okta.com/saml2/service-provider/spgv32vOnpdyeGSaiUpL"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"kid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"164f0d13-be79-4a13-8848-a9450e9abd2c"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"nameFormat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"urn:oasis:names:tc:SAML:2.0:nameid-format:transient"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1025,6 +1056,134 @@
   </tbody>
 </table>
 
+<h6 id="saml-20-trust-credentials-object">SAML 2.0 Trust Credentials Object</h6>
+
+<p>Federation trust credentials for verifying assertions from the IdP</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Readonly</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>issuer</td>
+      <td>URI that identifies the issuer (IdP) of a SAML <code class="highlighter-rouge">&lt;SAMLResponse&gt;</code> message <code class="highlighter-rouge">&lt;Assertion&gt;</code> element</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>1</td>
+      <td>1024</td>
+      <td><a href="https://tools.ietf.org/html/rfc3986">URI</a></td>
+    </tr>
+    <tr>
+      <td>audience</td>
+      <td>URI that identifies the target Okta IdP instance (SP) for an <code class="highlighter-rouge">&lt;Assertion&gt;</code></td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>1</td>
+      <td>1024</td>
+      <td><a href="https://tools.ietf.org/html/rfc3986">URI</a></td>
+    </tr>
+    <tr>
+      <td>kid</td>
+      <td><a href="#identity-provider-key-store-operations">Key ID</a> reference to the IdP’s X.509 signature certificate</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>36</td>
+      <td>36</td>
+      <td>Valid IdP Key ID reference</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SAML2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"trust"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"issuer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"urn:example:idp"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"audience"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.okta.com/saml2/service-provider/spgv32vOnpdyeGSaiUpL"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"kid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"164f0d13-be79-4a13-8848-a9450e9abd2c"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h5 id="saml-20-settings-object">SAML 2.0 Settings Object</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Readonly</th>
+      <th>DataType</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>nameFormat</td>
+      <td>The name identifier format to use</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td><a href="#saml-20-name-identifier-formats">SAML 2.0 Name Identifier Formats</a></td>
+      <td>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SAML2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"nameFormat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"urn:oasis:names:tc:SAML:2.0:nameid-format:transient"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h5 id="saml-20-name-identifier-formats">SAML 2.0 Name Identifier Formats</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Options</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</td>
+    </tr>
+    <tr>
+      <td>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</td>
+    </tr>
+    <tr>
+      <td>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</td>
+    </tr>
+    <tr>
+      <td>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="oauth-20-protocol">OAuth 2.0 Protocol</h4>
 
 <p>Protocol settings for authentication using the <a href="https://tools.ietf.org/html/rfc6749#section-4.1">OAuth 2.0 Authorization Code Flow</a></p>
@@ -1073,6 +1232,16 @@
       <td> </td>
       <td> </td>
     </tr>
+    <tr>
+      <td>credentials</td>
+      <td>Client authentication credentials for an <a href="https://tools.ietf.org/html/rfc6749#section-2.3">OAuth 2.0 Authorization Server (AS)</a></td>
+      <td><a href="#oauth-20-client-credentials-object">Credentials Object</a></td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
   </tbody>
 </table>
 
@@ -1096,66 +1265,12 @@
     </span><span class="nt">"scopes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="s2">"public_profile"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"email"</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<h5 id="oauth-20-endpoints-object">OAuth 2.0 Endpoints Object</h5>
-
-<p>The <code class="highlighter-rouge">OAUTH2</code> protocol supports the <code class="highlighter-rouge">authorization</code> and <code class="highlighter-rouge">token</code> endpoints</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>authorization</td>
-      <td>IdP Authorization Server (AS) endpoint to request consent from user and obtain an authorization code grant</td>
-      <td><a href="#oauth-20-authorization-server-endpoint-object">OAuth 2.0 Authorization Server Endpoint Object</a></td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>token</td>
-      <td>IdP Authorization Server (AS) endpoint to exchange authorization code grant for an access token</td>
-      <td><a href="#oauth-20-authorization-server-endpoint-object">OAuth 2.0 Authorization Server Endpoint Object</a></td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<blockquote>
-  <p>The IdP Authorization Server (AS) endpoints are currently defined as part of the <a href="#identity-provider-type">IdP provider</a> and are <strong>read-only</strong></p>
-</blockquote>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"endpoints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"authorization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.facebook.com/dialog/oauth"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"binding"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HTTP-REDIRECT"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://graph.facebook.com/v2.5/oauth/access_token"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"binding"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HTTP-POST"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"client"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"430731646638-sq6oeve9f6rpm2rne289nukind6f1qgk.apps.googleusercontent.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"client_secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kOgHsuPDawNDSkkaAKvv6SMh"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1210,6 +1325,16 @@
       <td> </td>
       <td> </td>
     </tr>
+    <tr>
+      <td>credentials</td>
+      <td>Client authentication credentials for an <a href="https://tools.ietf.org/html/rfc6749#section-2.3">OAuth 2.0 Authorization Server (AS)</a></td>
+      <td><a href="#openid-connect-client-credentials-object">Credentials Object</a></td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
   </tbody>
 </table>
 
@@ -1234,15 +1359,21 @@
       </span><span class="s2">"profile"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"openid"</span><span class="w">
-    </span><span class="p">]</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"client"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"430731646638-sq6oeve9f6rpm2rne289nukind6f1qgk.apps.googleusercontent.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"client_secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kOgHsuPDawNDSkkaAKvv6SMh"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
 
-<h5 id="openid-connect-endpoints-object">OpenID Connect Endpoints Object</h5>
+<h5 id="oauth-20-and-openid-connect-endpoints-object">OAuth 2.0 and OpenID Connect Endpoints Object</h5>
 
-<p>The <code class="highlighter-rouge">OIDC</code> protocol supports the <code class="highlighter-rouge">authorization</code> and <code class="highlighter-rouge">token</code> endpoints</p>
+<p>The <code class="highlighter-rouge">OAUTH2</code> and <code class="highlighter-rouge">OIDC</code> protocols support the <code class="highlighter-rouge">authorization</code> and <code class="highlighter-rouge">token</code> endpoints</p>
 
 <table>
   <thead>
@@ -1286,14 +1417,108 @@
 </blockquote>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"endpoints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"authorization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://accounts.google.com/o/oauth2/auth"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"binding"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HTTP-REDIRECT"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.googleapis.com/oauth2/v3/token"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"binding"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HTTP-POST"</span><span class="w">
+  </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OAUTH2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"endpoints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"authorization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.facebook.com/dialog/oauth"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"binding"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HTTP-REDIRECT"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://graph.facebook.com/v2.5/oauth/access_token"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"binding"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HTTP-POST"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OIDC"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"endpoints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"authorization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://accounts.google.com/o/oauth2/auth"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"binding"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HTTP-REDIRECT"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.googleapis.com/oauth2/v3/token"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"binding"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HTTP-POST"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h5 id="oauth-20-and-openid-connect-client-credentials-object">OAuth 2.0 and Openid Connect Client Credentials Object</h5>
+
+<p>Client authentication credentials for an <a href="https://tools.ietf.org/html/rfc6749#section-2.3">OAuth 2.0 Authorization Server (AS)</a></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Readonly</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>client_id</td>
+      <td><a href="https://tools.ietf.org/html/rfc6749#section-2.2">Unique identifier</a> issued by AS for the Okta IdP instance</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>1</td>
+      <td>1024</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>client_secret</td>
+      <td><a href="https://tools.ietf.org/html/rfc6749#section-2.3.1">Client secret issued</a> by AS for the Okta IdP instance</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>1</td>
+      <td>1024</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>You must perform client registration with the IdP Authorization Server for your Okta IdP instance to obtain client credentials</p>
+</blockquote>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OAUTH2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"client"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"399886900205105"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"client_secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"854b2478619d4fcff49f1eb10c78292d"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OIDC"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"client"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"430731646638-sq6oeve9f6rpm2rne289nukind6f1qgk.apps.googleusercontent.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"client_secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kOgHsuPDawNDSkkaAKvv6SMh"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1376,9 +1601,6 @@
       </span><span class="nt">"userNameTemplate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"idpuser.subjectNameId"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"</span><span class="w">
-      </span><span class="p">],</span><span class="w">
       </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nt">"matchType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USERNAME"</span><span class="w">
     </span><span class="p">},</span><span class="w">
@@ -2105,16 +2327,6 @@
       <td><a href="../getting_started/okta_expression_lang.html">Okta EL Expression</a></td>
     </tr>
     <tr>
-      <td>format</td>
-      <td>IdP-specific format</td>
-      <td>Array of String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
       <td>filter</td>
       <td>Optional <a href="https://en.wikipedia.org/wiki/Regular_expression">regular expression pattern</a> used to filter untrusted IdP usernames</td>
       <td>String</td>
@@ -2144,7 +2356,7 @@
 </blockquote>
 
 <blockquote>
-  <p>Only <code class="highlighter-rouge">SAML2</code> IdP providers support <code class="highlighter-rouge">format</code> and <code class="highlighter-rouge">filter</code> properties</p>
+  <p>Only <code class="highlighter-rouge">SAML2</code> IdP providers support the <code class="highlighter-rouge">filter</code> property</p>
 </blockquote>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
@@ -2152,9 +2364,6 @@
     </span><span class="nt">"userNameTemplate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"idpuser.subjectNameId"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="s2">"urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"</span><span class="w">
-    </span><span class="p">],</span><span class="w">
     </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"matchType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USERNAME"</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -2202,197 +2411,6 @@
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"userNameTemplate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"idpuser.subjectNameId"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<h4 id="credentials-object">Credentials Object</h4>
-
-<p>Trust or client credentials for the <a href="#identity-provider-type">IdP provider</a></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>trust</td>
-      <td>Federation trust credentials for verifying assertions from an IdP</td>
-      <td><a href="#trust-credentials-object">Trust Credentials Object</a></td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td>Required for <code class="highlighter-rouge">SAML2</code> provider</td>
-    </tr>
-    <tr>
-      <td>client</td>
-      <td>Client authentication credentials for an <a href="https://tools.ietf.org/html/rfc6749#section-2.3">OAuth 2.0 Authorization Server (AS)</a></td>
-      <td><a href="#client-credentials-object">Client Credentials Object</a></td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td>Required for <code class="highlighter-rouge">OAUTH2</code> or <code class="highlighter-rouge">OIDC</code> provider</td>
-    </tr>
-  </tbody>
-</table>
-
-<h5 id="idp-type-credentials">IdP Type Credentials</h5>
-
-<p>The <a href="#identity-provider-type">type of IdP</a> determines which credential type is supported:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>IdP Type</th>
-      <th>Credential Type</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">SAML2</code></td>
-      <td><a href="#trust-credentials-object">Trust</a></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">FACEBOOK</code></td>
-      <td><a href="#client-credentials-object">Client</a></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">GOOGLE</code></td>
-      <td><a href="#client-credentials-object">Client</a></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">LINKEDIN</code></td>
-      <td><a href="#client-credentials-object">Client</a></td>
-    </tr>
-  </tbody>
-</table>
-
-<h5 id="trust-credentials-object">Trust Credentials Object</h5>
-
-<p>Federation trust credentials for verifying assertions from an IdP</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>issuer</td>
-      <td>URI that identifies the issuer (IdP) of a SAML <code class="highlighter-rouge">&lt;SAMLResponse&gt;</code> message <code class="highlighter-rouge">&lt;Assertion&gt;</code> element</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>1</td>
-      <td>1024</td>
-      <td><a href="https://tools.ietf.org/html/rfc3986">URI</a></td>
-    </tr>
-    <tr>
-      <td>audience</td>
-      <td>URI that identifies the target Okta IdP instance (SP) for an <code class="highlighter-rouge">&lt;Assertion&gt;</code></td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>1</td>
-      <td>1024</td>
-      <td><a href="https://tools.ietf.org/html/rfc3986">URI</a></td>
-    </tr>
-    <tr>
-      <td>kid</td>
-      <td>Key ID reference to the IdP’s X.509 signature certificate</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>36</td>
-      <td>36</td>
-      <td>Valid IdP Key ID reference</td>
-    </tr>
-  </tbody>
-</table>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"trust"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"issuer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"urn:example:idp"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"audience"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.okta.com/saml2/service-provider/spgv32vOnpdyeGSaiUpL"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"kid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"164f0d13-be79-4a13-8848-a9450e9abd2c"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<h5 id="client-credentials-object">Client Credentials Object</h5>
-
-<p>Client authentication credentials for an <a href="https://tools.ietf.org/html/rfc6749#section-2.3">OAuth 2.0 Authorization Server (AS)</a></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>client_id</td>
-      <td><a href="https://tools.ietf.org/html/rfc6749#section-2.2">Unique identifier</a> issued by AS for the Okta IdP instance</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>1</td>
-      <td>1024</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>client_secret</td>
-      <td><a href="https://tools.ietf.org/html/rfc6749#section-2.3.1">Client secret issued</a> by AS for the Okta IdP instance</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>1</td>
-      <td>1024</td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<blockquote>
-  <p>You must perform client registration with the IdP Authorization Server for your Okta IdP instance to obtain client credentials</p>
-</blockquote>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"client"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"430731646638-sq6oeve9f6rpm2rne289nukind6f1qgk.apps.googleusercontent.com"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"client_secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kOgHsuPDawNDSkkaAKvv6SMh"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -4619,13 +4637,25 @@
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
 -d <span class="s1">'{
-}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/idps/credentials/keys/akm5hvbbevE341ovl0h7"</span>
+}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/idps/credentials/keys/74bb2164-e0c8-4457-862b-7c29ba6cd2c9"</span>
 </code></pre>
 </div>
 
 <h5 class="api api-response api-response-example" id="response-example-19">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="w">
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"kid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"74bb2164-e0c8-4457-862b-7c29ba6cd2c9"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-03T18:15:47.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-03T18:15:47.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"e"</span><span class="p">:</span><span class="w"> </span><span class="s2">"65537"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"n"</span><span class="p">:</span><span class="w"> </span><span class="s2">"101438407598598116085679865987760095721749307901605456708912786847324207000576780508113360584555007890315805735307890113536927352312915634368993759211767770602174860126854831344273970871509573365292777620005537635317282520456901584213746937262823585533063042033441296629204165064680610660631365266976782082747"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"kty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RSA"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"use"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sig"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"x5c"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"MIIDnjCCAoagAwIBAgIGAVG3MN+PMA0GCSqGSIb3DQEBBQUAMIGPMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxEDAOBgNVBAMMB2V4YW1wbGUxHDAaBgkqhkiG9w0BCQEWDWluZm9Ab2t0YS5jb20wHhcNMTUxMjE4MjIyMjMyWhcNMjUxMjE4MjIyMzMyWjCBjzELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xDTALBgNVBAoMBE9rdGExFDASBgNVBAsMC1NTT1Byb3ZpZGVyMRAwDgYDVQQDDAdleGFtcGxlMRwwGgYJKoZIhvcNAQkBFg1pbmZvQG9rdGEuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtcnyvuVCrsFEKCwHDenS3Ocjed8eWDv3zLtD2K/iZfE8BMj2wpTfn6Ry8zCYey3mWlKdxIybnV9amrujGRnE0ab6Q16v9D6RlFQLOG6dwqoRKuZy33Uyg8PGdEudZjGbWuKCqqXEp+UKALJHV+k4wWeVH8g5d1n3KyR2TVajVJpCrPhLFmq1Il4G/IUnPe4MvjXqB6CpKkog1+ThWsItPRJPAM+RweFHXq7KfChXsYE7Mmfuly8sDQlvBmQyxZnFHVuiPfCvGHJjpvHy11YlHdOjfgqHRvZbmo30+y0X/oY/yV4YEJ00LL6eJWU4wi7ViY3HP6/VCdRjHoRdr5L/DwIDAQABMA0GCSqGSIb3DQEBBQUAA4IBAQCzzhOFkvyYLNFj2WDcq1YqD4sBy1iCia9QpRH3rjQvMKDwQDYWbi6EdOX0TQ/IYR7UWGj+2pXd6v0t33lYtoKocp/4lUvT3tfBnWZ5KnObi+J2uY2teUqoYkASN7F+GRPVOuMVoVgm05ss8tuMb2dLc9vsx93sDt+XlMTv/2qi5VPwaDtqduKkzwW9lUfn4xIMkTiVvCpe0X2HneD2Bpuao3/U8Rk0uiPfq6TooWaoW3kjsmErhEAs9bA7xuqo1KKY9CdHcFhkSsMhoeaZylZHtzbnoipUlQKSLMdJQiiYZQ0bYL83/Ta9fulr1EERICMFt3GUmtYaZZKHpWSfdJp9"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"x5t"</span><span class="p">:</span><span class="w"> </span><span class="s2">"noocvK-9pzU-n35eimPK16zYEYk"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
 
@@ -4686,7 +4716,19 @@
 <h5 class="api api-response api-response-example" id="response-example-20">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
-
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"kid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"74bb2164-e0c8-4457-862b-7c29ba6cd2c9"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-03T18:15:47.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-03T18:15:47.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"e"</span><span class="p">:</span><span class="w"> </span><span class="s2">"65537"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"n"</span><span class="p">:</span><span class="w"> </span><span class="s2">"101438407598598116085679865987760095721749307901605456708912786847324207000576780508113360584555007890315805735307890113536927352312915634368993759211767770602174860126854831344273970871509573365292777620005537635317282520456901584213746937262823585533063042033441296629204165064680610660631365266976782082747"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"kty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RSA"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"use"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sig"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"x5c"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"MIIDnjCCAoagAwIBAgIGAVG3MN+PMA0GCSqGSIb3DQEBBQUAMIGPMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxEDAOBgNVBAMMB2V4YW1wbGUxHDAaBgkqhkiG9w0BCQEWDWluZm9Ab2t0YS5jb20wHhcNMTUxMjE4MjIyMjMyWhcNMjUxMjE4MjIyMzMyWjCBjzELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xDTALBgNVBAoMBE9rdGExFDASBgNVBAsMC1NTT1Byb3ZpZGVyMRAwDgYDVQQDDAdleGFtcGxlMRwwGgYJKoZIhvcNAQkBFg1pbmZvQG9rdGEuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtcnyvuVCrsFEKCwHDenS3Ocjed8eWDv3zLtD2K/iZfE8BMj2wpTfn6Ry8zCYey3mWlKdxIybnV9amrujGRnE0ab6Q16v9D6RlFQLOG6dwqoRKuZy33Uyg8PGdEudZjGbWuKCqqXEp+UKALJHV+k4wWeVH8g5d1n3KyR2TVajVJpCrPhLFmq1Il4G/IUnPe4MvjXqB6CpKkog1+ThWsItPRJPAM+RweFHXq7KfChXsYE7Mmfuly8sDQlvBmQyxZnFHVuiPfCvGHJjpvHy11YlHdOjfgqHRvZbmo30+y0X/oY/yV4YEJ00LL6eJWU4wi7ViY3HP6/VCdRjHoRdr5L/DwIDAQABMA0GCSqGSIb3DQEBBQUAA4IBAQCzzhOFkvyYLNFj2WDcq1YqD4sBy1iCia9QpRH3rjQvMKDwQDYWbi6EdOX0TQ/IYR7UWGj+2pXd6v0t33lYtoKocp/4lUvT3tfBnWZ5KnObi+J2uY2teUqoYkASN7F+GRPVOuMVoVgm05ss8tuMb2dLc9vsx93sDt+XlMTv/2qi5VPwaDtqduKkzwW9lUfn4xIMkTiVvCpe0X2HneD2Bpuao3/U8Rk0uiPfq6TooWaoW3kjsmErhEAs9bA7xuqo1KKY9CdHcFhkSsMhoeaZylZHtzbnoipUlQKSLMdJQiiYZQ0bYL83/Ta9fulr1EERICMFt3GUmtYaZZKHpWSfdJp9"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"x5t"</span><span class="p">:</span><span class="w"> </span><span class="s2">"noocvK-9pzU-n35eimPK16zYEYk"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 </div>
@@ -4732,7 +4774,7 @@
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/idps/credentials/keys/00ulwodIu7wCfdiVR0g3"</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/idps/credentials/keys/74bb2164-e0c8-4457-862b-7c29ba6cd2c9"</span>
 </code></pre>
 </div>
 
