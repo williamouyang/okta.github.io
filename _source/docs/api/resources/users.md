@@ -278,6 +278,8 @@ Specifies the authentication provider that validates the user's password credent
 
 > `ACTIVE_DIRECTORY` or `LDAP` providers specify the directory instance name as the `name` property.
 
+> Users with a `FEDERATION` or `SOCIAL` authentication provider do not support a `password` or `recovery_question` credential and must authenticate via a trusted Identity Provider.
+
 ### Links Object
 
 Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the current status of a user.  The Links Object is used for dynamic discovery of related resources and lifecycle or credential operations.  The Links Object is **read-only**.
@@ -343,6 +345,8 @@ All responses return the created [User](#user-model).  Activation of a user is a
 | X              | X        | FALSE                    | `STAGED`      |                        |                |
 | X              | X        | TRUE                     | `ACTIVE`      | Password               |                |
 |----------------+----------+--------------------------+---------------+------------------------+----------------|
+
+> Creating users with `FEDERATION` or `SOCIAL` provider will be either `ACTIVE` or `STAGED` based on the `activate` query parameter since they do not support a `password` or `recovery_question` credential.
 
 #### Create User without Credentials
 {:.api .api-operation}
@@ -607,7 +611,7 @@ curl -v -X POST \
 #### Create User with Authentication Provider
 {:.api .api-operation}
 
-Creates a new user with a specified authentication provider. The allowed authentication providers are SOCIAL and FEDERATION. This flow is common when users have their Identity Provider outside of Okta.
+Creates a new passwordless user with a `SOCIAL` or `FEDERATION` [authentication provider](#provider-object) that must be authenticated via a trusted Identity Provider.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
