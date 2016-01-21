@@ -1053,6 +1053,10 @@
   <p><code class="highlighter-rouge">ACTIVE_DIRECTORY</code> or <code class="highlighter-rouge">LDAP</code> providers specify the directory instance name as the <code class="highlighter-rouge">name</code> property.</p>
 </blockquote>
 
+<blockquote>
+  <p>Users with a <code class="highlighter-rouge">FEDERATION</code> or <code class="highlighter-rouge">SOCIAL</code> authentication provider do not support a <code class="highlighter-rouge">password</code> or <code class="highlighter-rouge">recovery_question</code> credential and must authenticate via a trusted Identity Provider.</p>
+</blockquote>
+
 <h3 id="links-object">Links Object</h3>
 
 <p>Specifies link relations (See <a href="http://tools.ietf.org/html/rfc5988">Web Linking</a>) available for the current status of a user.  The Links Object is used for dynamic discovery of related resources and lifecycle or credential operations.  The Links Object is <strong>read-only</strong>.</p>
@@ -1121,6 +1125,7 @@
   <li><a href="#create-user-with-recovery-question">Create User with Recovery Question</a></li>
   <li><a href="#create-user-with-password">Create User with Password</a></li>
   <li><a href="#create-user-with-password--recovery-question">Create User with Password &amp; Recovery Question</a></li>
+  <li><a href="#create-user-with-authentication-provider">Create User with Authentication Provider</a></li>
 </ul>
 
 <h5 class="api api-request api-request-params" id="request-parameters">Request Parameters</h5>
@@ -1144,6 +1149,14 @@
       <td>Boolean</td>
       <td>FALSE</td>
       <td>TRUE</td>
+    </tr>
+    <tr>
+      <td>provider</td>
+      <td>Indicates whether to create a user with a specified authentication provider</td>
+      <td>Query</td>
+      <td>Boolean</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
     </tr>
     <tr>
       <td>profile</td>
@@ -1254,6 +1267,10 @@
     </tr>
   </tbody>
 </table>
+
+<blockquote>
+  <p>Creating users with <code class="highlighter-rouge">FEDERATION</code> or <code class="highlighter-rouge">SOCIAL</code> provider will be either <code class="highlighter-rouge">ACTIVE</code> or <code class="highlighter-rouge">STAGED</code> based on the <code class="highlighter-rouge">activate</code> query parameter since they do not support a <code class="highlighter-rouge">password</code> or <code class="highlighter-rouge">recovery_question</code> credential.</p>
+</blockquote>
 
 <h4 class="api api-operation" id="create-user-without-credentials">Create User without Credentials</h4>
 
@@ -1507,6 +1524,77 @@
 </span></code></pre>
 </div>
 
+<h4 class="api api-operation" id="create-user-with-authentication-provider">Create User with Authentication Provider</h4>
+
+<p>Creates a new passwordless user with a <code class="highlighter-rouge">SOCIAL</code> or <code class="highlighter-rouge">FEDERATION</code> <a href="#provider-object">authentication provider</a> that must be authenticated via a trusted Identity Provider.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-4">Request Example</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+-d <span class="s1">'{
+  "profile": {
+    "firstName": "Isaac",
+    "lastName": "Brock",
+    "email": "isaac.brock@example.com",
+    "login": "isaac.brock@example.com",
+    "mobilePhone": "555-415-1337"
+  },
+  "credentials": {
+    "provider": {
+      "type": "FEDERATION",
+      "name": "FEDERATION"
+    }
+  }
+}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users?provider=true"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-4">Response Example</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00uijntSwJjSHtDY70g3"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-19T22:02:08.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"activated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-19T22:02:08.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"statusChanged"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-19T22:02:08.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastLogin"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-19T22:02:08.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"passwordChanged"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"isaac.brock@example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isaac"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brock"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"mobilePhone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"555-415-1337"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"isaac.brock@example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"secondEmail"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FEDERATION"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FEDERATION"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"resetPassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00uijntSwJjSHtDY70g3/lifecycle/reset_password"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"POST"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"changeRecoveryQuestion"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00uijntSwJjSHtDY70g3/credentials/change_recovery_question"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"POST"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00uijntSwJjSHtDY70g3/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"POST"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
 <h3 class="api api-operation" id="get-user">Get User</h3>
 
 <p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users/<em>:id</em></span><span class="api-label api-label-cors api-uri-template-cors pull-right"><i class="fa fa-cloud-download"></i> CORS</span></p>
@@ -1571,7 +1659,7 @@
 
 <p>Fetches the current user linked to API token or session cookie</p>
 
-<h5 class="api api-request api-request-example" id="request-example-4">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-5">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -1581,7 +1669,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-4">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-5">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
@@ -1640,7 +1728,7 @@
 
 <p>Fetches a specific user when you know the user’s <code class="highlighter-rouge">id</code>. See the filters section below for an example of fetching multiple ids.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-5">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-6">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -1650,7 +1738,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-5">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-6">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
@@ -1713,7 +1801,7 @@
   <p>When fetching a user by <code class="highlighter-rouge">login</code>, you should <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encode</a> the request parameter to ensure special characters are escaped properly.  Logins with a <code class="highlighter-rouge">/</code> character can only be fetched by ‘id’ due to URL issues with escaping the <code class="highlighter-rouge">/</code> character.</p>
 </blockquote>
 
-<h5 class="api api-request api-request-example" id="request-example-6">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-7">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -1723,7 +1811,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-6">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-7">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
@@ -1786,7 +1874,7 @@
   <p>When fetching a user by <code class="highlighter-rouge">login shortname</code>, you should <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encode</a> the request parameter to ensure special characters are escaped properly.  Logins with a <code class="highlighter-rouge">/</code> character can only be fetched by ‘id’ due to URL issues with escaping the <code class="highlighter-rouge">/</code> character.</p>
 </blockquote>
 
-<h5 class="api api-request api-request-example" id="request-example-7">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-8">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -1796,7 +1884,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-7">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-8">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
@@ -2044,7 +2132,7 @@
   <p>If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller <code class="highlighter-rouge">limit</code> and page the results (See <a href="/docs/getting_started/design_principles.html#pagination">Pagination</a>)</p>
 </blockquote>
 
-<h5 class="api api-request api-request-example" id="request-example-8">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-9">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2054,7 +2142,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-8">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-9">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -2149,7 +2237,7 @@
 
 <p>Searches for user by <code class="highlighter-rouge">firstName</code>, <code class="highlighter-rouge">lastName</code>, or <code class="highlighter-rouge">email</code> value.  This operation is ideal for implementing a people picker. This operation does not support pagination.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-9">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-10">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2159,7 +2247,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-9">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-10">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -2221,7 +2309,7 @@
 
 <p>Enumerates all users that have been updated since a specific timestamp.  Use this operation when implementing a background synchronization job and you want to poll for changes.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-10">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-11">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2231,7 +2319,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-10">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-11">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -2297,7 +2385,7 @@
   <p>Users with a status of <code class="highlighter-rouge">DEPROVISIONED</code> are not enumerated by default and must be explicitly requested with a status filter.</p>
 </blockquote>
 
-<h5 class="api api-request api-request-example" id="request-example-11">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-12">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2307,7 +2395,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-11">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-12">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -2429,7 +2517,7 @@ in the request will be deleted. <strong>Do not use <code class="highlighter-roug
 
 <h4 class="api api-operation" id="update-profile">Update Profile</h4>
 
-<h5 class="api api-request api-request-example" id="request-example-12">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-13">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X PUT <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2447,7 +2535,7 @@ in the request will be deleted. <strong>Do not use <code class="highlighter-roug
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-12">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-13">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
@@ -2560,7 +2648,7 @@ in the request will not be modified or deleted. <strong>Use <code class="highlig
 
 <h4 class="api api-operation" id="update-profile-1">Update Profile</h4>
 
-<h5 class="api api-request api-request-example" id="request-example-13">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-14">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2574,7 +2662,7 @@ in the request will not be modified or deleted. <strong>Use <code class="highlig
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-13">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-14">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
@@ -2639,7 +2727,7 @@ in the request will not be modified or deleted. <strong>Use <code class="highlig
   <li><a href="#change-password">Change Password</a></li>
 </ul>
 
-<h5 class="api api-request api-request-example" id="request-example-14">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-15">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2653,7 +2741,7 @@ in the request will not be modified or deleted. <strong>Use <code class="highlig
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-14">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-15">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
@@ -2712,7 +2800,7 @@ in the request will not be modified or deleted. <strong>Use <code class="highlig
 
 <p>This is an administrative operation and does not validate existing user credentials.  See <a href="#change-recovery-question">Change Recovery Question</a> for an operation that requires validation</p>
 
-<h5 class="api api-request api-request-example" id="request-example-15">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-16">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2729,7 +2817,7 @@ in the request will not be modified or deleted. <strong>Use <code class="highlig
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-15">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-16">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
@@ -2821,7 +2909,7 @@ in the request will not be modified or deleted. <strong>Use <code class="highlig
 
 <p>Array of App Links</p>
 
-<h5 class="api api-request api-request-example" id="request-example-16">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-17">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2831,7 +2919,7 @@ in the request will not be modified or deleted. <strong>Use <code class="highlig
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-16">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-17">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -2921,7 +3009,7 @@ in the request will not be modified or deleted. <strong>Use <code class="highlig
 
 <p>Array of <a href="groups.html">Groups</a></p>
 
-<h5 class="api api-request api-request-example" id="request-example-17">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-18">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2931,7 +3019,7 @@ in the request will not be modified or deleted. <strong>Use <code class="highlig
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-17">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-18">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -3013,7 +3101,7 @@ in the request will not be modified or deleted. <strong>Use <code class="highlig
   <p>If a password was set before the user was activated, then user must login with with their password and not the activation link</p>
 </blockquote>
 
-<h5 class="api api-request api-request-example" id="request-example-18">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-19">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3023,7 +3111,7 @@ in the request will not be modified or deleted. <strong>Use <code class="highlig
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-18">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-19">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"activationUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/welcome/XE6wE17zmphl3KqAPFxO"</span><span class="w">
@@ -3070,7 +3158,7 @@ in the request will not be modified or deleted. <strong>Use <code class="highlig
 
 <p>Returns an empty object.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-19">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-20">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3080,7 +3168,7 @@ in the request will not be modified or deleted. <strong>Use <code class="highlig
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-19">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-20">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -3126,7 +3214,7 @@ in the request will not be modified or deleted. <strong>Use <code class="highlig
 
 <p>Returns an empty object</p>
 
-<h5 class="api api-request api-request-example" id="request-example-20">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-21">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3136,7 +3224,7 @@ in the request will not be modified or deleted. <strong>Use <code class="highlig
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-20">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-21">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -3196,7 +3284,7 @@ in the request will not be modified or deleted. <strong>Use <code class="highlig
 </span></code></pre>
 </div>
 
-<h5 class="api api-request api-request-example" id="request-example-21">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-22">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3206,7 +3294,7 @@ in the request will not be modified or deleted. <strong>Use <code class="highlig
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-21">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-22">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"resetPasswordUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"</span><span class="w">
@@ -3227,7 +3315,7 @@ parameter must be false or omitted for this type of conversion.</p>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-22">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-23">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"resetPasswordUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"</span><span class="w">
@@ -3284,7 +3372,7 @@ parameter must be false or omitted for this type of conversion.</p>
 </span></code></pre>
 </div>
 
-<h5 class="api api-request api-request-example" id="request-example-22">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-23">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3294,7 +3382,7 @@ parameter must be false or omitted for this type of conversion.</p>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-23">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-24">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
@@ -3384,7 +3472,7 @@ parameter must be false or omitted for this type of conversion.</p>
 
 <p>Returns an empty object by default.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-23">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-24">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3394,7 +3482,7 @@ parameter must be false or omitted for this type of conversion.</p>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-24">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-25">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -3456,7 +3544,7 @@ parameter must be false or omitted for this type of conversion.</p>
   <p>This operation does not affect the status of the user.</p>
 </blockquote>
 
-<h5 class="api api-request api-request-example" id="request-example-24">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-25">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3466,7 +3554,7 @@ parameter must be false or omitted for this type of conversion.</p>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-25">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-26">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"resetPasswordUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"</span><span class="w">
@@ -3531,7 +3619,7 @@ parameter must be false or omitted for this type of conversion.</p>
   <p>This operation does not affect the status of the user.</p>
 </blockquote>
 
-<h5 class="api api-request api-request-example" id="request-example-25">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-26">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3544,7 +3632,7 @@ parameter must be false or omitted for this type of conversion.</p>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-26">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-27">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -3616,7 +3704,7 @@ parameter must be false or omitted for this type of conversion.</p>
   <p>The user will transition to <code class="highlighter-rouge">ACTIVE</code> status when successfully invoked in <code class="highlighter-rouge">RECOVERY</code> status</p>
 </blockquote>
 
-<h5 class="api api-request api-request-example" id="request-example-26">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-27">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3629,7 +3717,7 @@ parameter must be false or omitted for this type of conversion.</p>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-27">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-28">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -3701,7 +3789,7 @@ parameter must be false or omitted for this type of conversion.</p>
   <p>This operation does not affect the status of the user.</p>
 </blockquote>
 
-<h5 class="api api-request api-request-example" id="request-example-27">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-28">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3717,7 +3805,7 @@ parameter must be false or omitted for this type of conversion.</p>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-28">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-29">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
