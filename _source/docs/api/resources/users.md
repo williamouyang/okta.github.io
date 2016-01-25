@@ -91,7 +91,7 @@ The User model defines several **read-only** properties:
 | Property              | Description                                                     | DataType                                                                                            | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
 | --------------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------| -------- | ------ | -------- | --------- | --------- | ---------- |
 | id                    | unique key for user                                             | String                                                                                              | FALSE    | TRUE   | TRUE     |           |           |            |
-| status                | current [status](#user-status) of user                          | `STAGED`, `PROVISIONED`, `ACTIVE`, `RECOVERY`, `LOCKED_OUT`, `PASSWORD_EXPIRED`, or `DEPROVISIONED` | FALSE    | FALSE  | TRUE     |           |           |            |
+| status                | current [status](#user-status) of user                          | `STAGED`, `PROVISIONED`, `ACTIVE`, `RECOVERY`, `LOCKED_OUT`, `PASSWORD_EXPIRED`, `SUSPENDED`, or `DEPROVISIONED` | FALSE    | FALSE  | TRUE     |           |           |            |
 | created               | timestamp when user was created                                 | Date                                                                                                | FALSE    | FALSE  | TRUE     |           |           |            |
 | activated             | timestamp when transition to `ACTIVE` status completed          | Date                                                                                                | FALSE    | FALSE  | TRUE     |           |           |            |
 | statusChanged         | timestamp when status last changed                              | Date                                                                                                | TRUE     | FALSE  | TRUE     |           |           |            |
@@ -290,10 +290,12 @@ Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988))
 | self                   | The actual user                                                                                                                                           |
 | activate               | [Lifecycle action](#activate-user) to transition user to `ACTIVE` status                                                                                  |
 | deactivate             | [Lifecycle action](#deactivate-user) to transition user to `DEPROVISIONED` status                                                                         |
+| suspend                | [Lifecycle action](#suspend-user) to transition user to `SUSPENDED` status                                                                         |
+| unsuspend              | [Lifecycle action](#unsuspend-user) to return a user to `ACTIVE` status when their current status is `SUSPENDED`                                                                         |
 | resetPassword          | [Lifecycle action](#reset-password) to transition user to `RECOVERY` status                                                                               |
 | expirePassword         | [Lifecycle action](#expire-password) to transition user to `PASSWORD_EXPIRED` status                                                                      |
 | resetFactors           | [Lifecycle action](#reset-factors) to reset all the MFA factors for the user                                                                              |
-| unlock                 | [Lifecycle action](#unlock-user) to returns a user to `ACTIVE` status when their current status is `LOCKED_OUT` due to exceeding failed login attempts    |
+| unlock                 | [Lifecycle action](#unlock-user) to return a user to `ACTIVE` status when their current status is `LOCKED_OUT` due to exceeding failed login attempts    |
 | forgotPassword         | [Resets a user's password](#forgot-password) by validating the user's recovery credential.                                                                |
 | changePassword         | [Changes a user's password](#change-password) validating the user's current password                                                                      |
 | changeRecoveryQuestion | [Changes a user's recovery credential](#change-recovery-question) by validating the user's current password                                               |
@@ -2017,6 +2019,86 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 "https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~http
+HTTP/1.1 200 OK
+Content-Type: application/json
+~~~
+
+### Suspend User
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:id*/lifecycle/deactivate</span>
+
+Suspends a user.  This operation can only be performed on users with an `ACTIVE` status.  The user will have a status of `SUSPENDED` when the process is complete. 
+
+> Suspended users cannot log in to Okta. Their group and app assignments are retained.  
+> Suspended users can only be unsuspended or deactivated.
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter | Description  | Param Type | DataType | Required | Default
+--------- | ------------ | ---------- | -------- | -------- | -------
+id        | `id` of user | URL        | String   | TRUE     |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+Returns an empty object.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/suspend"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~http
+HTTP/1.1 200 OK
+Content-Type: application/json
+~~~
+
+### Unsuspend User
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:id*/lifecycle/deactivate</span>
+
+Unsuspends users and returns then to the `ACTIVE` state.  This operation can only be performed on users that have a `SUSPENDED` status.  
+
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter | Description  | Param Type | DataType | Required | Default
+--------- | ------------ | ---------- | -------- | -------- | -------
+id        | `id` of user | URL        | String   | TRUE     |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+Returns an empty object.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/unsuspend"
 ~~~
 
 ##### Response Example
