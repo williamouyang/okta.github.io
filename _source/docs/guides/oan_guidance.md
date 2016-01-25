@@ -122,7 +122,7 @@ A: Okta App Integration team reviews all submitted apps. The team will reach out
 
 **Q: What is the difference between Okta Verified and Community Created in the Okta Application Network?**
 
-A: There are two different app certification levels in the OAN – Okta Verified and Community Created. Okta Verified apps have custom configuration documentation, Okta has developer/support contacts at the partner company, and the integrations are tested by Okta on an ongoing basis. All other apps are labeled in the Okta Application Network as Community Created and have not been tested and verified by Okta.
+A: There are two different app certification levels in the OAN – Okta Verified and Community Created. Okta Verified apps have custom configuration documentation and the integrations are tested by Okta on an ongoing basis. In many cases, Okta has partnered with the app's developer. All other apps are labeled in the Okta Application Network as Community Created and have not been tested and verified by Okta.
 
 ![OAN Certification](https://cloud.githubusercontent.com/assets/3278918/12027092/9cab6bd2-ad76-11e5-8372-938b5367ba30.png "OAN Certification")
 
