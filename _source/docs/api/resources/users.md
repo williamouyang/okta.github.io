@@ -2032,7 +2032,7 @@ Content-Type: application/json
 ### Suspend User
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:id*/lifecycle/deactivate</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:id*/lifecycle/suspend</span>
 
 Suspends a user.  This operation can only be performed on users with an `ACTIVE` status.  The user will have a status of `SUSPENDED` when the process is complete. 
 
@@ -2049,7 +2049,7 @@ id        | `id` of user | URL        | String   | TRUE     |
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Returns an empty object.
+Returns an empty object. Passing an invalid `id` returns a `400 Bad Request` status code with error code `E0000001`.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -2073,7 +2073,7 @@ Content-Type: application/json
 ### Unsuspend User
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:id*/lifecycle/deactivate</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:id*/lifecycle/unsuspend</span>
 
 Unsuspends users and returns then to the `ACTIVE` state.  This operation can only be performed on users that have a `SUSPENDED` status.  
 
@@ -2088,7 +2088,7 @@ id        | `id` of user | URL        | String   | TRUE     |
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Returns an empty object.
+Returns an empty object. Returns an empty object. Passing an invalid `id` returns a `400 Bad Request` status code with error code `E0000001`.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
