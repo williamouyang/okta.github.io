@@ -43,7 +43,7 @@ of factors and comes with built-in support for all of the factors listed below:
 ## Self service password reset
 
 The Okta Sign-In Widget has everything you need to give your users the
-ability reset their forgotten passwords, it comes with support
+ability to reset their forgotten passwords, it comes with support
 for sending reset notifications as well as prompting users to verify
 themselves by prompting them to answer a security question.
 
@@ -69,7 +69,7 @@ might occur in a user login flow.
 
 If you are a developer, the best way to understand the Okta
 Sign-In Widget is to look at a simple example of the HTML
-needed to get it working. The HTML below shows you how the quickly
+needed to get it working. The HTML below shows you how to quickly
 and easily set up a fully featured login experience:
 
 ~~~ html
@@ -104,20 +104,20 @@ tag, we include the  `okta-sign-in-1.0.2.min.js` and
 logic for the Okta Sign-In Widget. 
 
 We also include the `okta-theme-1.0.2.css` file, which contains all
-of the styling information for the the Okta Sign-In Widget.
+of the styling information for the Okta Sign-In Widget.
 
 In the `<body>`, we add a `<div>` tag with an "`id`" of
 `okta-login-container`  &#x2013; you can use any "`id`" value in this tag,
 we are just using `okta-login-container` here for the sake of clarity.
 
-Next, we add some JavaScript code to insert the the Okta Sign-In Widget
+Next, we add some JavaScript code to insert the Okta Sign-In Widget
 into the `okta-login-container` tag. In this short example, this
 JavaScript is included at the end of the file. However, when you use
 this code on your own website, you will need to run these functions
 in the parts of your code that are run when the DOM is ready.
 
 Here is what that JavaScript code is doing: First, the line below
-initializes the the Okta Sign-In Widget object, note that 
+initializes the Okta Sign-In Widget object, note that 
 the `baseUrl` value **MUST** be the domain for *your* Okta
 organization.
 
@@ -130,7 +130,7 @@ var baseUrl = 'https://example.okta.com';
 var oktaSignIn = new OktaSignIn({baseUrl: baseUrl});
 ~~~
 
-Finally, the lines below actually render the the Okta Sign-In
+Finally, the lines below actually render the Okta Sign-In
 Widget. Note that the value for `el` can be whatever `id` that you 
 specify, also note that we only define a "SUCCESS" callback. In a
 production environment, you will want to handle statuses beyond
@@ -150,7 +150,7 @@ oktaSignIn.renderEl(
 
 Now that you have a basic idea of how the Okta Sign-In widget works,
 your next step is to see these capabilities in action for
-yourself. The best way to do this is to set up a version of the the
+yourself. The best way to do this is to set up a version of the
 Okta Sign-In Widget that is configured to point at your own Okta 
 organization.
 
@@ -213,7 +213,7 @@ Copy this to a file named `login-to-okta.html`:
           { el: '#okta-login-container' },
           function (res) {
             if (res.status === 'SUCCESS') {
-              console.log('User %s succesfully authenticated %o', res.user.profile.login, res.user);
+              console.log('User %s successfully authenticated %o', res.user.profile.login, res.user);
               res.session.setCookieAndRedirect('https://example.com/');
             }
           }
@@ -304,13 +304,13 @@ Test the Okta Sign-In Widget by loading the URL for the
 If you used `python -m SimpleHTTPServer` command above, this URL will be
 <http://localhost:8000/login-to-okta.html>
 
-Once you've successfully loaded the the Okta Sign-In Widget, it is
+Once you've successfully loaded the Okta Sign-In Widget, it is
 time to start exploring the capabilities of the
 widget. 
 
 Here are two things for you to try:
 
-1.  Log in using credentials that you are know are invalid. 
+1.  Log in using credentials that you know are invalid. 
     For example: Try using "invalid@example.com" as the user name and
     "invalid" as the password. You should see an error.
 2.  Try using a valid user name and password. If everything works,
@@ -338,35 +338,35 @@ the Okta Sign-In Widget using CSS and JavaScript.
 ## Customizing style with CSS
 
 You will need to write CSS style overloads to customize the "look
-and feel" of the the Okta Sign-In Widget.
+and feel" of the Okta Sign-In Widget.
 
 Before you get started, it is useful to know how the widget works.
 Most important is understanding how the widget is created. The
-the Okta Sign-In Widget is created when the `renderEl()` JavaScript
-method is called. When the the `renderEl()` method is called, the
-the Okta Sign-In Widget will be created as a `<div>` tag with an
+Okta Sign-In Widget is created when the `renderEl()` JavaScript
+method is called. When the `renderEl()` method is called, the
+Okta Sign-In Widget will be created as a `<div>` tag with an
 `id` of `okta-sign-in` which will be inserted inside of the tag that
 you specified in the `el` option to `renderEl` method.
 
-Here is what the opening tag for the the Okta Sign-In Widget will look like:
+Here is what the opening tag for the Okta Sign-In Widget will look like:
 
     <div id="okta-sign-in" class="auth-container main-container no-beacon">
 
-Customization of the HTML *surrounding* the the Okta Sign-In Widget 
+Customization of the HTML *surrounding* the Okta Sign-In Widget 
 is up to you. Customization of the widget itself will be done on
 the `#okta-login-container` selector and its child elements.
 
 A full list of the CSS selectors that you can use to style the
-the Okta Sign-In Widget are in the [okta-theme.css](https://example.okta.com/css/login/okta-theme.css) file. We strongly
+Okta Sign-In Widget are in the [okta-theme.css](https://example.okta.com/css/login/okta-theme.css) file. We strongly
 urge you to style your widget using only the selectors that are
 present in the [okta-theme.css](https://example.okta.com/css/login/okta-theme.css) file, other elements in the widget
 will be subject to change and will cause your styling to break in
-future versions of the the Okta Sign-In Widget.
+future versions of the Okta Sign-In Widget.
 
-### Example CSS styling for the the Okta Sign-In Widget
+### Example CSS styling for the Okta Sign-In Widget
 
 Below is some example CSS, which will give you an idea of how you
-can style the the Okta Sign-In Widget. You can try out this CSS yourself
+can style the Okta Sign-In Widget. You can try out this CSS yourself
 by copying the `<style>` tag below into the `<head>` section of
 the `login-to-okta.html` file that you created above.
 
@@ -412,13 +412,13 @@ your HTML:
 
 The configuration options that are passed to the `OktaSignIn()`
 constructor are used to configure the functionality and text labels
-of the the Okta Sign-In Widget. An example of how to configure
+of the Okta Sign-In Widget. An example of how to configure
 `OktaSignIn()` is below, followed by a full list of all of the
 features and text labels that you can use to configure the Okta Sign-In Widget.
 
 ### Example
 
-Below is a working example of a customized the Okta Sign-In Widget. You can
+Below is a working example of a customized version of the Okta Sign-In Widget. You can
 see what these customizations do by copying this code into your
 `login-to-okta.html` example file and reloading the page in your
 web browser. A full list of the supported customization options
