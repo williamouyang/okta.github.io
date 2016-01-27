@@ -9,7 +9,7 @@ redirect_from: "/docs/getting_started/enabling_cors.html"
 
 [Cross-Origin Resource Sharing (CORS)](http://en.wikipedia.org/wiki/Cross-Origin_Resource_Sharing) is a mechanism that allows a web page to make an AJAX call using [XMLHttpRequest (XHR)](http://en.wikipedia.org/wiki/XMLHttpRequest) to a domain that is  different from the one from where the script was loaded.  Such "cross-domain" requests would otherwise be forbidden by web browsers, per the [same origin security policy](http://en.wikipedia.org/wiki/Same_origin_policy).  CORS defines a [standardized](http://www.w3.org/TR/cors/) way in which the browser and the server can interact to determine whether or not to allow the cross-origin request
 
-In Okta, CORS allows JavaScript hosted on your websites to make an XHR to the Okta API with the Okta session cookie. Every website orgin must be explictly permitted via the Okta Admin Dashboard for CORS.
+In Okta, CORS allows JavaScript hosted on your websites to make an XHR to the Okta API with the Okta session cookie. Every website origin must be explictly permitted via the Okta Admin Dashboard for CORS.
 
 > **Caution:** Only grant access to specific origins (websites) that you control and trust to access the Okta API.
 
@@ -31,7 +31,7 @@ You can enable CORS for websites that need cross-origin requests to the Okta API
 
 ![CORS Settings UI](/assets/img/okta-admin-ui-cors.png "CORS Settings UI")
 
-1. Enter the base URL of websites with which you want to allow cross-orgin AJAX requests, one per line. Again, only list specific websites that you control.
+1. Enter the base URL of websites with which you want to allow cross-origin AJAX requests, one per line. Again, only list specific websites that you control.
 2. Check the **Enable CORS…** box to enable CORS.
 3. Select **Save**.
 
