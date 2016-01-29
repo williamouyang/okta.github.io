@@ -19,7 +19,7 @@ The generated one-time token along with the URL for your landing page can then b
 
 ### Validate credentials & retrieve a one-time token
 
-When processing a user's login request in your web application, retrieve an one-time token by passing the user's credentials with the `cookieToken` additionalFields query param to the [Create Session](/docs/api/rest/sessions.html#create-session-with-session-token) operation.
+When processing a user's login request in your web application, retrieve a one-time token by passing the user's credentials with the `cookieToken` additionalFields query param to the [Create Session](/docs/api/rest/sessions.html#create-session-with-session-token) operation.
 
 #### Request Example
 {:.api .api-request .api-request-example}
