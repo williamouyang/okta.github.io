@@ -2049,7 +2049,10 @@ id        | `id` of user | URL        | String   | TRUE     |
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Returns an empty object. Passing an invalid `id` returns a `400 Bad Request` status code with error code `E0000001`.
+Returns an empty object. 
+
+Passing an invalid `id` returns a `404 Not Found` status code with error code `E0000007`.
+Passing an `id` that is not in the `ACTIVE` state returns a `400 Bad Request` status code with error code `E0000001`.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -2088,7 +2091,10 @@ id        | `id` of user | URL        | String   | TRUE     |
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Returns an empty object. Returns an empty object. Passing an invalid `id` returns a `400 Bad Request` status code with error code `E0000001`.
+Returns an empty object. Returns an empty object. 
+
+Passing an invalid `id` returns a `404 Not Found` status code with error code `E0000007`.
+Passing an `id` that is not in the `SUSPENDED` state returns a `400 Bad Request` status code with error code `E0000001`.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
