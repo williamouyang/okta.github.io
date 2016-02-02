@@ -2159,7 +2159,7 @@ tempPassword | Sets the user's password to a temporary password,  if `true` | Qu
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Returns an the complete user object by default. When `tempPassword` is `true`, returns the temporary password.
+Returns the complete user object by default. When `tempPassword` is `true`, returns the temporary password.
 
 ~~~json
 {
