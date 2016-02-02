@@ -56,7 +56,7 @@ Used for retrieving resources.
 #### POST
 
 Used for creating resources, or performing custom actions (such as
-user lifecycle operations).  POST requests
+user lifecycle operations).  For POST requests
 with no `body` param, be sure to set the `Content-Length` header to zero.
 
 #### PUT
@@ -197,8 +197,8 @@ Note: Some resources do not support all operators.
 
 Operator | Description | Behavior
 -------- | ----------- | --------
-and | Logical And | The filter is only a match if both expressions evaluate to true.
-or | Logical or | The filter is a match if either expression evaluates to true.
+and | Logical AND | The filter is only a match if both expressions evaluate to true.
+or | Logical OR | The filter is a match if either expression evaluates to true.
 
 ### Logical Operators
 
@@ -259,9 +259,9 @@ The following three headers are set in each response:
 
 ~~~ http
 HTTP/1.1 200 OK
-X-RateLimit-Limit: 20
-X-RateLimit-Remaining: 15
-X-RateLimit-Reset: 1366037820
+X-Rate-Limit-Limit: 20
+X-Rate-Limit-Remaining: 15
+X-Rate-Limit-Reset: 1366037820
 ~~~
 
 If the rate limit is exceeded, an HTTP 429 Status Code is returned.  The current Rate Limit is on a per-org per-endpoint basis.
