@@ -306,7 +306,7 @@ Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988))
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users</span>
 
-Creates a new user in your Okta organization with or without credentials:
+Creates a new user in your Okta organization with or without credentials.
 
 - [Create User without Credentials](#create-user-without-credentials)
 - [Create User with Recovery Question](#create-user-with-recovery-question)
@@ -687,7 +687,12 @@ curl -v -X POST \
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users/*:id*</span><span class="api-label api-label-cors api-uri-template-cors pull-right"><i class="fa fa-cloud-download"></i> CORS</span>
 
-Fetches a user from your Okta organization
+Fetches a user from your Okta organization.
+
+- [Get Current User](#get-current-user)
+- [Get User with ID](#get-user-with-id)
+- [Get User with Login](#get-user-with-login)
+- [Get User with Login Shortname](#get-user-with-login-shortname)
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -725,7 +730,7 @@ Content-Type: application/json
 #### Get Current User
 {:.api .api-operation}
 
-Fetches the current user linked to API token or session cookie
+Fetches the current user linked to API token or session cookie.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -869,7 +874,7 @@ curl -v -X GET \
 #### Get User with Login
 {:.api .api-operation}
 
-Fetches a specific user when you know the user's `login`
+Fetches a specific user when you know the user's `login`.
 
 > When fetching a user by `login`, you should [URL encode](http://en.wikipedia.org/wiki/Percent-encoding) the request parameter to ensure special characters are escaped properly.  Logins with a `/` character can only be fetched by 'id' due to URL issues with escaping the `/` character.
 
@@ -943,7 +948,7 @@ curl -v -X GET \
 #### Get User with Login Shortname
 {:.api .api-operation}
 
-Fetches a specific user when you know the user's `login shortname` and the shortname is unique within the organization
+Fetches a specific user when you know the user's `login shortname` and the shortname is unique within the organization.
 
 > When fetching a user by `login shortname`, you should [URL encode](http://en.wikipedia.org/wiki/Percent-encoding) the request parameter to ensure special characters are escaped properly.  Logins with a `/` character can only be fetched by 'id' due to URL issues with escaping the `/` character.
 
@@ -1094,7 +1099,7 @@ Array of [User](#user-model)
 #### List Users with Defaults
 {:.api .api-operation}
 
-Enumerates all users that do not have a status of `DEPROVISIONED`
+Enumerates all users that do not have a status of `DEPROVISIONED`.
 
 The default user limit is set to a very high number due to historical reasons which is no longer valid for most organizations.  This will change in a future version of this API.  The recommended page limit is now `limit=200`.
 
@@ -1437,7 +1442,7 @@ curl -v -X GET \
 
 <span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /users/*:id*</span>
 
-Update a user's profile and/or credentials using strict-update semantics
+Update a user's profile and/or credentials using strict-update semantics.
 
 > All profile properties must be specified when updating a user's profile with a `PUT` method. Any attribute not specified
 in the request will be deleted. **Do not use `PUT` method for partial updates.**
@@ -1637,11 +1642,7 @@ curl -v -X POST \
 #### Set Password
 {:.api .api-operation}
 
-This is an administrative operation and does not validate existing user credentials.  For operations that validate credentials refer to:
-
-- [Reset Password](#reset-password)
-- [Forgot Password](#forgot-password)
-- [Change Password](#change-password)
+This is an administrative operation and does not validate existing user credentials.  For operations that validate credentials refer to [Reset Password](#reset-password), [Forgot Password](#forgot-password), and [Change Password](#change-password).
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1800,7 +1801,7 @@ curl -v -X POST \
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users/*:id*/appLinks</span><span class="api-label api-label-cors pull-right"><i class="fa fa-cloud-download"></i> CORS</span>
 
-Fetches appLinks for all direct or indirect (via group membership) assigned applications
+Fetches appLinks for all direct or indirect (via group membership) assigned applications.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
