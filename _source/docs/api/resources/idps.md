@@ -1198,8 +1198,8 @@ The Identity Provider Transaction Model represents a account link or just-in-tim
         ]
       }
     },
-    "jit": {
-      "href": "https://example.okta.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/lifecycle/jit",
+    "provision": {
+      "href": "https://example.okta.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/lifecycle/provision",
       "hints": {
         "allow": [
           "POST"
@@ -1218,7 +1218,7 @@ All IdP transactions have the following properties:
 | Property      | Description                                                                            | DataType                                                        | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
 | ------------- | -------------------------------------------------------------------------------------- | --------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
 | id            | unique key for transaction                                                             | String                                                          | FALSE    | TRUE   | TRUE     |           |           |            |
-| status        | status of transaction                                                                  | `ACCOUNT_JIT`, `ACCOUNT_LINK` or `FINISHED`                     | FALSE    | FALSE  | TRUE     |           |           |            |
+| status        | status of transaction                                                                  | `ACCOUNT_JIT`, `ACCOUNT_LINK` or `SUCCESS`                      | FALSE    | FALSE  | TRUE     |           |           |            |
 | created       | timestamp when transaction was created                                                 | Date                                                            | FALSE    | FALSE  | TRUE     |           |           |            |
 | expiresAt     | timestamp when transaction expires                                                     | Date                                                            | FALSE    | FALSE  | TRUE     |           |           |            |
 | sessionToken  | ephemeral [one-time token](authn.html#session-token) used to bootstrap an Okta session | String                                                          | TRUE     | FALSE  | TRUE     |           |           |            |
@@ -1228,7 +1228,7 @@ All IdP transactions have the following properties:
 | _embedded     | embedded resources related to the transaction                                          | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)  | TRUE     | FALSE  | TRUE     |           |           |            |
 |---------------+----------------------------------------------------------------------------------------+-----------------------------------------------------------------+----------|--------|----------|-----------|-----------+------------|
 
-> The `sessionToken` is only available for completed transactions with the `FINISH` status
+> The `sessionToken` is only available for completed transactions with the `SUCCESS` status
 
 #### Identity Provider Authority Object
 
@@ -1282,8 +1282,8 @@ Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988))
 | source             | [IdP user](#identity-provider-user-model) for the transaction                                                                                                                                       |
 | target             | Transformed [Okta user profile](users.html#profile-object) for the transaction via UD Profile Mappings for the IdP                                                                                  |
 | users              | [Okta user](users.html#user-model) candidates for the account link transaction that match the IdP's [account link policy](#account-link-policy-object) and [subject policy](#subject-policy-object) |
-| jit                | Lifecycle operation to just-in-time provision a new [Okta user](users.html#user-model) for the IdP user                                                                                             |
-| finish             | Completes the transaction                                                                                                                                                                           |
+| provision          | Lifecycle operation to just-in-time provision a new [Okta user](users.html#user-model) for the IdP user                                                                                             |
+| next               | Completes the transaction                                                                                                                                                                           |
 | cancel             | Cancels the transaction                                                                                                                                                                             |
 |--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
@@ -1949,8 +1949,8 @@ curl -v -X GET \
         ]
       }
     },
-    "jit": {
-      "href": "https://example.okta.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/lifecycle/jit",
+    "provision": {
+      "href": "https://example.okta.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/lifecycle/provision",
       "hints": {
         "allow": [
           "POST"
@@ -2164,7 +2164,7 @@ curl -v -X GET \
 ### Provision IdP User
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /idps/tx/*:tid*/lifecycle/jit</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /idps/tx/*:tid*/lifecycle/provision</span>
 
 Just-in-time provisions an IdP user as a new Okta user
 
@@ -2193,7 +2193,7 @@ curl -v -X POST \
   "profile": {
     "userType": "Social"
   }
-}' "https://${org}.okta.com/api/v1/idps/tx/satvkokI9JsOxqsjz0g3/lifecycle/jit"
+}' "https://${org}.okta.com/api/v1/idps/tx/satvkokI9JsOxqsjz0g3/lifecycle/provision"
 ~~~
 
 ##### Response Example
@@ -2202,7 +2202,7 @@ curl -v -X POST \
 ~~~json
 {
   "id": "satvkokI9JsOxqsjz0g3",
-  "status": "FINISH",
+  "status": "SUCCESS",
   "sessionToken": "20111ItcRRtx_HOKguQRqx6YIeFL3L6cQhpqSCvLOD-fpj-3K53aqXN",
   "expiresAt": "2016-01-04T02:40:43.000Z",
   "created": "2016-01-04T02:32:23.000Z",
@@ -2216,7 +2216,7 @@ curl -v -X POST \
     "ipAddress": "127.0.0.1"
   },
   "_links": {
-    "finish": {
+    "next": {
       "href": "https://example.okta.com/api/v1/idps/tx/satvkokI9JsOxqsjz0g3/finish",
       "hints": {
         "allow": [
@@ -2278,7 +2278,7 @@ curl -v -X POST \
 ~~~json
 {
   "id": "satvkokI9JsOxqsjz0g3",
-  "status": "FINISH",
+  "status": "SUCCESS",
   "sessionToken": "20111FLDl04JoQdl-NJOB9A6HosTSuHtQQUmCBhdEvnE4XEInod0Sg_",
   "expiresAt": "2016-01-04T02:53:13.000Z",
   "created": "2016-01-04T02:44:53.000Z",
@@ -2292,7 +2292,7 @@ curl -v -X POST \
     "ipAddress": "127.0.0.1"
   },
   "_links": {
-    "finish": {
+    "next": {
       "href": "https://example.okta.com/api/v1/idps/tx/satvkokI9JsOxqsjz0g3/finish",
       "hints": {
         "allow": [
