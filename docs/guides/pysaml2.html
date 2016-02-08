@@ -240,6 +240,19 @@ the following steps, you will have a working example of connecting Okta to a sam
 
 <ol>
   <li>
+    <p>Install platform-dependent prerequisites:</p>
+
+    <p>For Mac OS X:
+~~~ shell
+brew install libffi libxmlsec1
+~~~</p>
+
+    <p>For RHEL:
+~~~ shell
+sudo yum install libffi-devel xmlsec1 xmlsec1-openssl
+~~~</p>
+  </li>
+  <li>
     <p>Download the example application for Python:</p>
 
     <div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>git clone git@github.com:jpf/okta-pysaml2-example.git
