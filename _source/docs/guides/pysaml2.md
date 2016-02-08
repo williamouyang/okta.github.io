@@ -69,6 +69,17 @@ section wuse the "Identity Provider metadata" link from the
 section above to configure {{ page.saml_library }}. After completing
 the following steps, you will have a working example of connecting Okta to a sample {{ page.programming_language }} application using {{ page.saml_library }}.
 
+0.  Install platform-dependent prerequisites:
+    
+    For Mac OS X:
+    ~~~ shell
+    brew install libffi libxmlsec1
+    ~~~
+
+    For RHEL:
+    ~~~ shell
+    sudo yum install libffi-devel xmlsec1 xmlsec1-openssl
+    ~~~
 
 1.  Download the example application for {{ page.programming_language }}:
 
