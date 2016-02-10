@@ -1688,7 +1688,7 @@ curl -v -X POST \
 -d '{
   "stateToken": "007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb",
   "factorType": "token:software:totp",
-  "provider": "OKTA"
+  "provider": "GOOGLE"
 }' "https://${org}.okta.com/api/v1/authn/factors"
 ~~~
 
