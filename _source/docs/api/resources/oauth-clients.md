@@ -70,7 +70,7 @@ Client applications have the following properties:
 
 > The `client_id`, `client_id_issued_at`, and `client_secret` attributes are only available after a client is created.
 
-> Client secret is only shown on the initial creation of a client application (and only if the token_endpoint_auth_method is client-secret-based).
+> Client secret is only shown on the initial creation of a client application (and only if the token_endpoint_auth_method is one that requires a client secret).
   It is never returned in a GET call.
 
 > The "grant_types" and "response_types" values described above are partially orthogonal, as they refer to arguments passed to different
@@ -80,7 +80,7 @@ Client applications have the following properties:
   the OAuth 2.0 authorization code grant.
 
 > At least one redirect URI and response type is required for all client types, with one exception: if the client uses the
-  [Resource Owner Password](https://tools.ietf.org/html/rfc6749#section-4.3) flow (e.g. if `grant_types` contains the value `password`) 
+  [Resource Owner Password](https://tools.ietf.org/html/rfc6749#section-4.3) flow (if `grant_types` contains the value `password`) 
   then no redirect URI or response type is necessary. In this case you can pass either null or an empty array for these attributes.
 
 
