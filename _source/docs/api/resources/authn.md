@@ -296,7 +296,7 @@ User's recovery question used for verification of a recovery transaction
 
 ### Password Policy Object
 
-A subset of policy settings for the user's assigned password policy published during `PASSWORD_WARN`, `PASSWORD_EXPIRD`, or `PASSWORD_RESET` states
+A subset of policy settings for the user's assigned password policy published during `PASSWORD_WARN`, `PASSWORD_EXPIRED`, or `PASSWORD_RESET` states
 
 |------------+------------------------------+-----------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
 | Property   | Description                  | DataType                                                  | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
@@ -393,7 +393,7 @@ TOTP factors when activated have an embedded verification object which describes
 | timeStep       | time-step size for TOTP                           | String                                                         | FALSE    | FALSE  | TRUE     |           |           |            |
 | sharedSecret   | unique secret key for prover                      | String                                                         | FALSE    | FALSE  | TRUE     |           |           |            |
 | encoding       | encoding of `sharedSecret`                        | `base32` or `base64`                                           | FALSE    | FALSE  | TRUE     |           |           |            |
-| keyLength      | number of digits in an HOTP value                 | Number                                                         | FALSE    | FALSE  | TRUE     |           |           |            |
+| keyLength      | number of digits in an TOTP value                 | Number                                                         | FALSE    | FALSE  | TRUE     |           |           |            |
 | _links         | discoverable resources related to the activation  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
 |----------------+---------------------------------------------------+----------------------------------------------------------------+----------|--------|----------|-----------|-----------+------------|
 
