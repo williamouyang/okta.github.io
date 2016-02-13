@@ -657,7 +657,7 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -d '{
   "username": "dade.murphy@example.com",
-  "password" : "correcthorsebatterystaple",
+  "password": "correcthorsebatterystaple",
   "relayState": "/myapp/some/deep/link/i/want/to/return/to",
   "options": {
     "multiOptionalFactorEnroll": false,
@@ -1059,7 +1059,7 @@ curl -v -X POST \
 -H "X-Forwarded-For: 23.235.46.133" \
 -d '{
   "username": "dade.murphy@example.com",
-  "password" : "correcthorsebatterystaple",
+  "password": "correcthorsebatterystaple",
   "relayState": "/myapp/some/deep/link/i/want/to/return/to",
   "options": {
     "multiOptionalFactorEnroll": false,
@@ -1112,7 +1112,7 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -d '{
   "username": "dade.murphy@example.com",
-  "password" : "correcthorsebatterystaple",
+  "password": "correcthorsebatterystaple",
   "relayState": "/myapp/some/deep/link/i/want/to/return/to",
   "options": {
     "multiOptionalFactorEnroll": false,
@@ -1868,7 +1868,7 @@ curl -v -X POST \
 #### Enroll YubiKey Factor
 {:.api .api-operation}
 
-Enrolls a user with a YubiCo factor (YubiKey).  YubiKeys must be verified with the [current passcode](factors.html#factor-verification-object) as part of the enrollment request.
+Enrolls a user with a Yubico factor (YubiKey).  YubiKeys must be verified with the [current passcode](factors.html#factor-verification-object) as part of the enrollment request.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -4231,7 +4231,7 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -d '{
   "stateToken": "00lMJySRYNz3u_rKQrsLvLrzxiARgivP8FB_1gpmVb"
-}' 'https://${org}.okta.com/api/v1/cancel'
+}' "https://${org}.okta.com/api/v1/authn/cancel"
 ~~~
 
 ##### Response Example
