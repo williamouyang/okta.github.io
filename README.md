@@ -46,6 +46,7 @@ and generate the final site content.
 
 * **_source** this is where the source files live. If you're editing content, or adding assets like images or css, they
   belong in here
+* **docs** The output HTML files live in this directory. Don't edit this content, it'll be overwritten with every build.
 * **_site** this directory is ignored in github. It contains the local version of each of the built files in the site
 * **almost everything else** most of the other directories in the root are the checked in versions of the built site.
   These files should not be edited directly. Find the corresponding version of the file in the _source directory, modify
