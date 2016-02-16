@@ -6,8 +6,11 @@ redirect_from: "/docs/api/rest/oauth-clients.html"
 
 ## Overview
 
-The OAuth Clients API provides operations to register and manager client applications for use with Okta's
+The OAuth Clients API provides operations to register and manage client applications for use with Okta's
 OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract defined in [RFC7591](https://tools.ietf.org/html/rfc7591).
+
+Note that clients managed via this API are modeled as applications in Okta and will show in the Applications section of the
+Administrator dashboard. Changes made via the API will reflect in the UI and vice versa.
 
 > This API is currently in **Early Access (EA)** status.
 
@@ -58,22 +61,28 @@ Client applications have the following properties:
 | client_name                | human-readable string name of the client application              | String                                                                 | FALSE    | FALSE  | FALSE    |
 | client_secret              | OAuth 2.0 client secret string (used for confidential clients)    | String                                                                 | TRUE     | TRUE   | TRUE     |
 | logo_uri                   | URL string that references a logo for the client                  | String                                                                 | TRUE     | FALSE  | FALSE    | 
-| redirect_uris              | array of redirection URI strings for use in redirect-based flows  | Array                                                                  | FALSE    | FALSE  | FALSE    |
-| response_types             | array of OAuth 2.0 response type strings                          | Array of `code`, `token`, `id_token`                                   | FALSE    | FALSE  | FALSE    |
+| redirect_uris              | array of redirection URI strings for use in redirect-based flows  | Array                                                                  | TRUE     | FALSE  | FALSE    |
+| response_types             | array of OAuth 2.0 response type strings                          | Array of `code`, `token`, `id_token`                                   | TRUE     | FALSE  | FALSE    |
 | grant_types                | array of OAuth 2.0 grant type strings                             | Array of `authorization_code`, `implicit`, `password`, `refresh_token` | FALSE    | FALSE  | FALSE    | 
 | token_endpoint_auth_method | requested authentication method for the token endpoint            | `none`, `client_secret_post`, or `client_secret_basic`                 | FALSE    | FALSE  | FALSE    |
 | _links                     | discoverable resources related to the app                         | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)         | TRUE     | FALSE  | TRUE     | 
 |----------------------------+-------------------------------------------------------------------+------------------------------------------------------------------------+----------+--------+----------|
 
-> `client_id`, `client_id_issued_at`, and `client_secret` are only available after a client is created.
+> The `client_id`, `client_id_issued_at`, and `client_secret` attributes are only available after a client is created.
 
-> Client secret is only shown on the initial creation of a client application (and only if the token_endpoint_auth_method is one that is client-secret-based).
+> Client secret is only shown on the initial creation of a client application (and only if the token_endpoint_auth_method is one that requires a client secret).
   It is never returned in a GET call.
 
 > The "grant_types" and "response_types" values described above are partially orthogonal, as they refer to arguments passed to different
-  endpoints in the OAuth protocol.  However, they are related in that the "grant_types" available to a client influence the "response_types"
-  that the client is allowed to use, and vice versa. For instance, a "grant_types" value that includes "authorization_code" implies a
-  "response_types" value that includes "code", as both values are defined as part of the OAuth 2.0 authorization code grant.
+  endpoints in the [OAuth 2.0 protocol](https://tools.ietf.org/html/rfc6749). However, they are related in that the "grant_types"
+  available to a client influence the "response_types" that the client is allowed to use, and vice versa. For instance, a "grant_types"
+  value that includes "authorization_code" implies a "response_types" value that includes "code", as both values are defined as part of
+  the OAuth 2.0 authorization code grant.
+
+> At least one redirect URI and response type is required for all client types, with one exception: if the client uses the
+  [Resource Owner Password](https://tools.ietf.org/html/rfc6749#section-4.3) flow (if `grant_types` contains the value `password`) 
+  then no redirect URI or response type is necessary. In this case you can pass either null or an empty array for these attributes.
+
 
 ## Client Application Operations
 
