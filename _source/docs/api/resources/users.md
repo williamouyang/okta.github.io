@@ -91,7 +91,7 @@ The User model defines several **read-only** properties:
 | Property              | Description                                                     | DataType                                                                                            | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
 | --------------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------| -------- | ------ | -------- | --------- | --------- | ---------- |
 | id                    | unique key for user                                             | String                                                                                              | FALSE    | TRUE   | TRUE     |           |           |            |
-| status                | current [status](#user-status) of user                          | `STAGED`, `PROVISIONED`, `ACTIVE`, `RECOVERY`, `LOCKED_OUT`, `PASSWORD_EXPIRED`, `SUSPENDED`, or `DEPROVISIONED` | FALSE    | FALSE  | TRUE     |           |           |            |
+| status                | current [status](#user-status) of user                          | `STAGED`, `PROVISIONED`, `ACTIVE`, `RECOVERY`, `LOCKED_OUT`, `PASSWORD_EXPIRED`, `SUSPENDED`, or `DEPROVISIONED` | FALSE | FALSE | TRUE         |           |           |
 | created               | timestamp when user was created                                 | Date                                                                                                | FALSE    | FALSE  | TRUE     |           |           |            |
 | activated             | timestamp when transition to `ACTIVE` status completed          | Date                                                                                                | FALSE    | FALSE  | TRUE     |           |           |            |
 | statusChanged         | timestamp when status last changed                              | Date                                                                                                | TRUE     | FALSE  | TRUE     |           |           |            |
@@ -162,7 +162,7 @@ The default user profile is based on the [System for Cross-Domain Identity Manag
 | secondEmail       | secondary email address of user typically used for account recovery                                                          | String   | TRUE     | TRUE   | FALSE    | 5         | 100       | [RFC 5322 Section 3.2.3](http://tools.ietf.org/html/rfc5322#section-3.2.3)                                        |
 | firstName         | given name of the user (`givenName`)                                                                                         | String   | FALSE    | FALSE  | FALSE    | 1         | 50        |                                                                                                                   |
 | lastName          | family name of the user (`familyName`)                                                                                       | String   | FALSE    | FALSE  | FALSE    | 1         | 50        |                                                                                                                   |
-| middleName        | middle name(s) of the user                                                                                                   | String   | TRUE    | FALSE  | FALSE    |           |           |                                                                                                                   |
+| middleName        | middle name(s) of the user                                                                                                   | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
 | honorificPrefix   | honorific prefix(es) of the user, or title in most Western languages                                                         | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
 | honorificSuffix   | honorific suffix(es) of the user                                                                                             | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
 | title             | user's title, such as "Vice President"                                                                                       | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
@@ -290,12 +290,12 @@ Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988))
 | self                   | The actual user                                                                                                                                           |
 | activate               | [Lifecycle action](#activate-user) to transition user to `ACTIVE` status                                                                                  |
 | deactivate             | [Lifecycle action](#deactivate-user) to transition user to `DEPROVISIONED` status                                                                         |
-| suspend                | [Lifecycle action](#suspend-user) to transition user to `SUSPENDED` status                                                                         |
-| unsuspend              | [Lifecycle action](#unsuspend-user) to return a user to `ACTIVE` status when their current status is `SUSPENDED`                                                                         |
+| suspend                | [Lifecycle action](#suspend-user) to transition user to `SUSPENDED` status                                                                                |
+| unsuspend              | [Lifecycle action](#unsuspend-user) to return a user to `ACTIVE` status when their current status is `SUSPENDED`                                          |
 | resetPassword          | [Lifecycle action](#reset-password) to transition user to `RECOVERY` status                                                                               |
 | expirePassword         | [Lifecycle action](#expire-password) to transition user to `PASSWORD_EXPIRED` status                                                                      |
 | resetFactors           | [Lifecycle action](#reset-factors) to reset all the MFA factors for the user                                                                              |
-| unlock                 | [Lifecycle action](#unlock-user) to return a user to `ACTIVE` status when their current status is `LOCKED_OUT` due to exceeding failed login attempts    |
+| unlock                 | [Lifecycle action](#unlock-user) to return a user to `ACTIVE` status when their current status is `LOCKED_OUT` due to exceeding failed login attempts     |
 | forgotPassword         | [Resets a user's password](#forgot-password) by validating the user's recovery credential.                                                                |
 | changePassword         | [Changes a user's password](#change-password) validating the user's current password                                                                      |
 | changeRecoveryQuestion | [Changes a user's recovery credential](#change-recovery-question) by validating the user's current password                                               |
@@ -321,10 +321,10 @@ Creates a new user in your Okta organization with or without credentials.
 
 Parameter   | Description                                                                      | Param Type | DataType                                  | Required | Default
 ----------- | -------------------------------------------------------------------------------- | ---------- | ----------------------------------------- | -------- | -------
-activate    | Executes [activation lifecycle](#activate-user) operation when creating the user | Query      | Boolean                                   | FALSE    | TRUE
-provider    | Indicates whether to create a user with a specified authentication provider      | Query      | Boolean                                   | FALSE    | FALSE
-profile     | Profile properties for user                                                      | Body       | [Profile Object](#profile-object)         | TRUE     |
-credentials | Credentials for user                                                             | Body       | [Credentials Object](#credentials-object) | FALSE    |
+activate    | Executes [activation lifecycle](#activate-user) operation when creating the user | Query      | Boolean                                   | FALSE    | TRUE   
+provider    | Indicates whether to create a user with a specified authentication provider      | Query      | Boolean                                   | FALSE    | FALSE  
+profile     | Profile properties for user                                                      | Body       | [Profile Object](#profile-object)         | TRUE     | 
+credentials | Credentials for user                                                             | Body       | [Credentials Object](#credentials-object) | FALSE    | 
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -1030,6 +1030,7 @@ Enumerates users in your organization with pagination.  A subset of users can be
 
 - [List Users with Defaults](#list-users-with-defaults)
 - [List Users with Search](#list-users-with-search)
+- [List Users with Advanced Search](#list-users-with-advanced-search)
 - [List Users Updated after Timestamp](#list-users-updated-after-timestamp)
 - [List Users with Status](#list-users-with-status)
 
@@ -1039,13 +1040,129 @@ Enumerates users in your organization with pagination.  A subset of users can be
 Parameter | Description                                                                               | Param Type | DataType | Required | Default
 --------- | ----------------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------
 q         | Searches `firstName`, `lastName`, and `email` properties of users for matching value      | Query      | String   | FALSE    |
-limit     | Specified the number of results                                                           | Query      | Number   | FALSE    | 200
+limit     | Specified the number of results                                                           | Query      | Number   | FALSE    | 200     
 filter    | [Filter expression](/docs/api/getting_started/design_principles.html#filtering) for users | Query      | String   | FALSE    |
 after     | Specifies the pagination cursor for the next page of users                                | Query      | String   | FALSE    |
+search    | [Filter expression](/docs/api/getting_started/design_principles.html#filtering) for advanced user search | Query      | String   | FALSE    |
 
-> The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination)
+Parameter Details
 
-> Search currently performs a startsWith match but it should be considered an implementation detail and may change without notice in the future
+- Search with `q` currently performs a startsWith match but it should be considered an implementation detail and may change without notice in the future.
+- The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination).
+
+###### Advanced Search
+
+> The `advanced search` feature is [Beta](/docs/api/resources/users.html#list-users-with-advanced-search)
+
+Advanced search provides the option to filter on a variety of attributes:
+
+- Any user profile attribute
+- Any custom defined profile attribute
+- The top-level attributes `id`, `status`, `created`, `activated`, `statusChanged` and `lastUpdated` 
+
+Advanced search filters against all fields specified in the search parameter (case insensitive).
+The most up-to-date data is sometimes delayed for up to a few seconds, so a search may miss a recent change.
+
+Filter                                         | Description
+---------------------------------------------- | ------------------------------------------------
+`profile.department eq "Engineering"`          | Users that have a `department` of `Engineering`
+`profile.occupation eq "Leader"`               | Users that have a `occupation` of `Leader`
+
+See [Filtering](/docs/api/getting_started/design_principles.html#filtering) for more information about expressions.
+
+**URL Encoding Requirement**
+
+You must use [URL encoding](http://en.wikipedia.org/wiki/Percent-encoding) for all advanced searches. 
+For example, `search=profile.department eq "Engineering"` is encoded as `search=profile.department%20eq%20%22Engineering%22`
+
+**Advanced Search Examples**
+
+Users with occupation of `Leader`
+
+    search=profile.occupation eq "Leader"
+
+Users with department of `Engineering` and either was created before `01/01/2014` or has a status of `ACTIVE`
+
+    search=profile.department eq "Engineering" and (created lt "2014-01-01T00:00:00.000Z" or status eq "ACTIVE")
+    
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+Array of [User](#user-model)
+
+#### List Users with Advanced Search
+{:.api .api-operation}
+
+Enable search for all user profile attributes as well as `id`, `status`, `created`, `activated`, `statusChanged`, and `lastUpdated`.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users?search=profile.mobilePhone+sw+\"555\"+and+status+eq+\"ACTIVE\""
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+[
+  {
+    "id": "00ub0oNGTSWTBKOLGLNR",
+    "status": "ACTIVE",
+    "created": "2013-06-24T16:39:18.000Z",
+    "activated": "2013-06-24T16:39:19.000Z",
+    "statusChanged": "2013-06-24T16:39:19.000Z",
+    "lastLogin": "2013-06-24T17:39:19.000Z",
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": "2013-07-02T21:36:25.344Z",
+    "profile": {
+      "firstName": "Isaac",
+      "lastName": "Brock",
+      "email": "isaac.brock@example.com",
+      "login": "isaac.brock@example.com",
+      "mobilePhone": "555-415-1337"
+    },
+    "credentials": {
+      "password": {},
+      "recovery_question": {
+        "question": "Who's a major player in the cowboy scene?"
+      },
+      "provider": {
+        "type": "OKTA",
+        "name": "OKTA"
+      }
+    },
+    "_links": {
+      "resetPassword": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+      },
+      "resetFactors": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+      },
+      "expirePassword": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+      },
+      "forgotPassword": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+      },
+      "changeRecoveryQuestion": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+      },
+      "deactivate": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+      },
+      "changePassword": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+      }
+    }
+  }
+]
+~~~
 
 ###### Filters
 
@@ -1553,7 +1670,7 @@ in the request will not be modified or deleted. **Use `POST` method for partial 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter   | Description                 | Param Type | DataType                                  | Required | Default
+Parameter   | Description                 | Param Type | DataType                                  | Required | Default 
 ----------- | --------------------------- | ---------- | ----------------------------------------- | -------- | -------
 id          | `id` of user to update      | URL        | String                                    | TRUE     |
 profile     | Updated profile for user    | Body       | [Profile Object](#profile-object)         | FALSE    |
