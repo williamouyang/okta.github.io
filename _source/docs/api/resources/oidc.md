@@ -187,13 +187,15 @@ unsupported_response_mode  | The specified response mode is invalid or unsupport
 invalid_scope  | The scopes list contains an invalid or unsupported value.    | 
 server_error  | The server encountered an internal error.    | 
 temporarily_unavailable  | The server is temporarily unavailable, but should be able to process the request at a later time.    |
+invalid_request | The request is missing a necessary parameter or the parameter has an invalid value. |
+invalid_client  | The specified client id is invalid.
+access_denied   | The server denied the request. 
 
 [Open-ID Spec error codes](http://openid.net/specs/openid-connect-core-1_0.html#AuthError)
 
 Error Id         | Details                                                                | 
 -----------------| -----------------------------------------------------------------------| 
 login_required  | The request specified that no prompt should be shown but the user is currently not authenticated.    |
-invalid_token  |  The access_token passed is invalid or corrupted.   |
 
 
 ### Get user information
