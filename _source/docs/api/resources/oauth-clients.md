@@ -25,6 +25,7 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
   "client_name": "Example OAuth Client",
   "client_uri": "http://www.example-application.com",
   "logo_uri": "http://www.example-application.com/logo.png",
+  "application_type": "web",
   "redirect_uris": [
     "https://www.example-application.com/oauth2/redirectUri"
   ],
@@ -36,6 +37,7 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
     "authorization_code"
   ],
   "token_endpoint_auth_method": "client_secret_post",
+  "initiate_login_uri": "https://www.example-application.com/oauth2/login",
   "_links": {
     "newSecret": {
       "href": "https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret",
@@ -61,10 +63,12 @@ Client applications have the following properties:
 | client_name                | human-readable string name of the client application              | String                                                                 | FALSE    | FALSE  | FALSE    |
 | client_secret              | OAuth 2.0 client secret string (used for confidential clients)    | String                                                                 | TRUE     | TRUE   | TRUE     |
 | logo_uri                   | URL string that references a logo for the client                  | String                                                                 | TRUE     | FALSE  | FALSE    | 
+| application_type           | The type of client application                                    | `web`, `native`, or `browser`                                          | TRUE     | TRUE   | TRUE     |
 | redirect_uris              | array of redirection URI strings for use in redirect-based flows  | Array                                                                  | TRUE     | FALSE  | FALSE    |
 | response_types             | array of OAuth 2.0 response type strings                          | Array of `code`, `token`, `id_token`                                   | TRUE     | FALSE  | FALSE    |
 | grant_types                | array of OAuth 2.0 grant type strings                             | Array of `authorization_code`, `implicit`, `password`, `refresh_token` | FALSE    | FALSE  | FALSE    | 
 | token_endpoint_auth_method | requested authentication method for the token endpoint            | `none`, `client_secret_post`, or `client_secret_basic`                 | FALSE    | FALSE  | FALSE    |
+| initiate_login_uri         | URL that a third party can use to initiate a login by the client  | String                                                                 | TRUE     | FALSE  | FALSE    |
 | _links                     | discoverable resources related to the app                         | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)         | TRUE     | FALSE  | TRUE     | 
 |----------------------------+-------------------------------------------------------------------+------------------------------------------------------------------------+----------+--------+----------|
 
@@ -117,6 +121,7 @@ curl -v -X POST \
       "client_name": "Example OAuth Client",
       "client_uri": "http://www.example-application.com",
       "logo_uri": "http://www.example-application.com/logo.png",
+      "application_type": "web",
       "redirect_uris": [
          "https://www.example-application.com/oauth2/redirectUri"
       ],
@@ -128,7 +133,8 @@ curl -v -X POST \
          "authorization_code",
          "refresh_token"
       ],
-      "token_endpoint_auth_method": "client_secret_post"
+      "token_endpoint_auth_method": "client_secret_post",
+      "initiate_login_uri": "https://www.example-application.com/oauth2/login"
     }' "https://${org}.okta.com/oauth2/v1/clients"
 ~~~
 
@@ -142,6 +148,7 @@ curl -v -X POST \
   "client_name": "Example OAuth Client",
   "client_uri": "http://www.example-application.com",
   "logo_uri": "http://www.example-application.com/logo.png",
+  "application_type": "web",
   "redirect_uris": [
     "https://www.example-application.com/oauth2/redirectUri"
   ],
@@ -153,6 +160,7 @@ curl -v -X POST \
     "authorization_code"
   ],
   "token_endpoint_auth_method": "client_secret_post",
+  "initiate_login_uri": "https://www.example-application.com/oauth2/login",
   "_links": {
     "newSecret": {
       "href": "https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret",
@@ -206,6 +214,7 @@ curl -v -X GET \
   "client_name": "Example OAuth Client",
   "client_uri": "http://www.example-application.com",
   "logo_uri": "http://www.example-application.com/logo.png",
+  "application_type": "web",
   "redirect_uris": [
     "https://www.example-application.com/oauth2/redirectUri"
   ],
@@ -217,6 +226,7 @@ curl -v -X GET \
     "authorization_code"
   ],
   "token_endpoint_auth_method": "client_secret_post",
+  "initiate_login_uri": "https://www.example-application.com/oauth2/login",
   "_links": {
     "newSecret": {
       "href": "https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret",
@@ -287,6 +297,7 @@ Link: <https://your-domain.okta.com/oauth2/v1/clients?after=F10CaazJPQ5Zpyu1Ojko
     "client_name": "Example OAuth Client",
     "client_uri": "http://www.example-application.com",
     "logo_uri": "http://www.example-application.com/logo.png",
+    "application_type": "web",
     "redirect_uris": [
       "https://www.example-application.com/oauth2/redirectUri"
     ],
@@ -298,6 +309,7 @@ Link: <https://your-domain.okta.com/oauth2/v1/clients?after=F10CaazJPQ5Zpyu1Ojko
       "authorization_code"
     ],
     "token_endpoint_auth_method": "client_secret_post",
+    "initiate_login_uri": "https://www.example-application.com/oauth2/login",
     "_links": {
       "newSecret": {
         "href": "https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret",
@@ -315,6 +327,7 @@ Link: <https://your-domain.okta.com/oauth2/v1/clients?after=F10CaazJPQ5Zpyu1Ojko
     "client_name": "Another OAuth Client",
     "client_uri": "http://www.another-application.com",
     "logo_uri": "http://www.another-application.com/logo.png",
+    "application_type": "browser",
     "redirect_uris": [
       "https://www.another-application.com/oauth2/redirectUri"
     ],
@@ -325,7 +338,8 @@ Link: <https://your-domain.okta.com/oauth2/v1/clients?after=F10CaazJPQ5Zpyu1Ojko
     "grant_types": [
       "implicit"
     ],
-    "token_endpoint_auth_method": "none"
+    "token_endpoint_auth_method": "none",
+    "initiate_login_uri": null,
   }
 ]
 ~~~
@@ -359,6 +373,7 @@ curl -v -X GET \
     "client_name": "Payroll Application",
     "client_uri": "http://www.payroll-application.com",
     "logo_uri": "http://www.payroll-application.com/logo.png",
+    "application_type": "web",
     "redirect_uris": [
       "https://www.payroll-application.com/oauth2/redirectUri"
     ],
@@ -370,6 +385,7 @@ curl -v -X GET \
       "authorization_code"
     ],
     "token_endpoint_auth_method": "client_secret_post",
+    "initiate_login_uri": "https://www.example-application.com/oauth2/login",
     "_links": {
       "newSecret": {
         "href": "https://payroll.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret",
@@ -418,6 +434,7 @@ curl -v -X PUT \
       "client_name": "Updated OAuth Client",
       "client_uri": "http://www.example-application.com",
       "logo_uri": "http://www.example-application.com/logo.png",
+      "application_type": "web",
       "redirect_uris": [
         "https://www.example-application.com/oauth2/redirectUri"
       ],
@@ -428,7 +445,8 @@ curl -v -X PUT \
       "grant_types": [
         "authorization_code"
       ],
-      "token_endpoint_auth_method": "client_secret_post"
+      "token_endpoint_auth_method": "client_secret_post",
+      "initiate_login_uri": "https://www.example-application.com/oauth2/login"
     }' "https://${org}.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"
 ~~~
 
@@ -443,6 +461,7 @@ curl -v -X PUT \
   "client_name": "Updated OAuth Client",
   "client_uri": "http://www.example-application.com",
   "logo_uri": "http://www.example-application.com/logo.png",
+  "application_type": "web",
   "redirect_uris": [
     "https://www.example-application.com/oauth2/redirectUri"
   ],
@@ -454,6 +473,7 @@ curl -v -X PUT \
     "authorization_code"
   ],
   "token_endpoint_auth_method": "client_secret_post",
+  "initiate_login_uri": "https://www.example-application.com/oauth2/login",
   "_links": {
     "newSecret": {
       "href": "https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret",
@@ -511,6 +531,7 @@ curl -v -X POST \
   "client_uri": "http://www.example-application.com",
   "client_secret": "cdUQIFvE61wGI5P51H33ORC4SRB1RXfX",
   "logo_uri": "http://www.example-application.com/logo.png",
+  "application_type": "web",
   "redirect_uris": [
     "https://www.example-application.com/oauth2/redirectUri"
   ],
@@ -522,6 +543,7 @@ curl -v -X POST \
     "authorization_code"
   ],
   "token_endpoint_auth_method": "client_secret_post",
+  "initiate_login_uri": "https://www.example-application.com/oauth2/login",
   "_links": {
     "newSecret": {
       "href": "https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret",

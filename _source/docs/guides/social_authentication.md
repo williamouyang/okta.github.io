@@ -112,26 +112,23 @@ Advantages of using Okta Social Authentication include:
     Here is what the body of your POST request should look like:
     
         {
-        "client_name": "Example",
-        "client_uri": "https://example.com",
-        "logo_uri": "https://example.com/logo.png",
-        "application_type": "web",
-        "redirect_uris": [
+          "client_name": "Example",
+          "client_uri": "https://example.com",
+          "logo_uri": "https://example.com/logo.png",
+          "application_type": "web",
+          "redirect_uris": [
             "https://www.example.com/User/SocialAuthSuccess.aspx",
             "https://payroll.example.com/socialAuth",
             "https://example.okta.com"
-        ],
-        "response_types": [
-            "code",
+          ],
+          "response_types": [
             "token",
             "id_token"
-        ],
-        "grant_types": [
-            "authorization_code",
+          ],
+          "grant_types": [
             "implicit"
-        ],
-        "token_endpoint_auth_method": "private_key_jwt",
-        "jwks_uri": "https://static.example.com/certs/public.jwks"
+          ],
+          "token_endpoint_auth_method": "client_secret_post"
         }
     
     > The contents of the `redirect_uris` array **MUST** be an SSL ("https") URL. Instructions for enabling SSL on your web server is outside of the scope of this document, however an easy way to do this is to use [CloudFlare to add SSL](https://support.cloudflare.com/hc/en-us/articles/200170516-How-do-I-add-SSL-to-my-site-) to your server. If you are developing a service on your own computer that is running on "`http://localhost`", you can use the wonderful [ngrok](https://ngrok.com/) service to create an SSL enabled tunnel for your "`http://localhost`" URL.
@@ -154,16 +151,13 @@ Advantages of using Okta Social Authentication include:
             "https://employees.example.com/directory"
           ],
           "response_types": [
-            "code",
             "token",
             "id_token"
           ],
           "grant_types": [
-            "authorization_code",
             "implicit"
           ],
-          "jwks_uri": "https://static.example.com/certs/public.jwks",
-          "token_endpoint_auth_method": "private_key_jwt",
+          "token_endpoint_auth_method": "client_secret_post",
           "client_id": "ABCd0efgHi1J2KlMnOP3",
           "client_id_issued_at": 1445638425
         }

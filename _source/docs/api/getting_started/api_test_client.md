@@ -69,19 +69,21 @@ Once you have setup your Postman environment, you can import pre-built collectio
 
 2. Select the **From URL** tab and import the following URLs:
 
-    |--------------------+-------------------------------------------------------|
-    | Resource           | Postman Collection                                    |
-    |:-------------------|:------------------------------------------------------|
-    | Authentication     | [Authentication API](../postman/authentication.json)  |
-    | Sessions           | [Sessions API](../postman/sessions.json)              |
-    | Users              | [Users API](../postman/users.json)                    |
-    | Factors            | [Factors API](../postman/factors.json)                |
-    | Groups             | [Groups API](../postman/groups.json)                  |
-    | Admin Roles        | [Admin Roles API](../postman/admin-roles.json)        |
-    | Apps               | [Apps API](../postman/apps.json)                      |
-    | Schemas            | [Schemas API](../postman/schemas.json)                |
-    | Events             | [Events API](../postman/events.json)                  |
-    |--------------------+-------------------------------------------------------|
+    |--------------------+-------------------------------------------------------------------------|
+    | Resource           | Postman Collection                                                      |
+    |:-------------------|:------------------------------------------------------------------------|
+    | Authentication     | [Authentication API](../postman/authentication.json)                    |
+    | Sessions           | [Sessions API](../postman/sessions.json)                                |
+    | Users              | [Users API](../postman/users.json)                                      |
+    | Factors            | [Factors API](../postman/factors.json)                                  |
+    | Groups             | [Groups API](../postman/groups.json)                                    |
+    | Identity Providers | [IDP API](../postman/idps.json)                                         |
+    | Admin Roles        | [Admin Roles API](../postman/admin-roles.json)                          |
+    | Apps               | [Apps API](../postman/apps.json)                                        |
+    | Schemas            | [Schemas API](../postman/schemas.json)                                  |
+    | Events             | [Events API](../postman/events.json)                                    |
+    | OAuth 2.0 Clients  | [Client Registration API (EA)](../postman/client-registration.json)     |
+    |--------------------+-------------------------------------------------------------------------|
 
     > You must import each collection individually
 
