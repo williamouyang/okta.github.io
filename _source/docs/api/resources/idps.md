@@ -1149,16 +1149,16 @@ Webhook authorization settings for an IdP provisioning or account link transacti
 
 Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the IdP using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  This object is used for dynamic discovery of related resources and lifecycle operations.
 
-|--------------------+--------------------------------------------------------------------------------------------------------------------------|
-| Link Relation Type | Description                                                                                                              |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------ |
-| self               | The primary URL for the IdP                                                                                              |
-| login              | Login URL to authenticate user with [OAuth 2.0 Authorization Code Flow](https://tools.ietf.org/html/rfc6749#section-4.1) |
-| clientRedirectUri  | Redirect URI for [OAuth 2.0 Authorization Code Flow](https://tools.ietf.org/html/rfc6749#section-4.1)                    |
-| metadata           | Federation metadata document for IdP (e.g SAML 2.0 Metadata)                                                             |
-| acs                | SAML 2.0 Assertion Consumer Service URL for Okta SP                                                                      |
-| users              | IdP Users                                                                                                                |
-|--------------------+--------------------------------------------------------------------------------------------------------------------------|
+|--------------------+-----------------------------------------------------------------------------------------------------------------------------------|
+| Link Relation Type | Description                                                                                                                       |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| self               | The primary URL for the IdP                                                                                                       |
+| authorize          | OAuth 2.0 authorization endpoint for the IdP [OAuth 2.0 Authorization Code Flow](https://tools.ietf.org/html/rfc6749#section-4.1) |
+| clientRedirectUri  | Redirect URI for [OAuth 2.0 Authorization Code Flow](https://tools.ietf.org/html/rfc6749#section-4.1)                             |
+| metadata           | Federation metadata document for IdP (e.g SAML 2.0 Metadata)                                                                      |
+| acs                | SAML 2.0 Assertion Consumer Service URL for Okta SP                                                                               |
+| users              | IdP Users                                                                                                                         |
+|--------------------+-----------------------------------------------------------------------------------------------------------------------------------|
 
 > The Links Object is **read-only**.
 
