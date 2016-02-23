@@ -165,7 +165,7 @@ The list of provisioning features an app may support are:
 | PUSH_NEW_USERS         | Create Users           | Creates or links a user account in the application when assigning the app to a user in Okta.                                                                                                                                                   |
 | PUSH_PROFILE_UPDATES   | Update User Properties | Updates a user's profile in the app when the user's profile changes in Okta (Profile Master).                                                                                                                                                  |
 | PUSH_USER_DEACTIVATION | Deactivate Users       | Deactivates a user's account in the app when unassigned from the app in Okta or deactivated.                                                                                                                                                   |
-| REACTIVATE_USERS       | Deactivate Users       | Reactivates an existing inactive user when provisioning a user to the app.                                                                                                                                                                     |  
+| REACTIVATE_USERS       | Deactivate Users       | Reactivates an existing inactive user when provisioning a user to the app.                                                                                                                                                                     |
 | PUSH_PASSWORD_UPDATES  | Sync Okta Password     | Updates the user's app password when their password changes in Okta.                                                                                                                                                                           |
 | GROUP_PUSH             | Group Push             | Creates or links a group in the app when a mapping is defined for a group in Okta.  Okta is the the master for group memberships and all group members in Okta who are also assigned to the app will be synced as group members to the app.    |
 |------------------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -700,9 +700,10 @@ Adds a new application to your Okta organization.
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter | Description                                | Param Type | DataType                          | Required | Default
---------- | ------------------------------------------ | ---------- | --------------------------------- | -------- | -------
-app       | App-specific name, signOnMode and settings | Body       | [Application](#application-model) | TRUE     |
+Parameter | Description                                                                            | Param Type | DataType                          | Required | Default
+--------- | -------------------------------------------------------------------------------------- | ---------- | --------------------------------- | -------- | -------
+activate  | Executes [activation lifecycle](#activate-application) operation when creating the app | Query      | Boolean                           | FALSE    | TRUE
+app       | App-specific name, signOnMode and settings                                             | Body       | [Application](#application-model) | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
