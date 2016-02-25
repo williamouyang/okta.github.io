@@ -58,15 +58,15 @@
     </url>
     <url>
         <loc>http://developer.okta.com/docs/api/getting_started/api_test_client.html</loc>
-        <lastmod>2015-12-22T11:02:38-08:00</lastmod>
+        <lastmod>2016-02-25T14:43:44-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/api/resources/apps.html</loc>
-        <lastmod>2015-12-21T15:20:47-08:00</lastmod>
+        <lastmod>2016-02-25T14:43:44-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/api/resources/authn.html</loc>
-        <lastmod>2016-02-10T13:03:58-08:00</lastmod>
+        <lastmod>2016-02-25T14:43:44-08:00</lastmod>
     </url>
     <url>
         <loc>
@@ -80,7 +80,7 @@
     </url>
     <url>
         <loc>http://developer.okta.com/docs/api/getting_started/design_principles.html</loc>
-        <lastmod>2016-02-10T13:03:58-08:00</lastmod>
+        <lastmod>2016-02-25T14:43:44-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/examples/dotnet_sample_application.html</loc>
@@ -92,7 +92,7 @@
     </url>
     <url>
         <loc>http://developer.okta.com/docs/api/getting_started/error_codes.html</loc>
-        <lastmod>2015-12-21T15:20:47-08:00</lastmod>
+        <lastmod>2016-02-25T14:43:44-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/api/resources/events.html</loc>
@@ -116,7 +116,7 @@
     </url>
     <url>
         <loc>http://developer.okta.com/docs/api/resources/idps.html</loc>
-        <lastmod>2016-01-20T11:13:11-08:00</lastmod>
+        <lastmod>2016-02-25T14:43:44-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/customers/</loc>
@@ -224,15 +224,15 @@
     </url>
     <url>
         <loc>http://developer.okta.com/docs/api/resources/oauth-clients.html</loc>
-        <lastmod>2016-02-10T13:03:58-08:00</lastmod>
+        <lastmod>2016-02-25T14:43:44-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/api/resources/oidc.html</loc>
-        <lastmod>2016-02-10T13:03:58-08:00</lastmod>
+        <lastmod>2016-02-25T14:43:44-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/api/getting_started/okta_expression_lang.html</loc>
-        <lastmod>2016-01-06T13:57:28-08:00</lastmod>
+        <lastmod>2016-02-25T14:43:44-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/guides/okta_mobile_connect.html</loc>
@@ -318,7 +318,7 @@
     </url>
     <url>
         <loc>http://developer.okta.com/docs/guides/social_authentication.html</loc>
-        <lastmod>2016-01-06T13:57:28-08:00</lastmod>
+        <lastmod>2016-02-25T14:43:44-08:00</lastmod>
     </url>
     <url>
         <loc>http://developer.okta.com/docs/guides/spring_security_saml.html</loc>

@@ -594,9 +594,9 @@
 <p>In stituations where Okta needs to pass an error to a downstream application via a <code class="highlighter-rouge">redirect_uri</code>, the error code and description will be encoded as the query parameters <code class="highlighter-rouge">error</code> and <code class="highlighter-rouge">error_description</code>.</p>
 
 <blockquote>
-  <p>For example, if the <strong>redirect_uri</strong> is <strong>https://example.com</strong>, then the <strong>UNKNOWN_ENDPOINT</strong> error would be passed as follows:</p>
+  <p>For example, if the <strong>redirect_uri</strong> is <strong>https://example.com</strong>, then the <strong>ACCESS_DENIED</strong> error would be passed as follows:</p>
 
-  <div class="highlighter-rouge"><pre class="highlight"><code>https://example.com?error=UNKNOWN_ENDPOINT&amp;error_description=Unknown%20social%20endpoint.
+  <div class="highlighter-rouge"><pre class="highlight"><code>https://example.com?error=access_denied&amp;error_description=The%20resource%20owner%20or%20authorization%20server%20denied%20the%20request.
 </code></pre>
   </div>
 </blockquote>
@@ -610,160 +610,64 @@
 </thead>
 
 <tbody>
-<tr>
-<td class="left">UNKNOWN_ENDPOINT</td>
-<td class="left">Unknown social endpoint.</td>
-</tr>
-
 
 <tr>
-<td class="left">UNAUTHORIZED_CLIENT</td>
+<td class="left">unauthorized_client</td>
 <td class="left">The client is not authorized to request an authorization code using this method.</td>
 </tr>
 
-
 <tr>
-<td class="left">ACCESS_DENIED</td>
+<td class="left">access_denied</td>
 <td class="left">The resource owner or authorization server denied the request.</td>
 </tr>
 
-
 <tr>
-<td class="left">INVALID_SCOPE</td>
-<td class="left">The requested scope is invalid, unknown, or malformed.</td>
-</tr>
-
-
-<tr>
-<td class="left">INVALID_STATE</td>
-<td class="left">The authentication request does not have the correct 'state' parameter.</td>
-</tr>
-
-
-<tr>
-<td class="left">SERVER_ERROR</td>
-<td class="left">The authorization server encountered an unexpected condition that prevented it from fulfilling the request.</td>
-</tr>
-
-
-<tr>
-<td class="left">TEMPORARILY_UNAVAILABLE</td>
-<td class="left">The authorization server is currently unable to handle the request due to a temporary overloading or maintenance of the server.</td>
-</tr>
-
-
-<tr>
-<td class="left">UNSUPPORTED_RESPONSE_TYPE</td>
+<td class="left">unsupported_response_type</td>
 <td class="left">The authorization server does not support obtaining an authorization code using this method.</td>
 </tr>
 
+<tr>
+<td class="left">unsupported_response_mode</td>
+<td class="left">The authorization server does not support the requested response mode.</td>
+</tr>
 
 <tr>
-<td class="left">INTERACTION_REQUIRED</td>
-<td class="left">Illegal value for 'prompt' parameter.</td>
+<td class="left">invalid_scope</td>
+<td class="left">The requested scope is invalid, unknown, or malformed.</td>
+</tr>
+
+<tr>
+<td class="left">server_error</td>
+<td class="left">The authorization server encountered an unexpected condition that prevented it from fulfilling the request.</td>
+</tr>
+
+<tr>
+<td class="left">temporarily_unavailable</td>
+<td class="left">The authorization server is currently unable to handle the request due to a temporary overloading or maintenance of the server.</td>
+</tr>
+
+<tr>
+<td class="left">invalid_client</td>
+<td class="left">The specified client is not valid.</td>
+</tr>
+
+<tr>
+<td class="left">login_required</td>
+<td class="left">The client specified not to prompt, but the user is not logged in.</td>
+</tr>
+
+<tr>
+<td class="left">invalid_request</td>
+<td class="left">The request parameters are not valid.</td>
 </tr>
 
 
 <tr>
-<td class="left">ILLEGAL_REDIRECT_URI</td>
-<td class="left">Illegal value for redirect_uri parameter.</td>
-</tr>
-
-
-<tr>
-<td class="left">NO_EXISTING_SESSION</td>
-<td class="left">Client specified prompt=none but had no existing session.</td>
-</tr>
-
-
-<tr>
-<td class="left">USER_CANCELED_REQUEST</td>
+<td class="left">user_canceled_request</td>
 <td class="left">User canceled the social login request.</td>
 </tr>
 
 
-<tr>
-<td class="left">SOCIAL_TRANSACTION_EXPIRED</td>
-<td class="left">Social transaction expired.</td>
-</tr>
-
-
-<tr>
-<td class="left">INVALID_TOKEN</td>
-<td class="left">Could not acquire access token from authorization code.</td>
-</tr>
-
-
-<tr>
-<td class="left">GET_SOCIAL_PROFILE_ERROR</td>
-<td class="left">Could not fetch social profile.</td>
-</tr>
-
-
-<tr>
-<td class="left">FAILED_USERNAME_TRANSFORM</td>
-<td class="left">Unable to process the username transform.</td>
-</tr>
-
-
-<tr>
-<td class="left">USER_MATCH_ERROR</td>
-<td class="left">Could not match social profile to an Okta user.</td>
-</tr>
-
-
-<tr>
-<td class="left">USER_LINK_ERROR</td>
-<td class="left">Error in linking or finding a linked user.</td>
-</tr>
-
-
-<tr>
-<td class="left">INVALID_USER_STATUS_ERROR</td>
-<td class="left">User status is invalid.</td>
-</tr>
-
-
-<tr>
-<td class="left">LOGIN_FAILED</td>
-<td class="left">Login failed.</td>
-</tr>
-
-
-<tr>
-<td class="left">PRE_REQ_FEATURE_NOT_ENABLED</td>
-<td class="left">Required features are not enabled for this functionality.</td>
-</tr>
-
-
-<tr>
-<td class="left">JIT_DISABLED</td>
-<td class="left">User creation was disabled.</td>
-</tr>
-
-
-<tr>
-<td class="left">JIT_DENIED</td>
-<td class="left">User creation was denied by the callout service.</td>
-</tr>
-
-
-<tr>
-<td class="left">LINK_DENIED_CALLOUT</td>
-<td class="left">User linking was denied by the callout service.</td>
-</tr>
-
-
-<tr>
-<td class="left">LINK_DENIED_GROUP</td>
-<td class="left">User linking was denied because the user is not in any of the specified groups.</td>
-</tr>
-
-
-<tr>
-<td class="left">INVALID_CALLOUT_RESPONSE</td>
-<td class="left">The callout service returned an invalid response.</td>
-</tr>
 </tbody>
 </table>
 

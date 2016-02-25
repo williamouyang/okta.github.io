@@ -177,8 +177,11 @@
 
 		<h2 id="overview">Overview</h2>
 
-<p>The OAuth Clients API provides operations to register and manager client applications for use with Okta’s
+<p>The OAuth Clients API provides operations to register and manage client applications for use with Okta’s
 OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract defined in <a href="https://tools.ietf.org/html/rfc7591">RFC7591</a>.</p>
+
+<p>Note that clients managed via this API are modeled as applications in Okta and will show in the Applications section of the
+Administrator dashboard. Changes made via the API will reflect in the UI and vice versa.</p>
 
 <blockquote>
   <p>This API is currently in <strong>Early Access (EA)</strong> status.</p>
@@ -194,6 +197,7 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
   </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example OAuth Client"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"https://www.example-application.com/oauth2/redirectUri"</span><span class="w">
   </span><span class="p">],</span><span class="w">
@@ -205,6 +209,7 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
     </span><span class="s2">"authorization_code"</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/oauth2/login"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"newSecret"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"</span><span class="p">,</span><span class="w">
@@ -276,10 +281,18 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
       <td>FALSE</td>
     </tr>
     <tr>
+      <td>application_type</td>
+      <td>The type of client application</td>
+      <td><code class="highlighter-rouge">web</code>, <code class="highlighter-rouge">native</code>, or <code class="highlighter-rouge">browser</code></td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+    </tr>
+    <tr>
       <td>redirect_uris</td>
       <td>array of redirection URI strings for use in redirect-based flows</td>
       <td>Array</td>
-      <td>FALSE</td>
+      <td>TRUE</td>
       <td>FALSE</td>
       <td>FALSE</td>
     </tr>
@@ -287,7 +300,7 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
       <td>response_types</td>
       <td>array of OAuth 2.0 response type strings</td>
       <td>Array of <code class="highlighter-rouge">code</code>, <code class="highlighter-rouge">token</code>, <code class="highlighter-rouge">id_token</code></td>
-      <td>FALSE</td>
+      <td>TRUE</td>
       <td>FALSE</td>
       <td>FALSE</td>
     </tr>
@@ -308,6 +321,14 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
       <td>FALSE</td>
     </tr>
     <tr>
+      <td>initiate_login_uri</td>
+      <td>URL that a third party can use to initiate a login by the client</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+    </tr>
+    <tr>
       <td>_links</td>
       <td>discoverable resources related to the app</td>
       <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
@@ -319,19 +340,26 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
 </table>
 
 <blockquote>
-  <p><code class="highlighter-rouge">client_id</code>, <code class="highlighter-rouge">client_id_issued_at</code>, and <code class="highlighter-rouge">client_secret</code> are only available after a client is created.</p>
+  <p>The <code class="highlighter-rouge">client_id</code>, <code class="highlighter-rouge">client_id_issued_at</code>, and <code class="highlighter-rouge">client_secret</code> attributes are only available after a client is created.</p>
 </blockquote>
 
 <blockquote>
-  <p>Client secret is only shown on the initial creation of a client application (and only if the token_endpoint_auth_method is one that is client-secret-based).
+  <p>Client secret is only shown on the initial creation of a client application (and only if the token_endpoint_auth_method is one that requires a client secret).
   It is never returned in a GET call.</p>
 </blockquote>
 
 <blockquote>
   <p>The “grant_types” and “response_types” values described above are partially orthogonal, as they refer to arguments passed to different
-  endpoints in the OAuth protocol.  However, they are related in that the “grant_types” available to a client influence the “response_types”
-  that the client is allowed to use, and vice versa. For instance, a “grant_types” value that includes “authorization_code” implies a
-  “response_types” value that includes “code”, as both values are defined as part of the OAuth 2.0 authorization code grant.</p>
+  endpoints in the <a href="https://tools.ietf.org/html/rfc6749">OAuth 2.0 protocol</a>. However, they are related in that the “grant_types”
+  available to a client influence the “response_types” that the client is allowed to use, and vice versa. For instance, a “grant_types”
+  value that includes “authorization_code” implies a “response_types” value that includes “code”, as both values are defined as part of
+  the OAuth 2.0 authorization code grant.</p>
+</blockquote>
+
+<blockquote>
+  <p>At least one redirect URI and response type is required for all client types, with one exception: if the client uses the
+  <a href="https://tools.ietf.org/html/rfc6749#section-4.3">Resource Owner Password</a> flow (if <code class="highlighter-rouge">grant_types</code> contains the value <code class="highlighter-rouge">password</code>) 
+  then no redirect URI or response type is necessary. In this case you can pass either null or an empty array for these attributes.</p>
 </blockquote>
 
 <h2 id="client-application-operations">Client Application Operations</h2>
@@ -381,6 +409,7 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
       "client_name": "Example OAuth Client",
       "client_uri": "http://www.example-application.com",
       "logo_uri": "http://www.example-application.com/logo.png",
+      "application_type": "web",
       "redirect_uris": [
          "https://www.example-application.com/oauth2/redirectUri"
       ],
@@ -392,7 +421,8 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
          "authorization_code",
          "refresh_token"
       ],
-      "token_endpoint_auth_method": "client_secret_post"
+      "token_endpoint_auth_method": "client_secret_post",
+      "initiate_login_uri": "https://www.example-application.com/oauth2/login"
     }'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/oauth2/v1/clients"</span>
 </code></pre>
 </div>
@@ -405,6 +435,7 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
   </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example OAuth Client"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"https://www.example-application.com/oauth2/redirectUri"</span><span class="w">
   </span><span class="p">],</span><span class="w">
@@ -416,6 +447,7 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
     </span><span class="s2">"authorization_code"</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/oauth2/login"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"newSecret"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"</span><span class="p">,</span><span class="w">
@@ -483,6 +515,7 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
   </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example OAuth Client"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"https://www.example-application.com/oauth2/redirectUri"</span><span class="w">
   </span><span class="p">],</span><span class="w">
@@ -494,6 +527,7 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
     </span><span class="s2">"authorization_code"</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/oauth2/login"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"newSecret"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"</span><span class="p">,</span><span class="w">
@@ -595,6 +629,7 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
     </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example OAuth Client"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="s2">"https://www.example-application.com/oauth2/redirectUri"</span><span class="w">
     </span><span class="p">],</span><span class="w">
@@ -606,6 +641,7 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
       </span><span class="s2">"authorization_code"</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/oauth2/login"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"newSecret"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"</span><span class="p">,</span><span class="w">
@@ -623,6 +659,7 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
     </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Another OAuth Client"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.another-application.com"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.another-application.com/logo.png"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"browser"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="s2">"https://www.another-application.com/oauth2/redirectUri"</span><span class="w">
     </span><span class="p">],</span><span class="w">
@@ -633,8 +670,9 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
     </span><span class="nt">"grant_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="s2">"implicit"</span><span class="w">
     </span><span class="p">],</span><span class="w">
-    </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"none"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+    </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"none"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="err">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 </div>
@@ -666,6 +704,7 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
     </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payroll Application"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.payroll-application.com"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.payroll-application.com/logo.png"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="s2">"https://www.payroll-application.com/oauth2/redirectUri"</span><span class="w">
     </span><span class="p">],</span><span class="w">
@@ -677,6 +716,7 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
       </span><span class="s2">"authorization_code"</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/oauth2/login"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"newSecret"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://payroll.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"</span><span class="p">,</span><span class="w">
@@ -746,6 +786,7 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
       "client_name": "Updated OAuth Client",
       "client_uri": "http://www.example-application.com",
       "logo_uri": "http://www.example-application.com/logo.png",
+      "application_type": "web",
       "redirect_uris": [
         "https://www.example-application.com/oauth2/redirectUri"
       ],
@@ -756,7 +797,8 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
       "grant_types": [
         "authorization_code"
       ],
-      "token_endpoint_auth_method": "client_secret_post"
+      "token_endpoint_auth_method": "client_secret_post",
+      "initiate_login_uri": "https://www.example-application.com/oauth2/login"
     }'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"</span>
 </code></pre>
 </div>
@@ -770,6 +812,7 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
   </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Updated OAuth Client"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"https://www.example-application.com/oauth2/redirectUri"</span><span class="w">
   </span><span class="p">],</span><span class="w">
@@ -781,6 +824,7 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
     </span><span class="s2">"authorization_code"</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/oauth2/login"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"newSecret"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"</span><span class="p">,</span><span class="w">
@@ -852,6 +896,7 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
   </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cdUQIFvE61wGI5P51H33ORC4SRB1RXfX"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"https://www.example-application.com/oauth2/redirectUri"</span><span class="w">
   </span><span class="p">],</span><span class="w">
@@ -863,6 +908,7 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
     </span><span class="s2">"authorization_code"</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/oauth2/login"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"newSecret"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"</span><span class="p">,</span><span class="w">

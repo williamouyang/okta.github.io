@@ -2701,8 +2701,8 @@
       <td>The primary URL for the IdP</td>
     </tr>
     <tr>
-      <td>login</td>
-      <td>Login URL to authenticate user with <a href="https://tools.ietf.org/html/rfc6749#section-4.1">OAuth 2.0 Authorization Code Flow</a></td>
+      <td>authorize</td>
+      <td>OAuth 2.0 authorization endpoint for the IdP <a href="https://tools.ietf.org/html/rfc6749#section-4.1">OAuth 2.0 Authorization Code Flow</a></td>
     </tr>
     <tr>
       <td>clientRedirectUri</td>
@@ -2762,8 +2762,8 @@
         </span><span class="p">]</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"jit"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/lifecycle/jit"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"provision"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/lifecycle/provision"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="s2">"POST"</span><span class="w">
@@ -2808,7 +2808,7 @@
     <tr>
       <td>status</td>
       <td>status of transaction</td>
-      <td><code class="highlighter-rouge">ACCOUNT_JIT</code>, <code class="highlighter-rouge">ACCOUNT_LINK</code> or <code class="highlighter-rouge">FINISHED</code></td>
+      <td><code class="highlighter-rouge">ACCOUNT_JIT</code>, <code class="highlighter-rouge">ACCOUNT_LINK</code> or <code class="highlighter-rouge">SUCCESS</code></td>
       <td>FALSE</td>
       <td>FALSE</td>
       <td>TRUE</td>
@@ -2897,7 +2897,7 @@
 </table>
 
 <blockquote>
-  <p>The <code class="highlighter-rouge">sessionToken</code> is only available for completed transactions with the <code class="highlighter-rouge">FINISH</code> status</p>
+  <p>The <code class="highlighter-rouge">sessionToken</code> is only available for completed transactions with the <code class="highlighter-rouge">SUCCESS</code> status</p>
 </blockquote>
 
 <h4 id="identity-provider-authority-object">Identity Provider Authority Object</h4>
@@ -3043,11 +3043,11 @@
       <td><a href="users.html#user-model">Okta user</a> candidates for the account link transaction that match the IdP’s <a href="#account-link-policy-object">account link policy</a> and <a href="#subject-policy-object">subject policy</a></td>
     </tr>
     <tr>
-      <td>jit</td>
+      <td>provision</td>
       <td>Lifecycle operation to just-in-time provision a new <a href="users.html#user-model">Okta user</a> for the IdP user</td>
     </tr>
     <tr>
-      <td>finish</td>
+      <td>next</td>
       <td>Completes the transaction</td>
     </tr>
     <tr>
@@ -4065,8 +4065,8 @@
         </span><span class="p">]</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"jit"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/lifecycle/jit"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"provision"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/lifecycle/provision"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="s2">"POST"</span><span class="w">
@@ -4324,7 +4324,7 @@
 
 <h3 class="api api-operation" id="provision-idp-user">Provision IdP User</h3>
 
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /idps/tx/<em>:tid</em>/lifecycle/jit</span></p>
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /idps/tx/<em>:tid</em>/lifecycle/provision</span></p>
 
 <p>Just-in-time provisions an IdP user as a new Okta user</p>
 
@@ -4375,7 +4375,7 @@
   "profile": {
     "userType": "Social"
   }
-}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/idps/tx/satvkokI9JsOxqsjz0g3/lifecycle/jit"</span>
+}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/idps/tx/satvkokI9JsOxqsjz0g3/lifecycle/provision"</span>
 </code></pre>
 </div>
 
@@ -4383,7 +4383,7 @@
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"satvkokI9JsOxqsjz0g3"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FINISH"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"sessionToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20111ItcRRtx_HOKguQRqx6YIeFL3L6cQhpqSCvLOD-fpj-3K53aqXN"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-04T02:40:43.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-04T02:32:23.000Z"</span><span class="p">,</span><span class="w">
@@ -4397,7 +4397,7 @@
     </span><span class="nt">"ipAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"127.0.0.1"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"finish"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/api/v1/idps/tx/satvkokI9JsOxqsjz0g3/finish"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -4487,7 +4487,7 @@
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"satvkokI9JsOxqsjz0g3"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FINISH"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"sessionToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20111FLDl04JoQdl-NJOB9A6HosTSuHtQQUmCBhdEvnE4XEInod0Sg_"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-04T02:53:13.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-04T02:44:53.000Z"</span><span class="p">,</span><span class="w">
@@ -4501,7 +4501,7 @@
     </span><span class="nt">"ipAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"127.0.0.1"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"finish"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/api/v1/idps/tx/satvkokI9JsOxqsjz0g3/finish"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
