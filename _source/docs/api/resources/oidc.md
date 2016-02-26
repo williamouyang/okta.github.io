@@ -90,7 +90,6 @@ This is the digital signature signed by Okta using the public key identified by 
 | jti     | A unique identifier for this ID token for debugging and revocation purposes.   | String    |  "Tlenfse93dgkaksginv"  |
 | iss     | The Issuer Identifier of the response.    | String    | "https://your-org.okta.com"     |
 | sub     | The subject. A unique identifier for the user.   | String    | 	"00uk1u7AsAk6dZL3z0g3"     |
-| login   | The Okta login (username) for the end-user.   | String    | 	"john.doe@example.com"     |
 | aud     | Identifies the audience that this ID token is intended for. It must be one of the OAuth 2.0 client IDs of your application.   | String    | "6joRGIzNCaJfdCPzRjlh"     |
 | iat     | The time the ID token was issued, represented in Unix time (seconds).   | Integer    | 1311280970     |
 | exp     | The time the ID token expires, represented in Unix time (seconds).   | Integer    | 1311280970     |
@@ -100,12 +99,13 @@ This is the digital signature signed by Okta using the public key identified by 
 | nonce     |  Value used to associate a Client session with an ID token, and to mitigate replay attacks. This is only returned if <em>nonce</em> was present in the request that generated the Id token.    |  String   | "n-0S6_WzA2Mj"  |
 | at_hash     | The base64 encoded first 128-bits of the SHA-256 value of the access-token. This is only returned if an access token is also returned with id_token.  | String    | "MTIzNDU2Nzg5MDEyMzQ1Ng"     |
 
-##### Scope dependendent claims
+##### Scope dependent claims
 
 |--------------+-------------------+----------------------------------------------------------------------------------+--------------|--------------------------|
 | Property     | Required Scope | Description                                                                      | DataType     | Example                  |
 |--------------+---------+----------+----------------------------------------------------------------------------------+--------------|--------------------------|
 | name     |  profile  | User's full name in displayable form including all name parts, possibly including titles and suffixes, ordered according to the user's locale and preferences.   | String    | "John Doe"     |
+| preferred_username | profile | The Okta login (username) for the end-user. | String | "john.doe@example.com" |
 | nickname     |  profile   | Casual name of the user that may or may not be the same as the given_name.   | String    | "Jimmy"    |
 | given_name     |  profile   | Given name(s) or first name(s) of the user. Note that in some cultures, people can have multiple given names; all can be present, with the names being separated by space characters.   | String    | "John"     |
 | middle_name     |  profile    | Middle name(s) of the user. Note that in some cultures, people can have multiple middle names; all can be present, with the names being separated by space characters. Also note that in some cultures, middle names are not used.   | String    | "James"   |
@@ -118,6 +118,11 @@ This is the digital signature signed by Okta using the public key identified by 
 | email_verified     |  email   | True if the user's e-mail address has been verified; otherwise false.   | boolean    | true     |
 | address     | address    | User's preferred postal address. The value of the address member is a JSON structure containing <em>street_address</em>, <em>locality</em>, <em>region</em>, <em>postal_code</em>, and <em>country</em>.   | JSON structure    | { "street_address": "123 Hollywood Blvd.", "locality": "Los Angeles", "region": "CA", "postal_code": "90210", "country": "US" }     |
 | phone_number     |  phone   | User's preferred telephone number in E.164 format.   | String    | 	"+1 (425) 555-1212"     |
+
+The client can also optionally request an access token along with the id token. In this case, in order to keep the size of the id token small, the id token body does not contain all the scope dependent claims. 
+
+Instead, the id token contains the <em>name</em> and <em>preferred_username</em> claims if the <em>profile</em> scope was requested and <em>email</em> claim if the <em>email</em> scope was requested. The full set of claims for the requested scopes is available via the [/oauth2/v1/userinfo](#get-user-information) endpoint that can be called using the access token.
+
 
 ##OIDC Operations
 
@@ -242,7 +247,7 @@ Returns a JSON document with information corresponding to the data requested in 
 }
 ~~~
 
-The claims in the response are identical to what are returned for the requested scopes in the id_token JWT, except for the 'sub' claim which is always present. Details of the individual claims is [documented above](#scope-dependendent-claims)
+The claims in the response are identical to those returned for the requested scopes in the id_token JWT, except for the 'sub' claim which is always present. Details of the individual claims is [documented above](#scope-dependent-claims)
 
 #### Response Example (Error)
 
