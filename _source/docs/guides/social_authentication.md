@@ -73,13 +73,16 @@ Advantages of using Okta Social Authentication include:
     
     **Note:** This URL will look similar to this one:
     `https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4`
-6.  Add an OAuth client via the Okta API
+6.  Add an OAuth client via the App Integration Wizard or via the [Okta API](../resources/oauth-clients.html)
     
-    For now, you will need to do this by making HTTP requests
-    directly against the Okta API. We suggest using Postman to do
+    Register an OAuth Client by navigating to the Administrator Dashboard, go to Applications, then click "Add Application".
+    Click "Create New App" to launch the App Integration Wizard. It will guide you through the necessary configuration
+    steps and give you back a "client_id" which you can then use in Step 7.
+    
+    If you'd rather use the Okta API to register a client, we suggest using Postman to do
     this. If you haven't used Postman before, see our [instructions
     for using Postman with Okta](http://developer.okta.com/docs/api/getting_started/api_test_client.html) before proceeding. Load our [Client
-    Registration Postman Collection](https://beta.getpostman.com/collections/2bece1641e75a7d4a222) into Postman and then use the
+    Registration Postman Collection](../postman/client-registration.json) into Postman and then use the
     "Create OAuth Client" request to create a new OAuth client on
     Okta, this will make a POST request to the `/oauth2/v1/clients` URL
     of your Okta org.
@@ -131,7 +134,7 @@ Advantages of using Okta Social Authentication include:
           "token_endpoint_auth_method": "client_secret_post"
         }
     
-    > The contents of the `redirect_uris` array **MUST** be an SSL ("https") URL. Instructions for enabling SSL on your web server is outside of the scope of this document, however an easy way to do this is to use [CloudFlare to add SSL](https://support.cloudflare.com/hc/en-us/articles/200170516-How-do-I-add-SSL-to-my-site-) to your server. If you are developing a service on your own computer that is running on "`http://localhost`", you can use the wonderful [ngrok](https://ngrok.com/) service to create an SSL enabled tunnel for your "`http://localhost`" URL.
+    > If you are developing a service on your own computer that is running on "`http://localhost`", you can use the wonderful [ngrok](https://ngrok.com/) service to create an SSL enabled tunnel for your "`http://localhost`" URL.
     
     After you click the "Send" button in Postman, you will see a JSON
     response from Okta, which will look like the response below. Find

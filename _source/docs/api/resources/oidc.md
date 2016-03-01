@@ -34,7 +34,6 @@ The id_token JWT consists of three period seperated base64 encoded JSON segments
   "ver": 1,
   "sub": "00uid4BxXw6I6TV4m0g3",
   "iss": "http://rain.okta1.com:1802",
-  "login": "administrator1@clouditude.net",
   "aud": "uAaunofWkaDJxukCFeBx",
   "iat": 1449624026,
   "exp": 1449627626,
@@ -46,6 +45,7 @@ The id_token JWT consists of three period seperated base64 encoded JSON segments
   "at_hash": "cpqKfdQA5eH891Ff5oJr_Q",
   "name" :"John Doe",
   "nickname":"Jimmy",
+  "preferred_username": "administrator1@clouditude.net",
   "given_name":"John",
   "middle_name":"James",
   "family_name":"Doe",
@@ -90,7 +90,6 @@ This is the digital signature signed by Okta using the public key identified by 
 | jti     | A unique identifier for this ID token for debugging and revocation purposes.   | String    |  "Tlenfse93dgkaksginv"  |
 | iss     | The Issuer Identifier of the response.    | String    | "https://your-org.okta.com"     |
 | sub     | The subject. A unique identifier for the user.   | String    | 	"00uk1u7AsAk6dZL3z0g3"     |
-| login   | The Okta login (username) for the end-user.   | String    | 	"john.doe@example.com"     |
 | aud     | Identifies the audience that this ID token is intended for. It must be one of the OAuth 2.0 client IDs of your application.   | String    | "6joRGIzNCaJfdCPzRjlh"     |
 | iat     | The time the ID token was issued, represented in Unix time (seconds).   | Integer    | 1311280970     |
 | exp     | The time the ID token expires, represented in Unix time (seconds).   | Integer    | 1311280970     |
@@ -107,6 +106,7 @@ This is the digital signature signed by Okta using the public key identified by 
 |--------------+---------+----------+----------------------------------------------------------------------------------+--------------|--------------------------|
 | name     |  profile  | User's full name in displayable form including all name parts, possibly including titles and suffixes, ordered according to the user's locale and preferences.   | String    | "John Doe"     |
 | nickname     |  profile   | Casual name of the user that may or may not be the same as the given_name.   | String    | "Jimmy"    |
+| preferred_username  |  profile  |  The chosen login (username) for the end-user. By default this is the Okta username.  | String    | 	"john.doe@example.com"     |
 | given_name     |  profile   | Given name(s) or first name(s) of the user. Note that in some cultures, people can have multiple given names; all can be present, with the names being separated by space characters.   | String    | "John"     |
 | middle_name     |  profile    | Middle name(s) of the user. Note that in some cultures, people can have multiple middle names; all can be present, with the names being separated by space characters. Also note that in some cultures, middle names are not used.   | String    | "James"   |
 | family_name     |  profile   | Surname(s) or last name(s) of the user. Note that in some cultures, people can have multiple family names or no family name; all can be present, with the names being separated by space characters.   | String    |  "Doe"    |
@@ -391,7 +391,6 @@ This API endpoint returns the OpenID Connect related metadata that can be used b
         "iss",
         "sub",
         "aud",
-        "login",
         "iat",
         "exp",
         "auth_time",
@@ -401,6 +400,7 @@ This API endpoint returns the OpenID Connect related metadata that can be used b
         "nonce",
         "name",
         "nickname",
+        "preferred_username",
         "given_name",
         "middle_name",
         "family_name",
