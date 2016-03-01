@@ -49,11 +49,13 @@ The Authentication API leverages the [JSON HAL](http://tools.ietf.org/html/draft
 | sessionToken  | ephemeral [one-time token](#session-token) used to bootstrap an Okta session                           | String                                                         | TRUE     | TRUE     |           |           |            |
 | expiresAt     | lifetime of the `stateToken` or `sessionToken` (See [Tokens](#tokens))                                 | Date                                                           | TRUE     | TRUE     |           |           |            |
 | status        | current [state](#transaction-state) of the authentication transaction                                  | [Transaction State](#transaction-state)                        | FALSE    | TRUE     |           |           |            |
-| relayState    | optional state value that is persisted for the lifetime of the authentication transaction              | String                                                         | TRUE     | TRUE     |           | 2048      |            |
+| relayState    | optional opaque value that is persisted for the lifetime of the authentication transaction             | String                                                         | TRUE     | TRUE     |           | 2048      |            |
 | factorResult  | optional status of last verification attempt for a given factor                                        | [Factor Result](#factor-result)                                | TRUE     | TRUE     |           |           |            |
 | _embedded     | [embedded resources](#embedded-resources) for the current `status`                                     | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | TRUE     |           |           |            |
 | _links        | [link relations](#links-object) for the current `status`                                               | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | TRUE     |           |           |            |
 |---------------+--------------------------------------------------------------------------------------------------------+----------------------------------------------------------------+----------+----------+-----------+-----------+------------|
+
+> The `relayState` paramater is an opaque value for the transaction and processed as untrusted data which is just echoed in a response.  It is the client's responsibility to escape/encode this value before displaying in a UI such as a HTML document using [best-practices](https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet)
 
 ### Recovery Transaction Model
 
@@ -64,13 +66,15 @@ The Authentication API leverages the [JSON HAL](http://tools.ietf.org/html/draft
 | recoveryToken | ephemeral [one-time token](#recovery-token) for recovery transaction to be distributed to the end-user | String                                                         | TRUE     | TRUE     |           |           |            |
 | expiresAt     | lifetime of the `stateToken` or `recoveryToken` (See [Tokens](#tokens))                                | Date                                                           | TRUE     | TRUE     |           |           |            |
 | status        | current [state](#transaction-state) of the recovery transaction                                        | [Transaction State](#transaction-state)                        | FALSE    | TRUE     |           |           |            |
-| relayState    | optional state value that is persisted for the lifetime of the recovery transaction                    | String                                                         | TRUE     | TRUE     |           | 2048      |            |
+| relayState    | optional opaque value that is persisted for the lifetime of the recovery transaction                   | String                                                         | TRUE     | TRUE     |           | 2048      |            |
 | factorType    | type of selected factor for the recovery transaction                                                   | `EMAIL` or `SMS`                                               | FALSE    | TRUE     |           |           |            |
 | recoveryType  | type of recovery operation                                                                             | `PASSWORD` or `UNLOCK`                                         | FALSE    | TRUE     |           |           |            |
 | factorResult  | optional status of last verification attempt for the `factorType`                                      | [Factor Result](#factor-result)                                | TRUE     | TRUE     |           |           |            |
 | _embedded     | [embedded resources](#embedded-resources) for the current `status`                                     | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | TRUE     |           |           |            |
 | _links        | [link relations](#links-object) for the current `status`                                               | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | TRUE     |           |           |            |
 |---------------+--------------------------------------------------------------------------------------------------------+----------------------------------------------------------------+----------+----------+-----------+-----------+------------|
+
+> The `relayState` paramater is an opaque value for the transaction and processed as untrusted data which is just echoed in a response.  It is the client's responsibility to escape/encode this value before displaying in a UI such as a HTML document using [best-practices](https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet)
 
 ### Transaction State
 
