@@ -16,7 +16,7 @@
 	<title>OpenId Connect | Okta Developer</title>
 	<meta name="description" content="Secure, scalable, and highly available authentication and user management for any app.">
 
-	<link rel="canonical" href="http://developer.okta.com/docs/api/resources/oidc.html">
+	<link rel="canonical" href="http://developer.okta.com/docs/api/resources/oidc">
 
 	<link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/assets/css/animate.css">
@@ -49,10 +49,6 @@
 
 
 
-
-  
-  
-  
 
 <body id="docs">
 
@@ -189,7 +185,7 @@
 
 <p>OpenID Connect introduces an <a href="http://openid.net/specs/openid-connect-core-1_0.html#IDToken">id_token</a> which is <a href="https://tools.ietf.org/html/rfc7519">JWT</a> that contains information about an authentication event as well as claims about the authenticated user.</p>
 
-<p>The id_token JWT consists of three period seperated base64 encoded JSON segments. </p>
+<p>The id_token JWT consists of three period seperated base64 encoded JSON segments.</p>
 
 <h5 id="header--">Header -</h5>
 
@@ -206,7 +202,6 @@
   </span><span class="nt">"ver"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nt">"sub"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00uid4BxXw6I6TV4m0g3"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"iss"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://rain.okta1.com:1802"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"administrator1@clouditude.net"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"aud"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uAaunofWkaDJxukCFeBx"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"iat"</span><span class="p">:</span><span class="w"> </span><span class="mi">1449624026</span><span class="p">,</span><span class="w">
   </span><span class="nt">"exp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1449627626</span><span class="p">,</span><span class="w">
@@ -218,6 +213,7 @@
   </span><span class="nt">"at_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cpqKfdQA5eH891Ff5oJr_Q"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"nickname"</span><span class="p">:</span><span class="s2">"Jimmy"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"preferred_username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"administrator1@clouditude.net"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"given_name"</span><span class="p">:</span><span class="s2">"John"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"middle_name"</span><span class="p">:</span><span class="s2">"James"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"family_name"</span><span class="p">:</span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
@@ -310,12 +306,6 @@
       <td>“00uk1u7AsAk6dZL3z0g3”</td>
     </tr>
     <tr>
-      <td>login</td>
-      <td>The Okta login (username) for the end-user.</td>
-      <td>String</td>
-      <td>“john.doe@example.com”</td>
-    </tr>
-    <tr>
       <td>aud</td>
       <td>Identifies the audience that this ID token is intended for. It must be one of the OAuth 2.0 client IDs of your application.</td>
       <td>String</td>
@@ -366,7 +356,7 @@
   </tbody>
 </table>
 
-<h5 id="scope-dependendent-claims">Scope dependendent claims</h5>
+<h5 id="scope-dependent-claims">Scope dependent claims</h5>
 
 <table>
   <thead>
@@ -387,11 +377,25 @@
       <td>“John Doe”</td>
     </tr>
     <tr>
+      <td>preferred_username</td>
+      <td>profile</td>
+      <td>The Okta login (username) for the end-user.</td>
+      <td>String</td>
+      <td>“john.doe@example.com”</td>
+    </tr>
+    <tr>
       <td>nickname</td>
       <td>profile</td>
       <td>Casual name of the user that may or may not be the same as the given_name.</td>
       <td>String</td>
       <td>“Jimmy”</td>
+    </tr>
+    <tr>
+      <td>preferred_username</td>
+      <td>profile</td>
+      <td>The chosen login (username) for the end-user. By default this is the Okta username.</td>
+      <td>String</td>
+      <td>“john.doe@example.com”</td>
     </tr>
     <tr>
       <td>given_name</td>
@@ -472,6 +476,10 @@
     </tr>
   </tbody>
 </table>
+
+<p>The client can also optionally request an access token along with the id token. In this case, in order to keep the size of the id token small, the id token body does not contain all the scope dependent claims.</p>
+
+<p>Instead, the id token contains the <em>name</em> and <em>preferred_username</em> claims if the <em>profile</em> scope was requested and <em>email</em> claim if the <em>email</em> scope was requested. The full set of claims for the requested scopes is available via the <a href="#get-user-information">/oauth2/v1/userinfo</a> endpoint that can be called using the access token.</p>
 
 <h2 id="oidc-operations">OIDC Operations</h2>
 
@@ -648,7 +656,7 @@
 
 <h5 id="possible-errors">Possible errors</h5>
 
-<p>The Okta OpenID Connect APIs are compliant with the OpenId Connect and OAuth2 spec with some Okta specific extensions. </p>
+<p>The Okta OpenID Connect APIs are compliant with the OpenId Connect and OAuth2 spec with some Okta specific extensions.</p>
 
 <p><a href="https://tools.ietf.org/html/rfc6749#section-4.1.2.1">OAuth 2 Spec error codes</a></p>
 
@@ -752,7 +760,7 @@
 </span></code></pre>
 </div>
 
-<p>The claims in the response are identical to what are returned for the requested scopes in the id_token JWT, except for the ‘sub’ claim which is always present. Details of the individual claims is <a href="#scope-dependendent-claims">documented above</a></p>
+<p>The claims in the response are identical to those returned for the requested scopes in the id_token JWT, except for the ‘sub’ claim which is always present. Details of the individual claims is <a href="#scope-dependent-claims">documented above</a></p>
 
 <h4 id="response-example-error-1">Response Example (Error)</h4>
 
@@ -967,7 +975,6 @@
         </span><span class="s2">"iss"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"sub"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"aud"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"login"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"iat"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"exp"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"auth_time"</span><span class="p">,</span><span class="w">
@@ -977,6 +984,7 @@
         </span><span class="s2">"nonce"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"name"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"nickname"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"preferred_username"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"given_name"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"middle_name"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"family_name"</span><span class="p">,</span><span class="w">

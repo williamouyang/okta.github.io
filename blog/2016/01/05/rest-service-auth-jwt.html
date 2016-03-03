@@ -13,15 +13,15 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="/favicon.ico">
-	<title>Welcome! You're ready to go. | Okta Developer</title>
-	<meta name="description" content="Secure, scalable, and highly available authentication and user management for any app.">
+	<title>REST Service Authorization with JWTs | Okta Developer</title>
+	<meta name="description" content="Many companies are adopting micro-services based architectures to promotedecoupling and separation of concerns in their applications. One inherentchallenge w...">
 
-	<link rel="canonical" href="http://developer.okta.com/confirm/account">
+	<link rel="canonical" href="http://developer.okta.com/blog/2016/01/05/rest-service-auth-jwt">
 
 	<link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/assets/css/animate.css">
 	<link rel="stylesheet" href="/assets/css/master.css">
-	<link rel="stylesheet" href="/assets/css/layout-docs.css">
+	
 	<link rel="stylesheet" href="/assets/css/responsive.css">
 
 
@@ -32,7 +32,7 @@
 	<script type="text/javascript" defer="defer" src="/assets/js/master.js"></script>
 	<script type="text/javascript" defer="defer" src="/assets/js/scrollspy.js"></script>
 
-	<script type="text/javascript" defer="defer" src="/assets/js/docs.js"></script>
+	
 	<!-- TypeKit -->
 	<script src="//use.typekit.net/pls8pog.js"></script>
 	<script>try{Typekit.load();}catch(e){}</script>
@@ -50,7 +50,7 @@
 
 
 
-<body id="confirm">
+<body id="blog">
 
 	<header class="site-header">
 	<div class="wrap">
@@ -119,39 +119,99 @@
 	<div class="page-content">
 
 		
-		<section id="valprop" class="section--full-width bg--light-blue">
-			<div class="wrap">
-				<header>
-					<h1>Welcome! You're ready to go.</h1>
-					
-				</header>
 
-				
-			</div>
-		</section>
-		
+		<section id="blog-post" class="section--full-width">
 
-		<section class="section--full-width">
-	<div class="wrap">
+	
 
-		<p>Check your email for your account activation message.</p>
+	
+	
 
-<hr />
 
-<p>To learn more about the Okta Identity Platform, check out our <a href="/docs/getting_started/design_principles.html">docs</a>.</p>
+	<div class="blog">
+		<section >
+<div class="wrap">
+	<article class="post-block">
+	  <header class="post-title-block">
+	    <h1><a href="/blog/2016/01/05/rest-service-auth-jwt">REST Service Authorization with JWTs</a></h1>
+	    <div class="attribution">
+	      
+	      
+	      
+	      <img src="/assets/img/avatar-jon_todd.jpg"
+	           alt="avatar-jon_todd.jpg"
+	           class="author-avatar">
+	      
+	      <address>Jon Todd</address>
+	      &nbsp;
+		  
+		    <a class="social_link" href="https://github.com/jontodd"><i class="fa fa-github-square"></i></a>
+		  
+		  
+		    <a class="social_link" href="https://twitter.com/jonrtodd"><i class="fa fa-twitter-square"></i></a>
+		  
+		  
+		  
+		    <a class="social_link" href="http://www.jontodd.com"><i class="fa fa-external-link-square"></i></a>
+		  
+		    <span class="sepr">&middot;</span>
+	      
+	      
+	      
+	      <address>William Dawson</address>
+	      &nbsp;
+		  
+		    <a class="social_link" href="https://github.com/wdawson"><i class="fa fa-github-square"></i></a>
+		  
+		  
+		    <a class="social_link" href="https://twitter.com/wilsdawson"><i class="fa fa-twitter-square"></i></a>
+		  
+		  
+	 		<a class="social_link" href="https://linkedin.com/in/wilsdawson"><i class="fa fa-linkedin-square"></i></a>
+		  
+		  
+		    <span class="sepr">&middot;</span>
+	      
+	      <time datetime="2016-01-05">
+	      January 5, 2016
+	      </time>
+	    </div>
+	  </header>
 
-<hr />
+	  <section class="post-content">
+	    <p>Many companies are adopting micro-services based architectures to promote
+decoupling and separation of concerns in their applications. One inherent
+challenge with breaking applications up into small services is that now each
+service needs to deal with authenticating and authorizing requests made to it.
+<a href="https://tools.ietf.org/html/rfc7519">Json Web Tokens (JWTs)</a> offer a clean
+solution to this problem along with
+<a href="/blog/2015/12/02/tls-client-authentication-for-services">TLS client authentication</a>
+lower down in the stack.</p>
 
-<p>Have a question? We’re here to help.</p>
+<p>Wils Dawson and I presented these topics to the <a href="http://www.meetup.com/sfjava/">Java User Group</a>
+at Okta’s HQ in December and are thrilled to offer the
+<a href="http://www.slideshare.net/JonTodd1/rest-service-authetication-with-tls-jwts">slides</a>,
+<a href="https://github.com/wdawson/dropwizard-auth-example">code</a>, and the following
+recording of the presentation. In the talk, we cover authentication and
+authorization both at a server level with TLS and a user level with OAuth 2.0.
+In addition, we explain claims based auth and federation while walking through
+demos for these concepts using Java and Dropwizard. We purposely skipped over
+client (e.g. browser) side authentication as it’s enough material for a future
+talk and focused on solutions for authentication and authorization between
+services within an application.</p>
 
-<ul>
-  <li>Post it in the <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow forum</a></li>
-  <li>Open a ticket by logging in to your account and clicking ‘Help’</li>
-  <li>Call us: 1-888-722-7871</li>
-</ul>
+<iframe src="https://player.vimeo.com/video/150714428" width="500" height="281" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
 
+	  </section>
+
+
+
+	</article>
+</div>
+</section>
 
 	</div>
+
 </section>
 
 

@@ -16,7 +16,7 @@
 	<title>Users | Okta Developer</title>
 	<meta name="description" content="Secure, scalable, and highly available authentication and user management for any app.">
 
-	<link rel="canonical" href="http://developer.okta.com/docs/api/resources/users.html">
+	<link rel="canonical" href="http://developer.okta.com/docs/api/resources/users">
 
 	<link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/assets/css/animate.css">
@@ -49,10 +49,6 @@
 
 
 
-
-  
-  
-  
 
 <body id="docs">
 
@@ -3188,7 +3184,7 @@ in the request will not be modified or deleted. <strong>Use <code class="highlig
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/<em>:id</em>/lifecycle/suspend</span></p>
 
-<p>Suspends a user.  This operation can only be performed on users with an <code class="highlighter-rouge">ACTIVE</code> status.  The user will have a status of <code class="highlighter-rouge">SUSPENDED</code> when the process is complete. </p>
+<p>Suspends a user.  This operation can only be performed on users with an <code class="highlighter-rouge">ACTIVE</code> status.  The user will have a status of <code class="highlighter-rouge">SUSPENDED</code> when the process is complete.</p>
 
 <blockquote>
   <p>Suspended users cannot log in to Okta. Their group and app assignments are retained.<br />
@@ -3222,7 +3218,7 @@ Suspended users can only be unsuspended or deactivated.</p>
 
 <h5 class="api api-response api-response-params" id="response-parameters-9">Response Parameters</h5>
 
-<p>Returns an empty object. </p>
+<p>Returns an empty object.</p>
 
 <p>Passing an invalid <code class="highlighter-rouge">id</code> returns a <code class="highlighter-rouge">404 Not Found</code> status code with error code <code class="highlighter-rouge">E0000007</code>.
 Passing an <code class="highlighter-rouge">id</code> that is not in the <code class="highlighter-rouge">ACTIVE</code> state returns a <code class="highlighter-rouge">400 Bad Request</code> status code with error code <code class="highlighter-rouge">E0000001</code>.</p>
@@ -3248,7 +3244,7 @@ Passing an <code class="highlighter-rouge">id</code> that is not in the <code cl
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/<em>:id</em>/lifecycle/unsuspend</span></p>
 
-<p>Unsuspends users and returns then to the <code class="highlighter-rouge">ACTIVE</code> state.  This operation can only be performed on users that have a <code class="highlighter-rouge">SUSPENDED</code> status.  </p>
+<p>Unsuspends users and returns then to the <code class="highlighter-rouge">ACTIVE</code> state.  This operation can only be performed on users that have a <code class="highlighter-rouge">SUSPENDED</code> status.</p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-10">Request Parameters</h5>
 
@@ -3277,7 +3273,7 @@ Passing an <code class="highlighter-rouge">id</code> that is not in the <code cl
 
 <h5 class="api api-response api-response-params" id="response-parameters-10">Response Parameters</h5>
 
-<p>Returns an empty object. Returns an empty object. </p>
+<p>Returns an empty object. Returns an empty object.</p>
 
 <p>Passing an invalid <code class="highlighter-rouge">id</code> returns a <code class="highlighter-rouge">404 Not Found</code> status code with error code <code class="highlighter-rouge">E0000007</code>.
 Passing an <code class="highlighter-rouge">id</code> that is not in the <code class="highlighter-rouge">SUSPENDED</code> state returns a <code class="highlighter-rouge">400 Bad Request</code> status code with error code <code class="highlighter-rouge">E0000001</code>.</p>

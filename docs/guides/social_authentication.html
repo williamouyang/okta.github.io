@@ -16,7 +16,7 @@
 	<title>Social Authentication | Okta Developer</title>
 	<meta name="description" content="Setting up an Okta Social Authentication provider">
 
-	<link rel="canonical" href="http://developer.okta.com/docs/guides/social_authentication.html">
+	<link rel="canonical" href="http://developer.okta.com/docs/guides/social_authentication">
 
 	<link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/assets/css/animate.css">
@@ -49,10 +49,6 @@
 
 
 
-
-  
-  
-  
 
 <body id="docs">
 
@@ -201,7 +197,7 @@
 <p><em>Linking of existing Okta account to a Social Provider identity</em></p>
 
 <ul>
-  <li>Provide a flow for users with an existing local account to </li>
+  <li>Provide a flow for users with an existing local account to</li>
 </ul>
 
 <p><em>Call-out during registration/linking for custom logic</em></p>
@@ -266,12 +262,15 @@ log in to your Okta org or custom application using their social credentials.</p
 <code class="highlighter-rouge">https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4</code></p>
   </li>
   <li>
-    <p>Add an OAuth client via the Okta API</p>
+    <p>Add an OAuth client via the App Integration Wizard or via the <a href="../resources/oauth-clients.html">Okta API</a></p>
 
-    <p>For now, you will need to do this by making HTTP requests
-directly against the Okta API. We suggest using Postman to do
+    <p>Register an OAuth Client by navigating to the Administrator Dashboard, go to Applications, then click “Add Application”.
+Click “Create New App” to launch the App Integration Wizard. It will guide you through the necessary configuration
+steps and give you back a “client_id” which you can then use in Step 7.</p>
+
+    <p>If you’d rather use the Okta API to register a client, we suggest using Postman to do
 this. If you haven’t used Postman before, see our <a href="http://developer.okta.com/docs/api/getting_started/api_test_client.html">instructions
-for using Postman with Okta</a> before proceeding. Load our <a href="https://beta.getpostman.com/collections/2bece1641e75a7d4a222">Client
+for using Postman with Okta</a> before proceeding. Load our <a href="../postman/client-registration.json">Client
 Registration Postman Collection</a> into Postman and then use the
 “Create OAuth Client” request to create a new OAuth client on
 Okta, this will make a POST request to the <code class="highlighter-rouge">/oauth2/v1/clients</code> URL
@@ -335,7 +334,7 @@ URLS:</p>
     </div>
 
     <blockquote>
-      <p>The contents of the <code class="highlighter-rouge">redirect_uris</code> array <strong>MUST</strong> be an SSL (“https”) URL. Instructions for enabling SSL on your web server is outside of the scope of this document, however an easy way to do this is to use <a href="https://support.cloudflare.com/hc/en-us/articles/200170516-How-do-I-add-SSL-to-my-site-">CloudFlare to add SSL</a> to your server. If you are developing a service on your own computer that is running on “<code class="highlighter-rouge">http://localhost</code>”, you can use the wonderful <a href="https://ngrok.com/">ngrok</a> service to create an SSL enabled tunnel for your “<code class="highlighter-rouge">http://localhost</code>” URL.</p>
+      <p>If you are developing a service on your own computer that is running on “<code class="highlighter-rouge">http://localhost</code>”, you can use the wonderful <a href="https://ngrok.com/">ngrok</a> service to create an SSL enabled tunnel for your “<code class="highlighter-rouge">http://localhost</code>” URL.</p>
     </blockquote>
 
     <p>After you click the “Send” button in Postman, you will see a JSON
@@ -400,7 +399,7 @@ URL”.</p>
 the <code class="highlighter-rouge">redirect_url</code> parameter. The value of this GET parameter is
 where Okta will return a user to after the user
 has finished authenticating against their Social
-Authentication provider. Note that this URL <strong>must</strong> start with “https” and <strong>must</strong> match one of the URLs in the <code class="highlighter-rouge">redirect_uris</code> array that you configured previously. </p>
+Authentication provider. Note that this URL <strong>must</strong> start with “https” and <strong>must</strong> match one of the URLs in the <code class="highlighter-rouge">redirect_uris</code> array that you configured previously.</p>
 
         <p>After adding the <code class="highlighter-rouge">redirect_url</code> GET parameter to 
 your URL, it should look something like this:
