@@ -202,6 +202,8 @@ Okta has a default ambiguous name resolution policy for logins.  Users can login
 
 User profiles may be extended with custom properties but the attribute must first be added to the user profile schema before it can be referenced.  You can use the Profile Editor in the Admin UI or the [Schemas API](./schemas.html) to manage schema extensions.
 
+Custom attributes may contain HTML tags. It is the client's responsibility to escape or encode this data before displaying it. Use [best-practices](https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet) to prevent cross-site scripting.
+
 ### Credentials Object
 
 Specifies primary authentication and recovery credentials for a user.  Credential types and requirements vary depending on the provider and security policy of the organization.
