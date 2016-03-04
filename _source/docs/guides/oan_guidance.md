@@ -41,11 +41,11 @@ Use the following instructions to support single sign-on for your app in the pub
 
 ### 3. Need Help?
 
-Get stuck or have questions? See our Okta Application Network FAQs (below), email <oan@okta.com> or post your questions on [stackoverflow](https://stackoverflow.com).
+Get stuck or have questions? See our Okta Application Network FAQs (below), email <developers@okta.com> or post your questions on [stackoverflow](https://stackoverflow.com).
 
 ### 4. Partner with Okta (Optional)
 
-Already part of the Okta App Network but looking for a more “go-to-market” partnership? Email oan@okta.com about becoming an [Okta App Partner](https://www.okta.com/partners/). App Partners are fully integrated with Okta and get access to great benefits like marketing support and a free version of Okta for your app.
+Already part of the Okta App Network but looking for a more “go-to-market” partnership? Email <developers@okta.com> about becoming an [Okta App Partner](https://www.okta.com/partners/). App Partners are fully integrated with Okta and get access to great benefits like marketing support and a free version of Okta for your app.
 
 
 ## Provisioning
@@ -63,24 +63,24 @@ With the new Cloud Provisioning Connector (CPC) Program, you can now build and s
 -------- | ----------- | --------
 **What is it?**  | The Java SDK lets you write Java code that takes Okta provisioning signals and translates them into your service’s User API. This connector code is written and supported by the ISV (you) and hosted in the Okta service to complete the integration. Typical development effort is ~1-3 man-weeks. | Okta's SCIM 1.1/2.0 Client will interface directly with compatible SCIM 1.1/2.0 Servers. The integration is completed with a few configurations, such as the endpoint address and authentication method. No coding required.
 **Who is it designed for?** | ISVs with an existing proprietary API for user operations. You want maximum flexibility and do not plan on supporting the SCIM standard. | ISVs that: a) currently support the SCIM standard; b) plan to support the SCIM standard; c) don’t already have proprietary APIs for user operations.
-**How do I get started?** |Email <oan@okta.com> and express interest in developing using Java SDK. We’ll share the SDK and additional program details. **Note: We are only accepting a limited number of ISV partners into the Java SDK program to start.** Please try to share some details on customer demand and urgency (e.g. # of joint customers that would benefit, deployment deadlines) in your email. | Okta support for SCIM is coming in March 2016. If you are interested in being part of the SCIM Beta reply to <oan@okta.com> and we’ll add you to the list. We’ll reach back out with additional SCIM documentation and SCIM Beta details by March 2016.
+**How do I get started?** |Email <developers@okta.com> and express interest in developing using Java SDK. We’ll share the SDK and additional program details. **Note: We are only accepting a limited number of ISV partners into the Java SDK program to start.** Please try to share some details on customer demand and urgency (e.g. # of joint customers that would benefit, deployment deadlines) in your email. | Okta support for SCIM is coming in March 2016. If you are interested in being part of the SCIM Beta reply to <developers@okta.com> and we’ll add you to the list. We’ll reach back out with additional SCIM documentation and SCIM Beta details by March 2016.
 
 For more details, see the [Cloud Provisioning Connector Program Overview](https://www.okta.com/sites/default/files/cloud_provisioning_connector_program_overview_v1.pdf).
 
-Interested in provisioning with Okta but have general questions about the approaches above? Email us at <oan@okta.com>
+Interested in provisioning with Okta but have general questions about the approaches above? Email us at <developers@okta.com>
 
 
 ##Okta Application Network FAQs
 
 **Q: Do I need to contact Okta first to start integrating my application?**
 
-A: No, the materials here should be enough to help you get started. You should start by enabling [SAML](/docs/guides/saml_guidance.html) with your application. Then test your app integration and submit for review by Okta with the [App Wizard](https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard). Get stuck or have questions? Email <oan@okta.com>.
+A: No, the materials here should be enough to help you get started. You should start by enabling [SAML](/docs/guides/saml_guidance.html) with your application. Then test your app integration and submit for review by Okta with the [App Wizard](https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard). Get stuck or have questions? Email <developers@okta.com>.
 
 <br/>
 
 **Q: I am having issues integrating my app or have questions about single sign-on support in my app. How do I contact Okta?**
 
-A: If you have any technical questions, you can submit them to <oan@okta.com> or post your questions on [stackoverflow](https://stackoverflow.com).
+A: If you have any technical questions, you can submit them to <developers@okta.com> or post your questions on [stackoverflow](https://stackoverflow.com).
 
 <br/>
 
@@ -116,7 +116,7 @@ A: SWA was developed by Okta to provide single sign-on for apps that do not supp
 
 **Q: What is the process after I have submitted my app using the App Wizard?**
 
-A: Okta App Integration team reviews all submitted apps. The team will reach out during the testing and documentation process for additional information. When completed, the application is then be promoted to the public Okta Application Network, and you are notified. Typical review time is two weeks. Have you submitted an app but have not heard from Okta? Email <oan@okta.com>.
+A: Okta App Integration team reviews all submitted apps. The team will reach out during the testing and documentation process for additional information. When completed, the application is then be promoted to the public Okta Application Network, and you are notified. Typical review time is two weeks. Have you submitted an app but have not heard from Okta? Email <developers@okta.com>.
 
 <br/>
 
@@ -130,19 +130,19 @@ A: There are two different app certification levels in the OAN – Okta Verified
 
 **Q: I’m setting up a SAML 2.0 app using the App Wizard and we have different domains for each customer. How do you manage these types of situations?**
 
-A: Currently, the App Wizard does not support custom domains. Create an app integration as you normally would using the [App Wizard](https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard). In step #3 Feedback, please try to include in the “How to enable SAML” section or email oan@okta.com. Our team will work with you to add this functionality when they begin to work with you.
+A: Currently, the App Wizard does not support custom domains. Create an app integration as you normally would using the [App Wizard](https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard). In step #3 Feedback, please try to include in the “How to enable SAML” section or email <developers@okta.com>. Our team will work with you to add this functionality when they begin to work with you.
 
 <br/>
 
 **Q: My app currently supports WS-FED for single sign-on. Can I use the App Wizard?**
 
-A: The Okta App Wizard only supports SAML 2.0 for federated single sign-on. If your app supports WS-Fed, you will instead need to create a [WS-Fed Template App](https://support.okta.com/help/articles/Knowledge_Article/Web-Security-Federation-WS-Fed-Template-Overview). Once completed, the Template Application you have created will only be able to be used within your account. In order to promote your Template App to the Okta Application Network, please email a screenshot of the configured app details to oan@okta.com with your app name in the subject line.
+A: The Okta App Wizard only supports SAML 2.0 for federated single sign-on. If your app supports WS-Fed, you will instead need to create a [WS-Fed Template App](https://support.okta.com/help/articles/Knowledge_Article/Web-Security-Federation-WS-Fed-Template-Overview). Once completed, the Template Application you have created will only be able to be used within your account. In order to promote your Template App to the Okta Application Network, please email a screenshot of the configured app details to <developers@okta.com> with your app name in the subject line.
 
 <br/>
 
 **Q: I am creating a SWA using the App Wizard but I realize my application has additional fields on the login page beyond the standard username and password (example: Customer / OrgID). Can an app with additional fields like this on the login be configured using the App Wizard?**
 
-A: Currently, the App Wizard does not support extra login fields. Create an app using the Plug-in (SWA) Template Application. In order to promote your Template App to the Okta Application Network, please email a screenshot of the configured app details to <oan@okta.com> with your app name in the subject line.
+A: Currently, the App Wizard does not support extra login fields. Create an app using the Plug-in (SWA) Template Application. In order to promote your Template App to the Okta Application Network, please email a screenshot of the configured app details to <developers@okta.com> with your app name in the subject line.
 
 <br/>
 
@@ -168,4 +168,4 @@ Also, if you haven’t already done so, sign up for an Okta [developer account](
 
 **Q: In general, how can I get familiar with the Okta product?**
 
-A: To get started, check out the [Okta Help Center](https://support.okta.com/help) or [Okta Academy on YouTube](https://www.youtube.com/playlist?list=PLIid085fSVdurJ8l_UgfNGJohaSW6w97p). App Partners are eligible for live Okta 101 sessions as well, please email oan@okta.com if you are interested.
+A: To get started, check out the [Okta Help Center](https://support.okta.com/help) or [Okta Academy on YouTube](https://www.youtube.com/playlist?list=PLIid085fSVdurJ8l_UgfNGJohaSW6w97p). App Partners are eligible for live Okta 101 sessions as well, please email <developers@okta.com> if you are interested.
