@@ -841,6 +841,8 @@
 
 <p>User profiles may be extended with custom properties but the attribute must first be added to the user profile schema before it can be referenced.  You can use the Profile Editor in the Admin UI or the <a href="./schemas.html">Schemas API</a> to manage schema extensions.</p>
 
+<p>Custom attributes may contain HTML tags. It is the client’s responsibility to escape or encode this data before displaying it. Use <a href="https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet">best-practices</a> to prevent cross-site scripting.</p>
+
 <h3 id="credentials-object">Credentials Object</h3>
 
 <p>Specifies primary authentication and recovery credentials for a user.  Credential types and requirements vary depending on the provider and security policy of the organization.</p>
