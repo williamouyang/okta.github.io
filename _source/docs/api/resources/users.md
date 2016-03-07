@@ -2167,7 +2167,7 @@ Generates a one-time token (OTT) that can be used to reset a user's password.  T
 
 This operation will transition the user to the status of `RECOVERY` and the user will not be able to login or initiate a forgot password flow until they complete the reset flow.
 
-**Note:** You can also use this API to convert a user with the Okta Credential Provider to a use a Federated Provider. After this conversion, the user cannot directly sign in with password. The second example demonstrate this usage.
+**Note:** You can also use this API to convert a user with the Okta Credential Provider to a use a Federated Provider. After this conversion, the user cannot directly sign in with password. The second example demonstrates this usage.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2226,9 +2226,7 @@ curl -v -X POST \
 {:.api .api-response .api-response-example}
 
 ~~~json
-{
-  "resetPasswordUrl": "https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"
-}
+{}
 ~~~
 
 ### Expire Password
