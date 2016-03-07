@@ -2663,7 +2663,7 @@ recovery_question | New recovery question & answer for user | Body       | [Reco
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-[Credentials](#credentials-object) of the user  
+[Credentials](#credentials-object) of the user
 
 > This operation does not affect the status of the user.
 
