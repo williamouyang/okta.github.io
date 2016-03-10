@@ -198,7 +198,7 @@ Copy this to a file named `login-to-okta.html`:
     
       <script src="https://example.okta.com/js/sdk/okta-sign-in-1.0.2.min.js" type="text/javascript"></script>
       <link href="https://example.okta.com/js/sdk/okta-sign-in-1.0.2.min.css" type="text/css" rel="stylesheet">
-      <link href="https://example.okta.com/css/login/okta-theme.css" type="text/css" rel="stylesheet">
+      <link href="https://example.okta.com/js/sdk/okta-theme-1.0.2.css" type="text/css" rel="stylesheet">
     </head>
     <body>
       <!-- Render the login widget here -->
@@ -357,9 +357,9 @@ is up to you. Customization of the widget itself will be done on
 the `#okta-login-container` selector and its child elements.
 
 A full list of the CSS selectors that you can use to style the
-Okta Sign-In Widget are in the [okta-theme.css](https://example.okta.com/css/login/okta-theme.css) file. We strongly
+Okta Sign-In Widget are in the [okta-theme.css](https://example.okta.com/js/sdk/okta-theme-1.0.2.css) file. We strongly
 urge you to style your widget using only the selectors that are
-present in the [okta-theme.css](https://example.okta.com/css/login/okta-theme.css) file, other elements in the widget
+present in the [okta-theme.css](https://example.okta.com/js/sdk/okta-theme-1.0.2.css) file, other elements in the widget
 will be subject to change and will cause your styling to break in
 future versions of the Okta Sign-In Widget.
 
