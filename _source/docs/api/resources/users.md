@@ -200,7 +200,7 @@ Okta has a default ambiguous name resolution policy for logins.  Users can login
 
 #### Custom Profile Properties
 
-User profiles may be extended with custom properties but the attribute must first be added to the user profile schema before it can be referenced.  You can use the Profile Editor in the Admin UI or the [Schemas API](./schemas.html) to manage schema extensions.
+User profiles may be extended with custom properties but the property must first be added to the user profile schema before it can be referenced.  You can use the Profile Editor in the Admin UI or the [Schemas API](./schemas.html) to manage schema extensions.
 
 ### Credentials Object
 
@@ -1026,34 +1026,52 @@ curl -v -X GET \
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users</span>
 
-Enumerates users in your organization with pagination.  A subset of users can be returned that match a supported filter expression or query.
+Enumerates users in your organization with pagination in most cases.  A subset of users can be returned that match a supported filter expression or query.
 
-- [List Users with Defaults](#list-users-with-defaults)
-- [List Users with Search](#list-users-with-search)
-- [List Users with Advanced Search](#list-users-with-advanced-search)
-- [List Users Updated after Timestamp](#list-users-updated-after-timestamp)
-- [List Users with Status](#list-users-with-status)
+- [List All Users](#list-all-users)
+- [Find Users](#find-users)
+- [List Users, Filter on Additional Properties](#list-users-filter-on-additional-properties)
+- [List Users, Filter on Timestamp](#list-users-filter-on-timestamp)
+- [List Users, Filter on Status](#list-users-filter-on-status)
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
 Parameter | Description                                                                               | Param Type | DataType | Required | Default
 --------- | ----------------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------
-q         | Searches `firstName`, `lastName`, and `email` properties of users for matching value      | Query      | String   | FALSE    |
-search    | [Filter expression](/docs/api/getting_started/design_principles.html#filtering) for searches that `q` can't support | Query      | String   | FALSE    |
-limit     | Specified the number of results                                                           | Query      | Number   | FALSE    | 200
-filter    | [Filter expression](/docs/api/getting_started/design_principles.html#filtering) for users | Query      | String   | FALSE    |
+q         | Filter on `firstName`, `lastName`, and `email` properties      | Query      | String   | FALSE    |
+search    | [Filter on](/docs/api/getting_started/design_principles.html#filtering) other properties | Query      | String   | FALSE    |
+limit     | Specifies the number of results returned                                                           | Query      | Number   | FALSE    | 200
+filter    | Specifies the [Filter expression](/docs/api/getting_started/design_principles.html#filtering) | Query      | String   | FALSE    |
 after     | Specifies the pagination cursor for the next page of users                                | Query      | String   | FALSE    |
 
-**More about `q`**
+#### Choosing a List Type
 
-Search with `q` currently performs a startsWith match but this is an implementation detail and may change without notice in the future.
+   * If you need a list and don't need to filter at all, don't use either `q` or `search`.
+   * If you need to filter, use `q` if you can, because it requires less coding, is faster, and latency issues won't affect search results as often. You may need `search` instead of `q` if:
+      - You need to filter on anything other than `firstName`, `lastName`, or `email`.
+      - You don't mind if search results don't reflect changes made in the last second or two.
+      - You're creating a name picker.
+      - You don't need pagination.
 
-**More about `after`**
+#### More about Request Parameter q
 
-The `after` cursor should be treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination).
+Search with `q` currently performs a startsWith match but this is an implementation detail and may change without notice. You don't need to specify `firstName`, `lastName`, or `email`. 
 
-**More about `filter`**
+#### More about Request Parameter limit
+
+The maximum value for `limit` is `200`, except for a few orgs that haven't yet been updated with the current limit. 
+
+  * We recommend everyone set the limit to 200 or less, as we expect to bring all orgs to the same default value
+in the future.
+  * We may change the default to a different value. Don't write code that depends on a default value of 200.
+  * An HTTP 500 status code usually indicates that you have exceeded the request timeout.  Retry your request with a smaller limit and paginate the results. For more information, see [Pagination](/docs/getting_started/design_principles.html#pagination)).
+
+#### More about Request Parameter after
+
+Treat the `after` cursor as an opaque value and obtain it through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination).
+
+#### More about Request Parameter filter
 
 The following expressions are supported for users with the `filter` query parameter:
 
@@ -1081,11 +1099,11 @@ Filter                                         | Description
 
 See [Filtering](/docs/api/getting_started/design_principles.html#filtering) for more information about the expressions used in filtering.
 
-##### URL Encoding Requirement
+#### URL Encoding Requirement
 
 All filters must be [URL encoded](http://en.wikipedia.org/wiki/Percent-encoding) where `filter=lastUpdated gt "2013-06-01T00:00:00.000Z"` is encoded as `filter=lastUpdated%20gt%20%222013-06-01T00:00:00.000Z%22`.
 
-##### Filter Examples
+#### Filter Examples
 
 Users with status of `LOCKED_OUT`
 
@@ -1109,14 +1127,11 @@ Users updated after 06/01/2013 but with a status of `LOCKED_OUT` or `RECOVERY`
 
 Array of [User](#user-model)
 
-#### List Users with Defaults
+#### List All Users
 {:.api .api-operation}
 
 Enumerates all users that do not have a status of `DEPROVISIONED`.
 
-The default user limit is very large. Because we expect to change this in a future release, we recommend that you set `limit=200`.
-
-> An HTTP 500 status code usually indicates that you have exceeded the request timeout.  Retry your request with a smaller `limit` and paginate the results. For more information, see [Pagination](/docs/getting_started/design_principles.html#pagination)).
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1221,10 +1236,15 @@ Link: <https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limi
 ]
 ~~~
 
-#### List Users with Search
+#### Find Users
 {:.api .api-operation}
 
-Searches for user by `firstName`, `lastName`, or `email` value.  This operation is ideal for implementing a people picker. This operation does not support pagination.
+Use the `q` parameter to find users. The value of `q` is checked against the values in `firstName`, `lastName`, and `email`.  
+
+This operation:
+ 
+ * Is ideal for implementing a people picker. 
+ * Doesn't support pagination.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1296,21 +1316,21 @@ curl -v -X GET \
 ]
 ~~~
 
-#### List Users with Advanced Search
+#### List Users, Filter on Additional Properties
 {:.api .api-operation}
 
 > The advanced search feature is [Beta](/docs/api/resources/users.html#list-users-with-advanced-search).
 
-Searches for user by the fields specified in the search parameter (case insensitive). Unlike search, advanced search
+Searches for user by the properties specified in the search parameter (case insensitive). Unlike search, advanced search
 supports pagination.
 
-Filter on a variety of attributes with `search`:
+Filter on a variety of properties with `search`:
 
-- Any user profile attribute
-- Any custom defined profile attribute
-- The top-level attributes `id`, `status`, `created`, `activated`, `statusChanged` and `lastUpdated` 
+- Any user profile property
+- Any custom-defined profile property
+- The top-level properties `id`, `status`, `created`, `activated`, `statusChanged` and `lastUpdated` 
 
-##### Latency and Advanced Search Results
+##### Latency and Filtering on Addition Properties
 
 The most up-to-date data is sometimes delayed for up to a few seconds, so a search may miss a recent change.
 
@@ -1319,7 +1339,7 @@ The most up-to-date data is sometimes delayed for up to a few seconds, so a sear
 You must use [URL encoding](http://en.wikipedia.org/wiki/Percent-encoding) for all advanced searches. 
 For example, `search=profile.department eq "Engineering"` is encoded as `search=profile.department%20eq%20%22Engineering%22`.
 
-##### Advanced Search Examples
+##### Examples Using Additional Properties
 
 Find users with an occupation of `Leader`.
 
@@ -1329,13 +1349,6 @@ Find users in the department of `Engineering` who were created before `01/01/201
 
     search=profile.department eq "Engineering" and (created lt "2014-01-01T00:00:00.000Z" or status eq "ACTIVE")
 
-##### `q` or `search`?
-
-Use the simple `q` for searches if you can, because it requires less coding, is faster, and latency issues
-won't affect search results as often. You may need `search` if:
-
-- You need to filter on anything other than `firstName`, `lastName`, or `email`.
-- You don't mind if search results don't reflect changes made in the last second or two.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1411,7 +1424,7 @@ curl -v -X GET \
 
 Array of [User](#user-model)
 
-#### List Users Updated after Timestamp
+#### List Users, Filter on Timestamp
 {:.api .api-operation}
 
 Enumerates all users that have been updated since a specific timestamp.  Use this operation when implementing a background synchronization job and you want to poll for changes.
@@ -1486,7 +1499,7 @@ curl -v -X GET \
 ]
 ~~~
 
-#### List Users with Status
+#### List Users, Filter on Status
 {:.api .api-operation}
 
 Enumerates all users that have a specific status.
@@ -1572,7 +1585,7 @@ curl -v -X GET \
 
 Update a user's profile and/or credentials using strict-update semantics.
 
-> All profile properties must be specified when updating a user's profile with a `PUT` method. Any attribute not specified
+> All profile properties must be specified when updating a user's profile with a `PUT` method. Any property not specified
 in the request will be deleted. **Don't use `PUT` method for partial updates.**
 
 ##### Request Parameters
@@ -1673,7 +1686,7 @@ curl -v -X PUT \
 
 Update a user's profile or credentials with partial update semantics.
 
-> Use the `POST` method for partial updates, because unspecified attributes aren't changed with `POST`. 
+> Use the `POST` method for partial updates, because unspecified properties aren't changed with `POST`. 
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
