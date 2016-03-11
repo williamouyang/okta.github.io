@@ -34,7 +34,7 @@
 			"description": "",
 			"collectionId": "0a7f822e-86a7-a992-edc7-c4287a9a0023",
 			"responses": [],
-			"rawModeData": "{\n    \"client_name\": \"Example OAuth2 Client\",\n    \"client_uri\": \"https://myapp.example.com\",\n    \"logo_uri\": \"https://static.example.com/logo.png\",\n    \"redirect_uris\": [\n        \"https://example.com/oauth/callback\"\n    ],\n    \"response_types\": [\n        \"code\",\n        \"id_token\"\n    ],\n    \"grant_types\": [\n        \"authorization_code\",\n        \"refresh_token\"\n    ],\n    \"token_endpoint_auth_method\": \"client_secret_post\"\n}"
+			"rawModeData": "{\n    \"client_name\": \"Example OAuth2 Client\",\n    \"client_uri\": \"https://myapp.example.com\",\n    \"logo_uri\": \"https://static.example.com/logo.png\",\n    \"redirect_uris\": [\n        \"https://example.com/oauth/callback\"\n    ],\n    \"response_types\": [\n        \"code\",\n        \"id_token\"\n    ],\n    \"grant_types\": [\n        \"authorization_code\",\n        \"implicit\",\n        \"refresh_token\"\n    ],\n    \"token_endpoint_auth_method\": \"client_secret_post\",\n    \"application_type\": \"web\"\n}"
 		},
 		{
 			"id": "497032eb-372e-57c6-ea42-cc8165e03e83",
@@ -133,7 +133,7 @@
 			"description": "",
 			"collectionId": "0a7f822e-86a7-a992-edc7-c4287a9a0023",
 			"responses": [],
-			"rawModeData": "{\n    \"client_name\": \"Example OAuth2 Client\",\n    \"client_uri\": \"https://myapp.example.com\",\n    \"logo_uri\": \"https://myapp.example.com/logo.png\",\n    \"redirect_uris\": [\n        \"https://example.com/oauth/callback\"\n    ],\n    \"response_types\": [\n        \"code\",\n        \"id_token\"\n    ],\n    \"grant_types\": [\n        \"authorization_code\",\n        \"refresh_token\"\n    ],\n    \"token_endpoint_auth_method\": \"client_secret_basic\"\n}"
+			"rawModeData": "{\n    \"client_name\": \"Example OAuth2 Client\",\n    \"client_uri\": \"https://myapp.example.com\",\n    \"logo_uri\": \"https://myapp.example.com/logo.png\",\n    \"redirect_uris\": [\n        \"https://example.com/oauth/callback\"\n    ],\n    \"response_types\": [\n        \"code\",\n        \"id_token\"\n    ],\n    \"grant_types\": [\n        \"authorization_code\",\n        \"implicit\",\n        \"refresh_token\"\n    ],\n    \"token_endpoint_auth_method\": \"client_secret_basic\",\n    \"application_type\": \"web\"\n}"
 		}
 	]
 }
