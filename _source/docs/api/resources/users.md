@@ -329,7 +329,7 @@ credentials | Credentials for user                                              
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-All responses return the created [User](#user-model).  Activation of a user is an asynchronous operation.  The system will perform group reconcilation during activation and assign the user to all applications via direct or inderect relationships (group memberships).  The user will have the `transitioningToStatus` property with a value of `ACTIVE` during activation to indicate that the user hasn't completed the asynchronous operation.  The user will have a `status` of `ACTIVE` when the activation process is complete.
+All responses return the created [User](#user-model).  Activation of a user is an asynchronous operation.  The system performs group reconciliation during activation and assign the user to all applications via direct or indirect relationships (group memberships).  The user will have the `transitioningToStatus` property with a value of `ACTIVE` during activation to indicate that the user hasn't completed the asynchronous operation.  The user will have a `status` of `ACTIVE` when the activation process is complete.
 
 > The user will be emailed a one-time activation token if activated without a password
 
@@ -1026,39 +1026,27 @@ curl -v -X GET \
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users</span>
 
-Enumerates users in your organization with pagination in most cases.  A subset of users can be returned that match a supported filter expression or query.
-
-- [List All Users](#list-all-users)
-- [Find Users](#find-users)
-- [List Users, Filter on Additional Properties](#list-users-filter-on-additional-properties)
-- [List Users, Filter on Timestamp](#list-users-filter-on-timestamp)
-- [List Users, Filter on Status](#list-users-filter-on-status)
+Enumerates users in your organization with pagination in most cases.  A subset of users can be returned that match a supported filter expression or search criteria.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
+The first three parameters correspond to different types of lists:
+
+- [List All Users](#list-all-users) (no parameters)
+- [Find Users](#find-users) (`q`)
+- [List Users with a Filter](#list-users-with-a-filter) (`filter`)
+- [List Users with Search](#list-users-with-search) (`search`)
+
+Combine `'limit` and `after` with other relevant parameters.
+
 Parameter | Description                                                                               | Param Type | DataType | Required | Default
 --------- | ----------------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------
 q         | Filter on `firstName`, `lastName`, and `email` properties      | Query      | String   | FALSE    |
+filter    | Specifies the [Filter expression](/docs/api/getting_started/design_principles.html#filtering) | Query      | String   | FALSE    |
 search    | [Filter on](/docs/api/getting_started/design_principles.html#filtering) other properties | Query      | String   | FALSE    |
 limit     | Specifies the number of results returned                                                           | Query      | Number   | FALSE    | 200
-filter    | Specifies the [Filter expression](/docs/api/getting_started/design_principles.html#filtering) | Query      | String   | FALSE    |
 after     | Specifies the pagination cursor for the next page of users                                | Query      | String   | FALSE    |
-
-#### Choosing a List Type
-
-   * If you need a list and don't need to filter at all, don't use either `q` or `search`.
-   * If you need to filter, use `q` if you can, because it requires less coding, is faster, and latency issues won't affect search results as often. You may need `search` instead of `q` if:
-      - You need to filter on anything other than `firstName`, `lastName`, or `email`.
-      - You don't mind if search results don't reflect changes made in the last second or two.
-      - You're creating a name picker.
-      - You don't need pagination.
-
-#### More about Request Parameter q
-
-Search with `q` currently performs a startsWith match but this is an implementation detail and may change without notice. You don't need to specify `firstName`, `lastName`, or `email`. 
-
-#### More about Request Parameter limit
 
 The maximum value for `limit` is `200`, except for a few orgs that haven't yet been updated with the current limit. 
 
@@ -1067,60 +1055,7 @@ in the future.
   * We may change the default to a different value. Don't write code that depends on a default value of 200.
   * An HTTP 500 status code usually indicates that you have exceeded the request timeout.  Retry your request with a smaller limit and paginate the results. For more information, see [Pagination](/docs/getting_started/design_principles.html#pagination)).
 
-#### More about Request Parameter after
-
 Treat the `after` cursor as an opaque value and obtain it through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination).
-
-#### More about Request Parameter filter
-
-The following expressions are supported for users with the `filter` query parameter:
-
-Filter                                         | Description
----------------------------------------------- | ------------------------------------------------
-`status eq "STAGED"`                           | Users that have a `status` of `STAGED`
-`status eq "PROVISIONED"`                      | Users that have a `status` of `PROVISIONED`
-`status eq "ACTIVE"`                           | Users that have a `status` of `ACTIVE`
-`status eq "RECOVERY"`                         | Users that have a `status` of `RECOVERY`
-`status eq "PASSWORD_EXPIRED"`                 | Users that have a `status` of `PASSWORD_EXPIRED`
-`status eq "LOCKED_OUT"`                       | Users that have a `status` of `LOCKED_OUT`
-`status eq "DEPROVISIONED"`                    | Users that have a `status` of `DEPROVISIONED`
-`lastUpdated lt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Users last updated before a specific timestamp
-`lastUpdated eq "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Users last updated at a specific timestamp
-`lastUpdated gt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Users last updated after a specific timestamp
-`id eq "00u1ero7vZFVEIYLWPBN"`                 | Users with a specified `id`
-`profile.login eq "login@example.com"`         | Users with a specified `login`
-`profile.department eq "Engineering"`          | Users that have a `department` of `Engineering`
-`profile.occupation eq "Leader"`               | Users that have an `occupation` of `Leader`
-`profile.email eq "email@example.com"`         | Users with a specified `email`*
-`profile.firstName eq "John"`                  | Users with a specified `firstName`*
-`profile.lastName eq "Smith" `                 | Users with a specified `lastName`*
-
-\* If filtering by `email`, `lastName`, or `firstName`, Okta recommends the [User query API](#list-users-with-search). These profile filters are here for your convenience.
-
-See [Filtering](/docs/api/getting_started/design_principles.html#filtering) for more information about the expressions used in filtering.
-
-#### URL Encoding Requirement
-
-All filters must be [URL encoded](http://en.wikipedia.org/wiki/Percent-encoding) where `filter=lastUpdated gt "2013-06-01T00:00:00.000Z"` is encoded as `filter=lastUpdated%20gt%20%222013-06-01T00:00:00.000Z%22`.
-
-#### Filter Examples
-
-Users with status of `LOCKED_OUT`
-
-    filter=status eq "LOCKED_OUT"
-
-Users updated after 06/01/2013 but before 01/01/2014
-
-    filter=lastUpdated gt "2013-06-01T00:00:00.000Z" and lastUpdated lt "2014-01-01T00:00:00.000Z"
-
-Users updated after 06/01/2013 but before 01/01/2014 with a status of `ACTIVE`
-
-    filter=lastUpdated gt "2013-06-01T00:00:00.000Z" and lastUpdated lt "2014-01-01T00:00:00.000Z" and status eq "ACTIVE"
-
-Users updated after 06/01/2013 but with a status of `LOCKED_OUT` or `RECOVERY`
-
-    filter=lastUpdated gt "2013-06-01T00:00:00.000Z" and (status eq "LOCKED_OUT" or status eq "RECOVERY")
-
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -1245,6 +1180,8 @@ This operation:
  
  * Is ideal for implementing a people picker. 
  * Doesn't support pagination.
+ * Queries live data.
+ * Performs a startsWith match but this is an implementation detail and may change without notice. You don't need to specify `firstName`, `lastName`, or `email`.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1316,41 +1253,63 @@ curl -v -X GET \
 ]
 ~~~
 
-#### List Users, Filter on Additional Properties
+
+#### List Users with a Filter
 {:.api .api-operation}
 
-> The advanced search feature is [Beta](/docs/api/resources/users.html#list-users-with-advanced-search).
+Lists all users that match the filter criteria.
 
-Searches for user by the properties specified in the search parameter (case insensitive). Unlike search, advanced search
-supports pagination.
+This operation:
 
-Filter on a variety of properties with `search`:
+* Filters against live data. For example, if you create a user or change an attribute and then issue a filter request,
+the changes are reflected in your results.
+* Requires [URL encoding](http://en.wikipedia.org/wiki/Percent-encoding) where `filter=lastUpdated gt "2013-06-01T00:00:00.000Z"` is encoded as `filter=lastUpdated%20gt%20%222013-06-01T00:00:00.000Z%22`.
+* Supports a limited number of expressions:
 
-- Any user profile property
-- Any custom-defined profile property
-- The top-level properties `id`, `status`, `created`, `activated`, `statusChanged` and `lastUpdated` 
+Filter                                         | Description
+---------------------------------------------- | ------------------------------------------------
+`status eq "STAGED"`                           | Users that have a `status` of `STAGED`
+`status eq "PROVISIONED"`                      | Users that have a `status` of `PROVISIONED`
+`status eq "ACTIVE"`                           | Users that have a `status` of `ACTIVE`
+`status eq "RECOVERY"`                         | Users that have a `status` of `RECOVERY`
+`status eq "PASSWORD_EXPIRED"`                 | Users that have a `status` of `PASSWORD_EXPIRED`
+`status eq "LOCKED_OUT"`                       | Users that have a `status` of `LOCKED_OUT`
+`status eq "DEPROVISIONED"`                    | Users that have a `status` of `DEPROVISIONED`
+`lastUpdated lt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Users last updated before a specific timestamp
+`lastUpdated eq "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Users last updated at a specific timestamp
+`lastUpdated gt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Users last updated after a specific timestamp
+`id eq "00u1ero7vZFVEIYLWPBN"`                 | Users with a specified `id`
+`profile.login eq "login@example.com"`         | Users with a specified `login`
+`profile.department eq "Engineering"`          | Users that have a `department` of `Engineering`
+`profile.occupation eq "Leader"`               | Users that have an `occupation` of `Leader`
+`profile.email eq "email@example.com"`         | Users with a specified `email`*
+`profile.firstName eq "John"`                  | Users with a specified `firstName`*
+`profile.lastName eq "Smith" `                 | Users with a specified `lastName`*
 
-##### Latency and Filtering on Addition Properties
+\* If filtering by `email`, `lastName`, or `firstName`, Okta recommends the [User query API](#list-users-with-search). These profile filters are here for your convenience.
 
-The most up-to-date data is sometimes delayed for up to a few seconds, so a search may miss a recent change.
+See [Filtering](/docs/api/getting_started/design_principles.html#filtering) for more information about the expressions used in filtering.
 
-##### URL Encoding Requirement
+##### Filter Examples
 
-You must use [URL encoding](http://en.wikipedia.org/wiki/Percent-encoding) for all advanced searches. 
-For example, `search=profile.department eq "Engineering"` is encoded as `search=profile.department%20eq%20%22Engineering%22`.
+List users with status of `LOCKED_OUT`
 
-##### Examples Using Additional Properties
+    filter=status eq "LOCKED_OUT"
 
-Find users with an occupation of `Leader`.
+List users updated after 06/01/2013 but before 01/01/2014
 
-    search=profile.occupation eq "Leader"
+    filter=lastUpdated gt "2013-06-01T00:00:00.000Z" and lastUpdated lt "2014-01-01T00:00:00.000Z"
 
-Find users in the department of `Engineering` who were created before `01/01/2014` or have a status of `ACTIVE`.
+List users updated after 06/01/2013 but before 01/01/2014 with a status of `ACTIVE`
 
-    search=profile.department eq "Engineering" and (created lt "2014-01-01T00:00:00.000Z" or status eq "ACTIVE")
+    filter=lastUpdated gt "2013-06-01T00:00:00.000Z" and lastUpdated lt "2014-01-01T00:00:00.000Z" and status eq "ACTIVE"
+
+List users updated after 06/01/2013 but with a status of `LOCKED_OUT` or `RECOVERY`
+
+    filter=lastUpdated gt "2013-06-01T00:00:00.000Z" and (status eq "LOCKED_OUT" or status eq "RECOVERY")
 
 
-##### Request Example
+##### Request Example: Status
 {:.api .api-request .api-request-example}
 
 ~~~sh
@@ -1358,8 +1317,10 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users?search=profile.mobilePhone+sw+\"555\"+and+status+eq+\"ACTIVE\""
+"https://${org}.okta.com/api/v1/users?filter=status+eq+\"ACTIVE\"+or+status+eq+\"RECOVERY\""
 ~~~
+
+> Users with a status of `DEPROVISIONED` are not enumerated by default and must be explicitly requested with a status filter.
 
 ##### Response Example
 {:.api .api-response .api-response-example}
@@ -1376,16 +1337,17 @@ curl -v -X GET \
     "lastUpdated": "2013-07-02T21:36:25.344Z",
     "passwordChanged": "2013-07-02T21:36:25.344Z",
     "profile": {
-      "firstName": "Isaac",
-      "lastName": "Brock",
-      "email": "isaac.brock@example.com",
-      "login": "isaac.brock@example.com",
-      "mobilePhone": "555-415-1337"
+      "firstName": "Eric",
+      "lastName": "Judy",
+      "email": "eric.judy@example.com",
+      "secondEmail": "eric@example.org",
+      "login": "eric.judy@example.com",
+      "mobilePhone": "555-415-2011"
     },
     "credentials": {
       "password": {},
       "recovery_question": {
-        "question": "Who's a major player in the cowboy scene?"
+        "question": "The stars are projectors?"
       },
       "provider": {
         "type": "OKTA",
@@ -1412,25 +1374,17 @@ curl -v -X GET \
         "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
       },
       "changePassword": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+        "href": "https://your-domain.okta.com/api/v1/users/000ub0oNGTSWTBKOLGLNR/credentials/change_password"
       }
     }
   }
 ]
 ~~~
 
-##### Response Parameters
-{:.api .api-response .api-response-params}
-
-Array of [User](#user-model)
-
-#### List Users, Filter on Timestamp
-{:.api .api-operation}
+##### Request Example: Timestamp
+{:.api .api-request .api-request-example}
 
 Enumerates all users that have been updated since a specific timestamp.  Use this operation when implementing a background synchronization job and you want to poll for changes.
-
-##### Request Example
-{:.api .api-request .api-request-example}
 
 ~~~sh
 curl -v -X GET \
@@ -1499,12 +1453,34 @@ curl -v -X GET \
 ]
 ~~~
 
-#### List Users, Filter on Status
+#### List Users with Search
 {:.api .api-operation}
 
-Enumerates all users that have a specific status.
+> Listing users with search is Beta. Changes may occur that break the current implementation. Don't use this feature in production.
 
-> Users with a status of `DEPROVISIONED` are not enumerated by default and must be explicitly requested with a status filter.
+Searches for user by the properties specified in the search parameter (case insensitive). 
+
+This operation:
+
+* Supports pagination.
+* Requires [URL encoding](http://en.wikipedia.org/wiki/Percent-encoding).
+For example, `search=profile.department eq "Engineering"` is encoded as `search=profile.department%20eq%20%22Engineering%22`.
+* Queries replicated data, so results don't always show the latest changes. 
+* Searches many properties:
+   - Any user profile property
+   - Any custom-defined profile property
+   - The top-level properties `id`, `status`, `created`, `activated`, `statusChanged` and `lastUpdated` 
+
+##### Search Examples
+
+List users with an occupation of `Leader`.
+
+    search=profile.occupation eq "Leader"
+
+List users in the department of `Engineering` who were created before `01/01/2014` or have a status of `ACTIVE`.
+
+    search=profile.department eq "Engineering" and (created lt "2014-01-01T00:00:00.000Z" or status eq "ACTIVE")
+
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1514,7 +1490,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users?filter=status+eq+\"ACTIVE\"+or+status+eq+\"RECOVERY\""
+"https://${org}.okta.com/api/v1/users?search=profile.mobilePhone+sw+\"555\"+and+status+eq+\"ACTIVE\""
 ~~~
 
 ##### Response Example
@@ -1532,17 +1508,16 @@ curl -v -X GET \
     "lastUpdated": "2013-07-02T21:36:25.344Z",
     "passwordChanged": "2013-07-02T21:36:25.344Z",
     "profile": {
-      "firstName": "Eric",
-      "lastName": "Judy",
-      "email": "eric.judy@example.com",
-      "secondEmail": "eric@example.org",
-      "login": "eric.judy@example.com",
-      "mobilePhone": "555-415-2011"
+      "firstName": "Isaac",
+      "lastName": "Brock",
+      "email": "isaac.brock@example.com",
+      "login": "isaac.brock@example.com",
+      "mobilePhone": "555-415-1337"
     },
     "credentials": {
       "password": {},
       "recovery_question": {
-        "question": "The stars are projectors?"
+        "question": "Who's a major player in the cowboy scene?"
       },
       "provider": {
         "type": "OKTA",
@@ -1569,7 +1544,7 @@ curl -v -X GET \
         "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
       },
       "changePassword": {
-        "href": "https://your-domain.okta.com/api/v1/users/000ub0oNGTSWTBKOLGLNR/credentials/change_password"
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
       }
     }
   }
