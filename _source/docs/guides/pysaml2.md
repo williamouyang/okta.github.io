@@ -65,7 +65,7 @@ guide. As noted in the instructions, there are two steps to change:
 
 Now that you have configured the {{ page.chiclet_name }} "chiclet" in your Okta organization, you
 are ready to configure {{ page.saml_library }} to work with your Okta organization. In this
-section wuse the "Identity Provider metadata" link from the
+section we use the "Identity Provider metadata" link from the
 section above to configure {{ page.saml_library }}. After completing
 the following steps, you will have a working example of connecting Okta to a sample {{ page.programming_language }} application using {{ page.saml_library }}.
 
