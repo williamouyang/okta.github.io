@@ -3361,7 +3361,7 @@ Passing an <code class="highlighter-rouge">id</code> that is not in the <code cl
 
 <p>This operation will transition the user to the status of <code class="highlighter-rouge">RECOVERY</code> and the user will not be able to login or initiate a forgot password flow until they complete the reset flow.</p>
 
-<p><strong>Note:</strong> You can also use this API to convert a user with the Okta Credential Provider to a use a Federated Provider. After this conversion, the user cannot directly sign in with password. The second example demonstrate this usage.</p>
+<p><strong>Note:</strong> You can also use this API to convert a user with the Okta Credential Provider to a use a Federated Provider. After this conversion, the user cannot directly sign in with password. The second example demonstrates this usage.</p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-12">Request Parameters</h5>
 
@@ -3439,9 +3439,7 @@ parameter must be false or omitted for this type of conversion.</p>
 
 <h5 class="api api-response api-response-example" id="response-example-25">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"resetPasswordUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"</span><span class="w">
-</span><span class="p">}</span><span class="w">
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{}</span><span class="w">
 </span></code></pre>
 </div>
 

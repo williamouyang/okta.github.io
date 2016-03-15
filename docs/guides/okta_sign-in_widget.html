@@ -371,7 +371,7 @@ will have a lot more in-depth configuration.</p>
 
   <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://example.okta.com/js/sdk/okta-sign-in-1.0.2.min.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
   <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://example.okta.com/js/sdk/okta-sign-in-1.0.2.min.css"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://example.okta.com/css/login/okta-theme.css"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://example.okta.com/js/sdk/okta-theme-1.0.2.css"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
   <span class="c">&lt;!-- Render the login widget here --&gt;</span>
@@ -560,9 +560,9 @@ is up to you. Customization of the widget itself will be done on
 the <code class="highlighter-rouge">#okta-login-container</code> selector and its child elements.</p>
 
 <p>A full list of the CSS selectors that you can use to style the
-Okta Sign-In Widget are in the <a href="https://example.okta.com/css/login/okta-theme.css">okta-theme.css</a> file. We strongly
+Okta Sign-In Widget are in the <a href="https://example.okta.com/js/sdk/okta-theme-1.0.2.css">okta-theme.css</a> file. We strongly
 urge you to style your widget using only the selectors that are
-present in the <a href="https://example.okta.com/css/login/okta-theme.css">okta-theme.css</a> file, other elements in the widget
+present in the <a href="https://example.okta.com/js/sdk/okta-theme-1.0.2.css">okta-theme.css</a> file, other elements in the widget
 will be subject to change and will cause your styling to break in
 future versions of the Okta Sign-In Widget.</p>
 
@@ -634,7 +634,6 @@ are below.</p>
   <span class="na">logo</span><span class="p">:</span> <span class="s1">'https://upload.wikimedia.org/wikipedia/en/thumb/7/7e/Oldacmelogo.png/200px-Oldacmelogo.png'</span><span class="p">,</span>
 
   <span class="na">features</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">securityImage</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="na">rememberMe</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="na">smsRecovery</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="na">selfServiceUnlock</span><span class="p">:</span> <span class="kc">true</span>
@@ -687,11 +686,11 @@ are below.</p>
     <p>The options in the <code class="highlighter-rouge">features</code> object enable or disable widget
 features via a Boolean <code class="highlighter-rouge">true</code> or <code class="highlighter-rouge">false</code>. Features are enabled
 by defining them with <code class="highlighter-rouge">true</code>, and disabled with <code class="highlighter-rouge">false</code>. For
-example, to enable display of a users security image, you would
+example, to disable display of the “Remember Me” prompt, you would
 update your <code class="highlighter-rouge">features</code> object to look like below:</p>
 
     <div class="highlighter-rouge"><pre class="highlight"><code>features: {
-    securityImage: true
+    rememberMe: false
 }
 </code></pre>
     </div>
@@ -699,14 +698,6 @@ update your <code class="highlighter-rouge">features</code> object to look like 
     <p>Here is the full list of features that you can configure:</p>
 
     <ul>
-      <li>
-        <p><code class="highlighter-rouge">securityImage</code></p>
-
-        <p>When set to <strong>true</strong>, this will display the user’s security image in the
-login widget.</p>
-
-        <p>Defaults to <strong>false</strong></p>
-      </li>
       <li>
         <p><code class="highlighter-rouge">rememberMe</code></p>
 
