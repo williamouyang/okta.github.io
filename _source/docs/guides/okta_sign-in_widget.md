@@ -430,7 +430,6 @@ var oktaSignIn = new OktaSignIn({
   logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/7/7e/Oldacmelogo.png/200px-Oldacmelogo.png',
 
   features: {
-    securityImage: false,
     rememberMe: true,
     smsRecovery: true,
     selfServiceUnlock: true
@@ -474,21 +473,15 @@ var oktaSignIn = new OktaSignIn({
     The options in the `features` object enable or disable widget
     features via a Boolean `true` or `false`. Features are enabled
     by defining them with `true`, and disabled with `false`. For
-    example, to enable display of a users security image, you would
+    example, to disable display of the "Remember Me" prompt, you would
     update your `features` object to look like below:
     
         features: {
-            securityImage: true
+            rememberMe: false
         }
     
     Here is the full list of features that you can configure:
     
-    -   `securityImage`
-        
-        When set to **true**, this will display the user's security image in the
-        login widget.
-        
-        Defaults to **false**
     -   `rememberMe`
         
         When set to **true**, this will display a checkbox allowing a
