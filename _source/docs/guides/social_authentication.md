@@ -6,7 +6,7 @@ excerpt: Setting up an Okta Social Authentication provider
 
 # Overview
 
-Okta Social Authentication allows Okta to integrate with a Social Identity Provider such as Facebook, Google, LinkedIn and Microsoft. These integrations support the following features:
+Okta Social Authentication allows Okta to integrate with a Social Identity Provider such as Facebook, Google, LinkedIn, and Microsoft. These integrations support the following features:
 
 *User Registration leveraging the user profile from a Social Provider*
 
