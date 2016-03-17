@@ -57,17 +57,20 @@ While many ISVs use proprietary APIs, Okta recommends that you implement your AP
 
 ### Provisioning: Building an Integration with Okta
 
-With the new Cloud Provisioning Connector (CPC) Program, you can now build and support a provisioning integration between your application and Okta, and make it easily available to customers via the Okta Application Network. At a high level, the CPC program let’s you choose between two technical approaches for building the integration, each with it’s own advantages:
+If you already have a "compliant" SCIM server, you are 90% of the way to supporting provisioning with Okta! The remaining steps are: configuration, testing, and joint customer validation. If you don’t yet support SCIM, don’t worry, the [Okta SCIM Beta Guide](https://github.com/joelfranusic-okta/okta-scim-beta#getting-into-the-okta-scim-beta) is designed to get you on the right path.
 
-| | **Java Connector** | **SCIM**
--------- | ----------- | --------
-**What is it?**  | The Java SDK lets you write Java code that takes Okta provisioning signals and translates them into your service’s User API. This connector code is written and supported by the ISV (you) and hosted in the Okta service to complete the integration. Typical development effort is ~1-3 man-weeks. | Okta's SCIM 1.1/2.0 Client will interface directly with compatible SCIM 1.1/2.0 Servers. The integration is completed with a few configurations, such as the endpoint address and authentication method. No coding required.
-**Who is it designed for?** | ISVs with an existing proprietary API for user operations. You want maximum flexibility and do not plan on supporting the SCIM standard. | ISVs that: a) currently support the SCIM standard; b) plan to support the SCIM standard; c) don’t already have proprietary APIs for user operations.
-**How do I get started?** |Email <developers@okta.com> and express interest in developing using Java SDK. We’ll share the SDK and additional program details. **Note: We are only accepting a limited number of ISV partners into the Java SDK program to start.** Please try to share some details on customer demand and urgency (e.g. # of joint customers that would benefit, deployment deadlines) in your email. | Okta support for SCIM is coming in March 2016. If you are interested in being part of the SCIM Beta reply to <developers@okta.com> and we’ll add you to the list. We’ll reach back out with additional SCIM documentation and SCIM Beta details by March 2016.
+Below are some high-level details on the process and timeline for building a SCIM-based provisioning integration with Okta:
 
-For more details, see the [Cloud Provisioning Connector Program Overview](https://www.okta.com/sites/default/files/cloud_provisioning_connector_program_overview_v1.pdf).
+| | **Explore & Apply** | **Develop & Validate** | **Review & Test** | **Customer Testing** | **Promote** |
+| :--- |:--------: | :--------: | :--------: | :--------: | :--------: |
+|**timeline**| | Week 1 - 2 | Week 3 - 4 | Week 5 - 7 | Week 8
+|**actions**| Explore [SCIM standard](http://www.simplecloud.info/) & [Okta’s SCIM requirements] (https://github.com/joelfranusic-okta/okta-scim-beta#getting-into-the-okta-scim-beta), [Apply for SCIM beta](https://docs.google.com/forms/d/1RKvwFaY8hoMvWn2HEnIsXYY2uaDDZZtF8-p6h2a6e4E/viewform) | Work with Okta developer enablement team to confirm approach | Okta reviews functionality, security, performance,  documentation, and support plan. Partner testing in Okta developer org | Partner identifies small set of customers to test integration with | Once 2 live & happy customers, publish to public Okta Application Network. Okta Application Network Gold partner & benefits|
 
-Interested in provisioning with Okta but have general questions about the approaches above? Email us at <developers@okta.com>
+_*The timeline outlined is our best estimate. The process may take more or less time than described here._
+
+As a next step, review [Okta’s SCIM Beta Guide](https://github.com/joelfranusic-okta/okta-scim-beta#welcome-to-the-okta-scim-beta) for technical documentation and details on how to apply for the beta.
+
+Have questions? Need help? Email <developers@okta.com>
 
 
 ##Okta Application Network FAQs
