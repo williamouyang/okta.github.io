@@ -1026,7 +1026,7 @@ curl -v -X GET \
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users</span>
 
-Enumerates users in your organization with pagination in most cases.  A subset of users can be returned that match a supported filter expression or search criteria.
+Lists users in your organization with pagination in most cases.  A subset of users can be returned that match a supported filter expression or search criteria.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -1038,24 +1038,21 @@ The first three parameters correspond to different types of lists:
 - [List Users with a Filter](#list-users-with-a-filter) (`filter`)
 - [List Users with Search](#list-users-with-search) (`search`)
 
-Combine `'limit` and `after` with other relevant parameters.
-
 Parameter | Description                                                                               | Param Type | DataType | Required | Default
 --------- | ----------------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------
-q         | Filter on `firstName`, `lastName`, and `email` properties      | Query      | String   | FALSE    |
-filter    | Specifies the [Filter expression](/docs/api/getting_started/design_principles.html#filtering) | Query      | String   | FALSE    |
-search    | [Filter on](/docs/api/getting_started/design_principles.html#filtering) other properties | Query      | String   | FALSE    |
+q         | Finds a user that matches `firstName`, `lastName`, and `email` properties      | Query      | String   | FALSE    |
+filter    | [Filters](/docs/api/getting_started/design_principles.html#filtering) users with a supported expression for a subset of properties | Query      | String   | FALSE    |
+search    | Searches for users witha  supported expression for most properties  | Query      | String   | FALSE    |
 limit     | Specifies the number of results returned                                                           | Query      | Number   | FALSE    | 200
 after     | Specifies the pagination cursor for the next page of users                                | Query      | String   | FALSE    |
 
-The maximum value for `limit` is `200`, except for a few orgs that haven't yet been updated with the current limit. 
-
-  * We recommend everyone set the limit to 200 or less, as we expect to bring all orgs to the same default value
-in the future.
-  * We may change the default to a different value. Don't write code that depends on a default value of 200.
+  * If you don't specify a value for `limit` and don't specify a query, only 200 results are returned for most orgs.
+  * If you don't specify any value for `limit` and do specify a query, a maximum of 10 results are returned.
+  * The maximum value for `limit` is 200 for most orgs.
+  *  Don't write code that depends on the default or maximum value, as it may change.
   * An HTTP 500 status code usually indicates that you have exceeded the request timeout.  Retry your request with a smaller limit and paginate the results. For more information, see [Pagination](/docs/getting_started/design_principles.html#pagination)).
-
-Treat the `after` cursor as an opaque value and obtain it through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination).
+  * Use `limit` and `after` with all four query types.
+  * Treat the `after` cursor as an opaque value and obtain it through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination).
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -1065,7 +1062,7 @@ Array of [User](#user-model)
 #### List All Users
 {:.api .api-operation}
 
-Enumerates all users that do not have a status of `DEPROVISIONED`.
+If you don't specify any query, returns a list of all users that do not have a status of `DEPROVISIONED`, up to the maximum (200 for most orgs).
 
 
 ##### Request Example
@@ -1174,13 +1171,14 @@ Link: <https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limi
 #### Find Users
 {:.api .api-operation}
 
-Use the `q` parameter to find users. The value of `q` is checked against the values in `firstName`, `lastName`, and `email`.  
+Use the `q` parameter for a simple lookup of users by name, for example when creating a people picker.
+The value of `q` is matched against `firstName`, `lastName`, or `email`.
+ 
 
 This operation:
  
- * Is ideal for implementing a people picker. 
  * Doesn't support pagination.
- * Queries live data.
+ * Queries the most up-to-date data. For example, if you create a user or change an attribute and then issue a filter request, the change is reflected in the results.
  * Performs a startsWith match but this is an implementation detail and may change without notice. You don't need to specify `firstName`, `lastName`, or `email`.
 
 ##### Request Example
@@ -1261,10 +1259,11 @@ Lists all users that match the filter criteria.
 
 This operation:
 
-* Filters against live data. For example, if you create a user or change an attribute and then issue a filter request,
+* Filters against the most up-to-date data. For example, if you create a user or change an attribute and then issue a filter request,
 the changes are reflected in your results.
 * Requires [URL encoding](http://en.wikipedia.org/wiki/Percent-encoding) where `filter=lastUpdated gt "2013-06-01T00:00:00.000Z"` is encoded as `filter=lastUpdated%20gt%20%222013-06-01T00:00:00.000Z%22`.
-* Supports a limited number of expressions:
+* Supports only a limited number of properties: `status`, `lastUpdated`, `id`, `profile.login`, `profile.email`, `profilefirstName`, and `profile.lastName`.
+* Doesn't include users with a status of `DEPROVISIONED`. You must include a status filter for deprovisioned users.
 
 Filter                                         | Description
 ---------------------------------------------- | ------------------------------------------------
@@ -1280,13 +1279,12 @@ Filter                                         | Description
 `lastUpdated gt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Users last updated after a specific timestamp
 `id eq "00u1ero7vZFVEIYLWPBN"`                 | Users with a specified `id`
 `profile.login eq "login@example.com"`         | Users with a specified `login`
-`profile.department eq "Engineering"`          | Users that have a `department` of `Engineering`
-`profile.occupation eq "Leader"`               | Users that have an `occupation` of `Leader`
 `profile.email eq "email@example.com"`         | Users with a specified `email`*
 `profile.firstName eq "John"`                  | Users with a specified `firstName`*
 `profile.lastName eq "Smith" `                 | Users with a specified `lastName`*
+`profile.lastName sw "Sm" `                    | Users whose `lastName` starts with "Sm"
 
-\* If filtering by `email`, `lastName`, or `firstName`, Okta recommends the [User query API](#list-users-with-search). These profile filters are here for your convenience.
+\* If filtering by `email`, `lastName`, or `firstName`, it may be easier to use `q` instead of `filter`.
 
 See [Filtering](/docs/api/getting_started/design_principles.html#filtering) for more information about the expressions used in filtering.
 
@@ -1320,7 +1318,6 @@ curl -v -X GET \
 "https://${org}.okta.com/api/v1/users?filter=status+eq+\"ACTIVE\"+or+status+eq+\"RECOVERY\""
 ~~~
 
-> Users with a status of `DEPROVISIONED` are not enumerated by default and must be explicitly requested with a status filter.
 
 ##### Response Example
 {:.api .api-response .api-response-example}
@@ -1384,7 +1381,7 @@ curl -v -X GET \
 ##### Request Example: Timestamp
 {:.api .api-request .api-request-example}
 
-Enumerates all users that have been updated since a specific timestamp.  Use this operation when implementing a background synchronization job and you want to poll for changes.
+Lists all users that have been updated since a specific timestamp.  Use this operation when implementing a background synchronization job and you want to poll for changes.
 
 ~~~sh
 curl -v -X GET \
@@ -1456,7 +1453,8 @@ curl -v -X GET \
 #### List Users with Search
 {:.api .api-operation}
 
-> Listing users with search is Beta. Changes may occur that break the current implementation. Don't use this feature in production.
+> Listing users with search is an Early Access feature which you can request from Okta Support.
+It's been tested to the same level as Generally Available (GA) features, so you  can use it in a production environment. 
 
 Searches for user by the properties specified in the search parameter (case insensitive). 
 
@@ -1465,11 +1463,24 @@ This operation:
 * Supports pagination.
 * Requires [URL encoding](http://en.wikipedia.org/wiki/Percent-encoding).
 For example, `search=profile.department eq "Engineering"` is encoded as `search=profile.department%20eq%20%22Engineering%22`.
-* Queries replicated data, so results don't always show the latest changes. 
+* Queries data from a replicated source, so results don't always show the latest changes. 
 * Searches many properties:
-   - Any user profile property
-   - Any custom-defined profile property
+   - Any user profile property, including custom-defined properties
    - The top-level properties `id`, `status`, `created`, `activated`, `statusChanged` and `lastUpdated` 
+  
+   Search Term Example                            | Description
+   ---------------------------------------------- | ------------------------------------------------
+   `status eq "STAGED"`                           | Users that have a `status` of `STAGED`
+   `lastUpdated gt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Users last updated after a specific timestamp
+   `id eq "00u1ero7vZFVEIYLWPBN"`                 | Users with a specified `id`
+   `profile.department eq "Engineering"`          | Users that have a `department` of `Engineering`
+   `profile.occupation eq "Leader"`               | Users that have an `occupation` of `Leader`
+   `profile.lastName sw "Sm" `                    | Users whose `lastName` starts with "Sm"
+
+##### Searching Arrays
+
+You can search properties that are arrays. If any element matches the search term, the entire array (object) is returned. 
+For examples, see [Request Example for Array](#request-example-for-array) and [Response Example for Array](#response-example-for-array).
 
 ##### Search Examples
 
@@ -1479,9 +1490,8 @@ List users with an occupation of `Leader`.
 
 List users in the department of `Engineering` who were created before `01/01/2014` or have a status of `ACTIVE`.
 
-    search=profile.department eq "Engineering" and (created lt "2014-01-01T00:00:00.000Z" or status eq "ACTIVE")
-
-
+    search=profile.department eq "Engineering" and (created lt "2014-01-01T00:00:00.000Z" or status eq "ACTIVE"
+    
 ##### Request Example
 {:.api .api-request .api-request-example}
 
@@ -1548,6 +1558,79 @@ curl -v -X GET \
       }
     }
   }
+]
+~~~
+
+##### Request Example for Array
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users?search=profile.arrayAttr eq "arrayAttrVal1" "
+~~~
+
+##### Response Example for Array
+{:.api .api-response .api-response-example}
+
+~~~json
+[
+    {
+        "id": "00u19uiKQa0xXkbdGLNR",
+        "status": "PROVISIONED",
+        "created": "2016-03-15T04:21:51.000Z",
+        "activated": "2016-03-15T04:21:52.000Z",
+        "statusChanged": "2016-03-15T04:21:52.000Z",
+        "lastLogin": null,
+        "lastUpdated": "2016-03-17T07:08:15.000Z",
+        "passwordChanged": null,
+        "profile": {
+            "login": "u7@test.com",
+            "mobilePhone": null,
+            "email": "u7@test.com",
+            "secondEmail": "",
+            "firstName": "u7",
+            "lastName": "u7",
+            "boolAttr": true,
+            "intAttr": 99,
+            "strArray": [
+                "strArrayVal1",
+                "strArrayVal2"
+            ],
+            "intArray": [
+                5,
+                8
+            ],
+            "numAttr": 8.88,
+            "attr1": "attr1ValUpdated3",
+            "arrayAttr": [
+                "arrayAttrVal1",
+                "arrayAttrVal2Updated"
+            ],
+            "numArray": [
+                1.23,
+                4.56
+            ]
+        },
+        "credentials": {
+            "provider": {
+                "type": "OKTA",
+                "name": "OKTA"
+            }
+        },
+        "_links": {
+            "resetPassword": {
+                "href": "http://your-domain.okta.com/api/v1/users/00u19uiKQa0xXkbdGLNR/lifecycle/reset_password",
+                "method": "POST"
+            },
+            "deactivate": {
+                "href": "http://your-domain.okta.com/api/v1/users/00u19uiKQa0xXkbdGLNR/lifecycle/deactivate",
+                "method": "POST"
+            }
+        }
+    }
 ]
 ~~~
 
