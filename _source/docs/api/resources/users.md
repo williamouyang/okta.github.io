@@ -2234,7 +2234,12 @@ curl -v -X POST \
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:id*/lifecycle/expire_password</span>
 
-This operation will transition the user to the status of `PASSWORD_EXPIRED` and the user will be required to change their password at their next login. If `tempPassword` is passed, the user's password is reset to a temporary password that is returned, and then the temporary password is expired.
+This operation transitions the user to the status of `PASSWORD_EXPIRED` so that the user is required to change their password at their next login.
+If `tempPassword` is passed, the user's password is reset to a temporary password that is returned, and then the temporary password is expired.
+
+If you have integrated Okta with your on-premise Active Directory (AD), then setting a user's password as expired in Okta also expires the password in Active Directory.
+When the user tries to log in to Okta, delegated authentication finds the password-expired status in the Active Directory, 
+and the user is presented with the password-expired page where he or she can change the password.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
