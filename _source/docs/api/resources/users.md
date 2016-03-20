@@ -1463,7 +1463,9 @@ This operation:
 * Supports pagination.
 * Requires [URL encoding](http://en.wikipedia.org/wiki/Percent-encoding).
 For example, `search=profile.department eq "Engineering"` is encoded as `search=profile.department%20eq%20%22Engineering%22`.
-* Queries data from a replicated source, so results don't always show the latest changes. 
+* Queries data from a replicated store, so changes aren't always immediately available in search results. 
+Don't use search results directly for record updates, as the data might be stale and therefore overwrite newer data (data loss). 
+Use an Id lookup for records that you update to ensure your results contain the latest data. 
 * Searches many properties:
    - Any user profile property, including custom-defined properties
    - The top-level properties `id`, `status`, `created`, `activated`, `statusChanged` and `lastUpdated` 
