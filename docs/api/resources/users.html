@@ -3447,7 +3447,12 @@ parameter must be false or omitted for this type of conversion.</p>
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/<em>:id</em>/lifecycle/expire_password</span></p>
 
-<p>This operation will transition the user to the status of <code class="highlighter-rouge">PASSWORD_EXPIRED</code> and the user will be required to change their password at their next login. If <code class="highlighter-rouge">tempPassword</code> is passed, the user’s password is reset to a temporary password that is returned, and then the temporary password is expired.</p>
+<p>This operation transitions the user to the status of <code class="highlighter-rouge">PASSWORD_EXPIRED</code> so that the user is required to change their password at their next login.
+If <code class="highlighter-rouge">tempPassword</code> is passed, the user’s password is reset to a temporary password that is returned, and then the temporary password is expired.</p>
+
+<p>If you have integrated Okta with your on-premise Active Directory (AD), then setting a user’s password as expired in Okta also expires the password in Active Directory.
+When the user tries to log in to Okta, delegated authentication finds the password-expired status in the Active Directory, 
+and the user is presented with the password-expired page where he or she can change the password.</p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-13">Request Parameters</h5>
 
