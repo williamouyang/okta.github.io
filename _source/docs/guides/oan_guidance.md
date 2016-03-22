@@ -82,7 +82,9 @@ Below are some high-level details on the process and timeline for building a SCI
 
 _*The timeline outlined is our best estimate. The process may take more or less time than described here._
 
-As a next step, review [Okta’s SCIM Beta Guide](https://github.com/joelfranusic-okta/okta-scim-beta#welcome-to-the-okta-scim-beta) for technical documentation and details on how to apply for the beta.
+<br/>
+
+**As a next step, review [Okta’s SCIM Beta Guide](https://github.com/joelfranusic-okta/okta-scim-beta#welcome-to-the-okta-scim-beta) for technical documentation and details on how to apply for the beta.**
 
 Have questions? Need help? Email <developers@okta.com>
 
