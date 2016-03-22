@@ -27,11 +27,11 @@ For details on how to federate your application with SAML and Okta Mobile Connec
 
 Use the following instructions to support single sign-on for your app in the public-facing Okta Application Network:
 
-### 1. Prepare Your Application
+#### 1. Prepare Your Application
 
 * Use Okta’s [Single Sign-On with Okta](/docs/guides/saml_guidance.html) guide for best practices on supporting SAML in your app which includes toolkits and testing tools.
 
-### 2. Integrate Your App
+#### 2. Integrate Your App
 
 * Sign up for an Okta [developer account](https://www.okta.com/developer/signup/).
 * In your Okta account (make sure you are signed in as an admin), use the [App Wizard](https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard) to build a Single Sign-on integration with Okta. For the more visually inclined, see our [video](https://support.okta.com/help/articles/Knowledge_Article/Adding-Applications-Using-the-Application-Integration-Wizard-AIW) for using the App Wizard.
@@ -39,11 +39,11 @@ Use the following instructions to support single sign-on for your app in the pub
 
 ![App Wizard - Feedback](https://cloud.githubusercontent.com/assets/3278918/12026882/a2e71aee-ad73-11e5-9ef4-cd477d2990e7.png "App Wizard - Feedback")
 
-### 3. Need Help?
+#### 3. Need Help?
 
 Get stuck or have questions? See our Okta Application Network FAQs (below), email <developers@okta.com> or post your questions on [stackoverflow](https://stackoverflow.com).
 
-### 4. Partner with Okta (Optional)
+#### 4. Partner with Okta (Optional)
 
 Already part of the Okta App Network but looking for a more “go-to-market” partnership? Email <developers@okta.com> about becoming an [Okta App Partner](https://www.okta.com/partners/). App Partners are fully integrated with Okta and get access to great benefits like marketing support and a free version of Okta for your app.
 
@@ -61,10 +61,24 @@ If you already have a "compliant" SCIM server, you are 90% of the way to support
 
 Below are some high-level details on the process and timeline for building a SCIM-based provisioning integration with Okta:
 
-| | **Explore & Apply** | **Develop & Validate** | **Review & Test** | **Customer Testing** | **Promote** |
-| :--- |:--------: | :--------: | :--------: | :--------: | :--------: |
-|**timeline**| | Week 1 - 2 | Week 3 - 4 | Week 5 - 7 | Week 8
-|**actions**| Explore [SCIM standard](http://www.simplecloud.info/) & [Okta’s SCIM requirements] (https://github.com/joelfranusic-okta/okta-scim-beta#getting-into-the-okta-scim-beta), [Apply for SCIM beta](https://docs.google.com/forms/d/1RKvwFaY8hoMvWn2HEnIsXYY2uaDDZZtF8-p6h2a6e4E/viewform) | Work with Okta developer enablement team to confirm approach | Okta reviews functionality, security, performance,  documentation, and support plan. Partner testing in Okta developer org | Partner identifies small set of customers to test integration with | Once 2 live & happy customers, publish to public Okta Application Network. Okta Application Network Gold partner & benefits|
+#### Explore and Apply
+
+* Explore [SCIM standard](http://www.simplecloud.info/) & [Okta’s SCIM requirements] (https://github.com/joelfranusic-okta/okta-scim-beta#getting-into-the-okta-scim-beta)
+* [Apply for SCIM beta](https://docs.google.com/forms/d/1RKvwFaY8hoMvWn2HEnIsXYY2uaDDZZtF8-p6h2a6e4E/viewform) 
+
+#### Develop and Validate (Week 1-2)
+* Work with Okta developer enablement team to build SCIM support and confirm approach
+
+#### Review and Test (Week 3-4)
+* Okta reviews functionality, security, performance,  documentation, and support plan
+* Partner testing in Okta developer org
+
+#### Customer Testing (Week 5-7)
+* Partner identifies small set of customers to test integration with
+
+#### Promote (Week 8)
+* Once 2 live & happy customers, publish to public Okta Application Network
+* Okta Application Network Gold partner & benefits
 
 _*The timeline outlined is our best estimate. The process may take more or less time than described here._
 
