@@ -63,7 +63,7 @@ Below are some high-level details on the process and timeline for building a SCI
 
 #### Explore and Apply
 
-* Explore [SCIM standard](http://www.simplecloud.info/) & [Okta’s SCIM requirements] (https://github.com/joelfranusic-okta/okta-scim-beta#getting-into-the-okta-scim-beta)
+* Explore [SCIM standard](http://www.simplecloud.info/) & [Okta’s SCIM requirements](https://github.com/joelfranusic-okta/okta-scim-beta#getting-into-the-okta-scim-beta)
 * [Apply for SCIM beta](https://docs.google.com/forms/d/1RKvwFaY8hoMvWn2HEnIsXYY2uaDDZZtF8-p6h2a6e4E/viewform) 
 
 #### Develop and Validate (Week 1-2)
@@ -82,7 +82,9 @@ Below are some high-level details on the process and timeline for building a SCI
 
 _*The timeline outlined is our best estimate. The process may take more or less time than described here._
 
-As a next step, review [Okta’s SCIM Beta Guide](https://github.com/joelfranusic-okta/okta-scim-beta#welcome-to-the-okta-scim-beta) for technical documentation and details on how to apply for the beta.
+<br/>
+
+**As a next step, please [Apply for SCIM beta](https://docs.google.com/forms/d/1RKvwFaY8hoMvWn2HEnIsXYY2uaDDZZtF8-p6h2a6e4E/viewform) and review [Okta’s SCIM Beta Guide](https://github.com/joelfranusic-okta/okta-scim-beta#welcome-to-the-okta-scim-beta) for technical documentation and details.**
 
 Have questions? Need help? Email <developers@okta.com>
 
