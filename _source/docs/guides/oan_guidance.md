@@ -84,7 +84,7 @@ _*The timeline outlined is our best estimate. The process may take more or less 
 
 <br/>
 
-**As a next step, review [Okta’s SCIM Beta Guide](https://github.com/joelfranusic-okta/okta-scim-beta#welcome-to-the-okta-scim-beta) for technical documentation and details on how to apply for the beta.**
+**As a next step, please [Apply for SCIM beta](https://docs.google.com/forms/d/1RKvwFaY8hoMvWn2HEnIsXYY2uaDDZZtF8-p6h2a6e4E/viewform) and review [Okta’s SCIM Beta Guide](https://github.com/joelfranusic-okta/okta-scim-beta#welcome-to-the-okta-scim-beta) for technical documentation and details.**
 
 Have questions? Need help? Email <developers@okta.com>
 
