@@ -1042,7 +1042,7 @@ Parameter | Description                                                         
 --------- | ----------------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------
 q         | Finds a user that matches `firstName`, `lastName`, and `email` properties      | Query      | String   | FALSE    |
 filter    | [Filters](/docs/api/getting_started/design_principles.html#filtering) users with a supported expression for a subset of properties | Query      | String   | FALSE    |
-search    | Searches for users witha  supported expression for most properties  | Query      | String   | FALSE    |
+search    | Searches for users with a supported expression for most properties  | Query      | String   | FALSE    |
 limit     | Specifies the number of results returned                                                           | Query      | Number   | FALSE    | 200
 after     | Specifies the pagination cursor for the next page of users                                | Query      | String   | FALSE    |
 
@@ -1261,8 +1261,9 @@ This operation:
 
 * Filters against the most up-to-date data. For example, if you create a user or change an attribute and then issue a filter request,
 the changes are reflected in your results.
-* Requires [URL encoding](http://en.wikipedia.org/wiki/Percent-encoding) where `filter=lastUpdated gt "2013-06-01T00:00:00.000Z"` is encoded as `filter=lastUpdated%20gt%20%222013-06-01T00:00:00.000Z%22`.
-* Supports only a limited number of properties: `status`, `lastUpdated`, `id`, `profile.login`, `profile.email`, `profilefirstName`, and `profile.lastName`.
+* Requires [URL encoding](http://en.wikipedia.org/wiki/Percent-encoding). For example, `filter=lastUpdated gt "2013-06-01T00:00:00.000Z"` is encoded as `filter=lastUpdated%20gt%20%222013-06-01T00:00:00.000Z%22`.
+Examples use cURL-style escaping instead of URL encoding to make them easier to read.
+* Supports only a limited number of properties: `status`, `lastUpdated`, `id`, `profile.login`, `profile.email`, `profile.firstName`, and `profile.lastName`.
 * Doesn't include users with a status of `DEPROVISIONED`. You must include a status filter for deprovisioned users.
 
 Filter                                         | Description
@@ -1463,6 +1464,7 @@ This operation:
 * Supports pagination.
 * Requires [URL encoding](http://en.wikipedia.org/wiki/Percent-encoding).
 For example, `search=profile.department eq "Engineering"` is encoded as `search=profile.department%20eq%20%22Engineering%22`.
+Examples use cURL-style escaping instead of URL encoding to make them easier to read.
 * Queries data from a replicated store, so changes aren't always immediately available in search results. 
 Don't use search results directly for record updates, as the data might be stale and therefore overwrite newer data (data loss). 
 Use an Id lookup for records that you update to ensure your results contain the latest data. 
@@ -1492,7 +1494,7 @@ List users with an occupation of `Leader`.
 
 List users in the department of `Engineering` who were created before `01/01/2014` or have a status of `ACTIVE`.
 
-    search=profile.department eq "Engineering" and (created lt "2014-01-01T00:00:00.000Z" or status eq "ACTIVE"
+    search=profile.department eq "Engineering" and (created lt "2014-01-01T00:00:00.000Z" or status eq "ACTIVE")
     
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1566,12 +1568,14 @@ curl -v -X GET \
 ##### Request Example for Array
 {:.api .api-request .api-request-example}
 
+The following example is for a custom attribute on User, an array of strings named `arrayAttr` that contains values `["arrayAttrVal1", "arrayAttrVal2"...]`. 
+
 ~~~sh
 curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users?search=profile.arrayAttr eq "arrayAttrVal1" "
+"https://${org}.okta.com/api/v1/users?search=profile.arrayAttr+eq+\"arrayAttrVal1\" "
 ~~~
 
 ##### Response Example for Array
