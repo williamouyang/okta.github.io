@@ -83,6 +83,15 @@ karl_mcguinness:
   twitter: https://twitter.com/jankytweet
   github: https://github.com/mcguinness
 
+raphael_londner:
+  full_name: Raphael Londner
+  display_name: Raphael 
+  avatar: avatar-raphael.jpg
+  email: raphael.londner@okta.com 
+  web: https://www.linkedin.com/in/londner
+  twitter: https://twitter.com/rlondner
+  github: https://github.com/rlondner
+
 okta_generic_blogger:
   full_name: Okta Staff
   display_name: Okta Staff
