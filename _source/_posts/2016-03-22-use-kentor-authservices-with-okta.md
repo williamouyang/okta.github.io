@@ -41,9 +41,9 @@ Here's how you should configure an app powered by Kentor AuthServices to make it
   10. In the **Name ID format** field, select the default **Unspecified** (or select any other value of your choice). 
   11. Select the **Show Advanced Settings** link.  For the **Signature Algorithm** field, we suggest that you leave the default value, SHA-256. However, if you do, you will need to add the following line of code to the Application_Start() method of your Global.asax.cs file:
 
-  `Kentor.AuthServices.Configuration.Options.GlobalEnableSha256XmlSignatures()`
+  `Kentor.AuthServices.Configuration.Options.GlobalEnableSha256XmlSignatures();`
   
-Otherwise, switch to RSA-SHA1 though we do not recommend it as it less secure than SHA-256.  
+Otherwise, you may switch to RSA-SHA1 though we do not recommend it (as it less secure than SHA-256).  
   12. In the Attribute Statements section, optionally enter additional attributes, such as in the following screenshot:  
 ![Optional Attribute Statements](/assets/img/KentorOkta/OptionalAttributeStatements.png)  
   13. Press the **Next** button. Select the **I'm a software vendor** option (if you're indeed a vendor - if you are developing an internal app, select the first option) and press the Finish button.  
