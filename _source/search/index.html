@@ -6,7 +6,6 @@ title: "Search",
 show_cta: false
 }
 show_bottom_cta: true
-js: search.js
 ---
 
 <section id="search" class="section--full-width">
@@ -16,36 +15,8 @@ js: search.js
 		<div class="search-container" data-slide-toggle-name="search">
 			<div class="site-container">
 				<span class="por">
-					<?php // Google Custom Search START ?>
-					<script>
-						(function() {
-							var cx = '005121479574088032773:mmh_vhv8uns';
-							var gcse = document.createElement('script');
-							gcse.type = 'text/javascript';
-							gcse.async = true;
-							gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-							'//www.google.com/cse/cse.js?cx=' + cx;
-							var s = document.getElementsByTagName('script')[0];
-							s.parentNode.insertBefore(gcse, s);
-						})();
-					</script>
 					<gcse:searchbox-only resultsUrl="/search" enableAutoComplete="true"></gcse:searchbox-only>
-					<script>
-						return decodeURIComponent(decodeURIComponent(keyvaluepair[1].replace(/\+/g, ' ')));
-						(function() {
-							var cx = '005121479574088032773:mmh_vhv8uns';
-							var gcse = document.createElement('script');
-							gcse.type = 'text/javascript';
-							gcse.async = true;
-							gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-							'//www.google.com/cse/cse.js?cx=' + cx;
-							var s = document.getElementsByTagName('script')[0];
-							s.parentNode.insertBefore(gcse, s);
-						})();
-					</script>
-					<gcse:searchresults-only  enableOrderBy=false></gcse:searchresults-only>
-
-					<?php // Google Custom Search END ?>
+					<gcse:searchresults-only></gcse:searchresults-only>
 				</span>
 			</div>
 		</div>
