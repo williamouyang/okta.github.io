@@ -33,28 +33,31 @@ Here's how you should configure an app powered by Kentor AuthServices to make it
 ![Press the Create a new Okta app](/assets/img/KentorOkta/CreateNewAppButton.png)
    5. Select the **SAML 2.0** option and press the **Create** button.
 ![Choose the SAML 2.0 template](/assets/img/KentorOkta/SAML2Option.png)
-  6. Give your application a name and optionally upload a custom logo. We'll call it " **Kentor AuthServices App 1**"
+  6. Give your application a name and optionally upload a custom logo. We'll call it "**Kentor AuthServices App 1**"
 ![Give your Okta app a name](/assets/img/KentorOkta/OktaAppName.png)
   7. Press **Next**.
   8. In the **Single sign on URL** field, enter the url you retrieved above in step #2 and append " **/AuthServices/Acs**", for instance **http://localhost:18714/SamplePath/AuthServices/Acs**
-  9. For the Audience URI field, enter the Url your retrieved above in step #2 and append " **/AuthServices**", for instance [**http://localhost:18714/SamplePath/AuthServices**](http://localhost:18714/SamplePath/AuthServices)
-  10. In the **Name ID format** field, select **x509SubjectName**. 
-  11. Select the **Show Advanced Settings** link and select **RSA-SHA1** for **Signature Algorithm**:
-![Okta App Advanced Settings](/assets/img/KentorOkta/AppAdvancedSettings.png)
-  12. In the Attribute Statements section, optionally enter additional attributes, such as in the following screenshot:
-![Optional Attribute Statements](/assets/img/KentorOkta/OptionalAttributeStatements.png)
-  13. Press the **Next** button. Select the **I'm a software vendor** option (if you're indeed a vendor - if you are developing an internal app, select the first option) and press the Finish button
-![Select the customer or vendor option](/assets/img/KentorOkta/VendorOrCustomerOption.png)
-  14. Now edit the web.config file of the SampleApplication project.
+  9. For the Audience URI field, enter the Url you retrieved above in step #2 and append " **/AuthServices**", for instance **http://localhost:18714/SamplePath/AuthServices**
+  10. In the **Name ID format** field, select the default **Unspecified** (or select any other value of your choice). 
+  11. Select the **Show Advanced Settings** link.  For the **Signature Algorithm** field, we suggest that you leave the default value, SHA-256. However, if you do, you will need to add the following line of code to the Application_Start() method of your Global.asax.cs file:
+
+  `Kentor.AuthServices.Configuration.Options.GlobalEnableSha256XmlSignatures()`
+  
+Otherwise, switch to RSA-SHA1 though we do not recommend it as it less secure than SHA-256.  
+  12. In the Attribute Statements section, optionally enter additional attributes, such as in the following screenshot:  
+![Optional Attribute Statements](/assets/img/KentorOkta/OptionalAttributeStatements.png)  
+  13. Press the **Next** button. Select the **I'm a software vendor** option (if you're indeed a vendor - if you are developing an internal app, select the first option) and press the Finish button.  
+![Select the customer or vendor option](/assets/img/KentorOkta/VendorOrCustomerOption.png)  
+  14. Now edit the web.config file of the SampleApplication project.  
   15. In the `<kentor.authServices>` section, enter the following values:
-  - **entityId** = same value as the Audience URI for the Okta app, e.g. [http://localhost:18714/SamplePath/AuthServices](http://localhost:18714/SamplePath/AuthServices)
+  - **entityId** = same value as the Audience URI for the Okta app, e.g. [http://localhost:18714/SamplePath/AuthServices](http://localhost:18714/SamplePath/AuthServices)  
   - **returnUrl** = value of the web application's url, i.e. [http://localhost:18714/SamplePath](http://localhost:18714/SamplePath)
-  16. In the <identityProviders> section, enter the following values:
+  16. In the <identityProviders> section, enter the following values:  
   - **entityId** = **Identity Provider Issuer** from **Sign On** => **View Setup Instructions**
 ![View setup instructions](/assets/img/KentorOkta/ViewSetupInstructions.png)
-![Identity Provider Issuer](/assets/img/KentorOkta/IdentityProviderIssuer.png)
+![Identity Provider Issuer](/assets/img/KentorOkta/IdentityProviderIssuer.png)  
   - **signOnUrl** = value of the **Identity Provider Single Sign-On URL** below
-![Identity Provider Single Sign-On URL](/assets/img/KentorOkta/IdPSSOUrl.png)
+![Identity Provider Single Sign-On URL](/assets/img/KentorOkta/IdPSSOUrl.png)  
  - In the `<signingCertificate>` section, download the  **okta.cert** X.509 certificate from the instructions page in the Okta app and put it in the **App\_Data** folder of your web application. Then reference it accordingly (such as with **fileName="~/App\_Data/okta.cert**") in the web.config file.
 
 
