@@ -1,11 +1,22 @@
 ---
 layout: docs_page
 title: Identity Providers
+redirect_from: "docs/api/rest/idps.html"
 ---
 
 ## Overview
 
-The Okta Identity Providers API provides operations to manage federations with external Identity Providers (IdP).
+The Okta Identity Providers API provides operations to manage federations with external Identity Providers (IDP).
+For example, your app can support logging in with credentials from Facebook, Google, LinkedIn, Microsoft, or an enterprise IdP using SAML 2.0 protocol.
+
+## Setup Guides
+
+Each identity provider (IdP) requires some setup. Use the Okta setup guide for your IdP:
+
+* [Facebook](http://saml-doc.okta.com/IdentityProvider_Docs/Facebook_Identity_Provider_Setup.html)
+* [Google](http://saml-doc.okta.com/IdentityProvider_Docs/Google_Identity_Provider_Setup.html)
+* [LinkedIn](http://saml-doc.okta.com/IdentityProvider_Docs/LinkedIn_Identity_Provider_Setup.html)
+* [Microsoft](http://saml-doc.okta.com/IdentityProvider_Docs/Microsoft_Identity_Provider_Setup.html)
 
 ## Identity Provider Model
 
@@ -130,19 +141,19 @@ All Identity Providers have the following properties:
 |---------------+--------------------------------------------------------------+----------------------------------------------------------------+----------|--------|----------|-----------|-----------+------------|
 | Property      | Description                                                  | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
 | ------------- | ------------------------------------------------------------ | -------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| id            | unique key for the IdP                                       | String                                                         | FALSE    | TRUE   | TRUE     |           |           |            |
-| type          | type of IdP                                                  | [Identity Provider Type](#identity-provider-type)              | FALSE    | FALSE  | FALSE    |           |           |            |
-| name          | unique name for the IdP                                      | String                                                         | FALSE    | TRUE   | FALSE    | 1         | 100       |            |
-| status        | status of the IdP                                            | `ACTIVE` or `INACTIVE`                                         | FALSE    | FALSE  | TRUE     |           |           |            |
-| created       | timestamp when IdP was created                               | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
-| lastUpdated   | timestamp when IdP was last updated                          | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
-| protocol      | protocol settings for IdP `type`                             | [Protocol Object](#identity-provider-type)                     | FALSE    | FALSE  | FALSE    |           |           |            |
-| policy        | policy settings for IdP `type`                               | [Policy Object](#identity-provider-type)                       | FALSE    | FALSE  | FALSE    |           |           |            |
-| _links        | [discoverable resources](#links-object) related to the IdP   | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
-| _embedded     | embedded resources related to the IdP                        | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
+| id            | Unique key for the IdP                                       | String                                                         | FALSE    | TRUE   | TRUE     |           |           |            |
+| type          | Type of IdP                                                  | [Identity Provider Type](#identity-provider-type)              | FALSE    | FALSE  | FALSE    |           |           |            |
+| name          | Unique name for the IdP                                      | String                                                         | FALSE    | TRUE   | FALSE    | 1         | 100       |            |
+| status        | Status of the IdP                                            | `ACTIVE` or `INACTIVE`                                         | FALSE    | FALSE  | TRUE     |           |           |            |
+| created       | Timestamp when IdP was created                               | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
+| lastUpdated   | Timestamp when IdP was last updated                          | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
+| protocol      | Protocol settings for IdP `type`                             | [Protocol Object](#identity-provider-type)                     | FALSE    | FALSE  | FALSE    |           |           |            |
+| policy        | Policy settings for IdP `type`                               | [Policy Object](#identity-provider-type)                       | FALSE    | FALSE  | FALSE    |           |           |            |
+| _links        | [Discoverable resources](#links-object) related to the IdP   | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
+| _embedded     | Embedded resources related to the IdP                        | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
 |---------------+--------------------------------------------------------------+----------------------------------------------------------------+----------|--------|----------|-----------|-----------+------------|
 
-> `id`, `created`, `lastUpdated`, and `_links` are only available after an IdP is created
+The properties `id`, `created`, `lastUpdated`, and `_links` are available after an IdP is created.
 
 ### Identity Provider Type
 
@@ -155,11 +166,12 @@ Okta supports the following enterprise and social IdPs:
 | `FACEBOOK`   | [Facebook Login](https://developers.facebook.com/docs/facebook-login/overview/)                                                                       |
 | `GOOGLE`     | [Google Sign-In with OpenID Connect](https://developers.google.com/identity/protocols/OpenIDConnect)                                                  |
 | `LINKEDIN`   | [Sign In with Linked In](https://developer.linkedin.com/docs/signin-with-linkedin)                                                                    |
+| `MICROSOFT`  | [Microsoft Enterprise SSO](https://msdn.microsoft.com/en-us/library/aa745042\(v=bts.10\).aspx)
 |--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 ### Protocol Object
 
-IdP-specific protocol settings for endpoints, bindings, and algorithms used to connect with the IdP and validate messages.
+The Protocol object contains IdP-specific protocol settings for endpoints, bindings, and algorithms used to connect with the IdP and validate messages.
 
 |--------------+--------------------------------------------+
 | Provider     | Protocol                                   |
@@ -168,11 +180,12 @@ IdP-specific protocol settings for endpoints, bindings, and algorithms used to c
 | `FACEBOOK`   | [OAuth 2.0](#oauth-20-protocol)            |
 | `GOOGLE`     | [OpenID Connect](#openid-connect-protocol) |
 | `LINKEDIN`   | [OAuth 2.0](#oauth-20-protocol)            |
+| `MICROSOFT`  | [OAuth 2.0](#oauth-20-protocol)            |
 |--------------+--------------------------------------------+
 
 #### SAML 2.0 Protocol
 
-Protocol settings for the [SAML 2.0 Authentication Request Protocol](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)
+Protocol settings for the [SAML 2.0 Authentication Request Protocol](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf):
 
 |-------------+--------------------------------------------------------------------+-------------------------------------------------------------------+----------+----------+-----------+-----------+------------|
 | Property    | Description                                                        | DataType                                                          | Nullable | Readonly | MinLength | MaxLength | Validation |
@@ -229,7 +242,7 @@ Protocol settings for the [SAML 2.0 Authentication Request Protocol](http://docs
 
 ##### SAML 2.0 Endpoints Object
 
-The `SAML2` protocol supports the `sso` and `acs` endpoints
+The `SAML2` protocol supports the `sso` and `acs` endpoints.
 
 |----------+---------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+----------+----------+-----------+-----------+------------|
 | Property | Description                                                                           | DataType                                                                                            | Nullable | Readonly | MinLength | MaxLength | Validation |
@@ -240,7 +253,7 @@ The `SAML2` protocol supports the `sso` and `acs` endpoints
 
 ###### Single Sign-On (SSO) Endpoint Object
 
-The Single Sign-On (SSO) endpoint is the IdP's `SingleSignOnService` endpoint where Okta will send a SAML 2.0 `<AuthnRequest>` message
+The Single Sign-On (SSO) endpoint is the IdP's `SingleSignOnService` endpoint where Okta sends a SAML 2.0 `<AuthnRequest>` message:
 
 |-------------+------------------------------------------------------------------------------------+----------------------------------+----------+----------+-----------+-----------+-------------------------------------------------|
 | Property    | Description                                                                        | DataType                         | Nullable | Readonly | MinLength | MaxLength | Validation                                      |
@@ -250,9 +263,10 @@ The Single Sign-On (SSO) endpoint is the IdP's `SingleSignOnService` endpoint wh
 | destination | URI reference indicating the address to which the `<AuthnRequest>` message is sent | String                           | TRUE     | FALSE    | 1         | 512       |                                                 |
 |-------------+------------------------------------------------------------------------------------+----------------------------------+----------+----------+-----------+-----------+-------------------------------------------------|
 
-> The `destination` property is required if request signatures are specified (See [SAML 2.0 Request Algorithm Object](#saml-20-request-algorithm-object)).
->
-> The value is defaulted to the same `url` as the `sso` endpoint if omitted during creation of a new IdP instance.
+Property Details
+
+* The `destination` property is required if request signatures are specified (See [SAML 2.0 Request Algorithm Object](#saml-20-request-algorithm-object)).
+* The value of `url` is defaulted to the same value as the `sso` endpoint if omitted during creation of a new IdP instance.
 
 ~~~json
 {
@@ -269,7 +283,7 @@ The Single Sign-On (SSO) endpoint is the IdP's `SingleSignOnService` endpoint wh
 }
 ~~~
 
-> The `url` should be the same value as the `Location` attribute for a published binding in the IdP's SAML Metadata `IDPSSODescriptor`
+* The `url` should be the same value as the `Location` attribute for a published binding in the IdP's SAML Metadata `IDPSSODescriptor`.
 
 ~~~xml
 <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
@@ -280,13 +294,13 @@ The Single Sign-On (SSO) endpoint is the IdP's `SingleSignOnService` endpoint wh
 
 ###### Assertion Consumer Service (ACS) Endpoint Object
 
-The Assertion Consumer Service (ACS) endpoint is Okta's `SPSSODescriptor` endpoint where the IdP will send a SAML 2.0 `<SAMLResponse>` message
+The Assertion Consumer Service (ACS) endpoint is Okta's `SPSSODescriptor` endpoint where the IdP sends a SAML 2.0 `<SAMLResponse>` message.
 
 |-------------+-----------------------------------------------------------------------------------------------------------------------+-----------------------+----------+----------+-----------+-----------+------------|
 | Property    | Description                                                                                                           | DataType              | Nullable | Readonly | MinLength | MaxLength | Default    |
 | ----------- | --------------------------------------------------------------------------------------------------------------------- | --------------------- | -------- | -------- | --------- | --------- | ---------- |
 | binding     | HTTP binding used to receive a `<SAMLResponse>` message from the IdP                                                  | `HTTP-POST`           | TRUE     | FALSE    |           |           | `HTTP-POST`|
-| type        | Determines whether to publish a instance-specific (trust) or organization (shared) ACS endpoint in the SAML metadata  | `INSTANCE` or `ORG`   | TRUE     | FALSE    |           |           | `INSTANCE` |
+| type        | Determines whether to publish an instance-specific (trust) or organization (shared) ACS endpoint in the SAML metadata | `INSTANCE` or `ORG`   | TRUE     | FALSE    |           |           | `INSTANCE` |
 |-------------+-----------------------------------------------------------------------------------------------------------------------+-----------------------+----------+----------+-----------+-----------+------------|
 
 ~~~json
@@ -313,7 +327,7 @@ The Assertion Consumer Service (ACS) endpoint is Okta's `SPSSODescriptor` endpoi
 </md:EntityDescriptor>
 ~~~
 
-> Note the unique IdP instance `id` in the ACS `Location`
+> Note the unique IdP instance `id` in the ACS `Location`.
 
 **Organization (shared) ACS Endpoint Example**
 
@@ -325,11 +339,11 @@ The Assertion Consumer Service (ACS) endpoint is Okta's `SPSSODescriptor` endpoi
 </md:EntityDescriptor>
 ~~~
 
-> Organization-specific ACS endpoint enables multiple trusts from an IdP to a single ACS URL which may be required by specific IdP vendors
+> An organization-specific ACS endpoint enables multiple trusts from an IdP to a single ACS URL which may be required by specific IdP vendors.
 
 ##### SAML 2.0 Algorithms Object
 
-The `SAML2` protocol supports `request` and `response` algorithm and verification settings
+The `SAML2` protocol supports `request` and `response` algorithm and verification settings.
 
 |----------+---------------------------------------------------------------+--------------------------------------------------------------------------+----------+----------+-----------+-----------+------------|
 | Property | Description                                                   | DataType                                                                 | Nullable | Readonly | MinLength | MaxLength | Validation |
@@ -362,7 +376,7 @@ The `SAML2` protocol supports `request` and `response` algorithm and verificatio
 
 ###### SAML 2.0 Request Algorithm Object
 
-Algorithm settings for securing `<AuthnRequest>` messages sent to the IdP
+Algorithm settings for securing `<AuthnRequest>` messages sent to the IdP:
 
 |-----------+-------------------------------------------------------------+--------------------------------------------------------------------------------------------+----------+----------+-----------+-----------+------------|
 | Property  | Description                                                 | DataType                                                                                   | Nullable | Readonly | MinLength | MaxLength | Validation |
@@ -388,20 +402,20 @@ Algorithm settings for securing `<AuthnRequest>` messages sent to the IdP
 
 ###### SAML 2.0 Request Signature Algorithm Object
 
-XML digital signature algorithm settings for signing `<AuthnRequest>` messages sent to the IdP
+XML digital signature algorithm settings for signing `<AuthnRequest>` messages sent to the IdP:
 
 |-------------+------------------------------------------------------------------------------------+----------------------+----------+----------+-----------+-----------+------------|
 | Property    | Description                                                                        | DataType             | Nullable | Readonly | MinLength | MaxLength | Validation |
 | ----------- | ---------------------------------------------------------------------------------- | -------------------- | -------- | -------- | --------- | --------- | ---------- |
-| algorithm   | XML digital signature algorithm used when signing an `<AuthnRequest>` message      | `SHA-1` or `SHA-256` | FALSE    | FALSE    |           |           |            |
+| algorithm   | The XML digital signature algorithm used when signing an `<AuthnRequest>` message  | `SHA-1` or `SHA-256` | FALSE    | FALSE    |           |           |            |
 | scope       | Specifies whether or not to digitally sign an `<AuthnRequest>` messages to the IdP | `REQUEST` or `NONE`  | FALSE    | FALSE    |           |           |            |
 |-------------+------------------------------------------------------------------------------------+----------------------+----------+----------+-----------+-----------+------------|
 
-> The `algorithm` property is ignored when disabling request signatures (`scope` set as `NONE`)
+> The `algorithm` property is ignored when disabling request signatures (`scope` set as `NONE`).
 
 ###### SAML 2.0 Response Algorithm Object
 
-Algorithm settings for verifying `<SAMLResponse>` messages and `<Assertion>` elements from the IdP
+Algorithm settings for verifying `<SAMLResponse>` messages and `<Assertion>` elements from the IdP:
 
 |-----------+----------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+----------+----------+-----------+-----------+------------|
 | Property  | Description                                                                                        | DataType                                                                                     | Nullable | Readonly | MinLength | MaxLength | Validation |
@@ -427,7 +441,7 @@ Algorithm settings for verifying `<SAMLResponse>` messages and `<Assertion>` ele
 
 ###### SAML 2.0 Response Signature Algorithm Object
 
-XML digital signature algorithm settings for verifying `<SAMLResponse>` messages and `<Assertion>` elements from the IdP
+XML digital signature algorithm settings for verifying `<SAMLResponse>` messages and `<Assertion>` elements from the IdP:
 
 |-------------+------------------------------------------------------------------------------------------------------------------------+--------------------------------+----------+----------+-----------+-----------+------------|
 | Property    | Description                                                                                                            | DataType                       | Nullable | Readonly | MinLength | MaxLength | Validation |
@@ -438,7 +452,7 @@ XML digital signature algorithm settings for verifying `<SAMLResponse>` messages
 
 ###### SAML 2.0 Trust Credentials Object
 
-Federation trust credentials for verifying assertions from the IdP
+Federation trust credentials for verifying assertions from the IdP:
 
 |---------+--------------------------------------------------------------------------------------------------------+----------+----------+----------+-----------+-----------+--------------------------------------------|
 | Property | Description                                                                                           | DataType | Nullable | Readonly | MinLength | MaxLength | Validation                                 |
@@ -495,7 +509,7 @@ Federation trust credentials for verifying assertions from the IdP
 
 #### OAuth 2.0 Protocol
 
-Protocol settings for authentication using the [OAuth 2.0 Authorization Code Flow](https://tools.ietf.org/html/rfc6749#section-4.1)
+Protocol settings for authentication using the [OAuth 2.0 Authorization Code Flow](https://tools.ietf.org/html/rfc6749#section-4.1):
 
 |-------------+---------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+----------+----------+-----------+-----------+------------|
 | Property    | Description                                                                                                                     | DataType                                                  | Nullable | Readonly | MinLength | MaxLength | Validation |
@@ -506,7 +520,7 @@ Protocol settings for authentication using the [OAuth 2.0 Authorization Code Flo
 | credentials | Client authentication credentials for an [OAuth 2.0 Authorization Server (AS)](https://tools.ietf.org/html/rfc6749#section-2.3) | [Credentials Object](#oauth-20-client-credentials-object) | FALSE    | FALSE    |           |           |            |
 |-------------+---------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+----------+----------+-----------+-----------+------------|
 
-> Refer to the IdP setup documentation for a list of what scopes are supported [per-IdP provider](#identity-provider-type)
+The [OAuth 2.0 Setup Guide](#setup-guides) lists the scopes that are supported [per-IdP provider](#identity-provider-type).
 
 ~~~json
 {
@@ -538,7 +552,7 @@ Protocol settings for authentication using the [OAuth 2.0 Authorization Code Flo
 
 #### OpenID Connect Protocol
 
-Protocol settings for authentication using the [OpenID Connect Protocol](http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth)
+Protocol settings for authentication using the [OpenID Connect Protocol](http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth):
 
 |-------------+---------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------+----------+----------+-----------+-----------+------------|
 | Property    | Description                                                                                                                     | DataType                                                        | Nullable | Readonly | MinLength | MaxLength | Validation |
@@ -549,7 +563,7 @@ Protocol settings for authentication using the [OpenID Connect Protocol](http://
 | credentials | Client authentication credentials for an [OAuth 2.0 Authorization Server (AS)](https://tools.ietf.org/html/rfc6749#section-2.3) | [Credentials Object](#openid-connect-client-credentials-object) | FALSE    | FALSE    |           |           |            |
 |-------------+---------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------+----------+----------+-----------+-----------+------------|
 
-> Refer to the IdP setup documentation for a list of what scopes are supported [per-IdP provider](#identity-provider-type).  The base `openid` scope is always required.
+The [IdP setup guides](#setup-guides) list the scopes that are supported [per-IdP provider](#identity-provider-type).  The base `openid` scope is always required.
 
 ~~~json
 {
@@ -582,7 +596,9 @@ Protocol settings for authentication using the [OpenID Connect Protocol](http://
 
 ##### OAuth 2.0 and OpenID Connect Endpoints Object
 
-The `OAUTH2` and `OIDC` protocols support the `authorization` and `token` endpoints
+The `OAUTH2` and `OIDC` protocols support the `authorization` and `token` endpoints.
+
+The IdP Authorization Server (AS) endpoints are currently defined as part of the [IdP provider](#identity-provider-type) and are read only.
 
 |---------------+------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------+----------+----------+-----------+-----------+------------|
 | Property      | Description                                                                                                | DataType                                                                                        | Nullable | Readonly | MinLength | MaxLength | Validation |
@@ -591,7 +607,6 @@ The `OAUTH2` and `OIDC` protocols support the `authorization` and `token` endpoi
 | token         | IdP Authorization Server (AS) endpoint to exchange authorization code grant for an access token            | [OAuth 2.0 Authorization Server Endpoint Object](#oauth-20-authorization-server-endpoint-object)| TRUE     | TRUE     |           |           |            |
 |---------------+------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------+----------+----------+-----------+-----------+------------|
 
-> The IdP Authorization Server (AS) endpoints are currently defined as part of the [IdP provider](#identity-provider-type) and are **read-only**
 
 ~~~json
 {
@@ -631,7 +646,7 @@ The `OAUTH2` and `OIDC` protocols support the `authorization` and `token` endpoi
 
 ##### OAuth 2.0 and Openid Connect Client Credentials Object
 
-Client authentication credentials for an [OAuth 2.0 Authorization Server (AS)](https://tools.ietf.org/html/rfc6749#section-2.3)
+Client authentication credentials for an [OAuth 2.0 Authorization Server (AS)](https://tools.ietf.org/html/rfc6749#section-2.3).
 
 |---------------+-------------------------------------------------------------------------------------------------------------+----------+----------+----------+-----------+-----------+------------|
 | Property      | Description                                                                                                 | DataType | Nullable | Readonly | MinLength | MaxLength | Validation |
@@ -640,7 +655,7 @@ Client authentication credentials for an [OAuth 2.0 Authorization Server (AS)](h
 | client_secret | [Client secret issued](https://tools.ietf.org/html/rfc6749#section-2.3.1) by AS for the Okta IdP instance   | String   | FALSE    | FALSE    | 1         | 1024      |            |
 |---------------+-------------------------------------------------------------------------------------------------------------+----------+----------+----------+-----------+-----------+------------|
 
-> You must perform client registration with the IdP Authorization Server for your Okta IdP instance to obtain client credentials
+> You must complete client registration with the IdP Authorization Server for your Okta IdP instance to obtain client credentials.
 
 ~~~json
 {
@@ -722,7 +737,7 @@ Client authentication credentials for an [OAuth 2.0 Authorization Server (AS)](h
 
 #### Provisioning Policy Object
 
-Specifies the behavior for just-in-time (JIT) provisioning of an IdP user as a new Okta user and their group memberships
+Specifies the behavior for just-in-time (JIT) provisioning of an IdP user as a new Okta user and their group memberships.
 
 |---------------+-----------------------------------------------------------------------------------+-----------------------------------------------------------------------+----------+----------+-----------+-----------+------------|
 | Property      | Description                                                                       | DataType                                                              | Nullable | Readonly | MinLength | MaxLength | Validation |
@@ -764,7 +779,7 @@ The follow provisioning actions are support by each IdP provider:
 
 ##### User Provisioning Action Type
 
-Specifies the user provisioning action during authentication when an IdP user is not linked to an existing Okta user
+Specifies the user provisioning action during authentication when an IdP user is not linked to an existing Okta user.
 
 |-------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Action Type | Description                                                                                                                                                                                      |
@@ -774,11 +789,11 @@ Specifies the user provisioning action during authentication when an IdP user is
 | `DISABLED`  | Okta will reject the authentication request and skip provisioning of a new Okta user if the IdP user is not linked to an existing Okta User.                                                     |
 |--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-> JIT provisioning **must** be enabled in your organization security settings for `AUTO` or `CALLOUT` actions to successfully provision a new Okta user
+Property Details
 
-> JIT provisioning **may** fail if the target username is not unique or the resulting Okta user profile is missing a required profile attribute
-
-> New Okta users will be provisioned with either a `FEDERATION` or `SOCIAL` authentication provider depending on the IdP `type`
+* To successfully provision a new Okta user, JIT provisioning must be enabled in your organization security settings for `AUTO` or `CALLOUT` actions. 
+* If the target username is not unique or the resulting Okta user profile is missing a required profile attribute, JIT provisioning may fail.
+* New Okta users are provisioned with either a `FEDERATION` or `SOCIAL` authentication provider depending on the IdP `type`.
 
 ##### Group Provisioning Policy Object
 
@@ -788,7 +803,7 @@ Specifies the user provisioning action during authentication when an IdP user is
 | action              | Provisioning action for IdP user's group memberships                                                                     | [Group Provisioning Action Type](#group-provisioning-action-type) | FALSE    | FALSE    |           |           |            |
 | sourceAttributeName | IdP user profile attribute name (case-insensitive) for an array value that contains group memberships                    | String                                                            | TRUE     | FALSE    | 0         | 1024      |            |
 | filter              | Whitelist of `OKTA_GROUP` group identifiers that are allowed for the `APPEND` or `SYNC` provisioning action              | Array of String (`OKTA_GROUP` IDs)                                | TRUE     | FALSE    |           |           |            |
-| assignments         | List of `OKTA_GROUP` group identifiers to add IdP user as a member with the `ASSIGN` action                              | Array of String (`OKTA_GROUP` IDs)                                | TRUE     | FALSE    |           |           |            |
+| assignments         | List of `OKTA_GROUP` group identifiers to add an IdP user as a member with the `ASSIGN` action                           | Array of String (`OKTA_GROUP` IDs)                                | TRUE     | FALSE    |           |           |            |
 |---------------------+--------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+----------+----------+-----------+-----------+------------|
 
 
@@ -818,7 +833,7 @@ Specifies the user provisioning action during authentication when an IdP user is
 
 ###### Group Provisioning Action Type
 
-The group provisioning action for an IdP user
+The group provisioning action for an IdP user:
 
 |-------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|--------------------------------|-------------------------------|
 | Action      | Description                                                                                                                                                        | Existing OKTA_GROUP Memberships                                                               | Existing APP_GROUP Memberships | Existing BUILT_IN Memberships |
@@ -883,7 +898,7 @@ The group provisioning action for an IdP user
 
 #### Account Link Policy Object
 
-Specifies the behavior for linking an IdP user to an existing Okta user
+Specifies the behavior for linking an IdP user to an existing Okta user.
 
 |----------+-------------------------------------------------------+-----------------------------------------------------------+----------+----------+-----------+-----------+------------|
 | Property | Description                                           | DataType                                                  | Nullable | Readonly | MinLength | MaxLength | Validation |
@@ -910,7 +925,7 @@ Specifies the behavior for linking an IdP user to an existing Okta user
 
 ##### IdP Type Account Link Policy Actions
 
-The follow account link actions are supported by each IdP provider:
+The follow-account link actions are supported by each IdP provider:
 
 |--------------+----------------------+----------------------+
 | Type         | Account Link Actions | Account Link Filters |
@@ -923,14 +938,14 @@ The follow account link actions are supported by each IdP provider:
 
 ##### Account Link Action Type
 
-The account link action for an IdP user during authentication
+The account link action for an IdP user during authentication:
 
 |--------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Action Type | Description                                                                                                                                                                            |
 | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `AUTO`      | The IdP user will be automatically linked to an Okta user when the transformed IdP user matches an existing Okta user according to [subject match rules](#subject-policy-object)       |
-| `CALLOUT`   | Okta will callout to an external web service during authentication to validate the IdP user profile and determine whether to link the IdP user to an Okta user candidate               |
-| `DISABLED`  | Okta will never attempt link the IdP user to an existing Okta user, but may still attempt to provision a new Okta user (See [Provisioning Action Type](#user-provisioning-action-type) |
+| `AUTO`      | The IdP user is automatically linked to an Okta user when the transformed IdP user matches an existing Okta user according to [subject match rules](#subject-policy-object).           |
+| `CALLOUT`   | Okta calls out to an external web service during authentication to validate the IdP user profile and determine whether to link the IdP user to an Okta user candidate.                 |
+| `DISABLED`  | Okta never attempts to link the IdP user to an existing Okta user, but may still attempt to provision a new Okta user (See [Provisioning Action Type](#user-provisioning-action-type). |
 |--------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
 ~~~json
@@ -950,7 +965,7 @@ The account link action for an IdP user during authentication
 
 ##### Account Link Filter Object
 
-Specifies group memberships to restrict which users are available for account linking by an IdP
+Specifies group memberships to restrict which users are available for account linking by an IdP.
 
 |----------+--------------------------------------------------+-------------------------------------------------------------------------+----------+----------+-----------+-----------+------------|
 | Property | Description                                      | DataType                                                                | Nullable | Readonly | MinLength | MaxLength | Validation |
@@ -972,7 +987,7 @@ Specifies group memberships to restrict which users are available for account li
 
 ###### Groups Account Link Filter Object
 
-Defines a whitelist of group membership to restrict which users are available for account linking by an IdP
+Defines a whitelist of group membership to restrict which users are available for account linking by an IdP.
 
 |----------+---------------------------------------------------------------+------------------------------+----------+----------+-----------+-----------+------------|
 | Property | Description                                                   | DataType                     | Nullable | Readonly | MinLength | MaxLength | Validation |
@@ -980,7 +995,7 @@ Defines a whitelist of group membership to restrict which users are available fo
 | include  | Specifies the whitelist of group identifiers to match against | Array of String (Group IDs)  | TRUE     | FALSE    |           |           |            |
 |----------+---------------------------------------------------------------+------------------------------+----------+----------+-----------+-----------+------------|
 
-> Group memberships are currently restricted to type `OKTA_GROUP`
+> Group memberships are restricted to type `OKTA_GROUP`.
 
 ~~~json
 {
@@ -994,21 +1009,22 @@ Defines a whitelist of group membership to restrict which users are available fo
 
 #### Subject Policy Object
 
-Specifies the behavior for establishing, validating, and matching a username for an IdP user
+Specifies the behavior for establishing, validating, and matching a username for an IdP user.
 
 |------------------+-------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------+----------+----------+-----------+-----------+---------------------------------------------------------------------|
 | Property         | Description                                                                                                                         | DataType                                               | Nullable | Readonly | MinLength | MaxLength | Validation                                                          |
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ | -------- | -------- | --------- | --------- | ------------------------------------------------------------------- |
-| userNameTemplate | [Okta EL Expression](../getting_started/okta_expression_lang.html) to generate or transform an unique username for the IdP user     | [UserName Template Object](#username-template-object)  | FALSE    | FALSE    |           |           | [Okta EL Expression](../getting_started/okta_expression_lang.html)  |
+| userNameTemplate | [Okta EL Expression](../getting_started/okta_expression_lang.html) to generate or transform a unique username for the IdP user     | [UserName Template Object](#username-template-object)  | FALSE    | FALSE    |           |           | [Okta EL Expression](../getting_started/okta_expression_lang.html)  |
 | filter           | Optional [regular expression pattern](https://en.wikipedia.org/wiki/Regular_expression) used to filter untrusted IdP usernames      | String                                                 | TRUE     | FALSE    | 0         | 1024      |                                                                     |
 | matchType        | Determines the Okta user profile attribute match conditions for account linking and authentication of the transformed IdP username  | `USERNAME`, `EMAIL`, or `USERNAME_OR_EMAIL`            | FALSE    | FALSE    |           |           |                                                                     |
 |------------------+-------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------+----------+----------+-----------+-----------+---------------------------------------------------------------------|
 
-> Defining a [regular expression pattern](https://en.wikipedia.org/wiki/Regular_expression) to filter untrusted IdP usernames for security purposes is **highly recommended**, especially if you have multiple IdPs connected to your organization.  The filter prevents and IdP from issuing an assertion for **ANY** user including partners or directory users in your Okta organization.
->
-> For example, the filter pattern `(\S+@example\.com)` will only allow users that have a `@example.com` username suffix and would reject assertions that have any other suffix such as `@corp.example.com` or `@partner.com`
+Property Details
 
-> Only `SAML2` IdP providers support the `filter` property
+* Defining a [regular expression pattern](https://en.wikipedia.org/wiki/Regular_expression) to filter untrusted IdP usernames for security purposes is **highly recommended**, especially if you have multiple IdPs connected to your organization.  The filter prevents and IdP from issuing an assertion for **ANY** user including partners or directory users in your Okta organization.
+   For example, the filter pattern `(\S+@example\.com)` will only allow users that have a `@example.com` username suffix and would reject assertions that have any other suffix such as `@corp.example.com` or `@partner.com`.
+
+* Only `SAML2` IdP providers support the `filter` property.
 
 ~~~json
 {
@@ -1030,9 +1046,12 @@ Specifies the behavior for establishing, validating, and matching a username for
 | template | [Okta EL Expression](../getting_started/okta_expression_lang.html) to generate or transform an unique username for the IdP user  | String   | FALSE    | FALSE    | 9         | 1024      | [Okta EL Expression](../getting_started/okta_expression_lang.html) |
 |----------+----------------------------------------------------------------------------------------------------------------------------------+----------+----------+----------+-----------+-----------+--------------------------------------------------------------------|
 
-> IdP user profile attributes can be referenced with the `idpuser` prefix such as `idpuser.subjectNameId`
+Property Details
 
-> You must define a IdP user profile attribute before it can be referenced in an Okta EL expression which may required first creating an new IdP instance without a base profile property, editing the IdP user profile, then updating the IdP instance with an expression that references the newly added IdP user profile attribute.
+* IdP user profile attributes can be referenced with the `idpuser` prefix such as `idpuser.subjectNameId`.
+
+* You must define a IdP user profile attribute before it can be referenced in an Okta EL expression. To define an IdP user attribute policy, you may need to create a new IdP instance without a base profile property, edit the IdP user profile, 
+   then update the IdP instance with an expression that references the IdP user profile attribute you just created.
 
 ~~~json
 {
@@ -1044,7 +1063,9 @@ Specifies the behavior for establishing, validating, and matching a username for
 
 #### OAuth 2.0 Authorization Server Endpoint Object
 
-Endpoint for an [OAuth 2.0 Authorization Server (AS)](https://tools.ietf.org/html/rfc6749#page-18)
+Endpoint for an [OAuth 2.0 Authorization Server (AS)](https://tools.ietf.org/html/rfc6749#page-18).
+
+The IdP Authorization Server (AS) endpoints are defined as part of the [IdP provider](#identity-provider-type) and are read only.
 
 |-------------+-----------------------------------------------------------------------------+----------------------------------+----------+----------+-----------+-----------+-------------------------------------------------|
 | Property    | Description                                                                 | DataType                         | Nullable | Readonly | MinLength | MaxLength | Validation                                      |
@@ -1052,8 +1073,6 @@ Endpoint for an [OAuth 2.0 Authorization Server (AS)](https://tools.ietf.org/htm
 | url         | URL of IdP Authorization Server (AS) endpoint                               | String                           | TRUE     | TRUE     | 11        |           | [RFC 3986](https://tools.ietf.org/html/rfc3986) |
 | binding     | HTTP binding used to send request to IdP Authorization Server (AS) endpoint | `HTTP-POST` or `HTTP-Redirect`   | TRUE     | TRUE     |           |           |                                                 |
 |-------------+-----------------------------------------------------------------------------+----------------------------------+----------+----------+-----------+-----------+-------------------------------------------------|
-
-> The IdP Authorization Server (AS) endpoints are currently defined as part of the [IdP provider](#identity-provider-type) and are **read-only**
 
 ~~~json
 {
@@ -1066,7 +1085,7 @@ Endpoint for an [OAuth 2.0 Authorization Server (AS)](https://tools.ietf.org/htm
 
 #### Callout Object
 
-Webhook settings for an IdP provisioning or account link transaction
+Webhook settings for an IdP provisioning or account link transaction:
 
 |---------------+-------------------------------------------------------------------------------+---------------------------------------------------------------+----------+----------+-----------+-----------+-------------------------------------------------|
 | Property      | Description                                                                   | DataType                                                      | Nullable | Readonly | MinLength | MaxLength | Validation                                      |
@@ -1093,7 +1112,7 @@ Webhook settings for an IdP provisioning or account link transaction
 
 ##### Callout Authorization Object
 
-Webhook authorization settings for an IdP provisioning or account link transaction
+Webhook authorization settings for an IdP provisioning or account link transaction:
 
 |------------+-----------------------------------+-------------------------------------------------------------+----------+----------+-----------+-----------+------------|
 | Property   | Description                       | DataType                                                    | Nullable | Readonly | MinLength | MaxLength | Validation |
@@ -1103,9 +1122,10 @@ Webhook authorization settings for an IdP provisioning or account link transacti
 | custom     | Custom key/value HTTP headers     | Object                                                      | FALSE    | FALSE    |           |           |            |
 |------------+-----------------------------------+-------------------------------------------------------------+----------+----------+-----------+-----------+------------|
 
-> A null value specifies that no authorization scheme shall be used for a callout
+Property Details
 
-> Authorization schemes are mutually exclusive and a single scheme must be selected
+* A null value specifies that no authorization scheme is used for a callout.
+* Authorization schemes are mutually exclusive. Specify a single scheme per callout.
 
 ###### Basic Authorization Scheme
 
@@ -1147,7 +1167,9 @@ Webhook authorization settings for an IdP provisioning or account link transacti
 
 ### Links Object
 
-Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the IdP using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  This object is used for dynamic discovery of related resources and lifecycle operations.
+Specifies link relationships (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the IdP 
+using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  
+This object is used for dynamic discovery of related resources and lifecycle operations, and is read only.
 
 |--------------------+-----------------------------------------------------------------------------------------------------------------------------------|
 | Link Relation Type | Description                                                                                                                       |
@@ -1160,11 +1182,9 @@ Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988))
 | users              | IdP Users                                                                                                                         |
 |--------------------+-----------------------------------------------------------------------------------------------------------------------------------|
 
-> The Links Object is **read-only**.
-
 ## Identity Provider Transaction Model
 
-The Identity Provider Transaction Model represents a account link or just-in-time (JIT) provisioning transaction
+The Identity Provider Transaction Model represents an account link or just-in-time (JIT) provisioning transaction.
 
 ### Example
 
@@ -1213,6 +1233,7 @@ The Identity Provider Transaction Model represents a account link or just-in-tim
 ### Identity Provider Transaction Attributes
 
 All IdP transactions have the following properties:
+TODO: Isn't this read only?
 
 |---------------+----------------------------------------------------------------------------------------+-----------------------------------------------------------------+----------|--------|----------|-----------|-----------+------------|
 | Property      | Description                                                                            | DataType                                                        | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
@@ -1228,11 +1249,12 @@ All IdP transactions have the following properties:
 | _embedded     | embedded resources related to the transaction                                          | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)  | TRUE     | FALSE  | TRUE     |           |           |            |
 |---------------+----------------------------------------------------------------------------------------+-----------------------------------------------------------------+----------|--------|----------|-----------|-----------+------------|
 
-> The `sessionToken` is only available for completed transactions with the `SUCCESS` status
+> The `sessionToken` is only available for completed transactions with the `SUCCESS` status.
 
 #### Identity Provider Authority Object
 
-Metadata about the IdP that authenticated the user
+Metadata about the IdP that authenticated the user:
+TODO: isn't this read only?
 
 |----------+-------------------------+---------------------------------------------------+----------|--------|----------|-----------|-----------+------------|
 | Property | Description             | DataType                                          | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
@@ -1254,7 +1276,8 @@ Metadata about the IdP that authenticated the user
 
 #### Identity Provider Transaction Context Object
 
-Additional context that describes the HTTP client for the transaction
+Additional context that describes the HTTP client for the transaction:
+TODO: Read only?
 
 |---------------+----------------------------------------+----------------------------+----------|--------|----------|-----------|-----------+------------|
 | Property      | Description                            | DataType                   | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
@@ -1274,7 +1297,8 @@ Additional context that describes the HTTP client for the transaction
 
 ### Links Object
 
-Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the IdP transaction using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  This object is used for dynamic discovery of related resources and lifecycle operations.
+Specifies link relationships (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the IdP transaction using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  
+This object is used for dynamic discovery of related resources and lifecycle operations, and is read only.
 
 |--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Link Relation Type | Description                                                                                                                                                                                         |
@@ -1286,8 +1310,6 @@ Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988))
 | next               | Completes the transaction                                                                                                                                                                           |
 | cancel             | Cancels the transaction                                                                                                                                                                             |
 |--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-
-> The Links Object is **read-only**.
 
 ## Identity Provider Key Credential Model
 
@@ -1331,7 +1353,7 @@ IdP credential keys have the following properties:
 
 ## Identity Provider User Model
 
-The Identity Provider User Model represents a linked user and their IdP user profile
+The Identity Provider User Model represents a linked user and their IdP user profile.
 
 ### Example
 
@@ -1379,6 +1401,7 @@ The Identity Provider User Model represents a linked user and their IdP user pro
 ### Identity Provider User Properties
 
 All linked IdP users have the following properties:
+TODO: Read only?
 
 |------------------+--------------------------------------------------------------+---------------------------------------------------------------------------------|----------|--------|----------|-----------|-----------+------------|
 | Property         | Description                                                  | DataType                                                                        | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
@@ -1426,7 +1449,8 @@ Identity Provider user profiles are IdP-specific but may be customized by the Pr
 
 ### Links Object
 
-Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the IdP user using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  This object is used for dynamic discovery of related resources and lifecycle operations.
+Specifies link relationships (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the IdP user using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.
+This object is used for dynamic discovery of related resources and lifecycle operations, and is read only.
 
 |--------------------+------------------------------------|
 | Link Relation Type | Description                        |
@@ -1436,8 +1460,6 @@ Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988))
 | users              | The linked [Okta user](users.html) |
 |--------------------+------------------------------------|
 
-> The Links Object is **read-only**.
-
 ## Identity Provider Operations
 
 ### Add Identity Provider
@@ -1445,12 +1467,13 @@ Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988))
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /idps</span>
 
-Adds a new IdP to your organization
+Adds a new IdP to your organization.
 
 - [Add SAML 2.0 Identity Provider](#add-saml-20-identity-provider)
 - [Add Facebook Identity Provider](#add-facebook-identity-provider)
 - [Add Google Identity Provider](#add-google-identity-provider)
 - [Add LinkedIn Identity Provider](#add-linkedin-identity-provider)
+- [Add Microsoft Identity Provider](#add-microsoft-identity-provider)
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -1469,7 +1492,7 @@ The created [Identity Provider](#identity-provider-model)
 
 Adds a new `SAML2` type IdP to your organization
 
-> You must first add the IdP's signature certificate to the IdP key store before you can add a SAML 2.0 IdP with a `kid` credential reference
+> You must first add the IdP's signature certificate to the IdP key store before you can add a SAML 2.0 IdP with a `kid` credential reference.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1480,21 +1503,182 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-
-}' "https://${org}.okta.com/api/v1/idps"
+      "type": "SAML2",
+      "name": "Example IdP",
+      "protocol": {
+        "type": "SAML2",
+        "endpoints": {
+          "sso": {
+            "url": "https://idp.example.com",
+            "binding": "HTTP-POST",
+            "destination": "https://idp.example.com"
+          },
+          "acs": {
+            "binding": "HTTP-POST",
+            "type": "INSTANCE"
+          }
+        },
+        "algorithms": {
+          "request": {
+            "signature": {
+              "algorithm": "SHA-256",
+              "scope": "REQUEST"
+            }
+          },
+          "response": {
+            "signature": {
+              "algorithm": "SHA-256",
+              "scope": "ANY"
+            }
+          }
+        },
+        "credentials": {
+          "trust": {
+            "issuer": "https://idp.example.com",
+            "audience": "http://www.okta.com/123",
+            "kid": "c166e29c-a12b-4d19-aac2-fa60a9593a75"
+          }
+        }
+      },
+      "policy": {
+        "provisioning": {
+          "action": "AUTO",
+          "profileMaster": true,
+          "groups": {
+            "action": "NONE"
+          }
+        },
+        "accountLink": {
+          "filter": null,
+          "action": "AUTO"
+        },
+        "subject": {
+          "userNameTemplate": {
+            "template": "saml.subjectNameId"
+          },
+          "format": [
+              "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
+          ],
+          "filter": "(\\S+@example\\.com)",
+          "matchType": "USERNAME"
+        }
+      }
+    }' "https://${org}.okta.com/api/v1/idps"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
 ~~~json
-
+{
+  "id": "0oa62bc8wppPw0UGr0h7",
+  "type": "SAML2",
+  "name": "Example IdP",
+  "status": "ACTIVE",
+  "created": "2016-03-24T23:14:54.000Z",
+  "lastUpdated": "2016-03-24T23:14:54.000Z",
+  "protocol": {
+    "type": "SAML2",
+    "endpoints": {
+      "sso": {
+        "url": "https://idp.example.com",
+        "binding": "HTTP-POST",
+        "destination": "https://idp.example.com"
+      },
+      "acs": {
+        "binding": "HTTP-POST",
+        "type": "INSTANCE"
+      }
+    },
+    "algorithms": {
+      "request": {
+        "signature": {
+          "algorithm": "SHA-256",
+          "scope": "REQUEST"
+        }
+      },
+      "response": {
+        "signature": {
+          "algorithm": "SHA-256",
+          "scope": "ANY"
+        }
+      }
+    },
+    "settings": {
+      "nameFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
+    },
+    "credentials": {
+      "trust": {
+        "issuer": "https://idp.example.com",
+        "audience": "http://www.okta.com/123",
+        "kid": "c166e29c-a12b-4d19-aac2-fa60a9593a75"
+      }
+    }
+  },
+  "policy": {
+    "provisioning": {
+      "action": "AUTO",
+      "profileMaster": true,
+      "groups": {
+        "action": "NONE"
+      }
+    },
+    "accountLink": {
+      "filter": null,
+      "action": "AUTO"
+    },
+    "subject": {
+      "userNameTemplate": {
+        "template": "saml.subjectNameId"
+      },
+      "filter": "(\\S+@example\\.com)",
+      "matchType": "USERNAME"
+    },
+    "maxClockSkew": 0
+  },
+  "_links": {
+    "metadata": {
+      "href": "https://your-domain.okta.com/api/v1/idps/0oa62bc8wppPw0UGr0h7/metadata.xml",
+      "type": "application/xml",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    },
+    "acs": {
+      "href": "https://your-domain.okta.com/sso/saml2/0oa62bc8wppPw0UGr0h7",
+      "type": "application/xml",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "users": {
+      "href": "https://your-domain.okta.com/api/v1/idps/0oa62bc8wppPw0UGr0h7/users",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    },
+    "deactivate": {
+      "href": "https://your-domain.okta.com/api/v1/idps/0oa62bc8wppPw0UGr0h7/lifecycle/deactivate",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
 ~~~
 
 #### Add Facebook Identity Provider
 {:.api .api-operation}
 
-Adds a new `FACEBOOK` type IdP to your organization
+Adds a new `FACEBOOK` type IdP to your organization.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1505,21 +1689,127 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-
-}' "https://${org}.okta.com/api/v1/idps"
+      "type": "FACEBOOK",
+      "name": "Facebook",
+      "protocol": {
+        "type": "OAUTH2",
+        "scopes": [
+          "public_profile",
+          "email"
+        ],
+        "credentials": {
+          "client": {
+            "client_id": "1565799993707161",
+            "client_secret": "9f86154a68278b62748f255e3e7db604"
+          }
+        }
+      },
+      "policy": {
+        "provisioning": {
+          "action": "AUTO",
+          "profileMaster": true,
+          "groups": {
+            "action": "NONE"
+          }
+        },
+        "accountLink": {
+          "filter": null,
+          "action": "AUTO"
+        },
+        "subject": {
+          "userNameTemplate": {
+            "template": "appuser.email",
+            "type": null
+          },
+          "filter": null,
+          "matchType": "USERNAME"
+        },
+        "maxClockSkew": 0
+      }
+    }' "https://${org}.okta.com/api/v1/idps"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
 ~~~json
-
+{
+  "id": "0oa62b57p7c8PaGpU0h7",
+  "type": "FACEBOOK",
+  "name": "Facebook",
+  "status": "ACTIVE",
+  "created": "2016-03-24T23:18:27.000Z",
+  "lastUpdated": "2016-03-24T23:18:27.000Z",
+  "protocol": {
+    "type": "OAUTH2",
+    "endpoints": {
+      "authorization": {
+        "url": "https://www.facebook.com/dialog/oauth",
+        "binding": "HTTP-REDIRECT"
+      },
+      "token": {
+        "url": "https://graph.facebook.com/v2.5/oauth/access_token",
+        "binding": "HTTP-POST"
+      }
+    },
+    "scopes": [
+      "public_profile",
+      "email"
+    ],
+    "credentials": {
+      "client": {
+        "client_id": "1565799993707161",
+        "client_secret": "9f86154a68278b62748f255e3e7db604"
+      }
+    }
+  },
+  "policy": {
+    "provisioning": {
+      "action": "AUTO",
+      "profileMaster": true,
+      "groups": {
+        "action": "NONE"
+      }
+    },
+    "accountLink": {
+      "filter": null,
+      "action": "AUTO"
+    },
+    "subject": {
+      "userNameTemplate": {
+        "template": "appuser.email"
+      },
+      "filter": null,
+      "matchType": "USERNAME"
+    },
+    "maxClockSkew": 0
+  },
+  "_links": {
+    "authorize": {
+      "href": "https://your-domain.okta.com/oauth2/v1/authorize?idp=0oa62b57p7c8PaGpU0h7&client_id={clientId}&response_type={responseType}&response_mode={responseMode}&scope={scopes}&redirect_uri={redirectUri}&state={state}",
+      "templated": true,
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    },
+    "clientRedirectUri": {
+      "href": "https://your-domain.okta.com/oauth2/v1/authorize/callback",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
 ~~~
 
 #### Add Google Identity Provider
 {:.api .api-operation}
 
-Adds a new `Google` type IdP to your organization
+Adds a new `Google` type IdP to your organization.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1530,21 +1820,129 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-
-}' "https://${org}.okta.com/api/v1/idps"
+      "type": "GOOGLE",
+      "name": "Google",
+      "protocol": {
+        "type": "OAUTH2",
+        "scopes": [
+          "profile",
+          "email",
+          "openid"
+        ],
+        "credentials": {
+          "client": {
+            "client_id": "430731646638-sq6oeve9f6rpm2rne289nukind6f1qgk.apps.googleusercontent.com",
+            "client_secret": "kOgHsuPDawNDSkkaAKvv6SMh"
+          }
+        }
+      },
+      "policy": {
+        "provisioning": {
+          "action": "AUTO",
+          "profileMaster": true,
+          "groups": {
+            "action": "NONE"
+          }
+        },
+        "accountLink": {
+          "filter": null,
+          "action": "AUTO"
+        },
+        "subject": {
+          "userNameTemplate": {
+            "template": "appuser.email",
+            "type": null
+          },
+          "filter": null,
+          "matchType": "USERNAME"
+        },
+        "maxClockSkew": 0
+      }
+    }' "https://${org}.okta.com/api/v1/idps"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
 ~~~json
-
+{
+  "id": "0oa62bfdiumsUndnZ0h7",
+  "type": "GOOGLE",
+  "name": "Google",
+  "status": "ACTIVE",
+  "created": "2016-03-24T23:21:49.000Z",
+  "lastUpdated": "2016-03-24T23:21:49.000Z",
+  "protocol": {
+    "type": "OIDC",
+    "endpoints": {
+      "authorization": {
+        "url": "https://accounts.google.com/o/oauth2/auth",
+        "binding": "HTTP-REDIRECT"
+      },
+      "token": {
+        "url": "https://www.googleapis.com/oauth2/v3/token",
+        "binding": "HTTP-POST"
+      }
+    },
+    "scopes": [
+      "profile",
+      "email",
+      "openid"
+    ],
+    "credentials": {
+      "client": {
+        "client_id": "430731646638-sq6oeve9f6rpm2rne289nukind6f1qgk.apps.googleusercontent.com",
+        "client_secret": "kOgHsuPDawNDSkkaAKvv6SMh"
+      }
+    }
+  },
+  "policy": {
+    "provisioning": {
+      "action": "AUTO",
+      "profileMaster": true,
+      "groups": {
+        "action": "NONE"
+      }
+    },
+    "accountLink": {
+      "filter": null,
+      "action": "AUTO"
+    },
+    "subject": {
+      "userNameTemplate": {
+        "template": "appuser.email"
+      },
+      "filter": null,
+      "matchType": "USERNAME"
+    },
+    "maxClockSkew": 0
+  },
+  "_links": {
+    "authorize": {
+      "href": "https://your-domain.okta.com/oauth2/v1/authorize?idp=0oa62bfdiumsUndnZ0h7&client_id={clientId}&response_type={responseType}&response_mode={responseMode}&scope={scopes}&redirect_uri={redirectUri}&state={state}",
+      "templated": true,
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    },
+    "clientRedirectUri": {
+      "href": "https://your-domain.okta.com/oauth2/v1/authorize/callback",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
 ~~~
 
 #### Add LinkedIn Identity Provider
 {:.api .api-operation}
 
-Adds a new `LINKEDIN` type IdP to your organization
+Adds a new `LINKEDIN` type IdP to your organization.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1555,23 +1953,155 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-
-}' "https://${org}.okta.com/api/v1/idps"
+      "type": "LINKEDIN",
+      "name": "Linked In",
+      "protocol": {
+        "type": "OAUTH2",
+        "scopes": [
+          "r_basicprofile",
+          "r_emailaddress"
+        ],
+        "credentials": {
+          "client": {
+            "client_id": "123456789",
+            "client_secret": "kOgHsuPDawNDSkkaAKvv6SMh"
+          }
+        }
+      },
+      "policy": {
+        "provisioning": {
+          "action": "AUTO",
+          "profileMaster": true,
+          "groups": {
+            "action": "NONE"
+          }
+        },
+        "accountLink": {
+          "filter": null,
+          "action": "AUTO"
+        },
+        "subject": {
+          "userNameTemplate": {
+            "template": "appuser.email",
+            "type": null
+          },
+          "filter": null,
+          "matchType": "USERNAME"
+        },
+        "maxClockSkew": 0
+      }
+    }' "https://${org}.okta.com/api/v1/idps"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
 ~~~json
-
+{
+  "id": "0oa62bfdjnK55Z5x80h7",
+  "type": "LINKEDIN",
+  "name": "Linked In",
+  "status": "ACTIVE",
+  "created": "2016-03-24T23:23:59.000Z",
+  "lastUpdated": "2016-03-24T23:23:59.000Z",
+  "protocol": {
+    "type": "OAUTH2",
+    "endpoints": {
+      "authorization": {
+        "url": "https://www.linkedin.com/uas/oauth2/authorization",
+        "binding": "HTTP-REDIRECT"
+      },
+      "token": {
+        "url": "https://www.linkedin.com/uas/oauth2/accessToken",
+        "binding": "HTTP-POST"
+      }
+    },
+    "scopes": [
+      "r_basicprofile",
+      "r_emailaddress"
+    ],
+    "credentials": {
+      "client": {
+        "client_id": "123456789",
+        "client_secret": "kOgHsuPDawNDSkkaAKvv6SMh"
+      }
+    }
+  },
+  "policy": {
+    "provisioning": {
+      "action": "AUTO",
+      "profileMaster": true,
+      "groups": {
+        "action": "NONE"
+      }
+    },
+    "accountLink": {
+      "filter": null,
+      "action": "AUTO"
+    },
+    "subject": {
+      "userNameTemplate": {
+        "template": "appuser.email"
+      },
+      "filter": null,
+      "matchType": "USERNAME"
+    },
+    "maxClockSkew": 0
+  },
+  "_links": {
+    "authorize": {
+      "href": "https://your-domain.okta.com/oauth2/v1/authorize?idp=0oa62bfdjnK55Z5x80h7&client_id={clientId}&response_type={responseType}&response_mode={responseMode}&scope={scopes}&redirect_uri={redirectUri}&state={state}",
+      "templated": true,
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    },
+    "clientRedirectUri": {
+      "href": "https://your-domain.okta.com/oauth2/v1/authorize/callback",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
 ~~~
+
+#### Add Microsoft Identity Provider
+{:.api .api-operation}
+
+Adds a new `Microsoft` type IdP to your organization.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+TODO: Get from Lars' postman update)
+}
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+TODO: {Get from Lars' postman update)
+~~~
+
 
 ### Get Identity Provider
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /idps/*:id*</span>
 
-Fetches a specific IdP by `id` from your organization
+Fetches an IdP by `id`.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -1586,21 +2116,90 @@ id        | `id` of an IdP  | URL        | String   | TRUE     |
 [Identity Provider](#identity-provider-model)
 
 ##### Request Example
-{:.api .api-request .api-request-example}
 
 ~~~sh
 curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/idps/0oabzr1fHCHDNsiko0g4"
+"https://${org}.okta.com/api/v1/idps/0oa62bfdjnK55Z5x80h7"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
 ~~~json
-
+{
+  "id": "0oa62bfdjnK55Z5x80h7",
+  "type": "LINKEDIN",
+  "name": "Linked In",
+  "status": "ACTIVE",
+  "created": "2016-03-24T23:23:59.000Z",
+  "lastUpdated": "2016-03-24T23:23:59.000Z",
+  "protocol": {
+    "type": "OAUTH2",
+    "endpoints": {
+      "authorization": {
+        "url": "https://www.linkedin.com/uas/oauth2/authorization",
+        "binding": "HTTP-REDIRECT"
+      },
+      "token": {
+        "url": "https://www.linkedin.com/uas/oauth2/accessToken",
+        "binding": "HTTP-POST"
+      }
+    },
+    "scopes": [
+      "r_basicprofile",
+      "r_emailaddress"
+    ],
+    "credentials": {
+      "client": {
+        "client_id": "123456789",
+        "client_secret": "kOgHsuPDawNDSkkaAKvv6SMh"
+      }
+    }
+  },
+  "policy": {
+    "provisioning": {
+      "action": "AUTO",
+      "profileMaster": true,
+      "groups": {
+        "action": "NONE"
+      }
+    },
+    "accountLink": {
+      "filter": null,
+      "action": "AUTO"
+    },
+    "subject": {
+      "userNameTemplate": {
+        "template": "appuser.email"
+      },
+      "filter": null,
+      "matchType": "USERNAME"
+    },
+    "maxClockSkew": 0
+  },
+  "_links": {
+    "authorize": {
+      "href": "https://your-domain.okta.com/oauth2/v1/authorize?idp=0oa62bfdjnK55Z5x80h7&client_id={clientId}&response_type={responseType}&response_mode={responseMode}&scope={scopes}&redirect_uri={redirectUri}&state={state}",
+      "templated": true,
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    },
+    "clientRedirectUri": {
+      "href": "https://your-domain.okta.com/oauth2/v1/authorize/callback",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
 ~~~
 
 ### List Identity Providers
@@ -1611,7 +2210,7 @@ curl -v -X GET \
 Enumerates IdPs in your organization with pagination. A subset of IdPs can be returned that match a supported filter expression or query.
 
 - [List Identity Providers with Defaults](#list-identity-providers-with-defaults)
-- [Search Identity Providers](#search-identity-providers)
+- [List Identity Providers with a Filter](#list-identity-providers-with-a-filter)
 - [List Identity Providers with Type](#list-identity-providers-with-type)
 
 ##### Request Parameters
@@ -1624,9 +2223,10 @@ type      | Filters IdPs by `type`                                              
 limit     | Specifies the number of IdP results in a page                                              | Query      | Number   | FALSE    | 20
 after     | Specifies the pagination cursor for the next page of IdPs                                  | Query      | String   | FALSE    |
 
-> The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination)
+Parameter Details
 
-> Search currently performs a startsWith match but it should be considered an implementation detail and may change without notice in the future
+* The `after` cursor should treated as an opaque value and obtained through the next link relationship. See [Pagination](/docs/api/getting_started/design_principles.html#pagination).
+* Search currently performs a startsWith match but it should be considered an implementation detail and may change without notice in the future.
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -1646,29 +2246,340 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/idps"
+"https://${org}.okta.com/api/v1/idps?limit=20"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~http
-HTTP/1.1 200 OK
-Content-Type: application/json
-Link: <https://your-domain.okta.com/api/v1/idps?limit=20>; rel="self"
-Link: <https://your-domain.okta.com/api/v1/idps?after=0oaxdqpA88PtFNmhu0g3&limit=20>; rel="next"
-
+~~~json
 [
-
+  {
+    "id": "0oa62b57p7c8PaGpU0h7",
+    "type": "FACEBOOK",
+    "name": "Facebook",
+    "status": "ACTIVE",
+    "created": "2016-03-24T23:18:27.000Z",
+    "lastUpdated": "2016-03-24T23:18:27.000Z",
+    "protocol": {
+      "type": "OAUTH2",
+      "endpoints": {
+        "authorization": {
+          "url": "https://www.facebook.com/dialog/oauth",
+          "binding": "HTTP-REDIRECT"
+        },
+        "token": {
+          "url": "https://graph.facebook.com/v2.5/oauth/access_token",
+          "binding": "HTTP-POST"
+        }
+      },
+      "scopes": [
+        "public_profile",
+        "email"
+      ],
+      "credentials": {
+        "client": {
+          "client_id": "1565799993707161",
+          "client_secret": "9f86154a68278b62748f255e3e7db604"
+        }
+      }
+    },
+    "policy": {
+      "provisioning": {
+        "action": "AUTO",
+        "profileMaster": true,
+        "groups": {
+          "action": "NONE"
+        }
+      },
+      "accountLink": {
+        "filter": null,
+        "action": "AUTO"
+      },
+      "subject": {
+        "userNameTemplate": {
+          "template": "appuser.email"
+        },
+        "filter": null,
+        "matchType": "USERNAME"
+      },
+      "maxClockSkew": 0
+    },
+    "_links": {
+      "authorize": {
+        "href": "https://your-domain.okta.com/oauth2/v1/authorize?idp=0oa62b57p7c8PaGpU0h7&client_id={clientId}&response_type={responseType}&response_mode={responseMode}&scope={scopes}&redirect_uri={redirectUri}&state={state}",
+        "templated": true,
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      },
+      "clientRedirectUri": {
+        "href": "https://your-domain.okta.com/oauth2/v1/authorize/callback",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "0oa62bc8wppPw0UGr0h7",
+    "type": "SAML2",
+    "name": "Example IdP",
+    "status": "ACTIVE",
+    "created": "2016-03-24T23:14:54.000Z",
+    "lastUpdated": "2016-03-24T23:14:54.000Z",
+    "protocol": {
+      "type": "SAML2",
+      "endpoints": {
+        "sso": {
+          "url": "https://idp.example.com",
+          "binding": "HTTP-POST",
+          "destination": "https://idp.example.com"
+        },
+        "acs": {
+          "binding": "HTTP-POST",
+          "type": "INSTANCE"
+        }
+      },
+      "algorithms": {
+        "request": {
+          "signature": {
+            "algorithm": "SHA-256",
+            "scope": "REQUEST"
+          }
+        },
+        "response": {
+          "signature": {
+            "algorithm": "SHA-256",
+            "scope": "ANY"
+          }
+        }
+      },
+      "settings": {
+        "nameFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
+      },
+      "credentials": {
+        "trust": {
+          "issuer": "https://idp.example.com",
+          "audience": "http://www.okta.com/123",
+          "kid": "c166e29c-a12b-4d19-aac2-fa60a9593a75"
+        }
+      }
+    },
+    "policy": {
+      "provisioning": {
+        "action": "AUTO",
+        "profileMaster": true,
+        "groups": {
+          "action": "NONE"
+        }
+      },
+      "accountLink": {
+        "filter": null,
+        "action": "AUTO"
+      },
+      "subject": {
+        "userNameTemplate": {
+          "template": "saml.subjectNameId"
+        },
+        "filter": "(\\S+@example\\.com)",
+        "matchType": "USERNAME"
+      },
+      "maxClockSkew": 0
+    },
+    "_links": {
+      "metadata": {
+        "href": "https://your-domain.okta.com/api/v1/idps/0oa62bc8wppPw0UGr0h7/metadata.xml",
+        "type": "application/xml",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      },
+      "acs": {
+        "href": "https://your-domain.okta.com/sso/saml2/0oa62bc8wppPw0UGr0h7",
+        "type": "application/xml",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      },
+      "users": {
+        "href": "https://your-domain.okta.com/api/v1/idps/0oa62bc8wppPw0UGr0h7/users",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      },
+      "deactivate": {
+        "href": "https://your-domain.okta.com/api/v1/idps/0oa62bc8wppPw0UGr0h7/lifecycle/deactivate",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "0oa62bfdiumsUndnZ0h7",
+    "type": "GOOGLE",
+    "name": "Google",
+    "status": "ACTIVE",
+    "created": "2016-03-24T23:21:49.000Z",
+    "lastUpdated": "2016-03-24T23:21:49.000Z",
+    "protocol": {
+      "type": "OIDC",
+      "endpoints": {
+        "authorization": {
+          "url": "https://accounts.google.com/o/oauth2/auth",
+          "binding": "HTTP-REDIRECT"
+        },
+        "token": {
+          "url": "https://www.googleapis.com/oauth2/v3/token",
+          "binding": "HTTP-POST"
+        }
+      },
+      "scopes": [
+        "profile",
+        "email",
+        "openid"
+      ],
+      "credentials": {
+        "client": {
+          "client_id": "430731646638-sq6oeve9f6rpm2rne289nukind6f1qgk.apps.googleusercontent.com",
+          "client_secret": "kOgHsuPDawNDSkkaAKvv6SMh"
+        }
+      }
+    },
+    "policy": {
+      "provisioning": {
+        "action": "AUTO",
+        "profileMaster": true,
+        "groups": {
+          "action": "NONE"
+        }
+      },
+      "accountLink": {
+        "filter": null,
+        "action": "AUTO"
+      },
+      "subject": {
+        "userNameTemplate": {
+          "template": "appuser.email"
+        },
+        "filter": null,
+        "matchType": "USERNAME"
+      },
+      "maxClockSkew": 0
+    },
+    "_links": {
+      "authorize": {
+        "href": "https://your-domain.okta.com/oauth2/v1/authorize?idp=0oa62bfdiumsUndnZ0h7&client_id={clientId}&response_type={responseType}&response_mode={responseMode}&scope={scopes}&redirect_uri={redirectUri}&state={state}",
+        "templated": true,
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      },
+      "clientRedirectUri": {
+        "href": "https://your-domain.okta.com/oauth2/v1/authorize/callback",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "0oa62bfdjnK55Z5x80h7",
+    "type": "LINKEDIN",
+    "name": "Linked In",
+    "status": "ACTIVE",
+    "created": "2016-03-24T23:23:59.000Z",
+    "lastUpdated": "2016-03-24T23:23:59.000Z",
+    "protocol": {
+      "type": "OAUTH2",
+      "endpoints": {
+        "authorization": {
+          "url": "https://www.linkedin.com/uas/oauth2/authorization",
+          "binding": "HTTP-REDIRECT"
+        },
+        "token": {
+          "url": "https://www.linkedin.com/uas/oauth2/accessToken",
+          "binding": "HTTP-POST"
+        }
+      },
+      "scopes": [
+        "r_basicprofile",
+        "r_emailaddress"
+      ],
+      "credentials": {
+        "client": {
+          "client_id": "123456789",
+          "client_secret": "kOgHsuPDawNDSkkaAKvv6SMh"
+        }
+      }
+    },
+    "policy": {
+      "provisioning": {
+        "action": "AUTO",
+        "profileMaster": true,
+        "groups": {
+          "action": "NONE"
+        }
+      },
+      "accountLink": {
+        "filter": null,
+        "action": "AUTO"
+      },
+      "subject": {
+        "userNameTemplate": {
+          "template": "appuser.email"
+        },
+        "filter": null,
+        "matchType": "USERNAME"
+      },
+      "maxClockSkew": 0
+    },
+    "_links": {
+      "authorize": {
+        "href": "https://your-domain.okta.com/oauth2/v1/authorize?idp=0oa62bfdjnK55Z5x80h7&client_id={clientId}&response_type={responseType}&response_mode={responseMode}&scope={scopes}&redirect_uri={redirectUri}&state={state}",
+        "templated": true,
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      },
+      "clientRedirectUri": {
+        "href": "https://your-domain.okta.com/oauth2/v1/authorize/callback",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      }
+    }
+  }
 ]
 ~~~
-
-#### Search Identity Providers
+ 
+#### Find Identity Providers by Name
 {:.api .api-operation}
 
 Searches for IdPs by `name` in your organization.
 
-> Search currently performs a startsWith match but it should be considered an implementation detail and may change without notice in the future. Exact matches will always be returned before partial matches
+Search currently performs a startsWith match but it should be considered an implementation detail and may change without notice in the future. Exact matches are returned before partial matches.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1686,14 +2597,116 @@ curl -v -X GET \
 
 ~~~json
 [
-
+  {
+    "id": "0oa62bc8wppPw0UGr0h7",
+    "type": "SAML2",
+    "name": "Example IdP",
+    "status": "ACTIVE",
+    "created": "2016-03-24T23:14:54.000Z",
+    "lastUpdated": "2016-03-24T23:14:54.000Z",
+    "protocol": {
+      "type": "SAML2",
+      "endpoints": {
+        "sso": {
+          "url": "https://idp.example.com",
+          "binding": "HTTP-POST",
+          "destination": "https://idp.example.com"
+        },
+        "acs": {
+          "binding": "HTTP-POST",
+          "type": "INSTANCE"
+        }
+      },
+      "algorithms": {
+        "request": {
+          "signature": {
+            "algorithm": "SHA-256",
+            "scope": "REQUEST"
+          }
+        },
+        "response": {
+          "signature": {
+            "algorithm": "SHA-256",
+            "scope": "ANY"
+          }
+        }
+      },
+      "settings": {
+        "nameFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
+      },
+      "credentials": {
+        "trust": {
+          "issuer": "https://idp.example.com",
+          "audience": "http://www.okta.com/123",
+          "kid": "c166e29c-a12b-4d19-aac2-fa60a9593a75"
+        }
+      }
+    },
+    "policy": {
+      "provisioning": {
+        "action": "AUTO",
+        "profileMaster": true,
+        "groups": {
+          "action": "NONE"
+        }
+      },
+      "accountLink": {
+        "filter": null,
+        "action": "AUTO"
+      },
+      "subject": {
+        "userNameTemplate": {
+          "template": "saml.subjectNameId"
+        },
+        "filter": "(\\S+@example\\.com)",
+        "matchType": "USERNAME"
+      },
+      "maxClockSkew": 0
+    },
+    "_links": {
+      "metadata": {
+        "href": "https://your-domain.okta.com/api/v1/idps/0oa62bc8wppPw0UGr0h7/metadata.xml",
+        "type": "application/xml",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      },
+      "acs": {
+        "href": "https://your-domain.okta.com/sso/saml2/0oa62bc8wppPw0UGr0h7",
+        "type": "application/xml",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      },
+      "users": {
+        "href": "https://your-domain.okta.com/api/v1/idps/0oa62bc8wppPw0UGr0h7/users",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      },
+      "deactivate": {
+        "href": "https://your-domain.okta.com/api/v1/idps/0oa62bc8wppPw0UGr0h7/lifecycle/deactivate",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      }
+    }
+  }
 ]
 ~~~
 
-#### List Identity Providers with Type
+#### Find Identity Providers by Type
 {:.api .api-operation}
 
-Enumerates all IdPs with a [specific type](#identity-provider-type)
+Finds all IdPs with a [specific type](#identity-provider-type).
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1716,7 +2729,109 @@ Link: <https://your-domain.okta.com/api/v1/idps?limit=20>; rel="self"
 Link: <https://your-domain.okta.com/api/v1/idps?after=0oaxdqpA88PtFNmhu0g3&limit=20>; rel="next"
 
 [
-
+  {
+    "id": "0oa62bc8wppPw0UGr0h7",
+    "type": "SAML2",
+    "name": "Example IdP",
+    "status": "ACTIVE",
+    "created": "2016-03-24T23:14:54.000Z",
+    "lastUpdated": "2016-03-24T23:14:54.000Z",
+    "protocol": {
+      "type": "SAML2",
+      "endpoints": {
+        "sso": {
+          "url": "https://idp.example.com",
+          "binding": "HTTP-POST",
+          "destination": "https://idp.example.com"
+        },
+        "acs": {
+          "binding": "HTTP-POST",
+          "type": "INSTANCE"
+        }
+      },
+      "algorithms": {
+        "request": {
+          "signature": {
+            "algorithm": "SHA-256",
+            "scope": "REQUEST"
+          }
+        },
+        "response": {
+          "signature": {
+            "algorithm": "SHA-256",
+            "scope": "ANY"
+          }
+        }
+      },
+      "settings": {
+        "nameFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
+      },
+      "credentials": {
+        "trust": {
+          "issuer": "https://idp.example.com",
+          "audience": "http://www.okta.com/123",
+          "kid": "c166e29c-a12b-4d19-aac2-fa60a9593a75"
+        }
+      }
+    },
+    "policy": {
+      "provisioning": {
+        "action": "AUTO",
+        "profileMaster": true,
+        "groups": {
+          "action": "NONE"
+        }
+      },
+      "accountLink": {
+        "filter": null,
+        "action": "AUTO"
+      },
+      "subject": {
+        "userNameTemplate": {
+          "template": "saml.subjectNameId"
+        },
+        "filter": "(\\S+@example\\.com)",
+        "matchType": "USERNAME"
+      },
+      "maxClockSkew": 0
+    },
+    "_links": {
+      "metadata": {
+        "href": "https://your-domain.okta.com/api/v1/idps/0oa62bc8wppPw0UGr0h7/metadata.xml",
+        "type": "application/xml",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      },
+      "acs": {
+        "href": "https://your-domain.okta.com/sso/saml2/0oa62bc8wppPw0UGr0h7",
+        "type": "application/xml",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      },
+      "users": {
+        "href": "https://your-domain.okta.com/api/v1/idps/0oa62bc8wppPw0UGr0h7/users",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      },
+      "deactivate": {
+        "href": "https://your-domain.okta.com/api/v1/idps/0oa62bc8wppPw0UGr0h7/lifecycle/deactivate",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      }
+    }
+  }
 ]
 ~~~
 
@@ -1725,7 +2840,7 @@ Link: <https://your-domain.okta.com/api/v1/idps?after=0oaxdqpA88PtFNmhu0g3&limit
 
 <span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /idps/*:id*</span>
 
-Updates the configuration for an IdP
+Updates the configuration for an IdP.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -1735,12 +2850,14 @@ Parameter | Description                       | Param Type | DataType           
 id        | id of the group to update         | URL        | String                                        | TRUE     |
 idp       | Updated configuration for the IdP | Body       | [Identity Provider](#identity-provider-model) | TRUE     |
 
-> All properties must be specified when updating IdP configuration, **partial updates are not supported!**
+All properties must be specified when updating IdP configuration. Partial updates are not supported.
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
 Updated [Identity Provider](#identity-provider-model)
+
+TODO: When I substititue an idps id in postman, this request fails.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1759,8 +2876,10 @@ curl -v -X PUT \
 {:.api .api-response .api-response-example}
 
 ~~~json
-
+TODO: Needs valid response.
 ~~~
+
+TODO: need a valid example when parameter is idp, not id. Need help.
 
 ### Delete Identity Provider
 {:.api .api-operation}
@@ -1769,9 +2888,8 @@ curl -v -X PUT \
 
 Removes an IdP from your organization.
 
-> All existing IdP users will be automatically unlinked with the highest order profile master taking precedence for each IdP user
->
-> Unlinked users will keep their existing authentication provider such as `FEDERATION` or `SOCIAL`.
+* All existing IdP users are unlinked with the highest-order profile master taking precedence for each IdP user.
+* Unlinked users keep their existing authentication provider such as `FEDERATION` or `SOCIAL`.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -1783,7 +2901,7 @@ id        | `id` of the IdP to delete   | URL        | String    | TRUE     |
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-N/A
+There are no response parameters.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1833,14 +2951,85 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/idps/0oa1k5d68qR2954hb0g4/lifecycle/activate"
+"https://${org}.okta.com/api/v1/idps/0oa62bfdiumsUndnZ0h7/lifecycle/activate"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
 ~~~json
-
+{
+  "id": "0oa62bfdiumsUndnZ0h7",
+  "type": "GOOGLE",
+  "name": "Google",
+  "status": "ACTIVE",
+  "created": "2016-03-24T23:21:49.000Z",
+  "lastUpdated": "2016-03-25T19:14:23.000Z",
+  "protocol": {
+    "type": "OIDC",
+    "endpoints": {
+      "authorization": {
+        "url": "https://accounts.google.com/o/oauth2/auth",
+        "binding": "HTTP-REDIRECT"
+      },
+      "token": {
+        "url": "https://www.googleapis.com/oauth2/v3/token",
+        "binding": "HTTP-POST"
+      }
+    },
+    "scopes": [
+      "profile",
+      "email",
+      "openid"
+    ],
+    "credentials": {
+      "client": {
+        "client_id": "430731646638-sq6oeve9f6rpm2rne289nukind6f1qgk.apps.googleusercontent.com",
+        "client_secret": "kOgHsuPDawNDSkkaAKvv6SMh"
+      }
+    }
+  },
+  "policy": {
+    "provisioning": {
+      "action": "AUTO",
+      "profileMaster": true,
+      "groups": {
+        "action": "NONE"
+      }
+    },
+    "accountLink": {
+      "filter": null,
+      "action": "AUTO"
+    },
+    "subject": {
+      "userNameTemplate": {
+        "template": "appuser.email"
+      },
+      "filter": null,
+      "matchType": "USERNAME"
+    },
+    "maxClockSkew": 0
+  },
+  "_links": {
+    "authorize": {
+      "href": "https://your-domain.okta.com/oauth2/v1/authorize?idp=0oa62bfdiumsUndnZ0h7&client_id={clientId}&response_type={responseType}&response_mode={responseMode}&scope={scopes}&redirect_uri={redirectUri}&state={state}",
+      "templated": true,
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    },
+    "clientRedirectUri": {
+      "href": "https://your-domain.okta.com/oauth2/v1/authorize/callback",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
 ~~~
 
 ### Deactivate Identity Provider
@@ -1870,14 +3059,85 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/idps/0oa1k5d68qR2954hb0g4/lifecycle/deactivate"
+"https://${org}.okta.com/api/v1/idps/0oa62bfdiumsUndnZ0h7/lifecycle/deactivate"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
 ~~~json
-
+{
+  "id": "0oa62bfdiumsUndnZ0h7",
+  "type": "GOOGLE",
+  "name": "Google",
+  "status": "INACTIVE",
+  "created": "2016-03-24T23:21:49.000Z",
+  "lastUpdated": "2016-03-25T19:16:53.000Z",
+  "protocol": {
+    "type": "OIDC",
+    "endpoints": {
+      "authorization": {
+        "url": "https://accounts.google.com/o/oauth2/auth",
+        "binding": "HTTP-REDIRECT"
+      },
+      "token": {
+        "url": "https://www.googleapis.com/oauth2/v3/token",
+        "binding": "HTTP-POST"
+      }
+    },
+    "scopes": [
+      "profile",
+      "email",
+      "openid"
+    ],
+    "credentials": {
+      "client": {
+        "client_id": "430731646638-sq6oeve9f6rpm2rne289nukind6f1qgk.apps.googleusercontent.com",
+        "client_secret": "kOgHsuPDawNDSkkaAKvv6SMh"
+      }
+    }
+  },
+  "policy": {
+    "provisioning": {
+      "action": "AUTO",
+      "profileMaster": true,
+      "groups": {
+        "action": "NONE"
+      }
+    },
+    "accountLink": {
+      "filter": null,
+      "action": "AUTO"
+    },
+    "subject": {
+      "userNameTemplate": {
+        "template": "appuser.email"
+      },
+      "filter": null,
+      "matchType": "USERNAME"
+    },
+    "maxClockSkew": 0
+  },
+  "_links": {
+    "authorize": {
+      "href": "https://your-domain.okta.com/oauth2/v1/authorize?idp=0oa62bfdiumsUndnZ0h7&client_id={clientId}&response_type={responseType}&response_mode={responseMode}&scope={scopes}&redirect_uri={redirectUri}&state={state}",
+      "templated": true,
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    },
+    "clientRedirectUri": {
+      "href": "https://your-domain.okta.com/oauth2/v1/authorize/callback",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
 ~~~
 
 ## Identity Provider Transaction Operations
@@ -1891,7 +3151,7 @@ Operations for just-in-time provisioning or account linking with a `CALLOUT` act
 
 Fetches an IdP transaction by `id`
 
-> You must use a `CALLOUT` action for [user provisioning](#user-provisioning-action-type) or [account linking](#account-link-action-type) to obtain an IdP transaction `id`
+You must use a `CALLOUT` action for [user provisioning](#user-provisioning-action-type) or [account linking](#account-link-action-type) to obtain an IdP transaction `id`.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -1966,7 +3226,7 @@ curl -v -X GET \
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /idps/tx/*:tid*/source</span>
 
-Fetches the source [IdP user](#identity-provider-user-model) for a transaction
+Fetches the source [IdP user](#identity-provider-user-model) for a transaction.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2018,7 +3278,7 @@ curl -v -X GET \
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /idps/tx/*:tid*/target</span>
 
-Fetches the target transformed [Okta user profile](users.html#profile-object) for a just-in-time provisioning transaction
+Fetches the target transformed [Okta user profile](users.html#profile-object) for a just-in-time provisioning transaction.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2075,9 +3335,9 @@ curl -v -X GET \
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /idps/tx/*:tid*/users</span>
 
-Enumerates the candidate [Okta users](users.html#user-model) for an account link transaction
+Enumerates the candidate [Okta users](users.html#user-model) for an account link transaction.
 
-> Link candidates are determined by the IdP's [account link policy](#account-link-policy-object) and [subject policy](#subject-policy-object)
+Link candidates are determined by the IdP's [account link policy](#account-link-policy-object) and [subject policy](#subject-policy-object).
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2166,7 +3426,7 @@ curl -v -X GET \
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /idps/tx/*:tid*/lifecycle/provision</span>
 
-Just-in-time provisions an IdP user as a new Okta user
+Provisions an IdP user as a new Okta user.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2241,7 +3501,7 @@ curl -v -X POST \
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /idps/tx/*:tid*/lifecycle/confirm/*:uid*</span>
 
-Links an IdP user to an [existing Okta user](#list-users-for-idp-link-transaction)
+Links an IdP user to an [existing Okta user](#list-users-for-idp-link-transaction).
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2319,7 +3579,7 @@ curl -v -X POST \
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /idps/credentials/keys</span>
 
-Adds a new X.509 certificate credential to the IdP key store
+Adds a new X.509 certificate credential to the IdP key store.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2376,7 +3636,7 @@ Location: https://${org}.okta.com/api/v1/idps/credentials/keys/74bb2164-e0c8-445
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /idps/credentials/keys/*:kid*</span>
 
-Gets a specific [IdP Key Credential](#identity-provider-key-credential-model) by `kid`
+Gets a specific [IdP Key Credential](#identity-provider-key-credential-model) by `kid`.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2426,7 +3686,7 @@ curl -v -X GET \
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /idps/credentials/keys</span>
 
-Enumerates IdP key credentials
+Enumerates IdP key credentials.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2479,7 +3739,7 @@ curl -v -X GET \
 
 <span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /idps/credentials/keys/*:kid*</span>
 
-Deletes a specific [IdP Key Credential](#identity-provider-key-credential-model) by `kid`
+Deletes a specific [IdP Key Credential](#identity-provider-key-credential-model) by `kid`.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2491,7 +3751,7 @@ kid       | unique key of [IdP Key Credential](#identity-provider-key-credential
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-N/A
+There are no response parameters.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -2549,7 +3809,7 @@ curl -v -X GET \
 {:.api .api-response .api-response-example}
 
 ~~~json
-
+placeholder
 ~~~
 
 ### List Linked Identity Provider Users
@@ -2557,7 +3817,9 @@ curl -v -X GET \
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /idps/*:id*/users</span>
 
-Enumerates all [users](#identity-provider-user-model) linked to an IdP.
+Lists all [users](#identity-provider-user-model) linked to an IdP.
+
+TODO: None of these requests worked in my Postman environment. Need help. Error is usually 7, "Not found" Resource not found" but not sure if it's some setup I'm missing or...?
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2569,7 +3831,7 @@ limit     | specifies the number of results for a page                        | 
 after     | specifies the pagination cursor for the next page of linked users | Query      | String   | FALSE    |
 expand    | optionally embeds linked [User](Users.html#user-model) resource   | Query      | String   | FALSE    |
 
-> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination)
+Treat the page cursor `after` as an opaque value and obtain it through the next link relationship. See [Pagination](/docs/api/getting_started/design_principles.html#pagination).
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -2592,7 +3854,7 @@ curl -v -X GET \
 
 ~~~json
 [
-
+TODO: Get valid response exmaple once I'm able to send these requests.
 ]
 ~~~
 
@@ -2600,6 +3862,7 @@ curl -v -X GET \
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /idps/*:id*/users/*:uid*</span>
+TODO: No postman samples. I couldn't run but maybe just not giving the right values...Need help.
 
 Unlinks a [user](Users.html#user-model) from an IdP by `id`.
 
@@ -2616,7 +3879,7 @@ uid       | unique key of linked [User](Users.html#user-model)               | U
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-N/A
+There are no response parameters.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -2636,3 +3899,4 @@ curl -v -X DELETE \
 ~~~http
 HTTP/1.1 204 No Content
 ~~~
+ TODO: There are postman requests not covered here. Do I need to add them all here?3
