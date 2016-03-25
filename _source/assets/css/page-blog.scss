@@ -61,6 +61,8 @@
   height: 50px;
   border-radius: 25px;
   vertical-align: middle;
+  padding-top: 0px;
+  padding-bottom: 0px;
   @include breakpoint(large) {
        position: absolute;
       top: -20px; left: -110px;
@@ -168,6 +170,14 @@
 
 .blog img {
   max-width: 100%;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  display: block;
+  margin: 0 auto;
+}
+
+.blog ol li img {
+  margin: 0 0;
 }
 
 .blog sup {
