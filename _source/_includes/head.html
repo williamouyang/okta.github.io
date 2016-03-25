@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="{{ "assets/css/animate.css" | prepend: site.baseurl }}">
 	<link rel="stylesheet" href="{{ "assets/css/master.css" | prepend: site.baseurl }}">
 	{% if page.css %}<link rel="stylesheet" href="{{ "assets/css/" | prepend: site.baseurl | append: page.css }}.css">{% endif %}
+	{% if layout.css %}<link rel="stylesheet" href="{{ "assets/css/" | prepend: site.baseurl | append: layout.css }}.css">{% endif %}
 	<link rel="stylesheet" href="{{ "assets/css/responsive.css" | prepend: site.baseurl }}">
 
 
@@ -24,6 +25,7 @@
 	<script type="text/javascript" defer="defer" src="{{ "assets/js/scrollspy.js" | prepend: site.baseurl }}"></script>
 
 	{% if page.js %}<script type="text/javascript" defer="defer" src="{{ "assets/js/" | prepend: site.baseurl | append: page.js }}.js"></script>{% endif %}
+	{% if layout.js %}<script type="text/javascript" defer="defer" src="{{ "assets/js/" | prepend: site.baseurl | append: layout.js }}.js"></script>{% endif %}
 	<!-- TypeKit -->
 	<script src="//use.typekit.net/pls8pog.js"></script>
 	<script>try{Typekit.load();}catch(e){}</script>
