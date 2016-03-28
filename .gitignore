@@ -29,6 +29,8 @@ classes
 .DS_Store
 reload_views.rb
 
+# Ignore the vendor folder.
+vendor/*
 
 _site/*
 
