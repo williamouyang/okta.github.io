@@ -10,11 +10,11 @@ Okta uses a cookie-based authentication mechanism to maintain a user's authentic
 
 ### Session Cookie
 
-Okta utilizes a HTTP session cookie to provide access to your Okta organization and applications across web requests for an interactive user-agents such as a browser.  Session cookies have an expiration configurable by an administrator for the organization and are valid until the cookie expires or the user closes the session (logout) or browser application.
+Okta utilizes a HTTP session cookie to provide access to your Okta organization and applications across web requests for an interactive user agent such as a web browser.  Session cookies have an expiration configurable by an administrator for the organization and are valid until the cookie expires or the user closes the session (logout) or browser application.
 
 ### Session Token
 
-A [session token](./authn.html#session-token) is bearer token that provides proof of authentication and may be redeemed for an interactive SSO session in Okta in a user agent.  Session tokens can only be used **once** to establish a session for a user and are revoked when the token expires.
+A [session token](./authn.html#session-token) is a bearer token that provides proof of authentication and may be redeemed for an interactive SSO session in Okta in a user agent.  Session tokens can only be used **once** to establish a session for a user and are revoked when the token expires.
 
 Okta provides a very rich [Authentication API](./authn.html) to validate a [user's primary credentials](./authn.html#primary-authentication) and secondary [MFA factor](./authn.html#verify-factor). A one-time [session token](./authn.html#session-token) is returned after successful authentication which can be later exchanged for a session cookie using one of the following flows:
 
@@ -22,7 +22,7 @@ Okta provides a very rich [Authentication API](./authn.html) to validate a [user
 - [Retrieving a session cookie by visiting an application embed link](/docs/examples/session_cookie.html#retrieving-a-session-cookie-by-visiting-an-application-embed-link)
 - [Retrieving a session cookie embedding a hidden image](/docs/examples/session_cookie.html#retrieving-a-session-cookie-with-a-hidden-image)
 
-> **Session Tokens** are secrets and should be protected at rest as well as during transit. A session token for a user is equivalent to having the user's actual credentials
+> **Session Tokens** are secrets and should be protected at rest as well as during transit. A session token for a user is equivalent to having the user's actual credentials.
 
 ## Session Model
 
@@ -95,7 +95,7 @@ Sessions have the following properties:
 | lastFactorVerification   | timestamp when user last performed multi-factor authentication                                | Date                                      | TRUE     | TRUE   | TRUE     |           |           |            |
 | amr                      | authentication method reference                                                               | [AMR Object](#amr-object)                 | FALSE    | FALSE  | TRUE     |           |           |            |
 | idp                      | identity provider used to authenticate the user                                               | [IDP Object](#idp-object)                 | FALSE    | FALSE  | TRUE     |           |           |            |
-| mfaActive                | indicates whether the user has [enrolled a MFA factor](./factors.html#list-enrolled-factors)  | Boolean                                   | FALSE    | FALSE  | TRUE     |           |           |            |
+| mfaActive                | indicates whether the user has [enrolled an MFA factor](./factors.html#list-enrolled-factors)  | Boolean                                   | FALSE    | FALSE  | TRUE     |           |           |            |
 |--------------------------+-----------------------------------------------------------------------------------------------+-------------------------------------------+----------+--------+----------+-----------+-----------+------------|
 
 #### Optional Session Properties
@@ -109,7 +109,7 @@ The [Create Session](#create-session) operation can optionally return the follow
 | cookieTokenUrl | URL for a a transparent 1x1 pixel image which contains a one-time session token which when visited sets the session cookie in your browser for your organization.                  |
 |----------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-> The `cookieTokenUrl` is deprecated as modern browsers block cookies set via embedding images from another origin (cross-domain)
+> The `cookieTokenUrl` is deprecated as modern browsers block cookies set via embedding images from another origin (cross-domain).
 
 ### Session Status
 
@@ -121,13 +121,13 @@ The following values are defined for the status of a session:
 
 ### AMR Object
 
-The authentication methods reference ("AMR") specifies what authentication methods were used to establish the session. The value is a JSON array with one or more of the following values:
+The authentication methods reference ("AMR") specifies which authentication methods were used to establish the session. The value is a JSON array with one or more of the following values:
 
 |----------+-----------------------------------+---------------------------------------------------------------------------|
 | Value    | Description                       | Example                                                                   |
 | -------- | ----------------------------------|---------------------------------------------------------------------------|
 | `pwd`    | Password authentication           | Standard password-based login                                             |
-| `pop`    | Proof of posession of a key       | Okta Verify with Push                                                     |
+| `pop`    | Proof of possession of a key      | Okta Verify with Push                                                     |
 | `otp`    | One-time password                 | Okta Verify, Google Authenticator                                         |
 | `sms`    | SMS text message                  | SMS factor                                                                |
 | `kba`    | Knowlege-based authentication     | Security Question factor                                                  |
@@ -163,12 +163,12 @@ Specifies the identity provider used to authentication the user.
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /sessions</span>
 
-Creates a new session for a user with a valid session token.  Only use this operation if you need the session `id`, otherwise you should use one of the following flows to obtain a SSO session with a `sessionToken`
+Creates a new session for a user with a valid session token.  Only use this operation if you need the session `id`, otherwise you should use one of the following flows to obtain a SSO session with a `sessionToken`:
 
 - [Retrieving a session cookie by visiting a session redirect link](/docs/examples/session_cookie.html#retrieving-a-session-cookie-by-visiting-a-session-redirect-link)
 - [Retrieving a session cookie by visiting an application embed link](/docs/examples/session_cookie.html#retrieving-a-session-cookie-by-visiting-an-application-embed-link)
 
-> This operation can be performed anonymously without an API Token
+> This operation can be performed anonymously without an API Token.
 
 ##### Request Parameters
 {:.api .request-parameters}
@@ -178,7 +178,7 @@ Parameter        | Description                                                  
 additionalFields | Optional [session properties](#optional-session-properties)   | Query      | String (comma separated values) | FALSE    |
 sessionToken     | Session token obtained via [Authentication API](./authn.html) | Body       | String                          | TRUE     |
 
-> Creating a session with `username` and `password` has been deprecated.  Use the [Authentication API](./authn.html) to obtain a `sessionToken`
+> Creating a session with `username` and `password` has been deprecated.  Use the [Authentication API](./authn.html) to obtain a `sessionToken`.
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
