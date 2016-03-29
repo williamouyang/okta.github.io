@@ -61,7 +61,7 @@ Each identity provider (IdP) requires some setup. Use the Okta setup guide for y
       "trust": {
         "issuer": "urn:example:idp",
         "audience": "https://www.okta.com/saml2/service-provider/spgv32vOnpdyeGSaiUpL",
-        "kid": "164f0d13-be79-4a13-8848-a9450e9abd2c"
+        "kid": "your-key-id"
       }
     }
   },
@@ -165,7 +165,7 @@ Okta supports the following enterprise and social IdPs:
 | `SAML2`      | Enterprise IdP provider that supports the [SAML 2.0 Web Browser SSO Profile](https://docs.oasis-open.org/security/saml/v2.0/saml-profiles-2.0-os.pdf) |
 | `FACEBOOK`   | [Facebook Login](https://developers.facebook.com/docs/facebook-login/overview/)                                                                       |
 | `GOOGLE`     | [Google Sign-In with OpenID Connect](https://developers.google.com/identity/protocols/OpenIDConnect)                                                  |
-| `LINKEDIN`   | [Sign In with Linked In](https://developer.linkedin.com/docs/signin-with-linkedin)                                                                    |
+| `LINKEDIN`   | [Sign In with LinkedIn](https://developer.linkedin.com/docs/signin-with-linkedin)                                                                    |
 | `MICROSOFT`  | [Microsoft Enterprise SSO](https://msdn.microsoft.com/en-us/library/aa745042\(v=bts.10\).aspx)
 |--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
 
@@ -230,7 +230,7 @@ Protocol settings for the [SAML 2.0 Authentication Request Protocol](http://docs
       "trust": {
         "issuer": "urn:example:idp",
         "audience": "https://www.okta.com/saml2/service-provider/spgv32vOnpdyeGSaiUpL",
-        "kid": "164f0d13-be79-4a13-8848-a9450e9abd2c"
+        "kid": "your-key-id"
       }
     },
     "settings": {
@@ -470,7 +470,7 @@ Federation trust credentials for verifying assertions from the IdP:
       "trust": {
         "issuer": "urn:example:idp",
         "audience": "https://www.okta.com/saml2/service-provider/spgv32vOnpdyeGSaiUpL",
-        "kid": "164f0d13-be79-4a13-8848-a9450e9abd2c"
+        "kid": "your-key-id"
       }
     }
   }
@@ -542,8 +542,8 @@ The [OAuth 2.0 Setup Guide](#setup-guides) lists the scopes that are supported [
     ],
     "credentials": {
       "client": {
-        "client_id": "430731646638-sq6oeve9f6rpm2rne289nukind6f1qgk.apps.googleusercontent.com",
-        "client_secret": "kOgHsuPDawNDSkkaAKvv6SMh"
+        "client_id": "your-client-id",
+        "client_secret": "your-client-secret"
       }
     }
   }
@@ -586,8 +586,8 @@ The [IdP setup guides](#setup-guides) list the scopes that are supported [per-Id
     ],
     "credentials": {
       "client": {
-        "client_id": "430731646638-sq6oeve9f6rpm2rne289nukind6f1qgk.apps.googleusercontent.com",
-        "client_secret": "kOgHsuPDawNDSkkaAKvv6SMh"
+        "client_id": "your-client-id",
+        "client_secret": "your-client-secret"
       }
     }
   }
@@ -663,8 +663,8 @@ Client authentication credentials for an [OAuth 2.0 Authorization Server (AS)](h
     "type": "OAUTH2",
     "credentials": {
       "client": {
-        "client_id": "399886900205105",
-        "client_secret": "854b2478619d4fcff49f1eb10c78292d"
+        "client_id": "your-client-id",
+        "client_secret": "your-client-secret"
       }
     }
   }
@@ -677,8 +677,8 @@ Client authentication credentials for an [OAuth 2.0 Authorization Server (AS)](h
     "type": "OIDC",
     "credentials": {
       "client": {
-        "client_id": "430731646638-sq6oeve9f6rpm2rne289nukind6f1qgk.apps.googleusercontent.com",
-        "client_secret": "kOgHsuPDawNDSkkaAKvv6SMh"
+        "client_id": "your-client-id",
+        "client_secret": "your-client-secret"
       }
     }
   }
@@ -1200,7 +1200,8 @@ The Identity Provider Transaction Model represents an account link or just-in-ti
     "type": "FACEBOOK"
   },
   "context": {
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) 
+        Chrome/47.0.2526.106 Safari/537.36",
     "ipAddress": "54.197.192.167"
   },
   "_links": {
@@ -1233,7 +1234,6 @@ The Identity Provider Transaction Model represents an account link or just-in-ti
 ### Identity Provider Transaction Attributes
 
 All IdP transactions have the following properties:
-TODO: Isn't this read only?
 
 |---------------+----------------------------------------------------------------------------------------+-----------------------------------------------------------------+----------|--------|----------|-----------|-----------+------------|
 | Property      | Description                                                                            | DataType                                                        | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
@@ -1254,7 +1254,6 @@ TODO: Isn't this read only?
 #### Identity Provider Authority Object
 
 Metadata about the IdP that authenticated the user:
-TODO: isn't this read only?
 
 |----------+-------------------------+---------------------------------------------------+----------|--------|----------|-----------|-----------+------------|
 | Property | Description             | DataType                                          | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
@@ -1277,7 +1276,6 @@ TODO: isn't this read only?
 #### Identity Provider Transaction Context Object
 
 Additional context that describes the HTTP client for the transaction:
-TODO: Read only?
 
 |---------------+----------------------------------------+----------------------------+----------|--------|----------|-----------|-----------+------------|
 | Property      | Description                            | DataType                   | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
@@ -1289,7 +1287,8 @@ TODO: Read only?
 ~~~json
 {
   "context": {
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) 
+        Chrome/47.0.2526.106 Safari/537.36",
     "ipAddress": "54.197.192.167"
   }
 }
@@ -1319,15 +1318,30 @@ The IdP key credential model defines a [JSON Web Key](https://tools.ietf.org/htm
 
 ~~~json
 {
-  "kid": "74bb2164-e0c8-4457-862b-7c29ba6cd2c9",
+  "kid": "your-key-id",
   "created": "2016-01-03T18:15:47.000Z",
   "lastUpdated": "2016-01-03T18:15:47.000Z",
   "e": "65537",
-  "n": "101438407598598116085679865987760095721749307901605456708912786847324207000576780508113360584555007890315805735307890113536927352312915634368993759211767770602174860126854831344273970871509573365292777620005537635317282520456901584213746937262823585533063042033441296629204165064680610660631365266976782082747",
+  "n": "101438407598598116085679865987760095721749307901605456708912786847324207000576780508113360584
+        555007890315805735307890113536927352312915634368993759211767770602174860126854831344273970871
+        509573365292777620005537635317282520456901584213746937262823585533063042033441296629204165064
+        680610660631365266976782082747",
   "kty": "RSA",
   "use": "sig",
   "x5c": [
-    "MIIDnjCCAoagAwIBAgIGAVG3MN+PMA0GCSqGSIb3DQEBBQUAMIGPMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxEDAOBgNVBAMMB2V4YW1wbGUxHDAaBgkqhkiG9w0BCQEWDWluZm9Ab2t0YS5jb20wHhcNMTUxMjE4MjIyMjMyWhcNMjUxMjE4MjIyMzMyWjCBjzELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xDTALBgNVBAoMBE9rdGExFDASBgNVBAsMC1NTT1Byb3ZpZGVyMRAwDgYDVQQDDAdleGFtcGxlMRwwGgYJKoZIhvcNAQkBFg1pbmZvQG9rdGEuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtcnyvuVCrsFEKCwHDenS3Ocjed8eWDv3zLtD2K/iZfE8BMj2wpTfn6Ry8zCYey3mWlKdxIybnV9amrujGRnE0ab6Q16v9D6RlFQLOG6dwqoRKuZy33Uyg8PGdEudZjGbWuKCqqXEp+UKALJHV+k4wWeVH8g5d1n3KyR2TVajVJpCrPhLFmq1Il4G/IUnPe4MvjXqB6CpKkog1+ThWsItPRJPAM+RweFHXq7KfChXsYE7Mmfuly8sDQlvBmQyxZnFHVuiPfCvGHJjpvHy11YlHdOjfgqHRvZbmo30+y0X/oY/yV4YEJ00LL6eJWU4wi7ViY3HP6/VCdRjHoRdr5L/DwIDAQABMA0GCSqGSIb3DQEBBQUAA4IBAQCzzhOFkvyYLNFj2WDcq1YqD4sBy1iCia9QpRH3rjQvMKDwQDYWbi6EdOX0TQ/IYR7UWGj+2pXd6v0t33lYtoKocp/4lUvT3tfBnWZ5KnObi+J2uY2teUqoYkASN7F+GRPVOuMVoVgm05ss8tuMb2dLc9vsx93sDt+XlMTv/2qi5VPwaDtqduKkzwW9lUfn4xIMkTiVvCpe0X2HneD2Bpuao3/U8Rk0uiPfq6TooWaoW3kjsmErhEAs9bA7xuqo1KKY9CdHcFhkSsMhoeaZylZHtzbnoipUlQKSLMdJQiiYZQ0bYL83/Ta9fulr1EERICMFt3GUmtYaZZKHpWSfdJp9"
+    "MIIDnjCCAoagAwIBAgIGAVG3MN+PMA0GCSqGSIb3DQEBBQUAMIGPMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5p
+     YTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxEDAOBgNVBAMM
+     B2V4YW1wbGUxHDAaBgkqhkiG9w0BCQEWDWluZm9Ab2t0YS5jb20wHhcNMTUxMjE4MjIyMjMyWhcNMjUxMjE4MjIyMzMyWjCB
+     jzELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xDTALBgNVBAoMBE9r
+     dGExFDASBgNVBAsMC1NTT1Byb3ZpZGVyMRAwDgYDVQQDDAdleGFtcGxlMRwwGgYJKoZIhvcNAQkBFg1pbmZvQG9rdGEuY29t
+     MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtcnyvuVCrsFEKCwHDenS3Ocjed8eWDv3zLtD2K/iZfE8BMj2wpTf
+     n6Ry8zCYey3mWlKdxIybnV9amrujGRnE0ab6Q16v9D6RlFQLOG6dwqoRKuZy33Uyg8PGdEudZjGbWuKCqqXEp+UKALJHV+k4
+     wWeVH8g5d1n3KyR2TVajVJpCrPhLFmq1Il4G/IUnPe4MvjXqB6CpKkog1+ThWsItPRJPAM+RweFHXq7KfChXsYE7Mmfuly8s
+     DQlvBmQyxZnFHVuiPfCvGHJjpvHy11YlHdOjfgqHRvZbmo30+y0X/oY/yV4YEJ00LL6eJWU4wi7ViY3HP6/VCdRjHoRdr5L/
+     DwIDAQABMA0GCSqGSIb3DQEBBQUAA4IBAQCzzhOFkvyYLNFj2WDcq1YqD4sBy1iCia9QpRH3rjQvMKDwQDYWbi6EdOX0TQ/I
+     YR7UWGj+2pXd6v0t33lYtoKocp/4lUvT3tfBnWZ5KnObi+J2uY2teUqoYkASN7F+GRPVOuMVoVgm05ss8tuMb2dLc9vsx93s
+     Dt+XlMTv/2qi5VPwaDtqduKkzwW9lUfn4xIMkTiVvCpe0X2HneD2Bpuao3/U8Rk0uiPfq6TooWaoW3kjsmErhEAs9bA7xuqo
+     1KKY9CdHcFhkSsMhoeaZylZHtzbnoipUlQKSLMdJQiiYZQ0bYL83/Ta9fulr1EERICMFt3GUmtYaZZKHpWSfdJp9"
   ],
   "x5t": "noocvK-9pzU-n35eimPK16zYEYk"
 }
@@ -1401,7 +1415,6 @@ The Identity Provider User Model represents a linked user and their IdP user pro
 ### Identity Provider User Properties
 
 All linked IdP users have the following properties:
-TODO: Read only?
 
 |------------------+--------------------------------------------------------------+---------------------------------------------------------------------------------|----------|--------|----------|-----------|-----------+------------|
 | Property         | Description                                                  | DataType                                                                        | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
@@ -1536,7 +1549,7 @@ curl -v -X POST \
           "trust": {
             "issuer": "https://idp.example.com",
             "audience": "http://www.okta.com/123",
-            "kid": "c166e29c-a12b-4d19-aac2-fa60a9593a75"
+            "kid": "your-key-id"
           }
         }
       },
@@ -1611,7 +1624,7 @@ curl -v -X POST \
       "trust": {
         "issuer": "https://idp.example.com",
         "audience": "http://www.okta.com/123",
-        "kid": "c166e29c-a12b-4d19-aac2-fa60a9593a75"
+        "kid": "your-key-id"
       }
     }
   },
@@ -1699,8 +1712,8 @@ curl -v -X POST \
         ],
         "credentials": {
           "client": {
-            "client_id": "1565799993707161",
-            "client_secret": "9f86154a68278b62748f255e3e7db604"
+            "client_id": "your-client-id",
+            "client_secret": "your-client-secret"
           }
         }
       },
@@ -1718,7 +1731,7 @@ curl -v -X POST \
         },
         "subject": {
           "userNameTemplate": {
-            "template": "appuser.email",
+            "template": "idpuser.userPrincipalName",
             "type": null
           },
           "filter": null,
@@ -1758,8 +1771,8 @@ curl -v -X POST \
     ],
     "credentials": {
       "client": {
-        "client_id": "1565799993707161",
-        "client_secret": "9f86154a68278b62748f255e3e7db604"
+        "client_id": "your-client-id",
+        "client_secret": "your-client-secret"
       }
     }
   },
@@ -1777,7 +1790,7 @@ curl -v -X POST \
     },
     "subject": {
       "userNameTemplate": {
-        "template": "appuser.email"
+        "template": "idpuser.userPrincipalName"
       },
       "filter": null,
       "matchType": "USERNAME"
@@ -1786,7 +1799,9 @@ curl -v -X POST \
   },
   "_links": {
     "authorize": {
-      "href": "https://your-domain.okta.com/oauth2/v1/authorize?idp=0oa62b57p7c8PaGpU0h7&client_id={clientId}&response_type={responseType}&response_mode={responseMode}&scope={scopes}&redirect_uri={redirectUri}&state={state}",
+      "href": "https://your-domain.okta.com/oauth2/v1/authorize?idp=0oa62b57p7c8PaGpU0h7&
+          client_id={clientId}&response_type={responseType}&response_mode={responseMode}&
+          scope={scopes}&redirect_uri={redirectUri}&state={state}",
       "templated": true,
       "hints": {
         "allow": [
@@ -1831,8 +1846,8 @@ curl -v -X POST \
         ],
         "credentials": {
           "client": {
-            "client_id": "430731646638-sq6oeve9f6rpm2rne289nukind6f1qgk.apps.googleusercontent.com",
-            "client_secret": "kOgHsuPDawNDSkkaAKvv6SMh"
+            "client_id": "your-client-id",
+            "client_secret": "your-client-secret"
           }
         }
       },
@@ -1850,7 +1865,7 @@ curl -v -X POST \
         },
         "subject": {
           "userNameTemplate": {
-            "template": "appuser.email",
+            "template": "idpuser.userPrincipalName",
             "type": null
           },
           "filter": null,
@@ -1891,8 +1906,8 @@ curl -v -X POST \
     ],
     "credentials": {
       "client": {
-        "client_id": "430731646638-sq6oeve9f6rpm2rne289nukind6f1qgk.apps.googleusercontent.com",
-        "client_secret": "kOgHsuPDawNDSkkaAKvv6SMh"
+        "client_id": "your-client-id",
+        "client_secret": "your-client-secret"
       }
     }
   },
@@ -1910,7 +1925,7 @@ curl -v -X POST \
     },
     "subject": {
       "userNameTemplate": {
-        "template": "appuser.email"
+        "template": "idpuser.userPrincipalName"
       },
       "filter": null,
       "matchType": "USERNAME"
@@ -1919,7 +1934,9 @@ curl -v -X POST \
   },
   "_links": {
     "authorize": {
-      "href": "https://your-domain.okta.com/oauth2/v1/authorize?idp=0oa62bfdiumsUndnZ0h7&client_id={clientId}&response_type={responseType}&response_mode={responseMode}&scope={scopes}&redirect_uri={redirectUri}&state={state}",
+      "href": "https://your-domain.okta.com/oauth2/v1/authorize?idp=0oa62bfdiumsUndnZ0h7&
+          client_id={clientId}&response_type={responseType}&response_mode={responseMode}&
+          scope={scopes}&redirect_uri={redirectUri}&state={state}",
       "templated": true,
       "hints": {
         "allow": [
@@ -1954,7 +1971,7 @@ curl -v -X POST \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
       "type": "LINKEDIN",
-      "name": "Linked In",
+      "name": "LinkedIn",
       "protocol": {
         "type": "OAUTH2",
         "scopes": [
@@ -1963,8 +1980,8 @@ curl -v -X POST \
         ],
         "credentials": {
           "client": {
-            "client_id": "123456789",
-            "client_secret": "kOgHsuPDawNDSkkaAKvv6SMh"
+            "client_id": "your-client-id",
+            "client_secret": "your-client-secret"
           }
         }
       },
@@ -1982,7 +1999,7 @@ curl -v -X POST \
         },
         "subject": {
           "userNameTemplate": {
-            "template": "appuser.email",
+            "template": "idpuser.userPrincipalName",
             "type": null
           },
           "filter": null,
@@ -2000,7 +2017,7 @@ curl -v -X POST \
 {
   "id": "0oa62bfdjnK55Z5x80h7",
   "type": "LINKEDIN",
-  "name": "Linked In",
+  "name": "LinkedIn",
   "status": "ACTIVE",
   "created": "2016-03-24T23:23:59.000Z",
   "lastUpdated": "2016-03-24T23:23:59.000Z",
@@ -2022,8 +2039,8 @@ curl -v -X POST \
     ],
     "credentials": {
       "client": {
-        "client_id": "123456789",
-        "client_secret": "kOgHsuPDawNDSkkaAKvv6SMh"
+        "client_id": "your-client-id",
+        "client_secret": "your-client-secret"
       }
     }
   },
@@ -2041,7 +2058,7 @@ curl -v -X POST \
     },
     "subject": {
       "userNameTemplate": {
-        "template": "appuser.email"
+        "template": "idpuser.userPrincipalName"
       },
       "filter": null,
       "matchType": "USERNAME"
@@ -2050,7 +2067,9 @@ curl -v -X POST \
   },
   "_links": {
     "authorize": {
-      "href": "https://your-domain.okta.com/oauth2/v1/authorize?idp=0oa62bfdjnK55Z5x80h7&client_id={clientId}&response_type={responseType}&response_mode={responseMode}&scope={scopes}&redirect_uri={redirectUri}&state={state}",
+      "href": "https://your-domain.okta.com/oauth2/v1/authorize?idp=0oa62bfdjnK55Z5x80h7&
+          client_id={clientId}&response_type={responseType}&response_mode={responseMode}&
+          scope={scopes}&redirect_uri={redirectUri}&state={state}",
       "templated": true,
       "hints": {
         "allow": [
@@ -2084,15 +2103,122 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-TODO: Get from Lars' postman update)
-}
+       "type":"MICROSOFT",
+       "name":"Microsoft",
+       "protocol": {
+            "type": "OIDC",
+            "scopes": [ "openid", "email", "profile", "https://graph.microsoft.com/User.Read" ],
+            "credentials": {
+                "client": {
+                    "client_id": "your-client-id",
+                    "client_secret": "your-client-secret"
+                }
+            }
+        },
+        "policy": {
+            "provisioning": {
+                "action": "AUTO",
+                "profileMaster": true,
+                "groups": {
+                    "action": "NONE"
+                }
+            },
+            "accountLink": {
+                "filter": null,
+                "action": "AUTO"
+            },
+            "subject": { 
+                "userNameTemplate": {
+                    "template": "idpuser.userPrincipalName",
+                    "type": null
+                },
+                "filter": null,
+                "matchType": "USERNAME"
+            },
+            "maxClockSkew": 0
+        }
+     }
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
 ~~~json
-TODO: {Get from Lars' postman update)
+{
+  "id": "0oajmvdFawBih4gey0g3",
+  "type": "MICROSOFT",
+  "name": "Microsoft",
+  "status": "ACTIVE",
+  "created": "2016-03-29T16:47:36.000Z",
+  "lastUpdated": "2016-03-29T16:47:36.000Z",
+  "protocol": {
+    "type": "OIDC",
+    "endpoints": {
+      "authorization": {
+        "url": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+        "binding": "HTTP-REDIRECT"
+      },
+      "token": {
+        "url": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+        "binding": "HTTP-POST"
+      }
+    },
+    "scopes": [
+      "openid",
+      "email",
+      "profile",
+      "https://graph.microsoft.com/User.Read"
+    ],
+    "credentials": {
+      "client": {
+        "client_id": "your-client-id",
+        "client_secret": "your-client-secret"
+      }
+    }
+  },
+  "policy": {
+    "provisioning": {
+      "action": "AUTO",
+      "profileMaster": true,
+      "groups": {
+        "action": "NONE"
+      }
+    },
+    "accountLink": {
+      "filter": null,
+      "action": "AUTO"
+    },
+    "subject": {
+      "userNameTemplate": {
+        "template": "idpuser.userPrincipalName"
+      },
+      "filter": null,
+      "matchType": "USERNAME"
+    },
+    "maxClockSkew": 0
+  },
+  "_links": {
+    "authorize": {
+      "href": "your-domain.okta.com/oauth2/v1/authorize?idp=0oajmvdFawBih4gey0g3&
+          client_id={clientId}&response_type={responseType}&response_mode={responseMode}&
+          scope={scopes}&redirect_uri={redirectUri}&state={state}",
+      "templated": true,
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    },
+    "clientRedirectUri": {
+      "href": "your-domain.okta.com:1802/oauth2/v1/authorize/callback",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
 ~~~
 
 
@@ -2132,7 +2258,7 @@ curl -v -X GET \
 {
   "id": "0oa62bfdjnK55Z5x80h7",
   "type": "LINKEDIN",
-  "name": "Linked In",
+  "name": "LinkedIn",
   "status": "ACTIVE",
   "created": "2016-03-24T23:23:59.000Z",
   "lastUpdated": "2016-03-24T23:23:59.000Z",
@@ -2154,8 +2280,8 @@ curl -v -X GET \
     ],
     "credentials": {
       "client": {
-        "client_id": "123456789",
-        "client_secret": "kOgHsuPDawNDSkkaAKvv6SMh"
+        "client_id": "your-client-id",
+        "client_secret": "your-client-secret"
       }
     }
   },
@@ -2173,7 +2299,7 @@ curl -v -X GET \
     },
     "subject": {
       "userNameTemplate": {
-        "template": "appuser.email"
+        "template": "idpuser.userPrincipalName"
       },
       "filter": null,
       "matchType": "USERNAME"
@@ -2182,7 +2308,9 @@ curl -v -X GET \
   },
   "_links": {
     "authorize": {
-      "href": "https://your-domain.okta.com/oauth2/v1/authorize?idp=0oa62bfdjnK55Z5x80h7&client_id={clientId}&response_type={responseType}&response_mode={responseMode}&scope={scopes}&redirect_uri={redirectUri}&state={state}",
+      "href": "https://your-domain.okta.com/oauth2/v1/authorize?idp=0oa62bfdjnK55Z5x80h7&
+          client_id={clientId}&response_type={responseType}&response_mode={responseMode}&
+          scope={scopes}&redirect_uri={redirectUri}&state={state}",
       "templated": true,
       "hints": {
         "allow": [
@@ -2279,8 +2407,8 @@ curl -v -X GET \
       ],
       "credentials": {
         "client": {
-          "client_id": "1565799993707161",
-          "client_secret": "9f86154a68278b62748f255e3e7db604"
+          "client_id": "your-client-id",
+          "client_secret": "your-client-secret"
         }
       }
     },
@@ -2298,7 +2426,7 @@ curl -v -X GET \
       },
       "subject": {
         "userNameTemplate": {
-          "template": "appuser.email"
+          "template": "idpuser.userPrincipalName"
         },
         "filter": null,
         "matchType": "USERNAME"
@@ -2307,7 +2435,9 @@ curl -v -X GET \
     },
     "_links": {
       "authorize": {
-        "href": "https://your-domain.okta.com/oauth2/v1/authorize?idp=0oa62b57p7c8PaGpU0h7&client_id={clientId}&response_type={responseType}&response_mode={responseMode}&scope={scopes}&redirect_uri={redirectUri}&state={state}",
+        "href": "https://your-domain.okta.com/oauth2/v1/authorize?idp=0oa62b57p7c8PaGpU0h7&
+            client_id={clientId}&response_type={responseType}&response_mode={responseMode}&
+            scope={scopes}&redirect_uri={redirectUri}&state={state}",
         "templated": true,
         "hints": {
           "allow": [
@@ -2366,7 +2496,7 @@ curl -v -X GET \
         "trust": {
           "issuer": "https://idp.example.com",
           "audience": "http://www.okta.com/123",
-          "kid": "c166e29c-a12b-4d19-aac2-fa60a9593a75"
+          "kid": "your-key-id"
         }
       }
     },
@@ -2454,8 +2584,8 @@ curl -v -X GET \
       ],
       "credentials": {
         "client": {
-          "client_id": "430731646638-sq6oeve9f6rpm2rne289nukind6f1qgk.apps.googleusercontent.com",
-          "client_secret": "kOgHsuPDawNDSkkaAKvv6SMh"
+          "client_id": "your-client-id",
+          "client_secret": "your-client-secret"
         }
       }
     },
@@ -2473,7 +2603,7 @@ curl -v -X GET \
       },
       "subject": {
         "userNameTemplate": {
-          "template": "appuser.email"
+          "template": "idpuser.userPrincipalName"
         },
         "filter": null,
         "matchType": "USERNAME"
@@ -2482,7 +2612,9 @@ curl -v -X GET \
     },
     "_links": {
       "authorize": {
-        "href": "https://your-domain.okta.com/oauth2/v1/authorize?idp=0oa62bfdiumsUndnZ0h7&client_id={clientId}&response_type={responseType}&response_mode={responseMode}&scope={scopes}&redirect_uri={redirectUri}&state={state}",
+        "href": "https://your-domain.okta.com/oauth2/v1/authorize?idp=0oa62bfdiumsUndnZ0h7&
+            client_id={clientId}&response_type={responseType}&response_mode={responseMode}&
+            scope={scopes}&redirect_uri={redirectUri}&state={state}",
         "templated": true,
         "hints": {
           "allow": [
@@ -2503,7 +2635,7 @@ curl -v -X GET \
   {
     "id": "0oa62bfdjnK55Z5x80h7",
     "type": "LINKEDIN",
-    "name": "Linked In",
+    "name": "LinkedIn",
     "status": "ACTIVE",
     "created": "2016-03-24T23:23:59.000Z",
     "lastUpdated": "2016-03-24T23:23:59.000Z",
@@ -2525,8 +2657,8 @@ curl -v -X GET \
       ],
       "credentials": {
         "client": {
-          "client_id": "123456789",
-          "client_secret": "kOgHsuPDawNDSkkaAKvv6SMh"
+          "client_id": "your-client-id",
+          "client_secret": "your-client-secret"
         }
       }
     },
@@ -2544,7 +2676,7 @@ curl -v -X GET \
       },
       "subject": {
         "userNameTemplate": {
-          "template": "appuser.email"
+          "template": "idpuser.userPrincipalName"
         },
         "filter": null,
         "matchType": "USERNAME"
@@ -2553,7 +2685,9 @@ curl -v -X GET \
     },
     "_links": {
       "authorize": {
-        "href": "https://your-domain.okta.com/oauth2/v1/authorize?idp=0oa62bfdjnK55Z5x80h7&client_id={clientId}&response_type={responseType}&response_mode={responseMode}&scope={scopes}&redirect_uri={redirectUri}&state={state}",
+        "href": "https://your-domain.okta.com/oauth2/v1/authorize?idp=0oa62bfdjnK55Z5x80h7&
+            client_id={clientId}&response_type={responseType}&response_mode={responseMode}&
+            scope={scopes}&redirect_uri={redirectUri}&state={state}",
         "templated": true,
         "hints": {
           "allow": [
@@ -2579,7 +2713,8 @@ curl -v -X GET \
 
 Searches for IdPs by `name` in your organization.
 
-Search currently performs a startsWith match but it should be considered an implementation detail and may change without notice in the future. Exact matches are returned before partial matches.
+Search currently performs a startsWith match but it should be considered an implementation detail and may change without notice in the future.
+Exact matches are returned before partial matches.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -2638,7 +2773,7 @@ curl -v -X GET \
         "trust": {
           "issuer": "https://idp.example.com",
           "audience": "http://www.okta.com/123",
-          "kid": "c166e29c-a12b-4d19-aac2-fa60a9593a75"
+          "kid": "your-key-id"
         }
       }
     },
@@ -2770,7 +2905,7 @@ Link: <https://your-domain.okta.com/api/v1/idps?after=0oaxdqpA88PtFNmhu0g3&limit
         "trust": {
           "issuer": "https://idp.example.com",
           "audience": "http://www.okta.com/123",
-          "kid": "c166e29c-a12b-4d19-aac2-fa60a9593a75"
+          "kid": "your-key-id"
         }
       }
     },
@@ -2857,8 +2992,6 @@ All properties must be specified when updating IdP configuration. Partial update
 
 Updated [Identity Provider](#identity-provider-model)
 
-TODO: When I substititue an idps id in postman, this request fails.
-
 ##### Request Example
 {:.api .api-request .api-request-example}
 
@@ -2869,17 +3002,117 @@ curl -v -X PUT \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
 
-}' "https://${org}.okta.com/api/v1/idps/0oa1k5d68qR2954hb0g4"
+}' "https://${org}.okta.com/api/v1/idps/your-idps-id"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
 ~~~json
-TODO: Needs valid response.
+{
+  "id": "0oa62bc8wppPw0UGr0h7",
+  "type": "SAML2",
+  "name": "Example IdP",
+  "status": "INACTIVE",
+  "created": null,
+  "lastUpdated": "2016-03-29T21:23:45.000Z",
+  "protocol": {
+    "type": "SAML2",
+    "endpoints": {
+      "sso": {
+        "url": "https://idp.example.com/saml2/sso",
+        "binding": "HTTP-REDIRECT",
+        "destination": "https://idp.example.com/saml2/sso"
+      },
+      "acs": {
+        "binding": "HTTP-POST",
+        "type": "INSTANCE"
+      }
+    },
+    "algorithms": {
+      "request": {
+        "signature": {
+          "algorithm": "SHA-256",
+          "scope": "REQUEST"
+        }
+      },
+      "response": {
+        "signature": {
+          "algorithm": "SHA-256",
+          "scope": "ANY"
+        }
+      }
+    },
+    "settings": {
+      "nameFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
+    },
+    "credentials": {
+      "trust": {
+        "issuer": "https://idp.example.com",
+        "audience": "https://www.okta.com/saml2/service-provider/spCQJRNaaxs7ANqKBO7M",
+        "kid": "your-key-id"
+      }
+    }
+  },
+  "policy": {
+    "provisioning": {
+      "action": "AUTO",
+      "profileMaster": true,
+      "groups": {
+        "action": "NONE"
+      }
+    },
+    "accountLink": {
+      "filter": null,
+      "action": "AUTO"
+    },
+    "subject": {
+      "userNameTemplate": {
+        "template": "idpuser.subjectNameId"
+      },
+      "filter": null,
+      "matchType": "USERNAME"
+    },
+    "maxClockSkew": 120000
+  },
+  "_links": {
+    "metadata": {
+      "href": "https://your-domain.okta.com/api/v1/idps/0oa62bc8wppPw0UGr0h7/metadata.xml",
+      "type": "application/xml",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    },
+    "acs": {
+      "href": "https://your-domain.okta.com/sso/saml2/0oa62bc8wppPw0UGr0h7",
+      "type": "application/xml",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "users": {
+      "href": "https://your-domain.okta.com/api/v1/idps/0oa62bc8wppPw0UGr0h7/users",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    },
+    "activate": {
+      "href": "https://your-domain.okta.com/api/v1/idps/0oa62bc8wppPw0UGr0h7/lifecycle/activate",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
 ~~~
-
-TODO: need a valid example when parameter is idp, not id. Need help.
 
 ### Delete Identity Provider
 {:.api .api-operation}
@@ -2984,8 +3217,8 @@ curl -v -X POST \
     ],
     "credentials": {
       "client": {
-        "client_id": "430731646638-sq6oeve9f6rpm2rne289nukind6f1qgk.apps.googleusercontent.com",
-        "client_secret": "kOgHsuPDawNDSkkaAKvv6SMh"
+        "client_id": "your-client-id",
+        "client_secret": "your-client-secret"
       }
     }
   },
@@ -3003,7 +3236,7 @@ curl -v -X POST \
     },
     "subject": {
       "userNameTemplate": {
-        "template": "appuser.email"
+        "template": "idpuser.email"
       },
       "filter": null,
       "matchType": "USERNAME"
@@ -3012,7 +3245,9 @@ curl -v -X POST \
   },
   "_links": {
     "authorize": {
-      "href": "https://your-domain.okta.com/oauth2/v1/authorize?idp=0oa62bfdiumsUndnZ0h7&client_id={clientId}&response_type={responseType}&response_mode={responseMode}&scope={scopes}&redirect_uri={redirectUri}&state={state}",
+      "href": "https://your-domain.okta.com/oauth2/v1/authorize?idp=0oa62bfdiumsUndnZ0h7&
+          client_id={clientId}&response_type={responseType}&response_mode={responseMode}&
+          scope={scopes}&redirect_uri={redirectUri}&state={state}",
       "templated": true,
       "hints": {
         "allow": [
@@ -3092,8 +3327,8 @@ curl -v -X POST \
     ],
     "credentials": {
       "client": {
-        "client_id": "430731646638-sq6oeve9f6rpm2rne289nukind6f1qgk.apps.googleusercontent.com",
-        "client_secret": "kOgHsuPDawNDSkkaAKvv6SMh"
+        "client_id": "your-client-id",
+        "client_secret": "your-client-secret"
       }
     }
   },
@@ -3111,7 +3346,7 @@ curl -v -X POST \
     },
     "subject": {
       "userNameTemplate": {
-        "template": "appuser.email"
+        "template": "idpuser.userPrincipalName"
       },
       "filter": null,
       "matchType": "USERNAME"
@@ -3120,7 +3355,9 @@ curl -v -X POST \
   },
   "_links": {
     "authorize": {
-      "href": "https://your-domain.okta.com/oauth2/v1/authorize?idp=0oa62bfdiumsUndnZ0h7&client_id={clientId}&response_type={responseType}&response_mode={responseMode}&scope={scopes}&redirect_uri={redirectUri}&state={state}",
+      "href": "https://your-domain.okta.com/oauth2/v1/authorize?idp=0oa62bfdiumsUndnZ0h7&
+      client_id={clientId}&response_type={responseType}&response_mode={responseMode}&
+      scope={scopes}&redirect_uri={redirectUri}&state={state}",
       "templated": true,
       "hints": {
         "allow": [
@@ -3151,7 +3388,8 @@ Operations for just-in-time provisioning or account linking with a `CALLOUT` act
 
 Fetches an IdP transaction by `id`
 
-You must use a `CALLOUT` action for [user provisioning](#user-provisioning-action-type) or [account linking](#account-link-action-type) to obtain an IdP transaction `id`.
+You must use a `CALLOUT` action for [user provisioning](#user-provisioning-action-type) or [account linking](#account-link-action-type) 
+to obtain an IdP transaction `id`.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -3191,7 +3429,8 @@ curl -v -X GET \
     "type": "FACEBOOK"
   },
   "context": {
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) 
+        Chrome/47.0.2526.106 Safari/537.36",
     "ipAddress": "127.0.0.1"
   },
   "_links": {
@@ -3472,7 +3711,8 @@ curl -v -X POST \
     "type": "FACEBOOK"
   },
   "context": {
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) 
+        Chrome/47.0.2526.106 Safari/537.36",
     "ipAddress": "127.0.0.1"
   },
   "_links": {
@@ -3548,7 +3788,8 @@ curl -v -X POST \
     "type": "FACEBOOK"
   },
   "context": {
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) 
+        Chrome/47.0.2526.106 Safari/537.36",
     "ipAddress": "127.0.0.1"
   },
   "_links": {
@@ -3603,7 +3844,19 @@ curl -v -X POST \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
   "x5c": [
-    "MIIDnjCCAoagAwIBAgIGAVG3MN+PMA0GCSqGSIb3DQEBBQUAMIGPMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxEDAOBgNVBAMMB2V4YW1wbGUxHDAaBgkqhkiG9w0BCQEWDWluZm9Ab2t0YS5jb20wHhcNMTUxMjE4MjIyMjMyWhcNMjUxMjE4MjIyMzMyWjCBjzELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xDTALBgNVBAoMBE9rdGExFDASBgNVBAsMC1NTT1Byb3ZpZGVyMRAwDgYDVQQDDAdleGFtcGxlMRwwGgYJKoZIhvcNAQkBFg1pbmZvQG9rdGEuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtcnyvuVCrsFEKCwHDenS3Ocjed8eWDv3zLtD2K/iZfE8BMj2wpTfn6Ry8zCYey3mWlKdxIybnV9amrujGRnE0ab6Q16v9D6RlFQLOG6dwqoRKuZy33Uyg8PGdEudZjGbWuKCqqXEp+UKALJHV+k4wWeVH8g5d1n3KyR2TVajVJpCrPhLFmq1Il4G/IUnPe4MvjXqB6CpKkog1+ThWsItPRJPAM+RweFHXq7KfChXsYE7Mmfuly8sDQlvBmQyxZnFHVuiPfCvGHJjpvHy11YlHdOjfgqHRvZbmo30+y0X/oY/yV4YEJ00LL6eJWU4wi7ViY3HP6/VCdRjHoRdr5L/DwIDAQABMA0GCSqGSIb3DQEBBQUAA4IBAQCzzhOFkvyYLNFj2WDcq1YqD4sBy1iCia9QpRH3rjQvMKDwQDYWbi6EdOX0TQ/IYR7UWGj+2pXd6v0t33lYtoKocp/4lUvT3tfBnWZ5KnObi+J2uY2teUqoYkASN7F+GRPVOuMVoVgm05ss8tuMb2dLc9vsx93sDt+XlMTv/2qi5VPwaDtqduKkzwW9lUfn4xIMkTiVvCpe0X2HneD2Bpuao3/U8Rk0uiPfq6TooWaoW3kjsmErhEAs9bA7xuqo1KKY9CdHcFhkSsMhoeaZylZHtzbnoipUlQKSLMdJQiiYZQ0bYL83/Ta9fulr1EERICMFt3GUmtYaZZKHpWSfdJp9"
+    "MIIDnjCCAoagAwIBAgIGAVG3MN+PMA0GCSqGSIb3DQEBBQUAMIGPMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5p
+     YTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxEDAOBgNVBAMM
+     B2V4YW1wbGUxHDAaBgkqhkiG9w0BCQEWDWluZm9Ab2t0YS5jb20wHhcNMTUxMjE4MjIyMjMyWhcNMjUxMjE4MjIyMzMyWjCB
+     jzELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xDTALBgNVBAoMBE9r
+     dGExFDASBgNVBAsMC1NTT1Byb3ZpZGVyMRAwDgYDVQQDDAdleGFtcGxlMRwwGgYJKoZIhvcNAQkBFg1pbmZvQG9rdGEuY29t
+     MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtcnyvuVCrsFEKCwHDenS3Ocjed8eWDv3zLtD2K/iZfE8BMj2wpTf
+     n6Ry8zCYey3mWlKdxIybnV9amrujGRnE0ab6Q16v9D6RlFQLOG6dwqoRKuZy33Uyg8PGdEudZjGbWuKCqqXEp+UKALJHV+k4
+     wWeVH8g5d1n3KyR2TVajVJpCrPhLFmq1Il4G/IUnPe4MvjXqB6CpKkog1+ThWsItPRJPAM+RweFHXq7KfChXsYE7Mmfuly8s
+     DQlvBmQyxZnFHVuiPfCvGHJjpvHy11YlHdOjfgqHRvZbmo30+y0X/oY/yV4YEJ00LL6eJWU4wi7ViY3HP6/VCdRjHoRdr5L/
+     DwIDAQABMA0GCSqGSIb3DQEBBQUAA4IBAQCzzhOFkvyYLNFj2WDcq1YqD4sBy1iCia9QpRH3rjQvMKDwQDYWbi6EdOX0TQ/I
+     YR7UWGj+2pXd6v0t33lYtoKocp/4lUvT3tfBnWZ5KnObi+J2uY2teUqoYkASN7F+GRPVOuMVoVgm05ss8tuMb2dLc9vsx93s
+     Dt+XlMTv/2qi5VPwaDtqduKkzwW9lUfn4xIMkTiVvCpe0X2HneD2Bpuao3/U8Rk0uiPfq6TooWaoW3kjsmErhEAs9bA7xuqo
+     1KKY9CdHcFhkSsMhoeaZylZHtzbnoipUlQKSLMdJQiiYZQ0bYL83/Ta9fulr1EERICMFt3GUmtYaZZKHpWSfdJp9"
   ]
 }' "https://${org}.okta.com/api/v1/idps/credentials/keys"
 ~~~
@@ -3617,15 +3870,30 @@ Content-Type: application/json
 Location: https://${org}.okta.com/api/v1/idps/credentials/keys/74bb2164-e0c8-4457-862b-7c29ba6cd2c9
 
 {
-  "kid": "74bb2164-e0c8-4457-862b-7c29ba6cd2c9",
+  "kid": "your-key-id",
   "created": "2016-01-03T18:15:47.000Z",
   "lastUpdated": "2016-01-03T18:15:47.000Z",
   "e": "65537",
-  "n": "101438407598598116085679865987760095721749307901605456708912786847324207000576780508113360584555007890315805735307890113536927352312915634368993759211767770602174860126854831344273970871509573365292777620005537635317282520456901584213746937262823585533063042033441296629204165064680610660631365266976782082747",
+  "n": "101438407598598116085679865987760095721749307901605456708912786847324207000576780508113360584
+        555007890315805735307890113536927352312915634368993759211767770602174860126854831344273970871
+        509573365292777620005537635317282520456901584213746937262823585533063042033441296629204165064
+        680610660631365266976782082747",
   "kty": "RSA",
   "use": "sig",
   "x5c": [
-    "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"
+    "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"
   ],
   "x5t": "noocvK-9pzU-n35eimPK16zYEYk"
 }
@@ -3659,7 +3927,7 @@ curl -v -X GET \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-}' "https://${org}.okta.com/api/v1/idps/credentials/keys/74bb2164-e0c8-4457-862b-7c29ba6cd2c9"
+}' "https://${org}.okta.com/api/v1/idps/credentials/keys/your-key-id"
 ~~~
 
 ##### Response Example
@@ -3667,15 +3935,30 @@ curl -v -X GET \
 
 ~~~json
 {
-  "kid": "74bb2164-e0c8-4457-862b-7c29ba6cd2c9",
+  "kid": "your-key-id",
   "created": "2016-01-03T18:15:47.000Z",
   "lastUpdated": "2016-01-03T18:15:47.000Z",
   "e": "65537",
-  "n": "101438407598598116085679865987760095721749307901605456708912786847324207000576780508113360584555007890315805735307890113536927352312915634368993759211767770602174860126854831344273970871509573365292777620005537635317282520456901584213746937262823585533063042033441296629204165064680610660631365266976782082747",
+  "n": "101438407598598116085679865987760095721749307901605456708912786847324207000576780508113360584
+        555007890315805735307890113536927352312915634368993759211767770602174860126854831344273970871
+        509573365292777620005537635317282520456901584213746937262823585533063042033441296629204165064
+        680610660631365266976782082747",
   "kty": "RSA",
   "use": "sig",
   "x5c": [
-    "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"
+    "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"
   ],
   "x5t": "noocvK-9pzU-n35eimPK16zYEYk"
 }
@@ -3719,15 +4002,30 @@ curl -v -X GET \
 ~~~json
 [
   {
-    "kid": "74bb2164-e0c8-4457-862b-7c29ba6cd2c9",
+    "kid": "your-key-id",
     "created": "2016-01-03T18:15:47.000Z",
     "lastUpdated": "2016-01-03T18:15:47.000Z",
     "e": "65537",
-    "n": "101438407598598116085679865987760095721749307901605456708912786847324207000576780508113360584555007890315805735307890113536927352312915634368993759211767770602174860126854831344273970871509573365292777620005537635317282520456901584213746937262823585533063042033441296629204165064680610660631365266976782082747",
+    "n": "101438407598598116085679865987760095721749307901605456708912786847324207000576780508113360584
+          555007890315805735307890113536927352312915634368993759211767770602174860126854831344273970871
+          509573365292777620005537635317282520456901584213746937262823585533063042033441296629204165064
+          680610660631365266976782082747",
     "kty": "RSA",
     "use": "sig",
     "x5c": [
-      "MIIDnjCCAoagAwIBAgIGAVG3MN+PMA0GCSqGSIb3DQEBBQUAMIGPMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxEDAOBgNVBAMMB2V4YW1wbGUxHDAaBgkqhkiG9w0BCQEWDWluZm9Ab2t0YS5jb20wHhcNMTUxMjE4MjIyMjMyWhcNMjUxMjE4MjIyMzMyWjCBjzELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xDTALBgNVBAoMBE9rdGExFDASBgNVBAsMC1NTT1Byb3ZpZGVyMRAwDgYDVQQDDAdleGFtcGxlMRwwGgYJKoZIhvcNAQkBFg1pbmZvQG9rdGEuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtcnyvuVCrsFEKCwHDenS3Ocjed8eWDv3zLtD2K/iZfE8BMj2wpTfn6Ry8zCYey3mWlKdxIybnV9amrujGRnE0ab6Q16v9D6RlFQLOG6dwqoRKuZy33Uyg8PGdEudZjGbWuKCqqXEp+UKALJHV+k4wWeVH8g5d1n3KyR2TVajVJpCrPhLFmq1Il4G/IUnPe4MvjXqB6CpKkog1+ThWsItPRJPAM+RweFHXq7KfChXsYE7Mmfuly8sDQlvBmQyxZnFHVuiPfCvGHJjpvHy11YlHdOjfgqHRvZbmo30+y0X/oY/yV4YEJ00LL6eJWU4wi7ViY3HP6/VCdRjHoRdr5L/DwIDAQABMA0GCSqGSIb3DQEBBQUAA4IBAQCzzhOFkvyYLNFj2WDcq1YqD4sBy1iCia9QpRH3rjQvMKDwQDYWbi6EdOX0TQ/IYR7UWGj+2pXd6v0t33lYtoKocp/4lUvT3tfBnWZ5KnObi+J2uY2teUqoYkASN7F+GRPVOuMVoVgm05ss8tuMb2dLc9vsx93sDt+XlMTv/2qi5VPwaDtqduKkzwW9lUfn4xIMkTiVvCpe0X2HneD2Bpuao3/U8Rk0uiPfq6TooWaoW3kjsmErhEAs9bA7xuqo1KKY9CdHcFhkSsMhoeaZylZHtzbnoipUlQKSLMdJQiiYZQ0bYL83/Ta9fulr1EERICMFt3GUmtYaZZKHpWSfdJp9"
+      "MIIDnjCCAoagAwIBAgIGAVG3MN+PMA0GCSqGSIb3DQEBBQUAMIGPMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5p
+       YTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxEDAOBgNVBAMM
+       B2V4YW1wbGUxHDAaBgkqhkiG9w0BCQEWDWluZm9Ab2t0YS5jb20wHhcNMTUxMjE4MjIyMjMyWhcNMjUxMjE4MjIyMzMyWjCB
+       jzELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xDTALBgNVBAoMBE9r
+       dGExFDASBgNVBAsMC1NTT1Byb3ZpZGVyMRAwDgYDVQQDDAdleGFtcGxlMRwwGgYJKoZIhvcNAQkBFg1pbmZvQG9rdGEuY29t
+       MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtcnyvuVCrsFEKCwHDenS3Ocjed8eWDv3zLtD2K/iZfE8BMj2wpTf
+       n6Ry8zCYey3mWlKdxIybnV9amrujGRnE0ab6Q16v9D6RlFQLOG6dwqoRKuZy33Uyg8PGdEudZjGbWuKCqqXEp+UKALJHV+k4
+       wWeVH8g5d1n3KyR2TVajVJpCrPhLFmq1Il4G/IUnPe4MvjXqB6CpKkog1+ThWsItPRJPAM+RweFHXq7KfChXsYE7Mmfuly8s
+       DQlvBmQyxZnFHVuiPfCvGHJjpvHy11YlHdOjfgqHRvZbmo30+y0X/oY/yV4YEJ00LL6eJWU4wi7ViY3HP6/VCdRjHoRdr5L/
+       DwIDAQABMA0GCSqGSIb3DQEBBQUAA4IBAQCzzhOFkvyYLNFj2WDcq1YqD4sBy1iCia9QpRH3rjQvMKDwQDYWbi6EdOX0TQ/I
+       YR7UWGj+2pXd6v0t33lYtoKocp/4lUvT3tfBnWZ5KnObi+J2uY2teUqoYkASN7F+GRPVOuMVoVgm05ss8tuMb2dLc9vsx93s
+       Dt+XlMTv/2qi5VPwaDtqduKkzwW9lUfn4xIMkTiVvCpe0X2HneD2Bpuao3/U8Rk0uiPfq6TooWaoW3kjsmErhEAs9bA7xuqo
+       1KKY9CdHcFhkSsMhoeaZylZHtzbnoipUlQKSLMdJQiiYZQ0bYL83/Ta9fulr1EERICMFt3GUmtYaZZKHpWSfdJp9"
     ],
     "x5t": "noocvK-9pzU-n35eimPK16zYEYk"
   }
@@ -3771,6 +4069,7 @@ curl -v -X DELETE \
 HTTP/1.1 204 No Content
 ~~~
 
+<!-- To be completed in future release.
 ## Identity Provider User Operations
 
 ### Get Linked Identity Provider User
@@ -3812,14 +4111,13 @@ curl -v -X GET \
 placeholder
 ~~~
 
+
 ### List Linked Identity Provider Users
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /idps/*:id*/users</span>
 
 Lists all [users](#identity-provider-user-model) linked to an IdP.
-
-TODO: None of these requests worked in my Postman environment. Need help. Error is usually 7, "Not found" Resource not found" but not sure if it's some setup I'm missing or...?
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -3854,7 +4152,7 @@ curl -v -X GET \
 
 ~~~json
 [
-TODO: Get valid response exmaple once I'm able to send these requests.
+TODO: Valid response.
 ]
 ~~~
 
@@ -3862,7 +4160,6 @@ TODO: Get valid response exmaple once I'm able to send these requests.
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /idps/*:id*/users/*:uid*</span>
-TODO: No postman samples. I couldn't run but maybe just not giving the right values...Need help.
 
 Unlinks a [user](Users.html#user-model) from an IdP by `id`.
 
@@ -3899,4 +4196,4 @@ curl -v -X DELETE \
 ~~~http
 HTTP/1.1 204 No Content
 ~~~
- TODO: There are postman requests not covered here. Do I need to add them all here?3
+-->
