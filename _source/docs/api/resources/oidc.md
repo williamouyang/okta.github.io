@@ -420,5 +420,4 @@ This API endpoint returns the OpenID Connect related metadata that can be used b
         "updated_at"
     ]
 }
-
 ~~~~

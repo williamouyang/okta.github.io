@@ -266,7 +266,21 @@ X-Rate-Limit-Reset: 1366037820
 
 If the rate limit is exceeded, an HTTP 429 Status Code is returned.  The current Rate Limit is on a per-org per-endpoint basis.
 
-**Rate limits are enforced for all organizations.**
+-**Rate limits are enforced for all organizations.**
+
+## Request Debugging
+
+The request ID will always be present in every API response and can be used for debugging. This value can be used to correlate events from the [Events API](http://developer.okta.com/docs/api/resources/events.html) as well as the System Log events.
+
+The following header is set in each response:
+
+`X-Okta-Request-Id` - The unique identifier for the API request
+
+~~~ http
+HTTP/1.1 200 OK
+X-Okta-Request-Id: reqVy8wsvmBQN27h4soUE3ZEnA
+~~~
+
 
 ## Cross-Origin Resource Sharing (CORS)
 
