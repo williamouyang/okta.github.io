@@ -7,6 +7,7 @@
 		"42f36504-9223-78d4-0b4c-c3e613ef2097",
 		"f9464a0c-5dbc-c327-9e8b-576ab72a4818",
 		"dab2d28c-fc52-1128-949b-4152a61ea6dc",
+		"ff32845c-4dbd-39a0-9823-00e4e3d396e8",
 		"d5c1d389-95ac-921a-0c59-cc707b85a964",
 		"d69d5bd9-0849-9ea3-be51-1872e158ea89",
 		"04ea4855-53e0-5e26-ef67-2228df0d6efb",
@@ -268,7 +269,7 @@
 			"name": "Add Facebook IdP",
 			"description": "",
 			"collectionId": "a067175b-173b-23c7-cfe6-42aba0ac243f",
-			"rawModeData": "{\n  \"type\": \"FACEBOOK\",\n  \"name\": \"Facebook\",\n  \"protocol\": {\n    \"type\": \"OAUTH2\",\n    \"scopes\": [\n      \"public_profile\",\n      \"email\"\n    ],\n    \"credentials\": {\n      \"client\": {\n        \"client_id\": \"1565799993707161\",\n        \"client_secret\": \"9f86154a68278b62748f255e3e7db604\"\n      }\n    }\n  },\n  \"policy\": {\n    \"provisioning\": {\n      \"action\": \"AUTO\",\n      \"profileMaster\": true,\n      \"groups\": {\n        \"action\": \"NONE\"\n      }\n    },\n    \"accountLink\": {\n      \"filter\": null,\n      \"action\": \"AUTO\"\n    },\n    \"subject\": {\n      \"userNameTemplate\": {\n        \"template\": \"appuser.email\",\n        \"type\": null\n      },\n      \"filter\": null,\n      \"matchType\": \"USERNAME\"\n    },\n    \"maxClockSkew\": 0\n  }\n}"
+			"rawModeData": "{\n  \"type\": \"FACEBOOK\",\n  \"name\": \"Facebook\",\n  \"protocol\": {\n    \"type\": \"OAUTH2\",\n    \"scopes\": [\n      \"public_profile\",\n      \"email\"\n    ],\n    \"credentials\": {\n      \"client\": {\n        \"client_id\": \"1565799993707161\",\n        \"client_secret\": \"9f86154a68278b62748f255e3e7db604\"\n      }\n    }\n  },\n  \"policy\": {\n    \"provisioning\": {\n      \"action\": \"AUTO\",\n      \"profileMaster\": true,\n      \"groups\": {\n        \"action\": \"NONE\"\n      }\n    },\n    \"accountLink\": {\n      \"filter\": null,\n      \"action\": \"AUTO\"\n    },\n    \"subject\": {\n      \"userNameTemplate\": {\n        \"template\": \"idpuser.email\",\n        \"type\": null\n      },\n      \"filter\": null,\n      \"matchType\": \"USERNAME\"\n    },\n    \"maxClockSkew\": 0\n  }\n}"
 		},
 		{
 			"folder": null,
@@ -503,7 +504,7 @@
 			"name": "Add LinkedIn IdP",
 			"description": "",
 			"collectionId": "a067175b-173b-23c7-cfe6-42aba0ac243f",
-			"rawModeData": "{\n  \"type\": \"LINKEDIN\",\n  \"name\": \"Linked In\",\n  \"protocol\": {\n    \"type\": \"OAUTH2\",\n    \"scopes\": [\n      \"r_basicprofile\",\n      \"r_emailaddress\"\n    ],\n    \"credentials\": {\n      \"client\": {\n        \"client_id\": \"123456789\",\n        \"client_secret\": \"kOgHsuPDawNDSkkaAKvv6SMh\"\n      }\n    }\n  },\n  \"policy\": {\n    \"provisioning\": {\n      \"action\": \"AUTO\",\n      \"profileMaster\": true,\n      \"groups\": {\n        \"action\": \"NONE\"\n      }\n    },\n    \"accountLink\": {\n      \"filter\": null,\n      \"action\": \"AUTO\"\n    },\n    \"subject\": {\n      \"userNameTemplate\": {\n        \"template\": \"appuser.email\",\n        \"type\": null\n      },\n      \"filter\": null,\n      \"matchType\": \"USERNAME\"\n    },\n    \"maxClockSkew\": 0\n  }\n}"
+			"rawModeData": "{\n  \"type\": \"LINKEDIN\",\n  \"name\": \"Linked In\",\n  \"protocol\": {\n    \"type\": \"OAUTH2\",\n    \"scopes\": [\n      \"r_basicprofile\",\n      \"r_emailaddress\"\n    ],\n    \"credentials\": {\n      \"client\": {\n        \"client_id\": \"123456789\",\n        \"client_secret\": \"kOgHsuPDawNDSkkaAKvv6SMh\"\n      }\n    }\n  },\n  \"policy\": {\n    \"provisioning\": {\n      \"action\": \"AUTO\",\n      \"profileMaster\": true,\n      \"groups\": {\n        \"action\": \"NONE\"\n      }\n    },\n    \"accountLink\": {\n      \"filter\": null,\n      \"action\": \"AUTO\"\n    },\n    \"subject\": {\n      \"userNameTemplate\": {\n        \"template\": \"idpuser.email\",\n        \"type\": null\n      },\n      \"filter\": null,\n      \"matchType\": \"USERNAME\"\n    },\n    \"maxClockSkew\": 0\n  }\n}"
 		},
 		{
 			"id": "dbadd8a3-e479-7d97-7fbd-b3c3b2ee27b8",
@@ -561,7 +562,26 @@
 			"name": "Add Google IdP",
 			"description": "",
 			"collectionId": "a067175b-173b-23c7-cfe6-42aba0ac243f",
-			"rawModeData": "{\n  \"type\": \"GOOGLE\",\n  \"name\": \"Google\",\n  \"protocol\": {\n    \"type\": \"OAUTH2\",\n    \"scopes\": [\n      \"profile\",\n      \"email\",\n      \"openid\"\n    ],\n    \"credentials\": {\n      \"client\": {\n        \"client_id\": \"430731646638-sq6oeve9f6rpm2rne289nukind6f1qgk.apps.googleusercontent.com\",\n        \"client_secret\": \"kOgHsuPDawNDSkkaAKvv6SMh\"\n      }\n    }\n  },\n  \"policy\": {\n    \"provisioning\": {\n      \"action\": \"AUTO\",\n      \"profileMaster\": true,\n      \"groups\": {\n        \"action\": \"NONE\"\n      }\n    },\n    \"accountLink\": {\n      \"filter\": null,\n      \"action\": \"AUTO\"\n    },\n    \"subject\": {\n      \"userNameTemplate\": {\n        \"template\": \"appuser.email\",\n        \"type\": null\n      },\n      \"filter\": null,\n      \"matchType\": \"USERNAME\"\n    },\n    \"maxClockSkew\": 0\n  }\n}"
+			"rawModeData": "{\n  \"type\": \"GOOGLE\",\n  \"name\": \"Google\",\n  \"protocol\": {\n    \"type\": \"OIDC\",\n    \"scopes\": [\n      \"profile\",\n      \"email\",\n      \"openid\"\n    ],\n    \"credentials\": {\n      \"client\": {\n        \"client_id\": \"430731646638-sq6oeve9f6rpm2rne289nukind6f1qgk.apps.googleusercontent.com\",\n        \"client_secret\": \"kOgHsuPDawNDSkkaAKvv6SMh\"\n      }\n    }\n  },\n  \"policy\": {\n    \"provisioning\": {\n      \"action\": \"AUTO\",\n      \"profileMaster\": true,\n      \"groups\": {\n        \"action\": \"NONE\"\n      }\n    },\n    \"accountLink\": {\n      \"filter\": null,\n      \"action\": \"AUTO\"\n    },\n    \"subject\": {\n      \"userNameTemplate\": {\n        \"template\": \"idpuser.email\",\n        \"type\": null\n      },\n      \"filter\": null,\n      \"matchType\": \"USERNAME\"\n    },\n    \"maxClockSkew\": 0\n  }\n}"
+		},
+		{
+			"id": "ff32845c-4dbd-39a0-9823-00e4e3d396e8",
+			"headers": "Authorization: SSWS {{apikey}}\nContent-Type: application/json\nAccept: application/json\n",
+			"url": "{{url}}/api/v1/idps",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1459276634347,
+			"name": "Add Microsoft IdP",
+			"description": "",
+			"collectionId": "a067175b-173b-23c7-cfe6-42aba0ac243f",
+			"rawModeData": "{\n  \"type\": \"MICROSOFT\",\n  \"name\": \"Microsoft\",\n  \"protocol\": {\n    \"type\": \"OIDC\",\n    \"scopes\": [\n      \"openid\",\n      \"email\",\n      \"profile\",\n      \"https://graph.microsoft.com/User.Read\"\n    ],\n    \"credentials\": {\n      \"client\": {\n        \"client_id\": \"my-test-client-id\",\n        \"client_secret\": \"my-test-client-secret\"\n      }\n    }\n  },\n  \"policy\": {\n    \"provisioning\": {\n      \"action\": \"AUTO\",\n      \"profileMaster\": true,\n      \"groups\": {\n        \"action\": \"NONE\"\n      }\n    },\n    \"accountLink\": {\n      \"filter\": null,\n      \"action\": \"AUTO\"\n    },\n    \"subject\": {\n      \"userNameTemplate\": {\n        \"template\": \"idpuser.userPrincipalName\",\n        \"type\": null\n      },\n      \"filter\": null,\n      \"matchType\": \"USERNAME\"\n    },\n    \"maxClockSkew\": 0\n  }\n}"
 		}
 	]
 }
