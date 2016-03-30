@@ -91,7 +91,7 @@ The User model defines several **read-only** properties:
 | Property              | Description                                                     | DataType                                                                                            | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
 | --------------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------| -------- | ------ | -------- | --------- | --------- | ---------- |
 | id                    | unique key for user                                             | String                                                                                              | FALSE    | TRUE   | TRUE     |           |           |            |
-| status                | current [status](#user-status) of user                          | `STAGED`, `PROVISIONED`, `ACTIVE`, `RECOVERY`, `LOCKED_OUT`, `PASSWORD_EXPIRED`, `SUSPENDED`, or `DEPROVISIONED` | FALSE    | FALSE  | TRUE     |           |           |            |
+| status                | current [status](#user-status) of user                          | `STAGED`, `PROVISIONED`, `ACTIVE`, `RECOVERY`, `LOCKED_OUT`, `PASSWORD_EXPIRED`, `SUSPENDED`, or `DEPROVISIONED` | FALSE | FALSE | TRUE         |           |           |
 | created               | timestamp when user was created                                 | Date                                                                                                | FALSE    | FALSE  | TRUE     |           |           |            |
 | activated             | timestamp when transition to `ACTIVE` status completed          | Date                                                                                                | FALSE    | FALSE  | TRUE     |           |           |            |
 | statusChanged         | timestamp when status last changed                              | Date                                                                                                | TRUE     | FALSE  | TRUE     |           |           |            |
@@ -162,7 +162,7 @@ The default user profile is based on the [System for Cross-Domain Identity Manag
 | secondEmail       | secondary email address of user typically used for account recovery                                                          | String   | TRUE     | TRUE   | FALSE    | 5         | 100       | [RFC 5322 Section 3.2.3](http://tools.ietf.org/html/rfc5322#section-3.2.3)                                        |
 | firstName         | given name of the user (`givenName`)                                                                                         | String   | FALSE    | FALSE  | FALSE    | 1         | 50        |                                                                                                                   |
 | lastName          | family name of the user (`familyName`)                                                                                       | String   | FALSE    | FALSE  | FALSE    | 1         | 50        |                                                                                                                   |
-| middleName        | middle name(s) of the user                                                                                                   | String   | TRUE    | FALSE  | FALSE    |           |           |                                                                                                                   |
+| middleName        | middle name(s) of the user                                                                                                   | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
 | honorificPrefix   | honorific prefix(es) of the user, or title in most Western languages                                                         | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
 | honorificSuffix   | honorific suffix(es) of the user                                                                                             | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
 | title             | user's title, such as "Vice President"                                                                                       | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
@@ -200,7 +200,7 @@ Okta has a default ambiguous name resolution policy for logins.  Users can login
 
 #### Custom Profile Properties
 
-User profiles may be extended with custom properties but the attribute must first be added to the user profile schema before it can be referenced.  You can use the Profile Editor in the Admin UI or the [Schemas API](./schemas.html) to manage schema extensions.
+User profiles may be extended with custom properties but the property must first be added to the user profile schema before it can be referenced.  You can use the Profile Editor in the Admin UI or the [Schemas API](./schemas.html) to manage schema extensions.
 
 Custom attributes may contain HTML tags. It is the client's responsibility to escape or encode this data before displaying it. Use [best-practices](https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet) to prevent cross-site scripting.
 
@@ -292,12 +292,12 @@ Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988))
 | self                   | The actual user                                                                                                                                           |
 | activate               | [Lifecycle action](#activate-user) to transition user to `ACTIVE` status                                                                                  |
 | deactivate             | [Lifecycle action](#deactivate-user) to transition user to `DEPROVISIONED` status                                                                         |
-| suspend                | [Lifecycle action](#suspend-user) to transition user to `SUSPENDED` status                                                                         |
-| unsuspend              | [Lifecycle action](#unsuspend-user) to return a user to `ACTIVE` status when their current status is `SUSPENDED`                                                                         |
+| suspend                | [Lifecycle action](#suspend-user) to transition user to `SUSPENDED` status                                                                                |
+| unsuspend              | [Lifecycle action](#unsuspend-user) to return a user to `ACTIVE` status when their current status is `SUSPENDED`                                          |
 | resetPassword          | [Lifecycle action](#reset-password) to transition user to `RECOVERY` status                                                                               |
 | expirePassword         | [Lifecycle action](#expire-password) to transition user to `PASSWORD_EXPIRED` status                                                                      |
 | resetFactors           | [Lifecycle action](#reset-factors) to reset all the MFA factors for the user                                                                              |
-| unlock                 | [Lifecycle action](#unlock-user) to return a user to `ACTIVE` status when their current status is `LOCKED_OUT` due to exceeding failed login attempts    |
+| unlock                 | [Lifecycle action](#unlock-user) to return a user to `ACTIVE` status when their current status is `LOCKED_OUT` due to exceeding failed login attempts     |
 | forgotPassword         | [Resets a user's password](#forgot-password) by validating the user's recovery credential.                                                                |
 | changePassword         | [Changes a user's password](#change-password) validating the user's current password                                                                      |
 | changeRecoveryQuestion | [Changes a user's recovery credential](#change-recovery-question) by validating the user's current password                                               |
@@ -331,7 +331,7 @@ credentials | Credentials for user                                              
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-All responses return the created [User](#user-model).  Activation of a user is an asynchronous operation.  The system will perform group reconcilation during activation and assign the user to all applications via direct or inderect relationships (group memberships).  The user will have the `transitioningToStatus` property with a value of `ACTIVE` during activation to indicate that the user hasn't completed the asynchronous operation.  The user will have a `status` of `ACTIVE` when the activation process is complete.
+All responses return the created [User](#user-model).  Activation of a user is an asynchronous operation.  The system performs group reconciliation during activation and assign the user to all applications via direct or indirect relationships (group memberships).  The user will have the `transitioningToStatus` property with a value of `ACTIVE` during activation to indicate that the user hasn't completed the asynchronous operation.  The user will have a `status` of `ACTIVE` when the activation process is complete.
 
 > The user will be emailed a one-time activation token if activated without a password
 
@@ -355,7 +355,7 @@ All responses return the created [User](#user-model).  Activation of a user is a
 #### Create User without Credentials
 {:.api .api-operation}
 
-Creates a user without a [password](#password-object) or [recovery question & answer](#recovery-question-object).  When the user is activated, an email is sent to the user with an activation token that the can be used to complete the activation process.  This is the default flow for new user registration with the Okta Admin UI
+Creates a user without a [password](#password-object) or [recovery question & answer](#recovery-question-object).  When the user is activated, an email is sent to the user with an activation token that the can be used to complete the activation process.  This is the default flow for new user registration with the Okta Admin UI.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -707,7 +707,7 @@ Parameter | Description                                                        |
 --------- | ------------------------------------------------------------------ | ---------- | -------- | -------- | -------
 id        | `id`, `login`, or *login shortname* (as long as it is unambiguous) | URL        | String   | TRUE     |
 
-> When fetching a user by `login` or `login shortname`, you should [URL encode](http://en.wikipedia.org/wiki/Percent-encoding) the request parameter to ensure special characters are escaped properly.  Logins with a `/` character can only be fetched by 'id' due to URL issues with escaping the `/` character.
+> When fetching a user by `login` or `login shortname`, you should [URL encode](http://en.wikipedia.org/wiki/Percent-encoding) the request parameter to ensure special characters are escaped properly.  Logins with a `/` character can only be fetched by `id` due to URL issues with escaping the `/` character.
 
 >You can substitute *me* for the id to fetch the current user linked to API token or session cookie.
 
@@ -880,7 +880,7 @@ curl -v -X GET \
 
 Fetches a specific user when you know the user's `login`.
 
-> When fetching a user by `login`, you should [URL encode](http://en.wikipedia.org/wiki/Percent-encoding) the request parameter to ensure special characters are escaped properly.  Logins with a `/` character can only be fetched by 'id' due to URL issues with escaping the `/` character.
+> When fetching a user by `login`, you should [URL encode](http://en.wikipedia.org/wiki/Percent-encoding) the request parameter to ensure special characters are escaped properly.  Logins with a `/` character can only be fetched by `id` due to URL issues with escaping the `/` character.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1028,86 +1028,44 @@ curl -v -X GET \
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users</span>
 
-Enumerates users in your organization with pagination.  A subset of users can be returned that match a supported filter expression or query.
-
-- [List Users with Defaults](#list-users-with-defaults)
-- [List Users with Search](#list-users-with-search)
-- [List Users Updated after Timestamp](#list-users-updated-after-timestamp)
-- [List Users with Status](#list-users-with-status)
+Lists users in your organization with pagination in most cases.  A subset of users can be returned that match a supported filter expression or search criteria.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
+The first three parameters correspond to different types of lists:
+
+- [List All Users](#list-all-users) (no parameters)
+- [Find Users](#find-users) (`q`)
+- [List Users with a Filter](#list-users-with-a-filter) (`filter`)
+- [List Users with Search](#list-users-with-search) (`search`)
+
 Parameter | Description                                                                               | Param Type | DataType | Required | Default
 --------- | ----------------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------
-q         | Searches `firstName`, `lastName`, and `email` properties of users for matching value      | Query      | String   | FALSE    |
-limit     | Specified the number of results                                                           | Query      | Number   | FALSE    | 200
-filter    | [Filter expression](/docs/api/getting_started/design_principles.html#filtering) for users | Query      | String   | FALSE    |
+q         | Finds a user that matches `firstName`, `lastName`, and `email` properties      | Query      | String   | FALSE    |
+filter    | [Filters](/docs/api/getting_started/design_principles.html#filtering) users with a supported expression for a subset of properties | Query      | String   | FALSE    |
+search    | Searches for users with a supported expression for most properties  | Query      | String   | FALSE    |
+limit     | Specifies the number of results returned                                                           | Query      | Number   | FALSE    | 200
 after     | Specifies the pagination cursor for the next page of users                                | Query      | String   | FALSE    |
 
-> The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination)
-
-> Search currently performs a startsWith match but it should be considered an implementation detail and may change without notice in the future
-
-###### Filters
-
-The following expressions are supported for users with the `filter` query parameter:
-
-Filter                                         | Description
----------------------------------------------- | ------------------------------------------------
-`status eq "STAGED"`                           | Users that have a `status` of `STAGED`
-`status eq "PROVISIONED"`                      | Users that have a `status` of `PROVISIONED`
-`status eq "ACTIVE"`                           | Users that have a `status` of `ACTIVE`
-`status eq "RECOVERY"`                         | Users that have a `status` of `RECOVERY`
-`status eq "PASSWORD_EXPIRED"`                 | Users that have a `status` of `PASSWORD_EXPIRED`
-`status eq "LOCKED_OUT"`                       | Users that have a `status` of `LOCKED_OUT`
-`status eq "DEPROVISIONED"`                    | Users that have a `status` of `DEPROVISIONED`
-`lastUpdated lt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Users last updated before a specific timestamp
-`lastUpdated eq "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Users last updated at a specific timestamp
-`lastUpdated gt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Users last updated after a specific timestamp
-`id eq "00u1ero7vZFVEIYLWPBN"`                 | Users with a specified `id`
-`profile.login eq "login@example.com"`         | Users with a specified `login`
-`profile.email eq "email@example.com"`         | Users with a specified `email`*
-`profile.firstName eq "John"`                  | Users with a specified `firstName`*
-`profile.lastName eq "Smith" `                 | Users with a specified `lastName`*
-
-\* If filtering by `email`, `lastName`, or `firstName`, Okta recommends the [User query API](#list-users-with-search). These profile filters are here for your convenience.
-
-See [Filtering](/docs/api/getting_started/design_principles.html#filtering) for more information on expressions
-
-> All filters must be [URL encoded](http://en.wikipedia.org/wiki/Percent-encoding) where `filter=lastUpdated gt "2013-06-01T00:00:00.000Z"` is encoded as `filter=lastUpdated%20gt%20%222013-06-01T00:00:00.000Z%22`
-
-**Filter Examples**
-
-Users with status of `LOCKED_OUT`
-
-    filter=status eq "LOCKED_OUT"
-
-Users updated after 06/01/2013 but before 01/01/2014
-
-    filter=lastUpdated gt "2013-06-01T00:00:00.000Z" and lastUpdated lt "2014-01-01T00:00:00.000Z"
-
-Users updated after 06/01/2013 but before 01/01/2014 with a status of `ACTIVE`
-
-    filter=lastUpdated gt "2013-06-01T00:00:00.000Z" and lastUpdated lt "2014-01-01T00:00:00.000Z" and status eq "ACTIVE"
-
-Users updated after 06/01/2013 but with a status of `LOCKED_OUT` or `RECOVERY`
-
-    filter=lastUpdated gt "2013-06-01T00:00:00.000Z" and (status eq "LOCKED_OUT" or status eq "RECOVERY")
+  * If you don't specify a value for `limit` and don't specify a query, only 200 results are returned for most orgs.
+  * If you don't specify any value for `limit` and do specify a query, a maximum of 10 results are returned.
+  * The maximum value for `limit` is 200 for most orgs.
+  *  Don't write code that depends on the default or maximum value, as it may change.
+  * An HTTP 500 status code usually indicates that you have exceeded the request timeout.  Retry your request with a smaller limit and paginate the results. For more information, see [Pagination](/docs/getting_started/design_principles.html#pagination)).
+  * Use `limit` and `after` with all four query types.
+  * Treat the `after` cursor as an opaque value and obtain it through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination).
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
 Array of [User](#user-model)
 
-#### List Users with Defaults
+#### List All Users
 {:.api .api-operation}
 
-Enumerates all users that do not have a status of `DEPROVISIONED`.
+If you don't specify any query, returns a list of all users that do not have a status of `DEPROVISIONED`, up to the maximum (200 for most orgs).
 
-The default user limit is set to a very high number due to historical reasons which is no longer valid for most organizations.  This will change in a future version of this API.  The recommended page limit is now `limit=200`.
-
-> If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller `limit` and page the results (See [Pagination](/docs/getting_started/design_principles.html#pagination))
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1212,10 +1170,18 @@ Link: <https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limi
 ]
 ~~~
 
-#### List Users with Search
+#### Find Users
 {:.api .api-operation}
 
-Searches for user by `firstName`, `lastName`, or `email` value.  This operation is ideal for implementing a people picker. This operation does not support pagination.
+Use the `q` parameter for a simple lookup of users by name, for example when creating a people picker.
+The value of `q` is matched against `firstName`, `lastName`, or `email`.
+ 
+
+This operation:
+ 
+ * Doesn't support pagination.
+ * Queries the most up-to-date data. For example, if you create a user or change an attribute and then issue a filter request, the change is reflected in the results.
+ * Performs a startsWith match but this is an implementation detail and may change without notice. You don't need to specify `firstName`, `lastName`, or `email`.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1287,13 +1253,138 @@ curl -v -X GET \
 ]
 ~~~
 
-#### List Users Updated after Timestamp
+
+#### List Users with a Filter
 {:.api .api-operation}
 
-Enumerates all users that have been updated since a specific timestamp.  Use this operation when implementing a background synchronization job and you want to poll for changes.
+Lists all users that match the filter criteria.
 
-##### Request Example
+This operation:
+
+* Filters against the most up-to-date data. For example, if you create a user or change an attribute and then issue a filter request,
+the changes are reflected in your results.
+* Requires [URL encoding](http://en.wikipedia.org/wiki/Percent-encoding). For example, `filter=lastUpdated gt "2013-06-01T00:00:00.000Z"` is encoded as `filter=lastUpdated%20gt%20%222013-06-01T00:00:00.000Z%22`.
+Examples use cURL-style escaping instead of URL encoding to make them easier to read.
+* Supports only a limited number of properties: `status`, `lastUpdated`, `id`, `profile.login`, `profile.email`, `profile.firstName`, and `profile.lastName`.
+* Doesn't include users with a status of `DEPROVISIONED`. You must include a status filter for deprovisioned users.
+
+Filter                                         | Description
+---------------------------------------------- | ------------------------------------------------
+`status eq "STAGED"`                           | Users that have a `status` of `STAGED`
+`status eq "PROVISIONED"`                      | Users that have a `status` of `PROVISIONED`
+`status eq "ACTIVE"`                           | Users that have a `status` of `ACTIVE`
+`status eq "RECOVERY"`                         | Users that have a `status` of `RECOVERY`
+`status eq "PASSWORD_EXPIRED"`                 | Users that have a `status` of `PASSWORD_EXPIRED`
+`status eq "LOCKED_OUT"`                       | Users that have a `status` of `LOCKED_OUT`
+`status eq "DEPROVISIONED"`                    | Users that have a `status` of `DEPROVISIONED`
+`lastUpdated lt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Users last updated before a specific timestamp
+`lastUpdated eq "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Users last updated at a specific timestamp
+`lastUpdated gt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Users last updated after a specific timestamp
+`id eq "00u1ero7vZFVEIYLWPBN"`                 | Users with a specified `id`
+`profile.login eq "login@example.com"`         | Users with a specified `login`
+`profile.email eq "email@example.com"`         | Users with a specified `email`*
+`profile.firstName eq "John"`                  | Users with a specified `firstName`*
+`profile.lastName eq "Smith" `                 | Users with a specified `lastName`*
+`profile.lastName sw "Sm" `                    | Users whose `lastName` starts with "Sm"
+
+\* If filtering by `email`, `lastName`, or `firstName`, it may be easier to use `q` instead of `filter`.
+
+See [Filtering](/docs/api/getting_started/design_principles.html#filtering) for more information about the expressions used in filtering.
+
+##### Filter Examples
+
+List users with status of `LOCKED_OUT`
+
+    filter=status eq "LOCKED_OUT"
+
+List users updated after 06/01/2013 but before 01/01/2014
+
+    filter=lastUpdated gt "2013-06-01T00:00:00.000Z" and lastUpdated lt "2014-01-01T00:00:00.000Z"
+
+List users updated after 06/01/2013 but before 01/01/2014 with a status of `ACTIVE`
+
+    filter=lastUpdated gt "2013-06-01T00:00:00.000Z" and lastUpdated lt "2014-01-01T00:00:00.000Z" and status eq "ACTIVE"
+
+List users updated after 06/01/2013 but with a status of `LOCKED_OUT` or `RECOVERY`
+
+    filter=lastUpdated gt "2013-06-01T00:00:00.000Z" and (status eq "LOCKED_OUT" or status eq "RECOVERY")
+
+
+##### Request Example: Status
 {:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users?filter=status+eq+\"ACTIVE\"+or+status+eq+\"RECOVERY\""
+~~~
+
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+[
+  {
+    "id": "00ub0oNGTSWTBKOLGLNR",
+    "status": "ACTIVE",
+    "created": "2013-06-24T16:39:18.000Z",
+    "activated": "2013-06-24T16:39:19.000Z",
+    "statusChanged": "2013-06-24T16:39:19.000Z",
+    "lastLogin": "2013-06-24T17:39:19.000Z",
+    "lastUpdated": "2013-07-02T21:36:25.344Z",
+    "passwordChanged": "2013-07-02T21:36:25.344Z",
+    "profile": {
+      "firstName": "Eric",
+      "lastName": "Judy",
+      "email": "eric.judy@example.com",
+      "secondEmail": "eric@example.org",
+      "login": "eric.judy@example.com",
+      "mobilePhone": "555-415-2011"
+    },
+    "credentials": {
+      "password": {},
+      "recovery_question": {
+        "question": "The stars are projectors?"
+      },
+      "provider": {
+        "type": "OKTA",
+        "name": "OKTA"
+      }
+    },
+    "_links": {
+      "resetPassword": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+      },
+      "resetFactors": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+      },
+      "expirePassword": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+      },
+      "forgotPassword": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+      },
+      "changeRecoveryQuestion": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+      },
+      "deactivate": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+      },
+      "changePassword": {
+        "href": "https://your-domain.okta.com/api/v1/users/000ub0oNGTSWTBKOLGLNR/credentials/change_password"
+      }
+    }
+  }
+]
+~~~
+
+##### Request Example: Timestamp
+{:.api .api-request .api-request-example}
+
+Lists all users that have been updated since a specific timestamp.  Use this operation when implementing a background synchronization job and you want to poll for changes.
 
 ~~~sh
 curl -v -X GET \
@@ -1362,13 +1453,51 @@ curl -v -X GET \
 ]
 ~~~
 
-#### List Users with Status
+#### List Users with Search
 {:.api .api-operation}
 
-Enumerates all users that have a specific status.
+> Listing users with search is an Early Access feature which you can request from Okta Support.
+It's been tested to the same level as Generally Available (GA) features, so you  can use it in a production environment. 
 
-> Users with a status of `DEPROVISIONED` are not enumerated by default and must be explicitly requested with a status filter.
+Searches for user by the properties specified in the search parameter (case insensitive). 
 
+This operation:
+
+* Supports pagination.
+* Requires [URL encoding](http://en.wikipedia.org/wiki/Percent-encoding).
+For example, `search=profile.department eq "Engineering"` is encoded as `search=profile.department%20eq%20%22Engineering%22`.
+Examples use cURL-style escaping instead of URL encoding to make them easier to read.
+* Queries data from a replicated store, so changes aren't always immediately available in search results. 
+Don't use search results directly for record updates, as the data might be stale and therefore overwrite newer data (data loss). 
+Use an Id lookup for records that you update to ensure your results contain the latest data. 
+* Searches many properties:
+   - Any user profile property, including custom-defined properties
+   - The top-level properties `id`, `status`, `created`, `activated`, `statusChanged` and `lastUpdated` 
+  
+   Search Term Example                            | Description
+   ---------------------------------------------- | ------------------------------------------------
+   `status eq "STAGED"`                           | Users that have a `status` of `STAGED`
+   `lastUpdated gt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Users last updated after a specific timestamp
+   `id eq "00u1ero7vZFVEIYLWPBN"`                 | Users with a specified `id`
+   `profile.department eq "Engineering"`          | Users that have a `department` of `Engineering`
+   `profile.occupation eq "Leader"`               | Users that have an `occupation` of `Leader`
+   `profile.lastName sw "Sm" `                    | Users whose `lastName` starts with "Sm"
+
+##### Searching Arrays
+
+You can search properties that are arrays. If any element matches the search term, the entire array (object) is returned. 
+For examples, see [Request Example for Array](#request-example-for-array) and [Response Example for Array](#response-example-for-array).
+
+##### Search Examples
+
+List users with an occupation of `Leader`.
+
+    search=profile.occupation eq "Leader"
+
+List users in the department of `Engineering` who were created before `01/01/2014` or have a status of `ACTIVE`.
+
+    search=profile.department eq "Engineering" and (created lt "2014-01-01T00:00:00.000Z" or status eq "ACTIVE")
+    
 ##### Request Example
 {:.api .api-request .api-request-example}
 
@@ -1377,7 +1506,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users?filter=status+eq+\"ACTIVE\"+or+status+eq+\"RECOVERY\""
+"https://${org}.okta.com/api/v1/users?search=profile.mobilePhone+sw+\"555\"+and+status+eq+\"ACTIVE\""
 ~~~
 
 ##### Response Example
@@ -1395,17 +1524,16 @@ curl -v -X GET \
     "lastUpdated": "2013-07-02T21:36:25.344Z",
     "passwordChanged": "2013-07-02T21:36:25.344Z",
     "profile": {
-      "firstName": "Eric",
-      "lastName": "Judy",
-      "email": "eric.judy@example.com",
-      "secondEmail": "eric@example.org",
-      "login": "eric.judy@example.com",
-      "mobilePhone": "555-415-2011"
+      "firstName": "Isaac",
+      "lastName": "Brock",
+      "email": "isaac.brock@example.com",
+      "login": "isaac.brock@example.com",
+      "mobilePhone": "555-415-1337"
     },
     "credentials": {
       "password": {},
       "recovery_question": {
-        "question": "The stars are projectors?"
+        "question": "Who's a major player in the cowboy scene?"
       },
       "provider": {
         "type": "OKTA",
@@ -1432,10 +1560,85 @@ curl -v -X GET \
         "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
       },
       "changePassword": {
-        "href": "https://your-domain.okta.com/api/v1/users/000ub0oNGTSWTBKOLGLNR/credentials/change_password"
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
       }
     }
   }
+]
+~~~
+
+##### Request Example for Array
+{:.api .api-request .api-request-example}
+
+The following example is for a custom attribute on User, an array of strings named `arrayAttr` that contains values `["arrayAttrVal1", "arrayAttrVal2"...]`. 
+
+~~~sh
+curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users?search=profile.arrayAttr+eq+\"arrayAttrVal1\" "
+~~~
+
+##### Response Example for Array
+{:.api .api-response .api-response-example}
+
+~~~json
+[
+    {
+        "id": "00u19uiKQa0xXkbdGLNR",
+        "status": "PROVISIONED",
+        "created": "2016-03-15T04:21:51.000Z",
+        "activated": "2016-03-15T04:21:52.000Z",
+        "statusChanged": "2016-03-15T04:21:52.000Z",
+        "lastLogin": null,
+        "lastUpdated": "2016-03-17T07:08:15.000Z",
+        "passwordChanged": null,
+        "profile": {
+            "login": "u7@test.com",
+            "mobilePhone": null,
+            "email": "u7@test.com",
+            "secondEmail": "",
+            "firstName": "u7",
+            "lastName": "u7",
+            "boolAttr": true,
+            "intAttr": 99,
+            "strArray": [
+                "strArrayVal1",
+                "strArrayVal2"
+            ],
+            "intArray": [
+                5,
+                8
+            ],
+            "numAttr": 8.88,
+            "attr1": "attr1ValUpdated3",
+            "arrayAttr": [
+                "arrayAttrVal1",
+                "arrayAttrVal2Updated"
+            ],
+            "numArray": [
+                1.23,
+                4.56
+            ]
+        },
+        "credentials": {
+            "provider": {
+                "type": "OKTA",
+                "name": "OKTA"
+            }
+        },
+        "_links": {
+            "resetPassword": {
+                "href": "http://your-domain.okta.com/api/v1/users/00u19uiKQa0xXkbdGLNR/lifecycle/reset_password",
+                "method": "POST"
+            },
+            "deactivate": {
+                "href": "http://your-domain.okta.com/api/v1/users/00u19uiKQa0xXkbdGLNR/lifecycle/deactivate",
+                "method": "POST"
+            }
+        }
+    }
 ]
 ~~~
 
@@ -1448,8 +1651,8 @@ curl -v -X GET \
 
 Update a user's profile and/or credentials using strict-update semantics.
 
-> All profile properties must be specified when updating a user's profile with a `PUT` method. Any attribute not specified
-in the request will be deleted. **Do not use `PUT` method for partial updates.**
+> All profile properties must be specified when updating a user's profile with a `PUT` method. Any property not specified
+in the request will be deleted. **Don't use `PUT` method for partial updates.**
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -1547,15 +1750,14 @@ curl -v -X PUT \
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:id*</span>
 
-Update a user's profile and/or credentials with partial update semantics.
+Update a user's profile or credentials with partial update semantics.
 
-> Only the profile properties specified in the request will be modified when using the `POST` method. Any attribute not specified
-in the request will not be modified or deleted. **Use `POST` method for partial updates.**
+> Use the `POST` method for partial updates, because unspecified properties aren't changed with `POST`. 
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter   | Description                 | Param Type | DataType                                  | Required | Default
+Parameter   | Description                 | Param Type | DataType                                  | Required | Default 
 ----------- | --------------------------- | ---------- | ----------------------------------------- | -------- | -------
 id          | `id` of user to update      | URL        | String                                    | TRUE     |
 profile     | Updated profile for user    | Body       | [Profile Object](#profile-object)         | FALSE    |
@@ -1722,7 +1924,7 @@ curl -v -X POST \
 #### Set Recovery Question & Answer
 {:.api .api-operation}
 
-This is an administrative operation and does not validate existing user credentials.  See [Change Recovery Question](#change-recovery-question) for an operation that requires validation
+This is an administrative operation and doesn't validate existing user credentials. See [Change Recovery Question](#change-recovery-question) for an operation that requires validation.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
