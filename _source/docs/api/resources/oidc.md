@@ -257,7 +257,6 @@ HTTP/1.1 401 Unauthorized​
 Cache-Control: no-cache, no-store​
 Pragma: no-cache​
 Expires: 0​
-X-Okta-Request-Id: reqVy8wsvmBQN27h4soU3ZEnA
 WWW-Authenticate: Bearer error="invalid_token", error_description="The access token is invalid"​
 ~~~
 
@@ -267,7 +266,6 @@ WWW-Authenticate: Bearer error="invalid_token", error_description="The access to
 HTTP/1.1 403 Forbidden​
 Cache-Control: no-cache, no-store​
 Pragma: no-cache​
-X-Okta-Request-Id: reqVy8wsvmBQN27h4soU3ZEnA
 Expires: 0​
 WWW-Authenticate: Bearer error="insufficient_scope", error_description="The access token must provide access to at least one of these scopes - profile, email, address or phone"
 ~~~
