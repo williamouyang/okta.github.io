@@ -3071,7 +3071,7 @@ username    | User's non-qualified short-name (e.g. dade.murphy) or unique fully
 factorType  | Recovery factor to use for primary authentication                                                                | Body       | `EMAIL` or `SMS`                  | FALSE    |         |
 relayState  | Optional state value that is persisted for the lifetime of the recovery transaction                              | Body       | String                            | FALSE    |         | 2048
 
-> A valid `factoryType` is required for requests without an API token with admin privileges. (See [Forgot Password with Trusted Application](#forgot-password-with-trusted-application))
+> A valid `factorType` is required for requests without an API token with admin privileges. (See [Forgot Password with Trusted Application](#forgot-password-with-trusted-application))
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
