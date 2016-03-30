@@ -12,7 +12,7 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
 Note that clients managed via this API are modeled as applications in Okta and will show in the Applications section of the
 Administrator dashboard. Changes made via the API will reflect in the UI and vice versa.
 
-> This API is currently in **Early Access (EA)** status.
+> This API is currently in **Beta** status.
 
 ## Client Application Model
 
