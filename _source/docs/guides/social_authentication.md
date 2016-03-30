@@ -53,6 +53,7 @@ Advantages of using Okta Social Authentication include:
     -   [Facebook](http://saml-doc.okta.com/IdentityProvider_Docs/Facebook_Identity_Provider_Setup.html)
     -   [Google](http://saml-doc.okta.com/IdentityProvider_Docs/Google_Identity_Provider_Setup.html)
     -   [LinkedIn](http://saml-doc.okta.com/IdentityProvider_Docs/LinkedIn_Identity_Provider_Setup.html)
+    -   [Microsoft](http://saml-doc.okta.com/IdentityProvider_Docs/Microsoft_Identity_Provider_Setup.html)
 4.  Configure your Social Authentication provider:
     -   **Name**: We suggest using the name you would
         expect to see on a button, something like "Log in to Facebook".
