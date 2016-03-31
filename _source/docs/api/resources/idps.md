@@ -2110,8 +2110,8 @@ curl -v -X POST \
             "scopes": [ "openid", "email", "profile", "https://graph.microsoft.com/User.Read" ],
             "credentials": {
                 "client": {
-                    "client_id": "your-client-id",
-                    "client_secret": "your-client-secret"
+                    "client_id": "my-client-id",
+                    "client_secret": "my-client-secret"
                 }
             }
         },
@@ -2994,14 +2994,13 @@ Updated [Identity Provider](#identity-provider-model)
 
 ##### Request Example
 {:.api .api-request .api-request-example}
-
+TOdo
 ~~~sh
 curl -v -X PUT \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-
 }' "https://${org}.okta.com/api/v1/idps/your-idps-id"
 ~~~
 
