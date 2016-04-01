@@ -43,9 +43,12 @@ Advantages of using Okta Social Authentication include:
 # Setting up a Social Authentication provider in Okta
 
 1.  Click the blue "Admin" button to get into the Okta Administrator view.
+
 2.  From the "Security" menu, select "Identity Providers".
+
 3.  Use the "Add Identity Provider" drop-down menu to select the
     Identity Provider that you want to configure.
+    
     The options for social authentication providers are:
     -   [Facebook](http://saml-doc.okta.com/IdentityProvider_Docs/Facebook_Identity_Provider_Setup.html)
     -   [Google](http://saml-doc.okta.com/IdentityProvider_Docs/Google_Identity_Provider_Setup.html)
@@ -66,6 +69,7 @@ Advantages of using Okta Social Authentication include:
     -   **Client Secret**: Set this to appropriate value for the Social
         Authentication provider that you are configuring.
     -   **Scopes**: Leave set to the default.
+    
 5.  Make note of the "Login URL" from the "Identity Providers" page.
     
     Copy this URL somewhere you can refer to it later. You will be
@@ -74,102 +78,19 @@ Advantages of using Okta Social Authentication include:
     
     **Note:** This URL will look similar to this one:
     `https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4`
-6.  Add an OAuth client via the App Integration Wizard or via the [Okta API](../resources/oauth-clients.html)
     
-    Register an OAuth Client by navigating to the Administrator Dashboard, go to Applications, then click "Add Application".
-    Click "Create New App" to launch the App Integration Wizard. It will guide you through the necessary configuration
-    steps and give you back a "client_id" which you can then use in Step 7.
+6.  Register an OAuth client using the App Integration Wizard.
     
-    If you'd rather use the Okta API to register a client, we suggest using Postman to do
-    this. If you haven't used Postman before, see our [instructions
-    for using Postman with Okta](http://developer.okta.com/docs/api/getting_started/api_test_client.html) before proceeding. Load our [Client
-    Registration Postman Collection](../postman/client-registration.json) into Postman and then use the
-    "Create OAuth Client" request to create a new OAuth client on
-    Okta, this will make a POST request to the `/oauth2/v1/clients` URL
-    of your Okta org.
+    1. Navigate to the Administrator Dashboard.
     
-    When making the HTTP POST to the `/oauth2/v1/clients` URL, you
-    should use the default request body, replacing the contents of
-    the `redirect_uris` with the URLs that your Social Authentication
-    provider will be allowed to redirect users to.
+    2. Select *Applications*.
     
-    These URLs can be any URL of your choosing. The URLs that you
-    will likely want to use would be either the URL for your Okta
-    dashboard (so that your employees can log in to Okta using their
-    social credentials) or a URL to one of your custom applications
-    (so that your users can log in using their social credentials)
+    3. Select *Add Application*.
     
-    The example below shows what a POST request would look like if
-    you configured to redirect users to one of the following three
-    URLS:
+    4. Select *Create New App* to launch the App Integration Wizard. It guides you through the necessary configuration
+    steps and give you back a `client_id` which you use in Step 7.
     
-    1.  `https://example.okta.com`
-        
-        An example of a link to the Okta user dashboard.
-    2.  `https://www.example.com/User/SocialAuthSuccess.aspx`
-        
-        An example link to an ASP.NET program.
-    3.  `https://payroll.example.com/socialAuth`
-        
-        An example link to a modified payroll application.
-    
-    Here is what the body of your POST request should look like:
-    
-        {
-          "client_name": "Example",
-          "client_uri": "https://example.com",
-          "logo_uri": "https://example.com/logo.png",
-          "application_type": "web",
-          "redirect_uris": [
-            "https://www.example.com/User/SocialAuthSuccess.aspx",
-            "https://payroll.example.com/socialAuth",
-            "https://example.okta.com"
-          ],
-          "response_types": [
-            "token",
-            "id_token"
-          ],
-          "grant_types": [
-            "implicit"
-          ],
-          "token_endpoint_auth_method": "client_secret_post"
-        }
-    
-    > If you are developing a service on your own computer that is running on "`http://localhost`", you can use the wonderful [ngrok](https://ngrok.com/) service to create an SSL enabled tunnel for your "`http://localhost`" URL.
-    
-    After you click the "Send" button in Postman, you will see a JSON
-    response from Okta, which will look like the response below. Find
-    the `client_id` and copy that for use in the next step.
-    
-        {
-          "id": "ida0bcd12efGhIjK34l5",
-          "created": "2015-10-23T22:13:45.000Z",
-          "lastUpdated": "2015-10-23T22:13:45.000Z",
-          "client_name": "Example",
-          "client_uri": "https://example.com",
-          "logo_uri": "https://example.com/logo.png",
-          "application_type": "web",
-          "redirect_uris": [
-            "https://www.example.com/User/SocialAuthSuccess.aspx",
-            "https://payroll.example.com/socialAuth",
-            "https://employees.example.com/directory"
-          ],
-          "response_types": [
-            "token",
-            "id_token"
-          ],
-          "grant_types": [
-            "implicit"
-          ],
-          "token_endpoint_auth_method": "client_secret_post",
-          "client_id": "ABCd0efgHi1J2KlMnOP3",
-          "client_id_issued_at": 1445638425
-        }
-    
-    In the example result above, the `client_id` is `ABCd0efgHi1J2KlMnOP3`.
-    Take note of the `client_id` in your result since you will be using it
-    in the next step.
-7.  Create a Social Auth Login URL
+7.  Create a Social Auth Login URL.
     1.  Append the `client_id` you copied above into the Social Auth
         "Login URL" as the value of a GET parameter name `client_id`.
         
