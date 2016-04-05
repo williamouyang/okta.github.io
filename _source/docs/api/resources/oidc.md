@@ -374,7 +374,8 @@ This API endpoint returns the OpenID Connect related metadata that can be used b
     ],
     "grant_types_supported": [
         "authorization_code",
-        "implicit"
+        "implicit",
+	"refresh_token"
     ],
     "subject_types_supported": [
         "public"
