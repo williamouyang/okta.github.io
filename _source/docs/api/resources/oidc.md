@@ -391,7 +391,8 @@ This API endpoint returns the OpenID Connect related metadata that can be used b
     ],
     "token_endpoint_auth_methods_supported": [
         "client_secret_basic",
-        "client_secret_post"
+        "client_secret_post",
+	"none"
     ],
     "claims_supported": [
         "iss",
