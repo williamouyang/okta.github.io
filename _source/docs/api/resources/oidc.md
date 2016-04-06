@@ -500,7 +500,8 @@ This API doesn't require any authentication and returns a JSON object with the f
     ],
     "grant_types_supported": [
         "authorization_code",
-        "implicit"
+        "implicit",
+	"refresh_token"
     ],
     "subject_types_supported": [
         "public"
