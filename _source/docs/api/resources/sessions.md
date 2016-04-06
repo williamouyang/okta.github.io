@@ -123,16 +123,17 @@ The following values are defined for the status of a session:
 
 The authentication methods reference ("AMR") specifies which authentication methods were used to establish the session. The value is a JSON array with one or more of the following values:
 
-|----------+-----------------------------------+---------------------------------------------------------------------------|
-| Value    | Description                       | Example                                                                   |
-| -------- | ----------------------------------|---------------------------------------------------------------------------|
-| `pwd`    | Password authentication           | Standard password-based login                                             |
-| `pop`    | Proof of possession of a key      | Okta Verify with Push                                                     |
-| `otp`    | One-time password                 | Okta Verify, Google Authenticator                                         |
-| `sms`    | SMS text message                  | SMS factor                                                                |
-| `kba`    | Knowlege-based authentication     | Security Question factor                                                  |
-| `mfa`    | Multiple factor authentication    | (This value is present whenever any MFA factor verification is performed) |
-|--------- +-----------------------------------+---------------------------------------------------------------------------|
+|----------+------------------------------------------------------+---------------------------------------------------------------------------|
+| Value    | Description                                          | Example                                                                   |
+| -------- | -----------------------------------------------------|---------------------------------------------------------------------------|
+| `pwd`    | Password authentication                              | Standard password-based login                                             |
+| `swk`    | Proof-of-possession (PoP) of a software-secured key. | Okta Verify with Push                                                     |
+| `hwk`    | Proof-of-possession (PoP) of a hardware-secured key. | Yubikey factor                                                            |
+| `otp`    | One-time password                                    | Okta Verify, Google Authenticator                                         |
+| `sms`    | SMS text message                                     | SMS factor                                                                |
+| `kba`    | Knowlege-based authentication                        | Security Question factor                                                  |
+| `mfa`    | Multiple factor authentication                       | (This value is present whenever any MFA factor verification is performed) |
+|--------- +------------------------------------------------------+---------------------------------------------------------------------------|
 
 ### IDP Object
 

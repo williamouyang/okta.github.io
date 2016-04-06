@@ -109,7 +109,7 @@ Claims in the payload are independent of scope (always returned) or dependent on
 | iat     | The time the ID Token was issued, represented in Unix time (seconds).   | Integer    | 1311280970     |
 | exp     | The time the ID Token expires, represented in Unix time (seconds).   | Integer    | 1311280970     |
 | auth_time | The time the end-user was authenticated, represented in Unix time (seconds).   | Integer    | 1311280970     |
-| amr     | JSON array of strings that are identifiers for [authentication methods](http://self-issued.info/docs/draft-jones-oauth-amr-values-00.html) used in the authentication.   | Array    | [ "pwd", "otp", "mfa" ]     |
+| amr     | JSON array of strings that are identifiers for [authentication methods](http://self-issued.info/docs/draft-jones-oauth-amr-values-00.html) used in the authentication.   | Array    | [ "pwd", "mfa", "otp", "kba", "sms", "swk", "hwk" ]     |
 | idp     | The id of the Identity Provider that the user authenticated to Okta with. (Used for Social Auth and Inbound SAML). If it was Okta, the value would be the OrgId.  | String    | "00ok1u7AsAkrwdZL3z0g3"    |
 | nonce     |  Value used to associate a Client session with an ID Token, and to mitigate replay attacks. This is only returned if <em>nonce</em> was present in the request that generated the ID Token.    |  String   | "n-0S6_WzA2Mj"  |
 | at_hash     | The base64URL-encoded first 128-bits of the SHA-256 hash of the Access Token. This is only returned if an Access Token is also returned with an ID Token.  | String    | "MTIzNDU2Nzg5MDEyMzQ1Ng"     |
