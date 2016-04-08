@@ -19,11 +19,7 @@ OpenID Connect introduces an [ID Token](http://openid.net/specs/openid-connect-c
 which is a [JSON web token (JWT)](https://tools.ietf.org/html/rfc7519) that contains information about an authentication event 
 as well as claims about the authenticated user.
 
-The ID Token consists of three period-separated, base64URL-encoded JSON segments: [a header](#header), [the payload](#payload), and [the signature](#signature).
-
 ID Tokens should always be [validated](#validating-id-tokens) by the client to ensure their integrity.
-
-### Header
 
 The ID Token (`id_token`) consists of three period-separated, base64URL-encoded JSON segments: [a header](#header), [the payload](#payload), and [the signature](#signature). 
 
