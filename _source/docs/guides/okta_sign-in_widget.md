@@ -4,8 +4,6 @@ title: Okta Sign-In Widget
 excerpt: Easily add Okta capabilities to your website.
 ---
 
-> This widget is currently in **Early Access (EA)** status.
-
 ![Screenshot of basic Okta Sign-In Widget](/assets/img/okta-signin.png)
 
 # Introduction
