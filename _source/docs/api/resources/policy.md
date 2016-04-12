@@ -246,6 +246,8 @@ curl -v -X GET \
 
 HTTP 200: 
 <a href="#PolicyObject">Policy Object</a>
+HTTP 204: 
+<a href="#PolicyObject">Policy Object</a>
 
 
 
@@ -457,7 +459,7 @@ HTTP 200:
  - The default rule is required and always is the last rule in the priority order. If you add rules to the default policy, they have a higher priority than the default rule.
  - The `system` attribute determines whether a rule is created by a system or by a user. The default rule is the only rule that has this attribute.
 
-### Rules Object Example
+### Rules Model Example
 
 ~~~json
 {
@@ -502,7 +504,7 @@ HTTP 200:
     "priorityOrder": {
         "default": "Last / Lowest Priority", 
         "description": "Priority for the rule", 
-        "type": "int"
+        "type": "integer"
     }, 
     "status": "ACTIVE", 
     "system": true, 
@@ -522,7 +524,7 @@ Parameter | Description | Data Type | Required | Default
 id | Identifier for the rule | String | No | Assigned
 type | Rule type | `OKTA_SIGN_ON` or `MFA_ENROLL` | Yes | 
 status | Status of the rule: `ACTIVE` or `INACTIVE` | String | No | ACTIVE
-priorityOrder | Priority for the rule | Int | No | Last / Lowest Priority
+priorityOrder | Priority for the rule | Integer | No | Last / Lowest Priority
 system | Whether or not the rule is the default | Boolean | No | false
 created | Timestamp when the rule was created | Date | No | Assigned
 lastUpdated | Timestamp when the rule was last modified | Date | No | Assigned
@@ -582,7 +584,7 @@ Parameter | Description | Data Type | Required | Default
 access | `ALLOW` or `DENY` | `ALLOW` or `DENY` | Yes | 
 requireFactor |  | Boolean | No | false
 factorPromptMode | `DEVICE`, `SESSION` or `ALWAYS` | `DEVICE`, `SESSION` or `ALWAYS` | No | 
-factorLifetime | How long until factor times out | Int | No | 
+factorLifetime | How long until factor times out | Integer | No | 
 session | Session Rules | <a href="#SignonSessionObject">Signon Session Object</a> | No | 
 
 
@@ -593,8 +595,8 @@ session | Session Rules | <a href="#SignonSessionObject">Signon Session Object</
 
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
-maxSessionIdleMinutes | Maximum number of minutes that a user session can be idle before the session is ended. | Int | No | 
-maxSessionLifetimeMinutes | Maximum number of minutes from user login that a user session will be active. Set this to force users to sign-in again after the number of specified minutes. Disable by setting to `0`. | Int | No | 
+maxSessionIdleMinutes | Maximum number of minutes that a user session can be idle before the session is ended. | Integer | No | 
+maxSessionLifetimeMinutes | Maximum number of minutes from user login that a user session will be active. Set this to force users to sign-in again after the number of specified minutes. Disable by setting to `0`. | Integer | No | 
 usePersistentCookie | If set to `false`, user session cookies will only last the length of a browser session. If set to `true`, user session cookies will last across browser sessions. This setting does not impact Okta Administrator users, who can *never* have persistant session cookies. | Boolean | No | false
 
 
