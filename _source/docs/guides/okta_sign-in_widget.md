@@ -98,7 +98,7 @@ Here is what is happening in the HTML above:
 
 First, in the `<head>`
 tag, we include the  `okta-sign-in-1.2.0.min.js` and
-`okta-sign-in-1.2.min.css` files. These files have all of the
+`okta-sign-in-1.2.0.min.css` files. These files have all of the
 logic for the Okta Sign-In Widget. 
 
 We also include the `okta-theme-1.2.0.css` file, which contains all
@@ -443,7 +443,7 @@ var oktaSignIn = new OktaSignIn({
     ]
   },
 
-  // See the contents of the 'okta-theme-1.2.css' file for a full list of labels.
+  // See the contents of the 'okta-theme-1.2.0.css' file for a full list of labels.
   labels: {
     'primaryauth.title': 'Acme Partner Login',
     'primaryauth.username': 'Partner ID',
