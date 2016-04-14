@@ -330,12 +330,12 @@ The following parameters can be posted as a part of the URL-encoded form values 
 
 Parameter          | Description                                                                                         | Type       |
 -------------------+-----------------------------------------------------------------------------------------------------+------------|
-grant_type         | Can be either <em>authorization_code</em> or <em>refresh_token</em>. Determines the mechanism Okta will use to authorize the creation of the tokens. | String |  
-code               | Expected if grant_type specified <em>code</em>. The value is what was returned from the /oauth2/v1/authorize endpoint. | String
+grant_type         | Can be one of the following: <em>authorization_code</em>, <em>password</em>, or <em>refresh_token</em>. Determines the mechanism Okta will use to authorize the creation of the tokens. | String |  
+code               | Expected if grant_type specified <em>authorization_code</em>. The value is what was returned from the /oauth2/v1/authorize endpoint. | String
 refresh_token      | Expected if the grant_type specified <em>refresh_token</em>. The value is what was returned from this endpoint via a previous invocation. | String |
 scope              | Expected only if <em>refresh_token</em> is specified as the grant type. This is a list of scopes that the client wants to be included in the Access Token. These scopes have to be subset of the scopes used to generate the Refresh Token in the first place. | String |
 redirect_uri       | Expected if grant_type is <em>authorization_code</em>. Specifies the callback location where the authorization was sent; must match what is preregistered in Okta for this client. | String |
-client_id          | The client id generated as a part of client registration. This is used in conjunction with the <em>client_secret</em> parameter to authenticate the client application. | String |
+client_id          | The client ID generated as a part of client registration. This is used in conjunction with the <em>client_secret</em> parameter to authenticate the client application. | String |
 client_secret      | The client secret generated as a part of client registration. This is used in conjunction with the <em>client_id</em> parameter to authenticate the client application. | String |
 
 
