@@ -355,9 +355,9 @@ is up to you. Customization of the widget itself will be done on
 the `#okta-login-container` selector and its child elements.
 
 A full list of the CSS selectors that you can use to style the
-Okta Sign-In Widget are in the [okta-theme.css](https://example.okta.com/js/sdk/okta-theme-1.2.0.css) file. We strongly
+Okta Sign-In Widget are in the [okta-theme.css](https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.2.0/css/okta-theme-1.2.0.css) file. We strongly
 urge you to style your widget using only the selectors that are
-present in the [okta-theme.css](https://example.okta.com/js/sdk/okta-theme-1.2.0.css) file, other elements in the widget
+present in the [okta-theme.css](https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.2.0/css/okta-theme-1.2.0.css) file, other elements in the widget
 will be subject to change and will cause your styling to break in
 future versions of the Okta Sign-In Widget.
 
