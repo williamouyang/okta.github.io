@@ -73,10 +73,10 @@ and easily set up a fully featured login experience:
 ~~~ html
 <head>
 	<!-- Core widget js and css -->
-	<script src="https://example.okta.com/js/sdk/okta-sign-in-1.0.2.min.js" type="text/javascript"></script>
-	<link href="https://example.okta.com/js/sdk/okta-sign-in-1.0.2.min.css" type="text/css" rel="stylesheet">
+	<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.2.0/js/okta-sign-in-1.2.0.min.js" type="text/javascript"></script>
+	<link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.2.0/css/okta-sign-in-1.2.0.min.css" type="text/css" rel="stylesheet">
 	<!-- Customizable css theme options. Link your own customized copy of this file or override styles in-line -->
-	<link href="https://example.okta.com/js/sdk/okta-theme-1.0.2.css" type="text/css" rel="stylesheet">
+	<link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.2.0/css/okta-theme-1.2.0.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 	<div id="okta-login-container"></div>
@@ -97,11 +97,11 @@ and easily set up a fully featured login experience:
 Here is what is happening in the HTML above: 
 
 First, in the `<head>`
-tag, we include the  `okta-sign-in-1.0.2.min.js` and
-`okta-sign-in-1.0.2.min.css` files. These files have all of the
+tag, we include the  `okta-sign-in-1.2.0.min.js` and
+`okta-sign-in-1.2.0.min.css` files. These files have all of the
 logic for the Okta Sign-In Widget. 
 
-We also include the `okta-theme-1.0.2.css` file, which contains all
+We also include the `okta-theme-1.2.0.css` file, which contains all
 of the styling information for the Okta Sign-In Widget.
 
 In the `<body>`, we add a `<div>` tag with an "`id`" of
@@ -194,9 +194,9 @@ Copy this to a file named `login-to-okta.html`:
           <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
       <![endif]-->
     
-      <script src="https://example.okta.com/js/sdk/okta-sign-in-1.0.2.min.js" type="text/javascript"></script>
-      <link href="https://example.okta.com/js/sdk/okta-sign-in-1.0.2.min.css" type="text/css" rel="stylesheet">
-      <link href="https://example.okta.com/js/sdk/okta-theme-1.0.2.css" type="text/css" rel="stylesheet">
+      <script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.2.0/js/okta-sign-in-1.2.0.min.js" type="text/javascript"></script>
+      <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.2.0/css/okta-sign-in-1.2.0.min.css" type="text/css" rel="stylesheet">
+      <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.2.0/css/okta-theme-1.2.0.css" type="text/css" rel="stylesheet">
     </head>
     <body>
       <!-- Render the login widget here -->
@@ -243,13 +243,13 @@ There are four lines that you will need to modify in
 
 1.  The `<script>` tag for `okta-sign-in.js`:
     
-        <script src="https://example.okta.com/js/sdk/okta-sign-in-1.0.2.min.js" type="text/javascript"></script>
+        <script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.2.0/js/okta-sign-in-1.2.0.min.js" type="text/javascript"></script>
 2.  The `<link>` tag for `okta-sign-in.css`:
     
-        <link href="https://example.okta.com/js/sdk/okta-sign-in-1.0.2.min.css" type="text/css" rel="stylesheet">
+        <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.2.0/css/okta-sign-in-1.2.0.min.css" type="text/css" rel="stylesheet">
 3.  The `<link>` tag for `okta-theme.css`:
     
-        <link href="https://example.okta.com/js/sdk/okta-theme-1.0.2.css" type="text/css" rel="stylesheet">
+        <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.2.0/css/okta-theme-1.2.0.css" type="text/css" rel="stylesheet">
 4.  The string passed as the `baseUrl` to the `OktaSignIn` constructor:
 
         var baseUrl = 'https://example.okta.com';
@@ -355,9 +355,9 @@ is up to you. Customization of the widget itself will be done on
 the `#okta-login-container` selector and its child elements.
 
 A full list of the CSS selectors that you can use to style the
-Okta Sign-In Widget are in the [okta-theme.css](https://example.okta.com/js/sdk/okta-theme-1.0.2.css) file. We strongly
+Okta Sign-In Widget are in the [okta-theme.css](https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.2.0/css/okta-theme-1.2.0.css) file. We strongly
 urge you to style your widget using only the selectors that are
-present in the [okta-theme.css](https://example.okta.com/js/sdk/okta-theme-1.0.2.css) file, other elements in the widget
+present in the [okta-theme.css](https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.2.0/css/okta-theme-1.2.0.css) file, other elements in the widget
 will be subject to change and will cause your styling to break in
 future versions of the Okta Sign-In Widget.
 
@@ -400,11 +400,11 @@ the `login-to-okta.html` file that you created above.
 
 While the example above demonstrates how to using an in-page style
 tag, we strongly encourage you to create your own stylesheet by
-copying the `okta-theme-1.0.2.css` file onto your own website, and
+copying the `okta-theme-1.2.0.css` file onto your own website, and
 update that file as needed. Here is what that might look like in
 your HTML:
 
-    <link href="https://your-website.example.com/static/css/custom-okta-theme-1.0.2.css" type="text/css" rel="stylesheet">
+    <link href="https://your-website.example.com/static/css/custom-okta-theme-1.2.0.css" type="text/css" rel="stylesheet">
 
 ## Customizing widget features and text labels with JavaScript
 
@@ -443,7 +443,7 @@ var oktaSignIn = new OktaSignIn({
     ]
   },
 
-  // See the contents of the 'okta-theme-1.0.2.css' file for a full list of labels.
+  // See the contents of the 'okta-theme-1.2.0.css' file for a full list of labels.
   labels: {
     'primaryauth.title': 'Acme Partner Login',
     'primaryauth.username': 'Partner ID',
