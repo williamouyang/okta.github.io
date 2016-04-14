@@ -334,7 +334,7 @@ as well as claims about the authenticated user.</p>
       <td>amr</td>
       <td>JSON array of strings that are identifiers for <a href="http://self-issued.info/docs/draft-jones-oauth-amr-values-00.html">authentication methods</a> used in the authentication.</td>
       <td>Array</td>
-      <td>[ “pwd”, “otp”, “mfa” ]</td>
+      <td>[ “pwd”, “mfa”, “otp”, “kba”, “sms”, “swk”, “hwk” ]</td>
     </tr>
     <tr>
       <td>idp</td>
@@ -863,12 +863,12 @@ See <a href="#scope-dependent-claims">Scope-Dependent Claims</a> for more inform
   <tbody>
     <tr>
       <td>grant_type</td>
-      <td>Can be either <em>authorization_code</em> or <em>refresh_token</em>. Determines the mechanism Okta will use to authorize the creation of the tokens.</td>
+      <td>Can be one of the following: <em>authorization_code</em>, <em>password</em>, or <em>refresh_token</em>. Determines the mechanism Okta will use to authorize the creation of the tokens.</td>
       <td>String</td>
     </tr>
     <tr>
       <td>code</td>
-      <td>Expected if grant_type specified <em>code</em>. The value is what was returned from the /oauth2/v1/authorize endpoint.</td>
+      <td>Expected if grant_type specified <em>authorization_code</em>. The value is what was returned from the /oauth2/v1/authorize endpoint.</td>
       <td>String</td>
     </tr>
     <tr>
@@ -888,7 +888,7 @@ See <a href="#scope-dependent-claims">Scope-Dependent Claims</a> for more inform
     </tr>
     <tr>
       <td>client_id</td>
-      <td>The client id generated as a part of client registration. This is used in conjunction with the <em>client_secret</em> parameter to authenticate the client application.</td>
+      <td>The client ID generated as a part of client registration. This is used in conjunction with the <em>client_secret</em> parameter to authenticate the client application.</td>
       <td>String</td>
     </tr>
     <tr>

@@ -779,6 +779,8 @@ the action in Rule A is taken, and Rule B is not evaluated.</p>
 <h5 class="api api-response api-response-example" id="response-types">Response Types</h5>
 
 <p>HTTP 200: 
+<a href="#PolicyObject">Policy Object</a>
+HTTP 204: 
 <a href="#PolicyObject">Policy Object</a></p>
 
 <h3 class="api api-operation" id="delete-policy">Delete Policy</h3>
@@ -959,7 +961,7 @@ the action in Rule A is taken, and Rule B is not evaluated.</p>
   <li>The <code class="highlighter-rouge">system</code> attribute determines whether a rule is created by a system or by a user. The default rule is the only rule that has this attribute.</li>
 </ul>
 
-<h3 id="rules-object-example">Rules Object Example</h3>
+<h3 id="rules-model-example">Rules Model Example</h3>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1003,7 +1005,7 @@ the action in Rule A is taken, and Rule B is not evaluated.</p>
     </span><span class="nt">"priorityOrder"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Last / Lowest Priority"</span><span class="p">,</span><span class="w"> 
         </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Priority for the rule"</span><span class="p">,</span><span class="w"> 
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"int"</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integer"</span><span class="w">
     </span><span class="p">},</span><span class="w"> 
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w"> 
     </span><span class="nt">"system"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> 
@@ -1051,7 +1053,7 @@ the action in Rule A is taken, and Rule B is not evaluated.</p>
     <tr>
       <td>priorityOrder</td>
       <td>Priority for the rule</td>
-      <td>Int</td>
+      <td>Integer</td>
       <td>No</td>
       <td>Last / Lowest Priority</td>
     </tr>
@@ -1240,7 +1242,7 @@ the action in Rule A is taken, and Rule B is not evaluated.</p>
     <tr>
       <td>factorLifetime</td>
       <td>How long until factor times out</td>
-      <td>Int</td>
+      <td>Integer</td>
       <td>No</td>
       <td> </td>
     </tr>
@@ -1270,14 +1272,14 @@ the action in Rule A is taken, and Rule B is not evaluated.</p>
     <tr>
       <td>maxSessionIdleMinutes</td>
       <td>Maximum number of minutes that a user session can be idle before the session is ended.</td>
-      <td>Int</td>
+      <td>Integer</td>
       <td>No</td>
       <td> </td>
     </tr>
     <tr>
       <td>maxSessionLifetimeMinutes</td>
       <td>Maximum number of minutes from user login that a user session will be active. Set this to force users to sign-in again after the number of specified minutes. Disable by setting to <code class="highlighter-rouge">0</code>.</td>
-      <td>Int</td>
+      <td>Integer</td>
       <td>No</td>
       <td> </td>
     </tr>
