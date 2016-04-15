@@ -725,14 +725,14 @@ Client authentication credentials for an [OAuth 2.0 Authorization Server (AS)](h
 
 #### IdP Type Policy Actions
 
-|--------------+-------------------------------+---------------------------------------+----------------------+----------------------+
-| Type         | User Provisioning Actions     | Group Provisioning Actions            | Account Link Actions | Account Link Filters |
-| ------------ | ----------------------------- | ------------------------------------- | -------------------- | -------------------- |
-| `SAML2`      | `AUTO` or `DISABLED`          | `NONE`, `ASSIGN`, `APPEND`, or `SYNC` | `AUTO`               |                      |
-| `FACEBOOK`   | `AUTO`, `CALLOUT`, `DISABLED` | `NONE` or `ASSIGN`                    | `AUTO` or `CALLOUT`  | `groups`             |
-| `GOOGLE`     | `AUTO`, `CALLOUT`, `DISABLED` | `NONE` or `ASSIGN`                    | `AUTO` or `CALLOUT`  | `groups`             |
-| `LINKEDIN`   | `AUTO`, `CALLOUT`, `DISABLED` | `NONE` or `ASSIGN`                    | `AUTO` or `CALLOUT`  | `groups`             |
-|--------------+-------------------------------+---------------------------------------+----------------------+----------------------+
+|--------------+-------------------------------+---------------------------------------+-------------------------------+----------------------+
+| Type         | User Provisioning Actions     | Group Provisioning Actions            | Account Link Actions          | Account Link Filters |
+| ------------ | ----------------------------- | ------------------------------------- | ----------------------------- | -------------------- |
+| `SAML2`      | `AUTO` or `DISABLED`          | `NONE`, `ASSIGN`, `APPEND`, or `SYNC` | `AUTO`                        |                      |
+| `FACEBOOK`   | `AUTO`, `CALLOUT`, `DISABLED` | `NONE` or `ASSIGN`                    | `AUTO`, `CALLOUT`, `DISABLED` | `groups`             |
+| `GOOGLE`     | `AUTO`, `CALLOUT`, `DISABLED` | `NONE` or `ASSIGN`                    | `AUTO`, `CALLOUT`, `DISABLED` | `groups`             |
+| `LINKEDIN`   | `AUTO`, `CALLOUT`, `DISABLED` | `NONE` or `ASSIGN`                    | `AUTO`, `CALLOUT`, `DISABLED` | `groups`             |
+|--------------+-------------------------------+---------------------------------------+-------------------------------+----------------------+
 
 
 #### Provisioning Policy Object
@@ -927,14 +927,14 @@ Specifies the behavior for linking an IdP user to an existing Okta user.
 
 The follow-account link actions are supported by each IdP provider:
 
-|--------------+----------------------+----------------------+
-| Type         | Account Link Actions | Account Link Filters |
-| ------------ | -------------------- | -------------------- |
-| `SAML2`      | `AUTO`               |                      |
-| `FACEBOOK`   | `AUTO` or `CALLOUT`  | `groups`             |
-| `GOOGLE`     | `AUTO` or `CALLOUT`  | `groups`             |
-| `LINKEDIN`   | `AUTO` or `CALLOUT`  | `groups`             |
-|--------------+----------------------+----------------------+
+|--------------+-------------------------------+----------------------+
+| Type         | Account Link Actions          | Account Link Filters |
+| ------------ | ----------------------------- | -------------------- |
+| `SAML2`      | `AUTO`                        |                      |
+| `FACEBOOK`   | `AUTO`, `CALLOUT`, `DISABLED` | `groups`             |
+| `GOOGLE`     | `AUTO`, `CALLOUT`, `DISABLED` | `groups`             |
+| `LINKEDIN`   | `AUTO`, `CALLOUT`, `DISABLED` | `groups`             |
+|--------------+-------------------------------+----------------------+
 
 ##### Account Link Action Type
 
