@@ -16,7 +16,7 @@
 	<title>Identity Providers | Okta Developer</title>
 	<meta name="description" content="Secure, scalable, and highly available authentication and user management for any app.">
 
-	<link rel="canonical" href="http://developer.okta.com/docs/api/resources/idps">
+	<link rel="canonical" href="http://developer.okta.com/docs/api/resources/idps.html">
 
 	<link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/assets/css/animate.css">
@@ -51,6 +51,10 @@
 
 
 
+
+  
+  
+  
 
 <body id="docs">
 
@@ -1633,21 +1637,21 @@ For example, your app can support logging in with credentials from Facebook, Goo
       <td><code class="highlighter-rouge">FACEBOOK</code></td>
       <td><code class="highlighter-rouge">AUTO</code>, <code class="highlighter-rouge">CALLOUT</code>, <code class="highlighter-rouge">DISABLED</code></td>
       <td><code class="highlighter-rouge">NONE</code> or <code class="highlighter-rouge">ASSIGN</code></td>
-      <td><code class="highlighter-rouge">AUTO</code> or <code class="highlighter-rouge">CALLOUT</code></td>
+      <td><code class="highlighter-rouge">AUTO</code>, <code class="highlighter-rouge">CALLOUT</code>, <code class="highlighter-rouge">DISABLED</code></td>
       <td><code class="highlighter-rouge">groups</code></td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">GOOGLE</code></td>
       <td><code class="highlighter-rouge">AUTO</code>, <code class="highlighter-rouge">CALLOUT</code>, <code class="highlighter-rouge">DISABLED</code></td>
       <td><code class="highlighter-rouge">NONE</code> or <code class="highlighter-rouge">ASSIGN</code></td>
-      <td><code class="highlighter-rouge">AUTO</code> or <code class="highlighter-rouge">CALLOUT</code></td>
+      <td><code class="highlighter-rouge">AUTO</code>, <code class="highlighter-rouge">CALLOUT</code>, <code class="highlighter-rouge">DISABLED</code></td>
       <td><code class="highlighter-rouge">groups</code></td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">LINKEDIN</code></td>
       <td><code class="highlighter-rouge">AUTO</code>, <code class="highlighter-rouge">CALLOUT</code>, <code class="highlighter-rouge">DISABLED</code></td>
       <td><code class="highlighter-rouge">NONE</code> or <code class="highlighter-rouge">ASSIGN</code></td>
-      <td><code class="highlighter-rouge">AUTO</code> or <code class="highlighter-rouge">CALLOUT</code></td>
+      <td><code class="highlighter-rouge">AUTO</code>, <code class="highlighter-rouge">CALLOUT</code>, <code class="highlighter-rouge">DISABLED</code></td>
       <td><code class="highlighter-rouge">groups</code></td>
     </tr>
   </tbody>
@@ -1796,7 +1800,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
 <p>Property Details</p>
 
 <ul>
-  <li>To successfully provision a new Okta user, JIT provisioning must be enabled in your organization security settings for <code class="highlighter-rouge">AUTO</code> or <code class="highlighter-rouge">CALLOUT</code> actions.</li>
+  <li>To successfully provision a new Okta user, JIT provisioning must be enabled in your organization security settings for <code class="highlighter-rouge">AUTO</code> or <code class="highlighter-rouge">CALLOUT</code> actions. </li>
   <li>If the target username is not unique or the resulting Okta user profile is missing a required profile attribute, JIT provisioning may fail.</li>
   <li>New Okta users are provisioned with either a <code class="highlighter-rouge">FEDERATION</code> or <code class="highlighter-rouge">SOCIAL</code> authentication provider depending on the IdP <code class="highlighter-rouge">type</code>.</li>
 </ul>
@@ -2147,17 +2151,17 @@ For example, your app can support logging in with credentials from Facebook, Goo
     </tr>
     <tr>
       <td><code class="highlighter-rouge">FACEBOOK</code></td>
-      <td><code class="highlighter-rouge">AUTO</code> or <code class="highlighter-rouge">CALLOUT</code></td>
+      <td><code class="highlighter-rouge">AUTO</code>, <code class="highlighter-rouge">CALLOUT</code>, <code class="highlighter-rouge">DISABLED</code></td>
       <td><code class="highlighter-rouge">groups</code></td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">GOOGLE</code></td>
-      <td><code class="highlighter-rouge">AUTO</code> or <code class="highlighter-rouge">CALLOUT</code></td>
+      <td><code class="highlighter-rouge">AUTO</code>, <code class="highlighter-rouge">CALLOUT</code>, <code class="highlighter-rouge">DISABLED</code></td>
       <td><code class="highlighter-rouge">groups</code></td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">LINKEDIN</code></td>
-      <td><code class="highlighter-rouge">AUTO</code> or <code class="highlighter-rouge">CALLOUT</code></td>
+      <td><code class="highlighter-rouge">AUTO</code>, <code class="highlighter-rouge">CALLOUT</code>, <code class="highlighter-rouge">DISABLED</code></td>
       <td><code class="highlighter-rouge">groups</code></td>
     </tr>
   </tbody>
