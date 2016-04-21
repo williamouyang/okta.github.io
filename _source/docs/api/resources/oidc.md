@@ -160,7 +160,7 @@ display           | Specifies how to display the authentication and consent UI. 
 max_age           | Specifies the allowable elapsed time, in seconds, since the last time the end user was actively authenticated by Okta. | Query      | String    | FALSE    | |
 response_mode     | Specifies how the authorization response should be returned. [Valid values: <em>fragment</em>, <em>form_post</em>, <em>query</em> or <em>okta_post_message</em>](#parameter-details). If <em>id_token</em> is specified as the response type, then <em>query</em> can't be used as the response mode. Default: Defaults to and is required to be <em>fragment</em> in implicit and hybrid flow. Defaults to <em>query</em> in authorization code flow. | Query        | String   | FALSE      | See Description.
 scope          | Can be a combination of <em>openid</em>, <em>profile</em>, <em>email</em>, <em>address</em> and <em>phone</em>. The combination determines the claims that are returned in the id_token. The openid scope has to be specified to get back an id_token. | Query        | String   | TRUE     | 
-state          | A client application provided optional state string that might be useful to the application upon receipt of the response. It can contain alphanumeric, comma, period, underscore and hyphen characters.   | Query        | String   |  FALSE    | 
+state          | A client application provided state string that might be useful to the application upon receipt of the response. It can contain alphanumeric, comma, period, underscore and hyphen characters.   | Query        | String   |  TRUE    | 
 prompt         | Can be either <em>none</em> or <em>login</em>. The value determines if Okta should not prompt for authentication (if needed), or force a prompt (even if the user had an existing session). Default: The default behavior is based on whether there's an existing Okta session. | Query        | String   | FALSE     | See Description. 
 nonce          | Specifies a nonce that is reflected back in the ID Token. Can be used for CSRF protection. | Query        | String   | FALSE     | 
 
@@ -177,8 +177,7 @@ nonce          | Specifies a nonce that is reflected back in the ID Token. Can b
       Okta Post Message is an adaptation of the [Web Message Response Mode](https://tools.ietf.org/html/draft-sakimura-oauth-wmrm-00#section-4.1). 
       This value provides a secure way for a single-page application to perform a sign-in flow 
       in a popup window or an iFrame and receive the ID token and/or access token back in the parent page without leaving the context of that page.
- * `state`: Always pass `state` with each authorize request to correlate the request and response. This correlation prevents and attacker from sending a different response (CSRF).
- For more information, see [this blog post about the importance of state in OAuth 2.0](http://www.twobotechnologies.com/blog/2014/02/importance-of-state-in-oauth2.html).
+ * Okta requires use of the OAuth 2.0 `state` parameter on all requests to the Authorization Endpoint in order to prevent cross-site request forgery (CSRF). The OAuth 2.0 specification [requires](https://tools.ietf.org/html/rfc6749#section-10.12) that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent's authenticated state. Using the `state` parameter is also a countermeasure to several other known attacks as outlined in the [OAuth 2.0 Threat Model and Security Considerations](https://tools.ietf.org/html/rfc6819)
       
 ####Response Parameters
 
@@ -192,7 +191,7 @@ Parameter         | Description                                                 
 id_token          | The ID Token JWT contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the <em>response_type</em> includes <em>id_token</em> .| String    | 
 access_token      | The access_token that be used to access the userinfo endpoint. This is returned if the <em>response_type</em>  included token. Unlike the ID Token JWT, the access_token structure is Okta internal only and is subject to change.| String  |
 token_type        | This is always <em>Bearer</em> and is returned only when <em>token</em> is specified as a `response_type`. | String |
-state             | If the request contained a <em>state</em> parameter, then the same unmodified value is returned back in the response. | String |
+state             | The same unmodified value from the request is returned back in the response. | String |
 error             | The error-code string providing information if anything went wrong. | String |
 error_description | Further description of the error. | String |
 
