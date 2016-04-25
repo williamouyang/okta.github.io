@@ -179,8 +179,9 @@ nonce          | Specifies a nonce that is reflected back in the ID Token. Can b
       in a popup window or an iFrame and receive the ID token and/or access token back in the parent page without leaving the context of that page.
       The data model for the [postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) call is in the next section.
       
- * `state`: Always pass `state` with each authorize request to correlate the request and response. This correlation prevents and attacker from sending a different response (CSRF).
- For more information, see [this blog post about the importance of state in OAuth 2.0](http://www.twobotechnologies.com/blog/2014/02/importance-of-state-in-oauth2.html).
+ * Okta requires the OAuth 2.0 `state` parameter on all requests to the authorization endpoint in order to prevent cross-site request forgery (CSRF). 
+ The OAuth 2.0 specification [requires](https://tools.ietf.org/html/rfc6749#section-10.12) that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent's authenticated state. 
+ Using the `state` parameter is also a countermeasure to several other known attacks as outlined in [OAuth 2.0 Threat Model and Security Considerations](https://tools.ietf.org/html/rfc6819).
       
 ####postMessage() Data Model
 
@@ -196,7 +197,7 @@ state             | If the request contained a `state` parameter, then the same 
 error             | The error-code string providing information if anything goes wrong.                                | String    |
 error_description | Additional description of the error.                                                               | String    |
 
-`targetOrigin` 
+`targetOrigin`: 
 
 Specifies what the origin of `parentWindow` must be in order for the postMessage() event to be dispatched
 (this is enforced by the browser). The <em>okta-post-message</em> response mode always uses the origin from the `redirect_uri` 
