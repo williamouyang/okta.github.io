@@ -16,7 +16,7 @@
 	<title>Users | Okta Developer</title>
 	<meta name="description" content="Secure, scalable, and highly available authentication and user management for any app.">
 
-	<link rel="canonical" href="http://developer.okta.com/docs/api/resources/users.html">
+	<link rel="canonical" href="http://developer.okta.com/docs/api/resources/users">
 
 	<link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/assets/css/animate.css">
@@ -51,10 +51,6 @@
 
 
 
-
-  
-  
-  
 
 <body id="docs">
 
@@ -2480,10 +2476,10 @@ Examples use cURL-style escaping instead of URL encoding to make them easier to 
 
 <blockquote>
   <p>Listing users with search is an Early Access feature which you can request from Okta Support.
-It’s been tested to the same level as Generally Available (GA) features, so you  can use it in a production environment. </p>
+It’s been tested to the same level as Generally Available (GA) features, so you  can use it in a production environment.</p>
 </blockquote>
 
-<p>Searches for user by the properties specified in the search parameter (case insensitive). </p>
+<p>Searches for user by the properties specified in the search parameter (case insensitive).</p>
 
 <p>This operation:</p>
 
@@ -2494,11 +2490,11 @@ For example, <code class="highlighter-rouge">search=profile.department eq "Engin
 Examples use cURL-style escaping instead of URL encoding to make them easier to read.</li>
   <li>Queries data from a replicated store, so changes aren’t always immediately available in search results. 
 Don’t use search results directly for record updates, as the data might be stale and therefore overwrite newer data (data loss). 
-Use an Id lookup for records that you update to ensure your results contain the latest data. </li>
+Use an Id lookup for records that you update to ensure your results contain the latest data.</li>
   <li>Searches many properties:
     <ul>
       <li>Any user profile property, including custom-defined properties</li>
-      <li>The top-level properties <code class="highlighter-rouge">id</code>, <code class="highlighter-rouge">status</code>, <code class="highlighter-rouge">created</code>, <code class="highlighter-rouge">activated</code>, <code class="highlighter-rouge">statusChanged</code> and <code class="highlighter-rouge">lastUpdated</code> </li>
+      <li>The top-level properties <code class="highlighter-rouge">id</code>, <code class="highlighter-rouge">status</code>, <code class="highlighter-rouge">created</code>, <code class="highlighter-rouge">activated</code>, <code class="highlighter-rouge">statusChanged</code> and <code class="highlighter-rouge">lastUpdated</code></li>
     </ul>
 
     <table>
@@ -2626,7 +2622,7 @@ For examples, see <a href="#request-example-for-array">Request Example for Array
 
 <h5 class="api api-request api-request-example" id="request-example-for-array">Request Example for Array</h5>
 
-<p>The following example is for a custom attribute on User, an array of strings named <code class="highlighter-rouge">arrayAttr</code> that contains values <code class="highlighter-rouge">["arrayAttrVal1", "arrayAttrVal2"...]</code>. </p>
+<p>The following example is for a custom attribute on User, an array of strings named <code class="highlighter-rouge">arrayAttr</code> that contains values <code class="highlighter-rouge">["arrayAttrVal1", "arrayAttrVal2"...]</code>.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2839,7 +2835,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 <p>Update a user’s profile or credentials with partial update semantics.</p>
 
 <blockquote>
-  <p>Use the <code class="highlighter-rouge">POST</code> method for partial updates, because unspecified properties aren’t changed with <code class="highlighter-rouge">POST</code>. </p>
+  <p>Use the <code class="highlighter-rouge">POST</code> method for partial updates, because unspecified properties aren’t changed with <code class="highlighter-rouge">POST</code>.</p>
 </blockquote>
 
 <h5 class="api api-request api-request-params" id="request-parameters-4">Request Parameters</h5>
@@ -3416,7 +3412,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/<em>:id</em>/lifecycle/suspend</span></p>
 
-<p>Suspends a user.  This operation can only be performed on users with an <code class="highlighter-rouge">ACTIVE</code> status.  The user will have a status of <code class="highlighter-rouge">SUSPENDED</code> when the process is complete. </p>
+<p>Suspends a user.  This operation can only be performed on users with an <code class="highlighter-rouge">ACTIVE</code> status.  The user will have a status of <code class="highlighter-rouge">SUSPENDED</code> when the process is complete.</p>
 
 <blockquote>
   <p>Suspended users cannot log in to Okta. Their group and app assignments are retained.<br />
@@ -3450,7 +3446,7 @@ Suspended users can only be unsuspended or deactivated.</p>
 
 <h5 class="api api-response api-response-params" id="response-parameters-9">Response Parameters</h5>
 
-<p>Returns an empty object. </p>
+<p>Returns an empty object.</p>
 
 <p>Passing an invalid <code class="highlighter-rouge">id</code> returns a <code class="highlighter-rouge">404 Not Found</code> status code with error code <code class="highlighter-rouge">E0000007</code>.
 Passing an <code class="highlighter-rouge">id</code> that is not in the <code class="highlighter-rouge">ACTIVE</code> state returns a <code class="highlighter-rouge">400 Bad Request</code> status code with error code <code class="highlighter-rouge">E0000001</code>.</p>
@@ -3476,7 +3472,7 @@ Passing an <code class="highlighter-rouge">id</code> that is not in the <code cl
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/<em>:id</em>/lifecycle/unsuspend</span></p>
 
-<p>Unsuspends users and returns then to the <code class="highlighter-rouge">ACTIVE</code> state.  This operation can only be performed on users that have a <code class="highlighter-rouge">SUSPENDED</code> status.  </p>
+<p>Unsuspends users and returns then to the <code class="highlighter-rouge">ACTIVE</code> state.  This operation can only be performed on users that have a <code class="highlighter-rouge">SUSPENDED</code> status.</p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-10">Request Parameters</h5>
 
@@ -3505,7 +3501,7 @@ Passing an <code class="highlighter-rouge">id</code> that is not in the <code cl
 
 <h5 class="api api-response api-response-params" id="response-parameters-10">Response Parameters</h5>
 
-<p>Returns an empty object. Returns an empty object. </p>
+<p>Returns an empty object. Returns an empty object.</p>
 
 <p>Passing an invalid <code class="highlighter-rouge">id</code> returns a <code class="highlighter-rouge">404 Not Found</code> status code with error code <code class="highlighter-rouge">E0000007</code>.
 Passing an <code class="highlighter-rouge">id</code> that is not in the <code class="highlighter-rouge">SUSPENDED</code> state returns a <code class="highlighter-rouge">400 Bad Request</code> status code with error code <code class="highlighter-rouge">E0000001</code>.</p>

@@ -16,7 +16,7 @@
 	<title>Okta Sign-In Widget | Okta Developer</title>
 	<meta name="description" content="Easily add Okta capabilities to your website.">
 
-	<link rel="canonical" href="http://developer.okta.com/docs/guides/okta_sign-in_widget.html">
+	<link rel="canonical" href="http://developer.okta.com/docs/guides/okta_sign-in_widget">
 
 	<link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/assets/css/animate.css">
@@ -51,10 +51,6 @@
 
 
 
-
-  
-  
-  
 
 <body id="docs">
 
@@ -181,7 +177,7 @@ can be used to authenticate users on any web site.</p>
 validating a user using a username and password. In addition to
 credential validation, the Okta Sign-In Widget also handles validation of
 password complexity requirements and will display common error messages
-for things like invalid passwords or blank fields. </p>
+for things like invalid passwords or blank fields.</p>
 
 <h2 id="multi-factor-authentication">Multi-Factor Authentication</h2>
 
@@ -257,12 +253,12 @@ and easily set up a fully featured login experience:</p>
 </code></pre>
 </div>
 
-<p>Here is what is happening in the HTML above: </p>
+<p>Here is what is happening in the HTML above:</p>
 
 <p>First, in the <code class="highlighter-rouge">&lt;head&gt;</code>
 tag, we include the  <code class="highlighter-rouge">okta-sign-in-1.2.0.min.js</code> and
 <code class="highlighter-rouge">okta-sign-in-1.2.0.min.css</code> files. These files have all of the
-logic for the Okta Sign-In Widget. </p>
+logic for the Okta Sign-In Widget.</p>
 
 <p>We also include the <code class="highlighter-rouge">okta-theme-1.2.0.css</code> file, which contains all
 of the styling information for the Okta Sign-In Widget.</p>
@@ -296,7 +292,7 @@ Widget. Note that the value for <code class="highlighter-rouge">el</code> can be
 specify, also note that we only define a “SUCCESS” callback. In a
 production environment, you will want to handle statuses beyond
 “SUCCESS”, you will likely also want to define an “ERROR”
-callback as well. </p>
+callback as well.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">renderEl</span><span class="p">(</span>
   <span class="p">{</span> <span class="na">el</span><span class="p">:</span> <span class="s1">'#okta-login-container'</span> <span class="p">},</span>
@@ -329,7 +325,7 @@ following steps:</p>
 <h2 id="creating-an-okta-organization">Creating an Okta organization</h2>
 
 <p>You can skip this step if you already have an Okta organization and
-have the ability to configure CORS on that Okta organization. </p>
+have the ability to configure CORS on that Okta organization.</p>
 
 <p>If you do have the ability to <a href="http://developer.okta.com/docs/api/getting_started/enabling_cors.html">configure CORS</a> for your Okta
 organization, or do not have an Okta organization, you will need to 
@@ -393,7 +389,7 @@ will have a lot more in-depth configuration.</p>
 <code class="highlighter-rouge">login-to-okta.html</code>, the next step is for you to use your favorite
 text editor to modify <code class="highlighter-rouge">login-to-okta.html</code>. You will need to
 replace all instances of the string <code class="highlighter-rouge">example.okta.com</code> with the
-<a href="https://en.wikipedia.org/wiki/Fully_qualified_domain_name">fully qualified domain name</a> for your Okta organization. </p>
+<a href="https://en.wikipedia.org/wiki/Fully_qualified_domain_name">fully qualified domain name</a> for your Okta organization.</p>
 
 <p><strong>NOTE:</strong> If you aren’t sure what the “fully qualified domain name” for your
 Okta organization is, it is simply the “<a href="https://en.wikipedia.org/wiki/Uniform_Resource_Locator#Syntax">domain</a>” part of the URL
@@ -445,7 +441,7 @@ var oktaSignIn = new OktaSignIn({baseUrl: baseUrl});
 <p>Once you’ve created a <code class="highlighter-rouge">login-to-okta.html</code> file, your next step is
 get this file hosted on a web server. The web server you use will
 depend on your development environment and what you are comfortable
-with using. </p>
+with using.</p>
 
 <p>If you aren’t sure what web server to use, or don’t have one set up
 already, an easy web server to set up on Mac OS X or GNU/Linux
@@ -483,7 +479,7 @@ started on TCP port 8000 of your local machine).</p>
 
 <h2 id="testing-the-okta-sign-in-widget">Testing the Okta Sign-In Widget</h2>
 
-<p>At this point, you are ready to test the Okta Sign-In Widget. </p>
+<p>At this point, you are ready to test the Okta Sign-In Widget.</p>
 
 <p>Test the Okta Sign-In Widget by loading the URL for the
 <code class="highlighter-rouge">login-to-okta.html</code> file in your favorite web browser.</p>
@@ -493,7 +489,7 @@ started on TCP port 8000 of your local machine).</p>
 
 <p>Once you’ve successfully loaded the Okta Sign-In Widget, it is
 time to start exploring the capabilities of the
-widget. </p>
+widget.</p>
 
 <p>Here are two things for you to try:</p>
 
@@ -521,7 +517,7 @@ start configuring the widget for your specific needs.</p>
 <p>the Okta Sign-In Widget is fully customizable via CSS and JavaScript. 
 Stylistic customizations, changing the way that the widget looks, is
 done via CSS. Customization of widget features, the way that the
-widget works, and text labels for the widget are done via JavaScript. </p>
+widget works, and text labels for the widget are done via JavaScript.</p>
 
 <p>The sections below go into detail on how to customize
 the Okta Sign-In Widget using CSS and JavaScript.</p>
@@ -717,7 +713,7 @@ mobile phone number to recovery their password using an SMS.</p>
     <p><code class="highlighter-rouge">helpLinks</code></p>
 
     <p>The options in the <code class="highlighter-rouge">helpLinks</code> object set alternate links to be
-used for the help links on the Okta Sign-In Widget. </p>
+used for the help links on the Okta Sign-In Widget.</p>
 
     <p>Here is an example of configuring an alternate help link for the
 link labeled “Help”, as well as configuring a custom link with a

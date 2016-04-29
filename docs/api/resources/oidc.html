@@ -16,7 +16,7 @@
 	<title>OpenID Connect | Okta Developer</title>
 	<meta name="description" content="Secure, scalable, and highly available authentication and user management for any app.">
 
-	<link rel="canonical" href="http://developer.okta.com/docs/api/resources/oidc.html">
+	<link rel="canonical" href="http://developer.okta.com/docs/api/resources/oidc">
 
 	<link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/assets/css/animate.css">
@@ -51,10 +51,6 @@
 
 
 
-
-  
-  
-  
 
 <body id="docs">
 
@@ -184,7 +180,7 @@ as well as claims about the authenticated user.</p>
 
 <p>ID Tokens should always be <a href="#validating-id-tokens">validated</a> by the client to ensure their integrity.</p>
 
-<p>The ID Token (<code class="highlighter-rouge">id_token</code>) consists of three period-separated, base64URL-encoded JSON segments: <a href="#header">a header</a>, <a href="#payload">the payload</a>, and <a href="#signature">the signature</a>. </p>
+<p>The ID Token (<code class="highlighter-rouge">id_token</code>) consists of three period-separated, base64URL-encoded JSON segments: <a href="#header">a header</a>, <a href="#payload">the payload</a>, and <a href="#signature">the signature</a>.</p>
 
 <h3 id="header">Header</h3>
 
@@ -629,18 +625,70 @@ Instead, the id token contains the <code class="highlighter-rouge">name</code> a
       <li><em>query</em> – Parameters are encoded in the query string added to the <code class="highlighter-rouge">redirect_uri</code> when redirecting back to the client.</li>
       <li><em>form_post</em> – Parameters are encoded as HTML form values that are auto-submitted in the User Agent.Thus, the values are transmitted via the HTTP POST method to the client
 and the result parameters are encoded in the body using the application/x-www-form-urlencoded format.</li>
-      <li><em>okta_post_message</em> – Uses HTML5 Web Messaging (for example, window.postMessage()) instead of the redirect for the authorization response from the authorization endpoint
-Okta Post Message is an adaptation of the <a href="https://tools.ietf.org/html/draft-sakimura-oauth-wmrm-00#section-4.1">Web Message Response Mode</a>. 
+      <li><em>okta_post_message</em> – Uses <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">HTML5 Web Messaging</a> (for example, window.postMessage()) instead of the redirect for the authorization response from the authorization endpoint.
+<em>okta_post_message</em> is an adaptation of the <a href="https://tools.ietf.org/html/draft-sakimura-oauth-wmrm-00#section-4.1">Web Message Response Mode</a>. 
 This value provides a secure way for a single-page application to perform a sign-in flow 
-in a popup window or an iFrame and receive the ID token and/or access token back in the parent page without leaving the context of that page.</li>
+in a popup window or an iFrame and receive the ID token and/or access token back in the parent page without leaving the context of that page.
+The data model for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">postMessage</a> call is in the next section.</li>
     </ul>
   </li>
-  <li>Okta requires use of the OAuth 2.0 <code class="highlighter-rouge">state</code> parameter on all requests to the Authorization Endpoint in order to prevent cross-site request forgery (CSRF). The OAuth 2.0 specification <a href="https://tools.ietf.org/html/rfc6749#section-10.12">requires</a> that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent’s authenticated state. Using the <code class="highlighter-rouge">state</code> parameter is also a countermeasure to several other known attacks as outlined in the <a href="https://tools.ietf.org/html/rfc6819">OAuth 2.0 Threat Model and Security Considerations</a></li>
+  <li>Okta requires the OAuth 2.0 <code class="highlighter-rouge">state</code> parameter on all requests to the authorization endpoint in order to prevent cross-site request forgery (CSRF). 
+ The OAuth 2.0 specification <a href="https://tools.ietf.org/html/rfc6749#section-10.12">requires</a> that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent’s authenticated state. 
+ Using the <code class="highlighter-rouge">state</code> parameter is also a countermeasure to several other known attacks as outlined in <a href="https://tools.ietf.org/html/rfc6819">OAuth 2.0 Threat Model and Security Considerations</a>.</li>
 </ul>
+
+<h4 id="postmessage-data-model">postMessage() Data Model</h4>
+
+<p>Use the postMessage() data model to help you when working with the <em>okta_post_message</em> value of the <code class="highlighter-rouge">response_mode</code> request parameter.</p>
+
+<p><code class="highlighter-rouge">message</code>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>DataType</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id_token</td>
+      <td>The ID Token JWT contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the <code class="highlighter-rouge">response_type</code> includes <code class="highlighter-rouge">id_token</code>.</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>access_token</td>
+      <td>The <code class="highlighter-rouge">access_token</code> used to access the /userinfo endpoint. This is returned if the <code class="highlighter-rouge">response_type</code> included a token. <b>Important</b>: Unlike the ID Token JWT, the <code class="highlighter-rouge">access_toekn</code> structure is specific to Okta, and is subject to change.</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>state</td>
+      <td>If the request contained a <code class="highlighter-rouge">state</code> parameter, then the same unmodified value is returned back in the response.</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>error</td>
+      <td>The error-code string providing information if anything goes wrong.</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>error_description</td>
+      <td>Additional description of the error.</td>
+      <td>String</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="highlighter-rouge">targetOrigin</code>:</p>
+
+<p>Specifies what the origin of <code class="highlighter-rouge">parentWindow</code> must be in order for the postMessage() event to be dispatched
+(this is enforced by the browser). The <em>okta-post-message</em> response mode always uses the origin from the <code class="highlighter-rouge">redirect_uri</code> 
+specified by the client. This is crucial to prevent the sensitive token data from being exposed to a malicious site.</p>
 
 <h4 id="response-parameters">Response Parameters</h4>
 
-<p>The response depends on the response type passed to the API. For example, a <em>fragment</em> response mode returns values in the fragment portion of a redirect to the specified <em>redirect_uri</em> while a <em>form_post</em> response mode POSTs the return values to the redirect URI. 
+<p class="api api-response api-response-example">The response depends on the response type passed to the API. For example, a <em>fragment</em> response mode returns values in the fragment portion of a redirect to the specified <em>redirect_uri</em> while a <em>form_post</em> response mode POSTs the return values to the redirect URI. 
 Irrespective of the response type, the contents of the response is always one of the following.</p>
 
 <table>
@@ -687,7 +735,7 @@ Irrespective of the response type, the contents of the response is always one of
 
 <h5 id="possible-errors">Possible Errors</h5>
 
-<p>The Okta OpenID Connect APIs are compliant with the OpenID Connect and OAuth2 spec with some Okta specific extensions. </p>
+<p>The Okta OpenID Connect APIs are compliant with the OpenID Connect and OAuth2 spec with some Okta specific extensions.</p>
 
 <p><a href="https://tools.ietf.org/html/rfc6749#section-4.1.2.1">OAuth 2 Spec error codes</a></p>
 
@@ -1013,7 +1061,7 @@ and only via POST data or within request headers. If you store them on your serv
 <p>Clients MUST validate the ID token in the Token Response in the following manner:</p>
 
 <ol>
-  <li>Verify that the <code class="highlighter-rouge">iss</code> (issuer) claim in the ID token exactly matches the issuer identifier for your Okta organization (which is typically obtained during <a href="#openid-discovery-document">Discovery</a>). </li>
+  <li>Verify that the <code class="highlighter-rouge">iss</code> (issuer) claim in the ID token exactly matches the issuer identifier for your Okta organization (which is typically obtained during <a href="#openid-discovery-document">Discovery</a>).</li>
   <li>Verify that the <code class="highlighter-rouge">aud</code> (audience) claim contains the <code class="highlighter-rouge">client_id</code> of your application.</li>
   <li>Verify the signature of the ID token according to <a href="https://tools.ietf.org/html/rfc7515">JWS</a> using the algorithm specified in the JWT <code class="highlighter-rouge">alg</code> header parameter. Use the public keys provided by Okta via the <a href="#openid-discovery-document">Discovery Document</a>.</li>
   <li>Verify that the expiry time (from the <code class="highlighter-rouge">exp</code> claim) has not already passed.</li>
@@ -1060,7 +1108,7 @@ and only via POST data or within request headers. If you store them on your serv
 </span></code></pre>
 </div>
 
-<p>For efficiency your application can retrieve these public keys, cache them, and validate the ID token signatures locally. </p>
+<p>For efficiency your application can retrieve these public keys, cache them, and validate the ID token signatures locally.</p>
 
 <p>There are standard open-source libraries available for every major language to perform <a href="https://tools.ietf.org/html/rfc7515">JWS</a> signature validation.</p>
 

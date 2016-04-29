@@ -562,9 +562,9 @@ rights reserved.&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;These days, making sure your product solves problems that customers face everyday is not just a &lt;em&gt;good idea&lt;/em&gt;, it’s &lt;strong&gt;table stakes&lt;/strong&gt;. And the bar is rising constantly. The more products improve, the less customers are willing to tolerate bad experiences. With the consumerization of the enterprise, the importance of product design and favorable user experiences is indispensable to every kind of product distribution model. &lt;/p&gt;
+&lt;p&gt;These days, making sure your product solves problems that customers face everyday is not just a &lt;em&gt;good idea&lt;/em&gt;, it’s &lt;strong&gt;table stakes&lt;/strong&gt;. And the bar is rising constantly. The more products improve, the less customers are willing to tolerate bad experiences. With the consumerization of the enterprise, the importance of product design and favorable user experiences is indispensable to every kind of product distribution model.&lt;/p&gt;
 
-&lt;p&gt;Two of the most important aspects of the product are Product Status/Trust and Customer Support. Having dissected both of these from many angles in my recent work, I know that businesses neglect them at their peril. &lt;/p&gt;
+&lt;p&gt;Two of the most important aspects of the product are Product Status/Trust and Customer Support. Having dissected both of these from many angles in my recent work, I know that businesses neglect them at their peril.&lt;/p&gt;
 
 &lt;h3 id=&quot;communicate-transparently&quot;&gt;Communicate transparently&lt;/h3&gt;
 
@@ -573,14 +573,14 @@ rights reserved.&lt;/p&gt;
 &lt;h3 id=&quot;serve-multiple-audiences&quot;&gt;Serve multiple audiences&lt;/h3&gt;
 &lt;p&gt;A Product Status/Trust page is also one of the first places that prospects are likely to visit. In fact, when the product is gaining momentum, prospect traffic may exceed customer traffic. &lt;/p&gt;
 
-&lt;p&gt;I’ve rarely seen a Status/Trust page actually serve both customers and prospects effectively. The key is to find the correct balance. As the product becomes popular, customers and prospects visit the page with very different mindsets. &lt;/p&gt;
+&lt;p&gt;I’ve rarely seen a Status/Trust page actually serve both customers and prospects effectively. The key is to find the correct balance. As the product becomes popular, customers and prospects visit the page with very different mindsets.&lt;/p&gt;
 
-&lt;p&gt;For customers, the Status/Trust page must be the source of truth for issues, downtime, and root cause analysis. This requires radical transparency and effective communication. &lt;/p&gt;
+&lt;p&gt;For customers, the Status/Trust page must be the source of truth for issues, downtime, and root cause analysis. This requires radical transparency and effective communication.&lt;/p&gt;
 
 &lt;p&gt;For prospects, the Status/Trust page must do at least the following:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Display all the information they need to make an informed decision &lt;/li&gt;
+  &lt;li&gt;Display all the information they need to make an informed decision&lt;/li&gt;
   &lt;li&gt;Make them love the product even more&lt;/li&gt;
   &lt;li&gt;Serve as an effective talking point for your sales reps&lt;/li&gt;
 &lt;/ul&gt;
@@ -591,12 +591,12 @@ rights reserved.&lt;/p&gt;
 
 &lt;p&gt;It is a truism that one cannot solve for all technical constraints. Choosing the right platform on which to build your Product and Status/Trust pages is very important, but hosting both pages on the same platform risks both being down at the same time if your site crashes. &lt;/p&gt;
 
-&lt;p&gt;Obviously, you cannot afford to let your Trust/Status page go down, so &lt;strong&gt;high availability&lt;/strong&gt; is key. But just in case the page ever &lt;em&gt;does&lt;/em&gt; go down, you need a &lt;strong&gt;risk mitigation plan&lt;/strong&gt;. Central to this is making sure that you are contsantly monitoring your Trust/Status page with enterprise-class monitoring tools. &lt;/p&gt;
+&lt;p&gt;Obviously, you cannot afford to let your Trust/Status page go down, so &lt;strong&gt;high availability&lt;/strong&gt; is key. But just in case the page ever &lt;em&gt;does&lt;/em&gt; go down, you need a &lt;strong&gt;risk mitigation plan&lt;/strong&gt;. Central to this is making sure that you are contsantly monitoring your Trust/Status page with enterprise-class monitoring tools.&lt;/p&gt;
 
 &lt;h3 id=&quot;send-rapid-robust-and-consistent-notifications&quot;&gt;Send rapid, robust, and consistent notifications&lt;/h3&gt;
 &lt;p&gt;In the event of trust page problems, make sure that you have ways to easily and automatically notify customers and site ops as soon as issues are detected. Employ RSS, Twitter, and other channels to notify customers; invest in monitoring tools to notify site ops.&lt;/p&gt;
 
-&lt;p&gt;If you send notifications manually, take care not to introduce human error when the site is having issues, as these are usually chaotic periods for your ops team. &lt;/p&gt;
+&lt;p&gt;If you send notifications manually, take care not to introduce human error when the site is having issues, as these are usually chaotic periods for your ops team.&lt;/p&gt;
 
 &lt;p&gt;Realize that many of your customers will probably check your trust page &lt;em&gt;and&lt;/em&gt; call support, so it’s important that the trust page and the support team provide the same information. This also argues for ensuring that your support team is a key stakeholder in the development of your trust page. &lt;/p&gt;
 
@@ -613,13 +613,13 @@ rights reserved.&lt;/p&gt;
     
       <item>
         <title>How Okta Chased Down Severe System CPU Contention in MySQL</title>
-        <description>&lt;p&gt;Sometimes fixing a problem causes or reveals a new one. And sometimes this sets off a chain reaction of problems and fixes, where each solution exposes a deeper issue. In technology, cascades like these are common, often painful, and occasionally welcome. &lt;/p&gt;
+        <description>&lt;p&gt;Sometimes fixing a problem causes or reveals a new one. And sometimes this sets off a chain reaction of problems and fixes, where each solution exposes a deeper issue. In technology, cascades like these are common, often painful, and occasionally welcome.&lt;/p&gt;
 
-&lt;p&gt;Our battle against CPU contention last fall is a good example of such a cascade. What began as a buffer pool adjustment triggered a series of issues and fixes that generated plenty of stress, but ultimately strengthened our platform. &lt;/p&gt;
+&lt;p&gt;Our battle against CPU contention last fall is a good example of such a cascade. What began as a buffer pool adjustment triggered a series of issues and fixes that generated plenty of stress, but ultimately strengthened our platform.&lt;/p&gt;
 
-&lt;p&gt;Underlying each of the challenges we faced in that period was the huge amount of business our Sales organization had closed in late summer and early Fall of 2014. Growth brought a dramatic increase in the number of new customers running large import jobs and new orgs running agents. &lt;/p&gt;
+&lt;p&gt;Underlying each of the challenges we faced in that period was the huge amount of business our Sales organization had closed in late summer and early Fall of 2014. Growth brought a dramatic increase in the number of new customers running large import jobs and new orgs running agents.&lt;/p&gt;
 
-&lt;p&gt;As problems go, growing pains are good problems to have. But they usually come at a cost: the increased traffic caused significant CPU contention, as shown in the following image. &lt;/p&gt;
+&lt;p&gt;As problems go, growing pains are good problems to have. But they usually come at a cost: the increased traffic caused significant CPU contention, as shown in the following image.&lt;/p&gt;
 
 &lt;p&gt;&lt;img style=&quot;width:55%&quot; src=&quot;/assets/img/Pre-buffer_adjustment.png&quot; alt=&quot;Before tuning the database&quot; /&gt;&lt;/p&gt;
 
@@ -636,7 +636,7 @@ compared to the amount of available RAM, which meant that we were sacrificing bo
 
 &lt;p&gt;Despite the buffer pool adjustment, we continued to see significant CPU contention. In response, we doubled the size of our servers (244 GB of RAM, 32 CPU cores, and 2 x 320 GB HDDs). CPU contention decreased (see the trough in the following image), but probably because of the Thanksgiving holiday, not the additional hardware.&lt;/p&gt;
 
-&lt;p&gt;After the holiday, CPU spikes returned, now worse than ever. Page render time slowed down, queries against the database took longer, and jobs backed up. &lt;/p&gt;
+&lt;p&gt;After the holiday, CPU spikes returned, now worse than ever. Page render time slowed down, queries against the database took longer, and jobs backed up.&lt;/p&gt;
 
 &lt;p&gt;&lt;img style=&quot;width:50%&quot; src=&quot;/assets/img/Thanksgiving.png&quot; alt=&quot;Thanksgiving holiday&quot; /&gt;&lt;/p&gt;
 
@@ -646,21 +646,21 @@ compared to the amount of available RAM, which meant that we were sacrificing bo
 
 &lt;h2 id=&quot;kernel-mutex-bottleneck&quot;&gt;Kernel mutex bottleneck&lt;/h2&gt;
 
-&lt;p&gt;The alarming amount of yellow in our graphs showed extremely high &lt;strong&gt;system CPU usage&lt;/strong&gt; (and &lt;strong&gt;user CPU usage&lt;/strong&gt; was also too high). Clearly, the operating system was working very hard at &lt;em&gt;something&lt;/em&gt;. The metrics we pulled revealed that all the InnoDB threads were busy waiting on the kernel mutex. We had known that kernel mutex was a bottleneck even before we’d doubled hardware resources, but we hadn’t understood why. &lt;/p&gt;
+&lt;p&gt;The alarming amount of yellow in our graphs showed extremely high &lt;strong&gt;system CPU usage&lt;/strong&gt; (and &lt;strong&gt;user CPU usage&lt;/strong&gt; was also too high). Clearly, the operating system was working very hard at &lt;em&gt;something&lt;/em&gt;. The metrics we pulled revealed that all the InnoDB threads were busy waiting on the kernel mutex. We had known that kernel mutex was a bottleneck even before we’d doubled hardware resources, but we hadn’t understood why.&lt;/p&gt;
 
 &lt;p&gt;A closer look at the MySQL source code showed that kernel mutex was trying to allocate memory to all of our transactions. This is perfectly normal behavior, but it proved to be very limiting in our case because we perform approximately 85,000 transactions per minute. The kernel has to create a transaction ID for each transaction and allocate a tiny block of memory in RAM before giving it to the thread handling the transaction.&lt;/p&gt;
 
-&lt;p&gt;Now we knew why doubling the number of CPUs caused greater contention: instead of  providing transaction IDs and associated memory to approximately 24 InnoDB threads, kernel mutex was now working like mad to provide IDs and memory to approximately 48 InnoDB threads. Imagine having a single toll booth on a 16 lane highway and then &lt;em&gt;doubling the number of lanes&lt;/em&gt;. &lt;/p&gt;
+&lt;p&gt;Now we knew why doubling the number of CPUs caused greater contention: instead of  providing transaction IDs and associated memory to approximately 24 InnoDB threads, kernel mutex was now working like mad to provide IDs and memory to approximately 48 InnoDB threads. Imagine having a single toll booth on a 16 lane highway and then &lt;em&gt;doubling the number of lanes&lt;/em&gt;.&lt;/p&gt;
 
-&lt;p&gt;In the discussions that followed, some called for rolling back to the smaller machines, reasoning that fewer threads would mean less CPU contention. Others believed that rolling backward would be a mistake, arguing that our business growth required the more powerful servers in any case, and that doubling the number of CPUs was not itself a problem, but rather part of the ultimate solution because it exposed the root cause of the extreme system CPU usage. &lt;/p&gt;
+&lt;p&gt;In the discussions that followed, some called for rolling back to the smaller machines, reasoning that fewer threads would mean less CPU contention. Others believed that rolling backward would be a mistake, arguing that our business growth required the more powerful servers in any case, and that doubling the number of CPUs was not itself a problem, but rather part of the ultimate solution because it exposed the root cause of the extreme system CPU usage.&lt;/p&gt;
 
 &lt;p&gt;The right course – the one we ultimately took – was to stick with the more powerful servers and tune them properly.&lt;/p&gt;
 
 &lt;h2 id=&quot;adopting-tcmalloc&quot;&gt;Adopting TCMalloc&lt;/h2&gt;
 
-&lt;p&gt;We quickly found several resources online, including a &lt;a href=&quot;http://goog-perftools.sourceforge.net/doc/tcmalloc.html&quot;&gt;key blog post&lt;/a&gt; about &lt;strong&gt;TCMalloc&lt;/strong&gt; (Thread-Caching Memory Allocation) and an article about &lt;a href=&quot;http://www.olivierdoucet.info/blog/2012/05/19/debugging-a-mysql-stall/&quot;&gt;debugging MySQL&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;We quickly found several resources online, including a &lt;a href=&quot;http://goog-perftools.sourceforge.net/doc/tcmalloc.html&quot;&gt;key blog post&lt;/a&gt; about &lt;strong&gt;TCMalloc&lt;/strong&gt; (Thread-Caching Memory Allocation) and an article about &lt;a href=&quot;http://www.olivierdoucet.info/blog/2012/05/19/debugging-a-mysql-stall/&quot;&gt;debugging MySQL&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Traditional memory allocation schemes, like the &lt;strong&gt;glibc&lt;/strong&gt; malloc that we were then using, employ a mutex to prevent concurrent access to the transaction ID counter.  Preventing concurrency is totally wrong for a multi-core, multi-thread architecture like ours.  &lt;/p&gt;
+&lt;p&gt;Traditional memory allocation schemes, like the &lt;strong&gt;glibc&lt;/strong&gt; malloc that we were then using, employ a mutex to prevent concurrent access to the transaction ID counter.  Preventing concurrency is totally wrong for a multi-core, multi-thread architecture like ours.&lt;/p&gt;
 
 &lt;p&gt;In contrast, TCMalloc allocates a small pool of memory to each CPU core. Individual processor threads obtain RAM directly from their core, ideally from the L2 cache nearest the thread’s section of the CPU. This sounded promising, so we switched to TCMalloc.&lt;/p&gt;
 
@@ -670,13 +670,13 @@ compared to the amount of available RAM, which meant that we were sacrificing bo
 
 &lt;h2 id=&quot;transparent-huge-pages-thanks-for-your-helpplease-dont-help&quot;&gt;Transparent Huge Pages: Thanks for your help…please don’t help&lt;/h2&gt;
 
-&lt;p&gt;By the next morning &lt;strong&gt;CPU contention was worse&lt;/strong&gt;. &lt;/p&gt;
+&lt;p&gt;By the next morning &lt;strong&gt;CPU contention was worse&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;The alarmingly high system CPU usage that we’d seen in the previous 3 months was always due to MySQL using kernel mutex. But since we’d fixed that problem, &lt;em&gt;what the heck was this?&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;We discussed turning off TCMalloc, but that would’ve been a mistake. Implementing TCMalloc was a critical link in the chain of problems and solutions that ultimately strengthened our platform.&lt;/p&gt;
 
-&lt;p&gt;We discovered very quickly that the culprit this time was a &lt;em&gt;khugepaged&lt;/em&gt; enabled by a Linux kernel flag called &lt;strong&gt;Transparent Huge Pages&lt;/strong&gt; (THP; turned on by default in most Linux distributions). Huge pages are designed to improve performance by helping the operating system manage large amounts of memory. They effectively increase the page size from the standard 4kb to 2MB or 1Gb (depending on how it is configured). &lt;/p&gt;
+&lt;p&gt;We discovered very quickly that the culprit this time was a &lt;em&gt;khugepaged&lt;/em&gt; enabled by a Linux kernel flag called &lt;strong&gt;Transparent Huge Pages&lt;/strong&gt; (THP; turned on by default in most Linux distributions). Huge pages are designed to improve performance by helping the operating system manage large amounts of memory. They effectively increase the page size from the standard 4kb to 2MB or 1Gb (depending on how it is configured).&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;THP&lt;/strong&gt; makes huge pages easier to use by, among other things, arranging your memory into larger chunks.  It works great for app servers that are not performing memory-intensive operations.&lt;/p&gt;
 
@@ -690,7 +690,7 @@ compared to the amount of available RAM, which meant that we were sacrificing bo
 
 &lt;h2 id=&quot;lessons-learned&quot;&gt;Lessons learned&lt;/h2&gt;
 
-&lt;p&gt;Beyond the technical lessons we learned during this period, we were reminded that sometimes the best thing to do is stay the course. At times we were tempted to pull back, but moving forward ultimately paid off as each improvement we made exposed the inadequacy (for our platform) of a downstream component. &lt;/p&gt;
+&lt;p&gt;Beyond the technical lessons we learned during this period, we were reminded that sometimes the best thing to do is stay the course. At times we were tempted to pull back, but moving forward ultimately paid off as each improvement we made exposed the inadequacy (for our platform) of a downstream component.&lt;/p&gt;
 
 </description>
         <pubDate>Fri, 22 May 2015 00:00:00 -0700</pubDate>
@@ -732,7 +732,7 @@ changes out in weekly sprints.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;Everything should be made as simple as possible, but no simpler — Albert
-  Einstein &lt;/p&gt;
+  Einstein&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;This truism has been around for ages, and it goes hand-in-hand with the
@@ -748,7 +748,7 @@ more intuitive than other code. There’s a lot of prior art on this topic and a
 great place to start is &lt;a href=&quot;http://books.google.com/books?id=dwSfGQAACAAJ&quot;&gt;Clean
 Code&lt;/a&gt; by Robert C. Martin, aka
 Uncle Bob. The book breaks down the qualities of code which make it
-intuitive, and provides a framework for reasoning about code quality. &lt;/p&gt;
+intuitive, and provides a framework for reasoning about code quality.&lt;/p&gt;
 
 &lt;p&gt;Here are some guiding principles about writing clean code we use in practice
 which are also covered in the book.&lt;/p&gt;
@@ -767,7 +767,7 @@ years)&lt;/li&gt;
 &lt;p&gt;At the end of the day there is no substitue for experience, like any craft,
 writing clean code takes practice. At Okta every engineer is constantly honing
 their skills, we rely heavily on code reviews and pair programming to help hone
-each other’s skills. &lt;/p&gt;
+each other’s skills.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/2015-05-08-software-engineering-design-principles-code_quality_wtfs_per_minute.jpg&quot; alt=&quot;wtfs per minute&quot; /&gt;&lt;/p&gt;
 
@@ -786,11 +786,11 @@ massive amounts of operational data about our systems to:&lt;/p&gt;
 
 &lt;p&gt;With every new feature we add, developers are responsible for ensuring that
 their designs provide visibility into these dimensions. In order to make this an
-efficient process we’ve invested in: &lt;/p&gt;
+efficient process we’ve invested in:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Runtime logging control toggling by level, class, tenant, user &lt;/li&gt;
-  &lt;li&gt;Creation of dashboards and alerts is self-service &lt;/li&gt;
+  &lt;li&gt;Runtime logging control toggling by level, class, tenant, user&lt;/li&gt;
+  &lt;li&gt;Creation of dashboards and alerts is self-service&lt;/li&gt;
   &lt;li&gt;Every developer has access to metrics and anonymous unstructured data&lt;/li&gt;
   &lt;li&gt;Request ID generated at edge is passed along at every layer of stack for
 correlation&lt;/li&gt;
@@ -809,21 +809,21 @@ in addition to investing in prevention, we invest in making failure cheap.&lt;/p
 &lt;p&gt;The cost of failure becomes significantly more expensive 
 further out on the development timeline. Making adjustments 
 during requirements gather and design are significantly cheaper than 
-finding issues in production.&lt;sup id=&quot;fnref:agile-cost-curve&quot;&gt;&lt;a href=&quot;#fn:agile-cost-curve&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; &lt;/p&gt;
+finding issues in production.&lt;sup id=&quot;fnref:agile-cost-curve&quot;&gt;&lt;a href=&quot;#fn:agile-cost-curve&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/2015-05-08-software-engineering-design-principles-agile-cost-curve.png&quot; alt=&quot;cost curve of development&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;One fundamental we take from both Agile and XP is to invest in pushing failure
 as early in the development timeline as possible. We mitigate failures from
 poor requirements gathering by iterating quickly with the customer as described in
-Principle 1. Once we get to design and development we make failure cheap through: &lt;/p&gt;
+Principle 1. Once we get to design and development we make failure cheap through:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Design reviews with stakeholders ahead of writing code &lt;/li&gt;
+  &lt;li&gt;Design reviews with stakeholders ahead of writing code&lt;/li&gt;
   &lt;li&gt;TDD - developers write all tests for their code; test isn’t a separate phase
-from development &lt;/li&gt;
+from development&lt;/li&gt;
   &lt;li&gt;Keeping master stable - check-in to master is gated by passing all unit,
-functional and UI tests &lt;/li&gt;
+functional and UI tests&lt;/li&gt;
   &lt;li&gt;Developers can trigger CI on any topic branch; CI is massively parallelized
 over a cloud of fast machines&lt;/li&gt;
 &lt;/ul&gt;
@@ -855,14 +855,14 @@ be automated. These are automation principles we follow:&lt;/p&gt;
   &lt;li&gt;All artifacts are immutable and versioned&lt;/li&gt;
   &lt;li&gt;All code modules get dependencies automatically from central artifact server&lt;/li&gt;
   &lt;li&gt;Creation of base images and provisioning of new hardware is automated&lt;/li&gt;
-  &lt;li&gt;All forms of testing are automated &lt;/li&gt;
+  &lt;li&gt;All forms of testing are automated&lt;/li&gt;
   &lt;li&gt;Development environment setup is automated&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Tools we use:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;AWS - Automated provisioning of hardware &lt;/li&gt;
+  &lt;li&gt;AWS - Automated provisioning of hardware&lt;/li&gt;
   &lt;li&gt;Chef - Configuration managment&lt;/li&gt;
   &lt;li&gt;Ansible - Automated deployment orchestration&lt;/li&gt;
   &lt;li&gt;Jenkins - Continuous integration&lt;/li&gt;
