@@ -4,30 +4,30 @@ title: Okta Auth SDK
 excerpt: Easily add Okta capabilities to your website.
 ---
 
-> This SDK is currently in **Beta** status.
-
 # Introduction
 
-The Okta Sign-In SDK builds on top of our [Authentication APIs](), allowing 
-you to create a custom login experience using JavaScript. This includes 
-a traditional Okta authentication flow with MFA or Social Auth.
+The Okta Auth SDK builds on top of our [Authentication API](/docs/api/resources/authn.html) to enable you to create a custom login experience using JavaScript.
 
 # Prerequisites
 
 - An Okta org - Register for [Okta Developer Edition](https://www.okta.com/developer/signup/) if you don't have an existing org
-- [CORS enabled for your domain](/docs/api/getting_started/enabling_cors.html)
+- A domain that is [CORS enabled for your org](/docs/api/getting_started/enabling_cors.html)
 
 # Installation
 
-Include the following script in your page:
+Include the following script tag in your target web page:
 
 ~~~ html
-<script src="OktaAuth.js" type="text/javascript"></script>
+<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-sdk-1.0.0.min.js" type="text/javascript"></script>
 ~~~
 
 ## Authentication Flow
 
-The goal of an authentication flow is setting an Okta cookie. Simple!
+The goal of an authentication flow is to set an Okta session cookie on the user's browser. 
+
+All Auth SDK methods return [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), deferred objects that resolve when the method has finished. For more information about why Promises are useful, and how to use our specific promise library, check out the [Q.js readme](https://github.com/kriskowal/q).
+
+An example authentication flow would look like this:
 
 ~~~ javascript
 var authClient = new OktaAuth({url: 'https://your-org.okta.com'});
@@ -35,87 +35,105 @@ authClient.signIn({
   username: 'some-username',
   password: 'some-password'
 })
-.then(function(transaction) {
+.then(function(transaction) { // On success
   switch(transaction.status) {
     
     case 'SUCCESS':
-      authClient.session.setCookieAndRedirect(transaction.sessionToken);
+      authClient.session.setCookieAndRedirect(transaction.sessionToken); // Sets a cookie on redirect
       break;
 
     default:
       throw 'We cannot handle the ' + transaction.status + ' status';
   }
 })
-.fail(function(err) {
+.fail(function(err) { // On failure
   console.error(err);
 });
 ~~~
 
-As you can see, we use [A+ Promises](https://promisesaplus.com/) (via
-[Q](https://github.com/kriskowal/q)). This allows us to handle asynchronous 
-actions, like HTTP requests, in a way that appears more synchronous.
-
-Most methods during an authentication flow will resolve `then` with a 
-[Transaction](#transactions).
-
-A `fail` will resolve with one of several [Errors](#errors).
-
 ## Transactions
 
-Providing only a username and password may not be sufficient to obtain a
-sessionToken. You may need to reset a password, enroll in MFA, or verify your
-existing MFA. To track your progression through these states, we use a
-transaction. The possible states, their definitions, and their flow can be found
-in our [Authentication API documentation](/docs/api/resources/authn.html#transaction-state).
+When Auth SDK methods resolve, they return a Transaction object that encapsulates the new state in the authentication flow. This Transaction object contains metadata about the current state, and methods that can be used to progress to the next state.
 
-Here is a list of the states and their possible methods:
+More information about Transaction states, their definitions, and the flow between them can be found in our [Authentication API documentation](/docs/api/resources/authn.html#transaction-state).
 
-> Methods listed for certain states may only be available in certain scenarios
+### Transaction States
 
-> `stateToken` is never required as a parameter
-
-> All transactions have:
+> Keep in mind:
 >
-> * `status` - Matches the transaction's state
-> * `data` - The response body as an object
+> * Methods listed for a state are not always guaranteed to be available.
+>
+> * `stateToken` is never required as a parameter.
+>
+> * All transactions have a `data` attribute that contains the response body as an object.
 
-### SUCCESS
+#### Locked Out
 
-Name                  |   Type    | Description
+The user account is locked; self-service unlock or admin unlock is required.
+
+Property              |   Type    | Description
 --------------------- | --------  | -----------
-`expiresAt`           | [Date String](https://tools.ietf.org/html/rfc3339) | Time the sessionToken will expire
-`sessionToken`        | [Session Token](/docs/api/resources/authn.html#session-token) | Token that can be exchanged for a cookie
-`user`                | [User](http://localhost:4000/docs/api/resources/authn.html#user-object) | Subset of user properties
-
-### LOCKED_OUT
-
-Name                  |   Type    | Description
---------------------- | --------  | -----------
+`status`              | String    | `LOCKED_OUT`
 `unlock`            | Function | [Parameters](/docs/api/resources/authn.html#unlock-account)
 `cancel`            | Function | Ends the transaction
 
-### PASSWORD_EXPIRED
+Example:
 
-Name                  |   Type    | Description
+~~~ javascript
+transaction.unlock({
+  username: 'dade.murphy@example.com',
+  factorType: 'EMAIL'
+});
+~~~
+
+#### Password Expired
+
+The user’s password was successfully validated but is expired.
+
+Property              |   Type    | Description
 --------------------- | --------  | -----------
+`status`              | String    | `PASSWORD_EXPIRED`
 `expiresAt`           | [Date String](https://tools.ietf.org/html/rfc3339) | Time the transaction will expire
 `user`                | [User](/docs/api/resources/authn.html#user-object) | Subset of user properties
 `changePassword`      | Function | [Parameters](/docs/api/resources/authn.html#change-password)
 `cancel`              | Function | Ends the transaction
 
-### PASSWORD_RESET
+Example:
 
-Name                  |   Type    | Description
+~~~ javascript
+transaction.changePassword({
+  oldPassword: '0ldP4ssw0rd',
+  newPassword: 'N3wP4ssw0rd'
+});
+~~~
+
+#### Password Reset
+
+The user successfully answered their recovery question and can set a new password.
+
+Property              |   Type    | Description
 --------------------- | --------  | -----------
+`status`              | String    | `PASSWORD_RESET`
 `expiresAt`           | [Date String](https://tools.ietf.org/html/rfc3339) | Time the transaction will expire
 `user`                | [User](/docs/api/resources/authn.html#user-object) | Subset of user properties
 `resetPassword`       | Function | [Parameters](/docs/api/resources/authn.html#reset-password)
 `cancel`              | Function | Ends the transaction
 
-### PASSWORD_WARN
+Example:
 
-Name                  |   Type    | Description
+~~~ javascript
+transaction.resetPassword({
+  newPassword: 'N3wP4ssw0rd'
+});
+~~~
+
+#### Password Almost Expired
+
+The user’s password was successfully validated but is about to expire and should be changed.
+
+Property              |   Type    | Description
 --------------------- | --------  | -----------
+`status`              | String    | `PASSWORD_WARN`
 `expiresAt`           | [Date String](https://tools.ietf.org/html/rfc3339) | Time the transaction will expire
 `user`                | [User](/docs/api/resources/authn.html#user-object) | Subset of user properties
 `policy`              | [Policy](/docs/api/resources/authn#password-policy-object) | Password requirements
@@ -123,19 +141,42 @@ Name                  |   Type    | Description
 `skip`                | Function | Ignore the warning and continue
 `cancel`              | Function | Ends the transaction
 
-### RECOVERY
+Example:
 
-Name                  |   Type    | Description
+~~~ javascript
+transaction.changePassword({
+  oldPassword: '0ldP4ssw0rd',
+  newPassword: 'N3wP4ssw0rd'
+});
+~~~
+
+#### Recovery
+
+The user has requested a recovery token to reset their password or unlock their account.
+
+Property              |   Type    | Description
 --------------------- | --------  | -----------
-`recoveryType`        | ? | ?
+`status`              | String    | `RECOVERY`
+`recoveryType`        | String    | `PASSWORD` or `UNLOCK`
 `user`                | [User](/docs/api/resources/authn.html#user-object) | Subset of user properties
 `answer`              | Function | [Parameters](/docs/api/resources/authn#answer-recovery-question)
 `cancel`              | Function | Ends the transaction
 
-### RECOVERY_CHALLENGE
+Example:
 
-Name                  |   Type    | Description
+~~~ javascript
+transaction.answer({
+  answer: 'My favorite recovery question answer'
+});
+~~~
+
+#### Verify Recovery
+
+The user must verify the factor-specific recovery challenge.
+
+Property              |   Type    | Description
 --------------------- | --------  | -----------
+`status`              | String    | `RECOVERY_CHALLENGE`
 `expiresAt`           | [Date String](https://tools.ietf.org/html/rfc3339) | Time the transaction will expire
 `user`                | [User](/docs/api/resources/authn.html#user-object) | Subset of user properties
 `factorType`          | String | `EMAIL` or `SMS`
@@ -144,19 +185,34 @@ Name                  |   Type    | Description
 `resend`              | Function | Resend the recovery email or text
 `cancel`              | Function | Ends the transaction
 
-### MFA_ENROLL
+Examples:
 
-Name                  |   Type    | Description
+~~~ javascript
+// Verify the recovery
+transaction.verify({
+  passCode: '615243'
+});
+
+// Resend recovery email or sms
+transaction.resend();
+~~~
+
+#### Begin MFA Enrollment
+
+When MFA is required, but a user isn't enrolled in MFA, they must enroll in at least one factor.
+
+Property              |   Type    | Description
 --------------------- | --------  | -----------
+`status`              | String    | `MFA_ENROLL`
 `expiresAt`           | [Date String](https://tools.ietf.org/html/rfc3339) | Time the transaction will expire
 `user`                | [User](/docs/api/resources/authn.html#user-object) | Subset of user properties
 `factors`             | List of [Enroll Factors](#enroll-factor) | Factors enabled for an org
 `skip`                | Function | Ignore enrollment and continue
 `cancel`              | Function | Ends the transaction
 
-#### Enroll Factor
+##### Enroll Factor
 
-Name                  |   Type    | Description
+Property              |   Type    | Description
 --------------------- | --------  | -----------
 `enrollment`          | String    | `OPTIONAL` or `REQUIRED`
 `status`              | String    | `NOT_SETUP`, `PENDING_ACTIVATION`, `ENROLLED`, `ACTIVE`, `INACTIVE`, or `EXPIRED`
@@ -165,48 +221,82 @@ Name                  |   Type    | Description
 `enroll`              | Function  | [Parameters](/docs/api/resources/authn.html#enroll-factor). `factorType` and `provider` are optional
 `questions`           | Function  | Returns [available questions](/docs/api/resources/factors.html#response-example-3), not a transaction. Only available for the `question` factorType
 
-### MFA_ENROLL_ACTIVATE
+Example:
 
-Name                  |   Type    | Description
+~~~ javascript
+// Assume the first factor is a question
+var factor = transaction.factors[0];
+
+// Returns the available questions
+factor.questions();
+
+// Enroll after selecting a question and entering an answer
+factor.enroll({
+  profile: {
+    question: 'disliked_food',
+    answer: 'mayonnaise'
+  }
+});
+~~~
+
+#### Activate a Factor for MFA Enrollment
+
+The user must activate the factor to complete enrollment.
+
+Property              |   Type    | Description
 --------------------- | --------  | -----------
+`status`              | String    | `MFA_ENROLL_ACTIVATE`
 `expiresAt`           | [Date String](https://tools.ietf.org/html/rfc3339) | Time the transaction will expire
 `factorResult`        | String   | `WAITING`, `CANCELLED`, `TIMEOUT`, or `ERROR`
 `user`                | [User](/docs/api/resources/authn.html#user-object) | Subset of user properties
 `factor`              | [Activate Enroll Factor](#activate-enroll-factor) | Factor to activate
-`poll`                | Function | Poll until `factorResult` changes. Throws [AuthPollStopError](#AuthPollStopError) when `prev` or `cancel` is called
+`activate`            | Function | Verify the OTP or restart the activation process if the activation is expired
+`poll`                | Function | Poll until `factorResult` changes. Throws [AuthPollStopError](#authpollstoperror) when `prev` or `cancel` is called
+`resend`              | Function | Send another OTP if user doesn’t receive the original activation SMS OTP
 `prev`                | Function | End current factor enrollment and return to [MFA_ENROLL](#mfaenroll)
 `cancel`              | Function | Ends the transaction
 
-#### Activate Enroll Factor
+##### Activate Enroll Factor
 
-Name                  |   Type    | Description
+Property              |   Type    | Description
 --------------------- | --------  | -----------
 `id`                  | String    | Unique id for the factor
 `factorType`          | [Factor Type](/docs/api/resources/factors.html#factor-type) | Type of factor
 `provider`            | [Factor Provider](/docs/api/resources/factors.html#provider-type) | Provider of the given `factorType`
 `activation`          | [Activation](#activation) | Activation properties
 
-#### Activation
+##### Activation
 
-Name                  |   Type    | Description
+Property              |   Type    | Description
 --------------------- | --------  | -----------
 `expiresAt`           | [Date String](https://tools.ietf.org/html/rfc3339) | Time the activation will expire
 `factorResult`        | String   | `WAITING`, `CANCELLED`, `TIMEOUT`, or `ERROR`
-`send`                | Function | Takes a `name` parameter that's usually `sms` or `email`
+`send`                | Function | Takes a `name` parameter that's `sms` or `email`
 `qrcode`              | [Link](/docs/api/getting_started/design_principles.html#links) | Contains `href` and `type` to embed as an image
 
-### MFA_REQUIRED
+Example:
 
-Name                  |   Type    | Description
+~~~ javascript
+transaction.activate({
+  passCode: '615243'
+});
+~~~
+
+#### Select MFA When Required
+
+The user must provide additional verification with a previously enrolled factor.
+
+Property              |   Type    | Description
 --------------------- | --------  | -----------
+`status`              | String    | `MFA_REQUIRED`
 `expiresAt`           | [Date String](https://tools.ietf.org/html/rfc3339) | Time the transaction will expire
 `user`                | [User](/docs/api/resources/authn.html#user-object) | Subset of user properties
 `factors`             | List of [Enrolled Factors](#enrolled-factor) | Factors available to pass MFA
 `cancel`              | Function | Ends the transaction
 
-#### Enrolled Factor
+##### Enrolled Factor
 
-Name                  |   Type    | Description
+Property              |   Type    | Description
 --------------------- | --------  | -----------
 `id`                  | String    | Unique id for the factor
 `factorType`          | [Factor Type](/docs/api/resources/factors.html#factor-type) | Type of factor
@@ -214,21 +304,36 @@ Name                  |   Type    | Description
 `profile`             | [Factor Profile](/docs/api/resources/factors.html#factor-profile-object) | Details about the factor
 `verify`              | Function  | [Parameters](/docs/api/resources/authn.html#verify-factor)
 
-### MFA_CHALLENGE
+Example:
 
-Name                  |   Type    | Description
+~~~ javascript
+// Assume the first factor is a question
+var factor = transaction.factors[0];
+
+factor.verify({
+  answer: 'mayonnaise'
+});
+~~~
+
+#### MFA Enforcement
+
+The user must verify the factor-specific challenge.
+
+Property              |   Type    | Description
 --------------------- | --------  | -----------
+`status`              | String    | `MFA_CHALLENGE`
 `expiresAt`           | [Date String](https://tools.ietf.org/html/rfc3339) | Time the transaction will expire
+`factorResult`        | String   | `WAITING`, `CANCELLED`, `TIMEOUT`, or `ERROR`
 `user`                | [User](/docs/api/resources/authn.html#user-object) | Subset of user properties
 `factor`              | [Challenge Factor](#challenge-factor) | Factor currently being challenged
-`poll`                | Function | Poll until `factorResult` changes. Throws [AuthPollStopError](#AuthPollStopError) when `prev`, `resend`, or `cancel` is called
+`poll`                | Function | Poll until `factorResult` is not `WAITING`. Throws [AuthPollStopError](#authpollstoperror) if `prev`, `resend`, or `cancel` is called
 `resend`              | Function | Takes a `name` parameter that's usually `sms` or `push`
 `prev`                | Function | End current factor enrollment and return to [MFA_ENROLL](#mfaenroll)
 `cancel`              | Function | Ends the transaction
 
-#### Challenge Factor
+##### Challenge Factor
 
-Name                  |   Type    | Description
+Property              |   Type    | Description
 --------------------- | --------  | -----------
 `id`                  | String    | Unique id for the factor
 `factorType`          | [Factor Type](/docs/api/resources/factors.html#factor-type) | Type of factor
@@ -236,9 +341,52 @@ Name                  |   Type    | Description
 `profile`             | [Factor Profile](/docs/api/resources/factors.html#factor-profile-object) | Details about the factor
 `verification`        | [Verification](#verification)  | Verification properties
 
-## Social Auth and OIDC
+Example:
 
-If you have [set up social auth](/docs/guides/social_authentication.html#setting-up-a-social-authentication-provider-in-okta), it's possible to manage the flow with the SDK. To do so, instantiate your client with a clientId and redirectUri.
+~~~ javascript
+transaction.poll();
+~~~
+
+#### Successful Sign-In
+
+At the end of the authentication flow, a transaction with a status of `SUCCESS` is returned. This transaction contains a `sessionToken` that you can [exchange for an Okta cookie](#create-a-session).
+
+Property              |   Type    | Description
+--------------------- | --------  | -----------
+`status`              | String    | `SUCCESS`
+`expiresAt`           | [Date String](https://tools.ietf.org/html/rfc3339) | Time the sessionToken will expire
+`sessionToken`        | [Session Token](/docs/api/resources/authn.html#session-token) | Token that can be exchanged for a cookie
+`user`                | [User](http://localhost:4000/docs/api/resources/authn.html#user-object) | Subset of user properties
+
+Example:
+
+~~~ javascript
+authClient.session.setCookieAndRedirect(transaction.sessionToken);
+~~~
+
+## Transaction Management
+
+If the user navigates away from the page during an authentication flow, you may want to resume the transaction.
+
+### Check for Existing Transaction
+
+Check for a transaction to be resumed. This is synchronous and returns `true` or `false`.
+
+~~~ javascript
+authClient.tx.exists();
+~~~
+
+### Resume the transaction
+
+Returns a transaction with a user's previous state.
+
+~~~ javascript
+authClient.tx.resume();
+~~~
+
+## Social Authentication and OIDC
+
+If you want to obtain an ID Token via [OIDC](/docs/api/resources/oidc.html) or [social authentication](/docs/guides/social_authentication.html), it's possible to manage the flow with the SDK. To do so, instantiate your client with a `clientId` and `redirectUri`.
 
 ~~~ javascript
 var authClient = new OktaAuth({
@@ -248,33 +396,33 @@ var authClient = new OktaAuth({
 });
 ~~~
 
-### Get an Id Token
+### Get an ID Token
 ~~~ javascript
 authClient.idToken.authorize()
 .then(function(res) {
-  // Raw Id Token
+  // Raw ID Token
   res.idToken;
 
-  // Decoded Id Token claims
+  // Decoded ID Token claims
   res.claims;
 })
 ~~~
 
-### Exchange a sessionToken for an Id Token
+### Exchange a sessionToken for an ID Token
 ~~~ javascript
 authClient.idToken.authorize({
   sessionToken: 'testSessionToken'
 });
 ~~~
 
-### Get an Id Token from an IDP
+### Get an ID Token from an IDP
 ~~~ javascript
 authClient.idToken.authorize({
   idp: 'target-idp'
 });
 ~~~
 
-### Refresh an Id Token
+### Refresh an ID Token
 
 Returns a new idToken if the Okta session is still valid.
 
@@ -282,9 +430,9 @@ Returns a new idToken if the Okta session is still valid.
 authClient.idToken.refresh();
 ~~~
 
-### Decode an Id Token
+### Decode an ID Token
 
-Decode a raw Id Token
+Decode a raw ID Token
 
 ~~~ javascript
 authClient.idToken.decode(idTokenString);
@@ -312,7 +460,7 @@ authClient.session.exists();
 
 ### Get an existing session
 
-Resolves with a [session](/docs/api/resources/sessions.html#example)
+Resolves with a [session](/docs/api/resources/sessions.html#example).
 
 ~~~ javascript
 authClient.session.get();
@@ -320,13 +468,15 @@ authClient.session.get();
 
 ### Refresh a session
 
-Resolves with a refreshed version of your existing [session](/docs/api/resources/sessions.html#example)
+Resolves with a refreshed version of your existing [session](/docs/api/resources/sessions.html#example).
 
 ~~~ javascript
 authClient.session.refresh();
 ~~~
 
 ### Close a session
+
+Terminates an existing [session](/docs/api/resources/sessions.html#example).
 
 ~~~ javascript
 authClient.session.close();
@@ -338,27 +488,16 @@ A `fail` on a promise will resolve with one of these failures:
 
 #### AuthApiError
 
-This is thrown when we receive a response from the Okta service that is not a 200.
-
-Name                  |   Type    | Description
---------------------- | --------  | -----------
-`errorCode`           | String | Okta [Error Code](/docs/api/getting_started/error_codes)
-`errorSummary`        | String | Summary of the error
-`errorLink`           | String | Okta [Error Code](/docs/api/getting_started/error_codes)
-`errorId`             | String | Unique error id
-`errorCauses`         | List of Strings | More detailed causes of the error, if any
+This is thrown when we receive a response from the Okta service that is not a 200. It contains the same properties as our [API errors](/docs/api/getting_started/design_principles.html#errors).
 
 #### AuthSdkError
 
 This is thrown when an error occurs within the SDK.
 
-Name                  |   Type    | Description
+Property              |   Type    | Description
 --------------------- | --------  | -----------
 `errorCode`           | String | Always `INTERNAL`
 `errorSummary`        | String | Summary of the error
-`errorLink`           | String | Always `INTERNAL`
-`errorId`             | String | Always `INTERNAL`
-`errorCauses`         | List of Strings | Always `[]`
 
 #### AuthPollStopError
 
@@ -368,7 +507,7 @@ This is thrown when a `poll` has been initiated, but another action is taken bef
 
 This is thrown when an [error occurs during the OAuth flow](docs/api/getting_started/error_codes.html#openid-connect-and-okta-social-authentication).
 
-Name                  |   Type    | Description
+Property              |   Type    | Description
 --------------------- | --------  | -----------
 `errorCode`           | String | The OAuth error code
 `errorSummary`        | String | Summary of the error
