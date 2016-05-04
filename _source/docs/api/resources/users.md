@@ -1055,6 +1055,8 @@ after     | Specifies the pagination cursor for the next page of users          
   * An HTTP 500 status code usually indicates that you have exceeded the request timeout.  Retry your request with a smaller limit and paginate the results. For more information, see [Pagination](/docs/getting_started/design_principles.html#pagination)).
   * Use `limit` and `after` with all four query types.
   * Treat the `after` cursor as an opaque value and obtain it through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination).
+  * We support most of the operators listed in the [SCIM Protocol Specification](https://tools.ietf.org/html/rfc7644#section-3.4.2.2). 
+    We don't support `co`, `ne`, `pr`, or `le`. See each parameter's section for example searches using supported operators.
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -1483,11 +1485,6 @@ Use an Id lookup for records that you update to ensure your results contain the 
    `profile.occupation eq "Leader"`               | Users that have an `occupation` of `Leader`
    `profile.lastName sw "Sm" `                    | Users whose `lastName` starts with "Sm"
 
-##### Searching Arrays
-
-You can search properties that are arrays. If any element matches the search term, the entire array (object) is returned. 
-For examples, see [Request Example for Array](#request-example-for-array) and [Response Example for Array](#response-example-for-array).
-
 ##### Search Examples
 
 List users with an occupation of `Leader`.
@@ -1566,6 +1563,14 @@ curl -v -X GET \
   }
 ]
 ~~~
+
+##### Searching Arrays
+
+You can search properties that are arrays. If any element matches the search term, the entire array (object) is returned. 
+For examples, see [Request Example for Array](#request-example-for-array) and [Response Example for Array](#response-example-for-array).
+
+* We follow the [SCIM Protocol Specification](https://tools.ietf.org/html/rfc7644#section-3.4.2.2) for searching arrays.
+* Search for one value at a time when searching arrays. For example, you can't search for users where a string is equal to an attriubte in two different arrays.
 
 ##### Request Example for Array
 {:.api .api-request .api-request-example}
