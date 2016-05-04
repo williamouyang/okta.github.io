@@ -449,6 +449,12 @@ Step 3 involves downloading the public JWKS from Okta (specified by the `jwks_ur
 
 Each public key is identified by a `kid` attribute, which corresponds with the `kid` claim in the [ID token header](#claims-in-the-header-section).
 
+The ID token and the access token are signed by an RSA private key. Okta publishes the corresponding public key and adds a public-key identifier `kid` in the ID token header. To minimize the effects of key rotation, your application should check the `kid`, and if it has changed, check the `jwks_uri` value in the [well-known configuration](#openid-connect-metadata) for a new public key and `kid`. 
+
+All applications must roll over keys for adequate security. Be sure to include key rollover in your implementation.
+
+
+
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/v1/keys</span>
 
 ~~~json
@@ -484,7 +490,7 @@ Each public key is identified by a `kid` attribute, which corresponds with the `
 }
 ~~~
 
-For efficiency your application can retrieve these public keys, cache them, and validate the ID token signatures locally. 
+> Okta strongly recommends retrieving and caching public keys and validating the ID token signatures locally.
 
 There are standard open-source libraries available for every major language to perform [JWS](https://tools.ietf.org/html/rfc7515) signature validation.
 
