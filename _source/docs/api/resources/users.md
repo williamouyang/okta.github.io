@@ -116,6 +116,13 @@ The following diagram shows the state model for a user:
 
 ![STAGED, PROVISIONED, ACTIVE, RECOVERY, LOCKED_OUT, PASSWORD_EXPIRED, or DEPROVISIONED](/assets/img/okta-user-status.png "Okta User Status Diagram")
 
+### Understanding User Status Values
+
+The status of a user changes in response to explicit events, such as admin-driven lifecycle changes, user login, or self-service password recovery. 
+Okta doesn't asynchronously sweep through users and update their password expiry state, for example. 
+Instead, Okta evaluates password policy at login time, notices the password has expired, and moves the user to the expired state. 
+When running reports, remember that the data is valid as of the last login or lifecycle event for that user.
+
 ### Profile Object
 
 Specifies [standard](#standard-profile-properties) and [custom](#custom-profile-properties) profile properties for a user.
