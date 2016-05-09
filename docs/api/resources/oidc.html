@@ -344,7 +344,7 @@ as well as claims about the authenticated user.</p>
     </tr>
     <tr>
       <td>nonce</td>
-      <td>Value used to associate a Client session with an ID Token, and to mitigate replay attacks. This is only returned if <em>nonce</em> was present in the request that generated the ID Token.</td>
+      <td>Value used to associate a Client session with an ID Token, and to mitigate replay attacks.</td>
       <td>String</td>
       <td>“n-0S6_WzA2Mj”</td>
     </tr>
@@ -1065,7 +1065,7 @@ and only via POST data or within request headers. If you store them on your serv
   <li>Verify that the <code class="highlighter-rouge">aud</code> (audience) claim contains the <code class="highlighter-rouge">client_id</code> of your application.</li>
   <li>Verify the signature of the ID token according to <a href="https://tools.ietf.org/html/rfc7515">JWS</a> using the algorithm specified in the JWT <code class="highlighter-rouge">alg</code> header parameter. Use the public keys provided by Okta via the <a href="#openid-discovery-document">Discovery Document</a>.</li>
   <li>Verify that the expiry time (from the <code class="highlighter-rouge">exp</code> claim) has not already passed.</li>
-  <li>If a <code class="highlighter-rouge">nonce</code> value was sent in the Authentication Request, a <code class="highlighter-rouge">nonce</code> claim MUST be present and its value checked to verify that it is the same value as the one that was sent in the Authentication Request. The client should check the nonce value for replay attacks.</li>
+  <li>A <code class="highlighter-rouge">nonce</code> claim MUST be present and its value checked to verify that it is the same value as the one that was sent in the Authentication Request. The client should check the nonce value for replay attacks.</li>
   <li>The client SHOULD check the <code class="highlighter-rouge">auth_time</code> claim value and request re-authentication using the <code class="highlighter-rouge">prompt=login</code> parameter if it determines too much time has elapsed since the last End-User authentication.</li>
 </ol>
 
