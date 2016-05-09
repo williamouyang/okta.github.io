@@ -162,26 +162,25 @@ When you first make an API call and get a cursor-paged list of objects, the end 
 
 Filtering allows a requestor to specify a subset of resources to return and is often needed for large collection resources such as Users.  While filtering semantics are standardized in the Okta API, not all resources in the Okta API support filtering. When filtering is supported for a resource, the `filter` URL query parameter contains a filter expression.
 
-The expression language that is used in the filter parameter supports references to JSON attributes and literals. The literal values can be strings enclosed in double quotes, numbers, date times enclosed in double quotes, and Boolean values; i.e., true or false. String literals must be valid JSON strings.
+The expression language that is used in the filter and search parameters supports references to JSON attributes and literals. The literal values can be strings enclosed in double quotes, numbers, date times enclosed in double quotes, and Boolean values; i.e., true or false. String literals must be valid JSON strings.
 
-The attribute names are case-sensitive while attribute operators are case-insensitive. For example, the following two expressions will evaluate to the same logical value:
+The attribute names are case-sensitive while attribute operators are case-insensitive. For example, the following two expressions evaluate to the same logical value:
 
     filter=firstName Eq "john"
 
     filter=firstName eq "john"
 
-The filter parameter **must** contain at least one valid Boolean expression. Each expression **must** contain an attribute name followed by an attribute operator and optional value. Multiple expressions **may** be combined using the two logical operators. Furthermore expressions can be grouped together using "()".
+The filter and search parameters **must** contain at least one valid Boolean expression. Each expression **must** contain an attribute name followed by an attribute operator and optional value. Multiple expressions **may** be combined using the two logical operators. Furthermore expressions can be grouped together using "()".
 
 > Each resource in the Okta API defines what attributes and operators are supported for expression.  *Please refer to resource-specific documentation for details.*
 
 ### Operators
 
-The operators supported in the expression are listed in the following table.
+Most of the operators listed in the [SCIM Protocol Specification](https://tools.ietf.org/html/rfc7644#section-3.4.2.2) are supported:
 
 Operator | Description | Behavior
 -------- | ----------- | --------
 eq | equal | The attribute and operator values must be identical for a match.
-co | contains | The entire operator value must be a substring of the attribute value for a match.
 sw |starts with | The entire operator value must be a substring of the attribute value, starting at the beginning of the attribute value. This criterion is satisfied if the two strings are identical.
 pr | present (has value) | If the attribute has a non-empty value, or if it contains a non-empty node for complex attributes there is a match.
 gt | greater than | If the attribute value is greater than operator value, there is a match. The actual comparison is dependent on the attribute type. For `String` attribute types, this is a lexicographical comparison and for `Date` types, it is a chronological comparison.
@@ -189,7 +188,7 @@ ge | greater than or equal | If the attribute value is greater than or equal to 
 lt | less than | If the attribute value is less than operator value, there is a match. The actual comparison is dependent on the attribute type. For `String` attribute types, this is a lexicographical comparison and for `Date` types, it is a chronological comparison.
 le | less than or equal | If the attribute value is less than or equal to the operator value, there is a match. The actual comparison is dependent on the attribute type. For `String` attribute types, this is a lexicographical comparison and for `Date` types, it is a chronological comparison.
 
-Note: Some resources do not support all operators.
+Note: Some resources don't support all the listed operators.
 
 > All `Date` values use the ISO 8601 format `YYYY-MM-DDTHH:mm:ss.SSSZ`
 
