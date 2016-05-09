@@ -163,6 +163,8 @@ scope          | Can be a combination of <em>openid</em>, <em>profile</em>, <em>
 state          | A client application provided state string that might be useful to the application upon receipt of the response. It can contain alphanumeric, comma, period, underscore and hyphen characters.   | Query        | String   |  TRUE    | 
 prompt         | Can be either <em>none</em> or <em>login</em>. The value determines if Okta should not prompt for authentication (if needed), or force a prompt (even if the user had an existing session). Default: The default behavior is based on whether there's an existing Okta session. | Query        | String   | FALSE     | See Description. 
 nonce          | Specifies a nonce that is reflected back in the ID Token. Can be used for CSRF protection. | Query        | String   | TRUE     | 
+code_challenge | Specifies a challenge of [PKCE](#parameter-details). It will be verified in the Access Token request.  | Query        | String   | FALSE    | 
+code_challenge_method | Specifies the method was used to derive the code challenge. Only S256 is supported.  | Query        | String   | FALSE    | 
 
 ####Parameter Details
  
@@ -182,6 +184,8 @@ nonce          | Specifies a nonce that is reflected back in the ID Token. Can b
  * Okta requires the OAuth 2.0 `state` parameter on all requests to the authorization endpoint in order to prevent cross-site request forgery (CSRF). 
  The OAuth 2.0 specification [requires](https://tools.ietf.org/html/rfc6749#section-10.12) that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent's authenticated state. 
  Using the `state` parameter is also a countermeasure to several other known attacks as outlined in [OAuth 2.0 Threat Model and Security Considerations](https://tools.ietf.org/html/rfc6819).
+
+ * [Proof Key for Code Exchange](https://tools.ietf.org/html/rfc7636) (PKCE) is stronger mechanism for binding the authorization code to the client than just client secret, and prevents [code interception attack](https://tools.ietf.org/html/rfc7636#section-1) in the case that both the code and the client credentials are intercepted (which can happen on mobile/native devices). The PKCE enabled client creates a large random string as code_verifier and derive code_challenge from it using code_challenge_method. It passes the code_challenge and code_challenge_method in the authorization request for code flow. When a client tries to redeem the code, it must pass the code_verifer. Okta will recompute the challenge and returns the requested token only if it matches the code_challenge in the original authorization request. When a client, whose token_endpoint_auth_method is 'none', makes a code flow authorization request, the code_challenge parameter is required.
       
 ####postMessage() Data Model
 
@@ -360,6 +364,7 @@ scope              | Expected only if <em>refresh_token</em> is specified as the
 redirect_uri       | Expected if grant_type is <em>authorization_code</em>. Specifies the callback location where the authorization was sent; must match what is preregistered in Okta for this client. | String |
 client_id          | The client ID generated as a part of client registration. This is used in conjunction with the <em>client_secret</em> parameter to authenticate the client application. | String |
 client_secret      | The client secret generated as a part of client registration. This is used in conjunction with the <em>client_id</em> parameter to authenticate the client application. | String |
+code_verifier      | The code verifier of [PKCE](#parameter-details). Okta uses it to recompute the code challenge and verify if it matches the original code_challenge in the authorization request. | String |
 
 
 #####Token Authentication Methods
