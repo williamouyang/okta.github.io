@@ -8,9 +8,17 @@ excerpt: Easily add Okta Sign-in capabilities to your website.
 
 The Okta Sign-In Widget is a JavaScript widget from Okta that gives you a customizable login experience that authenticates users on any web site.
 
-> Okta Sign-In Widget documentation uses the domain name acme. Other Okta developer content uses your-domain.
+This page contains detailed reference information you can use to customize your sign-in widget. Basic instructions for creating a sign-in widget are available in [Okta Sign-In Widget](docs/guides/okta_sign-in_widget.html). 
+
+Prerequisites from the basic guide include: 
+
+* Use [a supported browser](https://support.okta.com/help/articles/Knowledge_Article/24532952-Platforms---Browser-and-OS-Support).
+* [Create an Okta Developer Edition org](docs/guides/okta_sign-in_widget.html#creating-an-okta-organization) if you don't already have one.
+* [Configure your Okta org to support CORS](docs/api/getting_started/enabling_cors.html) before testing the Okta Sign-In Widget.
 
 ### Example of a Customized Sign-In Widget
+
+> Okta Sign-In Widget documentation uses the domain name acme. Other Okta developer content uses <em>your-domain</em>.
 
 ~~~ javascript
 // Initialize
@@ -20,7 +28,6 @@ var oktaSignIn = new OktaSignIn({
     rememberMe: true,
     rememberDevice: true,
     smsRecovery: true,
-    windowsVerify: true,
     multiOptionalFactorEnroll: true
   },
   labels: {
@@ -68,8 +75,9 @@ oktaSignIn.session.exists(function (exists) {
 `logo`          | Logo to use in the widget (e.g., `https://acme.com/assets/logo/acme-logo.png`). | String    | No           | `Okta logo`
 `username`      | Bootstrap the widget with a username i.e., pre-fill the username in the widget. | String    | No           | None
 `transformUsername` | Transform the username before sending the request. The function is passed the username and the operation as parameters. [Example](#transformusername-example) | Function   | No           | None    
-`features`      | Options to enable or disable a feature in the widget. [Option list](#features-options) [Example](#features-example) |
-`helpLinks`     | Options to configure alternate help links in the widget. [Option list](#helplinks-options) [Example](#helplinks-example)   |
+`features`      | Options to enable or disable a feature in the widget. [Option list](#features-options) [Example](#features-example) | Boolean | No           | None
+`helpLinks`     | Options to configure alternate help links in the widget. [Option list](#helplinks-options) [Example](#helplinks-example)   | String | No           | None
+`labels`        | Options to localize labels in the widget. [Option list](#links-options) | String | No           | None
 
 ### Configuration Examples and Option Details
 
@@ -95,7 +103,6 @@ The following sections provide examples and option details for the last three co
       rememberMe: true,
       rememberDevice: false,
       selfServiceUnlock: true,
-      windowsVerify: true,
       multiOptionalFactorEnroll: true
     }
 ~~~
@@ -114,16 +121,13 @@ Enable or disable widget functionality with the following options for `features`
     Default the "Trust this device" checkbox to `true`.
         
 -   `smsRecovery` `(default: false)`       
-    Allow users with a configured mobile phone number to recover their password using SMS.
+    Allow users with a configured mobile phone number to recover their password using an SMS message.
     
 -   `selfServiceUnlock` `(default: false)`
     Display the "Unlock Account" link to allow users to unlock their accounts.
     
 -   `multiOptionalFactorEnroll` `(default: false)`
     Allow users the option to enroll in multiple optional factors.
-    
--   `windowsVerify` `(default: false)`
-    Allow users the option to enroll a Windows device for push or TOTP.
     
 -   `router` `(default: false)`
     Update the browser location bar with a route on navigation.
@@ -164,10 +168,38 @@ Enable help links with the following options:
 
 - `helpSupportNumber`
   Option to display a Help/Support phone number if the user does not have access to email.
+  
+#### labels Options
+
+The full list of labels are in these two files:
+ 
+ * [Login Properties](https://github.com/okta/okta-signin-widget/blob/master/resources/nls/login.properties)
+ * [Country Properties](https://github.com/okta/okta-signin-widget/blob/master/resources/nls/country.properties)
+
+The following labels are among the most frequently used:
+
+- `primaryauth.title`
+   Title for your widget page.
+
+- `primaryauth.username`
+   Label for the username box.
+
+- `primaryauth.username.tooltip`
+   The tooltip that appears when the user hovers over the username box.
+
+- `primaryauth.password`
+   Label for the password box.
+
+- `primaryauth.password.tooltip`
+   The tooltip that appears when the user hovers over the password box.
+
+Some labels contain "Okta." You may want to supply a different value for those labels.
 
 ### OIDC Options
 
 Options for the [OpenID Connect](/docs/api/resources/oidc.html#request-parameters) authentication flow.
+This lfow is required for social authentication, and requires OAuth client registration with Okta.
+For instructions, see [Social Authentication](/docs/api/resources/social_authentication.html).
 
 #### Example OIDC flow
 
@@ -242,7 +274,9 @@ You can use any of the following parameters for `authParams`.
 
 ## Render the widget
 
-`.renderEl()` Render function for the sign-in widget. The function must be called with an `options` object containing any of the configuration options, a `success` callback function and a `failure` callback function. 
+`.renderEl()` 
+
+Render function for the sign-in widget. The function must be called with an `options` object containing any of the configuration options, a `success` callback function and a `failure` callback function. 
 The options object must have an `el` property, usually an HTML DOM element `id` or `selector`, which becomes the container element for the widget DOM.
 
 #### Example
@@ -290,7 +324,9 @@ Manage your Okta session with session functions in the Sign-in widget SDK.
 
 #### Check for an existing session
 
-`.session.exists()` Check if there is an active session.
+`.session.exists()` 
+
+Check if there is an active session.
 
 ##### Example
 ~~~ javascript
@@ -311,7 +347,9 @@ callback              | Function  | Yes           | Callback function. The funct
 
 #### Get the session
 
-`.session.get()` Get the active session information.
+`.session.get()` 
+
+Get the active session information.
 
 ##### Example
 ~~~ javascript
@@ -337,7 +375,9 @@ callback              | Function  | Yes           | Callback function. The funct
 
 #### Refresh the session
 
-`.session.refresh()` Refresh the current session by extending its lifetime. This can be used as a keep-alive operation.
+`.session.refresh()` 
+
+Refresh the current session by extending its lifetime. This can be used as a keep-alive operation.
 
 ##### Example
 ~~~ javascript
@@ -364,7 +404,9 @@ callback              | Function  | Yes           | Callback function. The funct
 
 #### Close the session
 
-`.session.close()` Close the active session. Same as `.signOut()`
+`.session.close()` 
+
+Close the active session. Same as `.signOut()`
 
 ##### Example
 ~~~ javascript
@@ -381,7 +423,9 @@ callback              | Function  | Yes           | Callback function to invoke 
 
 #### Sign-out the user
 
-`.signOut()` Sign-out the current signed-in user. Shorthand for `.session.close()`
+`.signOut()` 
+
+Sign-out the current signed-in user. Shorthand for `.session.close()`
 
 ##### Example
 ~~~ javascript
@@ -402,7 +446,9 @@ Manage your ID tokens with the Sign-in Widget SDK.
 
 #### Refresh an id token
 
-`.idToken.refresh()` Refresh the `id_token` by extending its lifetime.
+`.idToken.refresh()`
+ 
+Refresh the `id_token` by extending its lifetime.
 
 ##### Example
 ~~~ javascript
