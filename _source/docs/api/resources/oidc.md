@@ -367,11 +367,9 @@ client_secret      | The client secret generated as a part of client registratio
 code_verifier      | The code verifier of [PKCE](#parameter-details). Okta uses it to recompute the code_challenge and verify if it matches the original code_challenge in the authorization request. | String |
 
 
-#####Token Authentication Methods
+#####Token Authentication Method
 
-The client can authenticate by providing `client_id` and `client_secret` as a part of the URL-encoded form parameters (as described in table above),
-or it can use basic authentication by providing the `client_id` and `client_secret` as an Authroization header using the Basic auth scheme. 
-Use one authentication mechanism with a given request. Using both returns an error.
+The client can authenticate by providing the `client_id` and `client_secret` as an Authorization header in the Basic auth scheme (basic authentication).
 
 For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.
 
