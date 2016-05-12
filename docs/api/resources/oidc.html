@@ -334,7 +334,7 @@ as well as claims about the authenticated user.</p>
       <td>amr</td>
       <td>JSON array of strings that are identifiers for <a href="http://self-issued.info/docs/draft-jones-oauth-amr-values-00.html">authentication methods</a> used in the authentication.</td>
       <td>Array</td>
-      <td>[ “pwd”, “otp”, “mfa” ]</td>
+      <td>[ “pwd”, “mfa”, “otp”, “kba”, “sms”, “swk”, “hwk” ]</td>
     </tr>
     <tr>
       <td>idp</td>
@@ -344,7 +344,7 @@ as well as claims about the authenticated user.</p>
     </tr>
     <tr>
       <td>nonce</td>
-      <td>Value used to associate a Client session with an ID Token, and to mitigate replay attacks. This is only returned if <em>nonce</em> was present in the request that generated the ID Token.</td>
+      <td>Value used to associate a Client session with an ID Token, and to mitigate replay attacks.</td>
       <td>String</td>
       <td>“n-0S6_WzA2Mj”</td>
     </tr>
@@ -589,10 +589,10 @@ Instead, the id token contains the <code class="highlighter-rouge">name</code> a
     </tr>
     <tr>
       <td>state</td>
-      <td>A client application provided optional state string that might be useful to the application upon receipt of the response. It can contain alphanumeric, comma, period, underscore and hyphen characters.</td>
+      <td>A client application provided state string that might be useful to the application upon receipt of the response. It can contain alphanumeric, comma, period, underscore and hyphen characters.</td>
       <td>Query</td>
       <td>String</td>
-      <td>FALSE</td>
+      <td>TRUE</td>
       <td> </td>
     </tr>
     <tr>
@@ -608,7 +608,7 @@ Instead, the id token contains the <code class="highlighter-rouge">name</code> a
       <td>Specifies a nonce that is reflected back in the ID Token. Can be used for CSRF protection.</td>
       <td>Query</td>
       <td>String</td>
-      <td>FALSE</td>
+      <td>TRUE</td>
       <td> </td>
     </tr>
   </tbody>
@@ -625,15 +625,66 @@ Instead, the id token contains the <code class="highlighter-rouge">name</code> a
       <li><em>query</em> – Parameters are encoded in the query string added to the <code class="highlighter-rouge">redirect_uri</code> when redirecting back to the client.</li>
       <li><em>form_post</em> – Parameters are encoded as HTML form values that are auto-submitted in the User Agent.Thus, the values are transmitted via the HTTP POST method to the client
 and the result parameters are encoded in the body using the application/x-www-form-urlencoded format.</li>
-      <li><em>okta_post_message</em> – Uses HTML5 Web Messaging (for example, window.postMessage()) instead of the redirect for the authorization response from the authorization endpoint
-Okta Post Message is an adaptation of the <a href="https://tools.ietf.org/html/draft-sakimura-oauth-wmrm-00#section-4.1">Web Message Response Mode</a>. 
+      <li><em>okta_post_message</em> – Uses <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">HTML5 Web Messaging</a> (for example, window.postMessage()) instead of the redirect for the authorization response from the authorization endpoint.
+<em>okta_post_message</em> is an adaptation of the <a href="https://tools.ietf.org/html/draft-sakimura-oauth-wmrm-00#section-4.1">Web Message Response Mode</a>. 
 This value provides a secure way for a single-page application to perform a sign-in flow 
-in a popup window or an iFrame and receive the ID token and/or access token back in the parent page without leaving the context of that page.</li>
+in a popup window or an iFrame and receive the ID token and/or access token back in the parent page without leaving the context of that page.
+The data model for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">postMessage</a> call is in the next section.</li>
     </ul>
   </li>
-  <li><code class="highlighter-rouge">state</code>: Always pass <code class="highlighter-rouge">state</code> with each authorize request to correlate the request and response. This correlation prevents and attacker from sending a different response (CSRF).
- For more information, see <a href="http://www.twobotechnologies.com/blog/2014/02/importance-of-state-in-oauth2.html">this blog post about the importance of state in OAuth 2.0</a>.</li>
+  <li>Okta requires the OAuth 2.0 <code class="highlighter-rouge">state</code> parameter on all requests to the authorization endpoint in order to prevent cross-site request forgery (CSRF). 
+ The OAuth 2.0 specification <a href="https://tools.ietf.org/html/rfc6749#section-10.12">requires</a> that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent’s authenticated state. 
+ Using the <code class="highlighter-rouge">state</code> parameter is also a countermeasure to several other known attacks as outlined in <a href="https://tools.ietf.org/html/rfc6819">OAuth 2.0 Threat Model and Security Considerations</a>.</li>
 </ul>
+
+<h4 id="postmessage-data-model">postMessage() Data Model</h4>
+
+<p>Use the postMessage() data model to help you when working with the <em>okta_post_message</em> value of the <code class="highlighter-rouge">response_mode</code> request parameter.</p>
+
+<p><code class="highlighter-rouge">message</code>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>DataType</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id_token</td>
+      <td>The ID Token JWT contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the <code class="highlighter-rouge">response_type</code> includes <code class="highlighter-rouge">id_token</code>.</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>access_token</td>
+      <td>The <code class="highlighter-rouge">access_token</code> used to access the /userinfo endpoint. This is returned if the <code class="highlighter-rouge">response_type</code> included a token. <b>Important</b>: Unlike the ID Token JWT, the <code class="highlighter-rouge">access_toekn</code> structure is specific to Okta, and is subject to change.</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>state</td>
+      <td>If the request contained a <code class="highlighter-rouge">state</code> parameter, then the same unmodified value is returned back in the response.</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>error</td>
+      <td>The error-code string providing information if anything goes wrong.</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>error_description</td>
+      <td>Additional description of the error.</td>
+      <td>String</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="highlighter-rouge">targetOrigin</code>:</p>
+
+<p>Specifies what the origin of <code class="highlighter-rouge">parentWindow</code> must be in order for the postMessage() event to be dispatched
+(this is enforced by the browser). The <em>okta-post-message</em> response mode always uses the origin from the <code class="highlighter-rouge">redirect_uri</code> 
+specified by the client. This is crucial to prevent the sensitive token data from being exposed to a malicious site.</p>
 
 <h4 id="response-parameters">Response Parameters</h4>
 
@@ -666,7 +717,7 @@ Irrespective of the response type, the contents of the response is always one of
     </tr>
     <tr>
       <td>state</td>
-      <td>If the request contained a <em>state</em> parameter, then the same unmodified value is returned back in the response.</td>
+      <td>The same unmodified value from the request is returned back in the response.</td>
       <td>String</td>
     </tr>
     <tr>
@@ -863,12 +914,12 @@ See <a href="#scope-dependent-claims">Scope-Dependent Claims</a> for more inform
   <tbody>
     <tr>
       <td>grant_type</td>
-      <td>Can be either <em>authorization_code</em> or <em>refresh_token</em>. Determines the mechanism Okta will use to authorize the creation of the tokens.</td>
+      <td>Can be one of the following: <em>authorization_code</em>, <em>password</em>, or <em>refresh_token</em>. Determines the mechanism Okta will use to authorize the creation of the tokens.</td>
       <td>String</td>
     </tr>
     <tr>
       <td>code</td>
-      <td>Expected if grant_type specified <em>code</em>. The value is what was returned from the /oauth2/v1/authorize endpoint.</td>
+      <td>Expected if grant_type specified <em>authorization_code</em>. The value is what was returned from the /oauth2/v1/authorize endpoint.</td>
       <td>String</td>
     </tr>
     <tr>
@@ -888,7 +939,7 @@ See <a href="#scope-dependent-claims">Scope-Dependent Claims</a> for more inform
     </tr>
     <tr>
       <td>client_id</td>
-      <td>The client id generated as a part of client registration. This is used in conjunction with the <em>client_secret</em> parameter to authenticate the client application.</td>
+      <td>The client ID generated as a part of client registration. This is used in conjunction with the <em>client_secret</em> parameter to authenticate the client application.</td>
       <td>String</td>
     </tr>
     <tr>
@@ -1014,7 +1065,7 @@ and only via POST data or within request headers. If you store them on your serv
   <li>Verify that the <code class="highlighter-rouge">aud</code> (audience) claim contains the <code class="highlighter-rouge">client_id</code> of your application.</li>
   <li>Verify the signature of the ID token according to <a href="https://tools.ietf.org/html/rfc7515">JWS</a> using the algorithm specified in the JWT <code class="highlighter-rouge">alg</code> header parameter. Use the public keys provided by Okta via the <a href="#openid-discovery-document">Discovery Document</a>.</li>
   <li>Verify that the expiry time (from the <code class="highlighter-rouge">exp</code> claim) has not already passed.</li>
-  <li>If a <code class="highlighter-rouge">nonce</code> value was sent in the Authentication Request, a <code class="highlighter-rouge">nonce</code> claim MUST be present and its value checked to verify that it is the same value as the one that was sent in the Authentication Request. The client should check the nonce value for replay attacks.</li>
+  <li>A <code class="highlighter-rouge">nonce</code> claim MUST be present and its value checked to verify that it is the same value as the one that was sent in the Authentication Request. The client should check the nonce value for replay attacks.</li>
   <li>The client SHOULD check the <code class="highlighter-rouge">auth_time</code> claim value and request re-authentication using the <code class="highlighter-rouge">prompt=login</code> parameter if it determines too much time has elapsed since the last End-User authentication.</li>
 </ol>
 

@@ -116,6 +116,13 @@ The following diagram shows the state model for a user:
 
 ![STAGED, PROVISIONED, ACTIVE, RECOVERY, LOCKED_OUT, PASSWORD_EXPIRED, or DEPROVISIONED](/assets/img/okta-user-status.png "Okta User Status Diagram")
 
+### Understanding User Status Values
+
+The status of a user changes in response to explicit events, such as admin-driven lifecycle changes, user login, or self-service password recovery. 
+Okta doesn't asynchronously sweep through users and update their password expiry state, for example. 
+Instead, Okta evaluates password policy at login time, notices the password has expired, and moves the user to the expired state. 
+When running reports, remember that the data is valid as of the last login or lifecycle event for that user.
+
 ### Profile Object
 
 Specifies [standard](#standard-profile-properties) and [custom](#custom-profile-properties) profile properties for a user.
@@ -1044,7 +1051,7 @@ Parameter | Description                                                         
 --------- | ----------------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------
 q         | Finds a user that matches `firstName`, `lastName`, and `email` properties      | Query      | String   | FALSE    |
 filter    | [Filters](/docs/api/getting_started/design_principles.html#filtering) users with a supported expression for a subset of properties | Query      | String   | FALSE    |
-search    | Searches for users with a supported expression for most properties  | Query      | String   | FALSE    |
+search    | Searches for users with a supported [filtering](/docs/api/getting_started/design_principles.html#filtering)  expression for most properties  | Query      | String   | FALSE    |
 limit     | Specifies the number of results returned                                                           | Query      | Number   | FALSE    | 200
 after     | Specifies the pagination cursor for the next page of users                                | Query      | String   | FALSE    |
 
@@ -1483,11 +1490,6 @@ Use an Id lookup for records that you update to ensure your results contain the 
    `profile.occupation eq "Leader"`               | Users that have an `occupation` of `Leader`
    `profile.lastName sw "Sm" `                    | Users whose `lastName` starts with "Sm"
 
-##### Searching Arrays
-
-You can search properties that are arrays. If any element matches the search term, the entire array (object) is returned. 
-For examples, see [Request Example for Array](#request-example-for-array) and [Response Example for Array](#response-example-for-array).
-
 ##### Search Examples
 
 List users with an occupation of `Leader`.
@@ -1566,6 +1568,14 @@ curl -v -X GET \
   }
 ]
 ~~~
+
+##### Searching Arrays
+
+You can search properties that are arrays. If any element matches the search term, the entire array (object) is returned. 
+For examples, see [Request Example for Array](#request-example-for-array) and [Response Example for Array](#response-example-for-array).
+
+* We follow the [SCIM Protocol Specification](https://tools.ietf.org/html/rfc7644#section-3.4.2.2) for searching arrays.
+* Search for one value at a time when searching arrays. For example, you can't search for users where a string is equal to an attriubte in two different arrays.
 
 ##### Request Example for Array
 {:.api .api-request .api-request-example}

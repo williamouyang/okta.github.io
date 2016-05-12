@@ -3705,7 +3705,7 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-  "recoveryToken": "/myapp/some/deep/link/i/want/to/return/to"
+  "recoveryToken": "00xdqXOE5qDZX8-PBR1bYv8AESqIFinDy3yul01tyh"
 }' "https://${org}.okta.com/api/v1/authn/recovery/token"
 ~~~
 

@@ -295,8 +295,18 @@ your URL, it should look something like this:
 <code class="highlighter-rouge">https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&amp;client_id=AbcDE0fGHI1jk2LM34no&amp;scope=openid%20email%20profile&amp;response_type=id_token</code></p>
       </li>
       <li>
-        <p>Add a <code class="highlighter-rouge">redirect_url</code> GET parameter to the Social Auth “Login
-URL”.</p>
+        <p>Add the <code class="highlighter-rouge">state</code> and <code class="highlighter-rouge">nonce</code> GET parameters to the Social Auth Login URL.</p>
+
+        <p>The <code class="highlighter-rouge">state</code> parameter is a string that will be returned in the response which should be used to protect against cross-site request forgery (CSRF).
+The <code class="highlighter-rouge">nonce</code> parameter is a string that will be included in the returned ID Token and should be used to associate a client session with an ID Token, and to mitigate replay attacks.</p>
+
+        <p>After adding the <code class="highlighter-rouge">scope</code> and <code class="highlighter-rouge">nonce</code> parameters to your URL it should look something like this:
+<code class="highlighter-rouge">https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&amp;client_id=AbcDE0fGHI1jk2LM34no&amp;scope=openid%20email%20profile&amp;response_type=id_token&amp;state=someState&amp;nonce=someNonce</code></p>
+
+        <p>To learn more about Okta’s requirements for these parameters see the <a href="/docs/api/resources/oidc.html#parameter-details">Authorize Endpoint Parameter Details</a>.</p>
+      </li>
+      <li>
+        <p>Add a <code class="highlighter-rouge">redirect_url</code> GET parameter to the Social Auth “Login URL”.</p>
 
         <p>The last required GET parameter you need to add to your URL is
 the <code class="highlighter-rouge">redirect_url</code> parameter. The value of this GET parameter is
@@ -306,10 +316,10 @@ Authentication provider. Note that this URL <strong>must</strong> start with “
 
         <p>After adding the <code class="highlighter-rouge">redirect_url</code> GET parameter to 
 your URL, it should look something like this:
-<code class="highlighter-rouge">https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&amp;client_id=AbcDE0fGHI1jk2LM34no&amp;scope=openid%20email%20profile&amp;response_type=id_token&amp;redirect_uri=https://app.example.com/social_auth</code>
+<code class="highlighter-rouge">https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&amp;client_id=AbcDE0fGHI1jk2LM34no&amp;scope=openid%20email%20profile&amp;response_type=id_token&amp;state=someState&amp;nonce=someNonce&amp;redirect_uri=https://app.example.com/social_auth</code>
 or, if you are logging your user into Okta, might look
 something like this:
-<code class="highlighter-rouge">https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&amp;client_id=AbcDE0fGHI1jk2LM34no&amp;scope=openid%20email%20profile&amp;response_type=id_token&amp;redirect_uri=https://example.okta.com</code></p>
+<code class="highlighter-rouge">https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&amp;client_id=AbcDE0fGHI1jk2LM34no&amp;scope=openid%20email%20profile&amp;response_type=id_token&amp;state=someState&amp;nonce=someNonce&amp;redirect_uri=https://example.okta.com</code></p>
       </li>
     </ol>
   </li>

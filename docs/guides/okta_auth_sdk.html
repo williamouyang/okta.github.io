@@ -161,133 +161,97 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		</header>
 		
 
-		<blockquote>
-  <p>This SDK is currently in <strong>Beta</strong> status.</p>
-</blockquote>
+		<h1 id="introduction">Introduction</h1>
 
-<h1 id="introduction">Introduction</h1>
-
-<p>The Okta Sign-In SDK builds on top of our <a href="">Authentication APIs</a>, allowing 
-you to create a custom login experience using JavaScript. This includes 
-a traditional Okta authentication flow with MFA or Social Auth.</p>
+<p>The Okta Auth SDK builds on top of our <a href="/docs/api/resources/authn.html">Authentication API</a> to enable you to create a custom login experience using JavaScript.</p>
 
 <h1 id="prerequisites">Prerequisites</h1>
 
 <ul>
   <li>An Okta org - Register for <a href="https://www.okta.com/developer/signup/">Okta Developer Edition</a> if you don’t have an existing org</li>
-  <li><a href="/docs/api/getting_started/enabling_cors.html">CORS enabled for your domain</a></li>
+  <li>A domain that is <a href="/docs/api/getting_started/enabling_cors.html">CORS enabled for your org</a></li>
 </ul>
 
 <h1 id="installation">Installation</h1>
 
-<p>Include the following script in your page:</p>
+<p>Include the following script tag in your target web page:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"OktaAuth.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-sdk-1.0.0.min.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
 </code></pre>
 </div>
 
 <h2 id="authentication-flow">Authentication Flow</h2>
 
-<p>The goal of an authentication flow is setting an Okta cookie. Simple!</p>
+<p>The goal of an authentication flow is to set an Okta session cookie on the user’s browser.</p>
+
+<p>All Auth SDK methods return <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promises</a>, deferred objects that resolve when the method has finished. For more information about why Promises are useful, and how to use our specific promise library, check out the <a href="https://github.com/kriskowal/q">Q.js readme</a>.</p>
+
+<p>An example authentication flow would look like this:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">authClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaAuth</span><span class="p">({</span><span class="na">url</span><span class="p">:</span> <span class="s1">'https://your-org.okta.com'</span><span class="p">});</span>
 <span class="nx">authClient</span><span class="p">.</span><span class="nx">signIn</span><span class="p">({</span>
   <span class="na">username</span><span class="p">:</span> <span class="s1">'some-username'</span><span class="p">,</span>
   <span class="na">password</span><span class="p">:</span> <span class="s1">'some-password'</span>
 <span class="p">})</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">transaction</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">transaction</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// On success</span>
   <span class="k">switch</span><span class="p">(</span><span class="nx">transaction</span><span class="p">.</span><span class="nx">status</span><span class="p">)</span> <span class="p">{</span>
     
     <span class="k">case</span> <span class="s1">'SUCCESS'</span><span class="err">:</span>
-      <span class="nx">authClient</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">setCookieAndRedirect</span><span class="p">(</span><span class="nx">transaction</span><span class="p">.</span><span class="nx">sessionToken</span><span class="p">);</span>
+      <span class="nx">authClient</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">setCookieAndRedirect</span><span class="p">(</span><span class="nx">transaction</span><span class="p">.</span><span class="nx">sessionToken</span><span class="p">);</span> <span class="c1">// Sets a cookie on redirect</span>
       <span class="k">break</span><span class="p">;</span>
 
     <span class="nl">default</span><span class="p">:</span>
       <span class="k">throw</span> <span class="s1">'We cannot handle the '</span> <span class="o">+</span> <span class="nx">transaction</span><span class="p">.</span><span class="nx">status</span> <span class="o">+</span> <span class="s1">' status'</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">})</span>
-<span class="p">.</span><span class="nx">fail</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">.</span><span class="nx">fail</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// On failure</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre>
 </div>
 
-<p>As you can see, we use <a href="https://promisesaplus.com/">A+ Promises</a> (via
-<a href="https://github.com/kriskowal/q">Q</a>). This allows us to handle asynchronous 
-actions, like HTTP requests, in a way that appears more synchronous.</p>
-
-<p>Most methods during an authentication flow will resolve <code class="highlighter-rouge">then</code> with a 
-<a href="#transactions">Transaction</a>.</p>
-
-<p>A <code class="highlighter-rouge">fail</code> will resolve with one of several <a href="#errors">Errors</a>.</p>
-
 <h2 id="transactions">Transactions</h2>
 
-<p>Providing only a username and password may not be sufficient to obtain a
-sessionToken. You may need to reset a password, enroll in MFA, or verify your
-existing MFA. To track your progression through these states, we use a
-transaction. The possible states, their definitions, and their flow can be found
-in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication API documentation</a>.</p>
+<p>When Auth SDK methods resolve, they return a Transaction object that encapsulates the new state in the authentication flow. This Transaction object contains metadata about the current state, and methods that can be used to progress to the next state.</p>
 
-<p>Here is a list of the states and their possible methods:</p>
+<p>More information about Transaction states, their definitions, and the flow between them can be found in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication API documentation</a>.</p>
+
+<h3 id="transaction-states">Transaction States</h3>
 
 <blockquote>
-  <p>Methods listed for certain states may only be available in certain scenarios</p>
-</blockquote>
-
-<blockquote>
-  <p><code class="highlighter-rouge">stateToken</code> is never required as a parameter</p>
-</blockquote>
-
-<blockquote>
-  <p>All transactions have:</p>
+  <p>Keep in mind:</p>
 
   <ul>
-    <li><code class="highlighter-rouge">status</code> - Matches the transaction’s state</li>
-    <li><code class="highlighter-rouge">data</code> - The response body as an object</li>
+    <li>
+      <p>Methods listed for a state are not always guaranteed to be available.</p>
+    </li>
+    <li>
+      <p><code class="highlighter-rouge">stateToken</code> is never required as a parameter.</p>
+    </li>
+    <li>
+      <p>All transactions have a <code class="highlighter-rouge">data</code> attribute that contains the response body as an object.</p>
+    </li>
   </ul>
 </blockquote>
 
-<h3 id="success">SUCCESS</h3>
+<h4 id="locked-out">Locked Out</h4>
+
+<p>The user account is locked; self-service unlock or admin unlock is required.</p>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Property</th>
       <th>Type</th>
       <th>Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">expiresAt</code></td>
-      <td><a href="https://tools.ietf.org/html/rfc3339">Date String</a></td>
-      <td>Time the sessionToken will expire</td>
+      <td><code class="highlighter-rouge">status</code></td>
+      <td>String</td>
+      <td><code class="highlighter-rouge">LOCKED_OUT</code></td>
     </tr>
-    <tr>
-      <td><code class="highlighter-rouge">sessionToken</code></td>
-      <td><a href="/docs/api/resources/authn.html#session-token">Session Token</a></td>
-      <td>Token that can be exchanged for a cookie</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">user</code></td>
-      <td><a href="http://localhost:4000/docs/api/resources/authn.html#user-object">User</a></td>
-      <td>Subset of user properties</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="lockedout">LOCKED_OUT</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
     <tr>
       <td><code class="highlighter-rouge">unlock</code></td>
       <td>Function</td>
@@ -301,17 +265,33 @@ in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication
   </tbody>
 </table>
 
-<h3 id="passwordexpired">PASSWORD_EXPIRED</h3>
+<p>Example:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">transaction</span><span class="p">.</span><span class="nx">unlock</span><span class="p">({</span>
+  <span class="na">username</span><span class="p">:</span> <span class="s1">'dade.murphy@example.com'</span><span class="p">,</span>
+  <span class="na">factorType</span><span class="p">:</span> <span class="s1">'EMAIL'</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<h4 id="password-expired">Password Expired</h4>
+
+<p>The user’s password was successfully validated but is expired.</p>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Property</th>
       <th>Type</th>
       <th>Description</th>
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">status</code></td>
+      <td>String</td>
+      <td><code class="highlighter-rouge">PASSWORD_EXPIRED</code></td>
+    </tr>
     <tr>
       <td><code class="highlighter-rouge">expiresAt</code></td>
       <td><a href="https://tools.ietf.org/html/rfc3339">Date String</a></td>
@@ -335,17 +315,33 @@ in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication
   </tbody>
 </table>
 
-<h3 id="passwordreset">PASSWORD_RESET</h3>
+<p>Example:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">transaction</span><span class="p">.</span><span class="nx">changePassword</span><span class="p">({</span>
+  <span class="na">oldPassword</span><span class="p">:</span> <span class="s1">'0ldP4ssw0rd'</span><span class="p">,</span>
+  <span class="na">newPassword</span><span class="p">:</span> <span class="s1">'N3wP4ssw0rd'</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<h4 id="password-reset">Password Reset</h4>
+
+<p>The user successfully answered their recovery question and can set a new password.</p>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Property</th>
       <th>Type</th>
       <th>Description</th>
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">status</code></td>
+      <td>String</td>
+      <td><code class="highlighter-rouge">PASSWORD_RESET</code></td>
+    </tr>
     <tr>
       <td><code class="highlighter-rouge">expiresAt</code></td>
       <td><a href="https://tools.ietf.org/html/rfc3339">Date String</a></td>
@@ -369,17 +365,32 @@ in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication
   </tbody>
 </table>
 
-<h3 id="passwordwarn">PASSWORD_WARN</h3>
+<p>Example:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">transaction</span><span class="p">.</span><span class="nx">resetPassword</span><span class="p">({</span>
+  <span class="na">newPassword</span><span class="p">:</span> <span class="s1">'N3wP4ssw0rd'</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<h4 id="password-almost-expired">Password Almost Expired</h4>
+
+<p>The user’s password was successfully validated but is about to expire and should be changed.</p>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Property</th>
       <th>Type</th>
       <th>Description</th>
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">status</code></td>
+      <td>String</td>
+      <td><code class="highlighter-rouge">PASSWORD_WARN</code></td>
+    </tr>
     <tr>
       <td><code class="highlighter-rouge">expiresAt</code></td>
       <td><a href="https://tools.ietf.org/html/rfc3339">Date String</a></td>
@@ -413,21 +424,37 @@ in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication
   </tbody>
 </table>
 
-<h3 id="recovery">RECOVERY</h3>
+<p>Example:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">transaction</span><span class="p">.</span><span class="nx">changePassword</span><span class="p">({</span>
+  <span class="na">oldPassword</span><span class="p">:</span> <span class="s1">'0ldP4ssw0rd'</span><span class="p">,</span>
+  <span class="na">newPassword</span><span class="p">:</span> <span class="s1">'N3wP4ssw0rd'</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<h4 id="recovery">Recovery</h4>
+
+<p>The user has requested a recovery token to reset their password or unlock their account.</p>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Property</th>
       <th>Type</th>
       <th>Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
+      <td><code class="highlighter-rouge">status</code></td>
+      <td>String</td>
+      <td><code class="highlighter-rouge">RECOVERY</code></td>
+    </tr>
+    <tr>
       <td><code class="highlighter-rouge">recoveryType</code></td>
-      <td>?</td>
-      <td>?</td>
+      <td>String</td>
+      <td><code class="highlighter-rouge">PASSWORD</code> or <code class="highlighter-rouge">UNLOCK</code></td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">user</code></td>
@@ -447,17 +474,32 @@ in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication
   </tbody>
 </table>
 
-<h3 id="recoverychallenge">RECOVERY_CHALLENGE</h3>
+<p>Example:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">transaction</span><span class="p">.</span><span class="nx">answer</span><span class="p">({</span>
+  <span class="na">answer</span><span class="p">:</span> <span class="s1">'My favorite recovery question answer'</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<h4 id="verify-recovery">Verify Recovery</h4>
+
+<p>The user must verify the factor-specific recovery challenge.</p>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Property</th>
       <th>Type</th>
       <th>Description</th>
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">status</code></td>
+      <td>String</td>
+      <td><code class="highlighter-rouge">RECOVERY_CHALLENGE</code></td>
+    </tr>
     <tr>
       <td><code class="highlighter-rouge">expiresAt</code></td>
       <td><a href="https://tools.ietf.org/html/rfc3339">Date String</a></td>
@@ -496,17 +538,36 @@ in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication
   </tbody>
 </table>
 
-<h3 id="mfaenroll">MFA_ENROLL</h3>
+<p>Examples:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// Verify the recovery</span>
+<span class="nx">transaction</span><span class="p">.</span><span class="nx">verify</span><span class="p">({</span>
+  <span class="na">passCode</span><span class="p">:</span> <span class="s1">'615243'</span>
+<span class="p">});</span>
+
+<span class="c1">// Resend recovery email or sms</span>
+<span class="nx">transaction</span><span class="p">.</span><span class="nx">resend</span><span class="p">();</span>
+</code></pre>
+</div>
+
+<h4 id="begin-mfa-enrollment">Begin MFA Enrollment</h4>
+
+<p>When MFA is required, but a user isn’t enrolled in MFA, they must enroll in at least one factor.</p>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Property</th>
       <th>Type</th>
       <th>Description</th>
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">status</code></td>
+      <td>String</td>
+      <td><code class="highlighter-rouge">MFA_ENROLL</code></td>
+    </tr>
     <tr>
       <td><code class="highlighter-rouge">expiresAt</code></td>
       <td><a href="https://tools.ietf.org/html/rfc3339">Date String</a></td>
@@ -535,12 +596,12 @@ in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication
   </tbody>
 </table>
 
-<h4 id="enroll-factor">Enroll Factor</h4>
+<h5 id="enroll-factor">Enroll Factor</h5>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Property</th>
       <th>Type</th>
       <th>Description</th>
     </tr>
@@ -579,17 +640,42 @@ in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication
   </tbody>
 </table>
 
-<h3 id="mfaenrollactivate">MFA_ENROLL_ACTIVATE</h3>
+<p>Example:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// Assume the first factor is a question</span>
+<span class="kd">var</span> <span class="nx">factor</span> <span class="o">=</span> <span class="nx">transaction</span><span class="p">.</span><span class="nx">factors</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+
+<span class="c1">// Returns the available questions</span>
+<span class="nx">factor</span><span class="p">.</span><span class="nx">questions</span><span class="p">();</span>
+
+<span class="c1">// Enroll after selecting a question and entering an answer</span>
+<span class="nx">factor</span><span class="p">.</span><span class="nx">enroll</span><span class="p">({</span>
+  <span class="na">profile</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">question</span><span class="p">:</span> <span class="s1">'disliked_food'</span><span class="p">,</span>
+    <span class="na">answer</span><span class="p">:</span> <span class="s1">'mayonnaise'</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<h4 id="activate-a-factor-for-mfa-enrollment">Activate a Factor for MFA Enrollment</h4>
+
+<p>The user must activate the factor to complete enrollment.</p>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Property</th>
       <th>Type</th>
       <th>Description</th>
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">status</code></td>
+      <td>String</td>
+      <td><code class="highlighter-rouge">MFA_ENROLL_ACTIVATE</code></td>
+    </tr>
     <tr>
       <td><code class="highlighter-rouge">expiresAt</code></td>
       <td><a href="https://tools.ietf.org/html/rfc3339">Date String</a></td>
@@ -611,9 +697,19 @@ in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication
       <td>Factor to activate</td>
     </tr>
     <tr>
+      <td><code class="highlighter-rouge">activate</code></td>
+      <td>Function</td>
+      <td>Verify the OTP or restart the activation process if the activation is expired</td>
+    </tr>
+    <tr>
       <td><code class="highlighter-rouge">poll</code></td>
       <td>Function</td>
-      <td>Poll until <code class="highlighter-rouge">factorResult</code> changes. Throws <a href="#AuthPollStopError">AuthPollStopError</a> when <code class="highlighter-rouge">prev</code> or <code class="highlighter-rouge">cancel</code> is called</td>
+      <td>Poll until <code class="highlighter-rouge">factorResult</code> changes. Throws <a href="#authpollstoperror">AuthPollStopError</a> when <code class="highlighter-rouge">prev</code> or <code class="highlighter-rouge">cancel</code> is called</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">resend</code></td>
+      <td>Function</td>
+      <td>Send another OTP if user doesn’t receive the original activation SMS OTP</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">prev</code></td>
@@ -628,12 +724,12 @@ in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication
   </tbody>
 </table>
 
-<h4 id="activate-enroll-factor">Activate Enroll Factor</h4>
+<h5 id="activate-enroll-factor">Activate Enroll Factor</h5>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Property</th>
       <th>Type</th>
       <th>Description</th>
     </tr>
@@ -662,12 +758,12 @@ in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication
   </tbody>
 </table>
 
-<h4 id="activation">Activation</h4>
+<h5 id="activation">Activation</h5>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Property</th>
       <th>Type</th>
       <th>Description</th>
     </tr>
@@ -686,7 +782,7 @@ in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication
     <tr>
       <td><code class="highlighter-rouge">send</code></td>
       <td>Function</td>
-      <td>Takes a <code class="highlighter-rouge">name</code> parameter that’s usually <code class="highlighter-rouge">sms</code> or <code class="highlighter-rouge">email</code></td>
+      <td>Takes a <code class="highlighter-rouge">name</code> parameter that’s <code class="highlighter-rouge">sms</code> or <code class="highlighter-rouge">email</code></td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">qrcode</code></td>
@@ -696,17 +792,32 @@ in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication
   </tbody>
 </table>
 
-<h3 id="mfarequired">MFA_REQUIRED</h3>
+<p>Example:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">transaction</span><span class="p">.</span><span class="nx">activate</span><span class="p">({</span>
+  <span class="na">passCode</span><span class="p">:</span> <span class="s1">'615243'</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<h4 id="select-mfa-when-required">Select MFA When Required</h4>
+
+<p>The user must provide additional verification with a previously enrolled factor.</p>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Property</th>
       <th>Type</th>
       <th>Description</th>
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">status</code></td>
+      <td>String</td>
+      <td><code class="highlighter-rouge">MFA_REQUIRED</code></td>
+    </tr>
     <tr>
       <td><code class="highlighter-rouge">expiresAt</code></td>
       <td><a href="https://tools.ietf.org/html/rfc3339">Date String</a></td>
@@ -730,12 +841,12 @@ in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication
   </tbody>
 </table>
 
-<h4 id="enrolled-factor">Enrolled Factor</h4>
+<h5 id="enrolled-factor">Enrolled Factor</h5>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Property</th>
       <th>Type</th>
       <th>Description</th>
     </tr>
@@ -769,21 +880,44 @@ in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication
   </tbody>
 </table>
 
-<h3 id="mfachallenge">MFA_CHALLENGE</h3>
+<p>Example:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// Assume the first factor is a question</span>
+<span class="kd">var</span> <span class="nx">factor</span> <span class="o">=</span> <span class="nx">transaction</span><span class="p">.</span><span class="nx">factors</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+
+<span class="nx">factor</span><span class="p">.</span><span class="nx">verify</span><span class="p">({</span>
+  <span class="na">answer</span><span class="p">:</span> <span class="s1">'mayonnaise'</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<h4 id="mfa-enforcement">MFA Enforcement</h4>
+
+<p>The user must verify the factor-specific challenge.</p>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Property</th>
       <th>Type</th>
       <th>Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
+      <td><code class="highlighter-rouge">status</code></td>
+      <td>String</td>
+      <td><code class="highlighter-rouge">MFA_CHALLENGE</code></td>
+    </tr>
+    <tr>
       <td><code class="highlighter-rouge">expiresAt</code></td>
       <td><a href="https://tools.ietf.org/html/rfc3339">Date String</a></td>
       <td>Time the transaction will expire</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">factorResult</code></td>
+      <td>String</td>
+      <td><code class="highlighter-rouge">WAITING</code>, <code class="highlighter-rouge">CANCELLED</code>, <code class="highlighter-rouge">TIMEOUT</code>, or <code class="highlighter-rouge">ERROR</code></td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">user</code></td>
@@ -798,7 +932,7 @@ in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication
     <tr>
       <td><code class="highlighter-rouge">poll</code></td>
       <td>Function</td>
-      <td>Poll until <code class="highlighter-rouge">factorResult</code> changes. Throws <a href="#AuthPollStopError">AuthPollStopError</a> when <code class="highlighter-rouge">prev</code>, <code class="highlighter-rouge">resend</code>, or <code class="highlighter-rouge">cancel</code> is called</td>
+      <td>Poll until <code class="highlighter-rouge">factorResult</code> is not <code class="highlighter-rouge">WAITING</code>. Throws <a href="#authpollstoperror">AuthPollStopError</a> if <code class="highlighter-rouge">prev</code>, <code class="highlighter-rouge">resend</code>, or <code class="highlighter-rouge">cancel</code> is called</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">resend</code></td>
@@ -818,12 +952,12 @@ in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication
   </tbody>
 </table>
 
-<h4 id="challenge-factor">Challenge Factor</h4>
+<h5 id="challenge-factor">Challenge Factor</h5>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Property</th>
       <th>Type</th>
       <th>Description</th>
     </tr>
@@ -857,9 +991,77 @@ in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication
   </tbody>
 </table>
 
-<h2 id="social-auth-and-oidc">Social Auth and OIDC</h2>
+<p>Example:</p>
 
-<p>If you have <a href="/docs/guides/social_authentication.html#setting-up-a-social-authentication-provider-in-okta">set up social auth</a>, it’s possible to manage the flow with the SDK. To do so, instantiate your client with a clientId and redirectUri.</p>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">transaction</span><span class="p">.</span><span class="nx">poll</span><span class="p">();</span>
+</code></pre>
+</div>
+
+<h4 id="successful-sign-in">Successful Sign-In</h4>
+
+<p>At the end of the authentication flow, a transaction with a status of <code class="highlighter-rouge">SUCCESS</code> is returned. This transaction contains a <code class="highlighter-rouge">sessionToken</code> that you can <a href="#create-a-session">exchange for an Okta cookie</a>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">status</code></td>
+      <td>String</td>
+      <td><code class="highlighter-rouge">SUCCESS</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">expiresAt</code></td>
+      <td><a href="https://tools.ietf.org/html/rfc3339">Date String</a></td>
+      <td>Time the sessionToken will expire</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">sessionToken</code></td>
+      <td><a href="/docs/api/resources/authn.html#session-token">Session Token</a></td>
+      <td>Token that can be exchanged for a cookie</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user</code></td>
+      <td><a href="http://localhost:4000/docs/api/resources/authn.html#user-object">User</a></td>
+      <td>Subset of user properties</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Example:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">setCookieAndRedirect</span><span class="p">(</span><span class="nx">transaction</span><span class="p">.</span><span class="nx">sessionToken</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<h2 id="transaction-management">Transaction Management</h2>
+
+<p>If the user navigates away from the page during an authentication flow, you may want to resume the transaction.</p>
+
+<h3 id="check-for-existing-transaction">Check for Existing Transaction</h3>
+
+<p>Check for a transaction to be resumed. This is synchronous and returns <code class="highlighter-rouge">true</code> or <code class="highlighter-rouge">false</code>.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">tx</span><span class="p">.</span><span class="nx">exists</span><span class="p">();</span>
+</code></pre>
+</div>
+
+<h3 id="resume-the-transaction">Resume the transaction</h3>
+
+<p>Returns a transaction with a user’s previous state.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">tx</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
+</code></pre>
+</div>
+
+<h2 id="social-authentication-and-oidc">Social Authentication and OIDC</h2>
+
+<p>If you want to obtain an ID Token via <a href="/docs/api/resources/oidc.html">OIDC</a> or <a href="/docs/guides/social_authentication.html">social authentication</a>, it’s possible to manage the flow with the SDK. To do so, instantiate your client with a <code class="highlighter-rouge">clientId</code> and <code class="highlighter-rouge">redirectUri</code>.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">authClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaAuth</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://your-org.okta.com'</span><span class="p">,</span>
@@ -869,33 +1071,33 @@ in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication
 </code></pre>
 </div>
 
-<h3 id="get-an-id-token">Get an Id Token</h3>
+<h3 id="get-an-id-token">Get an ID Token</h3>
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">idToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">()</span>
 <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// Raw Id Token</span>
+  <span class="c1">// Raw ID Token</span>
   <span class="nx">res</span><span class="p">.</span><span class="nx">idToken</span><span class="p">;</span>
 
-  <span class="c1">// Decoded Id Token claims</span>
+  <span class="c1">// Decoded ID Token claims</span>
   <span class="nx">res</span><span class="p">.</span><span class="nx">claims</span><span class="p">;</span>
 <span class="p">})</span>
 </code></pre>
 </div>
 
-<h3 id="exchange-a-sessiontoken-for-an-id-token">Exchange a sessionToken for an Id Token</h3>
+<h3 id="exchange-a-sessiontoken-for-an-id-token">Exchange a sessionToken for an ID Token</h3>
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">idToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">({</span>
   <span class="na">sessionToken</span><span class="p">:</span> <span class="s1">'testSessionToken'</span>
 <span class="p">});</span>
 </code></pre>
 </div>
 
-<h3 id="get-an-id-token-from-an-idp">Get an Id Token from an IDP</h3>
+<h3 id="get-an-id-token-from-an-idp">Get an ID Token from an IDP</h3>
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">idToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">({</span>
   <span class="na">idp</span><span class="p">:</span> <span class="s1">'target-idp'</span>
 <span class="p">});</span>
 </code></pre>
 </div>
 
-<h3 id="refresh-an-id-token">Refresh an Id Token</h3>
+<h3 id="refresh-an-id-token">Refresh an ID Token</h3>
 
 <p>Returns a new idToken if the Okta session is still valid.</p>
 
@@ -903,9 +1105,9 @@ in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication
 </code></pre>
 </div>
 
-<h3 id="decode-an-id-token">Decode an Id Token</h3>
+<h3 id="decode-an-id-token">Decode an ID Token</h3>
 
-<p>Decode a raw Id Token</p>
+<p>Decode a raw ID Token</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">idToken</span><span class="p">.</span><span class="nx">decode</span><span class="p">(</span><span class="nx">idTokenString</span><span class="p">);</span>
 </code></pre>
@@ -933,7 +1135,7 @@ in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication
 
 <h3 id="get-an-existing-session">Get an existing session</h3>
 
-<p>Resolves with a <a href="/docs/api/resources/sessions.html#example">session</a></p>
+<p>Resolves with a <a href="/docs/api/resources/sessions.html#example">session</a>.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
 </code></pre>
@@ -941,13 +1143,15 @@ in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication
 
 <h3 id="refresh-a-session">Refresh a session</h3>
 
-<p>Resolves with a refreshed version of your existing <a href="/docs/api/resources/sessions.html#example">session</a></p>
+<p>Resolves with a refreshed version of your existing <a href="/docs/api/resources/sessions.html#example">session</a>.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">refresh</span><span class="p">();</span>
 </code></pre>
 </div>
 
 <h3 id="close-a-session">Close a session</h3>
+
+<p>Terminates an existing <a href="/docs/api/resources/sessions.html#example">session</a>.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
 </code></pre>
@@ -959,44 +1163,7 @@ in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication
 
 <h4 id="authapierror">AuthApiError</h4>
 
-<p>This is thrown when we receive a response from the Okta service that is not a 200.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">errorCode</code></td>
-      <td>String</td>
-      <td>Okta <a href="/docs/api/getting_started/error_codes">Error Code</a></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">errorSummary</code></td>
-      <td>String</td>
-      <td>Summary of the error</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">errorLink</code></td>
-      <td>String</td>
-      <td>Okta <a href="/docs/api/getting_started/error_codes">Error Code</a></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">errorId</code></td>
-      <td>String</td>
-      <td>Unique error id</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">errorCauses</code></td>
-      <td>List of Strings</td>
-      <td>More detailed causes of the error, if any</td>
-    </tr>
-  </tbody>
-</table>
+<p>This is thrown when we receive a response from the Okta service that is not a 200. It contains the same properties as our <a href="/docs/api/getting_started/design_principles.html#errors">API errors</a>.</p>
 
 <h4 id="authsdkerror">AuthSdkError</h4>
 
@@ -1005,7 +1172,7 @@ in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Property</th>
       <th>Type</th>
       <th>Description</th>
     </tr>
@@ -1020,21 +1187,6 @@ in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication
       <td><code class="highlighter-rouge">errorSummary</code></td>
       <td>String</td>
       <td>Summary of the error</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">errorLink</code></td>
-      <td>String</td>
-      <td>Always <code class="highlighter-rouge">INTERNAL</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">errorId</code></td>
-      <td>String</td>
-      <td>Always <code class="highlighter-rouge">INTERNAL</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">errorCauses</code></td>
-      <td>List of Strings</td>
-      <td>Always <code class="highlighter-rouge">[]</code></td>
     </tr>
   </tbody>
 </table>
@@ -1050,7 +1202,7 @@ in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Property</th>
       <th>Type</th>
       <th>Description</th>
     </tr>

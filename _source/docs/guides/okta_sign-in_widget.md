@@ -358,7 +358,7 @@ A full list of the CSS selectors that you can use to style the
 Okta Sign-In Widget are in the [okta-theme.css](https://example.okta.com/js/sdk/okta-theme-1.3.2.css) file. We strongly
 urge you to style your widget using only the selectors that are
 present in the [okta-theme.css](https://example.okta.com/js/sdk/okta-theme-1.3.2.css) file, other elements in the widget
-will be subject to change and will cause your styling to break in
+is subject to change and will cause your styling to break in
 future versions of the Okta Sign-In Widget.
 
 ### Example CSS styling for the Okta Sign-In Widget

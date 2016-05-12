@@ -105,9 +105,9 @@ Claims in the payload are independent of scope (always returned) or dependent on
 | iat     | The time the ID Token was issued, represented in Unix time (seconds).   | Integer    | 1311280970     |
 | exp     | The time the ID Token expires, represented in Unix time (seconds).   | Integer    | 1311280970     |
 | auth_time | The time the end-user was authenticated, represented in Unix time (seconds).   | Integer    | 1311280970     |
-| amr     | JSON array of strings that are identifiers for [authentication methods](http://self-issued.info/docs/draft-jones-oauth-amr-values-00.html) used in the authentication.   | Array    | [ "pwd", "otp", "mfa" ]     |
+| amr     | JSON array of strings that are identifiers for [authentication methods](http://self-issued.info/docs/draft-jones-oauth-amr-values-00.html) used in the authentication.   | Array    | [ "pwd", "mfa", "otp", "kba", "sms", "swk", "hwk" ]     |
 | idp     | The id of the Identity Provider that the user authenticated to Okta with. (Used for Social Auth and Inbound SAML). If it was Okta, the value would be the OrgId.  | String    | "00ok1u7AsAkrwdZL3z0g3"    |
-| nonce     |  Value used to associate a Client session with an ID Token, and to mitigate replay attacks. This is only returned if <em>nonce</em> was present in the request that generated the ID Token.    |  String   | "n-0S6_WzA2Mj"  |
+| nonce     |  Value used to associate a Client session with an ID Token, and to mitigate replay attacks. |  String   | "n-0S6_WzA2Mj"  |
 | at_hash     | The base64URL-encoded first 128-bits of the SHA-256 hash of the Access Token. This is only returned if an Access Token is also returned with an ID Token.  | String    | "MTIzNDU2Nzg5MDEyMzQ1Ng"     |
 | c_hash  | The base64URL-encoded first 128-bits of the SHA-256 hash of the authorization code. This is only returned if an authorization code is also returned with the id_token. | String |    |
            
@@ -160,9 +160,9 @@ display           | Specifies how to display the authentication and consent UI. 
 max_age           | Specifies the allowable elapsed time, in seconds, since the last time the end user was actively authenticated by Okta. | Query      | String    | FALSE    | |
 response_mode     | Specifies how the authorization response should be returned. [Valid values: <em>fragment</em>, <em>form_post</em>, <em>query</em> or <em>okta_post_message</em>](#parameter-details). If <em>id_token</em> is specified as the response type, then <em>query</em> can't be used as the response mode. Default: Defaults to and is required to be <em>fragment</em> in implicit and hybrid flow. Defaults to <em>query</em> in authorization code flow. | Query        | String   | FALSE      | See Description.
 scope          | Can be a combination of <em>openid</em>, <em>profile</em>, <em>email</em>, <em>address</em> and <em>phone</em>. The combination determines the claims that are returned in the id_token. The openid scope has to be specified to get back an id_token. | Query        | String   | TRUE     | 
-state          | A client application provided optional state string that might be useful to the application upon receipt of the response. It can contain alphanumeric, comma, period, underscore and hyphen characters.   | Query        | String   |  FALSE    | 
+state          | A client application provided state string that might be useful to the application upon receipt of the response. It can contain alphanumeric, comma, period, underscore and hyphen characters.   | Query        | String   |  TRUE    | 
 prompt         | Can be either <em>none</em> or <em>login</em>. The value determines if Okta should not prompt for authentication (if needed), or force a prompt (even if the user had an existing session). Default: The default behavior is based on whether there's an existing Okta session. | Query        | String   | FALSE     | See Description. 
-nonce          | Specifies a nonce that is reflected back in the ID Token. Can be used for CSRF protection. | Query        | String   | FALSE     | 
+nonce          | Specifies a nonce that is reflected back in the ID Token. Can be used for CSRF protection. | Query        | String   | TRUE     | 
 
 ####Parameter Details
  
@@ -173,13 +173,36 @@ nonce          | Specifies a nonce that is reflected back in the ID Token. Can b
     * <em>query</em> -- Parameters are encoded in the query string added to the `redirect_uri` when redirecting back to the client.
     * <em>form_post</em> -- Parameters are encoded as HTML form values that are auto-submitted in the User Agent.Thus, the values are transmitted via the HTTP POST method to the client
       and the result parameters are encoded in the body using the application/x-www-form-urlencoded format.
-    * <em>okta_post_message</em> -- Uses HTML5 Web Messaging (for example, window.postMessage()) instead of the redirect for the authorization response from the authorization endpoint
-      Okta Post Message is an adaptation of the [Web Message Response Mode](https://tools.ietf.org/html/draft-sakimura-oauth-wmrm-00#section-4.1). 
+    * <em>okta_post_message</em> -- Uses [HTML5 Web Messaging](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) (for example, window.postMessage()) instead of the redirect for the authorization response from the authorization endpoint.
+      <em>okta_post_message</em> is an adaptation of the [Web Message Response Mode](https://tools.ietf.org/html/draft-sakimura-oauth-wmrm-00#section-4.1). 
       This value provides a secure way for a single-page application to perform a sign-in flow 
       in a popup window or an iFrame and receive the ID token and/or access token back in the parent page without leaving the context of that page.
- * `state`: Always pass `state` with each authorize request to correlate the request and response. This correlation prevents and attacker from sending a different response (CSRF).
- For more information, see [this blog post about the importance of state in OAuth 2.0](http://www.twobotechnologies.com/blog/2014/02/importance-of-state-in-oauth2.html).
+      The data model for the [postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) call is in the next section.
       
+ * Okta requires the OAuth 2.0 `state` parameter on all requests to the authorization endpoint in order to prevent cross-site request forgery (CSRF). 
+ The OAuth 2.0 specification [requires](https://tools.ietf.org/html/rfc6749#section-10.12) that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent's authenticated state. 
+ Using the `state` parameter is also a countermeasure to several other known attacks as outlined in [OAuth 2.0 Threat Model and Security Considerations](https://tools.ietf.org/html/rfc6819).
+      
+####postMessage() Data Model
+
+Use the postMessage() data model to help you when working with the <em>okta_post_message</em> value of the `response_mode` request parameter.
+
+`message`:
+
+Parameter         | Description                                                                                        | DataType  | 
+----------------- | -------------------------------------------------------------------------------------------------- | ----------| 
+id_token          | The ID Token JWT contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the `response_type` includes `id_token`. | String   |
+access_token      | The `access_token` used to access the /userinfo endpoint. This is returned if the `response_type` included a token. <b>Important</b>: Unlike the ID Token JWT, the `access_toekn` structure is specific to Okta, and is subject to change. | String    |
+state             | If the request contained a `state` parameter, then the same unmodified value is returned back in the response. | String    |
+error             | The error-code string providing information if anything goes wrong.                                | String    |
+error_description | Additional description of the error.                                                               | String    |
+
+`targetOrigin`: 
+
+Specifies what the origin of `parentWindow` must be in order for the postMessage() event to be dispatched
+(this is enforced by the browser). The <em>okta-post-message</em> response mode always uses the origin from the `redirect_uri` 
+specified by the client. This is crucial to prevent the sensitive token data from being exposed to a malicious site.
+
 ####Response Parameters
 
 {:.api .api-response .api-response-example}
@@ -192,7 +215,7 @@ Parameter         | Description                                                 
 id_token          | The ID Token JWT contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the <em>response_type</em> includes <em>id_token</em> .| String    | 
 access_token      | The access_token that be used to access the userinfo endpoint. This is returned if the <em>response_type</em>  included token. Unlike the ID Token JWT, the access_token structure is Okta internal only and is subject to change.| String  |
 token_type        | This is always <em>Bearer</em> and is returned only when <em>token</em> is specified as a `response_type`. | String |
-state             | If the request contained a <em>state</em> parameter, then the same unmodified value is returned back in the response. | String |
+state             | The same unmodified value from the request is returned back in the response. | String |
 error             | The error-code string providing information if anything went wrong. | String |
 error_description | Further description of the error. | String |
 
@@ -330,12 +353,12 @@ The following parameters can be posted as a part of the URL-encoded form values 
 
 Parameter          | Description                                                                                         | Type       |
 -------------------+-----------------------------------------------------------------------------------------------------+------------|
-grant_type         | Can be either <em>authorization_code</em> or <em>refresh_token</em>. Determines the mechanism Okta will use to authorize the creation of the tokens. | String |  
-code               | Expected if grant_type specified <em>code</em>. The value is what was returned from the /oauth2/v1/authorize endpoint. | String
+grant_type         | Can be one of the following: <em>authorization_code</em>, <em>password</em>, or <em>refresh_token</em>. Determines the mechanism Okta will use to authorize the creation of the tokens. | String |  
+code               | Expected if grant_type specified <em>authorization_code</em>. The value is what was returned from the /oauth2/v1/authorize endpoint. | String
 refresh_token      | Expected if the grant_type specified <em>refresh_token</em>. The value is what was returned from this endpoint via a previous invocation. | String |
 scope              | Expected only if <em>refresh_token</em> is specified as the grant type. This is a list of scopes that the client wants to be included in the Access Token. These scopes have to be subset of the scopes used to generate the Refresh Token in the first place. | String |
 redirect_uri       | Expected if grant_type is <em>authorization_code</em>. Specifies the callback location where the authorization was sent; must match what is preregistered in Okta for this client. | String |
-client_id          | The client id generated as a part of client registration. This is used in conjunction with the <em>client_secret</em> parameter to authenticate the client application. | String |
+client_id          | The client ID generated as a part of client registration. This is used in conjunction with the <em>client_secret</em> parameter to authenticate the client application. | String |
 client_secret      | The client secret generated as a part of client registration. This is used in conjunction with the <em>client_id</em> parameter to authenticate the client application. | String |
 
 
@@ -419,7 +442,7 @@ Clients MUST validate the ID token in the Token Response in the following manner
 2. Verify that the `aud` (audience) claim contains the `client_id` of your application.
 3. Verify the signature of the ID token according to [JWS](https://tools.ietf.org/html/rfc7515) using the algorithm specified in the JWT `alg` header parameter. Use the public keys provided by Okta via the [Discovery Document](#openid-discovery-document).
 4. Verify that the expiry time (from the `exp` claim) has not already passed.
-5. If a `nonce` value was sent in the Authentication Request, a `nonce` claim MUST be present and its value checked to verify that it is the same value as the one that was sent in the Authentication Request. The client should check the nonce value for replay attacks.
+5. A `nonce` claim MUST be present and its value checked to verify that it is the same value as the one that was sent in the Authentication Request. The client should check the nonce value for replay attacks.
 6. The client SHOULD check the `auth_time` claim value and request re-authentication using the `prompt=login` parameter if it determines too much time has elapsed since the last End-User authentication.
 
 Step 3 involves downloading the public JWKS from Okta (specified by the `jwks_uri` attribute in the [discovery document](#opendid-discovery-document)). The result of this call is a [JSON Web Key](https://tools.ietf.org/html/rfc7517) set.
