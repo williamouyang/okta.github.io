@@ -75,13 +75,13 @@ oktaSignIn.session.exists(function (exists) {
 `logo`          | Logo to use in the widget (e.g., `https://acme.com/assets/logo/acme-logo.png`). | String    | No           | `Okta logo`
 `username`      | Bootstrap the widget with a username i.e., pre-fill the username in the widget. | String    | No           | None
 `transformUsername` | Transform the username before sending the request. The function is passed the username and the operation as parameters. [Example](#transformusername-example) | Function   | No           | None    
-`features`      | Options to enable or disable a feature in the widget. [Option list](#features-options) [Example](#features-example) | Boolean | No           | None
-`helpLinks`     | Options to configure alternate help links in the widget. [Option list](#helplinks-options) [Example](#helplinks-example)   | String | No           | None
-`labels`        | Options to localize labels in the widget. [Option list](#links-options) | String | No           | None
+`features`      | Options to enable or disable a feature in the widget. [Option list](#features-options) [Example](#features-example) | Object | No           | None
+`helpLinks`     | Options to configure alternate help links in the widget. [Option list](#helplinks-options) [Example](#helplinks-example)   | Object | No           | None
+`labels`        | Options to localize labels in the widget. [Option list](#links-options) | Object | No           | None
 
 ### Configuration Examples and Option Details
 
-The following sections provide examples and option details for the last three configuration options.
+The following sections provide examples and option details for the last four configuration options.
 
 #### transformUsername Example
 
@@ -119,6 +119,9 @@ Enable or disable widget functionality with the following options for `features`
      
 -   `rememberDeviceAlways` `(default: false)`
     Default the "Trust this device" checkbox to `true`.
+    
+-   `autoPush` `(default: false)`
+    Display a checkbox to enable "Send push automatically" functionality in the MFA required flow.
         
 -   `smsRecovery` `(default: false)`       
     Allow users with a configured mobile phone number to recover their password using an SMS message.
@@ -198,7 +201,7 @@ Some labels contain "Okta." You may want to supply a different value for those l
 ### OIDC Options
 
 Options for the [OpenID Connect](/docs/api/resources/oidc.html#request-parameters) authentication flow.
-This lfow is required for social authentication, and requires OAuth client registration with Okta.
+This flow is required for social authentication, and requires OAuth client registration with Okta.
 For instructions, see [Social Authentication](/docs/api/resources/social_authentication.html).
 
 #### Example OIDC flow
