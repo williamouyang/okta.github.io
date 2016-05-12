@@ -18,6 +18,7 @@
     - oidc
     - social_authentication
     - sessions
+    - okta_signin_widget
 
 
 - section: api/resources
