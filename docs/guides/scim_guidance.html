@@ -124,7 +124,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	<span class="toggle-menu"></span>
 	<div id="sidebar-wrapper">
 		<div class="docs-sidebar-block" id="myScrollspy" >
-		<h2>Guides</h2>                                                                                                                                <ul class="nav sidebar-nav" data-item="saml_guidance" data-section=""><li data-name="Single Sign-On with Okta" ><a href="/docs/guides/saml_guidance.html">Single Sign-On with Okta</a></li></ul>                                                      <ul class="nav sidebar-nav" data-item="oan_guidance" data-section=""><li data-name="Okta Application Network" ><a href="/docs/guides/oan_guidance.html">Okta Application Network</a></li></ul>                                                                                    <ul class="nav sidebar-nav" data-item="okta_mobile_connect" data-section=""><li data-name="Okta Mobile Connect" ><a href="/docs/guides/okta_mobile_connect.html">Okta Mobile Connect</a></li></ul>                                                                            <ul class="nav sidebar-nav" data-item="okta_sign-in_widget" data-section=""><li data-name="Okta Sign-In Widget" ><a href="/docs/guides/okta_sign-in_widget.html">Okta Sign-In Widget</a></li></ul>                              <ul class="nav sidebar-nav" data-item="add_mfa" data-section=""><li data-name="Add Multi-Factor Authentication to your App with the Okta Platform" ><a href="/docs/guides/add_mfa.html">Add Multi-Factor Authentication to your App with the Okta Platform</a></li></ul>                                                                                                                                        <ul class="nav sidebar-nav" data-item="setting_up_a_saml_application_in_okta" data-section=""><li data-name="Setting up a SAML application in Okta" ><a href="/docs/guides/setting_up_a_saml_application_in_okta.html">Setting up a SAML application in Okta</a></li></ul>                                                                                <ul class="nav sidebar-nav" data-item="spring_security_saml" data-section=""><li data-name="Spring Security SAML (Java)" ><a href="/docs/guides/spring_security_saml.html">Spring Security SAML (Java)</a></li></ul>                                                      <ul class="nav sidebar-nav" data-item="pysaml2" data-section=""><li data-name="PySAML2 (Python)" ><a href="/docs/guides/pysaml2.html">PySAML2 (Python)</a></li></ul>                                                                                          <ul class="nav sidebar-nav" data-item="simplesamlphp" data-section=""><li data-name="SimpleSAMLphp (PHP)" ><a href="/docs/guides/simplesamlphp.html">SimpleSAMLphp (PHP)</a></li></ul>        
+		<h2>Guides</h2>                                                                                                                                    <ul class="nav sidebar-nav" data-item="saml_guidance" data-section=""><li data-name="Single Sign-On with Okta" ><a href="/docs/guides/saml_guidance.html">Single Sign-On with Okta</a></li></ul>                                                      <ul class="nav sidebar-nav" data-item="oan_guidance" data-section=""><li data-name="Okta Application Network" ><a href="/docs/guides/oan_guidance.html">Okta Application Network</a></li></ul>                                                                                      <ul class="nav sidebar-nav" data-item="okta_mobile_connect" data-section=""><li data-name="Okta Mobile Connect" ><a href="/docs/guides/okta_mobile_connect.html">Okta Mobile Connect</a></li></ul>                                                                              <ul class="nav sidebar-nav" data-item="okta_sign-in_widget" data-section=""><li data-name="Okta Sign-In Widget" ><a href="/docs/guides/okta_sign-in_widget.html">Okta Sign-In Widget</a></li></ul>                                <ul class="nav sidebar-nav" data-item="add_mfa" data-section=""><li data-name="Add Multi-Factor Authentication to your App with the Okta Platform" ><a href="/docs/guides/add_mfa.html">Add Multi-Factor Authentication to your App with the Okta Platform</a></li></ul>                                                                                                                                            <ul class="nav sidebar-nav" data-item="setting_up_a_saml_application_in_okta" data-section=""><li data-name="Setting up a SAML application in Okta" ><a href="/docs/guides/setting_up_a_saml_application_in_okta.html">Setting up a SAML application in Okta</a></li></ul>                                                                                  <ul class="nav sidebar-nav" data-item="spring_security_saml" data-section=""><li data-name="Spring Security SAML (Java)" ><a href="/docs/guides/spring_security_saml.html">Spring Security SAML (Java)</a></li></ul>                                                        <ul class="nav sidebar-nav" data-item="pysaml2" data-section=""><li data-name="PySAML2 (Python)" ><a href="/docs/guides/pysaml2.html">PySAML2 (Python)</a></li></ul>                                                                                            <ul class="nav sidebar-nav" data-item="simplesamlphp" data-section=""><li data-name="SimpleSAMLphp (PHP)" ><a href="/docs/guides/simplesamlphp.html">SimpleSAMLphp (PHP)</a></li></ul>        
 		</div>
 	</div>
 </div>
@@ -234,6 +234,157 @@ be mapped from Okta to a target.</p>
 
 <p>In Okta, an application instance is a connector that provides Single Sign-On
 and provisioning functionality with the target application.</p>
+
+<h1 id="testing-your-scim-server-with-runscope">Testing your SCIM server with Runscope</h1>
+
+<p>The easiest way for you to develop and verify your SCIM integration
+is to make use of an automated test suite that runs on Runscope.</p>
+
+<p>If you are already familiar with Runscope, then just import the
+<a href="https://raw.githubusercontent.com/joelfranusic-okta/okta-scim-beta/master/SCIM_tests_for_Runscope.json">SCIM_tests_for_Runscope.json</a> API test and configure the <code class="highlighter-rouge">SCIM Base
+  URL</code> variable to point at the base URL for your SCIM server, for
+example: <code class="highlighter-rouge">https://example.com/scim/v2</code>.</p>
+
+<p>If you are not familiar with Runscope, follow the detailed
+instructions below to get started with using Runscope to test your
+SCIM server.</p>
+
+<h2 id="set-up-runscope">Set up Runscope</h2>
+
+<p>If you do not have a Runscope account already, we suggest starting
+with <a href="https://www.runscope.com/pricing-and-plans">Runscope’s free plan</a>. Here is how to get started:</p>
+
+<ol>
+  <li>Download the <a href="https://raw.githubusercontent.com/joelfranusic-okta/okta-scim-beta/master/SCIM_tests_for_Runscope.json">SCIM_tests_for_Runscope.json</a> file from this
+repository to your local hard drive. (You will use this file to
+import Okta’s SCIM test suite into Runscope.)</li>
+  <li><a href="//www.runscope.com/signup">Sign up for Runscope</a>.</li>
+  <li>You may see a tutorial after signing up for Runscope, if so, click
+“Skip Tutorial”.</li>
+  <li>You should now see a screen that says “API Tests”.</li>
+  <li>In the lower left of your screen, click on the “Import Tests”
+link.</li>
+  <li>You should now see a title that starts with “Import Tests into
+…”</li>
+  <li>Select “Runscope API Tests” as the format to import</li>
+  <li>Click the “Choose File” button and select the
+<a href="https://raw.githubusercontent.com/joelfranusic-okta/okta-scim-beta/master/SCIM_tests_for_Runscope.json">SCIM_tests_for_Runscope.json</a> that you saved in Step 1 above.</li>
+  <li>Click the blue “Import API Test” button.</li>
+  <li>After the import completes, click on the “All Tests” link on
+the left hand side of your screen.</li>
+</ol>
+
+<p>Now that you’ve imported Okta’s SCIM test suite into Runscope, your
+next step will be to customize the test suite for the SCIM
+integration that you are writing.</p>
+
+<h2 id="customize-the-imported-runscope-test-for-your-scim-integration">Customize the imported Runscope test for your SCIM integration</h2>
+
+<p>After importing Okta’s SCIM test suite into Runscope, you will need to
+configure the test for your SCIM integration. Here is how to do that:</p>
+
+<ol>
+  <li>You should be looking at the “API Tests” screen in Runscope, if
+not, click on the “Tests” tab on the top of Runscope’s user interface.</li>
+  <li>You should see a test named “Okta SCIM 2.0 Tests”, if not,
+follow the “Set up Runscope” steps above.</li>
+  <li>Move your mouse over the “Okta SCIM 2.0 Tests” test, then select
+the “Edit” link on the lower left of the test.</li>
+  <li>In the “Environment” section of your test, you should see a
+collapsed “Test Settings” section, click the arrow on the left
+of “Test Settings” to expand this section.</li>
+  <li>“Initial Variables” should be selected, click the “Add Initial
+Variable” link.</li>
+  <li>Name the variable “SCIM Base URL” <em>(case sensitive, use spaces between words)</em></li>
+  <li>
+    <p>Set the value of the “SCIM Base URL” to the base URL for your
+SCIM integration.</p>
+
+    <p>For example, if your SCIM integration is hosted on
+<code class="highlighter-rouge">https://example.com</code> and uses a prefix of <code class="highlighter-rouge">/scim/v2</code> then the
+“SCIM Base URL” for your integration would be:
+<code class="highlighter-rouge">https://example.com/scim/v2</code></p>
+
+    <p>If you are developing your SCIM integration in a local
+development environment, we suggest using the excellent tool
+<a href="https://ngrok.com/">ngrok</a> to expose your local development environment to Runscope</p>
+  </li>
+  <li>Click the “Save” button at the top of the test.</li>
+</ol>
+
+<h2 id="running-oktas-scim-tests-against-your-scim-server">Running Okta’s SCIM tests against your SCIM server</h2>
+
+<p>Now that you have updated your SCIM test in Runscope for your SCIM
+server, it is time to run the test:</p>
+
+<ol>
+  <li>If you followed the steps above, you should now be seeing a “Run
+Now” button at the top of your test.</li>
+  <li>Click the “Run Now” button.</li>
+  <li>On the left side of your screen, you will see a test show up in
+the “Recent Test Results” section.</li>
+  <li>Click on the top test in the “Recent Test Results” section.</li>
+  <li>If the test is still running, you will see live updates of the
+test in progress. Once the test is complete, you will see the
+results of your test.</li>
+  <li>
+    <p>To see the details of tests, click on the little arrow next to
+each test to expand the details of a particular test case.</p>
+
+    <p>Doing this will allow you to see the <strong>Request</strong> and <strong>Response</strong>
+for each HTTP request that was made.</p>
+  </li>
+  <li>Since this test is running in your own Runscope instance, we
+encourage you to update the tests to better fit your own
+environment.</li>
+  <li>See the “Required SCIM Capabilities” section below for details
+on what your SCIM server will need to implement to pass all of
+the tests.</li>
+  <li>Keep running this test suite until all the tests pass.
+Here is an <a href="https://www.runscope.com/radar/qmovuxkrhtws/f95ac15f-3f22-46c3-8f1a-1001fbf8fb66/history/6a35fabf-5ce5-4e48-a13f-7292b1bd3cc5">example of a test suite where all tests pass</a>.</li>
+</ol>
+
+<h2 id="sharing-test-results-from-runscope">Sharing test results from Runscope</h2>
+
+<p>As you are developing your SCIM server, you will likely want to
+share test results with teammates or with Okta.</p>
+
+<p>Here is how to share a test result from Runscope with someone else:</p>
+
+<ol>
+  <li>Open the test result that you want to share.</li>
+  <li>At the top of the test result, Change the “Private / Shareable”
+toggle from “Private” to “Shareable”.</li>
+  <li>Copy the URL for the test result, it will look something like
+this:
+<code class="highlighter-rouge">https://www.runscope.com/radar/abcdefghijkl/m01nopq2-3456-7r8s-9012-t34567uvw890/history/123ef4gh-i567-89j0-1k2l-3m4n5o678901</code></li>
+  <li>Share that URL with the person that you want to share the test
+result with. Here is an example test result from Runscope:
+<a href="https://www.runscope.com/radar/qmovuxkrhtws/f95ac15f-3f22-46c3-8f1a-1001fbf8fb66/history/6a35fabf-5ce5-4e48-a13f-7292b1bd3cc5">https://www.runscope.com/radar/qmovuxkrhtws/f95ac15f-3f22-46c3-8f1a-1001fbf8fb66/history/6a35fabf-5ce5-4e48-a13f-7292b1bd3cc5</a></li>
+</ol>
+
+<h2 id="next-steps">Next steps</h2>
+
+<p>Once you have a SCIM server that passes all of the Runscope tests,
+you will want to do the following things:</p>
+
+<ol>
+  <li>
+    <p>Consider using Runscope to monitor your SCIM server.</p>
+
+    <p>Once you have a test suite that passes, you should consider
+having Runscope run your SCIM test suite on a schedule and alert
+you if the test suite fails.</p>
+  </li>
+  <li>
+    <p>Follow the steps in the “Submitting to Okta” section of this
+guide.</p>
+
+    <p>In particular, you will want make sure that the Profile 
+Attributes and Attribute Mappings in your Okta application show
+only the attributes and mappings that your SCIM server supports.</p>
+  </li>
+</ol>
 
 <h1 id="required-scim-capabilities">Required SCIM Capabilities</h1>
 
@@ -490,14 +641,20 @@ of the <a href="https://tools.ietf.org/html/rfc7644">SCIM 2.0 Protocol Specifica
 <p>Your SCIM 2.0 API must support fetching of users by user id.</p>
 
 <p>Below is how the sample application handles returning a user resource
-by user id:</p>
+by <code class="highlighter-rouge">user_id</code>:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>@app.route("/scim/v2/Users/&lt;user_id&gt;", methods=['GET'])
 def user_get(user_id):
-    user = User.query.filter_by(id=user_id).one()
+    try:
+        user = User.query.filter_by(id=user_id).one()
+    except:
+        return scim_error("User not found", 404)
     return render_json(user)
 </code></pre>
 </div>
+
+<p>If we don’t find a user, we return a HTTP status 404 (“Not found”)
+with SCIM error message.</p>
 
 <p>For more details on the <code class="highlighter-rouge">/Users/{id}</code> SCIM endpoint, see <a href="https://tools.ietf.org/html/rfc7644#section-3.4.1">section 3.4.1</a>
 of the <a href="https://tools.ietf.org/html/rfc7644">SCIM 2.0 Protocol Specification</a>.</p>
