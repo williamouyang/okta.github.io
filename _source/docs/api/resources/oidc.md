@@ -451,7 +451,16 @@ Each public key is identified by a `kid` attribute, which corresponds with the `
 
 The ID token and the access token are signed by an RSA private key. Okta publishes the corresponding public key and adds a public-key identifier `kid` in the ID token header. To minimize the effects of key rotation, your application should check the `kid`, and if it has changed, check the `jwks_uri` value in the [well-known configuration](#openid-connect-metadata) for a new public key and `kid`. 
 
-All applications must roll over keys for adequate security. Be sure to include key rollover in your implementation.
+All applications must roll over keys for adequate security. Please note the following:
+
+* Okta automatically rotates keys used to sign token, for security purposes.
+* The current key rotation schedule is at least twice a year. This schedule can change without notice.
+* In case of an emergency, Okta can rotate keys as needed.
+* Okta always publishes keys to the JWKS.
+* If your app follows the best practice to always resolve the `kid`, key rotations will not cause problems.
+* If you download the key and store it locally, **you are responsible for updates**.
+
+>Keys used to sign tokens automatically rotate and should always be resolved dynamically against the published JWKS. Your app might break if you hardcode public keys in your applications! Be sure to include key rollover in your implementation.
 
 
 
@@ -490,7 +499,7 @@ All applications must roll over keys for adequate security. Be sure to include k
 }
 ~~~
 
-> Okta strongly recommends retrieving and caching public keys and validating the ID token signatures locally.
+>Okta strongly recommends retrieving keys dynamically with the JWKS published in the discovery document. It is safe to cache or persist downloaded keys for performance, but if your application is pinned to a signing key, you must check the keys as Okta automatically rotates signing keys.
 
 There are standard open-source libraries available for every major language to perform [JWS](https://tools.ietf.org/html/rfc7515) signature validation.
 
