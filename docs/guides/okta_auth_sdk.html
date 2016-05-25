@@ -16,7 +16,7 @@
 	<title>Okta Auth SDK | Okta Developer</title>
 	<meta name="description" content="Easily add Okta capabilities to your website.">
 
-	<link rel="canonical" href="http://developer.okta.com/docs/guides/okta_auth_sdk">
+	<link rel="canonical" href="http://developer.okta.com/docs/guides/okta_auth_sdk.html">
 
 	<link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/assets/css/animate.css">
@@ -51,6 +51,10 @@
 
 
 
+
+  
+  
+  
 
 <body id="docs">
 
@@ -124,7 +128,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	<span class="toggle-menu"></span>
 	<div id="sidebar-wrapper">
 		<div class="docs-sidebar-block" id="myScrollspy" >
-		<h2>Guides</h2>                                                                                                                                  <ul class="nav sidebar-nav" data-item="saml_guidance" data-section=""><li data-name="Single Sign-On with Okta" ><a href="/docs/guides/saml_guidance.html">Single Sign-On with Okta</a></li></ul>                                                    <ul class="nav sidebar-nav" data-item="oan_guidance" data-section=""><li data-name="Okta Application Network" ><a href="/docs/guides/oan_guidance.html">Okta Application Network</a></li></ul>                                                                                    <ul class="nav sidebar-nav" data-item="okta_mobile_connect" data-section=""><li data-name="Okta Mobile Connect" ><a href="/docs/guides/okta_mobile_connect.html">Okta Mobile Connect</a></li></ul>                                                                            <ul class="nav sidebar-nav" data-item="okta_sign-in_widget" data-section=""><li data-name="Okta Sign-In Widget" ><a href="/docs/guides/okta_sign-in_widget.html">Okta Sign-In Widget</a></li></ul>                              <ul class="nav sidebar-nav" data-item="add_mfa" data-section=""><li data-name="Add Multi-Factor Authentication to your App with the Okta Platform" ><a href="/docs/guides/add_mfa.html">Add Multi-Factor Authentication to your App with the Okta Platform</a></li></ul>                                                                                                                                        <ul class="nav sidebar-nav" data-item="setting_up_a_saml_application_in_okta" data-section=""><li data-name="Setting up a SAML application in Okta" ><a href="/docs/guides/setting_up_a_saml_application_in_okta.html">Setting up a SAML application in Okta</a></li></ul>                                                                                <ul class="nav sidebar-nav" data-item="spring_security_saml" data-section=""><li data-name="Spring Security SAML (Java)" ><a href="/docs/guides/spring_security_saml.html">Spring Security SAML (Java)</a></li></ul>                                                        <ul class="nav sidebar-nav" data-item="pysaml2" data-section=""><li data-name="PySAML2 (Python)" ><a href="/docs/guides/pysaml2.html">PySAML2 (Python)</a></li></ul>                                                                                        <ul class="nav sidebar-nav" data-item="simplesamlphp" data-section=""><li data-name="SimpleSAMLphp (PHP)" ><a href="/docs/guides/simplesamlphp.html">SimpleSAMLphp (PHP)</a></li></ul>        
+		<h2>Guides</h2>                                                                                                                                    <ul class="nav sidebar-nav" data-item="saml_guidance" data-section=""><li data-name="Single Sign-On with Okta" ><a href="/docs/guides/saml_guidance.html">Single Sign-On with Okta</a></li></ul>                                                      <ul class="nav sidebar-nav" data-item="oan_guidance" data-section=""><li data-name="Okta Application Network" ><a href="/docs/guides/oan_guidance.html">Okta Application Network</a></li></ul>                                                                                      <ul class="nav sidebar-nav" data-item="okta_mobile_connect" data-section=""><li data-name="Okta Mobile Connect" ><a href="/docs/guides/okta_mobile_connect.html">Okta Mobile Connect</a></li></ul>                                                                              <ul class="nav sidebar-nav" data-item="okta_sign-in_widget" data-section=""><li data-name="Okta Sign-In Widget" ><a href="/docs/guides/okta_sign-in_widget.html">Okta Sign-In Widget</a></li></ul>                                <ul class="nav sidebar-nav" data-item="add_mfa" data-section=""><li data-name="Add Multi-Factor Authentication to your App with the Okta Platform" ><a href="/docs/guides/add_mfa.html">Add Multi-Factor Authentication to your App with the Okta Platform</a></li></ul>                                                                                                                                            <ul class="nav sidebar-nav" data-item="setting_up_a_saml_application_in_okta" data-section=""><li data-name="Setting up a SAML application in Okta" ><a href="/docs/guides/setting_up_a_saml_application_in_okta.html">Setting up a SAML application in Okta</a></li></ul>                                                                                  <ul class="nav sidebar-nav" data-item="spring_security_saml" data-section=""><li data-name="Spring Security SAML (Java)" ><a href="/docs/guides/spring_security_saml.html">Spring Security SAML (Java)</a></li></ul>                                                        <ul class="nav sidebar-nav" data-item="pysaml2" data-section=""><li data-name="PySAML2 (Python)" ><a href="/docs/guides/pysaml2.html">PySAML2 (Python)</a></li></ul>                                                                                            <ul class="nav sidebar-nav" data-item="simplesamlphp" data-section=""><li data-name="SimpleSAMLphp (PHP)" ><a href="/docs/guides/simplesamlphp.html">SimpleSAMLphp (PHP)</a></li></ul>        
 		</div>
 	</div>
 </div>
@@ -182,7 +186,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h2 id="authentication-flow">Authentication Flow</h2>
 
-<p>The goal of an authentication flow is to set an Okta session cookie on the user’s browser.</p>
+<p>The goal of an authentication flow is to set an Okta session cookie on the user’s browser. </p>
 
 <p>All Auth SDK methods return <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promises</a>, deferred objects that resolve when the method has finished. For more information about why Promises are useful, and how to use our specific promise library, check out the <a href="https://github.com/kriskowal/q">Q.js readme</a>.</p>
 

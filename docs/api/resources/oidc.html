@@ -16,7 +16,7 @@
 	<title>OpenID Connect | Okta Developer</title>
 	<meta name="description" content="Secure, scalable, and highly available authentication and user management for any app.">
 
-	<link rel="canonical" href="http://developer.okta.com/docs/api/resources/oidc">
+	<link rel="canonical" href="http://developer.okta.com/docs/api/resources/oidc.html">
 
 	<link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/assets/css/animate.css">
@@ -51,6 +51,10 @@
 
 
 
+
+  
+  
+  
 
 <body id="docs">
 
@@ -124,7 +128,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	<span class="toggle-menu"></span>
 	<div id="sidebar-wrapper">
 		<div class="docs-sidebar-block" id="myScrollspy" >
-		<h2>Getting Started</h2>              <ul class="nav sidebar-nav" data-item="design_principles" data-section="oidc"><li data-name="Design Principles" ><a href="/docs/api/getting_started/design_principles.html">Design Principles</a></li></ul>                                                                                <ul class="nav sidebar-nav" data-item="error_codes" data-section="oidc"><li data-name="Error Codes" ><a href="/docs/api/getting_started/error_codes.html">Error Codes</a></li></ul>                                                                                  <ul class="nav sidebar-nav" data-item="getting_a_token" data-section="oidc"><li data-name="Getting a Token" ><a href="/docs/api/getting_started/getting_a_token.html">Getting a Token</a></li></ul>                                                                <ul class="nav sidebar-nav" data-item="enabling_cors" data-section="oidc"><li data-name="Enabling CORS" ><a href="/docs/api/getting_started/enabling_cors.html">Enabling CORS</a></li></ul>                                                              <ul class="nav sidebar-nav" data-item="api_test_client" data-section="oidc"><li data-name="API Test Client" ><a href="/docs/api/getting_started/api_test_client.html">API Test Client</a></li></ul>                                                                                                              <ul class="nav sidebar-nav" data-item="okta_expression_lang" data-section="oidc"><li data-name="Okta Expression Language" ><a href="/docs/api/getting_started/okta_expression_lang.html">Okta Expression Language</a></li></ul>                                <h2>Authentication</h2>          <ul class="nav sidebar-nav" data-item="authn" data-section="oidc"><li data-name="Authentication API" ><a href="/docs/api/resources/authn.html">Authentication API</a></li></ul>                                                                                                      <ul class="nav sidebar-nav nav-title"><li data-name="OpenID Connect" ><a id="toc_current_doc" href="/docs/api/resources/oidc.html">OpenID Connect</a></li></ul><div id="gen-toc-container"><div class="gen-toc" id="gen-toc"><div class="gen-toc-title hide"><h2><div id="gen-toctitle" class="caret2 hide">OpenID Connect</div></h2></div><ul class="nav sidebar-nav hide"><li class="gen-toc_level-1 toc_section-1"><a href="#id-token"><span class="gen-toctext">ID Token</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-2"><a href="#header"><span class="gen-toctext">Header</span></a></li><li class="gen-toc_level-2 toc_section-3"><a href="#payload"><span class="gen-toctext">Payload</span></a></li><li class="gen-toc_level-2 toc_section-4"><a href="#signature"><span class="gen-toctext">Signature</span></a></li><li class="gen-toc_level-2 toc_section-5"><a href="#id-token-claims"><span class="gen-toctext">ID Token Claims</span></a></li></ul></li><li class="gen-toc_level-1 toc_section-6"><a href="#oauth-20-endpoints"><span class="gen-toctext">OAuth 2.0 Endpoints</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-7"><a href="#authentication-request"><span class="gen-toctext">Authentication Request</span></a></li><li class="gen-toc_level-2 toc_section-8"><a href="#get-user-information"><span class="gen-toctext">Get User Information</span></a></li><li class="gen-toc_level-2 toc_section-9"><a href="#get-access-token"><span class="gen-toctext">Get Access Token</span></a></li><li class="gen-toc_level-2 toc_section-10"><a href="#validating-id-tokens"><span class="gen-toctext">Validating ID Tokens</span></a></li><li class="gen-toc_level-2 toc_section-11"><a href="#openid-connect-discovery-document"><span class="gen-toctext">OpenID Connect Discovery Document</span></a></li></ul></li></ul></div></div>                                                                                                        <ul class="nav sidebar-nav" data-item="social_authentication" data-section="oidc"><li data-name="Social Authentication" ><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li></ul>                                                                    <ul class="nav sidebar-nav" data-item="sessions" data-section="oidc"><li data-name="Sessions" ><a href="/docs/api/resources/sessions.html">Sessions</a></li></ul>                                                            <ul class="nav sidebar-nav" data-item="okta_signin_widget" data-section="oidc"><li data-name="Okta Sign-In Widget" ><a href="/docs/api/resources/okta_signin_widget.html">Okta Sign-In Widget</a></li></ul>                          <h2>Resources</h2>                                                                          <ul class="nav sidebar-nav" data-item="users" data-section="oidc"><li data-name="Users" ><a href="/docs/api/resources/users.html">Users</a></li></ul>                          <ul class="nav sidebar-nav" data-item="factors" data-section="oidc"><li data-name="Factors (MFA)" ><a href="/docs/api/resources/factors.html">Factors (MFA)</a></li></ul>                                                                              <ul class="nav sidebar-nav" data-item="groups" data-section="oidc"><li data-name="Groups" ><a href="/docs/api/resources/groups.html">Groups</a></li></ul>                                                    <ul class="nav sidebar-nav" data-item="apps" data-section="oidc"><li data-name="Apps" ><a href="/docs/api/resources/apps.html">Apps</a></li></ul>                                                                                                                            <ul class="nav sidebar-nav" data-item="schemas" data-section="oidc"><li data-name="Schemas" ><a href="/docs/api/resources/schemas.html">Schemas</a></li></ul>                                                <ul class="nav sidebar-nav" data-item="idps" data-section="oidc"><li data-name="Identity Providers" ><a href="/docs/api/resources/idps.html">Identity Providers</a></li></ul>                                                                                                <ul class="nav sidebar-nav" data-item="roles" data-section="oidc"><li data-name="Admin Roles" ><a href="/docs/api/resources/roles.html">Admin Roles</a></li></ul>                                          <ul class="nav sidebar-nav" data-item="events" data-section="oidc"><li data-name="Events" ><a href="/docs/api/resources/events.html">Events</a></li></ul>                                                    
+		<h2>Getting Started</h2>              <ul class="nav sidebar-nav" data-item="design_principles" data-section="oidc"><li data-name="Design Principles" ><a href="/docs/api/getting_started/design_principles.html">Design Principles</a></li></ul>                                                                                  <ul class="nav sidebar-nav" data-item="error_codes" data-section="oidc"><li data-name="Error Codes" ><a href="/docs/api/getting_started/error_codes.html">Error Codes</a></li></ul>                                                                                    <ul class="nav sidebar-nav" data-item="getting_a_token" data-section="oidc"><li data-name="Getting a Token" ><a href="/docs/api/getting_started/getting_a_token.html">Getting a Token</a></li></ul>                                                                  <ul class="nav sidebar-nav" data-item="enabling_cors" data-section="oidc"><li data-name="Enabling CORS" ><a href="/docs/api/getting_started/enabling_cors.html">Enabling CORS</a></li></ul>                                                                <ul class="nav sidebar-nav" data-item="api_test_client" data-section="oidc"><li data-name="API Test Client" ><a href="/docs/api/getting_started/api_test_client.html">API Test Client</a></li></ul>                                                                                                                <ul class="nav sidebar-nav" data-item="okta_expression_lang" data-section="oidc"><li data-name="Okta Expression Language" ><a href="/docs/api/getting_started/okta_expression_lang.html">Okta Expression Language</a></li></ul>                                  <h2>Authentication</h2>          <ul class="nav sidebar-nav" data-item="authn" data-section="oidc"><li data-name="Authentication API" ><a href="/docs/api/resources/authn.html">Authentication API</a></li></ul>                                                                                                        <ul class="nav sidebar-nav nav-title"><li data-name="OpenID Connect" ><a id="toc_current_doc" href="/docs/api/resources/oidc.html">OpenID Connect</a></li></ul><div id="gen-toc-container"><div class="gen-toc" id="gen-toc"><div class="gen-toc-title hide"><h2><div id="gen-toctitle" class="caret2 hide">OpenID Connect</div></h2></div><ul class="nav sidebar-nav hide"><li class="gen-toc_level-1 toc_section-1"><a href="#id-token"><span class="gen-toctext">ID Token</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-2"><a href="#header"><span class="gen-toctext">Header</span></a></li><li class="gen-toc_level-2 toc_section-3"><a href="#payload"><span class="gen-toctext">Payload</span></a></li><li class="gen-toc_level-2 toc_section-4"><a href="#signature"><span class="gen-toctext">Signature</span></a></li><li class="gen-toc_level-2 toc_section-5"><a href="#id-token-claims"><span class="gen-toctext">ID Token Claims</span></a></li></ul></li><li class="gen-toc_level-1 toc_section-6"><a href="#oauth-20-endpoints"><span class="gen-toctext">OAuth 2.0 Endpoints</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-7"><a href="#authentication-request"><span class="gen-toctext">Authentication Request</span></a></li><li class="gen-toc_level-2 toc_section-8"><a href="#get-user-information"><span class="gen-toctext">Get User Information</span></a></li><li class="gen-toc_level-2 toc_section-9"><a href="#get-access-token"><span class="gen-toctext">Get Access Token</span></a></li><li class="gen-toc_level-2 toc_section-10"><a href="#validating-id-tokens"><span class="gen-toctext">Validating ID Tokens</span></a></li><li class="gen-toc_level-2 toc_section-11"><a href="#openid-connect-discovery-document"><span class="gen-toctext">OpenID Connect Discovery Document</span></a></li></ul></li></ul></div></div>                                                                                                            <ul class="nav sidebar-nav" data-item="social_authentication" data-section="oidc"><li data-name="Social Authentication" ><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li></ul>                                                                      <ul class="nav sidebar-nav" data-item="sessions" data-section="oidc"><li data-name="Sessions" ><a href="/docs/api/resources/sessions.html">Sessions</a></li></ul>                                                            <ul class="nav sidebar-nav" data-item="okta_signin_widget" data-section="oidc"><li data-name="Okta Sign-In Widget" ><a href="/docs/api/resources/okta_signin_widget.html">Okta Sign-In Widget</a></li></ul>                            <h2>Resources</h2>                                                                            <ul class="nav sidebar-nav" data-item="users" data-section="oidc"><li data-name="Users" ><a href="/docs/api/resources/users.html">Users</a></li></ul>                          <ul class="nav sidebar-nav" data-item="factors" data-section="oidc"><li data-name="Factors (MFA)" ><a href="/docs/api/resources/factors.html">Factors (MFA)</a></li></ul>                                                                                <ul class="nav sidebar-nav" data-item="groups" data-section="oidc"><li data-name="Groups" ><a href="/docs/api/resources/groups.html">Groups</a></li></ul>                                                      <ul class="nav sidebar-nav" data-item="apps" data-section="oidc"><li data-name="Apps" ><a href="/docs/api/resources/apps.html">Apps</a></li></ul>                                                                                                                              <ul class="nav sidebar-nav" data-item="schemas" data-section="oidc"><li data-name="Schemas" ><a href="/docs/api/resources/schemas.html">Schemas</a></li></ul>                                                  <ul class="nav sidebar-nav" data-item="idps" data-section="oidc"><li data-name="Identity Providers" ><a href="/docs/api/resources/idps.html">Identity Providers</a></li></ul>                                                                                                  <ul class="nav sidebar-nav" data-item="roles" data-section="oidc"><li data-name="Admin Roles" ><a href="/docs/api/resources/roles.html">Admin Roles</a></li></ul>                                            <ul class="nav sidebar-nav" data-item="events" data-section="oidc"><li data-name="Events" ><a href="/docs/api/resources/events.html">Events</a></li></ul>                                                      
 		</div>
 	</div>
 </div>
@@ -180,7 +184,7 @@ as well as claims about the authenticated user.</p>
 
 <p>ID Tokens should always be <a href="#validating-id-tokens">validated</a> by the client to ensure their integrity.</p>
 
-<p>The ID Token (<code class="highlighter-rouge">id_token</code>) consists of three period-separated, base64URL-encoded JSON segments: <a href="#header">a header</a>, <a href="#payload">the payload</a>, and <a href="#signature">the signature</a>.</p>
+<p>The ID Token (<code class="highlighter-rouge">id_token</code>) consists of three period-separated, base64URL-encoded JSON segments: <a href="#header">a header</a>, <a href="#payload">the payload</a>, and <a href="#signature">the signature</a>. </p>
 
 <h3 id="header">Header</h3>
 
@@ -605,7 +609,7 @@ Instead, the id token contains the <code class="highlighter-rouge">name</code> a
     </tr>
     <tr>
       <td>nonce</td>
-      <td>Specifies a nonce that is reflected back in the ID Token. Can be used for CSRF protection.</td>
+      <td>Specifies a nonce that is reflected back in the ID Token. It is used to mitigate replay attacks.</td>
       <td>Query</td>
       <td>String</td>
       <td>TRUE</td>
@@ -699,7 +703,7 @@ The data model for the <a href="https://developer.mozilla.org/en-US/docs/Web/API
   </tbody>
 </table>
 
-<p><code class="highlighter-rouge">targetOrigin</code>:</p>
+<p><code class="highlighter-rouge">targetOrigin</code>: </p>
 
 <p>Specifies what the origin of <code class="highlighter-rouge">parentWindow</code> must be in order for the postMessage() event to be dispatched
 (this is enforced by the browser). The <em>okta-post-message</em> response mode always uses the origin from the <code class="highlighter-rouge">redirect_uri</code> 
@@ -707,7 +711,7 @@ specified by the client. This is crucial to prevent the sensitive token data fro
 
 <h4 id="response-parameters">Response Parameters</h4>
 
-<p class="api api-response api-response-example">The response depends on the response type passed to the API. For example, a <em>fragment</em> response mode returns values in the fragment portion of a redirect to the specified <em>redirect_uri</em> while a <em>form_post</em> response mode POSTs the return values to the redirect URI. 
+<p>The response depends on the response type passed to the API. For example, a <em>fragment</em> response mode returns values in the fragment portion of a redirect to the specified <em>redirect_uri</em> while a <em>form_post</em> response mode POSTs the return values to the redirect URI. 
 Irrespective of the response type, the contents of the response is always one of the following.</p>
 
 <table>
@@ -754,7 +758,7 @@ Irrespective of the response type, the contents of the response is always one of
 
 <h5 id="possible-errors">Possible Errors</h5>
 
-<p>The Okta OpenID Connect APIs are compliant with the OpenID Connect and OAuth2 spec with some Okta specific extensions.</p>
+<p>The Okta OpenID Connect APIs are compliant with the OpenID Connect and OAuth2 spec with some Okta specific extensions. </p>
 
 <p><a href="https://tools.ietf.org/html/rfc6749#section-4.1.2.1">OAuth 2 Spec error codes</a></p>
 
@@ -957,16 +961,6 @@ See <a href="#scope-dependent-claims">Scope-Dependent Claims</a> for more inform
       <td>String</td>
     </tr>
     <tr>
-      <td>client_id</td>
-      <td>The client ID generated as a part of client registration. This is used in conjunction with the <em>client_secret</em> parameter to authenticate the client application.</td>
-      <td>String</td>
-    </tr>
-    <tr>
-      <td>client_secret</td>
-      <td>The client secret generated as a part of client registration. This is used in conjunction with the <em>client_id</em> parameter to authenticate the client application.</td>
-      <td>String</td>
-    </tr>
-    <tr>
       <td>code_verifier</td>
       <td>The code verifier of <a href="#parameter-details">PKCE</a>. Okta uses it to recompute the code_challenge and verify if it matches the original code_challenge in the authorization request.</td>
       <td>String</td>
@@ -974,11 +968,9 @@ See <a href="#scope-dependent-claims">Scope-Dependent Claims</a> for more inform
   </tbody>
 </table>
 
-<h5 id="token-authentication-methods">Token Authentication Methods</h5>
+<h5 id="token-authentication-method">Token Authentication Method</h5>
 
-<p>The client can authenticate by providing <code class="highlighter-rouge">client_id</code> and <code class="highlighter-rouge">client_secret</code> as a part of the URL-encoded form parameters (as described in table above),
-or it can use basic authentication by providing the <code class="highlighter-rouge">client_id</code> and <code class="highlighter-rouge">client_secret</code> as an Authroization header using the Basic auth scheme. 
-Use one authentication mechanism with a given request. Using both returns an error.</p>
+<p>The client can authenticate by providing the <a href="oidc.html#request-parameters"><code class="highlighter-rouge">client_id</code></a> and <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect"><code class="highlighter-rouge">client_secret</code></a> as an Authorization header in the Basic auth scheme (basic authentication).</p>
 
 <p>For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.</p>
 
@@ -1085,7 +1077,7 @@ and only via POST data or within request headers. If you store them on your serv
 <p>Clients MUST validate the ID token in the Token Response in the following manner:</p>
 
 <ol>
-  <li>Verify that the <code class="highlighter-rouge">iss</code> (issuer) claim in the ID token exactly matches the issuer identifier for your Okta organization (which is typically obtained during <a href="#openid-discovery-document">Discovery</a>).</li>
+  <li>Verify that the <code class="highlighter-rouge">iss</code> (issuer) claim in the ID token exactly matches the issuer identifier for your Okta organization (which is typically obtained during <a href="#openid-discovery-document">Discovery</a>). </li>
   <li>Verify that the <code class="highlighter-rouge">aud</code> (audience) claim contains the <code class="highlighter-rouge">client_id</code> of your application.</li>
   <li>Verify the signature of the ID token according to <a href="https://tools.ietf.org/html/rfc7515">JWS</a> using the algorithm specified in the JWT <code class="highlighter-rouge">alg</code> header parameter. Use the public keys provided by Okta via the <a href="#openid-discovery-document">Discovery Document</a>.</li>
   <li>Verify that the expiry time (from the <code class="highlighter-rouge">exp</code> claim) has not already passed.</li>
@@ -1096,6 +1088,23 @@ and only via POST data or within request headers. If you store them on your serv
 <p>Step 3 involves downloading the public JWKS from Okta (specified by the <code class="highlighter-rouge">jwks_uri</code> attribute in the <a href="#opendid-discovery-document">discovery document</a>). The result of this call is a <a href="https://tools.ietf.org/html/rfc7517">JSON Web Key</a> set.</p>
 
 <p>Each public key is identified by a <code class="highlighter-rouge">kid</code> attribute, which corresponds with the <code class="highlighter-rouge">kid</code> claim in the <a href="#claims-in-the-header-section">ID token header</a>.</p>
+
+<p>The ID token and the access token are signed by an RSA private key. Okta publishes the corresponding public key and adds a public-key identifier <code class="highlighter-rouge">kid</code> in the ID token header. To minimize the effects of key rotation, your application should check the <code class="highlighter-rouge">kid</code>, and if it has changed, check the <code class="highlighter-rouge">jwks_uri</code> value in the <a href="#openid-connect-metadata">well-known configuration</a> for a new public key and <code class="highlighter-rouge">kid</code>. </p>
+
+<p>All applications must roll over keys for adequate security. Please note the following:</p>
+
+<ul>
+  <li>For security purposes, Okta automatically rotates keys used to sign the token.</li>
+  <li>The current key rotation schedule is at least twice a year. This schedule can change without notice.</li>
+  <li>In case of an emergency, Okta can rotate keys as needed.</li>
+  <li>Okta always publishes keys to the JWKS.</li>
+  <li>If your app follows the best practice to always resolve the <code class="highlighter-rouge">kid</code>, key rotations will not cause problems.</li>
+  <li>If you download the key and store it locally, <strong>you are responsible for updates</strong>.</li>
+</ul>
+
+<blockquote>
+  <p>Keys used to sign tokens automatically rotate and should always be resolved dynamically against the published JWKS. Your app might break if you hardcode public keys in your applications! Be sure to include key rollover in your implementation.</p>
+</blockquote>
 
 <p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/v1/keys</span></p>
 
@@ -1132,7 +1141,9 @@ and only via POST data or within request headers. If you store them on your serv
 </span></code></pre>
 </div>
 
-<p>For efficiency your application can retrieve these public keys, cache them, and validate the ID token signatures locally.</p>
+<blockquote>
+  <p>Okta strongly recommends retrieving keys dynamically with the JWKS published in the discovery document. It is safe to cache or persist downloaded keys for performance, but if your application is pinned to a signing key, you must check the keys as Okta automatically rotates signing keys.</p>
+</blockquote>
 
 <p>There are standard open-source libraries available for every major language to perform <a href="https://tools.ietf.org/html/rfc7515">JWS</a> signature validation.</p>
 
