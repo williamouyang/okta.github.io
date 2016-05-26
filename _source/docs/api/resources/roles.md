@@ -335,7 +335,7 @@ HTTP/1.1 204 No Content
 
 Removes a group target from a `USER_ADMIN` role assignment.
 
-> Removing the last group target changes the scope of the role assignment from only applying to specific groups targets to applying to **all** group targets.
+> It is prohibited to remove the last group target from a role assignment.  This will result in an exception.  If the desired goal is to have a role assignment that applies to all groups, the API consumer should delete the `USER_ADMIN` role assignment and recreate it.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
