@@ -324,6 +324,7 @@ Creates a new user in your Okta organization with or without credentials.
 - [Create User with Password](#create-user-with-password)
 - [Create User with Password & Recovery Question](#create-user-with-password--recovery-question)
 - [Create User with Authentication Provider](#create-user-with-authentication-provider)
+- [Create User in Group](#create-user-in-group)
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -334,6 +335,7 @@ activate    | Executes [activation lifecycle](#activate-user) operation when cre
 provider    | Indicates whether to create a user with a specified authentication provider      | Query      | Boolean                                   | FALSE    | FALSE
 profile     | Profile properties for user                                                      | Body       | [Profile Object](#profile-object)         | TRUE     |
 credentials | Credentials for user                                                             | Body       | [Credentials Object](#credentials-object) | FALSE    |
+groupIds    | Ids of groups that user will be immediately added to at time of creation         | Body       | Array of Group Ids                        | FALSE    |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -688,6 +690,68 @@ curl -v -X POST \
     "deactivate": {
       "href": "https://your-domain.okta.com/api/v1/users/00uijntSwJjSHtDY70g3/lifecycle/deactivate",
       "method": "POST"
+    }
+  }
+}
+~~~
+
+#### Create User in Group
+{:.api .api-operation}
+
+Creates a user that is immediately added the specified groups upon creation.  This supplemental function can be used in conjunction with the other create operations.  This function is necessary for a User Admin that is scoped to only create users in specified groups.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "profile": {
+    "firstName": "Isaac",
+    "lastName": "Brock",
+    "email": "isaac.brock@example.com",
+    "login": "isaac.brock@example.com",
+    "mobilePhone": "555-415-1337"
+  },
+  "groupIds": [
+    "00g1emaKYZTWRYYRRTSK",
+    "00garwpuyxHaWOkdV0g4"
+  ]
+}' "https://${org}.okta.com/api/v1/users?activate=false"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "id": "00ub0oNGTSWTBKOLGLNR",
+  "status": "STAGED",
+  "created": "2013-07-02T21:36:25.344Z",
+  "activated": null,
+  "statusChanged": null,
+  "lastLogin": null,
+  "lastUpdated": "2013-07-02T21:36:25.344Z",
+  "passwordChanged": null,
+  "profile": {
+    "firstName": "Isaac",
+    "lastName": "Brock",
+    "email": "isaac.brock@example.com",
+    "login": "isaac.brock@example.com",
+    "mobilePhone": "555-415-1337"
+  },
+  "credentials": {
+    "provider": {
+      "type": "OKTA",
+      "name": "OKTA"
+    }
+  },
+  "_links": {
+    "activate": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"
     }
   }
 }
