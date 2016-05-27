@@ -540,3 +540,6 @@ var oktaSignIn = new OktaSignIn({
               { text: 'Dehydrated Boulders Support', href: 'http://acme.example.com/support/dehydrated-boulders' },
               { text: 'Rocket Sled Questions, href: 'http://acme.example.com/questions/rocket-sled' }
             ]
+
+##Reference Documentation
+You can find more reference information in the [Okta Sign-In Widget](../../docs/api/resources/okta_singin_widget.html) reference.
