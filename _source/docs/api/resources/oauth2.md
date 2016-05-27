@@ -382,7 +382,7 @@ client_secret   | The client secret generated as a part of client registration. 
 A client may only revoke a token generated for that client.
 
 The client can authenticate by providing <em>client_id</em> and <em>client_secret</em> as a part of the URL-encoded form parameters (as described in table above),
-or it can use basic authentication by providing the <em>client_id</em> and `<em>client_secret</em> as an Authroization header using the Basic auth scheme. 
+or it can use basic authentication by providing the <em>client_id</em> and <em>client_secret</em> as an Authroization header using the Basic auth scheme. 
 Use one authentication mechanism with a given request. Using both returns an error.
 
 For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.
