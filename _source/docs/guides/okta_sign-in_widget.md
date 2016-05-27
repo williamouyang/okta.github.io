@@ -542,4 +542,4 @@ var oktaSignIn = new OktaSignIn({
             ]
 
 ##Reference Documentation
-You can find more reference information in the [Okta Sign-In Widget](../../docs/api/resources/okta_singin_widget.html) reference.
+You can find more reference information in the [Okta Sign-In Widget](/docs/api/resources/okta_singin_widget.html) reference.
