@@ -19,7 +19,6 @@ which is a [JSON web token (JWT)](https://tools.ietf.org/html/rfc7519) that cont
 as well as claims about the authenticated user.
 
 ID Tokens should always be [validated](#validating-id-tokens) by the client to ensure their integrity.
-You can use an [OAuth 2.0 introspection request](/docs/api/resources/oauth2.html#introspection-request) for validation.
 
 The ID Token (`id_token`) consists of three period-separated, base64URL-encoded JSON segments: [a header](#header), [the payload](#payload), and [the signature](#signature). 
 
@@ -137,6 +136,7 @@ Instead, the ID token contains the `name` and `preferred_username` claims if the
 
 >The full set of claims for the requested scopes is available via the [/oauth2/v1/userinfo](#get-user-information) endpoint. Call this endpoint using the Access Token.
 
+
 ##Endpoints
 
 Both the Access Token and the ID Token are acquired via [OAuth 2.0](oauth2.html) endpoints.
@@ -216,7 +216,7 @@ But before you can use the information in the ID Token or rely on it as an asser
 ID Tokens are sensitive and can be misused if intercepted. Transmit them only over HTTPS
 and only via POST data or within request headers. If you store them on your server, you must store them securely.
 
-Clients MUST validate the ID Token in the Token Response in the following manner:
+Clients must validate the ID Token in the Token Response in the following manner:
 
 1. Verify that the `iss` (issuer) claim in the ID Token exactly matches the issuer identifier for your Okta org (which is typically obtained during [Discovery](#openid-discovery-document)). 
 2. Verify that the `aud` (audience) claim contains the `client_id` of your app.
@@ -241,8 +241,6 @@ All apps must roll over keys for adequate security. Please note the following:
 * If you download the key and store it locally, **you are responsible for updates**.
 
 >Keys used to sign tokens automatically rotate and should always be resolved dynamically against the published JWKS. Your app might break if you hardcode public keys in your applications! Be sure to include key rollover in your implementation.
-
-
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/v1/keys</span>
 
@@ -282,6 +280,10 @@ All apps must roll over keys for adequate security. Please note the following:
 >Okta strongly recommends retrieving keys dynamically with the JWKS published in the discovery document. It is safe to cache or persist downloaded keys for performance, but if your application is pinned to a signing key, you must check the keys as Okta automatically rotates signing keys.
 
 There are standard open-source libraries available for every major language to perform [JWS](https://tools.ietf.org/html/rfc7515) signature validation.
+
+###Alternative Validation 
+
+You can use an [OAuth 2.0 introspection request](/docs/api/resources/oauth2.html#introspection-request) for validation.
 
 ##OpenID Connect Discovery Document
 {:.api .api-operation}
