@@ -19,6 +19,7 @@ which is a [JSON web token (JWT)](https://tools.ietf.org/html/rfc7519) that cont
 as well as claims about the authenticated user.
 
 ID Tokens should always be [validated](#validating-id-tokens) by the client to ensure their integrity.
+You can use an [OAuth 2.0 introspection request](/docs/api/resources/oauth2.html#introspection-request) for validation.
 
 The ID Token (`id_token`) consists of three period-separated, base64URL-encoded JSON segments: [a header](#header), [the payload](#payload), and [the signature](#signature). 
 
