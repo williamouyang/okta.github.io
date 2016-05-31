@@ -57,13 +57,13 @@ While many ISVs use proprietary APIs, Okta recommends that you implement your AP
 
 ### Provisioning: Building an Integration with Okta
 
-If you already have a "compliant" SCIM server, you are 90% of the way to supporting provisioning with Okta! The remaining steps are: configuration, testing, and joint customer validation. If you don’t yet support SCIM, don’t worry, the [Okta SCIM Beta Guide](https://github.com/joelfranusic-okta/okta-scim-beta#getting-into-the-okta-scim-beta) is designed to get you on the right path.
+If you already have a "compliant" SCIM server, you are 90% of the way to supporting provisioning with Okta! The remaining steps are: configuration, testing, and joint customer validation. If you don’t yet support SCIM, don’t worry, the [Okta SCIM Beta Guide](http://developer.okta.com/docs/guides/scim_guidance.html) is designed to get you on the right path.
 
 Below are some high-level details on the process and timeline for building a SCIM-based provisioning integration with Okta:
 
 #### Explore and Apply
 
-* Explore [SCIM standard](http://www.simplecloud.info/) & [Okta’s SCIM requirements](https://github.com/joelfranusic-okta/okta-scim-beta#getting-into-the-okta-scim-beta)
+* Explore [SCIM standard](http://www.simplecloud.info/) & [Okta’s SCIM requirements](http://developer.okta.com/docs/guides/scim_guidance.html)
 * [Apply for SCIM beta](https://docs.google.com/forms/d/1RKvwFaY8hoMvWn2HEnIsXYY2uaDDZZtF8-p6h2a6e4E/viewform) 
 
 #### Develop and Validate (Week 1-2)
@@ -84,7 +84,7 @@ _*The timeline outlined is our best estimate. The process may take more or less 
 
 <br/>
 
-**As a next step, please [Apply for SCIM beta](https://docs.google.com/forms/d/1RKvwFaY8hoMvWn2HEnIsXYY2uaDDZZtF8-p6h2a6e4E/viewform) and review [Okta’s SCIM Beta Guide](https://github.com/joelfranusic-okta/okta-scim-beta#welcome-to-the-okta-scim-beta) for technical documentation and details.**
+**As a next step, please [Apply for SCIM beta](https://docs.google.com/forms/d/1RKvwFaY8hoMvWn2HEnIsXYY2uaDDZZtF8-p6h2a6e4E/viewform) and review [Okta’s SCIM Beta Guide](http://developer.okta.com/docs/guides/scim_guidance.html) for technical documentation and details.**
 
 Have questions? Need help? Email <developers@okta.com>
 
