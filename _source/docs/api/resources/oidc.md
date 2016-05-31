@@ -85,7 +85,7 @@ Claims in the header are always returned.
 | Property     | Description                                                                      | DataType     | Example                  |
 |--------------+---------+--------------------------------------------------------------------------------------------+--------------|--------------------------|
 | alg          | Identifies the digital signature algorithm used. This is always be RS256.      | String       | "RS256"                  |
-| kid          | Identifies the `public-key` used to sign the `id_token`. The corresponding `public-key` can be found as a part of the [well-known configuration's](#openid-connect-metadata) `jwks_uri` value.                                  | String       | "a5dfwef1a-0ead3f5223_w1e" |
+| kid          | Identifies the `public-key` used to sign the `id_token`. The corresponding `public-key` can be found as a part of the [well-known configuration's](#openid-connect-discovery-document) `jwks_uri` value.                                  | String       | "a5dfwef1a-0ead3f5223_w1e" |
 
 ####Claims in the payload section
 
@@ -186,7 +186,7 @@ Returns a JSON document with information requested in the scopes list of the tok
 ~~~
 
 The claims in the response are identical to those returned for the requested scopes in the `id_token` JWT, except for the sub-claim which is always present. 
-See [Scope-Dependent Claims](#scope-dependent-claims) for more information about individual claims.
+See [Scope-Dependent Claims](#scope-dependent-claims-not-always-returned) for more information about individual claims.
 
 ####Response Example (Error)
 
@@ -218,18 +218,18 @@ and only via POST data or within request headers. If you store them on your serv
 
 Clients must validate the ID Token in the Token Response in the following manner:
 
-1. Verify that the `iss` (issuer) claim in the ID Token exactly matches the issuer identifier for your Okta org (which is typically obtained during [Discovery](#openid-discovery-document)). 
+1. Verify that the `iss` (issuer) claim in the ID Token exactly matches the issuer identifier for your Okta org (which is typically obtained during [Discovery](#openid-connect-discovery-document). 
 2. Verify that the `aud` (audience) claim contains the `client_id` of your app.
-3. Verify the signature of the ID Token according to [JWS](https://tools.ietf.org/html/rfc7515) using the algorithm specified in the JWT `alg` header parameter. Use the public keys provided by Okta via the [Discovery Document](#openid-discovery-document).
+3. Verify the signature of the ID Token according to [JWS](https://tools.ietf.org/html/rfc7515) using the algorithm specified in the JWT `alg` header parameter. Use the public keys provided by Okta via the [Discovery Document](#openid-connect-discovery-document).
 4. Verify that the expiry time (from the `exp` claim) has not already passed.
 5. A `nonce` claim must be present and its value checked to verify that it is the same value as the one that was sent in the Authentication Request. The client should check the nonce value for replay attacks.
 6. The client should check the `auth_time` claim value and request re-authentication using the `prompt=login` parameter if it determines too much time has elapsed since the last end-user authentication.
 
-Step 3 involves downloading the public JWKS from Okta (specified by the `jwks_uri` attribute in the [discovery document](#opendid-discovery-document)). The result of this call is a [JSON Web Key](https://tools.ietf.org/html/rfc7517) set.
+Step 3 involves downloading the public JWKS from Okta (specified by the `jwks_uri` attribute in the [discovery document](#openid-connect-discovery-document). The result of this call is a [JSON Web Key](https://tools.ietf.org/html/rfc7517) set.
 
 Each public key is identified by a `kid` attribute, which corresponds with the `kid` claim in the [ID Token header](#claims-in-the-header-section).
 
-The ID Token and the access token are signed by an RSA private key. Okta publishes the corresponding public key and adds a public-key identifier `kid` in the ID Token header. To minimize the effects of key rotation, your application should check the `kid`, and if it has changed, check the `jwks_uri` value in the [well-known configuration](#openid-connect-metadata) for a new public key and `kid`. 
+The ID Token and the access token are signed by an RSA private key. Okta publishes the corresponding public key and adds a public-key identifier `kid` in the ID Token header. To minimize the effects of key rotation, your application should check the `kid`, and if it has changed, check the `jwks_uri` value in the [well-known configuration](#openid-connect-discovery-document) for a new public key and `kid`. 
 
 All apps must roll over keys for adequate security. Please note the following:
 
