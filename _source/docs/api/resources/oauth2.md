@@ -15,14 +15,14 @@ Additionally, these endpoints support the use of [OpenID Connect](/docs/api/reso
 
 ## Endpoints
 
-###Authentication Request
+### Authentication Request
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/v1/authorize</span>
 
 Starting point for all OAuth 2.0 flows. This request authenticates the user and returns an ID Token along with an authorization grant to the client application as a part of the response the client might have requested.
 
-####Request Parameters
+#### Request Parameters
 {:.api .api-request .api-request-params}
 
 Parameter         | Description                                                                                        | Param Type | DataType  | Required | Default         |
@@ -42,7 +42,7 @@ nonce          | Specifies a nonce that is reflected back in the ID Token. It is
 code_challenge | Specifies a challenge of [PKCE](#parameter-details). The challenge is verified in the Access Token request.  | Query        | String   | FALSE    | 
 code_challenge_method | Specifies the method that was used to derive the code challenge. Only S256 is supported.  | Query        | String   | FALSE    | 
 
-####Parameter Details
+#### Parameter Details
  
  * <em>idp</em> and <em>sessionToken</em> are Okta extensions to the [OIDC specification](http://openid.net/specs/openid-connect-core-1_0.html#Authentication). 
     All other parameters comply with the [OAuth 2.0 specification](https://tools.ietf.org/html/rfc6749) and their behavior is consistent with the specification.
@@ -63,7 +63,7 @@ code_challenge_method | Specifies the method that was used to derive the code ch
 
  * [Proof Key for Code Exchange](https://tools.ietf.org/html/rfc7636) (PKCE) is a stronger mechanism for binding the authorization code to the client than just a client secret, and prevents [a code interception attack](https://tools.ietf.org/html/rfc7636#section-1) if both the code and the client credentials are intercepted (which can happen on mobile/native devices). The PKCE-enabled client creates a large random string as code_verifier and derives code_challenge from it using code_challenge_method. It passes the code_challenge and code_challenge_method in the authorization request for code flow. When a client tries to redeem the code, it must pass the code_verifer. Okta recomputes the challenge and returns the requested token only if it matches the code_challenge in the original authorization request. When a client, whose token_endpoint_auth_method is 'none', makes a code flow authorization request, the code_challenge parameter is required.
       
-####postMessage() Data Model
+#### postMessage() Data Model
 
 Use the postMessage() data model to help you when working with the <em>okta_post_message</em> value of the <em>response_mode</em> request parameter.
 
@@ -83,9 +83,7 @@ Specifies what the origin of <em>parentWindow</em> must be in order for the post
 (this is enforced by the browser). The <em>okta-post-message</em> response mode always uses the origin from the <em>redirect_uri</em> 
 specified by the client. This is crucial to prevent the sensitive token data from being exposed to a malicious site.
 
-####Response Parameters
-
-{:.api .api-response .api-response-example}
+#### Response Parameters
 
 The response depends on the response type passed to the API. For example, a <em>fragment</em> response mode returns values in the fragment portion of a redirect to the specified <em>redirect_uri</em> while a <em>form_post</em> response mode POSTs the return values to the redirect URI. 
 Irrespective of the response type, the contents of the response is always one of the following.
@@ -99,7 +97,7 @@ state             | The same unmodified value from the request is returned back 
 error             | The error-code string providing information if anything went wrong. | String |
 error_description | Further description of the error. | String |
 
-#####Possible Errors
+##### Possible Errors
 
 These APIs are compliant with the OpenID Connect and OAuth2 spec with some Okta specific extensions. 
 
@@ -125,7 +123,7 @@ Error Id           | Details                                                    
 login_required     | The request specified that no prompt should be shown but the user is currently not authenticated.    |
 insufficient_scope | The access token provided does not contain the necessary scopes to access the resource.              |
 
-####Response Example (Success)
+#### Response Example (Success)
 
 The request is made with a <em>fragment</em> response mode.
 
@@ -148,7 +146,7 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
 &<em>token_type</em>=Bearer<em>state</em>=waojafoawjgvbf
 ~~~
 
-####Response Example (Error)
+#### Response Example (Error)
 
 The requested scope is invalid:
 
@@ -156,7 +154,7 @@ The requested scope is invalid:
 http://www.example.com/#error=invalid_scope&error_description=The+requested+scope+is+invalid%2C+unknown%2C+or+malformed
 ~~~
 
-###Token Request
+### Token Request
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-get"><span class="api-label">POST</span> /oauth2/v1/token</span>
@@ -165,7 +163,7 @@ The API takes an authorization code or a Refresh Token as the grant type and ret
 
 > Note:  No errors occur if you use this endpoint, but it isn’t useful until custom scopes or resource servers are available. We recommend you wait until custom scopes and resource servers are available.
 
-####Request Parameters
+#### Request Parameters
 
 The following parameters can be posted as a part of the URL-encoded form values to the API.
 
@@ -181,7 +179,7 @@ client_secret      | The client secret generated as a part of client registratio
 code_verifier      | The code verifier of [PKCE](#parameter-details). Okta uses it to recompute the code_challenge and verify if it matches the original code_challenge in the authorization request. | String |
 
 
-#####Token Authentication Methods
+##### Token Authentication Methods
 
 The client can authenticate by providing <em>client_id</em> and <em>client_secret</em> as a part of the URL-encoded form parameters (as described in table above),
 or it can use basic authentication by providing the <em>client_id</em> and <em>client_secret</em> as an Authroization header using the Basic auth scheme. 
@@ -193,7 +191,7 @@ For authentication with Basic auth, an HTTP header with the following format mus
 Authorization: Basic ${Base64(<client_id>:<client_secret>)} 
 ~~~
 
-####Response Parameters
+#### Response Parameters
 
 Based on the grant type, the returned JSON contains a different set of tokens.
 
@@ -202,7 +200,7 @@ Input grant type   | Output token types                    |
 code               | ID Token, Access Token, Refresh Token |
 refresh Token      | Access Token, Refresh Token           |
 
-####List of Errors 
+#### List of Errors 
 
 Error Id                |  Details                                                                                                     |
 ------------------------+--------------------------------------------------------------------------------------------------------------|
@@ -211,7 +209,7 @@ invalid_request         | The request structure was invalid. E.g. the basic auth
 invalid_grant           | The <em>code</em> or <em>refresh_token</em> value was invalid, or the <em>redirect_uri</em> does not match the one used in the authorization request. |
 unsupported_grant_type  | The grant_type was not <em>authorization_code</em> or <em>refresh_token</em>. |
 
-####Response Example (Success)
+#### Response Example (Success)
 
 ~~~json
 {
@@ -237,7 +235,7 @@ unsupported_grant_type  | The grant_type was not <em>authorization_code</em> or 
 }
 ~~~
 
-####Response Example (Error)
+#### Response Example (Error)
 
 ~~~http
 HTTP/1.1 401 Unauthorized
@@ -248,7 +246,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ~~~
 
-###Introspection Request
+### Introspection Request
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-get"><span class="api-label">POST</span> /oauth2/v1/introspect</span>
@@ -257,7 +255,7 @@ The API takes an Access Token, Refresh Token, or [ID Token](oidc.html#id-token) 
 If the token is active, additional data about the token is also returned. If the token is invalid, expired, or revoked, it is considered inactive. 
 An implicit client can only introspect its own tokens, while a confidential client may inspect all access tokens.
 
-####Request Parameters
+#### Request Parameters
 
 The following parameters can be posted as a part of the URL-encoded form values to the API.
 
@@ -268,7 +266,7 @@ token_type_hint | A hint of the type of <em>token</em>.                         
 client_id       | The client ID generated as a part of client registration. This is used in conjunction with the <em>client_secret</em> parameter to authenticate the client application. | String |
 client_secret   | The client secret generated as a part of client registration. This is used in conjunction with the <em>client_id</em> parameter to authenticate the client application. | String |
 
-#####Token Authentication Methods
+##### Token Authentication Methods
 
 The client can authenticate by providing <em>client_id</em> and <em>client_secret</em> as a part of the URL-encoded form parameters (as described in table above),
 or it can use basic authentication by providing the <em>client_id</em> and <em>client_secret</em> as an Authroization header using the Basic auth scheme. 
@@ -280,7 +278,7 @@ For authentication with Basic auth, an HTTP header with the following format mus
 Authorization: Basic ${Base64(<client_id>:<client_secret>)} 
 ~~~
 
-####Response Parameters
+#### Response Parameters
 
 Based on the type of token and whether it is active or not, the returned JSON contains a different set of tokens. These are the possible values:
 
@@ -300,14 +298,14 @@ iss         | The issuer of the token.                                          
 jti         | The identifier of the token.                                                                        | String     |
 device_id   | The ID of the device assocaited with the token                                                      | String     |
 
-####List of Errors 
+#### List of Errors 
 
 Error Id                |  Details                                                                                                     |
 ------------------------+--------------------------------------------------------------------------------------------------------------|
 invalid_client          | The specified client id wasn't found. |
 invalid_request         | The request structure was invalid. E.g. the basic authentication header was malformed, or both header and form parameters were used for authentication or no authentication information was provided. |
 
-####Response Example (Success, Access Token)
+#### Response Example (Success, Access Token)
 
 ~~~json
 {
@@ -325,7 +323,7 @@ invalid_request         | The request structure was invalid. E.g. the basic auth
 }
 ~~~
 
-####Response Example (Success, Refresh Token)
+#### Response Example (Success, Refresh Token)
 
 ~~~json
 {
@@ -340,7 +338,7 @@ invalid_request         | The request structure was invalid. E.g. the basic auth
 }
 ~~~
 
-####Response Example (Success, Inactive Token)
+#### Response Example (Success, Inactive Token)
 
 ~~~json
 {
@@ -348,7 +346,7 @@ invalid_request         | The request structure was invalid. E.g. the basic auth
 }
 ~~~
 
-####Response Example (Error)
+#### Response Example (Error)
 
 ~~~http
 HTTP/1.1 401 Unauthorized
@@ -359,7 +357,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ~~~
 
-###Revocation Request
+### Revocation Request
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-get"><span class="api-label">POST</span> /oauth2/v1/revoke</span>
@@ -368,7 +366,7 @@ The API takes an Access Token or Refresh Token and revokes it. Revoked tokens ar
 
 > Note: No errors occur if you use this endpoint, but it isn’t useful until custom scopes or resource servers are available. We recommend you wait until custom scopes and resource servers are available.
 
-####Request Parameters
+#### Request Parameters
 
 The following parameters can be posted as a part of the URL-encoded form values to the API.
 
@@ -379,7 +377,7 @@ token_type_hint | A hint of the type of <em>token</em>.                         
 client_id       | The client ID generated as a part of client registration. This is used in conjunction with the <em>client_secret</em> parameter to authenticate the client application. | String |
 client_secret   | The client secret generated as a part of client registration. This is used in conjunction with the <em>client_id</em> parameter to authenticate the client application. | String |
 
-#####Token Authentication Methods
+##### Token Authentication Methods
 
 A client may only revoke a token generated for that client.
 
@@ -393,18 +391,18 @@ For authentication with Basic auth, an HTTP header with the following format mus
 Authorization: Basic ${Base64(<client_id>:<client_secret>)} 
 ~~~
 
-####Response Parameters
+#### Response Parameters
 
 A successful revocation is denoted by an empty response with an HTTP 200. Note that revoking an invalid, expired, or revoked token will still be considered a success as to not leak information
 
-####List of Errors 
+#### List of Errors 
 
 Error Id                |  Details                                                                                                     |
 ------------------------+--------------------------------------------------------------------------------------------------------------|
 invalid_client          | The specified client id wasn't found. |
 invalid_request         | The request structure was invalid. E.g. the basic authentication header was malformed, or both header and form parameters were used for authentication or no authentication information was provided. |
 
-####Response Example (Success)
+#### Response Example (Success)
 
 ~~~http
 HTTP/1.1 200 OK
@@ -413,7 +411,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ~~~
 
-####Response Example (Error)
+#### Response Example (Error)
 
 ~~~http
 HTTP/1.1 401 Unauthorized

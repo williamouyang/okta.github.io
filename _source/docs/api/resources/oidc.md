@@ -22,7 +22,7 @@ ID Tokens should always be [validated](#validating-id-tokens) by the client to e
 
 The ID Token (`id_token`) consists of three period-separated, base64URL-encoded JSON segments: [a header](#header), [the payload](#payload), and [the signature](#signature). 
 
-###Header
+### Header
 
 ~~~json
 {
@@ -31,7 +31,7 @@ The ID Token (`id_token`) consists of three period-separated, base64URL-encoded 
 }
 ~~~
 
-###Payload
+### Payload
 
 ~~~json
 {
@@ -69,15 +69,15 @@ The ID Token (`id_token`) consists of three period-separated, base64URL-encoded 
 }
 ~~~
 
-###Signature
+### Signature
 
 This is the digital signature that Okta signs, using the public key identified by the `kid` property in the header section.
 
-###ID Token Claims
+### ID Token Claims
 
 The header and payload sections contain claims.
 
-####Claims in the header section
+#### Claims in the header section
 
 Claims in the header are always returned.
 
@@ -87,11 +87,11 @@ Claims in the header are always returned.
 | alg          | Identifies the digital signature algorithm used. This is always be RS256.      | String       | "RS256"                  |
 | kid          | Identifies the `public-key` used to sign the `id_token`. The corresponding `public-key` can be found as a part of the [well-known configuration's](#openid-connect-discovery-document) `jwks_uri` value.                                  | String       | "a5dfwef1a-0ead3f5223_w1e" |
 
-####Claims in the payload section
+#### Claims in the payload section
 
 Claims in the payload are independent of scope (always returned) or dependent on scope (not always returned).
 
-#####Scope-independent claims (always returned)
+##### Scope-independent claims (always returned)
  
 |--------------+-------------------+----------------------------------------------------------------------------------+--------------|--------------------------|
 | Property     |  Description                                                                      | DataType     | Example                  |
@@ -110,7 +110,7 @@ Claims in the payload are independent of scope (always returned) or dependent on
 | at_hash     | The base64URL-encoded first 128-bits of the SHA-256 hash of the Access Token. This is only returned if an Access Token is also returned with an ID Token.  | String    | "MTIzNDU2Nzg5MDEyMzQ1Ng"     |
 | c_hash  | The base64URL-encoded first 128-bits of the SHA-256 hash of the authorization code. This is only returned if an authorization code is also returned with the id_token. | String |    |
            
-#####Scope-dependent claims (not always returned)
+##### Scope-dependent claims (not always returned)
 
 |--------------+-------------------+----------------------------------------------------------------------------------+--------------|--------------------------|
 | Property     | Required Scope | Description                                                                      | DataType     | Example                  |
@@ -137,11 +137,11 @@ Instead, the ID token contains the `name` and `preferred_username` claims if the
 >The full set of claims for the requested scopes is available via the [/oauth2/v1/userinfo](#get-user-information) endpoint. Call this endpoint using the Access Token.
 
 
-##Endpoints
+## Endpoints
 
 Both the Access Token and the ID Token are acquired via [OAuth 2.0](oauth2.html) endpoints.
 
-###Get User Information
+### Get User Information
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET, POST</span> /oauth2/v1/userinfo</span>
@@ -150,7 +150,7 @@ You must include the `access_token` returned from the [/oauth2/v1/authorize](oau
 
 This endpoint complies with the [OIDC userinfo spec](http://openid.net/specs/openid-connect-core-1_0.html#UserInfo).
 
-####Request Example
+#### Request Example
 {:.api .api-request .api-request-example}
 
 ~~~sh
@@ -159,12 +159,12 @@ curl -v -X POST \
 "https://${org}.okta.com/oauth2/v1/userinfo"
 ~~~
 
-####Response Parameters
+#### Response Parameters
 {:.api .api-response .api-response-example}
 
 Returns a JSON document with information requested in the scopes list of the token.
 
-####Response Example (Success)
+#### Response Example (Success)
 {:.api .api-response .api-response-example}
 ~~~json
 {
@@ -188,7 +188,7 @@ Returns a JSON document with information requested in the scopes list of the tok
 The claims in the response are identical to those returned for the requested scopes in the `id_token` JWT, except for the sub-claim which is always present. 
 See [Scope-Dependent Claims](#scope-dependent-claims-not-always-returned) for more information about individual claims.
 
-####Response Example (Error)
+#### Response Example (Error)
 
 ~~~http
 HTTP/1.1 401 Unauthorized​
@@ -198,7 +198,7 @@ Expires: 0​
 WWW-Authenticate: Bearer error="invalid_token", error_description="The access token is invalid"​
 ~~~
 
-####Response Example (Error)
+#### Response Example (Error)
 
 ~~~http
 HTTP/1.1 403 Forbidden​
@@ -208,7 +208,7 @@ Expires: 0​
 WWW-Authenticate: Bearer error="insufficient_scope", error_description="The access token must provide access to at least one of these scopes - profile, email, address or phone"
 ~~~
 
-###Validating ID Tokens
+### Validating ID Tokens
 
 You can pass ID Tokens around different components of your app, and these components can use it as a lightweight authentication mechanism identifying the app and the user.
 But before you can use the information in the ID Token or rely on it as an assertion that the user has authenticated, you must validate it to prove its integrity.
@@ -281,11 +281,11 @@ All apps must roll over keys for adequate security. Please note the following:
 
 There are standard open-source libraries available for every major language to perform [JWS](https://tools.ietf.org/html/rfc7515) signature validation.
 
-###Alternative Validation 
+### Alternative Validation 
 
 You can use an [OAuth 2.0 introspection request](/docs/api/resources/oauth2.html#introspection-request) for validation.
 
-##OpenID Connect Discovery Document
+## OpenID Connect Discovery Document
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /.well-known/openid-configuration</span>
