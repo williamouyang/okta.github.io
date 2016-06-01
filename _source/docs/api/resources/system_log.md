@@ -158,6 +158,7 @@ Describes the target of the action
 | displayName | Display name of the target                                    | String          | TRUE     |         |           |           |            |
 | detail     | A map that goes from a String key to a value                   | Map[String->Object | TRUE  |         |           |           |            |
 |------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
+
 ~~~ json
 {
     "id": "00u3gjksoiRGRAZHLSYV",
@@ -261,6 +262,7 @@ Describes authentication data regarding an event
 ### Issuer Object
 
 Describes an issuer in the authentication context
+
 |------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
 | Property   | Description                                                    | DataType        | Nullable | Default | MinLength | MaxLength | Validation |
 | ---------- | -------------------------------------------------------------- | --------------- | -------- | ------- | --------- | --------- | ---------- |
@@ -292,7 +294,7 @@ q         | Finds a user that matches firstName, lastName, and email properties 
 until     | Specifies the first date after which results aren't returned                        | Query      | DateTime | FALSE    |
 after     | An opaque identifier used for pagination                                            | Query      | String   | FALSE    |
 
-The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination)
+The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination).
 
 ###### Filter
 
@@ -304,9 +306,9 @@ Filter                                       | Description
 `target.id eq ":id"`                         | Events published with a specific target id
 `actor.id eq ":id"`                          | Events published with a specific target id
 
-See [Filtering](/docs/getting_started/design_principles.html#filtering) for more information on expressions
-Filter allows a filter expression per http://developer.okta.com/docs/api/getting_started/design_principles.html#filtering . The 'q' parameter searches
+The 'q' parameter searches
 on all string fields for the given string and returns the results in the order of relevance.
+See [Filtering](/docs/getting_started/design_principles.html#filtering) for more information about expressions.
 
 **Filter Examples**
 Events published for a target user
@@ -346,7 +348,7 @@ http://rain-admin.okta1.com:1802/sage/api/v1/logs?since=2016-05-25T00:00:00+00:0
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~http
+~~~json
 [
   {
     "version": "0",
