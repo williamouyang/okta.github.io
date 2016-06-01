@@ -23,7 +23,8 @@
 				"d0ca10db-00fb-4e5c-d172-e4fd39e9d650",
 				"7af354ac-f903-e626-6db2-4e031f08fdf1",
 				"7eb2ec6c-27f4-edae-adec-5868b925979d",
-				"8d1afb48-6016-7690-04e8-431e81bfdef6"
+				"8d1afb48-6016-7690-04e8-431e81bfdef6",
+				"fa46ebe8-d10b-c4f3-2a75-736fe2d4bdd8"
 			],
 			"collection_name": "Users (Okta API)",
 			"collection_id": "59081abb-bd74-7c67-a8d9-ef999536c95e"
@@ -779,6 +780,25 @@
 			"collectionId": "59081abb-bd74-7c67-a8d9-ef999536c95e",
 			"responses": [],
 			"synced": false
+		},
+		{
+			"id": "fa46ebe8-d10b-c4f3-2a75-736fe2d4bdd8",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/users?activate=false",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1464303833765,
+			"name": "Create User in Group",
+			"description": "",
+			"collectionId": "59081abb-bd74-7c67-a8d9-ef999536c95e",
+			"rawModeData": "{\n  \"profile\": {\n    \"firstName\": \"Isaac\",\n    \"lastName\": \"Brock\",\n    \"email\": \"isaac@{{email-suffix}}\",\n    \"login\": \"isaac@{{email-suffix}}\"\n  },\n  \"groupIds\": [\n    \"{{groupId}}\"\n  ]\n}"
 		}
 	]
 }
