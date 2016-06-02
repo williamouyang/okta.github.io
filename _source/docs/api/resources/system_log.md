@@ -13,9 +13,11 @@ Use this API to export event data as a batch job from your organization to anoth
 
 Every organization has a system log that maintains a history of actions performed by users.  The Log model describes a single action performed by a set of actors for a set of targets.
 
-### Example
+### Annotated Example
 
-~~~ json
+Use the following example by replacing the explanatory text with valid values.
+
+~~~ html
 {
 "eventId": Randomly generated String, Required //note, not uuid as in underlying
 "published": ISO8601 string for timestamp, Required //note, published, not timestamp as in underlying
@@ -185,7 +187,7 @@ Describes the client performing the action
 | id         | id of the client                                               | String          | TRUE     |         |           |           |            |
 |------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
 
-### Geographical Context Object
+### GeographicalContext Object
 
 Describes the location data regarding where the action was performed
 
@@ -306,8 +308,7 @@ Filter                                       | Description
 `target.id eq ":id"`                         | Events published with a specific target id
 `actor.id eq ":id"`                          | Events published with a specific target id
 
-The 'q' parameter searches
-on all string fields for the given string and returns the results in the order of relevance.
+
 See [Filtering](/docs/getting_started/design_principles.html#filtering) for more information about expressions.
 
 **Filter Examples**
@@ -330,6 +331,26 @@ App SSO events for a target user and application
 Events published for a given ip address
 
     filter=client.ipAddress eq "184.73.186.14"
+
+##### Query with q
+
+> Important: The query parameter `q` behaves differently than described in  [Filtering](/docs/getting_started/design_principles.html).
+
+The query parameter `q` searches string fields, and supports the same expressions as the `filter` parameter.
+
+**Query Examples**
+
+Events published in the specified city
+
+    q=geographicalcontext.city eq "San Francisco"
+
+Events published as a result of requests from the specified URI
+
+    q=authenticationContext.eventType eq "core.user_auth.login_failed"
+
+Events published for a target user and application
+
+    q=geographicalContext.externalSessionId eq "interestingURI.com"
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
