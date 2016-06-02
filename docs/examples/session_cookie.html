@@ -16,13 +16,13 @@
 	<title>Session Cookie | Okta Developer</title>
 	<meta name="description" content="Secure, scalable, and highly available authentication and user management for any app.">
 
-	<link rel="canonical" href="http://developer.okta.com/docs/examples/session_cookie.html">
+	<link rel="canonical" href="http://developer.okta.com/docs/examples/session_cookie">
 
 	<link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/assets/css/animate.css">
 	<link rel="stylesheet" href="/assets/css/master.css">
-	<link rel="stylesheet" href="/assets/css/layout-docs.css">
 	
+	<link rel="stylesheet" href="/assets/css/layout-docs.css">
 	<link rel="stylesheet" href="/assets/css/responsive.css">
 
 
@@ -33,8 +33,8 @@
 	<script type="text/javascript" defer="defer" src="/assets/js/master.js"></script>
 	<script type="text/javascript" defer="defer" src="/assets/js/scrollspy.js"></script>
 
-	<script type="text/javascript" defer="defer" src="/assets/js/docs.js"></script>
 	
+	<script type="text/javascript" defer="defer" src="/assets/js/docs.js"></script>
 	<!-- TypeKit -->
 	<script src="//use.typekit.net/pls8pog.js"></script>
 	<script>try{Typekit.load();}catch(e){}</script>
@@ -51,10 +51,6 @@
 
 
 
-
-  
-  
-  
 
 <body id="docs">
 
@@ -128,7 +124,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	<span class="toggle-menu"></span>
 	<div id="sidebar-wrapper">
 		<div class="docs-sidebar-block" id="myScrollspy" >
-		<h2>Examples</h2>                                                              <ul class="nav sidebar-nav nav-title"><li data-name="Session Cookie" class="on"><a id="toc_current_doc" href="/docs/examples/session_cookie.html">Session Cookie</a></li></ul><div id="gen-toc-container"><div class="gen-toc" id="gen-toc"><div class="gen-toc-title hide"><h2><div id="gen-toctitle" class="caret2 hide">Session Cookie</div></h2></div><ul class="nav sidebar-nav hide"><li class="gen-toc_level-1 toc_section-1"><a href="#overview"><span class="gen-toctext">Overview</span></a></li><li class="gen-toc_level-1 toc_section-2"><a href="#retrieving-a-session-cookie-by-visiting-a-session-redirect-link"><span class="gen-toctext">Retrieving a session cookie by visiting a session redirect link</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-3"><a href="#validate-credentials--retrieve-a-one-time-token"><span class="gen-toctext">Validate credentials & retrieve a one-time token</span></a></li><li class="gen-toc_level-2 toc_section-4"><a href="#visit-session-redirect-url-with-the-one-time-token"><span class="gen-toctext">Visit session redirect URL with the one-time token</span></a></li></ul></li><li class="gen-toc_level-1 toc_section-5"><a href="#retrieving-a-session-cookie-by-visiting-an-application-embed-link"><span class="gen-toctext">Retrieving a session cookie by visiting an application embed link</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-6"><a href="#validate-credentials--retrieve-a-one-time-token-1"><span class="gen-toctext">Validate credentials & retrieve a one-time token</span></a></li><li class="gen-toc_level-2 toc_section-7"><a href="#visit-an-embed-link-with-the-one-time-token"><span class="gen-toctext">Visit an embed link with the one-time token</span></a></li><li class="gen-toc_level-2 toc_section-8"><a href="#initiate-a-saml-sso-with-the-one-time-token"><span class="gen-toctext">Initiate a SAML SSO with the one-time token</span></a></li><li class="gen-toc_level-2 toc_section-9"><a href="#initiate-a-ws-federation-sso-with-the-one-time-token"><span class="gen-toctext">Initiate a WS-Federation SSO with the one-time token</span></a></li></ul></li><li class="gen-toc_level-1 toc_section-10"><a href="#retrieving-a-session-cookie-with-a-hidden-image"><span class="gen-toctext">Retrieving a session cookie with a hidden image</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-11"><a href="#validate-credentials--retrieve-a-session-cookie-image-url"><span class="gen-toctext">Validate credentials & retrieve a session cookie image URL</span></a></li><li class="gen-toc_level-2 toc_section-12"><a href="#add-image-tag-with-session-cookie-image-url"><span class="gen-toctext">Add image tag with session cookie image URL</span></a></li></ul></li></ul></div></div>                              <ul class="nav sidebar-nav" data-item="dotnet_sample_application" data-section=""><li data-name=".NET Sample Application" ><a href="/docs/examples/dotnet_sample_application.html">.NET Sample Application</a></li></ul>                                                            
+		<h2>Examples</h2>                                                                <ul class="nav sidebar-nav nav-title"><li data-name="Session Cookie" class="on"><a id="toc_current_doc" href="/docs/examples/session_cookie.html">Session Cookie</a></li></ul><div id="gen-toc-container"><div class="gen-toc" id="gen-toc"><div class="gen-toc-title hide"><h2><div id="gen-toctitle" class="caret2 hide">Session Cookie</div></h2></div><ul class="nav sidebar-nav hide"><li class="gen-toc_level-1 toc_section-1"><a href="#overview"><span class="gen-toctext">Overview</span></a></li><li class="gen-toc_level-1 toc_section-2"><a href="#retrieving-a-session-cookie-by-visiting-a-session-redirect-link"><span class="gen-toctext">Retrieving a session cookie by visiting a session redirect link</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-3"><a href="#validate-credentials--retrieve-a-one-time-token"><span class="gen-toctext">Validate credentials & retrieve a one-time token</span></a></li><li class="gen-toc_level-2 toc_section-4"><a href="#visit-session-redirect-url-with-the-one-time-token"><span class="gen-toctext">Visit session redirect URL with the one-time token</span></a></li></ul></li><li class="gen-toc_level-1 toc_section-5"><a href="#retrieving-a-session-cookie-by-visiting-an-application-embed-link"><span class="gen-toctext">Retrieving a session cookie by visiting an application embed link</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-6"><a href="#validate-credentials--retrieve-a-one-time-token-1"><span class="gen-toctext">Validate credentials & retrieve a one-time token</span></a></li><li class="gen-toc_level-2 toc_section-7"><a href="#visit-an-embed-link-with-the-one-time-token"><span class="gen-toctext">Visit an embed link with the one-time token</span></a></li><li class="gen-toc_level-2 toc_section-8"><a href="#initiate-a-saml-sso-with-the-one-time-token"><span class="gen-toctext">Initiate a SAML SSO with the one-time token</span></a></li><li class="gen-toc_level-2 toc_section-9"><a href="#initiate-a-ws-federation-sso-with-the-one-time-token"><span class="gen-toctext">Initiate a WS-Federation SSO with the one-time token</span></a></li></ul></li><li class="gen-toc_level-1 toc_section-10"><a href="#retrieving-a-session-cookie-with-a-hidden-image"><span class="gen-toctext">Retrieving a session cookie with a hidden image</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-11"><a href="#validate-credentials--retrieve-a-session-cookie-image-url"><span class="gen-toctext">Validate credentials & retrieve a session cookie image URL</span></a></li><li class="gen-toc_level-2 toc_section-12"><a href="#add-image-tag-with-session-cookie-image-url"><span class="gen-toctext">Add image tag with session cookie image URL</span></a></li></ul></li></ul></div></div>                              <ul class="nav sidebar-nav" data-item="dotnet_sample_application" data-section=""><li data-name=".NET Sample Application" ><a href="/docs/examples/dotnet_sample_application.html">.NET Sample Application</a></li></ul>                                                              
 		</div>
 	</div>
 </div>
@@ -467,6 +463,57 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
 		
 
 	</div>
+
+	
+		
+<!-- Remarketing tag -->
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		var google_conversion_id = 1006913831;
+		var google_custom_params = window.google_tag_params;
+		var google_remarketing_only = true;
+		/* ]]> */
+	</script>
+	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+	</script>
+	<noscript>
+		<div style="display:inline;">
+			<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"/>
+		</div>
+	</noscript>
+<!-- End Remarketing tag -->
+
+<!-- Crazy Egg Tracking -->
+<script type="text/javascript">
+setTimeout(function(){var a=document.createElement("script");
+var b=document.getElementsByTagName("script")[0];
+a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+</script>
+<!-- End Crazy Egg Tracking -->
+
+<footer class="site-footer">
+	<div class="wrap">
+
+		<ul>
+			<li><a href="http://www.okta.com" target="_blank">Okta.com</a></li>
+			<li><a href="/blog">Blog</a></li>
+			<li><a href="/terms/">Terms &amp; Conditions</a></li>
+			<li><a href="/privacy/">Privacy Policy</a></li>
+			<li><a href="http://okta.com/developer/contact/">Contact Sales</a></li>
+			<li><a href="mailto:developers@okta.com">Contact Support</a></li>
+		</ul>
+
+		<ul>
+			<li><a class="icon" href="http://github.com/okta" target="_blank"><i class="fa fa-github"></i></a></li>
+			<li><a class="icon" href="http://twitter.com/okta" target="_blank"><i class="fa fa-twitter"></i></a></li>
+			<li><a class="icon" href="http://stackoverflow.com/search?q=okta" target="_blank"><i class="fa fa-stack-overflow"></i></a></li>
+			<li><a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a></li>
+			<li><a class="icon" href="http://community.okta.com" target="_blank"><i class="fa fa-comments"></i></a></li>
+		</ul>
+
+	</div>
+</footer>
 
 	
 </body>

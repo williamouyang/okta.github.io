@@ -16,13 +16,13 @@
 	<title>Single Sign-On with Okta | Okta Developer</title>
 	<meta name="description" content="Learn how to Single Sign-On enable your web and mobile application whether you are an ISV or IT - looking to federate authentication for your application.">
 
-	<link rel="canonical" href="http://developer.okta.com/docs/guides/saml_guidance.html">
+	<link rel="canonical" href="http://developer.okta.com/docs/guides/saml_guidance">
 
 	<link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/assets/css/animate.css">
 	<link rel="stylesheet" href="/assets/css/master.css">
-	<link rel="stylesheet" href="/assets/css/layout-docs.css">
 	
+	<link rel="stylesheet" href="/assets/css/layout-docs.css">
 	<link rel="stylesheet" href="/assets/css/responsive.css">
 
 
@@ -33,8 +33,8 @@
 	<script type="text/javascript" defer="defer" src="/assets/js/master.js"></script>
 	<script type="text/javascript" defer="defer" src="/assets/js/scrollspy.js"></script>
 
-	<script type="text/javascript" defer="defer" src="/assets/js/docs.js"></script>
 	
+	<script type="text/javascript" defer="defer" src="/assets/js/docs.js"></script>
 	<!-- TypeKit -->
 	<script src="//use.typekit.net/pls8pog.js"></script>
 	<script>try{Typekit.load();}catch(e){}</script>
@@ -51,10 +51,6 @@
 
 
 
-
-  
-  
-  
 
 <body id="docs">
 
@@ -128,7 +124,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	<span class="toggle-menu"></span>
 	<div id="sidebar-wrapper">
 		<div class="docs-sidebar-block" id="myScrollspy" >
-		<h2>Guides</h2>                                                                                                                                    <ul class="nav sidebar-nav nav-title"><li data-name="Single Sign-On with Okta" ><a id="toc_current_doc" href="/docs/guides/saml_guidance.html">Single Sign-On with Okta</a></li></ul><div id="gen-toc-container"><div class="gen-toc" id="gen-toc"><div class="gen-toc-title hide"><h2><div id="gen-toctitle" class="caret2 hide">Single Sign-On with Okta</div></h2></div><ul class="nav sidebar-nav hide"><li class="gen-toc_level-1 toc_section-1"><a href="#introduction"><span class="gen-toctext">Introduction</span></a></li><li class="gen-toc_level-1 toc_section-2"><a href="#authentication"><span class="gen-toctext">Authentication</span></a></li><li class="gen-toc_level-1 toc_section-3"><a href="#federated-identity"><span class="gen-toctext">Federated Identity</span></a></li><li class="gen-toc_level-1 toc_section-4"><a href="#planning-for-saml"><span class="gen-toctext">Planning for SAML</span></a></li><li class="gen-toc_level-1 toc_section-5"><a href="#planning-checklist"><span class="gen-toctext">Planning Checklist</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-6"><a href="#understanding-the-role-of-a-service-provider"><span class="gen-toctext">Understanding the role of a Service Provider</span></a></li><li class="gen-toc_level-2 toc_section-7"><a href="#single-idp-vs-multiple-idps"><span class="gen-toctext">Single IDP vs Multiple IDPs</span></a></li><li class="gen-toc_level-2 toc_section-8"><a href="#understanding-sp-initiated-login-flow"><span class="gen-toctext">Understanding SP-initiated Login Flow</span></a></li><li class="gen-toc_level-2 toc_section-9"><a href="#exposing-saml-configuration-in-sp"><span class="gen-toctext">Exposing SAML configuration in SP</span></a></li><li class="gen-toc_level-2 toc_section-10"><a href="#enabling-saml-for-everyone-vs-a-subset-of-users"><span class="gen-toctext">Enabling SAML for everyone vs a subset of users</span></a></li><li class="gen-toc_level-2 toc_section-11"><a href="#implementing-a-backdoor"><span class="gen-toctext">Implementing a “backdoor”</span></a></li></ul></li><li class="gen-toc_level-1 toc_section-12"><a href="#saml-for-mobile-native-apps"><span class="gen-toctext">SAML for Mobile Native Apps</span></a></li><li class="gen-toc_level-1 toc_section-13"><a href="#testing-saml"><span class="gen-toctext">Testing SAML</span></a></li><li class="gen-toc_level-1 toc_section-14"><a href="#saml-toolkits"><span class="gen-toctext">SAML Toolkits</span></a></li><li class="gen-toc_level-1 toc_section-15"><a href="#reference"><span class="gen-toctext">Reference</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-16"><a href="#saml-20"><span class="gen-toctext">SAML 2.0</span></a></li></ul></li></ul></div></div>                                                      <ul class="nav sidebar-nav" data-item="oan_guidance" data-section=""><li data-name="Okta Application Network" ><a href="/docs/guides/oan_guidance.html">Okta Application Network</a></li></ul>                                                                                      <ul class="nav sidebar-nav" data-item="okta_mobile_connect" data-section=""><li data-name="Okta Mobile Connect" ><a href="/docs/guides/okta_mobile_connect.html">Okta Mobile Connect</a></li></ul>                                                                              <ul class="nav sidebar-nav" data-item="okta_sign-in_widget" data-section=""><li data-name="Okta Sign-In Widget" ><a href="/docs/guides/okta_sign-in_widget.html">Okta Sign-In Widget</a></li></ul>                                <ul class="nav sidebar-nav" data-item="add_mfa" data-section=""><li data-name="Add Multi-Factor Authentication to your App with the Okta Platform" ><a href="/docs/guides/add_mfa.html">Add Multi-Factor Authentication to your App with the Okta Platform</a></li></ul>                                                                                                                                            <ul class="nav sidebar-nav" data-item="setting_up_a_saml_application_in_okta" data-section=""><li data-name="Setting up a SAML application in Okta" ><a href="/docs/guides/setting_up_a_saml_application_in_okta.html">Setting up a SAML application in Okta</a></li></ul>                                                                                  <ul class="nav sidebar-nav" data-item="spring_security_saml" data-section=""><li data-name="Spring Security SAML (Java)" ><a href="/docs/guides/spring_security_saml.html">Spring Security SAML (Java)</a></li></ul>                                                        <ul class="nav sidebar-nav" data-item="pysaml2" data-section=""><li data-name="PySAML2 (Python)" ><a href="/docs/guides/pysaml2.html">PySAML2 (Python)</a></li></ul>                                                                                            <ul class="nav sidebar-nav" data-item="simplesamlphp" data-section=""><li data-name="SimpleSAMLphp (PHP)" ><a href="/docs/guides/simplesamlphp.html">SimpleSAMLphp (PHP)</a></li></ul>        
+		<h2>Guides</h2>                                                                                                                                        <ul class="nav sidebar-nav nav-title"><li data-name="Single Sign-On with Okta" ><a id="toc_current_doc" href="/docs/guides/saml_guidance.html">Single Sign-On with Okta</a></li></ul><div id="gen-toc-container"><div class="gen-toc" id="gen-toc"><div class="gen-toc-title hide"><h2><div id="gen-toctitle" class="caret2 hide">Single Sign-On with Okta</div></h2></div><ul class="nav sidebar-nav hide"><li class="gen-toc_level-1 toc_section-1"><a href="#introduction"><span class="gen-toctext">Introduction</span></a></li><li class="gen-toc_level-1 toc_section-2"><a href="#authentication"><span class="gen-toctext">Authentication</span></a></li><li class="gen-toc_level-1 toc_section-3"><a href="#federated-identity"><span class="gen-toctext">Federated Identity</span></a></li><li class="gen-toc_level-1 toc_section-4"><a href="#planning-for-saml"><span class="gen-toctext">Planning for SAML</span></a></li><li class="gen-toc_level-1 toc_section-5"><a href="#planning-checklist"><span class="gen-toctext">Planning Checklist</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-6"><a href="#understanding-the-role-of-a-service-provider"><span class="gen-toctext">Understanding the role of a Service Provider</span></a></li><li class="gen-toc_level-2 toc_section-7"><a href="#single-idp-vs-multiple-idps"><span class="gen-toctext">Single IDP vs Multiple IDPs</span></a></li><li class="gen-toc_level-2 toc_section-8"><a href="#understanding-sp-initiated-login-flow"><span class="gen-toctext">Understanding SP-initiated Login Flow</span></a></li><li class="gen-toc_level-2 toc_section-9"><a href="#exposing-saml-configuration-in-sp"><span class="gen-toctext">Exposing SAML configuration in SP</span></a></li><li class="gen-toc_level-2 toc_section-10"><a href="#enabling-saml-for-everyone-vs-a-subset-of-users"><span class="gen-toctext">Enabling SAML for everyone vs a subset of users</span></a></li><li class="gen-toc_level-2 toc_section-11"><a href="#implementing-a-backdoor"><span class="gen-toctext">Implementing a “backdoor”</span></a></li></ul></li><li class="gen-toc_level-1 toc_section-12"><a href="#saml-for-mobile-native-apps"><span class="gen-toctext">SAML for Mobile Native Apps</span></a></li><li class="gen-toc_level-1 toc_section-13"><a href="#testing-saml"><span class="gen-toctext">Testing SAML</span></a></li><li class="gen-toc_level-1 toc_section-14"><a href="#saml-toolkits"><span class="gen-toctext">SAML Toolkits</span></a></li><li class="gen-toc_level-1 toc_section-15"><a href="#reference"><span class="gen-toctext">Reference</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-16"><a href="#saml-20"><span class="gen-toctext">SAML 2.0</span></a></li></ul></li></ul></div></div>                                                      <ul class="nav sidebar-nav" data-item="oan_guidance" data-section=""><li data-name="Okta Application Network" ><a href="/docs/guides/oan_guidance.html">Okta Application Network</a></li></ul>                                                                                          <ul class="nav sidebar-nav" data-item="okta_mobile_connect" data-section=""><li data-name="Okta Mobile Connect" ><a href="/docs/guides/okta_mobile_connect.html">Okta Mobile Connect</a></li></ul>                                                                                <ul class="nav sidebar-nav" data-item="okta_sign-in_widget" data-section=""><li data-name="Okta Sign-In Widget" ><a href="/docs/guides/okta_sign-in_widget.html">Okta Sign-In Widget</a></li></ul>                                <ul class="nav sidebar-nav" data-item="add_mfa" data-section=""><li data-name="Add Multi-Factor Authentication to your App with the Okta Platform" ><a href="/docs/guides/add_mfa.html">Add Multi-Factor Authentication to your App with the Okta Platform</a></li></ul>                                                                                                                                                <ul class="nav sidebar-nav" data-item="setting_up_a_saml_application_in_okta" data-section=""><li data-name="Setting up a SAML application in Okta" ><a href="/docs/guides/setting_up_a_saml_application_in_okta.html">Setting up a SAML application in Okta</a></li></ul>                                                                                    <ul class="nav sidebar-nav" data-item="spring_security_saml" data-section=""><li data-name="Spring Security SAML (Java)" ><a href="/docs/guides/spring_security_saml.html">Spring Security SAML (Java)</a></li></ul>                                                          <ul class="nav sidebar-nav" data-item="pysaml2" data-section=""><li data-name="PySAML2 (Python)" ><a href="/docs/guides/pysaml2.html">PySAML2 (Python)</a></li></ul>                                                                                              <ul class="nav sidebar-nav" data-item="simplesamlphp" data-section=""><li data-name="SimpleSAMLphp (PHP)" ><a href="/docs/guides/simplesamlphp.html">SimpleSAMLphp (PHP)</a></li></ul>        
 		</div>
 	</div>
 </div>
@@ -415,6 +411,57 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
 		
 
 	</div>
+
+	
+		
+<!-- Remarketing tag -->
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		var google_conversion_id = 1006913831;
+		var google_custom_params = window.google_tag_params;
+		var google_remarketing_only = true;
+		/* ]]> */
+	</script>
+	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+	</script>
+	<noscript>
+		<div style="display:inline;">
+			<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"/>
+		</div>
+	</noscript>
+<!-- End Remarketing tag -->
+
+<!-- Crazy Egg Tracking -->
+<script type="text/javascript">
+setTimeout(function(){var a=document.createElement("script");
+var b=document.getElementsByTagName("script")[0];
+a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+</script>
+<!-- End Crazy Egg Tracking -->
+
+<footer class="site-footer">
+	<div class="wrap">
+
+		<ul>
+			<li><a href="http://www.okta.com" target="_blank">Okta.com</a></li>
+			<li><a href="/blog">Blog</a></li>
+			<li><a href="/terms/">Terms &amp; Conditions</a></li>
+			<li><a href="/privacy/">Privacy Policy</a></li>
+			<li><a href="http://okta.com/developer/contact/">Contact Sales</a></li>
+			<li><a href="mailto:developers@okta.com">Contact Support</a></li>
+		</ul>
+
+		<ul>
+			<li><a class="icon" href="http://github.com/okta" target="_blank"><i class="fa fa-github"></i></a></li>
+			<li><a class="icon" href="http://twitter.com/okta" target="_blank"><i class="fa fa-twitter"></i></a></li>
+			<li><a class="icon" href="http://stackoverflow.com/search?q=okta" target="_blank"><i class="fa fa-stack-overflow"></i></a></li>
+			<li><a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a></li>
+			<li><a class="icon" href="http://community.okta.com" target="_blank"><i class="fa fa-comments"></i></a></li>
+		</ul>
+
+	</div>
+</footer>
 
 	
 </body>

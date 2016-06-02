@@ -16,13 +16,13 @@
 	<title>Users | Okta Developer</title>
 	<meta name="description" content="Secure, scalable, and highly available authentication and user management for any app.">
 
-	<link rel="canonical" href="http://developer.okta.com/docs/api/resources/users.html">
+	<link rel="canonical" href="http://developer.okta.com/docs/api/resources/users">
 
 	<link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/assets/css/animate.css">
 	<link rel="stylesheet" href="/assets/css/master.css">
-	<link rel="stylesheet" href="/assets/css/layout-docs.css">
 	
+	<link rel="stylesheet" href="/assets/css/layout-docs.css">
 	<link rel="stylesheet" href="/assets/css/responsive.css">
 
 
@@ -33,8 +33,8 @@
 	<script type="text/javascript" defer="defer" src="/assets/js/master.js"></script>
 	<script type="text/javascript" defer="defer" src="/assets/js/scrollspy.js"></script>
 
-	<script type="text/javascript" defer="defer" src="/assets/js/docs.js"></script>
 	
+	<script type="text/javascript" defer="defer" src="/assets/js/docs.js"></script>
 	<!-- TypeKit -->
 	<script src="//use.typekit.net/pls8pog.js"></script>
 	<script>try{Typekit.load();}catch(e){}</script>
@@ -51,10 +51,6 @@
 
 
 
-
-  
-  
-  
 
 <body id="docs">
 
@@ -128,7 +124,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	<span class="toggle-menu"></span>
 	<div id="sidebar-wrapper">
 		<div class="docs-sidebar-block" id="myScrollspy" >
-		<h2>Getting Started</h2>              <ul class="nav sidebar-nav" data-item="design_principles" data-section="users"><li data-name="Design Principles" ><a href="/docs/api/getting_started/design_principles.html">Design Principles</a></li></ul>                                                                                  <ul class="nav sidebar-nav" data-item="error_codes" data-section="users"><li data-name="Error Codes" ><a href="/docs/api/getting_started/error_codes.html">Error Codes</a></li></ul>                                                                                    <ul class="nav sidebar-nav" data-item="getting_a_token" data-section="users"><li data-name="Getting a Token" ><a href="/docs/api/getting_started/getting_a_token.html">Getting a Token</a></li></ul>                                                                  <ul class="nav sidebar-nav" data-item="enabling_cors" data-section="users"><li data-name="Enabling CORS" ><a href="/docs/api/getting_started/enabling_cors.html">Enabling CORS</a></li></ul>                                                                <ul class="nav sidebar-nav" data-item="api_test_client" data-section="users"><li data-name="API Test Client" ><a href="/docs/api/getting_started/api_test_client.html">API Test Client</a></li></ul>                                                                                                                <ul class="nav sidebar-nav" data-item="okta_expression_lang" data-section="users"><li data-name="Okta Expression Language" ><a href="/docs/api/getting_started/okta_expression_lang.html">Okta Expression Language</a></li></ul>                                  <h2>Authentication</h2>          <ul class="nav sidebar-nav" data-item="authn" data-section="users"><li data-name="Authentication API" ><a href="/docs/api/resources/authn.html">Authentication API</a></li></ul>                                                                                                        <ul class="nav sidebar-nav" data-item="oidc" data-section="users"><li data-name="OpenID Connect" ><a href="/docs/api/resources/oidc.html">OpenID Connect</a></li></ul>                                                                                                            <ul class="nav sidebar-nav" data-item="social_authentication" data-section="users"><li data-name="Social Authentication" ><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li></ul>                                                                      <ul class="nav sidebar-nav" data-item="sessions" data-section="users"><li data-name="Sessions" ><a href="/docs/api/resources/sessions.html">Sessions</a></li></ul>                                                            <ul class="nav sidebar-nav" data-item="okta_signin_widget" data-section="users"><li data-name="Okta Sign-In Widget" ><a href="/docs/api/resources/okta_signin_widget.html">Okta Sign-In Widget</a></li></ul>                            <h2>Resources</h2>                                                                            <ul class="nav sidebar-nav nav-title"><li data-name="Users" class="on"><a id="toc_current_doc" href="/docs/api/resources/users.html">Users</a></li></ul><div id="gen-toc-container"><div class="gen-toc" id="gen-toc"><div class="gen-toc-title hide"><h2><div id="gen-toctitle" class="caret2 hide">Users</div></h2></div><ul class="nav sidebar-nav hide"><li class="gen-toc_level-1 toc_section-1"><a href="#overview"><span class="gen-toctext">Overview</span></a></li><li class="gen-toc_level-1 toc_section-2"><a href="#user-model"><span class="gen-toctext">User Model</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-3"><a href="#example"><span class="gen-toctext">Example</span></a></li><li class="gen-toc_level-2 toc_section-4"><a href="#user-properties"><span class="gen-toctext">User Properties</span></a></li><li class="gen-toc_level-2 toc_section-5"><a href="#user-status"><span class="gen-toctext">User Status</span></a></li><li class="gen-toc_level-2 toc_section-6"><a href="#understanding-user-status-values"><span class="gen-toctext">Understanding User Status Values</span></a></li><li class="gen-toc_level-2 toc_section-7"><a href="#profile-object"><span class="gen-toctext">Profile Object</span></a></li><li class="gen-toc_level-2 toc_section-8"><a href="#credentials-object"><span class="gen-toctext">Credentials Object</span></a></li><li class="gen-toc_level-2 toc_section-9"><a href="#links-object"><span class="gen-toctext">Links Object</span></a></li></ul></li><li class="gen-toc_level-1 toc_section-10"><a href="#user-operations"><span class="gen-toctext">User Operations</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-11"><a href="#create-user"><span class="gen-toctext">Create User</span></a></li><li class="gen-toc_level-2 toc_section-12"><a href="#get-user"><span class="gen-toctext">Get User</span></a></li><li class="gen-toc_level-2 toc_section-13"><a href="#list-users"><span class="gen-toctext">List Users</span></a></li><li class="gen-toc_level-2 toc_section-14"><a href="#update-user"><span class="gen-toctext">Update User</span></a></li></ul></li><li class="gen-toc_level-1 toc_section-15"><a href="#related-resources"><span class="gen-toctext">Related Resources</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-16"><a href="#get-assigned-app-links"><span class="gen-toctext">Get Assigned App Links</span></a></li><li class="gen-toc_level-2 toc_section-17"><a href="#get-member-groups"><span class="gen-toctext">Get Member Groups</span></a></li></ul></li><li class="gen-toc_level-1 toc_section-18"><a href="#lifecycle-operations"><span class="gen-toctext">Lifecycle Operations</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-19"><a href="#activate-user"><span class="gen-toctext">Activate User</span></a></li><li class="gen-toc_level-2 toc_section-20"><a href="#deactivate-user"><span class="gen-toctext">Deactivate User</span></a></li><li class="gen-toc_level-2 toc_section-21"><a href="#suspend-user"><span class="gen-toctext">Suspend User</span></a></li><li class="gen-toc_level-2 toc_section-22"><a href="#unsuspend-user"><span class="gen-toctext">Unsuspend User</span></a></li><li class="gen-toc_level-2 toc_section-23"><a href="#unlock-user"><span class="gen-toctext">Unlock User</span></a></li><li class="gen-toc_level-2 toc_section-24"><a href="#reset-password"><span class="gen-toctext">Reset Password</span></a></li><li class="gen-toc_level-2 toc_section-25"><a href="#expire-password"><span class="gen-toctext">Expire Password</span></a></li><li class="gen-toc_level-2 toc_section-26"><a href="#reset-factors"><span class="gen-toctext">Reset Factors</span></a></li></ul></li><li class="gen-toc_level-1 toc_section-27"><a href="#credential-operations"><span class="gen-toctext">Credential Operations</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-28"><a href="#forgot-password"><span class="gen-toctext">Forgot Password</span></a></li><li class="gen-toc_level-2 toc_section-29"><a href="#change-password"><span class="gen-toctext">Change Password</span></a></li><li class="gen-toc_level-2 toc_section-30"><a href="#change-recovery-question"><span class="gen-toctext">Change Recovery Question</span></a></li></ul></li></ul></div></div>                          <ul class="nav sidebar-nav" data-item="factors" data-section="users"><li data-name="Factors (MFA)" ><a href="/docs/api/resources/factors.html">Factors (MFA)</a></li></ul>                                                                                <ul class="nav sidebar-nav" data-item="groups" data-section="users"><li data-name="Groups" ><a href="/docs/api/resources/groups.html">Groups</a></li></ul>                                                      <ul class="nav sidebar-nav" data-item="apps" data-section="users"><li data-name="Apps" ><a href="/docs/api/resources/apps.html">Apps</a></li></ul>                                                                                                                              <ul class="nav sidebar-nav" data-item="schemas" data-section="users"><li data-name="Schemas" ><a href="/docs/api/resources/schemas.html">Schemas</a></li></ul>                                                  <ul class="nav sidebar-nav" data-item="idps" data-section="users"><li data-name="Identity Providers" ><a href="/docs/api/resources/idps.html">Identity Providers</a></li></ul>                                                                                                  <ul class="nav sidebar-nav" data-item="roles" data-section="users"><li data-name="Admin Roles" ><a href="/docs/api/resources/roles.html">Admin Roles</a></li></ul>                                            <ul class="nav sidebar-nav" data-item="events" data-section="users"><li data-name="Events" ><a href="/docs/api/resources/events.html">Events</a></li></ul>                                                      
+		<h2>Getting Started</h2>              <ul class="nav sidebar-nav" data-item="design_principles" data-section="users"><li data-name="Design Principles" ><a href="/docs/api/getting_started/design_principles.html">Design Principles</a></li></ul>                                                                                    <ul class="nav sidebar-nav" data-item="error_codes" data-section="users"><li data-name="Error Codes" ><a href="/docs/api/getting_started/error_codes.html">Error Codes</a></li></ul>                                                                                      <ul class="nav sidebar-nav" data-item="getting_a_token" data-section="users"><li data-name="Getting a Token" ><a href="/docs/api/getting_started/getting_a_token.html">Getting a Token</a></li></ul>                                                                    <ul class="nav sidebar-nav" data-item="enabling_cors" data-section="users"><li data-name="Enabling CORS" ><a href="/docs/api/getting_started/enabling_cors.html">Enabling CORS</a></li></ul>                                                                  <ul class="nav sidebar-nav" data-item="api_test_client" data-section="users"><li data-name="API Test Client" ><a href="/docs/api/getting_started/api_test_client.html">API Test Client</a></li></ul>                                                                                                                    <ul class="nav sidebar-nav" data-item="okta_expression_lang" data-section="users"><li data-name="Okta Expression Language" ><a href="/docs/api/getting_started/okta_expression_lang.html">Okta Expression Language</a></li></ul>                                  <h2>Authentication</h2>          <ul class="nav sidebar-nav" data-item="authn" data-section="users"><li data-name="Authentication API" ><a href="/docs/api/resources/authn.html">Authentication API</a></li></ul>                                                                                                          <ul class="nav sidebar-nav" data-item="oauth2" data-section="users"><li data-name="OAuth 2.0" ><a href="/docs/api/resources/oauth2.html">OAuth 2.0</a></li></ul>                                                                                <ul class="nav sidebar-nav" data-item="oidc" data-section="users"><li data-name="OpenID Connect" ><a href="/docs/api/resources/oidc.html">OpenID Connect</a></li></ul>                                                                                                              <ul class="nav sidebar-nav" data-item="social_authentication" data-section="users"><li data-name="Social Authentication" ><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li></ul>                                                                        <ul class="nav sidebar-nav" data-item="sessions" data-section="users"><li data-name="Sessions" ><a href="/docs/api/resources/sessions.html">Sessions</a></li></ul>                                                              <ul class="nav sidebar-nav" data-item="okta_signin_widget" data-section="users"><li data-name="Okta Sign-In Widget" ><a href="/docs/api/resources/okta_signin_widget.html">Okta Sign-In Widget</a></li></ul>                            <h2>Resources</h2>                                                                              <ul class="nav sidebar-nav nav-title"><li data-name="Users" class="on"><a id="toc_current_doc" href="/docs/api/resources/users.html">Users</a></li></ul><div id="gen-toc-container"><div class="gen-toc" id="gen-toc"><div class="gen-toc-title hide"><h2><div id="gen-toctitle" class="caret2 hide">Users</div></h2></div><ul class="nav sidebar-nav hide"><li class="gen-toc_level-1 toc_section-1"><a href="#overview"><span class="gen-toctext">Overview</span></a></li><li class="gen-toc_level-1 toc_section-2"><a href="#user-model"><span class="gen-toctext">User Model</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-3"><a href="#example"><span class="gen-toctext">Example</span></a></li><li class="gen-toc_level-2 toc_section-4"><a href="#user-properties"><span class="gen-toctext">User Properties</span></a></li><li class="gen-toc_level-2 toc_section-5"><a href="#user-status"><span class="gen-toctext">User Status</span></a></li><li class="gen-toc_level-2 toc_section-6"><a href="#understanding-user-status-values"><span class="gen-toctext">Understanding User Status Values</span></a></li><li class="gen-toc_level-2 toc_section-7"><a href="#profile-object"><span class="gen-toctext">Profile Object</span></a></li><li class="gen-toc_level-2 toc_section-8"><a href="#credentials-object"><span class="gen-toctext">Credentials Object</span></a></li><li class="gen-toc_level-2 toc_section-9"><a href="#links-object"><span class="gen-toctext">Links Object</span></a></li></ul></li><li class="gen-toc_level-1 toc_section-10"><a href="#user-operations"><span class="gen-toctext">User Operations</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-11"><a href="#create-user"><span class="gen-toctext">Create User</span></a></li><li class="gen-toc_level-2 toc_section-12"><a href="#get-user"><span class="gen-toctext">Get User</span></a></li><li class="gen-toc_level-2 toc_section-13"><a href="#list-users"><span class="gen-toctext">List Users</span></a></li><li class="gen-toc_level-2 toc_section-14"><a href="#update-user"><span class="gen-toctext">Update User</span></a></li></ul></li><li class="gen-toc_level-1 toc_section-15"><a href="#related-resources"><span class="gen-toctext">Related Resources</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-16"><a href="#get-assigned-app-links"><span class="gen-toctext">Get Assigned App Links</span></a></li><li class="gen-toc_level-2 toc_section-17"><a href="#get-member-groups"><span class="gen-toctext">Get Member Groups</span></a></li></ul></li><li class="gen-toc_level-1 toc_section-18"><a href="#lifecycle-operations"><span class="gen-toctext">Lifecycle Operations</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-19"><a href="#activate-user"><span class="gen-toctext">Activate User</span></a></li><li class="gen-toc_level-2 toc_section-20"><a href="#deactivate-user"><span class="gen-toctext">Deactivate User</span></a></li><li class="gen-toc_level-2 toc_section-21"><a href="#suspend-user"><span class="gen-toctext">Suspend User</span></a></li><li class="gen-toc_level-2 toc_section-22"><a href="#unsuspend-user"><span class="gen-toctext">Unsuspend User</span></a></li><li class="gen-toc_level-2 toc_section-23"><a href="#unlock-user"><span class="gen-toctext">Unlock User</span></a></li><li class="gen-toc_level-2 toc_section-24"><a href="#reset-password"><span class="gen-toctext">Reset Password</span></a></li><li class="gen-toc_level-2 toc_section-25"><a href="#expire-password"><span class="gen-toctext">Expire Password</span></a></li><li class="gen-toc_level-2 toc_section-26"><a href="#reset-factors"><span class="gen-toctext">Reset Factors</span></a></li></ul></li><li class="gen-toc_level-1 toc_section-27"><a href="#credential-operations"><span class="gen-toctext">Credential Operations</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-28"><a href="#forgot-password"><span class="gen-toctext">Forgot Password</span></a></li><li class="gen-toc_level-2 toc_section-29"><a href="#change-password"><span class="gen-toctext">Change Password</span></a></li><li class="gen-toc_level-2 toc_section-30"><a href="#change-recovery-question"><span class="gen-toctext">Change Recovery Question</span></a></li></ul></li></ul></div></div>                          <ul class="nav sidebar-nav" data-item="factors" data-section="users"><li data-name="Factors (MFA)" ><a href="/docs/api/resources/factors.html">Factors (MFA)</a></li></ul>                                                                                  <ul class="nav sidebar-nav" data-item="groups" data-section="users"><li data-name="Groups" ><a href="/docs/api/resources/groups.html">Groups</a></li></ul>                                                        <ul class="nav sidebar-nav" data-item="apps" data-section="users"><li data-name="Apps" ><a href="/docs/api/resources/apps.html">Apps</a></li></ul>                                                                                                                                  <ul class="nav sidebar-nav" data-item="schemas" data-section="users"><li data-name="Schemas" ><a href="/docs/api/resources/schemas.html">Schemas</a></li></ul>                                                  <ul class="nav sidebar-nav" data-item="idps" data-section="users"><li data-name="Identity Providers" ><a href="/docs/api/resources/idps.html">Identity Providers</a></li></ul>                                                                                                      <ul class="nav sidebar-nav" data-item="roles" data-section="users"><li data-name="Admin Roles" ><a href="/docs/api/resources/roles.html">Admin Roles</a></li></ul>                                            <ul class="nav sidebar-nav" data-item="events" data-section="users"><li data-name="Events" ><a href="/docs/api/resources/events.html">Events</a></li></ul>                                                        
 		</div>
 	</div>
 </div>
@@ -1133,6 +1129,7 @@ When running reports, remember that the data is valid as of the last login or li
   <li><a href="#create-user-with-password">Create User with Password</a></li>
   <li><a href="#create-user-with-password--recovery-question">Create User with Password &amp; Recovery Question</a></li>
   <li><a href="#create-user-with-authentication-provider">Create User with Authentication Provider</a></li>
+  <li><a href="#create-user-in-group">Create User in Group</a></li>
 </ul>
 
 <h5 class="api api-request api-request-params" id="request-parameters">Request Parameters</h5>
@@ -1178,6 +1175,14 @@ When running reports, remember that the data is valid as of the last login or li
       <td>Credentials for user</td>
       <td>Body</td>
       <td><a href="#credentials-object">Credentials Object</a></td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>groupIds</td>
+      <td>Ids of groups that user will be immediately added to at time of creation</td>
+      <td>Body</td>
+      <td>Array of Group Ids</td>
       <td>FALSE</td>
       <td> </td>
     </tr>
@@ -1602,6 +1607,65 @@ When running reports, remember that the data is valid as of the last login or li
 </span></code></pre>
 </div>
 
+<h4 class="api api-operation" id="create-user-in-group">Create User in Group</h4>
+
+<p>Creates a user that is immediately added the specified groups upon creation.  This supplemental function can be used in conjunction with the other create operations.  This function is necessary for a User Admin that is scoped to only create users in specified groups.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-5">Request Example</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+-d <span class="s1">'{
+  "profile": {
+    "firstName": "Isaac",
+    "lastName": "Brock",
+    "email": "isaac.brock@example.com",
+    "login": "isaac.brock@example.com",
+    "mobilePhone": "555-415-1337"
+  },
+  "groupIds": [
+    "00g1emaKYZTWRYYRRTSK",
+    "00garwpuyxHaWOkdV0g4"
+  ]
+}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users?activate=false"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-5">Response Example</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STAGED"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-07-02T21:36:25.344Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"activated"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"statusChanged"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastLogin"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-07-02T21:36:25.344Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"passwordChanged"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isaac"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brock"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"isaac.brock@example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"isaac.brock@example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"mobilePhone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"555-415-1337"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OKTA"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OKTA"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"activate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
 <h3 class="api api-operation" id="get-user">Get User</h3>
 
 <p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users/<em>:id</em></span><span class="api-label api-label-cors api-uri-template-cors pull-right"><i class="fa fa-cloud-download"></i> CORS</span></p>
@@ -1673,7 +1737,7 @@ When running reports, remember that the data is valid as of the last login or li
 
 <p>Fetches the current user linked to API token or session cookie.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-5">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-6">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -1683,7 +1747,7 @@ When running reports, remember that the data is valid as of the last login or li
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-5">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-6">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
@@ -1742,7 +1806,7 @@ When running reports, remember that the data is valid as of the last login or li
 
 <p>Fetches a specific user when you know the user’s <code class="highlighter-rouge">id</code>. See the filters section below for an example of fetching multiple ids.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-6">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-7">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -1752,7 +1816,7 @@ When running reports, remember that the data is valid as of the last login or li
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-6">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-7">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
@@ -1815,7 +1879,7 @@ When running reports, remember that the data is valid as of the last login or li
   <p>When fetching a user by <code class="highlighter-rouge">login</code>, you should <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encode</a> the request parameter to ensure special characters are escaped properly.  Logins with a <code class="highlighter-rouge">/</code> character can only be fetched by <code class="highlighter-rouge">id</code> due to URL issues with escaping the <code class="highlighter-rouge">/</code> character.</p>
 </blockquote>
 
-<h5 class="api api-request api-request-example" id="request-example-7">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-8">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -1825,7 +1889,7 @@ When running reports, remember that the data is valid as of the last login or li
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-7">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-8">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
@@ -1888,7 +1952,7 @@ When running reports, remember that the data is valid as of the last login or li
   <p>When fetching a user by <code class="highlighter-rouge">login shortname</code>, you should <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encode</a> the request parameter to ensure special characters are escaped properly.  Logins with a <code class="highlighter-rouge">/</code> character can only be fetched by ‘id’ due to URL issues with escaping the <code class="highlighter-rouge">/</code> character.</p>
 </blockquote>
 
-<h5 class="api api-request api-request-example" id="request-example-8">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-9">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -1898,7 +1962,7 @@ When running reports, remember that the data is valid as of the last login or li
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-8">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-9">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
@@ -2043,7 +2107,7 @@ When running reports, remember that the data is valid as of the last login or li
 
 <p>If you don’t specify any query, returns a list of all users that do not have a status of <code class="highlighter-rouge">DEPROVISIONED</code>, up to the maximum (200 for most orgs).</p>
 
-<h5 class="api api-request api-request-example" id="request-example-9">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-10">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2053,7 +2117,7 @@ When running reports, remember that the data is valid as of the last login or li
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-9">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-10">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -2157,7 +2221,7 @@ The value of <code class="highlighter-rouge">q</code> is matched against <code c
   <li>Performs a startsWith match but this is an implementation detail and may change without notice. You don’t need to specify <code class="highlighter-rouge">firstName</code>, <code class="highlighter-rouge">lastName</code>, or <code class="highlighter-rouge">email</code>.</li>
 </ul>
 
-<h5 class="api api-request api-request-example" id="request-example-10">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-11">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2167,7 +2231,7 @@ The value of <code class="highlighter-rouge">q</code> is matched against <code c
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-10">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-11">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -2355,7 +2419,7 @@ Examples use cURL-style escaping instead of URL encoding to make them easier to 
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-11">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-12">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -2425,7 +2489,7 @@ Examples use cURL-style escaping instead of URL encoding to make them easier to 
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-12">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-13">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -2487,10 +2551,10 @@ Examples use cURL-style escaping instead of URL encoding to make them easier to 
 
 <blockquote>
   <p>Listing users with search is an Early Access feature which you can request from Okta Support.
-It’s been tested to the same level as Generally Available (GA) features, so you  can use it in a production environment. </p>
+It’s been tested to the same level as Generally Available (GA) features, so you  can use it in a production environment.</p>
 </blockquote>
 
-<p>Searches for user by the properties specified in the search parameter (case insensitive). </p>
+<p>Searches for user by the properties specified in the search parameter (case insensitive).</p>
 
 <p>This operation:</p>
 
@@ -2501,11 +2565,11 @@ For example, <code class="highlighter-rouge">search=profile.department eq "Engin
 Examples use cURL-style escaping instead of URL encoding to make them easier to read.</li>
   <li>Queries data from a replicated store, so changes aren’t always immediately available in search results. 
 Don’t use search results directly for record updates, as the data might be stale and therefore overwrite newer data (data loss). 
-Use an Id lookup for records that you update to ensure your results contain the latest data. </li>
+Use an Id lookup for records that you update to ensure your results contain the latest data.</li>
   <li>Searches many properties:
     <ul>
       <li>Any user profile property, including custom-defined properties</li>
-      <li>The top-level properties <code class="highlighter-rouge">id</code>, <code class="highlighter-rouge">status</code>, <code class="highlighter-rouge">created</code>, <code class="highlighter-rouge">activated</code>, <code class="highlighter-rouge">statusChanged</code> and <code class="highlighter-rouge">lastUpdated</code> </li>
+      <li>The top-level properties <code class="highlighter-rouge">id</code>, <code class="highlighter-rouge">status</code>, <code class="highlighter-rouge">created</code>, <code class="highlighter-rouge">activated</code>, <code class="highlighter-rouge">statusChanged</code> and <code class="highlighter-rouge">lastUpdated</code></li>
     </ul>
 
     <table>
@@ -2559,7 +2623,7 @@ Use an Id lookup for records that you update to ensure your results contain the 
 </code></pre>
 </div>
 
-<h5 class="api api-request api-request-example" id="request-example-11">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-12">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2569,7 +2633,7 @@ Use an Id lookup for records that you update to ensure your results contain the 
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-13">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-14">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -2638,7 +2702,7 @@ For examples, see <a href="#request-example-for-array">Request Example for Array
 
 <h5 class="api api-request api-request-example" id="request-example-for-array">Request Example for Array</h5>
 
-<p>The following example is for a custom attribute on User, an array of strings named <code class="highlighter-rouge">arrayAttr</code> that contains values <code class="highlighter-rouge">["arrayAttrVal1", "arrayAttrVal2"...]</code>. </p>
+<p>The following example is for a custom attribute on User, an array of strings named <code class="highlighter-rouge">arrayAttr</code> that contains values <code class="highlighter-rouge">["arrayAttrVal1", "arrayAttrVal2"...]</code>.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2773,7 +2837,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 
 <h4 class="api api-operation" id="update-profile">Update Profile</h4>
 
-<h5 class="api api-request api-request-example" id="request-example-12">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-13">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X PUT <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2786,132 +2850,6 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
     "email": "isaac.brock@update.example.com",
     "login": "isaac.brock@example.com",
     "mobilePhone": "555-415-1337"
-  }
-}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"</span>
-</code></pre>
-</div>
-
-<h5 class="api api-response api-response-example" id="response-example-14">Response Example</h5>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-06-24T16:39:18.000Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"activated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-06-24T16:39:19.000Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"statusChanged"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-06-24T16:39:19.000Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"lastLogin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-06-24T17:39:19.000Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-07-02T21:36:25.344Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"passwordChanged"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-07-02T21:36:25.344Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isaac"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brock"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"isaac.brock@update.example.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"isaac.brock@example.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"mobilePhone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"555-415-1337"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-    </span><span class="nt">"recovery_question"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Who's a major player in the cowboy scene?"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OKTA"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OKTA"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"resetPassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"resetFactors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"expirePassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"forgotPassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"changeRecoveryQuestion"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"changePassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/<em>:id</em></span></p>
-
-<p>Update a user’s profile or credentials with partial update semantics.</p>
-
-<blockquote>
-  <p>Use the <code class="highlighter-rouge">POST</code> method for partial updates, because unspecified properties aren’t changed with <code class="highlighter-rouge">POST</code>. </p>
-</blockquote>
-
-<h5 class="api api-request api-request-params" id="request-parameters-4">Request Parameters</h5>
-
-<table>
-  <thead>
-    <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>Param Type</th>
-      <th>DataType</th>
-      <th>Required</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>id</td>
-      <td><code class="highlighter-rouge">id</code> of user to update</td>
-      <td>URL</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>profile</td>
-      <td>Updated profile for user</td>
-      <td>Body</td>
-      <td><a href="#profile-object">Profile Object</a></td>
-      <td>FALSE</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>credentials</td>
-      <td>Update credentials for user</td>
-      <td>Body</td>
-      <td><a href="#credentials-object">Credentials Object</a></td>
-      <td>FALSE</td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<p><code class="highlighter-rouge">profile</code> and <code class="highlighter-rouge">credentials</code> can be updated independently or with a single request.</p>
-
-<h5 class="api api-response api-response-params" id="response-parameters-4">Response Parameters</h5>
-
-<p>Updated <a href="#user-model">User</a></p>
-
-<h4 class="api api-operation" id="update-profile-1">Update Profile</h4>
-
-<h5 class="api api-request api-request-example" id="request-example-13">Request Example</h5>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
--H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
--d <span class="s1">'{
-  "profile": {
-    "email": "isaac.brock@update.example.com"
   }
 }'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"</span>
 </code></pre>
@@ -2972,11 +2910,137 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 </span></code></pre>
 </div>
 
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/<em>:id</em></span></p>
+
+<p>Update a user’s profile or credentials with partial update semantics.</p>
+
+<blockquote>
+  <p>Use the <code class="highlighter-rouge">POST</code> method for partial updates, because unspecified properties aren’t changed with <code class="highlighter-rouge">POST</code>.</p>
+</blockquote>
+
+<h5 class="api api-request api-request-params" id="request-parameters-4">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><code class="highlighter-rouge">id</code> of user to update</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>profile</td>
+      <td>Updated profile for user</td>
+      <td>Body</td>
+      <td><a href="#profile-object">Profile Object</a></td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>credentials</td>
+      <td>Update credentials for user</td>
+      <td>Body</td>
+      <td><a href="#credentials-object">Credentials Object</a></td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="highlighter-rouge">profile</code> and <code class="highlighter-rouge">credentials</code> can be updated independently or with a single request.</p>
+
+<h5 class="api api-response api-response-params" id="response-parameters-4">Response Parameters</h5>
+
+<p>Updated <a href="#user-model">User</a></p>
+
+<h4 class="api api-operation" id="update-profile-1">Update Profile</h4>
+
+<h5 class="api api-request api-request-example" id="request-example-14">Request Example</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+-d <span class="s1">'{
+  "profile": {
+    "email": "isaac.brock@update.example.com"
+  }
+}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-16">Response Example</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-06-24T16:39:18.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"activated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-06-24T16:39:19.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"statusChanged"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-06-24T16:39:19.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastLogin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-06-24T17:39:19.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-07-02T21:36:25.344Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"passwordChanged"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-07-02T21:36:25.344Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isaac"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brock"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"isaac.brock@update.example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"isaac.brock@example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"mobilePhone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"555-415-1337"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="nt">"recovery_question"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Who's a major player in the cowboy scene?"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OKTA"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OKTA"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"resetPassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"resetFactors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"expirePassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"forgotPassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"changeRecoveryQuestion"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"changePassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
 <h4 class="api api-operation" id="set-password">Set Password</h4>
 
 <p>This is an administrative operation and does not validate existing user credentials.  For operations that validate credentials refer to <a href="#reset-password">Reset Password</a>, <a href="#forgot-password">Forgot Password</a>, and <a href="#change-password">Change Password</a>.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-14">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-15">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2990,7 +3054,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-16">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-17">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
@@ -3049,7 +3113,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 
 <p>This is an administrative operation and doesn’t validate existing user credentials. See <a href="#change-recovery-question">Change Recovery Question</a> for an operation that requires validation.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-15">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-16">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3066,7 +3130,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-17">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-18">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
@@ -3158,7 +3222,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 
 <p>Array of App Links</p>
 
-<h5 class="api api-request api-request-example" id="request-example-16">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-17">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3168,7 +3232,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-18">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-19">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -3258,7 +3322,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 
 <p>Array of <a href="groups.html">Groups</a></p>
 
-<h5 class="api api-request api-request-example" id="request-example-17">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-18">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3268,7 +3332,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-19">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-20">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -3350,7 +3414,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
   <p>If a password was set before the user was activated, then user must login with with their password and not the activation link</p>
 </blockquote>
 
-<h5 class="api api-request api-request-example" id="request-example-18">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-19">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3360,7 +3424,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-20">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-21">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"activationUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/welcome/XE6wE17zmphl3KqAPFxO"</span><span class="w">
@@ -3407,7 +3471,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 
 <p>Returns an empty object.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-19">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-20">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3417,7 +3481,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-21">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-22">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -3428,7 +3492,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/<em>:id</em>/lifecycle/suspend</span></p>
 
-<p>Suspends a user.  This operation can only be performed on users with an <code class="highlighter-rouge">ACTIVE</code> status.  The user will have a status of <code class="highlighter-rouge">SUSPENDED</code> when the process is complete. </p>
+<p>Suspends a user.  This operation can only be performed on users with an <code class="highlighter-rouge">ACTIVE</code> status.  The user will have a status of <code class="highlighter-rouge">SUSPENDED</code> when the process is complete.</p>
 
 <blockquote>
   <p>Suspended users cannot log in to Okta. Their group and app assignments are retained.<br />
@@ -3462,12 +3526,12 @@ Suspended users can only be unsuspended or deactivated.</p>
 
 <h5 class="api api-response api-response-params" id="response-parameters-9">Response Parameters</h5>
 
-<p>Returns an empty object. </p>
+<p>Returns an empty object.</p>
 
 <p>Passing an invalid <code class="highlighter-rouge">id</code> returns a <code class="highlighter-rouge">404 Not Found</code> status code with error code <code class="highlighter-rouge">E0000007</code>.
 Passing an <code class="highlighter-rouge">id</code> that is not in the <code class="highlighter-rouge">ACTIVE</code> state returns a <code class="highlighter-rouge">400 Bad Request</code> status code with error code <code class="highlighter-rouge">E0000001</code>.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-20">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-21">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3477,7 +3541,7 @@ Passing an <code class="highlighter-rouge">id</code> that is not in the <code cl
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-22">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-23">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -3488,7 +3552,7 @@ Passing an <code class="highlighter-rouge">id</code> that is not in the <code cl
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/<em>:id</em>/lifecycle/unsuspend</span></p>
 
-<p>Unsuspends users and returns then to the <code class="highlighter-rouge">ACTIVE</code> state.  This operation can only be performed on users that have a <code class="highlighter-rouge">SUSPENDED</code> status.  </p>
+<p>Unsuspends users and returns then to the <code class="highlighter-rouge">ACTIVE</code> state.  This operation can only be performed on users that have a <code class="highlighter-rouge">SUSPENDED</code> status.</p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-10">Request Parameters</h5>
 
@@ -3517,12 +3581,12 @@ Passing an <code class="highlighter-rouge">id</code> that is not in the <code cl
 
 <h5 class="api api-response api-response-params" id="response-parameters-10">Response Parameters</h5>
 
-<p>Returns an empty object. Returns an empty object. </p>
+<p>Returns an empty object. Returns an empty object.</p>
 
 <p>Passing an invalid <code class="highlighter-rouge">id</code> returns a <code class="highlighter-rouge">404 Not Found</code> status code with error code <code class="highlighter-rouge">E0000007</code>.
 Passing an <code class="highlighter-rouge">id</code> that is not in the <code class="highlighter-rouge">SUSPENDED</code> state returns a <code class="highlighter-rouge">400 Bad Request</code> status code with error code <code class="highlighter-rouge">E0000001</code>.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-21">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-22">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3532,7 +3596,7 @@ Passing an <code class="highlighter-rouge">id</code> that is not in the <code cl
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-23">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-24">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -3578,7 +3642,7 @@ Passing an <code class="highlighter-rouge">id</code> that is not in the <code cl
 
 <p>Returns an empty object</p>
 
-<h5 class="api api-request api-request-example" id="request-example-22">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-23">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3588,7 +3652,7 @@ Passing an <code class="highlighter-rouge">id</code> that is not in the <code cl
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-24">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-25">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -3648,7 +3712,7 @@ Passing an <code class="highlighter-rouge">id</code> that is not in the <code cl
 </span></code></pre>
 </div>
 
-<h5 class="api api-request api-request-example" id="request-example-23">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-24">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3658,7 +3722,7 @@ Passing an <code class="highlighter-rouge">id</code> that is not in the <code cl
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-25">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-26">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"resetPasswordUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"</span><span class="w">
@@ -3679,7 +3743,7 @@ parameter must be false or omitted for this type of conversion.</p>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-26">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-27">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{}</span><span class="w">
 </span></code></pre>
@@ -3739,7 +3803,7 @@ and the user is presented with the password-expired page where he or she can cha
 </span></code></pre>
 </div>
 
-<h5 class="api api-request api-request-example" id="request-example-24">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-25">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3749,7 +3813,7 @@ and the user is presented with the password-expired page where he or she can cha
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-27">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-28">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
@@ -3839,7 +3903,7 @@ and the user is presented with the password-expired page where he or she can cha
 
 <p>Returns an empty object by default.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-25">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-26">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3849,7 +3913,7 @@ and the user is presented with the password-expired page where he or she can cha
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-28">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-29">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -3911,7 +3975,7 @@ and the user is presented with the password-expired page where he or she can cha
   <p>This operation does not affect the status of the user.</p>
 </blockquote>
 
-<h5 class="api api-request api-request-example" id="request-example-26">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-27">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3921,7 +3985,7 @@ and the user is presented with the password-expired page where he or she can cha
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-29">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-30">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"resetPasswordUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"</span><span class="w">
@@ -3986,7 +4050,7 @@ and the user is presented with the password-expired page where he or she can cha
   <p>This operation does not affect the status of the user.</p>
 </blockquote>
 
-<h5 class="api api-request api-request-example" id="request-example-27">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-28">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3999,7 +4063,7 @@ and the user is presented with the password-expired page where he or she can cha
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-30">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-31">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -4071,7 +4135,7 @@ and the user is presented with the password-expired page where he or she can cha
   <p>The user will transition to <code class="highlighter-rouge">ACTIVE</code> status when successfully invoked in <code class="highlighter-rouge">RECOVERY</code> status</p>
 </blockquote>
 
-<h5 class="api api-request api-request-example" id="request-example-28">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-29">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -4084,7 +4148,7 @@ and the user is presented with the password-expired page where he or she can cha
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-31">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-32">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -4156,7 +4220,7 @@ and the user is presented with the password-expired page where he or she can cha
   <p>This operation does not affect the status of the user.</p>
 </blockquote>
 
-<h5 class="api api-request api-request-example" id="request-example-29">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-30">Request Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -4172,7 +4236,7 @@ and the user is presented with the password-expired page where he or she can cha
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-32">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-33">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -4246,6 +4310,57 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
 		
 
 	</div>
+
+	
+		
+<!-- Remarketing tag -->
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		var google_conversion_id = 1006913831;
+		var google_custom_params = window.google_tag_params;
+		var google_remarketing_only = true;
+		/* ]]> */
+	</script>
+	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+	</script>
+	<noscript>
+		<div style="display:inline;">
+			<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"/>
+		</div>
+	</noscript>
+<!-- End Remarketing tag -->
+
+<!-- Crazy Egg Tracking -->
+<script type="text/javascript">
+setTimeout(function(){var a=document.createElement("script");
+var b=document.getElementsByTagName("script")[0];
+a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+</script>
+<!-- End Crazy Egg Tracking -->
+
+<footer class="site-footer">
+	<div class="wrap">
+
+		<ul>
+			<li><a href="http://www.okta.com" target="_blank">Okta.com</a></li>
+			<li><a href="/blog">Blog</a></li>
+			<li><a href="/terms/">Terms &amp; Conditions</a></li>
+			<li><a href="/privacy/">Privacy Policy</a></li>
+			<li><a href="http://okta.com/developer/contact/">Contact Sales</a></li>
+			<li><a href="mailto:developers@okta.com">Contact Support</a></li>
+		</ul>
+
+		<ul>
+			<li><a class="icon" href="http://github.com/okta" target="_blank"><i class="fa fa-github"></i></a></li>
+			<li><a class="icon" href="http://twitter.com/okta" target="_blank"><i class="fa fa-twitter"></i></a></li>
+			<li><a class="icon" href="http://stackoverflow.com/search?q=okta" target="_blank"><i class="fa fa-stack-overflow"></i></a></li>
+			<li><a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a></li>
+			<li><a class="icon" href="http://community.okta.com" target="_blank"><i class="fa fa-comments"></i></a></li>
+		</ul>
+
+	</div>
+</footer>
 
 	
 </body>
