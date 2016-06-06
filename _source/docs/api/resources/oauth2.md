@@ -72,7 +72,7 @@ Use the postMessage() data model to help you when working with the <em>okta_post
 Parameter         | Description                                                                                        | DataType  | 
 ----------------- | -------------------------------------------------------------------------------------------------- | ----------| 
 id_token          | The ID Token JWT contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the `response_type` includes `id_token`. | String   |
-access_token      | The <em>access_token</em> used to access the [`/oauth2/v1//userinfo`](/docs/api/resources/oidc.html#get-user-information) endpoint. This is returned if the <em>response_type</em> included a token. <b>Important</b>: Unlike the ID Token JWT, the <em>access_token</em> structure is specific to Okta, and is subject to change. | String    |
+access_token      | The <em>access_token</em> used to access the [`/oauth2/v1/userinfo`](/docs/api/resources/oidc.html#get-user-information) endpoint. This is returned if the <em>response_type</em> included a token. <b>Important</b>: Unlike the ID Token JWT, the <em>access_token</em> structure is specific to Okta, and is subject to change. | String    |
 state             | If the request contained a `state` parameter, then the same unmodified value is returned back in the response. | String    |
 error             | The error-code string providing information if anything goes wrong.                                | String    |
 error_description | Additional description of the error.                                                               | String    |
@@ -91,7 +91,7 @@ Irrespective of the response type, the contents of the response is always one of
 Parameter         | Description                                                                                        | DataType  | 
 ----------------- | -------------------------------------------------------------------------------------------------- | ----------| 
 id_token          | The ID Token JWT contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the <em>response_type</em> includes <em>id_token</em> .| String    | 
-access_token      | The <em>access_token</em> that is used to access the [`/oauth2/v1//userinfo`](/docs/api/resources/oidc.html#get-user-information) endpoint. This is returned if the <em>response_type</em>  included a token. Unlike the ID Token JWT, the <em>access_token</em> structure is specific to Okta, and is subject to change.| String  |
+access_token      | The <em>access_token</em> that is used to access the [`/oauth2/v1/userinfo`](/docs/api/resources/oidc.html#get-user-information) endpoint. This is returned if the <em>response_type</em>  included a token. Unlike the ID Token JWT, the <em>access_token</em> structure is specific to Okta, and is subject to change.| String  |
 token_type        | The token type is always `Bearer` and is returned only when <em>token</em> is specified as a <em>response_type</em>. | String |
 state             | The same unmodified value from the request is returned back in the response. | String |
 error             | The error-code string providing information if anything went wrong. | String |
@@ -161,11 +161,6 @@ http://www.example.com/#error=invalid_scope&error_description=The+requested+scop
 
 The API takes an authorization code or a Refresh Token as the grant type and returns back an Access Token, ID Token and a Refresh Token.
 
-For web and native application types:
-
-1. Use the Okta Administration UI and check the <b>Allow Offline Access</b> checkbox on the client application page.
-2. Pass the <em>offline_access</em> scope to your authorize request.
-
 > Note:  No errors occur if you use this endpoint, but it isn’t useful until custom scopes or resource servers are available. We recommend you wait until custom scopes and resource servers are available.
 
 #### Request Parameters
@@ -204,6 +199,13 @@ Input grant type   | Output token types                    |
 -------------------|---------------------------------------|
 code               | ID Token, Access Token, Refresh Token |
 refresh Token      | Access Token, Refresh Token           |
+
+##### Refresh Tokens for Web and Native Applications
+
+For web and native application types, an additional process is required:
+
+1. Use the Okta Administration UI and check the <b>Allow Offline Access</b> checkbox on the client application page.
+2. Pass the <em>offline_access</em> scope to your authorize request.
 
 #### List of Errors 
 
