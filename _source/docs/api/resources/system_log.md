@@ -336,21 +336,18 @@ Events published for a given ip address
 
 > Important: The query parameter `q` behaves differently than described in  [Filtering](/docs/getting_started/design_principles.html).
 
-The query parameter `q` searches string fields, and supports the same expressions as the `filter` parameter.
+The query parameter `q` searches string fields
 
 **Query Examples**
 
-Events published in the specified city
+Events that mention a specific city
+    q=San Francisco
 
-    q=geographicalcontext.city eq "San Francisco"
+Events that mention a specific url
+    q=interestingURI.com
 
-Events published as a result of requests from the specified URI
-
-    q=authenticationContext.eventType eq "core.user_auth.login_failed"
-
-Events published for a target user and application
-
-    q=geographicalContext.externalSessionId eq "interestingURI.com"
+Events that mention a specific person
+    q=firstName lastName
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
