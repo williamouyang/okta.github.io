@@ -8,13 +8,14 @@ excerpt: Easily add Okta Sign-in capabilities to your website.
 
 The Okta Sign-In Widget is a JavaScript widget from Okta that gives you a customizable login experience that authenticates users on any web site.
 
-This page contains detailed reference information you can use to customize your sign-in widget. Basic instructions for creating a sign-in widget are available in [Okta Sign-In Widget](docs/guides/okta_sign-in_widget.html). 
+This page contains detailed reference information you can use to customize your sign-in widget.
+Basic instructions for creating a sign-in widget are available in [Okta Sign-In Widget](../../guides/okta_sign-in_widget.html). 
 
 Prerequisites from the basic guide include: 
 
 * Use [a supported browser](https://support.okta.com/help/articles/Knowledge_Article/24532952-Platforms---Browser-and-OS-Support).
-* [Create an Okta Developer Edition org](docs/guides/okta_sign-in_widget.html#creating-an-okta-organization) if you don't already have one.
-* [Configure your Okta org to support CORS](docs/api/getting_started/enabling_cors.html) before testing the Okta Sign-In Widget.
+* [Create an Okta Developer Edition org](../../guides/okta_sign-in_widget.html#creating-an-okta-organization) if you don't already have one.
+* [Configure your Okta org to support CORS](../getting_started/enabling_cors.html) before testing the Okta Sign-In Widget.
 
 ### Example of a Customized Sign-In Widget
 
@@ -77,7 +78,7 @@ oktaSignIn.session.exists(function (exists) {
 `transformUsername` | Transform the username before sending the request. The function is passed the username and the operation as parameters. [Example](#transformusername-example) | Function   | No           | None    
 `features`      | Options to enable or disable a feature in the widget. [Option list](#features-options) [Example](#features-example) | Object | No           | None
 `helpLinks`     | Options to configure alternate help links in the widget. [Option list](#helplinks-options) [Example](#helplinks-example)   | Object | No           | None
-`labels`        | Options to localize labels in the widget. [Option list](#links-options) | Object | No           | None
+`labels`        | Options to localize labels in the widget. [Option list](#labels-options) | Object | No           | None
 
 ### Configuration Examples and Option Details
 
@@ -256,7 +257,7 @@ oktaSignIn.renderEl({
 
  Property       | Description                              |  Type    |  Required    | Default
 --------------  | ---------------------------------------  | ------   | -----------  | -------
- `clientId`     | [Client Id](docs/api/resources/oauth-clients.html) pre-registered with Okta for OIDC authentication flow. | String | Yes | None
+ `clientId`     | [Client Id](oauth-clients) pre-registered with Okta for OIDC authentication flow. | String | Yes | None
  `redirectUri`  | Callback location to send the authorization code to. This must be pre-registered as part of client registration. | String | Yes | `window.location.href`
  `idps`         | External Identity Providers to use in OIDC authentication. Supported Identity providers - `GOOGLE`, `FACEBOOK` and `LINKEDIN`. Each IdP needs to be passed an object with `id` and `type`. | Array | No | `[]` 
  `idpDisplay`   | Display order for External Identity providers. `PRIMARY` to display external IdPs as primary, and `SECONDARY` to display Okta as the primary IdP. | String | No | `SECONDARY`
