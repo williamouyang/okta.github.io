@@ -1,0 +1,1447 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6 no-flexbox"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7 no-flexbox"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8 no-flexbox"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
+<!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern"> <!--<![endif]-->
+<head>
+
+	<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="/favicon.ico">
+	<title>System Log (Beta) | Okta Developer</title>
+	<meta name="description" content="Secure, scalable, and highly available authentication and user management for any app.">
+
+	<link rel="canonical" href="http://developer.okta.com/docs/api/resources/system_log">
+
+	<link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/assets/css/animate.css">
+	<link rel="stylesheet" href="/assets/css/master.css">
+	
+	<link rel="stylesheet" href="/assets/css/layout-docs.css">
+	<link rel="stylesheet" href="/assets/css/responsive.css">
+
+
+  
+	<script type="text/javascript" defer="defer" src="/assets/js/jquery.min.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/tabber.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/pacnav.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/master.js"></script>
+	<script type="text/javascript" defer="defer" src="/assets/js/scrollspy.js"></script>
+
+	
+	<script type="text/javascript" defer="defer" src="/assets/js/docs.js"></script>
+	<!-- TypeKit -->
+	<script src="//use.typekit.net/pls8pog.js"></script>
+	<script>try{Typekit.load();}catch(e){}</script>
+	<!-- GA -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-15777010-3', 'auto');
+		ga('send', 'pageview');
+	</script>
+</head>
+
+
+
+
+<body id="docs">
+
+	<header class="site-header">
+	<div class="wrap">
+
+		<h1 class="site-title"><a href="/">Okta Developer</a></h1>
+		<nav id="primary-nav" class="site-nav loaded">
+			<ul>
+				<li><a href="/product/">Product</a></li>
+				<li><a href="/docs/api/getting_started/design_principles.html">Docs</a></li>
+				<li><a href="/discussion/">Discussion</a></li>
+				<li class="has-dropdown"><a href="#">Support</a>
+					<div class="dropdown-window">
+						<p class="stack-overflow">
+							Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a>.<br />
+							We'll answer it within 24 hours.
+						</p>
+						<p class="email">
+							Email us:<br />
+							<a href="mailto:developers@okta.com">developers@okta.com</a>
+						</p>
+						<p class="tel">
+							Call us:<br />
+							<a href="tel:18887227871">1 (888) 722-7871</a>
+						</p>
+					</div>
+				</li>
+			</ul>
+		</nav>
+
+		<a href="/search" class="gsc-trigger search-button"></a>
+
+
+		<div class="search-container">
+			<div class="gsc-container">
+				<gcse:searchbox-only resultsUrl="/search" enableAutoComplete="true"></gcse:searchbox-only>
+			</div>
+		</div>
+		<a href="https://www.okta.com/developer/signup/" class="cta-button button--small">Get Started</a>
+
+	</div>
+</header>
+
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TJ45R6');</script>
+<!-- End Google Tag Manager -->
+
+
+	<div class="page-content">
+
+		
+
+		
+
+<section class="section--with-sidebar docs-page">
+	<aside id="sidebar-wrapper-aside" class="sticky-nav--sidebar">
+
+		
+
+
+
+<!-- Work around to remove blank lines -->
+<div class="scrollable">
+	<span class="toggle-menu"></span>
+	<div id="sidebar-wrapper">
+		<div class="docs-sidebar-block" id="myScrollspy" >
+		<h2>Getting Started</h2>              <ul class="nav sidebar-nav" data-item="design_principles" data-section="system_log"><li data-name="Design Principles" ><a href="/docs/api/getting_started/design_principles.html">Design Principles</a></li></ul>                                                                                      <ul class="nav sidebar-nav" data-item="error_codes" data-section="system_log"><li data-name="Error Codes" ><a href="/docs/api/getting_started/error_codes.html">Error Codes</a></li></ul>                                                                                        <ul class="nav sidebar-nav" data-item="getting_a_token" data-section="system_log"><li data-name="Getting a Token" ><a href="/docs/api/getting_started/getting_a_token.html">Getting a Token</a></li></ul>                                                                      <ul class="nav sidebar-nav" data-item="enabling_cors" data-section="system_log"><li data-name="Enabling CORS" ><a href="/docs/api/getting_started/enabling_cors.html">Enabling CORS</a></li></ul>                                                                    <ul class="nav sidebar-nav" data-item="api_test_client" data-section="system_log"><li data-name="API Test Client" ><a href="/docs/api/getting_started/api_test_client.html">API Test Client</a></li></ul>                                                                                                                      <ul class="nav sidebar-nav" data-item="okta_expression_lang" data-section="system_log"><li data-name="Okta Expression Language" ><a href="/docs/api/getting_started/okta_expression_lang.html">Okta Expression Language</a></li></ul>                                    <h2>Authentication</h2>          <ul class="nav sidebar-nav" data-item="authn" data-section="system_log"><li data-name="Authentication API" ><a href="/docs/api/resources/authn.html">Authentication API</a></li></ul>                                                                                                            <ul class="nav sidebar-nav" data-item="oauth2" data-section="system_log"><li data-name="OAuth 2.0" ><a href="/docs/api/resources/oauth2.html">OAuth 2.0</a></li></ul>                                                                                  <ul class="nav sidebar-nav" data-item="oidc" data-section="system_log"><li data-name="OpenID Connect" ><a href="/docs/api/resources/oidc.html">OpenID Connect</a></li></ul>                                                                                                                <ul class="nav sidebar-nav" data-item="social_authentication" data-section="system_log"><li data-name="Social Authentication" ><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li></ul>                                                                          <ul class="nav sidebar-nav" data-item="sessions" data-section="system_log"><li data-name="Sessions" ><a href="/docs/api/resources/sessions.html">Sessions</a></li></ul>                                                                <ul class="nav sidebar-nav" data-item="okta_signin_widget" data-section="system_log"><li data-name="Okta Sign-In Widget" ><a href="/docs/api/resources/okta_signin_widget.html">Okta Sign-In Widget</a></li></ul>                              <h2>Resources</h2>                                                                                <ul class="nav sidebar-nav" data-item="users" data-section="system_log"><li data-name="Users" ><a href="/docs/api/resources/users.html">Users</a></li></ul>                          <ul class="nav sidebar-nav" data-item="factors" data-section="system_log"><li data-name="Factors (MFA)" ><a href="/docs/api/resources/factors.html">Factors (MFA)</a></li></ul>                                                                                    <ul class="nav sidebar-nav" data-item="groups" data-section="system_log"><li data-name="Groups" ><a href="/docs/api/resources/groups.html">Groups</a></li></ul>                                                          <ul class="nav sidebar-nav" data-item="apps" data-section="system_log"><li data-name="Apps" ><a href="/docs/api/resources/apps.html">Apps</a></li></ul>                                                                                                                                    <ul class="nav sidebar-nav" data-item="schemas" data-section="system_log"><li data-name="Schemas" ><a href="/docs/api/resources/schemas.html">Schemas</a></li></ul>                                                    <ul class="nav sidebar-nav" data-item="idps" data-section="system_log"><li data-name="Identity Providers" ><a href="/docs/api/resources/idps.html">Identity Providers</a></li></ul>                                                                                                        <ul class="nav sidebar-nav" data-item="roles" data-section="system_log"><li data-name="Admin Roles" ><a href="/docs/api/resources/roles.html">Admin Roles</a></li></ul>                                              <ul class="nav sidebar-nav" data-item="events" data-section="system_log"><li data-name="Events" ><a href="/docs/api/resources/events.html">Events</a></li></ul>                                                          
+		</div>
+	</div>
+</div>
+
+	</aside>
+
+	<div id="docs-body" class="docs-body">
+
+		<nav id="sticky-nav" class="sticky-nav--top">
+
+			
+	<a  class="on"  href="/docs/api/getting_started/design_principles.html">
+		API
+	</a>
+	<a  href="/docs/guides/saml_guidance.html">
+		Guides
+	</a>
+	<a  href="/docs/examples/session_cookie.html">
+		Examples
+	</a>
+	<a  href="/docs/sdk/core/api.html">
+		SDKs
+	</a>
+
+
+		</nav>
+
+		<a href="#docs-body" id="scroll-top-button">Scroll to Top</a>
+
+		
+		<header>
+			<a href="https://github.com/okta/okta.github.io/tree/master/_source/docs/api/resources/system_log.md" target="_blank" class="btn btn-default btn-sm btn-github"><i class="fa fa-github"></i> Edit on GitHub</a>
+			<h1 class="page-title">System Log (Beta)</h1>
+		</header>
+		
+
+		<h2 id="overview">Overview</h2>
+
+<blockquote>
+  <p>Note: This API is in Beta status.</p>
+</blockquote>
+
+<p>The Okta System Log API provides read access to your organization’s system log. This API provides more functionality than the Events API.</p>
+
+<p>Use this API to export event data as a batch job from your organization to another system for reporting or analysis.</p>
+
+<h2 id="log-model">Log Model</h2>
+
+<p>Every organization has a system log that maintains a history of actions performed by users.  The Log model describes a single action performed by a set of actors for a set of targets.</p>
+
+<h3 id="annotated-example">Annotated Example</h3>
+
+<p>Use the following example by replacing the explanatory text with valid values.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>{
+"eventId": Randomly generated String, Required //note, not uuid as in underlying
+"published": ISO8601 string for timestamp, Required //note, published, not timestamp as in underlying
+"eventType": String, Required
+"version": String, Required
+"severity": String, one of DEBUG, INFO, WARN, ERROR, Required
+"legacyEventType": String, Optional
+"displayMessage": String, Optional
+"actor": { Object, Required
+     "id": String, Required
+     "type": String, Required
+     "alternateId": String, Optional
+     "displayName": String, Optional
+     "detailEntry" = {
+     String -&gt; String/Resource Map
+     }
+},
+"client": { Object, Optional
+     "userAgent": { Object, Optional
+          "rawUserAgent": String, Optional
+          "os": String, Optional
+          "browser": String, Optional
+     },
+     "geographicalContext": { Object, Optional
+          "geolocation": { Object, Optional
+               "lat":Double, Optional
+               "lon": Double, Optional
+          }
+          "city": String, Optional
+          "state": String, Optional
+          "country": String, Optional
+          "postalCode": String, Optional
+     },
+     "zone": String, Optional
+     "ipAddress": String, Optional
+     "device": String, Optional
+     "id": String, Optional
+},
+"outcome": { Object, Optional
+     "result": String, one of: SUCCESS, FAILURE, SKIPPED, UNKNOWN, Required
+     "reason": String, Optional
+},
+"target": [ List of Objects of the form:
+          {
+               "id": String, Required
+               "type": String, Required
+               "alternateId": String, Optional
+               "displayName": String, Optional
+               "detailEntry" = {
+                    String -&gt; String/Resource Map
+               }
+     }
+],
+"transaction": { Object, Optional
+     "id": String, Optional
+     "type": String one of "WEB", "JOB", Optional
+     "detail" = {
+          String -&gt; String/Resource Map
+     }
+},
+"debugContext": { Object, Optional
+     "debugData": {
+          String -&gt; String/Resource Map
+          "requestUri": "/api/1/devtools/global/test/orgs/specific"
+          "originalPrincipal": {
+               "id": "00ujchcbjpltartYI0g3",
+               "type": "User",
+               "alternateId": "admin@saasure.com",
+               "displayName": "Piras Add-min"
+          },
+     }
+},
+"authenticationContext": { Object, Optional
+     "authenticationProvider": String one of OKTA_AUTHENTICATION_PROVIDER, ACTIVE_DIRECTORY, LDAP, FEDERATION,
+            SOCIAL, FACTOR_PROVIDER, Optional
+          "credentialProvider": String one of OKTA_CREDENTIAL_PROVIDER, RSA, SYMANTEC, GOOGLE, DUO, YUBIKEY, Optional
+          "credentialType": String one of OTP, SMS, PASSWORD, ASSERTION, IWA, EMAIL, Optional
+          "issuer": Object, Optional {
+               "id": String, Optional
+               "type": String Optional
+          }
+          "externalSessionId": String, Optional
+          "interface": String, Optional i.e. Outlook, Office365, wsTrust
+     }
+}
+
+</code></pre>
+</div>
+
+<h3 id="attributes">Attributes</h3>
+
+<p>The Log model is read-only. The following properties are available:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Readonly</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>eventId</td>
+      <td>Unique key for event</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>published</td>
+      <td>Timestamp when event was published</td>
+      <td>Date</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td>1</td>
+      <td>255</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>eventType</td>
+      <td>Type of event that was published</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td>1</td>
+      <td>255</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>version</td>
+      <td>versioning indicator</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td>1</td>
+      <td>255</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>severity</td>
+      <td>Indicates how severe the event is. DEBUG, INFO, WARN, ERROR</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td>1</td>
+      <td>255</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>legacyEventType</td>
+      <td>legacy event type</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td>1</td>
+      <td>255</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>displayMessage</td>
+      <td>display message regarding the event</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td>1</td>
+      <td>255</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>actor</td>
+      <td>Describes zero or more entities that performed the action</td>
+      <td>Array of <a href="#actor-object">Actor Object</a></td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>client</td>
+      <td>Identifies the client that requested the action</td>
+      <td><a href="#client-object">Client Object</a></td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>outcome</td>
+      <td>Identifies the outcome of the action</td>
+      <td><a href="#outcome-object">Outcome Object</a></td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>target</td>
+      <td>Identifies the targets of the action</td>
+      <td><a href="#target-object">Target Object</a></td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>transaction</td>
+      <td>Identifies the transaction details of the action</td>
+      <td><a href="#transaction-object">Transaction Object</a></td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>debugContext</td>
+      <td>Identifies the debug request data of the action</td>
+      <td><a href="#debugContext-object">DebugContext Object</a></td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>authenticationContext</td>
+      <td>Identifies the authentication data of the action</td>
+      <td><a href="#authenticationContext-object">AuthenticationContext Object</a></td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>The actor and/or target of an event is dependent on the action performed. All events have actors. Not all events have targets.</p>
+</blockquote>
+
+<blockquote>
+  <p>The <code class="highlighter-rouge">sessionId</code> can identify multiple requests.  A single <code class="highlighter-rouge">requestId</code> can identify multiple events.  Use the <code class="highlighter-rouge">sessionId</code> to link events and requests that occurred in the same session.</p>
+</blockquote>
+
+<h3 id="actor-object">Actor Object</h3>
+
+<p>Describes the actor which performs the action</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Default</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td>Id of the target</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>type of the target</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>alternateId</td>
+      <td>alternative id of the target</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>displayName</td>
+      <td>Display name of the target</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>detail</td>
+      <td>A map that goes from a String key to a value</td>
+      <td>Map[String-&gt;Object</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="target-object">Target Object</h3>
+
+<p>Describes the target of the action</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Default</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td>Id of the target</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>type of the target</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>alternateId</td>
+      <td>alternative id of the target</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>displayName</td>
+      <td>Display name of the target</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>detail</td>
+      <td>A map that goes from a String key to a value</td>
+      <td>Map[String-&gt;Object</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00u3gjksoiRGRAZHLSYV"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jon Stewart"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"alternateId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00uKrs9rsRSAXN"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jon@example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h3 id="client-object">Client Object</h3>
+
+<p>Describes the client performing the action</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Default</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>userAgent</td>
+      <td>Id of the target</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>geographicalContext</td>
+      <td>Geographical context data of the event</td>
+      <td>[GeographicalContext Object]</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>zone</td>
+      <td>zone client is in</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>ipAddress</td>
+      <td>Ip address of the client</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>device</td>
+      <td>Device that the client was using</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>id of the client</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="geographicalcontext-object">GeographicalContext Object</h3>
+
+<p>Describes the location data regarding where the action was performed</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Default</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>geolocation</td>
+      <td>Id of the target</td>
+      <td>[Geolocation Object]</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>city</td>
+      <td>Geographical context data of the event</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>state</td>
+      <td>zone client is in</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>country</td>
+      <td>Ip address of the client</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>postalCode</td>
+      <td>Device that the client was using</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="geolocation-object">Geolocation Object</h3>
+
+<p>Describes transaction data an event</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Default</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>lat</td>
+      <td>latitude</td>
+      <td>Double</td>
+      <td>FALSE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>lon</td>
+      <td>longitude</td>
+      <td>Double</td>
+      <td>FALSE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="outcome-object">Outcome Object</h3>
+
+<p>Describes transaction data an event</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Default</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>result</td>
+      <td>Result of the action. SUCCESS, FAILURE, SKIPPED, UNKNOWN</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>reason</td>
+      <td>Type of transaction, “WEB” or “JOB”</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td>1</td>
+      <td>255</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="transaction-object">Transaction Object</h3>
+
+<p>Describes transaction data an event</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Default</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td>Id of the transaction Object</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>Type of transaction, “WEB” or “JOB”</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>detail</td>
+      <td>A map that goes from a String key to a value</td>
+      <td>Map[String-&gt;Object</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="debugcontext-object">DebugContext Object</h3>
+
+<p>Describes additional context regarding the event</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Default</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>debugData</td>
+      <td>A map that goes from a String key to a value</td>
+      <td>Map[String-&gt;Object</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="authenticationcontext-object">AuthenticationContext Object</h3>
+
+<p>Describes authentication data regarding an event</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Default</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>authenticationProvider</td>
+      <td>OKTA_AUTHENTICATION_PROVIDER, ACTIVE_DIRECTORY, LDAP, FEDERATION, SOCIAL, FACTOR_PROVIDER</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>credentialProvider</td>
+      <td>OKTA_CREDENTIAL_PROVIDER, RSA, SYMANTEC, GOOGLE, DUO, YUBIKEY</td>
+      <td>Array of String</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>credentialType</td>
+      <td>type of credential OTP, SMS, PASSWORD, ASSERTION, IWA, EMAIL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>issuer</td>
+      <td>Uri of the request that generated the event.</td>
+      <td>[Issuer Object]</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>externalSessionId</td>
+      <td>Uri of the request that generated the event.</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td>1</td>
+      <td>255</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>interface</td>
+      <td>Uri of the request that generated the event.</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td>1</td>
+      <td>255</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="issuer-object">Issuer Object</h3>
+
+<p>Describes an issuer in the authentication context</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Default</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td>An id for the issuer</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>The type of the issuer</td>
+      <td>Array of String</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="event-operations">Event Operations</h2>
+
+<h3 class="api api-operation" id="list-events">List Events</h3>
+
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/logs</span></p>
+
+<p>Fetch a list of events from your Okta organization system log.</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters">Request Parameters</h5>
+<p>the content linked to in “filter”? I left filter in even though the spec doesn’t have it because of conversations
+in related docs. Notes after the parameter may not be true.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>limit</td>
+      <td>Specifies the number of results to page</td>
+      <td>Query</td>
+      <td>Number</td>
+      <td>FALSE</td>
+      <td>1000</td>
+    </tr>
+    <tr>
+      <td>since</td>
+      <td>Specifies the last date before the oldest result is returned</td>
+      <td>Query</td>
+      <td>DateTime</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>filter</td>
+      <td><a href="/docs/api/getting_started/design_principles.html#filtering">Filter expression</a> for events</td>
+      <td>Query</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>q</td>
+      <td>Finds a user that matches firstName, lastName, and email properties</td>
+      <td>Query</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>until</td>
+      <td>Specifies the first date after which results aren’t returned</td>
+      <td>Query</td>
+      <td>DateTime</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>after</td>
+      <td>An opaque identifier used for pagination</td>
+      <td>Query</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The <code class="highlighter-rouge">after</code> cursor should treated as an opaque value and obtained through the next link relation. See <a href="/docs/api/getting_started/design_principles.html#pagination">Pagination</a>.</p>
+
+<h6 id="filter">Filter</h6>
+
+<p>The following expressions are supported for events with the <code class="highlighter-rouge">filter</code> query parameter (see http://developer.okta.com/docs/api/getting_started/design_principles.html#filtering):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Filter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">eventType eq ":eventType"</code></td>
+      <td>Events that have a specific <a href="#event-type">action eventType</a></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">target.id eq ":id"</code></td>
+      <td>Events published with a specific target id</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">actor.id eq ":id"</code></td>
+      <td>Events published with a specific target id</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>See <a href="/docs/getting_started/design_principles.html#filtering">Filtering</a> for more information about expressions.</p>
+
+<p><strong>Filter Examples</strong>
+Events published for a target user</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>filter=target.id eq "00uxc78lMKUMVIHLTAXY"
+</code></pre>
+</div>
+
+<p>Failed login events</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>filter=action.eventType eq "core.user_auth.login_failed"
+</code></pre>
+</div>
+
+<p>Events published for a target user and application</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>filter=target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
+</code></pre>
+</div>
+
+<p>App SSO events for a target user and application</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>filter=action.eventType eq "app.auth.sso" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
+</code></pre>
+</div>
+
+<p>Events published for a given ip address</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>filter=client.ipAddress eq "184.73.186.14"
+</code></pre>
+</div>
+
+<h5 id="query-with-q">Query with q</h5>
+
+<blockquote>
+  <p>Important: The query parameter <code class="highlighter-rouge">q</code> behaves differently than described in  <a href="/docs/getting_started/design_principles.html">Filtering</a>.</p>
+</blockquote>
+
+<p>The query parameter <code class="highlighter-rouge">q</code> searches string fields</p>
+
+<p><strong>Query Examples</strong></p>
+
+<p>Events that mention a specific city
+    q=San Francisco</p>
+
+<p>Events that mention a specific url
+    q=interestingURI.com</p>
+
+<p>Events that mention a specific person
+    q=firstName lastName</p>
+
+<h5 class="api api-response api-response-params" id="response-parameters">Response Parameters</h5>
+
+<p>Array of <a href="#log-model">Log object</a></p>
+
+<h5 class="api api-request api-request-example" id="request-example">Request Example</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>http://rain-admin.okta1.com:1802/sage/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:00+00:00&amp;until<span class="o">=</span>2016-06-01T23:59:59+00:00&amp;limit<span class="o">=</span>20&amp;q<span class="o">=</span>FAILURE
+http://rain-admin.okta1.com:1802/sage/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:00+00:00&amp;until<span class="o">=</span>2016-06-01T23:59:59+00:00&amp;limit<span class="o">=</span>20&amp;q<span class="o">=</span>
+http://rain-admin.okta1.com:1802/sage/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:00+00:00&amp;until<span class="o">=</span>2016-06-01T23:59:59+00:00&amp;limit<span class="o">=</span>20&amp;filter<span class="o">=</span>eventType eq <span class="s2">"user.session.start"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example">Response Example</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"severity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INFO"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"client"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"zone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OFF_NETWORK"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"device"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"userAgent"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"os"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"browser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UNKNOWN"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"rawUserAgent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UNKNOWN-DOWNLOAD"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"ipAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12.97.85.90"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"actor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00u1qw1mqitPHM8AJ0g7"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"alternateId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin@tc1-trexcloud.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Fung"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"outcome"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f790999f-fe87-467a-9880-6982a583986c"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-31T22:23:07.777Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"eventType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user.session.start"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"displayMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User login to Okta"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"transaction"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WEB"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"V04Oy4ubUOc5UuG6s9DyNQAABtc"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"debugContext"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"debugData"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"requestUri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/login/do-login"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"legacyEventType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"core.user_auth.login_success"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"authentication_context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"authenticationStep"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"externalSessionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1013FfF-DKQSvCI4RVXChzX-w"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"version"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"severity"</span><span class="p">:</span><span class="s2">"INFO"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"client"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"zone"</span><span class="p">:</span><span class="s2">"OFF_NETWORK"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"device"</span><span class="p">:</span><span class="s2">"Unknown"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"userAgent"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"os"</span><span class="p">:</span><span class="s2">"Unknown"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"browser"</span><span class="p">:</span><span class="s2">"UNKNOWN"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"rawUserAgent"</span><span class="p">:</span><span class="s2">"UNKNOWN-UNKNOWN"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"ipAddress"</span><span class="p">:</span><span class="s2">"127.0.0.1"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"geographicalContext"</span><span class="p">:{</span><span class="w">
+        </span><span class="nt">"city"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"state"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"country"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"geolocation"</span><span class="p">:{</span><span class="w">
+          </span><span class="nt">"lat"</span><span class="p">:</span><span class="mf">36.12</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"lon"</span><span class="p">:</span><span class="mf">-114.17</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"postalCode"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"actor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"00ujkqmCDIS4dRtaY0g3"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"User"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"alternateId"</span><span class="p">:</span><span class="s2">"administrator1@clouditude.net"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"displayName"</span><span class="p">:</span><span class="s2">"Add-Min O'Cloudy Tud"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"detailEntry"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"outcome"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"result"</span><span class="p">:</span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"reason"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"00T1pkSJOMoElZWVY0g3"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"Token"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"alternateId"</span><span class="p">:</span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"displayName"</span><span class="p">:</span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"detailEntry"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"uuid"</span><span class="p">:</span><span class="s2">"af4736fb-ef84-4cfb-bcfa-8f541ca99abf"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"published"</span><span class="p">:</span><span class="s2">"2016-05-27T19:38:59.031Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"eventType"</span><span class="p">:</span><span class="s2">"system.api_token.create"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"displayMessage"</span><span class="p">:</span><span class="s2">"Create API token"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"transaction"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"WEB"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"reqz_ADxMMoTSOd7TgdnbjUXw"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"detail"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"debugContext"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"debugData"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"originalPrincipal"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"alternateId"</span><span class="p">:</span><span class="s2">"admin@saasure.com"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"displayName"</span><span class="p">:</span><span class="s2">"Piras Add-min"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"00ujjjNmP7E3U2Rq50g3"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"User"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"requestUri"</span><span class="p">:</span><span class="s2">"/api/1/devtools/global/test/orgs/specific"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"legacyEventType"</span><span class="p">:</span><span class="s2">"api.token.create"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"authentication_context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"issuer"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"authenticationProvider"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"credentialProvider"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"credentialType"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"interface"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"authenticationStep"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"externalSessionId"</span><span class="p">:</span><span class="s2">"101NN7VYcLqQ5u2Mi1lbmnEmg"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+</div>
+
+	</div>
+	
+<!-- Remarketing tag -->
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		var google_conversion_id = 1006913831;
+		var google_custom_params = window.google_tag_params;
+		var google_remarketing_only = true;
+		/* ]]> */
+	</script>
+	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+	</script>
+	<noscript>
+		<div style="display:inline;">
+			<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"/>
+		</div>
+	</noscript>
+<!-- End Remarketing tag -->
+
+<!-- Crazy Egg Tracking -->
+<script type="text/javascript">
+setTimeout(function(){var a=document.createElement("script");
+var b=document.getElementsByTagName("script")[0];
+a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+</script>
+<!-- End Crazy Egg Tracking -->
+
+<footer class="site-footer">
+	<div class="wrap">
+
+		<ul>
+			<li><a href="http://www.okta.com" target="_blank">Okta.com</a></li>
+			<li><a href="/blog">Blog</a></li>
+			<li><a href="/terms/">Terms &amp; Conditions</a></li>
+			<li><a href="/privacy/">Privacy Policy</a></li>
+			<li><a href="http://okta.com/developer/contact/">Contact Sales</a></li>
+			<li><a href="mailto:developers@okta.com">Contact Support</a></li>
+		</ul>
+
+		<ul>
+			<li><a class="icon" href="http://github.com/okta" target="_blank"><i class="fa fa-github"></i></a></li>
+			<li><a class="icon" href="http://twitter.com/okta" target="_blank"><i class="fa fa-twitter"></i></a></li>
+			<li><a class="icon" href="http://stackoverflow.com/search?q=okta" target="_blank"><i class="fa fa-stack-overflow"></i></a></li>
+			<li><a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a></li>
+			<li><a class="icon" href="http://community.okta.com" target="_blank"><i class="fa fa-comments"></i></a></li>
+		</ul>
+
+	</div>
+</footer>
+
+</section>
+
+
+		
+
+	</div>
+
+	
+		
+<!-- Remarketing tag -->
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		var google_conversion_id = 1006913831;
+		var google_custom_params = window.google_tag_params;
+		var google_remarketing_only = true;
+		/* ]]> */
+	</script>
+	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+	</script>
+	<noscript>
+		<div style="display:inline;">
+			<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"/>
+		</div>
+	</noscript>
+<!-- End Remarketing tag -->
+
+<!-- Crazy Egg Tracking -->
+<script type="text/javascript">
+setTimeout(function(){var a=document.createElement("script");
+var b=document.getElementsByTagName("script")[0];
+a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+</script>
+<!-- End Crazy Egg Tracking -->
+
+<footer class="site-footer">
+	<div class="wrap">
+
+		<ul>
+			<li><a href="http://www.okta.com" target="_blank">Okta.com</a></li>
+			<li><a href="/blog">Blog</a></li>
+			<li><a href="/terms/">Terms &amp; Conditions</a></li>
+			<li><a href="/privacy/">Privacy Policy</a></li>
+			<li><a href="http://okta.com/developer/contact/">Contact Sales</a></li>
+			<li><a href="mailto:developers@okta.com">Contact Support</a></li>
+		</ul>
+
+		<ul>
+			<li><a class="icon" href="http://github.com/okta" target="_blank"><i class="fa fa-github"></i></a></li>
+			<li><a class="icon" href="http://twitter.com/okta" target="_blank"><i class="fa fa-twitter"></i></a></li>
+			<li><a class="icon" href="http://stackoverflow.com/search?q=okta" target="_blank"><i class="fa fa-stack-overflow"></i></a></li>
+			<li><a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a></li>
+			<li><a class="icon" href="http://community.okta.com" target="_blank"><i class="fa fa-comments"></i></a></li>
+		</ul>
+
+	</div>
+</footer>
+
+	
+</body>
+
+</html>
