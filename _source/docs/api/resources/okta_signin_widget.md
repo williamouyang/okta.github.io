@@ -177,8 +177,8 @@ Enable help links with the following options:
 
 The full list of labels are in these two files:
  
- * [Login Properties](https://github.com/okta/okta-signin-widget/blob/master/resources/nls/login.properties)
- * [Country Properties](https://github.com/okta/okta-signin-widget/blob/master/resources/nls/country.properties)
+ * [Login Properties](https://github.com/okta/okta-signin-widget/blob/master/node_modules/%40okta/i18n/dist/properties/login.properties)
+ * [Country Properties](https://github.com/okta/okta-signin-widget/blob/master/node_modules/%40okta/i18n/dist/properties/country.properties)
 
 The following labels are among the most frequently used:
 
