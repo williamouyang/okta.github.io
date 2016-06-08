@@ -422,7 +422,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <tr>
       <td>debugContext</td>
       <td>Identifies the debug request data of the action</td>
-      <td><a href="#debugContext-object">DebugContext Object</a></td>
+      <td><a href="#debugcontext-object">DebugContext Object</a></td>
       <td>TRUE</td>
       <td>FALSE</td>
       <td>TRUE</td>
@@ -433,7 +433,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <tr>
       <td>authenticationContext</td>
       <td>Identifies the authentication data of the action</td>
-      <td><a href="#authenticationContext-object">AuthenticationContext Object</a></td>
+      <td><a href="#authenticationcontext-object">AuthenticationContext Object</a></td>
       <td>TRUE</td>
       <td>FALSE</td>
       <td>TRUE</td>
@@ -635,7 +635,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <tr>
       <td>geographicalContext</td>
       <td>Geographical context data of the event</td>
-      <td>[GeographicalContext Object]</td>
+      <td><a href="#geographicalcontext-object">GeographicalContext Object</a></td>
       <td>TRUE</td>
       <td> </td>
       <td> </td>
@@ -706,7 +706,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <tr>
       <td>geolocation</td>
       <td>Id of the target</td>
-      <td>[Geolocation Object]</td>
+      <td><a href="#geolocation-object">Geolocation Object</a></td>
       <td>TRUE</td>
       <td> </td>
       <td> </td>
@@ -971,7 +971,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <tr>
       <td>issuer</td>
       <td>Uri of the request that generated the event.</td>
-      <td>[Issuer Object]</td>
+      <td><a href="#issuer-object">Issuer Object</a></td>
       <td>TRUE</td>
       <td> </td>
       <td> </td>
@@ -1121,7 +1121,7 @@ in related docs. Notes after the parameter may not be true.</p>
 
 <h6 id="filter">Filter</h6>
 
-<p>The following expressions are supported for events with the <code class="highlighter-rouge">filter</code> query parameter (see http://developer.okta.com/docs/api/getting_started/design_principles.html#filtering):</p>
+<p>The following expressions are supported for events with the <code class="highlighter-rouge">filter</code> query parameter (see <a href="http://developer.okta.com/docs/api/getting_started/design_principles.html#filtering">Filtering</a>:</p>
 
 <table>
   <thead>
@@ -1133,7 +1133,7 @@ in related docs. Notes after the parameter may not be true.</p>
   <tbody>
     <tr>
       <td><code class="highlighter-rouge">eventType eq ":eventType"</code></td>
-      <td>Events that have a specific <a href="#event-type">action eventType</a></td>
+      <td>Events that have a specific action <a href="#attributes">eventType</a></td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">target.id eq ":id"</code></td>
@@ -1185,22 +1185,25 @@ Events published for a target user</p>
   <p>Important: The query parameter <code class="highlighter-rouge">q</code> behaves differently than described in  <a href="/docs/getting_started/design_principles.html">Filtering</a>.</p>
 </blockquote>
 
-<p>The query parameter <code class="highlighter-rouge">q</code> searches string fields</p>
+<p>The query parameter <code class="highlighter-rouge">q</code> searches string fields.</p>
 
 <p><strong>Query Examples</strong></p>
 
-<p>Events that mention a specific city
-    q=San Francisco</p>
-
-<p>Events that mention a specific url
-    q=interestingURI.com</p>
-
-<p>Events that mention a specific person
-    q=firstName lastName</p>
+<ul>
+  <li>
+    <p>Events that mention a specific city: <code class="highlighter-rouge">q=San Francisco</code></p>
+  </li>
+  <li>
+    <p>Events that mention a specific url: <code class="highlighter-rouge">q=interestingURI.com</code></p>
+  </li>
+  <li>
+    <p>Events that mention a specific person: <code class="highlighter-rouge">q=firstName lastName</code></p>
+  </li>
+</ul>
 
 <h5 class="api api-response api-response-params" id="response-parameters">Response Parameters</h5>
 
-<p>Array of <a href="#log-model">Log object</a></p>
+<p>Array of <a href="#log-model">Log objects</a></p>
 
 <h5 class="api api-request api-request-example" id="request-example">Request Example</h5>
 
