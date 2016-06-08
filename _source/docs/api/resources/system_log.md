@@ -127,8 +127,8 @@ The Log model is read-only. The following properties are available:
 | outcome   | Identifies the outcome of the action                                  | [Outcome Object](#outcome-object)                              | TRUE     | FALSE  | TRUE     |           |           |            |
 | target    | Identifies the targets of the action                                  | [Target Object](#target-object)                                | TRUE     | FALSE  | TRUE     |           |           |            |
 | transaction   |  Identifies the transaction details of the action                 | [Transaction Object](#transaction-object)                      | TRUE     | FALSE  | TRUE     |           |           |            |
-| debugContext   | Identifies the debug request data of the action                  | [DebugContext Object](#debugContext-object)                    | TRUE     | FALSE  | TRUE     |           |           |            |
-| authenticationContext | Identifies the authentication data of the action          | [AuthenticationContext Object](#authenticationContext-object)  | TRUE     | FALSE  | TRUE     |           |           |            |
+| debugContext   | Identifies the debug request data of the action                  | [DebugContext Object](#debugcontext-object)                    | TRUE     | FALSE  | TRUE     |           |           |            |
+| authenticationContext | Identifies the authentication data of the action          | [AuthenticationContext Object](#authenticationcontext-object)  | TRUE     | FALSE  | TRUE     |           |           |            |
 |-----------+-----------------------------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
 
 > The actor and/or target of an event is dependent on the action performed. All events have actors. Not all events have targets.
@@ -182,7 +182,7 @@ Describes the client performing the action
 | Property   | Description                                                    | DataType        | Nullable | Default | MinLength | MaxLength | Validation |
 | ---------- | -------------------------------------------------------------- | --------------- | -------- | ------- | --------- | --------- | ---------- |
 | userAgent  | Id of the target                                               | String          | TRUE     |         |           |           |            |
-| geographicalContext | Geographical context data of the event                | [GeographicalContext Object]| TRUE | |           |           |            |
+| geographicalContext | Geographical context data of the event                | [GeographicalContext Object](#geographicalcontext-object) | TRUE | |           |           |            |
 | zone       | zone client is in                                              | String          | TRUE     |         |           |           |            |
 | ipAddress  | Ip address of the client                                       | String          | TRUE     |         |           |           |            |
 | device     | Device that the client was using                               | String          | TRUE     |         |           |           |            |
@@ -196,7 +196,7 @@ Describes the location data regarding where the action was performed
 |------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
 | Property   | Description                                                    | DataType        | Nullable | Default | MinLength | MaxLength | Validation |
 | ---------- | -------------------------------------------------------------- | --------------- | -------- | ------- | --------- | --------- | ---------- |
-| geolocation | Id of the target                                              | [Geolocation Object] | TRUE |        |           |           |            |
+| geolocation | Id of the target                                              | [Geolocation Object](#geolocation-object) | TRUE |        |           |           |            |
 | city       | Geographical context data of the event                         | String          | TRUE     |         |           |           |            |
 | state      | zone client is in                                              | String          | TRUE     |         |           |           |            |
 | country    | Ip address of the client                                       | String          | TRUE     |         |           |           |            |
@@ -258,7 +258,7 @@ Describes authentication data regarding an event
 | authenticationProvider | OKTA_AUTHENTICATION_PROVIDER, ACTIVE_DIRECTORY, LDAP, FEDERATION, SOCIAL, FACTOR_PROVIDER | String | TRUE  | | | |            |
 | credentialProvider | OKTA_CREDENTIAL_PROVIDER, RSA, SYMANTEC, GOOGLE, DUO, YUBIKEY | Array of String | TRUE  |     |           |           |            |
 | credentialType | type of credential OTP, SMS, PASSWORD, ASSERTION, IWA, EMAIL | String        | TRUE     |         |           |           |            |
-| issuer     | Uri of the request that generated the event.                   | [Issuer Object] | TRUE     |         |           |           |            |
+| issuer     | Uri of the request that generated the event.                   | [Issuer Object](#issuer-object) | TRUE     |         |           |           |            |
 | externalSessionId | Uri of the request that generated the event.            | String          | TRUE     |         | 1         | 255       |            |
 | interface  | Uri of the request that generated the event.                   | String          | TRUE     |         | 1         | 255       |            |
 |------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
@@ -302,11 +302,11 @@ The `after` cursor should treated as an opaque value and obtained through the ne
 
 ###### Filter
 
-The following expressions are supported for events with the `filter` query parameter (see http://developer.okta.com/docs/api/getting_started/design_principles.html#filtering):
+The following expressions are supported for events with the `filter` query parameter (see [Filtering](http://developer.okta.com/docs/api/getting_started/design_principles.html#filtering):
 
 Filter                                       | Description
 -------------------------------------------- | ------------------------------------------------------------------------------
-`eventType eq ":eventType"`                  | Events that have a specific [action eventType](#event-type)
+`eventType eq ":eventType"`                  | Events that have a specific action [eventType](#attributes)
 `target.id eq ":id"`                         | Events published with a specific target id
 `actor.id eq ":id"`                          | Events published with a specific target id
 
@@ -338,23 +338,20 @@ Events published for a given ip address
 
 > Important: The query parameter `q` behaves differently than described in  [Filtering](/docs/getting_started/design_principles.html).
 
-The query parameter `q` searches string fields
+The query parameter `q` searches string fields.
 
 **Query Examples**
 
-Events that mention a specific city
-    q=San Francisco
+* Events that mention a specific city: `q=San Francisco`
 
-Events that mention a specific url
-    q=interestingURI.com
+* Events that mention a specific url: `q=interestingURI.com`
 
-Events that mention a specific person
-    q=firstName lastName
+* Events that mention a specific person: `q=firstName lastName`
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Array of [Log object](#log-model)
+Array of [Log objects](#log-model)
 
 ##### Request Example
 {:.api .api-request .api-request-example}
