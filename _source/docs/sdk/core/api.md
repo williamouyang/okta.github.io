@@ -88,7 +88,7 @@ title: API
             </div>
             <div class="content">
                 <ul class="sdk-list">
-                    <li>Sign-In Widget</li>
+                    <li>Okta Sign-In Widget</li>
 					<li>
 						<a class="" href="/docs/guides/okta_sign-in_widget">Getting Started</a>
 					</li>
