@@ -284,6 +284,10 @@ Describes an issuer in the authentication context
 
 Fetch a list of events from your Okta organization system log.
 
+This operation:
+
+* Requires [URL encoding](http://en.wikipedia.org/wiki/Percent-encoding). For example, `since=2016-05-25T00:00:00+00:00` is encoded as `since=2016-06-02T00%3A00%3A00%2B00%3A00`.
+
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 the content linked to in "filter"? I left filter in even though the spec doesn't have it because of conversations
