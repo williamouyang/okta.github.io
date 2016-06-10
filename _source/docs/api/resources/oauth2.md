@@ -413,9 +413,6 @@ invalid_request         | The request structure was invalid. E.g. the basic auth
 
 ~~~http
 HTTP/1.1 204 No Content
-Content-Type: application/json;charset=UTF-8
-{
-}
 ~~~
 
 #### Response Example (Error)
