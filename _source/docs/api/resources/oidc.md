@@ -244,15 +244,18 @@ All apps must roll over keys for adequate security. Please note the following:
 
 >If your application cannot retrieve keys dynamically, the administrator can disable the automatic key rotation in the administration UI, [generate a key credential](apps.html#generate-new-application-key-credential) and [update the application](apps.html#update-key-credential-for-application) to use it for signing.
 
+### Get Keys
+{:.api .api-operation}
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/v1/keys</span>
 
+If automatic key rotation is disabled, provide the <em>client_id</em> to fetch public keys for your app. Otherwise, this endpoint returns the public keys automatically rotated.
 Request Parameters
 {:.api .api-request .api-request-params}
 
 Parameter         | Description                                                                                        | Param Type | DataType  | Required | Default         |
 ----------------- | -------------------------------------------------------------------------------------------------- | ---------- | --------- | -------- | --------------- |
-client_id         | If automatic key rotation is disabled, you need to give the client_id to fetch the public keys for your application. Otherwise it will return the public keys automatically rotated. | Query      | String    | FALSE    | null |
+client_id         | Your app's client ID. | Query      | String    | FALSE    | null |
 
 Response Example
 {:.api .api-response .api-response-example}
@@ -261,7 +264,7 @@ Response Example
 {
   "keys": [
     {
-      "kid": "DS7gC_ljzzhv2cP1adQ7F26kvVRi3IGeo3PP9PPxoo"
+      "kid": "DS7gC_ljzzhv2cP1adQ7F26kvVRi3IGeo3PP9PPxoo",
       "alg": "RS256",
       "e": "AQAB",
       "n": "paDgqMZdppjqc2-Q1jvcJmUPvQ6Uwz1IofmuyTxh2C4OBXsAF0Szk_Y0jOa6pTWJAgbHF5bxkFbH11isA9WpNbuPa-CprC6gTfmpb
