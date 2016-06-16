@@ -70,13 +70,17 @@ section above to configure {{ page.saml_library }}. After completing
 the following steps, you will have a working example of connecting Okta to a sample {{ page.programming_language }} application using {{ page.saml_library }}.
 
 0.  Install platform-dependent prerequisites:
+
+    > Note: These instructions assume that you are running on a recent version of your operating system.
     
     For Mac OS X:
+    
     ~~~ shell
     brew install libffi libxmlsec1
     ~~~
 
     For RHEL:
+    
     ~~~ shell
     sudo yum install libffi-devel xmlsec1 xmlsec1-openssl
     ~~~
@@ -103,16 +107,16 @@ the following steps, you will have a working example of connecting Okta to a sam
 
     ~~~ python
     metadata_url_for = {
-        'example-okta-com': '{metadata-url}'
+        'example-okta-com': '${metadata_url}'
     }
     ~~~
 
-5.  Be sure to replace the contents of `{metdata-url}` with the link
+5.  Be sure to replace the contents of `${metdata_url}` with the link
     that you copied in step \#10 of the
     "[Setting up a SAML application in Okta](../guides/setting_up_a_saml_application_in_okta.html)"
     instructions that you followed above!
 
-    Note: The contents of `{metadata-url}` should look similar to: `https://example.oktapreview.com/app/a0b1c2deFGHIJKLMNOPQ/sso/saml/metadata`
+    Note: The contents of `${metadata_url}` should look similar to: `https://example.oktapreview.com/app/a0b1c2deFGHIJKLMNOPQ/sso/saml/metadata`
 
 6.  Install the dependencies; for example, {{ page.programming_language }} SAML SP:
 
