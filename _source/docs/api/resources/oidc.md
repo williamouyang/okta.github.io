@@ -189,7 +189,7 @@ The claims in the response are identical to those returned for the requested sco
 See [Scope-Dependent Claims](#scope-dependent-claims-not-always-returned) for more information about individual claims.
 
 #### Response Example (Error)
-
+{:.api .api-response .api-response-example}
 ~~~http
 HTTP/1.1 401 Unauthorized​
 Cache-Control: no-cache, no-store​
@@ -199,7 +199,7 @@ WWW-Authenticate: Bearer error="invalid_token", error_description="The access to
 ~~~
 
 #### Response Example (Error)
-
+{:.api .api-response .api-response-example}
 ~~~http
 HTTP/1.1 403 Forbidden​
 Cache-Control: no-cache, no-store​
@@ -208,7 +208,7 @@ Expires: 0​
 WWW-Authenticate: Bearer error="insufficient_scope", error_description="The access token must provide access to at least one of these scopes - profile, email, address or phone"
 ~~~
 
-### Validating ID Tokens
+#### Validating ID Tokens
 
 You can pass ID Tokens around different components of your app, and these components can use it as a lightweight authentication mechanism identifying the app and the user.
 But before you can use the information in the ID Token or rely on it as an assertion that the user has authenticated, you must validate it to prove its integrity.
@@ -250,14 +250,15 @@ All apps must roll over keys for adequate security. Please note the following:
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/v1/keys</span>
 
 If automatic key rotation is disabled, provide the <em>client_id</em> to fetch public keys for your app. Otherwise, this endpoint returns the public keys automatically rotated.
-Request Parameters
+
+#### Request Parameters
 {:.api .api-request .api-request-params}
 
 Parameter         | Description                                                                                        | Param Type | DataType  | Required | Default         |
 ----------------- | -------------------------------------------------------------------------------------------------- | ---------- | --------- | -------- | --------------- |
 client_id         | Your app's client ID. | Query      | String    | FALSE    | null |
 
-Response Example
+#### Response Example
 {:.api .api-response .api-response-example}
 
 ~~~json
@@ -282,11 +283,11 @@ Response Example
 
 There are standard open-source libraries available for every major language to perform [JWS](https://tools.ietf.org/html/rfc7515) signature validation.
 
-### Alternative Validation 
+#### Alternative Validation 
 
 You can use an [OAuth 2.0 introspection request](/docs/api/resources/oauth2.html#introspection-request) for validation.
 
-## OpenID Connect Discovery Document
+### OpenID Connect Discovery Document
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /.well-known/openid-configuration</span>
