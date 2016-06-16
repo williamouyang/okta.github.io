@@ -229,7 +229,7 @@ Sign-In Widget is to look at a simple example of the HTML
 needed to get it working. The HTML below shows you how to quickly
 and easily set up a fully featured login experience:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;head&gt;</span>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;head&gt;</span>
 	<span class="c">&lt;!-- Core widget js and css --&gt;</span>
 	<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.2.0/js/okta-sign-in-1.2.0.min.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
 	<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.2.0/css/okta-sign-in-1.2.0.min.css"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
@@ -282,7 +282,7 @@ organization.</p>
 would replace the string “<code class="highlighter-rouge">example.okta.com</code>” below with
 “<code class="highlighter-rouge">acme.okta.com</code>”:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="s1">'https://example.okta.com'</span><span class="p">;</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="s1">'https://example.okta.com'</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">oktaSignIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span><span class="na">baseUrl</span><span class="p">:</span> <span class="nx">baseUrl</span><span class="p">});</span>
 </code></pre>
 </div>
@@ -294,7 +294,7 @@ production environment, you will want to handle statuses beyond
 “SUCCESS”, you will likely also want to define an “ERROR”
 callback as well.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">renderEl</span><span class="p">(</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">renderEl</span><span class="p">(</span>
   <span class="p">{</span> <span class="na">el</span><span class="p">:</span> <span class="s1">'#okta-login-container'</span> <span class="p">},</span>
   <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'SUCCESS'</span><span class="p">)</span> <span class="p">{</span> <span class="nx">res</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">setCookieAndRedirect</span><span class="p">(</span><span class="s1">'https://example.com/'</span><span class="p">);</span> <span class="p">}</span>
@@ -559,7 +559,7 @@ can style the Okta Sign-In Widget. You can try out this CSS yourself
 by copying the <code class="highlighter-rouge">&lt;style&gt;</code> tag below into the <code class="highlighter-rouge">&lt;head&gt;</code> section of
 the <code class="highlighter-rouge">login-to-okta.html</code> file that you created above.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;style&gt;</span>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;style&gt;</span>
   <span class="nt">body</span> <span class="p">{</span>
     <span class="nl">background-image</span><span class="p">:</span> <span class="sx">url('https://farm9.staticflickr.com/8332/8451032652_b2bf0bdadc_h.jpg')</span><span class="p">;</span>
     <span class="nl">background-repeat</span><span class="p">:</span> <span class="nb">no-repeat</span><span class="p">;</span>
@@ -615,7 +615,7 @@ see what these customizations do by copying this code into your
 web browser. A full list of the supported customization options
 are below.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">oktaSignIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">oktaSignIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span>
   <span class="na">baseUrl</span><span class="p">:</span> <span class="nx">baseUrl</span><span class="p">,</span>
   <span class="na">logo</span><span class="p">:</span> <span class="s1">'https://upload.wikimedia.org/wikipedia/en/thumb/7/7e/Oldacmelogo.png/200px-Oldacmelogo.png'</span><span class="p">,</span>
 
@@ -775,55 +775,6 @@ You can find more reference information in the <a href="/docs/api/resources/okta
 
 	</div>
 	
-<!-- Remarketing tag -->
-	<script type="text/javascript">
-		/* <![CDATA[ */
-		var google_conversion_id = 1006913831;
-		var google_custom_params = window.google_tag_params;
-		var google_remarketing_only = true;
-		/* ]]> */
-	</script>
-	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-	</script>
-	<noscript>
-		<div style="display:inline;">
-			<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"/>
-		</div>
-	</noscript>
-<!-- End Remarketing tag -->
-
-<!-- Crazy Egg Tracking -->
-<script type="text/javascript">
-setTimeout(function(){var a=document.createElement("script");
-var b=document.getElementsByTagName("script")[0];
-a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
-a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-</script>
-<!-- End Crazy Egg Tracking -->
-
-<footer class="site-footer">
-	<div class="wrap">
-
-		<ul>
-			<li><a href="http://www.okta.com" target="_blank">Okta.com</a></li>
-			<li><a href="/blog">Blog</a></li>
-			<li><a href="/terms/">Terms &amp; Conditions</a></li>
-			<li><a href="/privacy/">Privacy Policy</a></li>
-			<li><a href="http://okta.com/developer/contact/">Contact Sales</a></li>
-			<li><a href="mailto:developers@okta.com">Contact Support</a></li>
-		</ul>
-
-		<ul>
-			<li><a class="icon" href="http://github.com/okta" target="_blank"><i class="fa fa-github"></i></a></li>
-			<li><a class="icon" href="http://twitter.com/okta" target="_blank"><i class="fa fa-twitter"></i></a></li>
-			<li><a class="icon" href="http://stackoverflow.com/search?q=okta" target="_blank"><i class="fa fa-stack-overflow"></i></a></li>
-			<li><a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a></li>
-			<li><a class="icon" href="http://community.okta.com" target="_blank"><i class="fa fa-comments"></i></a></li>
-		</ul>
-
-	</div>
-</footer>
-
 </section>
 
 

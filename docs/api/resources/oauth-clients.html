@@ -177,7 +177,7 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
 
 <h3 id="example">Example</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0jrabyQWm4B9zVJPbotY"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example OAuth Client"</span><span class="p">,</span><span class="w">
@@ -387,7 +387,7 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
 
 <h5 class="api api-request api-request-example" id="request-example">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -415,7 +415,7 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
 
 <h5 class="api api-response api-response-example" id="response-example">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0jrabyQWm4B9zVJPbotY"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example OAuth Client"</span><span class="p">,</span><span class="w">
@@ -485,7 +485,7 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
 
 <h5 class="api api-request api-request-example" id="request-example-1">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -495,7 +495,7 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
 
 <h5 class="api api-response api-response-example" id="response-example-1">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0jrabyQWm4B9zVJPbotY"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example OAuth Client"</span><span class="p">,</span><span class="w">
@@ -593,7 +593,7 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
 
 <h5 class="api api-request api-request-example" id="request-example-2">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -603,7 +603,7 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
 
 <h5 class="api api-response api-response-example" id="response-example-2">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 <span class="na">Link</span><span class="p">:</span> <span class="s">&lt;https://your-domain.okta.com/oauth2/v1/clients&gt;; rel="self"</span>
 <span class="na">Link</span><span class="p">:</span> <span class="s">&lt;https://your-domain.okta.com/oauth2/v1/clients?after=F10CaazJPQ5Zpyu1Ojko&gt;; rel="next"</span>
@@ -673,7 +673,7 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
 
 <h5 class="api api-request api-request-example" id="request-example-3">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -683,7 +683,7 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
 
 <h5 class="api api-response api-response-example" id="response-example-3">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JoLxQvMz6u0kEkHFSnC8"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
@@ -764,7 +764,7 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
 
 <h5 class="api api-request api-request-example" id="request-example-4">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X PUT <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X PUT <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -791,7 +791,7 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
 
 <h5 class="api api-response api-response-example" id="response-example-4">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="w">
 </span><span class="p">{</span><span class="w">
   </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0jrabyQWm4B9zVJPbotY"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
@@ -864,7 +864,7 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
 
 <h5 class="api api-request api-request-example" id="request-example-5">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -874,7 +874,7 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
 
 <h5 class="api api-response api-response-example" id="response-example-5">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="w">
 </span><span class="p">{</span><span class="w">
   </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0jrabyQWm4B9zVJPbotY"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
@@ -944,7 +944,7 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
 
 <h5 class="api api-request api-request-example" id="request-example-6">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X DELETE <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X DELETE <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -954,61 +954,12 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
 
 <h5 class="api api-response api-response-example" id="response-example-6">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">204</span> <span class="ne">No Content</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">204</span> <span class="ne">No Content</span>
 </code></pre>
 </div>
 
 	</div>
 	
-<!-- Remarketing tag -->
-	<script type="text/javascript">
-		/* <![CDATA[ */
-		var google_conversion_id = 1006913831;
-		var google_custom_params = window.google_tag_params;
-		var google_remarketing_only = true;
-		/* ]]> */
-	</script>
-	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-	</script>
-	<noscript>
-		<div style="display:inline;">
-			<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"/>
-		</div>
-	</noscript>
-<!-- End Remarketing tag -->
-
-<!-- Crazy Egg Tracking -->
-<script type="text/javascript">
-setTimeout(function(){var a=document.createElement("script");
-var b=document.getElementsByTagName("script")[0];
-a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
-a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-</script>
-<!-- End Crazy Egg Tracking -->
-
-<footer class="site-footer">
-	<div class="wrap">
-
-		<ul>
-			<li><a href="http://www.okta.com" target="_blank">Okta.com</a></li>
-			<li><a href="/blog">Blog</a></li>
-			<li><a href="/terms/">Terms &amp; Conditions</a></li>
-			<li><a href="/privacy/">Privacy Policy</a></li>
-			<li><a href="http://okta.com/developer/contact/">Contact Sales</a></li>
-			<li><a href="mailto:developers@okta.com">Contact Support</a></li>
-		</ul>
-
-		<ul>
-			<li><a class="icon" href="http://github.com/okta" target="_blank"><i class="fa fa-github"></i></a></li>
-			<li><a class="icon" href="http://twitter.com/okta" target="_blank"><i class="fa fa-twitter"></i></a></li>
-			<li><a class="icon" href="http://stackoverflow.com/search?q=okta" target="_blank"><i class="fa fa-stack-overflow"></i></a></li>
-			<li><a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a></li>
-			<li><a class="icon" href="http://community.okta.com" target="_blank"><i class="fa fa-comments"></i></a></li>
-		</ul>
-
-	</div>
-</footer>
-
 </section>
 
 

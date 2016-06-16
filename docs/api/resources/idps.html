@@ -181,7 +181,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
 
 <h3 id="example">Example</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oa1k5d68qR2954hb0g4"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SAML2"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example IdP"</span><span class="p">,</span><span class="w">
@@ -567,7 +567,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SAML2"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"endpoints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -709,7 +709,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
   <li>The value of <code class="highlighter-rouge">url</code> is defaulted to the same value as the <code class="highlighter-rouge">sso</code> endpoint if omitted during creation of a new IdP instance.</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SAML2"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"endpoints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -728,7 +728,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
   <li>The <code class="highlighter-rouge">url</code> should be the same value as the <code class="highlighter-rouge">Location</code> attribute for a published binding in the IdP’s SAML Metadata <code class="highlighter-rouge">IDPSSODescriptor</code>.</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;IDPSSODescriptor</span> <span class="na">protocolSupportEnumeration=</span><span class="s">"urn:oasis:names:tc:SAML:2.0:protocol"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;IDPSSODescriptor</span> <span class="na">protocolSupportEnumeration=</span><span class="s">"urn:oasis:names:tc:SAML:2.0:protocol"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;SingleSignOnService</span> <span class="na">Binding=</span><span class="s">"urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"</span> <span class="na">Location=</span><span class="s">"https://idp.example.com/saml2/sso"</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;SingleSignOnService</span> <span class="na">Binding=</span><span class="s">"urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"</span> <span class="na">Location=</span><span class="s">"https://idp.example.com/saml2/sso"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/IDPSSODescriptor&gt;</span>
@@ -776,7 +776,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SAML2"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"endpoints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -792,7 +792,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
 
 <p><strong>Trust-specific ACS Endpoint Example</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;md:EntityDescriptor</span> <span class="na">entityID=</span><span class="s">"https://idp.example.com/saml2/sso"</span> <span class="na">xmlns:md=</span><span class="s">"urn:oasis:names:tc:SAML:2.0:metadata"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;md:EntityDescriptor</span> <span class="na">entityID=</span><span class="s">"https://idp.example.com/saml2/sso"</span> <span class="na">xmlns:md=</span><span class="s">"urn:oasis:names:tc:SAML:2.0:metadata"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;md:SPSSODescriptor</span> <span class="na">AuthnRequestsSigned=</span><span class="s">"true"</span> <span class="na">WantAssertionsSigned=</span><span class="s">"true"</span> <span class="na">protocolSupportEnumeration=</span><span class="s">"urn:oasis:names:tc:SAML:2.0:protocol"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;md:AssertionConsumerService</span> <span class="na">Binding=</span><span class="s">"urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"</span> <span class="na">Location=</span><span class="s">"https://your-domain.okta.co/sso/saml2/0oamxfD9Jvaxvr0M00g3"</span> <span class="na">index=</span><span class="s">"0"</span> <span class="na">isDefault=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;/md:SPSSODescriptor&gt;</span>
@@ -806,7 +806,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
 
 <p><strong>Organization (shared) ACS Endpoint Example</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;md:EntityDescriptor</span> <span class="na">entityID=</span><span class="s">"https://idp.example.com/saml2/sso"</span> <span class="na">xmlns:md=</span><span class="s">"urn:oasis:names:tc:SAML:2.0:metadata"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;md:EntityDescriptor</span> <span class="na">entityID=</span><span class="s">"https://idp.example.com/saml2/sso"</span> <span class="na">xmlns:md=</span><span class="s">"urn:oasis:names:tc:SAML:2.0:metadata"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;md:SPSSODescriptor</span> <span class="na">AuthnRequestsSigned=</span><span class="s">"true"</span> <span class="na">WantAssertionsSigned=</span><span class="s">"true"</span> <span class="na">protocolSupportEnumeration=</span><span class="s">"urn:oasis:names:tc:SAML:2.0:protocol"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;md:AssertionConsumerService</span> <span class="na">Binding=</span><span class="s">"urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"</span> <span class="na">Location=</span><span class="s">"https://your-domain.okta.com/sso/saml2"</span> <span class="na">index=</span><span class="s">"0"</span> <span class="na">isDefault=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;/md:SPSSODescriptor&gt;</span>
@@ -859,7 +859,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SAML2"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"algorithms"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -912,7 +912,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SAML2"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"algorithms"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1004,7 +1004,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SAML2"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"algorithms"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1112,7 +1112,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SAML2"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1154,7 +1154,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SAML2"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1252,7 +1252,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
 
 <p>The <a href="#setup-guides">OAuth 2.0 Setup Guide</a> lists the scopes that are supported <a href="#identity-provider-type">per-IdP provider</a>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OAUTH2"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"endpoints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1343,7 +1343,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
 
 <p>The <a href="#setup-guides">IdP setup guides</a> list the scopes that are supported <a href="#identity-provider-type">per-IdP provider</a>.  The base <code class="highlighter-rouge">openid</code> scope is always required.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OIDC"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"endpoints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1415,7 +1415,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OAUTH2"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"endpoints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1433,7 +1433,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
 </span></code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OIDC"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"endpoints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1496,7 +1496,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
   <p>You must complete client registration with the IdP Authorization Server for your Okta IdP instance to obtain client credentials.</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OAUTH2"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1510,7 +1510,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
 </span></code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OIDC"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1583,7 +1583,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"policy"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"provisioning"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUTO"</span><span class="p">,</span><span class="w">
@@ -1714,7 +1714,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"provisioning"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUTO"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"profileMaster"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
@@ -1860,7 +1860,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"groups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ASSIGN"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"assignments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -1871,7 +1871,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
 </span></code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"groups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SYNC"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"sourceAttributeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Groups"</span><span class="p">,</span><span class="w">
@@ -2005,7 +2005,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
 
 <p><strong>IdP Assertion</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;saml:AttributeStatement</span>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;saml:AttributeStatement</span>
     <span class="na">xmlns:xs=</span><span class="s">"http://www.w3.org/2001/XMLSchema"</span>
     <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;saml:Attribute</span> <span class="na">Name=</span><span class="s">"groups"</span><span class="nt">&gt;</span>
@@ -2112,7 +2112,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"accountLink"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"groups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -2190,7 +2190,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"accountLink"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"groups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -2236,7 +2236,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"groups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"include"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -2283,7 +2283,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
   <p>Group memberships are restricted to type <code class="highlighter-rouge">OKTA_GROUP</code>.</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"groups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"include"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="s2">"00gjg5lzfBpn62wuF0g3"</span><span class="w">
@@ -2356,7 +2356,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
   </li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"subject"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"userNameTemplate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"idpuser.subjectNameId"</span><span class="w">
@@ -2409,7 +2409,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
   </li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"userNameTemplate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"idpuser.subjectNameId"</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -2460,7 +2460,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://graph.facebook.com/v2.5/oauth/access_token"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"binding"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HTTP-POST"</span><span class="w">
@@ -2520,7 +2520,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"callout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://app.example.com"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"binding"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HTTP-POST"</span><span class="p">,</span><span class="w">
@@ -2632,7 +2632,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"authorization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"basic"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ugr7Wf8PoSmPXbS0g3"</span><span class="p">,</span><span class="w">
@@ -2672,7 +2672,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"authorization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bearer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00065EmIVWf7ln0HcVQNy9T_I7qS8rhjujc1hKHaoW"</span><span class="w">
@@ -2729,7 +2729,7 @@ This object is used for dynamic discovery of related resources and lifecycle ope
 
 <h3 id="example-1">Example</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"satvklBYyJmwa6qOg0g3"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACCOUNT_JIT"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-03T23:52:58.000Z"</span><span class="p">,</span><span class="w">
@@ -2952,7 +2952,7 @@ This object is used for dynamic discovery of related resources and lifecycle ope
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"idp"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oabmluDNh2JZi8lt0g4"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Facebook"</span><span class="p">,</span><span class="w">
@@ -3006,7 +3006,7 @@ This object is used for dynamic discovery of related resources and lifecycle ope
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"userAgent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) 
         Chrome/47.0.2526.106 Safari/537.36"</span><span class="p">,</span><span class="w">
@@ -3062,7 +3062,7 @@ This object is used for dynamic discovery of related resources and lifecycle ope
 
 <h3 id="example-2">Example</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"kid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"your-key-id"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-03T18:15:47.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-03T18:15:47.000Z"</span><span class="p">,</span><span class="w">
@@ -3220,7 +3220,7 @@ This object is used for dynamic discovery of related resources and lifecycle ope
 
 <h3 id="example-3">Example</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ulwodIu7wCfdiVR0g3"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"externalId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"saml.jackson@example.com"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-10T22:24:55.000Z"</span><span class="p">,</span><span class="w">
@@ -3374,7 +3374,7 @@ This object is used for dynamic discovery of related resources and lifecycle ope
 
 <h4 id="example-profile-object">Example Profile Object</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jackson"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"subjectNameQualifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example.com"</span><span class="p">,</span><span class="w">
@@ -3477,7 +3477,7 @@ This object is used for dynamic discovery of related resources and lifecycle ope
 
 <h5 class="api api-request api-request-example" id="request-example">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -3548,7 +3548,7 @@ This object is used for dynamic discovery of related resources and lifecycle ope
 
 <h5 class="api api-response api-response-example" id="response-example">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oa62bc8wppPw0UGr0h7"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SAML2"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example IdP"</span><span class="p">,</span><span class="w">
@@ -3660,7 +3660,7 @@ This object is used for dynamic discovery of related resources and lifecycle ope
 
 <h5 class="api api-request api-request-example" id="request-example-1">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -3708,7 +3708,7 @@ This object is used for dynamic discovery of related resources and lifecycle ope
 
 <h5 class="api api-response api-response-example" id="response-example-1">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oa62b57p7c8PaGpU0h7"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FACEBOOK"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Facebook"</span><span class="p">,</span><span class="w">
@@ -3790,7 +3790,7 @@ This object is used for dynamic discovery of related resources and lifecycle ope
 
 <h5 class="api api-request api-request-example" id="request-example-2">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -3839,7 +3839,7 @@ This object is used for dynamic discovery of related resources and lifecycle ope
 
 <h5 class="api api-response api-response-example" id="response-example-2">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oa62bfdiumsUndnZ0h7"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GOOGLE"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Google"</span><span class="p">,</span><span class="w">
@@ -3922,7 +3922,7 @@ This object is used for dynamic discovery of related resources and lifecycle ope
 
 <h5 class="api api-request api-request-example" id="request-example-3">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -3970,7 +3970,7 @@ This object is used for dynamic discovery of related resources and lifecycle ope
 
 <h5 class="api api-response api-response-example" id="response-example-3">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oa62bfdjnK55Z5x80h7"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LINKEDIN"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LinkedIn"</span><span class="p">,</span><span class="w">
@@ -4052,7 +4052,7 @@ This object is used for dynamic discovery of related resources and lifecycle ope
 
 <h5 class="api api-request api-request-example" id="request-example-4">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -4097,7 +4097,7 @@ This object is used for dynamic discovery of related resources and lifecycle ope
 
 <h5 class="api api-response api-response-example" id="response-example-4">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oajmvdFawBih4gey0g3"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MICROSOFT"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Microsoft"</span><span class="p">,</span><span class="w">
@@ -4212,7 +4212,7 @@ This object is used for dynamic discovery of related resources and lifecycle ope
 
 <h5 id="request-example-5">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -4222,7 +4222,7 @@ This object is used for dynamic discovery of related resources and lifecycle ope
 
 <h5 class="api api-response api-response-example" id="response-example-5">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oa62bfdjnK55Z5x80h7"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LINKEDIN"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LinkedIn"</span><span class="p">,</span><span class="w">
@@ -4376,7 +4376,7 @@ This object is used for dynamic discovery of related resources and lifecycle ope
 
 <h5 class="api api-request api-request-example" id="request-example-6">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -4386,7 +4386,7 @@ This object is used for dynamic discovery of related resources and lifecycle ope
 
 <h5 class="api api-response api-response-example" id="response-example-6">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oa62b57p7c8PaGpU0h7"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FACEBOOK"</span><span class="p">,</span><span class="w">
@@ -4723,7 +4723,7 @@ Exact matches are returned before partial matches.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-7">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -4733,7 +4733,7 @@ Exact matches are returned before partial matches.</p>
 
 <h5 class="api api-response api-response-example" id="response-example-7">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oa62bc8wppPw0UGr0h7"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SAML2"</span><span class="p">,</span><span class="w">
@@ -4847,7 +4847,7 @@ Exact matches are returned before partial matches.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-8">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -4857,7 +4857,7 @@ Exact matches are returned before partial matches.</p>
 
 <h5 class="api api-response api-response-example" id="response-example-8">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 <span class="na">Link</span><span class="p">:</span> <span class="s">&lt;https://your-domain.okta.com/api/v1/idps?limit=20&gt;; rel="self"</span>
 <span class="na">Link</span><span class="p">:</span> <span class="s">&lt;https://your-domain.okta.com/api/v1/idps?after=0oaxdqpA88PtFNmhu0g3&amp;limit=20&gt;; rel="next"</span>
@@ -5017,7 +5017,7 @@ Exact matches are returned before partial matches.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-9">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X PUT <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X PUT <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -5028,7 +5028,7 @@ Exact matches are returned before partial matches.</p>
 
 <h5 class="api api-response api-response-example" id="response-example-9">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oa62bc8wppPw0UGr0h7"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SAML2"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example IdP"</span><span class="p">,</span><span class="w">
@@ -5176,7 +5176,7 @@ Exact matches are returned before partial matches.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-10">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X DELETE <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X DELETE <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -5186,7 +5186,7 @@ Exact matches are returned before partial matches.</p>
 
 <h5 class="api api-response api-response-example" id="response-example-10">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">204</span> <span class="ne">No Content</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">204</span> <span class="ne">No Content</span>
 </code></pre>
 </div>
 
@@ -5229,7 +5229,7 @@ Exact matches are returned before partial matches.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-11">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -5239,7 +5239,7 @@ Exact matches are returned before partial matches.</p>
 
 <h5 class="api api-response api-response-example" id="response-example-11">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oa62bfdiumsUndnZ0h7"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GOOGLE"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Google"</span><span class="p">,</span><span class="w">
@@ -5353,7 +5353,7 @@ Exact matches are returned before partial matches.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-12">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -5363,7 +5363,7 @@ Exact matches are returned before partial matches.</p>
 
 <h5 class="api api-response api-response-example" id="response-example-12">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oa62bfdiumsUndnZ0h7"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GOOGLE"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Google"</span><span class="p">,</span><span class="w">
@@ -5484,7 +5484,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-13">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -5494,7 +5494,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 
 <h5 class="api api-response api-response-example" id="response-example-13">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"satvklBYyJmwa6qOg0g3"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACCOUNT_JIT"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-03T23:52:58.000Z"</span><span class="p">,</span><span class="w">
@@ -5574,7 +5574,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-14">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -5584,7 +5584,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 
 <h5 class="api api-response api-response-example" id="response-example-14">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"externalId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1437424479920471"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"middleName"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -5640,7 +5640,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-15">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -5650,7 +5650,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 
 <h5 class="api api-response api-response-example" id="response-example-15">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"middleName"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"streetAddress"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -5713,7 +5713,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-16">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -5723,7 +5723,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 
 <h5 class="api api-response api-response-example" id="response-example-16">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00uc8wfZSNWKlFGZa0g4"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
@@ -5824,7 +5824,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-17">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -5838,7 +5838,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 
 <h5 class="api api-response api-response-example" id="response-example-17">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"satvkokI9JsOxqsjz0g3"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"sessionToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20111ItcRRtx_HOKguQRqx6YIeFL3L6cQhpqSCvLOD-fpj-3K53aqXN"</span><span class="p">,</span><span class="w">
@@ -5929,7 +5929,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-18">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -5943,7 +5943,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 
 <h5 class="api api-response api-response-example" id="response-example-18">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"satvkokI9JsOxqsjz0g3"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"sessionToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20111FLDl04JoQdl-NJOB9A6HosTSuHtQQUmCBhdEvnE4XEInod0Sg_"</span><span class="p">,</span><span class="w">
@@ -6020,7 +6020,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-19">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -6046,7 +6046,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 
 <h5 class="api api-response api-response-example" id="response-example-19">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 <span class="na">Location</span><span class="p">:</span> <span class="s">https://${org}.okta.com/api/v1/idps/credentials/keys/74bb2164-e0c8-4457-862b-7c29ba6cd2c9</span>
 
@@ -6118,7 +6118,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-20">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -6129,7 +6129,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 
 <h5 class="api api-response api-response-example" id="response-example-20">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"kid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"your-key-id"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-03T18:15:47.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-03T18:15:47.000Z"</span><span class="p">,</span><span class="w">
@@ -6205,7 +6205,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-21">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -6216,7 +6216,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 
 <h5 class="api api-response api-response-example" id="response-example-21">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"kid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"your-key-id"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-03T18:15:47.000Z"</span><span class="p">,</span><span class="w">
@@ -6286,7 +6286,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-22">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X DELETE <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X DELETE <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -6296,61 +6296,12 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 
 <h5 class="api api-response api-response-example" id="response-example-22">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">204</span> <span class="ne">No Content</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">204</span> <span class="ne">No Content</span>
 </code></pre>
 </div>
 
 	</div>
 	
-<!-- Remarketing tag -->
-	<script type="text/javascript">
-		/* <![CDATA[ */
-		var google_conversion_id = 1006913831;
-		var google_custom_params = window.google_tag_params;
-		var google_remarketing_only = true;
-		/* ]]> */
-	</script>
-	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-	</script>
-	<noscript>
-		<div style="display:inline;">
-			<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"/>
-		</div>
-	</noscript>
-<!-- End Remarketing tag -->
-
-<!-- Crazy Egg Tracking -->
-<script type="text/javascript">
-setTimeout(function(){var a=document.createElement("script");
-var b=document.getElementsByTagName("script")[0];
-a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
-a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-</script>
-<!-- End Crazy Egg Tracking -->
-
-<footer class="site-footer">
-	<div class="wrap">
-
-		<ul>
-			<li><a href="http://www.okta.com" target="_blank">Okta.com</a></li>
-			<li><a href="/blog">Blog</a></li>
-			<li><a href="/terms/">Terms &amp; Conditions</a></li>
-			<li><a href="/privacy/">Privacy Policy</a></li>
-			<li><a href="http://okta.com/developer/contact/">Contact Sales</a></li>
-			<li><a href="mailto:developers@okta.com">Contact Support</a></li>
-		</ul>
-
-		<ul>
-			<li><a class="icon" href="http://github.com/okta" target="_blank"><i class="fa fa-github"></i></a></li>
-			<li><a class="icon" href="http://twitter.com/okta" target="_blank"><i class="fa fa-twitter"></i></a></li>
-			<li><a class="icon" href="http://stackoverflow.com/search?q=okta" target="_blank"><i class="fa fa-stack-overflow"></i></a></li>
-			<li><a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a></li>
-			<li><a class="icon" href="http://community.okta.com" target="_blank"><i class="fa fa-comments"></i></a></li>
-		</ul>
-
-	</div>
-</footer>
-
 </section>
 
 

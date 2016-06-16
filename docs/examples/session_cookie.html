@@ -183,7 +183,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h4 class="api api-request api-request-example" id="request-example">Request Example</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nf">POST</span> <span class="nn">/api/v1/sessions?additionalFields=cookieToken</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="nf">POST</span> <span class="nn">/api/v1/sessions?additionalFields=cookieToken</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">your-subdomain.okta.com</span>
 <span class="na">Authorization</span><span class="p">:</span> <span class="s">SSWS yourtoken</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
@@ -198,7 +198,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h4 class="api api-response api-response-example" id="response-example">Response Example</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 
 <span class="p">{</span><span class="w">
@@ -219,7 +219,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <p>Only the Okta session redirect URL with one-time token is required</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Moved Temporarily</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Moved Temporarily</span>
 <span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">my_app_session_cookie_name=my_apps_session_cookie_value; Path=/</span>
 <span class="na">Location</span><span class="p">:</span> <span class="s">https://your-subdomain.okta.com/login/sessionCookieRedirect?token=009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6&amp;redirectUrl=https%3A%2F%2Fwww.example.com%2Fportal%2Fhome</span>
 </code></pre>
@@ -227,13 +227,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>The user’s browser will set your app’s session cookie and follow the redirect to Okta.  Okta will validate the one-time token and return a 302 status response that sets a session cookie for Okta and redirects the user’s browser back to your landing page.  After the page has loaded the user will have an active session with Okta and will be able to SSO into their applications until the session is expired or the user closes the session (logout) or browser application.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nf">GET</span> <span class="nn">/login/sessionCookieRedirect?token=009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6&amp;redirectUrl=https%3A%2F%2Fwww.example.com%2Fportal%2Fhome</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="nf">GET</span> <span class="nn">/login/sessionCookieRedirect?token=009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6&amp;redirectUrl=https%3A%2F%2Fwww.example.com%2Fportal%2Fhome</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">your-subdomain.okta.com</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">*/*</span>
 </code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Moved Temporarily</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Moved Temporarily</span>
 <span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">sid=000aC_z7AZKTpSqtHFc0Ak6Vg; Path=/</span>
 <span class="na">Location</span><span class="p">:</span> <span class="s">https://www.example.com/portal/home</span>
 </code></pre>
@@ -255,7 +255,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h4 class="api api-request api-request-example" id="request-example-1">Request Example</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nf">POST</span> <span class="nn">/api/v1/sessions?additionalFields=cookieToken</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="nf">POST</span> <span class="nn">/api/v1/sessions?additionalFields=cookieToken</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">your-subdomain.okta.com</span>
 <span class="na">Authorization</span><span class="p">:</span> <span class="s">SSWS yourtoken</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
@@ -270,7 +270,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h4 class="api api-response api-response-example" id="response-example-1">Response Example</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 
 <span class="p">{</span><span class="w">
@@ -286,14 +286,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>After your login flow is complete you can launch an Okta application for the user with an <a href="/docs/api/rest/users.html#get-assigned-app-links">embed link</a> that contains the the one-time token as a query parameter <code class="highlighter-rouge">onetimetoken</code>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Moved Temporarily</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Moved Temporarily</span>
 <span class="na">Location</span><span class="p">:</span> <span class="s">https://your-subdomain/app/google/go1013td3mXAQOJCHEHQ/mail?onetimetoken=009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6</span>
 </code></pre>
 </div>
 
 <p>When the link is visited, the token in the request will be used to initiate the user’s session before processing the application launch request. A session cookie will be set in the browser and the user will have an active session with Okta and will be able to SSO into additional applications until the session is expired or the user closes the session (logout) or browser application.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Moved Temporarily</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Moved Temporarily</span>
 <span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">sid=000aC_z7AZKTpSqtHFc0Ak6Vg; Path=/</span>
 <span class="na">Location</span><span class="p">:</span> <span class="s">https://mail.google.com/a/your-subdomain</span>
 </code></pre>
@@ -308,7 +308,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>After your login flow is complete you can also initiate a SAML SSO into an Okta application for the user with either the <code class="highlighter-rouge">HTTP-Redirect</code> or <code class="highlighter-rouge">HTTP-POST</code>binding to the application’s SAML SSO URL
 that contains the the one-time token as query parameter <code class="highlighter-rouge">onetimetoken</code>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nf">GET</span> <span class="nn">/app/template_saml_2_0/kbiyMOIMHNLGHJNCBURM/sso/saml?RelayState=%2Fsome%2Fdeep%2Flink&amp;onetimetoken=009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="nf">GET</span> <span class="nn">/app/template_saml_2_0/kbiyMOIMHNLGHJNCBURM/sso/saml?RelayState=%2Fsome%2Fdeep%2Flink&amp;onetimetoken=009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">your-subdomain.okta.com</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">*/*</span>
 </code></pre>
@@ -316,7 +316,7 @@ that contains the the one-time token as query parameter <code class="highlighter
 
 <p>When the link is visited, the token in the request will be used to initiate the user’s session before processing the SAML SSO request. A session cookie will be set in the browser and the user will have an active session with Okta and will be able to SSO into additional applications until the session is expired or the user closes the session (logout) or browser application.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">text/html;charset=utf-8</span>
 <span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">sid=000aC_z7AZKTpSqtHFc0Ak6Vg; Path=/</span>
 <span class="s">&lt;html&gt;</span>
@@ -343,7 +343,7 @@ that contains the the one-time token as query parameter <code class="highlighter
 
 <p>You can also use the same <a href="#initiate-a-saml-sso-with-the-session-token">flow as SAML</a> for template WS-Federation application as well by passing the one-time token as query parameter <code class="highlighter-rouge">onetimetoken</code>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nf">GET</span> <span class="nn">/app/template_wsfed/k9x69oiKYSUWMIYZBKTY/sso/wsfed/passive?wa=wsignin1.0&amp;wtrealm=https%3A%2F%2Fexample.com%2FApp%2F&amp;wctx=rm%3D0%26id%3Dpassive%26ru%3D%2FApp%2FHome%2FAbout&amp;onetimetoken=009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="nf">GET</span> <span class="nn">/app/template_wsfed/k9x69oiKYSUWMIYZBKTY/sso/wsfed/passive?wa=wsignin1.0&amp;wtrealm=https%3A%2F%2Fexample.com%2FApp%2F&amp;wctx=rm%3D0%26id%3Dpassive%26ru%3D%2FApp%2FHome%2FAbout&amp;onetimetoken=009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">your-subdomain.okta.com</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">*/*</span>
 </code></pre>
@@ -363,7 +363,7 @@ that contains the the one-time token as query parameter <code class="highlighter
 
 <h4 class="api api-request api-request-example" id="request-example-2">Request Example</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nf">POST</span> <span class="nn">/api/v1/sessions?additionalFields=cookieTokenUrl</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="nf">POST</span> <span class="nn">/api/v1/sessions?additionalFields=cookieTokenUrl</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">your-subdomain.okta.com</span>
 <span class="na">Authorization</span><span class="p">:</span> <span class="s">SSWS yourtoken</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
@@ -378,7 +378,7 @@ that contains the the one-time token as query parameter <code class="highlighter
 
 <h4 class="api api-response api-response-example" id="response-example-2">Response Example</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 
 <span class="p">{</span><span class="w">
@@ -394,13 +394,13 @@ that contains the the one-time token as query parameter <code class="highlighter
 
 <p>When you are ready to establish a session with Okta for the user, include the session cookie image URL in an image tag.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"https://your-subdomain.okta.com/login/sessionCookie?token=00nwBmuBFS4o2E5l58eSbgnr4NmY0-ELQR4Pvn2RZV"</span><span class="nt">&gt;</span>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"https://your-subdomain.okta.com/login/sessionCookie?token=00nwBmuBFS4o2E5l58eSbgnr4NmY0-ELQR4Pvn2RZV"</span><span class="nt">&gt;</span>
 </code></pre>
 </div>
 
 <p>When the page containing the tag is loaded, the token in the request will be used to initiate the user’s session, and a session cookie will be set in the browser. The image that renders is a 1x1 transparent image. After the page has loaded the user will have an active session with Okta and will be able to SSO into their applications. The token is a one-time token, so successive page loads will have no impact on the user’s session. If the user logs out of Okta after using the token, they will not be able to reuse that same token to get a session cookie.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">image/png</span>
 <span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">sid=000O8P2OlZLTHuz4RZV8locXA; Path=/</span>
 </code></pre>
@@ -408,55 +408,6 @@ that contains the the one-time token as query parameter <code class="highlighter
 
 	</div>
 	
-<!-- Remarketing tag -->
-	<script type="text/javascript">
-		/* <![CDATA[ */
-		var google_conversion_id = 1006913831;
-		var google_custom_params = window.google_tag_params;
-		var google_remarketing_only = true;
-		/* ]]> */
-	</script>
-	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-	</script>
-	<noscript>
-		<div style="display:inline;">
-			<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"/>
-		</div>
-	</noscript>
-<!-- End Remarketing tag -->
-
-<!-- Crazy Egg Tracking -->
-<script type="text/javascript">
-setTimeout(function(){var a=document.createElement("script");
-var b=document.getElementsByTagName("script")[0];
-a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
-a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-</script>
-<!-- End Crazy Egg Tracking -->
-
-<footer class="site-footer">
-	<div class="wrap">
-
-		<ul>
-			<li><a href="http://www.okta.com" target="_blank">Okta.com</a></li>
-			<li><a href="/blog">Blog</a></li>
-			<li><a href="/terms/">Terms &amp; Conditions</a></li>
-			<li><a href="/privacy/">Privacy Policy</a></li>
-			<li><a href="http://okta.com/developer/contact/">Contact Sales</a></li>
-			<li><a href="mailto:developers@okta.com">Contact Support</a></li>
-		</ul>
-
-		<ul>
-			<li><a class="icon" href="http://github.com/okta" target="_blank"><i class="fa fa-github"></i></a></li>
-			<li><a class="icon" href="http://twitter.com/okta" target="_blank"><i class="fa fa-twitter"></i></a></li>
-			<li><a class="icon" href="http://stackoverflow.com/search?q=okta" target="_blank"><i class="fa fa-stack-overflow"></i></a></li>
-			<li><a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a></li>
-			<li><a class="icon" href="http://community.okta.com" target="_blank"><i class="fa fa-comments"></i></a></li>
-		</ul>
-
-	</div>
-</footer>
-
 </section>
 
 

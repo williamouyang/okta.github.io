@@ -516,7 +516,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <p>You should never assume a specific state transition or URL when navigating the <a href="#transaction-state">state model</a>.  Always inspect the response for <code class="highlighter-rouge">status</code> and dynamically follow the <a href="#links-object">published link relations</a>.</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"activate"</span><span class="p">,</span><span class="w">
@@ -574,7 +574,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <p>All Authentication API operations will return <code class="highlighter-rouge">401 Unauthorized</code> status code when you attempt to use an expired state token.</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">401</span> <span class="ne">Unauthorized</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">401</span> <span class="ne">Unauthorized</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 
 <span class="p">{</span><span class="w">
@@ -591,7 +591,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <p>State transitions are strictly enforced for state tokens.  You will receive a <code class="highlighter-rouge">403 Forbidden</code> status code if you call an Authentication API operation with a <code class="highlighter-rouge">stateToken</code> with an invalid <a href="#transaction-state">state</a>.</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 
 <span class="p">{</span><span class="w">
@@ -781,7 +781,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00udnlQDVLVRIVXESCMZ"</span><span class="p">,</span><span class="w">
  </span><span class="nt">"passwordChanged"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-09-08T20:14:45.000Z"</span><span class="p">,</span><span class="w">
  </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -952,7 +952,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiration"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"passwordExpireDays"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
   </span><span class="p">},</span><span class="w">
@@ -1165,7 +1165,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ostfm3hPNYSOIOIVTQWY"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"factorType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"token:software:totp"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OKTA"</span><span class="p">,</span><span class="w">
@@ -1265,7 +1265,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"activation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"timeStep"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
     </span><span class="nt">"sharedSecret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HE64TMLL2IUZW2ZLB"</span><span class="p">,</span><span class="w">
@@ -1350,7 +1350,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mbl198rKSEWOSKRIVIFT"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"phoneNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+1 XXX-XXX-1337"</span><span class="w">
@@ -1490,7 +1490,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"activation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-13T07:44:22.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1758,7 +1758,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p><code class="highlighter-rouge">401 Unauthorized</code> status code is returned for requests with invalid credentials or locked out accounts</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">401</span> <span class="ne">Unauthorized</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">401</span> <span class="ne">Unauthorized</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 
 <span class="p">{</span><span class="w">
@@ -1777,7 +1777,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <p>Ensure the user is assigned to a valid <strong>MFA Policy</strong> if additional verification is required in the user’s <strong>Sign-On Policy</strong></p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 
 <span class="p">{</span><span class="w">
@@ -1796,7 +1796,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <p>Authentication requests are aggressively rate-limited (e.g. 1 request per username/per second) for security purposes.</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">429</span> <span class="ne">Too Many Requests</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">429</span> <span class="ne">Too Many Requests</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 <span class="na">X-Rate-Limit-Limit</span><span class="p">:</span> <span class="s">1</span>
 <span class="na">X-Rate-Limit-Remaining</span><span class="p">:</span> <span class="s">0</span>
@@ -1818,7 +1818,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h5 class="api api-request api-request-example" id="request-example">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
@@ -1837,7 +1837,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Users with a valid password not assigned to a <strong>Sign-On Policy</strong> with additional verification requirements will successfully complete the authentication transaction.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"relayState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/myapp/some/deep/link/i/want/to/return/to"</span><span class="p">,</span><span class="w">
@@ -1863,7 +1863,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Primary authentication requests with an invalid <code class="highlighter-rouge">username</code> or <code class="highlighter-rouge">password</code> fail with a <code class="highlighter-rouge">401 Unauthorized</code> error.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">401</span> <span class="ne">Unauthorized</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">401</span> <span class="ne">Unauthorized</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 
 <span class="p">{</span><span class="w">
@@ -1880,7 +1880,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Primary authentication request has valid credentials but the user is denied access via  <strong>Sign-On Policy</strong> or <strong>MFA Policy</strong> with <code class="highlighter-rouge">403 Forbidden</code> error.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 
 <span class="p">{</span><span class="w">
@@ -1901,7 +1901,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>If the user’s password policy is configure to <strong>hide lockout failures</strong>, a <code class="highlighter-rouge">401 Unauthorized</code> error is returned preventing information disclosure of a valid user identifier.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">401</span> <span class="ne">Unauthorized</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">401</span> <span class="ne">Unauthorized</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 
 <span class="p">{</span><span class="w">
@@ -1918,7 +1918,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>If the user’s password policy is configure to <strong>show lockout failures</strong>, the authentication transaction completes with <code class="highlighter-rouge">LOCKED_OUT</code> status.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LOCKED_OUT"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1943,7 +1943,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <p>Users will be challenged for MFA (<code class="highlighter-rouge">MFA_REQUIRED</code>) before <code class="highlighter-rouge">PASSWORD_EXPIRED</code> if they have an active factor enrollment</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PASSWORD_EXPIRED"</span><span class="p">,</span><span class="w">
@@ -1997,7 +1997,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>User is assigned to a <strong>Sign-On Policy</strong> that requires additional verification and must <a href="#verify-factor">select and verify</a> a previously enrolled <a href="#factor-object">factor</a> by <code class="highlighter-rouge">id</code> to complete the authentication transaction.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MFA_REQUIRED"</span><span class="p">,</span><span class="w">
@@ -2111,7 +2111,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>User is assigned to a <strong>MFA Policy</strong> that requires enrollment during sign-on and must <a href="#enroll-factor">select a factor to enroll</a> to complete the authentication transaction.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MFA_ENROLL"</span><span class="p">,</span><span class="w">
@@ -2215,7 +2215,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h5 class="api api-request api-request-example" id="request-example-1">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -2238,7 +2238,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h5 class="api api-response api-response-example" id="response-example">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"relayState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/myapp/some/deep/link/i/want/to/return/to"</span><span class="p">,</span><span class="w">
@@ -2271,7 +2271,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-request api-request-example" id="request-example-2">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
@@ -2288,7 +2288,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-response api-response-example" id="response-example-1">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PASSWORD_WARN"</span><span class="p">,</span><span class="w">
@@ -2408,7 +2408,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <p>If the <code class="highlighter-rouge">oldPassword</code> is invalid you will receive a <code class="highlighter-rouge">403 Forbidden</code> status code with the following error:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 
 <span class="p">{</span><span class="w">
@@ -2427,7 +2427,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <p>If the <code class="highlighter-rouge">newPassword</code> does not meet password policy requirements, you will receive a <code class="highlighter-rouge">403 Forbidden</code> status code with the following error:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 
 <span class="p">{</span><span class="w">
@@ -2446,7 +2446,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-request api-request-example" id="request-example-3">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
@@ -2459,7 +2459,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-response api-response-example" id="response-example-2">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"relayState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/myapp/some/deep/link/i/want/to/return/to"</span><span class="p">,</span><span class="w">
@@ -2569,7 +2569,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-request api-request-example" id="request-example-4">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
@@ -2586,7 +2586,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-response api-response-example" id="response-example-3">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"relayState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/myapp/some/deep/link/i/want/to/return/to"</span><span class="p">,</span><span class="w">
@@ -2614,7 +2614,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-request api-request-example" id="request-example-5">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
@@ -2634,7 +2634,7 @@ Non-expired passwords will successfully complete the authentication transaction 
   <p>Use the <code class="highlighter-rouge">resend</code> link to send another OTP if user doesn’t receive the original activation SMS OTP.</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MFA_ENROLL_ACTIVATE"</span><span class="p">,</span><span class="w">
@@ -2708,7 +2708,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-request api-request-example" id="request-example-6">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
@@ -2721,7 +2721,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-response api-response-example" id="response-example-5">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MFA_ENROLL_ACTIVATE"</span><span class="p">,</span><span class="w">
@@ -2802,7 +2802,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-request api-request-example" id="request-example-7">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
@@ -2815,7 +2815,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-response api-response-example" id="response-example-6">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MFA_ENROLL_ACTIVATE"</span><span class="p">,</span><span class="w">
@@ -2907,7 +2907,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-request api-request-example" id="request-example-8">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
@@ -2920,7 +2920,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-response api-response-example" id="response-example-7">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MFA_ENROLL_ACTIVATE"</span><span class="p">,</span><span class="w">
@@ -2997,7 +2997,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-request api-request-example" id="request-example-9">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -3015,7 +3015,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-response api-response-example" id="response-example-8">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"relayState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/myapp/some/deep/link/i/want/to/return/to"</span><span class="p">,</span><span class="w">
@@ -3043,7 +3043,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-request api-request-example" id="request-example-10">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -3062,7 +3062,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-response api-response-example" id="response-example-9">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"relayState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/myapp/some/deep/link/i/want/to/return/to"</span><span class="p">,</span><span class="w">
@@ -3090,7 +3090,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-request api-request-example" id="request-example-11">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -3104,7 +3104,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-response api-response-example" id="response-example-10">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"relayState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/myapp/some/deep/link/i/want/to/return/to"</span><span class="p">,</span><span class="w">
@@ -3189,7 +3189,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <p>If the passcode is invalid you will receive a <code class="highlighter-rouge">403 Forbidden</code> status code with the following error:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 
 <span class="p">{</span><span class="w">
@@ -3208,7 +3208,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h4 class="api api-request api-request-example" id="request-example-12">Request Example</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
@@ -3220,7 +3220,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h4 class="api api-response api-response-example" id="response-example-11">Response Example</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"relayState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/myapp/some/deep/link/i/want/to/return/to"</span><span class="p">,</span><span class="w">
@@ -3293,7 +3293,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <p>If the passcode is invalid you will receive a <code class="highlighter-rouge">403 Forbidden</code> status code with the following error:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 
 <span class="p">{</span><span class="w">
@@ -3312,7 +3312,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-request api-request-example" id="request-example-13">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
@@ -3324,7 +3324,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-response api-response-example" id="response-example-12">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"relayState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/myapp/some/deep/link/i/want/to/return/to"</span><span class="p">,</span><span class="w">
@@ -3391,7 +3391,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-request api-request-example" id="request-example-14">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
@@ -3406,7 +3406,7 @@ Non-expired passwords will successfully complete the authentication transaction 
   <p>Follow the the published <code class="highlighter-rouge">next</code> link to keep polling for activation completion</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MFA_ENROLL_ACTIVATE"</span><span class="p">,</span><span class="w">
@@ -3494,7 +3494,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-response api-response-example" id="response-example-success-1">Response Example (Success)</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"relayState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/myapp/some/deep/link/i/want/to/return/to"</span><span class="p">,</span><span class="w">
@@ -3522,7 +3522,7 @@ Non-expired passwords will successfully complete the authentication transaction 
   <p>Follow the the published <code class="highlighter-rouge">activate</code> link to restart the activation process</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MFA_ENROLL_ACTIVATE"</span><span class="p">,</span><span class="w">
@@ -3618,7 +3618,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h6 class="api api-request api-request-example" id="request-example-email">Request Example (Email)</h6>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
@@ -3629,7 +3629,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h6 class="api api-request api-request-example" id="request-example-sms">Request Example (SMS)</h6>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
@@ -3643,7 +3643,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h6 class="api api-response api-response-example" id="response-example-13">Response Example</h6>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MFA_ENROLL_ACTIVATE"</span><span class="p">,</span><span class="w">
@@ -3793,7 +3793,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <p>If the <code class="highlighter-rouge">answer</code> is invalid you will receive a <code class="highlighter-rouge">403 Forbidden</code> status code with the following error:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000068"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid Passcode/Answer"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"errorLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000068"</span><span class="p">,</span><span class="w">
@@ -3809,7 +3809,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-request api-request-example" id="request-example-15">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
@@ -3821,7 +3821,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-response api-response-example" id="response-example-14">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"relayState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/myapp/some/deep/link/i/want/to/return/to"</span><span class="p">,</span><span class="w">
@@ -3898,7 +3898,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <p>If the <code class="highlighter-rouge">passCode</code> is invalid you will receive a <code class="highlighter-rouge">403 Forbidden</code> status code with the following error:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000068"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid Passcode/Answer"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"errorLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000068"</span><span class="p">,</span><span class="w">
@@ -3918,7 +3918,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h6 class="api api-request api-request-example" id="request-example-16">Request Example</h6>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
@@ -3929,7 +3929,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h6 class="api api-response api-response-example" id="response-example-15">Response Example</h6>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MFA_CHALLENGE"</span><span class="p">,</span><span class="w">
@@ -4003,7 +4003,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h6 class="api api-request api-request-example" id="request-example-17">Request Example</h6>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
@@ -4015,7 +4015,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h6 class="api api-response api-response-example" id="response-example-16">Response Example</h6>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"relayState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/myapp/some/deep/link/i/want/to/return/to"</span><span class="p">,</span><span class="w">
@@ -4090,7 +4090,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <p>If the passcode is invalid you will receive a <code class="highlighter-rouge">403 Forbidden</code> status code with the following error:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000068"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid Passcode/Answer"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"errorLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000068"</span><span class="p">,</span><span class="w">
@@ -4106,7 +4106,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h6 class="api api-request api-request-example" id="request-example-18">Request Example</h6>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
@@ -4118,7 +4118,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h6 class="api api-response api-response-example" id="response-example-17">Response Example</h6>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"relayState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/myapp/some/deep/link/i/want/to/return/to"</span><span class="p">,</span><span class="w">
@@ -4181,7 +4181,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-request api-request-example" id="request-example-19">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
@@ -4196,7 +4196,7 @@ Non-expired passwords will successfully complete the authentication transaction 
   <p>Keep polling authentication transactions with <code class="highlighter-rouge">WAITING</code> result until the challenge completes or expires.</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MFA_CHALLENGE"</span><span class="p">,</span><span class="w">
@@ -4270,7 +4270,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-response api-response-example" id="response-example-approved">Response Example (Approved)</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"relayState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/myapp/some/deep/link/i/want/to/return/to"</span><span class="p">,</span><span class="w">
@@ -4294,7 +4294,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-response api-response-example" id="response-example-rejected">Response Example (Rejected)</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MFA_CHALLENGE"</span><span class="p">,</span><span class="w">
@@ -4368,7 +4368,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <h5 class="api api-response api-response-example" id="response-example-timeout-1">Response Example (Timeout)</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MFA_CHALLENGE"</span><span class="p">,</span><span class="w">
@@ -4523,7 +4523,7 @@ Non-expired passwords will successfully complete the authentication transaction 
 
 <p>You will receive a <code class="highlighter-rouge">403 Forbidden</code> status code if the <code class="highlighter-rouge">username</code> requested is not valid</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 
 <span class="p">{</span><span class="w">
@@ -4549,7 +4549,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <h5 class="api api-request api-request-example" id="request-example-20">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
@@ -4562,7 +4562,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <h5 class="api api-response api-response-example" id="response-example-18">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RECOVERY_CHALLENGE"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"factorResult"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WAITING"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"relayState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/myapp/some/deep/link/i/want/to/return/to"</span><span class="p">,</span><span class="w">
@@ -4585,7 +4585,7 @@ Okta will not publish additional metadata about the user until primary authentic
   <p>SMS recovery factor must be enabled via the user’s assigned password policy to use this operation.</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
@@ -4598,7 +4598,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <h5 class="api api-response api-response-example" id="response-example-19">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00xdqXOE5qDXX8-PBR1bYv8AESqIEinDy3yul01tyh"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RECOVERY_CHALLENGE"</span><span class="p">,</span><span class="w">
@@ -4651,7 +4651,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <h5 class="api api-request api-request-example" id="request-example-21">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -4666,7 +4666,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <h5 class="api api-response api-response-example" id="response-example-20">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RECOVERY"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"relayState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/myapp/some/deep/link/i/want/to/return/to"</span><span class="p">,</span><span class="w">
@@ -4789,7 +4789,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <p>You will receive a <code class="highlighter-rouge">403 Forbidden</code> status code if the <code class="highlighter-rouge">username</code> requested is not valid</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 
 <span class="p">{</span><span class="w">
@@ -4815,7 +4815,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <h5 class="api api-request api-request-example" id="request-example-22">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
@@ -4828,7 +4828,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <h5 class="api api-response api-response-example" id="response-example-21">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RECOVERY_CHALLENGE"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"factorResult"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WAITING"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"relayState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/myapp/some/deep/link/i/want/to/return/to"</span><span class="p">,</span><span class="w">
@@ -4851,7 +4851,7 @@ Okta will not publish additional metadata about the user until primary authentic
   <p>SMS recovery factor must be enabled via the user’s assigned password policy to use this operation.</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
@@ -4864,7 +4864,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <h5 class="api api-response api-response-example" id="response-example-22">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00xdqXOE5qDXX8-PBR1bYv8AESqIEinDy3yul01tyh"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RECOVERY_CHALLENGE"</span><span class="p">,</span><span class="w">
@@ -4917,7 +4917,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <h5 class="api api-request api-request-example" id="request-example-23">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -4932,7 +4932,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <h5 class="api api-response api-response-example" id="response-example-23">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RECOVERY"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"relayState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/myapp/some/deep/link/i/want/to/return/to"</span><span class="p">,</span><span class="w">
@@ -5021,7 +5021,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <p>If the <code class="highlighter-rouge">passCode</code> is invalid you will receive a <code class="highlighter-rouge">403 Forbidden</code> status code with the following error:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000068"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid Passcode/Answer"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"errorLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000068"</span><span class="p">,</span><span class="w">
@@ -5037,7 +5037,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <h5 class="api api-request api-request-example" id="request-example-24">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
@@ -5049,7 +5049,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <h5 class="api api-response api-response-example" id="response-example-24">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00xdqXOE5qDXX8-PBR1bYv8AESqIEinDy3yul01tyh"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RECOVERY"</span><span class="p">,</span><span class="w">
@@ -5130,7 +5130,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <h4 class="api api-request api-request-example" id="request-example-25">Request Example</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
@@ -5141,7 +5141,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <h4 class="api api-response api-response-example" id="response-example-25">Response Example</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00xdqXOE5qDXX8-PBR1bYv8AESqIEinDy3yul01tyh"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RECOVERY_CHALLENGE"</span><span class="p">,</span><span class="w">
@@ -5220,7 +5220,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <p>You will receive a <code class="highlighter-rouge">401 Unauthorized</code> status code if you attempt to use an expired or invalid <a href="#recovery-token">recovery token</a>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">401</span> <span class="ne">Unauthorized</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">401</span> <span class="ne">Unauthorized</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 
 <span class="p">{</span><span class="w">
@@ -5235,7 +5235,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <h5 class="api api-request api-request-example" id="request-example-26">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -5247,7 +5247,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <h5 class="api api-response api-response-example" id="response-example-26">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00lMJySRYNz3u_rKQrsLvLrzxiARgivP8FB_1gpmVb"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RECOVERY"</span><span class="p">,</span><span class="w">
@@ -5336,7 +5336,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <p>You will receive a <code class="highlighter-rouge">403 Forbidden</code> status code if the <code class="highlighter-rouge">answer</code> to the user’s <a href="#recovery-question-object">recovery question</a> is invalid</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 
 <span class="p">{</span><span class="w">
@@ -5351,7 +5351,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <h5 class="api api-request api-request-example" id="request-example-27">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -5364,7 +5364,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <h5 class="api api-response api-response-example" id="response-example-27">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00lMJySRYNz3u_rKQrsLvLrzxiARgivP8FB_1gpmVb"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PASSWORD_RESET"</span><span class="p">,</span><span class="w">
@@ -5450,7 +5450,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <p>You will receive a <code class="highlighter-rouge">403 Forbidden</code> status code if the <code class="highlighter-rouge">answer</code> to the user’s <a href="#recovery-question-object">recovery question</a> is invalid.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 
 <span class="p">{</span><span class="w">
@@ -5465,7 +5465,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <p>You will also receive a <code class="highlighter-rouge">403 Forbidden</code> status code if the <code class="highlighter-rouge">newPassword</code> does not meet password policy requirements for the user.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 
 <span class="p">{</span><span class="w">
@@ -5484,7 +5484,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <h5 class="api api-request api-request-example" id="request-example-28">Request Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -5497,7 +5497,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <h5 class="api api-response api-response-example" id="response-example-28">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"relayState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/myapp/some/deep/link/i/want/to/return/to"</span><span class="p">,</span><span class="w">
@@ -5556,7 +5556,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <p><a href="#transaction-model">Transaction Object</a> with the current <a href="#transaction-state">state</a> for the authentication or recovery transaction.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
@@ -5567,7 +5567,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <h5 class="api api-response api-response-example" id="response-example-29">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00lMJySRYNz3u_rKQrsLvLrzxiARgivP8FB_1gpmVb"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MFA_CHALLENGE"</span><span class="p">,</span><span class="w">
@@ -5659,7 +5659,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <p><a href="#transaction-model">Transaction Object</a> with the current <a href="#transaction-state">state</a> for the authentication or recovery transaction.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
@@ -5670,7 +5670,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <h5 class="api api-response api-response-example" id="response-example-30">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MFA_ENROLL"</span><span class="p">,</span><span class="w">
@@ -5799,7 +5799,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <p><a href="#transaction-model">Transaction Object</a> with the current <a href="#transaction-state">state</a> for the authentication or recovery transaction.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
@@ -5810,7 +5810,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <h5 class="api api-response api-response-example" id="response-example-31">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"relayState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/myapp/some/deep/link/i/want/to/return/to"</span><span class="p">,</span><span class="w">
@@ -5888,7 +5888,7 @@ Okta will not publish additional metadata about the user until primary authentic
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
@@ -5899,7 +5899,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <h5 class="api api-response api-response-example" id="response-example-32">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"relayState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/myapp/some/deep/link/i/want/to/return/to"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -5907,55 +5907,6 @@ Okta will not publish additional metadata about the user until primary authentic
 
 	</div>
 	
-<!-- Remarketing tag -->
-	<script type="text/javascript">
-		/* <![CDATA[ */
-		var google_conversion_id = 1006913831;
-		var google_custom_params = window.google_tag_params;
-		var google_remarketing_only = true;
-		/* ]]> */
-	</script>
-	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-	</script>
-	<noscript>
-		<div style="display:inline;">
-			<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"/>
-		</div>
-	</noscript>
-<!-- End Remarketing tag -->
-
-<!-- Crazy Egg Tracking -->
-<script type="text/javascript">
-setTimeout(function(){var a=document.createElement("script");
-var b=document.getElementsByTagName("script")[0];
-a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
-a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-</script>
-<!-- End Crazy Egg Tracking -->
-
-<footer class="site-footer">
-	<div class="wrap">
-
-		<ul>
-			<li><a href="http://www.okta.com" target="_blank">Okta.com</a></li>
-			<li><a href="/blog">Blog</a></li>
-			<li><a href="/terms/">Terms &amp; Conditions</a></li>
-			<li><a href="/privacy/">Privacy Policy</a></li>
-			<li><a href="http://okta.com/developer/contact/">Contact Sales</a></li>
-			<li><a href="mailto:developers@okta.com">Contact Support</a></li>
-		</ul>
-
-		<ul>
-			<li><a class="icon" href="http://github.com/okta" target="_blank"><i class="fa fa-github"></i></a></li>
-			<li><a class="icon" href="http://twitter.com/okta" target="_blank"><i class="fa fa-twitter"></i></a></li>
-			<li><a class="icon" href="http://stackoverflow.com/search?q=okta" target="_blank"><i class="fa fa-stack-overflow"></i></a></li>
-			<li><a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a></li>
-			<li><a class="icon" href="http://community.okta.com" target="_blank"><i class="fa fa-comments"></i></a></li>
-		</ul>
-
-	</div>
-</footer>
-
 </section>
 
 

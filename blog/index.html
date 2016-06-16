@@ -201,8 +201,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <li><strong>returnUrl</strong> = value of the web application’s url, i.e. <a href="http://localhost:18714/SamplePath">http://localhost:18714/SamplePath</a></li>
     </ul>
   </li>
-  <li>In the <identityproviders> section, enter the following values:
-</identityproviders>    <ul>
+  <li>In the <identityProviders> section, enter the following values:
+</identityProviders>    <ul>
       <li><strong>entityId</strong> = <strong>Identity Provider Issuer</strong> from <strong>Sign On</strong> =&gt; <strong>View Setup Instructions</strong>
 <img src="/assets/img/KentorOkta/ViewSetupInstructions.png" alt="View setup instructions" />
 <img src="/assets/img/KentorOkta/IdentityProviderIssuer.png" alt="Identity Provider Issuer" /></li>
@@ -485,7 +485,7 @@ other explicitly, the rotation would be much more difficult, especially if you
 can’t take downtime. We’ll use the trust store for both the client and the
 server, so you only need to make one, which you can copy if you need to.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c"># Import your root certificate into a new trust store and follow the prompts</span>
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="c"># Import your root certificate into a new trust store and follow the prompts</span>
 keytool -import -alias root -file root.crt -keystore truststore.jks
 </code></pre>
 </div>
@@ -503,7 +503,7 @@ your client does not have a certificate for service-to-service communication,
 you can follow a similar pattern to create its certificate. But if it does have
 an existing certificate, you can just reuse that one.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c"># Create our server's key</span>
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="c"># Create our server's key</span>
 openssl genrsa -out server.key 2048
 
 <span class="c"># Create the csr and follow the prompts for country code, ou, etc</span>
@@ -528,7 +528,7 @@ keytool -importkeystore -destkeystore keystore.jks -srckeystore server.p12 -srcs
 <p>Now that we have our key and trust stores, let’s configure the server’s
 Dropwizard application connector.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">server</span>:
+<div class="language-conf highlighter-rouge"><pre class="highlight"><code><span class="n">server</span>:
   <span class="n">applicationConnectors</span>:
     - <span class="n">type</span>: <span class="n">https</span>
     <span class="n">port</span>: <span class="m">8443</span>
@@ -570,7 +570,7 @@ server, telling Java to debug the SSL handshakes, and make sure we see it
 refusing the connection for the right reason. In one terminal start the
 Dropwizard server debugging SSL.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>java -Djavax.net.debug<span class="o">=</span>SSL,keymanager,trustmanager -jar your/jar.jar server config.yml
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>java -Djavax.net.debug<span class="o">=</span>SSL,keymanager,trustmanager -jar your/jar.jar server config.yml
 </code></pre>
 </div>
 
@@ -578,7 +578,7 @@ Dropwizard server debugging SSL.</p>
 expected results. First, make sure that the server does not talk HTTP over our
 port.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>curl localhost:443
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>curl localhost:443
 curl: <span class="o">(</span>52<span class="o">)</span> Empty reply from server
 
 <span class="c"># The server should print something like the following because of no TLS:</span>
@@ -590,7 +590,7 @@ curl: <span class="o">(</span>52<span class="o">)</span> Empty reply from server
 curl has a preconfigured list of trusted certs and chances are your
 root certificate is not in there.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>curl https://localhost:443
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>curl https://localhost:443
 curl: <span class="o">(</span>60<span class="o">)</span> SSL certificate problem: Invalid certificate chain
 
 <span class="c"># The server will print a bunch of stuff ending with something like:</span>
@@ -601,7 +601,7 @@ curl: <span class="o">(</span>60<span class="o">)</span> SSL certificate problem
 <p>Finally, ensure that the server terminates the connection if no client cert is
 provided.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>curl -k https://localhost:443
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>curl -k https://localhost:443
 curl: <span class="o">(</span>35<span class="o">)</span> Server aborted the SSL handshake
 
 <span class="c"># The server will, again, print a bunch of stuff ending with something like:</span>
@@ -614,7 +614,7 @@ curl: <span class="o">(</span>35<span class="o">)</span> Server aborted the SSL 
 <p>Now we’ll configure our client to talk to the server. I’ll use the Jersey 2.X
 API, but there are equivalents in the 1.X as well as in the Apache HTTP library.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// Assume the following variables are initialized already</span>
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">// Assume the following variables are initialized already</span>
 <span class="n">String</span> <span class="n">password</span><span class="o">;</span>
 <span class="n">RSAPrivateKey</span> <span class="n">clientKey</span><span class="o">;</span>
 <span class="n">X509Certificate</span> <span class="n">clientCert</span><span class="o">;</span>
@@ -681,7 +681,7 @@ in the other direction (client verifying the server).</p>
 is one that Dropwizard supports this verification with a tricky configuration
 change for the underlying Java SSL connection.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">server</span>:
+<div class="language-conf highlighter-rouge"><pre class="highlight"><code><span class="n">server</span>:
   <span class="n">applicationConnectors</span>:
     - <span class="n">type</span>: <span class="n">https</span>
       <span class="c">#...
@@ -709,7 +709,7 @@ need to set up a filter in our server and configure a regex to match the DN in
 the certificate(s) that are allowed to communicate with our service or else
 return a 403 response.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">javax.annotation.Priority</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">javax.annotation.Priority</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletRequest</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">javax.ws.rs.Priorities</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">javax.ws.rs.container.ContainerRequestContext</span><span class="o">;</span>
@@ -1483,14 +1483,14 @@ are now testing just one class at a time.</p>
 
     <p>Add the following code under the dependency section:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="n">androidTestCompile</span> <span class="s1">'org.easymock:easymock:3.1'</span>
+    <div class="language-conf highlighter-rouge"><pre class="highlight"><code><span class="n">androidTestCompile</span> <span class="s1">'org.easymock:easymock:3.1'</span>
 </code></pre>
     </div>
   </li>
   <li>
     <p>Replace <code class="highlighter-rouge">FooTest</code> with the following code:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">myapplication</span><span class="o">;</span>
+    <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">myapplication</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">junit.framework.Assert</span><span class="o">;</span>
 
@@ -1542,7 +1542,7 @@ are now testing just one class at a time.</p>
 
     <p>(I believe the original code for injecting fields is from <strong>Spring</strong>; however, it was modified afterwards.)</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">myapplication</span><span class="o">;</span>
+    <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">myapplication</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.lang.reflect.Field</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">javax.inject.Inject</span><span class="o">;</span>
@@ -1697,7 +1697,7 @@ my summary is below:</p>
 
     <p>Add the following code under the dependency section:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="n">compile</span> <span class="s1">'com.squareup.dagger:dagger:1.2.1'</span>
+    <div class="language-conf highlighter-rouge"><pre class="highlight"><code><span class="n">compile</span> <span class="s1">'com.squareup.dagger:dagger:1.2.1'</span>
 <span class="n">provided</span> <span class="s1">'com.squareup.dagger:dagger-compiler:1.2.1'</span>
 </code></pre>
     </div>
@@ -1707,7 +1707,7 @@ my summary is below:</p>
 
     <p>Add the following code to the Application tags:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="n">android</span>:<span class="n">name</span>=<span class="s2">".MyApplication"</span>
+    <div class="language-conf highlighter-rouge"><pre class="highlight"><code><span class="n">android</span>:<span class="n">name</span>=<span class="s2">".MyApplication"</span>
 </code></pre>
     </div>
   </li>
@@ -1716,7 +1716,7 @@ my summary is below:</p>
 
     <p>Add the <code class="highlighter-rouge">MyApplication</code> class.</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
+    <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="n">ObjectGraph</span> <span class="n">applicationGraph</span><span class="o">;</span>
 
     <span class="nd">@Override</span>
@@ -1741,7 +1741,7 @@ my summary is below:</p>
   <li>
     <p>Add the <code class="highlighter-rouge">MyModule</code> class.</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">myapplication</span><span class="o">;</span>
+    <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">myapplication</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">dagger.Module</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">dagger.Provides</span><span class="o">;</span>
@@ -1765,7 +1765,7 @@ my summary is below:</p>
     <p>Modify <code class="highlighter-rouge">MainActivity</code> and replace code <code class="highlighter-rouge">private Foo
 foo = new Foo();</code> with:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@Inject</span>
+    <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Inject</span>
 <span class="n">Foo</span> <span class="n">foo</span><span class="o">;</span>
 </code></pre>
     </div>
@@ -1781,14 +1781,14 @@ foo = new Foo();</code> with:</p>
   <li>
     <p>Modify the <code class="highlighter-rouge">Foo</code> class and replace code <code class="highlighter-rouge">Bar bar = new Bar();</code> with:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@Inject</span>
+    <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Inject</span>
 <span class="n">Bar</span> <span class="n">bar</span><span class="o">;</span>
 </code></pre>
     </div>
 
     <p>Modify Bar class and add</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@Inject</span>
+    <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Inject</span>
 <span class="n">Bar</span><span class="o">()</span> <span class="o">{</span>
 <span class="o">}</span>
 </code></pre>
@@ -1889,7 +1889,7 @@ do:</p>
 
     <p>Add the following code to the dependencies section:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="n">classpath</span> <span class="s1">'org.robolectric:robolectric-gradle-plugin:0.12.+'</span>
+    <div class="language-conf highlighter-rouge"><pre class="highlight"><code><span class="n">classpath</span> <span class="s1">'org.robolectric:robolectric-gradle-plugin:0.12.+'</span>
 </code></pre>
     </div>
   </li>
@@ -1898,14 +1898,14 @@ do:</p>
 
     <p>Add the following code under <code class="highlighter-rouge">apply plugin: ‘com.android.application'</code>:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="n">apply</span> <span class="n">plugin</span>: <span class="s1">'robolectric'</span>
+    <div class="language-conf highlighter-rouge"><pre class="highlight"><code><span class="n">apply</span> <span class="n">plugin</span>: <span class="s1">'robolectric'</span>
 </code></pre>
     </div>
   </li>
   <li>
     <p>Add the following under the dependencies section:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="n">androidTestCompile</span>(<span class="s1">'junit:junit:4.11'</span>)
+    <div class="language-conf highlighter-rouge"><pre class="highlight"><code><span class="n">androidTestCompile</span>(<span class="s1">'junit:junit:4.11'</span>)
 <span class="n">androidTestCompile</span>(<span class="s1">'org.robolectric:robolectric:2.3'</span>)
 </code></pre>
     </div>
@@ -1913,7 +1913,7 @@ do:</p>
   <li>
     <p>Add this section:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="n">robolectric</span> {
+    <div class="language-conf highlighter-rouge"><pre class="highlight"><code><span class="n">robolectric</span> {
         <span class="n">include</span> <span class="s1">'**/*Test.class'</span>
 }
 </code></pre>
@@ -1924,7 +1924,7 @@ do:</p>
 
     <p>Modify <code class="highlighter-rouge">MainActivity</code>. Add the following code to it:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="n">Foo</span> <span class="n">foo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Foo</span><span class="o">();</span>
+    <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="n">Foo</span> <span class="n">foo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Foo</span><span class="o">();</span>
 <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getSomething</span><span class="p">(</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">foo</span><span class="o">.</span><span class="na">getFoo</span><span class="o">();</span>
 <span class="o">}</span>
@@ -1933,7 +1933,7 @@ do:</p>
 
     <p>Add the <code class="highlighter-rouge">Foo</code> class:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">myapplication</span><span class="o">;</span>
+    <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">myapplication</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Foo</span> <span class="o">{</span>
     <span class="n">Bar</span> <span class="n">bar</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Bar</span><span class="o">();</span>
@@ -1948,7 +1948,7 @@ do:</p>
   <li>
     <p>Add the <code class="highlighter-rouge">Bar</code> class:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">myapplication</span><span class="o">;</span>
+    <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">myapplication</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Bar</span> <span class="o">{</span>
 
@@ -1966,7 +1966,7 @@ do:</p>
 
     <p>Create the following <code class="highlighter-rouge">FooTest</code> class under your <code class="highlighter-rouge">androidTest</code>:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">myapplication</span><span class="o">;</span>
+    <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">myapplication</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">junit.framework.Assert</span><span class="o">;</span>
 

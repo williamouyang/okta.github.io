@@ -515,7 +515,7 @@ Irrespective of the response type, the contents of the response is always one of
 <p>The request is made with a <em>fragment</em> response mode.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>http://www.example.com/#
-&lt;em&gt;id_token&lt;/em&gt;=eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIwMHVpZDRCeFh3Nkk2VFY0bTBnMyIsImVtYWlsIjoid2VibWFzdGVyQGNsb3VkaXR1ZG
+id_token=eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIwMHVpZDRCeFh3Nkk2VFY0bTBnMyIsImVtYWlsIjoid2VibWFzdGVyQGNsb3VkaXR1ZG
 UubmV0IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInZlciI6MSwiaXNzIjoiaHR0cDovL3JhaW4ub2t0YTEuY29tOjE4MDIiLCJsb2dpbiI6ImFkbWluaXN
 0cmF0b3IxQGNsb3VkaXR1ZGUubmV0IiwiYXVkIjoidUFhdW5vZldrYURKeHVrQ0ZlQngiLCJpYXQiOjE0NDk2MjQwMjYsImV4cCI6MTQ0OTYyNzYyNiwi
 YW1yIjpbInB3ZCJdLCJqdGkiOiI0ZUFXSk9DTUIzU1g4WGV3RGZWUiIsImF1dGhfdGltZSI6MTQ0OTYyNDAyNiwiYXRfaGFzaCI6ImNwcUtmZFFBNWVIO
@@ -523,13 +523,13 @@ DkxRmY1b0pyX1EifQ.Btw6bUbZhRa89DsBb8KmL9rfhku--_mbNC2pgC8yu8obJnwO12nFBepui9Kzbp
 mF45Pn3u_6KKwxJnxcWxLvMuuisnvIs7NScKpOAab6ayZU0VL8W6XAijQmnYTtMWQfSuaaR8rYOaWHrffh3OypvDdrQuYacbkT0csxdrayXfBG3UF5-ZA
 lhfch1fhFT3yZFdWwzkSDc0BGygfiFyNhCezfyT454wbciSZgrA9ROeHkfPCaX7KCFO8GgQEkGRoQntFBNjluFhNLJIUkEFovEDlfuB4tv_M8BM75celd
 y3jkpOurg
-&amp;&lt;em&gt;access_token&lt;/em&gt;=eyJhbGciOiJSUzI1NiJ9.eyJ2ZXIiOjEsImlzcyI6Imh0dHA6Ly9yYWluLm9rdGExLmNvbToxODAyIiwiaWF0
+&amp;access_token=eyJhbGciOiJSUzI1NiJ9.eyJ2ZXIiOjEsImlzcyI6Imh0dHA6Ly9yYWluLm9rdGExLmNvbToxODAyIiwiaWF0
 IjoxNDQ5NjI0MDI2LCJleHAiOjE0NDk2Mjc2MjYsImp0aSI6IlVmU0lURzZCVVNfdHA3N21BTjJxIiwic2NvcGVzIjpbIm9wZW5pZCIsImVtYWlsIl0sI
 mNsaWVudF9pZCI6InVBYXVub2ZXa2FESnh1a0NGZUJ4IiwidXNlcl9pZCI6IjAwdWlkNEJ4WHc2STZUVjRtMGczIn0.HaBu5oQxdVCIvea88HPgr2O5ev
 qZlCT4UXH4UKhJnZ5px-ArNRqwhxXWhHJisslswjPpMkx1IgrudQIjzGYbtLFjrrg2ueiU5-YfmKuJuD6O2yPWGTsV7X6i7ABT6P-t8PRz_RNbk-U1GXW
 IEkNnEWbPqYDAm_Ofh7iW0Y8WDA5ez1jbtMvd-oXMvJLctRiACrTMLJQ2e5HkbUFxgXQ_rFPNHJbNSUBDLqdi2rg_ND64DLRlXRY7hupNsvWGo0gF4WEU
 k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNtiw
-&amp;&lt;em&gt;token_type&lt;/em&gt;=Bearer&lt;em&gt;state&lt;/em&gt;=waojafoawjgvbf
+&amp;token_type=Bearer&amp;state=waojafoawjgvbf
 </code></pre>
 </div>
 
@@ -610,12 +610,12 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
 <h5 id="token-authentication-methods">Token Authentication Methods</h5>
 
 <p>The client can authenticate by providing <em>client_id</em> and <em>client_secret</em> as a part of the URL-encoded form parameters (as described in table above),
-or it can use basic authentication by providing the <em>client_id</em> and <em>client_secret</em> as an Authroization header using the Basic auth scheme. 
+or it can use basic authentication by providing the <em>client_id</em> and <em>client_secret</em> as an Authorization header using the Basic auth scheme.
 Use one authentication mechanism with a given request. Using both returns an error.</p>
 
 <p>For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span> 
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span> 
 </code></pre>
 </div>
 
@@ -632,11 +632,11 @@ Use one authentication mechanism with a given request. Using both returns an err
   </thead>
   <tbody>
     <tr>
-      <td>code</td>
+      <td>authorization_code</td>
       <td>ID Token, Access Token, Refresh Token</td>
     </tr>
     <tr>
-      <td>refresh Token</td>
+      <td>refresh_token</td>
       <td>Access Token, Refresh Token</td>
     </tr>
   </tbody>
@@ -682,7 +682,7 @@ Use one authentication mechanism with a given request. Using both returns an err
 
 <h4 id="response-example-success-1">Response Example (Success)</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"access_token"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJhbGciOiJSUzI1NiJ9.eyJ2ZXIiOjEsImlzcyI6Imh0dHA6Ly9yYWluLm9rdGExLmNvbToxODAyIiwiaWF0IjoxNDQ5Nj
                       I0MDI2LCJleHAiOjE0NDk2Mjc2MjYsImp0aSI6IlVmU0lURzZCVVNfdHA3N21BTjJxIiwic2NvcGVzIjpbIm9wZW5pZCIsI
                       mVtYWlsIl0sImNsaWVudF9pZCI6InVBYXVub2ZXa2FESnh1a0NGZUJ4IiwidXNlcl9pZCI6IjAwdWlkNEJ4WHc2STZUVjRt
@@ -708,7 +708,7 @@ Use one authentication mechanism with a given request. Using both returns an err
 
 <h4 id="response-example-error-1">Response Example (Error)</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">401</span> <span class="ne">Unauthorized</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">401</span> <span class="ne">Unauthorized</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json;charset=UTF-8</span>
 <span class="s">{</span>
 <span class="s">    "error" : "invalid_client",</span>
@@ -764,12 +764,12 @@ An implicit client can only introspect its own tokens, while a confidential clie
 <h5 id="token-authentication-methods-1">Token Authentication Methods</h5>
 
 <p>The client can authenticate by providing <em>client_id</em> and <em>client_secret</em> as a part of the URL-encoded form parameters (as described in table above),
-or it can use basic authentication by providing the <em>client_id</em> and <em>client_secret</em> as an Authroization header using the Basic auth scheme. 
+or it can use basic authentication by providing the <em>client_id</em> and <em>client_secret</em> as an Authorization header using the Basic auth scheme.
 Use one authentication mechanism with a given request. Using both returns an error.</p>
 
 <p>For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span> 
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span> 
 </code></pre>
 </div>
 
@@ -793,7 +793,7 @@ Use one authentication mechanism with a given request. Using both returns an err
     </tr>
     <tr>
       <td>token_type</td>
-      <td>The type of the token, either <em>access_token</em> or <em>refresh_token</em>.</td>
+      <td>The type of the token, either <em>access_token</em>, <em>refresh_token</em>, or <em>id_token</em>.</td>
       <td>String</td>
     </tr>
     <tr>
@@ -848,7 +848,7 @@ Use one authentication mechanism with a given request. Using both returns an err
     </tr>
     <tr>
       <td>device_id</td>
-      <td>The ID of the device assocaited with the token</td>
+      <td>The ID of the device associated with the token</td>
       <td>String</td>
     </tr>
   </tbody>
@@ -877,7 +877,7 @@ Use one authentication mechanism with a given request. Using both returns an err
 
 <h4 id="response-example-success-access-token">Response Example (Success, Access Token)</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"active"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="nt">"token_type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"access_token"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"scope"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"openid profile"</span><span class="p">,</span><span class="w">
@@ -887,7 +887,7 @@ Use one authentication mechanism with a given request. Using both returns an err
     </span><span class="nt">"iat"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1451602800</span><span class="p">,</span><span class="w">
     </span><span class="nt">"sub"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"00uid4BxXw6I6TV4m0g3"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"aud"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ciSZgrA9ROeHkfPCaXsa"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"iss"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"http://rain.okta1.com:1802"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"iss"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-org.okta.com"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"jti"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"4eAWJOCMB3SX8XewDfVR"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -895,7 +895,7 @@ Use one authentication mechanism with a given request. Using both returns an err
 
 <h4 id="response-example-success-refresh-token">Response Example (Success, Refresh Token)</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"active"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="nt">"token_type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"refresh token"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"scope"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"openid profile email"</span><span class="p">,</span><span class="w">
@@ -910,7 +910,7 @@ Use one authentication mechanism with a given request. Using both returns an err
 
 <h4 id="response-example-success-inactive-token">Response Example (Success, Inactive Token)</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"active"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -918,7 +918,7 @@ Use one authentication mechanism with a given request. Using both returns an err
 
 <h4 id="response-example-error-2">Response Example (Error)</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">401</span> <span class="ne">Unauthorized</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">401</span> <span class="ne">Unauthorized</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json;charset=UTF-8</span>
 <span class="s">{</span>
 <span class="s">    "error" : "invalid_client",</span>
@@ -978,12 +978,12 @@ Use one authentication mechanism with a given request. Using both returns an err
 <p>A client may only revoke a token generated for that client.</p>
 
 <p>The client can authenticate by providing <em>client_id</em> and <em>client_secret</em> as a part of the URL-encoded form parameters (as described in table above),
-or it can use basic authentication by providing the <em>client_id</em> and <em>client_secret</em> as an Authroization header using the Basic auth scheme. 
+or it can use basic authentication by providing the <em>client_id</em> and <em>client_secret</em> as an Authorization header using the Basic auth scheme.
 Use one authentication mechanism with a given request. Using both returns an error.</p>
 
 <p>For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span> 
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span> 
 </code></pre>
 </div>
 
@@ -1014,16 +1014,13 @@ Use one authentication mechanism with a given request. Using both returns an err
 
 <h4 id="response-example-success-2">Response Example (Success)</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json;charset=UTF-8</span>
-<span class="s">{</span>
-<span class="s">}</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">204</span> <span class="ne">No Content</span>
 </code></pre>
 </div>
 
 <h4 id="response-example-error-3">Response Example (Error)</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">401</span> <span class="ne">Unauthorized</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">401</span> <span class="ne">Unauthorized</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json;charset=UTF-8</span>
 <span class="s">{</span>
 <span class="s">    "error" : "invalid_client",</span>
@@ -1034,55 +1031,6 @@ Use one authentication mechanism with a given request. Using both returns an err
 
 	</div>
 	
-<!-- Remarketing tag -->
-	<script type="text/javascript">
-		/* <![CDATA[ */
-		var google_conversion_id = 1006913831;
-		var google_custom_params = window.google_tag_params;
-		var google_remarketing_only = true;
-		/* ]]> */
-	</script>
-	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-	</script>
-	<noscript>
-		<div style="display:inline;">
-			<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"/>
-		</div>
-	</noscript>
-<!-- End Remarketing tag -->
-
-<!-- Crazy Egg Tracking -->
-<script type="text/javascript">
-setTimeout(function(){var a=document.createElement("script");
-var b=document.getElementsByTagName("script")[0];
-a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
-a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-</script>
-<!-- End Crazy Egg Tracking -->
-
-<footer class="site-footer">
-	<div class="wrap">
-
-		<ul>
-			<li><a href="http://www.okta.com" target="_blank">Okta.com</a></li>
-			<li><a href="/blog">Blog</a></li>
-			<li><a href="/terms/">Terms &amp; Conditions</a></li>
-			<li><a href="/privacy/">Privacy Policy</a></li>
-			<li><a href="http://okta.com/developer/contact/">Contact Sales</a></li>
-			<li><a href="mailto:developers@okta.com">Contact Support</a></li>
-		</ul>
-
-		<ul>
-			<li><a class="icon" href="http://github.com/okta" target="_blank"><i class="fa fa-github"></i></a></li>
-			<li><a class="icon" href="http://twitter.com/okta" target="_blank"><i class="fa fa-twitter"></i></a></li>
-			<li><a class="icon" href="http://stackoverflow.com/search?q=okta" target="_blank"><i class="fa fa-stack-overflow"></i></a></li>
-			<li><a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a></li>
-			<li><a class="icon" href="http://community.okta.com" target="_blank"><i class="fa fa-comments"></i></a></li>
-		</ul>
-
-	</div>
-</footer>
-
 </section>
 
 

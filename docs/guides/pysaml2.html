@@ -202,13 +202,13 @@ guide. As noted in the instructions, there are two steps to change:</p>
   <li>
     <p><em>In step #7</em>: When entering the URL</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>http://example.com/saml/sso/example-okta-com
+    <div class="language-shell highlighter-rouge"><pre class="highlight"><code>http://example.com/saml/sso/example-okta-com
 </code></pre>
     </div>
 
     <p>use the following:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>http://localhost:5000/saml/sso/example-okta-com
+    <div class="language-shell highlighter-rouge"><pre class="highlight"><code>http://localhost:5000/saml/sso/example-okta-com
 </code></pre>
     </div>
 
@@ -228,58 +228,64 @@ the following steps, you will have a working example of connecting Okta to a sam
   <li>
     <p>Install platform-dependent prerequisites:</p>
 
-    <p>For Mac OS X:
-~~~ shell
-brew install libffi libxmlsec1
-~~~</p>
+    <blockquote>
+      <p>Note: These instructions assume that you are running on a recent version of your operating system.</p>
+    </blockquote>
 
-    <p>For RHEL:
-~~~ shell
-sudo yum install libffi-devel xmlsec1 xmlsec1-openssl
-~~~</p>
+    <p>For Mac OS X:</p>
+
+    <div class="language-shell highlighter-rouge"><pre class="highlight"><code>brew install libffi libxmlsec1
+</code></pre>
+    </div>
+
+    <p>For RHEL:</p>
+
+    <div class="language-shell highlighter-rouge"><pre class="highlight"><code>sudo yum install libffi-devel xmlsec1 xmlsec1-openssl
+</code></pre>
+    </div>
   </li>
   <li>
     <p>Download the example application for Python:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>git clone git@github.com:jpf/okta-pysaml2-example.git
+    <div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>git clone git@github.com:jpf/okta-pysaml2-example.git
 </code></pre>
     </div>
   </li>
   <li>
     <p><code class="highlighter-rouge">cd</code> to the <code class="highlighter-rouge">okta-pysaml2-example</code> directory.</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">cd </span>okta-pysaml2-example
+    <div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">cd </span>okta-pysaml2-example
 </code></pre>
     </div>
   </li>
   <li>
     <p>Open the <code class="highlighter-rouge">app.py</code> file in your favorite text editor.</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nv">$EDITOR</span> app.py
+    <div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nv">$EDITOR</span> app.py
 </code></pre>
     </div>
   </li>
   <li>
     <p>After opening the <code class="highlighter-rouge">app.py</code> file, modify the contents of the <code class="highlighter-rouge">metadata_url_for</code> dictionary as shown below.</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="n">metadata_url_for</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s">'example-okta-com'</span><span class="p">:</span> <span class="s">'{metadata-url}'</span>
+    <div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">metadata_url_for</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'example-okta-com'</span><span class="p">:</span> <span class="s">'${metadata_url}'</span>
 <span class="p">}</span>
 </code></pre>
     </div>
   </li>
   <li>
-    <p>Be sure to replace the contents of <code class="highlighter-rouge"><span class="p">{</span><span class="err">metdata-url</span><span class="p">}</span></code> with the link
+    <p>Be sure to replace the contents of <code class="highlighter-rouge">${metdata_url}</code> with the link
 that you copied in step #10 of the
 “<a href="../guides/setting_up_a_saml_application_in_okta.html">Setting up a SAML application in Okta</a>”
 instructions that you followed above!</p>
 
-    <p>Note: The contents of <code class="highlighter-rouge"><span class="p">{</span><span class="err">metadata-url</span><span class="p">}</span></code> should look similar to: <code class="highlighter-rouge">https://example.oktapreview.com/app/a0b1c2deFGHIJKLMNOPQ/sso/saml/metadata</code></p>
+    <p>Note: The contents of <code class="highlighter-rouge">${metadata_url}</code> should look similar to: <code class="highlighter-rouge">https://example.oktapreview.com/app/a0b1c2deFGHIJKLMNOPQ/sso/saml/metadata</code></p>
   </li>
   <li>
     <p>Install the dependencies; for example, Python SAML SP:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>virtualenv venv
+    <div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>virtualenv venv
 <span class="gp">$ </span><span class="nb">source </span>venv/bin/activate
 <span class="gp">$ </span>pip install -r requirements.txt
 </code></pre>
@@ -288,7 +294,7 @@ instructions that you followed above!</p>
   <li>
     <p>Start the Python example:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>python app.py
+    <div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>python app.py
 </code></pre>
     </div>
   </li>
@@ -320,7 +326,7 @@ known as an <strong>SP-initiated login</strong>.)</p>
       <li>
         <p>Start the example application from the command line:</p>
 
-        <div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">source </span>venv/bin/activate
+        <div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">source </span>venv/bin/activate
 <span class="gp">$ </span>python app.py
 </code></pre>
         </div>
@@ -341,7 +347,7 @@ known as an <strong>SP-initiated login</strong>.)</p>
       <li>
         <p>Start the example application from the command line:</p>
 
-        <div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">source </span>venv/bin/activate
+        <div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">source </span>venv/bin/activate
 <span class="gp">$ </span>python app.py
 </code></pre>
         </div>
@@ -387,55 +393,6 @@ please reach out to me at: joel.franusic@okta.com.</p>
 
 	</div>
 	
-<!-- Remarketing tag -->
-	<script type="text/javascript">
-		/* <![CDATA[ */
-		var google_conversion_id = 1006913831;
-		var google_custom_params = window.google_tag_params;
-		var google_remarketing_only = true;
-		/* ]]> */
-	</script>
-	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-	</script>
-	<noscript>
-		<div style="display:inline;">
-			<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"/>
-		</div>
-	</noscript>
-<!-- End Remarketing tag -->
-
-<!-- Crazy Egg Tracking -->
-<script type="text/javascript">
-setTimeout(function(){var a=document.createElement("script");
-var b=document.getElementsByTagName("script")[0];
-a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
-a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-</script>
-<!-- End Crazy Egg Tracking -->
-
-<footer class="site-footer">
-	<div class="wrap">
-
-		<ul>
-			<li><a href="http://www.okta.com" target="_blank">Okta.com</a></li>
-			<li><a href="/blog">Blog</a></li>
-			<li><a href="/terms/">Terms &amp; Conditions</a></li>
-			<li><a href="/privacy/">Privacy Policy</a></li>
-			<li><a href="http://okta.com/developer/contact/">Contact Sales</a></li>
-			<li><a href="mailto:developers@okta.com">Contact Support</a></li>
-		</ul>
-
-		<ul>
-			<li><a class="icon" href="http://github.com/okta" target="_blank"><i class="fa fa-github"></i></a></li>
-			<li><a class="icon" href="http://twitter.com/okta" target="_blank"><i class="fa fa-twitter"></i></a></li>
-			<li><a class="icon" href="http://stackoverflow.com/search?q=okta" target="_blank"><i class="fa fa-stack-overflow"></i></a></li>
-			<li><a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a></li>
-			<li><a class="icon" href="http://community.okta.com" target="_blank"><i class="fa fa-comments"></i></a></li>
-		</ul>
-
-	</div>
-</footer>
-
 </section>
 
 

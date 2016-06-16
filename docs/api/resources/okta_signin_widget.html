@@ -182,7 +182,7 @@ Basic instructions for creating a sign-in widget are available in <a href="../..
   <p>Okta Sign-In Widget documentation uses the domain name acme. Other Okta developer content uses <em>your-domain</em>.</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// Initialize</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// Initialize</span>
 <span class="kd">var</span> <span class="nx">oktaSignIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span>
   <span class="na">baseUrl</span><span class="p">:</span> <span class="s1">'https://acme.okta.com'</span><span class="p">,</span>
   <span class="na">features</span><span class="p">:</span> <span class="p">{</span>
@@ -312,7 +312,7 @@ Basic instructions for creating a sign-in widget are available in <a href="../..
 
 <h4 id="transformusername-example">transformUsername Example</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    <span class="nx">transformUsername</span><span class="err">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">op</span><span class="p">)</span> <span class="p">{</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>    <span class="nx">transformUsername</span><span class="err">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">op</span><span class="p">)</span> <span class="p">{</span>
       <span class="kd">var</span> <span class="nx">suffix</span> <span class="o">=</span> <span class="s1">'@acme.com'</span><span class="p">;</span>
 
       <span class="c1">// op can be PRIMARY_AUTH, FORGOT_PASSWORD or UNLOCK_ACCOUNT</span>
@@ -325,7 +325,7 @@ Basic instructions for creating a sign-in widget are available in <a href="../..
 
 <h4 id="features-example">features Example</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    <span class="nx">features</span><span class="err">:</span> <span class="p">{</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>    <span class="nx">features</span><span class="err">:</span> <span class="p">{</span>
       <span class="nl">rememberMe</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
       <span class="nx">rememberDevice</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
       <span class="nx">selfServiceUnlock</span><span class="err">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -375,7 +375,7 @@ Update the browser location bar with a route on navigation.</p>
 
 <h4 id="helplinks-example">helpLinks Example</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    <span class="nx">helpLinks</span><span class="err">:</span> <span class="p">{</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>    <span class="nx">helpLinks</span><span class="err">:</span> <span class="p">{</span>
       <span class="nl">help</span><span class="p">:</span> <span class="s1">'https://acme.com/custom/help'</span><span class="p">,</span>
       <span class="nx">forgotPassword</span><span class="err">:</span> <span class="s1">'https://acme.com/custom/forgotpassword'</span><span class="p">,</span>
       <span class="nx">unlock</span><span class="err">:</span> <span class="s1">'https://acme.com/custom/unlock'</span><span class="p">,</span>
@@ -462,7 +462,7 @@ For instructions, see <a href="/docs/api/resources/social_authentication.html">S
 
 <h4 id="example-oidc-flow">Example OIDC flow</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">oktaSignIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">oktaSignIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span>
   <span class="na">baseUrl</span><span class="p">:</span> <span class="s1">'https://acme.okta.com'</span><span class="p">,</span>
   <span class="na">features</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">rememberDevice</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
@@ -632,7 +632,7 @@ For instructions, see <a href="/docs/api/resources/social_authentication.html">S
 The options object must have an <code class="highlighter-rouge">el</code> property, usually an HTML DOM element <code class="highlighter-rouge">id</code> or <code class="highlighter-rouge">selector</code>, which becomes the container element for the widget DOM.</p>
 
 <h4 id="example">Example</h4>
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">oktaSignIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">oktaSignIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span>
   <span class="na">baseUrl</span><span class="p">:</span> <span class="s1">'https://acme.okta.com'</span>
 <span class="p">});</span>
 
@@ -706,7 +706,7 @@ The options object must have an <code class="highlighter-rouge">el</code> proper
 <p>Check if there is an active session.</p>
 
 <h5 id="example-1">Example</h5>
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">exists</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">exists</span><span class="p">)</span> <span class="p">{</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">exists</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">exists</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">exists</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// There is an active session</span>
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -744,7 +744,7 @@ The options object must have an <code class="highlighter-rouge">el</code> proper
 <p>Get the active session information.</p>
 
 <h5 id="example-2">Example</h5>
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span> <span class="o">!==</span> <span class="s1">'INACTIVE'</span><span class="p">)</span> <span class="p">{</span>
     <span class="cm">/**
      * res.status - 'ACTIVE'
@@ -787,7 +787,7 @@ The options object must have an <code class="highlighter-rouge">el</code> proper
 <p>Refresh the current session by extending its lifetime. This can be used as a keep-alive operation.</p>
 
 <h5 id="example-3">Example</h5>
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">refresh</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">refresh</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'INACTIVE'</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// There is no active session to refresh</span>
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -831,7 +831,7 @@ The options object must have an <code class="highlighter-rouge">el</code> proper
 <p>Close the active session. Same as <code class="highlighter-rouge">.signOut()</code></p>
 
 <h5 id="example-4">Example</h5>
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">close</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">close</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
   <span class="c1">// User is now logged out</span>
 <span class="p">});</span>
 </code></pre>
@@ -865,7 +865,7 @@ The options object must have an <code class="highlighter-rouge">el</code> proper
 <p>Sign-out the current signed-in user. Shorthand for <code class="highlighter-rouge">.session.close()</code></p>
 
 <h5 id="example-5">Example</h5>
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">signOut</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">signOut</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
   <span class="c1">// User is now logged out</span>
 <span class="p">});</span>
 </code></pre>
@@ -903,7 +903,7 @@ The options object must have an <code class="highlighter-rouge">el</code> proper
 <p>Refresh the <code class="highlighter-rouge">id_token</code> by extending its lifetime.</p>
 
 <h5 id="example-6">Example</h5>
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">idToken</span><span class="p">.</span><span class="nx">refresh</span><span class="p">(</span><span class="nx">token</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">newToken</span><span class="p">)</span> <span class="p">{</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">idToken</span><span class="p">.</span><span class="nx">refresh</span><span class="p">(</span><span class="nx">token</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">newToken</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// New id_token with extended lifetime</span>
 <span class="p">});</span>
 </code></pre>
@@ -944,55 +944,6 @@ The options object must have an <code class="highlighter-rouge">el</code> proper
 
 	</div>
 	
-<!-- Remarketing tag -->
-	<script type="text/javascript">
-		/* <![CDATA[ */
-		var google_conversion_id = 1006913831;
-		var google_custom_params = window.google_tag_params;
-		var google_remarketing_only = true;
-		/* ]]> */
-	</script>
-	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-	</script>
-	<noscript>
-		<div style="display:inline;">
-			<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"/>
-		</div>
-	</noscript>
-<!-- End Remarketing tag -->
-
-<!-- Crazy Egg Tracking -->
-<script type="text/javascript">
-setTimeout(function(){var a=document.createElement("script");
-var b=document.getElementsByTagName("script")[0];
-a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
-a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-</script>
-<!-- End Crazy Egg Tracking -->
-
-<footer class="site-footer">
-	<div class="wrap">
-
-		<ul>
-			<li><a href="http://www.okta.com" target="_blank">Okta.com</a></li>
-			<li><a href="/blog">Blog</a></li>
-			<li><a href="/terms/">Terms &amp; Conditions</a></li>
-			<li><a href="/privacy/">Privacy Policy</a></li>
-			<li><a href="http://okta.com/developer/contact/">Contact Sales</a></li>
-			<li><a href="mailto:developers@okta.com">Contact Support</a></li>
-		</ul>
-
-		<ul>
-			<li><a class="icon" href="http://github.com/okta" target="_blank"><i class="fa fa-github"></i></a></li>
-			<li><a class="icon" href="http://twitter.com/okta" target="_blank"><i class="fa fa-twitter"></i></a></li>
-			<li><a class="icon" href="http://stackoverflow.com/search?q=okta" target="_blank"><i class="fa fa-stack-overflow"></i></a></li>
-			<li><a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a></li>
-			<li><a class="icon" href="http://community.okta.com" target="_blank"><i class="fa fa-comments"></i></a></li>
-		</ul>
-
-	</div>
-</footer>
-
 </section>
 
 

@@ -60,8 +60,8 @@
       &lt;li&gt;&lt;strong&gt;returnUrl&lt;/strong&gt; = value of the web application’s url, i.e. &lt;a href=&quot;http://localhost:18714/SamplePath&quot;&gt;http://localhost:18714/SamplePath&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;In the &lt;identityproviders&gt; section, enter the following values:
-&lt;/identityproviders&gt;    &lt;ul&gt;
+  &lt;li&gt;In the &lt;identityProviders&gt; section, enter the following values:
+&lt;/identityProviders&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;strong&gt;entityId&lt;/strong&gt; = &lt;strong&gt;Identity Provider Issuer&lt;/strong&gt; from &lt;strong&gt;Sign On&lt;/strong&gt; =&amp;gt; &lt;strong&gt;View Setup Instructions&lt;/strong&gt;
 &lt;img src=&quot;/assets/img/KentorOkta/ViewSetupInstructions.png&quot; alt=&quot;View setup instructions&quot; /&gt;
 &lt;img src=&quot;/assets/img/KentorOkta/IdentityProviderIssuer.png&quot; alt=&quot;Identity Provider Issuer&quot; /&gt;&lt;/li&gt;
@@ -217,7 +217,7 @@ other explicitly, the rotation would be much more difficult, especially if you
 can’t take downtime. We’ll use the trust store for both the client and the
 server, so you only need to make one, which you can copy if you need to.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Import your root certificate into a new trust store and follow the prompts&lt;/span&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Import your root certificate into a new trust store and follow the prompts&lt;/span&gt;
 keytool -import -alias root -file root.crt -keystore truststore.jks
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
@@ -235,7 +235,7 @@ your client does not have a certificate for service-to-service communication,
 you can follow a similar pattern to create its certificate. But if it does have
 an existing certificate, you can just reuse that one.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Create our server&#39;s key&lt;/span&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Create our server&#39;s key&lt;/span&gt;
 openssl genrsa -out server.key 2048
 
 &lt;span class=&quot;c&quot;&gt;# Create the csr and follow the prompts for country code, ou, etc&lt;/span&gt;
@@ -260,7 +260,7 @@ keytool -importkeystore -destkeystore keystore.jks -srckeystore server.p12 -srcs
 &lt;p&gt;Now that we have our key and trust stores, let’s configure the server’s
 Dropwizard application connector.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;:
+&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;:
   &lt;span class=&quot;n&quot;&gt;applicationConnectors&lt;/span&gt;:
     - &lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;: &lt;span class=&quot;n&quot;&gt;https&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;port&lt;/span&gt;: &lt;span class=&quot;m&quot;&gt;8443&lt;/span&gt;
@@ -302,7 +302,7 @@ server, telling Java to debug the SSL handshakes, and make sure we see it
 refusing the connection for the right reason. In one terminal start the
 Dropwizard server debugging SSL.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;java -Djavax.net.debug&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;SSL,keymanager,trustmanager -jar your/jar.jar server config.yml
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;java -Djavax.net.debug&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;SSL,keymanager,trustmanager -jar your/jar.jar server config.yml
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -310,7 +310,7 @@ Dropwizard server debugging SSL.&lt;/p&gt;
 expected results. First, make sure that the server does not talk HTTP over our
 port.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;curl localhost:443
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;curl localhost:443
 curl: &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;52&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Empty reply from server
 
 &lt;span class=&quot;c&quot;&gt;# The server should print something like the following because of no TLS:&lt;/span&gt;
@@ -322,7 +322,7 @@ curl: &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;52&lt;span class=&quot;o&quo
 curl has a preconfigured list of trusted certs and chances are your
 root certificate is not in there.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;curl https://localhost:443
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;curl https://localhost:443
 curl: &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;60&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; SSL certificate problem: Invalid certificate chain
 
 &lt;span class=&quot;c&quot;&gt;# The server will print a bunch of stuff ending with something like:&lt;/span&gt;
@@ -333,7 +333,7 @@ curl: &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;60&lt;span class=&quot;o&quo
 &lt;p&gt;Finally, ensure that the server terminates the connection if no client cert is
 provided.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;curl -k https://localhost:443
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;curl -k https://localhost:443
 curl: &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;35&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Server aborted the SSL handshake
 
 &lt;span class=&quot;c&quot;&gt;# The server will, again, print a bunch of stuff ending with something like:&lt;/span&gt;
@@ -346,7 +346,7 @@ curl: &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;35&lt;span class=&quot;o&quo
 &lt;p&gt;Now we’ll configure our client to talk to the server. I’ll use the Jersey 2.X
 API, but there are equivalents in the 1.X as well as in the Apache HTTP library.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Assume the following variables are initialized already&lt;/span&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Assume the following variables are initialized already&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;RSAPrivateKey&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clientKey&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;X509Certificate&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clientCert&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
@@ -413,7 +413,7 @@ in the other direction (client verifying the server).&lt;/p&gt;
 is one that Dropwizard supports this verification with a tricky configuration
 change for the underlying Java SSL connection.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;:
+&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;:
   &lt;span class=&quot;n&quot;&gt;applicationConnectors&lt;/span&gt;:
     - &lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;: &lt;span class=&quot;n&quot;&gt;https&lt;/span&gt;
       &lt;span class=&quot;c&quot;&gt;#...
@@ -441,7 +441,7 @@ need to set up a filter in our server and configure a regex to match the DN in
 the certificate(s) that are allowed to communicate with our service or else
 return a 403 response.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.annotation.Priority&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.annotation.Priority&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.servlet.http.HttpServletRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.Priorities&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.container.ContainerRequestContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
@@ -1044,14 +1044,14 @@ are now testing just one class at a time.&lt;/p&gt;
 
     &lt;p&gt;Add the following code under the dependency section:&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;androidTestCompile&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;org.easymock:easymock:3.1&#39;&lt;/span&gt;
+    &lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;androidTestCompile&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;org.easymock:easymock:3.1&#39;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
     &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Replace &lt;code class=&quot;highlighter-rouge&quot;&gt;FooTest&lt;/code&gt; with the following code:&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;myapplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;myapplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 
 &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;junit.framework.Assert&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 
@@ -1103,7 +1103,7 @@ are now testing just one class at a time.&lt;/p&gt;
 
     &lt;p&gt;(I believe the original code for injecting fields is from &lt;strong&gt;Spring&lt;/strong&gt;; however, it was modified afterwards.)&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;myapplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;myapplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 
 &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.lang.reflect.Field&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.inject.Inject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
@@ -1223,7 +1223,7 @@ my summary is below:&lt;/p&gt;
 
     &lt;p&gt;Add the following code under the dependency section:&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;com.squareup.dagger:dagger:1.2.1&#39;&lt;/span&gt;
+    &lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;com.squareup.dagger:dagger:1.2.1&#39;&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;provided&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;com.squareup.dagger:dagger-compiler:1.2.1&#39;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
     &lt;/div&gt;
@@ -1233,7 +1233,7 @@ my summary is below:&lt;/p&gt;
 
     &lt;p&gt;Add the following code to the Application tags:&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;android&lt;/span&gt;:&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;s2&quot;&gt;&quot;.MyApplication&quot;&lt;/span&gt;
+    &lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;android&lt;/span&gt;:&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;s2&quot;&gt;&quot;.MyApplication&quot;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
     &lt;/div&gt;
   &lt;/li&gt;
@@ -1242,7 +1242,7 @@ my summary is below:&lt;/p&gt;
 
     &lt;p&gt;Add the &lt;code class=&quot;highlighter-rouge&quot;&gt;MyApplication&lt;/code&gt; class.&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyApplication&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Application&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyApplication&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Application&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ObjectGraph&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;applicationGraph&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 
     &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
@@ -1267,7 +1267,7 @@ my summary is below:&lt;/p&gt;
   &lt;li&gt;
     &lt;p&gt;Add the &lt;code class=&quot;highlighter-rouge&quot;&gt;MyModule&lt;/code&gt; class.&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;myapplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;myapplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 
 &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;dagger.Module&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;dagger.Provides&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
@@ -1291,7 +1291,7 @@ my summary is below:&lt;/p&gt;
     &lt;p&gt;Modify &lt;code class=&quot;highlighter-rouge&quot;&gt;MainActivity&lt;/code&gt; and replace code &lt;code class=&quot;highlighter-rouge&quot;&gt;private Foo
 foo = new Foo();&lt;/code&gt; with:&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Inject&lt;/span&gt;
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Inject&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;Foo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
     &lt;/div&gt;
@@ -1307,14 +1307,14 @@ foo = new Foo();&lt;/code&gt; with:&lt;/p&gt;
   &lt;li&gt;
     &lt;p&gt;Modify the &lt;code class=&quot;highlighter-rouge&quot;&gt;Foo&lt;/code&gt; class and replace code &lt;code class=&quot;highlighter-rouge&quot;&gt;Bar bar = new Bar();&lt;/code&gt; with:&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Inject&lt;/span&gt;
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Inject&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;Bar&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
     &lt;/div&gt;
 
     &lt;p&gt;Modify Bar class and add&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Inject&lt;/span&gt;
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Inject&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;Bar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
@@ -1380,7 +1380,7 @@ do:&lt;/p&gt;
 
     &lt;p&gt;Add the following code to the dependencies section:&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;classpath&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;org.robolectric:robolectric-gradle-plugin:0.12.+&#39;&lt;/span&gt;
+    &lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;classpath&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;org.robolectric:robolectric-gradle-plugin:0.12.+&#39;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
     &lt;/div&gt;
   &lt;/li&gt;
@@ -1389,14 +1389,14 @@ do:&lt;/p&gt;
 
     &lt;p&gt;Add the following code under &lt;code class=&quot;highlighter-rouge&quot;&gt;apply plugin: ‘com.android.application&#39;&lt;/code&gt;:&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;apply&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plugin&lt;/span&gt;: &lt;span class=&quot;s1&quot;&gt;&#39;robolectric&#39;&lt;/span&gt;
+    &lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;apply&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plugin&lt;/span&gt;: &lt;span class=&quot;s1&quot;&gt;&#39;robolectric&#39;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
     &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Add the following under the dependencies section:&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;androidTestCompile&lt;/span&gt;(&lt;span class=&quot;s1&quot;&gt;&#39;junit:junit:4.11&#39;&lt;/span&gt;)
+    &lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;androidTestCompile&lt;/span&gt;(&lt;span class=&quot;s1&quot;&gt;&#39;junit:junit:4.11&#39;&lt;/span&gt;)
 &lt;span class=&quot;n&quot;&gt;androidTestCompile&lt;/span&gt;(&lt;span class=&quot;s1&quot;&gt;&#39;org.robolectric:robolectric:2.3&#39;&lt;/span&gt;)
 &lt;/code&gt;&lt;/pre&gt;
     &lt;/div&gt;
@@ -1404,7 +1404,7 @@ do:&lt;/p&gt;
   &lt;li&gt;
     &lt;p&gt;Add this section:&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;robolectric&lt;/span&gt; {
+    &lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;robolectric&lt;/span&gt; {
         &lt;span class=&quot;n&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;**/*Test.class&#39;&lt;/span&gt;
 }
 &lt;/code&gt;&lt;/pre&gt;
@@ -1415,7 +1415,7 @@ do:&lt;/p&gt;
 
     &lt;p&gt;Modify &lt;code class=&quot;highlighter-rouge&quot;&gt;MainActivity&lt;/code&gt;. Add the following code to it:&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Foo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Foo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
 &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getSomething&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getFoo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
@@ -1424,7 +1424,7 @@ do:&lt;/p&gt;
 
     &lt;p&gt;Add the &lt;code class=&quot;highlighter-rouge&quot;&gt;Foo&lt;/code&gt; class:&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;myapplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;myapplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 
 &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Foo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;Bar&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Bar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
@@ -1439,7 +1439,7 @@ do:&lt;/p&gt;
   &lt;li&gt;
     &lt;p&gt;Add the &lt;code class=&quot;highlighter-rouge&quot;&gt;Bar&lt;/code&gt; class:&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;myapplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;myapplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 
 &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Bar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
 
@@ -1457,7 +1457,7 @@ do:&lt;/p&gt;
 
     &lt;p&gt;Create the following &lt;code class=&quot;highlighter-rouge&quot;&gt;FooTest&lt;/code&gt; class under your &lt;code class=&quot;highlighter-rouge&quot;&gt;androidTest&lt;/code&gt;:&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;myapplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;myapplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 
 &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;junit.framework.Assert&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 

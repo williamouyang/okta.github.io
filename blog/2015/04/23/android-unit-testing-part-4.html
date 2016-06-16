@@ -170,14 +170,14 @@ are now testing just one class at a time.</p>
 
     <p>Add the following code under the dependency section:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="n">androidTestCompile</span> <span class="s1">'org.easymock:easymock:3.1'</span>
+    <div class="language-conf highlighter-rouge"><pre class="highlight"><code><span class="n">androidTestCompile</span> <span class="s1">'org.easymock:easymock:3.1'</span>
 </code></pre>
     </div>
   </li>
   <li>
     <p>Replace <code class="highlighter-rouge">FooTest</code> with the following code:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">myapplication</span><span class="o">;</span>
+    <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">myapplication</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">junit.framework.Assert</span><span class="o">;</span>
 
@@ -229,7 +229,7 @@ are now testing just one class at a time.</p>
 
     <p>(I believe the original code for injecting fields is from <strong>Spring</strong>; however, it was modified afterwards.)</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">myapplication</span><span class="o">;</span>
+    <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">myapplication</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.lang.reflect.Field</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">javax.inject.Inject</span><span class="o">;</span>

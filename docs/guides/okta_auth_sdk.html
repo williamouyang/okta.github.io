@@ -176,7 +176,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Include the following script tag in your target web page:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-sdk-1.0.0.min.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-sdk-1.0.0.min.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
 </code></pre>
 </div>
 
@@ -188,7 +188,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>An example authentication flow would look like this:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">authClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaAuth</span><span class="p">({</span><span class="na">url</span><span class="p">:</span> <span class="s1">'https://your-org.okta.com'</span><span class="p">});</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">authClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaAuth</span><span class="p">({</span><span class="na">url</span><span class="p">:</span> <span class="s1">'https://your-org.okta.com'</span><span class="p">});</span>
 <span class="nx">authClient</span><span class="p">.</span><span class="nx">signIn</span><span class="p">({</span>
   <span class="na">username</span><span class="p">:</span> <span class="s1">'some-username'</span><span class="p">,</span>
   <span class="na">password</span><span class="p">:</span> <span class="s1">'some-password'</span>
@@ -267,7 +267,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">transaction</span><span class="p">.</span><span class="nx">unlock</span><span class="p">({</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">transaction</span><span class="p">.</span><span class="nx">unlock</span><span class="p">({</span>
   <span class="na">username</span><span class="p">:</span> <span class="s1">'dade.murphy@example.com'</span><span class="p">,</span>
   <span class="na">factorType</span><span class="p">:</span> <span class="s1">'EMAIL'</span>
 <span class="p">});</span>
@@ -317,7 +317,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">transaction</span><span class="p">.</span><span class="nx">changePassword</span><span class="p">({</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">transaction</span><span class="p">.</span><span class="nx">changePassword</span><span class="p">({</span>
   <span class="na">oldPassword</span><span class="p">:</span> <span class="s1">'0ldP4ssw0rd'</span><span class="p">,</span>
   <span class="na">newPassword</span><span class="p">:</span> <span class="s1">'N3wP4ssw0rd'</span>
 <span class="p">});</span>
@@ -367,7 +367,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">transaction</span><span class="p">.</span><span class="nx">resetPassword</span><span class="p">({</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">transaction</span><span class="p">.</span><span class="nx">resetPassword</span><span class="p">({</span>
   <span class="na">newPassword</span><span class="p">:</span> <span class="s1">'N3wP4ssw0rd'</span>
 <span class="p">});</span>
 </code></pre>
@@ -426,7 +426,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">transaction</span><span class="p">.</span><span class="nx">changePassword</span><span class="p">({</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">transaction</span><span class="p">.</span><span class="nx">changePassword</span><span class="p">({</span>
   <span class="na">oldPassword</span><span class="p">:</span> <span class="s1">'0ldP4ssw0rd'</span><span class="p">,</span>
   <span class="na">newPassword</span><span class="p">:</span> <span class="s1">'N3wP4ssw0rd'</span>
 <span class="p">});</span>
@@ -476,7 +476,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">transaction</span><span class="p">.</span><span class="nx">answer</span><span class="p">({</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">transaction</span><span class="p">.</span><span class="nx">answer</span><span class="p">({</span>
   <span class="na">answer</span><span class="p">:</span> <span class="s1">'My favorite recovery question answer'</span>
 <span class="p">});</span>
 </code></pre>
@@ -540,7 +540,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Examples:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// Verify the recovery</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// Verify the recovery</span>
 <span class="nx">transaction</span><span class="p">.</span><span class="nx">verify</span><span class="p">({</span>
   <span class="na">passCode</span><span class="p">:</span> <span class="s1">'615243'</span>
 <span class="p">});</span>
@@ -642,7 +642,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// Assume the first factor is a question</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// Assume the first factor is a question</span>
 <span class="kd">var</span> <span class="nx">factor</span> <span class="o">=</span> <span class="nx">transaction</span><span class="p">.</span><span class="nx">factors</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
 
 <span class="c1">// Returns the available questions</span>
@@ -794,7 +794,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">transaction</span><span class="p">.</span><span class="nx">activate</span><span class="p">({</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">transaction</span><span class="p">.</span><span class="nx">activate</span><span class="p">({</span>
   <span class="na">passCode</span><span class="p">:</span> <span class="s1">'615243'</span>
 <span class="p">});</span>
 </code></pre>
@@ -882,7 +882,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// Assume the first factor is a question</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// Assume the first factor is a question</span>
 <span class="kd">var</span> <span class="nx">factor</span> <span class="o">=</span> <span class="nx">transaction</span><span class="p">.</span><span class="nx">factors</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
 
 <span class="nx">factor</span><span class="p">.</span><span class="nx">verify</span><span class="p">({</span>
@@ -993,7 +993,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">transaction</span><span class="p">.</span><span class="nx">poll</span><span class="p">();</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">transaction</span><span class="p">.</span><span class="nx">poll</span><span class="p">();</span>
 </code></pre>
 </div>
 
@@ -1035,7 +1035,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">setCookieAndRedirect</span><span class="p">(</span><span class="nx">transaction</span><span class="p">.</span><span class="nx">sessionToken</span><span class="p">);</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">setCookieAndRedirect</span><span class="p">(</span><span class="nx">transaction</span><span class="p">.</span><span class="nx">sessionToken</span><span class="p">);</span>
 </code></pre>
 </div>
 
@@ -1047,7 +1047,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Check for a transaction to be resumed. This is synchronous and returns <code class="highlighter-rouge">true</code> or <code class="highlighter-rouge">false</code>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">tx</span><span class="p">.</span><span class="nx">exists</span><span class="p">();</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">tx</span><span class="p">.</span><span class="nx">exists</span><span class="p">();</span>
 </code></pre>
 </div>
 
@@ -1055,7 +1055,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Returns a transaction with a user’s previous state.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">tx</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">tx</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
 </code></pre>
 </div>
 
@@ -1063,7 +1063,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>If you want to obtain an ID Token via <a href="/docs/api/resources/oidc.html">OIDC</a> or <a href="/docs/guides/social_authentication.html">social authentication</a>, it’s possible to manage the flow with the SDK. To do so, instantiate your client with a <code class="highlighter-rouge">clientId</code> and <code class="highlighter-rouge">redirectUri</code>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">authClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaAuth</span><span class="p">({</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">authClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaAuth</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://your-org.okta.com'</span><span class="p">,</span>
   <span class="na">clientId</span><span class="p">:</span> <span class="s1">'your-client-id'</span><span class="p">,</span>
   <span class="na">redirectUri</span><span class="p">:</span> <span class="s1">'https://your.redirect.uri/redirect'</span> <span class="c1">// defaults to current url if omitted</span>
@@ -1072,7 +1072,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </div>
 
 <h3 id="get-an-id-token">Get an ID Token</h3>
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">idToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">()</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">idToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">()</span>
 <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// Raw ID Token</span>
   <span class="nx">res</span><span class="p">.</span><span class="nx">idToken</span><span class="p">;</span>
@@ -1084,14 +1084,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </div>
 
 <h3 id="exchange-a-sessiontoken-for-an-id-token">Exchange a sessionToken for an ID Token</h3>
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">idToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">({</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">idToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">({</span>
   <span class="na">sessionToken</span><span class="p">:</span> <span class="s1">'testSessionToken'</span>
 <span class="p">});</span>
 </code></pre>
 </div>
 
 <h3 id="get-an-id-token-from-an-idp">Get an ID Token from an IDP</h3>
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">idToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">({</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">idToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">({</span>
   <span class="na">idp</span><span class="p">:</span> <span class="s1">'target-idp'</span>
 <span class="p">});</span>
 </code></pre>
@@ -1101,7 +1101,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Returns a new idToken if the Okta session is still valid.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">idToken</span><span class="p">.</span><span class="nx">refresh</span><span class="p">();</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">idToken</span><span class="p">.</span><span class="nx">refresh</span><span class="p">();</span>
 </code></pre>
 </div>
 
@@ -1109,7 +1109,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Decode a raw ID Token</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">idToken</span><span class="p">.</span><span class="nx">decode</span><span class="p">(</span><span class="nx">idTokenString</span><span class="p">);</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">idToken</span><span class="p">.</span><span class="nx">decode</span><span class="p">(</span><span class="nx">idTokenString</span><span class="p">);</span>
 </code></pre>
 </div>
 
@@ -1121,7 +1121,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>To create a session, you must first have a <code class="highlighter-rouge">sessionToken</code>. This can be created by going through the <a href="#authentication-flow">Authentication Flow</a> until the <a href="#success">SUCCESS</a> status. The transaction will contain the <code class="highlighter-rouge">sessionToken</code>. If a <code class="highlighter-rouge">redirectUri</code> is not passed, Okta will redirect to the current page.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">setCookieAndRedirect</span><span class="p">(</span><span class="nx">sessionToken</span><span class="p">,</span> <span class="nx">redirectUri</span><span class="p">);</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">setCookieAndRedirect</span><span class="p">(</span><span class="nx">sessionToken</span><span class="p">,</span> <span class="nx">redirectUri</span><span class="p">);</span>
 </code></pre>
 </div>
 
@@ -1129,7 +1129,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Resolves with <code class="highlighter-rouge">true</code> or <code class="highlighter-rouge">false</code>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">exists</span><span class="p">();</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">exists</span><span class="p">();</span>
 </code></pre>
 </div>
 
@@ -1137,7 +1137,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Resolves with a <a href="/docs/api/resources/sessions.html#example">session</a>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
 </code></pre>
 </div>
 
@@ -1145,7 +1145,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Resolves with a refreshed version of your existing <a href="/docs/api/resources/sessions.html#example">session</a>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">refresh</span><span class="p">();</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">refresh</span><span class="p">();</span>
 </code></pre>
 </div>
 
@@ -1153,7 +1153,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Terminates an existing <a href="/docs/api/resources/sessions.html#example">session</a>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
 </code></pre>
 </div>
 
@@ -1223,55 +1223,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 	</div>
 	
-<!-- Remarketing tag -->
-	<script type="text/javascript">
-		/* <![CDATA[ */
-		var google_conversion_id = 1006913831;
-		var google_custom_params = window.google_tag_params;
-		var google_remarketing_only = true;
-		/* ]]> */
-	</script>
-	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-	</script>
-	<noscript>
-		<div style="display:inline;">
-			<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"/>
-		</div>
-	</noscript>
-<!-- End Remarketing tag -->
-
-<!-- Crazy Egg Tracking -->
-<script type="text/javascript">
-setTimeout(function(){var a=document.createElement("script");
-var b=document.getElementsByTagName("script")[0];
-a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
-a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-</script>
-<!-- End Crazy Egg Tracking -->
-
-<footer class="site-footer">
-	<div class="wrap">
-
-		<ul>
-			<li><a href="http://www.okta.com" target="_blank">Okta.com</a></li>
-			<li><a href="/blog">Blog</a></li>
-			<li><a href="/terms/">Terms &amp; Conditions</a></li>
-			<li><a href="/privacy/">Privacy Policy</a></li>
-			<li><a href="http://okta.com/developer/contact/">Contact Sales</a></li>
-			<li><a href="mailto:developers@okta.com">Contact Support</a></li>
-		</ul>
-
-		<ul>
-			<li><a class="icon" href="http://github.com/okta" target="_blank"><i class="fa fa-github"></i></a></li>
-			<li><a class="icon" href="http://twitter.com/okta" target="_blank"><i class="fa fa-twitter"></i></a></li>
-			<li><a class="icon" href="http://stackoverflow.com/search?q=okta" target="_blank"><i class="fa fa-stack-overflow"></i></a></li>
-			<li><a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a></li>
-			<li><a class="icon" href="http://community.okta.com" target="_blank"><i class="fa fa-comments"></i></a></li>
-		</ul>
-
-	</div>
-</footer>
-
 </section>
 
 

@@ -179,7 +179,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Use the following example by replacing the explanatory text with valid values.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>{
+<div class="language-html highlighter-rouge"><pre class="highlight"><code>{
 "eventId": Randomly generated String, Required //note, not uuid as in underlying
 "published": ISO8601 string for timestamp, Required //note, published, not timestamp as in underlying
 "eventType": String, Required
@@ -594,7 +594,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00u3gjksoiRGRAZHLSYV"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jon Stewart"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"alternateId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00uKrs9rsRSAXN"</span><span class="p">,</span><span class="w">
@@ -1209,7 +1209,7 @@ Events published for a target user</p>
   <p>This operation requires <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encoding</a>. For example, <code class="highlighter-rouge">since=2016-05-25T00:00:00+00:00</code> is encoded as <code class="highlighter-rouge">since=2016-06-02T00%3A00%3A00%2B00%3A00</code>.</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>http://rain-admin.okta1.com:1802/sage/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:00+00:00&amp;until<span class="o">=</span>2016-06-01T23:59:59+00:00&amp;limit<span class="o">=</span>20&amp;q<span class="o">=</span>FAILURE
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>http://rain-admin.okta1.com:1802/sage/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:00+00:00&amp;until<span class="o">=</span>2016-06-01T23:59:59+00:00&amp;limit<span class="o">=</span>20&amp;q<span class="o">=</span>FAILURE
 http://rain-admin.okta1.com:1802/sage/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:00+00:00&amp;until<span class="o">=</span>2016-06-01T23:59:59+00:00&amp;limit<span class="o">=</span>20&amp;q<span class="o">=</span>
 http://rain-admin.okta1.com:1802/sage/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:00+00:00&amp;until<span class="o">=</span>2016-06-01T23:59:59+00:00&amp;limit<span class="o">=</span>20&amp;filter<span class="o">=</span>eventType eq <span class="s2">"user.session.start"</span>
 </code></pre>
@@ -1217,7 +1217,7 @@ http://rain-admin.okta1.com:1802/sage/api/v1/logs?since<span class="o">=</span>2
 
 <h5 class="api api-response api-response-example" id="response-example">Response Example</h5>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"severity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INFO"</span><span class="p">,</span><span class="w">
@@ -1339,55 +1339,6 @@ http://rain-admin.okta1.com:1802/sage/api/v1/logs?since<span class="o">=</span>2
 
 	</div>
 	
-<!-- Remarketing tag -->
-	<script type="text/javascript">
-		/* <![CDATA[ */
-		var google_conversion_id = 1006913831;
-		var google_custom_params = window.google_tag_params;
-		var google_remarketing_only = true;
-		/* ]]> */
-	</script>
-	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-	</script>
-	<noscript>
-		<div style="display:inline;">
-			<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"/>
-		</div>
-	</noscript>
-<!-- End Remarketing tag -->
-
-<!-- Crazy Egg Tracking -->
-<script type="text/javascript">
-setTimeout(function(){var a=document.createElement("script");
-var b=document.getElementsByTagName("script")[0];
-a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
-a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-</script>
-<!-- End Crazy Egg Tracking -->
-
-<footer class="site-footer">
-	<div class="wrap">
-
-		<ul>
-			<li><a href="http://www.okta.com" target="_blank">Okta.com</a></li>
-			<li><a href="/blog">Blog</a></li>
-			<li><a href="/terms/">Terms &amp; Conditions</a></li>
-			<li><a href="/privacy/">Privacy Policy</a></li>
-			<li><a href="http://okta.com/developer/contact/">Contact Sales</a></li>
-			<li><a href="mailto:developers@okta.com">Contact Support</a></li>
-		</ul>
-
-		<ul>
-			<li><a class="icon" href="http://github.com/okta" target="_blank"><i class="fa fa-github"></i></a></li>
-			<li><a class="icon" href="http://twitter.com/okta" target="_blank"><i class="fa fa-twitter"></i></a></li>
-			<li><a class="icon" href="http://stackoverflow.com/search?q=okta" target="_blank"><i class="fa fa-stack-overflow"></i></a></li>
-			<li><a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a></li>
-			<li><a class="icon" href="http://community.okta.com" target="_blank"><i class="fa fa-comments"></i></a></li>
-		</ul>
-
-	</div>
-</footer>
-
 </section>
 
 
