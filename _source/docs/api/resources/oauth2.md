@@ -204,7 +204,7 @@ refresh_token      | Access Token, Refresh Token           |
 
 For web and native application types, an additional process is required:
 
-1. Use the Okta Administration UI and check the <b>Allow Offline Access</b> checkbox on the client application page.
+1. Use the Okta Administration UI and check the <b>Refresh Token</b> checkbox under <b>Allowed Grant Types</b> on the client application page.
 2. Pass the <em>offline_access</em> scope to your authorize request.
 
 #### List of Errors 
