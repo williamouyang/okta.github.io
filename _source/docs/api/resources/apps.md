@@ -333,7 +333,7 @@ Determines the [key](#application-key-credential-model) used for signing asserti
 | kid        | Reference for key credential in the [app's key store](#application-key-store-operations)    | String                           | FALSE    |                   |           |           |            |
 |------------+---------------------------------------------------------------------------------------------+----------------------------------+----------+-------------------+-----------+-----------+------------|
 
-> You need to enable `KEY_ROLLOVER` feature to view `kid`, contact customer support for more information
+> You must to enable the key rollover feature to view `kid`. Key rollover is an Early Access feature; contact Customer Support to enable it.
 
 ~~~json
 {
@@ -2544,7 +2544,7 @@ curl -v -X PUT \
 
 Update [application key credential](#application-key-credential-model) by `kid`
 
-> You need to enable `KEY_ROLLOVER` feature to perform this operation, it is advised to contact Customer Support before enabling this feature.
+> You must enable the key rollover feature to perform this operation. Key rollover is an Early Access feature; contact Customer Support to enable it.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -3575,7 +3575,7 @@ curl -v -X DELETE \
 
 ## Application Key Store Operations
 
-> You need to enable `KEY_ROLLOVER` feature to perform the following operations, `KEY_ROLLOVER` is an Early Access feature, please contact Customer Support to have it enabled.
+> You must enable the key rollover feature to perform the following operations. Key rollover is an Early Access feature; contact Customer Support to enable it.
 
 ### Generate New Application Key Credential
 {:.api .api-operation}
