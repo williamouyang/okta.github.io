@@ -590,16 +590,6 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
       <td>String</td>
     </tr>
     <tr>
-      <td>client_id</td>
-      <td>The client ID generated as a part of client registration. This is used in conjunction with the <em>client_secret</em> parameter to authenticate the client application.</td>
-      <td>String</td>
-    </tr>
-    <tr>
-      <td>client_secret</td>
-      <td>The client secret generated as a part of client registration. This is used in conjunction with the <em>client_id</em> parameter to authenticate the client application.</td>
-      <td>String</td>
-    </tr>
-    <tr>
       <td>code_verifier</td>
       <td>The code verifier of <a href="#parameter-details">PKCE</a>. Okta uses it to recompute the code_challenge and verify if it matches the original code_challenge in the authorization request.</td>
       <td>String</td>
@@ -607,11 +597,10 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
   </tbody>
 </table>
 
-<h5 id="token-authentication-methods">Token Authentication Methods</h5>
+<h5 id="token-authentication-method">Token Authentication Method</h5>
 
-<p>The client can authenticate by providing <em>client_id</em> and <em>client_secret</em> as a part of the URL-encoded form parameters (as described in table above),
-or it can use basic authentication by providing the <em>client_id</em> and <em>client_secret</em> as an Authorization header using the Basic auth scheme.
-Use one authentication mechanism with a given request. Using both returns an error.</p>
+<p>The client can authenticate by providing the <a href="oidc.html#request-parameters"><code class="highlighter-rouge">client_id</code></a> 
+and <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect"><code class="highlighter-rouge">client_secret</code></a> as an Authorization header in the Basic auth scheme (basic authentication).</p>
 
 <p>For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.</p>
 
@@ -647,7 +636,7 @@ Use one authentication mechanism with a given request. Using both returns an err
 <p>For web and native application types, an additional process is required:</p>
 
 <ol>
-  <li>Use the Okta Administration UI and check the <b>Allow Offline Access</b> checkbox on the client application page.</li>
+  <li>Use the Okta Administration UI and check the <b>Refresh Token</b> checkbox under <b>Allowed Grant Types</b> on the client application page.</li>
   <li>Pass the <em>offline_access</em> scope to your authorize request.</li>
 </ol>
 
@@ -761,7 +750,7 @@ An implicit client can only introspect its own tokens, while a confidential clie
   </tbody>
 </table>
 
-<h5 id="token-authentication-methods-1">Token Authentication Methods</h5>
+<h5 id="token-authentication-methods">Token Authentication Methods</h5>
 
 <p>The client can authenticate by providing <em>client_id</em> and <em>client_secret</em> as a part of the URL-encoded form parameters (as described in table above),
 or it can use basic authentication by providing the <em>client_id</em> and <em>client_secret</em> as an Authorization header using the Basic auth scheme.
@@ -973,7 +962,7 @@ Use one authentication mechanism with a given request. Using both returns an err
   </tbody>
 </table>
 
-<h5 id="token-authentication-methods-2">Token Authentication Methods</h5>
+<h5 id="token-authentication-methods-1">Token Authentication Methods</h5>
 
 <p>A client may only revoke a token generated for that client.</p>
 
