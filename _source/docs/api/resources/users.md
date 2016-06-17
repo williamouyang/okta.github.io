@@ -698,7 +698,7 @@ curl -v -X POST \
 #### Create User in Group
 {:.api .api-operation}
 
-Creates a user that is immediately added the specified groups upon creation.  This supplemental function can be used in conjunction with the other create operations.  This function is necessary for a User Admin that is scoped to only create users in specified groups.
+Creates a user that is immediately added to the specified groups upon creation.  This supplemental function can be used in conjunction with the other create operations.  This function is necessary for a User Admin that is scoped to only create users in specified groups.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
