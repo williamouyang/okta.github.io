@@ -174,16 +174,13 @@ code               | Expected if grant_type specified <em>authorization_code</em
 refresh_token      | Expected if the grant_type specified <em>refresh_token</em>. The value is what was returned from this endpoint via a previous invocation. | String |
 scope              | Expected only if <em>refresh_token</em> is specified as the grant type. This is a list of scopes that the client wants to be included in the Access Token. These scopes have to be subset of the scopes used to generate the Refresh Token in the first place. | String |
 redirect_uri       | Expected if grant_type is <em>authorization_code</em>. Specifies the callback location where the authorization was sent; must match what is preregistered in Okta for this client. | String |
-client_id          | The client ID generated as a part of client registration. This is used in conjunction with the <em>client_secret</em> parameter to authenticate the client application. | String |
-client_secret      | The client secret generated as a part of client registration. This is used in conjunction with the <em>client_id</em> parameter to authenticate the client application. | String |
 code_verifier      | The code verifier of [PKCE](#parameter-details). Okta uses it to recompute the code_challenge and verify if it matches the original code_challenge in the authorization request. | String |
 
 
-##### Token Authentication Methods
+##### Token Authentication Method
 
-The client can authenticate by providing <em>client_id</em> and <em>client_secret</em> as a part of the URL-encoded form parameters (as described in table above),
-or it can use basic authentication by providing the <em>client_id</em> and <em>client_secret</em> as an Authorization header using the Basic auth scheme.
-Use one authentication mechanism with a given request. Using both returns an error.
+The client can authenticate by providing the [`client_id`](oidc.html#request-parameters) 
+and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect) as an Authorization header in the Basic auth scheme (basic authentication).
 
 For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.
 
