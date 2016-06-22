@@ -1,13 +1,16 @@
 {% assign section = page.url %}
-	<a {% if section contains "/api/" endif %} class="on" {% endif %} href="/docs/api/getting_started/design_principles.html">
+<a {% if section contains "/platform-release-notes/" endif %} class="on" {% endif %} href="/docs/platform-release-notes/platform-release-notes.html">
+		Platform Release Notes
+	</a>
+<a {% if section contains "/api/" endif %} class="on" {% endif %} href="/docs/api/getting_started/design_principles.html">
 		API
 	</a>
-	<a {% if section contains "/guides/" endif %} class="on" {% endif %} href="/docs/guides/saml_guidance.html">
+<a {% if section contains "/guides/" endif %} class="on" {% endif %} href="/docs/guides/saml_guidance.html">
 		Guides
 	</a>
-	<a {% if section contains "/examples/" endif %} class="on" {% endif %} href="/docs/examples/session_cookie.html">
+<a {% if section contains "/examples/" endif %} class="on" {% endif %} href="/docs/examples/session_cookie.html">
 		Examples
 	</a>
-	<a {% if section contains "/sdk/" endif %} class="on" {% endif %} href="/docs/sdk/core/api.html">
+<a {% if section contains "/sdk/" endif %} class="on" {% endif %} href="/docs/sdk/core/api.html">
 		SDKs
 	</a>
