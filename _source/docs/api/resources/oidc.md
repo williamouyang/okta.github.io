@@ -130,11 +130,18 @@ Claims in the payload are independent of scope (always returned) or dependent on
 | email_verified     |  email   | True if the user's e-mail address has been verified; otherwise false.   | boolean    | true     |
 | address     | address    | User's preferred postal address. The value of the address member is a JSON structure containing <em>street_address</em>, <em>locality</em>, <em>region</em>, <em>postal_code</em>, and <em>country</em>.   | JSON structure    | { "street_address": "123 Hollywood Blvd.", "locality": "Los Angeles", "region": "CA", "postal_code": "90210", "country": "US" }     |
 | phone_number     |  phone   | User's preferred telephone number in E.164 format.   | String    | 	"+1 (425) 555-1212"     |
+| groups    | groups    | The groups that the user is a member of that also match the group filter of the client app. | List | ["MyGroup1", "MyGroup2", "MyGroup3"] |
 
->The client can also optionally request an Access Token along with the ID Token. In this case, in order to keep the size of the ID Token small, the ID Token body does not contain all the scope dependent claims. 
+Be aware of the following before you work with scope-dependent claims:
+
+* The client can also optionally request an Access Token along with the ID Token. In this case, in order to keep the size of the ID Token small, the ID Token body does not contain all the scope dependent claims. 
 Instead, the ID token contains the `name` and `preferred_username` claims if the `profile` scope was requested and `email` claim if the `email` scope was requested.
 
->The full set of claims for the requested scopes is available via the [/oauth2/v1/userinfo](#get-user-information) endpoint. Call this endpoint using the Access Token.
+* The full set of claims for the requested scopes is available via the [/oauth2/v1/userinfo](#get-user-information) endpoint. Call this endpoint using the Access Token.
+
+* To protect against arbitrarily large numbers of groups matching the group filter, the group claim has a limit of 100. 
+If more than 100 groups match the filter, then the request fails. Expect that this limit may change in the future.
+For more information about configuring an app for OpenID Connect, including group claims, see [Using OpenID Connect](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect).
 
 
 ## Endpoints
