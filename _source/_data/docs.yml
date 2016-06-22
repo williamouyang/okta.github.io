@@ -1,3 +1,10 @@
+# -- Platform Release Notes
+- section: platform-release-notes/platform-release-notes.html
+  slug: Platform Release Notes
+  title: Platform Release Notes
+  pages:
+    - platform-relesae-notes
+
 # -- APIS
 - section: api/getting_started
   slug: api
