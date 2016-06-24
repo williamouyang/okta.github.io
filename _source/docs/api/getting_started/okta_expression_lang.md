@@ -261,12 +261,14 @@ isContractor | Boolean
 
 The following samples are valid conditional expressions that apply to profile mapping. The attribute *courtesyTitle* is from another system being mapped to Okta. 
 
+<p>If the middle initial is not blank, the full name is the first name, middle initial, a period, and the last name; otherwise it is the first name and the last name.<br>
+<code>String.len(middleInitial) > 0 ? String.join(firstName, " ", middleInitial, ". ", lastName) : String.join(firstName, " ", lastName)</code></p>
 
-<p>If the middle initial is not blank, the full name is the first name, middle initial, a period, and the last name; otherwise it is the first name and the last name.<br><code>fullName = String.len(middleInitial) > 0 ? fullName=String.join(firstName, " ", middleInitial, ". ", lastName) : fullName=String.join(firstName, " ", lastName)</code></p>
+<p>If there is a courtesy title, use it for the honorific prefix.<br>
+<code>courtesyTitle != "" ? courtesyTitle : ""</code></p>
 
-<p>If there is a courtesy title, use it for the honorific prefix.<br><code>honorificPrefix=!courtesyTitle=="" ? honorificPrefix=courtesyTitle : honorificPrefix=""</code></p>
-
-<p>If either email2 or email3 exists, make additionalEmail true; otherwise, make it false.<br><code>additionalEmail=String.len(email2) > 0 OR String.len(email3) > 0 ? additionalEmail= rue : additionalEmail=False</code></p>
+<p>If either email2 or email3 exists, make additionalEmail true; otherwise, make it false.<br>
+<code>String.len(email2) > 0 OR String.len(email3) > 0 ? True : False</code></p>
 
 ##### Samples Using Group Rules
 
