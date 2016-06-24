@@ -47,7 +47,7 @@ For example, the claim can be about a name, identity, key, group, or privilege.
 The claims in a security token are dependent upon the type of token, the type of credential used to authenticate the user, 
 and the application configuration.
 
-## Workflow Options
+## OpenID Connect Workflows
 
 Four OpenID Connect workflows are documented in the [OpenID spec](http://openid.net/specs/openid-connect-core-1_0.html#Authentication):
 
@@ -218,7 +218,7 @@ For more information about configuring an app for OpenID Connect, including grou
 
 Both the Access Token and the ID Token are acquired via [OAuth 2.0](oauth2.html) endpoints.
 
->The OIDC Access Token is applicable only for the Okta /oauth2/v1/userinfo endpoint and thus should be treated as opaque by the application. The application does not need to validate it since it should not be used against other resource servers. The format of it and the key used to sign it are subject to change without prior notice.
+>The OIDC Access Token is applicable only for the Okta `/oauth2/v1/userinfo` endpoint and thus should be treated as opaque by the application. The application does not need to validate it since it should not be used against other resource servers. The format of it and the key used to sign it are subject to change without prior notice.
 
 ### Get User Information
 {:.api .api-operation}
