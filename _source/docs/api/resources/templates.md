@@ -5,12 +5,12 @@ redirect_from: "/docs/api/rest/templates.html"
 ---
 
 ## Overview
-The Okta Templates API provides operations to manage custom templates. Currently only the sms custom templates are implemented.
+The Okta Templates API provides operations to manage custom templates. Currently only the SMS custom templates are implemented.
 
-## Sms Templates
-Sms templates are used to customize the sms message sent to the users. By default a single sms template "default" exists. All custom templates must have **${code}** variable as part of the text. The **${code}** variable will be replaced with the actual sms code when the message is sent. Optionally a variable **${org.name}** can be used. If a template contains **${org.name}** variable it will be replaced with organization name before the sms message is sent.
+## SMS Templates
+SMS templates customize the SMS message sent to users. One default SMS template is provided. All custom templates must have the variable **${code}** as part of the text. The **${code}** variable is replaced with the actual SMS code when the message is sent. Optionally, you can use the variable **${org.name}**. If a template contains **${org.name}**, it is replaced with organization name before the SMS message is sent.
 
-## Sms Template Model
+## SMS Template Model
 
 ### Example
 ~~~json
@@ -29,7 +29,7 @@ Sms templates are used to customize the sms message sent to the users. By defaul
 }
 ~~~
 
-### Sms Template Attributes
+### SMS Template Attributes
 
 All templates have the following properties:
 
@@ -47,40 +47,40 @@ All templates have the following properties:
 |   <translated_template>| translated text of the template                              | String                                                         | FALSE    | FALSE  | FALSE    |           |           |            |
 |------------------------+--------------------------------------------------------------+----------------------------------------------------------------+----------|--------|----------|-----------|-----------+------------|
 
-### Sms Template Types
+### SMS Template Types
 
-The template type is used to select a fallback template based on the workflow.
+Select a fallback template based on the workflow.
 
 |-------------------+--------------------------------------------------------------------------------------------------+
 | Type              | Description                                                                                      |
 | ----------------- | ------------------------------------------------------------------------------------------------ |
-| `SMS_VERIFY_CODE` | Template will be used when we send SMS for code verification.                                    |
+| `SMS_VERIFY_CODE` | This template is used when the SMS for code verification is sent.                                |
 |-------------------+--------------------------------------------------------------------------------------------------+
 
 
-### Sms Template Translations
+### SMS Template Translations
 
-Template translations are optionally provided when we want to be able to localize the sms messages. The translations are
-provided in pair of language and translated template text.
+Template translations are optionally provided when we want to be able to localize the SMS messages. Translations are
+provided in pairs: the language and translated template text.
 
-## Add Sms Template
+## Add SMS Template
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /templates/sms</span>
 
-Adds a new custom sms template to your organization.
+Adds a new custom SMS template to your organization.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
 Parameter | Description                               | ParamType | DataType                          | Required | Default
 --------- | ----------------------------------------- | --------- | --------------------------------- | -------- | ---
-          | Definition of the new custom sms template | Body      | (#template-object)                | TRUE     |
+          | Definition of the new custom SMS template | Body      | (#template-object)                | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-The created [Sms Template](#sms-template-model).
+The created [SMS Template](#sms-template-model).
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -123,12 +123,12 @@ curl -v -X POST \
 ~~~
 
 
-### Get Sms Template
+### Get SMS Template
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /templates/sms/*:id*</span>
 
-Fetches a specific template by `id`.
+Fetches a specific template by `id`
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -140,7 +140,7 @@ id        | `id` of a template | URL       | String   | TRUE     |
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Fetched [Sms Template](#sms-template-model)
+Fetched [SMS Template](#sms-template-model)
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -172,15 +172,15 @@ curl -v -X GET \
   }
 ~~~
 
-### List Sms Templates
+### List SMS Templates
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /templates/sms</span>
 
-Enumerates custom sms templates in your organization. A subset of templates can be returned that match a template type.
+Enumerates custom SMS templates in your organization. A subset of templates can be returned that match a template type.
 
-- [List Sms Templates with Defaults](#list-sms-templates-with-defaults)
-- [List Sms Templates with Type](#list-sms-templates-with-type)
+- [List SMS Templates with Defaults](#list-sms-templates-with-defaults)
+- [List SMS Templates with Type](#list-sms-templates-with-type)
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -189,17 +189,17 @@ Enumerates custom sms templates in your organization. A subset of templates can 
 -------------- | ------------------------------------------------------------------------------------------ | --------- | -------- | -------- | ----------------
  templateType  | Searches the `type` property of templates for matching value                               | Query     | String   | FALSE    |
 
-> Search currently performs exact match ot the type but it should be considered an implementation detail and may change without notice in the future
+> Search currently performs an exact match of the type but this is an implementation detail and may change without notice in the future.
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Array of [Sms Template](#sms-template-model)
+Array of [SMS Template](#sms-template-model)
 
-#### List Sms Templates with Defaults
+#### List SMS Templates with Defaults
 {:.api .api-operation}
 
-Enumerates all sms templates.
+Enumerates all SMS templates.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -257,7 +257,7 @@ curl -v -X GET \
 #### List Sms Templates with Type
 {:.api .api-operation}
 
-Enumerates all sms templates of particular type.
+Enumerates all SMS templates of particular type
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -296,9 +296,9 @@ curl -v -X GET \
 
 <span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /templates/sms/*:id*</span>
 
-Updates the sms template.
+Updates the SMS template.
 
-> The default sms template cannot be updated
+> The default SMS template can't be updated.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -308,12 +308,12 @@ Parameter | Description                                 | ParamType | DataType  
 id        | id of the sms template to update            | URL       | String                              | TRUE     |
           | full description of the custom sms template | Body      | [Sms Template](#sms-template-model) | TRUE     |
 
-> All profile properties must be specified when updating a sms custom template, partial updates are described [here](#partial-sms-template-update).
+> All profile properties must be specified when updating an SMS custom template. Partial updates are described [here](#partial-sms-template-update).
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Updated [Sms Template](#sms-template-model)
+Updated [SMS Template](#sms-template-model)
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -350,16 +350,19 @@ curl -v -X PUT \
 }
 ~~~
 
-
-### Partial Sms Template Update
+### Partial SMS Template Update
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /templates/sms/*:id*</span>
 
-Updates anly some of sms template attributes. All the attributes with of the custom sms template with values will be updated.
-Any translation that does not exists will be added. Any translation with null/empty value will be removed. Any translation with non empty/null value will be updated.
+Updates only some of the SMS template properties:
 
-> The default sms template cannot be updated
+* All properties with the custom SMS template with values are updated.
+* Any translation that doesn't exist is added. 
+* Any translation with a null or empty value is removed. 
+* Any translation with non empty/null value is updated.
+
+> The default SMS template can't be updated.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -369,7 +372,7 @@ Parameter | Description                                 | ParamType | DataType  
 id        | id of the sms template to update            | URL       | String                              | TRUE     |
           | attributes that we want to change           | Body      | [Sms Template](#sms-template-model) | TRUE     |
 
-> Full sms template update is described [here](update-sms-template).
+> Full SMS template update is described [here](update-sms-template).
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -412,26 +415,26 @@ curl -v -X POST \
 }
 ~~~
 
-### Remove Sms Template
+### Remove SMS Template
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /templates/sms/*:id*</span>
 
-Removes a sms template.
+Removes an SMS template.
 
-> The default sms template cannot be removed.
+> The default SMS template can't be removed.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
 Parameter | Description                        | ParamType | DataType | Required | Default
 --------- | ---------------------------------- | --------- | -------- | -------- | -------
-id        | `id` of the sms template to delete | URL       | String   | TRUE     |
+id        | `id` of the SMS template to delete | URL       | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-N/A
+There is no content in the response.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
