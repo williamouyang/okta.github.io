@@ -817,7 +817,7 @@ Enrolls a user with a supported [factor](#list-factors-to-enroll).
 Parameter    | Description                                   | Param Type  | DataType                | Required | Default
 ------------ | --------------------------------------------- | ----------- | ----------------------- | -------- | -------
 id           | `id` of user                                  | URL         | String                  | TRUE     |
-templateId   | `id` of sms template (only for sms factor)    | Query       | String                  | FALSE    |
+templateId   | `id` of SMS template (only for SMS factor)    | Query       | String                  | FALSE    |
 factor       | Factor                                        | Body        | [Factor](#factor-model) | TRUE     |
 
 ##### Response Parameters
@@ -991,12 +991,15 @@ curl -v -X POST \
 }
 ~~~
 
-##### Enroll Okta Sms Factor Using Custom Template
+##### Enroll Okta SMS Factor Using Custom Template
 {:.api .api-operation}
 
-This option allows to customize (and optionally to localize) the sms message sent to the user on enrollment. If the request have Accept_language header provided and template contains translation for that language the sms message will be sent using translated template. If the language provided in the Accept-Language header does not exist we will sent the sms message using the template text. If the provided templateId does not match existing template we will sent the sms message using the default template.
+Customize (and optionally localize) the SMS message sent to the user on enrollment. 
+* If the request has an `Accept_Language` header and the template contains a translation for that language, the SMS message is sent using the translated template. 
+* If the language provided in the `Accept-Language` header doesn't exist, the SMS message is sent using the template text. 
+* If the provided <em>templateId</em> doesn't match the existing template, the SMS message is sent using the default template.
 
->How to create custom template is described [here](templates.html#sms-template).
+>For instructions about how to create custome templates, see [SMS Template](templates.html#sms-template).
 
 
 ###### Request Example
@@ -1016,12 +1019,12 @@ curl -v -X POST \
 }' "https://${org}.okta.com/api/v1/users/${userId}/factors?templateId=${templateId}"
 ~~~
 
-##### Resend Sms as Part of Enrollment Using Custom Template
+##### Resend SMS as Part of Enrollment Using a Custom Template
 {:.api .api-operation}
 
-This option allows to customize (and optionally to localize) the sms message sent to the user in case we need to resend the message as part of enrollment.
+Customize (and optionally localize) the SMS message sent to the user in case Okta needs to resend the message as part of enrollment.
 
->How to create custom template is described [here](templates.html#sms-template).
+>For instructions about how to create custome templates, see [SMS Template](templates.html#sms-template).
 
 
 ###### Request Example
@@ -1948,7 +1951,7 @@ Parameter    | Description                                         | Param Type 
 ------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
 uid          | `id` of user                                        | URL        | String   | TRUE     |
 fid          | `id` of factor                                      | URL        | String   | TRUE     |
-templateId   | `id` of sms template                                | Query      | String   | FALSE    |
+templateId   | `id` of SMS template                                | Query      | String   | FALSE    |
 passCode     | OTP sent to device                                  | Body       | String   | FALSE    |
 
 > If you omit `passCode` in the request a new OTP will be sent to the device, otherwise the request will attempt to verify the `passCode`
@@ -2014,10 +2017,13 @@ curl -v -X POST \
 }
 ~~~
 
-#### Verify SMS Factor using custom template
+#### Verify SMS Factor Using A Custom Template
 {:.api .api-operation}
 
-This option allows to customize (and optionally to localize) the sms message sent to the user on verification. If the request have Accept-Language header provided and template contains translation for that language the sms message will be sent in that language. If the language provided in the Accept-Language header does not exist in the template definition we will sent the sms message using the template text. If the provided templateId does not match existing template we will sent the sms message using the default template.
+Customize (and optionally localize) the SMS message sent to the user on verification. 
+* If the request has an `Accept-Language` header and the template contains translation for that language, the SMS message is sent in that language. 
+* If the language provided in the `Accept-Language` header doesn't exist in the template definition, the SMS message is sent using the template text. 
+* If the provided `templateId` doesn't match an existing template, the SMS message is sent using the default template.
 
 >How to create custom template is described [here](templates.html#sms-template).
 
