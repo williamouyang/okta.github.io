@@ -55,7 +55,9 @@
 				"c1bcca9c-3f20-039e-4278-787a8ec20719",
 				"11bd973f-4cd2-b4fc-e939-b816d711a7c5",
 				"294ceb07-0a2a-c172-ed07-f6964aec1c2d",
-				"b3acf562-5a3a-8a65-8c6d-96e3482a27fc"
+				"b3acf562-5a3a-8a65-8c6d-96e3482a27fc",
+				"d7599423-dfa3-142f-3c19-5ecc00d72ba4",
+				"66200dd6-4065-5a09-a81c-61282dee9110"
 			],
 			"collection_name": "Users (Okta API)",
 			"collection_id": "59081abb-bd74-7c67-a8d9-ef999536c95e"
@@ -799,6 +801,44 @@
 			"description": "",
 			"collectionId": "59081abb-bd74-7c67-a8d9-ef999536c95e",
 			"rawModeData": "{\n  \"profile\": {\n    \"firstName\": \"Isaac\",\n    \"lastName\": \"Brock\",\n    \"email\": \"isaac@{{email-suffix}}\",\n    \"login\": \"isaac@{{email-suffix}}\"\n  },\n  \"groupIds\": [\n    \"{{groupId}}\"\n  ]\n}"
+		},
+		{
+			"id": "d7599423-dfa3-142f-3c19-5ecc00d72ba4",
+			"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/users/{{userId}}/lifecycle/suspend",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1466718158241,
+			"name": "Suspend User",
+			"description": "",
+			"collectionId": "59081abb-bd74-7c67-a8d9-ef999536c95e",
+			"rawModeData": ""
+		},
+		{
+			"id": "66200dd6-4065-5a09-a81c-61282dee9110",
+			"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/users/{{userId}}/lifecycle/unsuspend",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1466718179193,
+			"name": "Unsuspend User",
+			"description": "",
+			"collectionId": "59081abb-bd74-7c67-a8d9-ef999536c95e",
+			"rawModeData": ""
 		}
 	]
 }
