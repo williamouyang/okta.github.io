@@ -16,7 +16,7 @@ You can send custom text as part of an SMS message request:
 
 For more information, see [Templates API](/docs/api/resources/templates.html) and [Factors API](docs/api/resources/factors.html).
 
-## Feature Enahancement: Password Credential Flow Supports Refresh Tokens
+## Feature Enhancement: Password Credential Flow Supports Refresh Tokens
 
 The `/oauth2/v1/token` endpoint includes a Refresh Token if:
  
