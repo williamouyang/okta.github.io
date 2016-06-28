@@ -83,7 +83,7 @@ Below are some high-level details on the process and timeline for building a SCI
 
 > The timeline outlined is our best estimate. The process may take more or less time than described here.
 
-**As a next step, please [apply for the SCIM provisioning develper program](http://pages.okta.com/DeveloperSCIM.html) and review [Okta’s SCIM Beta Guide](http://developer.okta.com/docs/guides/scim_guidance.html) for technical documentation and details.**
+**As a next step, please [apply for the SCIM provisioning developer program](http://pages.okta.com/DeveloperSCIM.html) and review [Okta’s SCIM Beta Guide](http://developer.okta.com/docs/guides/scim_guidance.html) for technical documentation and details.**
 
 Have questions? Need help? Email <developers@okta.com>.
 
