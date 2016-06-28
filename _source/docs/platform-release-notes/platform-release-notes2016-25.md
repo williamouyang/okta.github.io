@@ -1,11 +1,9 @@
 ---
 layout: docs_page
-title: Platform Changes Available Wednesday, June 22, 2016
+title: Platform Release Notes June 22, 2016
 ---
 
-The Okta Platform adds new features and changes existing features to improve your experience, as well as fixing bugs.
-Features also move from Beta to Early Access to General Availability, and more rarely, are removed after end-of-life notifications.
-Okta platform changes delivered since the last Platform Release Note are listed here.
+Release 2016.25
 
 ## New Platform Feature: Limit on Size of Groups Claim
     
@@ -27,10 +25,8 @@ The following issues are fixed:
 
 ## Looking for Product Release Notes?
 
-For changes that affect the Okta user interface, see the [Release Notes Knowledge Hub](https://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub).
+For changes outside the Okta platform, see the [Release Notes Knowledge Hub](https://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub).
 
 ## Return to Current Release Notes
 
 [Current Platform Release Notes](platform-release-notes.html)
-
-<!-- Platform Release Notes: 2016.25 -->
