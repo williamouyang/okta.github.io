@@ -63,8 +63,9 @@ Below are some high-level details on the process and timeline for building a SCI
 
 #### Explore and Apply
 
-* Explore [SCIM standard](http://www.simplecloud.info/) & [Okta’s SCIM requirements](http://developer.okta.com/docs/guides/scim_guidance.html)
-* [Apply to SCIM program](http://pages.okta.com/DeveloperSCIM.html) 
+* Explore [SCIM standard](http://www.simplecloud.info/) & [Okta’s SCIM requirements](http://developer.okta.com/docs/guides/scim_guidance.html).
+* [Apply to the SCIM provisioning developer program](http://pages.okta.com/DeveloperSCIM.html).
+* [Register for our hands-on SCIM developer workshop on July 21, 2016](https://form.jotform.com/OktaTraining/SCIM).
 
 #### Develop and Validate (Week 1-2)
 * Work with Okta developer enablement team to build SCIM support and confirm approach
@@ -80,13 +81,11 @@ Below are some high-level details on the process and timeline for building a SCI
 * Once 2 live & happy customers, publish to public Okta Application Network
 * Okta Application Network Gold partner & benefits
 
-_*The timeline outlined is our best estimate. The process may take more or less time than described here._
+> The timeline outlined is our best estimate. The process may take more or less time than described here.
 
-<br/>
+**As a next step, please [apply for the SCIM provisioning developer program](http://pages.okta.com/DeveloperSCIM.html) and review [Okta’s SCIM Beta Guide](http://developer.okta.com/docs/guides/scim_guidance.html) for technical documentation and details.**
 
-**As a next step, please [Apply for SCIM beta](https://docs.google.com/forms/d/1RKvwFaY8hoMvWn2HEnIsXYY2uaDDZZtF8-p6h2a6e4E/viewform) and review [Okta’s SCIM Beta Guide](http://developer.okta.com/docs/guides/scim_guidance.html) for technical documentation and details.**
-
-Have questions? Need help? Email <developers@okta.com>
+Have questions? Need help? Email <developers@okta.com>.
 
 
 ##Okta Application Network FAQs

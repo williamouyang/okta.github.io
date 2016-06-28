@@ -25,7 +25,7 @@ If you haven't heard of SCIM before, here is a good summary from the
 # Getting into the Okta SCIM Beta
 
 Before building your SCIM Server, please [apply for admission to the
-SCIM Beta](http://pages.okta.com/DeveloperSCIM.html). Okta reviews new applicants on a weekly basis. We will
+SCIM provisioning developer program](http://pages.okta.com/DeveloperSCIM.html). Okta reviews new applicants on a weekly basis. We will
 reply within 7 days and give you an estimated timeline.
 
 Once admitted, we will collect information about your SCIM Server to
