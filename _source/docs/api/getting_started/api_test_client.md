@@ -82,6 +82,7 @@ Once you have setup your Postman environment, you can import pre-built collectio
     | Apps               | [Apps API](../postman/apps.json)                                        |
     | Schemas            | [Schemas API](../postman/schemas.json)                                  |
     | Events             | [Events API](../postman/events.json)                                    |
+    | Templates          | [Templates API](../postman/templates.json)                                    |
     |--------------------+-------------------------------------------------------------------------|
 
     > You must import each collection individually
