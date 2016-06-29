@@ -37,7 +37,7 @@
 	<script type="text/javascript" defer="defer" src="/assets/js/docs.js"></script>
 	<!-- TypeKit -->
 	<script src="//use.typekit.net/pls8pog.js"></script>
-	<script>try{Typekit.load();}catch(e){}</script>
+	<script>try{Typekit.load({async:true});}catch(e){}</script>
 	<!-- GA -->
 	<script>
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -61,7 +61,6 @@
 		<nav id="primary-nav" class="site-nav loaded">
 			<ul>
 				<li><a href="/product/">Product</a></li>
-				<li><a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a></li>
 				<li><a href="/docs/api/getting_started/design_principles.html">Docs</a></li>
 				<li><a href="/discussion/">Discussion</a></li>
 				<li class="has-dropdown"><a href="#">Support</a>
@@ -125,7 +124,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	<span class="toggle-menu"></span>
 	<div id="sidebar-wrapper">
 		<div class="docs-sidebar-block" id="myScrollspy" >
-		<h2>Platform Release Notes</h2>                                                                                      
+		<h2>Platform Release Notes</h2>                                                                                          
 		</div>
 	</div>
 </div>
@@ -164,11 +163,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		</header>
 		
 
-		<p>Platform changes available after Wednesday, June 15, 2016</p>
-
-<p>The Okta Platform adds new features and changes existing features to improve your experience, as well as fixing bugs.
-Features also move from Beta to Early Access to General Availability, and more rarely, are removed after end-of-life notifications.
-All Okta platform changes are listed here. For product changes, see the Okta Product Release Notes.</p>
+		<p>Release 2016.24</p>
 
 <h2 id="new-platform-feature">New Platform Feature</h2>
 
@@ -176,33 +171,27 @@ All Okta platform changes are listed here. For product changes, see the Okta Pro
 <p>Version 1.3.3 of the Okta Sign-In Widget, and version 1.0.2 of okta-auth-js are available for Preview orgs. For more information, see Okta Sign-In Widget.</p>
 
 <h3 id="policy-api">Policy API</h3>
-<p>The Links object, _links, is available in the Policy object. For more information, see Links Object.</p>
+<p>The Links object, <code class="highlighter-rouge">_links</code>, is available in the Policy object. For more information, see <a href="http://developer.okta.com/docs/api/resources/users.html#links-object">Links Object</a>.</p>
 
 <h3 id="improved-error-descriptions">Improved Error Descriptions</h3>
 <p>The error descriptions related to OAuth provide more helpful information about invalid clients for OpenID Connect flows.</p>
 
 <h3 id="disable-automatic-key-rotation">Disable Automatic Key Rotation</h3>
-<p>If you need to disable automatic key rotation for an OpenID Connect flow, you can do so in General Settings section under the General tab for an app, and then use the /oauth2/v1/keys endpoint to fetch public keys for your app. For more information, see OpenID Connect.</p>
+<p>If you need to disable automatic key rotation for an OpenID Connect flow, you can do so in General Settings section under the General tab for an app, and then use the <code class="highlighter-rouge">/oauth2/v1/keys</code> endpoint to fetch public keys for your app. For more information, see <a href="http://developer.okta.com/docs/api/resources/oidc.html">OpenID Connect</a>.</p>
 
 <h3 id="looking-for-product-new-features">Looking for Product New Features?</h3>
 
-<p>For changes that appear in the Okta user interface, see the <a href="https://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub">Release Notes Knowledge Hub</a>.</p>
-
-<!-- ## Enhancements -->
-
-<!-- ## Feature Status Changes -->
+<p>For changes outside the Okta platform, see the <a href="https://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub">Release Notes Knowledge Hub</a>.</p>
 
 <h2 id="bugs-fixed">Bugs Fixed</h2>
 
 <ul>
-  <li>OKTA-69173 – The <em>helpURL</em> for <em>vpn</em> wasn’t returned even though it had been set previously in a request to <code class="highlighter-rouge">/api/v1/apps</code>.</li>
+  <li>OKTA-69173 – The <code class="highlighter-rouge">helpURL</code> for <code class="highlighter-rouge">vpn</code> wasn’t returned even though it had been set previously in a request to <code class="highlighter-rouge">/api/v1/apps</code>.</li>
 </ul>
 
 <h2 id="return-to-current-release-notes">Return to Current Release Notes</h2>
 
 <p><a href="platform-release-notes.html">Current Platform Release Notes</a></p>
-
-<!-- Platform Release Notes: 2016.24 -->
 
 
 	</div>
