@@ -13,6 +13,164 @@ Additionally, these endpoints support the use of [OpenID Connect](/docs/api/reso
 
 > This API is currently in **Early Access** status.  It has been tested as thoroughly as a Generally Available feature. Contact Support to enable this feature.
 
+## Tokens
+{:.beta}
+> Access Token and Refresh Token for Okta resource server are not covered in this section. The format and validating method of them are subject to change without prior notice.
+{:.beta}
+
+> Access Token and Refresh Token for non-Okta resource server are currently in **Beta** status.
+{:.beta}
+
+
+### Access Token
+{:.beta}
+Access Token is a [JSON web token (JWT)](https://tools.ietf.org/html/rfc7519) encoded in base64URL format and contains [a header](#header), [the payload](#payload), and [the signature](#signature). A resource server can authorize the client to access particular resources based on the [scopes and claims](#scopes-and-claims) in the Access Token.
+{:.beta}
+
+### Header
+{:.beta}
+
+~~~json
+{
+  "alg": "RS256",
+  "kid": "45js03w0djwedsw"
+}
+~~~
+{:.beta}
+
+### Payload
+{:.beta}
+
+~~~json
+{
+  "ver": 1,
+  "jti": "AT.0mP4JKAZX1iACIT4vbEDF7LpvDVjxypPMf0D7uX39RE",
+  "iss": "https://your-org.okta.com/as/0oacqf8qaJw56czJi0g4",
+  "aud": "nmdP1fcyvdVO11AL7ECm",
+  "sub": "00ujmkLgagxeRrAg20g3",
+  "iat": 1467145094,
+  "exp": 1467148694,
+  "cid": "nmdP1fcyvdVO11AL7ECm",
+  "uid": "00ujmkLgagxeRrAg20g3",
+  "scp": [
+    "openid",
+    "email",
+    "flights",
+    "custom"
+  ],
+  "flight_number": "AX102",
+  "custom_claim": "CustomValue"
+}
+~~~
+{:.beta}
+
+### Signature
+{:.beta}
+
+This is the digital signature that Okta signs, using the public key identified by the `kid` property in the header section.
+{:.beta}
+
+### Scopes and claims
+{:.beta}
+
+Access token includes pre-defined scopes and claims, as well as the custom scopes and claims.
+{:.beta}
+
+#### Pre-defined scopes and claims
+{:.beta}
+
+##### Pre-defined scopes
+{:.beta}
+
+Pre-defined scopes includes [OIDC scopes](oidc.html#scope-dependent-claims-not-always-returned) and scopes start with "okta".
+{:.beta}
+
+##### Pre-defined claims in the header section
+{:.beta}
+
+The header only includes the following pre-defined claims:
+{:.beta}
+
+|--------------+-----------------------------------------------------------------------------------------------------+--------------|--------------------------|
+| Property     | Description                                                                      | DataType     | Example                  |
+|--------------+---------+--------------------------------------------------------------------------------------------+--------------|--------------------------|
+| alg          | Identifies the digital signature algorithm used. This is always be RS256.      | String       | "RS256"                  |
+| kid          | Identifies the `public-key` used to sign the `access_token`. The corresponding `public-key` can be found as a part of the [well-known configuration's](oidc.html#openid-connect-discovery-document) `jwks_uri` value.                                  | String       | "a5dfwef1a-0ead3f5223_w1e" |
+{:.beta}
+
+##### Pre-defined claims in the payload section
+{:.beta}
+
+The payload includes the following pre-defined claims:
+{:.beta}
+
+|--------------+-------------------+----------------------------------------------------------------------------------+--------------|--------------------------|
+| Property     |  Description                                                                      | DataType     | Example                  |
+|--------------+---------+----------+----------------------------------------------------------------------------------+--------------|--------------------------|
+| ver     | The semantic version of the Access Token.   |  Integer   |  1    |
+| jti     | A unique identifier for this Access Token for debugging and revocation purposes.   | String    |  "AT.0mP4JKAZX1iACIT4vbEDF7LpvDVjxypPMf0D7uX39RE"  |
+| iss     | The Issuer Identifier of the response.    | String    | "https://your-org.okta.com/as/0oacqf8qaJw56czJi0g4"     |
+| aud     | Identifies the audience that this Access Token is intended for. It can be the client id or the resource server id.   | String    | "6joRGIzNCaJfdCPzRjlh"     |
+| sub     | The subject. A unique identifier for the user or the client.  | String    | 	"00uk1u7AsAk6dZL3z0g3"     |
+| iat     | The time the Access Token was issued, represented in Unix time (seconds).   | Integer    | 1311280970     |
+| exp     | The time the Access Token expires, represented in Unix time (seconds).   | Integer    | 1311280970     |
+| cid     | Client ID of your application who requests the Access Token.  | String    | "6joRGIzNCaJfdCPzRjlh"     |
+| uid     | A unique identifier for the user. It will not be included in the Access Token if there is no user binded to it.  | String    | 	"00uk1u7AsAk6dZL3z0g3"     |
+| scp     | JSON array of scopes that are granted to this Access Token.   | Array    | [ "openid", "custom" ]     |
+{:.beta}
+
+#### Custom scopes and claims
+{:.beta}
+
+The admin can configure custom scopes and claims via the UI <a href="...link to setup guide">here</a>. When custom scopes and claims are configured for a client, the access tokens that are minted will include the custom claims. It will also include custom scopes if they were part of the request.
+{:.beta}
+
+##### Custom scopes
+{:.beta}
+If the request that generates the access token contains any custom scopes, those scopes will be part of the <b>scp</b> claim together with the scopes provided from the [OIDC specification](http://openid.net/specs/openid-connect-core-1_0.html).
+{:.beta}
+
+##### Custom claims
+{:.beta}
+All configured custom claims will be part of the access token. They will be evaluated for the user if the grant type is not <em>client_credentials</em>.
+{:.beta}
+
+### Validating Access Tokens
+{:.beta}
+
+The resource server must validate the Access Token before allow the client to access the protected resources.
+{:.beta}
+
+Access Tokens are sensitive and can be misused if intercepted. Transmit them only over HTTPS and only via POST data or within request headers. If you store them on your application, you must store them securely.
+{:.beta}
+
+Access Token must be validated in the following manner:
+{:.beta}
+
+1. Verify that the domain of `iss` (issuer) claim matches the issuer identifier for your Okta org (which is typically obtained during [Discovery](oidc.html#openid-connect-discovery-document). 
+2. Verify that the `aud` (audience) claim contains the `client_id` of the client or the id of the resource server.
+3. Verify the signature according to [JWS](https://tools.ietf.org/html/rfc7515) using the algorithm specified in the JWT `alg` header parameter. Use the public keys provided by Okta via the [Discovery Document](oidc.html#openid-connect-discovery-document).
+4. Verify that the expiry time (from the `exp` claim) has not already passed.
+{:.beta}
+
+Step 3 uses the same signature verifying method as for the [ID token](oidc.html#validating-id-tokens).
+{:.beta}
+
+Keys used to sign Access Token are rotated as discribed in the [ID token](oidc.html#validating-id-tokens).
+{:.beta}
+
+#### Alternative Validation
+{:.beta}
+
+You can use an [introspection request](#introspection-request) for validation.
+{:.beta}
+
+## Refresh Token
+{:.beta}
+
+Refresh Token is an opaque random string. It is a long-lived token that the client can trade in to obtain a new Access Token without re-obtain authorization from the resource owner. The new Access Token must have the same or subset of the authorization attached with the Refresh Token.
+{:.beta}
+
 ## Endpoints
 
 ### Authentication Request
@@ -264,25 +422,6 @@ Content-Type: application/json;charset=UTF-8
     "error_description" : "No client credentials found."
 }
 ~~~
-
-#### Custom scopes and claims
-{:.api .api-operation .beta}
-
-> This feature is currently in **Beta** status.
-{:.beta}
-
-The admin can configure custom scopes and claims via the UI. When custom scopes and claims are configured for a client, the access tokens that are minted will include the custom claims. It will also include custom scopes if they were part of the request.
-{:.beta}
-
-##### Custom scopes
-{:.beta}
-If the request that generates the access token contains any custom scopes, those scopes will be part of the <b>scp</b> claim together with the scopes provided from the [OIDC specification](http://openid.net/specs/openid-connect-core-1_0.html).
-{:.beta}
-
-##### Custom claims
-{:.beta}
-All configured custom claims will be part of the access token. They will be evaluated for the user if the grant type is not <em>client_credentials</em>.
-{:.beta}
 
 ### Introspection Request
 {:.api .api-operation}
