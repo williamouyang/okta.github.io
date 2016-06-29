@@ -1,35 +1,41 @@
 ---
 layout: docs_page
-title: Platform Changes Available Wednesday, June 22, 2016
+title: Platform Release Notes June 29, 2016
 ---
 
-The Okta Platform adds new features and changes existing features to improve your experience, as well as fixing bugs.
-Features also move from Beta to Early Access to General Availability, and more rarely, are removed after end-of-life notifications.
-Okta platform changes delivered since the last Platform Release Note are listed here.
+Release 2016.26
 
-## New Platform Feature: Limit on Size of Groups Claim
+Releases are rolled out to organizations in a staggered fashion: first to preview orgs, then to production orgs. 
+Check the [Current Release Status](https://support.okta.com/help/articles/Knowledge_Article/Current-Release-Status) to verify whether the changes in this document have rolled out to your org yet.
+ 
+## New Feature: API for Custom SMS Template
     
-To protect against arbitrarily large numbers of groups matching the group filter, the group claim has a limit of 100. 
-If more than 100 groups match the filter, then the request fails.
+You can send custom text as part of an SMS message request:
 
-* For more information about configuring an app for OpenID Connect, including group claims, see [Using OpenID Connect](). 
-* For more information about group claims in the API, see [Scope-dependent claims](/docs/api/resources/oidc.html#scope-dependent-claims-not-always-returned).
+1. Use the `/api/v1/templates/sms` endpoint to create a custom SMS text template. 
+2. Send a request to the Factors API specifying the template for verification. There is no change in the response.
+
+For more information, see [Templates API](http://developer.okta.com/docs/api/resources/templates.html) and [Factors API](http://developer.okta.com/docs/api/resources/factors.html).
+
+## Feature Enhancement: Resource Owner Password Credential Flow for OpenID Connect Supports Refresh Tokens
+
+The `/oauth2/v1/token` endpoint includes a Refresh Token if:
+ 
+* The request contains a `grant_type` with the value `password` and your client supports the `grant_type` value `refresh_token`. For more information, see [Token Request](http://developer.okta.com/docs/api/resources/oauth2.html#request-parameters-1).
+* You request the `offline_access` scope. For more information, see [Refresh Tokens for Web and Native Applications](http://developer.okta.com/docs/api/resources/oauth2.html#refresh-tokens-for-web-and-native-applications).
 
 ## Bugs Fixed
 
-The following issues are fixed:
-
-* OKTA-89624 – Base schema attributes for OpenID Connect without default mappings weren't included in ID token claims.
-* OKTA-89867 – Creating a new user and adding that user to a group with the same create request via the API failed, which was a problem for group-scoped User Admins creating users.
-* OKTA-90593 – The Group property <em>lastMembershipUpdated</em> wasn't updated when adding or removing users from an Active Directory group using scheduled import.
-* OKTA-90898 – Updating credentials failed when using the Apps API for custom apps.
-* OKTA-91066 – System log messages related to OpenID Connect didn't contain scopes.
+The following issue is fixed:
+ 
+* For some customers, an API request for users that match a value for `last_name` didn't return all the matches. (OKTA-91367) 
 
 ## Looking for Product Release Notes?
 
-For changes that affect the Okta user interface, see the [Release Notes Knowledge Hub](https://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub).
+For changes outside the Okta platform, see the [Release Notes Knowledge Hub](https://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub).
 
 ## Earlier Release Notes
 
+* [Platform Release Notes for the week ending Wednesday, June 22](platform-release-notes2016-25.html)
 * [Platform Release Notes for the week ending Wednesday, June 15](platform-release-notes2016-24.html)
 * [Platform Release Notes for the week ending Wednesday, June 8](platform-release-notes2016-23.html)
