@@ -15,16 +15,16 @@ Additionally, these endpoints support the use of [OpenID Connect](/docs/api/reso
 
 ## Tokens
 {:.beta}
-> Access Token and Refresh Token for Okta resource server are not covered in this section. The format and validating method of them are subject to change without prior notice.
+> Access Tokens and Refresh Tokens for Okta resource server are not covered in this section. The format and validation method of these tokens are subject to change without prior notice.
 {:.beta}
 
-> Access Token and Refresh Token for non-Okta resource server are currently in **Beta** status.
+> Access Tokens and Refresh Tokens for non-Okta resource server are currently in **Beta** status.
 {:.beta}
 
 
 ### Access Token
 {:.beta}
-Access Token is a [JSON web token (JWT)](https://tools.ietf.org/html/rfc7519) encoded in base64URL format and contains [a header](#header), [the payload](#payload), and [the signature](#signature). A resource server can authorize the client to access particular resources based on the [scopes and claims](#scopes-and-claims) in the Access Token.
+An Access Token is a [JSON web token (JWT)](https://tools.ietf.org/html/rfc7519) encoded in base64URL format that contains [a header](#header), [payload](#payload), and [signature](#signature). A resource server can authorize the client to access particular resources based on the [scopes and claims](#scopes-and-claims) in the Access Token.
 {:.beta}
 
 ### Header
@@ -67,13 +67,13 @@ Access Token is a [JSON web token (JWT)](https://tools.ietf.org/html/rfc7519) en
 ### Signature
 {:.beta}
 
-This is the digital signature that Okta signs, using the public key identified by the `kid` property in the header section.
+This is a digital signature Okta generates using the public key identified by the `kid` property in the header section.
 {:.beta}
 
 ### Scopes and claims
 {:.beta}
 
-Access token includes pre-defined scopes and claims, as well as the custom scopes and claims.
+Access Tokens include pre-defined scopes and claims and can optionally contain custom scopes and claims.
 {:.beta}
 
 #### Pre-defined scopes and claims
@@ -82,7 +82,7 @@ Access token includes pre-defined scopes and claims, as well as the custom scope
 ##### Pre-defined scopes
 {:.beta}
 
-Pre-defined scopes includes [OIDC scopes](oidc.html#scope-dependent-claims-not-always-returned) and scopes start with "okta".
+Pre-defined scopes include [OIDC scopes](oidc.html#scope-dependent-claims-not-always-returned) as well as scopes that starts with "okta:".
 {:.beta}
 
 ##### Pre-defined claims in the header section
@@ -122,7 +122,7 @@ The payload includes the following pre-defined claims:
 #### Custom scopes and claims
 {:.beta}
 
-The admin can configure custom scopes and claims via the UI <a href="...link to setup guide">here</a>. When custom scopes and claims are configured for a client, the access tokens that are minted will include the custom claims. It will also include custom scopes if they were part of the request.
+The admin can configure custom scopes and claims via the Authorization Server tab for the Application. Access Tokens are minted with all the configured custom claims and all the configured custom scopes that are included in the authorization request.
 {:.beta}
 
 ##### Custom scopes
@@ -138,7 +138,7 @@ All configured custom claims will be part of the access token. They will be eval
 ### Validating Access Tokens
 {:.beta}
 
-The resource server must validate the Access Token before allow the client to access the protected resources.
+The resource server must validate the Access Token before allowing the client to access protected resources.
 {:.beta}
 
 Access Tokens are sensitive and can be misused if intercepted. Transmit them only over HTTPS and only via POST data or within request headers. If you store them on your application, you must store them securely.
@@ -147,28 +147,28 @@ Access Tokens are sensitive and can be misused if intercepted. Transmit them onl
 Access Token must be validated in the following manner:
 {:.beta}
 
-1. Verify that the domain of `iss` (issuer) claim matches the issuer identifier for your Okta org (which is typically obtained during [Discovery](oidc.html#openid-connect-discovery-document). 
-2. Verify that the `aud` (audience) claim contains the `client_id` of the client or the id of the resource server.
+1. Verify that the domain of `iss` (issuer) claim matches the issuer identifier for your Okta org (which is typically obtained during [Discovery](oidc.html#openid-connect-discovery-document). Also verify that the authorization server id matches your authorization server.
+2. Verify that the `aud` (audience) claim has the same value as the issuer claim.
 3. Verify the signature according to [JWS](https://tools.ietf.org/html/rfc7515) using the algorithm specified in the JWT `alg` header parameter. Use the public keys provided by Okta via the [Discovery Document](oidc.html#openid-connect-discovery-document).
 4. Verify that the expiry time (from the `exp` claim) has not already passed.
 {:.beta}
 
-Step 3 uses the same signature verifying method as for the [ID token](oidc.html#validating-id-tokens).
+Step 3 uses the same signature verification method as the [ID token](oidc.html#validating-id-tokens).
 {:.beta}
 
-Keys used to sign Access Token are rotated as discribed in the [ID token](oidc.html#validating-id-tokens).
+The signing keys for the Access Token are rotated in the same was as the [ID token](oidc.html#validating-id-tokens).
 {:.beta}
 
 #### Alternative Validation
 {:.beta}
 
-You can use an [introspection request](#introspection-request) for validation.
+You can use an [introspection endpoint](#introspection-request) for validation.
 {:.beta}
 
 ### Refresh Token
 {:.beta}
 
-Refresh Token is an opaque random string. It is a long-lived token that the client can trade in to obtain a new Access Token without re-obtain authorization from the resource owner. The new Access Token must have the same or subset of the authorization attached with the Refresh Token.
+A Refresh Token is an opaque string. It is a long-lived token that the client can use to obtain a new Access Token without re-obtaining authorization from the resource owner. The new Access Token must have the same or subset of the scopes associated with the Refresh Token.
 {:.beta}
 
 ## Endpoints
