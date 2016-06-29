@@ -165,7 +165,7 @@ Keys used to sign Access Token are rotated as discribed in the [ID token](oidc.h
 You can use an [introspection request](#introspection-request) for validation.
 {:.beta}
 
-## Refresh Token
+### Refresh Token
 {:.beta}
 
 Refresh Token is an opaque random string. It is a long-lived token that the client can trade in to obtain a new Access Token without re-obtain authorization from the resource owner. The new Access Token must have the same or subset of the authorization attached with the Refresh Token.

@@ -36,12 +36,11 @@ module Jekyll
         item_number = 1
         level_html = ''
 
-
         # Find H1 tag and all its H2 siblings until next H1
-        doc.css('h2').each do |h2|
+        doc.css('h2:not(.beta)').each do |h2|
             # TODO This XPATH expression can greatly improved
             ct  = h2.xpath('count(following-sibling::h2)')
-            h3s = h2.xpath("following-sibling::h3[count(following-sibling::h2)=#{ct}]")
+            h3s = h2.xpath("following-sibling::h3[count(following-sibling::h2)=#{ct} and not(contains(@class, 'beta'))]")
 
             level_html = '';
             inner_section = 0;
