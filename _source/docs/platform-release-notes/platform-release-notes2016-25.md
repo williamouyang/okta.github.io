@@ -23,6 +23,10 @@ The following issues are fixed:
 * OKTA-90898 – Updating credentials failed when using the Apps API for custom apps.
 * OKTA-91066 – System log messages related to OpenID Connect didn't contain scopes.
 
+Added on June 29: 
+
+* OKTA-90514 – When adding a group target to a User Admin role via the API, that user still had the ability to administer all groups. Also, removing the last group target from a role after one has been added was incorrectly allowed.
+
 ## Looking for Product Release Notes?
 
 For changes outside the Okta platform, see the [Release Notes Knowledge Hub](https://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub).
