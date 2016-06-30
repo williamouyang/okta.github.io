@@ -1305,7 +1305,7 @@ curl -v -X POST \
 #### Add Custom SWA Application
 {:.api .api-operation}
 
-Adds a SWA application. This application is only available to the Org that creates it.
+Adds a SWA application. This application is only available to the org that creates it.
 
 ##### Settings
 {:.api .api-request .api-request-params}
@@ -1468,7 +1468,7 @@ curl -v -X POST \
 #### Add Custom SAML Application
 {:.api .api-operation}
 
-Adds a SAML 2.0 application. This application is only available to the Org that creates it.
+Adds a SAML 2.0 application. This application is only available to the org that creates it.
 
 ##### Settings
 {:.api .api-request .api-request-params}
@@ -1491,7 +1491,7 @@ honorForceAuthn       | Prompt user to re-authenticate if SP asks for it        
 authnContextClassRef  | Identifies the SAML authentication context class for the assertion's authentication statement                     | String                                               | FALSE    | FALSE |
 attributeStatements   | Check [here](http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-tech-overview-2.0-cd-02.html) for details | [Attribute Statements](#attribute-statements-object) | FALSE    | FALSE |
 
-> Fields that require certificate uploads may not be enabled through the API, such as Single Log Out and Assertion Encryption. These must be updated through the UI.
+> Fields that require certificate uploads can't be enabled through the API, such as Single Log Out and Assertion Encryption. These must be updated through the UI.
 
 > Either (or both) "responseSigned" or "assertionSigned" must be TRUE.
 
