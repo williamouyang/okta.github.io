@@ -238,7 +238,7 @@ Step 3 involves downloading the public JWKS from Okta (specified by the `jwks_ur
 
 Each public key is identified by a `kid` attribute, which corresponds with the `kid` claim in the [ID Token header](#claims-in-the-header-section).
 
-The ID Token are signed by an RSA private key. Okta publishes the corresponding public key and adds a public-key identifier `kid` in the ID Token header. To minimize the effects of key rotation, your application should check the `kid`, and if it has changed, check the `jwks_uri` value in the [well-known configuration](#openid-connect-discovery-document) for a new public key and `kid`.
+The ID Token is signed by an RSA private key. Okta publishes the corresponding public key and adds a public-key identifier `kid` in the ID Token header. To minimize the effects of key rotation, your application should check the `kid`, and if it has changed, check the `jwks_uri` value in the [well-known configuration](#openid-connect-discovery-document) for a new public key and `kid`.
 
 All apps must roll over keys for adequate security. Please note the following:
 
