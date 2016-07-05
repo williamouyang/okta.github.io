@@ -256,7 +256,7 @@ curl -v -X GET \
 ]
 ~~~
 
-#### List Sms Templates with Type
+#### List SMS Templates with Type
 {:.api .api-operation}
 
 Enumerates all SMS templates of particular type
@@ -293,7 +293,7 @@ curl -v -X GET \
 ]
 ~~~
 
-### Update Sms Template
+### Update SMS Template
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /templates/sms/*:id*</span>
