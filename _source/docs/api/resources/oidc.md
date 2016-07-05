@@ -315,7 +315,7 @@ check the `jwks_uri` value in the [well-known configuration](#openid-connect-dis
 All apps must roll over keys for adequate security. Please note the following:
 
 * For security purposes, Okta automatically rotates keys used to sign the token.
-* The current key rotation schedule is at least twice a year. This schedule can change without notice.
+* The current key rotation schedule is four times a year. This schedule can change without notice.
 * In case of an emergency, Okta can rotate keys as needed.
 * Okta always publishes keys to the JWKS.
 * If your app follows the best practice to always resolve the *kid*, key rotations will not cause problems.
