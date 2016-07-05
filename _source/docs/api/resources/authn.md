@@ -1240,9 +1240,9 @@ HTTP/1.1 403 Forbidden
 Content-Type: application/json
 
 {
-  "errorCode": "E0000080",
+  "errorCode": "E0000014",
   "errorSummary": "The password does meet the complexity requirements of the current password policy.",
-  "errorLink": "E0000080",
+  "errorLink": "E0000014",
   "errorId": "oaeuNNAquYEQkWFnUVG86Abbw",
   "errorCauses": [
     {
@@ -3891,9 +3891,9 @@ HTTP/1.1 403 Forbidden
 Content-Type: application/json
 
 {
-    "errorCode": "E0000080",
+    "errorCode": "E0000014",
     "errorSummary": "The password does meet the complexity requirements of the current password policy.",
-    "errorLink": "E0000080",
+    "errorLink": "E0000014",
     "errorId": "oaeS4O7BUp5Roefkk_y4Z2u8Q",
     "errorCauses": [
         {
