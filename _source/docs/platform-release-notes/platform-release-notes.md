@@ -23,29 +23,22 @@ We've rearranged some of the panels related to OAuth to improve usability:
  
 ### Okta Sign-In Widget Updated
 
+<!-- OKTA-91831, OKTA-93759 -->
 The Okta Sign-In Widget has been updated to version 1.4.0. See [the guide](http://developer.okta.com/docs/guides/okta_sign-in_widget.html) for updated sample code.
 
 ### Improved User Lookup for Password Recovery
 
-For the `/authn` endpoint, we've improved how we look up a user based on login ID or email address for password recovery. 
-This improvement prevents problems when the same email exists in different fields for different users.
+<!-- OKTA-92001 -->
+To ensure a successful password recovery lookup if an email address is associated with multiple users, we improved the lookup behavior:
 
-1. We first search by login ID:
-    * If only one user is found, start password recovery for the user.
-    * If more than one user is found, the password recovery request fails. This can happen when the value is not fully qualified: `mary.smith` instead of `mary.smith@my_company.com`.
-2. If no user is found in step 1, search primary email addresses.
-    * If one user is found, start password recovery for the user.
-    * If more than one user is found, the password recovery request fails.
-3. If no user is found in step 2, search the secondary email addresses, then secondary email.
-    * If one user is found, start password recovery for the user.
-    * If more than one user is found, or no user is found, the password recovery request fails.
+* Okta no longer includes deactivated users in the lookup.
+* The lookup searches login IDs first, then primary email addresses, and then secondary email addresses.
 
 ## Bugs Fixed
 
 The following issues are fixed:
  
 * The OIDC Access Token was incorrectly available to Okta endpoints other than `/oauth2/v1/userinfo`. (OKTA-91099)
-* The `/authn` endpoint (Authentication API) incorrectly failed password recovery for some active users.  (OKTA-92001)
 * The format of the issuer (`iss`) in the Access Token has changed: it was the client ID. It now takes the form: `https://<your-org>.okta.com/as/<authorization-server-ID>. (OKTA-93628)
 
 ## Looking for Product Release Notes?
