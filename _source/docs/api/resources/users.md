@@ -118,9 +118,9 @@ The following diagram shows the state model for a user:
 
 ### Understanding User Status Values
 
-The status of a user changes in response to explicit events, such as admin-driven lifecycle changes, user login, or self-service password recovery. 
-Okta doesn't asynchronously sweep through users and update their password expiry state, for example. 
-Instead, Okta evaluates password policy at login time, notices the password has expired, and moves the user to the expired state. 
+The status of a user changes in response to explicit events, such as admin-driven lifecycle changes, user login, or self-service password recovery.
+Okta doesn't asynchronously sweep through users and update their password expiry state, for example.
+Instead, Okta evaluates password policy at login time, notices the password has expired, and moves the user to the expired state.
 When running reports, remember that the data is valid as of the last login or lifecycle event for that user.
 
 ### Profile Object
@@ -760,7 +760,7 @@ curl -v -X POST \
 ### Get User
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users/*:id*</span><span class="api-label api-label-cors api-uri-template-cors pull-right"><i class="fa fa-cloud-download"></i> CORS</span>
+{% api_operation get /users/*:id* %} {% api_cors %}
 
 Fetches a user from your Okta organization.
 
@@ -1246,10 +1246,10 @@ Link: <https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limi
 
 Use the `q` parameter for a simple lookup of users by name, for example when creating a people picker.
 The value of `q` is matched against `firstName`, `lastName`, or `email`.
- 
+
 
 This operation:
- 
+
  * Doesn't support pagination.
  * Queries the most up-to-date data. For example, if you create a user or change an attribute and then issue a filter request, the change is reflected in the results.
  * Performs a startsWith match but this is an implementation detail and may change without notice. You don't need to specify `firstName`, `lastName`, or `email`.
@@ -1527,10 +1527,10 @@ curl -v -X GET \
 #### List Users with Search
 {:.api .api-operation}
 
-> Listing users with search is an Early Access feature which you can request from Okta Support.
-It's been tested to the same level as Generally Available (GA) features, so you  can use it in a production environment. 
+> {% api_lifecycle ea margin-bottom %}<br>Listing users with search is an Early Access feature which you can request from Okta Support.
+It's been tested to the same level as Generally Available (GA) features, so you can use it in a production environment.
 
-Searches for user by the properties specified in the search parameter (case insensitive). 
+Searches for user by the properties specified in the search parameter (case insensitive).
 
 This operation:
 
@@ -1538,13 +1538,13 @@ This operation:
 * Requires [URL encoding](http://en.wikipedia.org/wiki/Percent-encoding).
 For example, `search=profile.department eq "Engineering"` is encoded as `search=profile.department%20eq%20%22Engineering%22`.
 Examples use cURL-style escaping instead of URL encoding to make them easier to read.
-* Queries data from a replicated store, so changes aren't always immediately available in search results. 
-Don't use search results directly for record updates, as the data might be stale and therefore overwrite newer data (data loss). 
-Use an Id lookup for records that you update to ensure your results contain the latest data. 
+* Queries data from a replicated store, so changes aren't always immediately available in search results.
+Don't use search results directly for record updates, as the data might be stale and therefore overwrite newer data (data loss).
+Use an Id lookup for records that you update to ensure your results contain the latest data.
 * Searches many properties:
    - Any user profile property, including custom-defined properties
-   - The top-level properties `id`, `status`, `created`, `activated`, `statusChanged` and `lastUpdated` 
-  
+   - The top-level properties `id`, `status`, `created`, `activated`, `statusChanged` and `lastUpdated`
+
    Search Term Example                            | Description
    ---------------------------------------------- | ------------------------------------------------
    `status eq "STAGED"`                           | Users that have a `status` of `STAGED`
@@ -1563,7 +1563,7 @@ List users with an occupation of `Leader`.
 List users in the department of `Engineering` who were created before `01/01/2014` or have a status of `ACTIVE`.
 
     search=profile.department eq "Engineering" and (created lt "2014-01-01T00:00:00.000Z" or status eq "ACTIVE")
-    
+
 ##### Request Example
 {:.api .api-request .api-request-example}
 
@@ -1635,7 +1635,7 @@ curl -v -X GET \
 
 ##### Searching Arrays
 
-You can search properties that are arrays. If any element matches the search term, the entire array (object) is returned. 
+You can search properties that are arrays. If any element matches the search term, the entire array (object) is returned.
 For examples, see [Request Example for Array](#request-example-for-array) and [Response Example for Array](#response-example-for-array).
 
 * We follow the [SCIM Protocol Specification](https://tools.ietf.org/html/rfc7644#section-3.4.2.2) for searching arrays.
@@ -1644,7 +1644,7 @@ For examples, see [Request Example for Array](#request-example-for-array) and [R
 ##### Request Example for Array
 {:.api .api-request .api-request-example}
 
-The following example is for a custom attribute on User, an array of strings named `arrayAttr` that contains values `["arrayAttrVal1", "arrayAttrVal2"...]`. 
+The following example is for a custom attribute on User, an array of strings named `arrayAttr` that contains values `["arrayAttrVal1", "arrayAttrVal2"...]`.
 
 ~~~sh
 curl -v -X GET \
@@ -1826,12 +1826,12 @@ curl -v -X PUT \
 
 Update a user's profile or credentials with partial update semantics.
 
-> Use the `POST` method for partial updates, because unspecified properties aren't changed with `POST`. 
+> Use the `POST` method for partial updates, because unspecified properties aren't changed with `POST`.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter   | Description                 | Param Type | DataType                                  | Required | Default 
+Parameter   | Description                 | Param Type | DataType                                  | Required | Default
 ----------- | --------------------------- | ---------- | ----------------------------------------- | -------- | -------
 id          | `id` of user to update      | URL        | String                                    | TRUE     |
 profile     | Updated profile for user    | Body       | [Profile Object](#profile-object)         | FALSE    |
@@ -2313,9 +2313,9 @@ Content-Type: application/json
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:id*/lifecycle/suspend</span>
 
-Suspends a user.  This operation can only be performed on users with an `ACTIVE` status.  The user will have a status of `SUSPENDED` when the process is complete. 
+Suspends a user.  This operation can only be performed on users with an `ACTIVE` status.  The user will have a status of `SUSPENDED` when the process is complete.
 
-> Suspended users cannot log in to Okta. Their group and app assignments are retained.  
+> Suspended users cannot log in to Okta. Their group and app assignments are retained.
 > Suspended users can only be unsuspended or deactivated.
 
 ##### Request Parameters
@@ -2328,7 +2328,7 @@ id        | `id` of user | URL        | String   | TRUE     |
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Returns an empty object. 
+Returns an empty object.
 
 Passing an invalid `id` returns a `404 Not Found` status code with error code `E0000007`.
 Passing an `id` that is not in the `ACTIVE` state returns a `400 Bad Request` status code with error code `E0000001`.
@@ -2357,7 +2357,7 @@ Content-Type: application/json
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:id*/lifecycle/unsuspend</span>
 
-Unsuspends users and returns then to the `ACTIVE` state.  This operation can only be performed on users that have a `SUSPENDED` status.  
+Unsuspends users and returns then to the `ACTIVE` state.  This operation can only be performed on users that have a `SUSPENDED` status.
 
 
 ##### Request Parameters
@@ -2370,7 +2370,7 @@ id        | `id` of user | URL        | String   | TRUE     |
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Returns an empty object. Returns an empty object. 
+Returns an empty object. Returns an empty object.
 
 Passing an invalid `id` returns a `404 Not Found` status code with error code `E0000007`.
 Passing an `id` that is not in the `SUSPENDED` state returns a `400 Bad Request` status code with error code `E0000001`.
@@ -2514,7 +2514,7 @@ This operation transitions the user to the status of `PASSWORD_EXPIRED` so that 
 If `tempPassword` is passed, the user's password is reset to a temporary password that is returned, and then the temporary password is expired.
 
 If you have integrated Okta with your on-premise Active Directory (AD), then setting a user's password as expired in Okta also expires the password in Active Directory.
-When the user tries to log in to Okta, delegated authentication finds the password-expired status in the Active Directory, 
+When the user tries to log in to Okta, delegated authentication finds the password-expired status in the Active Directory,
 and the user is presented with the password-expired page where he or she can change the password.
 
 ##### Request Parameters
