@@ -66,8 +66,7 @@
 				<li class="has-dropdown"><a href="#">Support</a>
 					<div class="dropdown-window">
 						<p class="stack-overflow">
-							Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a>.<br />
-							We'll answer it within 24 hours.
+							Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a>.
 						</p>
 						<p class="email">
 							Email us:<br />
@@ -746,12 +745,12 @@ return a 403 response.</p>
      * @param dnRegex The regular expression to match subjects of certificates with.
      *                E.g.: "^CN=service1\.example\.com$"
      */</span>
-    <span class="kd">public</span> <span class="n">CertificateValidationFilter</span><span class="o">(</span><span class="n">String</span> <span class="n">dnRegex</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">CertificateValidationFilter</span><span class="o">(</span><span class="n">String</span> <span class="n">dnRegex</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">dnRegex</span> <span class="o">=</span> <span class="n">Pattern</span><span class="o">.</span><span class="na">compile</span><span class="o">(</span><span class="n">dnRegex</span><span class="o">);</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">filter</span><span class="o">(</span><span class="n">ContainerRequestContext</span> <span class="n">requestContext</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">filter</span><span class="o">(</span><span class="n">ContainerRequestContext</span> <span class="n">requestContext</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
         <span class="n">X509Certificate</span><span class="o">[]</span> <span class="n">certificateChain</span> <span class="o">=</span> <span class="o">(</span><span class="n">X509Certificate</span><span class="o">[])</span> <span class="n">request</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="n">X509_CERTIFICATE_ATTRIBUTE</span><span class="o">);</span>
 
         <span class="k">if</span> <span class="o">(</span><span class="n">certificateChain</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">certificateChain</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">certificateChain</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
@@ -768,7 +767,7 @@ return a 403 response.</p>
         <span class="o">}</span>
     <span class="o">}</span>
 
-    <span class="kd">private</span> <span class="n">Response</span> <span class="n">buildForbiddenResponse</span><span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">Response</span> <span class="nf">buildForbiddenResponse</span><span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">reutrn</span> <span class="n">Response</span><span class="o">.</span><span class="na">status</span><span class="o">(</span><span class="n">Response</span><span class="o">.</span><span class="na">Status</span><span class="o">.</span><span class="na">FORBIDDEN</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">entity</span><span class="o">(</span><span class="s">"{\"message\":\""</span> <span class="o">+</span> <span class="n">message</span> <span class="o">+</span> <span class="s">"\"}"</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">build</span><span class="o">();</span>
@@ -1510,7 +1509,7 @@ are now testing just one class at a time.</p>
     <span class="n">Bar</span> <span class="n">barMock</span><span class="o">;</span>
 
     <span class="nd">@Before</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setUp</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUp</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">sut</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Foo</span><span class="o">();</span>
 
         <span class="c1">// Create mocks</span>
@@ -1521,7 +1520,7 @@ are now testing just one class at a time.</p>
     <span class="o">}</span>
 
     <span class="nd">@Test</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">testGetFoo_returns4</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testGetFoo_returns4</span><span class="o">()</span> <span class="o">{</span>
         <span class="c1">// Arrange</span>
         <span class="n">expect</span><span class="o">(</span><span class="n">barMock</span><span class="o">.</span><span class="na">getBar</span><span class="o">()).</span><span class="na">andReturn</span><span class="o">(</span><span class="mi">4</span><span class="o">);</span>
         <span class="n">replayAll</span><span class="o">();</span>
@@ -1550,7 +1549,7 @@ are now testing just one class at a time.</p>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">InjectHelper</span> <span class="o">{</span>
 
     <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"unchecked"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">injectMock</span><span class="o">(</span><span class="n">Object</span> <span class="n">target</span><span class="o">,</span> <span class="n">Object</span> <span class="n">mock</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">injectMock</span><span class="o">(</span><span class="n">Object</span> <span class="n">target</span><span class="o">,</span> <span class="n">Object</span> <span class="n">mock</span><span class="o">)</span>
     <span class="o">{</span>
         <span class="n">Class</span> <span class="n">targetClass</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="na">getClass</span><span class="o">();</span>
         <span class="k">do</span> <span class="o">{</span>
@@ -1577,7 +1576,7 @@ are now testing just one class at a time.</p>
                     <span class="n">field</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">target</span><span class="o">,</span> <span class="n">mock</span><span class="o">);</span>
                 <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IllegalAccessException</span> <span class="n">e</span><span class="o">)</span>
                 <span class="o">{</span>
-                    <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+                    <span class="k">throw</span> <span class="k">new</span> <span class="nf">RuntimeException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
                 <span class="o">}</span>
 
                 <span class="c1">// return accessibility</span>
@@ -1720,18 +1719,18 @@ my summary is below:</p>
     <span class="kd">private</span> <span class="n">ObjectGraph</span> <span class="n">applicationGraph</span><span class="o">;</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onCreate</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">()</span> <span class="o">{</span>
         <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">();</span>
 
         <span class="n">applicationGraph</span> <span class="o">=</span> <span class="n">ObjectGraph</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">getModules</span><span class="o">().</span><span class="na">toArray</span><span class="o">());</span>
     <span class="o">}</span>
 
-    <span class="kd">protected</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">getModules</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">protected</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="nf">getModules</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">Arrays</span><span class="o">.&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="n">asList</span><span class="o">(</span>
-                <span class="k">new</span> <span class="n">MyModule</span><span class="o">(</span><span class="k">this</span><span class="o">)</span>
+                <span class="k">new</span> <span class="nf">MyModule</span><span class="o">(</span><span class="k">this</span><span class="o">)</span>
         <span class="o">);</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">inject</span><span class="o">(</span><span class="n">Object</span> <span class="n">object</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">inject</span><span class="o">(</span><span class="n">Object</span> <span class="n">object</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">applicationGraph</span><span class="o">.</span><span class="na">inject</span><span class="o">(</span><span class="n">object</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -1754,7 +1753,7 @@ my summary is below:</p>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyModule</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="kd">final</span> <span class="n">MyApplication</span> <span class="n">application</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="n">MyModule</span><span class="o">(</span><span class="n">MyApplication</span> <span class="n">application</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">MyModule</span><span class="o">(</span><span class="n">MyApplication</span> <span class="n">application</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">application</span> <span class="o">=</span> <span class="n">application</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -1925,7 +1924,7 @@ do:</p>
     <p>Modify <code class="highlighter-rouge">MainActivity</code>. Add the following code to it:</p>
 
     <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="n">Foo</span> <span class="n">foo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Foo</span><span class="o">();</span>
-<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getSomething</span><span class="p">(</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getSomething</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">foo</span><span class="o">.</span><span class="na">getFoo</span><span class="o">();</span>
 <span class="o">}</span>
 </code></pre>
@@ -1938,7 +1937,7 @@ do:</p>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Foo</span> <span class="o">{</span>
     <span class="n">Bar</span> <span class="n">bar</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Bar</span><span class="o">();</span>
 
-    <span class="kd">public</span> <span class="kt">int</span> <span class="n">getFoo</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getFoo</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">bar</span><span class="o">.</span><span class="na">getBar</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -1952,7 +1951,7 @@ do:</p>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Bar</span> <span class="o">{</span>
 
-    <span class="kd">public</span> <span class="kt">int</span> <span class="n">getBar</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getBar</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="mi">4</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -1980,12 +1979,12 @@ do:</p>
     <span class="n">Foo</span> <span class="n">sut</span><span class="o">;</span>
 
     <span class="nd">@Before</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setUp</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUp</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">sut</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Foo</span><span class="o">();</span>
     <span class="o">}</span>
 
     <span class="nd">@Test</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">testGetFoo_returns4</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testGetFoo_returns4</span><span class="o">()</span> <span class="o">{</span>
         <span class="c1">// Arrange</span>
 
         <span class="c1">// Act</span>

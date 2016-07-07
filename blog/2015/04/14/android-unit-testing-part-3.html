@@ -66,8 +66,7 @@
 				<li class="has-dropdown"><a href="#">Support</a>
 					<div class="dropdown-window">
 						<p class="stack-overflow">
-							Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a>.<br />
-							We'll answer it within 24 hours.
+							Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a>.
 						</p>
 						<p class="email">
 							Email us:<br />
@@ -210,18 +209,18 @@ my summary is below:</p>
     <span class="kd">private</span> <span class="n">ObjectGraph</span> <span class="n">applicationGraph</span><span class="o">;</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onCreate</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">()</span> <span class="o">{</span>
         <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">();</span>
 
         <span class="n">applicationGraph</span> <span class="o">=</span> <span class="n">ObjectGraph</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">getModules</span><span class="o">().</span><span class="na">toArray</span><span class="o">());</span>
     <span class="o">}</span>
 
-    <span class="kd">protected</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">getModules</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">protected</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="nf">getModules</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">Arrays</span><span class="o">.&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="n">asList</span><span class="o">(</span>
-                <span class="k">new</span> <span class="n">MyModule</span><span class="o">(</span><span class="k">this</span><span class="o">)</span>
+                <span class="k">new</span> <span class="nf">MyModule</span><span class="o">(</span><span class="k">this</span><span class="o">)</span>
         <span class="o">);</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">inject</span><span class="o">(</span><span class="n">Object</span> <span class="n">object</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">inject</span><span class="o">(</span><span class="n">Object</span> <span class="n">object</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">applicationGraph</span><span class="o">.</span><span class="na">inject</span><span class="o">(</span><span class="n">object</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -244,7 +243,7 @@ my summary is below:</p>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyModule</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="kd">final</span> <span class="n">MyApplication</span> <span class="n">application</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="n">MyModule</span><span class="o">(</span><span class="n">MyApplication</span> <span class="n">application</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">MyModule</span><span class="o">(</span><span class="n">MyApplication</span> <span class="n">application</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">application</span> <span class="o">=</span> <span class="n">application</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>

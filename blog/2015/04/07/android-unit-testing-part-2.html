@@ -66,8 +66,7 @@
 				<li class="has-dropdown"><a href="#">Support</a>
 					<div class="dropdown-window">
 						<p class="stack-overflow">
-							Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a>.<br />
-							We'll answer it within 24 hours.
+							Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a>.
 						</p>
 						<p class="email">
 							Email us:<br />
@@ -221,7 +220,7 @@ do:</p>
     <p>Modify <code class="highlighter-rouge">MainActivity</code>. Add the following code to it:</p>
 
     <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="n">Foo</span> <span class="n">foo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Foo</span><span class="o">();</span>
-<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getSomething</span><span class="p">(</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getSomething</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">foo</span><span class="o">.</span><span class="na">getFoo</span><span class="o">();</span>
 <span class="o">}</span>
 </code></pre>
@@ -234,7 +233,7 @@ do:</p>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Foo</span> <span class="o">{</span>
     <span class="n">Bar</span> <span class="n">bar</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Bar</span><span class="o">();</span>
 
-    <span class="kd">public</span> <span class="kt">int</span> <span class="n">getFoo</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getFoo</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">bar</span><span class="o">.</span><span class="na">getBar</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -248,7 +247,7 @@ do:</p>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Bar</span> <span class="o">{</span>
 
-    <span class="kd">public</span> <span class="kt">int</span> <span class="n">getBar</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getBar</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="mi">4</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -276,12 +275,12 @@ do:</p>
     <span class="n">Foo</span> <span class="n">sut</span><span class="o">;</span>
 
     <span class="nd">@Before</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setUp</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUp</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">sut</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Foo</span><span class="o">();</span>
     <span class="o">}</span>
 
     <span class="nd">@Test</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">testGetFoo_returns4</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testGetFoo_returns4</span><span class="o">()</span> <span class="o">{</span>
         <span class="c1">// Arrange</span>
 
         <span class="c1">// Act</span>

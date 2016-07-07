@@ -66,8 +66,7 @@
 				<li class="has-dropdown"><a href="#">Support</a>
 					<div class="dropdown-window">
 						<p class="stack-overflow">
-							Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a>.<br />
-							We'll answer it within 24 hours.
+							Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a>.
 						</p>
 						<p class="email">
 							Email us:<br />
@@ -417,6 +416,11 @@ Irrespective of the response type, the contents of the response is always one of
       <td>String</td>
     </tr>
     <tr>
+      <td>expires_in</td>
+      <td>The number of seconds until the <em>access_token</em> expires. This is only returned if the response included an <em>access_token</em>.</td>
+      <td>String</td>
+    </tr>
+    <tr>
       <td>state</td>
       <td>The same unmodified value from the request is returned back in the response.</td>
       <td>String</td>
@@ -531,7 +535,7 @@ mNsaWVudF9pZCI6InVBYXVub2ZXa2FESnh1a0NGZUJ4IiwidXNlcl9pZCI6IjAwdWlkNEJ4WHc2STZUV
 qZlCT4UXH4UKhJnZ5px-ArNRqwhxXWhHJisslswjPpMkx1IgrudQIjzGYbtLFjrrg2ueiU5-YfmKuJuD6O2yPWGTsV7X6i7ABT6P-t8PRz_RNbk-U1GXW
 IEkNnEWbPqYDAm_Ofh7iW0Y8WDA5ez1jbtMvd-oXMvJLctRiACrTMLJQ2e5HkbUFxgXQ_rFPNHJbNSUBDLqdi2rg_ND64DLRlXRY7hupNsvWGo0gF4WEU
 k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNtiw
-&amp;token_type=Bearer&amp;state=waojafoawjgvbf
+&amp;token_type=Bearer&amp;expires_in=3600&amp;state=waojafoawjgvbf
 </code></pre>
 </div>
 

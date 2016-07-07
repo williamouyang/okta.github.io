@@ -584,7 +584,9 @@ a[class*=col-] {
         margin-bottom: 0;
         padding-bottom: 0; }
       .site-nav .dropdown-window > p.stack-overflow {
-        background-image: url(/assets/images/icons/rounded-stackoverflow--small-blue.png); }
+        background-image: url(/assets/images/icons/rounded-stackoverflow--small-blue.png);
+        height: 30px;
+        padding-top: 10px; }
       .site-nav .dropdown-window > p.email {
         background-image: url(/assets/images/icons/rounded-email--small-blue.png); }
       .site-nav .dropdown-window > p.tel {

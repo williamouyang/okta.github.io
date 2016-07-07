@@ -66,8 +66,7 @@
 				<li class="has-dropdown"><a href="#">Support</a>
 					<div class="dropdown-window">
 						<p class="stack-overflow">
-							Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a>.<br />
-							We'll answer it within 24 hours.
+							Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a>.
 						</p>
 						<p class="email">
 							Email us:<br />
@@ -197,7 +196,7 @@ are now testing just one class at a time.</p>
     <span class="n">Bar</span> <span class="n">barMock</span><span class="o">;</span>
 
     <span class="nd">@Before</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setUp</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUp</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">sut</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Foo</span><span class="o">();</span>
 
         <span class="c1">// Create mocks</span>
@@ -208,7 +207,7 @@ are now testing just one class at a time.</p>
     <span class="o">}</span>
 
     <span class="nd">@Test</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">testGetFoo_returns4</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testGetFoo_returns4</span><span class="o">()</span> <span class="o">{</span>
         <span class="c1">// Arrange</span>
         <span class="n">expect</span><span class="o">(</span><span class="n">barMock</span><span class="o">.</span><span class="na">getBar</span><span class="o">()).</span><span class="na">andReturn</span><span class="o">(</span><span class="mi">4</span><span class="o">);</span>
         <span class="n">replayAll</span><span class="o">();</span>
@@ -237,7 +236,7 @@ are now testing just one class at a time.</p>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">InjectHelper</span> <span class="o">{</span>
 
     <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"unchecked"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">injectMock</span><span class="o">(</span><span class="n">Object</span> <span class="n">target</span><span class="o">,</span> <span class="n">Object</span> <span class="n">mock</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">injectMock</span><span class="o">(</span><span class="n">Object</span> <span class="n">target</span><span class="o">,</span> <span class="n">Object</span> <span class="n">mock</span><span class="o">)</span>
     <span class="o">{</span>
         <span class="n">Class</span> <span class="n">targetClass</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="na">getClass</span><span class="o">();</span>
         <span class="k">do</span> <span class="o">{</span>
@@ -264,7 +263,7 @@ are now testing just one class at a time.</p>
                     <span class="n">field</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">target</span><span class="o">,</span> <span class="n">mock</span><span class="o">);</span>
                 <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IllegalAccessException</span> <span class="n">e</span><span class="o">)</span>
                 <span class="o">{</span>
-                    <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+                    <span class="k">throw</span> <span class="k">new</span> <span class="nf">RuntimeException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
                 <span class="o">}</span>
 
                 <span class="c1">// return accessibility</span>
