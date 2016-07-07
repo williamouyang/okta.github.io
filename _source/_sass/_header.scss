@@ -321,6 +321,8 @@
 
 			&.stack-overflow {
 				background-image: url(/assets/images/icons/rounded-stackoverflow--small-blue.png);
+				height: 30px;
+    			padding-top: 10px;
 			}
 
 			&.email {
