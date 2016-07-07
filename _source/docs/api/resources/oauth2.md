@@ -82,7 +82,7 @@ Access Tokens include pre-defined scopes and claims and can optionally contain c
 ##### Pre-defined scopes
 {:.beta}
 
-Pre-defined scopes include [OIDC scopes](oidc.html#scope-dependent-claims-not-always-returned) as well as scopes that starts with "okta:".
+Pre-defined scopes include [OIDC scopes](oidc.html#scope-dependent-claims-not-always-returned).
 {:.beta}
 
 ##### Pre-defined claims in the header section
@@ -109,13 +109,13 @@ The payload includes the following pre-defined claims:
 |--------------+---------+----------+----------------------------------------------------------------------------------+--------------|--------------------------|
 | ver     | The semantic version of the Access Token.   |  Integer   |  1    |
 | jti     | A unique identifier for this Access Token for debugging and revocation purposes.   | String    |  "AT.0mP4JKAZX1iACIT4vbEDF7LpvDVjxypPMf0D7uX39RE"  |
-| iss     | The Issuer Identifier of the response.    | String    | "https://your-org.okta.com/as/0oacqf8qaJw56czJi0g4"     |
-| aud     | Identifies the audience that this Access Token is intended for. It can be the client id or the resource server id.   | String    | "6joRGIzNCaJfdCPzRjlh"     |
+| iss     | The Issuer Identifier of the response. This value will be the unique identifier for the Authorization Server instance.   | String    | "https://your-org.okta.com/as/0oacqf8qaJw56czJi0g4"     |
+| aud     | Identifies the audience that this Access Token is intended for. It will be the client id of your application.   | String    | "6joRGIzNCaJfdCPzRjlh"     |
 | sub     | The subject. A unique identifier for the user or the client.  | String    | 	"00uk1u7AsAk6dZL3z0g3"     |
 | iat     | The time the Access Token was issued, represented in Unix time (seconds).   | Integer    | 1311280970     |
 | exp     | The time the Access Token expires, represented in Unix time (seconds).   | Integer    | 1311280970     |
-| cid     | Client ID of your application who requests the Access Token.  | String    | "6joRGIzNCaJfdCPzRjlh"     |
-| uid     | A unique identifier for the user. It will not be included in the Access Token if there is no user binded to it.  | String    | 	"00uk1u7AsAk6dZL3z0g3"     |
+| cid     | Client ID of your application that requests the Access Token.  | String    | "6joRGIzNCaJfdCPzRjlh"     |
+| uid     | A unique identifier for the user. It will not be included in the Access Token if there is no user bound to it.  | String    | 	"00uk1u7AsAk6dZL3z0g3"     |
 | scp     | JSON array of scopes that are granted to this Access Token.   | Array    | [ "openid", "custom" ]     |
 {:.beta}
 
@@ -147,8 +147,8 @@ Access Tokens are sensitive and can be misused if intercepted. Transmit them onl
 Access Token must be validated in the following manner:
 {:.beta}
 
-1. Verify that the domain of `iss` (issuer) claim matches the issuer identifier for your Okta org (which is typically obtained during [Discovery](oidc.html#openid-connect-discovery-document). Also verify that the authorization server id matches your authorization server.
-2. Verify that the `aud` (audience) claim has the same value as the issuer claim.
+1. Verify that the `iss` (issuer) claim matches the identifier of your authorization server.
+2. Verify that the `aud` (audience) and `cid` (client id) claim are your client id.
 3. Verify the signature according to [JWS](https://tools.ietf.org/html/rfc7515) using the algorithm specified in the JWT `alg` header parameter. Use the public keys provided by Okta via the [Discovery Document](oidc.html#openid-connect-discovery-document).
 4. Verify that the expiry time (from the `exp` claim) has not already passed.
 {:.beta}
@@ -169,6 +169,7 @@ You can use an [introspection endpoint](#introspection-request) for validation.
 {:.beta}
 
 A Refresh Token is an opaque string. It is a long-lived token that the client can use to obtain a new Access Token without re-obtaining authorization from the resource owner. The new Access Token must have the same or subset of the scopes associated with the Refresh Token.
+To get a Refresh Token, the Authentication or Token requests must contain the `offline_access` scope.
 {:.beta}
 
 ## Endpoints
