@@ -110,13 +110,13 @@ The payload includes the following pre-defined claims:
 | ver     | The semantic version of the Access Token.   |  Integer   |  1    |
 | jti     | A unique identifier for this Access Token for debugging and revocation purposes.   | String    |  "AT.0mP4JKAZX1iACIT4vbEDF7LpvDVjxypPMf0D7uX39RE"  |
 | iss     | The Issuer Identifier of the response. This value will be the unique identifier for the Authorization Server instance.   | String    | "https://your-org.okta.com/as/0oacqf8qaJw56czJi0g4"     |
-| aud     | Identifies the audience that this Access Token is intended for. It will be the client id of your application.   | String    | "6joRGIzNCaJfdCPzRjlh"     |
+| aud     | Identifies the audience that this Access Token is intended for. It will be the client id of your application that requests the Access Token.   | String    | "6joRGIzNCaJfdCPzRjlh"     |
 | sub     | The subject. A unique identifier for the user or the client.  | String    | 	"00uk1u7AsAk6dZL3z0g3"     |
 | iat     | The time the Access Token was issued, represented in Unix time (seconds).   | Integer    | 1311280970     |
 | exp     | The time the Access Token expires, represented in Unix time (seconds).   | Integer    | 1311280970     |
 | cid     | Client ID of your application that requests the Access Token.  | String    | "6joRGIzNCaJfdCPzRjlh"     |
 | uid     | A unique identifier for the user. It will not be included in the Access Token if there is no user bound to it.  | String    | 	"00uk1u7AsAk6dZL3z0g3"     |
-| scp     | JSON array of scopes that are granted to this Access Token.   | Array    | [ "openid", "custom" ]     |
+| scp     | Array of scopes that are granted to this Access Token.   | Array    | [ "openid", "custom" ]     |
 {:.beta}
 
 #### Custom scopes and claims
@@ -132,7 +132,7 @@ If the request that generates the access token contains any custom scopes, those
 
 ##### Custom claims
 {:.beta}
-All configured custom claims will be part of the access token. They will be evaluated for the user if the grant type is not <em>client_credentials</em>.
+All configured custom claims will be included in the access token. They will be evaluated for the user if the grant type is not <em>client_credentials</em>.
 {:.beta}
 
 ### Validating Access Tokens
