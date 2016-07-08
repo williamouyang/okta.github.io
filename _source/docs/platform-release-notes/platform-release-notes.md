@@ -10,10 +10,10 @@ Check the [Current Release Status](https://support.okta.com/help/articles/Knowle
 
 ## Feature Enhancements
  
-### Improved Names and Locations for OAuth-related panels in the Admin Console
+### Improvements for OAuth Panels in the Admin Console
 
 <!-- OKTA-93256 -->
-We've rearranged some of the panels related to OAuth to improve usability:
+To improve usability, we've moved some of the panels in the Okta user interface related to OAuth:
 
 * The **OAuth** tab has been renamed **Authorization Server**.
 * The **Signing credentials rotation** option was on the **Client Registration** panel, but since it helps you configure tokens, we've
