@@ -44,9 +44,24 @@ module Okta
       '<span class="api-label api-label-cors api-uri-template-cors"><i class="fa fa-cloud-download"></i> CORS</span>'
     end
   end
+
+  class BetaBlock < Liquid::Block
+    def initialize(tag_name, markup, tokens)
+      super
+    end
+
+    def render(context)
+      site = context.registers[:site]
+      converter = site.find_converter_instance(Jekyll::Converters::Markdown)
+      '<div class="beta">' + converter.convert(super) + "</div>"
+    end
+  end
 end
+
 
 Liquid::Template.register_tag('api_lifecycle', Okta::ApiLifecycleTag)
 Liquid::Template.register_tag('api_operation', Okta::ApiUriTag)
 Liquid::Template.register_tag('api_cors', Okta::CorsTag)
+Liquid::Template.register_tag('beta', Okta::BetaBlock)
+
 
