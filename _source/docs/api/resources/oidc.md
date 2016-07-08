@@ -22,7 +22,7 @@ OpenID Connect extends OAuth 2.0:
 ![OpenID Architecture Diagram](/assets/img/openID_overview.png)
 
 Okta is the identity provider responsible for verifying the identity of users and applications that exist in an organization’s directory, 
-and ultimately issuing identity tokens upon successful authentication of those users and applications.
+and issuing identity tokens upon successful authentication of those users and applications.
 
 The basic authentication flow with Okta as your identity provider:
 
@@ -30,7 +30,7 @@ The basic authentication flow with Okta as your identity provider:
 2. Okta authenticates the client.
 3. Okta authenticates the user.
 4. Okta approves or denies the requested scopes.
-5. Okta mints a token and send it in the response.
+5. Okta mints a token and sends it in the response.
 6. The application validates the identity token’s integrity. For more information, see [Validating ID Tokens](#validating-id-tokens).
 
 > Important: Okta uses public key cryptography to sign tokens and verify that they are valid. 
@@ -155,7 +155,7 @@ Claims in the header are always returned.
 | Property     | Description                                                                      | DataType     | Example                  |
 |--------------+---------+--------------------------------------------------------------------------------------------+--------------|--------------------------|
 | alg          | Identifies the digital signature algorithm used. This is always be RS256.      | String       | "RS256"                  |
-| kid          | Identifies the *public-key* used to sign the *id_token*. The corresponding *public-key* can be found as a part of the [well-known configuration's](#openid-connect-discovery-document) *jwks_uri* value.                                  | String       | "a5dfwef1a-0ead3f5223_w1e" |
+| kid          | Identifies the *public-key* used to verify the *id_token*. The corresponding *public-key* can be found as a part of the [well-known configuration's](#openid-connect-discovery-document) *jwks_uri* value.                                  | String       | "a5dfwef1a-0ead3f5223_w1e" |
 
 #### Claims in the payload section
 
@@ -318,7 +318,7 @@ All apps must roll over keys for adequate security. Please note the following:
 * The current key rotation schedule is four times a year. This schedule can change without notice.
 * In case of an emergency, Okta can rotate keys as needed.
 * Okta always publishes keys to the JWKS.
-* If your app follows the best practice to always resolve the *kid*, key rotations will not cause problems.
+* If your app follows the best practice to always resolve the *kid*, key rotations won't cause problems.
 * If you download the key and store it locally, **you are responsible for updates**.
 
 >Keys used to sign tokens automatically rotate and should always be resolved dynamically against the published JWKS. Your app might fail if you hardcode public keys in your applications. Be sure to include key rollover in your implementation.
