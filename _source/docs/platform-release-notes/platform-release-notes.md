@@ -55,7 +55,7 @@ For changes outside the Okta platform, see the [Release Notes Knowledge Hub](htt
 
 ## Earlier Release Notes
 
-* [Platform Release Notes for the week ending Thursday, July 7](platform-release-notes2016-26.html)
+* [Platform Release Notes for the week ending Wednesday, June 29](platform-release-notes2016-26.html)
 * [Platform Release Notes for the week ending Wednesday, June 22](platform-release-notes2016-25.html)
 * [Platform Release Notes for the week ending Wednesday, June 15](platform-release-notes2016-24.html)
 * [Platform Release Notes for the week ending Wednesday, June 8](platform-release-notes2016-23.html)
