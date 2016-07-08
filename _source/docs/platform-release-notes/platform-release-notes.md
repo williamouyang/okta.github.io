@@ -24,7 +24,15 @@ We've rearranged some of the panels related to OAuth to improve usability:
 ### Okta Sign-In Widget Updated
 
 <!-- OKTA-91831, OKTA-93759 -->
-The Okta Sign-In Widget has been updated to version 1.4.0. See [the guide](http://developer.okta.com/docs/guides/okta_sign-in_widget.html) for updated sample code.
+The Okta Sign-In Widget will be updated to version 1.4.0 for Production orgs. 
+
+See [the guide](http://developer.okta.com/docs/guides/okta_sign-in_widget.html) for updated sample code
+after [Release 2016.27](https://support.okta.com/help/articles/Knowledge_Article/Current-Release-Status) is rolled out to production orgs.
+
+The new release includes several enhancements:
+
+* The new version is an npm module and is availabe on the [npm registry](https://www.npmjs.com/package/@okta/okta-signin-widget).
+* Changes to the "Trust this Device" checkbox and other minor bug fixes have been made.
 
 ### Improved User Lookup for Password Recovery
 
