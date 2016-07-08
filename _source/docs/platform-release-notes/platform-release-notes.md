@@ -26,7 +26,7 @@ To improve usability, we've moved some of the panels in the Okta user interface 
 <!-- OKTA-91831, OKTA-93759 -->
 The Okta Sign-In Widget will be updated to version 1.4.0 for Production orgs. 
 
-See [the guide](http://developer.okta.com/docs/guides/okta_sign-in_widget.html) for updated sample code
+See [Okta Sign-In Widget](http://developer.okta.com/docs/guides/okta_sign-in_widget.html) for updated sample code
 after [Release 2016.27](https://support.okta.com/help/articles/Knowledge_Article/Current-Release-Status) is rolled out to production orgs.
 
 The new release includes several enhancements:
