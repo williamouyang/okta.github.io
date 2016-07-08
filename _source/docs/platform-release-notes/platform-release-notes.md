@@ -1,34 +1,53 @@
 ---
 layout: docs_page
-title: Platform Release Notes June 29, 2016
+title: Platform Release Notes July 7, 2016
 ---
 
-Release 2016.26
+Release 2016.27
 
 Releases are rolled out to organizations in a staggered fashion: first to preview orgs, then to production orgs. 
 Check the [Current Release Status](https://support.okta.com/help/articles/Knowledge_Article/Current-Release-Status) to verify whether the changes in this document have rolled out to your org yet.
+
+## Feature Enhancements
  
-## New Feature: API for Custom SMS Template
-    
-You can send custom text as part of an SMS message request:
+### Improved Names and Locations for OAuth-related panels in the Admin Console
 
-1. Use the `/api/v1/templates/sms` endpoint to create a custom SMS text template. 
-2. Send a request to the Factors API specifying the template for verification. There is no change in the response.
+<!-- OKTA-93256 -->
+We've rearranged some of the panels related to OAuth to improve usability:
 
-For more information, see [Templates API](http://developer.okta.com/docs/api/resources/templates.html) and [Factors API](http://developer.okta.com/docs/api/resources/factors.html).
+* The **OAuth** tab has been renamed **Authorization Server**.
+* The **Signing credentials rotation** option was on the **Client Registration** panel, but since it helps you configure tokens, we've
+ moved it to the **Authorization Server** tab. 
 
-## Feature Enhancement: Resource Owner Password Credential Flow for OpenID Connect Supports Refresh Tokens
-
-The `/oauth2/v1/token` endpoint includes a Refresh Token if:
+![New Tab for Managing OAuth-Related Configuration](/assets/img/changed_tabs.png)
  
-* The request contains a `grant_type` with the value `password` and your client supports the `grant_type` value `refresh_token`. For more information, see [Token Request](http://developer.okta.com/docs/api/resources/oauth2.html#request-parameters-1).
-* You request the `offline_access` scope. For more information, see [Refresh Tokens for Web and Native Applications](http://developer.okta.com/docs/api/resources/oauth2.html#refresh-tokens-for-web-and-native-applications).
+### Okta Sign-In Widget Updated
+
+<!-- OKTA-91831, OKTA-93759 -->
+The Okta Sign-In Widget will be updated to version 1.4.0 for Production orgs. 
+
+See [the guide](http://developer.okta.com/docs/guides/okta_sign-in_widget.html) for updated sample code
+after [Release 2016.27](https://support.okta.com/help/articles/Knowledge_Article/Current-Release-Status) is rolled out to production orgs.
+
+The new release includes several enhancements:
+
+* The new version is an npm module and is availabe on the [npm registry](https://www.npmjs.com/package/@okta/okta-signin-widget).
+* Changes to the "Trust this Device" checkbox and other minor bug fixes have been made.
+
+### Improved User Lookup for Password Recovery
+
+<!-- OKTA-92001 -->
+To ensure a successful password recovery lookup if an email address is associated with multiple users, we improved the lookup behavior:
+
+* Okta no longer includes deactivated users in the lookup.
+* The lookup searches login IDs first, then primary email addresses, and then secondary email addresses.
 
 ## Bugs Fixed
 
-The following issue is fixed:
+The following issues are fixed:
  
-* For some customers, an API request for users that match a value for `last_name` didn't return all the matches. (OKTA-91367) 
+* The OIDC Access Token was incorrectly available to Okta endpoints other than `/oauth2/v1/userinfo`. (OKTA-91099)
+* The format of the issuer (`iss`) in the Access Token has changed: it was the client ID. It now takes the form: `https://<your-org>.okta.com/as/<authorization-server-ID>. (OKTA-93628)
 
 ## Looking for Product Release Notes?
 
@@ -36,6 +55,7 @@ For changes outside the Okta platform, see the [Release Notes Knowledge Hub](htt
 
 ## Earlier Release Notes
 
+* [Platform Release Notes for the week ending Thursday, July 7](platform-release-notes2016-26.html)
 * [Platform Release Notes for the week ending Wednesday, June 22](platform-release-notes2016-25.html)
 * [Platform Release Notes for the week ending Wednesday, June 15](platform-release-notes2016-24.html)
 * [Platform Release Notes for the week ending Wednesday, June 8](platform-release-notes2016-23.html)
