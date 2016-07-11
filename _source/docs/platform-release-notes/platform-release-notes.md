@@ -49,6 +49,10 @@ The following issues are fixed:
 * The OIDC Access Token was incorrectly available to Okta endpoints other than `/oauth2/v1/userinfo`. (OKTA-91099)
 * The format of the issuer (`iss`) in the Access Token has changed: it was the client ID. It now takes the form: `https://<your-org>.okta.com/as/<authorization-server-ID>. (OKTA-93628)
 
+Added 7/11/2016:
+
+* After API activation, some users were directed to the password recovery user interface before they finished setting up their account. (OKTA-94836)
+
 ## Looking for Product Release Notes?
 
 For changes outside the Okta platform, see the [Release Notes Knowledge Hub](https://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub).
