@@ -13,6 +13,165 @@ Additionally, these endpoints support the use of [OpenID Connect](/docs/api/reso
 
 > This API is currently in **Early Access** status.  It has been tested as thoroughly as a Generally Available feature. Contact Support to enable this feature.
 
+## Tokens
+{:.beta}
+> Access Tokens and Refresh Tokens for Okta resource server are not covered in this section. The format and validation method of these tokens are subject to change without prior notice.
+{:.beta}
+
+> Access Tokens and Refresh Tokens for non-Okta resource server are currently in **Beta** status.
+{:.beta}
+
+
+### Access Token
+{:.beta}
+An Access Token is a [JSON web token (JWT)](https://tools.ietf.org/html/rfc7519) encoded in base64URL format that contains [a header](#header), [payload](#payload), and [signature](#signature). A resource server can authorize the client to access particular resources based on the [scopes and claims](#scopes-and-claims) in the Access Token.
+{:.beta}
+
+### Header
+{:.beta}
+
+~~~json
+{
+  "alg": "RS256",
+  "kid": "45js03w0djwedsw"
+}
+~~~
+{:.beta}
+
+### Payload
+{:.beta}
+
+~~~json
+{
+  "ver": 1,
+  "jti": "AT.0mP4JKAZX1iACIT4vbEDF7LpvDVjxypPMf0D7uX39RE",
+  "iss": "https://your-org.okta.com/as/0oacqf8qaJw56czJi0g4",
+  "aud": "nmdP1fcyvdVO11AL7ECm",
+  "sub": "00ujmkLgagxeRrAg20g3",
+  "iat": 1467145094,
+  "exp": 1467148694,
+  "cid": "nmdP1fcyvdVO11AL7ECm",
+  "uid": "00ujmkLgagxeRrAg20g3",
+  "scp": [
+    "openid",
+    "email",
+    "flights",
+    "custom"
+  ],
+  "flight_number": "AX102",
+  "custom_claim": "CustomValue"
+}
+~~~
+{:.beta}
+
+### Signature
+{:.beta}
+
+This is a digital signature Okta generates using the public key identified by the `kid` property in the header section.
+{:.beta}
+
+### Scopes and claims
+{:.beta}
+
+Access Tokens include pre-defined scopes and claims and can optionally contain custom scopes and claims.
+{:.beta}
+
+#### Pre-defined scopes and claims
+{:.beta}
+
+##### Pre-defined scopes
+{:.beta}
+
+Pre-defined scopes include [OIDC scopes](oidc.html#scope-dependent-claims-not-always-returned).
+{:.beta}
+
+##### Pre-defined claims in the header section
+{:.beta}
+
+The header only includes the following pre-defined claims:
+{:.beta}
+
+|--------------+-----------------------------------------------------------------------------------------------------+--------------|--------------------------|
+| Property     | Description                                                                      | DataType     | Example                  |
+|--------------+---------+--------------------------------------------------------------------------------------------+--------------|--------------------------|
+| alg          | Identifies the digital signature algorithm used. This is always be RS256.      | String       | "RS256"                  |
+| kid          | Identifies the `public-key` used to sign the `access_token`. The corresponding `public-key` can be found as a part of the [well-known configuration's](oidc.html#openid-connect-discovery-document) `jwks_uri` value.                                  | String       | "a5dfwef1a-0ead3f5223_w1e" |
+{:.beta}
+
+##### Pre-defined claims in the payload section
+{:.beta}
+
+The payload includes the following pre-defined claims:
+{:.beta}
+
+|--------------+-------------------+----------------------------------------------------------------------------------+--------------|--------------------------|
+| Property     |  Description                                                                      | DataType     | Example                  |
+|--------------+---------+----------+----------------------------------------------------------------------------------+--------------|--------------------------|
+| ver     | The semantic version of the Access Token.   |  Integer   |  1    |
+| jti     | A unique identifier for this Access Token for debugging and revocation purposes.   | String    |  "AT.0mP4JKAZX1iACIT4vbEDF7LpvDVjxypPMf0D7uX39RE"  |
+| iss     | The Issuer Identifier of the response. This value will be the unique identifier for the Authorization Server instance.   | String    | "https://your-org.okta.com/as/0oacqf8qaJw56czJi0g4"     |
+| aud     | Identifies the audience that this Access Token is intended for. It will be the client id of your application that requests the Access Token.   | String    | "6joRGIzNCaJfdCPzRjlh"     |
+| sub     | The subject. A unique identifier for the user or the client.  | String    | 	"00uk1u7AsAk6dZL3z0g3"     |
+| iat     | The time the Access Token was issued, represented in Unix time (seconds).   | Integer    | 1311280970     |
+| exp     | The time the Access Token expires, represented in Unix time (seconds).   | Integer    | 1311280970     |
+| cid     | Client ID of your application that requests the Access Token.  | String    | "6joRGIzNCaJfdCPzRjlh"     |
+| uid     | A unique identifier for the user. It will not be included in the Access Token if there is no user bound to it.  | String    | 	"00uk1u7AsAk6dZL3z0g3"     |
+| scp     | Array of scopes that are granted to this Access Token.   | Array    | [ "openid", "custom" ]     |
+{:.beta}
+
+#### Custom scopes and claims
+{:.beta}
+
+The admin can configure custom scopes and claims via the Authorization Server tab for the Application. Access Tokens are minted with all the configured custom claims and all the configured custom scopes that are included in the authorization request.
+{:.beta}
+
+##### Custom scopes
+{:.beta}
+If the request that generates the access token contains any custom scopes, those scopes will be part of the <b>scp</b> claim together with the scopes provided from the [OIDC specification](http://openid.net/specs/openid-connect-core-1_0.html).
+{:.beta}
+
+##### Custom claims
+{:.beta}
+All configured custom claims will be included in the access token. They will be evaluated for the user if the grant type is not <em>client_credentials</em>.
+{:.beta}
+
+### Validating Access Tokens
+{:.beta}
+
+The resource server must validate the Access Token before allowing the client to access protected resources.
+{:.beta}
+
+Access Tokens are sensitive and can be misused if intercepted. Transmit them only over HTTPS and only via POST data or within request headers. If you store them on your application, you must store them securely.
+{:.beta}
+
+Access Token must be validated in the following manner:
+{:.beta}
+
+1. Verify that the `iss` (issuer) claim matches the identifier of your authorization server.
+2. Verify that the `aud` (audience) and `cid` (client id) claim are your client id.
+3. Verify the signature according to [JWS](https://tools.ietf.org/html/rfc7515) using the algorithm specified in the JWT `alg` header parameter. Use the public keys provided by Okta via the [Discovery Document](oidc.html#openid-connect-discovery-document).
+4. Verify that the expiry time (from the `exp` claim) has not already passed.
+{:.beta}
+
+Step 3 uses the same signature verification method as the [ID token](oidc.html#validating-id-tokens).
+{:.beta}
+
+The signing keys for the Access Token are rotated in the same was as the [ID token](oidc.html#validating-id-tokens).
+{:.beta}
+
+#### Alternative Validation
+{:.beta}
+
+You can use an [introspection endpoint](#introspection-request) for validation.
+{:.beta}
+
+### Refresh Token
+{:.beta}
+
+A Refresh Token is an opaque string. It is a long-lived token that the client can use to obtain a new Access Token without re-obtaining authorization from the resource owner. The new Access Token must have the same or subset of the scopes associated with the Refresh Token.
+To get a Refresh Token, the Authentication or Token requests must contain the `offline_access` scope.
+{:.beta}
+
 ## Endpoints
 
 ### Authentication Request
@@ -160,7 +319,7 @@ http://www.example.com/#error=invalid_scope&error_description=The+requested+scop
 
 <span class="api-uri-template api-uri-get"><span class="api-label">POST</span> /oauth2/v1/token</span>
 
-The API takes an authorization code or a Refresh Token as the grant type and returns back an Access Token, ID Token and a Refresh Token.
+The API takes a grant type of either <em>authorization_code</em>, <em>password</em>, or <em>refresh_token</em> and the corresponding credentials and returns back an Access Token. A Refresh Token will be returned if the client supports refresh tokens and the offline_access scope is requested. Additionally, using the authorization code grant type will return an ID Token if the <em>openid</em> scope is requested.
 
 > Note:  No errors occur if you use this endpoint, but it isn’t useful until custom scopes or resource servers are available. We recommend you wait until custom scopes and resource servers are available.
 
@@ -170,13 +329,17 @@ The following parameters can be posted as a part of the URL-encoded form values 
 
 Parameter          | Description                                                                                         | Type       |
 -------------------+-----------------------------------------------------------------------------------------------------+------------|
-grant_type         | Can be one of the following: <em>authorization_code</em>, <em>password</em>, or <em>refresh_token</em>. Determines the mechanism Okta will use to authorize the creation of the tokens. | String |  
+grant_type         | Can be one of the following: <em>authorization_code</em>, <em>password</em>, or <em>refresh_token</em><span class="beta" style="display: inline">,  or <em>client_credentials</em></span>. Determines the mechanism Okta will use to authorize the creation of the tokens. | String |  
 code               | Expected if grant_type specified <em>authorization_code</em>. The value is what was returned from the /oauth2/v1/authorize endpoint. | String
 refresh_token      | Expected if the grant_type specified <em>refresh_token</em>. The value is what was returned from this endpoint via a previous invocation. | String |
-scope              | Expected only if <em>refresh_token</em> is specified as the grant type. This is a list of scopes that the client wants to be included in the Access Token. These scopes have to be subset of the scopes used to generate the Refresh Token in the first place. | String |
+username           | Expected if the grant_type specified <em>password</em>. | String |
+password           | Expected if the grant_type specified <em>password</em>. | String |
+scope              | Optional if either <em>refresh_token</em><span class="hide-beta" style="display: inline"> or <em>password</em></span><span class="beta" style="display: inline">, <em>password</em>,  or <em>client_credentials</em></span> is specified as the grant type. This is a list of scopes that the client wants to be included in the Access Token. For the <em>refresh_token</em> grant type, these scopes have to be subset of the scopes used to generate the Refresh Token in the first place. | String |
 redirect_uri       | Expected if grant_type is <em>authorization_code</em>. Specifies the callback location where the authorization was sent; must match what is preregistered in Okta for this client. | String |
 code_verifier      | The code verifier of [PKCE](#parameter-details). Okta uses it to recompute the code_challenge and verify if it matches the original code_challenge in the authorization request. | String |
 
+> The [Client Credentials](https://tools.ietf.org/html/rfc6749#section-4.4) flow (if `grant_types` is `client_credentials`) is currently in **Beta** status.
+{:.beta}
 
 ##### Token Authentication Method
 
@@ -191,12 +354,22 @@ Authorization: Basic ${Base64(<client_id>:<client_secret>)}
 
 #### Response Parameters
 
-Based on the grant type, the returned JSON contains a different set of tokens.
+Based on the grant type, the returned JSON can contain a different set of tokens.
 
 Input grant type   | Output token types                    |
 -------------------|---------------------------------------|
-authorization_code | ID Token, Access Token, Refresh Token |
+authorization_code | Access Token, Refresh Token, ID Token |
 refresh_token      | Access Token, Refresh Token           |
+password           | Access Token, Refresh Token           |
+{:.hide-beta}
+
+Input grant type   | Output token types                    |
+-------------------|---------------------------------------|
+authorization_code | Access Token, Refresh Token, ID Token |
+refresh_token      | Access Token, Refresh Token           |
+password           | Access Token, Refresh Token           |
+client_credentials | Access Token                          |
+{:.beta}
 
 ##### Refresh Tokens for Web and Native Applications
 
@@ -213,6 +386,7 @@ invalid_client          | The specified client id wasn't found. |
 invalid_request         | The request structure was invalid. E.g. the basic authentication header was malformed, or both header and form parameters were used for authentication or no authentication information was provided. |
 invalid_grant           | The <em>code</em> or <em>refresh_token</em> value was invalid, or the <em>redirect_uri</em> does not match the one used in the authorization request. |
 unsupported_grant_type  | The grant_type was not <em>authorization_code</em> or <em>refresh_token</em>. |
+invalid_scope           | The scopes list contains an invalid or unsupported value.    |
 
 #### Response Example (Success)
 
