@@ -81,7 +81,7 @@ Also, the response to an answer recovery question (`/api/v1/authn/recovery/answe
 
 When performing a self-service password reset (forgot password), the request for an answer recovery question is made in response to the security question challenge.
 For more information, see [Password Complexity Object](http://developer.okta.com/docs/api/resources/authn#password-complexity-object)
-and [Answer Reovery Question](http://developer.okta.com/docs/api/resources/authn#answer-recovery-question).
+and [Answer Recovery Question](http://developer.okta.com/docs/api/resources/authn#answer-recovery-question).
 
 <!-- ## Bugs Fixed -->
 
