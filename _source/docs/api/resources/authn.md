@@ -1307,6 +1307,7 @@ Enrolls a user with a [factor](factors.html#supported-factors-for-providers) ass
 - [Enroll RSA SecurID Factor](#enroll-rsa-securid-factor)
 - [Enroll Symantec VIP Factor](#enroll-symantec-vip-factor)
 - [Enroll YubiKey Factor](#enroll-yubikey-factor)
+- [Enroll Duo Factor](#enroll-duo-factor)
 
 > This operation is only available for users that have not previously enrolled a factor and have transitioned to the `MFA_ENROLL` [state](#transaction-state).
 
@@ -1915,6 +1916,235 @@ curl -v -X POST \
 ~~~
 
 
+#### Enroll Duo Factor
+{:.api .api-operation}
+
+Enrolls a user with a Duo factor.  The enrollment process is interaction between OKTA and Duo code. The process starts with enrollment request to OKTA and then continue with Dou widget/script that handles the enrollment. At the end of the process it will make a callback to Okta to complete the enrollment.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-d '{
+  "factorType": "web",
+  "provider": "DUO",
+  "stateToken": "$(stateToken}"
+}' "https://${org}.okta.com/api/v1/authn/factors"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "stateToken":"00q8oewUkDwvzTKzQLNgZuZDqdpHue_e_xT89I8j4X",
+  "expiresAt":"2016-07-13T13:14:52.000Z",
+  "status":"MFA_ENROLL_ACTIVATE",
+  "factorResult":"WAITING",
+  "_embedded":{
+      "user":{
+          "id":"00uku2SnbUX49SAGb0g3",
+          "passwordChanged":"2016-07-13T13:07:51.000Z",
+          "profile":{
+              "login":"first.last@gexample.com",
+              "firstName":"First",
+              "lastName":"Last",
+              "locale":"en_US",
+              "timeZone":"America/Los_Angeles"
+          }
+      },
+      "factor":{
+          "id":"dsfkucEOz3phNMdGP0g3",
+          "factorType":"web",
+          "provider":"DUO",
+          "vendorName":"DUO",
+          "profile":{
+              "credentialId":"first.last@gexample.com"
+          },
+          "_embedded":{
+              "activation":{
+                  "host":"<your endpoint>.duosecurity.com",
+                  "signature":"<your signature>",
+                  "factorResult":"WAITING",
+                  "_links":{
+                      "complete":{
+                          "href":"http://rain.okta1.com:1802/api/v1/authn/factors/dsfkucEOz3phNMdGP0g3/lifecycle/duoCallback",
+                          "hints":{
+                              "allow":[
+                                  "POST"
+                             ]
+                          }
+                      },
+                      "script":{
+                          "href":"http://rain.okta1.com:1802/js/sections/duo/Duo-Web-v2.js",
+                          "type":"text/javascript; charset=utf-8"
+                      }
+                  }
+              }
+          }
+      }
+  },
+  "_links":{
+      "next":{
+          "name":"poll",
+          "href":"http://rain.okta1.com:1802/api/v1/authn/factors/dsfkucEOz3phNMdGP0g3/lifecycle/activate/poll",
+          "hints":{
+              "allow":[
+                   "POST"
+              ]
+          }
+      },
+      "cancel":{
+          "href":"http://rain.okta1.com:1802/api/v1/authn/cancel",
+          "hints":{
+              "allow":[
+                  "POST"
+              ]
+          }
+      },
+      "prev":{
+          "href":"http://rain.okta1.com:1802/api/v1/authn/previous",
+          "hints":{
+              "allow":[
+                  "POST"
+              ]
+          }
+      }
+  }
+}
+~~~
+
+##### Launch Duo WebSdk iFrame
+{:.api .api-response .api-response-example}
+
+~~~html
+<script src="/js/sections/duo/Duo-Web-v2.js"></script>
+<script>
+  Duo.init({
+    'host': '{activation.host}',
+    'sig_request': '{activation.signature}',
+    'post_action': '{activation._links.complete.href}'
+  });
+</script>
+~~~
+
+##### Poll for Duo WebSdk Activation Request Example
+{:.api .api-response .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-d '{
+  "stateToken": "$(stateToken}"
+}' "https://${org}.okta.com/api/v1/authn/factors/${factorId}/lifecycle/activate/poll"
+~~~
+
+##### Poll for Duo WebSdk Activation Response Example
+{:.api .api-response .api-response-example}
+
+In this example we just enrolled and activated Duo but the question and sms factors are not enrolled.
+
+~~~json
+{
+    "stateToken":"00pAZpdCXV9xYTpknEqP84bObwUKFbp9_huzt8rS0y",
+    "expiresAt":"2016-07-13T13:37:42.000Z",
+    "status":"MFA_ENROLL",
+    "_embedded":{
+        "user":{
+            "id":"00ukv3jVTgRjDctlX0g3",
+            "passwordChanged":"2016-07-13T13:29:58.000Z",
+            "profile":{
+                "login":"first.last@example.com",
+                "firstName":"First",
+                "lastName":"Last",
+                "locale":"en_US",
+                "timeZone":"America/Los_Angeles"
+            }
+        },
+        "factors":[
+            {
+                "factorType":"question",
+                "provider":"OKTA",
+                "vendorName":"OKTA",
+                "_links":{
+                    "questions":{
+                        "href":"http://rain.okta1.com:1802/api/v1/users/00ukv3jVTgRjDctlX0g3/factors/questions",
+                        "hints":{
+                            "allow":[
+                                "GET"
+                            ]
+                        }
+                    },
+                    "enroll":{
+                        "href":"http://rain.okta1.com:1802/api/v1/authn/factors",
+                        "hints":{
+                            "allow":[
+                                "POST"
+                            ]
+                        }
+                    }
+                },
+                "status":"NOT_SETUP"
+            },
+            {
+                "factorType":"sms",
+                "provider":"OKTA",
+                "vendorName":"OKTA",
+                "_links":{
+                    "enroll":{
+                        "href":"http://rain.okta1.com:1802/api/v1/authn/factors",
+                        "hints":{
+                            "allow":[
+                                "POST"
+                            ]
+                        }
+                    }
+                },
+                "status":"NOT_SETUP"
+            },
+            {
+                "factorType":"web",
+                "provider":"DUO",
+                "vendorName":"DUO",
+                "_links":{
+                    "enroll":{
+                        "href":"http://rain.okta1.com:1802/api/v1/authn/factors",
+                        "hints":{
+                            "allow":[
+                                "POST"
+                            ]
+                        }
+                    }
+                },
+                "status":"ACTIVE"
+            }
+        ]
+    },
+    "_links":{
+        "cancel":{
+            "href":"http://rain.okta1.com:1802/api/v1/authn/cancel",
+            "hints":{
+                "allow":[
+                    "POST"
+                ]
+            }
+        },
+        "skip":{
+            "href":"http://rain.okta1.com:1802/api/v1/authn/skip",
+            "hints":{
+                "allow":[
+                    "POST"
+                ]
+            }
+        }
+    }
+}
+~~~
+
 ### Activate Factor
 {:.api .api-operation}
 
@@ -2450,6 +2680,7 @@ Verifies an enrolled factor for an authentication transaction with the `MFA_REQU
 - [Verify SMS Factor](#verify-sms-factor)
 - [Verify TOTP Factor](#verify-totp-factor)
 - [Verify Push Factor](#verify-push-factor)
+- [Verify Duo Factor](#verify-duo-factor)
 
 #### Verify Security Question Factor
 {:.api .api-operation}
@@ -3044,6 +3275,160 @@ curl -v -X POST \
       }
     ]
   }
+}
+~~~
+
+#### Verify Duo Factor
+{:.api .api-operation}
+
+Verification of Dou factor is implemented as integration between OKTA api and Duo widget. The request starts with api call and then callback from the Duo widget and call to verification endpoint.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-d '{
+  "stateToken": "${stateToken}"
+}' "https://${org}.okta.com/api/v1/authn/factors/${factorId]/verify"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+    "stateToken":"00CzoxFVe4R2nv0hTxm32r1kayfrrOkuxcE2rfINwZ",
+    "expiresAt":"2016-07-13T14:13:58.000Z",
+    "status":"MFA_CHALLENGE",
+    "factorResult":"WAITING",
+    "_embedded":{
+        "user":{
+            "id":"00ukv3jVTgRjDctlX0g3",
+            "passwordChanged":"2016-07-13T13:29:58.000Z",
+            "profile":{
+                "login":"first.last@gexample.com",
+                "firstName":"First",
+                "lastName":"Last",
+                "locale":"en_US",
+                "timeZone":"America/Los_Angeles"
+            }
+        },
+        "factor":{
+            "id":"dsfkvdLeix4WsKK5W0g3",
+            "factorType":"web",
+            "provider":"DUO",
+            "vendorName":"DUO",
+            "profile":{
+                "credentialId":"first.last@example.com"
+            },
+            "_embedded":{
+                "verification":{
+                    "host":"<your endpoint>.duosecurity.com",
+                    "signature":"<your signature>",
+                    "factorResult":"WAITING",
+                    "_links":{
+                        "complete":{
+                            "href":"http://rain.okta1.com:1802/api/v1/authn/factors/dsfkvdLeix4WsKK5W0g3/lifecycle/duoCallback",
+                            "hints":{
+                                "allow":[
+                                    "POST"
+                                ]
+                            }
+                        },
+                        "script":{
+                            "href":"http://rain.okta1.com:1802/js/sections/duo/Duo-Web-v2.js",
+                            "type":"text/javascript; charset=utf-8"
+                        }
+                    }
+                }
+            }
+        },
+        "policy":{
+            "allowRememberDevice":true,
+            "rememberDeviceLifetimeInMinutes":15,
+            "rememberDeviceByDefault":false
+        }
+    },
+    "_links":{
+        "next":{
+            "name":"poll",
+            "href":"http://rain.okta1.com:1802/api/v1/authn/factors/dsfkvdLeix4WsKK5W0g3/verify",
+            "hints":{
+                "allow":[
+                    "POST"
+                ]
+            }
+        },
+        "cancel":{
+            "href":"http://rain.okta1.com:1802/api/v1/authn/cancel",
+            "hints":{
+                "allow":[
+                    "POST"
+                ]
+            }
+        },
+        "prev":{
+            "href":"http://rain.okta1.com:1802/api/v1/authn/previous",
+            "hints":{
+                "allow":[
+                    "POST"
+                ]
+            }
+        }
+    }
+}
+~~~
+
+##### Launch Duo iFrame
+{:.api .api-response .api-response-example}
+
+~~~html
+<script src="/js/sections/duo/Duo-Web-v2.js"></script>
+<script>
+  Duo.init({
+    'host': '{activation.host}',
+    'sig_request': '{activation.signature}',
+    'post_action': '{activation._links.complete.href}'
+  });
+</script>
+~~~
+
+##### Request Poll Verification Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-d '{
+  "stateToken": "${stateToken}"
+}' "https://${org}.okta.com/api/v1/authn/factors/${factorId]/verify"
+~~~
+
+##### Response Poll Verification Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+    "expiresAt":"2016-07-13T14:14:44.000Z",
+    "status":"SUCCESS",
+    "sessionToken":"201111XUk7La2gw5r5PV1IhU4WSd0fV6mvNYdlJoeqjuyej7S83x3Hr",
+    "_embedded":{
+        "user":{
+            "id":"00ukv3jVTgRjDctlX0g3",
+            "passwordChanged":"2016-07-13T13:29:58.000Z",
+            "profile":{
+                "login":"first.last@example.com",
+                "firstName":"First",
+                "lastName":"Last",
+                "locale":"en_US",
+                "timeZone":"America/Los_Angeles"
+            }
+        }
+    }
 }
 ~~~
 
