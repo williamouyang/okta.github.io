@@ -2453,6 +2453,11 @@ Parameter | Description                                      | Param Type | Data
 id        | `id` of user                                     | URL        | String   | TRUE     |
 sendEmail | Sends reset password email to the user if `true` | Query      | Boolean  | FALSE    | TRUE
 
+To ensure a successful password recovery lookup if an email address is associated with multiple users:
+
+* Okta no longer includes deactivated users in the lookup.
+* The lookup searches login IDs first, then primary email addresses, and then secondary email addresses.
+
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
@@ -2657,6 +2662,11 @@ Parameter    | Description                                         | Param Type 
 ------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
 id           | `id` of user                                        | URL        | String   | TRUE     |
 sendEmail    | Sends a forgot password email to the user if `true` | Query      | Boolean  | FALSE    | TRUE
+
+To ensure a successful password recovery lookup if an email address is associated with multiple users:
+
+* Okta no longer includes deactivated users in the lookup.
+* The lookup searches login IDs first, then primary email addresses, and then secondary email addresses.
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
