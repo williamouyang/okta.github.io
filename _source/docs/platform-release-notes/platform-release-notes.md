@@ -11,9 +11,8 @@ Check the [Current Release Status](https://support.okta.com/help/articles/Knowle
 ## Feature Enhancements: Password Complexity Requirements
 
 <!-- OKTA-88905 -->
-Two enhancements help clients to display password complexity requirements:
-
-The PasswordComplexity object includes parameters for password complexity requirements, `excludeUsername`, `age:minAgeMinutes`, and `age:historyCount`.
+To enable a platform client to display password
+complexity requirements to the user, we've enhanced the PasswordComplexity object to include those requirements: `excludeUsername`, `age:minAgeMinutes`, and `age:historyCount`.
 
 ~~~json
 {
