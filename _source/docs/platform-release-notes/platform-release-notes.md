@@ -5,7 +5,7 @@ title: Platform Release Notes July 13, 2016
 
 Release 2016.28
 
-## Feature Enhancements: Password Complexity Requirements
+## Feature Enhancement: Password Complexity Requirements
 
 <!-- OKTA-88905 -->
 To enable a platform client to display password
@@ -81,15 +81,15 @@ and [Answer Recovery Question](http://developer.okta.com/docs/api/resources/auth
 
 <!-- ## Bugs Fixed -->
 
-## Does Your Org Have These Changes Yet?
+### Does Your Org Have These Changes Yet?
 
 Check the footer of any Admin page in an org, for example the **Dashboard** or **Directory** tab, to verify the current release for that org.
 
-## Looking for Product Release Notes?
+### Looking for Product Release Notes?
 
 For changes outside the Okta platform, see the [Release Notes Knowledge Hub](https://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub).
 
-## Earlier Release Notes
+### Earlier Release Notes
 
 * [Platform Release Notes for the week ending Wednesday, July 7](platform-release-notes2016-27.html)
 * [Platform Release Notes for the week ending Wednesday, June 29](platform-release-notes2016-26.html)
