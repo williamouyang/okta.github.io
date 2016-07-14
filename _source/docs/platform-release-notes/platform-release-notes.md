@@ -5,9 +5,6 @@ title: Platform Release Notes July 13, 2016
 
 Release 2016.28
 
-Releases are rolled out to organizations in a staggered fashion: first to preview orgs, then to production orgs. 
-Check the [Current Release Status](https://support.okta.com/help/articles/Knowledge_Article/Current-Release-Status) to verify whether the changes in this document have rolled out to your org yet.
-
 ## Feature Enhancements: Password Complexity Requirements
 
 <!-- OKTA-88905 -->
@@ -84,6 +81,10 @@ For more information, see [Password Complexity Object](http://developer.okta.com
 and [Answer Reovery Question](http://developer.okta.com/docs/api/resources/authn#answer-recovery-question).
 
 <!-- ## Bugs Fixed -->
+
+## Does Your Org Have These Changes Yet?
+
+Check the footer of any Admin page, for example the **Dashboard** or **Directory** tab, to verify the current release for an org.
 
 ## Looking for Product Release Notes?
 
