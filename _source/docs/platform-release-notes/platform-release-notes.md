@@ -84,7 +84,7 @@ and [Answer Reovery Question](http://developer.okta.com/docs/api/resources/authn
 
 ## Does Your Org Have These Changes Yet?
 
-Check the footer of any Admin page, for example the **Dashboard** or **Directory** tab, to verify the current release for an org.
+Check the footer of any Admin page in an org, for example the **Dashboard** or **Directory** tab, to verify the current release for that org.
 
 ## Looking for Product Release Notes?
 
