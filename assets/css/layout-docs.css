@@ -492,6 +492,10 @@ h6:hover .header-link {
   border-top-right-radius: 3px;
   border-top-left-radius: 3px; }
 
+/* -------------------------- beta */
+.beta {
+  display: none; }
+
 /* -------------------------- sidebar */
 #sidebar-wrapper {
   overflow: auto; }
