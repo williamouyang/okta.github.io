@@ -127,7 +127,7 @@ The admin can configure custom scopes and claims via the Authorization Server ta
 
 ##### Custom scopes
 {:.beta}
-If the request that generates the access token contains any custom scopes, those scopes will be part of the <b>scp</b> claim together with the scopes provided from the [OIDC specification](http://openid.net/specs/openid-connect-core-1_0.html).
+If the request that generates the access token contains any custom scopes, those scopes will be part of the <b>scp</b> claim together with the scopes provided from the [OIDC specification](http://openid.net/specs/openid-connect-core-1_0.html). The form of these custom scopes must conform to the [OAuth2 specification](https://tools.ietf.org/html/rfc6749#section-3.3).
 {:.beta}
 
 ##### Custom claims
