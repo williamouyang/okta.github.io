@@ -78,7 +78,7 @@ Below are some high-level details on the process and timeline for building a SCI
 * Partner identifies small set of customers to test integration with
 
 #### Promote (Week 8)
-* Once 2 live & happy customers, publish to public Okta Application Network
+* Once 1 live & happy customers, publish to public Okta Application Network
 * Okta Application Network Gold partner & benefits
 
 > The timeline outlined is our best estimate. The process may take more or less time than described here.
