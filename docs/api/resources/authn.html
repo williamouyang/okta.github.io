@@ -954,16 +954,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </table>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"expiration"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nt">"expiration"</span><span class="p">:{</span><span class="w">
     </span><span class="nt">"passwordExpireDays"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-  </span><span class="p">},</span><span class="w">
+  </span><span class="p">},</span><span class="w"> 
   </span><span class="nt">"complexity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"minLowerCase"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"minUpperCase"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"minNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"minSymbol"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+    </span><span class="nt">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"minLowerCase"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"minUpperCase"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"minNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"minSymbol"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"excludeUsername"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="w">
+    </span><span class="p">},</span><span class="w"> 
+   </span><span class="nt">"age"</span><span class="p">:{</span><span class="w">
+     </span><span class="nt">"minAgeMinutes"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w"> 
+     </span><span class="nt">"historyCount"</span><span class="p">:</span><span class="mi">0</span><span class="w"> 
+    </span><span class="p">}</span><span class="w"> 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
@@ -1067,6 +1072,61 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <tr>
       <td>minSymbol</td>
       <td>minimum number of symbol characters for password</td>
+      <td>Number</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>excludeUsername</td>
+      <td>Prevents username from appearing in the password</td>
+      <td>boolean</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="password-age-object">Password Age Object</h4>
+
+<p>Specifies the password requirements related to password age and history</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Readonly</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>minAgeMinutes</td>
+      <td>minimum number of minutes required since the last password change</td>
+      <td>Number</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>historyCount</td>
+      <td>Number of previous passwords that the current password can’t match</td>
       <td>Number</td>
       <td>FALSE</td>
       <td>FALSE</td>
@@ -5380,6 +5440,23 @@ Okta will not publish additional metadata about the user until primary authentic
         </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Murphy"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"locale"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en_US"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"timeZone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nt">"policy"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"expiration"</span><span class="p">:{</span><span class="w">
+      </span><span class="nt">"passwordExpireDays"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"complexity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"minLowerCase"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"minUpperCase"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"minNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"minSymbol"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"excludeUsername"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="w">
+       </span><span class="p">},</span><span class="w">
+       </span><span class="nt">"age"</span><span class="p">:{</span><span class="w">
+         </span><span class="nt">"minAgeMinutes"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"historyCount"</span><span class="p">:</span><span class="mi">0</span><span class="w">  
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
