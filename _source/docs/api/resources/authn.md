@@ -356,7 +356,7 @@ Specifies the password complexity requirements of the assigned password policy
 
 #### Password Age Object
 
-Specifies password complexity requirements related to previous passwords
+Specifies the password requirements related to password age and history
 
 |--------------+------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+------------|
 | Property     | Description                                          | DataType | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
@@ -3841,7 +3841,7 @@ curl -v -X POST \
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
       }
-          },
+   },
    "policy": {
     "expiration":{
       "passwordExpireDays": 0
