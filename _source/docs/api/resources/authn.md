@@ -311,16 +311,21 @@ A subset of policy settings for the user's assigned password policy published du
 
 ~~~json
 {
-  "expiration": {
+  "expiration":{
     "passwordExpireDays": 0
-  },
+  }, 
   "complexity": {
-    "minLength": 8,
-    "minLowerCase": 1,
-    "minUpperCase": 1,
-    "minNumber": 1,
-    "minSymbol": 0
-  }
+    "minLength": 8, 
+    "minLowerCase": 1, 
+    "minUpperCase": 1, 
+    "minNumber": 1, 
+    "minSymbol": 0, 
+    "excludeUsername": "true"
+    }, 
+   "age":{
+     "minAgeMinutes":0, 
+     "historyCount":0 
+    } 
 }
 ~~~
 
@@ -346,8 +351,19 @@ Specifies the password complexity requirements of the assigned password policy
 | minUpperCase | minimum number of upper case characters for password | Number   | FALSE    | FALSE  | TRUE     |           |           |            |
 | minNumber    | minimum number of numeric characters for password    | Number   | FALSE    | FALSE  | TRUE     |           |           |            |
 | minSymbol    | minimum number of symbol characters for password     | Number   | FALSE    | FALSE  | TRUE     |           |           |            |
+| excludeUsername    | Prevents username from appearing in the password     | boolean   | FALSE    | FALSE  | TRUE     |           |           |            |
 |--------------+------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+------------|
 
+#### Password Age Object
+
+Specifies the password requirements related to password age and history
+
+|--------------+------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+------------|
+| Property     | Description                                          | DataType | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| ------------ | ---------------------------------------------------- | -------- | -------- | ------ | -------- | --------- | ----------| ---------- |
+| minAgeMinutes    | minimum number of minutes required since the last password change            | Number   | FALSE    | FALSE  | TRUE     |           |           |            |
+| historyCount |Number of previous passwords that the current password can't match | Number   | FALSE    | FALSE  | TRUE     |           |           |            |
+|--------------+------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+------------|
 
 ### Factor Object
 
@@ -3824,6 +3840,23 @@ curl -v -X POST \
         "lastName": "Murphy",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
+      }
+   },
+   "policy": {
+    "expiration":{
+      "passwordExpireDays": 0
+      },
+      "complexity": {
+        "minLength": 8,
+        "minLowerCase": 1,
+        "minUpperCase": 1,
+        "minNumber": 1,
+        "minSymbol": 0,
+        "excludeUsername": "true"
+       },
+       "age":{
+         "minAgeMinutes":0,
+         "historyCount":0  
       }
     }
   },
