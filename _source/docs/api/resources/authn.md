@@ -1919,7 +1919,7 @@ curl -v -X POST \
 #### Enroll Duo Factor
 {:.api .api-operation}
 
-Enrolls a user with a Duo factor.  The enrollment process is interaction between OKTA and Duo code. The process starts with enrollment request to OKTA and then continue with Dou widget/script that handles the enrollment. At the end of the process it will make a callback to Okta to complete the enrollment.
+Enrolls a user with a Duo factor.  The enrollment process starts with an enrollment request to Okta, then continues with a Duo widget or script that handles the enrollment. At the end of the process, Duo makes a callback to Okta to complete the enrollment.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -2046,7 +2046,7 @@ curl -v -X POST \
 ##### Poll for Duo WebSdk Activation Response Example
 {:.api .api-response .api-response-example}
 
-In this example we just enrolled and activated Duo but the question and sms factors are not enrolled.
+In this example we just enrolled and activated Duo but the question and SMS factors are not enrolled.
 
 ~~~json
 {
@@ -3281,7 +3281,7 @@ curl -v -X POST \
 #### Verify Duo Factor
 {:.api .api-operation}
 
-Verification of Dou factor is implemented as integration between OKTA api and Duo widget. The request starts with api call and then callback from the Duo widget and call to verification endpoint.
+Verification of the Duo factor is implemented as an integration between the OKTA API and Duo widget. The request starts with an API call and then callback from the Duo widget and call to the verification endpoint.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
