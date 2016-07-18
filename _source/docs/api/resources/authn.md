@@ -1919,7 +1919,7 @@ curl -v -X POST \
 #### Enroll Duo Factor
 {:.api .api-operation}
 
-Enrolls a user with a Duo factor.  The enrollment process starts with an enrollment request to Okta, then continues with a Duo widget or script that handles the enrollment. At the end of the process, Duo makes a callback to Okta to complete the enrollment.
+Enrolls a user with a Duo factor.  The enrollment process starts with an enrollment request to Okta, then continues with a Duo widget and script that handles the enrollment. At the end of the process, Duo makes a callback to Okta to complete the enrollment.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
