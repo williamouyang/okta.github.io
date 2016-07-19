@@ -18,8 +18,8 @@ For more information, see the `/oauth2/v1authorize` [Response Parameters](http:/
 ### SHA256 Certificate for New SAML IdP Instances
 
 <!-- OKTA-91496 -->
-The default certificate used by new SAML IdP instances to sign assertions is now a SHA256 certificate. 
-Existing IdPs continue to use the certificate they have now.
+The default certificate used by new SAML IdP instances to sign assertions is a SHA256 certificate. 
+Existing SAML IdP instances will continue to use the certificate they currently have.
  
 ## Bug Fixed
 
