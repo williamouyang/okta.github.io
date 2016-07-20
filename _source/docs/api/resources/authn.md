@@ -3281,7 +3281,9 @@ curl -v -X POST \
 #### Verify Duo Factor
 {:.api .api-operation}
 
-Verification of the Duo factor is implemented as an integration between the OKTA API and Duo widget. The request starts with an API call and then callback from the Duo widget and call to the verification endpoint.
+Verification of the Duo factor is implemented as an integration between the Okta API and Duo widget. Verification starts with a
+request to the Okta API, then continues with a Duo widget and script that handles verification. At the end of the process, Duo
+makes a callback to the Okta verification endpoint to complete the verification.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
