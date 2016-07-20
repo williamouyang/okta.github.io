@@ -128,7 +128,6 @@ The ID Token (*id_token*) consists of three period-separated, base64URL-encoded 
   "locale":"en-US",
   "updated_at":1311280970,
   "email":"john.doe@example.com",
-  "email_verified":true,
   "address" : { "street_address": "123 Hollywood Blvd.", 
   		"locality": "Los Angeles", 
   		"region": "CA", 
@@ -178,7 +177,7 @@ Claims in the payload are either base claims, independent of scope (always retur
 | idp     | The id of the Identity Provider that the user authenticated to Okta with. (Used for Social Auth and Inbound SAML). If it was Okta, the value would be the OrgId.  | String    | "00ok1u7AsAkrwdZL3z0g3"    |
 | nonce     |  Value used to associate a Client session with an ID Token, and to mitigate replay attacks. |  String   | "n-0S6_WzA2Mj"  |
 | at_hash     | The base64URL-encoded first 128-bits of the SHA-256 hash of the Access Token. This is only returned if an Access Token is also returned with an ID Token.  | String    | "MTIzNDU2Nzg5MDEyMzQ1Ng"     |
-| c_hash  | The base64URL-encoded first 128-bits of the SHA-256 hash of the authorization code. This is only returned if an authorization code is also returned with the id_token. | String |    |
+| c_hash  | The base64URL-encoded first 128-bits of the SHA-256 hash of the authorization code. This is only returned if an authorization code is also returned with the ID Token. | String | "DE5MzQ1TIzlr30gokT2UDN"   |
            
 ##### Scope-dependent claims (not always returned)
 
@@ -197,7 +196,6 @@ Claims in the payload are either base claims, independent of scope (always retur
 | locale     |  profile   | Language and [ISO3166‑1](http://www.iso.org/iso/country_codes) country code in uppercase, separated by a dash.   | String    | "en-US"     |
 | updated_at     | profile    | Time the user's information was last updated, represented in Unix time (seconds).   | Integer    | 1311280970     |
 | email     |  email   | User's preferred e-mail address. The resource provider must not rely upon this value being unique.   | String    | "john.doe@example.com"     |
-| email_verified     |  email   | True if the user's e-mail address has been verified; otherwise false.   | boolean    | true     |
 | address     | address    | User's preferred postal address. The value of the address member is a JSON structure containing *street_address*, *locality*, *region*, *postal_code*, and *country*.   | JSON structure    | { "street_address": "123 Hollywood Blvd.", "locality": "Los Angeles", "region": "CA", "postal_code": "90210", "country": "US" }     |
 | phone_number     |  phone   | User's preferred telephone number in E.164 format.   | String    | 	"+1 (425) 555-1212"     |
 | groups    | groups    | The groups that the user is a member of that also match the group filter of the client app. | List | ["MyGroup1", "MyGroup2", "MyGroup3"] |
@@ -258,7 +256,6 @@ Returns a JSON document with information requested in the scopes list of the tok
   "locale":"en-US",
   "updated_at":1311280970,
   "email":"john.doe@example.com",
-  "email_verified":true,
   "address" : { "street_address": "123 Hollywood Blvd.", "locality": "Los Angeles", "region": "CA", "postal_code": "90210", "country": "US" },
   "phone_number":"+1 (425) 555-1212"
 }
@@ -346,7 +343,7 @@ client_id         | Your app's client ID. | Query      | String    | FALSE    | 
 {
   "keys": [
     {
-      "kid": "DS7gC_ljzzhv2cP1adQ7F26kvVRi3IGeo3PP9PPxoo"
+      "kid": "DS7gC_ljzzhv2cP1adQ7F26kvVRi3IGeo3PP9PPxoo",
       "alg": "RS256",
       "e": "AQAB",
       "n": "paDgqMZdppjqc2-Q1jvcJmUPvQ6Uwz1IofmuyTxh2C4OBXsAF0Szk_Y0jOa6pTWJAgbHF5bxkFbH11isA9WpNbuPa-CprC6gTfmpb
@@ -456,7 +453,6 @@ This API doesn't require any authentication and returns a JSON object with the f
         "middle_name",
         "family_name",
         "email",
-        "email_verified",
         "profile",
         "zoneinfo",
         "locale",
