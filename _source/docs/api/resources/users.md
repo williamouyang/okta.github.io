@@ -291,7 +291,12 @@ Specifies the authentication provider that validates the user's password credent
 
 ### Links Object
 
-Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the current status of a user.  The Links Object is used for dynamic discovery of related resources and lifecycle or credential operations.  The Links Object is **read-only**.
+Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the current status of a user.  The Links Object is used for dynamic discovery of relaed resources and lifecycle or credential operations.  The Links Object is **read-only**.
+
+#### Individual Users vs Collection of Users
+
+For an individual User result, the Links Object contains a full set of link relations available for that User as determined by Policy. For a collection of Users, the Links Object contains only the self link. Operations that return a collection of Users include [List Users](#list-users) and [List Group Members](groups.html#list-group-members).
+
 
 |------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Link Relation Type     | Description                                                                                                                                               |
@@ -1182,8 +1187,8 @@ Link: <https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limi
       }
     },
     "_links": {
-      "activate": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"
+      "self": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
       }
     }
   },
@@ -1215,26 +1220,8 @@ Link: <https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limi
       }
     },
     "_links": {
-      "resetPassword": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
-      },
-      "resetFactors": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
-      },
-      "expirePassword": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
-      },
-      "forgotPassword": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
-      },
-      "changeRecoveryQuestion": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
-      },
-      "deactivate": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
-      },
-      "changePassword": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+      "self": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
       }
     }
   }
@@ -1298,26 +1285,8 @@ curl -v -X GET \
       }
     },
     "_links": {
-      "resetPassword": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
-      },
-      "resetFactors": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
-      },
-      "expirePassword": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
-      },
-      "forgotPassword": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
-      },
-      "changeRecoveryQuestion": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
-      },
-      "deactivate": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
-      },
-      "changePassword": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+      "self": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
       }
     }
   }
@@ -1426,26 +1395,8 @@ curl -v -X GET \
       }
     },
     "_links": {
-      "resetPassword": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
-      },
-      "resetFactors": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
-      },
-      "expirePassword": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
-      },
-      "forgotPassword": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
-      },
-      "changeRecoveryQuestion": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
-      },
-      "deactivate": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
-      },
-      "changePassword": {
-        "href": "https://your-domain.okta.com/api/v1/users/000ub0oNGTSWTBKOLGLNR/credentials/change_password"
+      "self": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
       }
     }
   }
@@ -1498,26 +1449,8 @@ curl -v -X GET \
       }
     },
     "_links": {
-      "resetPassword": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
-      },
-      "resetFactors": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
-      },
-      "expirePassword": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
-      },
-      "forgotPassword": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
-      },
-      "changeRecoveryQuestion": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
-      },
-      "deactivate": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
-      },
-      "changePassword": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+      "self": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
       }
     }
   }
@@ -1607,26 +1540,8 @@ curl -v -X GET \
       }
     },
     "_links": {
-      "resetPassword": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
-      },
-      "resetFactors": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
-      },
-      "expirePassword": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
-      },
-      "forgotPassword": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
-      },
-      "changeRecoveryQuestion": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
-      },
-      "deactivate": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
-      },
-      "changePassword": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+      "self": {
+        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
       }
     }
   }
@@ -1703,13 +1618,8 @@ curl -v -X GET \
             }
         },
         "_links": {
-            "resetPassword": {
-                "href": "http://your-domain.okta.com/api/v1/users/00u19uiKQa0xXkbdGLNR/lifecycle/reset_password",
-                "method": "POST"
-            },
-            "deactivate": {
-                "href": "http://your-domain.okta.com/api/v1/users/00u19uiKQa0xXkbdGLNR/lifecycle/deactivate",
-                "method": "POST"
+            "self": {
+                "href": "http://your-domain.okta.com/api/v1/users/00u19uiKQa0xXkbdGLNR"
             }
         }
     }
