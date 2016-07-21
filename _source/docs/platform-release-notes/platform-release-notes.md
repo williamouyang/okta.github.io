@@ -7,7 +7,7 @@ Release 2016.29
 
 ## Feature Enhancements
  
-### Response Parameter `expires_in`
+### New Response Parameter For Access Token Expiration
 
 <!-- OKTA-94115 -->
 The `expires_in` response parameter tells you the number of seconds before a `token` (Access Token) expires. If your
