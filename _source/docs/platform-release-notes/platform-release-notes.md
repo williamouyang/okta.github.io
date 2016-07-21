@@ -1,85 +1,31 @@
 ---
 layout: docs_page
-title: Platform Release Notes July 13, 2016
+title: Platform Release Notes July 20, 2016
 ---
 
-Release 2016.28
+Release 2016.29
 
-## Feature Enhancement: Password Complexity Requirements
+## Feature Enhancements
+ 
+### Response Parameter `expires_in`
 
-<!-- OKTA-88905 -->
-To enable a platform client to display password
-complexity requirements to the user, we've enhanced the PasswordComplexity object to include those requirements: `excludeUsername`, `age:minAgeMinutes`, and `age:historyCount`.
+<!-- OKTA-94115 -->
+The `expires_in` response parameter tells you the number of seconds before a `token` (Access Token) expires. If your
+response from the `/oauth2/v1/authorize` endpoint includes an Access Token, `expires_in` is included in the response.
 
-~~~json
-{
-  "expiration":{
-    "passwordExpireDays": 0
-  }, 
-  "complexity": {
-    "minLength": 8, 
-    "minLowerCase": 1, 
-    "minUpperCase": 1, 
-    "minNumber": 1, 
-    "minSymbol": 0, 
-    "excludeUsername": "true"
-    }, 
-   "age":{
-     "minAgeMinutes":0, 
-     "historyCount":0 
-    } 
-}
-~~~
+For more information, see the `/oauth2/v1authorize` [Response Parameters](http://developer.okta.com/docs/api/resources/oauth2#response-parameters).
 
-Also, the response to an answer recovery question (`/api/v1/authn/recovery/answer`) includes the PasswordPolicy object, which contains the PasswordComplexity object:
+### SHA256 Certificate for New SAML IdP Instances
 
-~~~json
-{
-  "stateToken": "00lMJySRYNz3u_rKQrsLvLrzxiARgivP8FB_1gpmVb",
-  "expiresAt": "2015-11-03T10:15:57.000Z",
-  "status": "PASSWORD_RESET",
-  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
-  "_embedded": {
-    "user": {
-      "id": "00ub0oNGTSWTBKOLGLNR",
-      "passwordChanged": "2015-09-08T20:14:45.000Z",
-      "profile": {
-        "login": "dade.murphy@example.com",
-        "firstName": "Dade",
-        "lastName": "Murphy",
-        "locale": "en_US",
-        "timeZone": "America/Los_Angeles"
-      }
-    },
-    "policy": {
-     "expiration":{
-       "passwordExpireDays": 0
-       },
-       "complexity": {
-         "minLength": 8,
-         "minLowerCase": 1,
-         "minUpperCase": 1,
-         "minNumber": 1,
-         "minSymbol": 0,
-         "excludeUsername": "true"
-       },
-       "age":{
-         "minAgeMinutes":0,
-         "historyCount":0
-       }
-    }
-  },
-  "_links": { 
-        ...
-  }
-}
-~~~
+<!-- OKTA-91496 -->
+The default certificate used by new SAML IdP instances to sign assertions is a SHA256 certificate. 
+Existing SAML IdP instances will continue to use the certificate they currently have.
+ 
+## Bug Fixed
 
-When performing a self-service password reset (forgot password), the request for an answer recovery question is made in response to the security question challenge.
-For more information, see [Password Complexity Object](http://developer.okta.com/docs/api/resources/authn#password-complexity-object)
-and [Answer Recovery Question](http://developer.okta.com/docs/api/resources/authn#answer-recovery-question).
+The following issue is fixed:
 
-<!-- ## Bugs Fixed -->
+* Requiring `okta-auth-js` didn't work unless you also defined global variables in the build flow. (OKTA-94206)
 
 ### Does Your Org Have These Changes Yet?
 
@@ -91,6 +37,7 @@ For changes outside the Okta platform, see the [Release Notes Knowledge Hub](htt
 
 ### Earlier Release Notes
 
+* [Platform Release Notes for the week ending Wednesday, July 13](platform-release-notes2016-28.html)
 * [Platform Release Notes for the week ending Wednesday, July 7](platform-release-notes2016-27.html)
 * [Platform Release Notes for the week ending Wednesday, June 29](platform-release-notes2016-26.html)
 * [Platform Release Notes for the week ending Wednesday, June 22](platform-release-notes2016-25.html)
