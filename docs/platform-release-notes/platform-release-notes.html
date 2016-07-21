@@ -13,7 +13,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="/favicon.ico">
-	<title>Platform Release Notes July 13, 2016 | Okta Developer</title>
+	<title>Platform Release Notes July 20, 2016 | Okta Developer</title>
 	<meta name="description" content="Secure, scalable, and highly available authentication and user management for any app.">
 
 	<link rel="canonical" href="http://developer.okta.com/docs/platform-release-notes/platform-release-notes">
@@ -123,7 +123,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	<span class="toggle-menu"></span>
 	<div id="sidebar-wrapper">
 		<div class="docs-sidebar-block" id="myScrollspy" >
-		<h2>Platform Release Notes</h2>                                                                                              
+		<h2>Platform Release Notes</h2>                                                                                                    
 		</div>
 	</div>
 </div>
@@ -158,87 +158,35 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		
 		<header>
 			<a href="https://github.com/okta/okta.github.io/tree/master/_source/docs/platform-release-notes/platform-release-notes.md" target="_blank" class="btn btn-default btn-sm btn-github"><i class="fa fa-github"></i> Edit on GitHub</a>
-			<h1 class="page-title">Platform Release Notes July 13, 2016</h1>
+			<h1 class="page-title">Platform Release Notes July 20, 2016</h1>
 		</header>
 		
 
-		<p>Release 2016.28</p>
+		<p>Release 2016.29</p>
 
-<h2 id="feature-enhancement-password-complexity-requirements">Feature Enhancement: Password Complexity Requirements</h2>
+<h2 id="feature-enhancements">Feature Enhancements</h2>
 
-<!-- OKTA-88905 -->
-<p>To enable a platform client to display password
-complexity requirements to the user, we’ve enhanced the PasswordComplexity object to include those requirements: <code class="highlighter-rouge">excludeUsername</code>, <code class="highlighter-rouge">age:minAgeMinutes</code>, and <code class="highlighter-rouge">age:historyCount</code>.</p>
+<h3 id="new-response-parameter-for-access-token-expiration">New Response Parameter For Access Token Expiration</h3>
 
-<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"expiration"</span><span class="p">:{</span><span class="w">
-    </span><span class="nt">"passwordExpireDays"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-  </span><span class="p">},</span><span class="w"> 
-  </span><span class="nt">"complexity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> 
-    </span><span class="nt">"minLowerCase"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> 
-    </span><span class="nt">"minUpperCase"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> 
-    </span><span class="nt">"minNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> 
-    </span><span class="nt">"minSymbol"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> 
-    </span><span class="nt">"excludeUsername"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="w">
-    </span><span class="p">},</span><span class="w"> 
-   </span><span class="nt">"age"</span><span class="p">:{</span><span class="w">
-     </span><span class="nt">"minAgeMinutes"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w"> 
-     </span><span class="nt">"historyCount"</span><span class="p">:</span><span class="mi">0</span><span class="w"> 
-    </span><span class="p">}</span><span class="w"> 
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<!-- OKTA-94115 -->
+<p>The <code class="highlighter-rouge">expires_in</code> response parameter tells you the number of seconds before a <code class="highlighter-rouge">token</code> (Access Token) expires. If your
+response from the <code class="highlighter-rouge">/oauth2/v1/authorize</code> endpoint includes an Access Token, <code class="highlighter-rouge">expires_in</code> is included in the response.</p>
 
-<p>Also, the response to an answer recovery question (<code class="highlighter-rouge">/api/v1/authn/recovery/answer</code>) includes the PasswordPolicy object, which contains the PasswordComplexity object:</p>
+<p>For more information, see the <code class="highlighter-rouge">/oauth2/v1authorize</code> <a href="http://developer.okta.com/docs/api/resources/oauth2#response-parameters">Response Parameters</a>.</p>
 
-<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00lMJySRYNz3u_rKQrsLvLrzxiARgivP8FB_1gpmVb"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PASSWORD_RESET"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"relayState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/myapp/some/deep/link/i/want/to/return/to"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"passwordChanged"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-09-08T20:14:45.000Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dade.murphy@example.com"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dade"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Murphy"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"locale"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en_US"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"timeZone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"policy"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-     </span><span class="nt">"expiration"</span><span class="p">:{</span><span class="w">
-       </span><span class="nt">"passwordExpireDays"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-       </span><span class="p">},</span><span class="w">
-       </span><span class="nt">"complexity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-         </span><span class="nt">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"minLowerCase"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"minUpperCase"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"minNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"minSymbol"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"excludeUsername"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="w">
-       </span><span class="p">},</span><span class="w">
-       </span><span class="nt">"age"</span><span class="p">:{</span><span class="w">
-         </span><span class="nt">"minAgeMinutes"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"historyCount"</span><span class="p">:</span><span class="mi">0</span><span class="w">
-       </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> 
-        </span><span class="err">...</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<h3 id="sha256-certificate-for-new-saml-idp-instances">SHA256 Certificate for New SAML IdP Instances</h3>
 
-<p>When performing a self-service password reset (forgot password), the request for an answer recovery question is made in response to the security question challenge.
-For more information, see <a href="http://developer.okta.com/docs/api/resources/authn#password-complexity-object">Password Complexity Object</a>
-and <a href="http://developer.okta.com/docs/api/resources/authn#answer-recovery-question">Answer Recovery Question</a>.</p>
+<!-- OKTA-91496 -->
+<p>The default certificate used by new SAML IdP instances to sign assertions is a SHA256 certificate. 
+Existing SAML IdP instances will continue to use the certificate they currently have.</p>
 
-<!-- ## Bugs Fixed -->
+<h2 id="bug-fixed">Bug Fixed</h2>
+
+<p>The following issue is fixed:</p>
+
+<ul>
+  <li>Requiring <code class="highlighter-rouge">okta-auth-js</code> didn’t work unless you also defined global variables in the build flow. (OKTA-94206)</li>
+</ul>
 
 <h3 id="does-your-org-have-these-changes-yet">Does Your Org Have These Changes Yet?</h3>
 
@@ -251,6 +199,7 @@ and <a href="http://developer.okta.com/docs/api/resources/authn#answer-recovery-
 <h3 id="earlier-release-notes">Earlier Release Notes</h3>
 
 <ul>
+  <li><a href="platform-release-notes2016-28.html">Platform Release Notes for the week ending Wednesday, July 13</a></li>
   <li><a href="platform-release-notes2016-27.html">Platform Release Notes for the week ending Wednesday, July 7</a></li>
   <li><a href="platform-release-notes2016-26.html">Platform Release Notes for the week ending Wednesday, June 29</a></li>
   <li><a href="platform-release-notes2016-25.html">Platform Release Notes for the week ending Wednesday, June 22</a></li>
