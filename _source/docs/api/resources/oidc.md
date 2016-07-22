@@ -128,6 +128,7 @@ The ID Token (*id_token*) consists of three period-separated, base64URL-encoded 
   "locale":"en-US",
   "updated_at":1311280970,
   "email":"john.doe@example.com",
+  "email_verified":true,
   "address" : { "street_address": "123 Hollywood Blvd.", 
   		"locality": "Los Angeles", 
   		"region": "CA", 
@@ -196,6 +197,7 @@ Claims in the payload are either base claims, independent of scope (always retur
 | locale     |  profile   | Language and [ISO3166‑1](http://www.iso.org/iso/country_codes) country code in uppercase, separated by a dash.   | String    | "en-US"     |
 | updated_at     | profile    | Time the user's information was last updated, represented in Unix time (seconds).   | Integer    | 1311280970     |
 | email     |  email   | User's preferred e-mail address. The resource provider must not rely upon this value being unique.   | String    | "john.doe@example.com"     |
+| email_verified     |  email   | True if the user's e-mail address (Okta primary email) has been verified; otherwise false.   | boolean    | true     |
 | address     | address    | User's preferred postal address. The value of the address member is a JSON structure containing *street_address*, *locality*, *region*, *postal_code*, and *country*.   | JSON structure    | { "street_address": "123 Hollywood Blvd.", "locality": "Los Angeles", "region": "CA", "postal_code": "90210", "country": "US" }     |
 | phone_number     |  phone   | User's preferred telephone number in E.164 format.   | String    | 	"+1 (425) 555-1212"     |
 | groups    | groups    | The groups that the user is a member of that also match the group filter of the client app. | List | ["MyGroup1", "MyGroup2", "MyGroup3"] |
@@ -256,6 +258,7 @@ Returns a JSON document with information requested in the scopes list of the tok
   "locale":"en-US",
   "updated_at":1311280970,
   "email":"john.doe@example.com",
+  "email_verified":true,
   "address" : { "street_address": "123 Hollywood Blvd.", "locality": "Los Angeles", "region": "CA", "postal_code": "90210", "country": "US" },
   "phone_number":"+1 (425) 555-1212"
 }
@@ -453,6 +456,7 @@ This API doesn't require any authentication and returns a JSON object with the f
         "middle_name",
         "family_name",
         "email",
+        "email_verified",
         "profile",
         "zoneinfo",
         "locale",
