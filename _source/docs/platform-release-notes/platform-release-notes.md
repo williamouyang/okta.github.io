@@ -18,10 +18,10 @@ For more information about creating custom apps with the API, see [Apps API: Add
 
 ## Feature Enhancements
  
-### User-Matching Improvement for SAML 2.0 Identity Providers (IdPs)
+### User-Matching Improvement for SAML Identity Providers (IdPs)
  
 <!-- OKTA-93061 -->
-For IdPs using SAML 2.0, you can now match transformed IdP usernames using more attributes.
+For SAML IdPs, you can now match transformed IdP usernames using more attributes.
 To match on an attribute other than username, email, or either, specify the attribute name in the property `matchAttribute`, 
 and specify the value `CUSTOM_ATTRIBUTE` in `matchType`.
  
