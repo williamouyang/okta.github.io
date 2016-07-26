@@ -21,11 +21,11 @@ For more information about creating custom apps with the API, see [Apps API: Add
 ### User-Matching Improvement for SAML 2.0 Identity Providers (IdPs)
  
 <!-- OKTA-93061 -->
-For IdPs using SAML 2.0, you can now use more than username, email, or both to match transformed IdP usernames.
-To match on a base attribute or custom attribute, specify the attribute in the property `matchAttribute`, 
+For IdPs using SAML 2.0, you can now match transformed IdP usernames using more attributes.
+To match on an attribute other than username, email, or either, specify the attribute name in the property `matchAttribute`, 
 and specify the value `CUSTOM_ATTRIBUTE` in `matchType`.
  
-For more information, see [Identity Providers](/docs/resources/api/idps.html#subject-policy-object)
+For more information, see [Identity Providers](/docs/resources/api/idps.html#subject-policy-object).
 
 > Contact Okta Support to enable this Early Access feature.
 
@@ -35,14 +35,14 @@ For more information, see [Identity Providers](/docs/resources/api/idps.html#sub
 The Okta Sign-In Widget release 1.5.0 contains the following enhancements:
  
 * Passwords for multifactor authentication (MFA) are masked.
-* The annotations `@okta/i18n` and `@okta/courage` are optional, to allow `npm install` to work properly.
+* The dependencies `@okta/i18n` and `@okta/courage` are optional, to allow `npm install` to work properly.
 * The **Show Answer** checkbox has been replaced with a simpler **Show/Hide** toggle button in the **Answer** field.
  
 ## Bug Fixed
 
 The following issues are fixed:
 
-* For some SAML IdPs, sending a SAML request with the app setting `forceAuthn` enabled resulted in an HTTP Error 400. (OKTA-89653)
+* For some SAML integrations, an SP-init flow that sent an SP's SAML request with `forceAuthn` set to `true` resulted in an HTTP Error 400. (OKTA-89653)
 * When configuring an app with OpenID Connect, some redirect URIs weren't saved correctly. (OKTA-90445)
 * Problems occurred in some orgs when deleting a very large group using the API. (OKTA-91383)
 
