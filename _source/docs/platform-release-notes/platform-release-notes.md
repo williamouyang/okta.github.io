@@ -38,7 +38,7 @@ The Okta Sign-In Widget release 1.5.0 contains the following enhancements:
 * The dependencies `@okta/i18n` and `@okta/courage` are optional, to allow `npm install` to work properly.
 * The **Show Answer** checkbox has been replaced with a simpler **Show/Hide** toggle button in the **Answer** field.
  
-## Bug Fixed
+## Bugs Fixed
 
 The following issues are fixed:
 
