@@ -42,7 +42,6 @@ The Okta Sign-In Widget release 1.5.0 contains the following enhancements:
 
 The following issues are fixed:
 
-* For some SAML integrations, an SP-init flow that sent an SP's SAML request with `forceAuthn` set to `true` resulted in an HTTP Error 400. (OKTA-89653)
 * When configuring an app with OpenID Connect, some redirect URIs weren't saved correctly. (OKTA-90445)
 * Problems occurred in some orgs when deleting a very large group using the API. (OKTA-91383)
 
