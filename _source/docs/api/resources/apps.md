@@ -14,15 +14,16 @@ The Okta Application API provides operations to manage applications and/or assig
 
 ~~~json
 {
-  "id": "0oabhnUQFYHMBNVSVXMV",
-  "name": "template_saml_2_0",
-  "label": "Example SAML App",
+  "id": "0oaud6YvvS7AghVmH0g3",
+  "name": "testorg_testsamlapp_1",
+  "label": "Test SAML App",
   "status": "ACTIVE",
-  "lastUpdated": "2013-09-09T16:25:14.000Z",
-  "created": "2013-09-09T16:25:14.000Z",
+  "lastUpdated": "2016-06-29T16:13:47.000Z",
+  "created": "2016-06-29T16:13:47.000Z",
   "accessibility": {
     "selfService": false,
-    "errorRedirectUrl": null
+    "errorRedirectUrl": null,
+    "loginRedirectUrl": null
   },
   "visibility": {
     "autoSubmitToolbar": false,
@@ -31,7 +32,7 @@ The Okta Application API provides operations to manage applications and/or assig
       "web": false
     },
     "appLinks": {
-      "login": true
+      "testorgone_testsamlapp_1_link": true
     }
   },
   "features": [],
@@ -41,60 +42,70 @@ The Okta Application API provides operations to manage applications and/or assig
       "template": "${source.login}",
       "type": "BUILT_IN"
     },
-    "signing": {
-      "kid": "akm5hvbn1vojA9Fsa0h7"
-    }
+    "signing": {}
   },
   "settings": {
-    "app": {
-      "audienceRestriction": "https://www.example.com/",
-      "groupName": null,
-      "forceAuthn": false,
-      "defaultRelayState": null,
-      "postBackURL": "https://www.example.com/sso/saml",
-      "authnContextClassRef": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
-      "configuredIssuer": null,
-      "requestCompressed": "COMPRESSED",
-      "groupFilter": null,
-      "recipient": "https://www.example.com/",
-      "signAssertion": "SIGNED",
-      "destination": "https://www.example.com/",
-      "signResponse": "SIGNED",
-      "nameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
-      "attributeStatements": null
-    },
-     "notifications": {
-         "vpn": {
-               "network": {
-                  "connection": "ANYWHERE"
-                },
-                "message": "Help message text.",
-                "helpUrl": "http:/www.help-site.example.com"
-          }
+    "app": {},
+    "notifications": {
+      "vpn": {
+        "network": {
+          "connection": "ANYWHERE"
+        },
+        "message": "Help message text.",
+        "helpUrl": "http://www.help-site.example.com/"
       }
+    },
+    "signOn": {
+      "defaultRelayState": "",
+      "ssoAcsUrl": "https://www.example.com/sso/saml",
+      "idpIssuer": "http://www.okta.com/${org.externalKey}",
+      "audience": "https://www.example.com/",
+      "recipient": "https://www.example.com/sso/saml",
+      "destination": "https://www.example.com/sso/saml",
+      "subjectNameIdTemplate": "${user.userName}",
+      "subjectNameIdFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified",
+      "responseSigned": true,
+      "assertionSigned": true,
+      "signatureAlgorithm": "RSA_SHA256",
+      "digestAlgorithm": "SHA256",
+      "honorForceAuthn": true,
+      "authnContextClassRef": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
+      "spIssuer": null,
+      "requestCompressed": false,
+      "attributeStatements": []
+    }
   },
   "_links": {
     "logo": [
       {
-        "href": "https:/example.okta.com/img/logos/logo_1.png",
         "name": "medium",
+        "href": "http://testorgone.okta1.com:1802/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png",
         "type": "image/png"
       }
     ],
-    "groups": {
-      "href": "http://example.okta.com/api/v1/apps/0oabhnUQFYHMBNVSVXMV/groups"
+    "appLinks": [
+      {
+        "name": "testorgone_testsamlapp_1_link",
+        "href": "http://testorgone.okta1.com:1802/home/testorgone_testsamlapp_1/0oaud6YvvS7AghVmH0g3/alnun3sSjdvR9IYuy0g3",
+        "type": "text/html"
+      }
+    ],
+    "help": {
+      "href": "http://testorgone-admin.okta1.com:1802/app/testorgone_testsamlapp_1/0oaud6YvvS7AghVmH0g3/setup/help/SAML_2_0/instructions",
+      "type": "text/html"
     },
     "users": {
-      "href": "https://example.okta.com/api/v1/apps/0oabhnUQFYHMBNVSVXMV/users"
-    },
-    "self": {
-      "href": "https://example.okta.com/api/v1/apps/0oabhnUQFYHMBNVSVXMV"
-    },
-    "metadata": {
-      "href": "https://example.okta.com/app/0oabhnUQFYHMBNVSVXMV/sso/saml/metadata"
+      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oaud6YvvS7AghVmH0g3/users"
     },
     "deactivate": {
-      "href": "https://example.okta.com/api/v1/apps/0oabhnUQFYHMBNVSVXMV/lifecycle/deactivate"
+      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oaud6YvvS7AghVmH0g3/lifecycle/deactivate"
+    },
+    "groups": {
+      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oaud6YvvS7AghVmH0g3/groups"
+    },
+    "metadata": {
+      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oaud6YvvS7AghVmH0g3/sso/saml/metadata",
+      "type": "application/xml"
     }
   }
 }
@@ -185,6 +196,7 @@ The list of possible modes an app may support are:
 | SECURE_PASSWORD_STORE | Secure Web Authentication (SWA) with POST (plugin not required)         |
 | SAML_2_0              | Federated Authentication with SAML 2.0 WebSSO                           |
 | WS_FEDERATION         | Federated Authentication with WS-Federation Passive Requestor Profile   |
+| AUTO_LOGIN            | Secure Web Authentication (SWA)
 | Custom                | App-Specific SignOn Mode                                                |
 |-----------------------+-------------------------------------------------------------------------|
 
@@ -439,6 +451,57 @@ There are four choices for the `connection` property.
  - `ANYWHERE` – Displays VPN connection information regardless of the browser's client IP. The notification appears before the end user can access the app.
  - `ON_NETWORK` – Displays VPN connection information only when a browser's client IP matches the configured Pubic Gateway IPs. The notification appears before the end user can access the app.
  - `OFF_NETWORK` – Displays VPN connection information only when the browser's client IP does not match the configured Pubic Gateway IPs. The notification appears before the end user can access the app.
+
+#### Attribute Statements Object
+
+Specifies (optional) attribute statements for a SAML application.
+
+|------------+----------------------------------------------------------------------------------------------+-------------+----------|
+| Property   | Description                                                                                  | DataType    | Nullable |
+| ---------- | -------------------------------------------------------------------------------------------- | ----------- | -------- |
+| name       | The reference name of the attribute statement                                                | String      | FALSE    |
+| ---------- | -------------------------------------------------------------------------------------------- | ----------- | -------- |
+| namespace  | The name format of the attribute                                                             | String      | FALSE    |
+| ---------- | -------------------------------------------------------------------------------------------- | ----------- | -------- |
+| values     | The value of the attribute; Supports [Okta EL](../getting_started/okta_expression_lang.html) | String      | FALSE    |
+|------------+--------------------------------------------------------------------------------------------- | ----------- | -------- |
+
+##### Supported Namespaces
+
+Label           | Value
+----------------| -------------------------------------------------------
+Unspecified     | urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified
+URI Reference   | urn:oasis:names:tc:SAML:2.0:attrname-format:uri
+Basic           | urn:oasis:names:tc:SAML:2.0:attrname-format:basic
+
+~~~json
+{
+  ...
+  "settings": {
+    "signOn" : {
+      ...
+      "attributeStatements": [
+        {
+          "type": "EXPRESSION",
+          "name": "Attribute One",
+          "namespace": "urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified",
+          "values": [
+            "Value One"
+          ]
+        },
+        {
+          "type": "EXPRESSION",
+          "name": "Attribute Two",
+          "namespace": "urn:oasis:names:tc:SAML:2.0:attrname-format:basic",
+          "values": [
+            "Value Two"
+          ]
+        }
+      ]
+    }
+  }
+}
+~~~
 
 ## Application User Model
 
@@ -1239,6 +1302,130 @@ curl -v -X POST \
 }
 ~~~
 
+#### Add Custom SWA Application
+{:.api .api-operation}
+
+Adds a SWA application. This application is only available to the org that creates it.
+
+##### Settings
+{:.api .api-request .api-request-params}
+
+Parameter           | Description                                           | DataType  | Nullable | Unique | Validation
+------------------- | ----------------------------------------------------- | --------- | -------- | ------ | ----------------------------------------
+loginUrl            | Primary URL of the login page for this app            | String    | FALSE    | FALSE  | [URL](http://tools.ietf.org/html/rfc3986)
+redirectUrl         | Secondary URL of the login page for this app          | String    | TRUE     | FALSE  | [URL](http://tools.ietf.org/html/rfc3986)
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+> [Application](#application-model)'s "signOnMode" must be set to AUTO_LOGIN, the "name" field must be left blank, and "label" field must be defined.
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+      "label": "Example Custom SWA App",
+      "visibility": {
+        "autoSubmitToolbar": false,
+        "hide": {
+          "iOS": false,
+          "web": false
+        }
+      },
+      "features": [],
+      "signOnMode": "AUTO_LOGIN",
+      "settings": {
+        "signOn": {
+          "redirectUrl": "http://swasecondaryredirecturl.okta.com",
+          "loginUrl": "http://swaprimaryloginurl.okta.com"
+        }
+      }
+    }' "https://${org}.okta.com/api/v1/apps"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "id": "0oaugjme6G6Aq6h7m0g3",
+  "name": "testorgone_examplecustomswaapp_1",
+  "label": "Example Custom SWA App",
+  "status": "ACTIVE",
+  "lastUpdated": "2016-06-29T17:11:24.000Z",
+  "created": "2016-06-29T17:11:24.000Z",
+  "accessibility": {
+    "selfService": false,
+    "errorRedirectUrl": null,
+    "loginRedirectUrl": null
+  },
+  "visibility": {
+    "autoSubmitToolbar": false,
+    "hide": {
+      "iOS": false,
+      "web": false
+    },
+    "appLinks": {
+      "testorgone_examplecustomswaapp_1_link": true
+    }
+  },
+  "features": [],
+  "signOnMode": "AUTO_LOGIN",
+  "credentials": {
+    "scheme": "EDIT_USERNAME_AND_PASSWORD",
+    "userNameTemplate": {
+      "template": "${source.login}",
+      "type": "BUILT_IN"
+    },
+    "revealPassword": false,
+    "signing": {}
+  },
+  "settings": {
+    "app": {},
+    "notifications": {
+      "vpn": {
+        "network": {
+          "connection": "DISABLED"
+        },
+        "message": null,
+        "helpUrl": null
+      }
+    },
+    "signOn": {
+      "redirectUrl": "http://swasecondaryredirecturl.okta.com",
+      "loginUrl": "http://swaprimaryloginurl.okta.com"
+    }
+  },
+  "_links": {
+    "logo": [
+      {
+        "name": "medium",
+        "href": "http://testorgone.okta1.com:1802/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png",
+        "type": "image/png"
+      }
+    ],
+    "appLinks": [
+      {
+        "name": "testorgone_examplecustomswaapp_1_link",
+        "href": "http://testorgone.okta1.com:1802/home/testorgone_examplecustomswaapp_1/0oaugjme6G6Aq6h7m0g3/alnuqqc3uS8X6L4Se0g3",
+        "type": "text/html"
+      }
+    ],
+    "users": {
+      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oaugjme6G6Aq6h7m0g3/users"
+    },
+    "deactivate": {
+      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oaugjme6G6Aq6h7m0g3/lifecycle/deactivate"
+    },
+    "groups": {
+      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oaugjme6G6Aq6h7m0g3/groups"
+    }
+  }
+}
+~~~
+
 #### Add SAML 2.0 Application
 {:.api .api-operation}
 
@@ -1276,6 +1463,240 @@ curl -v -X POST \
     }
   }
 }' "https://${org}.okta.com/api/v1/apps"
+~~~
+
+#### Add Custom SAML Application
+{:.api .api-operation}
+
+Adds a SAML 2.0 application. This application is only available to the org that creates it.
+
+##### Settings
+{:.api .api-request .api-request-params}
+
+Parameter             | Description                                                                                                       | DataType                                             | Nullable | Unique | Validation
+--------------------- | ----------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- | -------- | ----- | ----------------------------------------
+defaultRelayState     | Identifies a specific application resource in an IDP initiated SSO scenario.                                      | String                                               | TRUE     | FALSE |
+ssoAcsUrl             | Single Sign On Url                                                                                                | String                                               | FALSE    | FALSE |  [URL](http://tools.ietf.org/html/rfc3986)
+recipient             | The location where the app may present the SAML assertion                                                         | String                                               | FALSE    | FALSE |  [URL](http://tools.ietf.org/html/rfc3986)
+destination           | Identifies the location where the SAML response is intended to be sent inside of the SAML assertion               | String                                               | FALSE    | FALSE |  [URL](http://tools.ietf.org/html/rfc3986)
+audience              | Audience URI (SP Entity ID)                                                                                       | String                                               | FALSE    | FALSE |
+idpIssuer             | SAML Issuer ID                                                                                                    | String                                               | FALSE    | FALSE |
+subjectNameIdTemplate | Template for app user's username when a user is assigned to the app.                                              | String                                               | FALSE     | FALSE |
+subjectNameIdFormat   | Identifies the SAML processing rules.                                                                             | String                                               | FALSE    | FALSE |
+responseSigned        | Determines whether the SAML authentication response message is digitally signed by the IDP or not                 | Boolean                                              | FALSE    | FALSE |
+assertionSigned       | determines whether the SAML assertion is digitally signed or not                                                  | Boolean                                              | FALSE    | FALSE |
+signatureAlgorithm    | Determines the signing algorithm used to digitally sign the SAML assertion and response                           | String                                               | FALSE    | FALSE |
+digestAlgorithm       | Determines the digest algorithm used to digitally sign the SAML assertion and response                            | String                                               | FALSE    | FALSE |
+honorForceAuthn       | Prompt user to re-authenticate if SP asks for it                                                                  | Boolean                                              | FALSE    | FALSE |
+authnContextClassRef  | Identifies the SAML authentication context class for the assertion's authentication statement                     | String                                               | FALSE    | FALSE |
+attributeStatements   | Check [here](http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-tech-overview-2.0-cd-02.html) for details | [Attribute Statements](#attribute-statements-object) | FALSE    | FALSE |
+
+> Fields that require certificate uploads can't be enabled through the API, such as Single Log Out and Assertion Encryption. These must be updated through the UI.
+
+> Either (or both) "responseSigned" or "assertionSigned" must be TRUE.
+
+##### Supported Values for Custom SAML App
+The following values are support for creating custom SAML 2.0 Apps. Check [Attribute Statements](#attribute-statements-object) to see its supported values.
+
+###### Name ID Format
+
+Label           | Value
+--------------- | ------------
+Unspecified     | urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified
+Email Address   | urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress
+x509SubjectName | urn:oasis:names:tc:SAML:1.1:nameid-format:x509SubjectName
+Persistent      | urn:oasis:names:tc:SAML:2.0:nameid-format:persistent
+Transient       | urn:oasis:names:tc:SAML:2.0:nameid-format:transient
+
+###### Signature Algorithm
+
+Label            | Value
+---------------- | ---------
+RSA-SHA256       | RSA_SHA256
+RSA-SHA1         | RSA_SHA1
+
+###### Digest Algorithm
+
+Label            | Value
+---------------- | ---------
+SHA256           | SHA256
+SHA1             | SHA1
+
+###### Authentication Context Class
+
+Label                              | Value
+---------------------------------- | -------------------------------------------------------------------
+PasswordProtectedTransport         | urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport
+Password                           | urn:oasis:names:tc:SAML:2.0:ac:classes:Password
+Unspecified                        | urn:oasis:names:tc:SAML:2.0:ac:classes:unspecified
+TLS Client                         | urn:oasis:names:tc:SAML:2.0:ac:classes:TLSClient
+X509 Certificate                   | urn:oasis:names:tc:SAML:2.0:ac:classes:X509
+Integrated Windows Authentication  | urn:federation:authentication:windows
+Kerberos                           | oasis:names:tc:SAML:2.0:ac:classes:Kerberos
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+> [Application](#application-model)'s "signOnMode" must be set to SAML_2_0, the "name" field must be left blank, and "label" field must be defined.
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+      "label": "Example Custom SAML 2.0 App",
+      "visibility": {
+        "autoSubmitToolbar": false,
+        "hide": {
+          "iOS": false,
+          "web": false
+        }
+      },
+      "features": [],
+      "signOnMode": "SAML_2_0",
+      "settings": {
+        "signOn": {
+          "defaultRelayState": "",
+          "ssoAcsUrl": "http://testorgone.okta",
+          "idpIssuer": "http://www.okta.com/${org.externalKey}",
+          "audience": "asdqwe123",
+          "recipient": "http://testorgone.okta",
+          "destination": "http://testorgone.okta",
+          "subjectNameIdTemplate": "${user.userName}",
+          "subjectNameIdFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified",
+          "responseSigned": true,
+          "assertionSigned": true,
+          "signatureAlgorithm": "RSA_SHA256",
+          "digestAlgorithm": "SHA256",
+          "honorForceAuthn": true,
+          "authnContextClassRef": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
+          "spIssuer": null,
+          "requestCompressed": false,
+          "attributeStatements": [
+            {
+              "type": "EXPRESSION",
+              "name": "Attribute",
+              "namespace": "urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified",
+              "values": [
+                "Value"
+              ]
+            }
+          ]
+        }
+      }
+    }' "https://${org}.okta.com/api/v1/apps"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "id": "0oav8uiWzPDrDMYxU0g3",
+  "name": "testorgone_examplecustomsaml20app_1",
+  "label": "Example Custom SAML 2.0 App",
+  "status": "ACTIVE",
+  "lastUpdated": "2016-06-29T19:57:33.000Z",
+  "created": "2016-06-29T19:57:33.000Z",
+  "accessibility": {
+    "selfService": false,
+    "errorRedirectUrl": null,
+    "loginRedirectUrl": null
+  },
+  "visibility": {
+    "autoSubmitToolbar": false,
+    "hide": {
+      "iOS": false,
+      "web": false
+    },
+    "appLinks": {
+      "testorgone_examplecustomsaml20app_6_link": true
+    }
+  },
+  "features": [],
+  "signOnMode": "SAML_2_0",
+  "credentials": {
+    "userNameTemplate": {
+      "template": "${source.login}",
+      "type": "BUILT_IN"
+    },
+    "signing": {}
+  },
+  "settings": {
+    "app": {},
+    "notifications": {
+      "vpn": {
+        "network": {
+          "connection": "DISABLED"
+        },
+        "message": null,
+        "helpUrl": null
+      }
+    },
+    "signOn": {
+      "defaultRelayState": null,
+      "ssoAcsUrl": "http://testorgone.okta",
+      "idpIssuer": "http://www.okta.com/${org.externalKey}",
+      "audience": "asdqwe123",
+      "recipient": "http://testorgone.okta",
+      "destination": "http://testorgone.okta",
+      "subjectNameIdTemplate": "${user.userName}",
+      "subjectNameIdFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified",
+      "responseSigned": true,
+      "assertionSigned": true,
+      "signatureAlgorithm": "RSA_SHA256",
+      "digestAlgorithm": "SHA256",
+      "honorForceAuthn": true,
+      "authnContextClassRef": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
+      "spIssuer": null,
+      "requestCompressed": false,
+      "attributeStatements": [
+        {
+          "type": "EXPRESSION",
+          "name": "Attribute",
+          "namespace": "urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified",
+          "values": [
+            "Value"
+          ]
+        }
+      ]
+    }
+  },
+  "_links": {
+    "logo": [
+      {
+        "name": "medium",
+        "href": "http://testorgone.okta1.com:1802/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png",
+        "type": "image/png"
+      }
+    ],
+    "appLinks": [
+      {
+        "name": "testorgone_examplecustomsaml20app_6_link",
+        "href": "http://testorgone.okta1.com:1802/home/testorgone_examplecustomsaml20app_6/0oav8uiWzPDrDMYxU0g3/alnvjz6hLyuTZadi80g3",
+        "type": "text/html"
+      }
+    ],
+    "help": {
+      "href": "http://testorgone-admin.okta1.com:1802/app/testorgone_examplecustomsaml20app_6/0oav8uiWzPDrDMYxU0g3/setup/help/SAML_2_0/instructions",
+      "type": "text/html"
+    },
+    "users": {
+      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oav8uiWzPDrDMYxU0g3/users"
+    },
+    "deactivate": {
+      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oav8uiWzPDrDMYxU0g3/lifecycle/deactivate"
+    },
+    "groups": {
+      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oav8uiWzPDrDMYxU0g3/groups"
+    },
+    "metadata": {
+      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oav8uiWzPDrDMYxU0g3/sso/saml/metadata",
+      "type": "application/xml"
+    }
+  }
+}
 ~~~
 
 #### Add WS-Federation Application
