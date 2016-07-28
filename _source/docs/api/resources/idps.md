@@ -1016,13 +1016,17 @@ Specifies the behavior for establishing, validating, and matching a username for
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ | -------- | -------- | --------- | --------- | ------------------------------------------------------------------- |
 | userNameTemplate | [Okta EL Expression](../getting_started/okta_expression_lang.html) to generate or transform a unique username for the IdP user     | [UserName Template Object](#username-template-object)  | FALSE    | FALSE    |           |           | [Okta EL Expression](../getting_started/okta_expression_lang.html)  |
 | filter           | Optional [regular expression pattern](https://en.wikipedia.org/wiki/Regular_expression) used to filter untrusted IdP usernames      | String                                                 | TRUE     | FALSE    | 0         | 1024      |                                                                     |
-| matchType        | Determines the Okta user profile attribute match conditions for account linking and authentication of the transformed IdP username  | `USERNAME`, `EMAIL`, or `USERNAME_OR_EMAIL`            | FALSE    | FALSE    |           |           |                                                                     |
+| matchType        | Determines the Okta user profile attribute match conditions for account linking and authentication of the transformed IdP username  | `USERNAME`, `EMAIL`, `USERNAME_OR_EMAIL` or `CUSTOM_ATTRIBUTE`      | FALSE    | FALSE    |           |           |  
+| matchAttribute        | Okta user profile attribute for matching transformed IdP username. Only for matchType `CUSTOM_ATTRIBUTE` and `SAML2` IdP*  | String      | TRUE    | FALSE    |           |           | Must be a valid Okta user profile attribute of type String (with no format or 'email' format only), Integer or Number                                                                  |
 |------------------+-------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------+----------+----------+-----------+-----------+---------------------------------------------------------------------|
+
+> \*`CUSTOM_ATTRIBUTE` with `matchType` is currently an Early Access feature. Contact Support to enable it.
+
 
 Property Details
 
 * Defining a [regular expression pattern](https://en.wikipedia.org/wiki/Regular_expression) to filter untrusted IdP usernames for security purposes is **highly recommended**, especially if you have multiple IdPs connected to your organization.  The filter prevents and IdP from issuing an assertion for **ANY** user including partners or directory users in your Okta organization.
-   For example, the filter pattern `(\S+@example\.com)` will only allow users that have a `@example.com` username suffix and would reject assertions that have any other suffix such as `@corp.example.com` or `@partner.com`.
+   For example, the filter pattern `(\S+@example\.com)` will only allow users that have an `@example.com` username suffix and would reject assertions that have any other suffix such as `@corp.example.com` or `@partner.com`.
 
 * Only `SAML2` IdP providers support the `filter` property.
 
