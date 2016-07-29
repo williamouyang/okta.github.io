@@ -50,9 +50,9 @@ Here is how to set up a SAML application in Okta:
       Change the value of "Request compression" to "Compressed".
 
     - In the "Attribute Statements" section, add three attribute statements:
-      1. "FirstName" set to "${user.firstName}"
-      2. "LastName" set to "${user.lastName}"
-      3. "Email" set to "${user.email}"
+      1. "FirstName" set to "user.firstName"
+      2. "LastName" set to "user.lastName"
+      3. "Email" set to "user.email"
 
     - Then click the green "Next" button
 
