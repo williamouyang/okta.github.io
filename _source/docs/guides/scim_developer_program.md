@@ -89,14 +89,14 @@ Your submission will provide Okta with all the metadata needed to create a custo
 eventually published publicly in the [Okta Application Network](https://www.okta.com/resources/find-your-apps/). Okta will review the submission, 
 create the customized app, run it through our internal QA, and then make it available in your developer org for your own testing. 
 
-Note: There are two components which you will want to prepare before beginning to work through [the submission document](https://docs.google.com/forms/d/1olk5SYxiM4Ul-Hk02VVYOFnT28-vStFsjLaHAOWARX0/viewform):
+Prepare the following two components before beginning to work through [the submission document](https://docs.google.com/forms/d/1olk5SYxiM4Ul-Hk02VVYOFnT28-vStFsjLaHAOWARX0/viewform):
 
 1. Demo video showing working SCIM integration. This will be used for Okta internal review purposes only.
 Please use a QuickTime Player compatible video format such as .mov.
 2. Customer-facing Configuration Guide. This will be exposed externally in Okta to end customers. 
 For more details, see [the configuration guide guidelines](http://saml-doc.okta.com/Provisioning_Docs/SCIM_Configuration_Guide_Instructions.pdf).
 
-Note: Before submitting your application to Okta, you should 
+> Before submitting your application to Okta, you should 
 [check the User Attributes](http://developer.okta.com/docs/guides/scim_guidance.html#submitting-to-okta)
 to make sure that the attributes are set to what you want your users to see.
 
