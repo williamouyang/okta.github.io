@@ -17,7 +17,7 @@ to enable advanced provisioning. The program includes:
 * QA tools
 * Dedicated support
 
-> [Sign up for the program](http://pages.okta.com/DeveloperSCIM.html)
+> [Sign up for the program.](http://pages.okta.com/DeveloperSCIM.html)
 
 # Development Process
 
