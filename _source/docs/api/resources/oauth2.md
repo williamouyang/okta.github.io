@@ -255,6 +255,7 @@ id_token          | The ID Token JWT contains the details of the authentication 
 access_token      | The <em>access_token</em> that is used to access the [`/oauth2/v1/userinfo`](/docs/api/resources/oidc.html#get-user-information) endpoint. This is returned if the <em>response_type</em>  included a token. Unlike the ID Token JWT, the <em>access_token</em> structure is specific to Okta, and is subject to change.| String  |
 token_type        | The token type is always `Bearer` and is returned only when <em>token</em> is specified as a <em>response_type</em>. | String |
 expires_in        | The number of seconds until the <em>access_token</em> expires. This is only returned if the response included an <em>access_token</em>. | String |
+scope             | The scopes of the <em>access_token</em>. This is only returned if the response included an <em>access_token</em>. | String |
 state             | The same unmodified value from the request is returned back in the response. | String |
 error             | The error-code string providing information if anything went wrong. | String |
 error_description | Further description of the error. | String |
@@ -305,7 +306,7 @@ mNsaWVudF9pZCI6InVBYXVub2ZXa2FESnh1a0NGZUJ4IiwidXNlcl9pZCI6IjAwdWlkNEJ4WHc2STZUV
 qZlCT4UXH4UKhJnZ5px-ArNRqwhxXWhHJisslswjPpMkx1IgrudQIjzGYbtLFjrrg2ueiU5-YfmKuJuD6O2yPWGTsV7X6i7ABT6P-t8PRz_RNbk-U1GXW
 IEkNnEWbPqYDAm_Ofh7iW0Y8WDA5ez1jbtMvd-oXMvJLctRiACrTMLJQ2e5HkbUFxgXQ_rFPNHJbNSUBDLqdi2rg_ND64DLRlXRY7hupNsvWGo0gF4WEU
 k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNtiw
-&token_type=Bearer&expires_in=3600&state=waojafoawjgvbf
+&token_type=Bearer&expires_in=3600&scope=openid+email&state=waojafoawjgvbf
 ~~~
 
 #### Response Example (Error)
@@ -403,6 +404,7 @@ invalid_scope           | The scopes list contains an invalid or unsupported val
                       TEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNtiw",
     "token_type" : "Bearer",
     "expires_in" : 3600,
+    "scope"      : "openid email",
     "refresh_token" : "a9VpZDRCeFh3Nkk2VdY",
     "id_token" : "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIwMHVpZDRCeFh3Nkk2VFY0bTBnMyIsImVtYWlsIjoid2VibWFzdGVyQGNsb3VkaXR1ZG
                   UubmV0IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInZlciI6MSwiaXNzIjoiaHR0cDovL3JhaW4ub2t0YTEuY29tOjE4MDIiLCJsb
