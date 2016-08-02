@@ -10,11 +10,11 @@ Release 2016.31
 ### Version 1.4.0 of okta-auth-js Available
  
 <!-- OKTA-97056 -->
-We've added support for accessTokens and two new namespaces, token and tokenManager, 
-to handle both idTokens and accessTokens. 
+We've added support for Access Tokens and two new namespaces, token and tokenManager, 
+to handle both ID Tokens and Access Tokens. 
 The token namespace makes it easier to specify how to retrieve your tokens: 
 getWithoutPrompt, getWithPopup, and getWithRedirect. 
-The tokenManager allows tracking tokens and automatically refreshes them for you.
+The tokenManager namespace allows tracking tokens and automatically refreshes them for you.
  
 For more details including feature and bug-fix commits, 
 see [the okta-auth-js Git repository](https://github.com/okta/okta-auth-js/releases/tag/okta-auth-js-1.4.0).
@@ -26,20 +26,13 @@ Use the `expand` query parameter to include up to twenty rules in a Policy API q
 
      `GET https://my-org.okta.com/api/v1/policies/{id}?expand=rules`
 
-If more than twenty rules are returned, an error occurs.
-
-### Scope Response Parameter
-
-<!-- OKTA-93308 -->
-The `scope` response parameter is available for the `/oauth2/v1/authorize` and `/oauth2/v1/token` endpoints.
-This parameter is returned if the response also includes an `access_token`.
+The embedded rules option returns up to 20 rules for a given policy. If the policy has more than 20 rules, this request returns an error.
 
 ## Bug Fixed
 
 The following issue is fixed:
 
 * The ampersand (&) character in a username caused Forgot Password API requests (`/api/v1/authn/recovery/password` to fail. (OKTA-93994)
-
 
 ### Does Your Org Have These Changes Yet?
 
