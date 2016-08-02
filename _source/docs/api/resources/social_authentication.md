@@ -88,7 +88,10 @@ Advantages of using Okta Social Authentication include:
     3. Select *Add Application*.
     
     4. Select *Create New App* to launch the App Integration Wizard. It guides you through the necessary configuration
-    steps and give you back a `client_id` which you use in Step 7.
+    steps and give you back a `client_id` which you use in Step 7. For social authentication, choose the following:
+
+      1. In the **Create a New Application Integration** page of the wizard, select **OpenID Connect** in the **Sign on method** section.
+      2. In the **General Settings** tab, check the **Implicit** checkbox for allowed grant types.
     
 7.  Create a Social Auth Login URL.
     1.  Append the `client_id` you copied above into the Social Auth
