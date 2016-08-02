@@ -1,6 +1,6 @@
 ---
 layout: docs_page
-title: Single Sign-On with Okta
+title: Single Sign-On with SAML
 excerpt: Learn how to Single Sign-On enable your web and mobile application whether you are an ISV or IT - looking to federate authentication for your application.
 redirect_from: "/docs/getting_started/saml_guidance.html"
 ---
