@@ -288,16 +288,17 @@ Fetch a list of events from your Okta organization system log.
 {:.api .api-request .api-request-params}
 
 
-Parameter | Description                                                                         | Param Type | DataType | Required | Default
---------- | ----------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------
-limit     | Specifies the number of results to page                                             | Query      | Number   | FALSE    | 1000
-since     | Specifies the last date before the oldest result is returned                        | Query      | DateTime | FALSE    |
+Parameter | Description                                                                         | Param Type | DataType | Required | Minimum  | Maximum | Default
+--------- | ----------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------    -------   -------
+limit     | Specifies the number of results to page                                             | Query      | Number   | TRUE     |       0  |     100 |  
+since     | Specifies the last date before the oldest result is returned                        | Query      | DateTime | TRUE     |       0  |    1000 | 
 filter    | [Filter expression](/docs/api/getting_started/design_principles.html#filtering) for events | Query | String | FALSE    |
 q         | Finds a user that matches firstName, lastName, and email properties                 | Query      | String   | FALSE    |
-until     | Specifies the first date after which results aren't returned                        | Query      | DateTime | FALSE    |
+until     | Specifies the first date after which results aren't returned                        | Query      | DateTime | TRUE     |
 after     | An opaque identifier used for pagination                                            | Query      | String   | FALSE    |
 
 The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination).
+
 
 ###### Filter
 
