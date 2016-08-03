@@ -1,49 +1,38 @@
 ---
 layout: docs_page
-title: Platform Release Notes July 27, 2016
+title: Platform Release Notes August 3, 2016
 ---
 
-Release 2016.30
-
-## New Features
-
-### Create Custom Apps with the API
-
-<!-- OKTA-83462 -->
-You can now create SAML and SWA custom apps using the Apps API. Previously you had to create a custom app 
-using the [**App Integration Wizard**](https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard) 
-in the OKTA user interface.
-
-For more information about creating custom apps with the API, see [Apps API: Add Custom SAML Application](http://developer.okta.com/docs/api/resources/apps.html#add-saml-20-application).
+Release 2016.31
 
 ## Feature Enhancements
  
-### User-Matching Improvement for SAML Identity Providers (IdPs)
+### Version 1.4.0 of okta-auth-js Available
  
-<!-- OKTA-93061 -->
-For SAML IdPs, you can now match transformed IdP usernames using more attributes.
-To match on an attribute other than username, email, or either, specify the attribute name in the property `matchAttribute`, 
-and specify the value `CUSTOM_ATTRIBUTE` in `matchType`.
+<!-- OKTA-97056 -->
+We've added support for Access Tokens and two new namespaces, token and tokenManager, 
+to handle both ID Tokens and Access Tokens. 
+The token namespace makes it easier to specify how to retrieve your tokens: 
+getWithoutPrompt, getWithPopup, and getWithRedirect. 
+The tokenManager namespace allows tracking tokens and automatically refreshes them for you.
  
-For more information, see [Identity Providers](http://developer.okta.com/docs/api/resources/idps.html#subject-policy-object).
+For more details including feature and bug-fix commits, 
+see [the okta-auth-js Git repository](https://github.com/okta/okta-auth-js/releases/tag/okta-auth-js-1.4.0).
 
-> Contact Okta Support to enable this Early Access feature.
+### Rules Included in Policy API requests
 
-### Okta Sign-In Widget Release 1.5.0
+<!-- OKTA-40548 -->
+Use the `expand` query parameter to include up to twenty rules in a Policy API query:
 
-<!-- OKTA-96356 -->
-The Okta Sign-In Widget release 1.5.0 contains the following enhancements:
- 
-* Passcodes for RSA and On-Prem MFA are masked.
-* The dependencies `@okta/i18n` and `@okta/courage` are optional, to allow `npm install` to work properly.
-* The **Show Answer** checkbox has been replaced with a simpler **Show/Hide** toggle button in the **Answer** field. The **Show Answer** checkbox displays when a security question is a factor.
- 
-## Bugs Fixed
+     `GET https://my-org.okta.com/api/v1/policies/{id}?expand=rules`
 
-The following issues are fixed:
+The embedded rules option returns up to 20 rules for a given policy. If the policy has more than 20 rules, this request returns an error.
 
-* When configuring an app with OpenID Connect, some redirect URIs weren't saved correctly. (OKTA-90445)
-* Problems occurred in some orgs when deleting a very large group using the API. (OKTA-91383)
+## Bug Fixed
+
+The following issue is fixed:
+
+* The ampersand (&) character in a username caused Forgot Password API requests (`/api/v1/authn/recovery/password` to fail. (OKTA-93994)
 
 ### Does Your Org Have These Changes Yet?
 
@@ -55,6 +44,7 @@ For changes outside the Okta platform, see the [Release Notes Knowledge Hub](htt
 
 ### Earlier Release Notes
 
+* [Platform Release Notes for the week ending Wednesday, July 27](platform-release-notes2016-30.html)
 * [Platform Release Notes for the week ending Wednesday, July 20](platform-release-notes2016-29.html)
 * [Platform Release Notes for the week ending Wednesday, July 13](platform-release-notes2016-28.html)
 * [Platform Release Notes for the week ending Wednesday, July 7](platform-release-notes2016-27.html)
