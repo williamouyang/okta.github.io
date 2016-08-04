@@ -220,6 +220,58 @@ policy | Policy object for a rule only | String | Yes |
 
 ## Policy Operations
 
+### Get a Policy
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/<em>:policyId</em></span>
+
+#### Request Parameters
+
+The policy ID described in the [Policy Object](#policy-object) is required.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/policies/{policyId}"
+~~~
+
+##### Response Types
+{:.api .api-response .api-response-example}
+
+HTTP 200: 
+<a href="#PolicyObject">Policy Object</a>
+
+### Get a Policy with Rules
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/<em>:policyId</em>?expand=rules</span>
+
+#### Request Parameters
+
+* The policy ID described in the [Policy Object](#policy-object) is required.
+* The `expand=rules` query parameter returns up to twenty rules for the specified policy. If the policy has more than 20 rules, this request returns an error.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/policies/{policyId}?expand=rules"
+~~~
+
+##### Response Types
+{:.api .api-response .api-response-example}
+
+HTTP 200: 
+<a href="#PolicyObject">Policy Object</a>
 
 ### Get All Policies by Type
 {:.api .api-operation}
@@ -228,7 +280,7 @@ policy | Policy object for a rule only | String | Yes |
 
 #### Request Parameters
 
-The policy id described in the [Policy Object](#policy-object) is required.
+The policy ID described in the [Policy Object](#policy-object) is required.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -258,7 +310,7 @@ HTTP 204:
 
 #### Request Parameters
 
-The policy id described in the [Policy Object](#policy-object) is required.
+The policy ID described in the [Policy Object](#policy-object) is required.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -277,36 +329,6 @@ curl -v -X DELETE \
 HTTP 204: 
 *No Content*
 
-
-
-### Get a Policy
-{:.api .api-operation}
-
-<span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/<em>:policyId</em></span>
-
-#### Request Parameters
-
-The policy id described in the [Policy Object](#policy-object) is required.
-
-##### Request Example
-{:.api .api-request .api-request-example}
-
-~~~sh
-curl -v -X GET \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
--H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/policies/{policyId}"
-~~~
-
-##### Response Types
-{:.api .api-response .api-response-example}
-
-HTTP 200: 
-<a href="#PolicyObject">Policy Object</a>
-
-
-
 ### Update a Policy
 {:.api .api-operation}
 
@@ -314,7 +336,7 @@ HTTP 200:
 
 #### Request Parameters
 
-The policy id described in the [Policy Object](#policy-object) is required.
+The policy ID described in the [Policy Object](#policy-object) is required.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -355,7 +377,7 @@ HTTP 200:
 
 #### Request Parameters
 
-The policy id described in the [Policy Object](#policy-object) is required.
+The policy ID described in the [Policy Object](#policy-object) is required.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -426,7 +448,7 @@ HTTP 204:
 
 #### Request Parameters
 
-The policy id described in the [Policy Object](#policy-object) is required.
+The policy ID described in the [Policy Object](#policy-object) is required.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -610,7 +632,7 @@ usePersistentCookie | If set to `false`, user session cookies will only last the
 
 #### Request Parameters
 
-The policy id described in the [Policy Object](#policy-object) is required.
+The policy ID described in the [Policy Object](#policy-object) is required.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -638,7 +660,7 @@ HTTP 200:
 
 #### Request Parameters
 
-The policy id described in the [Policy Object](#policy-object) is required.
+The policy ID described in the [Policy Object](#policy-object) is required.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -684,7 +706,7 @@ HTTP 200:
 
 #### Request Parameters
 
-The policy id described in the [Policy Object](#policy-object) is required.
+The policy ID described in the [Policy Object](#policy-object) is required.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -712,7 +734,7 @@ HTTP 204:
 
 #### Request Parameters
 
-The policy id described in the [Policy Object](#policy-object) is required.
+The policy ID described in the [Policy Object](#policy-object) is required.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -740,7 +762,7 @@ HTTP 200:
 
 #### Request Parameters
 
-The policy id described in the [Policy Object](#policy-object) is required.
+The policy ID described in the [Policy Object](#policy-object) is required.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -789,7 +811,7 @@ HTTP 200:
 
 #### Request Parameters
 
-The policy id described in the [Policy Object](#policy-object) is required.
+The policy ID described in the [Policy Object](#policy-object) is required.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -817,7 +839,7 @@ HTTP 204:
 
 #### Request Parameters
 
-The policy id described in the [Policy Object](#policy-object) is required.
+The policy ID described in the [Policy Object](#policy-object) is required.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
