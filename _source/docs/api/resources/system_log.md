@@ -290,7 +290,7 @@ Fetch a list of events from your Okta organization system log.
 
 Parameter | Description                                                                         | Param Type | DataType | Required | Minimum  | Maximum | Default
 --------- | ----------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------    -------   -------
-limit     | Specifies the number of results to page                                             | Query      | Number   | TRUE     |       0  |     100 |  
+limit     | Specifies the number of results to page                                             | Query      | Number   | FALSE     |       0  |     100 |  
 since     | Specifies the last date before the oldest result is returned                        | Query      | DateTime | TRUE     |       0  |    1000 | 
 filter    | [Filter expression](/docs/api/getting_started/design_principles.html#filtering) for events | Query | String | FALSE    |
 q         | Finds a user that matches firstName, lastName, and email properties                 | Query      | String   | FALSE    |
