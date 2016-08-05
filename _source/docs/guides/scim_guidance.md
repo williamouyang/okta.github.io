@@ -534,7 +534,7 @@ attributes is a critical part of working with Okta.
 Your SCIM API must be able to filter users by `userName` and should
 also support filtering by `id` and `emails`. Filtering support
 is required because most provisioning actions require the ability
-for Okta to determine if a user resource exists on your system.
+for Okta to determine if a user resource exists on your system. The filter Okta generates will be based on the `userName` field, following the pattern "userName eq "..." ".
 
 Consider the scenario where an Okta customer with thousands of
 users has a provisioning integration with your system, which also
@@ -546,9 +546,9 @@ system.
 Examples of filters that Okta might send to your SCIM API are as
 follows:
 
-> userName eq "jane@example.com"
+> userName eq "jane.doe"
 
-> emails eq "jane@example.com"
+> userName eq "jane.doe@example.com"
 
 At the moment, Okta only supports the `eq` filter operator. However, the
 [filtering capabilities](https://tools.ietf.org/html/rfc7644#section-3.4.2.2) described in the SCIM 2.0 Protocol Specification are
