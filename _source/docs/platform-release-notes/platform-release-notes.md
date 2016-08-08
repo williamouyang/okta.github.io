@@ -1,9 +1,7 @@
 ---
 layout: docs_page
-title: Platform Release Notes August 3, 2016
+title: Platform Release Notes for Release 2016.31
 ---
-
-Release 2016.31
 
 ## Feature Enhancements
  
@@ -34,21 +32,21 @@ The following issue is fixed:
 
 * The ampersand (&) character in a username caused Forgot Password API requests (`/api/v1/authn/recovery/password` to fail. (OKTA-93994)
 
-### Does Your Org Have These Changes Yet?
+## Does Your Org Have These Changes Yet?
 
 Check the footer of any Admin page in an org, for example the **Dashboard** or **Directory** tab, to verify the current release for that org.
 
-### Looking for Product Release Notes?
+## Looking for Product Release Notes?
 
 For changes outside the Okta platform, see the [Release Notes Knowledge Hub](https://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub).
 
-### Earlier Release Notes
+## Earlier Release Notes
 
-* [Platform Release Notes for the week ending Wednesday, July 27](platform-release-notes2016-30.html)
-* [Platform Release Notes for the week ending Wednesday, July 20](platform-release-notes2016-29.html)
-* [Platform Release Notes for the week ending Wednesday, July 13](platform-release-notes2016-28.html)
-* [Platform Release Notes for the week ending Wednesday, July 7](platform-release-notes2016-27.html)
-* [Platform Release Notes for the week ending Wednesday, June 29](platform-release-notes2016-26.html)
-* [Platform Release Notes for the week ending Wednesday, June 22](platform-release-notes2016-25.html)
-* [Platform Release Notes for the week ending Wednesday, June 15](platform-release-notes2016-24.html)
-* [Platform Release Notes for the week ending Wednesday, June 8](platform-release-notes2016-23.html)
+* [Platform Release Notes for Release 2016.30](platform-release-notes2016-30.html)
+* [Platform Release Notes for Release 2016.29](platform-release-notes2016-29.html)
+* [Platform Release Notes for Release 2016.28](platform-release-notes2016-28.html)
+* [Platform Release Notes for Release 2016.27](platform-release-notes2016-27.html)
+* [Platform Release Notes for Release 2016.26](platform-release-notes2016-26.html)
+* [Platform Release Notes for Release 2016.25](platform-release-notes2016-25.html)
+* [Platform Release Notes for Release 2016.24](platform-release-notes2016-24.html)
+* [Platform Release Notes for Release 2016.23](platform-release-notes2016-23.html)
