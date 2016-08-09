@@ -1061,6 +1061,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
+      <th>Minimum</th>
+      <th>Maximum</th>
       <th>Default</th>
     </tr>
   </thead>
@@ -1071,14 +1073,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <td>Query</td>
       <td>Number</td>
       <td>FALSE</td>
-      <td>1000</td>
+      <td>0</td>
+      <td>100</td>
+      <td> </td>
     </tr>
     <tr>
       <td>since</td>
       <td>Specifies the last date before the oldest result is returned</td>
       <td>Query</td>
       <td>DateTime</td>
-      <td>FALSE</td>
+      <td>TRUE</td>
+      <td>0</td>
+      <td>1000</td>
       <td> </td>
     </tr>
     <tr>
@@ -1088,6 +1094,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <td>String</td>
       <td>FALSE</td>
       <td> </td>
+      <td> </td>
+      <td> </td>
     </tr>
     <tr>
       <td>q</td>
@@ -1096,13 +1104,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <td>String</td>
       <td>FALSE</td>
       <td> </td>
+      <td> </td>
+      <td> </td>
     </tr>
     <tr>
       <td>until</td>
       <td>Specifies the first date after which results aren’t returned</td>
       <td>Query</td>
       <td>DateTime</td>
-      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
       <td> </td>
     </tr>
     <tr>
@@ -1111,6 +1123,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <td>Query</td>
       <td>String</td>
       <td>FALSE</td>
+      <td> </td>
+      <td> </td>
       <td> </td>
     </tr>
   </tbody>

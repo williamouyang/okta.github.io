@@ -759,7 +759,7 @@ attributes is a critical part of working with Okta.</p>
 <p>Your SCIM API must be able to filter users by <code class="highlighter-rouge">userName</code> and should
 also support filtering by <code class="highlighter-rouge">id</code> and <code class="highlighter-rouge">emails</code>. Filtering support
 is required because most provisioning actions require the ability
-for Okta to determine if a user resource exists on your system.</p>
+for Okta to determine if a user resource exists on your system. The filter Okta generates will be based on the <code class="highlighter-rouge">userName</code> field, following the pattern “userName eq “…” ”.</p>
 
 <p>Consider the scenario where an Okta customer with thousands of
 users has a provisioning integration with your system, which also
@@ -772,11 +772,11 @@ system.</p>
 follows:</p>
 
 <blockquote>
-  <p>userName eq “jane@example.com”</p>
+  <p>userName eq “jane.doe”</p>
 </blockquote>
 
 <blockquote>
-  <p>emails eq “jane@example.com”</p>
+  <p>userName eq “jane.doe@example.com”</p>
 </blockquote>
 
 <p>At the moment, Okta only supports the <code class="highlighter-rouge">eq</code> filter operator. However, the
