@@ -150,7 +150,6 @@ The catalog is currently not exposed via an API.  While additional apps may be a
 | template_swa        | [Add Plugin SWA Application](#add-plugin-swa-application)                     |
 | template_swa3field  | [Add Plugin SWA (3 Field) Application](#add-plugin-swa-3-field-application)   |
 | tempalte_sps        | [Add SWA Application (No Plugin)](#add-swa-application-no-plugin)             |
-| template_saml_2_0   | [Add SAML 2.0 Application](#add-saml-20-application)                          |
 | template_wsfed      | [Add WS-Federation Application](#add-ws-federation-application)               |
 |---------------------+-------------------------------------------------------------------------------|
 
@@ -1426,45 +1425,6 @@ curl -v -X POST \
 }
 ~~~
 
-#### Add SAML 2.0 Application
-{:.api .api-operation}
-
-Adds a SAML 2.0 WebSSO application
-
-##### Request Example
-{:.api .api-request .api-request-example}
-
-~~~sh
-curl -v -X POST \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
--H "Authorization: SSWS ${api_token}" \
--d '{
-  "name": "template_saml_2_0",
-  "label": "Example SAML App",
-  "signOnMode": "SAML_2_0",
-  "settings": {
-    "app": {
-      "audienceRestriction": "https://example.com/tenant/123",
-      "forceAuthn": false,
-      "postBackURL": "https://example.com/sso/saml",
-      "authnContextClassRef": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
-      "requestCompressed": "COMPRESSED",
-      "recipient": "https://example.com/sso/saml",
-      "signAssertion": "SIGNED",
-      "destination": "https://example.com/sso/saml",
-      "signResponse": "SIGNED",
-      "nameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
-      "groupName": null,
-      "groupFilter": null,
-      "defaultRelayState": null,
-      "configuredIssuer": null,
-      "attributeStatements": null
-    }
-  }
-}' "https://${org}.okta.com/api/v1/apps"
-~~~
-
 #### Add Custom SAML Application
 {:.api .api-operation}
 
@@ -1762,7 +1722,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD"
+"https://${org}.okta.com/api/v1/apps/0oa1gjh63g214q0Hq0g4"
 ~~~
 
 ##### Response Example
@@ -1770,15 +1730,16 @@ curl -v -X GET \
 
 ~~~json
 {
-  "id": "0oabizCHPNYALCHDUIOD",
-  "name": "template_saml_2_0",
-  "label": "Example SAML App",
+  "id": "0oa1gjh63g214q0Hq0g4",
+  "name": "testorgone_customsaml20app_1",
+  "label": "Custom Saml 2.0 App",
   "status": "ACTIVE",
-  "lastUpdated": "2013-09-19T22:57:23.000Z",
-  "created": "2013-09-10T23:52:31.000Z",
+  "lastUpdated": "2016-08-09T20:12:19.000Z",
+  "created": "2016-08-09T20:12:19.000Z",
   "accessibility": {
     "selfService": false,
-    "errorRedirectUrl": null
+    "errorRedirectUrl": null,
+    "loginRedirectUrl": null
   },
   "visibility": {
     "autoSubmitToolbar": false,
@@ -1787,58 +1748,80 @@ curl -v -X GET \
       "web": false
     },
     "appLinks": {
-      "login": true
+      "testorgone_customsaml20app_1_link": true
     }
   },
   "features": [],
   "signOnMode": "SAML_2_0",
   "credentials": {
     "userNameTemplate": {
-      "template": "${source.login}",
+      "template": "${fn:substringBefore(source.login, \"@\")}",
       "type": "BUILT_IN"
-    }
+    },
+    "signing": {}
   },
   "settings": {
-    "app": {
-      "audienceRestriction": "https://example.com/tenant/123",
-      "groupName": null,
-      "forceAuthn": false,
-      "defaultRelayState": null,
-      "postBackURL": "https://example.com/sso/saml",
+    "app": {},
+    "notifications": {
+      "vpn": {
+        "network": {
+          "connection": "DISABLED"
+        },
+        "message": null,
+        "helpUrl": null
+      }
+    },
+    "signOn": {
+      "defaultRelayState": "",
+      "ssoAcsUrl": "http://example.okta.com",
+      "idpIssuer": "http://www.okta.com/${org.externalKey}",
+      "audience": "https://example.com/tenant/123",
+      "recipient": "http://recipient.okta.com",
+      "destination": "http://destination.okta.com",
+      "subjectNameIdTemplate": "${user.userName}",
+      "subjectNameIdFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+      "responseSigned": true,
+      "assertionSigned": true,
+      "signatureAlgorithm": "RSA_SHA256",
+      "digestAlgorithm": "SHA256",
+      "honorForceAuthn": true,
       "authnContextClassRef": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
-      "configuredIssuer": null,
-      "requestCompressed": "COMPRESSED",
-      "groupFilter": null,
-      "recipient": "https://example.com/sso/saml",
-      "signAssertion": "SIGNED",
-      "destination": "https://example.com/sso/saml",
-      "signResponse": "SIGNED",
-      "nameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
-      "attributeStatements": null
+      "spIssuer": null,
+      "requestCompressed": false,
+      "attributeStatements": []
     }
   },
   "_links": {
     "logo": [
       {
-        "href": "https:/example.okta.com/img/logos/logo_1.png",
         "name": "medium",
+        "href": "http://testorgone.okta1.com:1802/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png",
         "type": "image/png"
       }
     ],
+    "appLinks": [
+      {
+        "name": "testorgone_customsaml20app_1_link",
+        "href": "http://testorgone.okta1.com:1802/home/testorgone_customsaml20app_1/0oa1gjh63g214q0Hq0g4/aln1gofChJaerOVfY0g4",
+        "type": "text/html"
+      }
+    ],
+    "help": {
+      "href": "http://testorgone-admin.okta1.com:1802/app/testorgone_customsaml20app_1/0oa1gjh63g214q0Hq0g4/setup/help/SAML_2_0/instructions",
+      "type": "text/html"
+    },
     "users": {
-      "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/users"
-    },
-    "groups": {
-      "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/groups"
-    },
-    "self": {
-      "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD"
-    },
-    "metadata": {
-      "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/sso/saml/metadata"
+      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oa1gjh63g214q0Hq0g4/users"
     },
     "deactivate": {
-      "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/lifecycle/deactivate"
+      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oa1gjh63g214q0Hq0g4/lifecycle/deactivate"
+    },
+    "groups": {
+      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oa1gjh63g214q0Hq0g4/groups"
+    },
+    "metadata": {
+      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oa1gjh63g214q0Hq0g4/sso/saml/metadata",
+      "type": "application/xml"
     }
   }
 }
@@ -1918,15 +1901,16 @@ curl -v -X GET \
 ~~~json
 [
   {
-    "id": "0oabizCHPNYALCHDUIOD",
-    "name": "template_saml_2_0",
-    "label": "Example SAML App",
+    "id": "0oa1gjh63g214q0Hq0g4",
+    "name": "testorgone_customsaml20app_1",
+    "label": "Custom Saml 2.0 App",
     "status": "ACTIVE",
-    "lastUpdated": "2013-09-19T22:57:23.000Z",
-    "created": "2013-09-10T23:52:31.000Z",
+    "lastUpdated": "2016-08-09T20:12:19.000Z",
+    "created": "2016-08-09T20:12:19.000Z",
     "accessibility": {
       "selfService": false,
-      "errorRedirectUrl": null
+      "errorRedirectUrl": null,
+      "loginRedirectUrl": null
     },
     "visibility": {
       "autoSubmitToolbar": false,
@@ -1935,58 +1919,80 @@ curl -v -X GET \
         "web": false
       },
       "appLinks": {
-        "login": true
+        "testorgone_customsaml20app_1_link": true
       }
     },
     "features": [],
     "signOnMode": "SAML_2_0",
     "credentials": {
       "userNameTemplate": {
-        "template": "${source.login}",
+        "template": "${fn:substringBefore(source.login, \"@\")}",
         "type": "BUILT_IN"
-      }
+      },
+      "signing": {}
     },
     "settings": {
-      "app": {
-        "audienceRestriction": "https://example.com/tenant/123",
-        "groupName": null,
-        "forceAuthn": false,
-        "defaultRelayState": null,
-        "postBackURL": "https://example.com/sso/saml",
+      "app": {},
+      "notifications": {
+        "vpn": {
+          "network": {
+            "connection": "DISABLED"
+          },
+          "message": null,
+          "helpUrl": null
+        }
+      },
+      "signOn": {
+        "defaultRelayState": "",
+        "ssoAcsUrl": "http://example.okta.com",
+        "idpIssuer": "http://www.okta.com/${org.externalKey}",
+        "audience": "https://example.com/tenant/123",
+        "recipient": "http://recipient.okta.com",
+        "destination": "http://destination.okta.com",
+        "subjectNameIdTemplate": "${user.userName}",
+        "subjectNameIdFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+        "responseSigned": true,
+        "assertionSigned": true,
+        "signatureAlgorithm": "RSA_SHA256",
+        "digestAlgorithm": "SHA256",
+        "honorForceAuthn": true,
         "authnContextClassRef": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
-        "configuredIssuer": null,
-        "requestCompressed": "COMPRESSED",
-        "groupFilter": null,
-        "recipient": "https://example.com/sso/saml",
-        "signAssertion": "SIGNED",
-        "destination": "https://example.com/sso/saml",
-        "signResponse": "SIGNED",
-        "nameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
-        "attributeStatements": null
+        "spIssuer": null,
+        "requestCompressed": false,
+        "attributeStatements": []
       }
     },
     "_links": {
       "logo": [
         {
-          "href": "https:/example.okta.com/img/logos/logo_1.png",
           "name": "medium",
+          "href": "http://testorgone.okta1.com:1802/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png",
           "type": "image/png"
         }
       ],
+      "appLinks": [
+        {
+          "name": "testorgone_customsaml20app_1_link",
+          "href": "http://testorgone.okta1.com:1802/home/testorgone_customsaml20app_1/0oa1gjh63g214q0Hq0g4/aln1gofChJaerOVfY0g4",
+          "type": "text/html"
+        }
+      ],
+      "help": {
+        "href": "http://testorgone-admin.okta1.com:1802/app/testorgone_customsaml20app_1/0oa1gjh63g214q0Hq0g4/setup/help/SAML_2_0/instructions",
+        "type": "text/html"
+      },
       "users": {
-        "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/users"
-      },
-      "groups": {
-        "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/groups"
-      },
-      "self": {
-        "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD"
-      },
-      "metadata": {
-        "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/sso/saml/metadata"
+        "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oa1gjh63g214q0Hq0g4/users"
       },
       "deactivate": {
-        "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/lifecycle/deactivate"
+        "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oa1gjh63g214q0Hq0g4/lifecycle/deactivate"
+      },
+      "groups": {
+        "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oa1gjh63g214q0Hq0g4/groups"
+      },
+      "metadata": {
+        "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oa1gjh63g214q0Hq0g4/sso/saml/metadata",
+        "type": "application/xml"
       }
     }
   },
@@ -2077,15 +2083,16 @@ curl -v -X GET \
 ~~~json
 [
   {
-    "id": "0oabizCHPNYALCHDUIOD",
-    "name": "template_saml_2_0",
-    "label": "Example SAML App",
+    "id": "0oa1gjh63g214q0Hq0g4",
+    "name": "testorgone_customsaml20app_1",
+    "label": "Custom Saml 2.0 App",
     "status": "ACTIVE",
-    "lastUpdated": "2013-09-19T22:57:23.000Z",
-    "created": "2013-09-10T23:52:31.000Z",
+    "lastUpdated": "2016-08-09T20:12:19.000Z",
+    "created": "2016-08-09T20:12:19.000Z",
     "accessibility": {
       "selfService": false,
-      "errorRedirectUrl": null
+      "errorRedirectUrl": null,
+      "loginRedirectUrl": null
     },
     "visibility": {
       "autoSubmitToolbar": false,
@@ -2094,58 +2101,80 @@ curl -v -X GET \
         "web": false
       },
       "appLinks": {
-        "login": true
+        "testorgone_customsaml20app_1_link": true
       }
     },
     "features": [],
     "signOnMode": "SAML_2_0",
     "credentials": {
       "userNameTemplate": {
-        "template": "${source.login}",
+        "template": "${fn:substringBefore(source.login, \"@\")}",
         "type": "BUILT_IN"
-      }
+      },
+      "signing": {}
     },
     "settings": {
-      "app": {
-        "audienceRestriction": "https://example.com/tenant/123",
-        "groupName": null,
-        "forceAuthn": false,
-        "defaultRelayState": null,
-        "postBackURL": "https://example.com/sso/saml",
+      "app": {},
+      "notifications": {
+        "vpn": {
+          "network": {
+            "connection": "DISABLED"
+          },
+          "message": null,
+          "helpUrl": null
+        }
+      },
+      "signOn": {
+        "defaultRelayState": "",
+        "ssoAcsUrl": "http://example.okta.com",
+        "idpIssuer": "http://www.okta.com/${org.externalKey}",
+        "audience": "https://example.com/tenant/123",
+        "recipient": "http://recipient.okta.com",
+        "destination": "http://destination.okta.com",
+        "subjectNameIdTemplate": "${user.userName}",
+        "subjectNameIdFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+        "responseSigned": true,
+        "assertionSigned": true,
+        "signatureAlgorithm": "RSA_SHA256",
+        "digestAlgorithm": "SHA256",
+        "honorForceAuthn": true,
         "authnContextClassRef": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
-        "configuredIssuer": null,
-        "requestCompressed": "COMPRESSED",
-        "groupFilter": null,
-        "recipient": "https://example.com/sso/saml",
-        "signAssertion": "SIGNED",
-        "destination": "https://example.com/sso/saml",
-        "signResponse": "SIGNED",
-        "nameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
-        "attributeStatements": null
+        "spIssuer": null,
+        "requestCompressed": false,
+        "attributeStatements": []
       }
     },
     "_links": {
       "logo": [
         {
-          "href": "https:/example.okta.com/img/logos/logo_1.png",
           "name": "medium",
+          "href": "http://testorgone.okta1.com:1802/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png",
           "type": "image/png"
         }
       ],
+      "appLinks": [
+        {
+          "name": "testorgone_customsaml20app_1_link",
+          "href": "http://testorgone.okta1.com:1802/home/testorgone_customsaml20app_1/0oa1gjh63g214q0Hq0g4/aln1gofChJaerOVfY0g4",
+          "type": "text/html"
+        }
+      ],
+      "help": {
+        "href": "http://testorgone-admin.okta1.com:1802/app/testorgone_customsaml20app_1/0oa1gjh63g214q0Hq0g4/setup/help/SAML_2_0/instructions",
+        "type": "text/html"
+      },
       "users": {
-        "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/users"
-      },
-      "groups": {
-        "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/groups"
-      },
-      "self": {
-        "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD"
-      },
-      "metadata": {
-        "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/sso/saml/metadata"
+        "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oa1gjh63g214q0Hq0g4/users"
       },
       "deactivate": {
-        "href": "https://example.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD/lifecycle/deactivate"
+        "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oa1gjh63g214q0Hq0g4/lifecycle/deactivate"
+      },
+      "groups": {
+        "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oa1gjh63g214q0Hq0g4/groups"
+      },
+      "metadata": {
+        "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oa1gjh63g214q0Hq0g4/sso/saml/metadata",
+        "type": "application/xml"
       }
     },
     "_embedded": {
