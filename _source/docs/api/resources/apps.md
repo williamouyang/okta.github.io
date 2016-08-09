@@ -79,32 +79,32 @@ The Okta Application API provides operations to manage applications and/or assig
     "logo": [
       {
         "name": "medium",
-        "href": "http://testorgone.okta1.com:1802/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png",
+        "href": "http://testorgone.okta.com/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png",
         "type": "image/png"
       }
     ],
     "appLinks": [
       {
         "name": "testorgone_testsamlapp_1_link",
-        "href": "http://testorgone.okta1.com:1802/home/testorgone_testsamlapp_1/0oaud6YvvS7AghVmH0g3/alnun3sSjdvR9IYuy0g3",
+        "href": "http://testorgone.okta.com/home/testorgone_testsamlapp_1/0oaud6YvvS7AghVmH0g3/alnun3sSjdvR9IYuy0g3",
         "type": "text/html"
       }
     ],
     "help": {
-      "href": "http://testorgone-admin.okta1.com:1802/app/testorgone_testsamlapp_1/0oaud6YvvS7AghVmH0g3/setup/help/SAML_2_0/instructions",
+      "href": "http://testorgone-admin.okta.com:/app/testorgone_testsamlapp_1/0oaud6YvvS7AghVmH0g3/setup/help/SAML_2_0/instructions",
       "type": "text/html"
     },
     "users": {
-      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oaud6YvvS7AghVmH0g3/users"
+      "href": "http://testorgone.okta.com/api/v1/apps/0oaud6YvvS7AghVmH0g3/users"
     },
     "deactivate": {
-      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oaud6YvvS7AghVmH0g3/lifecycle/deactivate"
+      "href": "http://testorgone.okta.com:/api/v1/apps/0oaud6YvvS7AghVmH0g3/lifecycle/deactivate"
     },
     "groups": {
-      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oaud6YvvS7AghVmH0g3/groups"
+      "href": "http://testorgone.okta.com/api/v1/apps/0oaud6YvvS7AghVmH0g3/groups"
     },
     "metadata": {
-      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oaud6YvvS7AghVmH0g3/sso/saml/metadata",
+      "href": "http://testorgone.okta.com/api/v1/apps/0oaud6YvvS7AghVmH0g3/sso/saml/metadata",
       "type": "application/xml"
     }
   }
@@ -1401,25 +1401,25 @@ curl -v -X POST \
     "logo": [
       {
         "name": "medium",
-        "href": "http://testorgone.okta1.com:1802/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png",
+        "href": "http://testorgone.okta.com:/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png",
         "type": "image/png"
       }
     ],
     "appLinks": [
       {
         "name": "testorgone_examplecustomswaapp_1_link",
-        "href": "http://testorgone.okta1.com:1802/home/testorgone_examplecustomswaapp_1/0oaugjme6G6Aq6h7m0g3/alnuqqc3uS8X6L4Se0g3",
+        "href": "http://testorgone.okta.com/home/testorgone_examplecustomswaapp_1/0oaugjme6G6Aq6h7m0g3/alnuqqc3uS8X6L4Se0g3",
         "type": "text/html"
       }
     ],
     "users": {
-      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oaugjme6G6Aq6h7m0g3/users"
+      "href": "http://testorgone.okta.com/api/v1/apps/0oaugjme6G6Aq6h7m0g3/users"
     },
     "deactivate": {
-      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oaugjme6G6Aq6h7m0g3/lifecycle/deactivate"
+      "href": "http://testorgone.okta.com/api/v1/apps/0oaugjme6G6Aq6h7m0g3/lifecycle/deactivate"
     },
     "groups": {
-      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oaugjme6G6Aq6h7m0g3/groups"
+      "href": "http://testorgone.okta.com/api/v1/apps/0oaugjme6G6Aq6h7m0g3/groups"
     }
   }
 }
@@ -1627,32 +1627,32 @@ curl -v -X POST \
     "logo": [
       {
         "name": "medium",
-        "href": "http://testorgone.okta1.com:1802/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png",
+        "href": "http://testorgone.okta.com/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png",
         "type": "image/png"
       }
     ],
     "appLinks": [
       {
         "name": "testorgone_examplecustomsaml20app_6_link",
-        "href": "http://testorgone.okta1.com:1802/home/testorgone_examplecustomsaml20app_6/0oav8uiWzPDrDMYxU0g3/alnvjz6hLyuTZadi80g3",
+        "href": "http://testorgone.okta.com/home/testorgone_examplecustomsaml20app_6/0oav8uiWzPDrDMYxU0g3/alnvjz6hLyuTZadi80g3",
         "type": "text/html"
       }
     ],
     "help": {
-      "href": "http://testorgone-admin.okta1.com:1802/app/testorgone_examplecustomsaml20app_6/0oav8uiWzPDrDMYxU0g3/setup/help/SAML_2_0/instructions",
+      "href": "http://testorgone-admin.okta.com/app/testorgone_examplecustomsaml20app_6/0oav8uiWzPDrDMYxU0g3/setup/help/SAML_2_0/instructions",
       "type": "text/html"
     },
     "users": {
-      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oav8uiWzPDrDMYxU0g3/users"
+      "href": "http://testorgone.okta.com/api/v1/apps/0oav8uiWzPDrDMYxU0g3/users"
     },
     "deactivate": {
-      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oav8uiWzPDrDMYxU0g3/lifecycle/deactivate"
+      "href": "http://testorgone.okta.com/api/v1/apps/0oav8uiWzPDrDMYxU0g3/lifecycle/deactivate"
     },
     "groups": {
-      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oav8uiWzPDrDMYxU0g3/groups"
+      "href": "http://testorgone.okta.com/api/v1/apps/0oav8uiWzPDrDMYxU0g3/groups"
     },
     "metadata": {
-      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oav8uiWzPDrDMYxU0g3/sso/saml/metadata",
+      "href": "http://testorgone.okta.com:/api/v1/apps/0oav8uiWzPDrDMYxU0g3/sso/saml/metadata",
       "type": "application/xml"
     }
   }
@@ -1795,32 +1795,32 @@ curl -v -X GET \
     "logo": [
       {
         "name": "medium",
-        "href": "http://testorgone.okta1.com:1802/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png",
+        "href": "http://testorgone.okta.com/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png",
         "type": "image/png"
       }
     ],
     "appLinks": [
       {
         "name": "testorgone_customsaml20app_1_link",
-        "href": "http://testorgone.okta1.com:1802/home/testorgone_customsaml20app_1/0oa1gjh63g214q0Hq0g4/aln1gofChJaerOVfY0g4",
+        "href": "http://testorgone.okta.com/home/testorgone_customsaml20app_1/0oa1gjh63g214q0Hq0g4/aln1gofChJaerOVfY0g4",
         "type": "text/html"
       }
     ],
     "help": {
-      "href": "http://testorgone-admin.okta1.com:1802/app/testorgone_customsaml20app_1/0oa1gjh63g214q0Hq0g4/setup/help/SAML_2_0/instructions",
+      "href": "http://testorgone-admin.okta.com/app/testorgone_customsaml20app_1/0oa1gjh63g214q0Hq0g4/setup/help/SAML_2_0/instructions",
       "type": "text/html"
     },
     "users": {
-      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oa1gjh63g214q0Hq0g4/users"
+      "href": "http://testorgone.okta.com/api/v1/apps/0oa1gjh63g214q0Hq0g4/users"
     },
     "deactivate": {
-      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oa1gjh63g214q0Hq0g4/lifecycle/deactivate"
+      "href": "http://testorgone.okta.com/api/v1/apps/0oa1gjh63g214q0Hq0g4/lifecycle/deactivate"
     },
     "groups": {
-      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oa1gjh63g214q0Hq0g4/groups"
+      "href": "http://testorgone.okta.com/api/v1/apps/0oa1gjh63g214q0Hq0g4/groups"
     },
     "metadata": {
-      "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oa1gjh63g214q0Hq0g4/sso/saml/metadata",
+      "href": "http://testorgone.okta.com/api/v1/apps/0oa1gjh63g214q0Hq0g4/sso/saml/metadata",
       "type": "application/xml"
     }
   }
@@ -1966,32 +1966,32 @@ curl -v -X GET \
       "logo": [
         {
           "name": "medium",
-          "href": "http://testorgone.okta1.com:1802/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png",
+          "href": "http://testorgone.okta.com/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png",
           "type": "image/png"
         }
       ],
       "appLinks": [
         {
           "name": "testorgone_customsaml20app_1_link",
-          "href": "http://testorgone.okta1.com:1802/home/testorgone_customsaml20app_1/0oa1gjh63g214q0Hq0g4/aln1gofChJaerOVfY0g4",
+          "href": "http://testorgone.okta.com/home/testorgone_customsaml20app_1/0oa1gjh63g214q0Hq0g4/aln1gofChJaerOVfY0g4",
           "type": "text/html"
         }
       ],
       "help": {
-        "href": "http://testorgone-admin.okta1.com:1802/app/testorgone_customsaml20app_1/0oa1gjh63g214q0Hq0g4/setup/help/SAML_2_0/instructions",
+        "href": "http://testorgone-admin.okta.com/app/testorgone_customsaml20app_1/0oa1gjh63g214q0Hq0g4/setup/help/SAML_2_0/instructions",
         "type": "text/html"
       },
       "users": {
-        "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oa1gjh63g214q0Hq0g4/users"
+        "href": "http://testorgone.okta.com/api/v1/apps/0oa1gjh63g214q0Hq0g4/users"
       },
       "deactivate": {
-        "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oa1gjh63g214q0Hq0g4/lifecycle/deactivate"
+        "href": "http://testorgone.okta.com/api/v1/apps/0oa1gjh63g214q0Hq0g4/lifecycle/deactivate"
       },
       "groups": {
-        "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oa1gjh63g214q0Hq0g4/groups"
+        "href": "http://testorgone.okta.com/api/v1/apps/0oa1gjh63g214q0Hq0g4/groups"
       },
       "metadata": {
-        "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oa1gjh63g214q0Hq0g4/sso/saml/metadata",
+        "href": "http://testorgone.okta.com:/api/v1/apps/0oa1gjh63g214q0Hq0g4/sso/saml/metadata",
         "type": "application/xml"
       }
     }
@@ -2148,32 +2148,32 @@ curl -v -X GET \
       "logo": [
         {
           "name": "medium",
-          "href": "http://testorgone.okta1.com:1802/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png",
+          "href": "http://testorgone.okta.com/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png",
           "type": "image/png"
         }
       ],
       "appLinks": [
         {
           "name": "testorgone_customsaml20app_1_link",
-          "href": "http://testorgone.okta1.com:1802/home/testorgone_customsaml20app_1/0oa1gjh63g214q0Hq0g4/aln1gofChJaerOVfY0g4",
+          "href": "http://testorgone.okta.com/home/testorgone_customsaml20app_1/0oa1gjh63g214q0Hq0g4/aln1gofChJaerOVfY0g4",
           "type": "text/html"
         }
       ],
       "help": {
-        "href": "http://testorgone-admin.okta1.com:1802/app/testorgone_customsaml20app_1/0oa1gjh63g214q0Hq0g4/setup/help/SAML_2_0/instructions",
+        "href": "http://testorgone-admin.okta.com/app/testorgone_customsaml20app_1/0oa1gjh63g214q0Hq0g4/setup/help/SAML_2_0/instructions",
         "type": "text/html"
       },
       "users": {
-        "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oa1gjh63g214q0Hq0g4/users"
+        "href": "http://testorgone.okta.com/api/v1/apps/0oa1gjh63g214q0Hq0g4/users"
       },
       "deactivate": {
-        "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oa1gjh63g214q0Hq0g4/lifecycle/deactivate"
+        "href": "http://testorgone.okta.com/api/v1/apps/0oa1gjh63g214q0Hq0g4/lifecycle/deactivate"
       },
       "groups": {
-        "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oa1gjh63g214q0Hq0g4/groups"
+        "href": "http://testorgone.okta.com/api/v1/apps/0oa1gjh63g214q0Hq0g4/groups"
       },
       "metadata": {
-        "href": "http://testorgone.okta1.com:1802/api/v1/apps/0oa1gjh63g214q0Hq0g4/sso/saml/metadata",
+        "href": "http://testorgone.okta.com/api/v1/apps/0oa1gjh63g214q0Hq0g4/sso/saml/metadata",
         "type": "application/xml"
       }
     },
@@ -3095,32 +3095,32 @@ curl -v -X PUT \
     "logo": [
       {
         "name": "medium",
-        "href": "http://rain.okta1.com:1802/img/logos/zendesk.png",
+        "href": "http://testorgone.okta.com/img/logos/zendesk.png",
         "type": "image/png"
       }
     ],
     "appLinks": [
       {
         "name": "login",
-        "href": "http://rain.okta1.com:1802/home/zendesk/0oainmLkOL329Jcju0g3/120",
+        "href": "http://testorgone.okta.com/home/zendesk/0oainmLkOL329Jcju0g3/120",
         "type": "text/html"
       }
     ],
     "help": {
-      "href": "http://rain-admin.okta1.com:1802/app/zendesk/0oainmLkOL329Jcju0g3/setup/help/SAML_2_0/external-doc",
+      "href": "http://testorgone-admin.okta.com/app/zendesk/0oainmLkOL329Jcju0g3/setup/help/SAML_2_0/external-doc",
       "type": "text/html"
     },
     "users": {
-      "href": "http://rain.okta1.com:1802/api/v1/apps/0oainmLkOL329Jcju0g3/users"
+      "href": "http://testorgone.okta.com/api/v1/apps/0oainmLkOL329Jcju0g3/users"
     },
     "deactivate": {
-      "href": "http://rain.okta1.com:1802/api/v1/apps/0oainmLkOL329Jcju0g3/lifecycle/deactivate"
+      "href": "http://testorgone.okta.com:/api/v1/apps/0oainmLkOL329Jcju0g3/lifecycle/deactivate"
     },
     "groups": {
-      "href": "http://rain.okta1.com:1802/api/v1/apps/0oainmLkOL329Jcju0g3/groups"
+      "href": "http://testorgone.okta.com/api/v1/apps/0oainmLkOL329Jcju0g3/groups"
     },
     "metadata": {
-      "href": "http://rain.okta1.com:1802/api/v1/apps/0oainmLkOL329Jcju0g3/sso/saml/metadata",
+      "href": "http://testorgone.okta.com/api/v1/apps/0oainmLkOL329Jcju0g3/sso/saml/metadata",
       "type": "application/xml"
     }
   }
