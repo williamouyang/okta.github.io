@@ -28,6 +28,7 @@
 			"description": "",
 			"order": [
 				"2e5d5ae1-9f6f-f4b2-fc58-c121479a154e",
+				"bf9fefaf-2e3d-361b-292f-bfb49b25d4b5",
 				"b00be07d-d424-3d3a-6549-8c361f1125e1",
 				"d668d201-bd6a-9952-8158-cdfe1ab94a2a",
 				"5b862b88-fd9e-39dd-90bc-a8b396bb14c3",
@@ -179,10 +180,28 @@
 			"version": 2,
 			"tests": "",
 			"time": 1408163650741,
-			"name": "Add SAML 2.0 App",
+			"name": "Add Custom SAML 2.0 App",
 			"description": "",
 			"collectionId": "dd82f5f5-ea36-aade-5fd3-0dac0245db69",
-			"rawModeData": "{\n  \"name\": \"template_saml_2_0\",\n  \"label\": \"Example SAML App\",\n  \"signOnMode\": \"SAML_2_0\",\n  \"settings\": {\n    \"app\": {\n      \"audienceRestriction\": \"https://example.com/tenant/123\",\n      \"forceAuthn\": false,\n      \"postBackURL\": \"https://example.com/sso/saml\",\n      \"authnContextClassRef\": \"urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport\",\n      \"requestCompressed\": \"COMPRESSED\",\n      \"recipient\": \"https://example.com/sso/saml\",\n      \"signAssertion\": \"SIGNED\",\n      \"destination\": \"https://example.com/sso/saml\",\n      \"signResponse\": \"SIGNED\",\n      \"nameIDFormat\": \"urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress\",\n      \"groupName\": null,\n      \"groupFilter\": null,\n      \"defaultRelayState\": null,\n      \"configuredIssuer\": null,\n      \"attributeStatements\": null\n    }\n  }\n}",
+			"rawModeData": "{\n  \"label\": \"Custom Saml 2.0 App\",\n  \"accessibility\": {\n    \"selfService\": false,\n    \"errorRedirectUrl\": null,\n    \"loginRedirectUrl\": null\n  },\n  \"visibility\": {\n    \"autoSubmitToolbar\": false,\n    \"hide\": {\n      \"iOS\": false,\n      \"web\": false\n    }\n  },\n  \"features\": [],\n  \"signOnMode\": \"SAML_2_0\",\n  \"credentials\": {\n    \"userNameTemplate\": {\n      \"template\": \"${fn:substringBefore(source.login, \\\"@\\\")}\",\n      \"type\": \"BUILT_IN\"\n    },\n    \"signing\": {}\n  },\n  \"settings\": {\n    \"app\": {},\n    \"notifications\": {\n      \"vpn\": {\n        \"network\": {\n          \"connection\": \"DISABLED\"\n        },\n        \"message\": null,\n        \"helpUrl\": null\n      }\n    },\n    \"signOn\": {\n      \"defaultRelayState\": \"\",\n      \"ssoAcsUrl\": \"http://example.okta.com\",\n      \"idpIssuer\": \"http://www.okta.com/${org.externalKey}\",\n      \"audience\": \"https://example.com/tenant/123\",\n      \"recipient\": \"http://recipient.okta.com\",\n      \"destination\": \"http://destination.okta.com\",\n      \"subjectNameIdTemplate\": \"${user.userName}\",\n      \"subjectNameIdFormat\": \"urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress\",\n      \"responseSigned\": true,\n      \"assertionSigned\": true,\n      \"signatureAlgorithm\": \"RSA_SHA256\",\n      \"digestAlgorithm\": \"SHA256\",\n      \"honorForceAuthn\": true,\n      \"authnContextClassRef\": \"urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport\",\n      \"spIssuer\": null,\n      \"requestCompressed\": false,\n      \"attributeStatements\": []\n    }\n  }\n}",
+			"folder": "d5b71210-5dac-4ce0-6205-914c519fb44b"
+		},
+		{
+			"id": "bf9fefaf-2e3d-361b-292f-bfb49b25d4b5",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/apps",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "",
+			"time": 1470760927700,
+			"name": "Add Custom SWA App",
+			"description": "",
+			"collectionId": "dd82f5f5-ea36-aade-5fd3-0dac0245db69",
+			"rawModeData": "{\n  \"label\": \"Custom SWA App\",\n  \"accessibility\": {\n    \"selfService\": false,\n    \"errorRedirectUrl\": null,\n    \"loginRedirectUrl\": null\n  },\n  \"visibility\": {\n    \"autoSubmitToolbar\": false,\n    \"hide\": {\n      \"iOS\": false,\n      \"web\": false\n    }\n  },\n  \"features\": [],\n  \"signOnMode\": \"AUTO_LOGIN\",\n  \"credentials\": {\n    \"scheme\": \"EXTERNAL_PASSWORD_SYNC\",\n    \"userNameTemplate\": {\n      \"template\": \"${source.email}\",\n      \"type\": \"BUILT_IN\"\n    },\n    \"revealPassword\": false,\n    \"signing\": {}\n  },\n  \"settings\": {\n    \"app\": {},\n    \"notifications\": {\n      \"vpn\": {\n        \"network\": {\n          \"connection\": \"DISABLED\"\n        },\n        \"message\": null,\n        \"helpUrl\": null\n      }\n    },\n    \"signOn\": {\n      \"redirectUrl\": \"http://secondary.com\",\n      \"loginUrl\": \"http://primary.com\"\n    }\n  }\n}",
 			"folder": "d5b71210-5dac-4ce0-6205-914c519fb44b"
 		},
 		{
