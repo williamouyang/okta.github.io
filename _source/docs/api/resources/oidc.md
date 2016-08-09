@@ -47,41 +47,6 @@ For example, the claim can be about a name, identity, key, group, or privilege.
 The claims in a security token are dependent upon the type of token, the type of credential used to authenticate the user, 
 and the application configuration.
 
-## OpenID Connect Workflows
-
-Four OpenID Connect workflows are documented in the [OpenID spec](http://openid.net/specs/openid-connect-core-1_0.html#Authentication):
-
-* Implicit flow
-* Authorization code flow
-* Hybrid flow
-* Resource Owner Password Flow
-
-Choosing the right flow depends on the type of application you're integrating and what you need to do with it.
-
-## Choosing the Right Flow
-
-Three flows are available for these application types:
-
-* Single-page apps (JavaScript app or browser plugin): implicit flow or hybrid flow are supported. 
-    * You can use chiclets.
-    * Apps can be service-provider initiated.
-    * You can use claims for groups.
-    * Okta provides a UI for configuring OpenID Connect settings during app creation.
-* Web apps (server-side app with an end user): implicit flow or hybrid flow are best. 
-    * You can use chiclets.
-    * You can use claims for groups.
-* Native apps installed on a mobile device or desktop: authorization code flow is supported.
-    * You can use custom redirect URIs like `myApp://oauth:2.0:native`.
-    * You have access to several client authentication options, including *client_id* and *client_secret*, [JWT client authentication](https://tools.ietf.org/html/rfc7523#section-2.2), or [proof key for code exchange](https://tools.ietf.org/html/rfc7636).
-    * You can use claims for groups.
-    
-### Native App Requirements
- 
-Be aware of two important requirements for native apps:
- 
-* For native applications, the *client_id* and *client_secret* are embedded in the source code of the application. Thus, *client_secret* is not a secret.
-* Native apps must use [PKCE](https://tools.ietf.org/html/rfc7636) to mitigate authorization code interception. For more information, see [OAuth2.0](http://developer.okta.com/docs/api/resources/oauth2#parameter-details). 
-
 ## ID Token
 
 OpenID Connect introduces an [ID Token](http://openid.net/specs/openid-connect-core-1_0.html#IDToken) 
