@@ -151,6 +151,8 @@ The catalog is currently not exposed via an API.  While additional apps may be a
 | template_swa3field  | [Add Plugin SWA (3 Field) Application](#add-plugin-swa-3-field-application)   |
 | tempalte_sps        | [Add SWA Application (No Plugin)](#add-swa-application-no-plugin)             |
 | template_wsfed      | [Add WS-Federation Application](#add-ws-federation-application)               |
+| Custom SAML 2.0     | [Add Custom SAML 2.0 Application](#add-custom-saml-application)               |
+| Custom SWA          | [Add Custom SWA Application](#add-custom-swa-application)                     |
 |---------------------+-------------------------------------------------------------------------------|
 
 The current workaround is to manually configure the desired application via the Okta Admin UI in a preview (sandbox) organization and view the application via [Get Application](#get-application)
