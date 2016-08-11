@@ -466,7 +466,7 @@ Based on the type of token and whether it is active or not, the returned JSON co
 Parameter   | Description                                                                                         | Type       |
 ------------+-----------------------------------------------------------------------------------------------------+------------|
 active      | An access token or refresh token.                                                                   | boolean    |  
-token_type  | The type of the token, it is always `Bearer`.                                                       | String     |
+token_type  | The type of the token. The value is always `Bearer`.                                                | String     |
 scope       | A space-delimited list of scopes.                                                                   | String     |
 client_id   | The ID of the client associated with the token.                                                     | String     |
 username    | The username associated with the token.                                                             | String     |
