@@ -111,7 +111,7 @@ The payload includes the following pre-defined claims:
 | jti     | A unique identifier for this Access Token for debugging and revocation purposes.   | String    |  "AT.0mP4JKAZX1iACIT4vbEDF7LpvDVjxypPMf0D7uX39RE"  |
 | iss     | The Issuer Identifier of the response. This value will be the unique identifier for the Authorization Server instance.   | String    | "https://your-org.okta.com/as/0oacqf8qaJw56czJi0g4"     |
 | aud     | Identifies the audience that this Access Token is intended for. It will be the client id of your application that requests the Access Token.   | String    | "6joRGIzNCaJfdCPzRjlh"     |
-| sub     | The subject. A name for the user or an unique identifier for the client.  | String    | 	"john.doe@example.com"     |
+| sub     | The subject. A name for the user or a unique identifier for the client.  | String    | 	"john.doe@example.com"     |
 | iat     | The time the Access Token was issued, represented in Unix time (seconds).   | Integer    | 1311280970     |
 | exp     | The time the Access Token expires, represented in Unix time (seconds).   | Integer    | 1311280970     |
 | cid     | Client ID of your application that requests the Access Token.  | String    | "6joRGIzNCaJfdCPzRjlh"     |
