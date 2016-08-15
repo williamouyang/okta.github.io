@@ -15,12 +15,12 @@ There are several use cases and Okta product features built on top of the OAuth 
 * API Access Management -- {% api-lifecycle beta %}
 
 It's important to understand which use case you are targeting and build your application according to the correct patterns for that use case. 
-The OAuth 2.0 APIs each have several different [query params](xxx) which dictate which type of flow you are using and the mechanics of that flow.
+The OAuth 2.0 APIs each have several different [query params](#authentication-request) which dictate which type of flow you are using and the mechanics of that flow.
 
 At the very basic level, the main API endpoints are:
 
-* [/oauth2/v1/authorize](xxx) initiates an OAuth or OpenID Connect request.
-* [/oauth2/v1/token](xxx) redeems an authorization grant (returned by the /oauth2/v1/authorize endpoint) for an access token.
+* [/oauth2/v1/authorize](#authentication-request) initiates an OAuth or OpenID Connect request.
+* [/oauth2/v1/token](#token-request) redeems an authorization grant (returned by the `/oauth2/v1/authorize` endpoint) for an access token.
 
 ### Basic Flows
 
@@ -40,7 +40,7 @@ At the very basic level, the main API endpoints are:
     * Uses [Authorization Code Grant Flow](https://tools.ietf.org/html/rfc6749#section-4.1)
     * Can use custom redirect URIs like `myApp://oauth:2.0:native`
     
-![Authorization Code Flow for Single-Page Apps](/assets/img/auth_code_flow.png)
+![Native Application Flow](/assets/img/native_flow.png)
 
 > Note: For native applications, the client_id and client_secret are embedded in the source code of the application; in this context, the client secret isn't treated as a secret. 
         Therefore native apps should make use of Proof Key for Code Exchange (PKCE) to mitigate authorization code interception.
@@ -52,7 +52,7 @@ At the very basic level, the main API endpoints are:
     * Assumes Resource Owner and Client are on separate devices
     * Most secure flow as tokens never pass through user-agent
     
-<add diagram> //current diagram needs work. See https://okta.box.com/s/13odnc4a8ddgq6nz6jkzrvy0obuwfp74 for better reference.
+![Web Application Flow](/assets/img/web_app_flow.png)
 
 4. Service Application
 
@@ -80,8 +80,6 @@ See the last section of [Access Tokens](#access-tokens) for more information on 
 
 The Okta Authorization Server reserves a number of pre-defined (reserved) scopes which can't be overridden. 
 These include the standard OpenID Connect scopes (`openid`, `profile`, `email`, `phone`, `address`, `offline_access`) as well as a special scope called `groups`.
-
-![Tokens, OAuth 2.0, and Okta](/assets/img/tokens_and_flows1.png)
 
 Scopes are defined in the request parameter, and claims are in the Access Token returned from the request.
 
