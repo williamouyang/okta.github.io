@@ -69,26 +69,12 @@ This is what the "state" parameter is used for in the flows described above; the
 
 ### Custom User Experience
 
-By default, the Authorization Endpoint will display the Okta login page and authenticate the user if they don't have an existing session. 
+By default, the Authorization Endpoint displays the Okta login page and authenticates the user if he or she doesn't have an existing session. 
 If you prefer to use a fully customized user experience, you can instead authenticate the user via the [Authentication API](http://developer.okta.com/docs/api/resources/authn.html). 
 This authentication method produces a `sessionToken` which can be passed into the Authorize Endpoint, and the user won't see an Okta login page.
 
 > Important: Okta uses public key cryptography to sign tokens and verify that they are valid. 
 See the last section of [Access Tokens](#access-tokens) for more information on the logic your application must have to ensure it’s always updated with the latest keys.
-
-### Reserved Scopes
-
-The Okta Authorization Server reserves a number of pre-defined (reserved) scopes which can't be overridden. 
-These include the standard OpenID Connect scopes (`openid`, `profile`, `email`, `phone`, `address`, `offline_access`) as well as a special scope called `groups`.
-
-Scopes are defined in the request parameter, and claims are in the Access Token returned from the request.
-
-> For more information about OpenID Connect and ID Tokens, see [OpenID Connect](/docs/api/resources/oidc.html). They are included here for completeness.
-
-* ID Tokens are returned with all requests to `/oauth2/v1/authorize`. In addition to reserve scopes and claims, ID Tokens contain an authorization grant.
-* Access Tokens and Refresh tokens are returned from requests to `/oauth2/v1/token` if the request contains an authorization code or Refresh Token.
-
-You can also define your own custom scopes in the request.
 
 ## Tokens
 {:.beta}
@@ -159,7 +145,9 @@ Access Tokens include pre-defined scopes and claims and can optionally contain c
 ##### Pre-defined scopes
 {:.beta}
 
-Pre-defined scopes include [OIDC scopes](oidc.html#scope-dependent-claims-not-always-returned).
+The Okta Authorization Server reserves a number of pre-defined (reserved) scopes which can't be overridden. Pre-defined scopes include [OIDC scopes](oidc.html#scope-dependent-claims-not-always-returned).
+
+Scopes are defined in the request parameter, and claims are in the Access Token returned from the request.
 {:.beta}
 
 ##### Pre-defined claims in the header section

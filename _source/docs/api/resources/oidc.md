@@ -166,6 +166,8 @@ Claims in the payload are either base claims, independent of scope (always retur
 | address     | address    | User's preferred postal address. The value of the address member is a JSON structure containing *street_address*, *locality*, *region*, *postal_code*, and *country*.   | JSON structure    | { "street_address": "123 Hollywood Blvd.", "locality": "Los Angeles", "region": "CA", "postal_code": "90210", "country": "US" }     |
 | phone_number     |  phone   | User's preferred telephone number in E.164 format.   | String    | 	"+1 (425) 555-1212"     |
 | groups    | groups    | The groups that the user is a member of that also match the group filter of the client app. | List | ["MyGroup1", "MyGroup2", "MyGroup3"] |
+| openid    | ?????     | ????? | ???? | ???? |
+| offline_access | ?????  | ?????  | ????? | ????? |
 
 Be aware of the following before you work with scope-dependent claims:
 
