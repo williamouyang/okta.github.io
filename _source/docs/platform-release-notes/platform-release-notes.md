@@ -10,13 +10,11 @@ Release 2016.33
 
 The following issue is fixed:
 
-* Matching against attributes that exceed the allowed length of `appuser.username` failed without an appropriate message,
-and the failure wasn't logged. (OKTA-96437)
-* GET requests to `oauth2/v1/authorize` that specified the value `form_post` for the parameter `response_mode` sometimes 
+* GET requests to `oauth2/v1/authorize` that specified the Form Post Response Mode sometimes 
 failed to receive `expires_in` and `scope` in the response. (OKTA-98245)
-* Some custom apps couldn't upgdate the signing key. (OKTA-93959)
-* For OpenID client apps that configured their application type as "Okta or App,"
-the **App Embed Link** dialog incorrectly displayed additional sections. (OKTA-95526)
+* Custom SAML apps couldn't update their signing key credentials via API. (OKTA-93959)
+* When configuring OpenID Connect client apps, the App Embed Links dialog displayed custom login and error page sections that weren’t applicable. (OKTA-95526)
+* Using an API token created by a ReadOnly Admin caused a permission error when GET requests were sent to `/api/v1/users/:uid/factors` or `/api/v1/users/:uid/factors/catalog`. (OKTA-95569)
 
 ## Does Your Org Have These Changes Yet?
 
