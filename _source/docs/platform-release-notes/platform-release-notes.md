@@ -26,7 +26,7 @@ For changes outside the Okta platform, see the [Release Notes Knowledge Hub](htt
 
 ## Earlier Release Notes
 
-* [Platform Release Notes for Release 2016.30](platform-release-notes2016-31.html)
+* [Platform Release Notes for Release 2016.31](platform-release-notes2016-31.html)
 * [Platform Release Notes for Release 2016.30](platform-release-notes2016-30.html)
 * [Platform Release Notes for Release 2016.29](platform-release-notes2016-29.html)
 * [Platform Release Notes for Release 2016.28](platform-release-notes2016-28.html)
