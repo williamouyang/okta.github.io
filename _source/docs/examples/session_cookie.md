@@ -5,70 +5,67 @@ title: Session Cookie
 
 ## Overview
 
-Okta utilizes a non-persistent HTTP session cookie to provide access to your Okta organization and applications across web requests for an interactive user-agents such as a browser.  This document provides examples for programmatically retrieving and setting a session cookie for different deployment scenarios to provide SSO capabilities for custom web applications built on the Okta platform.
+Okta utilizes an HTTP session cookie to provide access to your Okta organization and applications across web requests for an interactive user-agents such as a browser. This document provides examples for programmatically retrieving and setting a session cookie for different deployment scenarios to provide SSO capabilities for custom web applications built on the Okta platform.
 
 Okta sessions are created and managed with the [Session API](/docs/api/rest/sessions.html).
 
-## Retrieving a session cookie by visiting a session redirect link
+## Retrieving a session cookie via OpenID Connect Authorization Endpoint
 
-This scenario is ideal for deployment scenarios where you have implemented both a custom login page and custom landing page for your application.  The login page will typically collect the user's credentials via a HTML form submit or POST and the web application will validate the credentials against your Okta organization by calling the [Create Session](/docs/api/rest/sessions.html#create-session-with-session-token) API to obtain a one-time token.
+This scenario is ideal for deployment scenarios where you have implemented both a custom login page and custom landing page for your application. The login page will typically collect the user's credentials via a HTML form submit or POST and the web application will validate the credentials against your Okta organization by calling the [Authentication API](/docs/api/rest/authn.html) to obtain a [session token](/docs/api/rest/sessions.html#session-token).
 
-The generated one-time token along with the URL for your landing page can then be used to complete the following [URI Template](http://tools.ietf.org/html/rfc6570) `https://your-subdomain.okta.com/login/sessionCookieRedirect?token={cookieToken}&redirectUrl={redirectUrl}` that will retrieve a session cookie for a user's browser when visited.
+Once a session token is obtained, it can be passed into the [OpenID Connect authorize endpoint](/docs/api/resources/oauth2.html#authentication-request) in order to get an Okta session cookie. Executing this flow will set a cookie in the end-user's browser and then redirect them back to the `redirect_uri` that is passed into the request.
 
-> The one-time token may only be used **once** to establish a session.  If the session expires or the user logs out of Okta after using the token, they will not be able to reuse the same one-time token to get a new session cookie.
+> The session token may only be used **once** to establish a session. If the session expires or the user logs out of Okta after using the token, they will not be able to reuse the same session token to get a new session cookie.
 
-### Validate credentials & retrieve a one-time token
-
-When processing a user's login request in your web application, retrieve a one-time token by passing the user's credentials with the `cookieToken` additionalFields query param to the [Create Session](/docs/api/rest/sessions.html#create-session-with-session-token) operation.
-
-#### Request Example
+##### Request Example
 {:.api .api-request .api-request-example}
 
-~~~ http
-POST /api/v1/sessions?additionalFields=cookieToken HTTP/1.1
-Host: your-subdomain.okta.com
-Authorization: SSWS yourtoken
-Accept: application/json
-Content-Type: application/json
-
-{
-  "username": "art.vandelay@example.com",
-  "password": "correct horse battery staple"
-}
+~~~
+https://your-subdomain.okta.com/oauth2/v1/authorize?client_id={clientId}&response_type=id_token&scope=openid&prompt=none&redirect_uri=https%3A%2F%2Fyour-app.example.com&state=Af0ifjslDkj&nonce=n-0S6_WzA2Mj&sessionToken=0HsohZYpJgMSHwmL9TQy7RRzuY
 ~~~
 
-#### Response Example
-{:.api .api-response .api-response-example}
+> The `prompt=none` param guarantees that the user will not be prompted for credentials. You will either obtain the requested tokens or an OAuth error response.
+
+> The `sessionToken` param serves as the primary credentials. It represents the authentication that was already performed via the [Authentication API](/docs/api/rest/authn.html).
+
+##### Response Example
+{:.api .api-request .api-response-example}
 
 ~~~ http
-HTTP/1.1 200 OK
-Content-Type: application/json
-
-{
-    "id": "000kYk6cDF7R02z4PxV5mhL4g",
-    "userId": "00u9apFCRAIKHVPZLGXT",
-    "mfaActive": false,
-    "cookieToken": "009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6"
-}
+HTTP/1.1 302 Moved Temporarily
+Set-Cookie: sid=lGj4FPxaG63Wm89TpJnaDF6; Path=/
+Location: https://your-app.example.com?id_token=S4sx3uixdsalasd&state=Af0ifjslDkj&nonce=n-0S6_WzA2Mj
 ~~~
 
-### Visit session redirect URL with the one-time token
+The response also includes an [ID Token](/docs/api/resources/oidc.html#id-token) that describes the authenticated user and can contain additional claims such as user profile attributes or email.
 
-After your login flow is complete you often need to establish a session cookie for your own application as well as a session cookie for Okta before visiting your landing page.  This is accomplished by returning a HTTP redirect status code for the login response that includes both your app's session cookie as well as the completed URI template with the one-time token for the Okta session redirect URL:
-`https://your-subdomain.okta.com/login/sessionCookieRedirect?token={cookieToken}&redirectUrl={redirectUrl}`
+The [Okta Sign-In Widget](/docs/guides/okta_sign-in_widget.html) uses this flow. This flow can also be used by Single Page Applications with the [`okta_post_messsage`](/docs/api/resources/oauth2.html#parameter-details) response type, which doesn't require a browser redirect.
 
-> Only the Okta session redirect URL with one-time token is required
+## Retrieving a session cookie by visiting a session redirect link
+
+> This pattern is deprecated. Prefer the [OpenID Connect](#retrieving-a-session-cookie-via-openid-connect-authorization-endpoint) flow described above.
+
+This scenario is ideal for deployment scenarios where you have implemented both a custom login page and custom landing page for your application. Your web application will solicit and validate the user credentials against your Okta organization by calling the [Authentication API](/docs/api/rest/authn.html) to obtain a [session token](/docs/api/rest/authn.html#session-token).
+
+The session token along with the URL for your landing page can then be used to complete the following [URI Template](http://tools.ietf.org/html/rfc6570) `https://your-subdomain.okta.com/login/sessionCookieRedirect?token={sessionToken}&redirectUrl={redirectUrl}` that will retrieve a session cookie for a user's browser when visited.
+
+> You must have your redirect URI white-listed as a Trusted Origin within Okta. This is required to protect against open redirect attacks. {% api_lifecycle ea %}
+
+> The session token may only be used **once** to establish a session. If the session expires or the user logs out of Okta after using the token, they will not be able to reuse the same session token to get a new session cookie.
+
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~ http
 HTTP/1.1 302 Moved Temporarily
 Set-Cookie: my_app_session_cookie_name=my_apps_session_cookie_value; Path=/
-Location: https://your-subdomain.okta.com/login/sessionCookieRedirect?token=009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6&redirectUrl=https%3A%2F%2Fwww.example.com%2Fportal%2Fhome
+Location: https://your-subdomain.okta.com/login/sessionCookieRedirect?token=0HsohZYpJgMSHwmL9TQy7RRzuY&redirectUrl=https%3A%2F%2Fwww.example.com%2Fportal%2Fhome
 ~~~
 
-The user's browser will set your app's session cookie and follow the redirect to Okta.  Okta will validate the one-time token and return a 302 status response that sets a session cookie for Okta and redirects the user's browser back to your landing page.  After the page has loaded the user will have an active session with Okta and will be able to SSO into their applications until the session is expired or the user closes the session (logout) or browser application.
+The user's browser will set your app's session cookie and follow the redirect to Okta.  Okta will validate the session token and return a 302 status response that sets a session cookie for Okta and redirects the user's browser back to your landing page.  After the page has loaded the user will have an active session with Okta and will be able to SSO into their applications until the session is expired or the user closes the session (logout) or browser application.
 
 ~~~ http
-GET /login/sessionCookieRedirect?token=009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6&redirectUrl=https%3A%2F%2Fwww.example.com%2Fportal%2Fhome HTTP/1.1
+GET /login/sessionCookieRedirect?token=0HsohZYpJgMSHwmL9TQy7RRzuY&redirectUrl=https%3A%2F%2Fyour-app.example.com HTTP/1.1
 Host: your-subdomain.okta.com
 Accept: */*
 ~~~
@@ -76,59 +73,24 @@ Accept: */*
 ~~~ http
 HTTP/1.1 302 Moved Temporarily
 Set-Cookie: sid=000aC_z7AZKTpSqtHFc0Ak6Vg; Path=/
-Location: https://www.example.com/portal/home
+Location: https://your-app.example.com
 ~~~
 
 ## Retrieving a session cookie by visiting an application embed link
 
-This scenario is ideal for deployment scenarios where you have a custom login page but immediately want to launch an Okta application after login without returning to a landing page.  The login page will typically collect the user's credentials via a HTML form submit or POST and validate the credentials against your Okta organization by calling the [Create Session](/docs/api/rest/sessions.html#create-session-with-session-token) API to obtain a one-time token.
+This scenario is ideal for deployment scenarios where you have a custom login page but immediately want to launch an Okta application after login without returning to a landing page. The login page will typically collect the user's credentials via a HTML form submit or POST and validate the credentials against your Okta organization by calling the [Authentication API](../resources/authn.html) to obtain a session token.
 
-The generated one-time token can than be passed as a query parameter to an Okta application's embed link that will set a session cookie as well as launch the application in a single web request.
+The session token can than be passed as a query parameter to an Okta application's embed link that will set a session cookie as well as launch the application in a single web request.
 
-> The one-time token may only be used **once** to establish a session.  If the session expires or the user logs out of Okta after using the token, they will not be able to reuse the same one-time token to get a new session cookie.
+> The session token may only be used **once** to establish a session. If the session expires or the user logs out of Okta after using the token, they will not be able to reuse the same session token to get a new session cookie.
 
-### Validate credentials & retrieve a one-time token
+### Visit an embed link with the session token
 
-When processing a user's login request in your web application, retrieve an one-time token by passing the user's credentials with the `cookieToken` additionalFields query param to the [Create Session](/docs/api/rest/sessions.html#create-session-with-session-token) operation.
-
-#### Request Example
-{:.api .api-request .api-request-example}
-
-~~~ http
-POST /api/v1/sessions?additionalFields=cookieToken HTTP/1.1
-Host: your-subdomain.okta.com
-Authorization: SSWS yourtoken
-Accept: application/json
-Content-Type: application/json
-
-{
-  "username": "art.vandelay@example.com",
-  "password": "correct horse battery staple"
-}
-~~~
-
-#### Response Example
-{:.api .api-response .api-response-example}
-
-~~~ http
-HTTP/1.1 200 OK
-Content-Type: application/json
-
-{
-    "id": "000kYk6cDF7R02z4PxV5mhL4g",
-    "userId": "00u9apFCRAIKHVPZLGXT",
-    "mfaActive": false,
-    "cookieToken": "009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6"
-}
-~~~
-
-### Visit an embed link with the one-time token
-
-After your login flow is complete you can launch an Okta application for the user with an [embed link](/docs/api/rest/users.html#get-assigned-app-links) that contains the the one-time token as a query parameter `onetimetoken`.
+After your login flow is complete you can launch an Okta application for the user with an [embed link](/docs/api/rest/users.html#get-assigned-app-links) that contains the the session token as a query parameter `sessionToken`.
 
 ~~~ http
 HTTP/1.1 302 Moved Temporarily
-Location: https://your-subdomain/app/google/go1013td3mXAQOJCHEHQ/mail?onetimetoken=009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6
+Location: https://your-subdomain/app/google/go1013td3mXAQOJCHEHQ/mail?sessionToken=0HsohZYpJgMSHwmL9TQy7RRzuY
 ~~~
 
 When the link is visited, the token in the request will be used to initiate the user's session before processing the application launch request. A session cookie will be set in the browser and the user will have an active session with Okta and will be able to SSO into additional applications until the session is expired or the user closes the session (logout) or browser application.
@@ -141,13 +103,13 @@ Location: https://mail.google.com/a/your-subdomain
 
 > The HTTP response will vary depending on the specific Okta application but will always contain a `Set-Cookie` header.
 
-### Initiate a SAML SSO with the one-time token
+### Initiate a SAML SSO with the session token
 
 After your login flow is complete you can also initiate a SAML SSO into an Okta application for the user with either the `HTTP-Redirect` or `HTTP-POST`binding to the application's SAML SSO URL
-that contains the the one-time token as query parameter `onetimetoken`.
+that contains the the session token as query parameter `sessionToken`.
 
 ~~~ http
-GET /app/template_saml_2_0/kbiyMOIMHNLGHJNCBURM/sso/saml?RelayState=%2Fsome%2Fdeep%2Flink&onetimetoken=009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6 HTTP/1.1
+GET /home/appwizardsaml_1/0oalkgr25YMb5reZp0g4/alnlkriVMi9J5WYmk0g4?RelayState=%2Fcustom%2Fdeep%2Flink&sessionToken=0HsohZYpJgMSHwmL9TQy7RRzuY HTTP/1.1
 Host: your-subdomain.okta.com
 Accept: */*
 ~~~
@@ -177,69 +139,12 @@ Set-Cookie: sid=000aC_z7AZKTpSqtHFc0Ak6Vg; Path=/
 </html>
 ~~~
 
-### Initiate a WS-Federation SSO with the one-time token
+### Initiate a WS-Federation SSO with the session token
 
-You can also use the same [flow as SAML](#initiate-a-saml-sso-with-the-session-token) for template WS-Federation application as well by passing the one-time token as query parameter `onetimetoken`.
+You can also use the same [flow as SAML](#initiate-a-saml-sso-with-the-session-token) for template WS-Federation application as well by passing the session token as query parameter `sessionToken`.
 
 ~~~ http
-GET /app/template_wsfed/k9x69oiKYSUWMIYZBKTY/sso/wsfed/passive?wa=wsignin1.0&wtrealm=https%3A%2F%2Fexample.com%2FApp%2F&wctx=rm%3D0%26id%3Dpassive%26ru%3D%2FApp%2FHome%2FAbout&onetimetoken=009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6 HTTP/1.1
+GET /app/template_wsfed/k9x69oiKYSUWMIYZBKTY/sso/wsfed/passive?wa=wsignin1.0&wtrealm=https%3A%2F%2Fexample.com%2FApp%2F&wctx=rm%3D0%26id%3Dpassive%26ru%3D%2FApp%2FHome%2FAbout&sessionToken=0HsohZYpJgMSHwmL9TQy7RRzuY HTTP/1.1
 Host: your-subdomain.okta.com
 Accept: */*
-~~~
-
-## Retrieving a session cookie with a hidden image
-
-This flow uses a browser trick to establish a session by setting a cookie when retrieving a transparent 1x1 image with a one-time token.  Your login page will typically collect the user's credentials via a HTML form submit or POST and validate the credentials against your Okta organization by calling the [Create Session](/docs/api/rest/sessions.html#create-session-with-embed-image-url) API to obtain a session cookie image URL with a one-time token.
-
-> This flow is now deprecated as some major browser vendors such as Safari block cookies from 3rd-party sites by default.  Please use an alternative flow as browser vendors are increasingly blocking cookies from 3rd party sites by default
-
-### Validate credentials & retrieve a session cookie image URL
-
-When processing a user's login request in your web application, retrieve a session cookie image URL by passing the user's credentials with the `cookieTokenUrl` additionalFields query param to the [Create Session](/docs/api/rest/sessions.html#create-session-with-embed-image-url) operation.
-
-#### Request Example
-{:.api .api-request .api-request-example}
-
-~~~ http
-POST /api/v1/sessions?additionalFields=cookieTokenUrl HTTP/1.1
-Host: your-subdomain.okta.com
-Authorization: SSWS yourtoken
-Accept: application/json
-Content-Type: application/json
-
-{
-  "username": "art.vandelay@example.com",
-  "password": "correct horse battery staple"
-}
-~~~
-
-#### Response Example
-{:.api .api-response .api-response-example}
-
-~~~ http
-HTTP/1.1 200 OK
-Content-Type: application/json
-
-{
-    "id": "000kYk6cDF7R02z4PxV5mhL4g",
-    "userId": "00u9apFCRAIKHVPZLGXT",
-    "mfaActive": false,
-    "cookieTokenUrl": "https://your-subdomain.okta.com/login/sessionCookie?token=00nwBmuBFS4o2E5l58eSbgnr4NmY0-ELQR4Pvn2RZV"
-}
-~~~
-
-### Add image tag with session cookie image URL
-
-When you are ready to establish a session with Okta for the user, include the session cookie image URL in an image tag.
-
-~~~ html
-<img src="https://your-subdomain.okta.com/login/sessionCookie?token=00nwBmuBFS4o2E5l58eSbgnr4NmY0-ELQR4Pvn2RZV">
-~~~
-
-When the page containing the tag is loaded, the token in the request will be used to initiate the user's session, and a session cookie will be set in the browser. The image that renders is a 1x1 transparent image. After the page has loaded the user will have an active session with Okta and will be able to SSO into their applications. The token is a one-time token, so successive page loads will have no impact on the user's session. If the user logs out of Okta after using the token, they will not be able to reuse that same token to get a session cookie.
-
-~~~ http
-HTTP/1.1 200 OK
-Content-Type: image/png
-Set-Cookie: sid=000O8P2OlZLTHuz4RZV8locXA; Path=/
 ~~~
