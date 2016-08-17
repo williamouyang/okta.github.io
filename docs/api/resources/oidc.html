@@ -526,7 +526,7 @@ as well as claims about the authenticated user.</p>
     <tr>
       <td>groups</td>
       <td>groups</td>
-      <td>The groups that the user is a member of that also match the group filter of the client app.</td>
+      <td>The groups that the user is a member of that also match the ID token group filter of the client app.</td>
       <td>List</td>
       <td>[“MyGroup1”, “MyGroup2”, “MyGroup3”]</td>
     </tr>
@@ -544,7 +544,7 @@ Instead, the ID token contains the <code class="highlighter-rouge">name</code> a
     <p>The full set of claims for the requested scopes is available via the <a href="#get-user-information">/oauth2/v1/userinfo</a> endpoint. Call this endpoint using the Access Token.</p>
   </li>
   <li>
-    <p>To protect against arbitrarily large numbers of groups matching the group filter, the group claim has a limit of 100. 
+    <p>To protect against arbitrarily large numbers of groups matching the group filter, the groups claim has a limit of 100. 
 If more than 100 groups match the filter, then the request fails. Expect that this limit may change in the future.
 For more information about configuring an app for OpenID Connect, including group claims, see <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect">Using OpenID Connect</a>.</p>
   </li>

@@ -123,7 +123,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	<span class="toggle-menu"></span>
 	<div id="sidebar-wrapper">
 		<div class="docs-sidebar-block" id="myScrollspy" >
-		<h2>Examples</h2>                                                                                    <ul class="nav sidebar-nav nav-title"><li data-name="Session Cookie" class="on"><a id="toc_current_doc" href="/docs/examples/session_cookie.html">Session Cookie</a></li></ul><div id="gen-toc-container"><div class="gen-toc" id="gen-toc"><div class="gen-toc-title hide"><h2><div id="gen-toctitle" class="caret2 hide">Session Cookie</div></h2></div><ul class="nav sidebar-nav hide"><li class="gen-toc_level-1 toc_section-1"><a href="#overview"><span class="gen-toctext">Overview</span></a></li><li class="gen-toc_level-1 toc_section-2"><a href="#retrieving-a-session-cookie-by-visiting-a-session-redirect-link"><span class="gen-toctext">Retrieving a session cookie by visiting a session redirect link</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-3"><a href="#validate-credentials--retrieve-a-one-time-token"><span class="gen-toctext">Validate credentials & retrieve a one-time token</span></a></li><li class="gen-toc_level-2 toc_section-4"><a href="#visit-session-redirect-url-with-the-one-time-token"><span class="gen-toctext">Visit session redirect URL with the one-time token</span></a></li></ul></li><li class="gen-toc_level-1 toc_section-5"><a href="#retrieving-a-session-cookie-by-visiting-an-application-embed-link"><span class="gen-toctext">Retrieving a session cookie by visiting an application embed link</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-6"><a href="#validate-credentials--retrieve-a-one-time-token-1"><span class="gen-toctext">Validate credentials & retrieve a one-time token</span></a></li><li class="gen-toc_level-2 toc_section-7"><a href="#visit-an-embed-link-with-the-one-time-token"><span class="gen-toctext">Visit an embed link with the one-time token</span></a></li><li class="gen-toc_level-2 toc_section-8"><a href="#initiate-a-saml-sso-with-the-one-time-token"><span class="gen-toctext">Initiate a SAML SSO with the one-time token</span></a></li><li class="gen-toc_level-2 toc_section-9"><a href="#initiate-a-ws-federation-sso-with-the-one-time-token"><span class="gen-toctext">Initiate a WS-Federation SSO with the one-time token</span></a></li></ul></li><li class="gen-toc_level-1 toc_section-10"><a href="#retrieving-a-session-cookie-with-a-hidden-image"><span class="gen-toctext">Retrieving a session cookie with a hidden image</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-11"><a href="#validate-credentials--retrieve-a-session-cookie-image-url"><span class="gen-toctext">Validate credentials & retrieve a session cookie image URL</span></a></li><li class="gen-toc_level-2 toc_section-12"><a href="#add-image-tag-with-session-cookie-image-url"><span class="gen-toctext">Add image tag with session cookie image URL</span></a></li></ul></li></ul></div></div>                                  <ul class="nav sidebar-nav" data-item="dotnet_sample_application" data-section=""><li data-name=".NET Sample Application" ><a href="/docs/examples/dotnet_sample_application.html">.NET Sample Application</a></li></ul>                                                                                      
+		<h2>Examples</h2>                                                                                    <ul class="nav sidebar-nav nav-title"><li data-name="Session Cookie" class="on"><a id="toc_current_doc" href="/docs/examples/session_cookie.html">Session Cookie</a></li></ul><div id="gen-toc-container"><div class="gen-toc" id="gen-toc"><div class="gen-toc-title hide"><h2><div id="gen-toctitle" class="caret2 hide">Session Cookie</div></h2></div><ul class="nav sidebar-nav hide"><li class="gen-toc_level-1 toc_section-1"><a href="#overview"><span class="gen-toctext">Overview</span></a></li><li class="gen-toc_level-1 toc_section-2"><a href="#retrieving-a-session-cookie-via-openid-connect-authorization-endpoint"><span class="gen-toctext">Retrieving a session cookie via OpenID Connect Authorization Endpoint</span></a></li><li class="gen-toc_level-1 toc_section-3"><a href="#retrieving-a-session-cookie-by-visiting-a-session-redirect-link"><span class="gen-toctext">Retrieving a session cookie by visiting a session redirect link</span></a></li><li class="gen-toc_level-1 toc_section-4"><a href="#retrieving-a-session-cookie-by-visiting-an-application-embed-link"><span class="gen-toctext">Retrieving a session cookie by visiting an application embed link</span></a><ul class="closed"><li class="gen-toc_level-2 toc_section-5"><a href="#visit-an-embed-link-with-the-session-token"><span class="gen-toctext">Visit an embed link with the session token</span></a></li><li class="gen-toc_level-2 toc_section-6"><a href="#initiate-a-saml-sso-with-the-session-token"><span class="gen-toctext">Initiate a SAML SSO with the session token</span></a></li><li class="gen-toc_level-2 toc_section-7"><a href="#initiate-a-ws-federation-sso-with-the-session-token"><span class="gen-toctext">Initiate a WS-Federation SSO with the session token</span></a></li></ul></li></ul></div></div>                                  <ul class="nav sidebar-nav" data-item="dotnet_sample_application" data-section=""><li data-name=".NET Sample Application" ><a href="/docs/examples/dotnet_sample_application.html">.NET Sample Application</a></li></ul>                                                                                      
 		</div>
 	</div>
 </div>
@@ -164,71 +164,75 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 		<h2 id="overview">Overview</h2>
 
-<p>Okta utilizes a non-persistent HTTP session cookie to provide access to your Okta organization and applications across web requests for an interactive user-agents such as a browser.  This document provides examples for programmatically retrieving and setting a session cookie for different deployment scenarios to provide SSO capabilities for custom web applications built on the Okta platform.</p>
+<p>Okta utilizes an HTTP session cookie to provide access to your Okta organization and applications across web requests for an interactive user-agents such as a browser. This document provides examples for programmatically retrieving and setting a session cookie for different deployment scenarios to provide SSO capabilities for custom web applications built on the Okta platform.</p>
 
 <p>Okta sessions are created and managed with the <a href="/docs/api/rest/sessions.html">Session API</a>.</p>
 
-<h2 id="retrieving-a-session-cookie-by-visiting-a-session-redirect-link">Retrieving a session cookie by visiting a session redirect link</h2>
+<h2 id="retrieving-a-session-cookie-via-openid-connect-authorization-endpoint">Retrieving a session cookie via OpenID Connect Authorization Endpoint</h2>
 
-<p>This scenario is ideal for deployment scenarios where you have implemented both a custom login page and custom landing page for your application.  The login page will typically collect the user’s credentials via a HTML form submit or POST and the web application will validate the credentials against your Okta organization by calling the <a href="/docs/api/rest/sessions.html#create-session-with-session-token">Create Session</a> API to obtain a one-time token.</p>
+<p>This scenario is ideal for deployment scenarios where you have implemented both a custom login page and custom landing page for your application. The login page will typically collect the user’s credentials via a HTML form submit or POST and the web application will validate the credentials against your Okta organization by calling the <a href="/docs/api/rest/authn.html">Authentication API</a> to obtain a <a href="/docs/api/rest/sessions.html#session-token">session token</a>.</p>
 
-<p>The generated one-time token along with the URL for your landing page can then be used to complete the following <a href="http://tools.ietf.org/html/rfc6570">URI Template</a> <code class="highlighter-rouge">https://your-subdomain.okta.com/login/sessionCookieRedirect?token={cookieToken}&amp;redirectUrl={redirectUrl}</code> that will retrieve a session cookie for a user’s browser when visited.</p>
-
-<blockquote>
-  <p>The one-time token may only be used <strong>once</strong> to establish a session.  If the session expires or the user logs out of Okta after using the token, they will not be able to reuse the same one-time token to get a new session cookie.</p>
-</blockquote>
-
-<h3 id="validate-credentials--retrieve-a-one-time-token">Validate credentials &amp; retrieve a one-time token</h3>
-
-<p>When processing a user’s login request in your web application, retrieve a one-time token by passing the user’s credentials with the <code class="highlighter-rouge">cookieToken</code> additionalFields query param to the <a href="/docs/api/rest/sessions.html#create-session-with-session-token">Create Session</a> operation.</p>
-
-<h4 class="api api-request api-request-example" id="request-example">Request Example</h4>
-
-<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="nf">POST</span> <span class="nn">/api/v1/sessions?additionalFields=cookieToken</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">your-subdomain.okta.com</span>
-<span class="na">Authorization</span><span class="p">:</span> <span class="s">SSWS yourtoken</span>
-<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
-
-<span class="p">{</span><span class="w">
-  </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"art.vandelay@example.com"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"correct horse battery staple"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<h4 class="api api-response api-response-example" id="response-example">Response Example</h4>
-
-<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
-
-<span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000kYk6cDF7R02z4PxV5mhL4g"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"userId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00u9apFCRAIKHVPZLGXT"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"mfaActive"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cookieToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<h3 id="visit-session-redirect-url-with-the-one-time-token">Visit session redirect URL with the one-time token</h3>
-
-<p>After your login flow is complete you often need to establish a session cookie for your own application as well as a session cookie for Okta before visiting your landing page.  This is accomplished by returning a HTTP redirect status code for the login response that includes both your app’s session cookie as well as the completed URI template with the one-time token for the Okta session redirect URL:
-<code class="highlighter-rouge">https://your-subdomain.okta.com/login/sessionCookieRedirect?token={cookieToken}&amp;redirectUrl={redirectUrl}</code></p>
+<p>Once a session token is obtained, it can be passed into the <a href="/docs/api/resources/oauth2.html#authentication-request">OpenID Connect authorize endpoint</a> in order to get an Okta session cookie. Executing this flow will set a cookie in the end-user’s browser and then redirect them back to the <code class="highlighter-rouge">redirect_uri</code> that is passed into the request.</p>
 
 <blockquote>
-  <p>Only the Okta session redirect URL with one-time token is required</p>
+  <p>The session token may only be used <strong>once</strong> to establish a session. If the session expires or the user logs out of Okta after using the token, they will not be able to reuse the same session token to get a new session cookie.</p>
 </blockquote>
 
-<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Moved Temporarily</span>
-<span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">my_app_session_cookie_name=my_apps_session_cookie_value; Path=/</span>
-<span class="na">Location</span><span class="p">:</span> <span class="s">https://your-subdomain.okta.com/login/sessionCookieRedirect?token=009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6&amp;redirectUrl=https%3A%2F%2Fwww.example.com%2Fportal%2Fhome</span>
+<h5 class="api api-request api-request-example" id="request-example">Request Example</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>https://your-subdomain.okta.com/oauth2/v1/authorize?client_id={clientId}&amp;response_type=id_token&amp;scope=openid&amp;prompt=none&amp;redirect_uri=https%3A%2F%2Fyour-app.example.com&amp;state=Af0ifjslDkj&amp;nonce=n-0S6_WzA2Mj&amp;sessionToken=0HsohZYpJgMSHwmL9TQy7RRzuY
 </code></pre>
 </div>
 
-<p>The user’s browser will set your app’s session cookie and follow the redirect to Okta.  Okta will validate the one-time token and return a 302 status response that sets a session cookie for Okta and redirects the user’s browser back to your landing page.  After the page has loaded the user will have an active session with Okta and will be able to SSO into their applications until the session is expired or the user closes the session (logout) or browser application.</p>
+<blockquote>
+  <p>The <code class="highlighter-rouge">prompt=none</code> param guarantees that the user will not be prompted for credentials. You will either obtain the requested tokens or an OAuth error response.</p>
+</blockquote>
 
-<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="nf">GET</span> <span class="nn">/login/sessionCookieRedirect?token=009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6&amp;redirectUrl=https%3A%2F%2Fwww.example.com%2Fportal%2Fhome</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<blockquote>
+  <p>The <code class="highlighter-rouge">sessionToken</code> param serves as the primary credentials. It represents the authentication that was already performed via the <a href="/docs/api/rest/authn.html">Authentication API</a>.</p>
+</blockquote>
+
+<h5 class="api api-request api-response-example" id="response-example">Response Example</h5>
+
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Moved Temporarily</span>
+<span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">sid=lGj4FPxaG63Wm89TpJnaDF6; Path=/</span>
+<span class="na">Location</span><span class="p">:</span> <span class="s">https://your-app.example.com?id_token=S4sx3uixdsalasd&amp;state=Af0ifjslDkj&amp;nonce=n-0S6_WzA2Mj</span>
+</code></pre>
+</div>
+
+<p>The response also includes an <a href="/docs/api/resources/oidc.html#id-token">ID Token</a> that describes the authenticated user and can contain additional claims such as user profile attributes or email.</p>
+
+<p>The <a href="/docs/guides/okta_sign-in_widget.html">Okta Sign-In Widget</a> uses this flow. This flow can also be used by Single Page Applications with the <a href="/docs/api/resources/oauth2.html#parameter-details"><code class="highlighter-rouge">okta_post_messsage</code></a> response type, which doesn’t require a browser redirect.</p>
+
+<h2 id="retrieving-a-session-cookie-by-visiting-a-session-redirect-link">Retrieving a session cookie by visiting a session redirect link</h2>
+
+<blockquote>
+  <p>This pattern is deprecated. Prefer the <a href="#retrieving-a-session-cookie-via-openid-connect-authorization-endpoint">OpenID Connect</a> flow described above.</p>
+</blockquote>
+
+<p>This scenario is ideal for deployment scenarios where you have implemented both a custom login page and custom landing page for your application. Your web application will solicit and validate the user credentials against your Okta organization by calling the <a href="/docs/api/rest/authn.html">Authentication API</a> to obtain a <a href="/docs/api/rest/authn.html#session-token">session token</a>.</p>
+
+<p>The session token along with the URL for your landing page can then be used to complete the following <a href="http://tools.ietf.org/html/rfc6570">URI Template</a> <code class="highlighter-rouge">https://your-subdomain.okta.com/login/sessionCookieRedirect?token={sessionToken}&amp;redirectUrl={redirectUrl}</code> that will retrieve a session cookie for a user’s browser when visited.</p>
+
+<blockquote>
+  <p>You must have your redirect URI white-listed as a Trusted Origin within Okta. This is required to protect against open redirect attacks. <span class="api-label api-label-ea "><i class="fa fa-flag"></i> Early Access</span></p>
+</blockquote>
+
+<blockquote>
+  <p>The session token may only be used <strong>once</strong> to establish a session. If the session expires or the user logs out of Okta after using the token, they will not be able to reuse the same session token to get a new session cookie.</p>
+</blockquote>
+
+<h5 class="api api-request api-request-example" id="request-example-1">Request Example</h5>
+
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Moved Temporarily</span>
+<span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">my_app_session_cookie_name=my_apps_session_cookie_value; Path=/</span>
+<span class="na">Location</span><span class="p">:</span> <span class="s">https://your-subdomain.okta.com/login/sessionCookieRedirect?token=0HsohZYpJgMSHwmL9TQy7RRzuY&amp;redirectUrl=https%3A%2F%2Fwww.example.com%2Fportal%2Fhome</span>
+</code></pre>
+</div>
+
+<p>The user’s browser will set your app’s session cookie and follow the redirect to Okta.  Okta will validate the session token and return a 302 status response that sets a session cookie for Okta and redirects the user’s browser back to your landing page.  After the page has loaded the user will have an active session with Okta and will be able to SSO into their applications until the session is expired or the user closes the session (logout) or browser application.</p>
+
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="nf">GET</span> <span class="nn">/login/sessionCookieRedirect?token=0HsohZYpJgMSHwmL9TQy7RRzuY&amp;redirectUrl=https%3A%2F%2Fyour-app.example.com</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">your-subdomain.okta.com</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">*/*</span>
 </code></pre>
@@ -236,59 +240,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Moved Temporarily</span>
 <span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">sid=000aC_z7AZKTpSqtHFc0Ak6Vg; Path=/</span>
-<span class="na">Location</span><span class="p">:</span> <span class="s">https://www.example.com/portal/home</span>
+<span class="na">Location</span><span class="p">:</span> <span class="s">https://your-app.example.com</span>
 </code></pre>
 </div>
 
 <h2 id="retrieving-a-session-cookie-by-visiting-an-application-embed-link">Retrieving a session cookie by visiting an application embed link</h2>
 
-<p>This scenario is ideal for deployment scenarios where you have a custom login page but immediately want to launch an Okta application after login without returning to a landing page.  The login page will typically collect the user’s credentials via a HTML form submit or POST and validate the credentials against your Okta organization by calling the <a href="/docs/api/rest/sessions.html#create-session-with-session-token">Create Session</a> API to obtain a one-time token.</p>
+<p>This scenario is ideal for deployment scenarios where you have a custom login page but immediately want to launch an Okta application after login without returning to a landing page. The login page will typically collect the user’s credentials via a HTML form submit or POST and validate the credentials against your Okta organization by calling the <a href="../resources/authn.html">Authentication API</a> to obtain a session token.</p>
 
-<p>The generated one-time token can than be passed as a query parameter to an Okta application’s embed link that will set a session cookie as well as launch the application in a single web request.</p>
+<p>The session token can than be passed as a query parameter to an Okta application’s embed link that will set a session cookie as well as launch the application in a single web request.</p>
 
 <blockquote>
-  <p>The one-time token may only be used <strong>once</strong> to establish a session.  If the session expires or the user logs out of Okta after using the token, they will not be able to reuse the same one-time token to get a new session cookie.</p>
+  <p>The session token may only be used <strong>once</strong> to establish a session. If the session expires or the user logs out of Okta after using the token, they will not be able to reuse the same session token to get a new session cookie.</p>
 </blockquote>
 
-<h3 id="validate-credentials--retrieve-a-one-time-token-1">Validate credentials &amp; retrieve a one-time token</h3>
+<h3 id="visit-an-embed-link-with-the-session-token">Visit an embed link with the session token</h3>
 
-<p>When processing a user’s login request in your web application, retrieve an one-time token by passing the user’s credentials with the <code class="highlighter-rouge">cookieToken</code> additionalFields query param to the <a href="/docs/api/rest/sessions.html#create-session-with-session-token">Create Session</a> operation.</p>
-
-<h4 class="api api-request api-request-example" id="request-example-1">Request Example</h4>
-
-<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="nf">POST</span> <span class="nn">/api/v1/sessions?additionalFields=cookieToken</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">your-subdomain.okta.com</span>
-<span class="na">Authorization</span><span class="p">:</span> <span class="s">SSWS yourtoken</span>
-<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
-
-<span class="p">{</span><span class="w">
-  </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"art.vandelay@example.com"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"correct horse battery staple"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<h4 class="api api-response api-response-example" id="response-example-1">Response Example</h4>
-
-<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
-
-<span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000kYk6cDF7R02z4PxV5mhL4g"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"userId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00u9apFCRAIKHVPZLGXT"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"mfaActive"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cookieToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<h3 id="visit-an-embed-link-with-the-one-time-token">Visit an embed link with the one-time token</h3>
-
-<p>After your login flow is complete you can launch an Okta application for the user with an <a href="/docs/api/rest/users.html#get-assigned-app-links">embed link</a> that contains the the one-time token as a query parameter <code class="highlighter-rouge">onetimetoken</code>.</p>
+<p>After your login flow is complete you can launch an Okta application for the user with an <a href="/docs/api/rest/users.html#get-assigned-app-links">embed link</a> that contains the the session token as a query parameter <code class="highlighter-rouge">sessionToken</code>.</p>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Moved Temporarily</span>
-<span class="na">Location</span><span class="p">:</span> <span class="s">https://your-subdomain/app/google/go1013td3mXAQOJCHEHQ/mail?onetimetoken=009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6</span>
+<span class="na">Location</span><span class="p">:</span> <span class="s">https://your-subdomain/app/google/go1013td3mXAQOJCHEHQ/mail?sessionToken=0HsohZYpJgMSHwmL9TQy7RRzuY</span>
 </code></pre>
 </div>
 
@@ -304,12 +275,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <p>The HTTP response will vary depending on the specific Okta application but will always contain a <code class="highlighter-rouge">Set-Cookie</code> header.</p>
 </blockquote>
 
-<h3 id="initiate-a-saml-sso-with-the-one-time-token">Initiate a SAML SSO with the one-time token</h3>
+<h3 id="initiate-a-saml-sso-with-the-session-token">Initiate a SAML SSO with the session token</h3>
 
 <p>After your login flow is complete you can also initiate a SAML SSO into an Okta application for the user with either the <code class="highlighter-rouge">HTTP-Redirect</code> or <code class="highlighter-rouge">HTTP-POST</code>binding to the application’s SAML SSO URL
-that contains the the one-time token as query parameter <code class="highlighter-rouge">onetimetoken</code>.</p>
+that contains the the session token as query parameter <code class="highlighter-rouge">sessionToken</code>.</p>
 
-<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="nf">GET</span> <span class="nn">/app/template_saml_2_0/kbiyMOIMHNLGHJNCBURM/sso/saml?RelayState=%2Fsome%2Fdeep%2Flink&amp;onetimetoken=009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="nf">GET</span> <span class="nn">/home/appwizardsaml_1/0oalkgr25YMb5reZp0g4/alnlkriVMi9J5WYmk0g4?RelayState=%2Fcustom%2Fdeep%2Flink&amp;sessionToken=0HsohZYpJgMSHwmL9TQy7RRzuY</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">your-subdomain.okta.com</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">*/*</span>
 </code></pre>
@@ -340,70 +311,13 @@ that contains the the one-time token as query parameter <code class="highlighter
 </code></pre>
 </div>
 
-<h3 id="initiate-a-ws-federation-sso-with-the-one-time-token">Initiate a WS-Federation SSO with the one-time token</h3>
+<h3 id="initiate-a-ws-federation-sso-with-the-session-token">Initiate a WS-Federation SSO with the session token</h3>
 
-<p>You can also use the same <a href="#initiate-a-saml-sso-with-the-session-token">flow as SAML</a> for template WS-Federation application as well by passing the one-time token as query parameter <code class="highlighter-rouge">onetimetoken</code>.</p>
+<p>You can also use the same <a href="#initiate-a-saml-sso-with-the-session-token">flow as SAML</a> for template WS-Federation application as well by passing the session token as query parameter <code class="highlighter-rouge">sessionToken</code>.</p>
 
-<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="nf">GET</span> <span class="nn">/app/template_wsfed/k9x69oiKYSUWMIYZBKTY/sso/wsfed/passive?wa=wsignin1.0&amp;wtrealm=https%3A%2F%2Fexample.com%2FApp%2F&amp;wctx=rm%3D0%26id%3Dpassive%26ru%3D%2FApp%2FHome%2FAbout&amp;onetimetoken=009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="nf">GET</span> <span class="nn">/app/template_wsfed/k9x69oiKYSUWMIYZBKTY/sso/wsfed/passive?wa=wsignin1.0&amp;wtrealm=https%3A%2F%2Fexample.com%2FApp%2F&amp;wctx=rm%3D0%26id%3Dpassive%26ru%3D%2FApp%2FHome%2FAbout&amp;sessionToken=0HsohZYpJgMSHwmL9TQy7RRzuY</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">your-subdomain.okta.com</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">*/*</span>
-</code></pre>
-</div>
-
-<h2 id="retrieving-a-session-cookie-with-a-hidden-image">Retrieving a session cookie with a hidden image</h2>
-
-<p>This flow uses a browser trick to establish a session by setting a cookie when retrieving a transparent 1x1 image with a one-time token.  Your login page will typically collect the user’s credentials via a HTML form submit or POST and validate the credentials against your Okta organization by calling the <a href="/docs/api/rest/sessions.html#create-session-with-embed-image-url">Create Session</a> API to obtain a session cookie image URL with a one-time token.</p>
-
-<blockquote>
-  <p>This flow is now deprecated as some major browser vendors such as Safari block cookies from 3rd-party sites by default.  Please use an alternative flow as browser vendors are increasingly blocking cookies from 3rd party sites by default</p>
-</blockquote>
-
-<h3 id="validate-credentials--retrieve-a-session-cookie-image-url">Validate credentials &amp; retrieve a session cookie image URL</h3>
-
-<p>When processing a user’s login request in your web application, retrieve a session cookie image URL by passing the user’s credentials with the <code class="highlighter-rouge">cookieTokenUrl</code> additionalFields query param to the <a href="/docs/api/rest/sessions.html#create-session-with-embed-image-url">Create Session</a> operation.</p>
-
-<h4 class="api api-request api-request-example" id="request-example-2">Request Example</h4>
-
-<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="nf">POST</span> <span class="nn">/api/v1/sessions?additionalFields=cookieTokenUrl</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">your-subdomain.okta.com</span>
-<span class="na">Authorization</span><span class="p">:</span> <span class="s">SSWS yourtoken</span>
-<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
-
-<span class="p">{</span><span class="w">
-  </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"art.vandelay@example.com"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"correct horse battery staple"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<h4 class="api api-response api-response-example" id="response-example-2">Response Example</h4>
-
-<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
-
-<span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000kYk6cDF7R02z4PxV5mhL4g"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"userId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00u9apFCRAIKHVPZLGXT"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"mfaActive"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cookieTokenUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-subdomain.okta.com/login/sessionCookie?token=00nwBmuBFS4o2E5l58eSbgnr4NmY0-ELQR4Pvn2RZV"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<h3 id="add-image-tag-with-session-cookie-image-url">Add image tag with session cookie image URL</h3>
-
-<p>When you are ready to establish a session with Okta for the user, include the session cookie image URL in an image tag.</p>
-
-<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"https://your-subdomain.okta.com/login/sessionCookie?token=00nwBmuBFS4o2E5l58eSbgnr4NmY0-ELQR4Pvn2RZV"</span><span class="nt">&gt;</span>
-</code></pre>
-</div>
-
-<p>When the page containing the tag is loaded, the token in the request will be used to initiate the user’s session, and a session cookie will be set in the browser. The image that renders is a 1x1 transparent image. After the page has loaded the user will have an active session with Okta and will be able to SSO into their applications. The token is a one-time token, so successive page loads will have no impact on the user’s session. If the user logs out of Okta after using the token, they will not be able to reuse that same token to get a session cookie.</p>
-
-<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">image/png</span>
-<span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">sid=000O8P2OlZLTHuz4RZV8locXA; Path=/</span>
 </code></pre>
 </div>
 
