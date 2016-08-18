@@ -13,8 +13,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="/favicon.ico">
-	<title>Platform Release Notes for Release 2016.31 | Okta Developer</title>
-	<meta name="description" content="Secure, scalable, and highly available authentication and user management for any app.">
+	<title>Platform Release Notes | Okta Developer</title>
+	<meta name="description" content="Summary of changes to the Okta Platform since Release 2016.31">
 
 	<link rel="canonical" href="http://developer.okta.com/docs/platform-release-notes/platform-release-notes">
 
@@ -123,7 +123,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	<span class="toggle-menu"></span>
 	<div id="sidebar-wrapper">
 		<div class="docs-sidebar-block" id="myScrollspy" >
-		<h2>Platform Release Notes</h2>                                                                                                      
+		<h2>Platform Release Notes</h2>                                                                                                          
 		</div>
 	</div>
 </div>
@@ -150,6 +150,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <a  href="/docs/sdk/core/api.html">
 		SDKs
 	</a>
+<a class="beta" href="/oidc_playground/index.html?beta=true">
+    OIDC Playground
+	</a>
+
 
 		</nav>
 
@@ -158,41 +162,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		
 		<header>
 			<a href="https://github.com/okta/okta.github.io/tree/master/_source/docs/platform-release-notes/platform-release-notes.md" target="_blank" class="btn btn-default btn-sm btn-github"><i class="fa fa-github"></i> Edit on GitHub</a>
-			<h1 class="page-title">Platform Release Notes for Release 2016.31</h1>
+			<h1 class="page-title">Platform Release Notes</h1>
 		</header>
 		
 
-		<h2 id="feature-enhancements">Feature Enhancements</h2>
+		<p>Release 2016.33</p>
 
-<h3 id="version-140-of-okta-auth-js-available">Version 1.4.0 of okta-auth-js Available</h3>
+<h2 id="bugs-fixed">Bugs Fixed</h2>
 
-<!-- OKTA-97056 -->
-<p>We’ve added support for Access Tokens and two new namespaces, token and tokenManager, 
-to handle both ID Tokens and Access Tokens. 
-The token namespace makes it easier to specify how to retrieve your tokens: 
-getWithoutPrompt, getWithPopup, and getWithRedirect. 
-The tokenManager namespace allows tracking tokens and automatically refreshes them for you.</p>
-
-<p>For more details including feature and bug-fix commits, 
-see <a href="https://github.com/okta/okta-auth-js/releases/tag/okta-auth-js-1.4.0">the okta-auth-js Git repository</a>.</p>
-
-<h3 id="rules-included-in-policy-api-requests">Rules Included in Policy API requests</h3>
-
-<!-- OKTA-40548 -->
-<p>Use the <code class="highlighter-rouge">expand</code> query parameter to include up to twenty rules in a Policy API query:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code> `GET https://my-org.okta.com/api/v1/policies/{id}?expand=rules`
-</code></pre>
-</div>
-
-<p>The embedded rules option returns up to 20 rules for a given policy. If the policy has more than 20 rules, this request returns an error.</p>
-
-<h2 id="bug-fixed">Bug Fixed</h2>
-
-<p>The following issue is fixed:</p>
+<p>The following issues are fixed:</p>
 
 <ul>
-  <li>The ampersand (&amp;) character in a username caused Forgot Password API requests (<code class="highlighter-rouge">/api/v1/authn/recovery/password</code> to fail. (OKTA-93994)</li>
+  <li>Custom SAML apps couldn’t update their signing key credentials via API. (OKTA-93959)</li>
+  <li>When configuring OpenID Connect client apps, the App Embed Links dialog displayed custom login and error page sections that weren’t applicable. (OKTA-95526)</li>
+  <li>Using an API token created by a ReadOnly Admin caused a permission error when GET requests were sent to <code class="highlighter-rouge">/api/v1/users/:uid/factors</code> or <code class="highlighter-rouge">/api/v1/users/:uid/factors/catalog</code>. (OKTA-95569)</li>
+  <li>GET requests to <code class="highlighter-rouge">oauth2/v1/authorize</code> that specified the Form Post Response Mode sometimes 
+failed to receive <code class="highlighter-rouge">expires_in</code> and <code class="highlighter-rouge">scope</code> in the response. (OKTA-98245)</li>
 </ul>
 
 <h2 id="does-your-org-have-these-changes-yet">Does Your Org Have These Changes Yet?</h2>
@@ -206,6 +191,7 @@ see <a href="https://github.com/okta/okta-auth-js/releases/tag/okta-auth-js-1.4.
 <h2 id="earlier-release-notes">Earlier Release Notes</h2>
 
 <ul>
+  <li><a href="platform-release-notes2016-31.html">Platform Release Notes for Release 2016.31</a></li>
   <li><a href="platform-release-notes2016-30.html">Platform Release Notes for Release 2016.30</a></li>
   <li><a href="platform-release-notes2016-29.html">Platform Release Notes for Release 2016.29</a></li>
   <li><a href="platform-release-notes2016-28.html">Platform Release Notes for Release 2016.28</a></li>
