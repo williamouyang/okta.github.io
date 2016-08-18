@@ -1,36 +1,20 @@
 ---
 layout: docs_page
-title: Platform Release Notes for Release 2016.31
+title: Platform Release Notes
+excerpt: Summary of changes to the Okta Platform since Release 2016.31
 ---
 
-## Feature Enhancements
- 
-### Version 1.4.0 of okta-auth-js Available
- 
-<!-- OKTA-97056 -->
-We've added support for Access Tokens and two new namespaces, token and tokenManager, 
-to handle both ID Tokens and Access Tokens. 
-The token namespace makes it easier to specify how to retrieve your tokens: 
-getWithoutPrompt, getWithPopup, and getWithRedirect. 
-The tokenManager namespace allows tracking tokens and automatically refreshes them for you.
- 
-For more details including feature and bug-fix commits, 
-see [the okta-auth-js Git repository](https://github.com/okta/okta-auth-js/releases/tag/okta-auth-js-1.4.0).
+Release 2016.33
 
-### Rules Included in Policy API requests
+## Bugs Fixed
 
-<!-- OKTA-40548 -->
-Use the `expand` query parameter to include up to twenty rules in a Policy API query:
+The following issues are fixed:
 
-     `GET https://my-org.okta.com/api/v1/policies/{id}?expand=rules`
-
-The embedded rules option returns up to 20 rules for a given policy. If the policy has more than 20 rules, this request returns an error.
-
-## Bug Fixed
-
-The following issue is fixed:
-
-* The ampersand (&) character in a username caused Forgot Password API requests (`/api/v1/authn/recovery/password` to fail. (OKTA-93994)
+* Custom SAML apps couldn't update their signing key credentials via API. (OKTA-93959)
+* When configuring OpenID Connect client apps, the App Embed Links dialog displayed custom login and error page sections that weren’t applicable. (OKTA-95526)
+* Using an API token created by a ReadOnly Admin caused a permission error when GET requests were sent to `/api/v1/users/:uid/factors` or `/api/v1/users/:uid/factors/catalog`. (OKTA-95569)
+* GET requests to `oauth2/v1/authorize` that specified the Form Post Response Mode sometimes 
+failed to receive `expires_in` and `scope` in the response. (OKTA-98245)
 
 ## Does Your Org Have These Changes Yet?
 
@@ -42,6 +26,7 @@ For changes outside the Okta platform, see the [Release Notes Knowledge Hub](htt
 
 ## Earlier Release Notes
 
+* [Platform Release Notes for Release 2016.31](platform-release-notes2016-31.html)
 * [Platform Release Notes for Release 2016.30](platform-release-notes2016-30.html)
 * [Platform Release Notes for Release 2016.29](platform-release-notes2016-29.html)
 * [Platform Release Notes for Release 2016.28](platform-release-notes2016-28.html)
