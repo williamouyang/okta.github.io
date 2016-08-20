@@ -32,7 +32,7 @@ At the very basic level, the main API endpoints are:
     * Does not support refresh tokens
     * Assumes Resource Owner and Public Client are on the same device
 
-    <add diagram> //current diagram needs work. See https://okta.box.com/s/13odnc4a8ddgq6nz6jkzrvy0obuwfp74 for better reference.
+    ![Broswer/Single-Page Application](/assets/img/browser_spa_implicit_flow.png)
     
 2. Native Application
 
@@ -40,9 +40,9 @@ At the very basic level, the main API endpoints are:
     * Uses [Authorization Code Grant Flow](https://tools.ietf.org/html/rfc6749#section-4.1)
     * Can use custom redirect URIs like `myApp://oauth:2.0:native`
     
-![Native Application Flow](/assets/img/native_flow.png)
+    ![Native Application Flow](/assets/img/native_auth_flow.png)
 
-> Note: For native applications, the client_id and client_secret are embedded in the source code of the application; in this context, the client secret isn't treated as a secret. 
+    > Note: For native applications, the client_id and client_secret are embedded in the source code of the application; in this context, the client secret isn't treated as a secret. 
         Therefore native apps should make use of Proof Key for Code Exchange (PKCE) to mitigate authorization code interception.
 
 3. Web Application
@@ -52,7 +52,7 @@ At the very basic level, the main API endpoints are:
     * Assumes Resource Owner and Client are on separate devices
     * Most secure flow as tokens never pass through user-agent
     
-![Web Application Flow](/assets/img/web_app_flow.png)
+    ![Web Application Flow](/assets/img/web_app_flow.png)
 
 4. Service Application
 
@@ -61,11 +61,12 @@ At the very basic level, the main API endpoints are:
     * Optimized for server-only Confidential Clients acting on behalf of itself or a user
     * Back-channel only flow to obtain an access token using the Client’s credentials
     
-<add diagram> //current diagram needs work. See https://okta.box.com/s/13odnc4a8ddgq6nz6jkzrvy0obuwfp74 for better reference.
+    ![Service Application Flow](/assets/img/service_app_flow.png).
 
 
-> Note: The OAuth 2.0 specification mandates that clients implement CSRF protection for their redirection URI endpoints. 
-This is what the "state" parameter is used for in the flows described above; the client should send a state value in on the authorization request, and it must validate that returned "state" parameter from the authorization server matches the original value.
+    > Note: The OAuth 2.0 specification mandates that clients implement CSRF protection for their redirection URI endpoints. 
+    This is what the `state` parameter is used for in the flows described above; the client should send a state value in on the authorization request, 
+    and it must validate that returned "state" parameter from the authorization server matches the original value.
 
 ### Custom User Experience
 
