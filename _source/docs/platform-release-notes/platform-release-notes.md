@@ -19,10 +19,10 @@ For more information, see [Get Session](http://developer.okta.com/docs/api/resou
 The following issues are fixed:
 
 * IdP keys could be deleted even when referenced by an active or inactive app instance. (OKTA-96139)
-* Identity Providers for social authentication configured to look up usernames by Okta username or email failed to return a valid match. 
-This failure occurred if the username was in both the username and email and a second user existed with the same email but different username. (OKTA-96335)
 * Properties could be deleted from the [User Profile schema](http://developer.okta.com/docs/api/resources/schemas.html#remove-property-from-user-profile-schema)
 while still referenced as a `matchAttribute` in inbound SAML IdPs. (OKTA-96281)
+* Identity Providers for social authentication configured to look up usernames by Okta username or email failed to return a valid match. 
+This failure occurred if the username was in both the username and email and a second user existed with the same email but different username. (OKTA-96335)
 
 ## Does Your Org Have These Changes Yet?
 
