@@ -9,7 +9,7 @@ Release 2016.34
 ## Feature Enhancement: HAL Links For Sessions API Are CORS-Enabled
 <!-- OKTA-98961 -->
 
-Two Session API endpoints, `GET /api/v1sessions/me` and `POST /sessions/me/lifecycle/refresh`, return `/me` instead of `/:id` in response links.
+Two Session API endpoints, `GET /api/v1/sessions/me` and `POST /sessions/me/lifecycle/refresh`, return `/me` instead of `/:id` in response links.
 These links are CORS-enabled, consistent with the original API calls which are also CORS-enabled.
 
 For more information, see [Get Session](http://developer.okta.com/docs/api/resources/sessions#get-session) or [Refresh Session](http://developer.okta.com/docs/api/resources/sessions#refresh-session).
@@ -20,7 +20,7 @@ The following issues are fixed:
 
 * IdP keys could be deleted even when referenced by an active or inactive app instance. (OKTA-96139)
 * Identity Providers for social authentication configured to look up usernames by Okta username or email failed to return a valid match. 
-This failure occurred if the username was in both the username and email and a second user existed with the same email but different username.
+This failure occurred if the username was in both the username and email and a second user existed with the same email but different username. (OKTA-96335)
 * Properties could be deleted from the [User Profile schema](http://developer.okta.com/docs/api/resources/schemas.html#remove-property-from-user-profile-schema)
 while still referenced as a `matchAttribute` in inbound SAML IdPs. (OKTA-96281)
 
