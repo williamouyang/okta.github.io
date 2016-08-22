@@ -300,7 +300,7 @@ Test the Okta Sign-In Widget by loading the URL for the
 `login-to-okta.html` file in your favorite web browser.
 
 If you used `python -m SimpleHTTPServer` command above, this URL will be
-<http://localhost:8000/login-to-okta.html>
+`http://localhost:8000/login-to-okta.html`
 
 Once you've successfully loaded the Okta Sign-In Widget, it is
 time to start exploring the capabilities of the
@@ -312,7 +312,7 @@ Here are two things for you to try:
     For example: Try using "invalid@example.com" as the user name and
     "invalid" as the password. You should see an error.
 2.  Try using a valid user name and password. If everything works,
-    you will be redirected to <https://example.com>.
+    you will be redirected to `https://example.com`.
 3.  [Configure Multifactor Authentication](https://support.okta.com/help/articles/Knowledge_Article/27315047-Configuring-Multifactor-Authentication)
     for your Okta org and try logging in using the Okta Sign-In Widget.
     
@@ -541,5 +541,5 @@ var oktaSignIn = new OktaSignIn({
               { text: 'Rocket Sled Questions, href: 'http://acme.example.com/questions/rocket-sled' }
             ]
 
-##Reference Documentation
+## Reference Documentation
 You can find more reference information in the [Okta Sign-In Widget](/docs/api/resources/okta_signin_widget.html) reference.
