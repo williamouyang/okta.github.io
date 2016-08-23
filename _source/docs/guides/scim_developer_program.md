@@ -24,16 +24,16 @@ to enable advanced provisioning. The program includes:
 After [signing up for the program](http://pages.okta.com/DeveloperSCIM.html), follow these steps to build, test, 
 and publish your SCIM-based integration with Okta:
 
-1. [Review Okta’s SCIM Docs & Prepare Your App](#one-review-oktas-scim-docs-and-prepare-your-app)
-2. [Test Your SCIM Server](#two-test-your-scim-server)
-3. [Submit for Okta Review](#three-submit-for-okta-review)
-4. [Test with Customers](#four-customer-testing)
-5. [Publish to Okta Application Network](#five-publish-to-okta-application-network)
+1. [Review Okta’s SCIM Docs & Prepare Your App](#review-oktas-scim-docs-and-prepare-your-app)
+2. [Test Your SCIM Server](#test-your-scim-server)
+3. [Submit for Okta Review](#submit-for-okta-review)
+4. [Test with Customers](#customer-testing)
+5. [Publish to Okta Application Network](#publish-to-okta-application-network)
 
 > At any stage of the process, please send all questions to <developers@okta.com>.
 
 
-## One: Review Okta’s SCIM Docs and Prepare Your App
+## Review Okta’s SCIM Docs and Prepare Your App
 
 The first step on is to build a “compliant” SCIM server. We developed [Okta’s SCIM Docs](http://developer.okta.com/docs/guides/scim_guidance.html)
 to assist you in this effort. Even if you already support SCIM, it’s important that you still review Okta’s SCIM docs 
@@ -47,7 +47,7 @@ to assist you in this effort. Even if you already support SCIM, it’s important
 [See the workshop agenda and sign-up](http://okta.litmos.com/self-signup/register/328927?type=1).
 
 
-## Two: Test Your SCIM Server
+## Test Your SCIM Server
 
 ### Leverage Runscope to simplify your SCIM testing
 
@@ -78,7 +78,7 @@ based off of the various authentication methods you could choose to support (Hea
 <!--Comment from original doc: Do we have testing plan details that our internal teams use which ISVs can also follow for testing in Okta?
 Comment on comment: Do we have this in a format that we can link to or include directly here? --> 
 
-## Three: Submit for Okta Review
+## Submit for Okta Review
 
 Once you have a functioning SCIM integration in your Okta developer org, and have confirmed support 
 for Okta’s [required SCIM capabilities](http://developer.okta.com/docs/guides/scim_guidance.html#required-scim-capabilities), 
@@ -100,7 +100,7 @@ For more details, see [the configuration guide guidelines](http://saml-doc.okta.
 [check the User Attributes](http://developer.okta.com/docs/guides/scim_guidance.html#submitting-to-okta)
 to make sure that the attributes are set to what you want your users to see.
 
-## Four: Customer Testing
+## Customer Testing
 
 We require one joint customer to successfully use the integration in production before making it publically available 
 in the Okta Application Network. Here’s the process for getting joint customers involved 
@@ -115,7 +115,7 @@ Partners are responsible for managing the customer identification and testing pr
 Please coordinate via <developers@okta.com>.
 
 
-## Five: Publish to Okta Application Network
+## Publish to Okta Application Network
 
 In order for an app to be published in the Okta Application Network, it must meet the following criteria:
 
