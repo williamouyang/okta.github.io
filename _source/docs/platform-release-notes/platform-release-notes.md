@@ -1,20 +1,28 @@
 ---
 layout: docs_page
 title: Platform Release Notes
-excerpt: Summary of changes to the Okta Platform since Release 2016.31
+excerpt: Summary of changes to the Okta Platform since Release 2016.33
 ---
 
-Release 2016.33
+Release 2016.34
+
+## Feature Enhancement: HAL Links For Sessions API Are CORS-Enabled
+<!-- OKTA-98961 -->
+
+Two Session API endpoints, `GET /api/v1/sessions/me` and `POST /sessions/me/lifecycle/refresh`, return `/me` instead of `/:id` in response links.
+These links are CORS-enabled, consistent with the original API calls which are also CORS-enabled.
+
+For more information, see [Get Session](http://developer.okta.com/docs/api/resources/sessions#get-session) or [Refresh Session](http://developer.okta.com/docs/api/resources/sessions#refresh-session).
 
 ## Bugs Fixed
 
 The following issues are fixed:
 
-* Custom SAML apps couldn't update their signing key credentials via API. (OKTA-93959)
-* When configuring OpenID Connect client apps, the App Embed Links dialog displayed custom login and error page sections that weren’t applicable. (OKTA-95526)
-* Using an API token created by a ReadOnly Admin caused a permission error when GET requests were sent to `/api/v1/users/:uid/factors` or `/api/v1/users/:uid/factors/catalog`. (OKTA-95569)
-* GET requests to `oauth2/v1/authorize` that specified the Form Post Response Mode sometimes 
-failed to receive `expires_in` and `scope` in the response. (OKTA-98245)
+* IdP keys could be deleted even when referenced by an active or inactive app instance. (OKTA-96139)
+* Properties could be deleted from the [User Profile schema](http://developer.okta.com/docs/api/resources/schemas.html#remove-property-from-user-profile-schema)
+while still referenced as a `matchAttribute` in inbound SAML IdPs. (OKTA-96281)
+* Identity Providers for social authentication configured to look up usernames by Okta username or email failed to return a valid match. 
+This failure occurred if the username was in both the username and email and a second user existed with the same email but different username. (OKTA-96335)
 
 ## Does Your Org Have These Changes Yet?
 
@@ -26,6 +34,7 @@ For changes outside the Okta platform, see the [Release Notes Knowledge Hub](htt
 
 ## Earlier Release Notes
 
+* [Platform Release Notes for Release 2016.33](platform-release-notes2016-33.html)
 * [Platform Release Notes for Release 2016.31](platform-release-notes2016-31.html)
 * [Platform Release Notes for Release 2016.30](platform-release-notes2016-30.html)
 * [Platform Release Notes for Release 2016.29](platform-release-notes2016-29.html)
