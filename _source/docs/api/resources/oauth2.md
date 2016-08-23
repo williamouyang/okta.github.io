@@ -439,9 +439,11 @@ Content-Type: application/json;charset=UTF-8
 
 <span class="api-uri-template api-uri-get"><span class="api-label">POST</span> /oauth2/v1/introspect</span>
 
-The API takes an Access Token, Refresh Token, or [ID Token](oidc.html#id-token) and returns whether it is active or not. 
+The API takes an Access Token or Refresh Token, and returns a boolean indicating whether it is active or not. 
 If the token is active, additional data about the token is also returned. If the token is invalid, expired, or revoked, it is considered inactive. 
 An implicit client can only introspect its own tokens, while a confidential client may inspect all access tokens.
+
+> Note; [ID Tokens](oidc.html#id-token) are also valid, however, they are usually validated on the service provider or app side of a flow.
 
 #### Request Parameters
 
