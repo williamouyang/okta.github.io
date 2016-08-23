@@ -472,14 +472,14 @@ curl -v -X GET \
 
 <span class="api-uri-template api-uri-get"><span class="api-label">POST</span> /meta/schemas/user/default</span>
 
-Adds one or more [custom user profile properties](#user-profile-schema-property) to the user schema
+Adds one or more [custom user profile properties](#user-profile-schema-property-object) to the user schema
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
 Parameter   | Description                                          | Param Type | DataType                                                       | Required | Default
 ----------- | ---------------------------------------------------- | ---------- | -------------------------------------------------------------- | -------- | -------
-definitions | Subschema with one or more custom profile properties | Body       | [User Profile Custom Subschema](user-profile-custom-subschema) | TRUE     |
+definitions | Subschema with one or more custom profile properties | Body       | [User Profile Custom Subschema](#user-profile-custom-subschema) | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -643,14 +643,14 @@ curl -v -X POST \
 
 <span class="api-uri-template api-uri-get"><span class="api-label">POST</span> /meta/schemas/user/default</span>
 
-Updates one or more [custom user profile properties](#user-profile-schema-property) in the schema or a [permission](#schema-property-permission-object) for a [user profile base property](#user-profile-base-subschema).
+Updates one or more [custom user profile properties](#user-profile-schema-property-object) in the schema or a [permission](#schema-property-permission-object) for a [user profile base property](#user-profile-base-subschema).
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
 Parameter   | Description                                          | Param Type | DataType                                                       | Required | Default
 ----------- | ---------------------------------------------------- | ---------- | -------------------------------------------------------------- | -------- | -------
-definitions | Subschema with one or more custom profile properties | Body       | [User Profile Custom Subschema](user-profile-custom-subschema) | TRUE     |
+definitions | Subschema with one or more custom profile properties | Body       | [User Profile Custom Subschema](#user-profile-custom-subschema) | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -814,14 +814,14 @@ curl -v -X POST \
 
 <span class="api-uri-template api-uri-get"><span class="api-label">POST</span> /meta/schemas/user/default</span>
 
-Removes one or more [custom user profile properties](#user-profile-schema-property) from the user schema
+Removes one or more [custom user profile properties](#user-profile-schema-property-object) from the user schema
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
 Parameter   | Description                                                    | Param Type | DataType                                                       | Required | Default
 ----------- | -------------------------------------------------------------- | ---------- | -------------------------------------------------------------- | -------- | -------
-definitions | Subschema with one or more custom profile properties to remove | Body       | [User Profile Custom Subschema](user-profile-custom-subschema) | TRUE     |
+definitions | Subschema with one or more custom profile properties to remove | Body       | [User Profile Custom Subschema](#user-profile-custom-subschema) | TRUE     |
 
 > Properties must be explicitly set to `null` to be removed from schema, otherwise the `POST` will be interpreted as a partial update.
 
