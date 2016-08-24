@@ -57,7 +57,7 @@ ID Tokens should always be [validated](#validating-id-tokens) by the client to e
 
 The ID Token (*id_token*) consists of three period-separated, base64URL-encoded JSON segments: [a header](#header), [the payload](#payload), and [the signature](#signature). 
 
-### Header
+### Header {: #id-token-header }
 
 ~~~json
 {
@@ -66,7 +66,7 @@ The ID Token (*id_token*) consists of three period-separated, base64URL-encoded 
 }
 ~~~
 
-### Payload
+### Payload {: #id-token-payload }
 
 ~~~json
 {
