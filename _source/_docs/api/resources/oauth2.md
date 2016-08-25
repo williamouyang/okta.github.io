@@ -27,7 +27,7 @@ Additionally, these endpoints support the use of [OpenID Connect](/docs/api/reso
 An Access Token is a [JSON web token (JWT)](https://tools.ietf.org/html/rfc7519) encoded in base64URL format that contains [a header](#header), [payload](#payload), and [signature](#signature). A resource server can authorize the client to access particular resources based on the [scopes and claims](#scopes-and-claims) in the Access Token.
 {:.beta}
 
-### Header
+### Header {: #tokens-header }
 {:.beta}
 
 ~~~json
@@ -38,7 +38,7 @@ An Access Token is a [JSON web token (JWT)](https://tools.ietf.org/html/rfc7519)
 ~~~
 {:.beta}
 
-### Payload
+### Payload {: #tokens-payload }
 {:.beta}
 
 ~~~json
