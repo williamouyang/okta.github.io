@@ -4,28 +4,28 @@ $(function() {
 
 	$('.closed').hide();
 	var offset = $('.site-header').height() + $('#sticky-nav').height() + 40;
-	$('body').scrollspy({ target: '#myScrollspy', offset:  offset });
+	// $('body').scrollspy({ target: '#myScrollspy', offset:  offset });
 
-	$('#myScrollspy').on('activate.bs.scrollspy', function() {
-		var selected = $('#myScrollspy .nav').children('li.active');
-		selected.parent('.nav').removeClass('hide');
-		if (selected.children('ul').length > 0 )
-		{
-			if (selected.children('ul').children('li').hasClass('active'))
-			{
-				selected.removeClass('active');
-				selected.children('ul').show();
-			}
-			else
-			{
-				$('#myScrollspy .nav').children('li:not(.active)').children('ul').hide();
-			}
-		}
-		if (!$('.closed').children('li').hasClass('active') && !$('#gen-toc-container .sidebar-nav li').hasClass('clicked'))
-		{
-			$('.closed').hide();
-		}
-	});
+	// $('#myScrollspy').on('activate.bs.scrollspy', function() {
+	// 	var selected = $('#myScrollspy .nav').children('li.active');
+	// 	selected.parent('.nav').removeClass('hide');
+	// 	if (selected.children('ul').length > 0 )
+	// 	{
+	// 		if (selected.children('ul').children('li').hasClass('active'))
+	// 		{
+	// 			selected.removeClass('active');
+	// 			selected.children('ul').show();
+	// 		}
+	// 		else
+	// 		{
+	// 			$('#myScrollspy .nav').children('li:not(.active)').children('ul').hide();
+	// 		}
+	// 	}
+	// 	if (!$('.closed').children('li').hasClass('active') && !$('#gen-toc-container .sidebar-nav li').hasClass('clicked'))
+	// 	{
+	// 		$('.closed').hide();
+	// 	}
+	// });
 
 	$('#docs-sidebar-wrap a').not('#toc_current_doc').click(function(e){
 		if ($('body').hasClass('toggled'))
