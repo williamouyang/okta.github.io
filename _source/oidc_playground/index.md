@@ -1,5 +1,6 @@
 ---
 layout: base
+css: master
 ---
 <script type="text/javascript">
 function loadPlayground (iframe) {
