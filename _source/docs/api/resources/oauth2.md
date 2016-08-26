@@ -45,7 +45,7 @@ An Access Token is a [JSON web token (JWT)](https://tools.ietf.org/html/rfc7519)
 {
   "ver": 1,
   "jti": "AT.0mP4JKAZX1iACIT4vbEDF7LpvDVjxypPMf0D7uX39RE",
-  "iss": "https://your-org.okta.com/as/0oacqf8qaJw56czJi0g4",
+  "iss": "https://your-org.okta.com/oauth2/0oacqf8qaJw56czJi0g4",
   "aud": "nmdP1fcyvdVO11AL7ECm",
   "sub": "00ujmkLgagxeRrAg20g3",
   "iat": 1467145094,
@@ -109,7 +109,7 @@ The payload includes the following pre-defined claims:
 |--------------+---------+----------+----------------------------------------------------------------------------------+--------------|--------------------------|
 | ver     | The semantic version of the Access Token.   |  Integer   |  1    |
 | jti     | A unique identifier for this Access Token for debugging and revocation purposes.   | String    |  "AT.0mP4JKAZX1iACIT4vbEDF7LpvDVjxypPMf0D7uX39RE"  |
-| iss     | The Issuer Identifier of the response. This value will be the unique identifier for the Authorization Server instance.   | String    | "https://your-org.okta.com/as/0oacqf8qaJw56czJi0g4"     |
+| iss     | The Issuer Identifier of the response. This value will be the unique identifier for the Authorization Server instance.   | String    | "https://your-org.okta.com/oauth2/0oacqf8qaJw56czJi0g4"     |
 | aud     | Identifies the audience that this Access Token is intended for. It will be the client id of your application that requests the Access Token.   | String    | "6joRGIzNCaJfdCPzRjlh"     |
 | sub     | The subject. A name for the user or a unique identifier for the client.  | String    | 	"john.doe@example.com"     |
 | iat     | The time the Access Token was issued, represented in Unix time (seconds).   | Integer    | 1311280970     |
@@ -508,7 +508,7 @@ invalid_request         | The request structure was invalid. E.g. the basic auth
     "iat" : 1451602800,
     "sub" : "john.doe@example.com",
     "aud" : "ciSZgrA9ROeHkfPCaXsa",
-    "iss" : "https://your-org.okta.com/as/orsmsg0aWLdnF3spV0g3",
+    "iss" : "https://your-org.okta.com/oauth2/orsmsg0aWLdnF3spV0g3",
     "jti" : "AT.7P4KlczBYVcWLkxduEuKeZfeiNYkZIC9uGJ28Cc-YaI",
     "uid" : "00uid4BxXw6I6TV4m0g3"
 }
