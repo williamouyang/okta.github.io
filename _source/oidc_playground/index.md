@@ -1,5 +1,5 @@
 ---
-layout: docs_page
+layout: base
 ---
 <script type="text/javascript">
 function loadPlayground (iframe) {
