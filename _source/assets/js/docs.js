@@ -59,18 +59,18 @@ $(function() {
 		}
 	}();
 
-	$('a[href*=#]:not([href=#])').click(function() {
-		if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+	// $('a[href*=#]:not([href=#])').click(function() {
+	// 	if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
 
-			window.location.hash = this.hash;
-			var target = $(this.hash);
-			target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-			if (target.length) {
-				$('html,body').scrollTop(target.offset().top - fixedNavHeight);
-				return false;
-			}
-		}
-	});
+	// 		window.location.hash = this.hash;
+	// 		var target = $(this.hash);
+	// 		target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+	// 		if (target.length) {
+	// 			$('html,body').scrollTop(target.offset().top - fixedNavHeight);
+	// 			return false;
+	// 		}
+	// 	}
+	// });
 
 	if ($(location.href.split("#")[1])) {
 		var target = $('#' + location.href.split("#")[1]);
