@@ -63,7 +63,7 @@ directly with Okta. To do so, you will first need to sign up for an Okta develop
 Once logged in, email <developers@okta.com> with your org subdomain (e.g. dev-123456) so we can enable 
 a SCIM “template app” in your Okta org. 
 
-> If you are using “three-legged” Oauth as your authentication method, Okta will need to custom-configure a template app for you. 
+> If you are using OAuth Authorization Code Grant flow as your authentication method, Okta will need to custom-configure a template app for you. 
 Please make note of this in your email to <developers@okta.com>.
 
 Once the SCIM template app has been assigned to your Okta developer org, you can start testing by following the steps below:

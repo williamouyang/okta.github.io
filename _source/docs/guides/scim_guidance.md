@@ -237,7 +237,7 @@ Your SCIM API **MUST** be secured against anonymous access. At the
 moment, Okta supports authentication against SCIM APIs with one of
 the following methods:
 
-1.  [OAuth 2.0](http://oauth.net/2/)
+1.  [OAuth 2.0 Authorization Code Grant Flow](https://tools.ietf.org/html/rfc6749#section-4.1)
 2.  [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
 3.  Custom HTTP Header
 
