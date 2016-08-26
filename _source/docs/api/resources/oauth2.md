@@ -36,7 +36,7 @@ At the very basic level, the main API endpoints are:
     
 2. Native Application
 
-    * Installed on a device or computer, such as mobile apps or on-prem agents
+    * Installed on a device or computer, such as mobile applications or installed desktop applications
     * Uses [Authorization Code Grant Flow](https://tools.ietf.org/html/rfc6749#section-4.1)
     * Can use custom redirect URIs like `myApp://oauth:2.0:native`
     
@@ -44,6 +44,7 @@ At the very basic level, the main API endpoints are:
 
     > Note: For native applications, the client_id and client_secret are embedded in the source code of the application; in this context, the client secret isn't treated as a secret. 
         Therefore native apps should make use of Proof Key for Code Exchange (PKCE) to mitigate authorization code interception.
+        For more information, see the PKCE note in [Parameter Details[(#parameter-details).
 
 3. Web Application
 
@@ -56,9 +57,9 @@ At the very basic level, the main API endpoints are:
 
 4. Service Application
 
-    * Server-side app with no end-user
+    * Server-side app with no end-user, such as an on-prem agent
     * Uses [Client Credentials Flow](https://tools.ietf.org/html/rfc6749#section-4.4)
-    * Optimized for server-only Confidential Clients acting on behalf of itself or a user
+    * Optimized for [Confidential Clients](https://tools.ietf.org/html/rfc6749#section-2.1) acting on behalf of itself or a user
     * Back-channel only flow to obtain an access token using the Client’s credentials
     
     ![Service Application Flow](/assets/img/service_app_flow.png).
@@ -70,29 +71,17 @@ At the very basic level, the main API endpoints are:
 
 ### Custom User Experience
 
-By default, the Authorization Endpoint displays the Okta login page and authenticates the user if he or she doesn't have an existing session. 
+By default, the Authorization Endpoint displays the Okta login page and authenticates users if they don't have an existing session. 
 If you prefer to use a fully customized user experience, you can instead authenticate the user via the [Authentication API](http://developer.okta.com/docs/api/resources/authn.html). 
 This authentication method produces a `sessionToken` which can be passed into the Authorize Endpoint, and the user won't see an Okta login page.
 
-> Important: Okta uses public key cryptography to sign tokens and verify that they are valid. 
-See the last section of [Access Tokens](#access-tokens) for more information on the logic your application must have to ensure it’s always updated with the latest keys.
-
-## Tokens
-{:.beta}
-> Access Tokens and Refresh Tokens for Okta resource server are not covered in this section. The format and validation method of these tokens are subject to change without prior notice.
-{:.beta}
-
-> Access Tokens and Refresh Tokens for non-Okta resource server are currently in **Beta** status.
-{:.beta}
-
-
 ### Access Token
-{:.beta}
+
 An Access Token is a [JSON web token (JWT)](https://tools.ietf.org/html/rfc7519) encoded in base64URL format that contains [a header](#header), [payload](#payload), and [signature](#signature). A resource server can authorize the client to access particular resources based on the [scopes and claims](#scopes-and-claims) in the Access Token.
-{:.beta}
+
 
 ### Header
-{:.beta}
+
 
 ~~~json
 {
@@ -100,10 +89,10 @@ An Access Token is a [JSON web token (JWT)](https://tools.ietf.org/html/rfc7519)
   "kid": "45js03w0djwedsw"
 }
 ~~~
-{:.beta}
+
 
 ### Payload
-{:.beta}
+
 
 ~~~json
 {
@@ -126,49 +115,43 @@ An Access Token is a [JSON web token (JWT)](https://tools.ietf.org/html/rfc7519)
   "custom_claim": "CustomValue"
 }
 ~~~
-{:.beta}
+
 
 ### Signature
-{:.beta}
 
 This is a digital signature Okta generates using the public key identified by the `kid` property in the header section.
-{:.beta}
 
 ### Scopes and claims
-{:.beta}
 
-Access Tokens include pre-defined scopes and claims and can optionally contain custom scopes and claims.
-{:.beta}
+Access Tokens include reserved scopes and claims.
+{% beta}Access Tokens can optionally include custom scopes and claims.{% endbeta %}
 
-#### Pre-defined scopes and claims
-{:.beta}
+#### Reserved scopes and claims
 
-##### Pre-defined scopes
-{:.beta}
-
-The Okta Authorization Server reserves a number of pre-defined (reserved) scopes which can't be overridden. Pre-defined scopes include [OIDC scopes](oidc.html#scope-dependent-claims-not-always-returned).
-
+The Okta Authorization Server defines a number of reserved scopes which can't be overridden.
 Scopes are defined in the request parameter, and claims are in the Access Token returned from the request.
-{:.beta}
 
-##### Pre-defined claims in the header section
-{:.beta}
+* [Reserved scopes](#reserved-scopes)
+* [Reserved claims in the header section](#reserved-claims-in-the-header-section)
+* [Reserved claims in the payload section](#reserved-claims-in-the-payload-section)
 
-The header only includes the following pre-defined claims:
-{:.beta}
+##### Reserved scopes
+
+Reserved scopes include [OIDC scopes](oidc.html#scope-dependent-claims-not-always-returned).
+
+##### Reserved claims in the header section
+
+The header only includes the following reserved claims:
 
 |--------------+-----------------------------------------------------------------------------------------------------+--------------|--------------------------|
 | Property     | Description                                                                      | DataType     | Example                  |
 |--------------+---------+--------------------------------------------------------------------------------------------+--------------|--------------------------|
 | alg          | Identifies the digital signature algorithm used. This is always be RS256.      | String       | "RS256"                  |
 | kid          | Identifies the `public-key` used to sign the `access_token`. The corresponding `public-key` can be found as a part of the [well-known configuration's](oidc.html#openid-connect-discovery-document) `jwks_uri` value.                                  | String       | "a5dfwef1a-0ead3f5223_w1e" |
-{:.beta}
 
-##### Pre-defined claims in the payload section
-{:.beta}
+##### Reserved claims in the payload section
 
-The payload includes the following pre-defined claims:
-{:.beta}
+The payload includes the following reserved claims:
 
 |--------------+-------------------+----------------------------------------------------------------------------------+--------------|--------------------------|
 | Property     |  Description                                                                      | DataType     | Example                  |
@@ -183,62 +166,52 @@ The payload includes the following pre-defined claims:
 | cid     | Client ID of your application that requests the Access Token.  | String    | "6joRGIzNCaJfdCPzRjlh"     |
 | uid     | A unique identifier for the user. It will not be included in the Access Token if there is no user bound to it.  | String    | 	"00uk1u7AsAk6dZL3z0g3"     |
 | scp     | Array of scopes that are granted to this Access Token.   | Array    | [ "openid", "custom" ]     |
-{:.beta}
+
+{% beta}
 
 #### Custom scopes and claims
-{:.beta}
 
 The admin can configure custom scopes and claims via the Authorization Server tab for the Application. Access Tokens are minted with all the configured custom claims and all the configured custom scopes that are included in the authorization request.
-{:.beta}
 
 ##### Custom scopes
-{:.beta}
+
 If the request that generates the access token contains any custom scopes, those scopes will be part of the *scp* claim together with the scopes provided from the [OIDC specification](http://openid.net/specs/openid-connect-core-1_0.html). The form of these custom scopes must conform to the [OAuth2 specification](https://tools.ietf.org/html/rfc6749#section-3.3).
 
 >*Note:* Scope names can contain the characters < (less than) or > (greater than), but not both characters.
-{:.beta}
 
 ##### Custom claims
-{:.beta}
+
 All configured custom claims will be included in the access token. They will be evaluated for the user if the grant type is not *client_credentials*.
-{:.beta}
+
+{% endbeta %}
 
 ### Validating Access Tokens
-{:.beta}
+
+Okta uses public key cryptography to sign tokens and verify that they are valid. 
 
 The resource server must validate the Access Token before allowing the client to access protected resources.
-{:.beta}
 
 Access Tokens are sensitive and can be misused if intercepted. Transmit them only over HTTPS and only via POST data or within request headers. If you store them on your application, you must store them securely.
-{:.beta}
 
 Access Token must be validated in the following manner:
-{:.beta}
 
 1. Verify that the `iss` (issuer) claim matches the identifier of your authorization server.
 2. Verify that the `aud` (audience) and `cid` (client id) claim are your client id.
 3. Verify the signature according to [JWS](https://tools.ietf.org/html/rfc7515) using the algorithm specified in the JWT `alg` header parameter. Use the public keys provided by Okta via the [Discovery Document](oidc.html#openid-connect-discovery-document).
 4. Verify that the expiry time (from the `exp` claim) has not already passed.
-{:.beta}
 
 Step 3 uses the same signature verification method as the [ID token](oidc.html#validating-id-tokens).
-{:.beta}
 
 The signing keys for the Access Token are rotated in the same was as the [ID token](oidc.html#validating-id-tokens).
-{:.beta}
 
 #### Alternative Validation
-{:.beta}
 
 You can use an [introspection endpoint](#introspection-request) for validation.
-{:.beta}
 
 ### Refresh Token
-{:.beta}
 
 A Refresh Token is an opaque string. It is a long-lived token that the client can use to obtain a new Access Token without re-obtaining authorization from the resource owner. The new Access Token must have the same or subset of the scopes associated with the Refresh Token.
 To get a Refresh Token, the Authentication or Token requests must contain the `offline_access` scope.
-{:.beta}
 
 ## Endpoints
 
@@ -261,7 +234,7 @@ client_id         | Obtained during either [UI client registration](../../guides
 redirect_uri      | Specifies the callback location where the authorization code should be sent and it must match what is preregistered in Okta as a part of client registration. | Query        | String   |  TRUE    | 
 display           | Specifies how to display the authentication and consent UI. Valid values: *page* or *popup*.  | Query        | String   | FALSE     |  |
 max_age           | Specifies the allowable elapsed time, in seconds, since the last time the end user was actively authenticated by Okta. | Query      | String    | FALSE    | |
-response_mode     | Specifies how the authorization response should be returned. [Valid values: *fragment*, *form_post*, *query* or *okta_post_message*](#parameter-details). If *id_token* or *token* is specified as the response type, then *query* can't be used as the response mode. Default: Defaults to *fragment* in implicit and hybrid flow. Defaults to *query* in authorization code flow and cannot be set as *okta_post_message*. | Query        | String   | FALSE      | See Description.
+response_mode     | Specifies how the authorization response should be returned. [Valid values: *fragment*, *form_post*, *query* or *okta_post_message*](#parameter-details). If *id_token* or *token* is specified as the response type, then *query* isn't allowed as a response mode. Defaults to *fragment* in implicit and hybrid flow. Defaults to *query* in authorization code flow and cannot be set as *okta_post_message*. | Query        | String   | FALSE      | See Description.
 scope          | Can be a combination of *openid*, *profile*, *email*, *address* and *phone*. The combination determines the claims that are returned in the id_token. The openid scope has to be specified to get back an id_token. | Query        | String   | TRUE     | 
 state          | A client application provided state string that might be useful to the application upon receipt of the response. It can contain alphanumeric, comma, period, underscore and hyphen characters.   | Query        | String   |  TRUE    | 
 prompt         | Can be either *none* or *login*. The value determines if Okta should not prompt for authentication (if needed), or force a prompt (even if the user had an existing session). Default: The default behavior is based on whether there's an existing Okta session. | Query        | String   | FALSE     | See Description. 
@@ -397,17 +370,17 @@ The following parameters can be posted as a part of the URL-encoded form values 
 
 Parameter          | Description                                                                                         | Type       |
 -------------------+-----------------------------------------------------------------------------------------------------+------------|
-grant_type         | Can be one of the following: *authorization_code*, *password*, or *refresh_token*<span class="beta" style="display: inline">,  or *client_credentials*</span>. Determines the mechanism Okta will use to authorize the creation of the tokens. | String |  
+grant_type         | Can be one of the following: *authorization_code*, *password*, *refresh_token*, or *client_credentials* {% api-lifecycle beta %}. Determines the mechanism Okta will use to authorize the creation of the tokens. | String |  
 code               | Expected if grant_type specified *authorization_code*. The value is what was returned from the /oauth2/v1/authorize endpoint. | String
 refresh_token      | Expected if the grant_type specified *refresh_token*. The value is what was returned from this endpoint via a previous invocation. | String |
 username           | Expected if the grant_type specified *password*. | String |
 password           | Expected if the grant_type specified *password*. | String |
-scope              | Optional if either *refresh_token*<span class="hide-beta" style="display: inline"> or *password*</span><span class="beta" style="display: inline">, *password*,  or *client_credentials*</span> is specified as the grant type. This is a list of scopes that the client wants to be included in the Access Token. For the *refresh_token* grant type, these scopes have to be subset of the scopes used to generate the Refresh Token in the first place. | String |
+scope              | Optional if *refresh_token*, or *password* is specified as the grant type. This is a list of scopes that the client wants to be included in the Access Token. For the *refresh_token* grant type, these scopes have to be subset of the scopes used to generate the Refresh Token in the first place. | String |
 redirect_uri       | Expected if grant_type is *authorization_code*. Specifies the callback location where the authorization was sent; must match what is preregistered in Okta for this client. | String |
 code_verifier      | The code verifier of [PKCE](#parameter-details). Okta uses it to recompute the code_challenge and verify if it matches the original code_challenge in the authorization request. | String |
 
-> The [Client Credentials](https://tools.ietf.org/html/rfc6749#section-4.4) flow (if `grant_types` is `client_credentials`) is currently in **Beta** status.
-{:.beta}
+> The [Client Credentials](https://tools.ietf.org/html/rfc6749#section-4.4) flow (if `grant_types` is `client_credentials`) is currently **Beta**.
+
 
 ##### Token Authentication Method
 
@@ -430,7 +403,7 @@ authorization_code | Access Token, Refresh Token, ID Token |
 refresh_token      | Access Token, Refresh Token           |
 password           | Access Token, Refresh Token           |
 client_credentials | Access Token                          |
-{:.beta}
+
 
 ##### Refresh Tokens for Web and Native Applications
 
