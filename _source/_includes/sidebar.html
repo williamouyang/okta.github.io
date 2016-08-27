@@ -31,7 +31,7 @@
 		   {% for doc in docs %}
 		     {% unless doc.id contains "docs/api/getting_started" %}{% continue %}{% endunless %}
 		     {% if doc.id contains "/index" %}{% continue %}{% endif %}
-		     <li><a href="{{ doc.id }}">{{ doc.title }}</a></li>
+		     <li><a href="{{ doc.id }}.html">{{ doc.title }}</a></li>
 		   {% endfor %}
 		 </ul>
 		 {% endif %}

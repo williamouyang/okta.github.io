@@ -48,7 +48,7 @@ access.
 
 ## Sign-in Widget
 
-The [Okta Sign-in Widget](/docs/guides/okta_sign-in_widget.html)
+The [Okta Sign-in Widget](/docs/api/resources/okta_signin_widget.html)
 provides a embeddable Javascript sign-in implementation that can
 easily be embedded into your customized login page.  The Sign-in
 widget carries the same feature set in the standard Okta sign-in page

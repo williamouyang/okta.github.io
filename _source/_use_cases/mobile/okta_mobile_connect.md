@@ -2,6 +2,8 @@
 layout: docs_page
 title: Okta Mobile Connect
 excerpt: Learn how to Single Sign-On enable your native mobile app.
+redirect_from:
+    - "/docs/guides/okta_mobile_connect.html"
 ---
 
 ## Overview

@@ -2,6 +2,8 @@
 layout: docs_page
 title: Okta Sign-In Widget
 excerpt: Easily add Okta capabilities to your website.
+redirect_from:
+    - "/docs/guides/okta_sign-in_widget.html"
 ---
 
 ![Screenshot of basic Okta Sign-In Widget](/assets/img/okta-signin.png)

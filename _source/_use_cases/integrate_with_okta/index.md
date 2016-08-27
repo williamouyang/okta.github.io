@@ -65,7 +65,6 @@ Below are some high-level details on the process and timeline for building a SCI
 
 * Explore [SCIM standard](http://www.simplecloud.info/) & [Okta’s SCIM requirements](http://developer.okta.com/docs/guides/scim_guidance.html).
 * [Apply to the SCIM provisioning developer program](http://pages.okta.com/DeveloperSCIM.html).
-* [Register for our hands-on SCIM developer workshop on July 21, 2016](https://form.jotform.com/OktaTraining/SCIM).
 
 #### Develop and Validate (Week 1-2)
 * Work with Okta developer enablement team to build SCIM support and confirm approach

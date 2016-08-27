@@ -1,7 +1,7 @@
 ---
 layout: docs_page
 title: Error Codes
-excerpt: Information about the errors that the Okta API returns
+excerpt: Information about the errors that the Okta API returns.
 redirect_from:
     - "/docs/getting_started/error_codes.html"
     - "/docs/api/getting_started/error_codes.html"

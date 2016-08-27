@@ -4,8 +4,8 @@ email: developers@okta.com
 description: > # this means to ignore newlines until "baseurl:"
   Secure, scalable, and highly available authentication and user management for any app.
 baseurl: ""
-# url: "http://developer.okta.com"
-url: "http://localhost:4000"
+url: "http://developer.okta.com"
+# url: "http://localhost:4000"
 twitter_username: okta
 github_username:  oktadeveloper
 
