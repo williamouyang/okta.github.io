@@ -160,14 +160,18 @@ The payload includes the following reserved claims:
 | jti     | A unique identifier for this Access Token for debugging and revocation purposes.   | String    |  "AT.0mP4JKAZX1iACIT4vbEDF7LpvDVjxypPMf0D7uX39RE"  |
 | iss     | The Issuer Identifier of the response. This value will be the unique identifier for the Authorization Server instance.   | String    | "https://your-org.okta.com/as/0oacqf8qaJw56czJi0g4"     |
 | aud     | Identifies the audience that this Access Token is intended for. It will be the client id of your application that requests the Access Token.   | String    | "6joRGIzNCaJfdCPzRjlh"     |
-| sub     | The subject. A unique identifier for the user or the client.  | String    | 	"00uk1u7AsAk6dZL3z0g3"     |
+| sub     | The subject. A name for the user or a unique identifier for the client.  | String    | 	"john.doe@example.com"     |
 | iat     | The time the Access Token was issued, represented in Unix time (seconds).   | Integer    | 1311280970     |
 | exp     | The time the Access Token expires, represented in Unix time (seconds).   | Integer    | 1311280970     |
 | cid     | Client ID of your application that requests the Access Token.  | String    | "6joRGIzNCaJfdCPzRjlh"     |
 | uid     | A unique identifier for the user. It will not be included in the Access Token if there is no user bound to it.  | String    | 	"00uk1u7AsAk6dZL3z0g3"     |
 | scp     | Array of scopes that are granted to this Access Token.   | Array    | [ "openid", "custom" ]     |
+| groups  | The groups that the user is a member of that also match the Access Token group filter of the client app. | Array    | [ "Group1", "Group2", "Group3" ]    |
 
-{% beta}
+{:.beta}
+>*Note:* The groups claim will only be returned in the Access Token if the <b>groups</b> scope was included in the authorization request. To protect against arbitrarily large numbers of groups matching the group filter, the groups claim has a limit of 100. If more than 100 groups match the filter, then the request fails. Expect that this limit may change in the future.
+
+{:.beta}
 
 #### Custom scopes and claims
 
@@ -290,10 +294,11 @@ Irrespective of the response type, the contents of the response is always one of
 
 Parameter         | Description                                                                                        | DataType  | 
 ----------------- | -------------------------------------------------------------------------------------------------- | ----------| 
-id_token          | The ID Token JWT contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the *response_type* includes *id_token* .| String    | 
-access_token      | The *access_token* that is used to access the [`/oauth2/v1/userinfo`](/docs/api/resources/oidc.html#get-user-information) endpoint. This is returned if the *response_type*  included a token. Unlike the ID Token JWT, the *access_token* structure is specific to Okta, and is subject to change.| String  |
-token_type        | The token type is always `Bearer` and is returned only when *token* is specified as a *response_type*. | String |
-expires_in        | The number of seconds until the *access_token* expires. This is only returned if the response included an *access_token*. | String |
+id_token          | The ID Token JWT contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the <em>response_type</em> includes <em>id_token</em> .| String    | 
+access_token      | The <em>access_token</em> that is used to access the [`/oauth2/v1/userinfo`](/docs/api/resources/oidc.html#get-user-information) endpoint. This is returned if the <em>response_type</em>  included a token. Unlike the ID Token JWT, the <em>access_token</em> structure is specific to Okta, and is subject to change.| String  |
+token_type        | The token type is always `Bearer` and is returned only when <em>token</em> is specified as a <em>response_type</em>. | String |
+expires_in        | The number of seconds until the <em>access_token</em> expires. This is only returned if the response included an <em>access_token</em>. | String |
+scope             | The scopes of the <em>access_token</em>. This is only returned if the response included an <em>access_token</em>. | String |
 state             | The same unmodified value from the request is returned back in the response. | String |
 error             | The error-code string providing information if anything went wrong. | String |
 error_description | Further description of the error. | String |
@@ -344,7 +349,7 @@ mNsaWVudF9pZCI6InVBYXVub2ZXa2FESnh1a0NGZUJ4IiwidXNlcl9pZCI6IjAwdWlkNEJ4WHc2STZUV
 qZlCT4UXH4UKhJnZ5px-ArNRqwhxXWhHJisslswjPpMkx1IgrudQIjzGYbtLFjrrg2ueiU5-YfmKuJuD6O2yPWGTsV7X6i7ABT6P-t8PRz_RNbk-U1GXW
 IEkNnEWbPqYDAm_Ofh7iW0Y8WDA5ez1jbtMvd-oXMvJLctRiACrTMLJQ2e5HkbUFxgXQ_rFPNHJbNSUBDLqdi2rg_ND64DLRlXRY7hupNsvWGo0gF4WEU
 k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNtiw
-&token_type=Bearer&expires_in=3600&state=waojafoawjgvbf
+&token_type=Bearer&expires_in=3600&scope=openid+email&state=waojafoawjgvbf
 ~~~
 
 #### Response Example (Error)
@@ -435,6 +440,7 @@ invalid_scope           | The scopes list contains an invalid or unsupported val
                       TEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNtiw",
     "token_type" : "Bearer",
     "expires_in" : 3600,
+    "scope"      : "openid email",
     "refresh_token" : "a9VpZDRCeFh3Nkk2VdY",
     "id_token" : "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIwMHVpZDRCeFh3Nkk2VFY0bTBnMyIsImVtYWlsIjoid2VibWFzdGVyQGNsb3VkaXR1ZG
                   UubmV0IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInZlciI6MSwiaXNzIjoiaHR0cDovL3JhaW4ub2t0YTEuY29tOjE4MDIiLCJsb
@@ -464,9 +470,11 @@ Content-Type: application/json;charset=UTF-8
 
 <span class="api-uri-template api-uri-get"><span class="api-label">POST</span> /oauth2/v1/introspect</span>
 
-The API takes an Access Token, Refresh Token, or [ID Token](oidc.html#id-token) and returns whether it is active or not. 
+The API takes an Access Token or Refresh Token, and returns a boolean indicating whether it is active or not. 
 If the token is active, additional data about the token is also returned. If the token is invalid, expired, or revoked, it is considered inactive. 
 An implicit client can only introspect its own tokens, while a confidential client may inspect all access tokens.
+
+> Note; [ID Tokens](oidc.html#id-token) are also valid, however, they are usually validated on the service provider or app side of a flow.
 
 #### Request Parameters
 
@@ -493,12 +501,12 @@ Authorization: Basic ${Base64(<client_id>:<client_secret>)}
 
 #### Response Parameters
 
-Based on the type of token and whether it is active or not, the returned JSON contains a different set of tokens. These are the possible values:
+Based on the type of token and whether it is active or not, the returned JSON contains a different set of information. Besides the claims in the token, the possible top-level members include:
 
 Parameter   | Description                                                                                         | Type       |
 ------------+-----------------------------------------------------------------------------------------------------+------------|
 active      | An access token or refresh token.                                                                   | boolean    |  
-token_type  | The type of the token, either *access_token*, *refresh_token*, or *id_token*.  | String     |
+token_type  | The type of the token. The value is always `Bearer`.                                                | String     |
 scope       | A space-delimited list of scopes.                                                                   | String     |
 client_id   | The ID of the client associated with the token.                                                     | String     |
 username    | The username associated with the token.                                                             | String     |
@@ -523,16 +531,17 @@ invalid_request         | The request structure was invalid. E.g. the basic auth
 ~~~json
 {
     "active" : true,
-    "token_type" : "access_token",
+    "token_type" : "Bearer",
     "scope" : "openid profile",
     "client_id" : "a9VpZDRCeFh3Nkk2VdYa",
     "username" : "john.doe@example.com",
     "exp" : 1451606400,
     "iat" : 1451602800,
-    "sub" : "00uid4BxXw6I6TV4m0g3",
+    "sub" : "john.doe@example.com",
     "aud" : "ciSZgrA9ROeHkfPCaXsa",
-    "iss" : "https://your-org.okta.com",
-    "jti" : "4eAWJOCMB3SX8XewDfVR"
+    "iss" : "https://your-org.okta.com/as/orsmsg0aWLdnF3spV0g3",
+    "jti" : "AT.7P4KlczBYVcWLkxduEuKeZfeiNYkZIC9uGJ28Cc-YaI",
+    "uid" : "00uid4BxXw6I6TV4m0g3"
 }
 ~~~
 
@@ -541,12 +550,12 @@ invalid_request         | The request structure was invalid. E.g. the basic auth
 ~~~json
 {
     "active" : true,
-    "token_type" : "refresh token",
+    "token_type" : "Bearer",
     "scope" : "openid profile email",
     "client_id" : "a9VpZDRCeFh3Nkk2VdYa",
     "username" : "john.doe@example.com",
     "exp" : 1451606400,
-    "sub" : "00uid4BxXw6I6TV4m0g3",
+    "sub" : "john.doe@example.com",
     "device_id" : "q4SZgrA9sOeHkfst5uaa"
 }
 ~~~

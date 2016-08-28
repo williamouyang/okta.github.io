@@ -133,7 +133,7 @@ Function  | Return Type | Example  | Output
 `Iso3166Convert.toAlpha2(string)` | String | `Iso3166Convert.toAlpha2("IND")`  | "IN"
 `Iso3166Convert.toAlpha3(string)` | String | `Iso3166Convert.toAlpha3("840")` | "USA"
 `Iso3166Convert.toNumeric(string)` | String | `Iso3166Convert.toNumeric("USA")` | "840"
-`Iso3166Convert.toName(string)` | String | `Iso3166Convert.toString("IN")` | "INDIA"
+`Iso3166Convert.toName(string)` | String | `Iso3166Convert.toName("IN")` | "India"
 
 **Note:**  All these functions take ISO 3166-1 2-character country codes (Alpha 2), 3-character country codes (Alpha 3), and numeric country codes as input. The function determines the input type and returns the output is in the format specified by the function name.
 
