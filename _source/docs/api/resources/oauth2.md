@@ -168,11 +168,9 @@ The payload includes the following reserved claims:
 | scp     | Array of scopes that are granted to this Access Token.   | Array    | [ "openid", "custom" ]     |
 | groups  | The groups that the user is a member of that also match the Access Token group filter of the client app. | Array    | [ "Group1", "Group2", "Group3" ]    |
 
-{:.beta}
 >*Note:* The groups claim will only be returned in the Access Token if the <b>groups</b> scope was included in the authorization request. To protect against arbitrarily large numbers of groups matching the group filter, the groups claim has a limit of 100. If more than 100 groups match the filter, then the request fails. Expect that this limit may change in the future.
 
-{:.beta}
-
+{% beta %}
 #### Custom scopes and claims
 
 The admin can configure custom scopes and claims via the Authorization Server tab for the Application. Access Tokens are minted with all the configured custom claims and all the configured custom scopes that are included in the authorization request.
@@ -294,11 +292,11 @@ Irrespective of the response type, the contents of the response is always one of
 
 Parameter         | Description                                                                                        | DataType  | 
 ----------------- | -------------------------------------------------------------------------------------------------- | ----------| 
-id_token          | The ID Token JWT contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the <em>response_type</em> includes <em>id_token</em> .| String    | 
-access_token      | The <em>access_token</em> that is used to access the [`/oauth2/v1/userinfo`](/docs/api/resources/oidc.html#get-user-information) endpoint. This is returned if the <em>response_type</em>  included a token. Unlike the ID Token JWT, the <em>access_token</em> structure is specific to Okta, and is subject to change.| String  |
-token_type        | The token type is always `Bearer` and is returned only when <em>token</em> is specified as a <em>response_type</em>. | String |
-expires_in        | The number of seconds until the <em>access_token</em> expires. This is only returned if the response included an <em>access_token</em>. | String |
-scope             | The scopes of the <em>access_token</em>. This is only returned if the response included an <em>access_token</em>. | String |
+id_token          | The ID Token JWT contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the *response_type* includes *id_token*.| String    | 
+access_token      | The *access_token* that is used to access the [`/oauth2/v1/userinfo`](/docs/api/resources/oidc.html#get-user-information) endpoint. This is returned if the *response_type* included a token. Unlike the ID Token JWT, the *access_token* structure is specific to Okta, and is subject to change.| String  |
+token_type        | The token type is always `Bearer` and is returned only when *token* is specified as a *response_type*. | String |
+expires_in        | The number of seconds until the *access_token* expires. This is only returned if the response included an *access_token*. | String |
+scope             | The scopes of the *access_token*. This is only returned if the response included an *access_token*. | String |
 state             | The same unmodified value from the request is returned back in the response. | String |
 error             | The error-code string providing information if anything went wrong. | String |
 error_description | Further description of the error. | String |
@@ -415,7 +413,7 @@ client_credentials | Access Token                          |
 For web and native application types, an additional process is required:
 
 1. Use the Okta Administration UI and check the <b>Refresh Token</b> checkbox under <b>Allowed Grant Types</b> on the client application page.
-2. Pass the <em>offline_access</em> scope to your authorize request.
+2. Pass the *offline_access* scope to your authorize request.
 
 #### List of Errors 
 
