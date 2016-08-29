@@ -22,11 +22,10 @@ If you haven't heard of SCIM before, here is a good summary from the
 > standard for automating the exchange of user identity information
 > between identity domains, or IT systems.
 
-# Getting into the Okta SCIM Beta
+# Joining the SCIM Provisioning Developer Program
 
-Before building your SCIM Server, please [apply for admission to the
-SCIM provisioning developer program](http://pages.okta.com/DeveloperSCIM.html). Okta reviews new applicants on a weekly basis. We will
-reply within 7 days and give you an estimated timeline.
+Before building your SCIM Server, please make sure to [apply for admission](http://pages.okta.com/DeveloperSCIM.html) 
+to the SCIM Provisioning Developer Program and familiarize yourself with the [program process and resources](http://developer.okta.com/docs/guides/scim_developer_program.html).
 
 Once admitted, we will collect information about your SCIM Server to
 get a generic SCIM template application ready for testing. You will
@@ -1172,6 +1171,29 @@ only happen if the User table isn't defined.
         socketio.run(app)
 
 ## Frequently Asked Questions (FAQ)
+
+This FAQ covers both app publication and technical questions.
+
+### App Publication Questions
+
+- If I submit my app with a set of attributes, and then I want to add attributes during the testing phase of the app, is this acceptable?
+
+    Yes. Do one of the following if you add attributes during the testing phase:
+     
+     * Add a new app instance in your dev org to test the new attributes.
+     * Ask Support to upgrade their profile template.
+     
+- Once my app has been published, and I add additional attributes, how do I republish my app? Can I republish frequently?
+  
+    Yes, you can republish your app, but we recommend you don't do it frequently. Your app goes throught the QA process every time you add additional attributes.
+  
+- How long does it take for my submission to be reviewed and published?
+
+    Review usually takes 48 hours, followed by QA which is usually another 48 hours. 
+    We don't publish the app until one customer tests the app in their production environment and send us a email 
+    saying that everything works and they recommend the integration.
+
+### SCIM Technical Questions
 
 -   What are the differences between SCIM 1.1 and 2.0?    
     
