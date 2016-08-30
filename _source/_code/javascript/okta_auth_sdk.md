@@ -1,7 +1,7 @@
 ---
 layout: docs_page
 title: Okta Auth SDK
-excerpt: Easily add Okta capabilities to your website.
+excerpt: Easily add sign-in capabilities to your fully branded web site.
 ---
 
 # Introduction

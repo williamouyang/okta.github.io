@@ -1,7 +1,7 @@
 ---
 layout: docs_page
 title: Okta Sign-In Widget
-excerpt: Easily add Okta capabilities to your website.
+excerpt: Easily add sign-in capabilities with Okta's pre-packaged UI component.
 redirect_from:
     - "/docs/guides/okta_sign-in_widget.html"
 ---
