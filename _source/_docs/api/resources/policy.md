@@ -1,6 +1,7 @@
 ---
 layout: docs_page
 title: Policy
+beta: true
 redirect_from: "/docs/getting_started/policy.html"
 ---
 

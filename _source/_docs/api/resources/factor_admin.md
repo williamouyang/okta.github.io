@@ -1,6 +1,7 @@
 ---
 layout: docs_page
 title: Factors Administration
+beta: true
 redirect_from: "/docs/getting_started/factor_admin.html"
 ---
 

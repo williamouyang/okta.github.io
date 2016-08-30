@@ -54,7 +54,7 @@
 		 <ul>
                      {% assign docs = site.docs %}
                      {% assign docids = api_references %}
-		     {% for docid in docids %}{% for doc in docs %}
+		     {% for docid in docids %}{% for doc in docs %}{% if doc.beta %}{% continue %}{% endif %}
 		     {% unless doc.id == docid %}{% continue %}{% endunless %}
 		     <li><a href="{{ doc.url }}">{{ doc.title }}</a></li>
 		     {% endfor %}{% endfor %}
