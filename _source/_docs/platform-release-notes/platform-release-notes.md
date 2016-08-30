@@ -8,7 +8,7 @@ excerpt: Summary of changes to the Okta Platform since Release 2016.35
 
 ## Feature Enhancements
  
-### Improvements to Endpoint sessions/me
+### Improvements to GET Current Session (/sessions/me)
 <!-- OKTA-95047 -->
 * The parameter `createdAt` is returned in results.
 * If authentication is done using a social IdP or SAML, `lastPasswordVerification` isn't updated.
