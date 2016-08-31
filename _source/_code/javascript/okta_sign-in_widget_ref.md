@@ -1,7 +1,10 @@
 ---
 layout: docs_page
-title: Okta Sign-In Widget
-excerpt: Easily add Okta Sign-in capabilities to your website.
+title: Okta Sign-In Widget Reference
+excerpt: Reference information for customizing the Okta Sign-In Widget.
+redirect_from: 
+    - "/_docs/api/resources/okta_signin_widget.html"
+    - "/docs/api/resources/okta_signin_widget.html"
 ---
 
 ## Overview
