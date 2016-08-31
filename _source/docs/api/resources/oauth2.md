@@ -516,6 +516,7 @@ aud         | The audience of the token.                                        
 iss         | The issuer of the token.                                                                            | String     |
 jti         | The identifier of the token.                                                                        | String     |
 device_id   | The ID of the device associated with the token                                                      | String     |
+uid         | The user ID. This parameter is returned only if the token is an access token and the subject is an end user.     | String     |
 
 #### List of Errors 
 
