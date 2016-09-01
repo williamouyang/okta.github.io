@@ -99,11 +99,9 @@ li.ui-corner-top{
 }
 
 .requestContentInputAccess{
-  padding-top: 14px;
 }
 
 .requestContentInputUser{
-  padding-top: 51px;
 }
 
 .requestContentInputRevoke{
@@ -158,8 +156,14 @@ textarea {
   margin-bottom: 0px;
 }
 
-.o-form-input-name-accessToken, .o-form-input-name-redirectUris {
+.o-form-input-name-accessToken, .o-form-input-name-redirectUris, .o-form-input-name-refreshToken {
   height: 50px;
+  display: block;
+  overflow: auto;
+}
+
+.o-form-input-name-clientSecret {
+  height: 30px;
   display: block;
   overflow: auto;
 }
