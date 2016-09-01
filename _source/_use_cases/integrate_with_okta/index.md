@@ -57,35 +57,9 @@ While many ISVs use proprietary APIs, Okta recommends that you implement your AP
 
 ### Provisioning: Building an Integration with Okta
 
-If you already have a "compliant" SCIM server, you are 90% of the way to supporting provisioning with Okta! The remaining steps are: configuration, testing, and joint customer validation. If you don’t yet support SCIM, don’t worry, the [Okta SCIM Beta Guide](http://developer.okta.com/docs/guides/scim_guidance.html) is designed to get you on the right path.
-
-Below are some high-level details on the process and timeline for building a SCIM-based provisioning integration with Okta:
-
-#### Explore and Apply
-
-* Explore [SCIM standard](http://www.simplecloud.info/) & [Okta’s SCIM requirements](http://developer.okta.com/docs/guides/scim_guidance.html).
-* [Apply to the SCIM provisioning developer program](http://pages.okta.com/DeveloperSCIM.html).
-
-#### Develop and Validate (Week 1-2)
-* Work with Okta developer enablement team to build SCIM support and confirm approach
-
-#### Review and Test (Week 3-4)
-* Okta reviews functionality, security, performance,  documentation, and support plan
-* Partner testing in Okta developer org
-
-#### Customer Testing (Week 5-7)
-* Partner identifies small set of customers to test integration with
-
-#### Promote (Week 8)
-* Once 1 live & happy customers, publish to public Okta Application Network
-* Okta Application Network Gold partner & benefits
-
-> The timeline outlined is our best estimate. The process may take more or less time than described here.
-
-**As a next step, please [apply for the SCIM provisioning developer program](http://pages.okta.com/DeveloperSCIM.html) and review [Okta’s SCIM Beta Guide](http://developer.okta.com/docs/guides/scim_guidance.html) for technical documentation and details.**
-
-Have questions? Need help? Email <developers@okta.com>.
-
+[Okta’s SCIM Provisioning Developer Program](http://developer.okta.com/standards/SCIM/scim_developer_program)
+is designed to help you build your SCIM server and integrate provisioning into the Okta Application Network. 
+Get started by reviewing the program process, SCIM docs, and applying to the program.
 
 ##Okta Application Network FAQs
 

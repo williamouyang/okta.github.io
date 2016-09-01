@@ -27,29 +27,13 @@ If you haven't heard of SCIM before, here is a good summary from the
 # Joining the SCIM Provisioning Developer Program
 
 Before building your SCIM Server, please make sure to [apply for admission](http://pages.okta.com/DeveloperSCIM.html) 
-to the SCIM Provisioning Developer Program and familiarize yourself with the [program process and resources](http://developer.okta.com/docs/guides/scim_developer_program.html).
+to the SCIM Provisioning Developer Program and familiarize yourself with 
+the [program process and resources](http://developer.okta.com/docs/guides/scim_developer_program.html).
 
-Once admitted, we will collect information about your SCIM Server to
-get a generic SCIM template application ready for testing. You will
-need to be ready to provide:
+# Understanding User Provisioning in Okta
 
-1.  The oktapreview.com Okta org that you will use to develop your
-    SCIM integration. (If you don't already have an Okta org, create
-    an [Okta Developer account](https://www.okta.com/developer/signup/))
-2.  The Base URL to which Okta will send SCIM requests to your
-    service.
-3.  The Authentication method that Okta will use to authenticate with
-    your service.
-4.  Details on the Base URL and Authentication method are covered
-    below.
-
-Once the generic SCIM template app is in your Okta org, you can
-start testing on your SCIM integration directly with Okta.
-
-# Understanding of User Provisioning in Okta
-
-Okta is a universal directory with the main focus in storing
-identity related information.  Users can be created in Okta directly
+Okta is a universal directory that stores
+identity-related information.  Users can be created in Okta directly
 as local users or imported from external systems like Active
 Directory or a [Human Resource Management Software](https://en.wikipedia.org/wiki/Category:Human_resource_management_software) system.
 
