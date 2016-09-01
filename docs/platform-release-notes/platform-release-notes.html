@@ -20,7 +20,7 @@
     <script type="text/javascript" defer="defer" src="/assets/js/docs.js"></script>    
     
     <title>Platform Release Notes | Okta Developer</title>
-    <meta name="description" content="Summary of changes to the Okta Platform since Release 2016.33">
+    <meta name="description" content="Summary of changes to the Okta Platform since Release 2016.35">
     <link rel="canonical" href="http://developer.okta.com/docs/platform-release-notes/platform-release-notes.html">
     <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml">
     
@@ -168,8 +168,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     <li><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li>
 		 
 		     <li><a href="/docs/api/resources/sessions.html">Sessions</a></li>
-		 
-		     <li><a href="/docs/api/resources/okta_signin_widget.html">Okta Sign-In Widget</a></li>
 		 </ul>
 	       </li>
 	       
@@ -407,7 +405,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     <li><a href="/docs/api/resources/idps.html">Identity Providers</a></li>
-		     
 		     
 		     
 		     
@@ -734,6 +731,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		 </ul>
 	       </li>
 	       
@@ -793,27 +791,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <!-- END Fixed sidebar -->
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
-	<p>Release 2016.34</p>
+	<h2 id="release-201635">Release 2016.35</h2>
 
-<h2 id="feature-enhancement-hal-links-for-sessions-api-are-cors-enabled">Feature Enhancement: HAL Links For Sessions API Are CORS-Enabled</h2>
-<!-- OKTA-98961 -->
+<h2 id="feature-enhancements">Feature Enhancements</h2>
 
-<p>Two Session API endpoints, <code class="highlighter-rouge">GET /api/v1/sessions/me</code> and <code class="highlighter-rouge">POST /sessions/me/lifecycle/refresh</code>, return <code class="highlighter-rouge">/me</code> instead of <code class="highlighter-rouge">/:id</code> in response links.
-These links are CORS-enabled, consistent with the original API calls which are also CORS-enabled.</p>
+<h3 id="improvements-to-get-current-session-sessionsme">Improvements to GET Current Session (/sessions/me)</h3>
+<!-- OKTA-95047 -->
+<ul>
+  <li>The parameter <code class="highlighter-rouge">createdAt</code> is returned in results.</li>
+  <li>If authentication is done using a social IdP or SAML, <code class="highlighter-rouge">lastPasswordVerification</code> isn’t updated.</li>
+  <li>The parameter <code class="highlighter-rouge">lastPasswordVerification</code> is only updated when the password is verified.</li>
+</ul>
 
-<p>For more information, see <a href="http://developer.okta.com/docs/api/resources/sessions#get-session">Get Session</a> or <a href="http://developer.okta.com/docs/api/resources/sessions#refresh-session">Refresh Session</a>.</p>
+<h3 id="new-version-of-okta-sign-in-widget">New Version of Okta Sign-In Widget</h3>
 
-<h2 id="bugs-fixed">Bugs Fixed</h2>
-
-<p>The following issues are fixed:</p>
+<p>The new version of Okta Sign-In Widget, 1.6.0, is available:</p>
 
 <ul>
-  <li>IdP keys could be deleted even when referenced by an active or inactive app instance. (OKTA-96139)</li>
-  <li>Properties could be deleted from the <a href="http://developer.okta.com/docs/api/resources/schemas.html#remove-property-from-user-profile-schema">User Profile schema</a>
-while still referenced as a <code class="highlighter-rouge">matchAttribute</code> in inbound SAML IdPs. (OKTA-96281)</li>
-  <li>Identity Providers for social authentication configured to look up usernames by Okta username or email failed to return a valid match. 
-This failure occurred if the username was in both the username and email and a second user existed with the same email but different username. (OKTA-96335)</li>
+  <li>Okta Sign-In Widget supports two new factors: Windows Hello and U2F.</li>
+  <li>The Widget is localized for Czech.</li>
+  <li>Translations are shipped with the <code class="highlighter-rouge">npm</code> module.</li>
 </ul>
+
+<p>Learn about these and other improvements at <a href="https://github.com/okta/okta-signin-widget/releases/tag/okta-signin-widget-1.6.0">the Git site</a>.</p>
+
+<!-- ## Bugs Fixed The following issues are fixed: * -->
 
 <h2 id="does-your-org-have-these-changes-yet">Does Your Org Have These Changes Yet?</h2>
 
@@ -826,6 +828,7 @@ This failure occurred if the username was in both the username and email and a s
 <h2 id="earlier-release-notes">Earlier Release Notes</h2>
 
 <ul>
+  <li><a href="platform-release-notes2016-34.html">Platform Release Notes for Release 2016.34</a></li>
   <li><a href="platform-release-notes2016-33.html">Platform Release Notes for Release 2016.33</a></li>
   <li><a href="platform-release-notes2016-31.html">Platform Release Notes for Release 2016.31</a></li>
   <li><a href="platform-release-notes2016-30.html">Platform Release Notes for Release 2016.30</a></li>

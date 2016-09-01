@@ -168,8 +168,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     <li><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li>
 		 
 		     <li><a href="/docs/api/resources/sessions.html">Sessions</a></li>
-		 
-		     <li><a href="/docs/api/resources/okta_signin_widget.html">Okta Sign-In Widget</a></li>
 		 </ul>
 	       </li>
 	       
@@ -495,7 +493,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
-		     
 		     <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
 		     
 		     
@@ -716,6 +713,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     <li><a href="/docs/api/resources/users.html">Users</a></li>
+		     
 		     
 		     
 		     
@@ -2202,7 +2200,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p><span class="api-uri-template api-uri-get"><span class="api-label">POST</span> /meta/schemas/user/default</span></p>
 
-<p>Removes one or more <a href="#user-profile-schema-property-object">custom user profile properties</a> from the user schema</p>
+<p>Removes one or more <a href="#user-profile-schema-property">custom user profile properties</a> from the user schema.
+A property cannot be removed if it is being referenced as a <a href="./idps.html#subject-policy-object">matchAttribute</a> in SAML2 IdPs.</p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-3">Request Parameters</h5>
 
