@@ -12,17 +12,17 @@ redirect_from:
 The Okta Sign-In Widget is a JavaScript widget from Okta that gives you a customizable login experience that authenticates users on any web site.
 
 This page contains detailed reference information you can use to customize your sign-in widget.
-Basic instructions for creating a sign-in widget are available in [Okta Sign-In Widget](../../guides/okta_sign-in_widget.html). 
+Basic instructions for creating a sign-in widget are available in [Okta Sign-In Widget](./okta_sign-in_widget.html). 
 
 Prerequisites from the basic guide include: 
 
 * Use [a supported browser](https://support.okta.com/help/articles/Knowledge_Article/24532952-Platforms---Browser-and-OS-Support).
-* [Create an Okta Developer Edition org](../../guides/okta_sign-in_widget.html#creating-an-okta-organization) if you don't already have one.
-* [Configure your Okta org to support CORS](../getting_started/enabling_cors.html) before testing the Okta Sign-In Widget.
+* [Create an Okta Developer Edition org](./okta_sign-in_widget.html#creating-an-okta-organization) if you don't already have one.
+* [Configure your Okta org to support CORS](http://developer.okta.com/docs/api/getting_started/enabling_cors.html) before testing the Okta Sign-In Widget.
 
 ### Example of a Customized Sign-In Widget
 
-> Okta Sign-In Widget documentation uses the domain name acme. Other Okta developer content uses <em>your-domain</em>.
+> Okta Sign-In Widget documentation uses the domain name acme. Other Okta developer content uses `your-domain`.
 
 ~~~ javascript
 // Initialize
