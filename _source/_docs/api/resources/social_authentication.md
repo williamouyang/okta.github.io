@@ -98,18 +98,19 @@ Advantages of using Okta Social Authentication include:
 7.  Create a Social Auth login (Authorize) URL by replacing the value of the following parameters in the Social Auth "Authorize URL."
          
      * `client_id`: use the `client_id` value you copied in step 6.
-     * `scope`
-     * `response_type`
+     * `scope`: A string is returned in the response. Use it to determine the claims that are retunred in the ID token.
+     * `response_type`: A string is returned in the response. Use it to determine which flow is used.
+     * `response_mode`: A string is returned in the response. Use it to determine how the authorization response should be returned.
      * `state`: A string returned in the response. Use it to protect against cross-site request forgery (CSRF).
      * `nonce`: A string included in the returned ID Token. Use it to associate a client session with an ID Token, and to mitigate replay attacks.
      * `redirect_url`: The location where Okta returns a user after the user has finished authenticating against their Social Authentication provider.
        This URL **must** start with "https" and **must** match one of the URLs in the `redirect_uris` array that you configured previously.
         
      When complete, your Authorize URL looks something like this:
-        `https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&client_id=AbcDE0fGHI1jk2LM34no&scope=openid%20email%20profile&response_type=id_token&state=someState&nonce=someNonce&redirect_uri=https://app.example.com/social_auth`
+        `https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&client_id=AbcDE0fGHI1jk2LM34no&scope=openid%20email%20profile&response_type=id_token&response_mode=fragment&state=someState&nonce=someNonce&redirect_uri=https://app.example.com/social_auth`
                 
      If you log users into Okta, the Authorize URL looks something like this:
-        `https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&client_id=AbcDE0fGHI1jk2LM34no&scope=openid%20email%20profile&response_type=id_token&state=someState&nonce=someNonce&redirect_uri=https://example.okta.com`
+        `https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&client_id=AbcDE0fGHI1jk2LM34no&scope=openid%20email%20profile&response_type=id_token&response_mode=fragment&state=someState&nonce=someNonce&redirect_uri=https://example.okta.com`
              
      For learn more about Okta's requirements for these parameters, see [Authorize Endpoint Parameter Details](http://developer.okta.com/docs/api/resources/oauth2.html#parameter-details).
      
