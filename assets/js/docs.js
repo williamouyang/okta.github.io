@@ -1,6 +1,6 @@
 $(function() {
 
-	var fixedNavHeight = 180;
+        var fixedNavHeight = $('#header').height();
 
 	$('.closed').hide();
 	var offset = $('.site-header').height() + $('#sticky-nav').height() + 40;
