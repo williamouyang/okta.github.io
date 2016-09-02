@@ -54,7 +54,7 @@ to access OAuth 2.0 protected endpoints. The following default scopes are suppor
 | email        | Requests access to the `email` and `email_verified` claims.                    | No           |
 | phone        | Requests access to the `phone_number` and `phone_number_verified` claims.      | No           |
 | address      | Requests access to the `address` claim.                                        | No           |
-| groups       | Requests access to the `groups` claim.
+| groups       | Requests access to the `groups` claim.                                         | No           |
 | offline_access | Requests a refresh token, used to obtain more access tokens without re-prompting the user for authentication. | No           |
 
 ### Scope Values
