@@ -10,9 +10,9 @@ The OAuth 2.0 APIs provide API security via scoped access tokens, and OpenID Con
 
 There are several use cases and Okta product features built on top of the OAuth 2.0 APIs:
 
-* Social Authentication -- {% api-lifecycle ea %}
-* OpenID Connect -- {% api-lifecycle ea %}
-* API Access Management -- {% api-lifecycle beta %}
+* Social Authentication -- {% api_lifecycle ea %}
+* OpenID Connect -- {% api_lifecycle ea %}
+* API Access Management -- {% api_lifecycle beta %}
 
 It's important to understand which use case you are targeting and build your application according to the correct patterns for that use case. 
 The OAuth 2.0 APIs each have several different [query params](#authentication-request) which dictate which type of flow you are using and the mechanics of that flow.
@@ -124,7 +124,12 @@ This is a digital signature Okta generates using the public key identified by th
 ### Scopes and claims
 
 Access Tokens include reserved scopes and claims.
-{% beta}Access Tokens can optionally include custom scopes and claims.{% endbeta %}
+
+{% beta %}
+
+Access Tokens can optionally include custom scopes and claims.
+
+{% endbeta %}
 
 #### Reserved scopes and claims
 
@@ -373,7 +378,7 @@ The following parameters can be posted as a part of the URL-encoded form values 
 
 Parameter          | Description                                                                                         | Type       |
 -------------------+-----------------------------------------------------------------------------------------------------+------------|
-grant_type         | Can be one of the following: *authorization_code*, *password*, *refresh_token*, or *client_credentials* {% api-lifecycle beta %}. Determines the mechanism Okta will use to authorize the creation of the tokens. | String |  
+grant_type         | Can be one of the following: *authorization_code*, *password*, *refresh_token*, or *client_credentials* {% api_lifecycle beta %}. Determines the mechanism Okta will use to authorize the creation of the tokens. | String |  
 code               | Expected if grant_type specified *authorization_code*. The value is what was returned from the /oauth2/v1/authorize endpoint. | String
 refresh_token      | Expected if the grant_type specified *refresh_token*. The value is what was returned from this endpoint via a previous invocation. | String |
 username           | Expected if the grant_type specified *password*. | String |
