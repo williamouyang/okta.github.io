@@ -42,10 +42,36 @@ The properties you need depend on which client profile and use case you are targ
 
 ## Claims
 
-ID tokens issued by Okta contain claims, which are statements about a subject (user).
+Tokens issued by Okta contain claims, which are statements about a subject (user).
 For example, the claim can be about a name, identity, key, group, or privilege.
-The claims in a security token are dependent upon the type of token, the type of credential used to authenticate the user, 
-and the application configuration.
+The claims in a security token are dependent upon the type of token, the type of credential used to authenticate the user, and the application configuration.
+
+The claims requested by the `profile`, `email`, `address`, and `phone` scope values are returned from the UserInfo Endpoint, as described in [the OpenID spec Section 5.3.2](http://openid.net/specs/openid-connect-core-1_0.html#UserInfoResponse), when a `response_type` value is used that results in an Access Token being issued. However, when no Access Token is issued (which is the case for the `response_type` value `id_token`), the resulting Claims are returned in the ID Token.
+
+## Scopes
+
+OpenID Connect uses scope values to specify what access privileges are being requested for Access Tokens. 
+The scopes associated with Access Tokens determine which claims are available when they are used 
+to access [the OIDC `userinfo` endpoint](http://developer.okta.com/docs/api/resources/oidc.html#get-user-information). The following scopes are supported:
+
+|--------------+--------------------------------------------------------------------------------|--------------|
+| Property     | Description                                                                    | Required     |
+|--------------+---------+----------------------------------------------------------------------|--------------|
+| openid       | Identifies the request as an OpenID Connect request.                           | Yes          |
+| profile      | Requests access to the end-user's default profile claims.                      | No           |
+| email        | Requests access to the `email` and `email_verified` claims.                    | No           |
+| phone        | Requests access to the `phone_number` and `phone_number_verified` claims.      | No           |
+| address      | Requests access to the `address` claim.                                        | No           |
+| groups       | Requests access to the `groups` claim.                                         | No           |
+| offline_access | Requests a refresh token, used to obtain more access tokens without re-prompting the user for authentication. | No           |
+
+### Scope Values
+
+* `openid` is required for any OpenID request connect flow. If no openid scope value is present, the request may
+  be a valid OAuth 2.0 request, but it's not an OpenID Connect request.
+* `profile` requests access to these default profile claims: `name`, `family_name`, `given_name`, `middle_name`, `nickname`, `preferred_username`, `profile`,  
+`picture`, `website`, `gender`, `birthdate`, `zoneinfo`,`locale`, and `updated_at`.
+* For more information about `offline_access`, see the [OIDC spec](http://openid.net/specs/openid-connect-core-1_0.html#OfflineAccess).
 
 ## ID Token
 
