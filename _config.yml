@@ -48,6 +48,9 @@ sitemap:
 
 include: [_static]
 
+sass:
+    sass_dir: _sass
+
 collections:
   standards:
     output: true
