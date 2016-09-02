@@ -1,9 +1,11 @@
 ---
-title: Okta Rum Tool product
+title: Okta Cloud Provisioning Connector Tool product
 layout: legal_notice
+redirect_from: "/3rd_party_notices/Okta_Rum_Tool"
+
 ---
 This document contains third party open source licenses and notices for
-the Okta Rum Tool product. Certain licenses and notices may appear in
+the Okta Cloud Provisioning Connector Tool product. Certain licenses and notices may appear in
 other parts of the product in accordance with the applicable license
 requirements.
 
