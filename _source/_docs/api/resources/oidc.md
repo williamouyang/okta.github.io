@@ -40,6 +40,31 @@ you must have in your application to ensure it’s always updated with the lates
 The flow of requests and responses for the authentication process is based on OAuth 2.0 and OpenID Connect protocols.
 The properties you need depend on which client profile and use case you are targeting.
 
+## Scopes
+
+OpenID Connect uses scope values to specify what access privileges are being requested for Access Tokens. 
+The scopes associated with Access Tokens determine which resources are available when they are used 
+to access OAuth 2.0 protected endpoints. The following default scopes are supported:
+
+|--------------+--------------------------------------------------------------------------------|--------------|
+| Property     | Description                                                                    | Required     |
+|--------------+---------+----------------------------------------------------------------------|--------------|
+| openid       | Identifies the request as an OpenID Connect request.                           | Yes          |
+| profile      | Requests access to the end-user's default profile claims.                      | No           |
+| email        | Requests access to the `email` and `email_verified` claims.                    | No           |
+| phone        | Requests access to the `phone_number` and `phone_number_verified` claims.      | No           |
+| address      | Requests access to the `address` claim.                                        | No           |
+| groups       | Requests access to the `groups` claim.
+| offline_access | Requests a refresh token, used to obtain more access tokens without re-prompting the user for authentication. | No           |
+
+### Scope Values
+
+* `openid` is required for any OpenID request connect flow. If no openid scope value is present, the request may
+  be a valid OAuth 2.0 request, but it's not an OpenID Connect request.
+* `profile` requests access to these default profile claims: `name`, `family_name`, `given_name`, `middle_name`, `nickname`, `preferred_username`, `profile`,  
+`picture`, `website`, `gender`, `birthdate`, `zoneinfo`,`locale`, and `updated_at`.
+* For more information about `offline_access`, see the [OIDC spec](http://openid.net/specs/openid-connect-core-1_0.html#OfflineAccess).
+
 ## Claims
 
 ID tokens issued by Okta contain claims, which are statements about a subject (user).
