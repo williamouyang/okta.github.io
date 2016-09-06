@@ -43,8 +43,8 @@ The properties you need depend on which client profile and use case you are targ
 ## Scopes
 
 OpenID Connect uses scope values to specify what access privileges are being requested for Access Tokens. 
-The scopes associated with Access Tokens determine which resources are available when they are used 
-to access OAuth 2.0 protected endpoints. The following default scopes are supported:
+The scopes associated with Access Tokens determine which claims are available when they are used 
+to access [`/oauth2/v1/userinfo`](http://developer.okta.com/docs/api/resources/oidc.html#get-user-information). The following scopes are supported:
 
 |--------------+--------------------------------------------------------------------------------|--------------|
 | Property     | Description                                                                    | Required     |
@@ -67,7 +67,7 @@ to access OAuth 2.0 protected endpoints. The following default scopes are suppor
 
 ## Claims
 
-ID tokens issued by Okta contain claims, which are statements about a subject (user).
+Tokens issued by Okta contain claims, which are statements about a subject (user).
 For example, the claim can be about a name, identity, key, group, or privilege.
 The claims in a security token are dependent upon the type of token, the type of credential used to authenticate the user, 
 and the application configuration.
