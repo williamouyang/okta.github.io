@@ -54,10 +54,12 @@ Advantages of using Okta Social Authentication include:
     -   [Google](http://saml-doc.okta.com/IdentityProvider_Docs/Google_Identity_Provider_Setup.html)
     -   [LinkedIn](http://saml-doc.okta.com/IdentityProvider_Docs/LinkedIn_Identity_Provider_Setup.html)
     -   [Microsoft](http://saml-doc.okta.com/IdentityProvider_Docs/Microsoft_Identity_Provider_Setup.html)
+
 4.  Configure your Social Authentication provider:
+
     -   **Name**: We suggest using the name you would
         expect to see on a button, something like "Log in to Facebook".
-    -   **Transform username**: Set to to "`email`".
+    -   **Transform username**: Set to "`idpuser.email`".
     -   **Authenticate if username matches**: Leave set to the default.
     -   **Account Link Policy**: Leave set to "Automatic" for now.
     -   **Auto-Link Restrictions**: Leave set to the default.
@@ -93,52 +95,31 @@ Advantages of using Okta Social Authentication include:
       1. In the **Create a New Application Integration** page of the wizard, select **OpenID Connect** in the **Sign on method** section.
       2. In the **General Settings** tab, check the **Implicit** checkbox for allowed grant types.
     
-7.  Create a Social Auth Login URL.
-    1.  Append the `client_id` you copied above into the Social Auth
-        "Login URL" as the value of a GET parameter name `client_id`.
+7.  Create a Social Auth login (Authorize) URL by replacing the value of the following parameters in the Social Auth "Authorize URL."
+         
+     * `client_id`: use the `client_id` value you copied in step 6.
+     * `scope`: Determines the claims that are returned in the ID token.
+     * `response_type`: Determines which flow is used.
+     * `response_mode`: Determines how the authorization response should be returned.
+     * `state`: Protects against cross-site request forgery (CSRF).
+     * `nonce`: A string included in the returned ID Token. Use it to associate a client session with an ID Token, and to mitigate replay attacks.
+     * `redirect_url`: The location where Okta returns a user after the user has finished authenticating against their Social Authentication provider.
+       This URL **must** start with "https" and **must** match one of the URLs in the `redirect_uris` array that you configured previously.
         
-        For example, your Social Auth "Login URL" should now look something like this:
-        `https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&client_id=AbcDE0fGHI1jk2LM34no`
-    2.  Add the `scope` and `response_type` GET parameters to the Social Auth Login URL in the step above.
-        
-        To do this, simply append this string to the end of your
-        Social Auth "Login URL": `&scope=openid%20email%20profile&response_type=id_token`
-        
-        After adding the `scope` and `response_type` parameters to
-        your URL, it should look something like this:
-        `https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&client_id=AbcDE0fGHI1jk2LM34no&scope=openid%20email%20profile&response_type=id_token`
-    3.  Add the `state` and `nonce` GET parameters to the Social Auth Login URL.
-
-        The `state` parameter is a string that will be returned in the response which should be used to protect against cross-site request forgery (CSRF).
-        The `nonce` parameter is a string that will be included in the returned ID Token and should be used to associate a client session with an ID Token, and to mitigate replay attacks.
-
-        After adding the `scope` and `nonce` parameters to your URL it should look something like this:
-        `https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&client_id=AbcDE0fGHI1jk2LM34no&scope=openid%20email%20profile&response_type=id_token&state=someState&nonce=someNonce`
-
-        To learn more about Okta's requirements for these parameters see the [Authorize Endpoint Parameter Details](/docs/api/resources/oauth2.html#parameter-details).
-
-    4.  Add a `redirect_url` GET parameter to the Social Auth "Login URL".
-        
-        The last required GET parameter you need to add to your URL is
-        the `redirect_url` parameter. The value of this GET parameter is
-        where Okta will return a user to after the user
-        has finished authenticating against their Social
-        Authentication provider. Note that this URL **must** start with "https" and **must** match one of the URLs in the `redirect_uris` array that you configured previously. 
-        
-        After adding the `redirect_url` GET parameter to 
-        your URL, it should look something like this:
-        `https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&client_id=AbcDE0fGHI1jk2LM34no&scope=openid%20email%20profile&response_type=id_token&state=someState&nonce=someNonce&redirect_uri=https://app.example.com/social_auth`
-        or, if you are logging your user into Okta, might look
-        something like this:
-        `https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&client_id=AbcDE0fGHI1jk2LM34no&scope=openid%20email%20profile&response_type=id_token&state=someState&nonce=someNonce&redirect_uri=https://example.okta.com`
+     When complete, your Authorize URL looks something like this:
+        `https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&client_id=AbcDE0fGHI1jk2LM34no&scope=openid%20email%20profile&response_type=id_token&response_mode=fragment&state=someState&nonce=someNonce&redirect_uri=https://app.example.com/social_auth`
+                
+     If you log users into Okta, the Authorize URL looks something like this:
+        `https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&client_id=AbcDE0fGHI1jk2LM34no&scope=openid%20email%20profile&response_type=id_token&response_mode=fragment&state=someState&nonce=someNonce&redirect_uri=https://example.okta.com`
+             
+     For learn more about Okta's requirements for these parameters, see [Authorize Endpoint Parameter Details](http://developer.okta.com/docs/api/resources/oauth2.html#parameter-details).
+     
+8.  Add the Social Auth Authorize URL to the page where you want to
+    enable Social Auth. Using the example URL from step 7, your HTML looks similar to the following:
     
-8.  Add the Social Auth Login URL to the page where you want to
-    enable Social Auth.
-    Using the example URL from above, here is what that might look
-    like:
-    
-        <a href="https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&client_id=AbcDE0fGHI1jk2LM34no&scope=openid%20email%20profile&response_type=id_token&redirect_uri=https://app.example.com/social_auth">Log in</a>
+     <a href="https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&client_id=AbcDE0fGHI1jk2LM34no&scope=openid%20email%20profile&response_type=id_token&response_mode=fragment&state=someState&nonce=someNonce&redirect_uri=https://app.example.com/social_auth">Log in</a>
 
+        
 # Error Codes
 
 See the [OpenID Connect and Okta Social Authentication](/docs/api/getting_started/error_codes.html#openid-connect-and-okta-social-authentication) section of the [Error Codes](/docs/api/getting_started/error_codes.html) API documentation.
