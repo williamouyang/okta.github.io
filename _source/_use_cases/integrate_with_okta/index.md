@@ -61,7 +61,7 @@ While many ISVs use proprietary APIs, Okta recommends that you implement your AP
 is designed to help you build your SCIM server and integrate provisioning into the Okta Application Network. 
 Get started by reviewing the program process, SCIM docs, and applying to the program.
 
-##Okta Application Network FAQs
+## Okta Application Network FAQs
 
 **Q: Do I need to contact Okta first to start integrating my application?**
 
