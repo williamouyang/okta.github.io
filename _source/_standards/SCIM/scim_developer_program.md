@@ -42,9 +42,9 @@ The first step on is to build a “compliant” SCIM server. We developed [Okta�
 to assist you in this effort. Even if you already support SCIM, it’s important that you still review Okta’s SCIM docs 
 (especially the sections below) to understand the specifics of Okta’s support for the SCIM standard:
 
-* [Understanding User Provisioning in Okta](http://developer.okta.com/docs/guides/scim_guidance.html#understanding-of-user-provisioning-in-okta)
-* [Required SCIM Capabilities](http://developer.okta.com/docs/guides/scim_guidance.html#required-scim-capabilities)
-* [SCIM Features Not Implemented by Okta](http://developer.okta.com/docs/guides/scim_guidance.html#scim-features-not-implemented-by-okta)
+* [Understanding User Provisioning in Okta](index.html#understanding-of-user-provisioning-in-okta)
+* [Required SCIM Capabilities](index.html#required-scim-capabilities)
+* [SCIM Features Not Implemented by Okta](index.html#scim-features-not-implemented-by-okta)
 
 > Okta hosts a monthly hands-on SCIM developer workshop to help ISV partners accelerate their implementation of SCIM and integration with Okta. 
 [See the workshop agenda and sign-up](http://okta.litmos.com/self-signup/register/328927?type=1).
