@@ -28,7 +28,7 @@ If you haven't heard of SCIM before, here is a good summary from the
 
 Before building your SCIM Server, please make sure to [apply for admission](http://pages.okta.com/DeveloperSCIM.html) 
 to the SCIM Provisioning Developer Program and familiarize yourself with 
-the [program process and resources](http://developer.okta.com/docs/guides/scim_developer_program.html).
+the [program process and resources](scim_developer_program.html).
 
 # Understanding User Provisioning in Okta
 
@@ -862,13 +862,7 @@ following:
 
 ## Contact Okta
 
-After you've finished verifying that your SCIM API works with Okta,
-it is time to submit your application to Okta.
-
-Work with your contact at Okta to start your submission.
-
-If you have any questions about this document, or how to work with
-SCIM, send an email to [developers@okta.com](developers@okta.com).
+To submit your application, follow the instructions in the SCIM Developer Program section ["Submit for Okta Review."](scim_developer_program.html#submit-for-okta-review)
 
 # Appendix: Details on the example SCIM server
 
