@@ -117,7 +117,7 @@ An Access Token is a [JSON web token (JWT)](https://tools.ietf.org/html/rfc7519)
 ~~~
 
 
-### JwT Signature
+### JWT Signature
 
 This is a digital signature Okta generates using the public key identified by the `kid` property in the header section.
 
