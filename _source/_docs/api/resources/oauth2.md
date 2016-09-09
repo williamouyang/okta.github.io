@@ -44,7 +44,7 @@ At the very basic level, the main API endpoints are:
 
     > Note: For native applications, the client_id and client_secret are embedded in the source code of the application; in this context, the client secret isn't treated as a secret. 
         Therefore native apps should make use of Proof Key for Code Exchange (PKCE) to mitigate authorization code interception.
-        For more information, see the PKCE note in [Parameter Details[(#parameter-details).
+        For more information, see the PKCE note in [Parameter Details](#parameter-details).
 
 3. Web Application
 
