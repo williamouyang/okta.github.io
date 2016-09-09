@@ -791,42 +791,116 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <!-- END Fixed sidebar -->
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
-	<h1 id="overview">Overview</h1>
+	<h2 id="overview">Overview</h2>
 
-<p>The OAuth 2.0 API endpoints enable clients to use <a href="https://tools.ietf.org/html/rfc6749">OAuth 2.0 workflows</a> with Okta.
-This authorization layer separates the role of client from that of resource owner by providing the client with an access token
-that can define scope, lifetime, and other attributes.</p>
+<p>Okta is a fully standards-compliant <a href="http://oauth.net/documentation">OAuth 2.0</a> authorization server and a certified <a href="http://openid.net/certification">OpenID Provider</a>. 
+The OAuth 2.0 APIs provide API security via scoped access tokens, and OpenID Connect provides user authentication and an SSO layer which is lighter and easier to use than SAML.</p>
 
-<p>Additionally, these endpoints support the use of <a href="/docs/api/resources/oidc.html">OpenID Connect</a> for OpenID Connect workflows such as social authentication.</p>
+<p>There are several use cases and Okta product features built on top of the OAuth 2.0 APIs:</p>
 
-<blockquote>
-  <p>This API is currently in <strong>Early Access</strong> status.  It has been tested as thoroughly as a Generally Available feature. Contact Support to enable this feature.</p>
-</blockquote>
+<ul>
+  <li>Social Authentication – <span class="api-label api-label-ea "><i class="fa fa-flag"></i> Early Access</span></li>
+  <li>OpenID Connect – <span class="api-label api-label-ea "><i class="fa fa-flag"></i> Early Access</span></li>
+  <li>API Access Management – <span class="api-label api-label-beta "><i class="fa fa-warning"></i> Beta</span></li>
+</ul>
 
-<h2 class="beta" id="tokens">Tokens</h2>
-<blockquote class="beta">
-  <p>Access Tokens and Refresh Tokens for Okta resource server are not covered in this section. The format and validation method of these tokens are subject to change without prior notice.</p>
-</blockquote>
+<p>It’s important to understand which use case you are targeting and build your application according to the correct patterns for that use case. 
+The OAuth 2.0 APIs each have several different <a href="#authentication-request">query params</a> which dictate which type of flow you are using and the mechanics of that flow.</p>
 
-<blockquote class="beta">
-  <p>Access Tokens and Refresh Tokens for non-Okta resource server are currently in <strong>Beta</strong> status.</p>
-</blockquote>
+<p>At the very basic level, the main API endpoints are:</p>
 
-<h3 class="beta" id="access-token">Access Token</h3>
-<p class="beta">An Access Token is a <a href="https://tools.ietf.org/html/rfc7519">JSON web token (JWT)</a> encoded in base64URL format that contains <a href="#header">a header</a>, <a href="#payload">payload</a>, and <a href="#signature">signature</a>. A resource server can authorize the client to access particular resources based on the <a href="#scopes-and-claims">scopes and claims</a> in the Access Token.</p>
+<ul>
+  <li><a href="#authentication-request">/oauth2/v1/authorize</a> initiates an OAuth or OpenID Connect request.</li>
+  <li><a href="#token-request">/oauth2/v1/token</a> redeems an authorization grant (returned by the <code class="highlighter-rouge">/oauth2/v1/authorize</code> endpoint) for an access token.</li>
+</ul>
 
-<h3 class="beta" id="header--tokens-header-">Header {: #tokens-header }</h3>
+<h3 id="basic-flows">Basic Flows</h3>
 
-<div class="language-json beta highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<ol>
+  <li>
+    <p>Browser/Single-Page Application</p>
+
+    <ul>
+      <li>Optimized for browser-only <a href="https://tools.ietf.org/html/rfc6749#section-2.1">Public Clients</a></li>
+      <li>Uses <a href="https://tools.ietf.org/html/rfc6749#section-4.2">Implicit Flow</a></li>
+      <li>Access token returned directly from authorization request (Front-channel only)</li>
+      <li>Does not support refresh tokens</li>
+      <li>Assumes Resource Owner and Public Client are on the same device</li>
+    </ul>
+
+    <p><img src="/assets/img/browser_spa_implicit_flow.png" alt="Broswer/Single-Page Application" /></p>
+  </li>
+  <li>
+    <p>Native Application</p>
+
+    <ul>
+      <li>Installed on a device or computer, such as mobile applications or installed desktop applications</li>
+      <li>Uses <a href="https://tools.ietf.org/html/rfc6749#section-4.1">Authorization Code Grant Flow</a></li>
+      <li>Can use custom redirect URIs like <code class="highlighter-rouge">myApp://oauth:2.0:native</code></li>
+    </ul>
+
+    <p><img src="/assets/img/native_auth_flow.png" alt="Native Application Flow" /></p>
+
+    <blockquote>
+      <p>Note: For native applications, the client_id and client_secret are embedded in the source code of the application; in this context, the client secret isn’t treated as a secret. 
+     Therefore native apps should make use of Proof Key for Code Exchange (PKCE) to mitigate authorization code interception.
+     For more information, see the PKCE note in <a href="#parameter-details">Parameter Details</a>.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Web Application</p>
+
+    <ul>
+      <li>Server-side app with an end-user</li>
+      <li>Uses <a href="https://tools.ietf.org/html/rfc6749#section-4.1">Authorization Code Grant Flow</a></li>
+      <li>Assumes Resource Owner and Client are on separate devices</li>
+      <li>Most secure flow as tokens never pass through user-agent</li>
+    </ul>
+
+    <p><img src="/assets/img/web_app_flow.png" alt="Web Application Flow" /></p>
+  </li>
+  <li>
+    <p>Service Application</p>
+
+    <ul>
+      <li>Server-side app with no end-user, such as an on-prem agent</li>
+      <li>Uses <a href="https://tools.ietf.org/html/rfc6749#section-4.4">Client Credentials Flow</a></li>
+      <li>Optimized for <a href="https://tools.ietf.org/html/rfc6749#section-2.1">Confidential Clients</a> acting on behalf of itself or a user</li>
+      <li>Back-channel only flow to obtain an access token using the Client’s credentials</li>
+    </ul>
+
+    <p><img src="/assets/img/service_app_flow.png" alt="Service Application Flow" />.</p>
+
+    <blockquote>
+      <p>Note: The OAuth 2.0 specification mandates that clients implement CSRF protection for their redirection URI endpoints. 
+ This is what the <code class="highlighter-rouge">state</code> parameter is used for in the flows described above; the client should send a state value in on the authorization request, 
+ and it must validate that returned “state” parameter from the authorization server matches the original value.</p>
+    </blockquote>
+  </li>
+</ol>
+
+<h3 id="custom-user-experience">Custom User Experience</h3>
+
+<p>By default, the Authorization Endpoint displays the Okta login page and authenticates users if they don’t have an existing session. 
+If you prefer to use a fully customized user experience, you can instead authenticate the user via the <a href="http://developer.okta.com/docs/api/resources/authn.html">Authentication API</a>. 
+This authentication method produces a <code class="highlighter-rouge">sessionToken</code> which can be passed into the Authorize Endpoint, and the user won’t see an Okta login page.</p>
+
+<h3 id="access-token">Access Token</h3>
+
+<p>An Access Token is a <a href="https://tools.ietf.org/html/rfc7519">JSON web token (JWT)</a> encoded in base64URL format that contains <a href="#header">a header</a>, <a href="#payload">payload</a>, and <a href="#signature">signature</a>. A resource server can authorize the client to access particular resources based on the <a href="#scopes-and-claims">scopes and claims</a> in the Access Token.</p>
+
+<h3 id="header">Header</h3>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"alg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RS256"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"kid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45js03w0djwedsw"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
 
-<h3 class="beta" id="payload--tokens-payload-">Payload {: #tokens-payload }</h3>
+<h3 id="payload">Payload</h3>
 
-<div class="language-json beta highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"ver"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nt">"jti"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AT.0mP4JKAZX1iACIT4vbEDF7LpvDVjxypPMf0D7uX39RE"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"iss"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-org.okta.com/oauth2/0oacqf8qaJw56czJi0g4"</span><span class="p">,</span><span class="w">
@@ -848,25 +922,39 @@ that can define scope, lifetime, and other attributes.</p>
 </span></code></pre>
 </div>
 
-<h3 class="beta" id="signature">Signature</h3>
+<h3 id="signature">Signature</h3>
 
-<p class="beta">This is a digital signature Okta generates using the public key identified by the <code class="highlighter-rouge">kid</code> property in the header section.</p>
+<p>This is a digital signature Okta generates using the public key identified by the <code class="highlighter-rouge">kid</code> property in the header section.</p>
 
-<h3 class="beta" id="scopes-and-claims">Scopes and claims</h3>
+<h3 id="scopes-and-claims">Scopes and claims</h3>
 
-<p class="beta">Access Tokens include pre-defined scopes and claims and can optionally contain custom scopes and claims.</p>
+<p>Access Tokens include reserved scopes and claims.</p>
 
-<h4 class="beta" id="pre-defined-scopes-and-claims">Pre-defined scopes and claims</h4>
+<div class="beta">
+<p>Access Tokens can optionally include custom scopes and claims.</p>
 
-<h5 class="beta" id="pre-defined-scopes">Pre-defined scopes</h5>
+</div>
 
-<p class="beta">Pre-defined scopes include <a href="oidc.html#scope-dependent-claims-not-always-returned">OIDC scopes</a>.</p>
+<h4 id="reserved-scopes-and-claims">Reserved scopes and claims</h4>
 
-<h5 class="beta" id="pre-defined-claims-in-the-header-section">Pre-defined claims in the header section</h5>
+<p>The Okta Authorization Server defines a number of reserved scopes which can’t be overridden.
+Scopes are defined in the request parameter, and claims are in the Access Token returned from the request.</p>
 
-<p class="beta">The header only includes the following pre-defined claims:</p>
+<ul>
+  <li><a href="#reserved-scopes">Reserved scopes</a></li>
+  <li><a href="#reserved-claims-in-the-header-section">Reserved claims in the header section</a></li>
+  <li><a href="#reserved-claims-in-the-payload-section">Reserved claims in the payload section</a></li>
+</ul>
 
-<table class="beta">
+<h5 id="reserved-scopes">Reserved scopes</h5>
+
+<p>Reserved scopes include <a href="oidc.html#scope-dependent-claims-not-always-returned">OIDC scopes</a>.</p>
+
+<h5 id="reserved-claims-in-the-header-section">Reserved claims in the header section</h5>
+
+<p>The header only includes the following reserved claims:</p>
+
+<table>
   <thead>
     <tr>
       <th>Property</th>
@@ -891,9 +979,9 @@ that can define scope, lifetime, and other attributes.</p>
   </tbody>
 </table>
 
-<h5 class="beta" id="pre-defined-claims-in-the-payload-section">Pre-defined claims in the payload section</h5>
+<h5 id="reserved-claims-in-the-payload-section">Reserved claims in the payload section</h5>
 
-<p class="beta">The payload includes the following pre-defined claims:</p>
+<p>The payload includes the following reserved claims:</p>
 
 <table>
   <thead>
@@ -974,50 +1062,57 @@ that can define scope, lifetime, and other attributes.</p>
   </tbody>
 </table>
 
-<blockquote class="beta">
+<blockquote>
   <p><em>Note:</em> The groups claim will only be returned in the Access Token if the <b>groups</b> scope was included in the authorization request. To protect against arbitrarily large numbers of groups matching the group filter, the groups claim has a limit of 100. If more than 100 groups match the filter, then the request fails. Expect that this limit may change in the future.</p>
 </blockquote>
 
-<h4 class="beta beta" id="custom-scopes-and-claims">Custom scopes and claims</h4>
+<div class="beta">
+<h4 id="custom-scopes-and-claims">Custom scopes and claims</h4>
 
-<p class="beta">The admin can configure custom scopes and claims via the Authorization Server tab for the Application. Access Tokens are minted with all the configured custom claims and all the configured custom scopes that are included in the authorization request.</p>
+<p>The admin can configure custom scopes and claims via the Authorization Server tab for the Application. Access Tokens are minted with all the configured custom claims and all the configured custom scopes that are included in the authorization request.</p>
 
-<h5 class="beta" id="custom-scopes">Custom scopes</h5>
-<p>If the request that generates the access token contains any custom scopes, those scopes will be part of the <b>scp</b> claim together with the scopes provided from the <a href="http://openid.net/specs/openid-connect-core-1_0.html">OIDC specification</a>. The form of these custom scopes must conform to the <a href="https://tools.ietf.org/html/rfc6749#section-3.3">OAuth2 specification</a>.</p>
+<h5 id="custom-scopes">Custom scopes</h5>
 
-<blockquote class="beta">
+<p>If the request that generates the access token contains any custom scopes, those scopes will be part of the <em>scp</em> claim together with the scopes provided from the <a href="http://openid.net/specs/openid-connect-core-1_0.html">OIDC specification</a>. The form of these custom scopes must conform to the <a href="https://tools.ietf.org/html/rfc6749#section-3.3">OAuth2 specification</a>.</p>
+
+<blockquote>
   <p><em>Note:</em> Scope names can contain the characters &lt; (less than) or &gt; (greater than), but not both characters.</p>
 </blockquote>
 
-<h5 class="beta" id="custom-claims">Custom claims</h5>
-<p class="beta">All configured custom claims will be included in the access token. They will be evaluated for the user if the grant type is not <em>client_credentials</em>.</p>
+<h5 id="custom-claims">Custom claims</h5>
 
-<h3 class="beta" id="validating-access-tokens">Validating Access Tokens</h3>
+<p>All configured custom claims will be included in the access token. They will be evaluated for the user if the grant type is not <em>client_credentials</em>.</p>
 
-<p class="beta">The resource server must validate the Access Token before allowing the client to access protected resources.</p>
+</div>
 
-<p class="beta">Access Tokens are sensitive and can be misused if intercepted. Transmit them only over HTTPS and only via POST data or within request headers. If you store them on your application, you must store them securely.</p>
+<h3 id="validating-access-tokens">Validating Access Tokens</h3>
 
-<p class="beta">Access Token must be validated in the following manner:</p>
+<p>Okta uses public key cryptography to sign tokens and verify that they are valid.</p>
 
-<ol class="beta">
+<p>The resource server must validate the Access Token before allowing the client to access protected resources.</p>
+
+<p>Access Tokens are sensitive and can be misused if intercepted. Transmit them only over HTTPS and only via POST data or within request headers. If you store them on your application, you must store them securely.</p>
+
+<p>Access Token must be validated in the following manner:</p>
+
+<ol>
   <li>Verify that the <code class="highlighter-rouge">iss</code> (issuer) claim matches the identifier of your authorization server.</li>
   <li>Verify that the <code class="highlighter-rouge">aud</code> (audience) and <code class="highlighter-rouge">cid</code> (client id) claim are your client id.</li>
   <li>Verify the signature according to <a href="https://tools.ietf.org/html/rfc7515">JWS</a> using the algorithm specified in the JWT <code class="highlighter-rouge">alg</code> header parameter. Use the public keys provided by Okta via the <a href="oidc.html#openid-connect-discovery-document">Discovery Document</a>.</li>
   <li>Verify that the expiry time (from the <code class="highlighter-rouge">exp</code> claim) has not already passed.</li>
 </ol>
 
-<p class="beta">Step 3 uses the same signature verification method as the <a href="oidc.html#validating-id-tokens">ID token</a>.</p>
+<p>Step 3 uses the same signature verification method as the <a href="oidc.html#validating-id-tokens">ID token</a>.</p>
 
-<p class="beta">The signing keys for the Access Token are rotated in the same was as the <a href="oidc.html#validating-id-tokens">ID token</a>.</p>
+<p>The signing keys for the Access Token are rotated in the same was as the <a href="oidc.html#validating-id-tokens">ID token</a>.</p>
 
-<h4 class="beta" id="alternative-validation">Alternative Validation</h4>
+<h4 id="alternative-validation">Alternative Validation</h4>
 
-<p class="beta">You can use an <a href="#introspection-request">introspection endpoint</a> for validation.</p>
+<p>You can use an <a href="#introspection-request">introspection endpoint</a> for validation.</p>
 
-<h3 class="beta" id="refresh-token">Refresh Token</h3>
+<h3 id="refresh-token">Refresh Token</h3>
 
-<p class="beta">A Refresh Token is an opaque string. It is a long-lived token that the client can use to obtain a new Access Token without re-obtaining authorization from the resource owner. The new Access Token must have the same or subset of the scopes associated with the Refresh Token.
+<p>A Refresh Token is an opaque string. It is a long-lived token that the client can use to obtain a new Access Token without re-obtaining authorization from the resource owner. The new Access Token must have the same or subset of the scopes associated with the Refresh Token.
 To get a Refresh Token, the Authentication or Token requests must contain the <code class="highlighter-rouge">offline_access</code> scope.</p>
 
 <h2 id="endpoints">Endpoints</h2>
@@ -1100,7 +1195,7 @@ To get a Refresh Token, the Authentication or Token requests must contain the <c
     </tr>
     <tr>
       <td>response_mode</td>
-      <td>Specifies how the authorization response should be returned. <a href="#parameter-details">Valid values: <em>fragment</em>, <em>form_post</em>, <em>query</em> or <em>okta_post_message</em></a>. If <em>id_token</em> or <em>token</em> is specified as the response type, then <em>query</em> can’t be used as the response mode. Default: Defaults to <em>fragment</em> in implicit and hybrid flow. Defaults to <em>query</em> in authorization code flow and cannot be set as <em>okta_post_message</em>.</td>
+      <td>Specifies how the authorization response should be returned. <a href="#parameter-details">Valid values: <em>fragment</em>, <em>form_post</em>, <em>query</em> or <em>okta_post_message</em></a>. If <em>id_token</em> or <em>token</em> is specified as the response type, then <em>query</em> isn’t allowed as a response mode. Defaults to <em>fragment</em> in implicit and hybrid flow. Defaults to <em>query</em> in authorization code flow and cannot be set as <em>okta_post_message</em>.</td>
       <td>Query</td>
       <td>String</td>
       <td>FALSE</td>
@@ -1248,12 +1343,12 @@ Irrespective of the response type, the contents of the response is always one of
   <tbody>
     <tr>
       <td>id_token</td>
-      <td>The ID Token JWT contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the <em>response_type</em> includes <em>id_token</em> .</td>
+      <td>The ID Token JWT contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the <em>response_type</em> includes <em>id_token</em>.</td>
       <td>String</td>
     </tr>
     <tr>
       <td>access_token</td>
-      <td>The <em>access_token</em> that is used to access the <a href="/docs/api/resources/oidc.html#get-user-information"><code class="highlighter-rouge">/oauth2/v1/userinfo</code></a> endpoint. This is returned if the <em>response_type</em>  included a token. Unlike the ID Token JWT, the <em>access_token</em> structure is specific to Okta, and is subject to change.</td>
+      <td>The <em>access_token</em> that is used to access the <a href="/docs/api/resources/oidc.html#get-user-information"><code class="highlighter-rouge">/oauth2/v1/userinfo</code></a> endpoint. This is returned if the <em>response_type</em> included a token. Unlike the ID Token JWT, the <em>access_token</em> structure is specific to Okta, and is subject to change.</td>
       <td>String</td>
     </tr>
     <tr>
@@ -1291,9 +1386,9 @@ Irrespective of the response type, the contents of the response is always one of
 
 <h5 id="possible-errors">Possible Errors</h5>
 
-<p>These APIs are compliant with the OpenID Connect and OAuth2 spec with some Okta specific extensions.</p>
+<p>These APIs are compliant with the OpenID Connect and OAuth 2.0 spec with some Okta specific extensions.</p>
 
-<p><a href="https://tools.ietf.org/html/rfc6749#section-4.1.2.1">OAuth 2 Spec error codes</a></p>
+<p><a href="https://tools.ietf.org/html/rfc6749#section-4.1.2.1">OAuth 2.0 Spec error codes</a></p>
 
 <table>
   <thead>
@@ -1423,7 +1518,7 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
   <tbody>
     <tr>
       <td>grant_type</td>
-      <td>Can be one of the following: <em>authorization_code</em>, <em>password</em>, or <em>refresh_token</em><span class="beta" style="display: inline">,  or <em>client_credentials</em></span>. Determines the mechanism Okta will use to authorize the creation of the tokens.</td>
+      <td>Can be one of the following: <em>authorization_code</em>, <em>password</em>, <em>refresh_token</em>, or <em>client_credentials</em> <span class="api-label api-label-beta "><i class="fa fa-warning"></i> Beta</span>. Determines the mechanism Okta will use to authorize the creation of the tokens.</td>
       <td>String</td>
     </tr>
     <tr>
@@ -1448,7 +1543,7 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
     </tr>
     <tr>
       <td>scope</td>
-      <td>Optional if either <em>refresh_token</em><span class="hide-beta" style="display: inline"> or <em>password</em></span><span class="beta" style="display: inline">, <em>password</em>,  or <em>client_credentials</em></span> is specified as the grant type. This is a list of scopes that the client wants to be included in the Access Token. For the <em>refresh_token</em> grant type, these scopes have to be subset of the scopes used to generate the Refresh Token in the first place.</td>
+      <td>Optional if <em>refresh_token</em>, or <em>password</em> is specified as the grant type. This is a list of scopes that the client wants to be included in the Access Token. For the <em>refresh_token</em> grant type, these scopes have to be subset of the scopes used to generate the Refresh Token in the first place.</td>
       <td>String</td>
     </tr>
     <tr>
@@ -1464,8 +1559,8 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
   </tbody>
 </table>
 
-<blockquote class="beta">
-  <p>The <a href="https://tools.ietf.org/html/rfc6749#section-4.4">Client Credentials</a> flow (if <code class="highlighter-rouge">grant_types</code> is <code class="highlighter-rouge">client_credentials</code>) is currently in <strong>Beta</strong> status.</p>
+<blockquote>
+  <p>The <a href="https://tools.ietf.org/html/rfc6749#section-4.4">Client Credentials</a> flow (if <code class="highlighter-rouge">grant_types</code> is <code class="highlighter-rouge">client_credentials</code>) is currently <strong>Beta</strong>.</p>
 </blockquote>
 
 <h5 id="token-authentication-method">Token Authentication Method</h5>
@@ -1483,30 +1578,7 @@ and <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-Open
 
 <p>Based on the grant type, the returned JSON can contain a different set of tokens.</p>
 
-<table class="hide-beta">
-  <thead>
-    <tr>
-      <th>Input grant type</th>
-      <th>Output token types</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>authorization_code</td>
-      <td>Access Token, Refresh Token, ID Token</td>
-    </tr>
-    <tr>
-      <td>refresh_token</td>
-      <td>Access Token, Refresh Token</td>
-    </tr>
-    <tr>
-      <td>password</td>
-      <td>Access Token, Refresh Token</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="beta">
+<table>
   <thead>
     <tr>
       <th>Input grant type</th>
@@ -1749,6 +1821,11 @@ Use one authentication mechanism with a given request. Using both returns an err
     <tr>
       <td>device_id</td>
       <td>The ID of the device associated with the token</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>uid</td>
+      <td>The user ID. This parameter is returned only if the token is an access token and the subject is an end user.</td>
       <td>String</td>
     </tr>
   </tbody>

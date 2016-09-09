@@ -858,11 +858,13 @@ Identity Provider that you want to configure.</p>
 -   <a href="http://saml-doc.okta.com/IdentityProvider_Docs/LinkedIn_Identity_Provider_Setup.html">LinkedIn</a>
 -   <a href="http://saml-doc.okta.com/IdentityProvider_Docs/Microsoft_Identity_Provider_Setup.html">Microsoft</a></p>
   </li>
-  <li>Configure your Social Authentication provider:
+  <li>
+    <p>Configure your Social Authentication provider:</p>
+
     <ul>
       <li><strong>Name</strong>: We suggest using the name you would
 expect to see on a button, something like “Log in to Facebook”.</li>
-      <li><strong>Transform username</strong>: Set to to “<code class="highlighter-rouge">email</code>”.</li>
+      <li><strong>Transform username</strong>: Set to “<code class="highlighter-rouge">idpuser.email</code>”.</li>
       <li><strong>Authenticate if username matches</strong>: Leave set to the default.</li>
       <li><strong>Account Link Policy</strong>: Leave set to “Automatic” for now.</li>
       <li><strong>Auto-Link Restrictions</strong>: Leave set to the default.</li>
@@ -907,63 +909,33 @@ steps and give you back a <code class="highlighter-rouge">client_id</code> which
       <li>In the <strong>General Settings</strong> tab, check the <strong>Implicit</strong> checkbox for allowed grant types.</li>
     </ol>
   </li>
-  <li>Create a Social Auth Login URL.
-    <ol>
-      <li>
-        <p>Append the <code class="highlighter-rouge">client_id</code> you copied above into the Social Auth
-“Login URL” as the value of a GET parameter name <code class="highlighter-rouge">client_id</code>.</p>
+  <li>
+    <p>Create a Social Auth login (Authorize) URL by replacing the value of the following parameters in the Social Auth “Authorize URL.”</p>
 
-        <p>For example, your Social Auth “Login URL” should now look something like this:
-<code class="highlighter-rouge">https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&amp;client_id=AbcDE0fGHI1jk2LM34no</code></p>
-      </li>
-      <li>
-        <p>Add the <code class="highlighter-rouge">scope</code> and <code class="highlighter-rouge">response_type</code> GET parameters to the Social Auth Login URL in the step above.</p>
+    <ul>
+      <li><code class="highlighter-rouge">client_id</code>: use the <code class="highlighter-rouge">client_id</code> value you copied in step 6.</li>
+      <li><code class="highlighter-rouge">scope</code>: Determines the claims that are returned in the ID token.</li>
+      <li><code class="highlighter-rouge">response_type</code>: Determines which flow is used.</li>
+      <li><code class="highlighter-rouge">response_mode</code>: Determines how the authorization response should be returned.</li>
+      <li><code class="highlighter-rouge">state</code>: Protects against cross-site request forgery (CSRF).</li>
+      <li><code class="highlighter-rouge">nonce</code>: A string included in the returned ID Token. Use it to associate a client session with an ID Token, and to mitigate replay attacks.</li>
+      <li><code class="highlighter-rouge">redirect_url</code>: The location where Okta returns a user after the user has finished authenticating against their Social Authentication provider.
+This URL <strong>must</strong> start with “https” and <strong>must</strong> match one of the URLs in the <code class="highlighter-rouge">redirect_uris</code> array that you configured previously.</li>
+    </ul>
 
-        <p>To do this, simply append this string to the end of your
-Social Auth “Login URL”: <code class="highlighter-rouge">&amp;scope=openid%20email%20profile&amp;response_type=id_token</code></p>
+    <p>When complete, your Authorize URL looks something like this:
+    <code class="highlighter-rouge">https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&amp;client_id=AbcDE0fGHI1jk2LM34no&amp;scope=openid%20email%20profile&amp;response_type=id_token&amp;response_mode=fragment&amp;state=someState&amp;nonce=someNonce&amp;redirect_uri=https://app.example.com/social_auth</code></p>
 
-        <p>After adding the <code class="highlighter-rouge">scope</code> and <code class="highlighter-rouge">response_type</code> parameters to
-your URL, it should look something like this:
-<code class="highlighter-rouge">https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&amp;client_id=AbcDE0fGHI1jk2LM34no&amp;scope=openid%20email%20profile&amp;response_type=id_token</code></p>
-      </li>
-      <li>
-        <p>Add the <code class="highlighter-rouge">state</code> and <code class="highlighter-rouge">nonce</code> GET parameters to the Social Auth Login URL.</p>
+    <p>If you log users into Okta, the Authorize URL looks something like this:
+    <code class="highlighter-rouge">https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&amp;client_id=AbcDE0fGHI1jk2LM34no&amp;scope=openid%20email%20profile&amp;response_type=id_token&amp;response_mode=fragment&amp;state=someState&amp;nonce=someNonce&amp;redirect_uri=https://example.okta.com</code></p>
 
-        <p>The <code class="highlighter-rouge">state</code> parameter is a string that will be returned in the response which should be used to protect against cross-site request forgery (CSRF).
-The <code class="highlighter-rouge">nonce</code> parameter is a string that will be included in the returned ID Token and should be used to associate a client session with an ID Token, and to mitigate replay attacks.</p>
-
-        <p>After adding the <code class="highlighter-rouge">scope</code> and <code class="highlighter-rouge">nonce</code> parameters to your URL it should look something like this:
-<code class="highlighter-rouge">https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&amp;client_id=AbcDE0fGHI1jk2LM34no&amp;scope=openid%20email%20profile&amp;response_type=id_token&amp;state=someState&amp;nonce=someNonce</code></p>
-
-        <p>To learn more about Okta’s requirements for these parameters see the <a href="/docs/api/resources/oauth2.html#parameter-details">Authorize Endpoint Parameter Details</a>.</p>
-      </li>
-      <li>
-        <p>Add a <code class="highlighter-rouge">redirect_url</code> GET parameter to the Social Auth “Login URL”.</p>
-
-        <p>The last required GET parameter you need to add to your URL is
-the <code class="highlighter-rouge">redirect_url</code> parameter. The value of this GET parameter is
-where Okta will return a user to after the user
-has finished authenticating against their Social
-Authentication provider. Note that this URL <strong>must</strong> start with “https” and <strong>must</strong> match one of the URLs in the <code class="highlighter-rouge">redirect_uris</code> array that you configured previously.</p>
-
-        <p>After adding the <code class="highlighter-rouge">redirect_url</code> GET parameter to 
-your URL, it should look something like this:
-<code class="highlighter-rouge">https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&amp;client_id=AbcDE0fGHI1jk2LM34no&amp;scope=openid%20email%20profile&amp;response_type=id_token&amp;state=someState&amp;nonce=someNonce&amp;redirect_uri=https://app.example.com/social_auth</code>
-or, if you are logging your user into Okta, might look
-something like this:
-<code class="highlighter-rouge">https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&amp;client_id=AbcDE0fGHI1jk2LM34no&amp;scope=openid%20email%20profile&amp;response_type=id_token&amp;state=someState&amp;nonce=someNonce&amp;redirect_uri=https://example.okta.com</code></p>
-      </li>
-    </ol>
+    <p>For learn more about Okta’s requirements for these parameters, see <a href="http://developer.okta.com/docs/api/resources/oauth2.html#parameter-details">Authorize Endpoint Parameter Details</a>.</p>
   </li>
   <li>
-    <p>Add the Social Auth Login URL to the page where you want to
-enable Social Auth.
-Using the example URL from above, here is what that might look
-like:</p>
+    <p>Add the Social Auth Authorize URL to the page where you want to
+enable Social Auth. Using the example URL from step 7, your HTML looks similar to the following:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>&lt;a href="https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&amp;client_id=AbcDE0fGHI1jk2LM34no&amp;scope=openid%20email%20profile&amp;response_type=id_token&amp;redirect_uri=https://app.example.com/social_auth"&gt;Log in&lt;/a&gt;
-</code></pre>
-    </div>
+    <p><a href="https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&amp;client_id=AbcDE0fGHI1jk2LM34no&amp;scope=openid%20email%20profile&amp;response_type=id_token&amp;response_mode=fragment&amp;state=someState&amp;nonce=someNonce&amp;redirect_uri=https://app.example.com/social_auth">Log in</a></p>
   </li>
 </ol>
 
