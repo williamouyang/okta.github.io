@@ -80,7 +80,7 @@ This authentication method produces a `sessionToken` which can be passed into th
 An Access Token is a [JSON web token (JWT)](https://tools.ietf.org/html/rfc7519) encoded in base64URL format that contains [a header](#header), [payload](#payload), and [signature](#signature). A resource server can authorize the client to access particular resources based on the [scopes and claims](#scopes-and-claims) in the Access Token.
 
 
-### Header
+### JWT Header
 
 
 ~~~json
@@ -91,7 +91,7 @@ An Access Token is a [JSON web token (JWT)](https://tools.ietf.org/html/rfc7519)
 ~~~
 
 
-### Payload
+### JWT Payload
 
 
 ~~~json
@@ -117,7 +117,7 @@ An Access Token is a [JSON web token (JWT)](https://tools.ietf.org/html/rfc7519)
 ~~~
 
 
-### Signature
+### JwT Signature
 
 This is a digital signature Okta generates using the public key identified by the `kid` property in the header section.
 
