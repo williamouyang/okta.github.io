@@ -1,15 +1,16 @@
 ---
 layout: docs_page
 title: Platform Release Notes
-excerpt: Summary of changes to the Okta Platform since Release 2016.35
+excerpt: Summary of changes to the Okta Platform since Release 2016.36
 ---
 
-## Release 2016.36
+## Release 2016.37
 
-### System Log Enhancement
+<!-- ### Feature Enhancement -->
 
-The names of [AppUser properties](http://developer.okta.com/docs/api/resources/apps.html#application-user-properties)
-that have changed during an import are included in the system log. <!-- (OKTA-96525) --><!-- ## Bug Fixed -->
+### Bug Fixed
+
+* In some cases, a `GET /api/v1/users` request incorrectly returned a 403 error. <!-- OKTA-75861 -->
 
 ### Does Your Org Have These Changes Yet?
 
@@ -24,6 +25,7 @@ For changes outside the Okta platform, see the [Release Notes Knowledge Hub](htt
 
 ### Earlier Release Notes
 
+* [Platform Release Notes for Release 2016.36](platform-release-notes2016-36.html)
 * [Platform Release Notes for Release 2016.35](platform-release-notes2016-35.html)
 * [Platform Release Notes for Release 2016.34](platform-release-notes2016-34.html)
 * [Platform Release Notes for Release 2016.33](platform-release-notes2016-33.html)
