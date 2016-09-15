@@ -6,7 +6,7 @@ excerpt: Summary of changes to the Okta Platform since Release 2016.36
 
 ## Release 2016.37
 
-<!-- ### System Log Enhancement -->
+<!-- ### Feature Enhancement -->
 
 ### Bug Fixed
 
