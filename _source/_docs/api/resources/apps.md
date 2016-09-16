@@ -290,7 +290,7 @@ Specifies credentials and scheme for the application's `signOnMode`.
       "type": "BUILT_IN"
     },
     "signing": {
-      "kid": "akm5hvbn1vojA9Fsa0h7"
+      "kid": "SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4"
     },
     "userName": "test",
     "password": {}
@@ -343,7 +343,7 @@ Determines the [key](#application-key-credential-model) used for signing asserti
 |------------+---------------------------------------------------------------------------------------------+----------------------------------+----------+-------------------+-----------+-----------+------------|
 | Property   | Description                                                                                 | DataType                         | Nullable | Default           | MinLength | MaxLength | Validation |
 | ---------- | ------------------------------------------------------------------------------------------- | -------------------------------- | -------- | ----------------- | --------- | ----------| ---------- |
-| kid        | Reference for key credential in the [app's key store](#application-key-store-operations)    | String                           | FALSE    |                   |           |           |            |
+| kid        | Reference for [key credential for the app](#application-key-store-operations)    | String                           | FALSE    |                   |           |           |            |
 |------------+---------------------------------------------------------------------------------------------+----------------------------------+----------+-------------------+-----------+-----------+------------|
 
 > You must to enable the key rollover feature to view `kid`. Key rollover is an Early Access feature; contact Customer Support to enable it.
@@ -351,7 +351,7 @@ Determines the [key](#application-key-credential-model) used for signing asserti
 ~~~json
 {
   "signing": {
-    "kid": "akm5hvbn1vojA9Fsa0h7"
+    "kid": "SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4"
   }
 }
 ~~~
@@ -731,7 +731,7 @@ The application key credential model defines a [JSON Web Key](https://tools.ietf
     "MIIDmDCCAoCgAwIBAgIGAVEmuwhKMA0GCSqGSIb3DQEBBQUAMIGMMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxDTALBgNVBAMMBHJhaW4xHDAaBgkqhkiG9w0BCQEWDWluZm9Ab2t0YS5jb20wHhcNMTUxMTIwMjEwODMwWhcNMTcxMTIwMjEwOTI5WjCBjDELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xDTALBgNVBAoMBE9rdGExFDASBgNVBAsMC1NTT1Byb3ZpZGVyMQ0wCwYDVQQDDARyYWluMRwwGgYJKoZIhvcNAQkBFg1pbmZvQG9rdGEuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1ml7//IDMpngTKGJJ5qhodUaOY2Yx7k6mCYyETA8wjVfJjWFYVDwfTJ5kB7zbuPBNVDFuLIxMqGyJk3i2/nSBKe1eAC2lv+WK2R5xqSgXNNLlnhR3xMp8ed7TCmrHFRoS46uIBpMfvROij4cmOjVtX1ZGTjdqC8Z8bPg+JiZW9BkBo9sdEIjWjZTzMpmuHJ26EcJkuODFp5jr3/SKv3LvFAjbF5slEXrZLyUFrmSL0AXU6fWszN1llUoPBjS9uSTelOsS4PvBUy/oH1e7vbo8jag68ym2+wbbTw9toOjGcdOcwsT7Phwh0ixjt1/oKnjNvMKHapSr2GoiY8cltkQ2wIDAQABMA0GCSqGSIb3DQEBBQUAA4IBAQBkYvW3dtPU5spAvUUNHZmk76C0GC0Dg+XD15menebia931qeO6o21SJLbcRr+0Doy8p59r8ZmqIj/jJOhCrA0jqiKT+wch/494K6OYz8k3jJ3OtrBQ3OtYJ7gpAq0QuWf/G3tFpH23tW/8VfBtalwPMxiffG9rkFzPYAoNgYHXAGLO5yRz3TC0Z8nkcY5xPO/NAN1gsWvlvTBxf3B06giug7g+szRaReAjpM3WUFz9XG4Hs/EtaqiBFeArWRqWxxO7igmSQEEmlAHYCCoTZ/Atvwa96CqCTlM2Dr45aT1h8tkaVFXl8HGdt1/m8mnw53PbgxvYW2AvN5JBwp9S8c6w"
   ],
   "x5t#S256": "CyhOiLD8_9hCFT02nUbkvmlNncBsb31xY_SUbF6fHPA",
-  "kid": "akml95AVptFeCi4zm0g3",
+  "kid": "SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4",
   "kty": "RSA",
   "use": "sig"
 }
@@ -3029,7 +3029,7 @@ curl -v -X PUT \
       "type": "BUILT_IN"
     },
     "signing": {
-      "kid": "akmip6HgvTMB1TcKU0g3"
+      "kid": "SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4"
     }
   }
 }' "https://${org}.okta.com/api/v1/apps/0oainmLkOL329Jcju0g3"
@@ -3072,7 +3072,7 @@ curl -v -X PUT \
       "type": "BUILT_IN"
     },
     "signing": {
-      "kid": "akmip6HgvTMB1TcKU0g3"
+      "kid": "SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4"
     }
   },
   "settings": {
@@ -4069,7 +4069,7 @@ curl -v -X POST \
 ~~~http
 HTTP/1.1 201 Created
 Content-Type: application/json
-Location: https://${org}.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/credentials/keys/akm5hvbbevE341ovl0h7
+Location: https://${org}.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/credentials/keys/SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4
 
 {
   "created": "2015-12-10T18:56:23.000Z",
@@ -4077,7 +4077,7 @@ Location: https://${org}.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/credentials/k
   "x5c": [
     "MIIDqDCCApCgAwIBAgIGAVGNQFX5MA0GCSqGSIb3DQEBBQUAMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTAeFw0xNTEyMTAxODU1MjJaFw0xNzEyMTAxODU2MjJaMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJJjrcnI6cXBiXNq9YDgfYrQe2O5qEHG4MXP8Ue0sMeefFkFEHYHnHUeZCq6WTAGqR+1LFgOl+Eq9We5V+qNlGIfkFkQ3iHGBrIALKqLCd0Et76HicDiegz7j9DtN+lo0hG/gfcw5783L5g5xeQ7zVmCQMkFwoUA0uA3bsfUSrmfORHJL+EMNQT8XIXD8NkG4g6u7ylHVRTLgXbe+W/p04m3EP6l41xl+MhIpBaPxDsyUvcKCNwkZN3aZIin1O9Y4YJuDHxrM64/VtLLp0sC05iawAmfsLunF7rdJAkWUpPn+xkviyNQ3UpvwAYuDr+jKLUdh2reRnm1PezxMIXzBVMCAwEAATANBgkqhkiG9w0BAQUFAAOCAQEARnFIjyitrCGbleFr3KeAwdOyeHiRmgeKupX5ZopgXtcseJoToUIinX5DVw2fVZPahqs0Q7/a0wcVnTRpw6946qZCwKd/PvZ1feVuVEA5Ui3+XvHuSH5xLp7NvYG1snNEvlbN3+NDUMlWj2NEbihowUBt9+UxTpQO3+N08q3aZk3hOZ+tHt+1Te7KEEL/4CM28GZ9MY7fSrS7MAgp1+ZXtn+kRlMrXnQ49qBda37brwDRqmSY9PwNMbev3r+9ZHwxr9W5wXW4Ev4C4xngA7RkVoyDbItSUho0I0M0u/LHuppclnXrw97xyO5Z883eIBvPVjfRcxsJxXJ8jx70ATDskw=="
   ],
-  "kid": "akm5hvbbevE341ovl0h7",
+  "kid": "SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4",
   "kty": "RSA",
   "use": "sig",
   "x5t#S256": "5GOpy9CQVtfvBmu2T8BHvpKE4OGtC3BuS046t7p9pps"
@@ -4098,6 +4098,81 @@ Content-Type: application/json
   "errorCauses": [
     {
       "errorSummary": "Validity years out of range. It should be 2 - 10 years"
+    }
+  ]
+}
+~~~
+
+### Clone Application Key Credential
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /apps/*:aid*/credentials/keys/*:kid*/clone?targetAid=*:targetAid*</span>
+
+Clones a X.509 certificate for an application key credential from a source application to target application.
+
+> To update the target application with the cloned key credential, see [Update Key Credential](#update-key-credential-for-application)
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter     | Description                                                                     | Param Type | DataType                                      | Required | Default
+------------- | ------------------------------------------------------------------------------- | ---------- | --------------------------------------------- | -------- | -------
+aid           | Unique key of the [Application](#application-properties)                                 | URL        | String                                        | TRUE     |
+kid           | Unique key of [Application Key Credential](#application-key-credential-model)   | URL        | String                                        | TRUE     |                                      |      |
+targetAid |  Unique key of the target [Application](#application-properties)   | Query      | String                                        | TRUE     |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+Returns the cloned [Application Key Credential](#application-key-credential-model).
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+}' "https://${org}.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/credentials/keys/SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4/clone?targetAid=0oal21k0DVN7DhS3R0g3"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~http
+HTTP/1.1 201 Created
+Content-Type: application/json
+Location: https://${org}.okta.com/api/v1/apps/0oal21k0DVN7DhS3R0g3/credentials/keys/SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4
+
+{
+  "created": "2015-12-10T18:56:23.000Z",
+  "expiresAt": "2017-12-10T18:56:22.000Z",
+  "x5c": [
+    "MIIDqDCCApCgAwIBAgIGAVGNQFX5MA0GCSqGSIb3DQEBBQUAMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTAeFw0xNTEyMTAxODU1MjJaFw0xNzEyMTAxODU2MjJaMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJJjrcnI6cXBiXNq9YDgfYrQe2O5qEHG4MXP8Ue0sMeefFkFEHYHnHUeZCq6WTAGqR+1LFgOl+Eq9We5V+qNlGIfkFkQ3iHGBrIALKqLCd0Et76HicDiegz7j9DtN+lo0hG/gfcw5783L5g5xeQ7zVmCQMkFwoUA0uA3bsfUSrmfORHJL+EMNQT8XIXD8NkG4g6u7ylHVRTLgXbe+W/p04m3EP6l41xl+MhIpBaPxDsyUvcKCNwkZN3aZIin1O9Y4YJuDHxrM64/VtLLp0sC05iawAmfsLunF7rdJAkWUpPn+xkviyNQ3UpvwAYuDr+jKLUdh2reRnm1PezxMIXzBVMCAwEAATANBgkqhkiG9w0BAQUFAAOCAQEARnFIjyitrCGbleFr3KeAwdOyeHiRmgeKupX5ZopgXtcseJoToUIinX5DVw2fVZPahqs0Q7/a0wcVnTRpw6946qZCwKd/PvZ1feVuVEA5Ui3+XvHuSH5xLp7NvYG1snNEvlbN3+NDUMlWj2NEbihowUBt9+UxTpQO3+N08q3aZk3hOZ+tHt+1Te7KEEL/4CM28GZ9MY7fSrS7MAgp1+ZXtn+kRlMrXnQ49qBda37brwDRqmSY9PwNMbev3r+9ZHwxr9W5wXW4Ev4C4xngA7RkVoyDbItSUho0I0M0u/LHuppclnXrw97xyO5Z883eIBvPVjfRcxsJxXJ8jx70ATDskw=="
+  ],
+  "kid": "SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4",
+  "kty": "RSA",
+  "use": "sig",
+  "x5t#S256": "5GOpy9CQVtfvBmu2T8BHvpKE4OGtC3BuS046t7p9pps"
+}
+~~~
+
+If key is already present in the list of key credentials for the target application, you will receive a 400 error response.
+
+~~~http
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+
+{
+  "errorCode": "E0000001",
+  "errorSummary": "Api validation failed: cloneKey",
+  "errorLink": "E0000001",
+  "errorId": "oaeQACJOHl1TKSGj8jA3hEpAg",
+  "errorCauses": [
+    {
+      "errorSummary": "Key already exists in the list of key credentials for the target app."
     }
   ]
 }
@@ -4145,7 +4220,7 @@ curl -v -X GET \
     "x5c": [
       "MIIDqDCCApCgAwIBAgIGAVGNQFX5MA0GCSqGSIb3DQEBBQUAMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTAeFw0xNTEyMTAxODU1MjJaFw0xNzEyMTAxODU2MjJaMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJJjrcnI6cXBiXNq9YDgfYrQe2O5qEHG4MXP8Ue0sMeefFkFEHYHnHUeZCq6WTAGqR+1LFgOl+Eq9We5V+qNlGIfkFkQ3iHGBrIALKqLCd0Et76HicDiegz7j9DtN+lo0hG/gfcw5783L5g5xeQ7zVmCQMkFwoUA0uA3bsfUSrmfORHJL+EMNQT8XIXD8NkG4g6u7ylHVRTLgXbe+W/p04m3EP6l41xl+MhIpBaPxDsyUvcKCNwkZN3aZIin1O9Y4YJuDHxrM64/VtLLp0sC05iawAmfsLunF7rdJAkWUpPn+xkviyNQ3UpvwAYuDr+jKLUdh2reRnm1PezxMIXzBVMCAwEAATANBgkqhkiG9w0BAQUFAAOCAQEARnFIjyitrCGbleFr3KeAwdOyeHiRmgeKupX5ZopgXtcseJoToUIinX5DVw2fVZPahqs0Q7/a0wcVnTRpw6946qZCwKd/PvZ1feVuVEA5Ui3+XvHuSH5xLp7NvYG1snNEvlbN3+NDUMlWj2NEbihowUBt9+UxTpQO3+N08q3aZk3hOZ+tHt+1Te7KEEL/4CM28GZ9MY7fSrS7MAgp1+ZXtn+kRlMrXnQ49qBda37brwDRqmSY9PwNMbev3r+9ZHwxr9W5wXW4Ev4C4xngA7RkVoyDbItSUho0I0M0u/LHuppclnXrw97xyO5Z883eIBvPVjfRcxsJxXJ8jx70ATDskw=="
     ],
-    "kid": "akm5hvbbevE341ovl0h7",
+    "kid": "SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4",
     "kty": "RSA",
     "use": "sig",
     "x5t#S256": "5GOpy9CQVtfvBmu2T8BHvpKE4OGtC3BuS046t7p9pps"
@@ -4156,7 +4231,7 @@ curl -v -X GET \
     "x5c": [
       "MIIDqDCCApCgAwIBAgIGAUsUkouzMA0GCSqGSIb3DQEBBQUAMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTAeFw0xNTAxMjMwMjE0MjNaFw00NTAxMjMwMjE1MjNaMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKhmkmKsu3FYeBiJg44aN6Ah3g9gof1cytXJVMnblDUWpLfe/FMUQCssh8Y8NCYRri5jni4efBgk6B3SkC7ymqsOXILIEHSwUYWnAaqDOTxO101mHzryowu1+0PldRNoyTthahpprvAPYlTin9zrDTqFT+WY/zwoaN8H+CfixlW1nM85qF18zYYekkW50MSoHPcfJKe2ywIhPXTYTSBEPcHh8dQEjBrZn7A4qOoDnfOXll8OL7j2O6EVyTtHA0tLJHVLpwI4gSPsXFwEnHltjN57odwYe9yds0BbM/YG9i+am1+3cmZ6Uyd16mLGclrr05o9BHcEZ4ZctV2hr6whbRsCAwEAATANBgkqhkiG9w0BAQUFAAOCAQEAnNlF27gRmhGTQ+GRAvbvYToFRgsIbBAPvRqB2LmEIiQ6UJd602w6uP1sv/zEzBYg4SnMLuVyWgOJ6d71dCvXdIO9mgAq6BaEPjlo0WhGyt+zGrpkMnIX5EwRa64kHydcPRHNA607wVYA96sJdyNJEMzBvjY9fJnfevzzDCN3NWpMS2T6rk6HP5IziI1VuFWY2OUC1kbCqLj1dUgp8koe3ftLL55ZpkAocnVMnrzBveNjgAOAiKTMcyS0bhESph9aVWvuHVZSfTnUjnTPb/4jA2YlB3ED+qaU3aqHwft1KXwZskNXBKXy7lyC+CMoeB3/ncFhSg/UllBooPPS3wYlNA=="
     ],
-    "kid": "akm5hvbn1vojA9Fsa0h7",
+    "kid": "mXtzOtml09Dg1ZCeKxTRBo3KrQuBWFkJ5oxhVagjTzo",
     "kty": "RSA",
     "use": "sig",
     "x5t#S256": "7CCyXWwKzH4P6PoBP91B1S_iIZVzuGffVnUXu-BTYQQ"
@@ -4193,7 +4268,7 @@ curl -v -X GET \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-}' "https://${org}.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/credentials/keys/akm5hvbbevE341ovl0h7"
+}' "https://${org}.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/credentials/keys/mXtzOtml09Dg1ZCeKxTRBo3KrQuBWFkJ5oxhVagjTzo"
 ~~~
 
 ##### Response Example
@@ -4206,7 +4281,7 @@ curl -v -X GET \
   "x5c": [
     "MIIDqDCCApCgAwIBAgIGAVGNQFX5MA0GCSqGSIb3DQEBBQUAMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTAeFw0xNTEyMTAxODU1MjJaFw0xNzEyMTAxODU2MjJaMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJJjrcnI6cXBiXNq9YDgfYrQe2O5qEHG4MXP8Ue0sMeefFkFEHYHnHUeZCq6WTAGqR+1LFgOl+Eq9We5V+qNlGIfkFkQ3iHGBrIALKqLCd0Et76HicDiegz7j9DtN+lo0hG/gfcw5783L5g5xeQ7zVmCQMkFwoUA0uA3bsfUSrmfORHJL+EMNQT8XIXD8NkG4g6u7ylHVRTLgXbe+W/p04m3EP6l41xl+MhIpBaPxDsyUvcKCNwkZN3aZIin1O9Y4YJuDHxrM64/VtLLp0sC05iawAmfsLunF7rdJAkWUpPn+xkviyNQ3UpvwAYuDr+jKLUdh2reRnm1PezxMIXzBVMCAwEAATANBgkqhkiG9w0BAQUFAAOCAQEARnFIjyitrCGbleFr3KeAwdOyeHiRmgeKupX5ZopgXtcseJoToUIinX5DVw2fVZPahqs0Q7/a0wcVnTRpw6946qZCwKd/PvZ1feVuVEA5Ui3+XvHuSH5xLp7NvYG1snNEvlbN3+NDUMlWj2NEbihowUBt9+UxTpQO3+N08q3aZk3hOZ+tHt+1Te7KEEL/4CM28GZ9MY7fSrS7MAgp1+ZXtn+kRlMrXnQ49qBda37brwDRqmSY9PwNMbev3r+9ZHwxr9W5wXW4Ev4C4xngA7RkVoyDbItSUho0I0M0u/LHuppclnXrw97xyO5Z883eIBvPVjfRcxsJxXJ8jx70ATDskw=="
   ],
-  "kid": "akm5hvbbevE341ovl0h7",
+  "kid": "mXtzOtml09Dg1ZCeKxTRBo3KrQuBWFkJ5oxhVagjTzo",
   "kty": "RSA",
   "use": "sig",
   "x5t#S256": "5GOpy9CQVtfvBmu2T8BHvpKE4OGtC3BuS046t7p9pps"
@@ -4242,7 +4317,7 @@ curl -v -X GET \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-}' "https://${org}.okta.com/api/v1/apps/0oa39sivhvvtqqFbu0h7/sso/saml/metadata?kid=akm5hvk50eF3P3C7b0h7"
+}' "https://${org}.okta.com/api/v1/apps/0oa39sivhvvtqqFbu0h7/sso/saml/metadata?kid=mXtzOtml09Dg1ZCeKxTRBo3KrQuBWFkJ5oxhVagjTzo"
 ~~~
 
 ##### Response Example
