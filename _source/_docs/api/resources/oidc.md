@@ -40,11 +40,19 @@ you must have in your application to ensure it’s always updated with the lates
 The flow of requests and responses for the authentication process is based on OAuth 2.0 and OpenID Connect protocols.
 The properties you need depend on which client profile and use case you are targeting.
 
+## Claims
+
+Tokens issued by Okta contain claims, which are statements about a subject (user).
+For example, the claim can be about a name, identity, key, group, or privilege.
+The claims in a security token are dependent upon the type of token, the type of credential used to authenticate the user, and the application configuration.
+
+The claims requested by the `profile`, `email`, `address`, and `phone` scope values are returned from the UserInfo Endpoint, as described in Section 5.3.2, when a `response_type` value is used that results in an Access Token being issued. However, when no Access Token is issued (which is the case for the `response_type` value `id_token`), the resulting Claims are returned in the ID Token.
+
 ## Scopes
 
 OpenID Connect uses scope values to specify what access privileges are being requested for Access Tokens. 
 The scopes associated with Access Tokens determine which claims are available when they are used 
-to access [`/oauth2/v1/userinfo`](http://developer.okta.com/docs/api/resources/oidc.html#get-user-information). The following scopes are supported:
+to access [the OIDC `userinfo` endpoint](http://developer.okta.com/docs/api/resources/oidc.html#get-user-information). The following scopes are supported:
 
 |--------------+--------------------------------------------------------------------------------|--------------|
 | Property     | Description                                                                    | Required     |
@@ -64,13 +72,6 @@ to access [`/oauth2/v1/userinfo`](http://developer.okta.com/docs/api/resources/o
 * `profile` requests access to these default profile claims: `name`, `family_name`, `given_name`, `middle_name`, `nickname`, `preferred_username`, `profile`,  
 `picture`, `website`, `gender`, `birthdate`, `zoneinfo`,`locale`, and `updated_at`.
 * For more information about `offline_access`, see the [OIDC spec](http://openid.net/specs/openid-connect-core-1_0.html#OfflineAccess).
-
-## Claims
-
-Tokens issued by Okta contain claims, which are statements about a subject (user).
-For example, the claim can be about a name, identity, key, group, or privilege.
-The claims in a security token are dependent upon the type of token, the type of credential used to authenticate the user, 
-and the application configuration.
 
 ## ID Token
 
