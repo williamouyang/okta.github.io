@@ -229,6 +229,8 @@ the following methods:
 2.  [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
 3.  Custom HTTP Header
 
+> Okta doesn't support OAuth 2.0 [Resource Owner Password Credentials grant flows](https://tools.ietf.org/html/rfc6749#section-1.3.3).
+
 ## Basic User Schema
 
 Your service must be capable of storing the following four user
