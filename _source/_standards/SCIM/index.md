@@ -20,9 +20,12 @@ or removed from their application in Okta.
 If you haven't heard of SCIM before, here is a good summary from the
 [Wikipedia article on SCIM](https://en.wikipedia.org/wiki/System_for_Cross-domain_Identity_Management):
 
-> System for Cross-domain Identity Management (SCIM) is an open
-> standard for automating the exchange of user identity information
-> between identity domains, or IT systems.
+"System for Cross-domain Identity Management (SCIM) is an open
+standard for automating the exchange of user identity information
+between identity domains, or IT systems."
+
+> Need help?
+Email us at <developers@okta.com> or post your question on [Stack Overflow](http://stackoverflow.com/search?q=okta,scim).
 
 # Joining the SCIM Provisioning Developer Program
 

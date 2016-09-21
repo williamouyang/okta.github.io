@@ -33,7 +33,8 @@ and publish your SCIM-based integration with Okta:
 4. [Test with Customers](#customer-testing)
 5. [Publish to Okta Application Network](#publish-to-okta-application-network)
 
-> At any stage of the process, please send all questions to <developers@okta.com>.
+> Need help?
+Email us at <developers@okta.com> or post your question on [Stack Overflow](http://stackoverflow.com/search?q=okta,scim).
 
 
 ### Review Okta’s SCIM Docs and Prepare Your App
@@ -134,3 +135,6 @@ saying that they "would recommend to other customers."
 * Full, permanent test tenant provided to Okta
 * RunScope Test Suite 
 * Final Full QA by Okta 
+
+> Need help?
+Email us at <developers@okta.com> or post your question on [Stack Overflow](http://stackoverflow.com/search?q=okta,scim).
