@@ -83,7 +83,7 @@ ID Tokens should always be [validated](#validating-id-tokens) by the client to e
 
 The ID Token (*id_token*) consists of three period-separated, base64URL-encoded JSON segments: [a header](#header), [the payload](#payload), and [the signature](#signature). 
 
-### Header {: #id-token-header }
+### ID Token Header
 
 ~~~json
 {
@@ -92,7 +92,7 @@ The ID Token (*id_token*) consists of three period-separated, base64URL-encoded 
 }
 ~~~
 
-### Payload {: #id-token-payload }
+### ID Token Payload
 
 ~~~json
 {
@@ -130,7 +130,7 @@ The ID Token (*id_token*) consists of three period-separated, base64URL-encoded 
 }
 ~~~
 
-### Signature
+### ID Token Signature
 
 This is the digital signature that Okta signs, using the public key identified by the *kid* property in the header section.
 
