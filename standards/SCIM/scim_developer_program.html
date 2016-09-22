@@ -838,7 +838,7 @@ to enable advanced provisioning. The program includes:</p>
   <p><a href="http://pages.okta.com/DeveloperSCIM.html">Sign up for the program.</a></p>
 </blockquote>
 
-<h1 id="development-process">Development Process</h1>
+<h2 id="development-process">Development Process</h2>
 
 <p>After <a href="http://pages.okta.com/DeveloperSCIM.html">signing up for the program</a>, follow these steps to build, test, 
 and publish your SCIM-based integration with Okta:</p>
@@ -852,10 +852,11 @@ and publish your SCIM-based integration with Okta:</p>
 </ol>
 
 <blockquote>
-  <p>At any stage of the process, please send all questions to <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;">&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;</a>.</p>
+  <p>Need help?
+Email us at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;">&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;</a> or post your question on <a href="http://stackoverflow.com/search?q=okta,scim">Stack Overflow</a>.</p>
 </blockquote>
 
-<h2 id="review-oktas-scim-docs-and-prepare-your-app">Review Okta’s SCIM Docs and Prepare Your App</h2>
+<h3 id="review-oktas-scim-docs-and-prepare-your-app">Review Okta’s SCIM Docs and Prepare Your App</h3>
 
 <p>The first step on is to build a “compliant” SCIM server. We developed <a href="http://developer.okta.com/docs/guides/scim_guidance.html">Okta’s SCIM Docs</a>
 to assist you in this effort. Even if you already support SCIM, it’s important that you still review Okta’s SCIM docs 
@@ -872,15 +873,15 @@ to assist you in this effort. Even if you already support SCIM, it’s important
 <a href="http://okta.litmos.com/self-signup/register/328927?type=1">See the workshop agenda and sign-up</a>.</p>
 </blockquote>
 
-<h2 id="test-your-scim-server">Test Your SCIM Server</h2>
+<h3 id="test-your-scim-server">Test Your SCIM Server</h3>
 
-<h3 id="leverage-runscope-to-simplify-your-scim-testing">Leverage Runscope to simplify your SCIM testing</h3>
+<h4 id="leverage-runscope-to-simplify-your-scim-testing">Leverage Runscope to simplify your SCIM testing</h4>
 
 <p>The easiest way for you to develop and verify your SCIM integration is to make use of an automated test suite that runs on Runscope. 
 A Runscope <a href="https://www.runscope.com/signup">free trial account</a> will give you all you need for testing if you don’t already use the service. 
 For more details, see <a href="http://developer.okta.com/docs/guides/scim_guidance.html#testing-your-scim-server-with-runscope">Testing your SCIM server with Runscope</a>.</p>
 
-<h3 id="testing-your-scim-server-with-okta">Testing your SCIM server with Okta</h3>
+<h4 id="testing-your-scim-server-with-okta">Testing your SCIM server with Okta</h4>
 
 <p>Once you have a SCIM server that passes all of the Runscope tests, you will want to test your SCIM integration 
 directly with Okta. To do so, you will first need to sign up for an Okta developer account.</p>
@@ -911,7 +912,7 @@ based off of the various authentication methods you could choose to support (Hea
 <!--Comment from original doc: Do we have testing plan details that our internal teams use which ISVs can also follow for testing in Okta?
 Comment on comment: Do we have this in a format that we can link to or include directly here? -->
 
-<h2 id="submit-for-okta-review">Submit for Okta Review</h2>
+<h3 id="submit-for-okta-review">Submit for Okta Review</h3>
 
 <p>Once you have a functioning SCIM integration in your Okta developer org, and have confirmed support 
 for Okta’s <a href="http://developer.okta.com/docs/guides/scim_guidance.html#required-scim-capabilities">required SCIM capabilities</a>, 
@@ -937,7 +938,7 @@ For more details, see <a href="http://saml-doc.okta.com/Provisioning_Docs/SCIM_C
 to make sure that the attributes are set to what you want your users to see.</p>
 </blockquote>
 
-<h2 id="customer-testing">Customer Testing</h2>
+<h3 id="customer-testing">Customer Testing</h3>
 
 <p>We require one joint customer to successfully use the integration in production before making it publically available 
 in the Okta Application Network. Here’s the process for getting joint customers involved 
@@ -953,7 +954,7 @@ Partners are responsible for managing the customer identification and testing pr
 Please coordinate via <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;">&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;</a>.</li>
 </ol>
 
-<h2 id="publish-to-okta-application-network">Publish to Okta Application Network</h2>
+<h3 id="publish-to-okta-application-network">Publish to Okta Application Network</h3>
 
 <p>In order for an app to be published in the Okta Application Network, it must meet the following criteria:</p>
 
@@ -974,6 +975,11 @@ saying that they “would recommend to other customers.”</li>
   <li>RunScope Test Suite</li>
   <li>Final Full QA by Okta</li>
 </ul>
+
+<blockquote>
+  <p>Need help?
+Email us at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;">&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;</a> or post your question on <a href="http://stackoverflow.com/search?q=okta,scim">Stack Overflow</a>.</p>
+</blockquote>
 
       </div>
       <!-- END Page Content -->

@@ -864,10 +864,74 @@ The properties you need depend on which client profile and use case you are targ
 
 <h2 id="claims">Claims</h2>
 
-<p>ID tokens issued by Okta contain claims, which are statements about a subject (user).
+<p>Tokens issued by Okta contain claims, which are statements about a subject (user).
 For example, the claim can be about a name, identity, key, group, or privilege.
-The claims in a security token are dependent upon the type of token, the type of credential used to authenticate the user, 
-and the application configuration.</p>
+The claims in a security token are dependent upon the type of token, the type of credential used to authenticate the user, and the application configuration.</p>
+
+<p>The claims requested by the <code class="highlighter-rouge">profile</code>, <code class="highlighter-rouge">email</code>, <code class="highlighter-rouge">address</code>, and <code class="highlighter-rouge">phone</code> scope values are returned from the UserInfo Endpoint, as described in <a href="http://openid.net/specs/openid-connect-core-1_0.html#UserInfoResponse">the OpenID spec Section 5.3.2</a>, when a <code class="highlighter-rouge">response_type</code> value is used that results in an Access Token being issued. However, when no Access Token is issued (which is the case for the <code class="highlighter-rouge">response_type</code> value <code class="highlighter-rouge">id_token</code>), the resulting Claims are returned in the ID Token.</p>
+
+<h2 id="scopes">Scopes</h2>
+
+<p>OpenID Connect uses scope values to specify what access privileges are being requested for Access Tokens. 
+The scopes associated with Access Tokens determine which claims are available when they are used 
+to access <a href="http://developer.okta.com/docs/api/resources/oidc.html#get-user-information">the OIDC <code class="highlighter-rouge">userinfo</code> endpoint</a>. The following scopes are supported:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>openid</td>
+      <td>Identifies the request as an OpenID Connect request.</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>profile</td>
+      <td>Requests access to the end-user’s default profile claims.</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>email</td>
+      <td>Requests access to the <code class="highlighter-rouge">email</code> and <code class="highlighter-rouge">email_verified</code> claims.</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>phone</td>
+      <td>Requests access to the <code class="highlighter-rouge">phone_number</code> and <code class="highlighter-rouge">phone_number_verified</code> claims.</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>address</td>
+      <td>Requests access to the <code class="highlighter-rouge">address</code> claim.</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>groups</td>
+      <td>Requests access to the <code class="highlighter-rouge">groups</code> claim.</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>offline_access</td>
+      <td>Requests a refresh token, used to obtain more access tokens without re-prompting the user for authentication.</td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="scope-values">Scope Values</h3>
+
+<ul>
+  <li><code class="highlighter-rouge">openid</code> is required for any OpenID request connect flow. If no openid scope value is present, the request may
+be a valid OAuth 2.0 request, but it’s not an OpenID Connect request.</li>
+  <li><code class="highlighter-rouge">profile</code> requests access to these default profile claims: <code class="highlighter-rouge">name</code>, <code class="highlighter-rouge">family_name</code>, <code class="highlighter-rouge">given_name</code>, <code class="highlighter-rouge">middle_name</code>, <code class="highlighter-rouge">nickname</code>, <code class="highlighter-rouge">preferred_username</code>, <code class="highlighter-rouge">profile</code>,  
+<code class="highlighter-rouge">picture</code>, <code class="highlighter-rouge">website</code>, <code class="highlighter-rouge">gender</code>, <code class="highlighter-rouge">birthdate</code>, <code class="highlighter-rouge">zoneinfo</code>,<code class="highlighter-rouge">locale</code>, and <code class="highlighter-rouge">updated_at</code>.</li>
+  <li>For more information about <code class="highlighter-rouge">offline_access</code>, see the <a href="http://openid.net/specs/openid-connect-core-1_0.html#OfflineAccess">OIDC spec</a>.</li>
+</ul>
 
 <h2 id="id-token">ID Token</h2>
 
@@ -879,7 +943,7 @@ as well as claims about the authenticated user.</p>
 
 <p>The ID Token (<em>id_token</em>) consists of three period-separated, base64URL-encoded JSON segments: <a href="#header">a header</a>, <a href="#payload">the payload</a>, and <a href="#signature">the signature</a>.</p>
 
-<h3 id="header--id-token-header-">Header {: #id-token-header }</h3>
+<h3 id="id-token-header">ID Token Header</h3>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"alg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RS256"</span><span class="p">,</span><span class="w">
@@ -888,7 +952,7 @@ as well as claims about the authenticated user.</p>
 </span></code></pre>
 </div>
 
-<h3 id="payload--id-token-payload-">Payload {: #id-token-payload }</h3>
+<h3 id="id-token-payload">ID Token Payload</h3>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"ver"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -926,7 +990,7 @@ as well as claims about the authenticated user.</p>
 </span></code></pre>
 </div>
 
-<h3 id="signature">Signature</h3>
+<h3 id="id-token-signature">ID Token Signature</h3>
 
 <p>This is the digital signature that Okta signs, using the public key identified by the <em>kid</em> property in the header section.</p>
 
