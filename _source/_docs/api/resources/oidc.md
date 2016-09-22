@@ -46,7 +46,7 @@ Tokens issued by Okta contain claims, which are statements about a subject (user
 For example, the claim can be about a name, identity, key, group, or privilege.
 The claims in a security token are dependent upon the type of token, the type of credential used to authenticate the user, and the application configuration.
 
-The claims requested by the `profile`, `email`, `address`, and `phone` scope values are returned from the UserInfo Endpoint, as described in Section 5.3.2, when a `response_type` value is used that results in an Access Token being issued. However, when no Access Token is issued (which is the case for the `response_type` value `id_token`), the resulting Claims are returned in the ID Token.
+The claims requested by the `profile`, `email`, `address`, and `phone` scope values are returned from the UserInfo Endpoint, as described in [the OpenID spec Section 5.3.2](http://openid.net/specs/openid-connect-core-1_0.html#UserInfoResponse), when a `response_type` value is used that results in an Access Token being issued. However, when no Access Token is issued (which is the case for the `response_type` value `id_token`), the resulting Claims are returned in the ID Token.
 
 ## Scopes
 
