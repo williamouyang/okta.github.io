@@ -80,7 +80,7 @@ Location: https://your-app.example.com
 
 ## Retrieving a session cookie by visiting an application embed link
 
-This scenario is ideal for deployment scenarios where you have a custom login page but immediately want to launch an Okta application after login without returning to a landing page. The login page will typically collect the user's credentials via a HTML form submit or POST and validate the credentials against your Okta organization by calling the [Authentication API](../resources/authn.html) to obtain a session token.
+This scenario is ideal for deployment scenarios where you have a custom login page but immediately want to launch an Okta application after login without returning to a landing page. The login page will typically collect the user's credentials via a HTML form submit or POST and validate the credentials against your Okta organization by calling the [Authentication API](/docs/api/rest/authn.html) to obtain a session token.
 
 The session token can than be passed as a query parameter to an Okta application's embed link that will set a session cookie as well as launch the application in a single web request.
 
