@@ -1,16 +1,30 @@
 ---
 layout: docs_page
 title: Platform Release Notes
-excerpt: Summary of changes to the Okta Platform since Release 2016.36
+excerpt: Summary of changes to the Okta Platform since Release 2016.37
 ---
 
-## Release 2016.37
+## Release 2016.39
 
-<!-- ### Feature Enhancement -->
+### Feature Enhancement: Sharing Certificates Between App Instances
+
+By cloning an app key credential with the Apps API, you can share the same certificate between two or more apps:
+
+<pre>/apps/<em>:aid</em>/credentials/keys/<em>:kid</em>/clone?targetAid=<em>:targetAid</em></pre>
+
+To share a certificate among app instances:
+
+1. Generate a new app key credential for an app (the source app).
+2. Use the new credential in the source app.
+3. Share the credential (`kid`) with one or more target apps.
+4. Use the new credential in the target app.
+
+For more detailed instructions, see ["Clone Key Credential for Application"](http://developer.okta.com/docs/api/resources/apps.html#clone-key-credential-for-application)
+and ["Update Key Credential for Application"](http://developer.okta.com/docs/api/resources/apps.html#update-key-credential-for-application).
 
 ### Bug Fixed
 
-* In some cases, a `GET /api/v1/users` request incorrectly returned a 403 error. <!-- OKTA-75861 -->
+The WWW-Authenticate header couldn't be read when the `/oauth2/v1/userinfo` endpoint returned errors in a browser. (OKTA-101943)
 
 ### Does Your Org Have These Changes Yet?
 
@@ -25,6 +39,7 @@ For changes outside the Okta platform, see the [Release Notes Knowledge Hub](htt
 
 ### Earlier Release Notes
 
+* [Platform Release Notes for Release 2016.37](platform-release-notes2016-37.html)
 * [Platform Release Notes for Release 2016.36](platform-release-notes2016-36.html)
 * [Platform Release Notes for Release 2016.35](platform-release-notes2016-35.html)
 * [Platform Release Notes for Release 2016.34](platform-release-notes2016-34.html)
