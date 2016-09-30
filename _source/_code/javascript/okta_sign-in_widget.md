@@ -131,8 +131,9 @@ var oktaSignIn = new OktaSignIn({baseUrl: orgUrl});
 ~~~
 
 Finally, the lines below actually render the Okta Sign-In
-Widget. Note that the value for `el` can be any selector of your choice - "#okta-login-container" is a selector for an element in the html that has an id attribute of "okta-login-container". Also note that we only define a "SUCCESS" callback in which we create an Okta session and redirect the browser to the Okta organization. This logs the user directly into the Okta dashboard. In a production environment, you will want to handle statuses beyond "SUCCESS", you will likely also want to define an "ERROR"
-callback as well. 
+Widget. Note that the value for `el` can be any selector of your choice - "#okta-login-container" is a selector for an element in the HTML code that has an `id` attribute of "okta-login-container". 
+
+Also note that we only define a "SUCCESS" callback in which we create an Okta session and redirect the browser to the Okta organization. This logs the user directly into the Okta dashboard. In a production environment, you should  handle statuses beyond "SUCCESS" and define an "ERROR" callback as well. 
 
 ~~~ javascript
 oktaSignIn.renderEl(
@@ -176,13 +177,20 @@ This step is necessary for Okta to accept authentication requests from an applic
 
 You can enable CORS by following the steps in our guide for
 [guide for Enabling CORS](http://developer.okta.com/docs/api/getting_started/enabling_cors.html). Configure CORS using the same base url of the
-web server you are using to host the HTML for the Okta Sign-In Widget (see below for instructions). For example, if you plan to host your Sign-In Widget in a page accessible under `http://localhost:8000`, you will need to add `http://localhost:8000` as a trusted CORS endpoint in Okta.
+web server you are using to host the HTML for the Okta Sign-In Widget (see below for instructions). For example, if you plan to host your Sign-In Widget in a page accessible under `http://localhost:8000`, you need to add `http://localhost:8000` as a trusted CORS endpoint in Okta.
 
-To do so, please follow the steps below:
+To do so, follow the steps below:
 
-1. Navigate to the `Admin -> Security -> API` page of your Okta dashboard
-2. In the `CORS` tab, add the url of the site that will host the Okta Sign-In Widget. For instance, if you want to test it on a development machine on a web site hosted at `http://localhost:8081`, just add `http://localhost:8081` in the CORS multi-line text box.
-3. Click `Enable CORS for the following base URLs`
+1. Navigate to the `Admin -> Security -> API` page of your Okta dashboard.
+2. In the `CORS` tab, add the url of the site that will host the Okta Sign-In Widget. For instance, if you want to test it on a development machine on a web site hosted at `http://localhost:8081`, add `http://localhost:8081` in the CORS multi-line text box.
+3. Click `Enable CORS for the following base URLs`.
+4. Press `Save`. 
+
+If you see the `Trusted Origins` tab instead of the `CORS` tab, follow the steps below:
+
+1. Press the `Add Origin` button.
+2. Fill out the Name field, add add the url of the site that will host the Okta Sign-In Widget to the `Origin URL` field.
+3. Check the `CORS` check box in the `Type` section.
 4. Press `Save`. 
 
 
