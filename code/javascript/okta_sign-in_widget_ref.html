@@ -832,9 +832,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <div class="PageContent-main" id="docs-body">
 	<h2 id="overview">Overview</h2>
 
-<p>The Okta Sign-In Widget is a JavaScript widget from Okta that gives you a customizable login experience that authenticates users on any web site.</p>
-
-<p>This page contains detailed reference information you can use to customize your sign-in widget.
+<p>This page contains detailed reference information you can use to customize your Okta sign-in widget.
 Basic instructions for creating a sign-in widget are available in <a href="./okta_sign-in_widget.html">Okta Sign-In Widget</a>.</p>
 
 <p>Prerequisites from the basic guide include:</p>
@@ -848,7 +846,7 @@ Basic instructions for creating a sign-in widget are available in <a href="./okt
 <h3 id="example-of-a-customized-sign-in-widget">Example of a Customized Sign-In Widget</h3>
 
 <blockquote>
-  <p>Okta Sign-In Widget documentation uses the domain name acme. Other Okta developer content uses <code class="highlighter-rouge">your-domain</code>.</p>
+  <p>The Okta Sign-In Widget documentation uses the <code class="highlighter-rouge">acme.com</code> domain name. Other Okta developer content may use <code class="highlighter-rouge">your-domain.com</code>.</p>
 </blockquote>
 
 <div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// Initialize</span>
@@ -856,12 +854,11 @@ Basic instructions for creating a sign-in widget are available in <a href="./okt
   <span class="na">baseUrl</span><span class="p">:</span> <span class="s1">'https://acme.okta.com'</span><span class="p">,</span>
   <span class="na">features</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">rememberMe</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="na">rememberDevice</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="na">smsRecovery</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="na">multiOptionalFactorEnroll</span><span class="p">:</span> <span class="kc">true</span>
   <span class="p">},</span>
   <span class="na">labels</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s1">'primaryauth.title'</span><span class="p">:</span> <span class="s1">'Partner login'</span><span class="p">,</span>
+    <span class="s1">'primaryauth.title'</span><span class="p">:</span> <span class="s1">'Partner Sign-In'</span><span class="p">,</span>
     <span class="s1">'help'</span><span class="p">:</span> <span class="s1">'Click here for more help'</span>
   <span class="p">},</span>
   <span class="na">transformUsername</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">)</span> <span class="p">{</span>
@@ -879,7 +876,7 @@ Basic instructions for creating a sign-in widget are available in <a href="./okt
 
   <span class="c1">// Show the sign-in widget</span>
   <span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">renderEl</span><span class="p">(</span>
-    <span class="p">{</span> <span class="na">el</span><span class="p">:</span> <span class="s1">'#sign-in-container'</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="na">el</span><span class="p">:</span> <span class="s1">'#okta-login-container'</span> <span class="p">},</span>
     <span class="c1">// Success callback (invoked on successful authentication)</span>
     <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'SUCCESS'</span><span class="p">)</span> <span class="p">{</span>
@@ -911,42 +908,42 @@ Basic instructions for creating a sign-in widget are available in <a href="./okt
   <tbody>
     <tr>
       <td><code class="highlighter-rouge">baseUrl</code></td>
-      <td>The base URL for your Okta organization. (e.g., <code class="highlighter-rouge">https://acme.okta.com</code> and <code class="highlighter-rouge">https://acme.oktapreview.com</code>).</td>
+      <td>The base URL for your Okta organization. (e.g., <code class="highlighter-rouge">https://acme.okta.com</code>, <code class="highlighter-rouge">https://acme.oktapreview.com</code> or <code class="highlighter-rouge">https://acme.okta-emea.com</code>).</td>
       <td>String</td>
       <td>Yes</td>
       <td>None</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">recoveryToken</code></td>
-      <td>Bootstrap the widget in the recovery flow (e.g., Unlock Account or Forgot Password).</td>
-      <td>String</td>
-      <td>No</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">stateToken</code></td>
-      <td>Bootstrap the widget in a specific flow (e.g., Enroll MFA or MFA challenge).</td>
+      <td>Bootstraps the widget in the recovery flow (e.g., Unlock Account or Forgot Password).</td>
       <td>String</td>
       <td>No</td>
       <td>None</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">logo</code></td>
-      <td>Logo to use in the widget (e.g., <code class="highlighter-rouge">https://acme.com/assets/logo/acme-logo.png</code>).</td>
+      <td>Url of the logo image that shows up at the top of the widget (e.g. <code class="highlighter-rouge">https://acme.com/assets/logo/acme-logo.png</code>).</td>
+      <td>String</td>
+      <td>No</td>
+      <td><code class="highlighter-rouge">Okta logo</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">helpSupportNumber</code></td>
+      <td>Support phone number that shows up in the Password Reset flow (if the user clicks on <code class="highlighter-rouge">Can't access email</code>) and in the Unlock Account flow.</td>
       <td>String</td>
       <td>No</td>
       <td><code class="highlighter-rouge">Okta logo</code></td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">username</code></td>
-      <td>Bootstrap the widget with a username i.e., pre-fill the username in the widget.</td>
+      <td>Bootstraps the widget with a username i.e., pre-fill the username in the widget.</td>
       <td>String</td>
       <td>No</td>
       <td>None</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">transformUsername</code></td>
-      <td>Transform the username before sending the request. The function is passed the username and the operation as parameters. <a href="#transformusername-example">Example</a></td>
+      <td>Transforms the username before sending the request. The function is passed the username and the operation as parameters. <a href="#transformusername-example">Example</a></td>
       <td>Function</td>
       <td>No</td>
       <td>None</td>
@@ -992,11 +989,12 @@ Basic instructions for creating a sign-in widget are available in <a href="./okt
 </code></pre>
 </div>
 
+<p>The code above ensures that in case the current user clicked on the ‘Forgot Password’ or ‘Unlock account’ link, the Sign-In Widget only proceeds with the requested operation if the user provided a username that ends with <code class="highlighter-rouge">@acme.com</code>. Otherwise, the Sign-In Widget automatically appends <code class="highlighter-rouge">@acme.com</code> to the provided user name.</p>
+
 <h4 id="features-example">features Example</h4>
 
 <div class="language-javascript highlighter-rouge"><pre class="highlight"><code>    <span class="nx">features</span><span class="err">:</span> <span class="p">{</span>
       <span class="nl">rememberMe</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-      <span class="nx">rememberDevice</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
       <span class="nx">selfServiceUnlock</span><span class="err">:</span> <span class="kc">true</span><span class="p">,</span>
       <span class="nx">multiOptionalFactorEnroll</span><span class="err">:</span> <span class="kc">true</span>
     <span class="p">}</span>
@@ -1013,20 +1011,17 @@ Basic instructions for creating a sign-in widget are available in <a href="./okt
 Display a checkbox to enable “Remember me” functionality at login.</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">rememberDevice</code> <code class="highlighter-rouge">(default: true)</code> 
-Display a checkbox to enable “Trust this device” functionality in MFA required flow.</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">rememberDeviceAlways</code> <code class="highlighter-rouge">(default: false)</code>
-Default the “Trust this device” checkbox to <code class="highlighter-rouge">true</code>.</p>
-  </li>
-  <li>
     <p><code class="highlighter-rouge">autoPush</code> <code class="highlighter-rouge">(default: false)</code>
-Display a checkbox to enable “Send push automatically” functionality in the MFA required flow.</p>
+    Display a checkbox to enable “Send push automatically” functionality in the MFA required flow.</p>
   </li>
   <li>
     <p><code class="highlighter-rouge">smsRecovery</code> <code class="highlighter-rouge">(default: false)</code>     <br />
 Allow users with a configured mobile phone number to recover their password using an SMS message.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">callRecovery</code> <code class="highlighter-rouge">(default: false)</code>     <br />
+Allow users with a configured mobile phone number to recover their password using a voice call.
+Note: This option is only available with version 1.6.0 and later of the Sign-In Widget.</p>
   </li>
   <li>
     <p><code class="highlighter-rouge">selfServiceUnlock</code> <code class="highlighter-rouge">(default: false)</code>
@@ -1039,6 +1034,10 @@ Allow users the option to enroll in multiple optional factors.</p>
   <li>
     <p><code class="highlighter-rouge">router</code> <code class="highlighter-rouge">(default: false)</code>
 Update the browser location bar with a route on navigation.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">windowsVerify</code> <code class="highlighter-rouge">(default: false)</code>
+When enrolling Okta Verify and if set to <code class="highlighter-rouge">true</code>, this option specifies whether the Sign-In Widget shows the Windows phone icon and instructions.</p>
   </li>
 </ul>
 
@@ -1081,10 +1080,6 @@ Update the browser location bar with a route on navigation.</p>
     <p><code class="highlighter-rouge">custom</code>
  Array of custom link objects. Each custom link object must have <code class="highlighter-rouge">text</code> and <code class="highlighter-rouge">href</code> properties.</p>
   </li>
-  <li>
-    <p><code class="highlighter-rouge">helpSupportNumber</code>
-Option to display a Help/Support phone number if the user does not have access to email.</p>
-  </li>
 </ul>
 
 <h4 id="labels-options">labels Options</h4>
@@ -1123,23 +1118,158 @@ Option to display a Help/Support phone number if the user does not have access t
 
 <p>Some labels contain “Okta.” You may want to supply a different value for those labels.</p>
 
-<h3 id="oidc-options">OIDC Options</h3>
+<h2 id="openid-connect-oauth-20-and-social-integrations">OpenID Connect, OAuth 2.0 and Social Integrations</h2>
 
-<p>Options for the <a href="/docs/api/resources/oidc.html#request-parameters">OpenID Connect</a> authentication flow.
-This flow is required for social authentication, and requires OAuth client registration with Okta.
-For instructions, see <a href="/docs/api/resources/social_authentication.html">Social Authentication</a>.</p>
+<p>The Okta Sign-In Widget provides built-in support for <a href="http://openid.net/specs/openid-connect-core-1_0.html">OpenID Connect</a> and <a href="https://tools.ietf.org/html/rfc6749">OAuth 2.0</a>, particularly with the <a href="http://openid.net/specs/openid-connect-core-1_0.html#ImplicitFlowAuth">Implicit Flow</a> for single-page web applications and the <a href="http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth">Authorization Code Flow</a> for  traditional server web applications.</p>
 
-<h4 id="example-oidc-flow">Example OIDC flow</h4>
+<p>More information is available for Okta support of <a href="/docs/api/resources/oidc.html#request-parameters">OpenID Connect</a> and <a href="/docs/api/resources/oauth2.html">OAuth 2.0</a>.</p>
+
+<p>For OpenID Connect and OAuth setup instructions, please take a look at these <a href="https://github.com/oktadeveloper/okta-oauth-spa-authjs-osw/blob/master/Okta-OIDC_SPA_JS-OSW_DevSetupGuide.pdf">setup instructions</a>.</p>
+
+<p>A working <a href="https://github.com/oktadeveloper/okta-oauth-spa-authjs-osw">OpenID Connect sample with the Okta Sign-In Widget</a> can also be found on GitHub.</p>
+
+<p>The Okta Sign-In Widget also provides support for social authentication, which is built on top of OpenID Connect and OAuth 2.0. For social authentication setup instructions, please refer to <a href="/docs/api/resources/social_authentication.html">Social Authentication</a>. Please see below for configuration details for social authentication.</p>
+
+<h4 id="example-openid-connect-configuration">Example OpenID Connect configuration</h4>
 
 <div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">oktaSignIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span>
   <span class="na">baseUrl</span><span class="p">:</span> <span class="s1">'https://acme.okta.com'</span><span class="p">,</span>
-  <span class="na">features</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">rememberDevice</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="p">},</span>
-  <span class="c1">// OIDC options</span>
+  <span class="c1">// OpenID Connect options</span>
   <span class="na">clientId</span><span class="p">:</span> <span class="s1">'GHtf9iJdr60A9IYrR0jw'</span><span class="p">,</span>
   <span class="na">redirectUri</span><span class="p">:</span> <span class="s1">'https://acme.com/oauth2/callback/home'</span><span class="p">,</span>
-  <span class="na">authScheme</span><span class="p">:</span> <span class="s1">'OAUTH2'</span><span class="p">,</span>
+  <span class="na">authParams</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">responseType</span><span class="p">:</span> <span class="s1">'id_token'</span><span class="p">,</span>
+    <span class="na">responseMode</span><span class="p">:</span> <span class="s1">'okta_post_message'</span><span class="p">,</span>
+    <span class="na">scope</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s1">'openid'</span><span class="p">,</span>
+      <span class="s1">'email'</span><span class="p">,</span>
+      <span class="s1">'profile'</span><span class="p">,</span>
+      <span class="s1">'address'</span><span class="p">,</span>
+      <span class="s1">'phone'</span><span class="p">,</span>
+      <span class="s1">'groups'</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+  <span class="p">});</span>
+
+<span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">renderEl</span><span class="p">({</span>
+    <span class="na">el</span><span class="p">:</span> <span class="s1">'#sign-in-container'</span>
+  <span class="p">},</span>
+  <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// res.idToken - id_token generated</span>
+    <span class="c1">// res.claims - decoded id_token information</span>
+  <span class="p">},</span>
+  <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// handleErrors(err);</span>
+  <span class="p">});</span>
+</code></pre>
+</div>
+
+<h4 id="openid-connect-parameters">OpenID Connect Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">clientId</code></td>
+      <td><a href="oauth-clients">Client Id</a> pre-registered with Okta for OIDC authentication flow.</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">redirectUri</code></td>
+      <td>Callback location to send the authorization code to. This must be pre-registered as part of client registration.</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td><code class="highlighter-rouge">window.location.href</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">oAuthTimeout</code></td>
+      <td>Timeout for OIDC authentication flow requests.</td>
+      <td>Number</td>
+      <td>No</td>
+      <td><code class="highlighter-rouge">120000</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">authParams</code></td>
+      <td>Authentication parameters for OIDC. <a href="#authParams-parameters">List</a></td>
+      <td>See <a href="#authParams-parameters">List</a></td>
+      <td>See <a href="#authParams-parameters">List</a></td>
+      <td>See <a href="#authParams-parameters">List</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="authparams-parameters">authParams parameters</h5>
+
+<p>You can use any of the following parameters for <code class="highlighter-rouge">authParams</code>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>authParams Parameter</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Required</th>
+      <th>Default</th>
+      <th>Valid Values</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">display</code></td>
+      <td>Specify how to display the authentication UI.</td>
+      <td>String</td>
+      <td>No</td>
+      <td><code class="highlighter-rouge">none</code> (for Okta) and <code class="highlighter-rouge">popup</code> (External IdP such as social)</td>
+      <td><code class="highlighter-rouge">none</code>, <code class="highlighter-rouge">popup</code>, <code class="highlighter-rouge">page</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">responseMode</code></td>
+      <td>Specify how the authorization response should be returned.</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td><code class="highlighter-rouge">okta_post_message</code></td>
+      <td><code class="highlighter-rouge">query</code>, <code class="highlighter-rouge">fragment</code>, <code class="highlighter-rouge">form_post</code>, <code class="highlighter-rouge">okta_post_message</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">responseType</code></td>
+      <td>Specify the response type for OpenID Connect authentication. The authorization code returned can later be exchanged for Access token or Refresh token.</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td><code class="highlighter-rouge">id_token</code></td>
+      <td><code class="highlighter-rouge">id_token</code>, <code class="highlighter-rouge">code</code> (starting from v1.7.0)</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">scope</code></td>
+      <td>Specify what information to make available in the <code class="highlighter-rouge">id_token</code>. <code class="highlighter-rouge">openid</code> is required.</td>
+      <td>Array</td>
+      <td>Yes</td>
+      <td><code class="highlighter-rouge">['openid', 'email']</code></td>
+      <td><code class="highlighter-rouge">openid</code>, <code class="highlighter-rouge">email</code>, <code class="highlighter-rouge">profile</code>, <code class="highlighter-rouge">address</code>, <code class="highlighter-rouge">phone</code>, <code class="highlighter-rouge">groups</code> (maps to groups claim configured in the Authorization Server tab)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="social-authentication-providers-options">Social Authentication Providers Options</h3>
+
+<p>Social authentication with social identity providers (such as Facebook, Linked and Google) is supported by Okta and requires OpenID Connect and OAuth configuration parameters as specified in the previous section. For Social Authentication setup instructions, please refer to <a href="/docs/api/resources/social_authentication.html">Social Authentication</a>.</p>
+
+<h4 id="example-social-authentication-configuration">Example Social Authentication configuration</h4>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">oktaSignIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span>
+  <span class="na">baseUrl</span><span class="p">:</span> <span class="s1">'https://acme.okta.com'</span><span class="p">,</span>
+  <span class="c1">// OpenID Connect options</span>
+  <span class="na">clientId</span><span class="p">:</span> <span class="s1">'GHtf9iJdr60A9IYrR0jw'</span><span class="p">,</span>
+  <span class="na">redirectUri</span><span class="p">:</span> <span class="s1">'https://acme.com/oauth2/callback/home'</span><span class="p">,</span>
   <span class="na">authParams</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">responseType</span><span class="p">:</span> <span class="s1">'id_token'</span><span class="p">,</span>
     <span class="na">responseMode</span><span class="p">:</span> <span class="s1">'okta_post_message'</span><span class="p">,</span>
@@ -1177,7 +1307,9 @@ For instructions, see <a href="/docs/api/resources/social_authentication.html">S
 </code></pre>
 </div>
 
-<h4 id="oidc-parameters">OIDC Parameters</h4>
+<h4 id="social-authentication-parameters">Social Authentication Parameters</h4>
+
+<p>In addition to the <a href="#openid-connect-parameters">OpenID Connect/OAuth parameters</a>, additional parameters are necessary for social authentication:</p>
 
 <table>
   <thead>
@@ -1190,20 +1322,6 @@ For instructions, see <a href="/docs/api/resources/social_authentication.html">S
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">clientId</code></td>
-      <td><a href="oauth-clients">Client Id</a> pre-registered with Okta for OIDC authentication flow.</td>
-      <td>String</td>
-      <td>Yes</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">redirectUri</code></td>
-      <td>Callback location to send the authorization code to. This must be pre-registered as part of client registration.</td>
-      <td>String</td>
-      <td>Yes</td>
-      <td><code class="highlighter-rouge">window.location.href</code></td>
-    </tr>
     <tr>
       <td><code class="highlighter-rouge">idps</code></td>
       <td>External Identity Providers to use in OIDC authentication. Supported Identity providers - <code class="highlighter-rouge">GOOGLE</code>, <code class="highlighter-rouge">FACEBOOK</code> and <code class="highlighter-rouge">LINKEDIN</code>. Each IdP needs to be passed an object with <code class="highlighter-rouge">id</code> and <code class="highlighter-rouge">type</code>.</td>
@@ -1218,82 +1336,12 @@ For instructions, see <a href="/docs/api/resources/social_authentication.html">S
       <td>No</td>
       <td><code class="highlighter-rouge">SECONDARY</code></td>
     </tr>
-    <tr>
-      <td><code class="highlighter-rouge">oAuthTimeout</code></td>
-      <td>Timeout for OIDC authentication flow requests.</td>
-      <td>Number</td>
-      <td>No</td>
-      <td><code class="highlighter-rouge">120000</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">authScheme</code></td>
-      <td>Authentication scheme for OIDC authentication.</td>
-      <td>String</td>
-      <td>Yes</td>
-      <td><code class="highlighter-rouge">OAUTH2</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">authParams</code></td>
-      <td>Authentication parameters for OIDC. <a href="#authParams-parameters">List</a></td>
-      <td>See <a href="#authParams-parameters">List</a></td>
-      <td>See <a href="#authParams-parameters">List</a></td>
-      <td>See <a href="#authParams-parameters">List</a></td>
-    </tr>
   </tbody>
 </table>
 
-<h5 id="parameters-for-authparams">Parameters for authParams</h5>
+<h2 id="public-functions">Public functions</h2>
 
-<p>You can use any of the following parameters for <code class="highlighter-rouge">authParams</code>.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>authParams Parameter</th>
-      <th>Description</th>
-      <th>Type</th>
-      <th>Required</th>
-      <th>Default</th>
-      <th>Valid Values</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">display</code></td>
-      <td>Specify how to display authentication UI.</td>
-      <td>String</td>
-      <td>No</td>
-      <td><code class="highlighter-rouge">none</code> (for Okta) and <code class="highlighter-rouge">popup</code> (External Idp)</td>
-      <td><code class="highlighter-rouge">none</code>, <code class="highlighter-rouge">popup</code>, <code class="highlighter-rouge">page</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">responseMode</code></td>
-      <td>Specify how the authorization response should be returned.</td>
-      <td>String</td>
-      <td>Yes</td>
-      <td><code class="highlighter-rouge">okta_post_message</code></td>
-      <td><code class="highlighter-rouge">query</code>, <code class="highlighter-rouge">fragment</code>, <code class="highlighter-rouge">form_post</code>, <code class="highlighter-rouge">okta_post_message</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">responseType</code></td>
-      <td>Specify the response type for OIDC authentication. The authorization code returned can later be exchanged for Access token or Refresh token.</td>
-      <td>String</td>
-      <td>Yes</td>
-      <td><code class="highlighter-rouge">id_token</code></td>
-      <td><code class="highlighter-rouge">code</code>, <code class="highlighter-rouge">token</code>, <code class="highlighter-rouge">id_token</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">scope</code></td>
-      <td>Specify what information to make available in the <code class="highlighter-rouge">id_token</code>. <code class="highlighter-rouge">openid</code> is required.</td>
-      <td>Array</td>
-      <td>Yes</td>
-      <td><code class="highlighter-rouge">['openid', 'email']</code></td>
-      <td><code class="highlighter-rouge">openid</code>, <code class="highlighter-rouge">email</code>, <code class="highlighter-rouge">profile</code>, <code class="highlighter-rouge">address</code>, <code class="highlighter-rouge">phone</code></td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="render-the-widget">Render the widget</h2>
+<h3 id="render-the-widget">Render the widget</h3>
 
 <p><code class="highlighter-rouge">.renderEl()</code></p>
 
@@ -1307,9 +1355,6 @@ The options object must have an <code class="highlighter-rouge">el</code> proper
 
 <span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">renderEl</span><span class="p">({</span>
     <span class="na">el</span><span class="p">:</span> <span class="s1">'#sign-in-container'</span><span class="p">,</span>
-    <span class="na">features</span><span class="p">:</span> <span class="p">{</span>
-      <span class="na">rememberDevice</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="p">},</span>
     <span class="na">labels</span><span class="p">:</span> <span class="p">{</span>
       <span class="s1">'primaryauth.title'</span><span class="p">:</span> <span class="s1">'Partner login'</span><span class="p">,</span>
       <span class="s1">'help'</span><span class="p">:</span> <span class="s1">'Click here for more help'</span>
@@ -1368,7 +1413,7 @@ The options object must have an <code class="highlighter-rouge">el</code> proper
 
 <p>Manage your Okta session with session functions in the Sign-in widget SDK.</p>
 
-<h4 id="check-for-an-existing-session">Check for an existing session</h4>
+<h3 id="check-for-an-existing-session">Check for an existing session</h3>
 
 <p><code class="highlighter-rouge">.session.exists()</code></p>
 
@@ -1406,7 +1451,7 @@ The options object must have an <code class="highlighter-rouge">el</code> proper
   </tbody>
 </table>
 
-<h4 id="get-the-session">Get the session</h4>
+<h3 id="get-the-current-session">Get the current session</h3>
 
 <p><code class="highlighter-rouge">.session.get()</code></p>
 
@@ -1449,7 +1494,7 @@ The options object must have an <code class="highlighter-rouge">el</code> proper
   </tbody>
 </table>
 
-<h4 id="refresh-the-session">Refresh the session</h4>
+<h3 id="refresh-the-current-session">Refresh the current session</h3>
 
 <p><code class="highlighter-rouge">.session.refresh()</code></p>
 
@@ -1493,7 +1538,7 @@ The options object must have an <code class="highlighter-rouge">el</code> proper
   </tbody>
 </table>
 
-<h4 id="close-the-session">Close the session</h4>
+<h3 id="close-the-current-session">Close the current session</h3>
 
 <p><code class="highlighter-rouge">.session.close()</code></p>
 
@@ -1527,7 +1572,7 @@ The options object must have an <code class="highlighter-rouge">el</code> proper
   </tbody>
 </table>
 
-<h4 id="sign-out-the-user">Sign-out the user</h4>
+<h3 id="sign-out-the-user">Sign out the user</h3>
 
 <p><code class="highlighter-rouge">.signOut()</code></p>
 
@@ -1563,13 +1608,13 @@ The options object must have an <code class="highlighter-rouge">el</code> proper
 
 <h2 id="token-management">Token Management</h2>
 
-<p>Manage your ID tokens with the Sign-in Widget SDK.</p>
+<p>Manage your OpenID Connect ID token with the Sign-in Widget SDK.</p>
 
-<h4 id="refresh-an-id-token">Refresh an id token</h4>
+<h3 id="renew-an-id-token">Renew an ID token</h3>
 
 <p><code class="highlighter-rouge">.idToken.refresh()</code></p>
 
-<p>Refresh the <code class="highlighter-rouge">id_token</code> by extending its lifetime.</p>
+<p>Renews the <code class="highlighter-rouge">id_token</code> by requesting a new one from Okta (and thus extending its default lifetime of one hour).</p>
 
 <h5 id="example-6">Example</h5>
 <div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">idToken</span><span class="p">.</span><span class="nx">refresh</span><span class="p">(</span><span class="nx">token</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">newToken</span><span class="p">)</span> <span class="p">{</span>
