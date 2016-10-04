@@ -21,7 +21,7 @@ In that case, the assertions from the two apps must be signed by the same key.
 
 ### Prerequisite
 
-Verify that the key rollover feature is enabled. If it's not, contact Support to enable it.
+The key rollover feature must be enabled. It's an Early Access feature; contact Support to enable it.
  
 ### How to Share the Certificate
  
