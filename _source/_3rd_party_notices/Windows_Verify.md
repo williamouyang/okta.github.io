@@ -1,7 +1,8 @@
 ---
-title: Okta Windows Verify product
 layout: legal_notice
+title: Okta Windows Verify product
 ---
+
 This document contains third party open source licenses and notices for
 the Okta Windows Verify product. Certain licenses and notices may appear
 in other parts of the product in accordance with the applicable license
@@ -15,7 +16,7 @@ THIRD PARTY NOTICES
 
 _Coding4Funtoolkit_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- --------------------------------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   Coding4FunToolkit is a set of controls, converters and helper classes for Windows Runtime XAML applications.
   LICENSE:             MIT
@@ -43,7 +44,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _Microsoft Application Insights_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ----------------------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   Application Insights main repository for documentation of overall SDK offerings for all platforms.
   LICENSE:             MIT

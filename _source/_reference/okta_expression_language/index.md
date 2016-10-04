@@ -17,7 +17,7 @@ This document details the features and syntax of Okta's Expression Language whic
 When you create an Okta expression, you can reference any attribute that lives on an Okta user profile or App user profile.
 
 ### Okta user profile
-Every user has an Okta user profile.  The Okta user profile is the central source of truth for a user's core attributes.  To reference an Okta user profile attribute, just reference `user` and specify the attribute variable name.  
+Every user has an Okta user profile.  The Okta user profile is the central source of truth for a user's core attributes.  To reference an Okta user profile attribute, just reference `user` and specify the attribute variable name.
 
 
 Syntax  | Definitions | Examples
@@ -168,7 +168,7 @@ Function  | Input Parameter Signature | Return Type | Example | Output
 `Time.fromIso8601ToUnix`|(String time)|String|ISO 8601 timestamp time as a string|The passed-in time expressed in Unix timestamp format.
 `Time.fromIso8601ToString`|(String time, String format)|String|ISO 8601 timestamp time, to convert to format using the same Joda time format semantics as fromStringToIso8601|The passed-in time expressed informat format.
 
->Both input parameters are optional for the Time.now function. The time zone ID supports both new and old style formats, listed below. The third example for 
+>Both input parameters are optional for the Time.now function. The time zone ID supports both new and old style formats, listed below. The third example for
 the Time.now function shows how to specify the military time format.
 
 ##### Time Zone IDs
@@ -220,7 +220,7 @@ Ternary operator example:<br>If group code is 123, assign value of Sales, else a
 You can specify IF...THEN...ELSE statements with the Okta EL. The primary use of these expressions is profile mappings and group rules. Group rules do not usually specificy an ELSE component.
 
 
-The format for conditional expressions is 
+The format for conditional expressions is
 <p><code>[Condition] ? [Value if TRUE] : [Value if FALSE]</code></p>
 
 
@@ -260,9 +260,9 @@ salary | Int
 isContractor | Boolean
 
 
-##### Samples Using Profile Mapping 
+##### Samples Using Profile Mapping
 
-The following samples are valid conditional expressions that apply to profile mapping. The attribute *courtesyTitle* is from another system being mapped to Okta. 
+The following samples are valid conditional expressions that apply to profile mapping. The attribute *courtesyTitle* is from another system being mapped to Okta.
 
 <p>If the middle initial is not blank, the full name is the first name, middle initial, a period, and the last name; otherwise it is the first name and the last name.<br>
 <code>String.len(middleInitial) > 0 ? String.join(firstName, " ", middleInitial, ". ", lastName) : String.join(firstName, " ", lastName)</code></p>

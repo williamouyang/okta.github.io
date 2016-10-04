@@ -23,7 +23,7 @@ Include the following script tag in your target web page:
 
 ## Authentication Flow
 
-The goal of an authentication flow is to set an Okta session cookie on the user's browser. 
+The goal of an authentication flow is to set an Okta session cookie on the user's browser.
 
 All Auth SDK methods return [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), deferred objects that resolve when the method has finished. For more information about why Promises are useful, and how to use our specific promise library, check out the [Q.js readme](https://github.com/kriskowal/q).
 
@@ -37,7 +37,7 @@ authClient.signIn({
 })
 .then(function(transaction) { // On success
   switch(transaction.status) {
-    
+
     case 'SUCCESS':
       authClient.session.setCookieAndRedirect(transaction.sessionToken); // Sets a cookie on redirect
       break;

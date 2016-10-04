@@ -1,7 +1,8 @@
 ---
-title: Okta Windows Shared product
 layout: legal_notice
+title: Okta Windows Shared product
 ---
+
 This document contains third party open source licenses and notices for
 the Okta Windows Shared product. Certain licenses and notices may appear
 in other parts of the product in accordance with the applicable license
@@ -42,9 +43,9 @@ _*Modifications by Okta, Inc._
 
 _CodeProject Article, "The MFC CDHtmlDialog class"_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ------
-  BRIEF DESCRIPTION:   
+  BRIEF DESCRIPTION:
   LICENSE:             CPOL
 
 License

@@ -3,7 +3,6 @@ layout: docs_page
 title: Integrate with Okta
 excerpt: Make your app enterprise-ready and connect with thousands of customers via the Okta Application Network.
 redirect_from: "/docs/getting_started/oan_guidance.html"
-
 ---
 
 ## Overview
@@ -13,7 +12,7 @@ With over 4000 pre-integrated applications, the [Okta Application Network (OAN)]
 
 ![OAN Overview](https://cloud.githubusercontent.com/assets/3278918/12026582/33986a56-ad70-11e5-96d4-3525cb796367.jpg "OAN Overview")
 
-There are two main area of focus – Single Sign-On and Provisioning. You need to support at least one of these features in order to be part of Okta Application Network. Okta strongly recommends that you implement both. 
+There are two main area of focus – Single Sign-On and Provisioning. You need to support at least one of these features in order to be part of Okta Application Network. Okta strongly recommends that you implement both.
 
 
 ## Single Sign-On
@@ -58,7 +57,7 @@ While many ISVs use proprietary APIs, Okta recommends that you implement your AP
 ### Provisioning: Building an Integration with Okta
 
 [Okta’s SCIM Provisioning Developer Program](http://developer.okta.com/standards/SCIM/scim_developer_program)
-is designed to help you build your SCIM server and integrate provisioning into the Okta Application Network. 
+is designed to help you build your SCIM server and integrate provisioning into the Okta Application Network.
 Get started by reviewing the program process, SCIM docs, and applying to the program.
 
 ## Okta Application Network FAQs

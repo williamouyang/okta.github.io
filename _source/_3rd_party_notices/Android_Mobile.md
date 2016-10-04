@@ -1,7 +1,8 @@
 ---
-title: Okta Android Mobile product
 layout: legal_notice
+title: Okta Android Mobile product
 ---
+
 This document contains third party open source licenses and notices for
 the Okta Android Mobile product. Certain licenses and notices may appear
 in other parts of the product in accordance with the applicable license
@@ -40,7 +41,7 @@ license._
 
 _Google Gson_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- --------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   A Java serialization library that can convert Java Objects into JSON and back.
   LICENSE:             Apache 2.0
@@ -65,7 +66,7 @@ license._
 
 _Gradle_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ----------------------------------------------------------
   BRIEF DESCRIPTION:   The modern open source polyglot build automation system.
   LICENSE:             Commercial or Apache 2.0, Apache 2.0 selected
@@ -131,7 +132,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _Sizzle_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -------------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   A pure-JavaScript CSS selector engine designed to be easily dropped in to a host library.
   LICENSE:             MIT
@@ -159,7 +160,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _The Android Open Source Project_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ------------------------------------------------------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   Android is an open source software stack for a wide range of mobile devices and a corresponding open source project led by Google.
   LICENSE:             Apache 2.0
@@ -183,9 +184,9 @@ license._
 
 _Underscore JS_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -----
-  BRIEF DESCRIPTION:   
+  BRIEF DESCRIPTION:
   LICENSE:             MIT
 
 Copyright (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative

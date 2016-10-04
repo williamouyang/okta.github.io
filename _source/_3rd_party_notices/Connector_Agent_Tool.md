@@ -1,7 +1,8 @@
 ---
-title: Okta Connector Agent Tool product
 layout: legal_notice
+title: Okta Connector Agent Tool product
 ---
+
 This document contains third party open source licenses and notices for
 the Okta Connector Agent Tool product. Certain licenses and notices may
 appear in other parts of the product in accordance with the applicable
@@ -15,7 +16,7 @@ THIRD PARTY NOTICES
 
 _Logback_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ----------------------------------------
   BRIEF DESCRIPTION:   Logging Framework
   LICENSE:             EPL 1.0 or LGPL 2.1, LGPL 2.1 selected
@@ -41,7 +42,7 @@ General Public License 2.1 license._
 
 _SpringFramework Spring Beans_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ----------------------------------------------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   Core support for dependency injection, transaction management, web applications, data access, messaging, testing and more.
   LICENSE:             Apache 2.0

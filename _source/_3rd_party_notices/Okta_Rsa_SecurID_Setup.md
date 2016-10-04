@@ -1,7 +1,8 @@
 ---
-title: Okta Rsa SecurID Setup product
 layout: legal_notice
+title: Okta Rsa SecurID Setup product
 ---
+
 This document contains third party open source licenses and notices for
 the Okta Rsa SecurID Setup product. Certain licenses and notices may
 appear in other parts of the product in accordance with the applicable

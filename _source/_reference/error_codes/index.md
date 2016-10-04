@@ -82,7 +82,7 @@ This document provides further information about the errors that the Okta API re
 |<a name="E0000081"></a>E0000081|Cannot modify the test attribute because it is a reserved attribute for this application.|400|
 
 
-## Okta Error Codes Listed by HTTP Return Code   
+## Okta Error Codes Listed by HTTP Return Code
 
 <table>
 <tr><th><strong>HTTP Return Code</strong></th><th><strong>Error Code</strong></th><th><strong>Description</strong></th></tr>
@@ -159,7 +159,7 @@ This document provides further information about the errors that the Okta API re
 In stituations where Okta needs to pass an error to a downstream application via a `redirect_uri`, the error code and description will be encoded as the query parameters `error` and `error_description`.
 
 > For example, if the **redirect_uri** is **https://example.com**, then the **ACCESS_DENIED** error would be passed as follows:
-> 
+>
 > ~~~
 > https://example.com?error=access_denied&error_description=The%20resource%20owner%20or%20authorization%20server%20denied%20the%20request.
 > ~~~

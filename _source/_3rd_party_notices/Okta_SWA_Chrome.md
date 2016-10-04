@@ -1,7 +1,8 @@
 ---
-title: Okta SWA Chrome product
 layout: legal_notice
+title: Okta SWA Chrome product
 ---
+
 This document contains third party open source licenses and notices for
 the Okta SWA Chrome product. Certain licenses and notices may appear in
 other parts of the product in accordance with the applicable license
@@ -69,7 +70,7 @@ license._
 
 _Backbone_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   Backbone.js gives structure to web applications by providing models with key-value binding and custom events, collections with a rich API of enumerable functions, views with declarative event handling, and connects it all to your existing API over a RESTful JSON interface.
   LICENSE:             MIT
@@ -164,7 +165,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _CasperJS_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- --------------------------------------------------------------------
   BRIEF DESCRIPTION:   Navigation scripting & testing utility for PhantomJS and SlimerJS.
   LICENSE:             MIT
@@ -228,7 +229,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _Grunt_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ----------------------------
   BRIEF DESCRIPTION:   The JavaScript Task Runner
   LICENSE:             MIT
@@ -256,7 +257,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _Info-ZIP_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   Info-ZIP's purpose is to provide free, portable, high-quality versions of the Zip and UnZip compressor-archiver utilities that are compatible with the DOS-based PKZIP by PKWARE, Inc.
   LICENSE:             Info-Zip License
@@ -369,7 +370,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _Mechanize_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- --------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   Stateful programmatic web browsing in Python, after Andy Lester’s Perl module.
   LICENSE:             ZPL 2.1 or BSD 3-Clause, BSD 3-Clause selected
@@ -413,7 +414,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _Serpent S Boxes_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -------------------------------------------------
   BRIEF DESCRIPTION:   Customized search engine to search for S boxes.
   LICENSE:             Custom
@@ -426,7 +427,7 @@ subject only to acknowledgement of its origin.
 
 _Sizzle_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -------------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   A pure-JavaScript CSS selector engine designed to be easily dropped in to a host library.
   LICENSE:             MIT
@@ -454,7 +455,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _UnderscoreJS_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ------------------------------------------------------------------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   Underscore is a JavaScript library that provides a whole mess of useful functional programming helpers without extending any built-in objects.
   LICENSE:             MIT
@@ -518,7 +519,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _XPISigner_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ---------------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   XPISigner is a commandline tool that simplifies signing Firefox and Thunderbird extensions.
   LICENSE:             BSD 3-Clause

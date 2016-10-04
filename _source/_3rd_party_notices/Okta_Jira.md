@@ -1,7 +1,8 @@
 ---
-title: Okta Jira product
 layout: legal_notice
+title: Okta Jira product
 ---
+
 This document contains third party open source licenses and notices for
 the Okta Jira product. Certain licenses and notices may appear in other
 parts of the product in accordance with the applicable license
@@ -42,7 +43,7 @@ _servlet-api_
 
   VERSION (IF ANY):    2.4
   -------------------- ------------
-  BRIEF DESCRIPTION:   
+  BRIEF DESCRIPTION:
   LICENSE:             Apache 2.0
 
 Copyright (c) 2003-2004 The Apache Software Foundation.

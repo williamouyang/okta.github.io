@@ -1,4 +1,5 @@
 ---
+layout: docs_page
 title: Setting up a SAML application in Okta
 redirect_from:
     - "/docs/guides/setting_up_a_saml_application_in_okta"

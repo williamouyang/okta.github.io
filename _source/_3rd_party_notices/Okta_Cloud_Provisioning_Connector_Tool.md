@@ -1,9 +1,9 @@
 ---
-title: Okta Cloud Provisioning Connector Tool product
 layout: legal_notice
+title: Okta Cloud Provisioning Connector Tool product
 redirect_from: "/3rd_party_notices/Okta_Rum_Tool"
-
 ---
+
 This document contains third party open source licenses and notices for
 the Okta Cloud Provisioning Connector Tool product. Certain licenses and notices may appear in
 other parts of the product in accordance with the applicable license
@@ -44,7 +44,7 @@ license._
 
 _Apache Commons Exec_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ------------------------------------------------------------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   The package shall create and maintain a process execution package written in the Java language to be distributed under the ASF license. 
   LICENSE:             Apache 2.0
@@ -127,7 +127,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _Logback_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ----------------------------------------
   BRIEF DESCRIPTION:   Logging Framework.
   LICENSE:             EPL 1.0 or LGPL 2.1, LGPL 2.1 selected
@@ -153,7 +153,7 @@ General Public License 2.1 license._
 
 _Schema for SOAP/ 1.1 envelope_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -------------------------------
   BRIEF DESCRIPTION:   Schema for SOAP/1.1 envelope.
   LICENSE:             Permissive
@@ -227,7 +227,7 @@ holders.
 
 _Serpent S Boxes_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -------------------------------------------------
   BRIEF DESCRIPTION:   Customized search engine to search for S boxes.
   LICENSE:             Custom

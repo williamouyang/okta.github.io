@@ -1,7 +1,8 @@
 ---
-title: Okta Web App Client JS product
 layout: legal_notice
+title: Okta Web App Client JS product
 ---
+
 This document contains third party open source licenses and notices for
 the Okta Web App Client JS product. Certain licenses and notices may
 appear in other parts of the product in accordance with the applicable
@@ -102,7 +103,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _Grunt_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -----------------------------
   BRIEF DESCRIPTION:   The JavaScript Task Runner.
   LICENSE:             MIT
@@ -130,7 +131,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _HUE2RGB.as_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -----------------------------------------------------------
   BRIEF DESCRIPTION:   ActionScript 3 framework, tools, libraries and utilities.
   LICENSE:             GPL 2.0 or LGPL 2.1 or MPL 1.1, LGPL 2.1 selected
@@ -377,7 +378,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _link-headers_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- --------------------------------------------------------------
   BRIEF DESCRIPTION:   JavaScript parsing of link headers as described by RFC 5988.
   LICENSE:             MIT
@@ -433,7 +434,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _Q_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ------------------------------------------------------------------------
   BRIEF DESCRIPTION:   A tool for creating and composing asynchronous promises in JavaScript.
   LICENSE:             MIT
@@ -489,7 +490,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _RequireJS_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ------------------------------------------
   BRIEF DESCRIPTION:   A file and module loader for JavaScript.
   LICENSE:             MIT or BSD 3-Clause, MIT selected
@@ -518,10 +519,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 _SHA 256 WebToolkit_
 
   ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   The SHA (Secure Hash Algorithm) is one of the many cryptographic hash functions. It is suggested that SHA256 or greater must used for critical technology. This script is used to process variable length message into a fixed-length
-                       
+
                        output using the SHA256 algorithm. It is fully compatible with UTF-8 encoding.
 
   LICENSE:             CC BY 2.0 UK
@@ -532,7 +533,7 @@ Commons Attribution 2.0 UK license._
 
 _Spin.js_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ------------------------------------------------------------
   BRIEF DESCRIPTION:   An animated CSS3 loading spinner with VML fallback for IE.
   LICENSE:             MIT
@@ -560,7 +561,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _UnderscoreJS_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ------------------------------------------------------------------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   Underscore is a JavaScript library that provides a whole mess of useful functional programming helpers without extending any built-in objects.
   LICENSE:             MIT
@@ -588,7 +589,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _URI Template Library_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   This is a set of tests for implementations of RFC6570 - URI Template. It is designed to be reused by any implementation, to improve interoperability and implementation quality.
   LICENSE:             Apache 2.0

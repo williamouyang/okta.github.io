@@ -16,12 +16,12 @@
 	     <h3 class="Sidebar-title">Programming languages</h3>
 	     <ul class="Sidebar-nav">
 	       {% comment %}
-	       
+
 	       The code below gets a list of programming languages.
 	       It ultimately defines to variables:
 	       - 'langauge' the name of the directory in the '_code' directory that has the language
 	       - 'element' the 'index.md' file for the language subdirectory in '_code'
-	       
+
 	       {% endcomment %}
 	       {% assign indices = site.code | sort: 'id' %}
 	       {% for index in indices %}
@@ -86,13 +86,13 @@
 	{% endfor %}
 	</div>
 	<!-- END Subpages Grid -->
-	
-	
-	
+
+
+
       </div>
       <!-- END Page Content -->
-	
-	
+
+
     </section>
     <!-- END Page Center w/Sub Nav & Content -->
 
@@ -102,10 +102,6 @@
     <!-- END Footer -->
 
   </div>
-<script
-        src="https://code.jquery.com/jquery-3.1.0.min.js"
-        integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
-        crossorigin="anonymous"></script>
 <script src="/assets/js/master.js"></script>
 </body>
 </html>

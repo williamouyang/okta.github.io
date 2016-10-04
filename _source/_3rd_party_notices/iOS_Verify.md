@@ -1,7 +1,8 @@
 ---
-title: Okta iOS Verify product
 layout: legal_notice
+title: Okta iOS Verify product
 ---
+
 This document contains third party open source licenses and notices for
 the Okta iOS Verify product. Certain licenses and notices may appear in
 other parts of the product in accordance with the applicable license
@@ -15,7 +16,7 @@ THIRD PARTY NOTICES
 
 _ALAlertBanner_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ------------------------------------------------------
   BRIEF DESCRIPTION:   A clean and simple alert banner for iPhone and iPad.
   LICENSE:             MIT
@@ -43,9 +44,9 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _Apple Code_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ---------------
-  BRIEF DESCRIPTION:   
+  BRIEF DESCRIPTION:
   LICENSE:             Apple License
 
 Copyright (C) 2016 Apple Inc. All Rights Reserved.
@@ -90,7 +91,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 _Google Authenticator OpenSource_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ----------------------------------------------
   BRIEF DESCRIPTION:   Open source version of Google Authenticator.
   LICENSE:             Apache 2.0
@@ -115,7 +116,7 @@ license._
 
 _OCMock_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -------------------------------
   BRIEF DESCRIPTION:   Mock objects for Objective-C.
   LICENSE:             Apache 2.0
@@ -140,7 +141,7 @@ license._
 
 _SlideInView_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- --------------------------------------------------------------------
   BRIEF DESCRIPTION:   How to present a notification like view from the bottom of a view.
   LICENSE:             MIT
@@ -168,7 +169,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _TouchIDAuth_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ----------------------------------------------------------------
   BRIEF DESCRIPTION:   A library for passwordless authentication using TouchID & JWT.
   LICENSE:             MIT
@@ -196,7 +197,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _Version.m_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -------------------------------
   BRIEF DESCRIPTION:   Runtime iOS Version Checking.
   LICENSE:             MIT
@@ -224,9 +225,9 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _UIImage-JTColor_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -----
-  BRIEF DESCRIPTION:   
+  BRIEF DESCRIPTION:
   LICENSE:             MIT
 
 Copyright (c) 2013 Jamz Tang <jamz@jamztang.com>.

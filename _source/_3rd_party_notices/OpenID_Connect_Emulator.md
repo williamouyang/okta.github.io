@@ -1,7 +1,8 @@
 ---
-title: Okta OpenID Connect Emulator product
 layout: legal_notice
+title: Okta OpenID Connect Emulator product
 ---
+
 This document contains third party open source licenses and notices for
 the Okta OpenID Connect Emulator product. Certain licenses and notices
 may appear in other parts of the product in accordance with the
@@ -15,10 +16,10 @@ THIRD PARTY NOTICES
 
 _Backbone_
 
-  VERSION (IF ANY):    1.2.1                                                                                                                                                                                                                                                                              
+  VERSION (IF ANY):    1.2.1
   -------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --
-  BRIEF DESCRIPTION:   Backbone.js gives structure to web applications by providing MODELS with key-value binding and custom events, COLLECTIONS with a rich API of enumerable functions,VIEWS with declarative event handling, and connects it all to your existing API over a RESTful JSON interface.   
-  LICENSE:             MIT                                                                                                                                                                                                                                                                                
+  BRIEF DESCRIPTION:   Backbone.js gives structure to web applications by providing MODELS with key-value binding and custom events, COLLECTIONS with a rich API of enumerable functions,VIEWS with declarative event handling, and connects it all to your existing API over a RESTful JSON interface.
+  LICENSE:             MIT
 
 COPYRIGHT (C) 2010-2015 JEREMY ASHKENAS, DOCUMENTCLOUD
 
@@ -43,10 +44,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _Chosen.jQuery_
 
-  VERSION (IF ANY):    0.11.1                                                                           
+  VERSION (IF ANY):    0.11.1
   -------------------- -------------------------------------------------------------------------------- --
-  BRIEF DESCRIPTION:   Chosen is a library for making long, unwieldy select boxes more user friendly.   
-  LICENSE              MIT                                                                              
+  BRIEF DESCRIPTION:   Chosen is a library for making long, unwieldy select boxes more user friendly.
+  LICENSE              MIT
 
 BY PATRICK FILLER FOR HARVEST
 
@@ -75,10 +76,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _EventEmitter_
 
-  VERSION (IF ANY):    4.2.0                                     
+  VERSION (IF ANY):    4.2.0
   -------------------- ----------------------------------------- --
-  BRIEF DESCRIPTION:   Event based JavaScript for the browser.   
-  LICENSE:             MIT                                       
+  BRIEF DESCRIPTION:   Event based JavaScript for the browser.
+  LICENSE:             MIT
 
 COPYRIGHT (C) 2011-2013 OLIVER CALDWELL.
 
@@ -103,10 +104,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _Eventie_
 
-  VERSION (IF ANY):    1.0.4                                        
+  VERSION (IF ANY):    1.0.4
   -------------------- -------------------------------------------- --
-  BRIEF DESCRIPTION:   Makes dealing with events in IE8 bearable.   
-  LICENSE:             MIT                                          
+  BRIEF DESCRIPTION:   Makes dealing with events in IE8 bearable.
+  LICENSE:             MIT
 
 COPYRIGHT (C) 2015 DAVID DESANDRO.
 
@@ -131,10 +132,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _Handlebars_
 
-  VERSION (IF ANY):    2.0.0                                                                                                                                                                                                                                         
+  VERSION (IF ANY):    2.0.0
   -------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --
-  BRIEF DESCRIPTION:   Handlebars.js is an extension to the Mustache templating language created by Chris Wanstrath. Handlebars.js and Mustache are both logicless templating languages that keep the view and the code separated like we all know they should be.   
-  LICENSE:             MIT                                                                                                                                                                                                                                           
+  BRIEF DESCRIPTION:   Handlebars.js is an extension to the Mustache templating language created by Chris Wanstrath. Handlebars.js and Mustache are both logicless templating languages that keep the view and the code separated like we all know they should be.
+  LICENSE:             MIT
 
 COPYRIGHT (C) 2011-2015 BY YEHUDA KATZ.
 
@@ -159,10 +160,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _Imagesloaded_
 
-  VERSION (IF ANY):    3.0.4                                  
+  VERSION (IF ANY):    3.0.4
   -------------------- -------------------------------------- --
-  BRIEF DESCRIPTION:   Detect when images have been loaded.   
-  LICENSE:             MIT                                    
+  BRIEF DESCRIPTION:   Detect when images have been loaded.
+  LICENSE:             MIT
 
 COPYRIGHT (C) 2015 DAVID DESANDRO.
 
@@ -187,10 +188,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _jQuery_
 
-  VERSION (IF ANY):    1.11.3                                                                                                                                                                                                                                                                                                                                                                       
+  VERSION (IF ANY):    1.11.3
   -------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --
-  BRIEF DESCRIPTION:   jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers. With a combination of versatility and extensibility, jQuery has changed the way that millions of people write JavaScript.   
-  LICENSE:             MIT                                                                                                                                                                                                                                                                                                                                                                          
+  BRIEF DESCRIPTION:   jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers. With a combination of versatility and extensibility, jQuery has changed the way that millions of people write JavaScript.
+  LICENSE:             MIT
 
 COPYRIGHT (C) 2005, 2014 JQUERY FOUNDATION, INC. AND OTHER CONTRIBUTORS.
 
@@ -217,10 +218,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _jQuery.AutoSuggest_
 
-  VERSION (IF ANY):    1.4                                                                                             
+  VERSION (IF ANY):    1.4
   -------------------- ----------------------------------------------------------------------------------------------- --
-  BRIEF DESCRIPTION:   This Plug-In will auto-complete or auto-suggest completed search queries for you as you type.   
-  LICENSE              MIT or GPL, MIT selected                                                                        
+  BRIEF DESCRIPTION:   This Plug-In will auto-complete or auto-suggest completed search queries for you as you type.
+  LICENSE              MIT or GPL, MIT selected
 
 COPYRIGHT (C) 2009-2010 DREW WILSON.
 
@@ -245,10 +246,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _jQuery.custominput_
 
-  VERSION (IF ANY):                                                                                                           
+  VERSION (IF ANY):
   -------------------- ------------------------------------------------------------------------------------------------------ --
-  BRIEF DESCRIPTION:   Accessible, custom designed checkbox and radio button inputs styled with CSS (and a dash of jQuery).   
-  LICENSE              MIT                                                                                                    
+  BRIEF DESCRIPTION:   Accessible, custom designed checkbox and radio button inputs styled with CSS (and a dash of jQuery).
+  LICENSE              MIT
 
 The MIT License
 
@@ -275,10 +276,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _jQuery.placeholder_
 
-  VERSION (IF ANY):                                                                                                               
+  VERSION (IF ANY):
   -------------------- ---------------------------------------------------------------------------------------------------------- --
-  BRIEF DESCRIPTION:   A jQuery plugin that enables HTML5 placeholder behavior for browsers that aren’t trying hard enough yet.   
-  LICENSE              MIT                                                                                                        
+  BRIEF DESCRIPTION:   A jQuery plugin that enables HTML5 placeholder behavior for browsers that aren’t trying hard enough yet.
+  LICENSE              MIT
 
 COPYRIGHT (C) MATHIAS BYNENS HTTP://MATHIASBYNENS.BE/.
 
@@ -303,10 +304,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _jQuery.qTip_
 
-  VERSION (IF ANY):    2.1.1                       
+  VERSION (IF ANY):    2.1.1
   -------------------- --------------------------- --
-  BRIEF DESCRIPTION:   Pretty powerful tooltips    
-  LICENSE              MIT and GPL, MIT selected   
+  BRIEF DESCRIPTION:   Pretty powerful tooltips
+  LICENSE              MIT and GPL, MIT selected
 
 COPYRIGHT (C) 2013 CRAIG MICHAEL THOMPSON.
 
@@ -333,10 +334,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _jQuery-ui_
 
-  VERSION (IF ANY):    1.10.4                                                                                                            
+  VERSION (IF ANY):    1.10.4
   -------------------- ----------------------------------------------------------------------------------------------------------------- --
-  BRIEF DESCRIPTION:   jQuery UI is a curated set of user interface interactions, effects, widgets, and themes built on top of jQuery.   
-  LICENSE              MIT                                                                                                               
+  BRIEF DESCRIPTION:   jQuery UI is a curated set of user interface interactions, effects, widgets, and themes built on top of jQuery.
+  LICENSE              MIT
 
 COPYRIGHT (C) JQUERY FOUNDATION AND OTHER CONTRIBUTORS,
 HTTPS://JQUERY.ORG/.
@@ -362,10 +363,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _jsrasign_
 
-  VERSION (IF ANY):    1.10.4                                                   
+  VERSION (IF ANY):    1.10.4
   -------------------- -------------------------------------------------------- --
-  BRIEF DESCRIPTION:   opensource free pure JavaScript cryptographic library.   
-  LICENSE              MIT                                                      
+  BRIEF DESCRIPTION:   opensource free pure JavaScript cryptographic library.
+  LICENSE              MIT
 
 COPYRIGHT (C) 2010-2016 KENJI URUSHIMA.
 
@@ -390,9 +391,9 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _Mixpanel_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ------------
-  BRIEF DESCRIPTION:   
+  BRIEF DESCRIPTION:
   LICENSE:             Apache 2.0
 
 Mixpanel, Inc. -- http://mixpanel.com/
@@ -417,10 +418,10 @@ license._
 
 _Spin.js_
 
-  VERSION (IF ANY):    1.3.2 and 2.3.2                                              
+  VERSION (IF ANY):    1.3.2 and 2.3.2
   -------------------- ------------------------------------------------------------ --
-  BRIEF DESCRIPTION:   An animated CSS3 loading spinner with VML fallback for IE.   
-  LICENSE              MIT                                                          
+  BRIEF DESCRIPTION:   An animated CSS3 loading spinner with VML fallback for IE.
+  LICENSE              MIT
 
 COPYRIGHT (C) 2011-2015 FELIX GNASS.
 
@@ -445,10 +446,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _Underscore.js_
 
-  VERSION (IF ANY):    1.8.3                                                                                                                                            
+  VERSION (IF ANY):    1.8.3
   -------------------- ------------------------------------------------------------------------------------------------------------------------------------------------ --
-  BRIEF DESCRIPTION:   Underscore is a JavaScript library that provides a whole mess of useful functional programming helpers without extending any built-in objects.   
-  LICENSE              MIT                                                                                                                                              
+  BRIEF DESCRIPTION:   Underscore is a JavaScript library that provides a whole mess of useful functional programming helpers without extending any built-in objects.
+  LICENSE              MIT
 
 COPYRIGHT (C) 2009-2015 JEREMY ASHKENAS, DOCUMENTCLOUD AND INVESTIGATIVE
 REPORTERS & EDITORS.

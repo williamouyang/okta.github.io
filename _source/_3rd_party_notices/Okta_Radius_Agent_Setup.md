@@ -1,7 +1,8 @@
 ---
-title: Okta Radius Agent Setup product
 layout: legal_notice
+title: Okta Radius Agent Setup product
 ---
+
 This document contains third party open source licenses and notices for
 the Okta Radius Agent Setup product. Certain licenses and notices may
 appear in other parts of the product in accordance with the applicable

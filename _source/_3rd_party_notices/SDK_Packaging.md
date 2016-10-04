@@ -1,7 +1,8 @@
 ---
-title: Okta SDK Packaging product
 layout: legal_notice
+title: Okta SDK Packaging product
 ---
+
 This document contains third party open source licenses and notices for
 the Okta SDK Packaging product. Certain licenses and notices may appear
 in other parts of the product in accordance with the applicable license
@@ -15,7 +16,7 @@ THIRD PARTY NOTICES
 
 _UnboundID SDK_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ----------------------------------------
   BRIEF DESCRIPTION:   SCIM SDK and Reference Implementation.
   LICENSE:             LGPL 2.1

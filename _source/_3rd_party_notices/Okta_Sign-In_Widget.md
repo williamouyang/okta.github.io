@@ -1,7 +1,8 @@
 ---
-title: Okta Sign-In Widget product
 layout: legal_notice
+title: Okta Sign-In Widget product
 ---
+
 This document contains third party open source licenses and notices for
 the Okta Sign-In Widget product. Certain licenses and notices may appear
 in other parts of the product in accordance with the applicable license
@@ -15,10 +16,10 @@ THIRD PARTY NOTICES
 
 _Almond_
 
-  VERSION (IF ANY):    0.3.1                                                                                                                                                                                          
+  VERSION (IF ANY):    0.3.1
   -------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --
-  BRIEF DESCRIPTION:   A replacement AMD loader for RequireJS. It provides a minimal AMD API footprint that includes loader plugin support. Only useful for built/bundled AMD modules, does not do dynamic loading.   
-  LICENSE:             MIT or New BSD, MIT selected                                                                                                                                                                   
+  BRIEF DESCRIPTION:   A replacement AMD loader for RequireJS. It provides a minimal AMD API footprint that includes loader plugin support. Only useful for built/bundled AMD modules, does not do dynamic loading.
+  LICENSE:             MIT or New BSD, MIT selected
 
 Almond is released under two licenses: new BSD, and MIT. You may pick
 the license that best suits your development needs. The text of both
@@ -84,10 +85,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _Backbone_
 
-  VERSION (IF ANY):    1.2.1                                                                                                                                                                                                                                                                              
+  VERSION (IF ANY):    1.2.1
   -------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --
-  BRIEF DESCRIPTION:   Backbone.js gives structure to web applications by providing MODELS with key-value binding and custom events, COLLECTIONS with a rich API of enumerable functions,VIEWS with declarative event handling, and connects it all to your existing API over a RESTful JSON interface.   
-  LICENSE:             MIT                                                                                                                                                                                                                                                                                
+  BRIEF DESCRIPTION:   Backbone.js gives structure to web applications by providing MODELS with key-value binding and custom events, COLLECTIONS with a rich API of enumerable functions,VIEWS with declarative event handling, and connects it all to your existing API over a RESTful JSON interface.
+  LICENSE:             MIT
 
 COPYRIGHT (C) 2010-2015 JEREMY ASHKENAS, DOCUMENTCLOUD
 
@@ -112,10 +113,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _Base64.js_
 
-  VERSION (IF ANY):    0.3.0                                                                                                                                                                                                                                                                                         
+  VERSION (IF ANY):    0.3.0
   -------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --
-  BRIEF DESCRIPTION:   Duo two-factor authentication for Java web applications. This package allows a web developer to quickly add Duo's interactive, self-service, two-factor authentication to any web login form - without setting up secondary user accounts, directory synchronization, servers, or hardware.   
-  LICENSE:             Apache 2.0 or WTFPL, WTFPL selected                                                                                                                                                                                                                                                           
+  BRIEF DESCRIPTION:   Duo two-factor authentication for Java web applications. This package allows a web developer to quickly add Duo's interactive, self-service, two-factor authentication to any web login form - without setting up secondary user accounts, directory synchronization, servers, or hardware.
+  LICENSE:             Apache 2.0 or WTFPL, WTFPL selected
 
 COPYRIGHT 2015 DAVID CHAMBERS
 
@@ -338,10 +339,10 @@ TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
 
 _Chosen.jQuery_
 
-  VERSION (IF ANY):    0.11.1                                                                           
+  VERSION (IF ANY):    0.11.1
   -------------------- -------------------------------------------------------------------------------- --
-  BRIEF DESCRIPTION:   Chosen is a library for making long, unwieldy select boxes more user friendly.   
-  LICENSE              MIT                                                                              
+  BRIEF DESCRIPTION:   Chosen is a library for making long, unwieldy select boxes more user friendly.
+  LICENSE              MIT
 
 BY PATRICK FILLER FOR HARVEST
 
@@ -370,10 +371,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _Duo Web SDK_
 
-  VERSION (IF ANY):    2                                                                                    
+  VERSION (IF ANY):    2
   -------------------- ------------------------------------------------------------------------------------ --
-  BRIEF DESCRIPTION:   ≈ 500 byte* polyfill for browsers which don't provide window.btoa and window.atob.   
-  LICENSE              BSD 3 Clause                                                                         
+  BRIEF DESCRIPTION:   ≈ 500 byte* polyfill for browsers which don't provide window.btoa and window.atob.
+  LICENSE              BSD 3 Clause
 
 COPYRIGHT (C) 2015, DUO SECURITY, INC. ALL RIGHTS RESERVED.
 
@@ -405,10 +406,10 @@ POSSIBILITY OF SUCH DAMAGE.
 
 _EventEmitter_
 
-  VERSION (IF ANY):    4.2.0                                     
+  VERSION (IF ANY):    4.2.0
   -------------------- ----------------------------------------- --
-  BRIEF DESCRIPTION:   Event based JavaScript for the browser.   
-  LICENSE:             MIT                                       
+  BRIEF DESCRIPTION:   Event based JavaScript for the browser.
+  LICENSE:             MIT
 
 COPYRIGHT (C) 2011-2013 OLIVER CALDWELL
 
@@ -433,10 +434,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _Eventie_
 
-  VERSION (IF ANY):    1.0.4                                        
+  VERSION (IF ANY):    1.0.4
   -------------------- -------------------------------------------- --
-  BRIEF DESCRIPTION:   Makes dealing with events in IE8 bearable.   
-  LICENSE:             MIT                                          
+  BRIEF DESCRIPTION:   Makes dealing with events in IE8 bearable.
+  LICENSE:             MIT
 
 COPYRIGHT © 2015 DAVID DESANDRO
 
@@ -461,10 +462,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _Handlebars_
 
-  VERSION (IF ANY):    2.0.0                                                                                                                                                                                                                                         
+  VERSION (IF ANY):    2.0.0
   -------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --
-  BRIEF DESCRIPTION:   Handlebars.js is an extension to the Mustache templating language created by Chris Wanstrath. Handlebars.js and Mustache are both logicless templating languages that keep the view and the code separated like we all know they should be.   
-  LICENSE:             MIT                                                                                                                                                                                                                                           
+  BRIEF DESCRIPTION:   Handlebars.js is an extension to the Mustache templating language created by Chris Wanstrath. Handlebars.js and Mustache are both logicless templating languages that keep the view and the code separated like we all know they should be.
+  LICENSE:             MIT
 
 COPYRIGHT (C) 2011-2015 BY YEHUDA KATZ
 
@@ -489,10 +490,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _i18n_
 
-  VERSION (IF ANY):                                                                                           
+  VERSION (IF ANY):
   -------------------- -------------------------------------------------------------------------------------- --
-  BRIEF DESCRIPTION:   An AMD loader plugin for loading internationalization/localization string resources.   
-  LICENSE:             New BSD or MIT, MIT selected                                                           
+  BRIEF DESCRIPTION:   An AMD loader plugin for loading internationalization/localization string resources.
+  LICENSE:             New BSD or MIT, MIT selected
 
 RequireJS is released under two licenses: new BSD, and MIT. You may pick
 the license that best suits your development needs. The text of both
@@ -558,10 +559,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _Imagesloaded_
 
-  VERSION (IF ANY):    3.0.4                                  
+  VERSION (IF ANY):    3.0.4
   -------------------- -------------------------------------- --
-  BRIEF DESCRIPTION:   Detect when images have been loaded.   
-  LICENSE:             MIT                                    
+  BRIEF DESCRIPTION:   Detect when images have been loaded.
+  LICENSE:             MIT
 
 COPYRIGHT © 2015 DAVID DESANDRO
 
@@ -586,10 +587,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _jQuery_
 
-  VERSION (IF ANY):    1.11.3                                                                                                                                                                                                                                                                                                                                                                       
+  VERSION (IF ANY):    1.11.3
   -------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --
-  BRIEF DESCRIPTION:   jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers. With a combination of versatility and extensibility, jQuery has changed the way that millions of people write JavaScript.   
-  LICENSE:             MIT                                                                                                                                                                                                                                                                                                                                                                          
+  BRIEF DESCRIPTION:   jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers. With a combination of versatility and extensibility, jQuery has changed the way that millions of people write JavaScript.
+  LICENSE:             MIT
 
 COPYRIGHT 2005, 2014 JQUERY FOUNDATION, INC. AND OTHER CONTRIBUTORS.
 
@@ -616,10 +617,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _jQuery.cookie_
 
-  VERSION (IF ANY):    1.4.0                                                                            
+  VERSION (IF ANY):    1.4.0
   -------------------- -------------------------------------------------------------------------------- --
-  BRIEF DESCRIPTION:   A simple, lightweight jQuery plugin for reading, writing and deleting cookies.   
-  LICENSE              MIT                                                                              
+  BRIEF DESCRIPTION:   A simple, lightweight jQuery plugin for reading, writing and deleting cookies.
+  LICENSE              MIT
 
 COPYRIGHT 2014 KLAUS HARTL
 
@@ -644,10 +645,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _jQuery.custominput_
 
-  VERSION (IF ANY):                                                                                                           
+  VERSION (IF ANY):
   -------------------- ------------------------------------------------------------------------------------------------------ --
-  BRIEF DESCRIPTION:   Accessible, custom designed checkbox and radio button inputs styled with CSS (and a dash of jQuery).   
-  LICENSE              MIT                                                                                                    
+  BRIEF DESCRIPTION:   Accessible, custom designed checkbox and radio button inputs styled with CSS (and a dash of jQuery).
+  LICENSE              MIT
 
 The MIT License
 
@@ -674,10 +675,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _jQuery.placeholder_
 
-  VERSION (IF ANY):                                                                                                               
+  VERSION (IF ANY):
   -------------------- ---------------------------------------------------------------------------------------------------------- --
-  BRIEF DESCRIPTION:   A jQuery plugin that enables HTML5 placeholder behavior for browsers that aren’t trying hard enough yet.   
-  LICENSE              MIT                                                                                                        
+  BRIEF DESCRIPTION:   A jQuery plugin that enables HTML5 placeholder behavior for browsers that aren’t trying hard enough yet.
+  LICENSE              MIT
 
 COPYRIGHT MATHIAS BYNENS <HTTP://MATHIASBYNENS.BE/>
 
@@ -702,10 +703,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _jQuery.qTip_
 
-  VERSION (IF ANY):    2.1.1                       
+  VERSION (IF ANY):    2.1.1
   -------------------- --------------------------- --
-  BRIEF DESCRIPTION:   Pretty powerful tooltips    
-  LICENSE              MIT and GPL, MIT selected   
+  BRIEF DESCRIPTION:   Pretty powerful tooltips
+  LICENSE              MIT and GPL, MIT selected
 
 COPYRIGHT (C) 2013 CRAIG MICHAEL THOMPSON
 
@@ -732,10 +733,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _q.js_
 
-  VERSION (IF ANY):                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+  VERSION (IF ANY):
   -------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --
-  BRIEF DESCRIPTION:   If a function cannot return a value or throw an exception without blocking, it can return a promise instead. A promise is an object that represents the return value or the thrown exception that the function may eventually provide. A promise can also be used as a proxy for a remote object to overcome latency. On the first pass, promises can mitigate the “Pyramid of Doom”: the situation where code marches to the right faster than it marches forward.   
-  LICENSE              MIT                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+  BRIEF DESCRIPTION:   If a function cannot return a value or throw an exception without blocking, it can return a promise instead. A promise is an object that represents the return value or the thrown exception that the function may eventually provide. A promise can also be used as a proxy for a remote object to overcome latency. On the first pass, promises can mitigate the “Pyramid of Doom”: the situation where code marches to the right faster than it marches forward.
+  LICENSE              MIT
 
 COPYRIGHT 2009–2014 KRISTOPHER MICHAEL KOWAL. ALL RIGHTS RESERVED.
 
@@ -760,10 +761,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _Sizzle_
 
-  VERSION (IF ANY):                                                                                                
+  VERSION (IF ANY):
   -------------------- ------------------------------------------------------------------------------------------- --
-  BRIEF DESCRIPTION:   A pure-JavaScript CSS selector engine designed to be easily dropped in to a host library.   
-  LICENSE:             MIT                                                                                         
+  BRIEF DESCRIPTION:   A pure-JavaScript CSS selector engine designed to be easily dropped in to a host library.
+  LICENSE:             MIT
 
 COPYRIGHT JQUERY FOUNDATION AND OTHER CONTRIBUTORS, HTTPS://JQUERY.ORG/
 
@@ -804,10 +805,10 @@ the terms above.
 
 _Underscore_
 
-  VERSION (IF ANY):    1.8.3                                                                                                                                                                                          
+  VERSION (IF ANY):    1.8.3
   -------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --
-  BRIEF DESCRIPTION:   Underscore.js is a utility-belt library for JavaScript that provides support for the usual functional suspects (each, map, reduce, filter...) without extending any core JavaScript objects.   
-  LICENSE:             MIT                                                                                                                                                                                            
+  BRIEF DESCRIPTION:   Underscore.js is a utility-belt library for JavaScript that provides support for the usual functional suspects (each, map, reduce, filter...) without extending any core JavaScript objects.
+  LICENSE:             MIT
 
 COPYRIGHT (C) 2009-2015 JEREMY ASHKENAS, DOCUMENTCLOUD AND INVESTIGATIVE
 REPORTERS & EDITORS
@@ -834,19 +835,19 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 _XDomain_
 
   ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  VERSION (IF ANY):                                                                                                                                                                                                                                                                                                                                                                                                                                                              0.7.3                                                                                                                                                                                                                                     
+  VERSION (IF ANY):                                                                                                                                                                                                                                                                                                                                                                                                                                                              0.7.3
   ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --
-  BRIEF DESCRIPTION:                                                                                                                                                                                                                                                                                                                                                                                                                                                             A pure JavaScript CORS alternative. No server configuration required - just add a proxy.html on the domain you wish to communicate with. This library utilizes XHook to hook all XHR, so XDomain will work seamlessly with any library.   
+  BRIEF DESCRIPTION:                                                                                                                                                                                                                                                                                                                                                                                                                                                             A pure JavaScript CORS alternative. No server configuration required - just add a proxy.html on the domain you wish to communicate with. This library utilizes XHook to hook all XHR, so XDomain will work seamlessly with any library.
 
-  LICENSE                                                                                                                                                                                                                                                                                                                                                                                                                                                                        MIT                                                                                                                                                                                                                                       
+  LICENSE                                                                                                                                                                                                                                                                                                                                                                                                                                                                        MIT
 
-  COPYRIGHT © 2014 JAIME PILLORA <DEV@JPILLORA.COM>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
-  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:                                                                                                                                                                                                                                                                         
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
-  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
-  THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                                                                                                                                                                                                                                             
+  COPYRIGHT © 2014 JAIME PILLORA <DEV@JPILLORA.COM>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
   ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 DISCLAIMER AND LIMITATION OF LIABILITY

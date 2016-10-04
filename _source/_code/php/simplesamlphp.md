@@ -1,5 +1,5 @@
 ---
-layout: software
+layout: docs_page
 title: SimpleSAMLphp
 excerpt: How to use SimpleSAMLphp to add support for Okta via SAML.
 support_email: developers@okta.com
@@ -138,7 +138,7 @@ PHP, reconfiguring Apache, and creating some symbolic links.
 
 3. `cd` to the `DocumentRoot` directory.
 
-   Assuming that the command above returned `DocumentRoot "/Library/WebServer/Documents"`,   
+   Assuming that the command above returned `DocumentRoot "/Library/WebServer/Documents"`,
    then `cd` to that directory
 
    ~~~

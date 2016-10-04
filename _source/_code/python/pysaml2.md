@@ -72,15 +72,15 @@ the following steps, you will have a working example of connecting Okta to a sam
 0.  Install platform-dependent prerequisites:
 
     > Note: These instructions assume that you are running on a recent version of your operating system.
-    
+
     For Mac OS X:
-    
+
     ~~~ shell
     brew install libffi libxmlsec1
     ~~~
 
     For RHEL:
-    
+
     ~~~ shell
     sudo yum install libffi-devel xmlsec1 xmlsec1-openssl
     ~~~
