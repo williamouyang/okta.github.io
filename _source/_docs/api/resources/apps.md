@@ -4110,7 +4110,7 @@ Content-Type: application/json
 
 Clones a X.509 certificate for an application key credential from a source application to target application.
 
-> To update the target application with the cloned key credential, see [Update Key Credential](#update-key-credential-for-application)
+> For step-by-step instructions to clone a credential, see [How to Share Application Key Credentials](/how-to/sharing-cert.html).
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
