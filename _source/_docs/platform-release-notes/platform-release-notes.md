@@ -9,8 +9,8 @@ excerpt: Summary of changes to the Okta Platform since Release 2016.39
 ### Feature Enhancements
 
 * [New Version of Okta Sign-In Widget](#new-version-of-okta-sign-in-widget)
-* [Auth SDK Version 1.5.0](#auth-sdk-version-1-5-0)
-* [Application Key Credential Sharing](#application-key-credential-sharing)
+* [New Version of Okta Auth JS](#new-version-of-okta-auth-js)
+* [Listing Apps that Share an Application Key Credential](#listing-apps-that-share-an-application-key-credential)
 
 #### New Version of Okta Sign-In Widget
 
