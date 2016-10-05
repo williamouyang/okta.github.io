@@ -4237,7 +4237,7 @@ Content-Type: application/json
 
 Clones a X.509 certificate for an application key credential from a source application to target application.
 
-> For step-by-step instructions to clone a credential, see [How to Share Application Key Credentials](http://developer.okta.com/docs/how-to/sharing-cert.html).
+> For step-by-step instructions to clone a credential, see [Share Application Key Credentials Between Apps](http://developer.okta.com/docs/how-to/sharing-cert.html).
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
