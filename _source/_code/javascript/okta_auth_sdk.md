@@ -6,7 +6,7 @@ excerpt: Easily add sign-in capabilities to your fully branded web site.
 
 # Introduction
 
-The Okta Auth SDK builds on top of our [Authentication API](/docs/api/resources/authn.html) to enable you to create a custom login experience using JavaScript.
+The Okta Auth SDK builds on top of our [Authentication API](/docs/api/resources/authn.html) and [OAuth 2.0 API](/docs/api/resources/oidc.html) to enable you to create a fully branded sign-in experience using JavaScript.
 
 # Prerequisites
 
@@ -18,7 +18,7 @@ The Okta Auth SDK builds on top of our [Authentication API](/docs/api/resources/
 Include the following script tag in your target web page:
 
 ~~~ html
-<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-sdk-1.0.0.min.js" type="text/javascript"></script>
+<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.5.0/okta-auth-js.min.js" type="text/javascript"></script>
 ~~~
 
 ## Authentication Flow
@@ -384,9 +384,9 @@ Returns a transaction with a user's previous state.
 authClient.tx.resume();
 ~~~
 
-## Social Authentication and OIDC
+## Social Authentication and OpenID Connect
 
-If you want to obtain an ID Token via [OIDC](/docs/api/resources/oidc.html) or [social authentication](/docs/guides/social_authentication.html), it's possible to manage the flow with the SDK. To do so, instantiate your client with a `clientId` and `redirectUri`.
+If you want to create a token via [OpenID Connect](/docs/api/resources/oidc.html) or [social authentication](/docs/guides/social_authentication.html), it's possible to manage the flow with this SDK. To do so, instantiate your client with a `clientId` and `redirectUri`. If you don't have either of those, [set up OpenID Connect with these instructions](https://github.com/oktadeveloper/okta-oauth-spa-authjs-osw/blob/master/Okta-OIDC_SPA_JS-OSW_DevSetupGuide.pdf).
 
 ~~~ javascript
 var authClient = new OktaAuth({
@@ -396,38 +396,151 @@ var authClient = new OktaAuth({
 });
 ~~~
 
-### Get an ID Token
-~~~ javascript
-authClient.idToken.authorize()
-.then(function(res) {
-  // Raw ID Token
-  res.idToken;
+Each method to create a token (or tokens) takes an optional argument:
 
-  // Decoded ID Token claims
-  res.claims;
-})
+~~~ javascript
+// Defaults
+var options = {
+  responseType: 'id_token',
+  scopes: ['openid', 'email']
+};
 ~~~
 
-### Exchange a sessionToken for an ID Token
+The `responseType` option can be a string (`id_token`, `token`, or `code`) or an array with multiple responseTypes. When a string is passed, the response is a single token. When an array is passed, the response is a token array in the order they were requested. For example:
+
+A single token
+
 ~~~ javascript
-authClient.idToken.authorize({
-  sessionToken: 'testSessionToken'
+authClient.token.getWithPopup({
+  responseType: 'id_token'
+})
+.then(function(idToken) {
+  // Manage the idToken
+})
+.catch(function(err) {
+  // Handle OAuthError
 });
 ~~~
 
-### Get an ID Token from an IDP
+Multiple tokens
+
 ~~~ javascript
-authClient.idToken.authorize({
+authClient.token.getWithPopup({
+  responseType: ['token', 'id_token']
+})
+.then(function(tokenArray) {
+  // The tokenArray order corresponds with the responseType array
+
+  // 'token' was first, so the first item is an accessToken
+  var accessToken = tokenArray[0];
+
+  // 'id_token' was second, so the second item is an idToken
+  var idToken = tokenArray[1];
+
+  // Manage the tokens
+})
+.catch(function(err) {
+  // Handle OAuthError
+});
+~~~
+
+Each `responseType` has its own format:
+
+~~~ javascript
+// id_token
+{
+  idToken: 'theIdTokenString',
+  claims: {}, // The claims of the idToken (they're determined by the scopes requested)
+  expiresAt: 123456789, // When the token expires in unix time
+  scopes: [] // The scopes requested
+}
+
+// token
+{
+  accessToken: 'theAccessTokenString',
+  expiresAt: 123456789, // When the token expires in unix time,
+  tokenType: 'Bearer', // This is the default type for access tokens
+  scopes: [] // The scopes requested
+}
+
+// code
+{
+  authorizationCode: 'theAuthorizationCodeString'
+}
+~~~
+
+### Create token with a popup
+~~~ javascript
+authClient.token.getWithPopup(options)
+.then(function(tokenOrTokens) {
+  // Manage token or tokens
+})
+.catch(function(err) {
+  // Handle OAuthError
+});
+~~~
+
+This is commonly used to create a token with an external idp.
+
+~~~ javascript
+authClient.token.getWithPopup({
   idp: 'target-idp'
 });
 ~~~
 
-### Refresh an ID Token
+### Create token using a redirect
+~~~ javascript
+authClient.token.getWithRedirect(options);
 
-Returns a new idToken if the Okta session is still valid.
+// If the token is in the uri after the redirect
+authClient.token.parseFromUri()
+.then(function(tokenOrTokens) {
+  // Manage token or tokens
+})
+.catch(function(err) {
+  // Handle OAuthError
+});
+~~~
+
+This is commonly used to create an authorization code.
 
 ~~~ javascript
-authClient.idToken.refresh();
+authClient.token.getWithRedirect({
+  responseType: 'code'
+});
+
+// authClient.token.parseFromUri isn't necessary, because it's parsed from the query param by your server
+~~~
+
+### Exchange a sessionToken for a token
+
+When you've obtained a sessionToken from the authorization flows, or a session already exists, you can obtain a token or tokens without prompting the user to log in.
+
+~~~ javascript
+authClient.token.getWithoutPrompt({
+  responseType: 'id_token', // or array of types
+  sessionToken: 'testSessionToken' // optional if the user has an existing Okta session
+})
+.then(function(tokenOrTokens) {
+  // Manage token or tokens
+})
+.catch(function(err) {
+  // Handle OAuthError
+});
+~~~
+
+### Refresh a token
+
+Returns a new token if the Okta session is still valid.
+
+~~~ javascript
+authClient.token.refresh(tokenToRefresh)
+.then(function(freshToken) {
+  // Manage freshToken
+})
+.catch(function(err) {
+  // Handle OAuthError
+});
 ~~~
 
 ### Decode an ID Token
@@ -435,7 +548,7 @@ authClient.idToken.refresh();
 Decode a raw ID Token
 
 ~~~ javascript
-authClient.idToken.decode(idTokenString);
+authClient.token.decode(idTokenString);
 ~~~
 
 ## Session Management
