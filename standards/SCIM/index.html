@@ -1,6 +1,6 @@
 <!doctype html>
 <html class="no-js" lang="en" dir="ltr">
-<head>
+  <head>
     <script src="//use.typekit.net/jff5neq.js"></script>
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
 
@@ -15,15 +15,11 @@
     <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
     <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
 
-
-    
-        
-    
     <title>SCIM | Okta Developer</title>
     <meta name="description" content="Enable SCIM-based provisioning from Okta to your application.">
     <link rel="canonical" href="http://developer.okta.com/standards/SCIM/">
     <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml">
-    
+
     <!-- GA -->
     <script>
     	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -35,10 +31,10 @@
     </script>
 </head>
 
-<body>
-  <div class="Page">
-    <!-- START Header -->
-    <header id="header">
+  <body>
+	<div class="Page">
+          <!-- START Header -->
+	  <header id="header">
     <div class="Wrap">
         <h1 class="logo"><a href="/">Okta</a></h1>
 
@@ -101,8 +97,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-TJ45R6');</script>
 <!-- End Google Tag Manager -->
 
-    <!-- END Header -->
-    <!-- START Page Center w/Sub Nav & Content -->
+	  <!-- END Header -->
+	      <!-- START Page Center w/Sub Nav & Content -->
     <section class="PageContent">
       <!-- START Fixed sidebar -->
               <aside class="Sidebar">
@@ -187,6 +183,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     <li><a href="/docs/api/resources/apps.html">Apps</a></li>
+		     
 		     
 		     
 		     
@@ -325,6 +322,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
 		     <li><a href="/docs/api/resources/factors.html">Factors (MFA)</a></li>
 		     
 		     
@@ -372,7 +371,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		     <li><a href="/docs/api/resources/groups.html">Groups</a></li>
+		     
 		     
 		     
 		     
@@ -514,7 +515,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
 		     <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
+		     
 		     
 		     
 		     
@@ -610,7 +614,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		     <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
+		     
 		     
 		     
 		     
@@ -748,7 +754,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
 		     <li><a href="/docs/api/resources/users.html">Users</a></li>
+		     
 		     
 		     
 		     
@@ -829,8 +838,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <!-- END Fixed sidebar -->
       <!-- START Page Content -->
-      <div class="PageContent-main">
-	<h1 id="scim-provisioning-technical-reference">SCIM Provisioning Technical Reference</h1>
+      <div class="PageContent-main" id="docs-body">
+      <h1 id="scim-provisioning-technical-reference">SCIM Provisioning Technical Reference</h1>
 
 <blockquote>
   <p>Okta’s SCIM implementation is currently in Beta status and provides
@@ -858,8 +867,8 @@ Email us at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#100;&#101;&#118;&#10
 
 <h1 id="joining-the-scim-provisioning-developer-program">Joining the SCIM Provisioning Developer Program</h1>
 
-<p>Before building your SCIM Server, please make sure to <a href="http://pages.okta.com/DeveloperSCIM.html">apply for admission</a> 
-to the SCIM Provisioning Developer Program and familiarize yourself with 
+<p>Before building your SCIM Server, please make sure to <a href="http://pages.okta.com/DeveloperSCIM.html">apply for admission</a>
+to the SCIM Provisioning Developer Program and familiarize yourself with
 the <a href="scim_developer_program.html">program process and resources</a>.</p>
 
 <h1 id="understanding-user-provisioning-in-okta">Understanding User Provisioning in Okta</h1>
@@ -1033,7 +1042,7 @@ you if the test suite fails.</p>
     <p>Follow the steps in the “Submitting to Okta” section of this
 guide.</p>
 
-    <p>In particular, you will want make sure that the Profile 
+    <p>In particular, you will want make sure that the Profile
 Attributes and Attribute Mappings in your Okta application show
 only the attributes and mappings that your SCIM server supports.</p>
   </li>
@@ -1189,7 +1198,7 @@ with any additional attributes that your application supports.  If your
 application supports entitlements, your SCIM 2.0 API should allow
 configuration of those as well.</p>
 
-<p>An HTTP POST to the <code class="highlighter-rouge">/Users</code> endpoint must return an immutable or 
+<p>An HTTP POST to the <code class="highlighter-rouge">/Users</code> endpoint must return an immutable or
 system ID of the user (<code class="highlighter-rouge">id</code>) must be returned to Okta.</p>
 
 <p>Okta will call this SCIM API endpoint under the following circumstances:</p>
@@ -1374,7 +1383,7 @@ application. Examples of when this happen are as follows:</p>
 <ul>
   <li>A user is manually unassigned from your application.</li>
   <li>A user is removed from a group which is assigned to your application.</li>
-  <li>When a user is deactivated in Okta, either manually or via 
+  <li>When a user is deactivated in Okta, either manually or via
 by an external profile master like Active Directory or a Human
 Resource Management Software system.</li>
 </ul>
@@ -1520,28 +1529,28 @@ must support pagination using a <em>limit</em> (<code class="highlighter-rouge">
 {
   "Resources": [
     {
-      "active": false, 
-      "id": 1, 
+      "active": false,
+      "id": 1,
       "meta": {
-        "location": "http://scim-server.example.com/scim/v2/Users/1", 
+        "location": "http://scim-server.example.com/scim/v2/Users/1",
         "resourceType": "User"
-      }, 
+      },
       "name": {
-        "familyName": "Doe", 
-        "givenName": "Jane", 
+        "familyName": "Doe",
+        "givenName": "Jane",
         "middleName": null
-      }, 
+      },
       "schemas": [
         "urn:ietf:params:scim:schemas:core:2.0:User"
-      ], 
+      ],
       "userName": "jane.doe@example.com"
     }
-  ], 
-  "itemsPerPage": 1, 
+  ],
+  "itemsPerPage": 1,
   "schemas": [
     "urn:ietf:params:scim:api:messages:2.0:ListResponse"
-  ], 
-  "startIndex": 0, 
+  ],
+  "startIndex": 0,
   "totalResults": 1
 }
 </code></pre>
@@ -1606,7 +1615,7 @@ an HTTP PATCH request to set the <code class="highlighter-rouge">active</code> s
 <p>The ability to query users with a POST request is described in
 <a href="https://tools.ietf.org/html/rfc7644#section-3.4.3">section 3.4.3</a> of the <a href="https://tools.ietf.org/html/rfc7644">SCIM 2.0 Protocol Specification</a>.</p>
 
-<p>Querying using POST is sometimes useful if your query contains 
+<p>Querying using POST is sometimes useful if your query contains
 <a href="https://en.wikipedia.org/wiki/Personally_identifiable_information">personally identifiable information</a> that would be exposed in
 system logs if used query parameters with a GET request.</p>
 
@@ -2162,8 +2171,8 @@ only happen if the User table isn’t defined.</p>
   <li>
     <p>How long does it take for my submission to be reviewed and published?</p>
 
-    <p>Review usually takes 48 hours, followed by QA which is usually another 48 hours. 
-  We don’t publish the app until one customer tests the app in their production environment and send us a email 
+    <p>Review usually takes 48 hours, followed by QA which is usually another 48 hours.
+  We don’t publish the app until one customer tests the app in their production environment and send us a email
   saying that everything works and they recommend the integration.</p>
   </li>
 </ul>
@@ -2391,39 +2400,11 @@ limitations under the License.
 
       </div>
       <!-- END Page Content -->
-	
-	
     </section>
     <!-- END Page Center w/Sub Nav & Content -->
 
-
-    <!-- START Footer -->
-    <!-- Remarketing tag -->
-	<script type="text/javascript">
-		/* <![CDATA[ */
-		var google_conversion_id = 1006913831;
-		var google_custom_params = window.google_tag_params;
-		var google_remarketing_only = true;
-		/* ]]> */
-	</script>
-	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-	</script>
-	<noscript>
-		<div style="display:inline;">
-			<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"/>
-		</div>
-	</noscript>
-<!-- End Remarketing tag -->
-
-<!-- Crazy Egg Tracking -->
-<script type="text/javascript">
-setTimeout(function(){var a=document.createElement("script");
-var b=document.getElementsByTagName("script")[0];
-a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
-a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-</script>
-<!-- End Crazy Egg Tracking -->
-
+	  <!-- START Footer -->
+	  
         <footer class="footer">
             <div class="Wrap">
 
@@ -2449,13 +2430,47 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
             </div>
         </footer>
 
-    <!-- END Footer -->
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"
+    integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
+    crossorigin="anonymous"></script>
 
-  </div>
-<script
-        src="https://code.jquery.com/jquery-3.1.0.min.js"
-        integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
-        crossorigin="anonymous"></script>
-<script src="/assets/js/master.js"></script>
+    
+    
+
+    
+    <script type="text/javascript" defer="defer" src="/assets/js/docs.js"></script>
+
+    <script src="/assets/js/master.js"></script>
+
+    <!-- Remarketing tag -->
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        var google_conversion_id = 1006913831;
+        var google_custom_params = window.google_tag_params;
+        var google_remarketing_only = true;
+        /* ]]> */
+    </script>
+    <div style="display:none;">
+        <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+    </script>
+    </div>
+    <noscript>
+        <div style="display:inline;">
+            <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"/>
+        </div>
+    </noscript>
+    <!-- End Remarketing tag -->
+
+    <!-- Crazy Egg Tracking -->
+    <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+    </script>
+    <!-- End Crazy Egg Tracking -->
+
+	  <!-- END Footer -->
+	</div>
 </body>
 </html>

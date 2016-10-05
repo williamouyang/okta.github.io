@@ -11,19 +11,15 @@
 
     <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
     
-    <link rel="stylesheet" href="/assets/css/layout-docs.css">
+    
     <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
     <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
 
-
-    
-    <script type="text/javascript" defer="defer" src="/assets/js/docs.js"></script>    
-    
     <title>Apps | Okta Developer</title>
     <meta name="description" content="Overview">
     <link rel="canonical" href="http://developer.okta.com/docs/api/resources/apps.html">
     <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml">
-    
+
     <!-- GA -->
     <script>
     	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -234,7 +230,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		     <li><a href="/docs/api/resources/events.html">Events</a></li>
+		     
+		     
 		     
 		     
 		     
@@ -372,7 +371,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		     <li><a href="/docs/api/resources/groups.html">Groups</a></li>
+		     
 		     
 		     
 		     
@@ -514,7 +515,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
 		     <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
+		     
 		     
 		     
 		     
@@ -610,7 +614,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		     <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
+		     
 		     
 		     
 		     
@@ -748,7 +754,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
 		     <li><a href="/docs/api/resources/users.html">Users</a></li>
+		     
 		     
 		     
 		     
@@ -830,7 +839,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <!-- END Fixed sidebar -->
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
-	<h2 id="overview">Overview</h2>
+      <h2 id="overview">Overview</h2>
 
 <p>The Okta Application API provides operations to manage applications and/or assignments to users or groups for your organization.</p>
 
@@ -4244,6 +4253,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <li><a href="#list-applications-with-defaults">List Applications with Defaults</a></li>
   <li><a href="#list-applications-assigned-to-user">List Applications Assigned to User</a></li>
   <li><a href="#list-applications-assigned-to-group">List Applications Assigned to Group</a></li>
+  <li><a href="#list-applications-using-a-key">List Applications Using a Key</a></li>
 </ul>
 
 <h5 class="api api-request api-request-params" id="request-parameters-2">Request Parameters</h5>
@@ -4270,7 +4280,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </tr>
     <tr>
       <td>filter</td>
-      <td>Filters apps by <code class="highlighter-rouge">status</code>, <code class="highlighter-rouge">user.id</code>, or <code class="highlighter-rouge">group.id</code> expression</td>
+      <td>Filters apps by <code class="highlighter-rouge">status</code>, <code class="highlighter-rouge">user.id</code>, <code class="highlighter-rouge">group.id</code> or <code class="highlighter-rouge">credentials.signing.kid</code> expression</td>
       <td>Query</td>
       <td>String</td>
       <td>FALSE</td>
@@ -4327,11 +4337,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <td><code class="highlighter-rouge">group.id eq ":gid"</code></td>
       <td>Apps assigned to a specific group such as <code class="highlighter-rouge">00gckgEHZXOUDGDJLYLG</code></td>
     </tr>
+    <tr>
+      <td><code class="highlighter-rouge">credentials.signing.kid eq ":kid"</code></td>
+      <td>Apps using a particular key such as <code class="highlighter-rouge">SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4</code></td>
+    </tr>
   </tbody>
 </table>
 
 <blockquote>
-  <p>Only a single expression is supported as this time</p>
+  <p>Only a single expression is supported as this time. The only supported filter type is <code class="highlighter-rouge">eq</code>.</p>
+</blockquote>
+
+<blockquote>
+  <p>To use <code class="highlighter-rouge">credentials.signing.kid</code> as a filter, you must enable the key rollover feature. Key rollover is an Early Access feature; contact Customer Support to enable it.</p>
 </blockquote>
 
 <h6 id="link-expansions">Link Expansions</h6>
@@ -4851,6 +4869,125 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </span></code></pre>
 </div>
 
+<h4 class="api api-operation" id="list-applications-using-a-key">List Applications Using a key</h4>
+
+<p>Enumerates all applications using a key.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-12">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/apps?filter=credentials.signing.kid+eq+</span><span class="se">\"</span><span class="s2">SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4</span><span class="se">\"</span><span class="s2">"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-11">Response Example</h5>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oa1gjh63g214q0Hq0g4"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"testorgone_customsaml20app_1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom Saml 2.0 App"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-09T20:12:19.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-09T20:12:19.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"accessibility"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"selfService"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"errorRedirectUrl"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"loginRedirectUrl"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"visibility"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"autoSubmitToolbar"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"hide"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"iOS"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"web"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"appLinks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"testorgone_customsaml20app_1_link"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"features"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nt">"signOnMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SAML_2_0"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"userNameTemplate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${fn:substringBefore(source.login, \"@\")}"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUILT_IN"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+       </span><span class="nt">"signing"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"kid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"app"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+      </span><span class="nt">"notifications"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"vpn"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"network"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DISABLED"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"helpUrl"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"signOn"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"defaultRelayState"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"ssoAcsUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.okta.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"idpIssuer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.okta.com/${org.externalKey}"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"audience"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.com/tenant/123"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"recipient"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://recipient.okta.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://destination.okta.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"subjectNameIdTemplate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${user.userName}"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"subjectNameIdFormat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"responseSigned"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"assertionSigned"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"signatureAlgorithm"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RSA_SHA256"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"digestAlgorithm"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SHA256"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"honorForceAuthn"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"authnContextClassRef"</span><span class="p">:</span><span class="w"> </span><span class="s2">"urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"spIssuer"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"requestCompressed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"attributeStatements"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"medium"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://testorgone.okta.com/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/png"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"appLinks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"testorgone_customsaml20app_1_link"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://testorgone.okta.com/home/testorgone_customsaml20app_1/0oa1gjh63g214q0Hq0g4/aln1gofChJaerOVfY0g4"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text/html"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"help"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://testorgone-admin.okta.com/app/testorgone_customsaml20app_1/0oa1gjh63g214q0Hq0g4/setup/help/SAML_2_0/instructions"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text/html"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://testorgone.okta.com/api/v1/apps/0oa1gjh63g214q0Hq0g4/users"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://testorgone.okta.com/api/v1/apps/0oa1gjh63g214q0Hq0g4/lifecycle/deactivate"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"groups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://testorgone.okta.com/api/v1/apps/0oa1gjh63g214q0Hq0g4/groups"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://testorgone.okta.com:/api/v1/apps/0oa1gjh63g214q0Hq0g4/sso/saml/metadata"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/xml"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+</div>
+
 <h3 class="api api-operation" id="update-application">Update Application</h3>
 
 <p><span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /apps/<em>:id</em></span></p>
@@ -4902,7 +5039,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Configures the <code class="highlighter-rouge">EDIT_USERNAME_AND_PASSWORD</code> scheme for a SWA application with a username template</p>
 
-<h5 class="api api-request api-request-example" id="request-example-12">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-13">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X PUT <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -4947,7 +5084,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-11">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-12">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oabkvBLDEKCNXBGYUAS"</span><span class="p">,</span><span class="w">
@@ -5016,7 +5153,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Configures the <code class="highlighter-rouge">ADMIN_SETS_CREDENTIALS</code> scheme for a SWA application with a username template</p>
 
-<h5 class="api api-request api-request-example" id="request-example-13">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-14">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X PUT <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -5061,7 +5198,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-12">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-13">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oabkvBLDEKCNXBGYUAS"</span><span class="p">,</span><span class="w">
@@ -5130,7 +5267,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Configures the <code class="highlighter-rouge">EDIT_PASSWORD_ONLY</code> scheme for a SWA application with a username template</p>
 
-<h5 class="api api-request api-request-example" id="request-example-14">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-15">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X PUT <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -5175,7 +5312,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-13">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-14">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oabkvBLDEKCNXBGYUAS"</span><span class="p">,</span><span class="w">
@@ -5244,7 +5381,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Configures the <code class="highlighter-rouge">EXTERNAL_PASSWORD_SYNC</code> scheme for a SWA application with a username template</p>
 
-<h5 class="api api-request api-request-example" id="request-example-15">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-16">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X PUT <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -5289,7 +5426,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-14">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-15">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oabkvBLDEKCNXBGYUAS"</span><span class="p">,</span><span class="w">
@@ -5358,7 +5495,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Configures the <code class="highlighter-rouge">SHARED_USERNAME_AND_PASSWORD</code> scheme for a SWA application with a username and password</p>
 
-<h5 class="api api-request api-request-example" id="request-example-16">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-17">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X PUT <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -5407,7 +5544,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<h5 class="api reponse" id="response-example-15">Response Example</h5>
+<h5 class="api reponse" id="response-example-16">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oabkvBLDEKCNXBGYUAS"</span><span class="p">,</span><span class="w">
@@ -5519,7 +5656,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p><a href="#application-model">Application</a> with updated <code class="highlighter-rouge">kid</code>.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-17">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-18">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X PUT <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -5542,7 +5679,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-16">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-17">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oainmLkOL329Jcju0g3"</span><span class="p">,</span><span class="w">
@@ -5674,7 +5811,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>An empty JSON object <code class="highlighter-rouge"><span class="p">{}</span></code></p>
 
-<h5 class="api api-request api-request-example" id="request-example-18">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-19">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X DELETE <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -5684,7 +5821,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-17">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-18">Response Example</h5>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">204</span> <span class="ne">No Content</span>
 </code></pre>
@@ -5746,7 +5883,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>An empty JSON object <code class="highlighter-rouge"><span class="p">{}</span></code></p>
 
-<h5 class="api api-request api-request-example" id="request-example-19">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-20">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -5756,7 +5893,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-18">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-19">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{}</span><span class="w">
 </span></code></pre>
@@ -5797,7 +5934,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>An empty JSON object <code class="highlighter-rouge"><span class="p">{}</span></code></p>
 
-<h5 class="api api-request api-request-example" id="request-example-20">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-21">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -5807,7 +5944,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-19">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-20">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{}</span><span class="w">
 </span></code></pre>
@@ -5866,7 +6003,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p><a href="#application-user-model">Application User</a></p>
 
-<h5 class="api api-request api-request-example" id="request-example-21">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-22">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -5885,7 +6022,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-20">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-21">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00u15s1KDETTQMQYABRL"</span><span class="p">,</span><span class="w">
@@ -5977,7 +6114,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </span></code></pre>
 </div>
 
-<h5 class="api api-request api-request-example" id="request-example-22">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-23">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -6000,7 +6137,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-21">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-22">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00u13okQOVWZJGDOAUVR"</span><span class="p">,</span><span class="w">
@@ -6083,7 +6220,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p><a href="#application-user-model">Application User</a></p>
 
-<h5 class="api api-request api-request-example" id="request-example-23">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-24">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -6093,7 +6230,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-22">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-23">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00u13okQOVWZJGDOAUVR"</span><span class="p">,</span><span class="w">
@@ -6188,7 +6325,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Array of <a href="#application-user-model">Application Users</a></p>
 
-<h5 class="api api-request api-request-example" id="request-example-24">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-25">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -6198,7 +6335,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-23">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-24">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -6340,7 +6477,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </span></code></pre>
 </div>
 
-<h5 class="api api-request api-request-example" id="request-example-25">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-26">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -6357,7 +6494,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-24">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-25">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ud4tVDDXYVKPXKVLCO"</span><span class="p">,</span><span class="w">
@@ -6454,7 +6591,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </span></code></pre>
 </div>
 
-<h5 class="api api-request api-request-example" id="request-example-26">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-27">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -6472,7 +6609,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-25">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-26">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ujsgVNDRESKKXERBUJ"</span><span class="p">,</span><span class="w">
@@ -6559,7 +6696,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>An empty JSON object <code class="highlighter-rouge"><span class="p">{}</span></code></p>
 
-<h5 class="api api-request api-request-example" id="request-example-27">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-28">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X DELETE <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -6569,7 +6706,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-26">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-27">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{}</span><span class="w">
 </span></code></pre>
@@ -6628,7 +6765,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>All responses return the assigned <a href="#application-group-model">Application Group</a>.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-28">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-29">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X PUT <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -6639,7 +6776,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-27">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-28">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00gbkkGFFWZDLCNTAGQR"</span><span class="p">,</span><span class="w">
@@ -6692,7 +6829,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Fetched <a href="#application-group-model">Application Group</a></p>
 
-<h5 class="api api-request api-request-example" id="request-example-29">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-30">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -6702,7 +6839,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-28">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-29">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00gbkkGFFWZDLCNTAGQR"</span><span class="p">,</span><span class="w">
@@ -6767,7 +6904,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Array of <a href="#application-group-model">Application Groups</a></p>
 
-<h5 class="api api-request api-request-example" id="request-example-30">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-31">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -6777,7 +6914,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-29">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-30">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -6837,7 +6974,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>An empty JSON object <code class="highlighter-rouge"><span class="p">{}</span></code></p>
 
-<h5 class="api api-request api-request-example" id="request-example-31">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-32">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X DELETE <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -6847,7 +6984,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-30">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-31">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{}</span><span class="w">
 </span></code></pre>
@@ -6906,7 +7043,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Return the generated <a href="#application-key-credential-model">Application Key Credential</a>.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-32">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-33">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -6917,7 +7054,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-31">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-32">Response Example</h5>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -6963,7 +7100,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>Clones a X.509 certificate for an application key credential from a source application to target application.</p>
 
 <blockquote>
-  <p>To update the target application with the cloned key credential, see <a href="#update-key-credential-for-application">Update Key Credential</a></p>
+  <p>For step-by-step instructions to clone a credential, see <a href="/how-to/sharing-cert.html">How to Share Application Key Credentials</a>.</p>
 </blockquote>
 
 <h5 class="api api-request api-request-params" id="request-parameters-20">Request Parameters</h5>
@@ -7015,7 +7152,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Returns the cloned <a href="#application-key-credential-model">Application Key Credential</a>.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-33">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-34">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -7026,7 +7163,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-32">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-33">Response Example</h5>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -7100,7 +7237,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Array of <a href="#application-key-credential-model">Application Key Credential</a>.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-34">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-35">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -7111,7 +7248,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-33">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-34">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -7183,7 +7320,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p><a href="#application-key-credential-model">Application Key Credential</a>.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-35">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-36">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -7194,7 +7331,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-34">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-35">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-10T18:56:23.000Z"</span><span class="p">,</span><span class="w">
@@ -7253,7 +7390,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>SAML metadata in XML</p>
 
-<h5 class="api api-request api-request-example" id="request-example-36">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-37">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/xml"</span> <span class="se">\</span>
@@ -7264,7 +7401,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-35">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-36">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="nt">&lt;md:EntityDescriptor</span> <span class="na">xmlns:md=</span><span class="s">"urn:oasis:names:tc:SAML:2.0:metadata"</span> <span class="na">entityID=</span><span class="s">"exk39sivhuytV2D8H0h7"</span><span class="nt">&gt;</span>
@@ -7307,32 +7444,7 @@ YoEdncuy+GQGzE9yLOhC4HNfHQXpqp2tMPdRlw==<span class="nt">&lt;/ds:X509Certificate
     <!-- END Page Center w/Sub Nav & Content -->
 
 	  <!-- START Footer -->
-	  <!-- Remarketing tag -->
-	<script type="text/javascript">
-		/* <![CDATA[ */
-		var google_conversion_id = 1006913831;
-		var google_custom_params = window.google_tag_params;
-		var google_remarketing_only = true;
-		/* ]]> */
-	</script>
-	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-	</script>
-	<noscript>
-		<div style="display:inline;">
-			<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"/>
-		</div>
-	</noscript>
-<!-- End Remarketing tag -->
-
-<!-- Crazy Egg Tracking -->
-<script type="text/javascript">
-setTimeout(function(){var a=document.createElement("script");
-var b=document.getElementsByTagName("script")[0];
-a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
-a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-</script>
-<!-- End Crazy Egg Tracking -->
-
+	  
         <footer class="footer">
             <div class="Wrap">
 
@@ -7358,12 +7470,47 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
             </div>
         </footer>
 
-	  <!-- END Footer -->
-	</div>
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"
     integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
     crossorigin="anonymous"></script>
-<!-- <script src="/assets/js/master.js"></script> -->
-<script src="/assets/js/okta.js"></script>
+
+    
+    
+
+    
+    <script type="text/javascript" defer="defer" src="/assets/js/docs.js"></script>
+
+    <script src="/assets/js/master.js"></script>
+
+    <!-- Remarketing tag -->
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        var google_conversion_id = 1006913831;
+        var google_custom_params = window.google_tag_params;
+        var google_remarketing_only = true;
+        /* ]]> */
+    </script>
+    <div style="display:none;">
+        <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+    </script>
+    </div>
+    <noscript>
+        <div style="display:inline;">
+            <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"/>
+        </div>
+    </noscript>
+    <!-- End Remarketing tag -->
+
+    <!-- Crazy Egg Tracking -->
+    <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+    </script>
+    <!-- End Crazy Egg Tracking -->
+
+	  <!-- END Footer -->
+	</div>
 </body>
 </html>
