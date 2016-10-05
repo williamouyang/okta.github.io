@@ -1,30 +1,48 @@
 ---
 layout: docs_page
 title: Platform Release Notes
-excerpt: Summary of changes to the Okta Platform since Release 2016.37
+excerpt: Summary of changes to the Okta Platform since Release 2016.39
 ---
 
-## Release 2016.39
+## Release 2016.40
 
-### Feature Enhancement: Sharing Certificates Between App Instances
+### Feature Enhancements
 
-By cloning an app key credential with the Apps API, you can share the same certificate between two or more apps:
+* [New Version of Okta Sign-In Widget](#new-version-of-okta-sign-in-widget)
+* [New Version of Okta Auth JS](#new-version-of-okta-auth-js)
+* [Listing Apps that Share an Application Key Credential](#listing-apps-that-share-an-application-key-credential)
 
-<pre>/apps/<em>:aid</em>/credentials/keys/<em>:kid</em>/clone?targetAid=<em>:targetAid</em></pre>
+#### New Version of Okta Sign-In Widget
 
-To share a certificate among app instances:
+The new version of Okta Sign-In Widget, 1.7.0, is available:
 
-1. Generate a new app key credential for an app (the source app).
-2. Use the new credential in the source app.
-3. Share the credential (`kid`) with one or more target apps.
-4. Use the new credential in the target app.
+* The Widget can create access tokens and authorization codes.
+* Added tokenManager to manage OAuth 2.0 and OpenID Connect tokens.
+* The Widget is localized for Hungarian and Romanian.
+* Added support for Voice Call in the forgot password flow.
+* Added the language option to set the displayed language.
 
-For more detailed instructions, see ["Clone Key Credential for Application"](http://developer.okta.com/docs/api/resources/apps.html#clone-key-credential-for-application)
-and ["Update Key Credential for Application"](http://developer.okta.com/docs/api/resources/apps.html#update-key-credential-for-application).
+Learn about these and other improvements in [the GitHub repository](https://github.com/okta/okta-signin-widget/releases/latest).
 
-### Bug Fixed
+#### New Version of Okta Auth JS
 
-The WWW-Authenticate header couldn't be read when the `/oauth2/v1/userinfo` endpoint returned errors in a browser. (OKTA-101943)
+The new version of Okta Auth JS, 1.5.0, is available:
+
+* Added manual token refreshes with the token.refresh method.
+* Okta Auth JS can create authorization codes.
+* Access updated user information with token.getUserInfo.
+* Performance improvements when refreshing multiple tokens.
+
+Learn about these and other improvements in [the GitHub repository](https://github.com/okta/okta-auth-js/releases/latest).
+
+#### Listing Apps that Share an Application Key Credential
+
+Once you have shared a credential between apps, you can list all the applications that are using 
+the same application key credential. <!-- OKTA-100925 -->
+
+For more information, see the [Apps API reference](/api/resources/apps.html#list-applications-using-a-key).
+
+<!-- ### Platform Bugs Fixed -->
 
 ### Does Your Org Have These Changes Yet?
 
@@ -39,6 +57,7 @@ For changes outside the Okta platform, see the [Release Notes Knowledge Hub](htt
 
 ### Earlier Release Notes
 
+* [Platform Release Notes for Release 2016.39](platform-release-notes2016-39.html)
 * [Platform Release Notes for Release 2016.37](platform-release-notes2016-37.html)
 * [Platform Release Notes for Release 2016.36](platform-release-notes2016-36.html)
 * [Platform Release Notes for Release 2016.35](platform-release-notes2016-35.html)
