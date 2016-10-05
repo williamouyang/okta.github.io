@@ -1,7 +1,8 @@
 ---
-title: Okta iOS Mobile product
 layout: legal_notice
+title: Okta iOS Mobile product
 ---
+
 This document contains third party open source licenses and notices for
 the Okta iOS Mobile product. Certain licenses and notices may appear in
 other parts of the product in accordance with the applicable license
@@ -15,7 +16,7 @@ THIRD PARTY NOTICES
 
 _BHTabBar_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ------------------------------------------------------
   BRIEF DESCRIPTION:   A web-browser like tab bar implementation for iOS4+.
   LICENSE:             MIT
@@ -108,7 +109,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _MKNetworkKit_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ----------------------------------------------------------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   Modern NSURLSession based Networking Framework with built in authentication and HTTP 1.1 caching standards support for iOS 8+ devices.
   LICENSE:             MIT
@@ -136,7 +137,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _NHToolkit_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -----------------------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   NHToolKit is a set of classes and categories that I find useful and use in most of my iOS projects.
   LICENSE:             MIT
@@ -164,7 +165,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _OCMock_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -------------------------------
   BRIEF DESCRIPTION:   Mock objects for Objective-C.
   LICENSE:             Apache 2.0
@@ -221,7 +222,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _SDWebImage_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -----------------------------------------------------------------------------
   BRIEF DESCRIPTION:   Asynchronous image downloader with cache support as a UIImageView category.
   LICENSE:             MIT
@@ -249,7 +250,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _Shimmer_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ---------------------------------------------------------------------------
   BRIEF DESCRIPTION:   An easy way to add a simple, shimmering effect to any view in an iOS app.
   LICENSE:             BSD 3-Clause
@@ -285,7 +286,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _Sizzle_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -------------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   A pure-JavaScript CSS selector engine designed to be easily dropped in to a host library.
   LICENSE:             MIT
@@ -313,9 +314,9 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _Underscore JS_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -----
-  BRIEF DESCRIPTION:   
+  BRIEF DESCRIPTION:
   LICENSE:             MIT
 
 Copyright (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative
@@ -342,7 +343,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _XCodeCoverage_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -----------------------------------
   BRIEF DESCRIPTION:   Code coverage for Xcode projects.
   LICENSE:             MIT

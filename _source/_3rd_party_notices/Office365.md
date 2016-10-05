@@ -1,7 +1,8 @@
 ---
-title: Okta Office365 product
 layout: legal_notice
+title: Okta Office365 product
 ---
+
 This document contains third party open source licenses and notices for
 the Okta Office365 product. Certain licenses and notices may appear in
 other parts of the product in accordance with the applicable license
@@ -16,9 +17,9 @@ THIRD PARTY NOTICES
 _Code from MSDN blog article "How do I calculate a MD5 hash from a
 string?"_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ----------------------------------
-  BRIEF DESCRIPTION:   
+  BRIEF DESCRIPTION:
   LICENSE:             Microsoft Limited Public License
 
 Microsoft Limited Public License

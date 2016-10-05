@@ -1,7 +1,8 @@
 ---
-title: Okta Password Sync Setup product
 layout: legal_notice
+title: Okta Password Sync Setup product
 ---
+
 This document contains third party open source licenses and notices for
 the Okta Password Sync Setup product. Certain licenses and notices may
 appear in other parts of the product in accordance with the applicable
@@ -15,7 +16,7 @@ THIRD PARTY NOTICES
 
 _APR_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   The mission of the Apache Portable Runtime (APR) project is to create and maintain software libraries that provide a predictable and consistent interface to underlying platform-specific implementations.
   LICENSE:             Apache 2.0
@@ -42,7 +43,7 @@ license._
 
 _APR-util_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   The mission of the Apache Portable Runtime (APR) project is to create and maintain software libraries that provide a predictable and consistent interface to underlying platform-specific implementations.
   LICENSE:             Apache 2.0
@@ -89,7 +90,7 @@ _jsondiffpatch_
 
   VERSION (IF ANY):    Diff & patch for JavaScript objects.
   -------------------- --------------------------------------
-  BRIEF DESCRIPTION:   
+  BRIEF DESCRIPTION:
   LICENSE:             MIT
 
 Copyright (c) 2014 Benjamín Eidelman twitter.com/beneidel.

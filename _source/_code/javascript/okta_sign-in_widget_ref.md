@@ -2,7 +2,7 @@
 layout: docs_page
 title: Okta Sign-In Widget Reference
 excerpt: Reference information for customizing the Okta Sign-In Widget.
-redirect_from: 
+redirect_from:
     - "/_docs/api/resources/okta_signin_widget.html"
     - "/docs/api/resources/okta_signin_widget.html"
 ---
@@ -10,9 +10,9 @@ redirect_from:
 ## Overview
 
 This page contains detailed reference information you can use to customize your Okta sign-in widget.
-Basic instructions for creating a sign-in widget are available in [Okta Sign-In Widget](./okta_sign-in_widget.html). 
+Basic instructions for creating a sign-in widget are available in [Okta Sign-In Widget](./okta_sign-in_widget.html).
 
-Prerequisites from the basic guide include: 
+Prerequisites from the basic guide include:
 
 * Use [a supported browser](https://support.okta.com/help/articles/Knowledge_Article/24532952-Platforms---Browser-and-OS-Support).
 * [Create an Okta Developer Edition org](./okta_sign-in_widget.html#creating-an-okta-organization) if you don't already have one.
@@ -75,7 +75,7 @@ oktaSignIn.session.exists(function (exists) {
 `logo`          | Url of the logo image that shows up at the top of the widget (e.g. `https://acme.com/assets/logo/acme-logo.png`). | String    | No           | `Okta logo`
 `helpSupportNumber`          | Support phone number that shows up in the Password Reset flow (if the user clicks on `Can't access email`) and in the Unlock Account flow. | String    | No           | `Okta logo`
 `username`      | Bootstraps the widget with a username i.e., pre-fill the username in the widget. | String    | No           | None
-`transformUsername` | Transforms the username before sending the request. The function is passed the username and the operation as parameters. [Example](#transformusername-example) | Function   | No           | None    
+`transformUsername` | Transforms the username before sending the request. The function is passed the username and the operation as parameters. [Example](#transformusername-example) | Function   | No           | None
 `features`      | Options to enable or disable a feature in the widget. [Option list](#features-options) [Example](#features-example) | Object | No           | None
 `helpLinks`     | Options to configure alternate help links in the widget. [Option list](#helplinks-options) [Example](#helplinks-example)   | Object | No           | None
 `labels`        | Options to localize labels in the widget. [Option list](#labels-options) | Object | No           | None
@@ -108,38 +108,38 @@ The code above ensures that in case the current user clicked on the 'Forgot Pass
       multiOptionalFactorEnroll: true
     }
 ~~~
-    
+
 #### features Options
 
 Enable or disable widget functionality with the following options for `features`:
-    
+
 -   `rememberMe` `(default: true)`
     Display a checkbox to enable "Remember me" functionality at login.
-     
+
  -   `autoPush` `(default: false)`
     Display a checkbox to enable "Send push automatically" functionality in the MFA required flow.
-        
--   `smsRecovery` `(default: false)`       
+
+-   `smsRecovery` `(default: false)`
     Allow users with a configured mobile phone number to recover their password using an SMS message.
-    
--   `callRecovery` `(default: false)`       
+
+-   `callRecovery` `(default: false)`
     Allow users with a configured mobile phone number to recover their password using a voice call.
     Note: This option is only available with version 1.6.0 and later of the Sign-In Widget.
-    
+
 -   `selfServiceUnlock` `(default: false)`
     Display the "Unlock Account" link to allow users to unlock their accounts.
-    
+
 -   `multiOptionalFactorEnroll` `(default: false)`
     Allow users the option to enroll in multiple optional factors.
-    
+
 -   `router` `(default: false)`
     Update the browser location bar with a route on navigation.
 
 -   `windowsVerify` `(default: false)`
     When enrolling Okta Verify and if set to `true`, this option specifies whether the Sign-In Widget shows the Windows phone icon and instructions.
-    
-    
-#### helpLinks Example    
+
+
+#### helpLinks Example
 
 ~~~ javascript
     helpLinks: {
@@ -160,23 +160,23 @@ Enable or disable widget functionality with the following options for `features`
 #### helpLinks Options
 
 Enable help links with the following options:
-    
+
 - `help`
    Custom link `href` for the 'Help' link.
-   
+
 - `forgotPassword`
    Custom link `href` for the 'Forgot Password' link.
-   
+
 - `unlock`
    Custom link `href` for the 'Unlock Account' link.
-   
+
 - `custom`
    Array of custom link objects. Each custom link object must have `text` and `href` properties.
-  
+
 #### labels Options
 
 The full list of labels are in these two files:
- 
+
  * [Login Properties](https://github.com/okta/okta-signin-widget/blob/master/node_modules/%40okta/i18n/dist/properties/login.properties)
  * [Country Properties](https://github.com/okta/okta-signin-widget/blob/master/node_modules/%40okta/i18n/dist/properties/country.properties)
 
@@ -255,7 +255,7 @@ oktaSignIn.renderEl({
  `redirectUri`  | Callback location to send the authorization code to. This must be pre-registered as part of client registration. | String | Yes | `window.location.href`
  `oAuthTimeout` | Timeout for OIDC authentication flow requests. | Number | No | `120000`
  `authParams`   | Authentication parameters for OIDC. [List](#authParams-parameters) |See [List](#authParams-parameters) |See [List](#authParams-parameters) | See [List](#authParams-parameters)
- 
+
 ##### authParams parameters
 
 You can use any of the following parameters for `authParams`.
@@ -265,7 +265,7 @@ You can use any of the following parameters for `authParams`.
 `display`                   | Specify how to display the authentication UI. | String  | No           | `none` (for Okta) and `popup` (External IdP such as social) | `none`, `popup`, `page`
 `responseMode`              | Specify how the authorization response should be returned. | String | Yes | `okta_post_message` | `query`, `fragment`, `form_post`, `okta_post_message`
 `responseType`              | Specify the response type for OpenID Connect authentication. The authorization code returned can later be exchanged for Access token or Refresh token. | String | Yes | `id_token` | `id_token`, `code` (starting from v1.7.0)
-`scope`                     | Specify what information to make available in the `id_token`. `openid` is required. | Array | Yes | `['openid', 'email']` | `openid`, `email`, `profile`, `address`, `phone`, `groups` (maps to groups claim configured in the Authorization Server tab)   
+`scope`                     | Specify what information to make available in the `id_token`. `openid` is required. | Array | Yes | `['openid', 'email']` | `openid`, `email`, `profile`, `address`, `phone`, `groups` (maps to groups claim configured in the Authorization Server tab)
 
 ### Social Authentication Providers Options
 
@@ -322,16 +322,16 @@ In addition to the [OpenID Connect/OAuth parameters](#openid-connect-parameters)
 
  Property       | Description                              |  Type    |  Required    | Default
 --------------  | ---------------------------------------  | ------   | -----------  | -------
- `idps`         | External Identity Providers to use in OIDC authentication. Supported Identity providers - `GOOGLE`, `FACEBOOK` and `LINKEDIN`. Each IdP needs to be passed an object with `id` and `type`. | Array | No | `[]` 
+ `idps`         | External Identity Providers to use in OIDC authentication. Supported Identity providers - `GOOGLE`, `FACEBOOK` and `LINKEDIN`. Each IdP needs to be passed an object with `id` and `type`. | Array | No | `[]`
  `idpDisplay`   | Display order for External Identity providers. `PRIMARY` to display external IdPs as primary, and `SECONDARY` to display Okta as the primary IdP. | String | No | `SECONDARY`
 
 ## Public functions
 
 ### Render the widget
 
-`.renderEl()` 
+`.renderEl()`
 
-Render function for the sign-in widget. The function must be called with an `options` object containing any of the configuration options, a `success` callback function and a `failure` callback function. 
+Render function for the sign-in widget. The function must be called with an `options` object containing any of the configuration options, a `success` callback function and a `failure` callback function.
 The options object must have an `el` property, usually an HTML DOM element `id` or `selector`, which becomes the container element for the widget DOM.
 
 #### Example
@@ -376,7 +376,7 @@ Manage your Okta session with session functions in the Sign-in widget SDK.
 
 ### Check for an existing session
 
-`.session.exists()` 
+`.session.exists()`
 
 Check if there is an active session.
 
@@ -399,7 +399,7 @@ callback              | Function  | Yes           | Callback function. The funct
 
 ### Get the current session
 
-`.session.get()` 
+`.session.get()`
 
 Get the active session information.
 
@@ -427,7 +427,7 @@ callback              | Function  | Yes           | Callback function. The funct
 
 ### Refresh the current session
 
-`.session.refresh()` 
+`.session.refresh()`
 
 Refresh the current session by extending its lifetime. This can be used as a keep-alive operation.
 
@@ -438,7 +438,7 @@ oktaSignIn.session.refresh(function (res) {
     // There is no active session to refresh
   } else {
     // The session now has an extended lifetime
-    
+
     /**
      * res.status - 'ACTIVE'
      * res.session - session object
@@ -456,7 +456,7 @@ callback              | Function  | Yes           | Callback function. The funct
 
 ### Close the current session
 
-`.session.close()` 
+`.session.close()`
 
 Close the active session. Same as `.signOut()`
 
@@ -475,7 +475,7 @@ callback              | Function  | Yes           | Callback function to invoke 
 
 ### Sign out the user
 
-`.signOut()` 
+`.signOut()`
 
 Sign-out the current signed-in user. Shorthand for `.session.close()`
 
@@ -499,7 +499,7 @@ Manage your OpenID Connect ID token with the Sign-in Widget SDK.
 ### Renew an ID token
 
 `.idToken.refresh()`
- 
+
 Renews the `id_token` by requesting a new one from Okta (and thus extending its default lifetime of one hour).
 
 ##### Example

@@ -1,4 +1,5 @@
 ---
+layout: docs_page
 title: SAML
 excerpt: Learn how to Single Sign-On enable your web and mobile application
 icon: /assets/img/icons/saml.svg

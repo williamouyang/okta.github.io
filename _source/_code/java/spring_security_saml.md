@@ -83,7 +83,7 @@ How to install the Spring Security SAML sample Okta application on Mac OS X:
 
 	  ~~~ shell
 	  ../gradlew build install
-	  ~~~  
+	  ~~~
 
 	This task compiles, tests, and assembles the code into a `.war` file.
 
@@ -108,7 +108,7 @@ How to install the Spring Security SAML sample Okta application on Mac OS X:
 
 	- Use the command below to start Tomcat
 
-	  ~~~ shell    
+	  ~~~ shell
 	/Library/Tomcat/bin/startup.sh
 	  ~~~
 

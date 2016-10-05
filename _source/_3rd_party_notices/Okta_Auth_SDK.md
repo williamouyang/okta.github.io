@@ -1,7 +1,8 @@
 ---
-title: Okta Auth SDK product
 layout: legal_notice
+title: Okta Auth SDK product
 ---
+
 This document contains third party open source licenses and notices for
 the Okta Auth SDK product. Certain licenses and notices may appear in
 other parts of the product in accordance with the applicable license
@@ -15,10 +16,10 @@ THIRD PARTY NOTICES
 
 _Almond_
 
-  VERSION (IF ANY):    0.3.1                                                                                                                                                                                          
+  VERSION (IF ANY):    0.3.1
   -------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --
-  BRIEF DESCRIPTION:   A replacement AMD loader for RequireJS. It provides a minimal AMD API footprint that includes loader plugin support. Only useful for built/bundled AMD modules, does not do dynamic loading.   
-  LICENSE:             MIT or New BSD, MIT selected                                                                                                                                                                   
+  BRIEF DESCRIPTION:   A replacement AMD loader for RequireJS. It provides a minimal AMD API footprint that includes loader plugin support. Only useful for built/bundled AMD modules, does not do dynamic loading.
+  LICENSE:             MIT or New BSD, MIT selected
 
 Almond is released under two licenses: new BSD, and MIT. You may pick
 the license that best suits your development needs. The text of both
@@ -84,10 +85,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _Base64.js_
 
-  VERSION (IF ANY):    0.3.0                                                                                                                                                                                                                                                                                         
+  VERSION (IF ANY):    0.3.0
   -------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --
-  BRIEF DESCRIPTION:   Duo two-factor authentication for Java web applications. This package allows a web developer to quickly add Duo's interactive, self-service, two-factor authentication to any web login form - without setting up secondary user accounts, directory synchronization, servers, or hardware.   
-  LICENSE:             Apache 2.0 or WTFPL, WTFPL selected                                                                                                                                                                                                                                                           
+  BRIEF DESCRIPTION:   Duo two-factor authentication for Java web applications. This package allows a web developer to quickly add Duo's interactive, self-service, two-factor authentication to any web login form - without setting up secondary user accounts, directory synchronization, servers, or hardware.
+  LICENSE:             Apache 2.0 or WTFPL, WTFPL selected
 
 COPYRIGHT 2015 DAVID CHAMBERS
 
@@ -310,10 +311,10 @@ TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
 
 _q.js_
 
-  VERSION (IF ANY):                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+  VERSION (IF ANY):
   -------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --
-  BRIEF DESCRIPTION:   If a function cannot return a value or throw an exception without blocking, it can return a promise instead. A promise is an object that represents the return value or the thrown exception that the function may eventually provide. A promise can also be used as a proxy for a remote object to overcome latency. On the first pass, promises can mitigate the “Pyramid of Doom”: the situation where code marches to the right faster than it marches forward.   
-  LICENSE              MIT                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+  BRIEF DESCRIPTION:   If a function cannot return a value or throw an exception without blocking, it can return a promise instead. A promise is an object that represents the return value or the thrown exception that the function may eventually provide. A promise can also be used as a proxy for a remote object to overcome latency. On the first pass, promises can mitigate the “Pyramid of Doom”: the situation where code marches to the right faster than it marches forward.
+  LICENSE              MIT
 
 COPYRIGHT 2009–2014 KRISTOPHER MICHAEL KOWAL. ALL RIGHTS RESERVED.
 
@@ -338,10 +339,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _reqwest_
 
-  VERSION (IF ANY):    2.0.5                                                                                                  
+  VERSION (IF ANY):    2.0.5
   -------------------- ------------------------------------------------------------------------------------------------------ --
-  BRIEF DESCRIPTION:   It's AJAX All over again. Includes support for xmlHttpRequest, JSONP, CORS, and CommonJS Promises A.   
-  LICENSE              MIT                                                                                                    
+  BRIEF DESCRIPTION:   It's AJAX All over again. Includes support for xmlHttpRequest, JSONP, CORS, and CommonJS Promises A.
+  LICENSE              MIT
 
 COPYRIGHT 2015 DUSTIN DIAZ. ALL RIGHTS RESERVED.
 

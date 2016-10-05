@@ -1,7 +1,8 @@
 ---
-title: Okta LDAP Agent product
 layout: legal_notice
+title: Okta LDAP Agent product
 ---
+
 This document contains third party open source licenses and notices for
 the Okta LDAP Agent product. Certain licenses and notices may appear in
 other parts of the product in accordance with the applicable license
@@ -81,7 +82,7 @@ license._
 _ASP.NET Weblog Article, "Encrypting Passwords in a .NET app.config
 File"_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -----------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   ASP.NET Weblog Article by Jon Galloway - Encrypting Passwords in a .NET app.config File
   LICENSE:             Ms-Pl
@@ -151,9 +152,9 @@ fitness for a particular purpose and non-infringement.
 _CodeProject Article, "Allow write/modify access to
 CommonApplicationData"_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ------
-  BRIEF DESCRIPTION:   
+  BRIEF DESCRIPTION:
   LICENSE:             CPOL
 
 License
@@ -170,9 +171,9 @@ _*Modifications by Okta, Inc._
 
 _CodeProject Article, "LSA Functions - Privileges and Impersonation"_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ------
-  BRIEF DESCRIPTION:   
+  BRIEF DESCRIPTION:
   LICENSE:             CPOL
 
 License
@@ -189,7 +190,7 @@ _*Modifications by Okta, Inc._
 
 _CommandLine Parser Library_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -----------------------------------------------------------------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   The Command Line Parser Library offers to CLR applications a clean and concise API for manipulating command line arguments and related tasks.
   LICENSE:             MIT
@@ -219,7 +220,7 @@ _Lightweight Directory Access Protocol_
 
   VERSION (IF ANY):    3
   -------------------- --------
-  BRIEF DESCRIPTION:   
+  BRIEF DESCRIPTION:
   LICENSE:             Custom
 
 Copyright (c) The Internet Society (1997). All Rights Reserved.
@@ -249,7 +250,7 @@ FITNESS FOR A PARTICULAR PURPOSE.
 
 _Json.NET_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -----------------------------------------------------------------
   BRIEF DESCRIPTION:   Json.NET is a popular high-performance JSON framework for .NET.
   LICENSE:             MIT
@@ -315,7 +316,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _Ms-Pl_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   DotNetZip is a FAST, FREE class library and toolset for manipulating zip files. Use VB, C# or any .NET language to easily create, extract, or update zip files.
   LICENSE:             Ms-Pl
@@ -384,7 +385,7 @@ fitness for a particular purpose and non-infringement.
 
 _SpringFramework Spring Beans_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ----------------------------------------------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   Core support for dependency injection, transaction management, web applications, data access, messaging, testing and more.
   LICENSE:             Apache 2.0

@@ -1,7 +1,8 @@
 ---
-title: Okta LDAP Agent Setup product
 layout: legal_notice
+title: Okta LDAP Agent Setup product
 ---
+
 This document contains third party open source licenses and notices for
 the Okta LDAP Agent Setup product. Certain licenses and notices may
 appear in other parts of the product in accordance with the applicable
@@ -54,7 +55,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 _ASP.NET Weblog Article, "Encrypting Passwords in a .NET app.config
 File"_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ------------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   ASP.NET Weblog Article by Jon Galloway - Encrypting Passwords in a .NET app.config File.
   LICENSE:             Microsoft Limited Public License
@@ -130,9 +131,9 @@ on a Microsoft Windows operating system product.
 _CodeProject Article, "Allow write/modify access to
 CommonApplicationData"_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ------
-  BRIEF DESCRIPTION:   
+  BRIEF DESCRIPTION:
   LICENSE:             CPOL
 
 License
@@ -149,9 +150,9 @@ _*Modifications by Okta, Inc._
 
 _CodeProject Article, "LSA Functions - Privileges and Impersonation"_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ------
-  BRIEF DESCRIPTION:   
+  BRIEF DESCRIPTION:
   LICENSE:             CPOL
 
 License
@@ -168,7 +169,7 @@ _*Modifications by Okta, Inc._
 
 _CommandLine Parser Library_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -----------------------------------------------------------------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   The Command Line Parser Library offers to CLR applications a clean and concise API for manipulating command line arguments and related tasks.
   LICENSE:             MIT
@@ -196,7 +197,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _Json.NET_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -----------------------------------------------------------------
   BRIEF DESCRIPTION:   Json.NET is a popular high-performance JSON framework for .NET.
   LICENSE:             MIT
@@ -262,7 +263,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _Ms-Pl_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   DotNetZip is a FAST, FREE class library and toolset for manipulating zip files. Use VB, C# or any .NET language to easily create, extract, or update zip files.
   LICENSE:             Ms-Pl

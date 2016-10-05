@@ -1,7 +1,8 @@
 ---
-title: Okta Android Verify product
 layout: legal_notice
+title: Okta Android Verify product
 ---
+
 This document contains third party open source licenses and notices for
 the Okta Android Verify product. Certain licenses and notices may appear
 in other parts of the product in accordance with the applicable license
@@ -15,7 +16,7 @@ THIRD PARTY NOTICES
 
 _android-keystore NativeCryptoConstants.java_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -----------------------------------------------------------
   BRIEF DESCRIPTION:   Direct access to Android's credential storage (keystore).
   LICENSE:             Apache 2.0
@@ -40,9 +41,9 @@ license._
 _Blogspot article, "Storing application secrets in Android's credential
 storage"_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ------------
-  BRIEF DESCRIPTION:   
+  BRIEF DESCRIPTION:
   LICENSE:             Apache 2.0
 
 Copyright (c) 2009 The Android Open Source Project.
@@ -64,7 +65,7 @@ license._
 
 _google-authenticator-android_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   The Google Authenticator project includes implementations of one-time passcode generators for several mobile platforms, as well as a pluggable authentication module (PAM).
   LICENSE:             Apache 2.0
@@ -88,7 +89,7 @@ license._
 
 _Gradle_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ----------------------------------------------------------
   BRIEF DESCRIPTION:   The modern open source polyglot build automation system.
   LICENSE:             Commercial or Apache 2.0, Apache 2.0 selected
@@ -149,7 +150,7 @@ license._
 
 _The Android Open Source Project_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ------------------------------------------------------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   Android is an open source software stack for a wide range of mobile devices and a corresponding open source project led by Google.
   LICENSE:             Apache 2.0
@@ -173,7 +174,7 @@ license._
 
 _Robolectric_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -------------------------------
   BRIEF DESCRIPTION:   Test-Drive Your Android Code.
   LICENSE:             MIT

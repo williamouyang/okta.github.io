@@ -1,7 +1,8 @@
 ---
-title: Okta SSO IWA product
 layout: legal_notice
+title: Okta SSO IWA product
 ---
+
 This document contains third party open source licenses and notices for
 the Okta SSO IWA product. Certain licenses and notices may appear in
 other parts of the product in accordance with the applicable license
@@ -53,9 +54,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _Code from MSDN blog article "Creating a self-signed certificate in C#"_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ----------------------------------
-  BRIEF DESCRIPTION:   
+  BRIEF DESCRIPTION:
   LICENSE:             Microsoft Limited Public License
 
 Microsoft Limited Public License
@@ -128,9 +129,9 @@ on a Microsoft Windows operating system product.
 
 _CodeProject Article, "LSA Functions - Privileges and Impersonation"_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ------
-  BRIEF DESCRIPTION:   
+  BRIEF DESCRIPTION:
   LICENSE:             CPOL
 
 License
@@ -147,7 +148,7 @@ _*Modifications by Okta, Inc._
 
 _CommandLine Parser Library_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -----------------------------------------------------------------------------------------------------------------------------------------------
   BRIEF DESCRIPTION:   The Command Line Parser Library offers to CLR applications a clean and concise API for manipulating command line arguments and related tasks.
   LICENSE:             MIT
@@ -175,7 +176,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 _Json.NET_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- -----------------------------------------------------------------
   BRIEF DESCRIPTION:   Json.NET is a popular high-performance JSON framework for .NET.
   LICENSE:             MIT

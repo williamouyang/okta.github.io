@@ -49,7 +49,7 @@ Refer to the [product documentation](https://support.okta.com/articles/Knowledge
 | Role Type         | Label                        | Optional Targets        |
 | ----------------- | -----------------------------| ------------------------|
 | `SUPER_ADMIN`     | Super Administrator          |                         |
-| `ORG_ADMIN`       | Organizational Administrator |                         |                  
+| `ORG_ADMIN`       | Organizational Administrator |                         |
 | `APP_ADMIN`       | Application Administrator    | Apps                    |
 | `USER_ADMIN`      | User Administrator           | [Groups](./groups.html) |
 | `MOBILE_ADMIN`    | Mobile Administrator         |                         |
@@ -208,7 +208,6 @@ HTTP/1.1 204 No Content
 ### User Admin Role Group Targets
 
 #### List Group Targets for User Admin Role
-
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users/*:uid*/roles/*:rid*/targets/groups</span>
@@ -284,7 +283,6 @@ curl -v -X GET \
 ~~~
 
 #### Add Group Target to User Admin Role
-
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /users/*:uid*/roles/*:rid*/targets/groups/*:gid*</span>
@@ -328,7 +326,6 @@ HTTP/1.1 204 No Content
 ~~~
 
 #### Remove Group Target from User Admin Role
-
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /users/*:uid*/roles/*:rid*/targets/groups/*:gid*</span>
@@ -374,7 +371,6 @@ HTTP/1.1 204 No Content
 ### App Admin Role App Targets
 
 #### List App Targets for App Admin Role
-
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users/*:uid*/roles/*:rid*/targets/catalog/apps</span>
@@ -484,7 +480,6 @@ curl -v -X GET \
 ~~~
 
 #### Add App Target to App Admin Role
-
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /users/*:uid*/roles/*:rid*/targets/catalog/apps/*:appName*</span>
@@ -528,7 +523,6 @@ HTTP/1.1 204 No Content
 ~~~
 
 #### Remove App Target from App Admin Role
-
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /users/*:uid*/roles/*:rid*/targets/catalog/apps/*:appName*</span>

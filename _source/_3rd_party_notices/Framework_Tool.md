@@ -1,7 +1,8 @@
 ---
-title: Okta Framework Tool product
 layout: legal_notice
+title: Okta Framework Tool product
 ---
+
 This document contains third party open source licenses and notices for
 the Okta Framework Tool product. Certain licenses and notices may appear
 in other parts of the product in accordance with the applicable license
@@ -15,7 +16,7 @@ THIRD PARTY NOTICES
 
 _Logback_
 
-  VERSION (IF ANY):    
+  VERSION (IF ANY):
   -------------------- ----------------------------------------
   BRIEF DESCRIPTION:   Logging Framework
   LICENSE:             EPL 1.0 or LGPL 2.1, LGPL 2.1 selected

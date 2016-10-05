@@ -1,8 +1,10 @@
 ---
 layout: docs_page
 title: Enabling CORS
-underscore: true
 redirect_from: "/docs/getting_started/enabling_cors.html"
+scripts:
+- https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js
+js: cors
 ---
 
 ## Overview
@@ -152,7 +154,6 @@ SCRIPT7002: XMLHttpRequest: Network Error 0x80070005, Access is denied.
 
 - [HTTP access control (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS)
 
-
 <script id="template-profile" type="text/template" class="template">
   <div class="panel panel-default panel-profile">
     <div class="panel-heading">
@@ -171,7 +172,7 @@ SCRIPT7002: XMLHttpRequest: Network Error 0x80070005, Access is denied.
           <div class="col-2-3">
             <p class="form-control-static"><%= user.status %></p>
           </div>
-        </div>            
+        </div>
         <div class="form-group">
           <label class="col-1-3 control-label">Login</label>
           <div class="col-2-3">
@@ -219,7 +220,7 @@ SCRIPT7002: XMLHttpRequest: Network Error 0x80070005, Access is denied.
           <div class="col-2-3">
             <p class="form-control-static"><%= user.lastLogin %></p>
           </div>
-        </div>  
+        </div>
       </div>
     </div>
   </div>
