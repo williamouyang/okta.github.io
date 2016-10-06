@@ -6,9 +6,14 @@ excerpt: Summary of changes to the Okta Platform since Release 2016.39
 
 ## Release 2016.40
 
-### Feature Enhancements
+### Feature Enhancement: Listing Apps that Share an Application Key Credential
+                         
+Once you have shared a credential between apps, you can list all the applications that are using 
+the same application key credential. <!-- OKTA-100925 -->
+                         
+For more information, see the [Apps API reference](http://developer.okta.com/docs/api/resources/apps.html#list-applications-using-a-key).
 
-* [New Version of Okta Sign-In Widget](#new-version-of-okta-sign-in-widget)
+<!-- * [New Version of Okta Sign-In Widget](#new-version-of-okta-sign-in-widget)
 * [New Version of Okta Auth JS](#new-version-of-okta-auth-js)
 * [Listing Apps that Share an Application Key Credential](#listing-apps-that-share-an-application-key-credential)
 
@@ -33,14 +38,8 @@ The new version of Okta Auth JS, 1.5.0, is available:
 * Access updated user information with token.getUserInfo.
 * Performance improvements when refreshing multiple tokens.
 
-Learn about these and other improvements in [the GitHub repository](https://github.com/okta/okta-auth-js/releases/latest).
+Learn about these and other improvements in [the GitHub repository](https://github.com/okta/okta-auth-js/releases/latest). -->
 
-#### Listing Apps that Share an Application Key Credential
-
-Once you have shared a credential between apps, you can list all the applications that are using 
-the same application key credential. <!-- OKTA-100925 -->
-
-For more information, see the [Apps API reference](http://developer.okta.com/docs/api/resources/apps.html#list-applications-using-a-key).
 
 <!-- ### Platform Bugs Fixed -->
 
