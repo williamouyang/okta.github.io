@@ -128,18 +128,16 @@ Response:
       "kid": "w__Yr9AElCftDtLP5CmjzZFMKXndqHtx7B3QPkg8jrI"
     }
   },
-//Rest of response deleted for clarity
 }
 ~~~
+
+> Note: The response has been truncated for clarity.
 
 #### 3. Share the source app's key credential (kid) with the target app
 
 Request:
 
-~~~ json
-
-POST /api/v1/apps/0oa8ae1t5yev2ajDs0h7/credentials/keys/w__Yr9AElCftDtLP5CmjzZFMKXndqHtx7B3QPkg8jrI/clone?targetAid=0oa8ae0dv4RGQvjyZ0h7 
-~~~
+`POST /api/v1/apps/0oa8ae1t5yev2ajDs0h7/credentials/keys/w__Yr9AElCftDtLP5CmjzZFMKXndqHtx7B3QPkg8jrI/clone?targetAid=0oa8ae0dv4RGQvjyZ0h7`
 
 Response:
 
@@ -234,10 +232,11 @@ Response:
       "kid": "w__Yr9AElCftDtLP5CmjzZFMKXndqHtx7B3QPkg8jrI"
     }
   },
-//Rest of response deleted for clarity
 }
 
 ~~~
+
+> Note: The response has been truncated for clarity.
 
 <!-- Add this section when second bullet is available
 ### Other Tasks
