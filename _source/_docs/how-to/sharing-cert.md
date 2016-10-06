@@ -127,9 +127,11 @@ Response:
     "signing": {
       "kid": "w__Yr9AElCftDtLP5CmjzZFMKXndqHtx7B3QPkg8jrI"
     }
-  }, // Rest of response deleted for clarity
+  },
 }
 ~~~
+
+> Note: The response has been truncated for clarity.
 
 #### 3. Share the source app's key credential (kid) with the target app
 
@@ -229,10 +231,12 @@ Response:
     "signing": {
       "kid": "w__Yr9AElCftDtLP5CmjzZFMKXndqHtx7B3QPkg8jrI"
     }
-  }, //Rest of response deleted for clarity
+  },
 }
 
 ~~~
+
+> Note: The response has been truncated for clarity.
 
 <!-- Add this section when second bullet is available
 ### Other Tasks
