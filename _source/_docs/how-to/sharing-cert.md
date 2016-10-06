@@ -127,8 +127,7 @@ Response:
     "signing": {
       "kid": "w__Yr9AElCftDtLP5CmjzZFMKXndqHtx7B3QPkg8jrI"
     }
-  },
-//Rest of response deleted for clarity
+  }, // Rest of response deleted for clarity
 }
 ~~~
 
@@ -136,10 +135,7 @@ Response:
 
 Request:
 
-~~~ json
-
-POST /api/v1/apps/0oa8ae1t5yev2ajDs0h7/credentials/keys/w__Yr9AElCftDtLP5CmjzZFMKXndqHtx7B3QPkg8jrI/clone?targetAid=0oa8ae0dv4RGQvjyZ0h7 
-~~~
+`POST /api/v1/apps/0oa8ae1t5yev2ajDs0h7/credentials/keys/w__Yr9AElCftDtLP5CmjzZFMKXndqHtx7B3QPkg8jrI/clone?targetAid=0oa8ae0dv4RGQvjyZ0h7`
 
 Response:
 
@@ -233,8 +229,7 @@ Response:
     "signing": {
       "kid": "w__Yr9AElCftDtLP5CmjzZFMKXndqHtx7B3QPkg8jrI"
     }
-  },
-//Rest of response deleted for clarity
+  }, //Rest of response deleted for clarity
 }
 
 ~~~
