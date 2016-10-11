@@ -222,7 +222,7 @@ In Okta, select <b>Applications > Applications</b> and choose your app. Then sel
 click <b>View Setup Instructions</b>, as shown below. Perform the setup for your app again. During this setup, you 
 will upload the certificate in a specified format, the metadata, or the certificate fingerprint.
 
-![Accessing SAML Setup Instructions](/assets/img/saml_setup.png "Accessing SAML Setup Instructions")
+![Accessing SAML Setup Instructions](/assets/img/saml_setup_link.png "Accessing SAML Setup Instructions")
 
 
 ### Reverting to a SHA1 Certificate
@@ -295,7 +295,7 @@ In Okta, select <b>Applications > Applications</b> and choose your app. Then sel
 click <b>View Setup Instructions</b>, as shown below. Perform the setup for your app again. During this setup, you 
 will upload the certificate in a specified format, the metadata, or the certificate fingerprint.
 
-![Accessing SAML Setup Instructions](/assets/img/saml_setup.png "Accessing SAML Setup Instructions")
+![Accessing SAML Setup Instructions](/assets/img/saml_setup_link.png "Accessing SAML Setup Instructions")
 
 ### Determine the Signature Algorithm of a Certificate 
 
