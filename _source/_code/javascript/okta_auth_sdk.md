@@ -492,7 +492,7 @@ authClient.token.getWithPopup({
 ~~~ javascript
 authClient.token.getWithRedirect(options);
 
-// If the token is in the uri after the redirect
+// If the token is in the url after the redirect
 authClient.token.parseFromUrl()
 .then(function(tokenOrTokens) {
   // Manage token or tokens
