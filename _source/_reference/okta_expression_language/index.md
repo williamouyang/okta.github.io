@@ -75,16 +75,16 @@ Function | Input Parameter Signature | Return Type | Example | Output
  | | | `String.join("", "This", "is", "a", "test")` | Thisisatest
 `String.len` | (String input) | Integer | `String.len("This")` | 4
 `String.removeSpaces` | (String input) | String | `String.removeSpaces("This is a test")` | Thisisatest
-`String.replaceAll`   | (String input, match, replacement) | String | '`String.replaceAll("This is a test", "is", "at")` | "That at a test"
+`String.replace`   | (String input, match, replacement) | String | '`String.replace("This is a test", "is", "at")` | "That at a test"
 `String.replaceOnce`   | (String input, match, replacement) | String | '`String.replaceOnce("This is a test", "is", "at")` | "That is a test"
 `String.stringContains` | (String input, String searchString) | Boolean |`String.stringContains("This is a test", "test")`  | true
  | | | `String.stringContains("This is a test", "doesn'tExist")` | false
-`String.substring `| (String input, int startIndex, int endIndex) | String | `String.substring("This is a test", 2, 9)` | is is a
-`String.substringAfter` | (String input, String searchString) | String | `String.substringAfter("abc@okta.com", "@")` | okta.com
-`String.substringBefore` | (String input, String searchString) | String | `String.substringBefore("abc@okta.com", "@")` | abc
 `String.stringSwitch` | (String input, String defaultString, String... keyValuePairs) | String | `String.stringSwitch("This is a test", "default", "key1", "value1")`| default
  | | | `String.stringSwitch("This is a test", "default", "is", "value1")`| value1
  | | | `String.stringSwitch("This is a test", "default", "key1", "value1", "test", "value2")` | value2
+`String.substring `| (String input, int startIndex, int endIndex) | String | `String.substring("This is a test", 2, 9)` | is is a
+`String.substringAfter` | (String input, String searchString) | String | `String.substringAfter("abc@okta.com", "@")` | okta.com
+`String.substringBefore` | (String input, String searchString) | String | `String.substringBefore("abc@okta.com", "@")` | abc
 `String.toUpperCase` | (String input) | String | `String.toUpperCase("This")` | THIS
 `String.toLowerCase` | (String input) | String | `String.toLowerCase("ThiS")` | this
 
