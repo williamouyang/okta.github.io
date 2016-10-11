@@ -21,7 +21,7 @@ This How To contains six sections:
 
 ### Why Should I Do This?
 
-Most major browser vendors will deprecate SHA1 later this year, as SHA256 becomes the new standard. This procedure allows you to change existing integrations.
+Most major browser vendors will deprecate SHA1 later this year, as SHA256 becomes the new standard. This procedure allows you to change existing integrations. 
 
 ## Prerequisite
 
