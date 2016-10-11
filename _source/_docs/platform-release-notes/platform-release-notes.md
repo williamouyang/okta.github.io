@@ -11,15 +11,16 @@ excerpt: Summary of changes to the Okta Platform since Release 2016.40
 * [New Version of Okta Sign-In Widget](#new-version-of-okta-sign-in-widget)
 * [New Version of Okta Auth JS](#new-version-of-okta-auth-js)
 * [Key Store Operations for Identity Providers API](#key-store-operations-are-available-for-identity-providers-api)
+* [New Functions for Replacing Strings](#new-functions-for-replacing-strings)
 
 #### New Version of Okta Sign-In Widget
 
 The new version of Okta Sign-In Widget, 1.7.0, is available:
 
 * The Widget can create access tokens and authorization codes.
-* Added tokenManager to manage OAuth 2.0 and OpenID Connect tokens.
-* The Widget is localized for Hungarian and Romanian.
-* Added support for Voice Call in the forgot password flow.
+* `tokenManager` manages OAuth 2.0 and OpenID Connect tokens.
+* Voice Call is supported in the forgot password flow.
+* Localization is available for Hungarian and Romanian.
 * Added the language option to set the displayed language.
 
 Learn about these and other improvements in [the GitHub repository](https://github.com/okta/okta-signin-widget/releases/latest).
@@ -28,10 +29,10 @@ Learn about these and other improvements in [the GitHub repository](https://gith
 
 The new version of Okta Auth JS, 1.5.0, is available:
 
-* Added manual token refreshes with the token.refresh method.
-* Okta Auth JS can create authorization codes.
-* Access updated user information with token.getUserInfo.
-* Performance improvements when refreshing multiple tokens.
+* Perform manual token refreshes with the `token.refresh` method.
+* Create authorization codes in Okta Auth JS.
+* Access updated user information with `token.getUserInfo`.
+* Performance has improved when refreshing multiple tokens.
 
 Learn about these and other improvements in [the GitHub repository](https://github.com/okta/okta-auth-js/releases/latest).
 
@@ -45,14 +46,14 @@ Just as you can in the Apps API, you can perform key store operations in the Ide
 For more information, see [Identity Provider Singing Key Store Operations](https://developer.okta.com/idps.html#identity-provider-signing-key-store-operations).
 <!-- OKTA-91498 -->
 
-#### New Functions for Replacing Strings in Expression Language
+#### New Functions for Replacing Strings
 
-Use the functions `String.replaceOnce` and `String.replaceAll` to replace strings.
+Use the Expression Language functions `String.replace` and `String.replaceOnce` to replace strings.
 
 Examples:
 
+* `String.replace("This list includes chores", "is", "at") = "That last includes chores"`
 * `String.replaceOnce("This list includes chores", "is", "at") = "That list includes chores"`
-* `String.replaceAll("This list includes chores", "is", "at") = "That last includes chores"`
 
 For more information, see [Expression Language: String Functions](http://developer.okta.com/reference/okta_expression_language/#string-functions).
 
