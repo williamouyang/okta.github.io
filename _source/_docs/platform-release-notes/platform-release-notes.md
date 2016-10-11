@@ -43,7 +43,7 @@ Just as you can in the Apps API, you can perform key store operations in the Ide
 * Generate an X.509 certificate public key
 * Retrieve and list public keys
 
-For more information, see [Identity Provider Singing Key Store Operations](https://developer.okta.com/idps.html#identity-provider-signing-key-store-operations).
+For more information, see [Identity Provider Signing Key Store Operations](https://developer.okta.com/idps.html#identity-provider-signing-key-store-operations).
 <!-- OKTA-91498 -->
 
 #### New Functions for Replacing Strings
@@ -61,7 +61,7 @@ For more information, see [Expression Language: String Functions](http://develop
 
 ### Platform Bug Fixed
 
-* Reauthorization using app sign-on policy wasn't always enforced for OpenID Connect flows.(OKTA-99897, OKTA-99900)
+* Reauthorization using app sign-on policy wasn't always enforced for OpenID Connect flows.(OKTA-99897) <!-- OKTA-99900 -->
 
 ### Does Your Org Have These Changes Yet?
 
