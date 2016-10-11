@@ -493,7 +493,7 @@ authClient.token.getWithPopup({
 authClient.token.getWithRedirect(options);
 
 // If the token is in the uri after the redirect
-authClient.token.parseFromUri()
+authClient.token.parseFromUrl()
 .then(function(tokenOrTokens) {
   // Manage token or tokens
 })
@@ -509,7 +509,7 @@ authClient.token.getWithRedirect({
   responseType: 'code'
 });
 
-// authClient.token.parseFromUri isn't necessary, because it's parsed from the query param by your server
+// authClient.token.parseFromUrl isn't necessary, because it's parsed from the query param by your server
 ~~~
 
 ### Exchange a sessionToken for a token
