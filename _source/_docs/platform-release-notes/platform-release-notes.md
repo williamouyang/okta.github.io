@@ -11,7 +11,7 @@ excerpt: Summary of changes to the Okta Platform since Release 2016.40
 * [New Version of Okta Sign-In Widget](#new-version-of-okta-sign-in-widget)
 * [New Version of Okta Auth JS](#new-version-of-okta-auth-js)
 * [Key Store Operations for Identity Providers API](#key-store-operations-are-available-for-identity-providers-api)
-* [New Functions for Replacing Strings](#new-functions-for-replacing-strings)
+* [New Function for Replacing Strings](#new-function-for-replacing-strings)
 
 #### New Version of Okta Sign-In Widget
 
