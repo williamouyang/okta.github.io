@@ -6,7 +6,7 @@ excerpt: Summary of changes to the Okta Platform since Release 2016.40
 
 ## Release 2016.41
 
-### Feature Enhancements:
+### Feature Enhancements
 
 * [New Version of Okta Sign-In Widget](#new-version-of-okta-sign-in-widget)
 * [New Version of Okta Auth JS](#new-version-of-okta-auth-js)
