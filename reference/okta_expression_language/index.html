@@ -231,7 +231,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		     <li><a href="/docs/api/resources/events.html">Events</a></li>
+		     
+		     
 		     
 		     
 		     
@@ -372,7 +375,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		     <li><a href="/docs/api/resources/groups.html">Groups</a></li>
+		     
 		     
 		     
 		     
@@ -517,7 +522,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
 		     <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
+		     
 		     
 		     
 		     
@@ -615,7 +623,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		     <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
+		     
 		     
 		     
 		     
@@ -756,7 +766,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
 		     <li><a href="/docs/api/resources/users.html">Users</a></li>
+		     
 		     
 		     
 		     
@@ -985,46 +998,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">String.stringSwitch</code></td>
-      <td>(String input, String defaultString, String… keyValuePairs)</td>
+      <td><code class="highlighter-rouge">String.append</code></td>
+      <td>(String str, String suffix)</td>
       <td>String</td>
-      <td><code class="highlighter-rouge">String.stringSwitch("This is a test", "default", "key1", "value1")</code></td>
-      <td>default</td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td><code class="highlighter-rouge">String.stringSwitch("This is a test", "default", "is", "value1")</code></td>
-      <td>value1</td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td><code class="highlighter-rouge">String.stringSwitch("This is a test", "default", "key1", "value1", "test", "value2")</code></td>
-      <td>value2</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">String.stringContains</code></td>
-      <td>(String input, String searchString)</td>
-      <td>Boolean</td>
-      <td><code class="highlighter-rouge">String.stringContains("This is a test", "test")</code> </td>
-      <td>true</td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td><code class="highlighter-rouge">String.stringContains("This is a test", "doesn'tExist")</code></td>
-      <td>false</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">String.removeSpaces</code></td>
-      <td>(String input)</td>
-      <td>String</td>
-      <td><code class="highlighter-rouge">String.removeSpaces("This is a test")</code></td>
-      <td>Thisisatest</td>
+      <td><code class="highlighter-rouge">String.append("This is", " a test")</code></td>
+      <td>This is a test</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">String.join</code></td>
@@ -1048,11 +1026,74 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <td>4</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">String.append</code></td>
-      <td>(String str, String suffix)</td>
+      <td><code class="highlighter-rouge">String.removeSpaces</code></td>
+      <td>(String input)</td>
       <td>String</td>
-      <td><code class="highlighter-rouge">String.append("This is", " a test")</code></td>
-      <td>This is a test</td>
+      <td><code class="highlighter-rouge">String.removeSpaces("This is a test")</code></td>
+      <td>Thisisatest</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">String.replace</code></td>
+      <td>(String input, match, replacement)</td>
+      <td>String</td>
+      <td>‘<code class="highlighter-rouge">String.replace("This is a test", "is", "at")</code></td>
+      <td>“That at a test”</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">String.stringContains</code></td>
+      <td>(String input, String searchString)</td>
+      <td>Boolean</td>
+      <td><code class="highlighter-rouge">String.stringContains("This is a test", "test")</code> </td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td><code class="highlighter-rouge">String.stringContains("This is a test", "doesn'tExist")</code></td>
+      <td>false</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">String.stringSwitch</code></td>
+      <td>(String input, String defaultString, String… keyValuePairs)</td>
+      <td>String</td>
+      <td><code class="highlighter-rouge">String.stringSwitch("This is a test", "default", "key1", "value1")</code></td>
+      <td>default</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td><code class="highlighter-rouge">String.stringSwitch("This is a test", "default", "is", "value1")</code></td>
+      <td>value1</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td><code class="highlighter-rouge">String.stringSwitch("This is a test", "default", "key1", "value1", "test", "value2")</code></td>
+      <td>value2</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">String.substring </code></td>
+      <td>(String input, int startIndex, int endIndex)</td>
+      <td>String</td>
+      <td><code class="highlighter-rouge">String.substring("This is a test", 2, 9)</code></td>
+      <td>is is a</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">String.substringAfter</code></td>
+      <td>(String input, String searchString)</td>
+      <td>String</td>
+      <td><code class="highlighter-rouge">String.substringAfter("abc@okta.com", "@")</code></td>
+      <td>okta.com</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">String.substringBefore</code></td>
+      <td>(String input, String searchString)</td>
+      <td>String</td>
+      <td><code class="highlighter-rouge">String.substringBefore("abc@okta.com", "@")</code></td>
+      <td>abc</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">String.toUpperCase</code></td>
@@ -1067,27 +1108,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <td>String</td>
       <td><code class="highlighter-rouge">String.toLowerCase("ThiS")</code></td>
       <td>this</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">String.substringBefore</code></td>
-      <td>(String input, String searchString)</td>
-      <td>String</td>
-      <td><code class="highlighter-rouge">String.substringBefore("abc@okta.com", "@")</code></td>
-      <td>abc</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">String.substringAfter</code></td>
-      <td>(String input, String searchString)</td>
-      <td>String</td>
-      <td><code class="highlighter-rouge">String.substringAfter("abc@okta.com", "@")</code></td>
-      <td>okta.com</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">String.substring </code></td>
-      <td>(String input, int startIndex, int endIndex)</td>
-      <td>String</td>
-      <td><code class="highlighter-rouge">String.substring("This is a test", 2, 9)</code></td>
-      <td>is is a</td>
     </tr>
   </tbody>
 </table>

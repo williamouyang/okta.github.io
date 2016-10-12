@@ -231,7 +231,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		     <li><a href="/docs/api/resources/events.html">Events</a></li>
+		     
+		     
 		     
 		     
 		     
@@ -372,7 +375,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		     <li><a href="/docs/api/resources/groups.html">Groups</a></li>
+		     
 		     
 		     
 		     
@@ -517,7 +522,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
 		     <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
+		     
 		     
 		     
 		     
@@ -615,7 +623,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		     <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
+		     
 		     
 		     
 		     
@@ -756,7 +766,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
 		     <li><a href="/docs/api/resources/users.html">Users</a></li>
+		     
 		     
 		     
 		     
@@ -841,7 +854,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <div class="PageContent-main" id="docs-body">
       <h1 id="introduction">Introduction</h1>
 
-<p>The Okta Auth SDK builds on top of our <a href="/docs/api/resources/authn.html">Authentication API</a> to enable you to create a custom login experience using JavaScript.</p>
+<p>The Okta Auth SDK builds on top of our <a href="/docs/api/resources/authn.html">Authentication API</a> and <a href="/docs/api/resources/oidc.html">OAuth 2.0 API</a> to enable you to create a fully branded sign-in experience using JavaScript.</p>
 
 <h1 id="prerequisites">Prerequisites</h1>
 
@@ -854,7 +867,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Include the following script tag in your target web page:</p>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-sdk-1.0.0.min.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.5.0/OktaAuth.min.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
 </code></pre>
 </div>
 
@@ -1737,9 +1750,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<h2 id="social-authentication-and-oidc">Social Authentication and OIDC</h2>
+<h2 id="social-authentication-and-openid-connect">Social Authentication and OpenID Connect</h2>
 
-<p>If you want to obtain an ID Token via <a href="/docs/api/resources/oidc.html">OIDC</a> or <a href="/docs/guides/social_authentication.html">social authentication</a>, it’s possible to manage the flow with the SDK. To do so, instantiate your client with a <code class="highlighter-rouge">clientId</code> and <code class="highlighter-rouge">redirectUri</code>.</p>
+<p>If you want to create a token via <a href="/docs/api/resources/oidc.html">OpenID Connect</a> or <a href="/docs/guides/social_authentication.html">social authentication</a>, it’s possible to manage the flow with this SDK. To do so, instantiate your client with a <code class="highlighter-rouge">clientId</code> and <code class="highlighter-rouge">redirectUri</code>. If you don’t have either of those, <a href="https://github.com/oktadeveloper/okta-oauth-spa-authjs-osw/blob/master/Okta-OIDC_SPA_JS-OSW_DevSetupGuide.pdf">set up OpenID Connect with these instructions</a>.</p>
 
 <div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">authClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaAuth</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://your-org.okta.com'</span><span class="p">,</span>
@@ -1749,37 +1762,150 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<h3 id="get-an-id-token">Get an ID Token</h3>
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">idToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">()</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// Raw ID Token</span>
-  <span class="nx">res</span><span class="p">.</span><span class="nx">idToken</span><span class="p">;</span>
+<p>Each method to create a token (or tokens) takes an optional argument:</p>
 
-  <span class="c1">// Decoded ID Token claims</span>
-  <span class="nx">res</span><span class="p">.</span><span class="nx">claims</span><span class="p">;</span>
-<span class="p">})</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// Defaults</span>
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">responseType</span><span class="p">:</span> <span class="s1">'id_token'</span><span class="p">,</span>
+  <span class="na">scopes</span><span class="p">:</span> <span class="p">[</span><span class="s1">'openid'</span><span class="p">,</span> <span class="s1">'email'</span><span class="p">]</span>
+<span class="p">};</span>
 </code></pre>
 </div>
 
-<h3 id="exchange-a-sessiontoken-for-an-id-token">Exchange a sessionToken for an ID Token</h3>
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">idToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">({</span>
-  <span class="na">sessionToken</span><span class="p">:</span> <span class="s1">'testSessionToken'</span>
+<p>The <code class="highlighter-rouge">responseType</code> option can be a string (<code class="highlighter-rouge">id_token</code>, <code class="highlighter-rouge">token</code>, or <code class="highlighter-rouge">code</code>) or an array with multiple responseTypes. When a string is passed, the response is a single token. When an array is passed, the response is a token array in the order they were requested. For example:</p>
+
+<p>A single token</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">getWithPopup</span><span class="p">({</span>
+  <span class="na">responseType</span><span class="p">:</span> <span class="s1">'id_token'</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">idToken</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Manage the idToken</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Handle OAuthError</span>
 <span class="p">});</span>
 </code></pre>
 </div>
 
-<h3 id="get-an-id-token-from-an-idp">Get an ID Token from an IDP</h3>
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">idToken</span><span class="p">.</span><span class="nx">authorize</span><span class="p">({</span>
+<p>Multiple tokens</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">getWithPopup</span><span class="p">({</span>
+  <span class="na">responseType</span><span class="p">:</span> <span class="p">[</span><span class="s1">'token'</span><span class="p">,</span> <span class="s1">'id_token'</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">tokenArray</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// The tokenArray order corresponds with the responseType array</span>
+
+  <span class="c1">// 'token' was first, so the first item is an accessToken</span>
+  <span class="kd">var</span> <span class="nx">accessToken</span> <span class="o">=</span> <span class="nx">tokenArray</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+
+  <span class="c1">// 'id_token' was second, so the second item is an idToken</span>
+  <span class="kd">var</span> <span class="nx">idToken</span> <span class="o">=</span> <span class="nx">tokenArray</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+
+  <span class="c1">// Manage the tokens</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Handle OAuthError</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p>Each <code class="highlighter-rouge">responseType</code> has its own format:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// id_token</span>
+<span class="p">{</span>
+  <span class="nl">idToken</span><span class="p">:</span> <span class="s1">'theIdTokenString'</span><span class="p">,</span>
+  <span class="nx">claims</span><span class="err">:</span> <span class="p">{},</span> <span class="c1">// The claims of the idToken (they're determined by the scopes requested)</span>
+  <span class="nx">expiresAt</span><span class="err">:</span> <span class="mi">123456789</span><span class="p">,</span> <span class="c1">// When the token expires in unix time</span>
+  <span class="nx">scopes</span><span class="err">:</span> <span class="p">[]</span> <span class="c1">// The scopes requested</span>
+<span class="p">}</span>
+
+<span class="c1">// token</span>
+<span class="p">{</span>
+  <span class="nl">accessToken</span><span class="p">:</span> <span class="s1">'theAccessTokenString'</span><span class="p">,</span>
+  <span class="nx">expiresAt</span><span class="err">:</span> <span class="mi">123456789</span><span class="p">,</span> <span class="c1">// When the token expires in unix time,</span>
+  <span class="nx">tokenType</span><span class="err">:</span> <span class="s1">'Bearer'</span><span class="p">,</span> <span class="c1">// This is the default type for access tokens</span>
+  <span class="nx">scopes</span><span class="err">:</span> <span class="p">[]</span> <span class="c1">// The scopes requested</span>
+<span class="p">}</span>
+
+<span class="c1">// code</span>
+<span class="p">{</span>
+  <span class="nl">authorizationCode</span><span class="p">:</span> <span class="s1">'theAuthorizationCodeString'</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h3 id="create-token-with-a-popup">Create token with a popup</h3>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">getWithPopup</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">tokenOrTokens</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Manage token or tokens</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Handle OAuthError</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p>This is commonly used to create a token with an external idp.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">getWithPopup</span><span class="p">({</span>
   <span class="na">idp</span><span class="p">:</span> <span class="s1">'target-idp'</span>
 <span class="p">});</span>
 </code></pre>
 </div>
 
-<h3 id="refresh-an-id-token">Refresh an ID Token</h3>
+<h3 id="create-token-using-a-redirect">Create token using a redirect</h3>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">getWithRedirect</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
 
-<p>Returns a new idToken if the Okta session is still valid.</p>
+<span class="c1">// If the token is in the url after the redirect</span>
+<span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">parseFromUrl</span><span class="p">()</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">tokenOrTokens</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Manage token or tokens</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Handle OAuthError</span>
+<span class="p">});</span>
+</code></pre>
+</div>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">idToken</span><span class="p">.</span><span class="nx">refresh</span><span class="p">();</span>
+<p>This is commonly used to create an authorization code.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">getWithRedirect</span><span class="p">({</span>
+  <span class="na">responseType</span><span class="p">:</span> <span class="s1">'code'</span>
+<span class="p">});</span>
+
+<span class="c1">// authClient.token.parseFromUrl isn't necessary, because it's parsed from the query param by your server</span>
+</code></pre>
+</div>
+
+<h3 id="exchange-a-sessiontoken-for-a-token">Exchange a sessionToken for a token</h3>
+
+<p>When you’ve obtained a sessionToken from the authorization flows, or a session already exists, you can obtain a token or tokens without prompting the user to log in.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">getWithoutPrompt</span><span class="p">({</span>
+  <span class="na">responseType</span><span class="p">:</span> <span class="s1">'id_token'</span><span class="p">,</span> <span class="c1">// or array of types</span>
+  <span class="na">sessionToken</span><span class="p">:</span> <span class="s1">'testSessionToken'</span> <span class="c1">// optional if the user has an existing Okta session</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">tokenOrTokens</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Manage token or tokens</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Handle OAuthError</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<h3 id="refresh-a-token">Refresh a token</h3>
+
+<p>Returns a new token if the Okta session is still valid.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">refresh</span><span class="p">(</span><span class="nx">tokenToRefresh</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">freshToken</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Manage freshToken</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Handle OAuthError</span>
+<span class="p">});</span>
 </code></pre>
 </div>
 
@@ -1787,7 +1913,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Decode a raw ID Token</p>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">idToken</span><span class="p">.</span><span class="nx">decode</span><span class="p">(</span><span class="nx">idTokenString</span><span class="p">);</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">decode</span><span class="p">(</span><span class="nx">idTokenString</span><span class="p">);</span>
 </code></pre>
 </div>
 
