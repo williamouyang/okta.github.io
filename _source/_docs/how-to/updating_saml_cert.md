@@ -1,7 +1,7 @@
 ---
 layout: docs_page
-title: How To Upgrade SAML Apps to Use a SHA256 Certificate
-excerpt: ow To Upgrade SAML Apps to Use a SHA256 Certificate
+title: Upgrade SAML Apps to SHA256
+excerpt: Upgrade SAML Apps to SHA256
 ---
 
 ## SAML Apps and SHA256 Certificates
@@ -21,7 +21,7 @@ This How To contains six sections:
 
 ### Why Should I Do This?
 
-Most major browser vendors will deprecate SHA1 later this year, as SHA256 becomes the new standard. This procedure allows you to change existing integrations. 
+To take advantage of the additional security features of SHA256 certificates. 
 
 ## Prerequisite
 
@@ -29,20 +29,19 @@ SHA256 certificate creation and key rollover are **Early Access** (EA) features;
 
 ### New SAML 2.0 App Integrations
 
-New SAML 2.0 app integrations automatically use SHA256 certificates when this feature is enabled. 
+New SAML 2.0 app integrations automatically use SHA256 certificates when the key rollover feature is enabled. 
 As instructed, upload the SHA256 certificate to the ISV.
 
 ### Existing SAML 2.0 App Integrations
 
-To update an existing app integrations, there are three steps to follow. 
+To update existing app integrations, there are four steps to follow. 
 
-  1. List your apps and get the app id, name, and label for each app to update.
-
-  For each app to update, perform the following steps.
-
+  1. List your apps and get the app id, name, and label for each app to update.<br />For each app to update, perform the following steps.<br />
   2. Generate a new application key credential.
   3. Update the key credential for the app to specify the new signing key id.
   4. Upload the new certificate to the ISV. (This step cannot be automated.)
+
+
 
 > **Important:** After you complete the first three steps, your users cannot access the application until step 4 is completed.
 
@@ -50,11 +49,11 @@ Although unlikely, if your ISV does not accept the SHA256 certificate, you can r
 
 #### Step 1 – List your apps and get the app id, name, and label for each app to update.
 
-Use the [List Apps](http://developer.okta.com/docs/api/resources/apps.html#list-applications) to return a list off all apps.
+Use the [List Apps](http://developer.okta.com/docs/api/resources/apps.html#list-applications) to return a list of all apps.
 
-For each app to update, collect then `id`, `name`, and `label` elements.
+For each app to update, collect the `id`, `name`, and `label` elements.
 
-Request: `POST /api/v1/apps`
+Request: `GET /api/v1/apps`
 
 Truncated Response:
 
@@ -83,7 +82,7 @@ Truncated Response:
       }
     },
     "features": [],
-    "signOnMode": "AUTO_LOGIN",
+    "signOnMode": "SAML_2_0",
     "credentials": {
       "scheme": "EDIT_USERNAME_AND_PASSWORD",
       "userNameTemplate": {
@@ -140,7 +139,7 @@ Truncated Response:
 
 #### Step 2 – Generate a new application key credential.
 
-Use the [Generate New App Key Credential](http://developer.okta.com/docs/api/resources/apps.html#generate-new-application-key-credential) 
+Use the [Apps API](http://developer.okta.com/docs/api/resources/apps.html#generate-new-application-key-credential) 
 to generate new credentials. Pass each app ID (`id`) that was collected in the previous step as the app ID (`aid`) in this API. If you have no company policy for credential expiration, 10 years is suggested.
 
 
@@ -218,11 +217,11 @@ curl -v -X POST \
 
 > After completing step 3, your users cannot access the SAML app until you complete this step.
 
-In Okta, select <b>Applications > Applications</b> and choose your app. Then select <b>Sign-On Options</b> and 
-click <b>View Setup Instructions</b>, as shown below. Perform the setup for your app again. During this setup, you 
-will upload the certificate in a specified format, the metadata, or the certificate fingerprint.
 
-![Accessing SAML Setup Instructions](/assets/img/saml_setup_link.png "Accessing SAML Setup Instructions")
+1. In the Okta user interface, select **Applications > Applications** and choose your app. 
+2. Select **Sign-On Options**.
+3. Click **View Setup Instructions**, as shown below. <br />![Accessing SAML Setup Instructions](/assets/img/saml_setup_link.png "Accessing SAML Setup Instructions")
+4. Perform the setup for your app again, using the instructions provided. During this setup, you will upload the certificate in a specified format, the metadata, or the certificate fingerprint.
 
 
 ### Reverting to a SHA1 Certificate
@@ -281,19 +280,20 @@ Response:
 
 #### Step 3 – Update the key credential for the application with the SHA1 certificate.
 
-Use the [Update Key Credential for Application](http://developer.okta.com/docs/api/resources/apps#update-key-credential-for-application) 
-API to update the key credential for the application to specify the kid of the SHA1 certificate that you retrieved in step 2.
+Use the [Apps API](http://developer.okta.com/docs/api/resources/apps#update-key-credential-for-application) 
+to update the key credential for the application to specify the kid of the SHA1 certificate that you retrieved in step 2.
 
 This step is the same as 
 [Step 3](http://localhost:4000/docs/how-to/updating_saml_cert.html#step-3--update-the-key-credential-for-the-app-to-specify-the-new-signing-key-id), above.
 
-#### Step 4 – Upload the new certificate to the ISV.
+#### Step 4 – Upload the SHA1 certificate to the ISV.
 
 > After completing step 3, your users cannot access the SAML app until you complete this step.
 
-In Okta, select <b>Applications > Applications</b> and choose your app. Then select <b>Sign-On Options</b> and 
-click <b>View Setup Instructions</b>, as shown below. Perform the setup for your app again. During this setup, you 
-will upload the certificate in a specified format, the metadata, or the certificate fingerprint.
+1. In the Okta user interface, select **Applications > Applications** and choose your app. 
+2. Select **Sign-On Options**.
+3. Click **View Setup Instructions**, as shown below. <br />![Accessing SAML Setup Instructions](/assets/img/saml_setup_link.png "Accessing SAML Setup Instructions")
+4. Perform the setup for your app again, using the instructions provided. During this setup, you will upload the certificate in a specified format, the metadata, or the certificate fingerprint.
 
 ![Accessing SAML Setup Instructions](/assets/img/saml_setup_link.png "Accessing SAML Setup Instructions")
 
