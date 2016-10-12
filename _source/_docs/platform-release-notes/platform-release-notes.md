@@ -46,14 +46,14 @@ Just as you can in the Apps API, you can perform key store operations in the Ide
 For more information, see [Identity Provider Signing Key Store Operations](https://developer.okta.com/idps.html#identity-provider-signing-key-store-operations).
 <!-- OKTA-91498 -->
 
-#### New Functions for Replacing Strings
+#### New Function for Replacing Strings
 
-Use the Expression Language functions `String.replace` and `String.replaceOnce` to replace strings.
+Use the Expression Language function `String.replace` to replace strings.
 
 Examples:
 
 * `String.replace("This list includes chores", "is", "at") = "That last includes chores"`
-* `String.replaceOnce("This list includes chores", "is", "at") = "That list includes chores"`
+<!-- * `String.replaceOnce("This list includes chores", "is", "at") = "That list includes chores"` -->
 
 For more information, see [Expression Language: String Functions](http://developer.okta.com/reference/okta_expression_language/#string-functions).
 
