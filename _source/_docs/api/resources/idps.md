@@ -3816,6 +3816,145 @@ curl -v -X POST \
 }
 ~~~
 
+
+### Find Users
+{:.api .api-operation} 
+
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/idps/*:id*/users</span>
+
+Find all the users linked to an identify provider
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter | Description             | Param Type | DataType | Required | Default
+--------- | ----------------------- | ---------- | -------- | -------- | -------
+id        | `id` of IdP to search   | URL        | String   | TRUE     |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+List of the org's [identity providers](#identity-provider-model) whether activated or not
+
+##### Request Example
+
+~~~sh
+GET https://acme.okta.com/api/v1/idps/0oa6fwncpum2rbOBX0h7/users
+200 OK
+~~~
+
+##### Response Example
+
+~~~json
+[
+  {
+    "id": "00u6fwir47Pv1z48G0h7",
+    "externalId": "sandy.kim@acme.com",
+    "created": "2016-06-04T17:43:52.000Z",
+    "lastUpdated": "2016-06-05T00:50:39.000Z",
+    "profile": {
+      "lastName": "Kim",
+      "subjectNameQualifier": null,
+      "subjectSpNameQualifier": null,
+      "mobilePhone": "555-5555",
+      "email": "sandy.kim@acme.com",
+      "subjectNameFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+      "subjectConfirmationAddress": null,
+      "subjectNameId": "sandy.kim@acme.com",
+      "firstName": "Sandy",
+      "subjectConfirmationMethod": null,
+      "subjectSpProvidedId": null,
+      "authNContextClassRef": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport"
+    },
+    "_links": {
+      "self": {
+        "href": "https://acme.okta.com/api/v1/idps/0oa6fwncpum2rbOBX0h7/users/00u6fwir47Pv1z48G0h7",
+        "hints": {
+          "allow": [
+            "GET",
+            "DELETE"
+          ]
+        }
+      },
+      "idp": {
+        "href": "https://acme.okta.com/api/v1/idps/0oa6fwncpum2rbOBX0h7"
+      },
+      "user": {
+        "href": "https://acme.okta.com/api/v1/users/00u6fwir47Pv1z48G0h7"
+      }
+    }
+  },
+  {
+    "id": "00u6fwjcnjX9oIcXl0h7",
+    "externalId": "saml.jackson@acme.com",
+    "created": "2016-06-04T17:15:23.000Z",
+    "lastUpdated": "2016-06-04T17:15:23.000Z",
+    "profile": {
+      "lastName": "Jackson",
+      "subjectNameQualifier": null,
+      "subjectSpNameQualifier": null,
+      "mobilePhone": "+1-415-555-5141",
+      "email": "saml.jackson@acme.com",
+      "subjectNameFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+      "subjectConfirmationAddress": null,
+      "subjectNameId": "saml.jackson@acme.com",
+      "firstName": "Saml",
+      "subjectConfirmationMethod": null,
+      "subjectSpProvidedId": null,
+      "authNContextClassRef": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport"
+    },
+    "_links": {
+      "self": {
+        "href": "https://acme.okta.com/api/v1/idps/0oa6fwncpum2rbOBX0h7/users/00u6fwjcnjX9oIcXl0h7",
+        "hints": {
+          "allow": [
+            "GET",
+            "DELETE"
+          ]
+        }
+      },
+      "idp": {
+        "href": "https://acme.okta.com/api/v1/idps/0oa6fwncpum2rbOBX0h7"
+      },
+      "user": {
+        "href": "https://acme.okta.com/api/v1/users/00u6fwjcnjX9oIcXl0h7"
+      }
+    }
+  } 
+]
+~~~
+
+### Delete Users
+{:.api .api-operation} 
+
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/idps/*:id*/users/*:uid*</span>
+
+Delete the specified user from the IdP
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter | Description             | Param Type | DataType | Required | Default
+--------- | ----------------------- | ---------- | -------- | -------- | -------
+id        | `id` of IdP to activate | URL        | String   | TRUE     |
+uid       | `uid` of user to delete | URL        | String   | TRUE     |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+
+##### Request Example
+
+~~~sh
+DELETE https://acme.okta.com//api/v1/idps/0oa6fwncpum2rbOBX0h7/users/00u8fyyhbswTvyj3e0h7
+~~~
+
+##### Response Example
+
+~~~sh
+204 - No Content
+~~~
+
 ## Identity Provider Key Store Operations
 
 ### Add X.509 Certificate Public Key
