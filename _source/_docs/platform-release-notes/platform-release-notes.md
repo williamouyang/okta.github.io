@@ -23,7 +23,7 @@ The new version of Okta Sign-In Widget, 1.7.0, is available:
 * Localization is available for Hungarian and Romanian.
 * Added the language option to set the displayed language.
 
-Learn about these and other improvements in [the GitHub repository](https://github.com/okta/okta-signin-widget/releases/latest).
+Learn about these and other improvements in [the GitHub repository](http://github.com/okta/okta-signin-widget/releases/latest).
 
 #### New Version of Okta Auth JS
 
@@ -34,7 +34,7 @@ The new version of Okta Auth JS, 1.5.0, is available:
 * Access updated user information with `token.getUserInfo`.
 * Performance has improved when refreshing multiple tokens.
 
-Learn about these and other improvements in [the GitHub repository](https://github.com/okta/okta-auth-js/releases/latest).
+Learn about these and other improvements in [the GitHub repository](http://github.com/okta/okta-auth-js/releases/latest).
 
 #### Key Store Operations are Available for Identity Providers API
      
@@ -43,7 +43,7 @@ Just as you can in the Apps API, you can perform key store operations in the Ide
 * Generate an X.509 certificate public key
 * Retrieve and list public keys
 
-For more information, see [Identity Provider Signing Key Store Operations](http://developer.okta.com/idps.html#identity-provider-signing-key-store-operations).
+For more information, see [Identity Provider Signing Key Store Operations](http://developer.okta.com/docs/api/resources/idps.html#identity-provider-signing-key-store-operations).
 <!-- OKTA-91498 -->
 
 #### New Function for Replacing Strings
@@ -72,7 +72,7 @@ scroll to the bottom of the Admin <b>Dashboard</b> page to see the version numbe
 
 ### Looking for Product Release Notes?
 
-For changes outside the Okta platform, see the [Release Notes Knowledge Hub](https://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub).
+For changes outside the Okta platform, see the [Release Notes Knowledge Hub](http://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub).
 
 ### Earlier Release Notes
 
