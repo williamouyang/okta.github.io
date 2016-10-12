@@ -50,9 +50,9 @@ For more information, see [Identity Provider Signing Key Store Operations](https
 
 Use the Expression Language function `String.replace` to replace strings.
 
-Examples:
+Example:
 
-* `String.replace("This list includes chores", "is", "at") = "That last includes chores"`
+`String.replace("This list includes chores", "is", "at") = "That last includes chores"`
 <!-- * `String.replaceOnce("This list includes chores", "is", "at") = "That list includes chores"` -->
 
 For more information, see [Expression Language: String Functions](http://developer.okta.com/reference/okta_expression_language/#string-functions).
