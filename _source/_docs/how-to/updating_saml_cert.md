@@ -42,7 +42,6 @@ To update existing app integrations, there are four steps to follow.
   4. Upload the new certificate to the ISV. (This step cannot be automated.)
 
 
-
 > **Important:** After you complete the first three steps, your users cannot access the application until step 4 is completed.
 
 Although unlikely, if your ISV does not accept the SHA256 certificate, you can revert the procedure to use a SHA1 certificate.
@@ -166,7 +165,7 @@ Response:
      sZ4Ht0/NjTSHrznjTjE2Ij2/1JuZY/XF+Kp8/bR+rP3Fa3mlcKJZqnwcdII3F6bbW8HPyz
      s8D8ytJJU1yc9xcm0rp+xqswWvRS9TMTRiV61OhE8ilMj+vjScIDQwOqD1LX0uiiQnjRIL
      rkK2NSUbFc9PC3oVELrWqZdloDCQd+xTI0TlxV6/i50K56o0YGWIne1IYdfazuK0tXTE8k
-     wsvXEZ0tDRq/jVhBpoAtfQ8hKLxVBYUCAwEAATANBgkqhkiG9w0BAQUFAAOCAQEAfcgMeP
+     wsvXEZ0tDRq/jVhBpoAtfQ8hKLxVEFKCAwEAATANBgkqhkiG9w0BAQUFAAOCAQEAfcgMeP
      D2nCGUImDmK7GcKIAH6fJCVfcpyHNZLYChB38yJgJ3F30mFZ0W/PM9pIW8ktLKh1lBp59p
      RwC4ITbpMMoWwK2EU/edocmi8qeVpG3ldXs5IeEMIoKt2c7Ndh8dTsj+fPdXDpF0iKPXtA
      3wgPvWxgioW6xCvePo98isevN7WGEEdEVzjdNdR7e4nPvJfKeGncvifV2rw0WOUIZQa524
@@ -236,9 +235,11 @@ This step is the same as [Step 1](#step-1--list-your-apps-and-get-the-app-id-nam
 #### Step 2 – Retrieve all certificates associated with the app and locate the SHA1 certificate.
 
 Use the [List Key Credentials for an Application API](http://developer.okta.com/docs/api/resources/apps#list-key-credentials-for-application) to list all the credentials.
-Pass the app ID (`id`) that was collected in the previous step as the app ID (`aid`) in this API. Then, determine which certificate is the SHA1 certificate by copying 
-the certificate text for each of the returned certificates, and [determine the signature algorithm](#determine-the-signature-algorithm-of-a-certificate) 
+Pass the app ID (`id`) that was collected in the previous step as the app ID (`aid`) in this API. Then, determine which certificate is the SHA1 certificate by copying the certificate text for each of the returned certificates, and [determine the signature algorithm](#determine-the-signature-algorithm-of-a-certificate) 
 using the method described below. After determining which certificate is the SHA1 certificate, note the signing key id, `kid`.
+
+The certificate is contained in the element, `x5c` and is not in PEM format; that is, it does not 
+contain *Begin Certificate* and *End Certificate* lines.  (The certificates shown in this how-to have been altered and are not valid.)
 
 In the sample response shown below, there are two certificates to check to find the SHA1 certificate.
 
@@ -295,7 +296,6 @@ This step is the same as
 3. Click **View Setup Instructions**, as shown below. <br />![Accessing SAML Setup Instructions](/assets/img/saml_setup_link.png "Accessing SAML Setup Instructions")
 4. Perform the setup for your app again, using the instructions provided. During this setup, you will upload the certificate in a specified format, the metadata, or the certificate fingerprint.
 
-<!-- ![Accessing SAML Setup Instructions](/assets/img/saml_setup_link.png "Accessing SAML Setup Instructions") -->
 
 ### Determine the Signature Algorithm of a Certificate 
 
@@ -307,9 +307,34 @@ If you have OpenSSL installed, from the command line run:
 
 Where:
 
-`<your certificate>` is the certificate filename relative to the current directory.
+`<your certificate>` is the certificate filename relative to the current directory. The certificate must be in PEM format. If you saved the 
+certificate text from the `x5c` element returned from an API call, you must add the **Begin Certificate** and **End Certificate** lines with the 
+hyphens to the top and bottom of the file, as shown below. (The certificate shown below has been altered and is not valid.)
 
-Use a free CSR and Certificate Decoder service and enter the contents of your certificate. These tools are readily found through a web search.
+~~~~
+-----BEGIN CERTIFICATE-----
+MIIDojCCAoqgAwIBAgIGAVd8z8kEMA0GCSqGSIb3DQEBBQUAMIGRMQswCQYDVQQGEwJVUz
+ETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UE
+CgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxEjAQBgNVBAMMCW15c3RpY29ycDEcMB
+oGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTAeFw0xNjA5MzAyMDM1MTRaFw0xODA5MzAy
+MDM2MTRaMIGRMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWEKQGA1UEBw
+wNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIx
+EjAQBgNVBAMMCW15c3RpY29ycDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTCCAS
+IwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAIJsMX3q/IMqFTPfhGJHILgRGHrrvYnZ
+zL2snGvC4CssqBC1Az6PIAE+RtO1vT+6v1sRevHMICbi/ut4xB29C3fo33Y3syerVHEJD9
+sZ4Ht0/NjTSHrznjTjE2Ij2/1JuZY/XF+Kp8/bR+rP3Fa3mlcKJZqnwcdII3F6bbW8HPyz
+s8D8ytJJU1yc9xcm0rp+xqswWvRS9TMTRiV61OhE8ilMj+vjScIDQwOqD1LX0uiiQnjRIL
+rkK2NSUbFc9PC3oVELrWqZdloDCQd+xTI0TlxV6/i50K56o0YGWIne1IYdfazuK0tXTE8k
+wsvXEZ0tDRq/jVhBpoAtfQ8hKLxVEFKCAwEAATANBgkqhkiG9w0BAQUFAAOCAQEAfcgMeP
+D2nCGUImDmK7GcKIAH6fJCVfcpyHNZLYChB38yJgJ3F30mFZ0W/PM9pIW8ktLKh1lBp59p
+RwC4ITbpMMoWwK2EU/edocmi8qeVpG3ldXs5IeEMIoKt2c7Ndh8dTsj+fPdXDpF0iKPXtA
+3wgPvWxgioW6xCvePo98isevN7WGEEdEVzjdNdR7e4nPvJfKeGncvifV2rw0WOUIZQa524
+AQdfoY2fEKn9eFwPxFsKx1WV5nc6+WU5gcSkhmbzF+HohLCjVFMWwsUQNY
+-----END CERTIFICATE-----
+~~~~
+
+Use a free CSR and Certificate Decoder service and enter the contents of your certificate. These tools are readily found through a web search. Be 
+sure to note the certificate format that the decoder service requires. 
 
 The Signature Algorithm is either *sha256WithRSAEncryption* or *sha1WithRSAEncryption*.
 
