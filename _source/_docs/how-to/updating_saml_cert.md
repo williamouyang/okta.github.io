@@ -308,7 +308,7 @@ If you have OpenSSL installed, from the command line run:
 Where:
 
 `<your certificate>` is the certificate filename relative to the current directory. The certificate must be in PEM format. Use a plain text editor
-line Notepad or Textedit to save the certificate text from the `x5c` element returned from an API call, and add the **Begin Certificate** and **End Certificate** lines with the hyphens to the top and bottom of the file, as shown below. (The certificate shown below has been altered and is not valid.)
+like Notepad or Textedit to save the certificate text from the `x5c` element returned from an API call, and add the **Begin Certificate** and **End Certificate** lines with the hyphens to the top and bottom of the file, as shown below. (The certificate shown below has been altered and is not valid.)
 
 ~~~~
 -----BEGIN CERTIFICATE-----
