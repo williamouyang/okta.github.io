@@ -556,7 +556,7 @@ All application user assignments have the following properties:
 |------------------+--------------------------------------------------------------+-----------------------------------------------------------------------------|----------|--------|----------|-----------|-----------+------------|
 | Property         | Description                                                  | DataType                                                                    | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
 | ---------------- | ------------------------------------------------------------ | --------------------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| id               | unique key of [User](Users.html)                             | String                                                                      | FALSE    | TRUE   | TRUE     |           |           |            |
+| id               | unique key of [User](/docs/api/resources/users.html)                             | String                                                                      | FALSE    | TRUE   | TRUE     |           |           |            |
 | externalId       | id of user in target app *(must be imported or provisioned)* | String                                                                      | TRUE     | TRUE   | TRUE     |           | 512       |            |
 | created          | timestamp when app user was created                          | Date                                                                        | FALSE    | FALSE  | TRUE     |           |           |            |
 | lastUpdated      | timestamp when app user was last updated                     | Date                                                                        | FALSE    | FALSE  | TRUE     |           |           |            |
@@ -3584,7 +3584,7 @@ Fetches a specific user assignment for application by `id`.
 Parameter | Description                                     | Param Type | DataType | Required | Default
 --------- | ----------------------------------------------- | ---------- | -------- | -------- | -------
 aid       | unique key of [Application](#application-model) | URL        | String   | TRUE     |
-uid       | unique key of assigned [User](users.html)       | URL        | String   | TRUE     |
+uid       | unique key of assigned [User](/docs/api/resources/users.html)       | URL        | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -3766,7 +3766,7 @@ Updates a user's [credentials](#application-user-credentials-object) for an assi
 Parameter | Description                                                        | Param Type | DataType                                    | Required | Default
 --------- | ------------------------------------------------------------------ | ---------- | ------------------------------------------- | -------- | -------
 aid       | unique key of [Application](#application-model)                    | URL        | String                                      | TRUE     |
-uid       | unique key of a valid [User](users.html)                           | URL        | String                                      | TRUE     |
+uid       | unique key of a valid [User](/docs/api/resources/users.html)                           | URL        | String                                      | TRUE     |
 appuser   | user's [credentials](#application-user-credentials-object) for app | Body       | [Application User](#application-user-model) | TRUE     |
 
 ##### Response Parameters
@@ -3852,7 +3852,7 @@ Updates a user's profile for an application
 Parameter | Description                                     | Param Type | DataType                                    | Required | Default
 --------- | ----------------------------------------------- | ---------- | ------------------------------------------- | -------- | -------
 aid       | unique key of [Application](#application-model) | URL        | String                                      | TRUE     |
-uid       | unique key of a valid [User](users.html)        | URL        | String                                      | TRUE     |
+uid       | unique key of a valid [User](/docs/api/resources/users.html)        | URL        | String                                      | TRUE     |
 appuser   | credentials for app                             | Body       | [Application User](#application-user-model) | FALSE    |
 
 ##### Response Parameters
@@ -3949,7 +3949,7 @@ Removes an assignment for a user from an application.
 Parameter | Description                                     | Param Type | DataType | Required | Default
 --------- | ----------------------------------------------- | ---------- | -------- | -------- | -------
 aid       | unique key of [Application](#application-model) | URL        | String   | TRUE     |
-uid       | unique key of assigned [User](users.html)       | URL        | String   | TRUE     |
+uid       | unique key of assigned [User](/docs/api/resources/users.html)       | URL        | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
