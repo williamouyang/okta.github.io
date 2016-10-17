@@ -34,6 +34,7 @@ As instructed, upload the SHA256 certificate to the ISV.
 
 ### Existing SAML 2.0 App Integrations
 
+
 To update existing app integrations, there are four steps to follow. 
 
   1. List your apps and get the app id, name, and label for each app to update.<br />For each app to update, perform the following steps.<br />
@@ -46,9 +47,11 @@ To update existing app integrations, there are four steps to follow.
 
 Although unlikely, if your ISV does not accept the SHA256 certificate, you can revert the procedure to use a SHA1 certificate.
 
+For information on using the Postman REST API test client for these steps, see [API Test Client](http://developer.okta.com/docs/api/getting_started/api_test_client.html).
+
 #### Step 1 – List your apps and get the app id, name, and label for each app to update.
 
-Use the [List Apps](http://developer.okta.com/docs/api/resources/apps.html#list-applications) to return a list of all apps.
+Use the [List Apps API](http://developer.okta.com/docs/api/resources/apps.html#list-applications) to return a list of all apps.
 
 For each app to update, collect the `id`, `name`, and `label` elements.
 
@@ -193,7 +196,7 @@ the app name and the app label that you obtained in step 1, the key ID that you 
 Request:
 
 ~~~ sh
-curl -v -X POST \
+curl -v -X PUT \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
@@ -341,11 +344,11 @@ The Signature Algorithm is either *sha256WithRSAEncryption* or *sha1WithRSAEncry
 
 You can obtain the current certificate for an app from the following URL:
 
-`https://<your org>.okta.com/admin/org/security/<application id>/cert`
+`https://<your org subdomain>-admin.okta.com/admin/org/security/<application id>/cert`
 
 Where:
 
-`<your org>` is your organization name
+`<your org subdomain>` is your organization's Okta subdomain.
 
 `<application id>` is the application ID you used in step 1.
 
