@@ -3820,9 +3820,9 @@ curl -v -X POST \
 ### Find Users
 {:.api .api-operation} 
 
-{% api_operation get /api/v1/idps/*:id*/users %}
+{% api_operation get /idps/*:id*/users %}
 
-Find all the users linked to an identify provider
+Find all the users linked to an identity provider
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -3834,7 +3834,7 @@ id        | `id` of IdP to search   | URL        | String   | TRUE     |
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-List of the org's [identity providers](#identity-provider-model) whether activated or not
+List of the users that are linked to the specified identity provider
 
 ##### Request Example
 
@@ -3884,9 +3884,10 @@ GET https://example.okta.com/api/v1/idps/0oa4lb6lbtmH355Hx0h7/users
 ### Unlink User from IdP
 {:.api .api-operation} 
 
-{% api_operation delete /api/v1/idps/*:id*/users/*:uid* %}
+{% api_operation delete /idps/*:id*/users/*:uid* %}
 
-Delete the specified user from the IdP
+Removes the link between the Okta user and the IdP user. 
+The next time the user federates into Okta via this IdP, they have to re-link their account according to the account link policy configured in Okta for this IdP.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
