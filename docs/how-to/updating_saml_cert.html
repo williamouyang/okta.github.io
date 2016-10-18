@@ -972,31 +972,6 @@ As instructed, upload the SHA256 certificate to the ISV.</p>
           </span><span class="nt">"helpUrl"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"activate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mycompany.okta.com/api/v1/apps/0oa12u8mdiPKDMIICNSV/lifecycle/activate"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"medium"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://op1static.oktacdn.com/bc/globalFileStoreRecord?id=gfs6hq9c2iNqhLe2A0h7"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/png"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"appLinks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"login"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mycompany.okta.com/home/appname/0oa12u8mdiPKDMIICNSV/496"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text/html"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mycompany.okta.com/api/v1/apps/0oa12u8mdiPKDMIICNSV/users"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"groups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mycompany.okta.com/api/v1/apps/0oa12u8mdiPKDMIICNSV/groups"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 
@@ -1110,7 +1085,7 @@ contain <em>Begin Certificate</em> and <em>End Certificate</em> lines.  (The cer
 
 <p>In the sample response shown below, there are two certificates to check to find the SHA1 certificate.</p>
 
-<p>Request: <code class="highlighter-rouge">POST /api/v1/apps/0000000000aaaaaBBBBBo/credentials/keys</code></p>
+<p>Request: <code class="highlighter-rouge">GET /api/v1/apps/0000000000aaaaaBBBBBo/credentials/keys</code></p>
 
 <p>Response:</p>
 
@@ -1140,7 +1115,7 @@ contain <em>Begin Certificate</em> and <em>End Certificate</em> lines.  (The cer
     </span><span class="nt">"kid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZcLGUslsdTn3996YYel6KPvOxZOhNWfly5-q36CByH4o"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"kty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RSA"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"use"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sig"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"x5t#S256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_DXULzisdoprgJ8OhiSN_KUD2rScRDd7pY2HE1ZI_bs"</span><span class="w">
+    </span><span class="nt">"x5t#S256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_DXULzisdoprgJ8OhiSN_KUD2rScRDd7pY2HE1ZI_bs"</span><span class="w"> 
   </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
@@ -1152,7 +1127,7 @@ contain <em>Begin Certificate</em> and <em>End Certificate</em> lines.  (The cer
 to update the key credential for the application to specify the kid of the SHA1 certificate that you retrieved in step 2.</p>
 
 <p>This step is the same as 
-<a href="http://localhost:4000/docs/how-to/updating_saml_cert.html#step-3--update-the-key-credential-for-the-app-to-specify-the-new-signing-key-id">Step 3</a>, above.</p>
+<a href="#step-3--update-the-key-credential-for-the-app-to-specify-the-new-signing-key-id">Step 3</a>, above.</p>
 
 <h4 id="step-4--upload-the-sha1-certificate-to-the-isv">Step 4 – Upload the SHA1 certificate to the ISV.</h4>
 
