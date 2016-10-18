@@ -109,31 +109,6 @@ Truncated Response:
           "helpUrl": null
         }
       }
-    },
-    "_links": {
-      "activate": {
-        "href": "https://mycompany.okta.com/api/v1/apps/0oa12u8mdiPKDMIICNSV/lifecycle/activate"
-      },
-      "logo": [
-        {
-          "name": "medium",
-          "href": "https://op1static.oktacdn.com/bc/globalFileStoreRecord?id=gfs6hq9c2iNqhLe2A0h7",
-          "type": "image/png"
-        }
-      ],
-      "appLinks": [
-        {
-          "name": "login",
-          "href": "https://mycompany.okta.com/home/appname/0oa12u8mdiPKDMIICNSV/496",
-          "type": "text/html"
-        }
-      ],
-      "users": {
-        "href": "https://mycompany.okta.com/api/v1/apps/0oa12u8mdiPKDMIICNSV/users"
-      },
-      "groups": {
-        "href": "https://mycompany.okta.com/api/v1/apps/0oa12u8mdiPKDMIICNSV/groups"
-      }
     }
   }
 
@@ -246,7 +221,7 @@ contain *Begin Certificate* and *End Certificate* lines.  (The certificates show
 
 In the sample response shown below, there are two certificates to check to find the SHA1 certificate.
 
-Request: `POST /api/v1/apps/0000000000aaaaaBBBBBo/credentials/keys`
+Request: `GET /api/v1/apps/0000000000aaaaaBBBBBo/credentials/keys`
 
 Response:
 
@@ -277,7 +252,7 @@ Response:
     "kid": "ZcLGUslsdTn3996YYel6KPvOxZOhNWfly5-q36CByH4o",
     "kty": "RSA",
     "use": "sig",
-    "x5t#S256": "_DXULzisdoprgJ8OhiSN_KUD2rScRDd7pY2HE1ZI_bs"
+    "x5t#S256": "_DXULzisdoprgJ8OhiSN_KUD2rScRDd7pY2HE1ZI_bs" 
   }
 
 ~~~
@@ -288,7 +263,7 @@ Use the [Apps API](http://developer.okta.com/docs/api/resources/apps#update-key-
 to update the key credential for the application to specify the kid of the SHA1 certificate that you retrieved in step 2.
 
 This step is the same as 
-[Step 3](http://localhost:4000/docs/how-to/updating_saml_cert.html#step-3--update-the-key-credential-for-the-app-to-specify-the-new-signing-key-id), above.
+[Step 3](#step-3--update-the-key-credential-for-the-app-to-specify-the-new-signing-key-id), above.
 
 #### Step 4 – Upload the SHA1 certificate to the ISV.
 
