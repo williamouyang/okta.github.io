@@ -463,6 +463,18 @@ This API doesn't require any authentication and returns a JSON object with the f
         "address",
         "phone_number",
         "updated_at"
+    ],
+    "introspection_endpoint": "https://${org}.okta.com/oauth2/v1/introspect",
+    "introspection_endpoint_auth_methods_supported": [
+        "client_secret_basic",
+        "client_secret_post",
+        "none"
+    ],
+    "revocation_endpoint": "https://${org}.okta.com/oauth2/v1/revoke",
+    "revocation_endpoint_auth_methods_supported": [
+        "client_secret_basic",
+        "client_secret_post",
+        "none"
     ]
 }
 ~~~
