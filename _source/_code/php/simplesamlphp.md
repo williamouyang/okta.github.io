@@ -40,7 +40,7 @@ you will need to set up an Okta
 application using SAML via SimpleSAMLphp.
 
 To set up Okta to connect to your application, follow the guide to
-[setting up a SAML application in Okta](setting_up_a_saml_application_in_okta.html).
+[setting up a SAML application in Okta](/standards/SAML/setting_up_a_saml_application_in_okta.html).
 As you follow the instructions, there are two steps where you will do things differently:
 
 * *In step \#6*: Use ***SimpleSAMLphp Example*** instead "Example SAML application"
@@ -222,7 +222,7 @@ PHP, reconfiguring Apache, and creating some symbolic links.
 
     Be sure to replace the contents of `{metdata-url}` with the link
     that you copied in step \#10 of the
-    "[Setting up a SAML application in Okta](setting_up_a_saml_application_in_okta.html)"
+    "[Setting up a SAML application in Okta](/standards/SAML/setting_up_a_saml_application_in_okta.html)"
     instructions that you followed above!
 
     > Note: The contents of `{metadata-url}` should look similar to this:
