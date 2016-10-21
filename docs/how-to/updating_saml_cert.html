@@ -157,6 +157,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		 
 		     <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0</a></li>
 		 
+		     <li><a href="/docs/api/resources/oauth-clients.html">OAuth 2.0 Clients</a></li>
+		 
 		     <li><a href="/docs/api/resources/oidc.html">OpenID Connect</a></li>
 		 
 		     <li><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li>
@@ -909,11 +911,9 @@ As instructed, upload the SHA256 certificate to the ISV.</p>
 
 <p>Although unlikely, if your ISV does not accept the SHA256 certificate, you can revert the procedure to use a SHA1 certificate.</p>
 
-<p>For information on using the Postman REST API test client for these steps, see <a href="http://developer.okta.com/docs/api/getting_started/api_test_client.html">API Test Client</a>.</p>
-
 <h4 id="step-1--list-your-apps-and-get-the-app-id-name-and-label-for-each-app-to-update">Step 1 – List your apps and get the app id, name, and label for each app to update.</h4>
 
-<p>Use the <a href="http://developer.okta.com/docs/api/resources/apps.html#list-applications">List Apps API</a> to return a list of all apps.</p>
+<p>Use the <a href="http://developer.okta.com/docs/api/resources/apps.html#list-applications">List Apps</a> to return a list of all apps.</p>
 
 <p>For each app to update, collect the <code class="highlighter-rouge">id</code>, <code class="highlighter-rouge">name</code>, and <code class="highlighter-rouge">label</code> elements.</p>
 
@@ -970,6 +970,31 @@ As instructed, upload the SHA256 certificate to the ISV.</p>
           </span><span class="nt">"helpUrl"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"activate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mycompany.okta.com/api/v1/apps/0oa12u8mdiPKDMIICNSV/lifecycle/activate"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"medium"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://op1static.oktacdn.com/bc/globalFileStoreRecord?id=gfs6hq9c2iNqhLe2A0h7"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/png"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"appLinks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"login"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mycompany.okta.com/home/appname/0oa12u8mdiPKDMIICNSV/496"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text/html"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mycompany.okta.com/api/v1/apps/0oa12u8mdiPKDMIICNSV/users"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"groups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mycompany.okta.com/api/v1/apps/0oa12u8mdiPKDMIICNSV/groups"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 
@@ -1003,7 +1028,7 @@ to generate new credentials. Pass each app ID (<code class="highlighter-rouge">i
      sZ4Ht0/NjTSHrznjTjE2Ij2/1JuZY/XF+Kp8/bR+rP3Fa3mlcKJZqnwcdII3F6bbW8HPyz
      s8D8ytJJU1yc9xcm0rp+xqswWvRS9TMTRiV61OhE8ilMj+vjScIDQwOqD1LX0uiiQnjRIL
      rkK2NSUbFc9PC3oVELrWqZdloDCQd+xTI0TlxV6/i50K56o0YGWIne1IYdfazuK0tXTE8k
-     wsvXEZ0tDRq/jVhBpoAtfQ8hKLxVEFKCAwEAATANBgkqhkiG9w0BAQUFAAOCAQEAfcgMeP
+     wsvXEZ0tDRq/jVhBpoAtfQ8hKLxVBYUCAwEAATANBgkqhkiG9w0BAQUFAAOCAQEAfcgMeP
      D2nCGUImDmK7GcKIAH6fJCVfcpyHNZLYChB38yJgJ3F30mFZ0W/PM9pIW8ktLKh1lBp59p
      RwC4ITbpMMoWwK2EU/edocmi8qeVpG3ldXs5IeEMIoKt2c7Ndh8dTsj+fPdXDpF0iKPXtA
      3wgPvWxgioW6xCvePo98isevN7WGEEdEVzjdNdR7e4nPvJfKeGncvifV2rw0WOUIZQa524
@@ -1031,7 +1056,7 @@ the app name and the app label that you obtained in step 1, the key ID that you 
 
 <p>Request:</p>
 
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X PUT <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
@@ -1075,15 +1100,13 @@ over the app key to specify the SHA1 certificate you previously associated with 
 <h4 id="step-2--retrieve-all-certificates-associated-with-the-app-and-locate-the-sha1-certificate">Step 2 – Retrieve all certificates associated with the app and locate the SHA1 certificate.</h4>
 
 <p>Use the <a href="http://developer.okta.com/docs/api/resources/apps#list-key-credentials-for-application">List Key Credentials for an Application API</a> to list all the credentials.
-Pass the app ID (<code class="highlighter-rouge">id</code>) that was collected in the previous step as the app ID (<code class="highlighter-rouge">aid</code>) in this API. Then, determine which certificate is the SHA1 certificate by copying the certificate text for each of the returned certificates, and <a href="#determine-the-signature-algorithm-of-a-certificate">determine the signature algorithm</a> 
+Pass the app ID (<code class="highlighter-rouge">id</code>) that was collected in the previous step as the app ID (<code class="highlighter-rouge">aid</code>) in this API. Then, determine which certificate is the SHA1 certificate by copying 
+the certificate text for each of the returned certificates, and <a href="#determine-the-signature-algorithm-of-a-certificate">determine the signature algorithm</a> 
 using the method described below. After determining which certificate is the SHA1 certificate, note the signing key id, <code class="highlighter-rouge">kid</code>.</p>
-
-<p>The certificate is contained in the element, <code class="highlighter-rouge">x5c</code> and is not in PEM format; that is, it does not 
-contain <em>Begin Certificate</em> and <em>End Certificate</em> lines.  (The certificates shown in this how-to have been altered and are not valid.)</p>
 
 <p>In the sample response shown below, there are two certificates to check to find the SHA1 certificate.</p>
 
-<p>Request: <code class="highlighter-rouge">GET /api/v1/apps/0000000000aaaaaBBBBBo/credentials/keys</code></p>
+<p>Request: <code class="highlighter-rouge">POST /api/v1/apps/0000000000aaaaaBBBBBo/credentials/keys</code></p>
 
 <p>Response:</p>
 
@@ -1113,7 +1136,7 @@ contain <em>Begin Certificate</em> and <em>End Certificate</em> lines.  (The cer
     </span><span class="nt">"kid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZcLGUslsdTn3996YYel6KPvOxZOhNWfly5-q36CByH4o"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"kty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RSA"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"use"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sig"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"x5t#S256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_DXULzisdoprgJ8OhiSN_KUD2rScRDd7pY2HE1ZI_bs"</span><span class="w"> 
+    </span><span class="nt">"x5t#S256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_DXULzisdoprgJ8OhiSN_KUD2rScRDd7pY2HE1ZI_bs"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
@@ -1125,7 +1148,7 @@ contain <em>Begin Certificate</em> and <em>End Certificate</em> lines.  (The cer
 to update the key credential for the application to specify the kid of the SHA1 certificate that you retrieved in step 2.</p>
 
 <p>This step is the same as 
-<a href="#step-3--update-the-key-credential-for-the-app-to-specify-the-new-signing-key-id">Step 3</a>, above.</p>
+<a href="http://localhost:4000/docs/how-to/updating_saml_cert.html#step-3--update-the-key-credential-for-the-app-to-specify-the-new-signing-key-id">Step 3</a>, above.</p>
 
 <h4 id="step-4--upload-the-sha1-certificate-to-the-isv">Step 4 – Upload the SHA1 certificate to the ISV.</h4>
 
@@ -1140,6 +1163,8 @@ to update the key credential for the application to specify the kid of the SHA1 
   <li>Perform the setup for your app again, using the instructions provided. During this setup, you will upload the certificate in a specified format, the metadata, or the certificate fingerprint.</li>
 </ol>
 
+<!-- ![Accessing SAML Setup Instructions](/assets/img/saml_setup_link.png "Accessing SAML Setup Instructions") -->
+
 <h3 id="determine-the-signature-algorithm-of-a-certificate">Determine the Signature Algorithm of a Certificate</h3>
 
 <p>You can find the signature algorithm of a certificate either by using the command line or by uploading your certificate to a free, online certificate decoder service.</p>
@@ -1150,33 +1175,9 @@ to update the key credential for the application to specify the kid of the SHA1 
 
 <p>Where:</p>
 
-<p><code class="highlighter-rouge">&lt;your certificate&gt;</code> is the certificate filename relative to the current directory. The certificate must be in PEM format. Use a plain text editor
-like Notepad or Textedit to save the certificate text from the <code class="highlighter-rouge">x5c</code> element returned from an API call, and add the <strong>Begin Certificate</strong> and <strong>End Certificate</strong> lines with the hyphens to the top and bottom of the file, as shown below. Trailing white spaces, such as a space or carriage return, at the end of the file make the certificate invalid. (The certificate shown below has been altered and is not valid.)</p>
+<p><code class="highlighter-rouge">&lt;your certificate&gt;</code> is the certificate filename relative to the current directory.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>-----BEGIN CERTIFICATE-----
-MIIDojCCAoqgAwIBAgIGAVd8z8kEMA0GCSqGSIb3DQEBBQUAMIGRMQswCQYDVQQGEwJVUz
-ETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UE
-CgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxEjAQBgNVBAMMCW15c3RpY29ycDEcMB
-oGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTAeFw0xNjA5MzAyMDM1MTRaFw0xODA5MzAy
-MDM2MTRaMIGRMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWEKQGA1UEBw
-wNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIx
-EjAQBgNVBAMMCW15c3RpY29ycDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTCCAS
-IwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAIJsMX3q/IMqFTPfhGJHILgRGHrrvYnZ
-zL2snGvC4CssqBC1Az6PIAE+RtO1vT+6v1sRevHMICbi/ut4xB29C3fo33Y3syerVHEJD9
-sZ4Ht0/NjTSHrznjTjE2Ij2/1JuZY/XF+Kp8/bR+rP3Fa3mlcKJZqnwcdII3F6bbW8HPyz
-s8D8ytJJU1yc9xcm0rp+xqswWvRS9TMTRiV61OhE8ilMj+vjScIDQwOqD1LX0uiiQnjRIL
-rkK2NSUbFc9PC3oVELrWqZdloDCQd+xTI0TlxV6/i50K56o0YGWIne1IYdfazuK0tXTE8k
-wsvXEZ0tDRq/jVhBpoAtfQ8hKLxVEFKCAwEAATANBgkqhkiG9w0BAQUFAAOCAQEAfcgMeP
-D2nCGUImDmK7GcKIAH6fJCVfcpyHNZLYChB38yJgJ3F30mFZ0W/PM9pIW8ktLKh1lBp59p
-RwC4ITbpMMoWwK2EU/edocmi8qeVpG3ldXs5IeEMIoKt2c7Ndh8dTsj+fPdXDpF0iKPXtA
-3wgPvWxgioW6xCvePo98isevN7WGEEdEVzjdNdR7e4nPvJfKeGncvifV2rw0WOUIZQa524
-AQdfoY2fEKn9eFwPxFsKx1WV5nc6+WU5gcSkhmbzF+HohLCjVFMWwsUQNY
------END CERTIFICATE-----
-</code></pre>
-</div>
-
-<p>Use a free CSR and Certificate Decoder service and enter the contents of your certificate. These tools are readily found through a web search. Be 
-sure to note the certificate format that the decoder service requires.</p>
+<p>Use a free CSR and Certificate Decoder service and enter the contents of your certificate. These tools are readily found through a web search.</p>
 
 <p>The Signature Algorithm is either <em>sha256WithRSAEncryption</em> or <em>sha1WithRSAEncryption</em>.</p>
 
@@ -1184,11 +1185,11 @@ sure to note the certificate format that the decoder service requires.</p>
 
 <p>You can obtain the current certificate for an app from the following URL:</p>
 
-<p><code class="highlighter-rouge">https://&lt;your org subdomain&gt;-admin.okta.com/admin/org/security/&lt;application id&gt;/cert</code></p>
+<p><code class="highlighter-rouge">https://&lt;your org&gt;.okta.com/admin/org/security/&lt;application id&gt;/cert</code></p>
 
 <p>Where:</p>
 
-<p><code class="highlighter-rouge">&lt;your org subdomain&gt;</code> is your organization’s Okta subdomain.</p>
+<p><code class="highlighter-rouge">&lt;your org&gt;</code> is your organization name</p>
 
 <p><code class="highlighter-rouge">&lt;application id&gt;</code> is the application ID you used in step 1.</p>
 
