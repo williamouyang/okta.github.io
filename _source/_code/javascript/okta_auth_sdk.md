@@ -618,7 +618,7 @@ This is thrown when a `poll` has been initiated, but another action is taken bef
 
 #### OAuthError
 
-This is thrown when an [error occurs during the OAuth flow](docs/api/getting_started/error_codes.html#openid-connect-and-okta-social-authentication).
+This is thrown when an [error occurs during the OAuth flow](/docs/api/getting_started/error_codes.html#openid-connect-and-okta-social-authentication).
 
 Property              |   Type    | Description
 --------------------- | --------  | -----------

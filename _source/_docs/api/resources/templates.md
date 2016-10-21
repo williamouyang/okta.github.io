@@ -374,7 +374,7 @@ Parameter | Description                                 | ParamType | DataType  
 id        | id of the sms template to update            | URL       | String                              | TRUE     |
           | attributes that we want to change           | Body      | [Sms Template](#sms-template-model) | TRUE     |
 
-> Full SMS template update is described [here](update-sms-template).
+> Full SMS template update is described [here](#update-sms-template).
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
