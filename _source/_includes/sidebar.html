@@ -1,5 +1,5 @@
         <aside class="Sidebar">
-        <h2 class="Sidebar-location Sidebar-toggle h6">HTTP Verbs</h3>
+        <h2 class="Sidebar-location Sidebar-toggle h6">Navigation</h3>
            <div class="Sidebar-close Sidebar-toggle"></div>
 	   <div>
 	     <h3 class="Sidebar-title">Use Cases</h3>
@@ -46,7 +46,7 @@
 		     <li><a href="{{ doc.url }}">{{ doc.title }}</a></li>
 		 {% endfor %}{% endfor %}</ul>
 	       </li>
-	       
+
 	       <li>
 		 <span>
 		   API Reference
@@ -60,7 +60,7 @@
 		     {% endfor %}{% endfor %}
 		 </ul>
 	       </li>
-	       
+
 	       {% assign documents = site.reference %}
 	       {% for document in documents %}
 	       {% if document.id contains "docs/api/getting_started" %}{% continue %}{% endif %}
@@ -100,6 +100,6 @@
 	       <!-- </li> -->
 	     </ul>
 	     {% endcomment %}
-	     
+
 	   </div>
         </aside>
