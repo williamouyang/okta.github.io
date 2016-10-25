@@ -16,9 +16,10 @@ The new version of Okta Sign-In Widget, 1.8.0, is available:
 
 Learn about these and other improvements in [the GitHub repository](https://github.com/okta/okta-signin-widget/releases/tag/okta-signin-widget-1.8.0).
 -->
+
 ### New Introspection and Revocation Endpoints
 
-Two new endpoints have been added to the [OpenID Connect discovery document](http://developer.okta.com/docs/api/resources/oidc.html#openid-connect-discovery-document):
+The introspection and revocation endpoints are returned in the [OpenID Connect discovery document](http://developer.okta.com/docs/api/resources/oidc.html#openid-connect-discovery-document).
 
 Request Example:
 
@@ -61,13 +62,13 @@ Response Example:
 
 #### New Function for Replacing Strings
 
-Use the Expression Language function `String.replaceFirst` to replace the first occurrence of a string.
+Use the [Expression Language](/reference/okta_expression_language/index.html) function `String.replaceFirst` to replace the first occurrence of a string.
 
 Example:
 
-* `String.replaceOnce("This list includes chores", "is", "at") = "That list includes chores"`
+`String.replaceOnce("This list includes chores", "is", "at") = "That list includes chores"`
 
-In release 2016.41, we also provided the basic string replacement function [`String.replace`]().
+In release 2016.41 we introduced the string replacement function [`String.replace`](), which replaces each instance of the specified string.
 
 ### Platform Bug Fixed
 
