@@ -82,7 +82,7 @@
 }
 
 
-@include media("<=medium") {
+@include media("<doc-min-toc") {
 	.Sidebar {
 		@include padding(x-small small x-small 0);
 		background: get-color('white');

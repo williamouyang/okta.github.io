@@ -726,7 +726,7 @@
 	}
 }
 
-@include media('<1265px') {
+@include media('<doc-min-toc') {
 	.PageContent {
 		padding-left: 0px;
         padding-top: 10px;
