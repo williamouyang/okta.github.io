@@ -127,7 +127,7 @@
 }
 
 
-@include media('<medium') {
+@include media('<doc-min-toc') {
 	.TableOfContents {
 		@include color('default');
 		order: -1;
@@ -177,7 +177,7 @@
 	}
 }
 
-@include media('<medium') {
+@include media('<doc-min-toc') {
 	.TableOfContents {
 		@include padding(0 medium);
 	}
