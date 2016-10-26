@@ -60,7 +60,7 @@ Response Example:
 }
 ~~~
 
-#### New Function for Replacing Strings
+### New Function for Replacing Strings
 
 Use the [Expression Language](/reference/okta_expression_language/index.html) function `String.replaceFirst` to replace the first occurrence of a string.
 
