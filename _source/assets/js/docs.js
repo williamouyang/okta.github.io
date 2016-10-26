@@ -44,7 +44,7 @@ $(function() {
 
 	if ($(location.href.split("#")[1])) {
 		var anchor = location.href.split("#")[1];
-			if (anchor) {
+		if (anchor) {
 			var target = $('#' + anchor);
 			if (target.length) {
 				$('html,body').scrollTop(target.offset().top - fixedNavHeight);
@@ -157,11 +157,11 @@ $(function() {
 
 		var init = function() {
 			$page.addClass('has-tableOfContents');
-            // Defined in _sass/okta/components/_Sidebar.scss
-            // See also: _source/_sass/okta/_/base/_variables.scss:66
-            if ($(window).width() > 1024) {
-			    $toc.scrollLock();
-            }
+			// Defined in _sass/okta/components/_Sidebar.scss
+			// See also: _source/_sass/okta/_/base/_variables.scss:66
+			if ($(window).width() > 1024) {
+				$toc.scrollLock();
+			}
 		};
 
 		var goToSection = function() {
