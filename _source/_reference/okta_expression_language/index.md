@@ -76,6 +76,7 @@ Function | Input Parameter Signature | Return Type | Example | Output
 `String.len` | (String input) | Integer | `String.len("This")` | 4
 `String.removeSpaces` | (String input) | String | `String.removeSpaces("This is a test")` | Thisisatest
 `String.replace`   | (String input, match, replacement) | String | '`String.replace("This is a test", "is", "at")` | "That at a test"
+`String.replaceFirst`   | (String input, match, replacement) | String | '`String.replaceFirst("This is a test", "is", "at")` | "That is a test"
 `String.stringContains` | (String input, String searchString) | Boolean |`String.stringContains("This is a test", "test")`  | true
  | | | `String.stringContains("This is a test", "doesn'tExist")` | false
 `String.stringSwitch` | (String input, String defaultString, String... keyValuePairs) | String | `String.stringSwitch("This is a test", "default", "key1", "value1")`| default

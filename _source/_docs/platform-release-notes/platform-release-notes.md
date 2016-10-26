@@ -1,67 +1,79 @@
 ---
 layout: docs_page
 title: Platform Release Notes
-excerpt: Summary of changes to the Okta Platform since Release 2016.40
+excerpt: Summary of changes to the Okta Platform since Release 2016.41
 ---
 
-## Release 2016.41
+## Release 2016.43
 
-### Feature Enhancements
+<!-- ### Feature Enhancement: New Version of Okta Sign-In Widget
 
-* [New Version of Okta Sign-In Widget](#new-version-of-okta-sign-in-widget)
-* [New Version of Okta Auth JS](#new-version-of-okta-auth-js)
-* [Key Store Operations for Identity Providers API](#key-store-operations-are-available-for-identity-providers-api)
-* [New Function for Replacing Strings](#new-function-for-replacing-strings)
+The new version of Okta Sign-In Widget, 1.8.0, is available:
 
-#### New Version of Okta Sign-In Widget
+* Localized security questions
+* Added Microsoft as a Social Provider
+* Added an option to provide your own dependencies
 
-The new version of Okta Sign-In Widget, 1.7.0, is available:
+Learn about these and other improvements in [the GitHub repository](https://github.com/okta/okta-signin-widget/releases/tag/okta-signin-widget-1.8.0).
+-->
 
-* The Widget can create access tokens and authorization codes.
-* `tokenManager` manages OAuth 2.0 and OpenID Connect tokens.
-* Voice Call is supported in the forgot password flow.
-* Localization is available for Hungarian and Romanian.
-* Added the language option to set the displayed language.
+### Enhanced Well-Known Endpoint for OpenID Connect
 
-Learn about these and other improvements in [the GitHub repository](http://github.com/okta/okta-signin-widget/releases/latest).
+The [OpenID Connect discovery endpoint](http://developer.okta.com/docs/api/resources/oidc.html#openid-connect-discovery-document) `.well-known` includes the introspection and revocation endpoints.
 
-#### New Version of Okta Auth JS
+Request Example:
 
-The new version of Okta Auth JS, 1.5.0, is available:
+~~~sh
+GET https://${org}.example.com/.well-known/openid-configuration
+~~~
 
-* Perform manual token refreshes with the `token.refresh` method.
-* Create authorization codes in Okta Auth JS.
-* Access updated user information with `token.getUserInfo`.
-* Performance has improved when refreshing multiple tokens.
+Response Example:
 
-Learn about these and other improvements in [the GitHub repository](http://github.com/okta/okta-auth-js/releases/latest).
-
-#### Key Store Operations are Available for Identity Providers API
-     
-Just as you can in the Apps API, you can perform key store operations in the Identity Providers API:
-     
-* Generate an X.509 certificate public key
-* Retrieve and list public keys
-
-For more information, see [Identity Provider Signing Key Store Operations](http://developer.okta.com/docs/api/resources/idps.html#identity-provider-signing-key-store-operations).
-<!-- OKTA-91498 -->
+~~~sh
+{
+    "issuer": "https://${org}.okta.com",
+    "authorization_endpoint": "https://${org}.okta.com/oauth2/v1/authorize",
+    "token_endpoint": "https://${org}.okta.com/oauth2/v1/token",
+    "userinfo_endpoint": "https://${org}.okta.com/oauth2/v1/userinfo",
+    "jwks_uri": "https://${org}.okta.com/oauth2/v1/keys",
+    "response_types_supported": [
+        "code",
+        "code id_token",
+        "code id_token token",
+        "id_token",
+        "id_token token",
+        "token"
+    ],
+    ...
+    "introspection_endpoint": "https://${org}.okta.com/oauth2/v1/introspect",
+    "introspection_endpoint_auth_methods_supported": [
+        "client_secret_basic",
+        "client_secret_post",
+        "none"
+    ],
+    "revocation_endpoint": "https://${org}.okta.com/oauth2/v1/revoke",
+    "revocation_endpoint_auth_methods_supported": [
+        "client_secret_basic",
+        "client_secret_post",
+        "none"
+    ]
+}
+~~~
 
 #### New Function for Replacing Strings
 
-Use the Expression Language function `String.replace` to replace strings.
+Use the [Expression Language](/reference/okta_expression_language/index.html) function `String.replaceFirst` to replace the first occurrence of a string.
 
 Example:
 
-`String.replace("This list includes chores", "is", "at") = "That last includes chores"`
-<!-- * `String.replaceOnce("This list includes chores", "is", "at") = "That list includes chores"` -->
+`String.replaceFirst("This list includes chores", "is", "at") = "That list includes chores"`
 
-For more information, see [Expression Language: String Functions](http://developer.okta.com/reference/okta_expression_language/#string-functions).
-
-<!-- OKTA-103057, OKTA-103966 -->
+In release 2016.41 we introduced the string replacement function `String.replace`, which replaces all instances of a specified string.
 
 ### Platform Bug Fixed
 
-* Reauthorization using app sign-on policy wasn't always enforced for OpenID Connect flows.(OKTA-99897) <!-- OKTA-99900 -->
+POST requests to `/api/v1/sessions` failed with an InvalidSessionException if the request specified a 
+`sessionToken` but no API token was included. (OKTA-104965)
 
 ### Does Your Org Have These Changes Yet?
 
@@ -76,6 +88,7 @@ For changes outside the Okta platform, see the [Release Notes Knowledge Hub](htt
 
 ### Earlier Release Notes
 
+* [Platform Release Notes for Release 2016.41](platform-release-notes2016-41.html)
 * [Platform Release Notes for Release 2016.40](platform-release-notes2016-40.html)
 * [Platform Release Notes for Release 2016.39](platform-release-notes2016-39.html)
 * [Platform Release Notes for Release 2016.37](platform-release-notes2016-37.html)
