@@ -102,7 +102,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <section class="PageContent">
       <!-- START Fixed sidebar -->
               <aside class="Sidebar">
-        <h2 class="Sidebar-location Sidebar-toggle h6">HTTP Verbs</h3>
+        <h2 class="Sidebar-location Sidebar-toggle h6">Navigation</h3>
            <div class="Sidebar-close Sidebar-toggle"></div>
 	   <div>
 	     <h3 class="Sidebar-title">Use Cases</h3>
@@ -164,7 +164,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     <li><a href="/docs/api/resources/sessions.html">Sessions</a></li>
 		 </ul>
 	       </li>
-	       
+
 	       <li>
 		 <span>
 		   API Reference
@@ -819,7 +819,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		 </ul>
 	       </li>
-	       
+
 	       
 	       
 	       
@@ -869,26 +869,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	     </ul>
 
 	     
-	     
+
 	   </div>
         </aside>
 
       <!-- END Fixed sidebar -->
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
-      <h1 id="getting-started-with-the-okta-sign-in-widget">Getting Started with the Okta Sign-In Widget</h1>
-
-<p><img src="/assets/img/okta-signin.png" alt="Screenshot of basic Okta Sign-In Widget" /></p>
-
-<h2 id="introduction">Introduction</h2>
+      <h2 id="overview">Overview</h2>
 
 <p>The Okta Sign-In Widget is a JavaScript widget from Okta that gives
 you a fully featured and customizable login experience which
 can be used to authenticate users on any web site.</p>
 
-<p>Here are the features and capabilities that the Okta Sign-In Widget provides:</p>
+<p><img src="/assets/img/okta-signin.png" alt="Screenshot of basic Okta Sign-In Widget" /></p>
 
-<h2 id="authentication">Authentication</h2>
+<h3 id="authentication">Authentication</h3>
 
 <p>The primary, and most visible, use case for the Okta Sign-In Widget is
 validating a user using a username and password. In addition to
@@ -896,7 +892,7 @@ credential validation, the Okta Sign-In Widget also handles validation of
 password complexity requirements and will display common error messages
 for things like invalid passwords or blank fields.</p>
 
-<h2 id="multi-factor-authentication">Multi-Factor Authentication</h2>
+<h3 id="multi-factor-authentication">Multi-Factor Authentication</h3>
 
 <p>The Okta Sign-In Widget also comes with full support for Multi-Factor
 Authentication user flows. It handles enrollment and verification
@@ -914,7 +910,7 @@ of factors and comes with built-in support for all of the factors listed below:<
 
 <p><img src="/assets/img/okta-signin-mfa-select.png" alt="Screenshot of Okta Sign-In Widget Multi-Factor Authentication selector" /></p>
 
-<h2 id="self-service-password-reset">Self service password reset</h2>
+<h3 id="self-service-password-reset">Self service password reset</h3>
 
 <p>The Okta Sign-In Widget has everything you need to give your users the
 ability to reset their forgotten passwords, it comes with support
@@ -923,7 +919,7 @@ themselves by prompting them to answer a security question.</p>
 
 <p><img src="/assets/img/okta-signin-reset-password.png" alt="Screenshot of Okta Sign-In Widget reset password dialog" /></p>
 
-<h2 id="password-expiration">Password Expiration</h2>
+<h3 id="password-expiration">Password Expiration</h3>
 
 <p>Another feature of the Okta Sign-In Widget is notifying users when their password has expired
 and prompting them to update their password before allowing them to
@@ -931,7 +927,7 @@ log in.</p>
 
 <p><img src="/assets/img/okta-signin-password-expired.png" alt="Screenshot of Okta Sign-In Widget password expired dialog" /></p>
 
-<h2 id="validation-and-error-handling">Validation and error handling</h2>
+<h3 id="validation-and-error-handling">Validation and error handling</h3>
 
 <p>Finally, the Okta Sign-In Widget comes with extensive support for validating user
 input as well as handling every imaginable error condition which
@@ -939,7 +935,7 @@ might occur in a user login flow.</p>
 
 <p><img src="/assets/img/okta-signin-validation-failure.png" alt="Screenshot of Okta Sign-In Widget displaying validation error " /></p>
 
-<h1 id="a-simple-example">A simple example</h1>
+<h2 id="a-simple-example">A simple example</h2>
 
 <p>If you are a developer, the best way to understand the Okta
 Sign-In Widget is to look at a simple example of the HTML
@@ -1017,7 +1013,7 @@ Widget. Note that the value for <code class="highlighter-rouge">el</code> can be
 </code></pre>
 </div>
 
-<h1 id="an-in-depth-example">An in-depth example</h1>
+<h2 id="an-in-depth-example">An in-depth example</h2>
 
 <p>Now that you have a basic idea of how the Okta Sign-In widget works,
 your next step is to see these capabilities in action for
@@ -1036,7 +1032,7 @@ following steps:</p>
   <li>Configuring CORS support on your Okta organization</li>
 </ol>
 
-<h2 id="creating-an-okta-organization">Creating an Okta organization</h2>
+<h3 id="creating-an-okta-organization">Creating an Okta organization</h3>
 
 <p>You can skip this step if you already have an Okta organization and
 have the ability to configure CORS on that Okta organization.</p>
@@ -1046,7 +1042,7 @@ organization, or do not have an Okta organization, you will need to
 create an <a href="https://www.okta.com/developer/signup/">Okta Developer Edition</a> account for yourself before
 continuing on the steps below.</p>
 
-<h2 id="configuring-cors-support-for-your-okta-organization">Configuring CORS support for your Okta organization</h2>
+<h3 id="configuring-cors-support-for-your-okta-organization">Configuring CORS support for your Okta organization</h3>
 
 <p>This step is necessary for Okta to accept authentication requests from an application through the Sign-In Widget.</p>
 
@@ -1072,7 +1068,7 @@ web server you are using to host the HTML for the Okta Sign-In Widget (see below
   <li>Press <code class="highlighter-rouge">Save</code>.</li>
 </ol>
 
-<h2 id="creating-an-html-file-with-the-widget-code">Creating an HTML file with the widget code</h2>
+<h3 id="creating-an-html-file-with-the-widget-code">Creating an HTML file with the widget code</h3>
 
 <p>The first step of getting the Okta Sign-In Widget set up for your Okta
 organization is to copy the HTML below to a file named
@@ -1127,7 +1123,7 @@ will have a lot more in-depth configuration.</p>
 
 <p>Note that in this code snippet, we redirect the user to a custom page we host locally at <code class="highlighter-rouge">http://localhost:8081/signed-in.html</code> instead of redirecting the user to the Okta dashboard (as was done in the simple example section above).</p>
 
-<h2 id="modify-the-html-for-your-okta-organization">Modify the HTML for your Okta organization</h2>
+<h3 id="modify-the-html-for-your-okta-organization">Modify the HTML for your Okta organization</h3>
 
 <p>Once you’ve copied the HTML above into a file named
 <code class="highlighter-rouge">login-to-okta.html</code>, the next step is for you to use your favorite
@@ -1155,7 +1151,7 @@ Developer Edition organization, your domain will be something like
 <p>Replace <code class="highlighter-rouge">example.okta.com</code> in the <code class="highlighter-rouge">orgUrl</code> variable with the fully qualified domain name of your organization.
 Replace also <code class="highlighter-rouge">http://localhost:8000/signed-in.html</code> in the <code class="highlighter-rouge">redirectUrl</code> variable with the url of the page in your own web application where you would like to redirect the user after a successful login.</p>
 
-<h2 id="copy-the-html-to-a-web-server">Copy the HTML to a web server</h2>
+<h3 id="copy-the-html-to-a-web-server">Copy the HTML to a web server</h3>
 
 <p>Once you’ve created a <code class="highlighter-rouge">login-to-okta.html</code> file, your next step is
 get this file hosted on a web server. The web server you use will
@@ -1183,7 +1179,7 @@ $ http-server
 </code></pre>
 </div>
 
-<h2 id="testing-the-okta-sign-in-widget">Testing the Okta Sign-In Widget</h2>
+<h3 id="testing-the-okta-sign-in-widget">Testing the Okta Sign-In Widget</h3>
 
 <p>At this point, you are ready to test the Okta Sign-In Widget.</p>
 
@@ -1214,7 +1210,7 @@ Your next step is to configure the Okta Sign-In Widget for your specific require
   </li>
 </ol>
 
-<h1 id="customization">Customization</h1>
+<h2 id="customization">Customization</h2>
 
 <p>In the example above, you set up a very basic version of
 the Okta Sign-In Widget. Now that you’ve seen it in action, it’s time to
@@ -1226,7 +1222,7 @@ Change how the widget looks with CSS, and change how the widget works, including
 <p>The sections below go into detail on how to customize
 the Okta Sign-In Widget using CSS and JavaScript.</p>
 
-<h2 id="customizing-style-with-css">Customizing style with CSS</h2>
+<h3 id="customizing-style-with-css">Customizing style with CSS</h3>
 
 <p>You will need to write CSS style overloads to customize the “look
 and feel” of the Okta Sign-In Widget.</p>
@@ -1255,7 +1251,7 @@ urge you to style your widget using only the selectors that are
 present in the <a href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.7.0/css/okta-theme.css">okta-theme.css</a> file as other stylistic elements in the widget may be subject to change and may cause your styling to break in
 future versions of the Okta Sign-In Widget.</p>
 
-<h3 id="example-css-styling-for-the-okta-sign-in-widget">Example CSS styling for the Okta Sign-In Widget</h3>
+<h4 id="example-css-styling-for-the-okta-sign-in-widget">Example CSS styling for the Okta Sign-In Widget</h4>
 
 <p>Below is an in-line CSS example, which gives you an idea of how you
 can style the Okta Sign-In Widget. Try the following style below
@@ -1285,7 +1281,7 @@ the <code class="highlighter-rouge">login-to-okta.html</code> file that you crea
 </code></pre>
 </div>
 
-<h3 id="advice-for-hosting-your-own-css">Advice for hosting your own CSS</h3>
+<h4 id="advice-for-hosting-your-own-css">Advice for hosting your own CSS</h4>
 
 <p>While the example above demonstrates how to use an in-page style
 tag, we strongly encourage you to create your own stylesheet by
@@ -1297,7 +1293,7 @@ your HTML:</p>
 </code></pre>
 </div>
 
-<h2 id="customizing-widget-features-and-text-labels-with-javascript">Customizing widget features and text labels with JavaScript</h2>
+<h3 id="customizing-widget-features-and-text-labels-with-javascript">Customizing widget features and text labels with JavaScript</h3>
 
 <p>The configuration options that are passed to the <code class="highlighter-rouge">OktaSignIn()</code>
 constructor are used to configure the functionality and text labels
@@ -1305,7 +1301,7 @@ of the Okta Sign-In Widget. An example of how to configure
 <code class="highlighter-rouge">OktaSignIn()</code> is below, followed by a full list of all of the
 features and text labels that you can use to configure the Okta Sign-In Widget.</p>
 
-<h3 id="example">Example</h3>
+<h4 id="example">Example</h4>
 
 <p>Below is a working example of a customized version of the Okta Sign-In Widget. You can
 see what these customizations do by copying this code into your
@@ -1345,7 +1341,7 @@ are below.</p>
 </code></pre>
 </div>
 
-<h3 id="configurable-features">Configurable features</h3>
+<h4 id="configurable-features">Configurable features</h4>
 
 <ul>
   <li>
