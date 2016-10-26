@@ -4,7 +4,7 @@
 	min-width: 280px;
 	position: relative;
 	width: 320px;
-	
+
 	&:before {
 		background: get-color('gray-lightest');
 		bottom: 0;
@@ -16,14 +16,14 @@
 		transform: translateX(-100%);
 		width: 50vw;
 	}
-	
+
 	&-title {
 		@include color('gray-dark');
 		@include font-size('base');
 		@include margin(medium 0 0);
 		font-weight: 600;
 	}
-	
+
 	&-nav {
 		&,
 		ul,
@@ -32,44 +32,44 @@
 			margin: 0;
 			padding: 0;
 		}
-		
+
 		ul {
 			border-left: 1px solid get-color('gray-light');
 			padding-left: get-spacing('x-small');
-			
+
 			a {
 				@include padding(0.1em x-small);
 				@include transition(background normal);
 				border-radius: 3px;
 			}
-			
+
 			a:active, a:hover {
 				background-color: get-color('gray-light');
 			}
 		}
-		
+
 		a {
 			@include color('default');
 			display: block;
 			font-weight: 400;
 			text-decoration: none;
 		}
-		
-		
+
+
 		> li,
 		ul {
 			@include margin(x-small 0);
 		}
-		
+
 		> li > a {
 			font-weight: 600;
 		}
-		
+
 		.is-active {
 			> a {
 				@include color('accent');
 			}
-			
+
 			> ul {
 				display: block;
 			}
@@ -81,14 +81,14 @@
 	}
 }
 
-
-@include media("<=medium") {
+@include media('<doc-min-toc') {
 	.Sidebar {
 		@include padding(x-small small x-small 0);
 		background: get-color('white');
 		min-width: 100%;
 		position: relative;
-		clear:both;
+		clear: both;
+		order: -2;
 		width: 100%;
 		height: auto;
 		border-bottom: solid 3px get-color('gray-light');
@@ -121,17 +121,17 @@
 
 		&-active {
 			@include padding(small);
-			
+
 			h3,
 			ul {
 				display: block;
 			}
 		}
-		
+
 		&-active &-close {
 			transform: rotate(180deg);
 		}
-		
+
 		&-active &-location {
 			display: none;
 		}
