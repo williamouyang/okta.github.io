@@ -157,8 +157,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		 
 		     <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0</a></li>
 		 
-		     <li><a href="/docs/api/resources/oauth-clients.html">OAuth 2.0 Clients</a></li>
-		 
 		     <li><a href="/docs/api/resources/oidc.html">OpenID Connect</a></li>
 		 
 		     <li><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li>
@@ -183,6 +181,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     <li><a href="/docs/api/resources/apps.html">Apps</a></li>
+		     
 		     
 		     
 		     
@@ -330,6 +329,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
 		     <li><a href="/docs/api/resources/factors.html">Factors (MFA)</a></li>
 		     
 		     
@@ -380,7 +381,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		     <li><a href="/docs/api/resources/groups.html">Groups</a></li>
+		     
 		     
 		     
 		     
@@ -531,7 +534,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
 		     <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
+		     
 		     
 		     
 		     
@@ -633,7 +639,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		     <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
+		     
 		     
 		     
 		     
@@ -780,7 +788,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
 		     <li><a href="/docs/api/resources/users.html">Users</a></li>
+		     
 		     
 		     
 		     
@@ -2013,7 +2024,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
     <tr>
       <td>endpoints</td>
       <td>Endpoint settings for OAuth 2.0 Authorization Server (AS)</td>
-      <td><a href="#oauth-20-endpoints-object">OAuth 2.0 Endpoints Object</a></td>
+      <td><a href="#oauth-20-and-openid-connect-endpoints-object">OAuth 2.0 Endpoints Object</a></td>
       <td>TRUE</td>
       <td>TRUE</td>
       <td> </td>
@@ -2104,7 +2115,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
     <tr>
       <td>endpoints</td>
       <td>Endpoint settings for OAuth 2.0 Authorization Server (AS)</td>
-      <td><a href="#openid-connect-endpoints-object">OAuth 2.0 Endpoints Object</a></td>
+      <td><a href="#oauth-20-and-openid-connect-endpoints-object">OAuth 2.0 Endpoints Object</a></td>
       <td>TRUE</td>
       <td>TRUE</td>
       <td> </td>
@@ -6792,6 +6803,140 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 </span></code></pre>
 </div>
 
+<h3 class="api api-operation" id="find-users">Find Users</h3>
+
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /idps/<em>:id</em>/users</span></p>
+
+<p>Find all the users linked to an identity provider</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-13">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><code class="highlighter-rouge">id</code> of IdP to search</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters-13">Response Parameters</h5>
+
+<p>List of the users that are linked to the specified identity provider</p>
+
+<h5 id="request-example-19">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>GET https://example.okta.com/api/v1/idps/0oa4lb6lbtmH355Hx0h7/users
+200 OK
+</code></pre>
+</div>
+
+<h5 id="response-example-19">Response Example</h5>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00u5cl9lo7nMjHjPr0h7"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"externalId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"109912936038778"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T19:10:11.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T19:11:49.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Carol"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"middleName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lee"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Johnson"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"carol_johnson@tfbnw.net"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Carol Johnson"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.facebook.com/app_scoped_user_id/109912936038778/"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/api/v1/idps/0oa4lb6lbtmH355Hx0h7/users/00u5cl9lo7nMjHjPr0h7"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                  </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"DELETE"</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"idp"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/api/v1/idps/0oa4lb6lbtmH355Hx0h7"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/api/v1/users/00u5cl9lo7nMjHjPr0h7"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+     </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+</div>
+
+<h3 class="api api-operation" id="unlink-user-from-idp">Unlink User from IdP</h3>
+
+<p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /idps/<em>:id</em>/users/<em>:uid</em></span></p>
+
+<p>Removes the link between the Okta user and the IdP user. 
+The next time the user federates into Okta via this IdP, they have to re-link their account according to the account link policy configured in Okta for this IdP.</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-14">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><code class="highlighter-rouge">id</code> of IdP to activate</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>uid</td>
+      <td><code class="highlighter-rouge">uid</code> of user to delete</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters-14">Response Parameters</h5>
+
+<h5 id="request-example-20">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>DELETE https://example.okta.com//api/v1/idps/0oa4lb6lbtmH355Hx0h7/users/00u5cl9lo7nMjHjPr0h7
+</code></pre>
+</div>
+
+<h5 id="response-example-20">Response Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>204 - No Content
+</code></pre>
+</div>
+
 <h2 id="identity-provider-key-store-operations">Identity Provider Key Store Operations</h2>
 
 <h3 class="api api-operation" id="add-x509-certificate-public-key">Add X.509 Certificate Public Key</h3>
@@ -6800,7 +6945,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 
 <p>Adds a new X.509 certificate credential to the IdP key store.</p>
 
-<h5 class="api api-request api-request-params" id="request-parameters-13">Request Parameters</h5>
+<h5 class="api api-request api-request-params" id="request-parameters-15">Request Parameters</h5>
 
 <table>
   <thead>
@@ -6825,11 +6970,11 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
   </tbody>
 </table>
 
-<h5 class="api api-response api-response-params" id="response-parameters-13">Response Parameters</h5>
+<h5 class="api api-response api-response-params" id="response-parameters-15">Response Parameters</h5>
 
 <p><a href="#identity-provider-key-credential-model">Identity Provider Key Credential</a></p>
 
-<h5 class="api api-request api-request-example" id="request-example-19">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-21">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -6855,7 +7000,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-19">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-21">Response Example</h5>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -6898,7 +7043,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 
 <p>Gets a specific <a href="#identity-provider-key-credential-model">IdP Key Credential</a> by <code class="highlighter-rouge">kid</code>.</p>
 
-<h5 class="api api-request api-request-params" id="request-parameters-14">Request Parameters</h5>
+<h5 class="api api-request api-request-params" id="request-parameters-16">Request Parameters</h5>
 
 <table>
   <thead>
@@ -6923,11 +7068,11 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
   </tbody>
 </table>
 
-<h5 class="api api-response api-response-params" id="response-parameters-14">Response Parameters</h5>
+<h5 class="api api-response api-response-params" id="response-parameters-16">Response Parameters</h5>
 
 <p><a href="#identity-provider-key-credential-model">Identity Provider Key Credential</a></p>
 
-<h5 class="api api-request api-request-example" id="request-example-20">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-22">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -6938,7 +7083,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-20">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-22">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"kid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"your-key-id"</span><span class="p">,</span><span class="w">
@@ -6977,7 +7122,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 
 <p>Enumerates IdP key credentials.</p>
 
-<h5 class="api api-request api-request-params" id="request-parameters-15">Request Parameters</h5>
+<h5 class="api api-request api-request-params" id="request-parameters-17">Request Parameters</h5>
 
 <table>
   <thead>
@@ -7010,11 +7155,11 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
   </tbody>
 </table>
 
-<h5 class="api api-response api-response-params" id="response-parameters-15">Response Parameters</h5>
+<h5 class="api api-response api-response-params" id="response-parameters-17">Response Parameters</h5>
 
 <p>Array of <a href="#identity-provider-key-credential-model">Identity Provider Key Credential</a></p>
 
-<h5 class="api api-request api-request-example" id="request-example-21">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-23">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -7025,7 +7170,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-21">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-23">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -7066,7 +7211,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 
 <p>Deletes a specific <a href="#identity-provider-key-credential-model">IdP Key Credential</a> by <code class="highlighter-rouge">kid</code> if it is not currently being used by an Active or Inactive IdP.</p>
 
-<h5 class="api api-request api-request-params" id="request-parameters-16">Request Parameters</h5>
+<h5 class="api api-request api-request-params" id="request-parameters-18">Request Parameters</h5>
 
 <table>
   <thead>
@@ -7091,11 +7236,11 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
   </tbody>
 </table>
 
-<h5 class="api api-response api-response-params" id="response-parameters-16">Response Parameters</h5>
+<h5 class="api api-response api-response-params" id="response-parameters-18">Response Parameters</h5>
 
 <p>There are no response parameters.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-22">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-24">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X DELETE <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -7105,7 +7250,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-22">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-24">Response Example</h5>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">204</span> <span class="ne">No Content</span>
 </code></pre>
@@ -7131,7 +7276,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
   <p>To update an IdP with the newly generated key credential, <a href="#update-identity-provider">update your IdP</a> using the returned key’s <code class="highlighter-rouge">kid</code> in the <a href="#saml-20-signing-credentials-object">signing credential</a>.</p>
 </blockquote>
 
-<h5 class="api api-request api-request-params" id="request-parameters-17">Request Parameters</h5>
+<h5 class="api api-request api-request-params" id="request-parameters-19">Request Parameters</h5>
 
 <table>
   <thead>
@@ -7164,11 +7309,11 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
   </tbody>
 </table>
 
-<h5 class="api api-response api-response-params" id="response-parameters-17">Response Parameters</h5>
+<h5 class="api api-response api-response-params" id="response-parameters-19">Response Parameters</h5>
 
 <p>Return the generated <a href="#identity-provider-key-credential-model">IdP Key Credential</a>.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-23">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-25">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -7179,7 +7324,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-23">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-25">Response Example</h5>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -7224,7 +7369,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 
 <p>Enumerates signing key credentials for an IdP</p>
 
-<h5 class="api api-request api-request-params" id="request-parameters-18">Request Parameters</h5>
+<h5 class="api api-request api-request-params" id="request-parameters-20">Request Parameters</h5>
 
 <table>
   <thead>
@@ -7249,11 +7394,11 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
   </tbody>
 </table>
 
-<h5 class="api api-response api-response-params" id="response-parameters-18">Response Parameters</h5>
+<h5 class="api api-response api-response-params" id="response-parameters-20">Response Parameters</h5>
 
 <p>Array of <a href="#identity-provider-key-credential-model">IdP Key Credential</a>.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-24">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-26">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -7264,7 +7409,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-24">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-26">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -7299,7 +7444,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 
 <p>Gets a specific <a href="#identity-provider-key-credential-model">IdP Key Credential</a> by <code class="highlighter-rouge">kid</code></p>
 
-<h5 class="api api-request api-request-params" id="request-parameters-19">Request Parameters</h5>
+<h5 class="api api-request api-request-params" id="request-parameters-21">Request Parameters</h5>
 
 <table>
   <thead>
@@ -7332,11 +7477,11 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
   </tbody>
 </table>
 
-<h5 class="api api-response api-response-params" id="response-parameters-19">Response Parameters</h5>
+<h5 class="api api-response api-response-params" id="response-parameters-21">Response Parameters</h5>
 
 <p><a href="#identity-provider-key-credential-model">IdP Key Credential</a>.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-25">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-27">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -7347,7 +7492,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-25">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-27">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-10T18:56:23.000Z"</span><span class="p">,</span><span class="w">
