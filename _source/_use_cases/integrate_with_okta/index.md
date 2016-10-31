@@ -38,6 +38,9 @@ Use the following instructions to support single sign-on for your app in the pub
 
 ![App Wizard - Feedback](https://cloud.githubusercontent.com/assets/3278918/12026882/a2e71aee-ad73-11e5-9ef4-cd477d2990e7.png "App Wizard - Feedback")
 
+> Note: Select **Is your app integration complete** if you want your app added to the OAN.
+Okta won’t contact you until this option is selected.
+
 #### 3. Need Help?
 
 Get stuck or have questions? See our Okta Application Network FAQs (below), email <developers@okta.com> or post your questions on [stackoverflow](https://stackoverflow.com).
