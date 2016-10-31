@@ -81,6 +81,16 @@ $(function() {
 		var $tocItems  = [];
 		var $indicator = $('<div>').addClass('TableOfContents-indicator').appendTo($toc);
 
+		// Unhide beta if necessary
+		var query = window.location.search.substring(1);
+		var params = query.split("&");
+		for (i in params) {
+			if (params[i].split('=')[0] === 'beta') {
+				$('.beta').show();
+				$('.hide-beta').hide();
+			}
+		}
+
 		var buildTOC = function() {
 
 			if (!$content.children('h1:first-child').length) {
