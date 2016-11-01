@@ -90,6 +90,8 @@ Client applications have the following properties:
   or [Client Credentials](https://tools.ietf.org/html/rfc6749#section-4.4) flow (if `grant_types` contains the value `client_credentials`)
   then no redirect URI or response type is necessary. In these cases you can pass either null or an empty array for these attributes.
 
+> All redirect URIs must be absolute URIs and must not include a fragment compontent.
+
 ## Client Application Operations
 
 ### Register New Client
