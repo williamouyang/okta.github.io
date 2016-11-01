@@ -5,6 +5,8 @@ excerpt: The Okta Music Store is a sample application written in .NET and is a d
 redirect_from: "/docs/examples/dotnet_sample_application.html"
 ---
 
+## About
+
 > <i class="fa fa-github"></i> [Visit the GitHub repository for the "Okta Music Store" .NET Sample Application.](https://github.com/okta/okta-music-store)
 
 The Okta Music Store is a sample application written in .NET and is a demonstration of how to add Okta as an identity provider for an existing application.
