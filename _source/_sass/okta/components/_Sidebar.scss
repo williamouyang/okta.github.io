@@ -81,59 +81,54 @@
 	}
 }
 
-@include media('<doc-min-toc') {
-	.Sidebar {
-		@include padding(x-small small x-small 0);
-		background: get-color('white');
-		min-width: 100%;
-		position: relative;
-		clear: both;
-		order: -2;
-		width: 100%;
-		height: auto;
-		border-bottom: solid 3px get-color('gray-light');
-		z-index: 100;
-		position: relative;
-
-		&-close {
-			@include transition(normal transform);
-			background: url('#{$asset-path}/img/icons/close.svg') no-repeat center;
-			cursor: pointer;
-			position: absolute;
-			width: 22px;
-			height: 22px;
-			z-index: 3;
-			right: get-spacing('small');
-			top: 14px;
-		}
-
-		&-location {
-			@include margin(0 small);
-			color: get-color('blue-bright');
-			display: block;
-			cursor: pointer;
-		}
-
-		h3,
-		ul {
-			display: none;
-		}
-
-		&-active {
-			@include padding(small);
-
-			h3,
-			ul {
-				display: block;
-			}
-		}
-
-		&-active &-close {
-			transform: rotate(180deg);
-		}
-
-		&-active &-location {
-			display: none;
-		}
-	}
+.DynamicSidebar {
+    @include media('<doc-min-toc') {
+	    .Sidebar {
+		    @include padding(x-small small x-small 0);
+		    background: get-color('white');
+		    min-width: 100%;
+		    position: relative;
+		    clear: both;
+		    order: -2;
+		    width: 100%;
+		    height: auto;
+		    border-bottom: solid 3px get-color('gray-light');
+		    z-index: 100;
+		    position: relative;
+        }
+	    .Sidebar-close {
+		    @include transition(normal transform);
+		    background: url('#{$asset-path}/img/icons/close.svg') no-repeat center;
+		    cursor: pointer;
+		    position: absolute;
+		    width: 22px;
+		    height: 22px;
+		    z-index: 3;
+		    right: get-spacing('small');
+		    top: 14px;
+	    }
+	    .Sidebar-location {
+		    @include margin(0 small);
+		    color: get-color('blue-bright');
+		    display: block;
+		    cursor: pointer;
+	    }
+	    h3,
+	    ul {
+		    display: none;
+	    }
+	    .Sidebar-active {
+		    @include padding(small);
+		    h3,
+		    ul {
+			    display: block;
+		    }
+	    }
+	    .Sidebar-active .Sidebar-close {
+		    transform: rotate(180deg);
+	    }
+	    .Sidebar-active .Sidebar-location {
+		    display: none;
+	    }
+    }
 }
