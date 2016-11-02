@@ -151,8 +151,8 @@ server, it is time to run the test:
 7.  Since this test is running in your own Runscope instance, we
     encourage you to update the tests to better fit your own
     environment.
-8.  See the "Required SCIM Capabilities" section below for details
-    on what your SCIM server will need to implement to pass all of
+8.  See [Required SCIM Capabilities](#required-scim-capabilities) for details
+    about your SCIM server needs to implement to pass all of
     the tests.
 9.  Keep running this test suite until all the tests pass.
     Here is an [example of a test suite where all tests pass](https://www.runscope.com/radar/qmovuxkrhtws/f95ac15f-3f22-46c3-8f1a-1001fbf8fb66/history/6a35fabf-5ce5-4e48-a13f-7292b1bd3cc5).
