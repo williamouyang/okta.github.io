@@ -17,8 +17,8 @@
 
     <title>OAuth 2.0 | Okta Developer</title>
     <meta name="description" content="Overview">
-    <link rel="canonical" href="http://developer.okta.com/docs/api/resources/oauth2.html">
-    <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml">
+    <link rel="canonical" href="http://localhost:4000/docs/api/resources/oauth2.html">
+    <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://localhost:4000/feed.xml">
 
     <!-- GA -->
     <script>
@@ -99,7 +99,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 	  <!-- END Header -->
 	      <!-- START Page Center w/Sub Nav & Content -->
-    <section class="PageContent">
+    <section class="PageContent DynamicSidebar">
       <!-- START Fixed sidebar -->
               <aside class="Sidebar">
         <h2 class="Sidebar-location Sidebar-toggle h6">Navigation</h3>
@@ -974,7 +974,7 @@ This authentication method produces a <code class="highlighter-rouge">sessionTok
 
 <p>An Access Token is a <a href="https://tools.ietf.org/html/rfc7519">JSON web token (JWT)</a> encoded in base64URL format that contains <a href="#header">a header</a>, <a href="#payload">payload</a>, and <a href="#signature">signature</a>. A resource server can authorize the client to access particular resources based on the <a href="#scopes-and-claims">scopes and claims</a> in the Access Token.</p>
 
-<h3 id="jwt-header">JWT Header</h3>
+<h4 id="jwt-header">JWT Header</h4>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"alg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RS256"</span><span class="p">,</span><span class="w">
@@ -983,7 +983,7 @@ This authentication method produces a <code class="highlighter-rouge">sessionTok
 </span></code></pre>
 </div>
 
-<h3 id="jwt-payload">JWT Payload</h3>
+<h4 id="jwt-payload">JWT Payload</h4>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"ver"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -1007,7 +1007,7 @@ This authentication method produces a <code class="highlighter-rouge">sessionTok
 </span></code></pre>
 </div>
 
-<h3 id="jwt-signature">JWT Signature</h3>
+<h4 id="jwt-signature">JWT Signature</h4>
 
 <p>This is a digital signature Okta generates using the public key identified by the <code class="highlighter-rouge">kid</code> property in the header section.</p>
 

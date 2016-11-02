@@ -3571,7 +3571,7 @@ ol.list--numbered {
     display: none; }
 
 @media (max-width: 1264px) {
-  .Sidebar {
+  .DynamicSidebar .Sidebar {
     padding: 10px 20px 10px 0;
     background: #fff;
     min-width: 100%;
@@ -3583,37 +3583,38 @@ ol.list--numbered {
     border-bottom: solid 3px #e6e6e8;
     z-index: 100;
     position: relative; }
-    .Sidebar-close {
-      transition: 0.4s transform;
-      background: url("/assets/img/icons/close.svg") no-repeat center;
-      cursor: pointer;
-      position: absolute;
-      width: 22px;
-      height: 22px;
-      z-index: 3;
-      right: 20px;
-      top: 14px; }
-    .Sidebar-location {
-      margin: 0 20px;
-      color: #007dc1;
-      display: block;
-      cursor: pointer; }
-      .Sidebar-location:first-child {
-        margin-top: 0; }
-      .Sidebar-location:last-child {
-        margin-bottom: 0; }
-    .Sidebar h3,
-    .Sidebar ul {
+    .DynamicSidebar .Sidebar h3,
+    .DynamicSidebar .Sidebar ul {
       display: none; }
-    .Sidebar-active {
-      padding: 20px; }
-      .Sidebar-active h3,
-      .Sidebar-active ul {
-        display: block; }
-    .Sidebar-active .Sidebar-close {
-      transform: rotate(180deg); }
-    .Sidebar-active .Sidebar-location {
-      display: none; } }
+  .DynamicSidebar .Sidebar-close {
+    transition: 0.4s transform;
+    background: url("/assets/img/icons/close.svg") no-repeat center;
+    cursor: pointer;
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    z-index: 3;
+    right: 20px;
+    top: 14px; }
+  .DynamicSidebar .Sidebar-location {
+    margin: 0 20px;
+    color: #007dc1;
+    display: block;
+    cursor: pointer; }
+    .DynamicSidebar .Sidebar-location:first-child {
+      margin-top: 0; }
+    .DynamicSidebar .Sidebar-location:last-child {
+      margin-bottom: 0; }
+  .DynamicSidebar .Sidebar-active {
+    padding: 20px; }
+    .DynamicSidebar .Sidebar-active h3,
+    .DynamicSidebar .Sidebar-active ul {
+      display: block; }
+  .DynamicSidebar .Sidebar-active .Sidebar-close {
+    transform: rotate(180deg); }
+  .DynamicSidebar .Sidebar-active .Sidebar-location {
+    display: none; } }
+
 #top-nav #form_search {
   display: none; }
 #top-nav.search-active #form_search {
