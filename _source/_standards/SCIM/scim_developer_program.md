@@ -39,13 +39,13 @@ and publish your SCIM-based integration with Okta:
 Email us at <developers@okta.com> or post your question on [Stack Overflow](http://stackoverflow.com/search?q=okta,scim).
 
 
-### Review Okta’s SCIM Docs and Prepare Your App
+### Review Okta's SCIM Docs and Prepare Your App
 
-The first step on is to build a “compliant” SCIM server. We developed [Okta’s SCIM Docs](http://developer.okta.com/docs/guides/scim_guidance.html)
+The first step is to build a “compliant” SCIM server. We developed [Okta’s SCIM Docs](http://developer.okta.com/docs/guides/scim_guidance.html)
 to assist you in this effort. Even if you already support SCIM, it’s important that you still review Okta’s SCIM docs
 (especially the sections below) to understand the specifics of Okta’s support for the SCIM standard:
 
-* [Understanding User Provisioning in Okta](index.html#understanding-of-user-provisioning-in-okta)
+* [Understanding User Provisioning in Okta](index.html#understanding-user-provisioning-in-okta)
 * [Required SCIM Capabilities](index.html#required-scim-capabilities)
 * [SCIM Features Not Implemented by Okta](index.html#scim-features-not-implemented-by-okta)
 
@@ -59,7 +59,7 @@ to assist you in this effort. Even if you already support SCIM, it’s important
 
 The easiest way for you to develop and verify your SCIM integration is to make use of an automated test suite that runs on Runscope.
 A Runscope [free trial account](https://www.runscope.com/signup) will give you all you need for testing if you don’t already use the service.
-For more details, see [Testing your SCIM server with Runscope](http://developer.okta.com/docs/guides/scim_guidance.html#testing-your-scim-server-with-runscope).
+For more details, see [Testing your SCIM server with Runscope](index.html#testing-your-scim-server-with-runscope).
 
 #### Testing your SCIM server with Okta
 
@@ -87,7 +87,7 @@ Comment on comment: Do we have this in a format that we can link to or include d
 ### Submit for Okta Review
 
 Once you have a functioning SCIM integration in your Okta developer org, and have confirmed support
-for Okta’s [required SCIM capabilities](http://developer.okta.com/docs/guides/scim_guidance.html#required-scim-capabilities),
+for Okta’s [required SCIM capabilities](index.html#required-scim-capabilities),
 you are ready to formally [submit your app for review](https://docs.google.com/forms/d/1olk5SYxiM4Ul-Hk02VVYOFnT28-vStFsjLaHAOWARX0/viewform) by Okta.
 
 Your submission will provide Okta with all the metadata needed to create a customized app
@@ -97,13 +97,13 @@ create the customized app, run it through our internal QA, and then make it avai
 
 Prepare the following two components before beginning to work through [the submission document](https://docs.google.com/forms/d/1olk5SYxiM4Ul-Hk02VVYOFnT28-vStFsjLaHAOWARX0/viewform):
 
-1. Demo video showing working SCIM integration. This will be used for Okta internal review purposes only.
-Please use a QuickTime Player compatible video format such as .mov.
-2. Customer-facing Configuration Guide. This will be exposed externally in Okta to end customers.
+1. Customer-facing Configuration Guide. This will be exposed externally in Okta to end customers.
 For more details, see [the configuration guide guidelines](http://saml-doc.okta.com/Provisioning_Docs/SCIM_Configuration_Guide_Instructions.pdf).
+2. (Optional) Demo video showing working SCIM integration. This will be used for Okta internal review purposes only.
+Please use a QuickTime Player compatible video format such as .mov.
 
 > Before submitting your application to Okta, you should
-[check the User Attributes](http://developer.okta.com/docs/guides/scim_guidance.html#submitting-to-okta)
+[check the User Attributes](index.html#check-the-profile-attributes-for-your-application)
 to make sure that the attributes are set to what you want your users to see.
 
 ### Customer Testing
