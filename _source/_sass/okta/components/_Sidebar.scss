@@ -95,6 +95,10 @@
 		    border-bottom: solid 3px get-color('gray-light');
 		    z-index: 100;
 		    position: relative;
+	        h3,
+	        ul {
+		        display: none;
+	        }
         }
 	    .Sidebar-close {
 		    @include transition(normal transform);
@@ -113,10 +117,6 @@
 		    display: block;
 		    cursor: pointer;
 	    }
-	    h3,
-	    ul {
-		    display: none;
-	    }
 	    .Sidebar-active {
 		    @include padding(small);
 		    h3,
@@ -132,3 +132,4 @@
 	    }
     }
 }
+
