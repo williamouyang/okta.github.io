@@ -66,14 +66,17 @@ For ID Tokens:
 
 1. Navigate to **Applications > Applications** and select an app.
 2. Select **Sign On**.
-3. Collect the information about **Token Credentials**: automatic or manual. WHERE DOES THIS GO?
-4. Collect all information about the **OpenID Connect ID Token**: `Claims` and `Groups claim`. 
+3. Collect all information about the **OpenID Connect ID Token**: `Claims` and `Groups claim`. 
     * The `issuer` and `audience` will change, so you don't need to record them.
-    * If you have a Groups claim, you'll have to create a scope for it in the shared authorization server. Groups scope is not a reserved scope in the shared authorization server.
-5. Select **Security > API**. 
-6. Select your authorization server name.
-7. Select **Scopes** and add any of the scopes you collected. Created a scope for groups if you had a groups claim in the private authorization server.
-8. Select **Claims** and add any of the claims you collected.
+    * If you have a Groups claim, collect the information for step 8.
+4. Select **Security > API**. 
+5. Select your authorization server name.
+6. Select **Scopes** and add any of the scopes you collected. Create a scope for groups if you had a groups claim in the private authorization server.
+7. Select **Claims** and add any of the claims you collected.
+8. If you had a Groups claim (see step 3), create a claim in the shared authorization server with a group filter, then link it
+         with a scope. The `groups` scope is not a reserved scope in the shared authorization server.
+
+> The shared authorization server only supports automatic token credentials, so you can ignore the **Token Credentials** field.
 
 For Access Tokens:
 
@@ -81,11 +84,12 @@ For Access Tokens:
 2. Select **Authorization Server**.
 3. Collect all the information about **OAuth 2.0 Access Token**: custom `Scopes`, `Claims`, and `Groups claim`.
     * The `issuer` and `audience` will change, so you don't need to record them.
-    * If you have a Groups claim, you'll have to create a scope for it. Groups scope is not a reserved scope in the shared authorization server.
+    * If you have a Groups claim, collect the information for step 8.
 4. Select **Security > API** 
 5. Select your authorization server name.
-6. Select **Scopes** and add any of the scopes you copied in step 2. If you had a groups claim in the private authorization server, you'll need to create a groups scope.
+6. Select **Scopes** and add any of the scopes you copied in step 2.
 7. Select **Claims** and add any of the claims you copied in step 2.
+8. If you use `groups` to get the claim for group information (see step 3), create it in the shared authorization server.
 
 >Hint: Instead of copying strings from the UI to a text document, you can take screenshots, or open two browsers, one accessing
  the old configuration (steps 1-4), and one showing the new configuration (steps 5-8).
@@ -313,6 +317,7 @@ check for the following symptoms and try the resolutions.
 
 Did you hard-code the base URL anywhere? If so, remove the hard-coding.
 
-### Symptom 2: 
-
-### Symptom 3:
+### Symptom 2: Some requests don't return the results expected in a token
+ 
+* Check that the client and shared authorization server configuration match.
+* Check the system log for additional details about any errors.
