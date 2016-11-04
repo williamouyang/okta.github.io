@@ -96,14 +96,37 @@ Use the following example by replacing the explanatory text with valid values.
      "authenticationProvider": String one of OKTA_AUTHENTICATION_PROVIDER, ACTIVE_DIRECTORY, LDAP, FEDERATION,
             SOCIAL, FACTOR_PROVIDER, Optional
           "credentialProvider": String one of OKTA_CREDENTIAL_PROVIDER, RSA, SYMANTEC, GOOGLE, DUO, YUBIKEY, Optional
-          "credentialType": String one of OTP, SMS, PASSWORD, ASSERTION, IWA, EMAIL, Optional
+          "credentialType": String one of OTP, SMS, PASSWORD, ASSERTION, IWA, EMAIL, OAUTH2, JWT, Optional
           "issuer": Object, Optional {
                "id": String, Optional
                "type": String Optional
           }
           "externalSessionId": String, Optional
           "interface": String, Optional i.e. Outlook, Office365, wsTrust
-     }
+},
+"securityContext": { Object, Optional
+          "asNumber": Integer, Optional
+          "asOrg": String, Optional
+          "isp": String, Optional
+          "domain": String, Optional
+          "isProxy": Boolean, Optional
+},
+"request": { Object, Optional
+          "ipChain": List of objects of the form [
+              "ip": String, Optional
+              "geographicalContext": { Object, Optional
+                        "geolocation": { Object, Optional
+                             "lat":Double, Optional
+                             "lon": Double, Optional
+                        }
+                        "city": String, Optional
+                        "state": String, Optional
+                        "country": String, Optional
+                        "postalCode": String, Optional
+                   },
+              "version": String, one of V4, V6 Optional
+              "source": String, Optional
+          ], Optional
 }
 
 ~~~
@@ -129,6 +152,8 @@ The Log model is read-only. The following properties are available:
 | transaction   |  Identifies the transaction details of the action                 | [Transaction Object](#transaction-object)                      | TRUE     | FALSE  | TRUE     |           |           |            |
 | debugContext   | Identifies the debug request data of the action                  | [DebugContext Object](#debugcontext-object)                    | TRUE     | FALSE  | TRUE     |           |           |            |
 | authenticationContext | Identifies the authentication data of the action          | [AuthenticationContext Object](#authenticationcontext-object)  | TRUE     | FALSE  | TRUE     |           |           |            |
+| securityContext | Identifies the security data of the action                      | [SecurityContext Object](#securitycontext-object)              | TRUE     | FALSE  | TRUE     |           |           |            |
+| request   | Identifies the request data of the action                             | [Request Object](#request-object)                              | TRUE     | FALSE  | TRUE     |           |           |            |
 |-----------+-----------------------------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
 
 > The actor and/or target of an event is dependent on the action performed. All events have actors. Not all events have targets.
@@ -196,10 +221,10 @@ Describes the location data regarding where the action was performed
 |------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
 | Property   | Description                                                    | DataType        | Nullable | Default | MinLength | MaxLength | Validation |
 | ---------- | -------------------------------------------------------------- | --------------- | -------- | ------- | --------- | --------- | ---------- |
-| geolocation | Id of the target                                              | [Geolocation Object](#geolocation-object) | TRUE |        |           |           |            |
-| city       | Geographical context data of the event                         | String          | TRUE     |         |           |           |            |
+| geolocation | geolocation of the target                                     | [Geolocation Object](#geolocation-object) | TRUE |        |           |           |            |
+| city       | city of the event                                              | String          | TRUE     |         |           |           |            |
 | state      | zone client is in                                              | String          | TRUE     |         |           |           |            |
-| country    | Ip address of the client                                       | String          | TRUE     |         |           |           |            |
+| country    | country of the client                                          | String          | TRUE     |         |           |           |            |
 | postalCode | Device that the client was using                               | String          | TRUE     |         |           |           |            |
 |------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
 
@@ -274,6 +299,43 @@ Describes an issuer in the authentication context
 | type       | The type of the issuer                                         | Array of String | TRUE     |         |           |           |            |
 |------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
 
+### SecurityContext Object
+
+Describes security data regarding an event
+
+|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
+| Property   | Description                                                    | DataType        | Nullable | Default | MinLength | MaxLength | Validation |
+| ---------- | -------------------------------------------------------------- | --------------- | -------- | ------- | --------- | --------- | ---------- |
+| asNumber   | AS Number                                                      | Integer         | TRUE     |         |           |           |            |
+| asOrg      | AS Organization                                                | String          | TRUE     |         |           |           |            |
+| isp        | Internet Service Provider                                      | String          | TRUE     |         |           |           |            |
+| domain     | domain                                                         | String          | TRUE     |         |           |           |            |
+| isProxy    | if event is from a known proxy                                 | Bool            | TRUE     |         |           |           |            |
+|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
+
+### Request Object
+
+Describes request data regarding an event
+
+|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
+| Property   | Description                                                    | DataType        | Nullable | Default | MinLength | MaxLength | Validation |
+| ---------- | -------------------------------------------------------------- | --------------- | -------- | ------- | --------- | --------- | ---------- |
+| ipChain    | chain of ip data                                               | Array of IpAddress | TRUE  |         |           |           |            |
+|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
+
+### SecurityContext Object
+
+Describes security data regarding an event
+
+|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
+| Property   | Description                                                    | DataType        | Nullable | Default | MinLength | MaxLength | Validation |
+| ---------- | -------------------------------------------------------------- | --------------- | -------- | ------- | --------- | --------- | ---------- |
+| ip         | ip address                                                     | String          | TRUE     |         |           |           |            |
+| geographicalContext | Geographical context of the ip address                | [GeographicalContext Object](#geographicalcontext-object)          | TRUE     |         |           |           |            |
+| version    | ip address version                                             | V4 or V6        | TRUE     |         |           |           |            |
+| source     | details regarding the source                                   | String          | TRUE     |         |           |           |            |
+|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
+
 
 ## Event Operations
 
@@ -294,7 +356,7 @@ limit     | Specifies the number of results to page                             
 since     | Specifies the last date before the oldest result is returned                        | Query      | DateTime | TRUE     |       0  |    1000 | 
 filter    | [Filter expression](/docs/api/getting_started/design_principles.html#filtering) for events | Query | String | FALSE    |
 q         | Finds a user that matches firstName, lastName, and email properties                 | Query      | String   | FALSE    |
-until     | Specifies the first date after which results aren't returned                        | Query      | DateTime | TRUE     |
+until     | Specifies the first date after which results aren't returned, can be empty which denotes no end date | Query      | DateTime | FALSE    |
 after     | An opaque identifier used for pagination                                            | Query      | String   | FALSE    |
 
 The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination).
@@ -360,9 +422,10 @@ Array of [Log objects](#log-model)
 
 
 ~~~sh
-http://rain-admin.okta1.com:1802/sage/api/v1/logs?since=2016-05-25T00:00:00+00:00&until=2016-06-01T23:59:59+00:00&limit=20&q=FAILURE
-http://rain-admin.okta1.com:1802/sage/api/v1/logs?since=2016-05-25T00:00:00+00:00&until=2016-06-01T23:59:59+00:00&limit=20&q=
-http://rain-admin.okta1.com:1802/sage/api/v1/logs?since=2016-05-25T00:00:00+00:00&until=2016-06-01T23:59:59+00:00&limit=20&filter=eventType eq "user.session.start"
+http://MyOrg.okta.com/api/v1/logs?since=2016-05-25T00:00:00+00:00&until=2016-06-01T23:59:59+00:00&limit=20&q=FAILURE
+http://MyOrg.okta.com/api/v1/logs?since=2016-05-25T00:00:00+00:00&until=2016-06-01T23:59:59+00:00&limit=20&q=
+http://MyOrg.okta.com/api/v1/logs?since=2016-05-25T00:00:00+00:00&until=2016-06-01T23:59:59+00:00&limit=20&filter=eventType eq "user.session.start"
+http://MyOrg.okta.com/api/v1/logs?since=2016-05-25T00:00:00+00:00&until=&limit=20&filter=eventType eq "user.session.end"
 ~~~
 
 ##### Response Example
