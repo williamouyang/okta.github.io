@@ -1,5 +1,6 @@
 ---
 layout: docs_page
+weight: 3
 title: Error Codes
 excerpt: Information about the errors that the Okta API returns.
 redirect_from:
