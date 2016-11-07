@@ -9,23 +9,42 @@ redirect_from: "/docs/getting_started/policy.html"
 
 # Overview
 
-The Okta Policy API enables you to peform policy and rule operations. These operation apply to various policies including Okta Sign on.
+The Okta Policy API enables an Administrator to perform policy and policy rule operations.  The policy framework is used by Okta to control rules and settings that govern, among other things, user session lifetime, whether multi-factor authentication is required when logging in, what MFA factors may be employed, password complexity requirements, and what types of self-service operations are permitted under various circumstances.
 
-This API supports the following **policy operations**:
+Policy settings for a particular policy type, such as Sign On Policy, consist of one or more Policy objects, each of which contains one or more Policy Rules.  Policies and rules contain conditions that determine whether they are applicable to a particular user at a particular time.
+
+The policy API supports the following **policy operations**:
 
 * Get all policies of a specific type
 * Create, read, update, and delete a policy
 * Activate and deactivate a policy
 
-This API supports the following **rule operations**:
+The policy supports the following **rule operations**:
 
 * Get all rules for a policy
 * Create, read, update, and delete a rule for a policy
 * Activate and deactivate a rule
 
-# Policies
+## Policies
 
-## Policy Model and Defaults
+### Policy Evaluation
+
+When policy needs to be retrieved for a particular user, for example when the user attempts to log in to Okta, or when the user initiates a self-service operation, then a policy evaluation takes place.
+During policy evaluation each policy of the appropriate type is considered in turn, in the order indicated by the policy priority.   Each of the conditions associated with the policy is evaluated.  If one or more of the conditions cannot be met, then the next policy in the list is considered.  If the conditions can be met, then each of the rules associated with the policy is considered in turn, in the order specified by the rule priority.  Each of the conditions associated with a given rule is evaluated.  If all of the conditions associated with a rule are met, then the settings contained in the rule and in the associated policy are applied to the user.  If none of the policy rules have conditions that can be met, then the next policy in the list is considered.
+
+Policies that have no rules are not considered during evaluation, and will never be applied.
+
+### Policy Types
+Different policy types control settings for different operations.  All policy types share a common framework, message structure and API, but have different policy settings and rule data.  The data structures specific to each policy type are discussed in the various sections below.
+
+
+<a href="#OktaSignOnPolicy">Okta Sign On Policy</a>
+
+<a href="#OktaMFAPolicy">Okta MFA Policy</a>
+
+<a href="#GroupPasswordPolicy">Password Policy</a>
+
+### Policy Priority and Defaults
 
 ### Default Policies
 
@@ -36,18 +55,25 @@ There is always a default policy created for each type of policy. The default po
  - The default policy always has one default rule that cannot be deleted. It is always the last rule in the priority order. If you add rules to the default policy, they have a higher priority than the default rule. For information on default rules, see [Rules Model and Defaults](#rules-model-and-defaults).
  - The `system` attribute determines whether a policy is created by a system or by a user.
 
-### Policy Model
+### Policy Priorities
 
-Policies and rules are ordered numerically by priority. This priority determines the order in which they are searched for a context match. The highest priority policy has a `priorityOrder` of 1.
+Policies and are ordered numerically by priority. This priority determines the order in which they are evaluated for a context match. The highest priority policy has a `priority` of 1.
 
-For example, assume the following conditions are in effect.
+For example, assume the following policies exist.
 
-- Rule A has priority 1 and applies to RADIUS VPN scenarios.
-- Rule B has priority 2 and applies to ON_NETWORK scenarios.
+- Policy A has priority 1 and applies to members of the "Administrators" group.
+- Policy B has priority 2 and applies to members of the "Everyone" group.
 
-Because Rule A has a higher priority, even though requests are coming from ON_NETWORK due to VPN,
-the action in Rule A is taken, and Rule B is not evaluated.
+When policy is evaluated for a user, policy "A" will be evaluated first.  If the user is a member of the "Administrators" group then the rules associated with policy "A" will be evaluated.   If a match is found then the policy settings will be applied.
+If the user is not a member of teh "Administrators" group, then policy B would be evaluated.
 
+### Policy JSON Example
+
+~~~json
+{
+    [ADD UPDATED JSON HERE]
+}
+~~~
 
 ### Policy Object
 {: #PolicyObject }
@@ -56,16 +82,15 @@ The Policy model defines several attributes:
 
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
-id | Identifier for the policy | String | No | Assigned
-type | Policy type | `OKTA_SIGN_ON` or `MFA_ENROLL` | Yes | 
-name | Name for the policy | String | Yes | 
-priority | This is set to `1` on system policies, which can not be deleted. | Integer | No | 0
-description | Description for the policy | String | No | Null
-priorityOrder | Priority for the policy | Int | No | Last / Lowest Priority
-system | Whether or not the policy is the default | Boolean | No | false
+id | Identifier of the policy | String | No | Assigned
+type | Policy type | Specifies the type of the policy, e.g. `OKTA_SIGN_ON` or `MFA_ENROLL` | Yes | 
+name | Name of the policy | String | Yes | 
+system | This is set to 'true' on system policies, which cannot be deleted. | Boolean | No | false
+description | Description of the policy | String | No | Null
+priority | Priority of the policy | Int | No | Last / Lowest Priority
 status | Status of the policy: ACTIVE or INACTIVE | String | No | "ACTIVE"
-conditions | Conditions for rule | <a href="#ConditionsObject">Conditions Object</a> | No | 
-settings | Settings for rule | <a href="#PolicySettingsObject">Policy Settings Object</a> | No | 
+conditions | Conditions for policy | <a href="#PolicyConditionsObject">Conditions Object</a> | No | 
+settings | Settings for policy | <a href="#PolicySettingsObject">Policy Settings Object</a> | No | 
 created | Timestamp when the policy was created | Date | No | Assigned
 lastUpdated | Timestamp when the policy was last modified | Date | No | Assigned
 _links | Hyperlinks | <a href="#LinksObject">Links Object</a> | No | 
@@ -74,135 +99,14 @@ _links | Hyperlinks | <a href="#LinksObject">Links Object</a> | No |
 ### Policy Settings Object
 {: #PolicySettingsObject }
 
-
-
-Parameter | Description | Data Type | Required | Default
-| --- | --- | --- | ---
-factors |  | <a href="#PolicyFactorsConfigurationObject">Policy Factors Configuration Object</a> | Yes | 
-
-
-### Policy Factors Configuration Object
-{: #PolicyFactorsConfigurationObject }
-
-
-
-Parameter | Description | Data Type | Required | Default
-| --- | --- | --- | ---
-google_otp | Google Authenticator | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
-okta_otp | Okta Verify TOTP | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
-okta_push | Okta Verify Push | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
-okta_question | Okta Security Question | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
-okta_sms | Okta SMS | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
-rsa_token | RSA Token | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
-symantec_vip | Symantic VIP | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
-
-
-### Policy MFA Factor Object
-{: #PolicyFactorObject }
-
-
-
-Parameter | Description | Data Type | Required | Default
-| --- | --- | --- | ---
-consent |  | <a href="#PolicyFactorConsentObject">Policy Factor Consent Object</a> | No | 
-enroll |  | <a href="#PolicyFactorEnrollObject">Policy Factor Enroll Object</a> | No | 
-
-
-### Policy Factor Enroll Object
-{: #PolicyFactorEnrollObject }
-
-
-
-Parameter | Description | Data Type | Required | Default
-| --- | --- | --- | ---
-self |  | `NOT_ALLOWED`, `OPTIONAL` or `REQUIRED` | Yes | 
-
-
-### Policy Factor Consent Object
-{: #PolicyFactorConsentObject }
-
-
-
-Parameter | Description | Data Type | Required | Default
-| --- | --- | --- | ---
-terms | The format of the consent dialog to be presented. | `TEXT`, `RTF`, `MARKDOWN` or `URL` | No | 
-type | Does the user need to consent to `NONE` or `TERMS_OF_SERVICE`. | String | No | NONE
-value | The contents of the consent dialog. | String | No | 
+The policy settings object contains the policy level settings for the particular policy type.  Not all policy types have policy level settings.  For example, in Password Policy the settings object contains, among other items, the password complexity settings.   In Sign On policy, on the other hand, there are no policy level settings; all of the policy data is contained in the rules.  See the sections for the various policy types for a discussion of the settings objects specific to each type.
 
 
 ### Conditions Object
-{: #ConditionsObject }
+{: #PolicyConditionsObject }
 
-
-
-Parameter | Description | Data Type | Required | Default
-| --- | --- | --- | ---
-authContext |  | <a href="#AuthContextConditionObject">authContext Condition Object</a> | Yes | 
-network |  | <a href="#NetworkConditionObject">Network Condition Object</a> | Yes | 
-people |  | <a href="#PeopleConditionObject">People Condition Object</a> | Yes | 
-
-
-### People Object
-{: #PeopleObject }
-
-The people condition identifies users and groups that are used together. For policies, you can only include a group.
-
-Parameter | Description | Data Type | Required | Default
-| --- | --- | --- | ---
-groups | The group condition | String | Yes | 
-users | The user condition | String | Yes | 
-
-
-### User Condition Object
-{: #UserConditionObject }
-
-
-
-Parameter | Description | Data Type | Required | Default
-| --- | --- | --- | ---
-include | The users to be included | Array | Yes | 
-exclude | The users to be excluded | Array | Yes | 
-
-
-### Group Condition Object
-{: #GroupConditionObject }
-
-
-
-Parameter | Description | Data Type | Required | Default
-| --- | --- | --- | ---
-include | The groups to be included | Array | Yes | 
-exclude | The groups to be excluded | Array | Yes | 
-
-
-### authContext Condition Object
-{: #AuthContextConditionObject }
-
-Specifies an authentication entry point.
-
-Parameter | Description | Data Type | Required | Default
-| --- | --- | --- | ---
-authType |  | `ANY` or `RADIUS` | No | 
-
-
-### Network Condition Object
-{: #NetworkConditionObject }
-
-Specifies a network segment.
-
-Parameter | Description | Data Type | Required | Default
-| --- | --- | --- | ---
-connection |  | `ANYWHERE`, `ON_NETWORK` or `OFF_NETWORK` | No | 
-
-
-### People Condition Object
-{: #PeopleConditionObject }
-
-
-
-Parameter | Description | Data Type | Required | Default
-| --- | --- | --- | ---
-users |  | <a href="#UserConditionObject">User Condition Object</a> | No | 
+The Conditions Object(s) specify the conditions that must be met during policy evaluation in order to apply the policy in question.   All policy conditions, as well as conditions for at least one rule must be met in order to apply the settings specified in the policy and the associated rule.  Policies and rules may contain different conditions depending on the policy type.  The conditions which can be used with a particular policy depends on the policy type.
+See <a href="#Conditions">conditions</a>
 
 
 ### Links Object
@@ -219,7 +123,147 @@ rules | Rules objects for a policy only | String | Yes |
 policy | Policy object for a rule only | String | Yes | 
 
 
-## Policy Operations
+
+## Rules
+Each policy may contain one or more rules.  Rules, like policies contain conditions, which must be satisfied in order for the rule to be applied.  
+
+
+### Rule Priority and Defaults
+
+### Default Rules
+
+ - Only the default policy contains a default rule. The default rule cannot be edited or deleted.
+ - The default rule is required and always is the last rule in the priority order. If you add rules to the default policy, they have a higher priority than the default rule.
+ - The `system` attribute determines whether a rule is created by a system or by a user. The default rule is the only rule that has this attribute.
+ 
+### Rule Priority
+
+Like policies, rules have a priority which governs the order in which they are considered during evaluation. The highest priority rule has a `priority` of 1.
+For example if a particular policy had two rules, "A" and "B" as below.
+
+- Rule A has priority 1 and applies to RADIUS VPN scenarios.
+- Rule B has priority 2 and applies to ON_NETWORK scenarios.
+
+If a request came in from the Radius endpoint but the request was on network then because Rule A has a higher priority, even though requests are coming from ON_NETWORK,
+the action in Rule A would be taken, and Rule B is not evaluated.
+
+### Rules Message Example
+
+~~~json
+{
+    [ADD UPDATED JSON HERE]
+}
+~~~
+
+
+### Rules Object
+{: #RulesObject }
+
+The Rules model defines several attributes:
+
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+id | Identifier of the rule | String | No | Assigned
+type | Rule type | `OKTA_SIGN_ON` or `MFA_ENROLL` | Yes | 
+status | Status of the rule: `ACTIVE` or `INACTIVE` | String | No | ACTIVE
+priority | Priority of the rule | Integer | No | Last / Lowest Priority
+system | This is set to 'true' on system rules, which cannot be deleted. | Boolean | No | false
+created | Timestamp when the rule was created | Date | No | Assigned
+lastUpdated | Timestamp when the rule was last modified | Date | No | Assigned
+conditions | Conditions for rule | <a href="#RuleConditionsObject">Conditions Object</a> | No | 
+actions | Actions for rule | <a href="#RulesActionsObject">Rules Actions Objects</a> | No | 
+
+
+### Actions Objects
+{: #RulesActionsObject }
+
+Just as policies contains settings, rules contain "Actions", which typically specify actions to be taken, or operations that may be allowed, if the rule conditions are satisfied.  For example, in Password Policy rule actions govern whether or not self-service operations such as reset password or unlock are permitted.   Just as different policy types have different settings, rules have different actions depending on the type of the policy they belong to.
+
+### Conditions Object
+{: #RuleConditionsObject }
+
+The Conditions Object(s) specify the conditions that must be met during policy evaluation in order to apply the rule in question.   All policy conditions, as well as conditions for at least one rule must be met in order to apply the settings specified in the policy and the associated rule.  Policies and rules may contain different conditions depending on the policy type.  The conditions which can be used with a particular policy depends on the policy type.
+See <a href="#Conditions">conditions</a>
+
+### Links Object
+{: #LinksObject }
+
+Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the current rule.  The Links Object is used for dynamic discovery of related resources.  The Links Object is **read-only**.
+
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+self | The policy or rule | String | Yes | 
+activate | Action to activate a policy or rule | String | Yes | 
+deactivate | Action to deactivate a policy or rule | String | Yes | 
+
+### Conditions
+{: #Conditions }
+ 
+#### People Condition Object
+{: #PeopleObject }
+
+The people condition identifies users and groups that are used together. For policies, you can only include a group.
+
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+groups | The group condition | String | Yes | 
+users | The user condition | String | Yes | 
+
+
+#### User Condition Object
+{: #UserConditionObject }
+
+
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+include | The users to be included | Array | Yes | 
+exclude | The users to be excluded | Array | Yes | 
+
+
+#### Group Condition Object
+{: #GroupConditionObject }
+
+
+
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+include | The groups to be included | Array | Yes | 
+exclude | The groups to be excluded | Array | Yes | 
+
+
+#### AuthContext Condition Object
+{: #AuthContextConditionObject }
+
+Specifies an authentication entry point.
+
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+authType |  | `ANY` or `RADIUS` | No | 
+
+
+#### Network Condition Object
+{: #NetworkConditionObject }
+
+Specifies a network segment.
+
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+connection |  | `ANYWHERE`, `ON_NETWORK` or `OFF_NETWORK` | No | 
+
+
+#### People Condition Object
+{: #PeopleConditionObject }
+
+
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+users |  | <a href="#UserConditionObject">User Condition Object</a> | No | 
+
+#### Authentication Provider Condition Object
+
+[THIS SECTION TBD]
+
+## Policy API Operations
 
 ### Get a Policy
 {:.api .api-operation}
@@ -471,158 +515,6 @@ HTTP 200:
 
 
 
-
-# Rules
-
-## Rules Model and Defaults
-
-### Default Rules
-
- - Only the default policy contains a default rule. The default rule cannot be edited or deleted.
- - The default rule is required and always is the last rule in the priority order. If you add rules to the default policy, they have a higher priority than the default rule.
- - The `system` attribute determines whether a rule is created by a system or by a user. The default rule is the only rule that has this attribute.
-
-### Rules Model Example
-
-~~~json
-{
-    "actions": {
-        "access": "ALLOW", 
-        "enroll": {
-            "self": "LOGIN"
-        }, 
-        "signon": {
-            "access": "ALLOW", 
-            "factorLifetime": 0, 
-            "factorPromptMode": "ALWAYS", 
-            "requireFactor": false, 
-            "session": {
-                "maxSessionIdleMinutes": 20, 
-                "maxSessionLifetimeMinutes": 200, 
-                "usePersistentCookie": false
-            }
-        }
-    }, 
-    "conditions": {
-        "authContext": {
-            "authType": "ANY"
-        }, 
-        "network": {
-            "connection": "ANYWHERE"
-        }, 
-        "people": {
-            "users": {
-                "exclude": [
-                    "example.user"
-                ], 
-                "include": [
-                    "example.user"
-                ]
-            }
-        }
-    }, 
-    "created": "2010-01-01T00:00:00.000Z", 
-    "id": "abcd1234", 
-    "lastUpdated": "2010-01-01T00:00:00.000Z", 
-    "priorityOrder": {
-        "default": "Last / Lowest Priority", 
-        "description": "Priority for the rule", 
-        "type": "integer"
-    }, 
-    "status": "ACTIVE", 
-    "system": true, 
-    "type": "OKTA_SIGN_ON"
-}
-~~~
-
-
-
-### Rules Object
-{: #RulesObject }
-
-The Rules model defines several attributes:
-
-Parameter | Description | Data Type | Required | Default
-| --- | --- | --- | ---
-id | Identifier for the rule | String | No | Assigned
-type | Rule type | `OKTA_SIGN_ON` or `MFA_ENROLL` | Yes | 
-status | Status of the rule: `ACTIVE` or `INACTIVE` | String | No | ACTIVE
-priorityOrder | Priority for the rule | Integer | No | Last / Lowest Priority
-system | Whether or not the rule is the default | Boolean | No | false
-created | Timestamp when the rule was created | Date | No | Assigned
-lastUpdated | Timestamp when the rule was last modified | Date | No | Assigned
-conditions | Conditions for rule | <a href="#ConditionsObject">Conditions Object</a> | No | 
-actions | Actions for rule | <a href="#RulesActionsObject">Actions Object</a> | No | 
-
-
-### Actions Object
-{: #RulesActionsObject }
-
-
-
-Parameter | Description | Data Type | Required | Default
-| --- | --- | --- | ---
-access | `ALLOW` or `DENY` | `ALLOW` or `DENY` | Yes | 
-enroll |  | <a href="#RulesActionsEnrollObject">Rules Actions Enroll Object</a> | No | 
-signon |  | <a href="#SignonObject">Signon Action Object</a> | No | 
-
-
-### Rules Actions Enroll Object
-{: #RulesActionsEnrollObject }
-
-
-
-Parameter | Description | Data Type | Required | Default
-| --- | --- | --- | ---
-self | Should the user be enrolled the first time they `LOGIN`, the next time they are `CHALLENGE`d, or `NEVER`? | `CHALLENGE`, `LOGIN` or `NEVER` | Yes | 
-
-
-### Network Condition Object
-{: #NetworkConditionObject }
-
-Specifies a network segment.
-
-Parameter | Description | Data Type | Required | Default
-| --- | --- | --- | ---
-connection |  | `ANYWHERE`, `ON_NETWORK` or `OFF_NETWORK` | No | 
-
-
-### authContext Condition Object
-{: #AuthContextConditionObject }
-
-Specifies an authentication entry point.
-
-Parameter | Description | Data Type | Required | Default
-| --- | --- | --- | ---
-authType |  | `ANY` or `RADIUS` | No | 
-
-
-### Signon Action Object
-{: #SignonObject }
-
-
-
-Parameter | Description | Data Type | Required | Default
-| --- | --- | --- | ---
-access | `ALLOW` or `DENY` | `ALLOW` or `DENY` | Yes | 
-requireFactor |  | Boolean | No | false
-factorPromptMode | `DEVICE`, `SESSION` or `ALWAYS` | `DEVICE`, `SESSION` or `ALWAYS` | No | 
-factorLifetime | How long until factor times out | Integer | No | 
-session | Session Rules | <a href="#SignonSessionObject">Signon Session Object</a> | No | 
-
-
-### Signon Session Object
-{: #SignonSessionObject }
-
-
-
-Parameter | Description | Data Type | Required | Default
-| --- | --- | --- | ---
-maxSessionIdleMinutes | Maximum number of minutes that a user session can be idle before the session is ended. | Integer | No | 
-maxSessionLifetimeMinutes | Maximum number of minutes from user login that a user session will be active. Set this to force users to sign-in again after the number of specified minutes. Disable by setting to `0`. | Integer | No | 
-usePersistentCookie | If set to `false`, user session cookies will only last the length of a browser session. If set to `true`, user session cookies will last across browser sessions. This setting does not impact Okta Administrator users, who can *never* have persistant session cookies. | Boolean | No | false
-
-
 ## Rules Operations
 
 
@@ -860,4 +752,128 @@ HTTP 204:
 *No content*
 
 
+## Type Specific Policy Data Structures
 
+## Okta Sign On Policy
+{: #OktaSignOnPolicy }
+
+[THIS SECTION IN PROGRESS]
+
+### Policy Settings Data
+
+Okta sign on policy does not contain policy settings data.  In the case of sign on policy all of the data is contained in the rules.
+
+### Policy Conditions
+The following conditions may be applied to Okta Sign On Policy
+
+
+### Rules Action Data
+
+### Signon Action Object
+{: #SignonObject }
+
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+access | `ALLOW` or `DENY` | `ALLOW` or `DENY` | Yes | 
+requireFactor |  | Boolean | No | false
+factorPromptMode | `DEVICE`, `SESSION` or `ALWAYS` | `DEVICE`, `SESSION` or `ALWAYS` | No | 
+factorLifetime | How long until factor times out | Integer | No | 
+session | Session Rules | <a href="#SignonSessionObject">Signon Session Object</a> | No | 
+
+
+### Signon Session Object
+{: #SignonSessionObject }
+
+
+
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+maxSessionIdleMinutes | Maximum number of minutes that a user session can be idle before the session is ended. | Integer | No | 
+maxSessionLifetimeMinutes | Maximum number of minutes from user login that a user session will be active. Set this to force users to sign-in again after the number of specified minutes. Disable by setting to `0`. | Integer | No | 
+usePersistentCookie | If set to `false`, user session cookies will only last the length of a browser session. If set to `true`, user session cookies will last across browser sessions. This setting does not impact Okta Administrator users, who can *never* have persistant session cookies. | Boolean | No | false
+
+### Rules Conditions
+The following conditions may be applied to the rules associated with Okta Sign On Policy
+
+## Okta MFA Policy
+{: #OktaMFAPolicy }
+
+[THIS SECTION IN PROGRESS]
+
+### Policy Settings Data
+
+#### Policy Factors Configuration Object
+{: #PolicyFactorsConfigurationObject }
+
+
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+google_otp | Google Authenticator | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
+okta_otp | Okta Verify TOTP | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
+okta_push | Okta Verify Push | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
+okta_question | Okta Security Question | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
+okta_sms | Okta SMS | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
+rsa_token | RSA Token | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
+symantec_vip | Symantic VIP | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
+
+
+#### Policy MFA Factor Object
+{: #PolicyFactorObject }
+
+
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+consent |  | <a href="#PolicyFactorConsentObject">Policy Factor Consent Object</a> | No | 
+enroll |  | <a href="#PolicyFactorEnrollObject">Policy Factor Enroll Object</a> | No | 
+
+
+#### Policy Factor Enroll Object
+{: #PolicyFactorEnrollObject }
+
+
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+self |  | `NOT_ALLOWED`, `OPTIONAL` or `REQUIRED` | Yes | 
+
+
+#### Policy Factor Consent Object
+{: #PolicyFactorConsentObject }
+
+
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+terms | The format of the consent dialog to be presented. | `TEXT`, `RTF`, `MARKDOWN` or `URL` | No | 
+type | Does the user need to consent to `NONE` or `TERMS_OF_SERVICE`. | String | No | NONE
+value | The contents of the consent dialog. | String | No | 
+
+### Policy Conditions
+The following conditions may be applied to Okta MFA Policy
+
+### Rules Action Data
+
+#### Rules Actions Enroll Object
+{: #RulesActionsEnrollObject }
+
+
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+self | Should the user be enrolled the first time they `LOGIN`, the next time they are `CHALLENGE`d, or `NEVER`? | `CHALLENGE`, `LOGIN` or `NEVER` | Yes | 
+
+### Rules Conditions
+The following conditions may be applied to the rules associated with Okta MFA Policy 
+
+## Password Policy
+{: #GroupPasswordPolicy }
+
+[THIS SECTION TBD]
+
+### Policy Settings Data
+
+### Policy Conditions
+The following conditions may be applied to Password Policy
+
+
+### Rules Action Data
+
+### Rules Conditions
+The following conditions may be applied to the rules associated with Okta Password Policy
