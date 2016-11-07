@@ -983,9 +983,9 @@ curl -v -X POST \
 
 ~~~json
 {
-    "errorCode": "E0000047",
-    "errorSummary": "API call exceeded rate limit due to too many requests.",
-    "errorLink": "E0000047",
+    "errorCode": "E0000109",
+    "errorSummary": "An SMS message was recently sent. Please wait 30 seconds before trying again.",
+    "errorLink": "E0000109",
     "errorId": "oaeneEaQF8qQrepOWHSkdoejw",
     "errorCauses": []
 }
@@ -1987,9 +1987,9 @@ If the passcode is invalid you will receive a `403 Forbidden` status code with t
 
 ~~~json
 {
-    "errorCode": "E0000047",
-    "errorSummary": "API call exceeded rate limit due to too many requests.",
-    "errorLink": "E0000047",
+    "errorCode": "E0000109",
+    "errorSummary": "An SMS message was recently sent. Please wait 30 seconds before trying again.",
+    "errorLink": "E0000109",
     "errorId": "oaeneEaQF8qQrepOWHSkdoejw",
     "errorCauses": []
 }
