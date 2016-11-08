@@ -1,12 +1,14 @@
 ---
 layout: docs_page
 title: Platform Release Notes
-excerpt: Summary of changes to the Okta Platform since Release 2016.41
+excerpt: Summary of changes to the Okta Platform since Release 2016.43
 ---
 
-## Release 2016.43
+# Release 2016.45
 
-<!-- ### Feature Enhancement: New Version of Okta Sign-In Widget
+## Feature Enhancements
+
+### New Version of Okta Sign-In Widget
 
 The new version of Okta Sign-In Widget, 1.8.0, is available:
 
@@ -15,79 +17,51 @@ The new version of Okta Sign-In Widget, 1.8.0, is available:
 * Added an option to provide your own dependencies
 
 Learn about these and other improvements in [the GitHub repository](https://github.com/okta/okta-signin-widget/releases/tag/okta-signin-widget-1.8.0).
--->
 
-### Enhanced Well-Known Endpoint for OpenID Connect
+### Improved Error Message for OpenID Connect
+ 
+OpenID Connect error messages related to invalid scopes now return more information. 
+<!-- OKTA-94798 -->
 
-The [OpenID Connect discovery endpoint](http://developer.okta.com/docs/api/resources/oidc.html#openid-connect-discovery-document) `.well-known` includes the introspection and revocation endpoints.
 
-Request Example:
+### HAL Links Returned With User Object Via API
 
-~~~sh
-GET https://${org}.example.com/.well-known/openid-configuration
-~~~
+We no longer perform a policy evaluation when determining which HAL links should be returned with a user object via API.
+You may notice HAL links being returned for reset password, change password, and if the user is locked, self-service unlock
+when they previously weren't. 
 
-Response Example:
+This enhancement applies to all new preview and productions orgs. Existing orgs receive the enhancement at a later date.
+<!-- OKTA-104084 -->
 
-~~~sh
-{
-    "issuer": "https://${org}.okta.com",
-    "authorization_endpoint": "https://${org}.okta.com/oauth2/v1/authorize",
-    "token_endpoint": "https://${org}.okta.com/oauth2/v1/token",
-    "userinfo_endpoint": "https://${org}.okta.com/oauth2/v1/userinfo",
-    "jwks_uri": "https://${org}.okta.com/oauth2/v1/keys",
-    "response_types_supported": [
-        "code",
-        "code id_token",
-        "code id_token token",
-        "id_token",
-        "id_token token",
-        "token"
-    ],
-    ...
-    "introspection_endpoint": "https://${org}.okta.com/oauth2/v1/introspect",
-    "introspection_endpoint_auth_methods_supported": [
-        "client_secret_basic",
-        "client_secret_post",
-        "none"
-    ],
-    "revocation_endpoint": "https://${org}.okta.com/oauth2/v1/revoke",
-    "revocation_endpoint_auth_methods_supported": [
-        "client_secret_basic",
-        "client_secret_post",
-        "none"
-    ]
-}
-~~~
 
-### New Function for Replacing Strings
+## Platform Bugs Fixed
 
-Use the [Expression Language](/reference/okta_expression_language/index.html) function `String.replaceFirst` to replace the first occurrence of a string.
+* Blank or empty passwords were allowed when users reset their passwords via the API following a reset password action.
+Following the login with a temporary password the user would be prompted to enter their new password. 
+At that time, the user could enter an empty password without generating an error. (OKTA-100802)
+* Validation of the security answer length in accordance with password policy wasn't performed 
+when creating a user via the API with the group password policy feature enabled.
+Before the fix, the minimum security answer length was assumed to always be 4, regardless of the policy settings. (OKTA-103407)
+* Improved the error message returned by an HTTP 429 error to remind the user to wait 30 seconds before re-issuing the request for an SMS message. (OKTA-104738)
+* Removed some app metadata that was incorrectly returned from a `GET /api/v1/apps/{app-ID}` request. (OKTA-104767)
+* After resetting an SMS factor for a user, that factor was incorrectly included in a subsequent API call for that user. (OKTA-105672)
+* Changed validation of OpenID Connect client apps to disallow fragment components in configured redirect URIs. (OKTA-106049)
 
-Example:
 
-`String.replaceFirst("This list includes chores", "is", "at") = "That list includes chores"`
-
-In release 2016.41 we introduced the string replacement function `String.replace`, which replaces all instances of a specified string.
-
-### Platform Bug Fixed
-
-POST requests to `/api/v1/sessions` failed with an InvalidSessionException if the request specified a 
-`sessionToken` but no API token was included. (OKTA-104965)
-
-### Does Your Org Have These Changes Yet?
+## Does Your Org Have These Changes Yet?
 
 Check the footer of any Admin page in an org to verify the current release for that org. For example,
 scroll to the bottom of the Admin <b>Dashboard</b> page to see the version number:
 
 ![Release Number in Footer](/assets/img/release_notes/version_footer.png)
 
-### Looking for Product Release Notes?
+## Looking for Product Release Notes?
 
 For changes outside the Okta platform, see the [Release Notes Knowledge Hub](http://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub).
 
-### Earlier Release Notes
+## Earlier Release Notes
 
+* [Platform Release Notes for Release 2016.43](platform-release-notes2016-43.html)
 * [Platform Release Notes for Release 2016.41](platform-release-notes2016-41.html)
 * [Platform Release Notes for Release 2016.40](platform-release-notes2016-40.html)
 * [Platform Release Notes for Release 2016.39](platform-release-notes2016-39.html)
