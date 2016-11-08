@@ -6,28 +6,36 @@ excerpt: Set Up an Authorization Service with OAuth 2.0 or OpenID Connect
 
 ## Overview
 
-Okta Authorization servers allow you to customize which users and which clients have access to non-Okta resources.
-For example, imagine a scenario where you have an OpenID Connect or OAuth 2.0 app that both employees and end users access.
-End-users are only allowed read access to a set of resources, but employees have read and write access to all the resources
-available to the app. In that case, using Okta's shared authorization server allows you to protect your non-Okta
-services and provide the right access to different groups of users.
+API Access Management allows you to build custom authorization servers in Okta which can be used to protect your own API endpoints. 
+An authorization server defines your security boundary, for example "staging" or "production."
+Within each authorization server you can define your own OAuth scopes, claims, and access policies. 
+This allows your apps and your APIs to anchor to a central authorization point and leverage the rich identity features of Okta,
+such as Universal Directory for transforming attributes, adaptive MFA for end-users, analytics, and system log, and extend it out to the API economy.
 
-How do you know if you need to use Okta's shared authorization server instead of the authorization service that is
+At its core, an authorization server is simply an OAuth 2.0 token minting engine. 
+Each authorization server has a unique [issuer URI](https://tools.ietf.org/html/rfc7519#section-4.1.1)
+and its own signing key for tokens in order to keep proper boundary between security domains. 
+The authorization server also acts as an [OpenID Connect Provider](http://openid.net/connect/), 
+which means you can request [ID tokens](http://openid.net/specs/openid-connect-core-1_0.html#IDToken) 
+in addition to [access tokens](https://tools.ietf.org/html/rfc6749#section-1.4) from the authorization server endpoints.
+
+How do you know if you need to use Okta's Darkoauthorization server instead of the authorization service that is
 built in to your Okta app?
 
 * You need to protect non-Okta resources.
 * You need different authorization policies depending on whether the person is an employee, partner, or end user, or
 other similar specializations.
 
-> Note: If your employees, partners, and users can use the same authentication policies for single sign-on, try [Okta's built in authorization service](https://support.okta.com/help/articles/Knowledge_Article/Single-Sign-On-Knowledge-Hub). 
+> Note: If your employees, partners, and users can all use the same authentication policies for single sign-on, 
+try [Okta's built in authorization service](https://support.okta.com/help/articles/Knowledge_Article/Single-Sign-On-Knowledge-Hub). 
 
 
 ## Set Up an Authorization Server
 
-Create and configure a shared authorization server to manage authorization between clients and Okta:
+Create and configure an authorization server to manage authorization between clients and Okta:
 
 * Define the scopes and claims in your client app and register it with Okta.
-* Create one or more shared authorization servers and configure them for the scopes and claims you've defined in your app.
+* Create one or more authorization servers and define the scopes and claims to match those you've defined in your app.
 
 It doesn't matter which task you do first, but the client app must recognize the scope names and be expecting the
 claims as defined in the authorization server.
@@ -51,7 +59,7 @@ However, the authorization server mints an ID Token based on the configured clai
 2. Choose **Add Authorization Server** and supply the requested information.
 
     * Name
-    * Resource URI. Each endpoint must have its own authorization server.
+    * Resource URI. URI for the OAuth resource that consumes the Access Tokens. This value is used as the default [audience](https://tools.ietf.org/html/rfc7519#section-4.1.3) for Access Tokens.
     * Description 
 
 When complete, your authorization server **Settings** tab displays the information that you provided and allows you to edit it.
@@ -59,7 +67,9 @@ When complete, your authorization server **Settings** tab displays the informati
 
 ### Create Scopes
 
-Scopes are names passed to the client that represent scopes definied in the client.
+Scopes represent high-level operations that can be performed on your API endpoints. 
+These are coded into applications, which then ask for them from the authorization server, 
+and the access policy decides which ones to grant and which ones to deny.
 
 If you need scopes in addition to the reserved scopes provided, create them now. 
 
@@ -73,9 +83,10 @@ If you need scopes in addition to the reserved scopes provided, create them now.
 These scopes are referenced by the **Claims** dialog.
 
 ### Create Claims
+ 
+Tokens contain claims that are statements about the subject or another subject, for example name, role, or email address.
 
-Create ID Token claims for OpenID Connect, or Access Tokens for OAuth 2.0. 
-Tokens contain the claims that are ....
+Create ID Token claims for OpenID Connect, or Access Tokens for OAuth 2.0:
 
 1. In the Okta user interface, navigate to **Security > API**.
 2. Choose the name of the authorization server to display it.
@@ -97,7 +108,7 @@ Tokens contain the claims that are ....
 
 Okta provides a default policy and two default rules, one for service apps (client credential flows) and one for all other flows.
 
-You can add [rules](#create-rules-for-each-access-policy) to the default policy, or you can create access policies and rules for a client or set of clients.
+Create access policies and rules for a client or set of clients.
 
 1. In the Okta user interface, navigate to **Security > API**.
 2. Choose the name of the authorization server. 
