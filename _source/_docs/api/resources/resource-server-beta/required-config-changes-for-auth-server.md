@@ -116,8 +116,6 @@ To copy the default access policy from the private authorization server:
 Send an API request for a token to the old private authorization server and the new shared authorization server.
 Both tokens should contain the same scope and custom claim information, since the reserved claims are slightly different, such as `issuer`. 
 
-<Link to the api doc for the correct operations to use.>
-
 ### Step Five: Change Your Clients to Consume the New Endpoints
 
 Change the endpoints in your clients to the new well-known endpoint for the authorization server you created.
