@@ -2,33 +2,33 @@
 layout: docs_page
 title: Configuration Changes Required for API Access Management Beta Update
 ---
-
+<<<
 ## Configuration Changes Required for API Access Management Beta Update
 
 Okta provides a private authorization server for OAuth 2.0 (Beta).
 However, with release 2016.45, you can use a shared authorization server instead, which provides several benefits:
 
-* You created a separate private authorization server for each client, which required you to set scopes and claims 
+* You created a separate private authorization server for each client, which required you to set scopes and claims
   and group filters for each client on a separate server, but keeping many configurations in sync is challenging.
-  With the shared authorization server, you can create a single configuration of scopes, claims, and Group filters, and
-  assign multiple clients. 
-* With the shared authorization server, you can create one server per API or other service that you need to secure.
+  With the shared authorization server, you can create a single configuration of scopes, claims, and group filters, and
+  assign multiple clients.
+* With the shared authorization server, you can create one server per API that you need to secure.
   When you bring a new client online, you can choose which combination of services it can use by choosing the
   appropriate combination of authorization servers. This ensures that access is being granted with the same permissions
   (scopes) each time.
 
 Since a shared authorization server meets the same needs as the current private authorization server,
-we are deprecating the private authorization server. All orgs using the private authorization server must create 
+we are deprecating the private authorization server. All orgs using the private authorization server must create
 a shared authorization server and manually transfer their OAuth 2.0 configuration information
-using the instructions provided. 
+using the instructions provided.
 
-> Do this within two weeks after preview release 2016.45 is available, currently scheduled for early November. 
-After that date, the private authorization server and all configuration information for it (scopes, claims, and groups claims)
-will be removed, so be sure to recreate your configurations in the shared authorization server before this date. 
+> Do this within two weeks after preview release 2016.45 is available on November 9, 2016.
+After November 23, 2016, the private authorization server and all configuration information for it (scopes, claims, and groups claims)
+will be removed, so be sure to recreate your configurations in the shared authorization server before this date.
 
 ## Prerequisites
 
-* You are an OAuth 2.0 Beta program participant or and OpenID Connect Early Access program participant, and you have existing scope, 
+* You are an OAuth 2.0 Beta program participant or and OpenID Connect Early Access program participant, and you have existing scope,
   claim, or group claim configurations set up for either OpenID Connect ID Token or OAuth 2.0 Access Token, and want to keep these configurations.
 * You have Admin access to the org where the private authorization server is set up. You need this access
   to collect the existing information and manually transfer it to the new shared authorization server that you will create.
@@ -55,21 +55,21 @@ In the Okta user interface, create a new authorization server:
    This value becomes the `audience` in the Access Token.
 5. Select **Save**.
 
-Repeat for as many authorization servers as you need to create. 
+Repeat for as many authorization servers as you need to create.
 
 ### Step Two: Copy Your Configuration
 
-Copy the custom scopes, custom claims, and group claims configuration from the private authorization server 
+Copy the custom scopes, custom claims, and group claims configuration from the private authorization server
 to the shared authorization server:
 
 For ID Tokens:
 
 1. Navigate to **Applications > Applications** and select an app.
 2. Select **Sign On**.
-3. Collect all information about the **OpenID Connect ID Token**: `Claims` and `Groups claim`. 
+3. Collect all information about the **OpenID Connect ID Token**: `Claims` and `Groups claim`.
     * The `issuer` and `audience` will change, so you don't need to record them.
     * If you have a groups claim, collect the information for step 8.
-4. Select **Security > API**. 
+4. Select **Security > API**.
 5. Select an authorization server name.
 6. Select **Scopes** and add any of the scopes you collected. Create a scope for groups if you had a groups claim in the private authorization server.
 7. Select **Claims** and add any of the claims you collected.
@@ -85,7 +85,7 @@ For Access Tokens:
 3. Collect all the information about **OAuth 2.0 Access Token**: custom `Scopes`, `Claims`, and `Groups claim`.
     * The `issuer` and `audience` will change, so you don't need to record them.
     * If you have a groups claim, collect the information for step 8.
-4. Select **Security > API** 
+4. Select **Security > API**
 5. Select your authorization server name.
 6. Select **Scopes** and add any of the scopes you copied in step 2.
 7. Select **Claims** and add any of the claims you copied in step 2.
@@ -95,14 +95,14 @@ For Access Tokens:
  the old configuration (steps 1-4), and one showing the new configuration (steps 5-8).
 
 ### Step Three: Create Policies and Rules
- 
-The final configuration step is to create access policies for your new authorization server. 
-The private authorization server provided a single default access policy that allows all 
+
+The final configuration step is to create access policies for your new authorization server.
+The private authorization server provided a single default access policy that allows all
 the assigned users to receive all the scopes and claims.
 The shared authorization server allows you to control which clients and users receive which scopes and claims, so you must set the access policy
 to ensure behavior is the same between private and shared authorization server.
 
-To copy the default access policy from the private authorization server:
+To copy the default access policy from the private authorization server, create a new policy (there's no defaul policy in the shared authorization server):
 
 1. In **Security > API**, select the name of the authorization server you are configuring.
 2. Select **Access Policies > Add Rule**.
@@ -114,7 +114,7 @@ To copy the default access policy from the private authorization server:
 ### Step Four: Test Your Configuration
 
 Send an API request for a token to the old private authorization server and the new shared authorization server.
-Both tokens should contain the same scope and custom claim information, since the reserved claims are slightly different, such as `issuer`. 
+Both tokens should contain the same scope and custom claim information, since the reserved claims are slightly different, such as `issuer`.
 
 ### Step Five: Change Your Clients to Consume the New Endpoints
 
@@ -125,20 +125,20 @@ To change the well-known endpoint:
 1. Find the authorization server ID for your new authorization server. It's displayed in the **Metadata URI** field of the
 settings tab ( **Security > API > Authorization Server** ).
 
-2. Use the Discovery Document for [OpenID Connect clients](http://developer.okta.com/docs/api/resources/oidc.html#openid-connect-discovery-document) 
+2. Use the Discovery Document for [OpenID Connect clients](http://developer.okta.com/docs/api/resources/oidc.html#openid-connect-discovery-document)
 and [OAuth 2.0 clients](http://developer.okta.com/docs/api/resources/oauth2.md#authorization-server-metadata) to identify all endpoints that must be changed, as shown in the example below.
 You'll also see the JWKs, introspect and revoke endpoints.
 
 3. Find all the code you've written that references the authorization server in the endpoints returned by the discovery document. For example,
 in the previous step, the following endpoints were identified: `/oauth2/v1/authorize`, `/oauth2/v1/token`, and `/oauth2/v1/userinfo`.
 
-4. For every instance in your code that references these endpoints, change them to match the endpoints in the well-known document. 
+4. For every instance in your code that references these endpoints, change them to match the endpoints in the well-known document.
 change the common base URL for the OAuth endpoints described in the previous step. The URL formatting should stay the same (query parameters, client IDs, scopes, and other qualifiers),
-just the base URL changes. 
+just the base URL changes.
 
->Hint: If you haven't already, structure your code to make the ID of the authorization server a variable. 
+>Hint: If you haven't already, structure your code to make the ID of the authorization server a variable.
 If you have different authorization servers for the app lifecycle (dev, test, prod) or want to move authorization servers
-in the future, you can adjust a few variables. 
+in the future, you can adjust a few variables.
 
 If you perform validation, change the validation to
 check for the issuer, because the issuer is now a different authorization server.
@@ -147,13 +147,13 @@ Also change the validation to get the new public keys from the new JWKs endpoint
 Discovery Document Example for OpenID Connect clients:
 
 Request:
-    
-~~~sh 
+
+~~~sh
 https://${org}.{subdomain}.com/.well-known/openid-configuration
 ~~~
-        
-Response:       
-    
+
+Response:
+
 ~~~sh
 {
   "issuer": "https://myOrg.example.com",
@@ -169,7 +169,7 @@ Response:
   "code token",
   "id_token token",
   "code id_token token"
-  ], 
+  ],
   "response_modes_supported": [
     "query",
     "fragment",
@@ -249,12 +249,12 @@ Response:
 Discovery Document Example for OAuth 2.0 clients:
 
 Request:
-    
-~~~sh 
+
+~~~sh
 https://${org}.{subdomain}.com/oauth2/{asId}/.well-known/oauth-authorization-server
 ~~~
-        
-Response:      
+
+Response:
 
 ~~~sh
 {
@@ -312,7 +312,7 @@ Response:
 
 ##Troubleshooting
 
-If you don't get a successful test in [Step Four](#step-four-test-your-configuration), 
+If you don't get a successful test in [Step Four](#step-four-test-your-configuration),
 check for the following symptoms and try the resolutions.
 
 ### Symptom 1: Some requests still using the old base URL
@@ -320,6 +320,6 @@ check for the following symptoms and try the resolutions.
 Did you hard-code the base URL anywhere? If so, remove the hard-coding.
 
 ### Symptom 2: Some requests don't return the results expected in a token
- 
+
 * Check that the client and shared authorization server configuration match.
 * Check the system log for additional details about any errors.
