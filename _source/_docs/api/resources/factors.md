@@ -747,7 +747,7 @@ curl -v -X GET \
 ]
 ~~~
 
-> Notice that `sms` factor type includes existing phone number in `_embedded`. You can either use the existing phone number or update it with a new number. See [Enroll Okta SMS factor] (#enroll-okta-sms-factor).
+> Notice that the `sms` factor type includes an existing phone number in `_embedded`. You can either use the existing phone number or update it with a new number. See [Enroll Okta SMS factor](#enroll-okta-sms-factor) for more information.
 
 
 ### List Security Questions
@@ -1007,9 +1007,9 @@ curl -v -X POST \
 
 ###### Existing Phone
 
-`400 Bad Request` status code may be returned if you attempt to enroll with a different phone number when there is an existing mobile phone for the user.
+A `400 Bad Request` status code may be returned if you attempt to enroll with a different phone number when there is an existing mobile phone for the user.
 
-*Currently user can enroll only one mobile phone*
+*Currently, a user can enroll only one mobile phone.*
 
 ~~~json
 {
@@ -1025,10 +1025,10 @@ curl -v -X POST \
 }
 ~~~
 
-##### Enroll Okta SMS Factor by updating Phone Number
+##### Enroll Okta SMS Factor by Updating Phone Number
 {:.api .api-operation}
 
-If the user wants to use a different phone number (instead of existing phone number) then enroll API call needs to supply `updatePhone` option with `true`
+If the user wants to use a different phone number (instead of the existing phone number) then the enroll API call needs to supply `updatePhone` option with `true`.
 
 ###### Request Example
 {:.api .api-request .api-request-example}
@@ -1047,11 +1047,11 @@ curl -v -X POST \
 }' "https://${org}.okta.com/api/v1/users/${userId}/factors?updatePhone=true"
 ~~~
 
-##### Enroll Okta SMS Factor by using existing Phone Number
+##### Enroll Okta SMS Factor by Using Existing Phone Number
 {:.api .api-operation}
 
-If the user wants to use the existing phone number then enroll API doesn't need to pass the phone number.
-Or you can pass the existing phone number in profile object.
+If the user wants to use the existing phone number then the enroll API doesn't need to pass the phone number.
+Or, you can pass the existing phone number in a profile object.
 
 ###### Request Example
 {:.api .api-request .api-request-example}
