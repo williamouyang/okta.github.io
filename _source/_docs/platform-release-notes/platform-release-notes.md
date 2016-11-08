@@ -24,11 +24,9 @@ OpenID Connect error messages related to invalid scopes now return more informat
 <!-- OKTA-94798 -->
 
 
-### HAL Links Returned With User Object Via API
+### User API Response Always Contains HAL Links
 
-We no longer perform a policy evaluation when determining which HAL links should be returned with a user object via API.
-You may notice HAL links being returned for reset password, change password, and if the user is locked, self-service unlock
-when they previously weren't. 
+The context of the initial user request is sometimes different from the context where the self-service operation is performed. Requests for the user via the API now always return the HAL links for reset password, change password and, if the user is in the locked state, self-service unlock.
 
 This enhancement applies to all new preview and productions orgs. Existing orgs receive the enhancement at a later date.
 <!-- OKTA-104084 -->
