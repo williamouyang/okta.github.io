@@ -41,7 +41,7 @@ At that time, the user could enter an empty password without generating an error
 when creating a user via the API with the group password policy feature enabled.
 Before the fix, the minimum security answer length was assumed to always be 4, regardless of the policy settings. (OKTA-103407)
 * Improved the error message returned by an HTTP 429 error to remind the user to wait 30 seconds before re-issuing the request for an SMS message. (OKTA-104738)
-* Removed some app metadata that was incorrectly returned from a `GET /api/v1/apps/{app-ID}` request. (OKTA-104767)
+* Removed some app metadata that was incorrectly returned from a `GET /api/v1/apps/{app-ID}` request for an OpenID Connect app. (OKTA-104767)
 * After resetting an SMS factor for a user, that factor was incorrectly included in a subsequent API call for that user. (OKTA-105672)
 * Changed validation of OpenID Connect client apps to disallow fragment components in configured redirect URIs. (OKTA-106049)
 
