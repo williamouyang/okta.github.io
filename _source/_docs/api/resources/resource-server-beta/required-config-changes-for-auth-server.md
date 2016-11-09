@@ -2,20 +2,20 @@
 layout: docs_page
 title: Configuration Changes Required for API Access Management Beta Update
 ---
-<<<
+
 ## Configuration Changes Required for API Access Management Beta Update
 
 Okta provides a private authorization server for OAuth 2.0 (Beta).
 However, with release 2016.45, you can use a shared authorization server instead, which provides several benefits:
 
-* You created a separate private authorization server for each client, which required you to set scopes and claims
+* **Many-to-Many Instead of One-to-One**&mdash;You created a separate private authorization server for each client, which required you to set scopes and claims
   and group filters for each client on a separate server, but keeping many configurations in sync is challenging.
   With the shared authorization server, you can create a single configuration of scopes, claims, and group filters, and
   assign multiple clients.
-* With the shared authorization server, you can create one server per API that you need to secure.
+* **Targeting the Audience**&mdash;With the shared authorization server, you can scope the set of resources you want to protect.
   When you bring a new client online, you can choose which combination of services it can use by choosing the
-  appropriate combination of authorization servers. This ensures that access is being granted with the same permissions
-  (scopes) each time.
+  appropriate authorization server and policies. This ensures that access is being granted with the same permissions
+  (scopes) without having to recreate the permissions for each new client.
 
 Since a shared authorization server meets the same needs as the current private authorization server,
 we are deprecating the private authorization server. All orgs using the private authorization server must create
@@ -89,7 +89,8 @@ For Access Tokens:
 5. Select your authorization server name.
 6. Select **Scopes** and add any of the scopes you copied in step 2.
 7. Select **Claims** and add any of the claims you copied in step 2.
-8. If you use `groups` to get the claim for group information (see step 3), create it in the shared authorization server.
+8. If you had a Groups claim (see step 3), create a claim in the shared authorization server with a group filter, then link it
+         with a scope. The `groups` scope is not a reserved scope in the shared authorization server.
 
 >Hint: Instead of copying strings from the UI to a text document, you can take screenshots, or open two browsers, one accessing
  the old configuration (steps 1-4), and one showing the new configuration (steps 5-8).
@@ -104,17 +105,21 @@ to ensure behavior is the same between private and shared authorization server.
 
 To copy the default access policy from the private authorization server, create a new policy (there's no defaul policy in the shared authorization server):
 
-1. In **Security > API**, select the name of the authorization server you are configuring.
-2. Select **Access Policies > Add Rule**.
-3. Enter a name for the rule.
-4. Select **User is assigned this client**
-5. Enter every custom scope name.
-4. Select **Create Rule**.
+ 1. In **Security > API**, select the name of the authorization server you are configuring.
+ 2. Select **Access Policies**.
+ 3. Select **Add New Access Policy**.
+ 4. Enter a name and description, and choos whether to assign the policy to **All clients** or **The following clients:** (enter the client names).
+ 5. Select **Create Policy** to save your policy.
+ 6. Check that your new policy is highlighted, and select **Add Rule**.
+ 7. Enter a name for the rule.
+ 8. Select **User is assigned this client**
+ 9. Select every custom scope name.
+10. Select **Create Rule**.
 
 ### Step Four: Test Your Configuration
 
 Send an API request for a token to the old private authorization server and the new shared authorization server.
-Both tokens should contain the same scope and custom claim information, since the reserved claims are slightly different, such as `issuer`.
+Both tokens should contain the same scope and custom claim information. The reserved claims are slightly different, such as `issuer`.
 
 ### Step Five: Change Your Clients to Consume the New Endpoints
 
