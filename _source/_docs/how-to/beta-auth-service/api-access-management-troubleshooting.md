@@ -34,7 +34,7 @@ you can control access to the common path with one authorization server.
     * Revocation happens when a configuration is changed or deleted:
         * User deactivation or deletion.
         * Configuration in the authorization server is changed or deleted.
-        * The client app is deactivated, changed, unassigned, or deleted.
+        * The [client app](https://help.okta.com/en/prev/Content/Topics/Apps/Apps_App_Integration_Wizard.htm#OIDCWizard) is deactivated, changed, unassigned, or deleted.
         
 * If a client requests multiple scopes, but the policy for that client only allows for a subset of the scopes,
 then the token isn't minted and an error is returned. The system log contains the details about the error.
@@ -43,7 +43,8 @@ then the token isn't minted and an error is returned. The system log contains th
 
 Some behaviors aren't obvious:
 
-* A user must be assigned to the client in Okta for the client to get Access Tokens from that client. To resolve, assign the user, or a group that contains the user, to the client.
+* A user must be assigned to the client in Okta for the client to get Access Tokens from that client. 
+You can assign the client directly (direct user assignment) or indirectly (group assignment).
 
 * If you haven't created a rule in a policy in the authorization server to allow the client, user, and 
 scope combination that you want, the request fails.
