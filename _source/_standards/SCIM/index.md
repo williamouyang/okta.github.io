@@ -315,8 +315,9 @@ In our sample application, each user resource has a Boolean
 
 ## Functionality
 
-Below are a list of the SCIM API endpoints that your SCIM API must
-support to work with Okta.
+Your SCIM API must support the following SCIM API endpoints to work with Okta:
+
+<img src="/assets/img/scim_flowchart.png" alt="scim api endpoints required to work with Okta" width="640px" />
 
 ## Create Account: POST /Users
 
@@ -999,7 +1000,7 @@ click on the "Tests" tab on the top of Runscope's user interface.
 |  5  | OktaAppId  | 0oa41ccmx9CAzfvpP0h7  | The App ID value which can be obtained by navigating to the SCIM App in the Okta org which results in URL value (https://scimtestorg-admin.oktapreview.com/admin/app/scim/instance/0oa41ccmx9CAzfvpP0h7/#tab-people).  |
 
 Once the variables are set, run the tests and share the results. 
-Based on your implementation for CRUD, please check and submit the results from this test to our team.
+Based on your implementation for CRUD, please check and submit the results from this test to developers@okta.com.
 The assertions are in place to indicate what OKTA expects for the provisioning connectors to work as intended. 
 Once completed with no issues, please proceed to the next step.
 
