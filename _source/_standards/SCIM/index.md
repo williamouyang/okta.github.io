@@ -315,8 +315,9 @@ In our sample application, each user resource has a Boolean
 
 ## Functionality
 
-Below are a list of the SCIM API endpoints that your SCIM API must
-support to work with Okta.
+Your SCIM API must support the following SCIM API endpoints to work with Okta:
+
+<img src="/assets/img/scim_flowchart.png" alt="scim api endpoints required to work with Okta" width="640px" />
 
 ## Create Account: POST /Users
 
@@ -864,7 +865,7 @@ Check your Profile Attributes as follows:
         You can delete an attribute by selecting it, then
         clicking the "Delete" button located in right hand attribute details pane.
         Before removing, check the mapping between Okta and Application and
-        **remove they mappings** forthe attribute(s) to be deleted.
+        **remove the mappings** for the attribute(s) to be deleted.
     -   After you've removed all unsupported attributes from the
         "Attributes" section, check the remaining
         attributes and ensure that the following properties
@@ -885,6 +886,7 @@ Check your Profile Attributes as follows:
     -   If the settings for any of your supported user attributes are
         incorrect, contact Okta and request the correction for your
         attribute.
+<img src="/assets/img/family_name.png" alt="Screen shot of Family name" width="640px" />
 
     Click the blue "Back to profiles" link when you are done checking
     the Profile Attributes for your application.
@@ -999,7 +1001,7 @@ click on the "Tests" tab on the top of Runscope's user interface.
 |  5  | OktaAppId  | 0oa41ccmx9CAzfvpP0h7  | The App ID value which can be obtained by navigating to the SCIM App in the Okta org which results in URL value (https://scimtestorg-admin.oktapreview.com/admin/app/scim/instance/0oa41ccmx9CAzfvpP0h7/#tab-people).  |
 
 Once the variables are set, run the tests and share the results. 
-Based on your implementation for CRUD, please check and submit the results from this test to our team.
+Based on your implementation for CRUD, please check and submit the results from this test to developers@okta.com.
 The assertions are in place to indicate what OKTA expects for the provisioning connectors to work as intended. 
 Once completed with no issues, please proceed to the next step.
 
