@@ -19,7 +19,7 @@ The authorization server also acts as an [OpenID Connect Provider](http://openid
 which means you can request [ID tokens](http://openid.net/specs/openid-connect-core-1_0.html#IDToken) 
 in addition to [access tokens](https://tools.ietf.org/html/rfc6749#section-1.4) from the authorization server endpoints.
 
-How do you know if you need to use Okta's Darkoauthorization server instead of the authorization service that is
+How do you know if you need to use Okta's authorization server instead of the authorization service that is
 built in to your Okta app?
 
 * You need to protect non-Okta resources.
@@ -47,9 +47,6 @@ This document provides step-by-step instructions for creating and configuring th
 3. [Create claims](#create-claims).
 4. [Create access policies and rules](#create-access-policies).
 5. [Test the ID Tokens or Access Tokens](#test-your-authorization-server-configuration).
-
-<!-- This note needs to be fixed or removed. > Note: OpenID Connect mints a token for OIDC flows if the appropriate claims and scopes are configured in the OpenID Connect client. 
-However, the authorization server mints an ID Token based on the configured claims and scopes if they are created and assigned to an OpenID Connect client. -->
 
 ### Create the Authorization Server
 
@@ -99,15 +96,13 @@ Create ID Token claims for OpenID Connect, or Access Tokens for OAuth 2.0:
     * **Name**
     * **Claim type**: Choose Access Token (Oauth 2.0) or ID Token (OpenID Connect).
     * **Value type**: Choose whether you'll define the claim by a list of **Groups** or by a list of users defined by an **Expression** written in Okta Expression Language.
-        * **Mapping**: This option displays if you chose **Expression** in the previous field. Add the mapping here using [Okta's Expression Language](/reference/expressionlanguage/), for example `appuser.username=="Bob"`.
+        * **Mapping**: This option displays if you chose **Expression** in the previous field. Add the mapping here using [Okta's Expression Language](/reference/expressionlanguage/), for example `appuser.username`.
           Be sure to check that your expression returns the results expected--the expression isn't validated here.
         * **Filter**: This option displays if you chose **Groups** in the previous field. Use it to add a group filter. If you leave it blank, all users are specified for this claim.
     * **Disable claim**: Check this option if you want to temporarily disable the claim for testing or debugging.
     * **Include in**: Specify whether the claim is valid for any scope, or select the scopes for which it is valid.
     
 ### Create Access Policies
-
-Okta provides a default policy and two default rules, one for service apps (client credential flows) and one for all other flows.
 
 Create access policies and rules for a client or set of clients.
 
