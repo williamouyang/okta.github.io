@@ -31,9 +31,9 @@ you can control access to the common path with one authorization server.
           but must be greater than or equal to the Access Token lifetime, and 2) Revocation if the Refresh Token
           isn't exercised within a specified time. Configure the specified time in an Access Policy, with a minimum of ten minutes.
     
-    * Expiration happens when a configuration is changed or deleted:
+    * Revocation happens when a configuration is changed or deleted:
         * User deactivation or deletion.
-        * A resource specified in the authorization server is changed or deleted.
+        * Configuration in the authorization server is changed or deleted.
         * The client app is deactivated, changed, unassigned, or deleted.
         
 * If a client requests multiple scopes, but the policy for that client only allows for a subset of the scopes,
@@ -42,8 +42,6 @@ then the token isn't minted and an error is returned. The system log contains th
 ## Subtle Behavior
 
 Some behaviors aren't obvious:
-
-* If you choose a scope that the client app doesn't support, no token is minted and an error is returned.
 
 * A user must be assigned to the client in Okta for the client to get Access Tokens from that client. To resolve, assign the user, or a group that contains the user, to the client.
 
@@ -58,4 +56,4 @@ Token expiration times depend on how they are defined in the rules, and which po
 
 * OpenID scopes can be requested with custom scopes. For example, a request can include `openid` and a custom scope.
 
-* The evaluation of a policy always takes place during the initial authentication of the user (or of the client in case of client credentials flow). If the flow is not immediately finished, such as when a token is requested using `authorization_code` or `refresh_token` grant type, the policy is not evaluated again, and a change in the policy after the user or client is initially authenticated won't affect the continued flow.
+* The evaluation of a policy always takes place during the initial authentication of the user (or of the client in case of client credentials flow). If the flow is not immediately finished, such as when a token is requested using `authorization_code` grant type, the policy is not evaluated again, and a change in the policy after the user or client is initially authenticated won't affect the continued flow.
