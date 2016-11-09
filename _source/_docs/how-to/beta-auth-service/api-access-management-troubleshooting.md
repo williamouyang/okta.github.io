@@ -58,4 +58,4 @@ Token expiration times depend on how they are defined in the rules, and which po
 
 * OpenID scopes can be requested with custom scopes. For example, a request can include `openid` and a custom scope.
 
-* The evaluation of a policy always takes place during the initial authentication of the user (or of the client in case of client credentials flow). If the flow is not immediately finished, such as when a token is requested using `authorization_code` or `refresh_token` grant type, the policy is not evaluated again, and a change in the policy after the user orclient is initially authenticated won't affect the continued flow.
+* The evaluation of a policy always takes place during the initial authentication of the user (or of the client in case of client credentials flow). If the flow is not immediately finished, such as when a token is requested using `authorization_code` or `refresh_token` grant type, the policy is not evaluated again, and a change in the policy after the user or client is initially authenticated won't affect the continued flow.
