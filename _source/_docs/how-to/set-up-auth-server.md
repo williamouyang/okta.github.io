@@ -34,8 +34,8 @@ try [Okta's built in authorization service](https://support.okta.com/help/articl
 
 Create and configure an authorization server to manage authorization between clients and Okta:
 
-* Define the scopes and claims in your client app and register it with Okta.
-* Create one or more authorization servers and define the scopes and claims to match those you've defined in your app.
+* Identify the scopes and claims in your client app and register it with Okta.
+* Create one or more authorization servers and define the scopes and claims to match those expected by your app.
 
 It doesn't matter which task you do first, but the client app must recognize the scope names and be expecting the
 claims as defined in the authorization server.
@@ -48,22 +48,23 @@ This document provides step-by-step instructions for creating and configuring th
 4. [Create access policies and rules](#create-access-policies).
 5. [Test the ID Tokens or Access Tokens](#test-your-authorization-server-configuration).
 
-> Note: OpenID Connect mints a token for OIDC flows if the appropriate claims and scopes are configured in the OpenID Connect client. 
-However, the authorization server mints an ID Token based on the configured claims and scopes if they are created and assigned to an OpenID Connect client.
+<!-- This note needs to be fixed or removed. > Note: OpenID Connect mints a token for OIDC flows if the appropriate claims and scopes are configured in the OpenID Connect client. 
+However, the authorization server mints an ID Token based on the configured claims and scopes if they are created and assigned to an OpenID Connect client. -->
 
 ### Create the Authorization Server
 
 1. In the Okta user interface, navigate to **Security > API**.
-<img src="/assets/img/auth_server_image.png" alt="Authorization Server" widgth="800px" />
+<img src="/assets/img/auth_server_image.png" alt="Authorization Server" width="640px" />
 
 2. Choose **Add Authorization Server** and supply the requested information.
 
     * Name
-    * Resource URI. URI for the OAuth resource that consumes the Access Tokens. This value is used as the default [audience](https://tools.ietf.org/html/rfc7519#section-4.1.3) for Access Tokens.
+    * Resource URI. URI for the OAuth resource that consumes the Access Tokens. Use an absolute path such as `http://api.example.com/pets`.
+      This value is used as the default [audience](https://tools.ietf.org/html/rfc7519#section-4.1.3) for Access Tokens.
     * Description 
 
 When complete, your authorization server **Settings** tab displays the information that you provided and allows you to edit it.
-<img src="/assets/img/auth_server2.png" alt="Add Authorization Server" width="800px" />
+<img src="/assets/img/auth_server2.png" alt="Add Authorization Server" width="640px" />
 
 ### Create Scopes
 
@@ -74,10 +75,10 @@ and the access policy decides which ones to grant and which ones to deny.
 If you need scopes in addition to the reserved scopes provided, create them now. 
 
 1. In the Okta user interface, navigate to **Security > API**.
-2. Choose the name of the authorization server to display it.
+2. Choose the name of the authorization server to display it, and then select **Scopes**.
 <img src="/assets/img/scope1.png" alt="Add Scopes" width="800px" />
 
-3. Choose **Scopes > Add Scope**, and provide a name and description.
+3. Choose **Scopes > Add Scope**, and provide a name and description, then choose **Create** to save the scope.
 <img src="/assets/img/scope2.png" alt="View Scopes" width="800px" />
 
 These scopes are referenced by the **Claims** dialog.
@@ -100,7 +101,7 @@ Create ID Token claims for OpenID Connect, or Access Tokens for OAuth 2.0:
     * **Value type**: Choose whether you'll define the claim by a list of **Groups** or by a list of users defined by an **Expression** written in Okta Expression Language.
         * **Mapping**: This option displays if you chose **Expression** in the previous field. Add the mapping here using [Okta's Expression Language](/reference/expressionlanguage/), for example `appuser.username=="Bob"`.
           Be sure to check that your expression returns the results expected--the expression isn't validated here.
-        * **Filter**: If you chose **Groups** in the previous field, add a group filter. If you leave it blank, all users are specified for this claim.
+        * **Filter**: This option displays if you chose **Groups** in the previous field. Use it to add a group filter. If you leave it blank, all users are specified for this claim.
     * **Disable claim**: Check this option if you want to temporarily disable the claim for testing or debugging.
     * **Include in**: Specify whether the claim is valid for any scope, or select the scopes for which it is valid.
     
@@ -111,18 +112,18 @@ Okta provides a default policy and two default rules, one for service apps (clie
 Create access policies and rules for a client or set of clients.
 
 1. In the Okta user interface, navigate to **Security > API**.
-2. Choose the name of the authorization server. 
+2. Choose the name of an authorization server. 
 3. Choose **Access Policies > Add New Access Policy** and provide the requested information.
-<img src="/assets/img/access_policy1.png" alt="Add Access Policy and Rule" width="800px" />
+<img src="/assets/img/access_policy1.png" alt="Add Access Policy" width="640px" />
 
     * Name
     * Description
-    * Assign to all clients, or enter the name of the clients covered by this access policy.
+    * Assign to **All clients**, or select **The following clients:** and enter the name of the clients covered by this access policy.
 
 While in the Access Policy list, you can:
 
 * Set access policies to be active or deactivate them for testing or debugging purposes.
-* Reorder any policies you create using drag-n-drop. The default policy is always last (lowest priority). 
+* Reorder any policies you create using drag-n-drop.  
 
 Polices are evaluated in priority order, as are the rules in a policy. 
 The first policy and rule that matches the client request is applied and no further rule or policy processing occurs.
@@ -130,23 +131,34 @@ The first policy and rule that matches the client request is applied and no furt
 ### Create Rules for Each Access Policy
 
 Rules control the mapping of client, user, and custom scope. For example, you can specify
-a rule for an access policy that says "If the user is assigned to this client, the the custom scope Scope1
-is valid."
+a rule for an access policy so that if the user is assigned to a client, then custom scope `Scope1`
+is valid.
 
-While in the Rules list for an Access Policy, you can:
+1. In the Okta user interface, navigate to **Security > API**.
+2. Choose the name of an authorization server, and select **Access Policies**.
+3. Choose the name of an access policy, and select **Add Rule**
+    <img src="/assets/img/rule1.png" alt="Add Rule" width="640px" />
+4. Enter the requested information:
+    * **Rule Name**
+    * **IF User is**&mdash;Select whether there's no user (client credentials flow), or a user assigned to a client that's assigned to this rule's policy,
+      or a user assigned to one or more groups that you specify or a list of users that you specify.
+    * **THEN Grant these scopes**&mdash;Choose the scopes (all scopes, or a list that you specify) that are granted if the user meets any of the conditions.
+    * **AND Access token lifetime is**&mdash;Choose the length of time before an access token expires.
+    * **AND Refresh token lifetime is**&mdash;Choose the length of time before a refresh token expires.
+5. Choose **Create Rule** to save the rule.
+    <img src="/assets/img/rule2.png" alt="Rules List" width="640px" />
+
+While in the Rules list for an access policy, you can:
 
 * Set a rule to be inactive for testing or debugging.
 * Reorder rules, except for the default rule in the default policy. Rules are evaluated in priority order,
-so the first rule that matches the client request is applied and no further processing occurs.
+so the first rule in the first policy that matches the client request is applied and no further processing occurs.
 
->Note: Because service applications (client credentials flow) there is no user. So make sure you have at least one rule
+>Note: Service applications (client credentials flow) have no user. If you use this flow, make sure you have at least one rule
 that specifies the condition **No user**.
 
 ### Test Your Authorization Server Configuration
 
 For each combination of authorization server and scopes and claims, issue an API call and check that the contents
 of the ID Token or Access Token are as expected.
-
-Add details.
-
  
