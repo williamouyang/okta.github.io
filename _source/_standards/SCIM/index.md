@@ -865,7 +865,7 @@ Check your Profile Attributes as follows:
         You can delete an attribute by selecting it, then
         clicking the "Delete" button located in right hand attribute details pane.
         Before removing, check the mapping between Okta and Application and
-        **remove they mappings** forthe attribute(s) to be deleted.
+        **remove the mappings** for the attribute(s) to be deleted.
     -   After you've removed all unsupported attributes from the
         "Attributes" section, check the remaining
         attributes and ensure that the following properties
@@ -886,6 +886,7 @@ Check your Profile Attributes as follows:
     -   If the settings for any of your supported user attributes are
         incorrect, contact Okta and request the correction for your
         attribute.
+<img src="/assets/img/family_name.png" alt="Screen shot of Family name" width="640px" />
 
     Click the blue "Back to profiles" link when you are done checking
     the Profile Attributes for your application.
