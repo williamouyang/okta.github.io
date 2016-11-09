@@ -95,7 +95,7 @@ Create ID Token claims for OpenID Connect, or Access Tokens for OAuth 2.0:
 
     * **Name**
     * **Claim type**: Choose Access Token (Oauth 2.0) or ID Token (OpenID Connect).
-    * **Value type**: Choose whether you'll define the claim by a list of **Groups** or by a list of users defined by an **Expression** written in Okta Expression Language.
+    * **Value type**: Choose whether you'll define the claim by a group filter or by an **Expression** written in Okta Expression Language.
         * **Mapping**: This option displays if you chose **Expression** in the previous field. Add the mapping here using [Okta's Expression Language](/reference/expressionlanguage/), for example `appuser.username`.
           Be sure to check that your expression returns the results expected--the expression isn't validated here.
         * **Filter**: This option displays if you chose **Groups** in the previous field. Use it to add a group filter. If you leave it blank, all users are specified for this claim.
