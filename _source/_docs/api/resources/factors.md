@@ -703,6 +703,17 @@ curl -v -X GET \
           ]
         }
       }
+    },
+    "_embedded": {
+      "phones": [
+        {
+          "id": "mblldntFJevYKbyQQ0g3",
+          "profile": {
+            "phoneNumber": "+14081234567"
+          },
+          "status": "ACTIVE"
+        }
+      ]
     }
   },
   {
@@ -735,6 +746,9 @@ curl -v -X GET \
   }
 ]
 ~~~
+
+> Notice that the `sms` factor type includes an existing phone number in `_embedded`. You can either use the existing phone number or update it with a new number. See [Enroll Okta SMS factor](#enroll-okta-sms-factor) for more information.
+
 
 ### List Security Questions
 {:.api .api-operation}
@@ -989,6 +1003,68 @@ curl -v -X POST \
     "errorId": "oaeneEaQF8qQrepOWHSkdoejw",
     "errorCauses": []
 }
+~~~
+
+###### Existing Phone
+
+A `400 Bad Request` status code may be returned if you attempt to enroll with a different phone number when there is an existing mobile phone for the user.
+
+*Currently, a user can enroll only one mobile phone.*
+
+~~~json
+{
+    "errorCode": "E0000001",
+    "errorSummary": "Api validation failed: factorEnrollRequest",
+    "errorLink": "E0000001",
+    "errorId": "oaeneEaQF8qQrepOWHSkdoejw",
+    "errorCauses": [
+       {
+          "errorSummary": "There is an existing verified phone number."
+       }
+    ]
+}
+~~~
+
+##### Enroll Okta SMS Factor by Updating Phone Number
+{:.api .api-operation}
+
+If the user wants to use a different phone number (instead of the existing phone number) then the enroll API call needs to supply `updatePhone` option with `true`.
+
+###### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "factorType": "sms",
+  "provider": "OKTA",
+  "profile": {
+    "phoneNumber": "+1-555-415-1337"
+  }
+}' "https://${org}.okta.com/api/v1/users/${userId}/factors?updatePhone=true"
+~~~
+
+##### Enroll Okta SMS Factor by Using Existing Phone Number
+{:.api .api-operation}
+
+If the user wants to use the existing phone number then the enroll API doesn't need to pass the phone number.
+Or, you can pass the existing phone number in a profile object.
+
+###### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "factorType": "sms",
+  "provider": "OKTA"
+}' "https://${org}.okta.com/api/v1/users/${userId}/factors"
 ~~~
 
 ##### Enroll Okta SMS Factor Using Custom Template
