@@ -315,7 +315,7 @@ Response:
 }
 ~~~
 
-##Troubleshooting
+## Troubleshooting
 
 If you don't get a successful test in [Step Four](#step-four-test-your-configuration),
 check for the following symptoms and try the resolutions.
