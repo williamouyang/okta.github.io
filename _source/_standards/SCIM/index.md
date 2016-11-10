@@ -118,10 +118,10 @@ configure the test for your SCIM integration. Here is how to do that:
 5.  "Initial Variables" should be selected, click the "Add Initial
     Variable" link and add the following:
 
-    | S.No  | Variable Name (Case Sensitive)  | Example Values  | Notes  |
-    |:--|:--|:--|:--|
-    |  1 | SCIMBaseURL   | https://example.com/scim/v2  |  For example, if your SCIM integration is hosted on https://example.com and uses a prefix of /scim/v2 then the "SCIM Base URL" for your integration would be: https://example.com/scim/v2. |
-    |  2 | auth  | Bearer abcxyz1234567890  | Basic/Oauth authorization values  |
+    | Variable Name (Case Sensitive) | Example Values              | Notes                                                                                                                                                                                     |
+    |:-------------------------------|:----------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    | SCIMBaseURL                    | https://example.com/scim/v2 | For example, if your SCIM integration is hosted on https://example.com and uses a prefix of /scim/v2 then the "SCIM Base URL" for your integration would be: https://example.com/scim/v2. |
+    | auth                           | Bearer abcxyz1234567890     | Basic/Oauth authorization values                                                                                                                                                          |
 
 6.  Add the [Initial Script Spec](SCIMFiles/Initial_Script_Spec.txt).
 
@@ -992,16 +992,20 @@ click on the "Tests" tab on the top of Runscope's user interface.
 4. In the "Environment" section of your test, you should see a collapsed "Test Settings" section, click the arrow on the left of "Test Settings" to expand this section.
 5. "Initial Variables" should be selected, click the "Add Initial Variable" link and add the following:
 
-|  S.No  | Variable Name (Case Sensitive)   | Example Values   | Notes  |
-|:---|:--|:--|:--|
-|  1  | SCIMUrl   | https://example.com/scim/v2  | This is the SCIM Server URL  |
-|  2 |  SCIMAuth | Bearer abcxyz1234567890  | The Authorization for SCIM server. Basic, Oauth.  |
-|  3  | OktaOrgUrl  | 	https://scimtestorg.oktapreview.com/  | The Okta organization url which is used to add the SCIM application  |
-|  4  | OktaToken  |  qwerty12345 | Token obtained using the following instructions. http://developer.okta.com/docs/api/getting_started/getting_a_token  |
-|  5  | OktaAppId  | 0oa41ccmx9CAzfvpP0h7  | The App ID value which can be obtained by navigating to the SCIM App in the Okta org which results in URL value (https://scimtestorg-admin.oktapreview.com/admin/app/scim/instance/0oa41ccmx9CAzfvpP0h7/#tab-people).  |
+Variables:
+
+* `SCIMUrl`: The SCIM Server URL.<br />Example value: <https://example.com/scim/v2>
+
+* `SCIMAuth`: The Authorization for SCIM server: Basic, Oauth. <br />Example value: `Bearer abcxyz1234567890`
+
+* `OktaOrgUrl`: The Okta organization URL which is used to add the SCIM application. <br/>Example value: <https://scimtestorg.oktapreview.com/> 
+
+* `OktaToken`: Token obtained using  [the getting started instructions](http://developer.okta.com/docs/api/getting_started/getting_a_token).<br />Example value: `qwerty12345`
+
+* `OktaAppId`: The App ID value which can be obtained by navigating to the SCIM App in the Okta org which results in URL value <https://scimtestorg-admin.oktapreview.com/admin/app/scim/instance/0oa41ccmx9CAzfvpP0h7/#tab-people>.<br />Example value: `0oa41ccmx9CAzfvpP0h`
 
 Once the variables are set, run the tests and share the results. 
-Based on your implementation for CRUD, please check and submit the results from this test to developers@okta.com.
+Based on your implementation for CRUD, please check and submit the results from this test to <developers@okta.com>.
 The assertions are in place to indicate what OKTA expects for the provisioning connectors to work as intended. 
 Once completed with no issues, please proceed to the next step.
 
