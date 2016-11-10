@@ -17,8 +17,8 @@
 
     <title>System Log (Beta) | Okta Developer</title>
     <meta name="description" content="Overview">
-    <link rel="canonical" href="http://developer.okta.com/docs/api/resources/system_log.html">
-    <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml">
+    <link rel="canonical" href="http://localhost:4000/docs/api/resources/system_log.html">
+    <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://localhost:4000/feed.xml">
 
     <!-- GA -->
     <script>
@@ -112,24 +112,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	       
                  
 	       
-	       <li><a href="/use_cases/authentication">Authentication</a></li>
-	       
+                 
 	       
                  
 	       
-	       <li><a href="/use_cases/integrate_with_okta">Integrate with Okta</a></li>
+                 
+	       
+                 
+	       
+                 
+	       
+	       <li><a href="/use_cases/authentication">Authentication</a></li>
 	       
 	       
 	       <li><a href="/use_cases/mfa">Multi-Factor Authentication</a></li>
 	       
 	       
-                 
+	       <li><a href="/use_cases/integrate_with_okta">Integrate with Okta</a></li>
 	       
-                 
-	       
-                 
-	       
-                 
 	       <!-- <li class="is-active"> -->
 	       <!-- 	 <a href="#">Working with the Okta API</a> -->
 	       <!-- 	 <ul> -->
@@ -181,6 +181,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     <li><a href="/docs/api/resources/apps.html">Apps</a></li>
+		     
+		     
+		     
+		     
 		     
 		     
 		     
@@ -331,6 +335,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
+		     
+		     
+		     
+		     
+		     
+		     
 		     <li><a href="/docs/api/resources/factors.html">Factors (MFA)</a></li>
 		     
 		     
@@ -382,7 +394,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
+		     
+		     
 		     <li><a href="/docs/api/resources/groups.html">Groups</a></li>
+		     
+		     
+		     
+		     
 		     
 		     
 		     
@@ -536,7 +556,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
+		     
+		     
+		     
+		     
+		     
+		     
+		     
 		     <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
+		     
+		     
+		     
+		     
 		     
 		     
 		     
@@ -640,7 +673,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
+		     
+		     
 		     <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
+		     
+		     
+		     
+		     
 		     
 		     
 		     
@@ -790,7 +831,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
+		     
+		     
+		     
+		     
+		     
+		     
 		     <li><a href="/docs/api/resources/users.html">Users</a></li>
+		     
+		     
+		     
 		     
 		     
 		     
@@ -970,14 +1022,37 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
      "authenticationProvider": String one of OKTA_AUTHENTICATION_PROVIDER, ACTIVE_DIRECTORY, LDAP, FEDERATION,
             SOCIAL, FACTOR_PROVIDER, Optional
           "credentialProvider": String one of OKTA_CREDENTIAL_PROVIDER, RSA, SYMANTEC, GOOGLE, DUO, YUBIKEY, Optional
-          "credentialType": String one of OTP, SMS, PASSWORD, ASSERTION, IWA, EMAIL, Optional
+          "credentialType": String one of OTP, SMS, PASSWORD, ASSERTION, IWA, EMAIL, OAUTH2, JWT, Optional
           "issuer": Object, Optional {
                "id": String, Optional
                "type": String Optional
           }
           "externalSessionId": String, Optional
           "interface": String, Optional i.e. Outlook, Office365, wsTrust
-     }
+},
+"securityContext": { Object, Optional
+          "asNumber": Integer, Optional
+          "asOrg": String, Optional
+          "isp": String, Optional
+          "domain": String, Optional
+          "isProxy": Boolean, Optional
+},
+"request": { Object, Optional
+          "ipChain": List of objects of the form [
+              "ip": String, Optional
+              "geographicalContext": { Object, Optional
+                        "geolocation": { Object, Optional
+                             "lat":Double, Optional
+                             "lon": Double, Optional
+                        }
+                        "city": String, Optional
+                        "state": String, Optional
+                        "country": String, Optional
+                        "postalCode": String, Optional
+                   },
+              "version": String, one of V4, V6 Optional
+              "source": String, Optional
+          ], Optional
 }
 
 </code></pre>
@@ -1149,6 +1224,28 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <td>authenticationContext</td>
       <td>Identifies the authentication data of the action</td>
       <td><a href="#authenticationcontext-object">AuthenticationContext Object</a></td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>securityContext</td>
+      <td>Identifies the security data of the action</td>
+      <td><a href="#securitycontext-object">SecurityContext Object</a></td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>request</td>
+      <td>Identifies the request data of the action</td>
+      <td><a href="#request-object">Request Object</a></td>
       <td>TRUE</td>
       <td>FALSE</td>
       <td>TRUE</td>
@@ -1420,7 +1517,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <tbody>
     <tr>
       <td>geolocation</td>
-      <td>Id of the target</td>
+      <td>geolocation of the target</td>
       <td><a href="#geolocation-object">Geolocation Object</a></td>
       <td>TRUE</td>
       <td> </td>
@@ -1430,7 +1527,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </tr>
     <tr>
       <td>city</td>
-      <td>Geographical context data of the event</td>
+      <td>city of the event</td>
       <td>String</td>
       <td>TRUE</td>
       <td> </td>
@@ -1450,7 +1547,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </tr>
     <tr>
       <td>country</td>
-      <td>Ip address of the client</td>
+      <td>country of the client</td>
       <td>String</td>
       <td>TRUE</td>
       <td> </td>
@@ -1757,6 +1854,169 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </tbody>
 </table>
 
+<h3 id="securitycontext-object">SecurityContext Object</h3>
+
+<p>Describes security data regarding an event</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Default</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>asNumber</td>
+      <td>AS Number</td>
+      <td>Integer</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>asOrg</td>
+      <td>AS Organization</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>isp</td>
+      <td>Internet Service Provider</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>domain</td>
+      <td>domain</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>isProxy</td>
+      <td>if event is from a known proxy</td>
+      <td>Bool</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="request-object">Request Object</h3>
+
+<p>Describes request data regarding an event</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Default</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ipChain</td>
+      <td>chain of ip data</td>
+      <td>Array of IpAddress</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="securitycontext-object-1">SecurityContext Object</h3>
+
+<p>Describes security data regarding an event</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Default</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ip</td>
+      <td>ip address</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>geographicalContext</td>
+      <td>Geographical context of the ip address</td>
+      <td><a href="#geographicalcontext-object">GeographicalContext Object</a></td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>version</td>
+      <td>ip address version</td>
+      <td>V4 or V6</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>source</td>
+      <td>details regarding the source</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
 <h2 id="event-operations">Event Operations</h2>
 
 <h3 class="api api-operation" id="list-events">List Events</h3>
@@ -1823,10 +2083,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </tr>
     <tr>
       <td>until</td>
-      <td>Specifies the first date after which results aren’t returned</td>
+      <td>Specifies the first date after which results aren’t returned, can be empty which denotes no end date</td>
       <td>Query</td>
       <td>DateTime</td>
-      <td>TRUE</td>
+      <td>FALSE</td>
       <td> </td>
       <td> </td>
       <td> </td>
@@ -1938,9 +2198,10 @@ Events published for a target user</p>
   <p>This operation requires <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encoding</a>. For example, <code class="highlighter-rouge">since=2016-05-25T00:00:00+00:00</code> is encoded as <code class="highlighter-rouge">since=2016-06-02T00%3A00%3A00%2B00%3A00</code>.</p>
 </blockquote>
 
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>http://rain-admin.okta1.com:1802/sage/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:00+00:00&amp;until<span class="o">=</span>2016-06-01T23:59:59+00:00&amp;limit<span class="o">=</span>20&amp;q<span class="o">=</span>FAILURE
-http://rain-admin.okta1.com:1802/sage/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:00+00:00&amp;until<span class="o">=</span>2016-06-01T23:59:59+00:00&amp;limit<span class="o">=</span>20&amp;q<span class="o">=</span>
-http://rain-admin.okta1.com:1802/sage/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:00+00:00&amp;until<span class="o">=</span>2016-06-01T23:59:59+00:00&amp;limit<span class="o">=</span>20&amp;filter<span class="o">=</span>eventType eq <span class="s2">"user.session.start"</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>http://MyOrg.okta.com/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:00+00:00&amp;until<span class="o">=</span>2016-06-01T23:59:59+00:00&amp;limit<span class="o">=</span>20&amp;q<span class="o">=</span>FAILURE
+http://MyOrg.okta.com/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:00+00:00&amp;until<span class="o">=</span>2016-06-01T23:59:59+00:00&amp;limit<span class="o">=</span>20&amp;q<span class="o">=</span>
+http://MyOrg.okta.com/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:00+00:00&amp;until<span class="o">=</span>2016-06-01T23:59:59+00:00&amp;limit<span class="o">=</span>20&amp;filter<span class="o">=</span>eventType eq <span class="s2">"user.session.start"</span>
+http://MyOrg.okta.com/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:00+00:00&amp;until<span class="o">=</span>&amp;limit<span class="o">=</span>20&amp;filter<span class="o">=</span>eventType eq <span class="s2">"user.session.end"</span>
 </code></pre>
 </div>
 
