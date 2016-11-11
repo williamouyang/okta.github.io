@@ -59,8 +59,10 @@ and generate the final site content.
 3. Compile changes into the _site directory `bundle exec jekyll serve --watch`
 4. Navigate the site and validate your changes
 5. Stop Jekyll with `ctrl+c`
-6. Sync the built _site files with the checked-in code with: `rsync -av _site/ ./`
-7. Git commit and push changes to github. When ready for review create a pull request and mention the users you want to
+6. Discard changed files (they have "localhost:4000" in link URLs instead of "developer.okta.com") with `git checkout .`
+7. Build again with `rm _site/*; bundle exec jekyll build`
+8. Sync the built _site files with the checked-in code with: `rsync -av _site/ ./`
+9. Git commit and push changes to github. When ready for review create a pull request and mention the users you want to
    review your changes.
 
 ### Resolving conflicts with "upstream"
