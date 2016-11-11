@@ -112,24 +112,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	       
                  
 	       
-	       <li><a href="/use_cases/authentication">Authentication</a></li>
-	       
+                 
 	       
                  
 	       
-	       <li><a href="/use_cases/integrate_with_okta">Integrate with Okta</a></li>
+                 
+	       
+                 
+	       
+                 
+	       
+	       <li><a href="/use_cases/authentication">Authentication</a></li>
 	       
 	       
 	       <li><a href="/use_cases/mfa">Multi-Factor Authentication</a></li>
 	       
 	       
-                 
+	       <li><a href="/use_cases/integrate_with_okta">Integrate with Okta</a></li>
 	       
-                 
-	       
-                 
-	       
-                 
 	       <!-- <li class="is-active"> -->
 	       <!-- 	 <a href="#">Working with the Okta API</a> -->
 	       <!-- 	 <ul> -->
@@ -181,6 +181,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     <li><a href="/docs/api/resources/apps.html">Apps</a></li>
+		     
+		     
+		     
+		     
 		     
 		     
 		     
@@ -331,6 +335,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
+		     
+		     
+		     
+		     
+		     
+		     
 		     <li><a href="/docs/api/resources/factors.html">Factors (MFA)</a></li>
 		     
 		     
@@ -382,7 +394,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
+		     
+		     
 		     <li><a href="/docs/api/resources/groups.html">Groups</a></li>
+		     
+		     
+		     
+		     
 		     
 		     
 		     
@@ -536,7 +556,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
+		     
+		     
+		     
+		     
+		     
+		     
+		     
 		     <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
+		     
+		     
+		     
+		     
 		     
 		     
 		     
@@ -640,7 +673,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
+		     
+		     
 		     <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
+		     
+		     
+		     
+		     
 		     
 		     
 		     
@@ -790,7 +831,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
+		     
+		     
+		     
+		     
+		     
+		     
 		     <li><a href="/docs/api/resources/users.html">Users</a></li>
+		     
+		     
+		     
 		     
 		     
 		     
@@ -878,13 +930,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <div class="PageContent-main" id="docs-body">
       <h1 id="scim-provisioning-technical-reference">SCIM Provisioning Technical Reference</h1>
 
-<blockquote>
-  <p>Okta’s SCIM implementation is currently in Beta status and provides
-no guarantees for backwards-compatibility. Okta is free to break
-this SCIM implementation until it is released.</p>
-</blockquote>
-
-<p>Thank you for your interest in the Okta SCIM beta.</p>
+<p>Thank you for your interest in the Okta SCIM program.</p>
 
 <p>By implementing support for the SCIM standard, an application in the Okta
 Application Network can be notified when a user is created, updated,
@@ -939,10 +985,15 @@ and provisioning functionality with the target application.</p>
 <p>The easiest way for you to develop and verify your SCIM integration
 is to make use of an automated test suite that runs on Runscope.</p>
 
-<p>If you are already familiar with Runscope, then just import the
-<a href="https://raw.githubusercontent.com/joelfranusic-okta/okta-scim-beta/master/SCIM_tests_for_Runscope.json">SCIM_tests_for_Runscope.json</a> API test and configure the <code class="highlighter-rouge">SCIM Base
+<p>If you are already familiar with Runscope, then import the
+OKTA SCIM Spec Test JSON API test (for SCIM 1.1 or SCIM 2.0) and configure the <code class="highlighter-rouge">SCIM Base
   URL</code> variable to point at the base URL for your SCIM server, for
 example: <code class="highlighter-rouge">https://example.com/scim/v2</code>.</p>
+
+<ul>
+  <li><a href="SCIMFiles/Okta-SCIM-20-SPEC-Test.json">Okta SCIM 2.0 Spec Test JSON</a></li>
+  <li><a href="SCIMFiles/Okta-SCIM-11-SPEC-Test.json">Okta SCIM 1.1 Spec Test JSON</a></li>
+</ul>
 
 <p>If you are not familiar with Runscope, follow the detailed
 instructions below to get started with using Runscope to test your
@@ -954,20 +1005,24 @@ SCIM server.</p>
 with <a href="https://www.runscope.com/okta">Runscope’s free plan for Okta</a>. Here is how to get started:</p>
 
 <ol>
-  <li>Download the <a href="https://raw.githubusercontent.com/joelfranusic-okta/okta-scim-beta/master/SCIM_tests_for_Runscope.json">SCIM_tests_for_Runscope.json</a> file from this
-repository to your local hard drive. (You will use this file to
-import Okta’s SCIM test suite into Runscope.)</li>
+  <li>Download the Okta SCIM Spec Test for your version of SCIM:
+    <ul>
+      <li><a href="SCIMFiles/Okta-SCIM-20-SPEC-Test.json">Okta SCIM 2.0 Spec Test JSON</a></li>
+      <li><a href="SCIMFiles/Okta-SCIM-11-SPEC-Test.json">Okta SCIM 1.1 Spec Test JSON</a></li>
+    </ul>
+
+    <p>You will use this file to import Okta’s SCIM test suite into Runscope.)</p>
+  </li>
   <li><a href="//www.runscope.com/signup">Sign up for Runscope</a>.</li>
   <li>You may see a tutorial after signing up for Runscope, if so, click
-“Skip Tutorial”.</li>
+    “Skip Tutorial”.</li>
   <li>You should now see a screen that says “API Tests”.</li>
   <li>In the lower left of your screen, click on the “Import Tests”
-link.</li>
+    link.</li>
   <li>You should now see a title that starts with “Import Tests into
-…”</li>
+    …”</li>
   <li>Select “Runscope API Tests” as the format to import</li>
-  <li>Click the “Choose File” button and select the
-<a href="https://raw.githubusercontent.com/joelfranusic-okta/okta-scim-beta/master/SCIM_tests_for_Runscope.json">SCIM_tests_for_Runscope.json</a> that you saved in Step 1 above.</li>
+  <li>Click the “Choose File” button and select the JSON file that you saved in Step 1.</li>
   <li>Click the blue “Import API Test” button.</li>
   <li>After the import completes, click on the “All Tests” link on
 the left hand side of your screen.</li>
@@ -992,12 +1047,9 @@ the “Edit” link on the lower left of the test.</li>
   <li>In the “Environment” section of your test, you should see a
 collapsed “Test Settings” section, click the arrow on the left
 of “Test Settings” to expand this section.</li>
-  <li>“Initial Variables” should be selected, click the “Add Initial
-Variable” link.</li>
-  <li>Name the variable “SCIM Base URL” <em>(case sensitive, use spaces between words)</em></li>
   <li>
-    <p>Set the value of the “SCIM Base URL” to the base URL for your
-SCIM integration.</p>
+    <p>“Initial Variables” should be selected, click the “Add Initial
+Variable” link and add the following:</p>
 
     <table>
       <thead>
@@ -1244,8 +1296,9 @@ uniquely identifies reach resource, as described in <a href="https://tools.ietf.
 
 <h2 id="functionality">Functionality</h2>
 
-<p>Below are a list of the SCIM API endpoints that your SCIM API must
-support to work with Okta.</p>
+<p>Your SCIM API must support the following SCIM API endpoints to work with Okta:</p>
+
+<p><img src="/assets/img/scim_flowchart.png" alt="scim api endpoints required to work with Okta" width="640px" /></p>
 
 <h2 id="create-account-post-users">Create Account: POST /Users</h2>
 
@@ -1427,7 +1480,8 @@ of the <a href="https://tools.ietf.org/html/rfc7644">SCIM 2.0 Protocol Specifica
 customers ask that your application supports provisioning
 with Okta. Your SCIM API should support account deactivation via a
 PATCH to <code class="highlighter-rouge">/Users/{id}</code> where the payload of the PATCH request sets
-the <code class="highlighter-rouge">active</code> property of the user to <code class="highlighter-rouge">false</code>.</p>
+the <code class="highlighter-rouge">active</code> property of the user to <code class="highlighter-rouge">false</code>.
+Okta also does a PUT if the Patch is not supported for deactivation.</p>
 
 <p>Your SCIM API should allow account updates at the attribute level.
 If entitlements are supported, your SCIM API should also be able
@@ -1653,6 +1707,44 @@ requests are made to your API.</p>
 <p>For more details on rate limiting requests using the HTTP 429
 status code, see <a href="https://tools.ietf.org/html/rfc6585#section-4">section 4</a> of <a href="https://tools.ietf.org/html/rfc6585">RFC 6585</a>.</p>
 
+<h2 id="get-groups-api-endpoint">GET /Groups API Endpoint</h2>
+
+<p>Okta currently supports the /Groups endpoint for GET /Groups of a SCIM API. This is usually done to check for groups data and is not mandatory for SCIM to work. The minimum check we require is for the resources to be of JSON. check example below.</p>
+
+<p>Example:</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code><span class="o">{</span>
+  <span class="s2">"schemas"</span>: <span class="o">[</span>
+    <span class="s2">"urn:ietf:params:scim:api:messages:2.0:ListResponse"</span>
+  <span class="o">]</span>,
+  <span class="s2">"totalResults"</span>: 1,
+  <span class="s2">"startIndex"</span>: 0,
+  <span class="s2">"itemsPerPage"</span>: 0,
+  <span class="s2">"Resources"</span>: <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s2">"id"</span>: <span class="s2">"66ed8bece1944aa18bf96fb5c935c4ba"</span>,
+      <span class="s2">"schemas"</span>: <span class="o">[</span>
+        <span class="s2">"urn:ietf:params:scim:schemas:core:2.0:Group"</span>
+      <span class="o">]</span>,
+      <span class="s2">"displayName"</span>: <span class="s2">"Marketing"</span>,
+      <span class="s2">"members"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+          <span class="s2">"value"</span>: <span class="s2">"m1@atko.com"</span>,
+          <span class="s2">"</span><span class="nv">$ref</span><span class="s2">"</span>: <span class="s2">"localhost:8080/Users/12345"</span>,
+          <span class="s2">"display"</span>: <span class="s2">"Marketing User 1"</span>
+        <span class="o">}</span>,
+        <span class="o">{</span>
+          <span class="s2">"value"</span>: <span class="s2">"m2@atko.com"</span>,
+          <span class="s2">"</span><span class="nv">$ref</span><span class="s2">"</span>: <span class="s2">"localhost:8080/Users/12346"</span>,
+          <span class="s2">"display"</span>: <span class="s2">"Marketing User 2"</span>
+        <span class="o">}</span>
+      <span class="o">]</span>
+    <span class="o">}</span>
+  <span class="o">]</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
 <h2 id="scim-features-not-implemented-by-okta">SCIM Features Not Implemented by Okta</h2>
 
 <p>The following features are currently not supported by Okta:</p>
@@ -1698,8 +1790,8 @@ covered in
 <h3 id="groups-api-endpoint">/Groups API endpoint</h3>
 
 <p>Okta currently does not support using the <code class="highlighter-rouge">/Groups</code> endpoint of a SCIM
-API. When support is added for the <code class="highlighter-rouge">/Groups</code> endpoint, Okta plans
-on using the following HTTP requests against the <code class="highlighter-rouge">/Groups</code> endpoint:</p>
+API, except for <a href="#get-groups-api-endpoint"><code class="highlighter-rouge">GET /Groups</code></a>. When support is added for the <code class="highlighter-rouge">/Groups</code> endpoint, Okta plans
+to use the following HTTP requests against the <code class="highlighter-rouge">/Groups</code> endpoint:</p>
 
 <ul>
   <li>
@@ -1783,6 +1875,7 @@ application to Okta is the following:</p>
 <ol>
   <li>Check the Profile Attributes for your application.</li>
   <li>Check the Attribute Mappings for your application.</li>
+  <li>Run the second set of Runscope tests: <a href="/SCIMFiles/Okta-SCIM-CRUD-Test.json">Okta SCIM 2.0 CRUD Test</a></li>
 </ol>
 
 <h2 id="check-the-profile-attributes-for-your-application">Check the Profile Attributes for Your Application</h2>
@@ -1810,19 +1903,21 @@ supported by your application.</p>
 application appears to support attributes that are not
 supported by your SCIM API.</p>
 
-        <p>You can delete an attribute by selecting an attribute, then
-clicking the “Delete” button located in right hand attribute details pane.</p>
+        <p>You can delete an attribute by selecting it, then
+clicking the “Delete” button located in right hand attribute details pane.
+Before removing, check the mapping between Okta and Application and
+<strong>remove the mappings</strong> for the attribute(s) to be deleted.</p>
       </li>
       <li>After you’ve removed all unsupported attributes from the
-“Attributes” section, check through the remaining
-attributes. In particular, check that the following properties
+“Attributes” section, check the remaining
+attributes and ensure that the following properties
 for each attribute are what you expect them to be:
         <ul>
-          <li>Display name</li>
-          <li>Variable name</li>
-          <li>External name</li>
-          <li>External namespace</li>
-          <li>Data type</li>
+          <li>Display name – Example: Family name</li>
+          <li>Variable name – Example: isvapp.familyName</li>
+          <li>External name – Example: name.familyName</li>
+          <li>External namespace – Example: urn:ietf:params:scim:schemas:core:2.0:User</li>
+          <li>Data type – Example: String</li>
           <li>Attribute required
 Only mark an attribute as required if one of the following is
 true:
@@ -1833,18 +1928,95 @@ integration to work.</li>
 this attribute.</li>
             </ol>
           </li>
-          <li>Scope</li>
+          <li>Scope – Example: User personal</li>
         </ul>
       </li>
       <li>If the settings for any of your supported user attributes are
 incorrect, contact Okta and request the correction for your
-attribute.</li>
+attribute.
+<img src="/assets/img/family_name.png" alt="Screen shot of Family name" width="640px" /></li>
     </ul>
 
     <p>Click the blue “Back to profiles” link when you are done checking
 the Profile Attributes for your application.</p>
   </li>
 </ul>
+
+<h2 id="custom-attributes">Custom Attributes</h2>
+
+<p>If you need to add custom attributes apart from the attributes supported in the User core schema, 
+please add them under schemaExtensions under a custom external namespace. For example, your business
+rules might require the T-Shirt size for each user.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Attribute</th>
+      <th style="text-align: left">Example</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Display Name</td>
+      <td style="text-align: left">Assistants</td>
+      <td style="text-align: left">The display name for this attribute</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Variable Name</td>
+      <td style="text-align: left">assistants</td>
+      <td style="text-align: left">The name of this profile attribute</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">externalName</td>
+      <td style="text-align: left">assistants</td>
+      <td style="text-align: left">The name of the attribute in the third-party SCIM Server</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">externalNamespace</td>
+      <td style="text-align: left">urn:<Application Name="">:params:scim:schemas:1.0:User</Application></td>
+      <td style="text-align: left">The custom namespace of the attribute in the third-party SCIM Server. The SCIM Spec requires that the namespace be a unique URI (Section 3.3).</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Example User Profile:</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code><span class="o">{</span>
+  <span class="s2">"schemas"</span>: <span class="o">[</span>
+    <span class="s2">"urn:ietf:params:scim:schemas:core:2.0:User"</span>,
+    <span class="s2">"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User"</span>,
+    <span class="s2">"urn:myapp:params:scim:schemas:1.0:User"</span>
+  <span class="o">]</span>,
+  <span class="s2">"emails"</span>: <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s2">"type"</span>: <span class="s2">"work"</span>,
+      <span class="s2">"value"</span>: <span class="s2">"John.Doe@demoexample.com"</span>,
+      <span class="s2">"primary"</span>: <span class="s2">"true"</span>
+    <span class="o">}</span>
+  <span class="o">]</span>,
+  <span class="s2">"displayName"</span>: <span class="s2">"John Doe"</span>,
+  <span class="s2">"meta"</span>: <span class="o">{</span>
+    <span class="s2">"lastModified"</span>: <span class="s2">"2016-05-10T01:50:06.324Z"</span>
+  <span class="o">}</span>,
+  <span class="s2">"name"</span>: <span class="o">{</span>
+    <span class="s2">"familyName"</span>: <span class="s2">"Doe"</span>,
+    <span class="s2">"givenName"</span>: <span class="s2">"John"</span>
+  <span class="o">}</span>,
+  <span class="s2">"active"</span>: <span class="nb">true</span>,
+  <span class="s2">"id"</span>: <span class="s2">"40288086547842232328"</span>,
+  <span class="s2">"userName"</span>: <span class="s2">"johnDoe"</span>,
+  <span class="s2">"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User"</span>: <span class="o">{</span>
+    <span class="s2">"manager"</span>: <span class="o">{}</span>
+  <span class="o">}</span>,
+  <span class="s2">"urn:myapp:params:scim:schemas:1.0:User"</span>: <span class="o">{</span>
+    <span class="s2">"assistants"</span>: <span class="o">[</span>
+      <span class="s2">"person"</span>
+    <span class="o">]</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
 
 <h2 id="check-the-attribute-mappings-for-your-application">Check the Attribute Mappings for Your Application</h2>
 
