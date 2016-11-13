@@ -6,6 +6,8 @@ excerpt: Set Up an Authorization Service with OAuth 2.0 or OpenID Connect
 
 ## Overview
 
+> API Access Management is {% api_lifecycle beta %}.
+
 API Access Management allows you to build custom authorization servers in Okta which can be used to protect your own API endpoints. 
 An authorization server defines your security boundary, for example "staging" or "production."
 Within each authorization server you can define your own OAuth scopes, claims, and access policies. 
