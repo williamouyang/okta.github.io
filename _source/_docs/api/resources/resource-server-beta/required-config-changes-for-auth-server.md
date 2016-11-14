@@ -5,6 +5,8 @@ title: Configuration Changes Required for API Access Management Beta Update
 
 ## Configuration Changes Required for API Access Management Beta Update
 
+> API Access Management is {% api_lifecycle beta %}.
+
 Okta provides a private authorization server for OAuth 2.0 (Beta).
 However, with release 2016.45, you can use a shared authorization server instead, which provides several benefits:
 
