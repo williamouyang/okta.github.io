@@ -19,7 +19,7 @@ The policy API supports the following **policy operations**:
 * Create, read, update, and delete a policy
 * Activate and deactivate a policy
 
-The policy supports the following **rule operations**:
+The policy API supports the following **rule operations**:
 
 * Get all rules for a policy
 * Create, read, update, and delete a rule for a policy
@@ -29,7 +29,7 @@ The policy supports the following **rule operations**:
 
 ### Policy Evaluation
 
-When policy needs to be retrieved for a particular user, for example when the user attempts to log in to Okta, or when the user initiates a self-service operation, then a policy evaluation takes place.
+When a policy needs to be retrieved for a particular user, for example when the user attempts to log in to Okta, or when the user initiates a self-service operation, then a policy evaluation takes place.
 During policy evaluation each policy of the appropriate type is considered in turn, in the order indicated by the policy priority.   Each of the conditions associated with the policy is evaluated.  If one or more of the conditions cannot be met, then the next policy in the list is considered.  If the conditions can be met, then each of the rules associated with the policy is considered in turn, in the order specified by the rule priority.  Each of the conditions associated with a given rule is evaluated.  If all of the conditions associated with a rule are met, then the settings contained in the rule and in the associated policy are applied to the user.  If none of the policy rules have conditions that can be met, then the next policy in the list is considered.
 
 Policies that have no rules are not considered during evaluation, and will never be applied.
@@ -67,13 +67,13 @@ For example, assume the following policies exist.
 When policy is evaluated for a user, policy "A" will be evaluated first.  If the user is a member of the "Administrators" group then the rules associated with policy "A" will be evaluated.   If a match is found then the policy settings will be applied.
 If the user is not a member of teh "Administrators" group, then policy B would be evaluated.
 
-### Policy JSON Example
+<!-- ### Policy JSON Example
 
 ~~~json
 {
     [ADD UPDATED JSON HERE]
 }
-~~~
+~~~ -->
 
 ### Policy Object
 {: #PolicyObject }
@@ -99,7 +99,7 @@ _links | Hyperlinks | <a href="#LinksObject">Links Object</a> | No |
 ### Policy Settings Object
 {: #PolicySettingsObject }
 
-The policy settings object contains the policy level settings for the particular policy type.  Not all policy types have policy level settings.  For example, in Password Policy the settings object contains, among other items, the password complexity settings.   In Sign On policy, on the other hand, there are no policy level settings; all of the policy data is contained in the rules.  See the sections for the various policy types for a discussion of the settings objects specific to each type.
+The policy settings object contains the policy level settings for the particular policy type.  Not all policy types have policy level settings.  For example, in Password Policy the settings object contains, among other items, the password complexity settings.   In Sign On policy, on the other hand, there are no policy level settings; all of the policy data is contained in the rules.  Each policy type section explains the settings objects specific to that type.
 
 
 ### Conditions Object
@@ -122,11 +122,8 @@ deactivate | Action to deactivate a policy or rule | String | Yes |
 rules | Rules objects for a policy only | String | Yes | 
 policy | Policy object for a rule only | String | Yes | 
 
-
-
 ## Rules
 Each policy may contain one or more rules.  Rules, like policies contain conditions, which must be satisfied in order for the rule to be applied.  
-
 
 ### Rule Priority and Defaults
 
@@ -147,14 +144,13 @@ For example if a particular policy had two rules, "A" and "B" as below.
 If a request came in from the Radius endpoint but the request was on network then because Rule A has a higher priority, even though requests are coming from ON_NETWORK,
 the action in Rule A would be taken, and Rule B is not evaluated.
 
-### Rules Message Example
+<!-- ### Rules Message Example
 
 ~~~json
 {
     [ADD UPDATED JSON HERE]
 }
-~~~
-
+~~~ -->
 
 ### Rules Object
 {: #RulesObject }
@@ -172,7 +168,6 @@ created | Timestamp when the rule was created | Date | No | Assigned
 lastUpdated | Timestamp when the rule was last modified | Date | No | Assigned
 conditions | Conditions for rule | <a href="#RuleConditionsObject">Conditions Object</a> | No | 
 actions | Actions for rule | <a href="#RulesActionsObject">Rules Actions Objects</a> | No | 
-
 
 ### Actions Objects
 {: #RulesActionsObject }
@@ -223,13 +218,10 @@ exclude | The users to be excluded | Array | Yes |
 #### Group Condition Object
 {: #GroupConditionObject }
 
-
-
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
 include | The groups to be included | Array | Yes | 
 exclude | The groups to be excluded | Array | Yes | 
-
 
 #### AuthContext Condition Object
 {: #AuthContextConditionObject }
@@ -254,14 +246,13 @@ connection |  | `ANYWHERE`, `ON_NETWORK` or `OFF_NETWORK` | No |
 #### People Condition Object
 {: #PeopleConditionObject }
 
-
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
 users |  | <a href="#UserConditionObject">User Condition Object</a> | No | 
 
-#### Authentication Provider Condition Object
+<!-- #### Authentication Provider Condition Object
 
-[THIS SECTION TBD]
+[THIS SECTION TBD] -->
 
 ## Policy API Operations
 
@@ -346,8 +337,6 @@ HTTP 200:
 HTTP 204: 
 <a href="#PolicyObject">Policy Object</a>
 
-
-
 ### Delete Policy
 {:.api .api-operation}
 
@@ -413,8 +402,6 @@ curl -v -X PUT \
 HTTP 200: 
 <a href="#PolicyObject">Policy Object</a>
 
-
-
 ### Create a Policy
 {:.api .api-operation}
 
@@ -456,8 +443,6 @@ curl -v -X POST \
 HTTP 204: 
 <a href="#PolicyObject">Policy Object</a>
 
-
-
 ### Activate a Policy
 {:.api .api-operation}
 
@@ -483,8 +468,6 @@ curl -v -X POST \
 
 HTTP 204: 
 *No Content is returned when the activation is successful.*
-
-
 
 ### Deactivate a Policy
 {:.api .api-operation}
@@ -512,11 +495,7 @@ curl -v -X POST \
 HTTP 200: 
 *No Content is returned when the deactivation is successful.*
 
-
-
-
 ## Rules Operations
-
 
 ### Get Policy Rules
 {:.api .api-operation}
@@ -543,8 +522,6 @@ curl -v -X GET \
 
 HTTP 200: 
 <a href="#RulesObject">Rules Object</a>
-
-
 
 ### Create a rule
 {:.api .api-operation}
@@ -590,8 +567,6 @@ curl -v -X POST \
 HTTP 200: 
 <a href="#RulesObject">Rules Object</a>
 
-
-
 ### Delete a rule
 {:.api .api-operation}
 
@@ -618,8 +593,6 @@ curl -v -X DELETE \
 HTTP 204: 
 *No Content*
 
-
-
 ### Get a rule
 {:.api .api-operation}
 
@@ -645,8 +618,6 @@ curl -v -X GET \
 
 HTTP 200: 
 <a href="#RulesObject">Rules Object</a>
-
-
 
 ### Update a rule
 {:.api .api-operation}
@@ -695,8 +666,6 @@ curl -v -X PUT \
 HTTP 200: 
 <a href="#RulesObject">Rules Object</a>
 
-
-
 ### Activate A Rule
 {:.api .api-operation}
 
@@ -722,8 +691,6 @@ curl -v -X POST \
 
 HTTP 204: 
 *No content*
-
-
 
 ### Deactivate A Rule
 {:.api .api-operation}
@@ -751,13 +718,12 @@ curl -v -X POST \
 HTTP 204: 
 *No content*
 
-
 ## Type Specific Policy Data Structures
 
 ## Okta Sign On Policy
 {: #OktaSignOnPolicy }
 
-[THIS SECTION IN PROGRESS]
+<!-- [THIS SECTION IN PROGRESS] -->
 
 ### Policy Settings Data
 
@@ -765,7 +731,6 @@ Okta sign on policy does not contain policy settings data.  In the case of sign 
 
 ### Policy Conditions
 The following conditions may be applied to Okta Sign On Policy
-
 
 ### Rules Action Data
 
@@ -784,8 +749,6 @@ session | Session Rules | <a href="#SignonSessionObject">Signon Session Object</
 ### Signon Session Object
 {: #SignonSessionObject }
 
-
-
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
 maxSessionIdleMinutes | Maximum number of minutes that a user session can be idle before the session is ended. | Integer | No | 
@@ -798,13 +761,12 @@ The following conditions may be applied to the rules associated with Okta Sign O
 ## Okta MFA Policy
 {: #OktaMFAPolicy }
 
-[THIS SECTION IN PROGRESS]
+<!-- [THIS SECTION IN PROGRESS] -->
 
 ### Policy Settings Data
 
 #### Policy Factors Configuration Object
 {: #PolicyFactorsConfigurationObject }
-
 
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
@@ -816,10 +778,8 @@ okta_sms | Okta SMS | <a href="#PolicyFactorObject">Policy MFA Factor Object</a>
 rsa_token | RSA Token | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
 symantec_vip | Symantic VIP | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
 
-
 #### Policy MFA Factor Object
 {: #PolicyFactorObject }
-
 
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
@@ -830,15 +790,12 @@ enroll |  | <a href="#PolicyFactorEnrollObject">Policy Factor Enroll Object</a> 
 #### Policy Factor Enroll Object
 {: #PolicyFactorEnrollObject }
 
-
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
 self |  | `NOT_ALLOWED`, `OPTIONAL` or `REQUIRED` | Yes | 
 
-
 #### Policy Factor Consent Object
 {: #PolicyFactorConsentObject }
-
 
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
@@ -853,7 +810,6 @@ The following conditions may be applied to Okta MFA Policy
 
 #### Rules Actions Enroll Object
 {: #RulesActionsEnrollObject }
-
 
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
@@ -871,7 +827,6 @@ The following conditions may be applied to the rules associated with Okta MFA Po
 
 ### Policy Conditions
 The following conditions may be applied to Password Policy
-
 
 ### Rules Action Data
 
