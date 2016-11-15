@@ -216,7 +216,7 @@ PHP, reconfiguring Apache, and creating some symbolic links.
 
     ~~~ php
     $metadata_url_for = array(
-        'example-okta-com': '{metadata-url}'
+        'example-okta-com'=> '{metadata-url}'
     );
     ~~~
 
