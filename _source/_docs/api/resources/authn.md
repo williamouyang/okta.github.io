@@ -32,7 +32,7 @@ Public applications are any application that anonymously start an authentication
 
 Trusted applications are backend applications that act as authentication broker or login portal for your Okta organization and may start an authentication or recovery transaction with an administrator API token.  Trusted apps  may implement their own recovery flows and primary authentication process and may receive additional metadata about the user before primary authentication has successfully completed.
 
-> Trusted web applications may need to override [client request context](../getting_started/design_principles.html#client-request-context) to forward the originating client context for the user.
+> Trusted web applications may need to override the [client request context](../getting_started/design_principles.html#client-request-context) to forward the originating client context for the user.
 
 ## Transaction Model
 
@@ -1399,7 +1399,7 @@ curl -v -X POST \
 #### Enroll Okta SMS Factor
 {:.api .api-operation}
 
-Enrolls a user with the Okta `sms` factor and a [SMS profile](factors.html#sms-profile).  A text message with an OTP is sent to the device during enrollment and must be [activated](#activate-sms-factor) by following the `next` link relation to complete the enrollment process.
+Enrolls a user with the Okta `sms` factor and an [SMS profile](factors.html#sms-profile).  A text message with an OTP is sent to the device during enrollment and must be [activated](#activate-sms-factor) by following the `next` link relation to complete the enrollment process.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -2812,7 +2812,7 @@ If the `passCode` is invalid you will receive a `403 Forbidden` status code with
 
 ##### Send SMS Challenge (OTP)
 
-Omit `passCode` in the request to sent an OTP to the device
+Omit `passCode` in the request to sent an OTP to the device.
 
 ###### Request Example
 {:.api .api-request .api-request-example}
@@ -3825,7 +3825,7 @@ curl -v -X POST \
 
 #### Unlock Account with Trusted Application
 
-Allows a [trusted application](#trusted-application) such as an external portal to implement it's own primary authentication process and directly obtain a [recovery token](#recovery-token) for a user given just the user's identifier.
+Allows a [trusted application](#trusted-application) such as an external portal to implement its own primary authentication process and directly obtain a [recovery token](#recovery-token) for a user given just the user's identifier.
 
 > Directly obtaining a `recoveryToken` is a highly privileged operation that requires an administrator API token and should be restricted to [trusted web applications](#trusted-application).  Anyone that obtains a `recoveryToken` for a user and knows the answer to a user's recovery question can reset their password or unlock their account.
 
