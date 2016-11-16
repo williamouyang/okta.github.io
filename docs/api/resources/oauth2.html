@@ -236,7 +236,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		     <li><a href="/docs/api/resources/events.html">Events</a></li>
+		     
+		     
 		     
 		     
 		     
@@ -398,7 +401,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		     <li><a href="/docs/api/resources/groups.html">Groups</a></li>
+		     
 		     
 		     
 		     
@@ -565,7 +570,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
 		     <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
+		     
 		     
 		     
 		     
@@ -677,7 +685,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		     <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
+		     
 		     
 		     
 		     
@@ -839,7 +849,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
 		     <li><a href="/docs/api/resources/users.html">Users</a></li>
+		     
 		     
 		     
 		     
@@ -1304,8 +1317,14 @@ A Refresh Token will be returned if ‘offline_access’ scope is requested usin
 
 <h3 class="api api-operation" id="authentication-request">Authentication Request</h3>
 
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/v1/authorize</span> <span class="api-label api-label-ea "><i class="fa fa-flag"></i> Early Access</span></p>
 <div class="beta">
+<p>OpenID Connect:</p>
+</div>
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/v1/authorize</span> <span class="api-label api-label-ea "><i class="fa fa-flag"></i> Early Access</span></p>
+
+<div class="beta">
+<p>OAuth 2.0:</p>
+
 <p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/:authorizationServerId/v1/authorize</span> <span class="api-label api-label-beta "><i class="fa fa-warning"></i> Beta</span></p>
 </div>
 
@@ -1391,7 +1410,7 @@ A Refresh Token will be returned if ‘offline_access’ scope is requested usin
     </tr>
     <tr>
       <td>scope</td>
-      <td>Can be a combination of reserved scopes and custom scopes. The combination determines the claims that are returned in the access_token and id_token. The openid scope has to be specified to get back an id_token.</td>
+      <td><strong>Required.</strong> Can be a combination of reserved scopes and custom scopes. The combination determines the claims that are returned in the access_token and id_token. The openid scope has to be specified to get back an id_token.</td>
       <td>Query</td>
       <td>String</td>
       <td>TRUE</td>
