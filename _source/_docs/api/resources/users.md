@@ -105,6 +105,25 @@ The User model defines several **read-only** properties:
 | _links                | [link relations](#links-object) for the user's current `status` | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                                      | TRUE     | FALSE  | TRUE     |           |           |            |
 |-----------------------+-----------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
 
+{% beta %}
+
+Currently, while the profile image feature is in beta, when inspecting the schema, image properties are the `Object` datatype, containing an `extendedType` field with the value `Image`.
+When a user is retrieved via the API, however, the value will be a URL (represented as a String).  Some caveats apply:
+
+1) Image properties are described differently in the schema than how the data actually comes back.  The precise way this is signaled may change; however, the discrepancy is deliberate.  An image property is similar to a URL (in that the value is the same type), but is not a URL property. Special handling rules apply (described below).
+
+2) During beta, the URL returned is a placeholder URL, resolving to a placeholder image.  By GA, the URL returned will resolve to the image (that is, a logged in user can click it and retrieve the image).
+
+**Updating image property values via Users API**
+
+Okta does not support uploading images via the Users API.  As such, all operations in this API that update properties work in a slightly different way when applied to image properties:
+
+1)  When performing a full update, if the property is not passed, it is unset (if set).  The same applies if a partial update explicitly sets it to null.
+
+2)  When "updating" the value, it must be set to the value returned by a GET on that user (resulting in no change).  Any other value will not validate.
+
+{% endbeta %}
+
 > Metadata properties such as `id`, `status`, timestamps, `_links`, and `_embedded` are only available after a user is created.
 
 > `activated` timestamp will only be available for users activated after *06/30/2013*.<br>
