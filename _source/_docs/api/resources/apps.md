@@ -3866,16 +3866,16 @@ Your request will be rejected with a `403 Forbidden` status for applications wit
 
 {% beta %}
 
-Currently, while the profile image feature is in beta, when inspecting the schema, image properties are the `Object` datatype, containing an `extendedType` field with the value `Image`.
+During the profile image Beta, image property definitions in the schema are of the `Object` data type with an additional `extendedType` of `Image`.
 When a user's app profile is retrieved via the API, however, the value will be a URL (represented as a String).  Some caveats apply:
 
-1) Image properties are described differently in the schema than how the data actually comes back.  The precise way this is signaled may change; however, the discrepancy is deliberate.  An image property is similar to a URL (in that the value is the same type), but is not a URL property. Special handling rules apply (described below).
+1) Image properties are described differently in the schema than how the data actually comes back.  This discrepancy is deliberate for the time being, but is likely to change after Beta.  Special handling rules apply (described below).
 
-2) During beta, the URL returned is a placeholder URL, resolving to a placeholder image.  By GA, the URL returned will resolve to the image (that is, a logged in user can click it and retrieve the image).
+2) During Beta, the URL returned is a placeholder URL, resolving to a placeholder image.  By GA, the URL returned will resolve to the image (that is, a logged in user can click it and retrieve the image).
 
 **Updating image property values via Users API**
 
-Okta does not support uploading images via the Apps API.  As such, all operations in this API that update properties on a user work in a slightly different way when applied to image properties:
+Okta does not support uploading images via the Apps API.  All operations in this API that update properties on a user work in a slightly different way when applied to image properties:
 
 1)  When performing a full update, if the property is not passed, it is unset (if set).  The same applies if a partial update explicitly sets it to null.
 
