@@ -7,7 +7,7 @@ body {
     padding-top: 100px;
     position: relative;
 
-  @include media('<small') {
+  @include media('<medium') {
     padding-top: 75px;
   }
 

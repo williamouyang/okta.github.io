@@ -129,13 +129,12 @@
 
 @include media('<doc-min-toc') {
 	.TableOfContents {
-		@include padding(0 medium);
+		@include padding(0 large);
 		@include color('default');
 		order: -1;
 		position: static;
 		width: 100%;
 		z-index: 10;
-		padding: 0 get-spacing('large');
 		margin-bottom: 20px;
 		left: inherit;
 		right: 0;
@@ -154,6 +153,18 @@
 			font-size: 32px;
 			font-weight: 500;
 			line-height: 42px;
+
+			&:after {
+				display: block;
+				@include font-size(h2);
+				@include font-weight(h2);
+				@include line-height(h2);
+				margin: auto;
+				margin-top: get-spacing(small);
+				margin-bottom: -(get-spacing(x-small));
+				content: 'Table of Contents';
+				border-bottom: solid 1px get-color('gray-medium');
+			}
 		}
 
 		.is-level2 {
@@ -176,6 +187,12 @@
 		.TableOfContents-footer {
 			display: none;
 		}
+	}
+}
+
+@include media('<medium'){
+	.TableOfContents {
+		@include padding (0 small);
 	}
 }
 
