@@ -4,6 +4,7 @@
 	min-width: 280px;
 	position: relative;
 	width: 320px;
+	border-left: solid 1px get-color('gray-lightest');
 
 	&:before {
 		background: get-color('gray-lightest');

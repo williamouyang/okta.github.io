@@ -66,6 +66,7 @@
 @for $i from 1 through $grid-width {
 	.Column--#{$i} {
 		width: 100% * ($i / $grid-width);
+		max-width: 100% * ($i / $grid-width);
 	}
 
 	.ColumnOffset--#{$i - 1} {
