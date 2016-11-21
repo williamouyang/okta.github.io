@@ -156,9 +156,9 @@
 
 			&:after {
 				display: block;
-				@include font-size(h2);
-				@include font-weight(h2);
-				@include line-height(h2);
+				@include font-size(h4);
+				@include font-weight(h4);
+				@include line-height(h4);
 				margin: auto;
 				margin-top: get-spacing(small);
 				margin-bottom: -(get-spacing(x-small));

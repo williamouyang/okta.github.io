@@ -23,7 +23,7 @@
         <h3 class="Sidebar-title">Reference</h3>
         <ul class="Sidebar-nav">
             <li{% if page.title contains '/getting_started' %} class="is-active"{% endif %}>
-                <a href="/docs/api/getting_started/">Getting Started</a>
+                <a href="/docs/api/getting_started/api_test_client.html">Getting Started</a>
                 {% if page.id contains "docs/api/getting_started" %}
                     <ul>
                     {% assign docs = site.docs | sort: 'weight' %}
@@ -43,7 +43,7 @@
                 <!--<span>-->
                 <!--Authentication Reference-->
                 <!--</span>-->
-                <a href="/docs/api/resources">Authentication Reference</a>
+                <a href="/docs/api/resources/authn.html">Authentication Reference</a>
 
                 {% if page.id contains "docs/api/resources" %}
                     <ul id="Sidebar_References" class="Sidebar-hide">
@@ -60,7 +60,7 @@
             </li>
 
             <li>
-                <a href="/docs/api/reference/">API Reference</a>
+                <a href="/docs/api/resources/apps.html">API Reference</a>
 
                 {% if page.id contains "docs/api/resources" %}
                     <ul id="Sidebar_Resources" class="Sidebar-hide">
