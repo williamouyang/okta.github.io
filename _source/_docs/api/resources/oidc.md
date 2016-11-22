@@ -404,10 +404,10 @@ This API doesn't require any authentication and returns a JSON object with the f
     "response_types_supported": [
         "code",
         "code id_token",
+        "code token",
         "code id_token token",
         "id_token",
-        "id_token token",
-        "token"
+        "id_token token"
     ],
     "response_modes_supported": [
         "query",
@@ -418,7 +418,8 @@ This API doesn't require any authentication and returns a JSON object with the f
     "grant_types_supported": [
         "authorization_code",
         "implicit",
-        "refresh_token"
+        "refresh_token",
+        "password"
     ],
     "subject_types_supported": [
         "public"
@@ -431,7 +432,9 @@ This API doesn't require any authentication and returns a JSON object with the f
         "email",
         "profile",
         "address",
-        "phone"
+        "phone",
+        "offline_access",
+        "groups"
     ],
     "token_endpoint_auth_methods_supported": [
         "client_secret_basic",
@@ -440,14 +443,15 @@ This API doesn't require any authentication and returns a JSON object with the f
     ],
     "claims_supported": [
         "iss",
+        "ver",
         "sub",
         "aud",
         "iat",
         "exp",
+        "jti",
         "auth_time",
         "amr",
         "idp",
-        "idp_type",
         "nonce",
         "name",
         "nickname",
@@ -462,7 +466,13 @@ This API doesn't require any authentication and returns a JSON object with the f
         "locale",
         "address",
         "phone_number",
-        "updated_at"
+        "picture",
+        "website",
+        "gender",
+        "birthdate",
+        "updated_at",
+        "at_hash",
+        "c_hash"
     ],
     "introspection_endpoint": "https://${org}.okta.com/oauth2/v1/introspect",
     "introspection_endpoint_auth_methods_supported": [
