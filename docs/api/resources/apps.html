@@ -237,7 +237,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		     <li><a href="/docs/api/resources/events.html">Events</a></li>
+		     
+		     
 		     
 		     
 		     
@@ -402,7 +405,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		     <li><a href="/docs/api/resources/groups.html">Groups</a></li>
+		     
 		     
 		     
 		     
@@ -572,7 +577,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
 		     <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
+		     
 		     
 		     
 		     
@@ -686,7 +694,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		     <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
+		     
 		     
 		     
 		     
@@ -851,7 +861,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
 		     <li><a href="/docs/api/resources/users.html">Users</a></li>
+		     
 		     
 		     
 		     
@@ -6682,6 +6695,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <blockquote>
   <p>The Okta API currently doesn’t support entity tags for conditional updates.  It is only safe to fetch the most recent profile with <a href="#get-assigned-user-for-application">Get Assigned User for Application</a>, apply your profile update, then <code class="highlighter-rouge">POST</code> back the updated profile as long as you are the <strong>only</strong> user updating a user’s application profile.</p>
 </blockquote>
+
+<div class="beta">
+<p>During the profile image Beta, image property definitions in the schema are of the <code class="highlighter-rouge">Object</code> data type with an additional <code class="highlighter-rouge">extendedType</code> of <code class="highlighter-rouge">Image</code>.
+When a user’s app profile is retrieved via the API, however, the value will be a URL (represented as a String).  Some caveats apply:</p>
+
+<p>1) Image properties are described differently in the schema than how the data actually comes back.  This discrepancy is deliberate for the time being, but is likely to change after Beta.  Special handling rules apply (described below).</p>
+
+<p>2) During Beta, the URL returned is a placeholder URL, resolving to a placeholder image.  By GA, the URL returned will resolve to the image (that is, a logged in user can click it and retrieve the image).</p>
+
+<p><strong>Updating image property values via Users API</strong></p>
+
+<p>Okta does not support uploading images via the Apps API.  All operations in this API that update properties on a user work in a slightly different way when applied to image properties:</p>
+
+<p>1)  When performing a full update, if the property is not passed, it is unset (if set).  The same applies if a partial update explicitly sets it to null.</p>
+
+<p>2)  When “updating” the value, it must be set to the value returned by a GET on that user (resulting in no change).  Any other value will not validate.</p>
+
+</div>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000075"</span><span class="p">,</span><span class="w">

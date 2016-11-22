@@ -237,7 +237,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		     <li><a href="/docs/api/resources/events.html">Events</a></li>
+		     
+		     
 		     
 		     
 		     
@@ -402,7 +405,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		     <li><a href="/docs/api/resources/groups.html">Groups</a></li>
+		     
 		     
 		     
 		     
@@ -572,7 +577,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
 		     <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
+		     
 		     
 		     
 		     
@@ -686,7 +694,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		     <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
+		     
 		     
 		     
 		     
@@ -851,7 +861,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
 		     <li><a href="/docs/api/resources/users.html">Users</a></li>
+		     
 		     
 		     
 		     
@@ -959,10 +972,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </li>
 </ul>
 
-<blockquote>
-  <p>The <a href="/docs/guides/okta_sign-in_widget.html">Okta Sign-In Widget</a> is built on this API and is recommended for quick integration if you don’t have advanced use cases</p>
-</blockquote>
-
 <h3 id="application-types">Application Types</h3>
 
 <p>The behavior of the Okta Authentication API varies depending on the type of your application and your org’s security policies such as the <strong>Okta Sign-On Policy</strong>, <strong>MFA Enrollment Policy</strong>, or <strong>Password Policy</strong>.</p>
@@ -977,1450 +986,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h4 id="trusted-application">Trusted Application</h4>
 
-<p>Trusted applications are backend applications that act as authentication broker or login portal for your Okta organization and may start an authentication or recovery transaction with an administrator API token.  Trusted apps  may implement their own recovery flows and primary authentication process and may receive additional metadata about the user before primary authentication has successfully completed.</p>
+<p>Trusted applications are backend applications that act as authentication broker or login portal for your Okta organization and may start an authentication or recovery transaction with an administrator API token.  Trusted apps may implement their own recovery flows and primary authentication process and may receive additional metadata about the user before primary authentication has successfully completed.</p>
 
 <blockquote>
   <p>Trusted web applications may need to override the <a href="../getting_started/design_principles.html#client-request-context">client request context</a> to forward the originating client context for the user.</p>
 </blockquote>
 
-<h2 id="transaction-model">Transaction Model</h2>
-
-<p>The Authentication API is a <em>stateful</em> API that implements a finite state machine with <a href="#transaction-state">defined states</a> and transitions.  Each authentication or recovery transaction is issued a unique <a href="#state-token">state token</a> that must be passed with each subsequent request until the transaction is complete or canceled.</p>
-
-<p>The Authentication API leverages the <a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a> format to publish <code class="highlighter-rouge">next</code> and <code class="highlighter-rouge">prev</code> links for the current transaction state which should be used to transition the state machine.</p>
-
-<h3 id="authentication-transaction-model">Authentication Transaction Model</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>stateToken</td>
-      <td>ephemeral <a href="#state-token">token</a> that encodes the current state of an authentication transaction</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>sessionToken</td>
-      <td>ephemeral <a href="#session-token">one-time token</a> used to bootstrap an Okta session</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>expiresAt</td>
-      <td>lifetime of the <code class="highlighter-rouge">stateToken</code> or <code class="highlighter-rouge">sessionToken</code> (See <a href="#tokens">Tokens</a>)</td>
-      <td>Date</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>status</td>
-      <td>current <a href="#transaction-state">state</a> of the authentication transaction</td>
-      <td><a href="#transaction-state">Transaction State</a></td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>relayState</td>
-      <td>optional opaque value that is persisted for the lifetime of the authentication transaction</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td>2048</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>factorResult</td>
-      <td>optional status of last verification attempt for a given factor</td>
-      <td><a href="#factor-result">Factor Result</a></td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>_embedded</td>
-      <td><a href="#embedded-resources">embedded resources</a> for the current <code class="highlighter-rouge">status</code></td>
-      <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>_links</td>
-      <td><a href="#links-object">link relations</a> for the current <code class="highlighter-rouge">status</code></td>
-      <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<blockquote>
-  <p>The <code class="highlighter-rouge">relayState</code> paramater is an opaque value for the transaction and processed as untrusted data which is just echoed in a response.  It is the client’s responsibility to escape/encode this value before displaying in a UI such as a HTML document using <a href="https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet">best-practices</a></p>
-</blockquote>
-
-<h3 id="recovery-transaction-model">Recovery Transaction Model</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>stateToken</td>
-      <td>ephemeral <a href="#state-token">token</a> that encodes the current state of a recovery transaction</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>recoveryToken</td>
-      <td>ephemeral <a href="#recovery-token">one-time token</a> for recovery transaction to be distributed to the end-user</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>expiresAt</td>
-      <td>lifetime of the <code class="highlighter-rouge">stateToken</code> or <code class="highlighter-rouge">recoveryToken</code> (See <a href="#tokens">Tokens</a>)</td>
-      <td>Date</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>status</td>
-      <td>current <a href="#transaction-state">state</a> of the recovery transaction</td>
-      <td><a href="#transaction-state">Transaction State</a></td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>relayState</td>
-      <td>optional opaque value that is persisted for the lifetime of the recovery transaction</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td>2048</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>factorType</td>
-      <td>type of selected factor for the recovery transaction</td>
-      <td><code class="highlighter-rouge">EMAIL</code> or <code class="highlighter-rouge">SMS</code></td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>recoveryType</td>
-      <td>type of recovery operation</td>
-      <td><code class="highlighter-rouge">PASSWORD</code> or <code class="highlighter-rouge">UNLOCK</code></td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>factorResult</td>
-      <td>optional status of last verification attempt for the <code class="highlighter-rouge">factorType</code></td>
-      <td><a href="#factor-result">Factor Result</a></td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>_embedded</td>
-      <td><a href="#embedded-resources">embedded resources</a> for the current <code class="highlighter-rouge">status</code></td>
-      <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>_links</td>
-      <td><a href="#links-object">link relations</a> for the current <code class="highlighter-rouge">status</code></td>
-      <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<blockquote>
-  <p>The <code class="highlighter-rouge">relayState</code> paramater is an opaque value for the transaction and processed as untrusted data which is just echoed in a response.  It is the client’s responsibility to escape/encode this value before displaying in a UI such as a HTML document using <a href="https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet">best-practices</a></p>
-</blockquote>
-
-<h3 id="transaction-state">Transaction State</h3>
-
-<p><img src="/assets/img/auth-state-model.png" alt="State Model Diagram" title="State Model Diagram" /></p>
-
-<p>An authentication or recovery transaction has one of the following states:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Value</th>
-      <th>Description</th>
-      <th>Next Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">PASSWORD_WARN</code></td>
-      <td>The user’s password was successfully validated but is about to expire and should be changed.</td>
-      <td>POST to the <code class="highlighter-rouge">next</code> link relation to <a href="#change-password">change the user’s password</a>.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">PASSWORD_EXPIRED</code></td>
-      <td>The user’s password was successfully validated but is expired.</td>
-      <td>POST to the <code class="highlighter-rouge">next</code> link relation to <a href="#change-password">change the user’s expired password</a>.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">RECOVERY</code></td>
-      <td>The user has requested a recovery token to reset their password or unlock their account.</td>
-      <td>POST to the <code class="highlighter-rouge">next</code> link relation to <a href="#answer-recovery-question">answer the user’s recovery question</a>.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">RECOVERY_CHALLENGE</code></td>
-      <td>The user must verify the factor-specific recovery challenge.</td>
-      <td>POST to the <code class="highlighter-rouge">verify</code> link relation to <a href="#verify-recovery-factor">verify the recovery factor</a>.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">PASSWORD_RESET</code></td>
-      <td>The user successfully answered their recovery question and must to set a new password.</td>
-      <td>POST to the <code class="highlighter-rouge">next</code> link relation to <a href="#reset-password">reset the user’s password</a>.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">LOCKED_OUT</code></td>
-      <td>The user account is locked; self-service unlock or admin unlock is required.</td>
-      <td>POST to the <code class="highlighter-rouge">unlock</code> link relation to perform a <a href="#unlock-account">self-service unlock</a>.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">MFA_ENROLL</code></td>
-      <td>The user must select and enroll an available factor for additional verification.</td>
-      <td>POST to the <code class="highlighter-rouge">enroll</code> link relation for a specific factor to <a href="#enroll-factor">enroll the factor</a>.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">MFA_ENROLL_ACTIVATE</code></td>
-      <td>The user must activate the factor to complete enrollment.</td>
-      <td>POST to the <code class="highlighter-rouge">next</code> link relation to <a href="#activate-factor">activate the factor</a>.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">MFA_REQUIRED</code></td>
-      <td>The user must provide additional verification with a previously enrolled factor.</td>
-      <td>POST to the <code class="highlighter-rouge">verify</code> link relation for a specific factor to <a href="#verify-factor">provide additional verification</a>.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">MFA_CHALLENGE</code></td>
-      <td>The user must verify the factor-specific challenge.</td>
-      <td>POST to the <code class="highlighter-rouge">verify</code> link relation to <a href="#verify-factor">verify the factor</a>.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">SUCCESS</code></td>
-      <td>The transaction has completed successfully</td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<p>You advance the authentication or recovery transaction to the next state by posting a request with a valid <a href="#state-token">state token</a> to the the <code class="highlighter-rouge">next</code> link relation published in the <a href="#links-object">JSON HAL links object</a> for the response.</p>
-
-<p><a href="#enroll-factor">Enrolling a factor</a> and <a href="#verify-factor">verifying a factor</a> do not have <code class="highlighter-rouge">next</code> link relationships as the end-user must make a selection of which factor to enroll or verify.</p>
-
-<blockquote>
-  <p>You should never assume a specific state transition or URL when navigating the <a href="#transaction-state">state model</a>.  Always inspect the response for <code class="highlighter-rouge">status</code> and dynamically follow the <a href="#links-object">published link relations</a>.</p>
-</blockquote>
-
-<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"activate"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/authn/factors/ostf2xjtDKWFPZIKYDZV/lifecycle/activate"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"POST"</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"prev"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/authn/previous"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"POST"</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"skip"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/authn/skip"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"POST"</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"cancel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/authn/cancel"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"POST"</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<h3 id="tokens">Tokens</h3>
-
-<p>Authentication API operations will return different token types depending on the <a href="#transaction-state">state</a> of the authentication or recovery transaction.</p>
-
-<h4 id="state-token">State Token</h4>
-
-<p>Ephemeral token that encodes the current state of an authentication or recovery transaction.</p>
-
-<ul>
-  <li>The <code class="highlighter-rouge">stateToken</code> must be passed with every request except when verifying a <code class="highlighter-rouge">recoveryToken</code> that was distributed out-of-band</li>
-  <li>The <code class="highlighter-rouge">stateToken</code> is only intended to be used between the web application performing end-user authentication and the Okta API. It should never distributed to the end-user via email or other out-of-band mechanism.</li>
-  <li>The lifetime of the <code class="highlighter-rouge">stateToken</code> uses a sliding scale expiration algorithm that extends with every request.  Always introspect the <code class="highlighter-rouge">expiresAt</code> property for the transaction when making decisions based on lifetime.</li>
-</ul>
-
-<blockquote>
-  <p>All Authentication API operations will return <code class="highlighter-rouge">401 Unauthorized</code> status code when you attempt to use an expired state token.</p>
-</blockquote>
-
-<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">401</span> <span class="ne">Unauthorized</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
-
-<span class="p">{</span><span class="w">
-  </span><span class="nt">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000011"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid token provided"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"errorLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000011"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"errorId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oaeY-4G_TBUTBSZAn9n7oZCfw"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"errorCauses"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<blockquote>
-  <p>State transitions are strictly enforced for state tokens.  You will receive a <code class="highlighter-rouge">403 Forbidden</code> status code if you call an Authentication API operation with a <code class="highlighter-rouge">stateToken</code> with an invalid <a href="#transaction-state">state</a>.</p>
-</blockquote>
-
-<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
-
-<span class="p">{</span><span class="w">
-  </span><span class="nt">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000079"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This operation is not allowed in the current authentication state."</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"errorLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000079"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"errorId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oaen9Ly_ivHQJ-STb8KiADh9w"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"errorCauses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This operation is not allowed in the current authentication state."</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<h4 id="recovery-token">Recovery Token</h4>
-
-<p>One-time token issued as <code class="highlighter-rouge">recoveryToken</code> response parameter when a recovery transaction transitions to the <code class="highlighter-rouge">RECOVERY</code> status.</p>
-
-<ul>
-  <li>The token can be exchanged for a <code class="highlighter-rouge">stateToken</code> to recover a user’s password or unlock their account.</li>
-  <li>Unlike the <code class="highlighter-rouge">statusToken</code> the <code class="highlighter-rouge">recoveryToken</code> should be distributed out-of-band to a user such as via email.</li>
-  <li>The lifetime of the <code class="highlighter-rouge">recoveryToken</code> is managed by the organization’s security policy.</li>
-</ul>
-
-<p>The <code class="highlighter-rouge">recoveryToken</code> is sent via an out-of-band channel to the end-user’s verified email address or SMS phone number and acts as primary authentication for the recovery transaction.</p>
-
-<blockquote>
-  <p>Directly obtaining a <code class="highlighter-rouge">recoveryToken</code> is a highly privileged operation and should be restricted to trusted web applications.  Anyone that obtains a <code class="highlighter-rouge">recoveryToken</code> for a user and knows the answer to a user’s recovery question can reset their password or unlock their account.</p>
-</blockquote>
-
-<h4 id="session-token">Session Token</h4>
-
-<p>One-time token issued as <code class="highlighter-rouge">sessionToken</code> response parameter when an authentication transaction completes with the <code class="highlighter-rouge">SUCCESS</code> status.</p>
-
-<ul>
-  <li>The token can be exchanged for a session with the <a href="sessions.html#create-session-with-session-token">Session API</a> or converted to a <a href="/docs/examples/session_cookie.html">session cookie</a>.</li>
-  <li>The lifetime of the <code class="highlighter-rouge">sessionToken</code> is the same as the lifetime of a user’s session and managed by the organization’s security policy.</li>
-</ul>
-
-<h3 id="factor-result">Factor Result</h3>
-
-<p>The <code class="highlighter-rouge">MFA_CHALLENGE</code> or <code class="highlighter-rouge">RECOVERY_CHALLENGE</code> state can return an additional property <strong>factorResult</strong> that provides additional context for the last factor verification attempt.</p>
-
-<p>The following table shows the possible values for this property:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>factorResult</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">WAITING</code></td>
-      <td>Factor verification has started but not yet completed (e.g user hasn’t answered phone call yet)</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">CANCELLED</code></td>
-      <td>Factor verification was canceled by user</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">TIMEOUT</code></td>
-      <td>Unable to verify factor within the allowed time window</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">TIME_WINDOW_EXCEEDED</code></td>
-      <td>Factor was successfully verified but outside of the computed time window.  Another verification is required in current time window.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">PASSCODE_REPLAYED</code></td>
-      <td>Factor was previously verified within the same time window.  User must wait another time window and retry with a new verification.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">ERROR</code></td>
-      <td>Unexpected server error occurred verifying factor.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="links-object">Links Object</h3>
-
-<p>Specifies link relations (See <a href="http://tools.ietf.org/html/rfc5988">Web Linking</a>) available for the current <a href="#transaction-state">transaction state</a> using the <a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON Hypertext Application Language</a> specification.  These links are used to transition the <a href="#transaction-state">state machine</a> of the authentication or recovery transaction.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Link Relation Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>next</td>
-      <td>Transitions the  <a href="#transaction-state">state machine</a> to the next state.  <strong>Note: The <code class="highlighter-rouge">name</code> of the link relationship will provide a hint of the next operation required</strong></td>
-    </tr>
-    <tr>
-      <td>prev</td>
-      <td>Transitions the  <a href="#transaction-state">state machine</a> to the previous state.</td>
-    </tr>
-    <tr>
-      <td>cancel</td>
-      <td>Cancels the current  transaction and revokes the <a href="#state-token">state token</a>.</td>
-    </tr>
-    <tr>
-      <td>skip</td>
-      <td>Skips over the current  transaction state to the next valid <a href="#transaction-state">state</a></td>
-    </tr>
-    <tr>
-      <td>resend</td>
-      <td>Resends a challenge or OTP to a device</td>
-    </tr>
-  </tbody>
-</table>
-
-<blockquote>
-  <p>The Links Object is <strong>read-only</strong></p>
-</blockquote>
-
-<h2 id="embedded-resources">Embedded Resources</h2>
-
-<h3 id="user-object">User Object</h3>
-
-<p>A subset of <a href="users.html#user-model">user properties</a> published in an authentication or recovery transaction after the user successfully completes primary authentication.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Unique</th>
-      <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>id</td>
-      <td>unique key for user</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>passwordChanged</td>
-      <td>timestamp when user’s password last changed</td>
-      <td>Date</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>profile</td>
-      <td>user’s profile</td>
-      <td><a href="#user-profile-object">User Profile Object</a></td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>recovery_question</td>
-      <td>user’s recovery question</td>
-      <td><a href="#recovery-question-object">Recovery Question Object</a></td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
- </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00udnlQDVLVRIVXESCMZ"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"passwordChanged"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-09-08T20:14:45.000Z"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dade.murphy@example.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"firstName"</span><span class="p">:</span><span class="s2">"Dade"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Murphy"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"locale"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en_US"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"timeZone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="w">
- </span><span class="p">},</span><span class="w">
- </span><span class="nt">"recovery_question"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Who's a major player in the cowboy scene?"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<h4 id="user-profile-object">User Profile Object</h4>
-
-<p>Subset of <a href="users.html#profile-object">profile properties</a> for a user</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Unique</th>
-      <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>login</td>
-      <td>unique login for user</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>firstName</td>
-      <td>first name of user</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>lastName</td>
-      <td>last name of user</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>locale</td>
-      <td>user’s default location for purposes of localizing items such as currency, date time format, numerical representations, etc.</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td><a href="https://tools.ietf.org/html/rfc5646">RFC 5646</a></td>
-    </tr>
-    <tr>
-      <td>timeZone</td>
-      <td>user’s time zone</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td><a href="https://tools.ietf.org/html/rfc6557">IANA Time Zone database format</a></td>
-    </tr>
-  </tbody>
-</table>
-
-<h4 id="recovery-question-object">Recovery Question Object</h4>
-
-<p>User’s recovery question used for verification of a recovery transaction</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Unique</th>
-      <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>question</td>
-      <td>user’s recovery question</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="password-policy-object">Password Policy Object</h3>
-
-<p>A subset of policy settings for the user’s assigned password policy published during <code class="highlighter-rouge">PASSWORD_WARN</code>, <code class="highlighter-rouge">PASSWORD_EXPIRED</code>, or <code class="highlighter-rouge">PASSWORD_RESET</code> states</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Unique</th>
-      <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>expiration</td>
-      <td>password expiration settings</td>
-      <td><a href="#password-expiration-object">Password Expiration Object</a></td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>complexity</td>
-      <td>password complexity settings</td>
-      <td><a href="#password-complexity-object">Password Complexity Object</a></td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"expiration"</span><span class="p">:{</span><span class="w">
-    </span><span class="nt">"passwordExpireDays"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-  </span><span class="p">},</span><span class="w"> 
-  </span><span class="nt">"complexity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> 
-    </span><span class="nt">"minLowerCase"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> 
-    </span><span class="nt">"minUpperCase"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> 
-    </span><span class="nt">"minNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> 
-    </span><span class="nt">"minSymbol"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> 
-    </span><span class="nt">"excludeUsername"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="w">
-    </span><span class="p">},</span><span class="w"> 
-   </span><span class="nt">"age"</span><span class="p">:{</span><span class="w">
-     </span><span class="nt">"minAgeMinutes"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w"> 
-     </span><span class="nt">"historyCount"</span><span class="p">:</span><span class="mi">0</span><span class="w"> 
-    </span><span class="p">}</span><span class="w"> 
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<h4 id="password-expiration-object">Password Expiration Object</h4>
-
-<p>Specifies the password age requirements of the assigned password policy</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Unique</th>
-      <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>passwordExpireDays</td>
-      <td>number of days before password is expired</td>
-      <td>Number</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<h4 id="password-complexity-object">Password Complexity Object</h4>
-
-<p>Specifies the password complexity requirements of the assigned password policy</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Unique</th>
-      <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>minLength</td>
-      <td>minimum number of characters for password</td>
-      <td>Number</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>minLowerCase</td>
-      <td>minimum number of lower case characters for password</td>
-      <td>Number</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>minUpperCase</td>
-      <td>minimum number of upper case characters for password</td>
-      <td>Number</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>minNumber</td>
-      <td>minimum number of numeric characters for password</td>
-      <td>Number</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>minSymbol</td>
-      <td>minimum number of symbol characters for password</td>
-      <td>Number</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>excludeUsername</td>
-      <td>Prevents username from appearing in the password</td>
-      <td>boolean</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<h4 id="password-age-object">Password Age Object</h4>
-
-<p>Specifies the password requirements related to password age and history</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Unique</th>
-      <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>minAgeMinutes</td>
-      <td>minimum number of minutes required since the last password change</td>
-      <td>Number</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>historyCount</td>
-      <td>Number of previous passwords that the current password can’t match</td>
-      <td>Number</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="factor-object">Factor Object</h3>
-
-<p>A subset of <a href="factors.html#factor-model">factor properties</a> published in an authentication transaction during <code class="highlighter-rouge">MFA_ENROLL</code>, <code class="highlighter-rouge">MFA_REQUIRED</code>, or <code class="highlighter-rouge">MFA_CHALLENGE</code> states</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Unique</th>
-      <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>id</td>
-      <td>unique key for factor</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>factorType</td>
-      <td>type of factor</td>
-      <td><a href="factors.html#factor-type">Factor Type</a></td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>provider</td>
-      <td>factor provider</td>
-      <td><a href="factors.html#provider-type">Provider Type</a></td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>profile</td>
-      <td>profile of a <a href="factors.html#supported-factors-for-providers">supported factor</a></td>
-      <td><a href="factors.html#factor-profile-object">Factor Profile Object</a></td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>_embedded</td>
-      <td><a href="#factor-embedded-resources">embedded resources</a> related to the factor</td>
-      <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>_links</td>
-      <td><a href="#factor-links-object">discoverable resources</a> for the factor</td>
-      <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ostfm3hPNYSOIOIVTQWY"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"factorType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"token:software:totp"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OKTA"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"credentialId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dade.murphy@example.com"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"verify"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/authn/factors/ostfm3hPNYSOIOIVTQWY/verify"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"POST"</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<h4 id="factor-embedded-resources">Factor Embedded Resources</h4>
-
-<h5 id="totp-factor-activation-object">TOTP Factor Activation Object</h5>
-
-<p>TOTP factors when activated have an embedded verification object which describes the <a href="http://tools.ietf.org/html/rfc6238">TOTP</a> algorithm parameters.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Unique</th>
-      <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>timeStep</td>
-      <td>time-step size for TOTP</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>sharedSecret</td>
-      <td>unique secret key for prover</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>encoding</td>
-      <td>encoding of <code class="highlighter-rouge">sharedSecret</code></td>
-      <td><code class="highlighter-rouge">base32</code> or <code class="highlighter-rouge">base64</code></td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>keyLength</td>
-      <td>number of digits in an TOTP value</td>
-      <td>Number</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>_links</td>
-      <td>discoverable resources related to the activation</td>
-      <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"activation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"timeStep"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"sharedSecret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HE64TMLL2IUZW2ZLB"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"encoding"</span><span class="p">:</span><span class="w"> </span><span class="s2">"base32"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"keyLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<h6 id="totp-activation-links-object">TOTP Activation Links Object</h6>
-
-<p>Specifies link relations (See <a href="http://tools.ietf.org/html/rfc5988">Web Linking</a>) available for the TOTP activation object using the <a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON Hypertext Application Language</a> specification.  This object is used for dynamic discovery of related resources and operations.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Link Relation Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>qrcode</td>
-      <td>QR code that encodes the TOTP parameters that can be used for enrollment</td>
-    </tr>
-  </tbody>
-</table>
-
-<h5 id="phone-object">Phone Object</h5>
-
-<p>The phone object describes previously enrolled phone numbers for the <code class="highlighter-rouge">sms</code> factor.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Unique</th>
-      <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>id</td>
-      <td>unique key for phone</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>profile</td>
-      <td>profile of phone</td>
-      <td><a href="#phone-profile-object">Phone Profile Object</a></td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>status</td>
-      <td>status of phone</td>
-      <td><code class="highlighter-rouge">ACTIVE</code> or <code class="highlighter-rouge">INACTIVE</code></td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mbl198rKSEWOSKRIVIFT"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"phoneNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+1 XXX-XXX-1337"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<h6 id="phone-profile-object">Phone Profile Object</h6>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Unique</th>
-      <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>phoneNumber</td>
-      <td>masked phone number</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<h5 id="phone-object-1">Phone Object</h5>
-
-<p>The phone object describes previously enrolled phone numbers for the <code class="highlighter-rouge">sms</code> factor.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Unique</th>
-      <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>id</td>
-      <td>unique key for phone</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>profile</td>
-      <td>profile of phone</td>
-      <td><a href="#phone-profile-object">Phone Profile Object</a></td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>status</td>
-      <td>status of phone</td>
-      <td><code class="highlighter-rouge">ACTIVE</code> or <code class="highlighter-rouge">INACTIVE</code></td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<h5 id="push-factor-activation-object">Push Factor Activation Object</h5>
-
-<p>Push factors must complete activation on the device by scanning the QR code or visiting activation link sent via email or sms.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Unique</th>
-      <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>expiresAt</td>
-      <td>lifetime of activation</td>
-      <td>Date</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>_links</td>
-      <td>discoverable resources related to the activation</td>
-      <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"activation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-13T07:44:22.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"send"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/lifecycle/activate/email"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-              </span><span class="s2">"POST"</span><span class="w">
-            </span><span class="p">]</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sms"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/lifecycle/activate/sms"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-              </span><span class="s2">"POST"</span><span class="w">
-            </span><span class="p">]</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"qrcode"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/qr/00Ji8qVBNJD4LmjYy1WZO2VbNqvvPdaCVua-1qjypa"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/png"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<h6 id="push-factor-activation-links-object">Push Factor Activation Links Object</h6>
-
-<p>Specifies link relations (See <a href="http://tools.ietf.org/html/rfc5988">Web Linking</a>) available for the push factor activation object using the <a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON Hypertext Application Language</a> specification.  This object is used for dynamic discovery of related resources and operations.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Link Relation Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>qrcode</td>
-      <td>QR code that encodes the push activation code needed for enrollment on the device</td>
-    </tr>
-    <tr>
-      <td>send</td>
-      <td>Sends an activation link via <code class="highlighter-rouge">email</code> or <code class="highlighter-rouge">sms</code> for users who can’t scan the QR code</td>
-    </tr>
-  </tbody>
-</table>
-
-<h5 id="factor-links-object">Factor Links Object</h5>
-
-<p>Specifies link relations (See <a href="http://tools.ietf.org/html/rfc5988">Web Linking</a>) available for the factor using the <a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON Hypertext Application Language</a> specification.  This object is used for dynamic discovery of related resources and operations.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Link Relation Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>enroll</td>
-      <td><a href="#enroll-factor">Enrolls a factor</a></td>
-    </tr>
-    <tr>
-      <td>verify</td>
-      <td><a href="#verify-factor">Verifies a factor</a></td>
-    </tr>
-    <tr>
-      <td>questions</td>
-      <td>Lists all possible questions for the <code class="highlighter-rouge">question</code> factor type</td>
-    </tr>
-    <tr>
-      <td>resend</td>
-      <td>Resends a challenge or OTP to a device</td>
-    </tr>
-  </tbody>
-</table>
-
-<blockquote>
-  <p>The Links Object is <strong>read-only</strong></p>
-</blockquote>
+<h3 id="getting-started-with-authentication">Getting Started with Authentication</h3>
+
+<ol>
+  <li>Make sure you need the API. Check out the <a href="/docs/guides/okta_sign-in_widget.html">Okta Sign-In Widget</a> which is built on the Authentication API. The Sign-In Widget easier to use and supports basic use cases.</li>
+  <li>For more advanced use cases, learn <a href="/docs/api/getting_started/api_test_client.html">the Okta API basics</a>.</li>
+  <li>Explore the Authentication API using <a href="/docs/api/getting_started/api_test_client.html#collections">the Postman collection</a>.</li>
+</ol>
 
 <h2 id="authentication-operations">Authentication Operations</h2>
 
@@ -7136,6 +5714,1446 @@ Okta will not publish additional metadata about the user until primary authentic
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
+
+<h2 id="transaction-model">Transaction Model</h2>
+
+<p>The Authentication API is a <em>stateful</em> API that implements a finite state machine with <a href="#transaction-state">defined states</a> and transitions.  Each authentication or recovery transaction is issued a unique <a href="#state-token">state token</a> that must be passed with each subsequent request until the transaction is complete or canceled.</p>
+
+<p>The Authentication API leverages the <a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a> format to publish <code class="highlighter-rouge">next</code> and <code class="highlighter-rouge">prev</code> links for the current transaction state which should be used to transition the state machine.</p>
+
+<h3 id="authentication-transaction-model">Authentication Transaction Model</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Readonly</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>stateToken</td>
+      <td>ephemeral <a href="#state-token">token</a> that encodes the current state of an authentication transaction</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>sessionToken</td>
+      <td>ephemeral <a href="#session-token">one-time token</a> used to bootstrap an Okta session</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>expiresAt</td>
+      <td>lifetime of the <code class="highlighter-rouge">stateToken</code> or <code class="highlighter-rouge">sessionToken</code> (See <a href="#tokens">Tokens</a>)</td>
+      <td>Date</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>status</td>
+      <td>current <a href="#transaction-state">state</a> of the authentication transaction</td>
+      <td><a href="#transaction-state">Transaction State</a></td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>relayState</td>
+      <td>optional opaque value that is persisted for the lifetime of the authentication transaction</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td>2048</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>factorResult</td>
+      <td>optional status of last verification attempt for a given factor</td>
+      <td><a href="#factor-result">Factor Result</a></td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>_embedded</td>
+      <td><a href="#embedded-resources">embedded resources</a> for the current <code class="highlighter-rouge">status</code></td>
+      <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>_links</td>
+      <td><a href="#links-object">link relations</a> for the current <code class="highlighter-rouge">status</code></td>
+      <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>The <code class="highlighter-rouge">relayState</code> paramater is an opaque value for the transaction and processed as untrusted data which is just echoed in a response.  It is the client’s responsibility to escape/encode this value before displaying in a UI such as a HTML document using <a href="https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet">best-practices</a></p>
+</blockquote>
+
+<h3 id="recovery-transaction-model">Recovery Transaction Model</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Readonly</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>stateToken</td>
+      <td>ephemeral <a href="#state-token">token</a> that encodes the current state of a recovery transaction</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>recoveryToken</td>
+      <td>ephemeral <a href="#recovery-token">one-time token</a> for recovery transaction to be distributed to the end-user</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>expiresAt</td>
+      <td>lifetime of the <code class="highlighter-rouge">stateToken</code> or <code class="highlighter-rouge">recoveryToken</code> (See <a href="#tokens">Tokens</a>)</td>
+      <td>Date</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>status</td>
+      <td>current <a href="#transaction-state">state</a> of the recovery transaction</td>
+      <td><a href="#transaction-state">Transaction State</a></td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>relayState</td>
+      <td>optional opaque value that is persisted for the lifetime of the recovery transaction</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td>2048</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>factorType</td>
+      <td>type of selected factor for the recovery transaction</td>
+      <td><code class="highlighter-rouge">EMAIL</code> or <code class="highlighter-rouge">SMS</code></td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>recoveryType</td>
+      <td>type of recovery operation</td>
+      <td><code class="highlighter-rouge">PASSWORD</code> or <code class="highlighter-rouge">UNLOCK</code></td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>factorResult</td>
+      <td>optional status of last verification attempt for the <code class="highlighter-rouge">factorType</code></td>
+      <td><a href="#factor-result">Factor Result</a></td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>_embedded</td>
+      <td><a href="#embedded-resources">embedded resources</a> for the current <code class="highlighter-rouge">status</code></td>
+      <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>_links</td>
+      <td><a href="#links-object">link relations</a> for the current <code class="highlighter-rouge">status</code></td>
+      <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>The <code class="highlighter-rouge">relayState</code> paramater is an opaque value for the transaction and processed as untrusted data which is just echoed in a response.  It is the client’s responsibility to escape/encode this value before displaying in a UI such as a HTML document using <a href="https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet">best-practices</a></p>
+</blockquote>
+
+<h3 id="transaction-state">Transaction State</h3>
+
+<p><img src="/assets/img/auth-state-model.png" alt="State Model Diagram" title="State Model Diagram" /></p>
+
+<p>An authentication or recovery transaction has one of the following states:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Value</th>
+      <th>Description</th>
+      <th>Next Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">PASSWORD_WARN</code></td>
+      <td>The user’s password was successfully validated but is about to expire and should be changed.</td>
+      <td>POST to the <code class="highlighter-rouge">next</code> link relation to <a href="#change-password">change the user’s password</a>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">PASSWORD_EXPIRED</code></td>
+      <td>The user’s password was successfully validated but is expired.</td>
+      <td>POST to the <code class="highlighter-rouge">next</code> link relation to <a href="#change-password">change the user’s expired password</a>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">RECOVERY</code></td>
+      <td>The user has requested a recovery token to reset their password or unlock their account.</td>
+      <td>POST to the <code class="highlighter-rouge">next</code> link relation to <a href="#answer-recovery-question">answer the user’s recovery question</a>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">RECOVERY_CHALLENGE</code></td>
+      <td>The user must verify the factor-specific recovery challenge.</td>
+      <td>POST to the <code class="highlighter-rouge">verify</code> link relation to <a href="#verify-recovery-factor">verify the recovery factor</a>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">PASSWORD_RESET</code></td>
+      <td>The user successfully answered their recovery question and must to set a new password.</td>
+      <td>POST to the <code class="highlighter-rouge">next</code> link relation to <a href="#reset-password">reset the user’s password</a>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">LOCKED_OUT</code></td>
+      <td>The user account is locked; self-service unlock or admin unlock is required.</td>
+      <td>POST to the <code class="highlighter-rouge">unlock</code> link relation to perform a <a href="#unlock-account">self-service unlock</a>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">MFA_ENROLL</code></td>
+      <td>The user must select and enroll an available factor for additional verification.</td>
+      <td>POST to the <code class="highlighter-rouge">enroll</code> link relation for a specific factor to <a href="#enroll-factor">enroll the factor</a>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">MFA_ENROLL_ACTIVATE</code></td>
+      <td>The user must activate the factor to complete enrollment.</td>
+      <td>POST to the <code class="highlighter-rouge">next</code> link relation to <a href="#activate-factor">activate the factor</a>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">MFA_REQUIRED</code></td>
+      <td>The user must provide additional verification with a previously enrolled factor.</td>
+      <td>POST to the <code class="highlighter-rouge">verify</code> link relation for a specific factor to <a href="#verify-factor">provide additional verification</a>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">MFA_CHALLENGE</code></td>
+      <td>The user must verify the factor-specific challenge.</td>
+      <td>POST to the <code class="highlighter-rouge">verify</code> link relation to <a href="#verify-factor">verify the factor</a>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">SUCCESS</code></td>
+      <td>The transaction has completed successfully</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>You advance the authentication or recovery transaction to the next state by posting a request with a valid <a href="#state-token">state token</a> to the the <code class="highlighter-rouge">next</code> link relation published in the <a href="#links-object">JSON HAL links object</a> for the response.</p>
+
+<p><a href="#enroll-factor">Enrolling a factor</a> and <a href="#verify-factor">verifying a factor</a> do not have <code class="highlighter-rouge">next</code> link relationships as the end-user must make a selection of which factor to enroll or verify.</p>
+
+<blockquote>
+  <p>You should never assume a specific state transition or URL when navigating the <a href="#transaction-state">state model</a>.  Always inspect the response for <code class="highlighter-rouge">status</code> and dynamically follow the <a href="#links-object">published link relations</a>.</p>
+</blockquote>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"activate"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/authn/factors/ostf2xjtDKWFPZIKYDZV/lifecycle/activate"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"POST"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"prev"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/authn/previous"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"POST"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"skip"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/authn/skip"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"POST"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"cancel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/authn/cancel"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"POST"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h3 id="tokens">Tokens</h3>
+
+<p>Authentication API operations will return different token types depending on the <a href="#transaction-state">state</a> of the authentication or recovery transaction.</p>
+
+<h4 id="state-token">State Token</h4>
+
+<p>Ephemeral token that encodes the current state of an authentication or recovery transaction.</p>
+
+<ul>
+  <li>The <code class="highlighter-rouge">stateToken</code> must be passed with every request except when verifying a <code class="highlighter-rouge">recoveryToken</code> that was distributed out-of-band</li>
+  <li>The <code class="highlighter-rouge">stateToken</code> is only intended to be used between the web application performing end-user authentication and the Okta API. It should never distributed to the end-user via email or other out-of-band mechanism.</li>
+  <li>The lifetime of the <code class="highlighter-rouge">stateToken</code> uses a sliding scale expiration algorithm that extends with every request.  Always introspect the <code class="highlighter-rouge">expiresAt</code> property for the transaction when making decisions based on lifetime.</li>
+</ul>
+
+<blockquote>
+  <p>All Authentication API operations will return <code class="highlighter-rouge">401 Unauthorized</code> status code when you attempt to use an expired state token.</p>
+</blockquote>
+
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">401</span> <span class="ne">Unauthorized</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+
+<span class="p">{</span><span class="w">
+  </span><span class="nt">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000011"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid token provided"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"errorLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000011"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"errorId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oaeY-4G_TBUTBSZAn9n7oZCfw"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"errorCauses"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<blockquote>
+  <p>State transitions are strictly enforced for state tokens.  You will receive a <code class="highlighter-rouge">403 Forbidden</code> status code if you call an Authentication API operation with a <code class="highlighter-rouge">stateToken</code> with an invalid <a href="#transaction-state">state</a>.</p>
+</blockquote>
+
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+
+<span class="p">{</span><span class="w">
+  </span><span class="nt">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000079"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This operation is not allowed in the current authentication state."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"errorLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000079"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"errorId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oaen9Ly_ivHQJ-STb8KiADh9w"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"errorCauses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This operation is not allowed in the current authentication state."</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h4 id="recovery-token">Recovery Token</h4>
+
+<p>One-time token issued as <code class="highlighter-rouge">recoveryToken</code> response parameter when a recovery transaction transitions to the <code class="highlighter-rouge">RECOVERY</code> status.</p>
+
+<ul>
+  <li>The token can be exchanged for a <code class="highlighter-rouge">stateToken</code> to recover a user’s password or unlock their account.</li>
+  <li>Unlike the <code class="highlighter-rouge">statusToken</code> the <code class="highlighter-rouge">recoveryToken</code> should be distributed out-of-band to a user such as via email.</li>
+  <li>The lifetime of the <code class="highlighter-rouge">recoveryToken</code> is managed by the organization’s security policy.</li>
+</ul>
+
+<p>The <code class="highlighter-rouge">recoveryToken</code> is sent via an out-of-band channel to the end-user’s verified email address or SMS phone number and acts as primary authentication for the recovery transaction.</p>
+
+<blockquote>
+  <p>Directly obtaining a <code class="highlighter-rouge">recoveryToken</code> is a highly privileged operation and should be restricted to trusted web applications.  Anyone that obtains a <code class="highlighter-rouge">recoveryToken</code> for a user and knows the answer to a user’s recovery question can reset their password or unlock their account.</p>
+</blockquote>
+
+<h4 id="session-token">Session Token</h4>
+
+<p>One-time token issued as <code class="highlighter-rouge">sessionToken</code> response parameter when an authentication transaction completes with the <code class="highlighter-rouge">SUCCESS</code> status.</p>
+
+<ul>
+  <li>The token can be exchanged for a session with the <a href="sessions.html#create-session-with-session-token">Session API</a> or converted to a <a href="/docs/examples/session_cookie.html">session cookie</a>.</li>
+  <li>The lifetime of the <code class="highlighter-rouge">sessionToken</code> is the same as the lifetime of a user’s session and managed by the organization’s security policy.</li>
+</ul>
+
+<h3 id="factor-result">Factor Result</h3>
+
+<p>The <code class="highlighter-rouge">MFA_CHALLENGE</code> or <code class="highlighter-rouge">RECOVERY_CHALLENGE</code> state can return an additional property <strong>factorResult</strong> that provides additional context for the last factor verification attempt.</p>
+
+<p>The following table shows the possible values for this property:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>factorResult</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">WAITING</code></td>
+      <td>Factor verification has started but not yet completed (e.g user hasn’t answered phone call yet)</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">CANCELLED</code></td>
+      <td>Factor verification was canceled by user</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">TIMEOUT</code></td>
+      <td>Unable to verify factor within the allowed time window</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">TIME_WINDOW_EXCEEDED</code></td>
+      <td>Factor was successfully verified but outside of the computed time window.  Another verification is required in current time window.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">PASSCODE_REPLAYED</code></td>
+      <td>Factor was previously verified within the same time window.  User must wait another time window and retry with a new verification.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">ERROR</code></td>
+      <td>Unexpected server error occurred verifying factor.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="links-object">Links Object</h3>
+
+<p>Specifies link relations (See <a href="http://tools.ietf.org/html/rfc5988">Web Linking</a>) available for the current <a href="#transaction-state">transaction state</a> using the <a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON Hypertext Application Language</a> specification.  These links are used to transition the <a href="#transaction-state">state machine</a> of the authentication or recovery transaction.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Link Relation Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>next</td>
+      <td>Transitions the  <a href="#transaction-state">state machine</a> to the next state.  <strong>Note: The <code class="highlighter-rouge">name</code> of the link relationship will provide a hint of the next operation required</strong></td>
+    </tr>
+    <tr>
+      <td>prev</td>
+      <td>Transitions the  <a href="#transaction-state">state machine</a> to the previous state.</td>
+    </tr>
+    <tr>
+      <td>cancel</td>
+      <td>Cancels the current  transaction and revokes the <a href="#state-token">state token</a>.</td>
+    </tr>
+    <tr>
+      <td>skip</td>
+      <td>Skips over the current  transaction state to the next valid <a href="#transaction-state">state</a></td>
+    </tr>
+    <tr>
+      <td>resend</td>
+      <td>Resends a challenge or OTP to a device</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>The Links Object is <strong>read-only</strong></p>
+</blockquote>
+
+<h2 id="embedded-resources">Embedded Resources</h2>
+
+<h3 id="user-object">User Object</h3>
+
+<p>A subset of <a href="users.html#user-model">user properties</a> published in an authentication or recovery transaction after the user successfully completes primary authentication.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Readonly</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td>unique key for user</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>passwordChanged</td>
+      <td>timestamp when user’s password last changed</td>
+      <td>Date</td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>profile</td>
+      <td>user’s profile</td>
+      <td><a href="#user-profile-object">User Profile Object</a></td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>recovery_question</td>
+      <td>user’s recovery question</td>
+      <td><a href="#recovery-question-object">Recovery Question Object</a></td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+ </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00udnlQDVLVRIVXESCMZ"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"passwordChanged"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-09-08T20:14:45.000Z"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dade.murphy@example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"firstName"</span><span class="p">:</span><span class="s2">"Dade"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Murphy"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"locale"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en_US"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"timeZone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="w">
+ </span><span class="p">},</span><span class="w">
+ </span><span class="nt">"recovery_question"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Who's a major player in the cowboy scene?"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h4 id="user-profile-object">User Profile Object</h4>
+
+<p>Subset of <a href="users.html#profile-object">profile properties</a> for a user</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Readonly</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>login</td>
+      <td>unique login for user</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>firstName</td>
+      <td>first name of user</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>lastName</td>
+      <td>last name of user</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>locale</td>
+      <td>user’s default location for purposes of localizing items such as currency, date time format, numerical representations, etc.</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td><a href="https://tools.ietf.org/html/rfc5646">RFC 5646</a></td>
+    </tr>
+    <tr>
+      <td>timeZone</td>
+      <td>user’s time zone</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td><a href="https://tools.ietf.org/html/rfc6557">IANA Time Zone database format</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="recovery-question-object">Recovery Question Object</h4>
+
+<p>User’s recovery question used for verification of a recovery transaction</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Readonly</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>question</td>
+      <td>user’s recovery question</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="password-policy-object">Password Policy Object</h3>
+
+<p>A subset of policy settings for the user’s assigned password policy published during <code class="highlighter-rouge">PASSWORD_WARN</code>, <code class="highlighter-rouge">PASSWORD_EXPIRED</code>, or <code class="highlighter-rouge">PASSWORD_RESET</code> states</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Readonly</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>expiration</td>
+      <td>password expiration settings</td>
+      <td><a href="#password-expiration-object">Password Expiration Object</a></td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>complexity</td>
+      <td>password complexity settings</td>
+      <td><a href="#password-complexity-object">Password Complexity Object</a></td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"expiration"</span><span class="p">:{</span><span class="w">
+    </span><span class="nt">"passwordExpireDays"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">},</span><span class="w"> 
+  </span><span class="nt">"complexity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"minLowerCase"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"minUpperCase"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"minNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"minSymbol"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"excludeUsername"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="w">
+    </span><span class="p">},</span><span class="w"> 
+   </span><span class="nt">"age"</span><span class="p">:{</span><span class="w">
+     </span><span class="nt">"minAgeMinutes"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w"> 
+     </span><span class="nt">"historyCount"</span><span class="p">:</span><span class="mi">0</span><span class="w"> 
+    </span><span class="p">}</span><span class="w"> 
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h4 id="password-expiration-object">Password Expiration Object</h4>
+
+<p>Specifies the password age requirements of the assigned password policy</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Readonly</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>passwordExpireDays</td>
+      <td>number of days before password is expired</td>
+      <td>Number</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="password-complexity-object">Password Complexity Object</h4>
+
+<p>Specifies the password complexity requirements of the assigned password policy</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Readonly</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>minLength</td>
+      <td>minimum number of characters for password</td>
+      <td>Number</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>minLowerCase</td>
+      <td>minimum number of lower case characters for password</td>
+      <td>Number</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>minUpperCase</td>
+      <td>minimum number of upper case characters for password</td>
+      <td>Number</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>minNumber</td>
+      <td>minimum number of numeric characters for password</td>
+      <td>Number</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>minSymbol</td>
+      <td>minimum number of symbol characters for password</td>
+      <td>Number</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>excludeUsername</td>
+      <td>Prevents username from appearing in the password</td>
+      <td>boolean</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="password-age-object">Password Age Object</h4>
+
+<p>Specifies the password requirements related to password age and history</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Readonly</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>minAgeMinutes</td>
+      <td>minimum number of minutes required since the last password change</td>
+      <td>Number</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>historyCount</td>
+      <td>Number of previous passwords that the current password can’t match</td>
+      <td>Number</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="factor-object">Factor Object</h3>
+
+<p>A subset of <a href="factors.html#factor-model">factor properties</a> published in an authentication transaction during <code class="highlighter-rouge">MFA_ENROLL</code>, <code class="highlighter-rouge">MFA_REQUIRED</code>, or <code class="highlighter-rouge">MFA_CHALLENGE</code> states</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Readonly</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td>unique key for factor</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>factorType</td>
+      <td>type of factor</td>
+      <td><a href="factors.html#factor-type">Factor Type</a></td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>provider</td>
+      <td>factor provider</td>
+      <td><a href="factors.html#provider-type">Provider Type</a></td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>profile</td>
+      <td>profile of a <a href="factors.html#supported-factors-for-providers">supported factor</a></td>
+      <td><a href="factors.html#factor-profile-object">Factor Profile Object</a></td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>_embedded</td>
+      <td><a href="#factor-embedded-resources">embedded resources</a> related to the factor</td>
+      <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>_links</td>
+      <td><a href="#factor-links-object">discoverable resources</a> for the factor</td>
+      <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ostfm3hPNYSOIOIVTQWY"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"factorType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"token:software:totp"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OKTA"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"credentialId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dade.murphy@example.com"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"verify"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/authn/factors/ostfm3hPNYSOIOIVTQWY/verify"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"POST"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h4 id="factor-embedded-resources">Factor Embedded Resources</h4>
+
+<h5 id="totp-factor-activation-object">TOTP Factor Activation Object</h5>
+
+<p>TOTP factors when activated have an embedded verification object which describes the <a href="http://tools.ietf.org/html/rfc6238">TOTP</a> algorithm parameters.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Readonly</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>timeStep</td>
+      <td>time-step size for TOTP</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>sharedSecret</td>
+      <td>unique secret key for prover</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>encoding</td>
+      <td>encoding of <code class="highlighter-rouge">sharedSecret</code></td>
+      <td><code class="highlighter-rouge">base32</code> or <code class="highlighter-rouge">base64</code></td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>keyLength</td>
+      <td>number of digits in an TOTP value</td>
+      <td>Number</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>_links</td>
+      <td>discoverable resources related to the activation</td>
+      <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"activation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"timeStep"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"sharedSecret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HE64TMLL2IUZW2ZLB"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"encoding"</span><span class="p">:</span><span class="w"> </span><span class="s2">"base32"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"keyLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h6 id="totp-activation-links-object">TOTP Activation Links Object</h6>
+
+<p>Specifies link relations (See <a href="http://tools.ietf.org/html/rfc5988">Web Linking</a>) available for the TOTP activation object using the <a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON Hypertext Application Language</a> specification.  This object is used for dynamic discovery of related resources and operations.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Link Relation Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>qrcode</td>
+      <td>QR code that encodes the TOTP parameters that can be used for enrollment</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="phone-object">Phone Object</h5>
+
+<p>The phone object describes previously enrolled phone numbers for the <code class="highlighter-rouge">sms</code> factor.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Readonly</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td>unique key for phone</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>profile</td>
+      <td>profile of phone</td>
+      <td><a href="#phone-profile-object">Phone Profile Object</a></td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>status</td>
+      <td>status of phone</td>
+      <td><code class="highlighter-rouge">ACTIVE</code> or <code class="highlighter-rouge">INACTIVE</code></td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mbl198rKSEWOSKRIVIFT"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"phoneNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+1 XXX-XXX-1337"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h6 id="phone-profile-object">Phone Profile Object</h6>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Readonly</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>phoneNumber</td>
+      <td>masked phone number</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="phone-object-1">Phone Object</h5>
+
+<p>The phone object describes previously enrolled phone numbers for the <code class="highlighter-rouge">sms</code> factor.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Readonly</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td>unique key for phone</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>profile</td>
+      <td>profile of phone</td>
+      <td><a href="#phone-profile-object">Phone Profile Object</a></td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>status</td>
+      <td>status of phone</td>
+      <td><code class="highlighter-rouge">ACTIVE</code> or <code class="highlighter-rouge">INACTIVE</code></td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="push-factor-activation-object">Push Factor Activation Object</h5>
+
+<p>Push factors must complete activation on the device by scanning the QR code or visiting activation link sent via email or sms.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Readonly</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>expiresAt</td>
+      <td>lifetime of activation</td>
+      <td>Date</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>_links</td>
+      <td>discoverable resources related to the activation</td>
+      <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"activation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-13T07:44:22.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"send"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/lifecycle/activate/email"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="s2">"POST"</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sms"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/lifecycle/activate/sms"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="s2">"POST"</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"qrcode"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/qr/00Ji8qVBNJD4LmjYy1WZO2VbNqvvPdaCVua-1qjypa"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/png"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h6 id="push-factor-activation-links-object">Push Factor Activation Links Object</h6>
+
+<p>Specifies link relations (See <a href="http://tools.ietf.org/html/rfc5988">Web Linking</a>) available for the push factor activation object using the <a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON Hypertext Application Language</a> specification.  This object is used for dynamic discovery of related resources and operations.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Link Relation Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>qrcode</td>
+      <td>QR code that encodes the push activation code needed for enrollment on the device</td>
+    </tr>
+    <tr>
+      <td>send</td>
+      <td>Sends an activation link via <code class="highlighter-rouge">email</code> or <code class="highlighter-rouge">sms</code> for users who can’t scan the QR code</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="factor-links-object">Factor Links Object</h5>
+
+<p>Specifies link relations (See <a href="http://tools.ietf.org/html/rfc5988">Web Linking</a>) available for the factor using the <a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON Hypertext Application Language</a> specification.  This object is used for dynamic discovery of related resources and operations.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Link Relation Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>enroll</td>
+      <td><a href="#enroll-factor">Enrolls a factor</a></td>
+    </tr>
+    <tr>
+      <td>verify</td>
+      <td><a href="#verify-factor">Verifies a factor</a></td>
+    </tr>
+    <tr>
+      <td>questions</td>
+      <td>Lists all possible questions for the <code class="highlighter-rouge">question</code> factor type</td>
+    </tr>
+    <tr>
+      <td>resend</td>
+      <td>Resends a challenge or OTP to a device</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>The Links Object is <strong>read-only</strong></p>
+</blockquote>
+
 
       </div>
       <!-- END Page Content -->

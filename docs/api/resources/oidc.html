@@ -237,7 +237,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		     <li><a href="/docs/api/resources/events.html">Events</a></li>
+		     
+		     
 		     
 		     
 		     
@@ -402,7 +405,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		     <li><a href="/docs/api/resources/groups.html">Groups</a></li>
+		     
 		     
 		     
 		     
@@ -572,7 +577,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
 		     <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
+		     
 		     
 		     
 		     
@@ -686,7 +694,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		     <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
+		     
 		     
 		     
 		     
@@ -851,7 +861,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
 		     <li><a href="/docs/api/resources/users.html">Users</a></li>
+		     
 		     
 		     
 		     
@@ -1054,6 +1067,7 @@ to access <a href="http://developer.okta.com/docs/api/resources/oidc.html#get-us
 be a valid OAuth 2.0 request, but it’s not an OpenID Connect request.</li>
   <li><code class="highlighter-rouge">profile</code> requests access to these default profile claims: <code class="highlighter-rouge">name</code>, <code class="highlighter-rouge">family_name</code>, <code class="highlighter-rouge">given_name</code>, <code class="highlighter-rouge">middle_name</code>, <code class="highlighter-rouge">nickname</code>, <code class="highlighter-rouge">preferred_username</code>, <code class="highlighter-rouge">profile</code>,  
 <code class="highlighter-rouge">picture</code>, <code class="highlighter-rouge">website</code>, <code class="highlighter-rouge">gender</code>, <code class="highlighter-rouge">birthdate</code>, <code class="highlighter-rouge">zoneinfo</code>,<code class="highlighter-rouge">locale</code>, and <code class="highlighter-rouge">updated_at</code>.</li>
+  <li><code class="highlighter-rouge">offline_access</code> can only be requested in combination with a <code class="highlighter-rouge">response_type</code> containing <code class="highlighter-rouge">code</code>. If the <code class="highlighter-rouge">response_type</code> does not contain <code class="highlighter-rouge">code</code>, <code class="highlighter-rouge">offline_access</code> will be ignored.</li>
   <li>For more information about <code class="highlighter-rouge">offline_access</code>, see the <a href="http://openid.net/specs/openid-connect-core-1_0.html#OfflineAccess">OIDC spec</a>.</li>
 </ul>
 
