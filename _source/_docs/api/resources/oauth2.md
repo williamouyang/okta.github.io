@@ -275,15 +275,9 @@ The actions in a Rule define which scopes can be granted to the requests, thus d
 ### Authentication Request
 {:.api .api-operation}
 
-{% beta %}
-OpenID Connect: 
-{% endbeta %}
 {% api_operation get /oauth2/v1/authorize %} {% api_lifecycle ea %}
 
 {% beta %}
-
-OAuth 2.0:
-
 {% api_operation get /oauth2/:authorizationServerId/v1/authorize %} {% api_lifecycle beta %}
 {% endbeta %}
 
