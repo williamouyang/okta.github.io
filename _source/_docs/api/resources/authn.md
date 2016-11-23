@@ -44,9 +44,9 @@ Trusted applications are backend applications that act as authentication broker 
 ### Primary Authentication
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/authn
 
-Every authentication transaction starts with primary authentication which validates a user's primary password credential.  **Password Policy**, **MFA Policy**,  and **Sign-On Policy** is evaluated during primary authentication to determine if the user's password is expired, a factor should be enrolled, or additional verification is required.
+Every authentication transaction starts with primary authentication which validates a user's primary password credential. **Password Policy**, **MFA Policy**,  and **Sign-On Policy** is evaluated during primary authentication to determine if the user's password is expired, a factor should be enrolled, or additional verification is required.
 
 The [transaction state](#transaction-state) of the response will depend on the user's status, group memberships and assigned policies.
 
@@ -55,6 +55,45 @@ The [transaction state](#transaction-state) of the response will depend on the u
 - [Primary Authentication with Password Expiration Warn](#primary-authentication-with-password-expiration-warn)
 
 > You must first enable MFA factors and assign a valid **Sign-On Policy** to a user to enroll and/or verify a MFA factor during authentication
+
+#### Example Request
+
+Request: `http://example.okta.com/api/v1/authn`
+
+Request Body:
+
+~~~JSON
+{
+  "username": "{{username}}",
+  "password": "{{password}}",
+  "options": {
+    "multiOptionalFactorEnroll": true,
+    "warnBeforePasswordExpired": true
+  }  
+}
+~~~
+
+Response:
+
+~~~JSON
+{
+  "expiresAt": "2016-11-23T01:54:52.000Z",
+  "status": "SUCCESS",
+  "sessionToken": "201117fVpEUdFFfPcijIDi0c4pbbqkqt-5xFiHKa6mGcP5b1_Fyf4fY",
+  "_embedded": {
+    "user": {
+      "id": "00u5t60iloOHN2Pbi0h7",
+      "passwordChanged": "2016-11-21T22:19:49.000Z",
+      "profile": {
+        "login": "best.employee@example.com",
+        "firstName": "Best",
+        "lastName": "Employee",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    }
+  }
+~~~
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -607,8 +646,8 @@ curl -v -X POST \
 
 Authenticates a user with a password that is about to expire.  The user should [change their password](#change-password) to complete the authentication transaction but may opt-out (skip).
 
-> The `warnBeforePasswordExpired` option must be explicitly specified as `true` to allow the authentication transaction to transition to `PASSWORD_WARN` status.<br>
-> Non-expired passwords will successfully complete the authentication transaction if this option is omitted or `false`.
+> * The `warnBeforePasswordExpired` option must be explicitly specified as `true` to allow the authentication transaction to transition to `PASSWORD_WARN` status.
+  * Non-expired passwords will successfully complete the authentication transaction if this option is omitted or `false`.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -696,17 +735,17 @@ curl -v -X POST \
 ### Change Password
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/credentials/change_password
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/authn/credentials/change_password
 
 This operation changes a user's password by providing the existing password and the new password password for authentication transactions with either the `PASSWORD_EXPIRED` or `PASSWORD_WARN` state.
 
 - A user *must* change their expired password for an authentication transaction with `PASSWORD_EXPIRED` status to successfully complete the transaction.
-- A user *may* opt-out of changing their password (skip) when the transaction has a `PASSWORD_WARN` status
+- A user *may* opt-out of changing their password (skip) when the transaction has a `PASSWORD_WARN` status.
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter   | Description                                                | Param Type | DataType  | Required | Default
+Parameter   | Description                                                | Param Type | DataType  | Required |
 ----------- | ---------------------------------------------------------- | ---------- | --------- | -------- |
 stateToken  | [state token](#state-token) for current transaction        | Body       | String    | TRUE     |
 oldPassword | User's current password that is expired or about to expire | Body       | String    | TRUE     |
@@ -794,11 +833,16 @@ curl -v -X POST \
 }
 ~~~
 
+## Multifactor Authentication Operations
+
+You can enroll, activate, and verify factors using the `/api/v1/authn/factors` endpoint.
+
+> You can also enroll, manage, and verify factors outside the authentication context with [`/api/v1/users/:uid/factors/`](factors.html#factor-verification-operations).
 
 ### Enroll Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/factors
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/authn/factors
 
 Enrolls a user with a [factor](factors.html#supported-factors-for-providers) assigned by their **MFA Policy**.
 
@@ -4157,7 +4201,7 @@ curl -v -X POST \
 
 ## Transaction Model
 
-The Authentication API is a *stateful* API that implements a finite state machine with [defined states](#transaction-state) and transitions.  Each authentication or recovery transaction is issued a unique [state token](#state-token) that must be passed with each subsequent request until the transaction is complete or canceled.
+The Authentication API is a *stateful* API that implements a finite state machine with [defined states](#transaction-state) and transitions.  Each initial authentication or recovery request is issued a unique [state token](#state-token) that must be passed with each subsequent request until the transaction is complete or canceled.
 
 The Authentication API leverages the [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) format to publish `next` and `prev` links for the current transaction state which should be used to transition the state machine.
 
