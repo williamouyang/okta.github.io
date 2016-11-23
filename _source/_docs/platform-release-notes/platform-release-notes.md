@@ -1,6 +1,6 @@
 ---
 layout: docs_page
-title: Release Notes
+title: Platform Release Notes
 excerpt: Summary of changes to the Okta Platform since Release 2016.45
 ---
 
@@ -23,7 +23,7 @@ scroll to the bottom of the Admin <b>Dashboard</b> page to see the version numbe
 
 For changes outside the Okta platform, see the [Release Notes Knowledge Hub](http://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub).
 
-## Earlier Release Notes
+## Earlier Platform Release Notes
 
 * [Platform Release Notes for Release 2016.45](platform-release-notes2016-45.html)
 * [Platform Release Notes for Release 2016.43](platform-release-notes2016-43.html)
