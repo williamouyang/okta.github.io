@@ -237,7 +237,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		     <li><a href="/docs/api/resources/events.html">Events</a></li>
+		     
+		     
 		     
 		     
 		     
@@ -402,7 +405,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		     <li><a href="/docs/api/resources/groups.html">Groups</a></li>
+		     
 		     
 		     
 		     
@@ -572,7 +577,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
 		     <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
+		     
 		     
 		     
 		     
@@ -686,7 +694,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
 		     <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
+		     
 		     
 		     
 		     
@@ -851,7 +861,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		     
 		     
 		     
+		     
+		     
 		     <li><a href="/docs/api/resources/users.html">Users</a></li>
+		     
 		     
 		     
 		     
@@ -1184,6 +1197,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </tr>
   </tbody>
 </table>
+
+<div class="beta">
+<p>During the profile image Beta, image property definitions in the schema are of the <code class="highlighter-rouge">Object</code> data type with an additional <code class="highlighter-rouge">extendedType</code> of <code class="highlighter-rouge">Image</code>.
+When a user is retrieved via the API, however, the value will be a URL (represented as a String).  Some caveats apply:</p>
+
+<p>1) Image properties are described differently in the schema than how the data actually comes back.  This discrepancy is deliberate for the time being, but is likely to change after Beta.  Special handling rules apply (described below).</p>
+
+<p>2) During Beta, the URL returned is a placeholder URL, resolving to a placeholder image.  By GA, the URL returned will resolve to the image (that is, a logged in user can click it and retrieve the image).</p>
+
+<p><strong>Updating image property values via Users API</strong></p>
+
+<p>Okta does not support uploading images via the Users API.  All operations in this API that update properties work in a slightly different way when applied to image properties:</p>
+
+<p>1)  When performing a full update, if the property is not passed, it is unset (if set).  The same applies if a partial update explicitly sets it to null.</p>
+
+<p>2)  When “updating” the value, it must be set to the value returned by a GET on that user (resulting in no change).  Any other value will not validate.</p>
+
+</div>
 
 <blockquote>
   <p>Metadata properties such as <code class="highlighter-rouge">id</code>, <code class="highlighter-rouge">status</code>, timestamps, <code class="highlighter-rouge">_links</code>, and <code class="highlighter-rouge">_embedded</code> are only available after a user is created.</p>
