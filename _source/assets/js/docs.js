@@ -66,7 +66,7 @@ $(function() {
 
 	$(document).ready(function() {
 
-		var isMobile  = (window.getComputedStyle(document.body,':before').content == '"toc-mobile"') ? true : false;
+		var isMobile   = window.getComputedStyle(document.body,':before').content.includes("toc-mobile");
 		var offset     = 140;
 		var headerData = [];
 
@@ -314,7 +314,7 @@ $(function() {
 		};
 
 		$(window).on('resize', function(){
-			isMobile = (window.getComputedStyle(document.body,':before').content == '"toc-mobile"') ? true : false;
+			isMobile = window.getComputedStyle(document.body,':before').content.includes("toc-mobile");
 		});
 		$(window).on('scroll', onScroll);
 		$(window).on('resize', onScroll);
