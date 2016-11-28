@@ -59,8 +59,8 @@ Advantages of using Okta Social Authentication include:
 
     -   **Name**: We suggest using the name you would
         expect to see on a button, something like "Log in to Facebook".
-    -   **Transform username**: Set to "`idpuser.email`".
-    -   **Authenticate if username matches**: Leave set to the default.
+    -   **IdP Username**: Set to "`idpuser.email`".
+    -   **Match against**: Leave set to the default.
     -   **Account Link Policy**: Leave set to "Automatic" for now.
     -   **Auto-Link Restrictions**: Leave set to the default.
     -   **Provisioning Policy**: Leave set to "Automatic" for now.
