@@ -46,55 +46,15 @@ Trusted applications are backend applications that act as authentication broker 
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/authn
 
-Every authentication transaction starts with primary authentication which validates a user's primary password credential. **Password Policy**, **MFA Policy**,  and **Sign-On Policy** is evaluated during primary authentication to determine if the user's password is expired, a factor should be enrolled, or additional verification is required.
+Every authentication transaction starts with primary authentication which validates a user's primary password credential. **Password Policy**, **MFA Policy**,  and **Sign-On Policy** are evaluated during primary authentication to determine if the user's password is expired, a factor should be enrolled, or additional verification is required. The [transaction state](#transaction-state) of the response depends on the user's status, group memberships and assigned policies. 
 
-The [transaction state](#transaction-state) of the response will depend on the user's status, group memberships and assigned policies.
+The requests and responses vary depending on the application type, and whether a password expiration warning is sent:
+ 
+- [Primary Authentication with Public Application](#primary-authentication-with-public-application)&mdash;[Request Example](#request-example-public-application)
+- [Primary Authentication with Trusted Application](#primary-authentication-with-trusted-application)&mdash;[Request Example](#request-example-trusted-application)
+- [Primary Authentication with Password Expiration Warning](#primary-authentication-with-password-expiration-warning)&mdash;[Request Example](#request-example-password-expiration-warning)
 
-- [Primary Authentication with Public Application](#primary-authentication-with-public-application)
-- [Primary Authentication with Trusted Application](#primary-authentication-with-trusted-application)
-- [Primary Authentication with Password Expiration Warn](#primary-authentication-with-password-expiration-warn)
-
-> You must first enable MFA factors and assign a valid **Sign-On Policy** to a user to enroll and/or verify a MFA factor during authentication
-
-#### Example Request
-
-Request: `http://example.okta.com/api/v1/authn`
-
-Request Body:
-
-~~~JSON
-{
-  "username": "{{username}}",
-  "password": "{{password}}",
-  "options": {
-    "multiOptionalFactorEnroll": true,
-    "warnBeforePasswordExpired": true
-  }  
-}
-~~~
-
-Response:
-
-~~~JSON
-{
-  "expiresAt": "2016-11-23T01:54:52.000Z",
-  "status": "SUCCESS",
-  "sessionToken": "201117fVpEUdFFfPcijIDi0c4pbbqkqt-5xFiHKa6mGcP5b1_Fyf4fY",
-  "_embedded": {
-    "user": {
-      "id": "00u5t60iloOHN2Pbi0h7",
-      "passwordChanged": "2016-11-21T22:19:49.000Z",
-      "profile": {
-        "login": "best.employee@example.com",
-        "firstName": "Best",
-        "lastName": "Employee",
-        "locale": "en_US",
-        "timeZone": "America/Los_Angeles"
-      }
-    }
-  }
-}
-~~~
+> You must first enable MFA factors and assign a valid **Sign-On Policy** to a user to enroll and/or verify a MFA factor during authentication.
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -112,10 +72,10 @@ context     | Provides additional context for the authentication transaction    
 The authentication transaction [state machine](#transaction-state) can be modified via the following opt-in features:
 
 |----------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+------------|
-| Property                   | Description                                                                                                                                                | DataType | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| multiOptionalFactorEnroll  | Transitions transaction back to `MFA_ENROLL` state after successful factor enrollment when additional optional factors are available for enrollment        | Boolean  | TRUE     | FALSE  | FALSE    |           |           |            |
-| warnBeforePasswordExpired  | Transitions transaction to `PASSWORD_WARN` state before `SUCCESS` if the user's password is about to expire and within their password policy warn period   | Boolean  | TRUE     | FALSE  | FALSE    |           |           |            |
+| Property                   | Description                                                                                                                                                | DataType | Nullable | Unique | Readonly |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------ | -------- |
+| multiOptionalFactorEnroll  | Transitions transaction back to `MFA_ENROLL` state after successful factor enrollment when additional optional factors are available for enrollment        | Boolean  | TRUE     | FALSE  | FALSE    |
+| warnBeforePasswordExpired  | Transitions transaction to `PASSWORD_WARN` state before `SUCCESS` if the user's password is about to expire and within their password policy warn period   | Boolean  | TRUE     | FALSE  | FALSE    |
 |----------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+------------|
 
 ##### Context Object
@@ -124,11 +84,11 @@ The context object allows [trusted web applications](#trusted-application) such 
 
 > Overriding context such as `deviceToken` is a highly privileged operation limited to trusted web applications and requires making authentication or recovery requests with a valid *administrator API token*.
 
-|-------------+-------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+------------|
-| Property    | Description                                                             | DataType | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| ----------- | ----------------------------------------------------------------------- | -------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| deviceToken | A globally unique ID identifying the user's client device or user agent | String   | TRUE     | FALSE  | FALSE    |           | 32        |            |
-|-------------+-------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+------------|
+|-------------+-------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------|
+| Property    | Description                                                             | DataType | Nullable | Unique | Readonly | MinLength | MaxLength |
+| ----------- | ----------------------------------------------------------------------- | -------- | -------- | ------ | -------- | --------- | --------- |
+| deviceToken | A globally unique ID identifying the user's client device or user agent | String   | TRUE     | FALSE  | FALSE    |           | 32        |
+|-------------+-------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------|
 
 > You must always pass the same `deviceToken` for a user's device with every authentication request for **per-device** or **per-session** Sign-On Policy factor challenges.  If the `deviceToken` is absent or does not match the previous `deviceToken`, the user will be challenged every-time instead of **per-device** or **per-session**.
 
@@ -195,7 +155,7 @@ X-Rate-Limit-Reset: 1447534590
 
 Authenticates a user with username/password credentials via a [public application](#public-application)
 
-##### Request Example
+##### Request Example: Public Application
 {:.api .api-request .api-request-example}
 
 ~~~sh
@@ -594,7 +554,7 @@ Authenticates a user via a [trusted application](#trusted-application) or proxy 
 
 > The **public IP address** of your [trusted application](#trusted-application) must be [whitelisted as a gateway IP address](../getting_started/design_principles.html#ip-address) to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header
 
-##### Request Example
+##### Request Example: Trusted Application
 {:.api .api-request .api-request-example}
 
 ~~~sh
@@ -643,14 +603,15 @@ curl -v -X POST \
 }
 ~~~
 
-#### Primary Authentication with Password Expiration Warn
+#### Primary Authentication with Password Expiration Warning
 
 Authenticates a user with a password that is about to expire.  The user should [change their password](#change-password) to complete the authentication transaction but may opt-out (skip).
 
-> * The `warnBeforePasswordExpired` option must be explicitly specified as `true` to allow the authentication transaction to transition to `PASSWORD_WARN` status.
-  * Non-expired passwords will successfully complete the authentication transaction if this option is omitted or `false`.
+>Please note:
+* The `warnBeforePasswordExpired` option must be explicitly specified as `true` to allow the authentication transaction to transition to `PASSWORD_WARN` status.
+* Non-expired passwords successfully complete the authentication transaction if this option is omitted or is specified as `false`.
 
-##### Request Example
+##### Request Example: Password Expiration Warning
 {:.api .api-request .api-request-example}
 
 ~~~sh
