@@ -196,15 +196,21 @@ Claims in the payload are either base claims, independent of scope (always retur
 
 Be aware of the following before you work with scope-dependent claims:
 
-* The client can also optionally request an Access Token along with the ID Token. In this case, in order to keep the size of the ID Token small, the ID Token body does not contain all the scope dependent claims. 
-Instead, the ID token contains the `name` and `preferred_username` claims if the `profile` scope was requested and `email` claim if the `email` scope was requested.
-
-* The full set of claims for the requested scopes is available via the [/oauth2/v1/userinfo](#get-user-information) endpoint. Call this endpoint using the Access Token.
-
 * To protect against arbitrarily large numbers of groups matching the group filter, the groups claim has a limit of 100. 
 If more than 100 groups match the filter, then the request fails. Expect that this limit may change in the future.
 For more information about configuring an app for OpenID Connect, including group claims, see [Using OpenID Connect](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect).
+* **Important:** Scope-dependent claims are returned differently depending on the values in `response_type` and the scopes requested:
 
+    | Response Type      | Claims Returned in ID Token    | Claims Returned from the Userinfo Endpoint |
+    |:-------------------|:-------------------|:-------------------------------------------------|
+    | `code `            |  N/A               | N/A                                              |
+    | `token`            |  N/A               | N/A                                              |
+    | `id_token`         |  Claims associated with requested scopes. | N/A                       |
+    | `id_token` `code ` |  Claims associated with requested scopes. | N/A                       |
+    | `id_token` `token` | `email` if email scope is requested; `name` and `preferred_username` if profile scope is requested | Claims associated with the requested scopes |
+    | `code` `id_token` `token` | `email` if email scope is requested; `name` and `preferred_username` if profile scope is requested | Claims associated with the requested scopes |
+
+* The full set of claims for the requested scopes is available via the [/oauth2/v1/userinfo](#get-user-information) endpoint. Call this endpoint using the Access Token.
 
 ## Endpoints
 
