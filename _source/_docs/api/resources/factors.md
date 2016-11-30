@@ -755,18 +755,6 @@ curl -v -X GET \
             ]
           }
         }
-      },
-      "_embedded": {
-        "phones": [
-          {
-            "id": "mblldntFJevYKbyQQ0g4",
-            "profile": {
-              "phoneNumber": "+14081234567",
-              "phoneExtension": "1234"
-            },
-            "status": "ACTIVE"
-          }
-        ]
       }
   },
   {
@@ -1288,50 +1276,6 @@ A `400 Bad Request` status code may be returned if you attempt to enroll with a 
     ]
 }
 ~~~
-
-##### Enroll Okta Call Factor by Updating Phone Number
-{:.api .api-operation}
-
-If the user wants to use a different phone number (instead of the existing phone number) then the enroll API call needs to supply `updatePhone` option with `true`.
-
-###### Request Example
-{:.api .api-request .api-request-example}
-
-~~~sh
-curl -v -X POST \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
--H "Authorization: SSWS ${api_token}" \
--d '{
-  "factorType": "call",
-  "provider": "OKTA",
-  "profile": {
-    "phoneNumber": "+1-555-415-1338",
-    "phoneExtension": "1234"
-  }
-}' "https://${org}.okta.com/api/v1/users/${userId}/factors?updatePhone=true"
-~~~
-
-##### Enroll Okta Call Factor by Using Existing Phone Number
-{:.api .api-operation}
-
-If the user wants to use the existing phone number then the enroll API doesn't need to pass the phone number.
-Or, you can pass the existing phone number in a profile object.
-
-###### Request Example
-{:.api .api-request .api-request-example}
-
-~~~sh
-curl -v -X POST \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
--H "Authorization: SSWS ${api_token}" \
--d '{
-  "factorType": "call",
-  "provider": "OKTA"
-}' "https://${org}.okta.com/api/v1/users/${userId}/factors"
-~~~
-
 
 #### Enroll Okta Verify TOTP Factor
 {:.api .api-operation}
