@@ -205,8 +205,8 @@ For more information about configuring an app for OpenID Connect, including grou
     |:-------------------|:-------------------|:-------------------------------------------------|
     | `code `            |  N/A               | N/A                                              |
     | `token`            |  N/A               | N/A                                              |
-    | `id_token`         |  Claims associated with requested scopes. | None                      |
-    | `id_token` `code ` |  Claims associated with requested scopes. | None                      |
+    | `id_token`         |  Claims associated with requested scopes. | N/A                       |
+    | `id_token` `code ` |  Claims associated with requested scopes. | N/A                       |
     | `id_token` `token` | `email` if email scope is requested; `name` and `preferred_username` if profile scope is requested | Claims associated with the requested scopes |
     | `code` `id_token` `token` | `email` if email scope is requested; `name` and `preferred_username` if profile scope is requested | Claims associated with the requested scopes |
 
