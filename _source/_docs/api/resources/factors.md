@@ -6,9 +6,9 @@ redirect_from: "/docs/api/rest/factors.html"
 
 ## Overview
 
-The Okta Factors API provides operations to enroll, manage, and verify factors for multi-factor authentication (MFA).  It is optimized for both administrative and end-user account management, but may also be used verify a factor at any time on-demand.
+The Okta Factors API provides operations to enroll, manage, and verify factors for multi-factor authentication (MFA).  It is optimized for both administrative and end-user account management, but may also be used verify a factor at any time.
 
-The Factors API contains three types of operations.
+The Factors API contains three types of operations:
 
  - **[Factor Operations](#factor-operations)** &ndash; List factors and security questions.
  - **[Factor Lifecycle Operations](#factor-lifecycle-operations)** &ndash; Enroll, activate, and reset factors.
@@ -90,6 +90,7 @@ The following factor types are supported:
 | --------------------- | --------------------------------------------------------------------------------------------------------------------|
 | `push`                | Out-of-band verification via push notification to a device and transaction verification with digital signature      |
 | `sms`                 | Software [OTP](http://en.wikipedia.org/wiki/One-time_password) sent via SMS to a registered phone number            |
+| `call`                | Software [OTP](http://en.wikipedia.org/wiki/One-time_password) sent via Voice Call to a registered phone number     |
 | `token`               | Software or hardware [One-time Password (OTP)](http://en.wikipedia.org/wiki/One-time_password) device               |
 | `token:software:totp` | Software [Time-based One-time Password (TOTP)](http://en.wikipedia.org/wiki/Time-based_One-time_Password_Algorithm) |
 | `token:hardware`      | Hardware one-time password [OTP](http://en.wikipedia.org/wiki/One-time_password) device                             |
@@ -114,7 +115,7 @@ The following providers are supported:
 
 #### Supported Factors for Providers
 
-Each provider only supports a subset of factor types.  The following table lists the factor types supported for each provider:
+Each provider supports a subset of factor types.  The following table lists the factor types supported for each provider:
 
 |------------+------------------------|
 | Provider   | Factor Type            |
@@ -122,6 +123,7 @@ Each provider only supports a subset of factor types.  The following table lists
 | `OKTA`     | `push`                 |
 | `OKTA`     | `question`             |
 | `OKTA`     | `sms`                  |
+| `OKTA`     | `call`                 |
 | `OKTA`     | `token:software:totp`  |
 | `GOOGLE`   | `token:software:totp`  |
 | `SYMANTEC` | `token`                |
@@ -132,7 +134,7 @@ Each provider only supports a subset of factor types.  The following table lists
 
 ### Factor Profile Object
 
-Profiles are specific to the [factor type](#factor-type)
+Profiles are specific to the [factor type](#factor-type).
 
 #### Question Profile
 
@@ -177,6 +179,31 @@ E.164 numbers can have a maximum of fifteen digits and are usually written as fo
 
 For example, to convert a US phone number (415 599 2671) to E.164 format, one would need to add the ‘+’ prefix and the country code (which is 1) in front of the number (+1 415 599 2671). In the UK and many other countries internationally, local dialing requires the addition of a 0 in front of the subscriber number. However, to use E.164 formatting, this 0 must be removed. A number such as 020 7183 8750 in the UK would be formatted as +44 20 7183 8750.
 
+#### Call Profile
+
+Specifies the profile for a `call` factor
+
+|---------------+-------------------------------+-----------------------------------------------------------------+----------+---------+----------+-----------+-----------+------------|
+| Property      | Description                   | DataType                                                        | Nullable | Unique  | Readonly | MinLength | MaxLength | Validation |
+| ------------- | ----------------------------- | --------------------------------------------------------------- | -------- | ------- | -------- | --------- | --------- | ---------- |
+| phoneNumber   | phone number of the device    | String [E.164 formatted](http://en.wikipedia.org/wiki/E.164)    | FALSE    | TRUE    | FALSE    |           | 15        |            |
+| phoneExtension| extension of the device       | String                                                          | TRUE     | FALSE   | FALSE    |           | 15        |            | 
+|---------------+-------------------------------+-----------------------------------------------------------------+----------+---------+----------+-----------+-----------+------------|
+
+~~~json
+{
+  "profile": {
+    "phoneNumber": "+1-555-415-1337",
+    "phoneExtension": "1234"
+  }
+}
+~~~
+
+E.164 numbers can have a maximum of fifteen digits and are usually written as follows: [+][country code][subscriber number including area code]. Phone numbers that are not formatted in E.164 may work, but it depends on the phone or handset that is being used as well as the carrier from which the call or SMS is being originated.
+
+For example, to convert a US phone number (415 599 2671) to E.164 format, one would need to add the ‘+’ prefix and the country code (which is 1) in front of the number (+1 415 599 2671). In the UK and many other countries internationally, local dialing requires the addition of a 0 in front of the subscriber number. However, to use E.164 formatting, this 0 must be removed. A number such as 020 7183 8750 in the UK would be formatted as +44 20 7183 8750.
+
+PhoneExtension is optional.
 
 #### Token Profile
 
@@ -250,7 +277,7 @@ Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988))
 | poll               | Polls factor for completion of activation of verification                        |
 |--------------------+--------------------------------------------------------------------------------- |
 
-> The Links Object is **read-only**
+> The Links Object is **read-only**.
 
 ## Embedded Resources
 
@@ -356,16 +383,16 @@ Specifies the status of a factor verification attempt
 |------------------------+-------------------------------------------------------------------------------------------------------------------------------------|
 | Result                 | Description                                                                                                                         |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------|
-| `SUCCESS`              | Factor was successfully verified                                                                                                    |
-| `CHALLENGE`            | Another verification is required                                                                                                    |
-| `WAITING`              | Factor verification has started but not yet completed (e.g user hasn't answered phone call yet)                                     |
-| `FAILED`               | Factor verification failed                                                                                                          |
-| `REJECTED`             | Factor verification was denied by user                                                                                              |
-| `CANCELLED`            | Factor verification was canceled by user                                                                                            |
-| `TIMEOUT`              | Unable to verify factor within the allowed time window                                                                              |
-| `TIME_WINDOW_EXCEEDED` | Factor was successfully verified but outside of the computed time window.  Another verification is required in current time window. |
-| `PASSCODE_REPLAYED`    | Factor was previously verified within the same time window.  User must wait another time window and retry with a new verification.  |
-| `ERROR`                | Unexpected server error occurred verifying factor.                                                                                  |
+| `SUCCESS`              | The factor was successfully verified.                                                                                                    |
+| `CHALLENGE`            | Another verification is required.                                                                                                    |
+| `WAITING`              | The factor verification has started but not yet completed (e.g user hasn't answered phone call yet).                                     |
+| `FAILED`               | The factor verification failed.                                                                                                          |
+| `REJECTED`             | The factor verification was denied by user.                                                                                              |
+| `CANCELLED`            | The factor verification was canceled by user.                                                                                            |
+| `TIMEOUT`              | Okta was unable to verify the factor within the allowed time window.                                                                              |
+| `TIME_WINDOW_EXCEEDED` | The factor was successfully verified but outside of the computed time window.  Another verification is required in current time window. |
+| `PASSCODE_REPLAYED`    | The factor was previously verified within the same time window.  The user must wait another time window and retry with a new verification.  |
+| `ERROR`                | An unexpected server error occurred verifying factor.                                                                                  |
 |------------------------+-------------------------------------------------------------------------------------------------------------------------------------|
 
 ## Factor Operations
@@ -375,13 +402,13 @@ Specifies the status of a factor verification attempt
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors/*:fid*
 
-Fetches a factor for the specified user.
+Fetches a factor for the specified user
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
+Parameter    | Description                                         | Param Type | DataType | Required |
+------------ | --------------------------------------------------- | ---------- | -------- | -------- |
 uid          | `id` of user                                        | URL        | String   | TRUE     |
 fid          | `id` of factor                                      | URL        | String   | TRUE     |
 
@@ -450,13 +477,13 @@ curl -v -X GET \
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors
 
-Enumerates all the enrolled factors for the specified user.
+Enumerates all the enrolled factors for the specified user
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
+Parameter    | Description                                         | Param Type | DataType | Required |
+------------ | --------------------------------------------------- | ---------- | -------- | -------- |
 uid          | `id` of user                                        | URL        | String   | TRUE     |
 
 #### Response Parameters
@@ -611,13 +638,13 @@ curl -v -X GET \
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors/catalog
 
-Enumerates all the [supported factors](#supported-factors-for-providers) that can be enrolled for the specified user.
+Enumerates all the [supported factors](#supported-factors-for-providers) that can be enrolled for the specified user
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
+Parameter    | Description                                         | Param Type | DataType | Required |
+------------ | --------------------------------------------------- | ---------- | -------- | -------- |
 uid          | `id` of user                                        | URL        | String   | TRUE     |
 
 #### Response Parameters
@@ -717,6 +744,32 @@ curl -v -X GET \
     }
   },
   {
+      "factorType": "call",
+      "provider": "OKTA",
+      "_links": {
+        "enroll": {
+          "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors",
+          "hints": {
+            "allow": [
+              "POST"
+            ]
+          }
+        }
+      },
+      "_embedded": {
+        "phones": [
+          {
+            "id": "mblldntFJevYKbyQQ0g4",
+            "profile": {
+              "phoneNumber": "+14081234567",
+              "phoneExtension": "1234"
+            },
+            "status": "ACTIVE"
+          }
+        ]
+      }
+  },
+  {
     "factorType": "token",
     "provider": "RSA",
     "_links": {
@@ -755,13 +808,13 @@ curl -v -X GET \
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors/questions
 
-Enumerates all available security questions for a user's `question` factor.
+Enumerates all available security questions for a user's `question` factor
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
+Parameter    | Description                                         | Param Type | DataType | Required |
+------------ | --------------------------------------------------- | ---------- | -------- | -------- |
 uid          | `id` of user                                        | URL        | String   | TRUE     |
 
 #### Response Parameters
@@ -769,12 +822,12 @@ uid          | `id` of user                                        | URL        
 
 Array of Questions
 
-|---------------+---------------------------+-----------+----------+--------+----------+-----------+-----------+------------|
-| Property      | Description               | DataType  | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| ------------- | ------------------------- | --------- | -------- | -------| -------- | --------- | --------- | ---------- |
-| question      | unique key for question   | String    | FALSE    | TRUE   | TRUE     |           |           |            |
-| questionText  | display text for question | String    | FALSE    | FALSE  | TRUE     |           |           |            |
-|---------------+---------------------------+-----------+----------+--------+----------+-----------+-----------+------------|
+|---------------+---------------------------+-----------+----------+--------+----------|
+| Property      | Description               | DataType  | Nullable | Unique | Readonly |
+| ------------- | ------------------------- | --------- | -------- | -------| -------- |
+| question      | unique key for question   | String    | FALSE    | TRUE   | TRUE     |
+| questionText  | display text for question | String    | FALSE    | FALSE  | TRUE     |
+|---------------+---------------------------+-----------+----------+--------+----------|
 
 #### Request Example
 {:.api .api-request .api-request-example}
@@ -814,10 +867,11 @@ curl -v -X GET \
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:id*/factors
 
-Enrolls a user with a supported [factor](#list-factors-to-enroll).
+Enrolls a user with a supported [factor](#list-factors-to-enroll)
 
 - [Enroll Okta Security Question Factor](#enroll-okta-security-question-factor)
 - [Enroll Okta SMS Factor](#enroll-okta-sms-factor)
+- [Enroll Okta Call Factor](#enroll-okta-call-factor)
 - [Enroll Okta Verify TOTP Factor](#enroll-okta-verify-totp-factor)
 - [Enroll Okta Verify Push Factor](#enroll-okta-verify-push-factor)
 - [Enroll Google Authenticator Factor](#enroll-google-authenticator-factor)
@@ -828,8 +882,8 @@ Enrolls a user with a supported [factor](#list-factors-to-enroll).
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                   | Param Type  | DataType                | Required | Default
------------- | --------------------------------------------- | ----------- | ----------------------- | -------- | -------
+Parameter    | Description                                   | Param Type  | DataType                | Required |
+------------ | --------------------------------------------- | ----------- | ----------------------- | -------- |
 id           | `id` of user                                  | URL         | String                  | TRUE     |
 templateId   | `id` of SMS template (only for SMS factor)    | Query       | String                  | FALSE    |
 factor       | Factor                                        | Body        | [Factor](#factor-model) | TRUE     |
@@ -839,14 +893,14 @@ factor       | Factor                                        | Body        | [Fa
 
 All responses return the enrolled [Factor](#factor-model) with a status of either `PENDING_ACTIVATION` or `ACTIVE`.
 
-> Some [factor types](#factor-type) require [activation](#activate-factor) to complete the enrollment process
+> Some [factor types](#factor-type) require [activation](#activate-factor) to complete the enrollment process.
 
 #### Enroll Okta Security Question Factor
 {:.api .api-operation}
 
 Enrolls a user with the `question` factor and [question profile](#question-profile).
 
-> Security Question factor does not require activation and is `ACTIVE` after enrollment
+> The Security Question factor does not require activation and is `ACTIVE` after enrollment.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -914,7 +968,7 @@ curl -v -X POST \
 #### Enroll Okta SMS Factor
 {:.api .api-operation}
 
-Enrolls a user with the Okta `sms` factor and a [SMS profile](#sms-profile).  A text message with an OTP is sent to the device during enrollment and must be [activated](#activate-sms-factor) by following the `activate` link relation to complete the enrollment process.
+Enrolls a user with the Okta `sms` factor and an [SMS profile](#sms-profile).  A text message with an OTP is sent to the device during enrollment and must be [activated](#activate-sms-factor) by following the `activate` link relation to complete the enrollment process.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -989,11 +1043,11 @@ curl -v -X POST \
 
 ###### Rate Limit
 
-`429 Too Many Requests` status code may be returned if you attempt to resend a SMS challenge (OTP) within the same time window.
+`429 Too Many Requests` status code may be returned if you attempt to resend an SMS challenge (OTP) within the same time window.
 
-*The current rate limit is 1 SMS challenge per device every 30 seconds.*
+*The current rate limit is one SMS challenge per device every 30 seconds.*
 
-> Okta will round-robin between SMS providers with every resend request to help ensure delivery of SMS OTP across different carriers
+> Okta round-robins between SMS providers with every resend request to help ensure delivery of SMS OTP across different carriers.
 
 ~~~json
 {
@@ -1121,6 +1175,163 @@ curl -v -X POST \
 }' "https://${org}.okta.com/api/v1/users/${userId}/factors/${factorId}/resend?templateId=${templateId}"
 ~~~
 
+#### Enroll Okta Call Factor
+{:.api .api-operation}
+
+Enrolls a user with the Okta `call` factor and a [Call profile](#call-profile).  A text message with an OTP is sent to the device during enrollment and must be [activated](#activate-call-factor) by following the `activate` link relation to complete the enrollment process.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "factorType": "call",
+  "provider": "OKTA",
+  "profile": {
+    "phoneNumber": "+1-555-415-1337",
+    "phoneExtension": "1234"
+  }
+}' "https://${org}.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "id": "clf1nz9JHJGHWRKMTLHP",
+  "factorType": "call",
+  "provider": "OKTA",
+  "status": "PENDING_ACTIVATION",
+  "created": "2014-08-05T20:59:49.000Z",
+  "lastUpdated": "2014-08-06T03:59:49.000Z",
+  "profile": {
+    "phoneNumber": "+1-555-415-1337",
+    "phoneExtension": "1234"
+  },
+  "_links": {
+    "activate": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/clf1nz9JHJGHWRKMTLHP/lifecycle/activate",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "resend": [
+      {
+        "name": "call",
+        "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/clf1nz9JHJGHWRKMTLHP/resend",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      }
+    ],
+    "self": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/clf1nz9JHJGHWRKMTLHP",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    },
+    "user": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+###### Rate Limit
+
+`429 Too Many Requests` status code may be returned if you attempt to resend a Voice Call challenge (OTP) within the same time window.
+
+*The current rate limit is one Voice Call challenge per device every 30 seconds.*
+
+~~~json
+{
+    "errorCode": "E0000047",
+    "errorSummary": "API call exceeded rate limit due to too many requests",
+    "errorLink": "E0000047",
+    "errorId": "oaexL5rislQROquLn3Jec7oGw",
+    "errorCauses": []
+}
+~~~
+
+###### Existing Phone
+
+A `400 Bad Request` status code may be returned if you attempt to enroll with a different phone number when there is an existing phone with 'Voice Call' capability for the user.
+
+*Currently, a user can enroll only one ''voice call' capable phone.*
+
+~~~json
+{
+    "errorCode": "E0000001",
+    "errorSummary": "Api validation failed: factorEnrollRequest",
+    "errorLink": "E0000001",
+    "errorId": "oaeneEaQF8qQrepOWHSkdoejw",
+    "errorCauses": [
+       {
+          "errorSummary": "Factor already exists."
+       }
+    ]
+}
+~~~
+
+##### Enroll Okta Call Factor by Updating Phone Number
+{:.api .api-operation}
+
+If the user wants to use a different phone number (instead of the existing phone number) then the enroll API call needs to supply `updatePhone` option with `true`.
+
+###### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "factorType": "call",
+  "provider": "OKTA",
+  "profile": {
+    "phoneNumber": "+1-555-415-1338",
+    "phoneExtension": "1234"
+  }
+}' "https://${org}.okta.com/api/v1/users/${userId}/factors?updatePhone=true"
+~~~
+
+##### Enroll Okta Call Factor by Using Existing Phone Number
+{:.api .api-operation}
+
+If the user wants to use the existing phone number then the enroll API doesn't need to pass the phone number.
+Or, you can pass the existing phone number in a profile object.
+
+###### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "factorType": "call",
+  "provider": "OKTA"
+}' "https://${org}.okta.com/api/v1/users/${userId}/factors"
+~~~
+
 
 #### Enroll Okta Verify TOTP Factor
 {:.api .api-operation}
@@ -1203,7 +1414,7 @@ curl -v -X POST \
 
 Enrolls a user with the Okta verify `push` factor. The factor must be [activated on the device](#activate-push-factor) by scanning the QR code or visiting the activation link sent via email or sms.
 
-> Use the published activation links to embed the QR code or distribute an activation `email` or `sms`
+> Use the published activation links to embed the QR code or distribute an activation `email` or `sms`.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1582,6 +1793,7 @@ The `sms` and `token:software:totp` [factor types](#factor-type) require activat
 
 - [Activate TOTP Factor](#activate-totp-factor)
 - [Activate SMS Factor](#activate-sms-factor)
+- [Activate Call Factor](#activate-call-factor)
 - [Activate Push Factor](#activate-push-factor)
 
 #### Activate TOTP Factor
@@ -1684,8 +1896,8 @@ Activates a `sms` factor by verifying the OTP.  The request/response is identica
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
+Parameter    | Description                                         | Param Type | DataType | Required |
+------------ | --------------------------------------------------- | ---------- | -------- | -------- |
 uid          | `id` of user                                        | URL        | String   | TRUE     |
 fid          | `id` of factor returned from enrollment             | URL        | String   | TRUE     |
 passCode     | OTP sent to mobile device                           | Body       | String   | TRUE     |
@@ -1756,6 +1968,99 @@ curl -v -X POST \
         ]
       }
     },
+    "user": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+#### Activate Call Factor
+{:.api .api-operation}
+
+Activates a `call` factor by verifying the OTP.  The request/response is identical to [activating a TOTP factor](#activate-totp-factor).
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter    | Description                                         | Param Type | DataType | Required | Default
+------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
+uid          | `id` of user                                        | URL        | String   | TRUE     |
+fid          | `id` of factor returned from enrollment             | URL        | String   | TRUE     |
+passCode     | OTP sent to mobile device                           | Body       | String   | TRUE     |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+If the passcode is correct you will receive the [Factor](#factor-model) with an `ACTIVE` status.
+
+If the passcode is invalid you will receive a `403 Forbidden` status code with the following error:
+
+~~~json
+{
+  "errorCode": "E0000068",
+  "errorSummary": "Invalid Passcode/Answer",
+  "errorLink": "E0000068",
+  "errorId": "oaei_IfXcpnTHit_YEKGInpFw",
+  "errorCauses": [
+    {
+      "errorSummary": "Your passcode doesn't match our records. Please try again."
+    }
+  ]
+}
+~~~
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "passCode": "12345"
+}' "https://${org}.okta.com/api/v1/users/users/00u15s1KDETTQMQYABRL/factors/clf1o51EADOTFXHHBXBP/lifecycle/activate"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "id": "clf1o51EADOTFXHHBXBP",
+  "factorType": "call",
+  "provider": "OKTA",
+  "status": "ACTIVE",
+  "created": "2014-08-06T16:56:31.000Z",
+  "lastUpdated": "2014-08-06T16:56:31.000Z",
+  "profile": {
+    "phoneNumber": "+1-555-415-1337",
+    "phoneExtension": "1234"
+  },
+  "_links": {
+    "verify": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/clf1o51EADOTFXHHBXBP/verify",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "self": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/clf1o51EADOTFXHHBXBP",
+      "hints": {
+        "allow": [
+          "GET",
+          "DELETE"
+        ]
+      }
+    },    
     "user": {
       "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL",
       "hints": {
@@ -1918,7 +2223,7 @@ curl -v -X POST \
 
 <span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/users/*:uid*/factors/*:fid*
 
-Unenrolls an existing factor for the specified user allowing the user to enroll a new factor.
+Unenrolls an existing factor for the specified user, allowing the user to enroll a new factor.
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2023,14 +2328,14 @@ Verifies an OTP for a `sms` factor.
 #### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
+Parameter    | Description                                         | Param Type | DataType | Required |
+------------ | --------------------------------------------------- | ---------- | -------- | -------- |
 uid          | `id` of user                                        | URL        | String   | TRUE     |
 fid          | `id` of factor                                      | URL        | String   | TRUE     |
 templateId   | `id` of SMS template                                | Query      | String   | FALSE    |
 passCode     | OTP sent to device                                  | Body       | String   | FALSE    |
 
-> If you omit `passCode` in the request a new OTP will be sent to the device, otherwise the request will attempt to verify the `passCode`
+> If you omit `passCode` in the request a new OTP is sent to the device, otherwise the request attempts to verify the `passCode`.
 
 #### Response Parameters
 {:.api .api-response .api-response-params}
@@ -2057,9 +2362,9 @@ If the passcode is invalid you will receive a `403 Forbidden` status code with t
 
 `429 Too Many Requests` status code may be returned if you attempt to resend a SMS challenge (OTP) within the same time window.
 
-*The current rate limit is 1 SMS challenge per device every 30 seconds.*
+*The current rate limit is one SMS challenge per device every 30 seconds.*
 
-> Okta will round-robin between SMS providers with every resend request to help ensure delivery of SMS OTP across different carriers
+> Okta will round-robin between SMS providers with every resend request to help ensure delivery of SMS OTP across different carriers.
 
 ~~~json
 {
@@ -2101,13 +2406,12 @@ Customize (and optionally localize) the SMS message sent to the user on verifica
 * If the language provided in the `Accept-Language` header doesn't exist in the template definition, the SMS message is sent using the template text. 
 * If the provided `templateId` doesn't match an existing template, the SMS message is sent using the default template.
 
->How to create custom template is described [here](templates.html#sms-template).
-
+To create custom templates, see [Templates](templates.html#sms-template).
 
 ###### Request Example
 {:.api .api-request .api-request-example}
 
-This will send the verification message in German, assuming that the sms template is configured with German translation.
+Sends the verification message in German, assuming that the SMS template is configured with a German translation
 
 ~~~sh
 curl -v -X POST \
@@ -2120,13 +2424,12 @@ curl -v -X POST \
 }' "https://${org}.okta.com/api/v1/users/${userId}/factors/${factorId}/verify?templateId=${templateId}"
 ~~~
 
-
-### Verify TOTP Factor
+### Verify Call Factor
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/verify</span>
 
-Verifies an OTP for a `token:software:totp` factor.
+Verifies an OTP for a `call` factor
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2135,13 +2438,90 @@ Parameter    | Description                                         | Param Type 
 ------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
 uid          | `id` of user                                        | URL        | String   | TRUE     |
 fid          | `id` of factor                                      | URL        | String   | TRUE     |
-passCode     | OTP generated by device                             | Body       | String   | TRUE     |
+passCode     | OTP sent to device                                  | Body       | String   | FALSE    |
+
+> If you omit `passCode` in the request a new OTP is sent to the device, otherwise the request attempts to verify the `passCode`.
 
 #### Response Parameters
 {:.api .api-response .api-response-params}
 
 Parameter    | Description                                         | Param Type | DataType                                            | Required | Default
 ------------ | --------------------------------------------------- | ---------- | --------------------------------------------------- | -------- | -------
+factorResult | verification result                                 | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
+
+If the passcode is invalid you will receive a `403 Forbidden` status code with the following error:
+
+~~~json
+{
+  "errorCode": "E0000068",
+  "errorSummary": "Invalid Passcode/Answer",
+  "errorLink": "E0000068",
+  "errorId": "oaei_IfXcpnTHit_YEKGInpFw",
+  "errorCauses": [
+    {
+      "errorSummary": "Your passcode doesn't match our records. Please try again."
+    }
+  ]
+}
+~~~
+
+`429 Too Many Requests` status code may be returned if you attempt to resend a Voice Call challenge (OTP) within the same time window.
+
+*The current rate limit is one Voice Call challenge per device every 30 seconds.*
+
+~~~json
+{
+    "errorCode": "E0000047",
+    "errorSummary": "API call exceeded rate limit due to too many requests.",
+    "errorLink": "E0000047",
+    "errorId": "oaeneEaQF8qQrepOWHSkdoejw",
+    "errorCauses": []
+}
+~~~
+
+#### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "passCode": "123456"
+}' "https://${org}.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/clff17zuKEUMYQAQGCOV/verify"
+~~~
+
+#### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "factorResult": "SUCCESS"
+}
+~~~
+
+### Verify TOTP Factor
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/verify</span>
+
+Verifies an OTP for a `token:software:totp` factor
+
+#### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter    | Description                                         | Param Type | DataType | Required |
+------------ | --------------------------------------------------- | ---------- | -------- | -------- |
+uid          | `id` of user                                        | URL        | String   | TRUE     |
+fid          | `id` of factor                                      | URL        | String   | TRUE     |
+passCode     | OTP generated by device                             | Body       | String   | TRUE     |
+
+#### Response Parameters
+{:.api .api-response .api-response-params}
+
+Parameter    | Description                                         | Param Type | DataType                                            | Required |
+------------ | --------------------------------------------------- | ---------- | --------------------------------------------------- | -------- |
 factorResult | verification result                                 | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
 
 If the passcode is invalid you will receive a `403 Forbidden` status code with the following error:
@@ -2201,13 +2581,13 @@ fid          | `id` of factor                                      | URL        
 
 > The client `IP Address` & `User Agent` of the HTTP request is automatically captured and sent in the push notification as additional context.<br>You should [always send a valid User-Agent HTTP header](../getting_started/design_principles.html#user-agent) when verifying a push factor.
 
-> The **public IP address** of your application must be [whitelisted as a gateway IP address](../getting_started/design_principles.html#ip-address) to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header
+> The **public IP address** of your application must be [whitelisted as a gateway IP address](../getting_started/design_principles.html#ip-address) to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header.
 
 #### Response Parameters
 {:.api .api-response .api-response-params}
 
-Parameter    | Description                                                          | Param Type | DataType                                             | Required | Default
------------- | -------------------------------------------------------------------- | ---------- | ---------------------------------------------------- | -------- | -------
+Parameter    | Description                                                          | Param Type | DataType                                             | Required |
+------------ | -------------------------------------------------------------------- | ---------- | ---------------------------------------------------- | -------- |
 factorResult | verification result (`WAITING`, `SUCCESS`, `REJECTED`, or `TIMEOUT`) | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
 
 #### Request Example
@@ -2256,15 +2636,15 @@ curl -v -X POST \
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users/*:uid*/factors/*:fid*/transactions/*:tid*
 
-Polls a push verification transaction for completion.  The transaction will have a result of `WAITING`, `SUCCESS`, `REJECTED`, or `TIMEOUT`.
+Polls a push verification transaction for completion.  The transaction result is `WAITING`, `SUCCESS`, `REJECTED`, or `TIMEOUT`.
 
-> You should always use the `poll` link relation and never manually construct your own URL
+> You should always use the `poll` link relation and never manually construct your own URL.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description         | Param Type | DataType | Required | Default
------------- | ------------------- | ---------- | -------- | -------- | -------
+Parameter    | Description         | Param Type | DataType | Required |
+------------ | ------------------- | ---------- | -------- | -------- |
 uid          | `id` of user        | URL        | String   | TRUE     |
 fid          | `id` of factor      | URL        | String   | TRUE     |
 tid          | `id` of transaction | URL        | String   | TRUE     |
@@ -2272,8 +2652,8 @@ tid          | `id` of transaction | URL        | String   | TRUE     |
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Parameter    | Description         | Param Type | DataType                                             | Required | Default
------------- | ------------------- | ---------- | ---------------------------------------------------- | -------- | -------
+Parameter    | Description         | Param Type | DataType                                             | Required |
+------------ | ------------------- | ---------- | ---------------------------------------------------- | -------- |
 factorResult | verification result | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
 
 ##### Response Example (Waiting)
@@ -2374,13 +2754,13 @@ factorResult | verification result | Body       | [Factor Verify Result](#factor
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/verify</span>
 
-Verifies an OTP for a `token` or `token:hardware` factor.
+Verifies an OTP for a `token` or `token:hardware` factor
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
+Parameter    | Description                                         | Param Type | DataType | Required |
+------------ | --------------------------------------------------- | ---------- | -------- | -------- |
 uid          | `id` of user                                        | URL        | String   | TRUE     |
 fid          | `id` of factor                                      | URL        | String   | TRUE     |
 passCode     | OTP generated by device                             | Body       | String   | TRUE     |
@@ -2388,8 +2768,8 @@ passCode     | OTP generated by device                             | Body       
 #### Response Parameters
 {:.api .api-response .api-response-params}
 
-Parameter    | Description                                         | Param Type | DataType                                             | Required | Default
------------- | --------------------------------------------------- | ---------- | ---------------------------------------------------- | -------- | -------
+Parameter    | Description                                         | Param Type | DataType                                             | Required |
+------------ | --------------------------------------------------- | ---------- | ---------------------------------------------------- | -------- |
 factorResult | verification result                                 | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
 
 If the passcode is invalid you will receive a `403 Forbidden` status code with the following error:
