@@ -4,7 +4,7 @@ title: Authentication API
 redirect_from: "/docs/api/rest/authn.html"
 ---
 
-## Overview
+## Authentication API
 
 The Okta Authentication API provides operations to authenticate users, perform multi-factor enrollment and verification, recover forgotten passwords, and unlock accounts. It can be used as a standalone API to provide the identity layer on top of your existing application, or it can be integrated with the Okta [Sessions API](sessions.html) to obtain an Okta [session cookie](/docs/examples/session_cookie.html) and access apps within Okta.
 
@@ -35,9 +35,9 @@ Trusted applications are backend applications that act as authentication broker 
 
 ### Getting Started with Authentication
 
-1. Make sure you need the API. Check out the [Okta Sign-In Widget](/docs/guides/okta_sign-in_widget.html) which is built on the Authentication API. The Sign-In Widget easier to use and supports basic use cases.
+1. Make sure you need the API. Check out the [Okta Sign-In Widget](/docs/guides/okta_sign-in_widget.html) which is built on the Authentication API. The Sign-In Widget is easier to use and supports basic use cases.
 2. For more advanced use cases, learn [the Okta API basics](/docs/api/getting_started/api_test_client.html).
-3. Explore the Authentication API using [the Postman collection](/docs/api/getting_started/api_test_client.html#collections).
+3. Explore the Authentication API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9324c34d53c65f1415c2)
 
 ## Authentication Operations
 
