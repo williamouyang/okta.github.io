@@ -1,16 +1,30 @@
 ---
 layout: docs_page
-title: Application API
+title: Apps
 redirect_from: "/docs/api/rest/apps.html"
 ---
 
-## Application API
+# Apps API
 
 The Okta Application API provides operations to manage applications and/or assignments to users or groups for your organization.
 
 ## Getting Started
 
-Explore the Custom Templates API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/7551a287ab8354aacf83)
+Explore the Custom Templates API: 
+
+<div class="postman-run-button"
+data-postman-action="collection/import"
+data-postman-var-1="7551a287ab8354aacf83"
+data-postman-param="env%5Bexample.okta.com%5D=W3siZW5hYmxlZCI6dHJ1ZSwia2V5IjoidXJsIiwibmFtZSI6InVybCIsInR5cGUiOiJ0ZXh0IiwidmFsdWUiOiJodHRwczovL2V4YW1wbGUub2t0YS5jb20ifSx7ImVuYWJsZWQiOnRydWUsImtleSI6ImFwaWtleSIsIm5hbWUiOiJhcGlrZXkiLCJ0eXBlIjoidGV4dCIsInZhbHVlIjoiIn0seyJlbmFibGVkIjp0cnVlLCJrZXkiOiJlbWFpbC1zdWZmaXgiLCJuYW1lIjoiZW1haWwtc3VmZml4IiwidHlwZSI6InRleHQiLCJ2YWx1ZSI6ImV4YW1wbGUuY29tIn0seyJlbmFibGVkIjp0cnVlLCJrZXkiOiJzdWJkb21haW4iLCJuYW1lIjoic3ViZG9tYWluIiwidHlwZSI6InRleHQiLCJ2YWx1ZSI6ImV4YW1wbGUifSx7ImVuYWJsZWQiOnRydWUsImtleSI6InVzZXJuYW1lIiwibmFtZSI6InVzZXJuYW1lIiwidHlwZSI6InRleHQiLCJ2YWx1ZSI6InVzZXJAZXhhbXBsZS5jb20ifSx7ImVuYWJsZWQiOnRydWUsImtleSI6InBhc3N3b3JkIiwibmFtZSI6InBhc3N3b3JkIiwidHlwZSI6InRleHQiLCJ2YWx1ZSI6IiJ9LHsiZW5hYmxlZCI6dHJ1ZSwia2V5IjoidXNlcklkIiwibmFtZSI6InVzZXJJZCIsInR5cGUiOiJ0ZXh0IiwidmFsdWUiOiIifSx7ImVuYWJsZWQiOnRydWUsImtleSI6Imdyb3VwSWQiLCJuYW1lIjoiZ3JvdXBJZCIsInR5cGUiOiJ0ZXh0IiwidmFsdWUiOiIifSx7ImVuYWJsZWQiOnRydWUsImtleSI6ImFwcElkIiwibmFtZSI6ImFwcElkIiwidHlwZSI6InRleHQiLCJ2YWx1ZSI6IiJ9LHsiZW5hYmxlZCI6dHJ1ZSwia2V5Ijoic2Vzc2lvbklkIiwibmFtZSI6InNlc3Npb25JZCIsInR5cGUiOiJ0ZXh0IiwidmFsdWUiOiIifSx7ImVuYWJsZWQiOnRydWUsImtleSI6InRydXN0SWQiLCJuYW1lIjoidHJ1c3RJZCIsInR5cGUiOiJ0ZXh0IiwidmFsdWUiOiIifSx7ImVuYWJsZWQiOnRydWUsImtleSI6ImZhY3RvcklkIiwibmFtZSI6ImZhY3RvcklkIiwidHlwZSI6InRleHQiLCJ2YWx1ZSI6IiJ9LHsiZW5hYmxlZCI6dHJ1ZSwia2V5Ijoic3RhdGVUb2tlbiIsIm5hbWUiOiJzdGF0ZVRva2VuIiwidHlwZSI6InRleHQiLCJ2YWx1ZSI6IiJ9LHsiZW5hYmxlZCI6dHJ1ZSwia2V5IjoicmVjb3ZlcnlUb2tlbiIsIm5hbWUiOiJyZWNvdmVyeVRva2VuIiwidHlwZSI6InRleHQiLCJ2YWx1ZSI6IiJ9LHsiZW5hYmxlZCI6dHJ1ZSwia2V5IjoicG9saWN5SWQiLCJuYW1lIjoicG9saWN5SWQiLCJ0eXBlIjoidGV4dCIsInZhbHVlIjoiIn0seyJlbmFibGVkIjp0cnVlLCJrZXkiOiJydWxlSWQiLCJuYW1lIjoicnVsZUlkIiwidHlwZSI6InRleHQiLCJ2YWx1ZSI6IiJ9LHsiZW5hYmxlZCI6dHJ1ZSwia2V5Ijoic2Vzc2lvblRva2VuIiwibmFtZSI6InNlc3Npb25Ub2tlbiIsInR5cGUiOiJ0ZXh0IiwidmFsdWUiOiIifSx7ImVuYWJsZWQiOnRydWUsImtleSI6InJlbGF5U3RhdGUiLCJuYW1lIjoicmVsYXlTdGF0ZSIsInR5cGUiOiJ0ZXh0IiwidmFsdWUiOiIifSx7ImVuYWJsZWQiOnRydWUsImtleSI6ImRldmljZVRva2VuIiwibmFtZSI6ImRldmljZVRva2VuIiwidHlwZSI6InRleHQiLCJ2YWx1ZSI6IiJ9LHsiZW5hYmxlZCI6dHJ1ZSwia2V5IjoiYXBwTmFtZSIsIm5hbWUiOiJhcHBOYW1lIiwidHlwZSI6InRleHQiLCJ2YWx1ZSI6ImFtYXpvbl9hd3MifSx7ImVuYWJsZWQiOnRydWUsImtleSI6ImlkcElkIiwibmFtZSI6ImlkcElkIiwidHlwZSI6InRleHQiLCJ2YWx1ZSI6IiJ9LHsiZW5hYmxlZCI6dHJ1ZSwia2V5Ijoicm9sZUlkIiwibmFtZSI6InJvbGVJZCIsInR5cGUiOiJ0ZXh0IiwidmFsdWUiOiIifSx7ImVuYWJsZWQiOnRydWUsImtleSI6InJlZGlyZWN0VXJsIiwibmFtZSI6InJlZGlyZWN0VXJsIiwidHlwZSI6InRleHQiLCJ2YWx1ZSI6IiJ9XQ=="></div>
+<script type="text/javascript">
+  (function (p,o,s,t,m,a,n) {
+    !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
+    !o.getElementById(s+t) && o.getElementsByTagName("head")[0].appendChild((
+      (n = o.createElement("script")),
+      (n.id = s+t), (n.async = 1), (n.src = m), n
+    ));
+  }(window, document, "_pm", "PostmanRunObject", "https://run.pstmn.io/button.js"));
+</script>
 
 ## Application Operations
 
