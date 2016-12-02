@@ -44,17 +44,17 @@ Trusted applications are backend applications that act as authentication broker 
 ### Primary Authentication
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/authn
 
-Every authentication transaction starts with primary authentication which validates a user's primary password credential.  **Password Policy**, **MFA Policy**,  and **Sign-On Policy** is evaluated during primary authentication to determine if the user's password is expired, a factor should be enrolled, or additional verification is required.
+Every authentication transaction starts with primary authentication which validates a user's primary password credential. **Password Policy**, **MFA Policy**,  and **Sign-On Policy** are evaluated during primary authentication to determine if the user's password is expired, a factor should be enrolled, or additional verification is required. The [transaction state](#transaction-state) of the response depends on the user's status, group memberships and assigned policies. 
 
-The [transaction state](#transaction-state) of the response will depend on the user's status, group memberships and assigned policies.
+The requests and responses vary depending on the application type, and whether a password expiration warning is sent:
+ 
+- [Primary Authentication with Public Application](#primary-authentication-with-public-application)&mdash;[Request Example](#request-example-public-application)
+- [Primary Authentication with Trusted Application](#primary-authentication-with-trusted-application)&mdash;[Request Example](#request-example-trusted-application)
+- [Primary Authentication with Password Expiration Warning](#primary-authentication-with-password-expiration-warning)&mdash;[Request Example](#request-example-password-expiration-warning)
 
-- [Primary Authentication with Public Application](#primary-authentication-with-public-application)
-- [Primary Authentication with Trusted Application](#primary-authentication-with-trusted-application)
-- [Primary Authentication with Password Expiration Warn](#primary-authentication-with-password-expiration-warn)
-
-> You must first enable MFA factors and assign a valid **Sign-On Policy** to a user to enroll and/or verify a MFA factor during authentication
+> You must first enable MFA factors and assign a valid **Sign-On Policy** to a user to enroll and/or verify a MFA factor during authentication.
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -72,10 +72,10 @@ context     | Provides additional context for the authentication transaction    
 The authentication transaction [state machine](#transaction-state) can be modified via the following opt-in features:
 
 |----------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+------------|
-| Property                   | Description                                                                                                                                                | DataType | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| multiOptionalFactorEnroll  | Transitions transaction back to `MFA_ENROLL` state after successful factor enrollment when additional optional factors are available for enrollment        | Boolean  | TRUE     | FALSE  | FALSE    |           |           |            |
-| warnBeforePasswordExpired  | Transitions transaction to `PASSWORD_WARN` state before `SUCCESS` if the user's password is about to expire and within their password policy warn period   | Boolean  | TRUE     | FALSE  | FALSE    |           |           |            |
+| Property                   | Description                                                                                                                                                | DataType | Nullable | Unique | Readonly |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------ | -------- |
+| multiOptionalFactorEnroll  | Transitions transaction back to `MFA_ENROLL` state after successful factor enrollment when additional optional factors are available for enrollment        | Boolean  | TRUE     | FALSE  | FALSE    |
+| warnBeforePasswordExpired  | Transitions transaction to `PASSWORD_WARN` state before `SUCCESS` if the user's password is about to expire and within their password policy warn period   | Boolean  | TRUE     | FALSE  | FALSE    |
 |----------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+------------|
 
 ##### Context Object
@@ -84,11 +84,11 @@ The context object allows [trusted web applications](#trusted-application) such 
 
 > Overriding context such as `deviceToken` is a highly privileged operation limited to trusted web applications and requires making authentication or recovery requests with a valid *administrator API token*.
 
-|-------------+-------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+------------|
-| Property    | Description                                                             | DataType | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| ----------- | ----------------------------------------------------------------------- | -------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| deviceToken | A globally unique ID identifying the user's client device or user agent | String   | TRUE     | FALSE  | FALSE    |           | 32        |            |
-|-------------+-------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+------------|
+|-------------+-------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------|
+| Property    | Description                                                             | DataType | Nullable | Unique | Readonly | MinLength | MaxLength |
+| ----------- | ----------------------------------------------------------------------- | -------- | -------- | ------ | -------- | --------- | --------- |
+| deviceToken | A globally unique ID identifying the user's client device or user agent | String   | TRUE     | FALSE  | FALSE    |           | 32        |
+|-------------+-------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------|
 
 > You must always pass the same `deviceToken` for a user's device with every authentication request for **per-device** or **per-session** Sign-On Policy factor challenges.  If the `deviceToken` is absent or does not match the previous `deviceToken`, the user will be challenged every-time instead of **per-device** or **per-session**.
 
@@ -155,7 +155,7 @@ X-Rate-Limit-Reset: 1447534590
 
 Authenticates a user with username/password credentials via a [public application](#public-application)
 
-##### Request Example
+##### Request Example: Public Application
 {:.api .api-request .api-request-example}
 
 ~~~sh
@@ -554,7 +554,7 @@ Authenticates a user via a [trusted application](#trusted-application) or proxy 
 
 > The **public IP address** of your [trusted application](#trusted-application) must be [whitelisted as a gateway IP address](../getting_started/design_principles.html#ip-address) to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header
 
-##### Request Example
+##### Request Example: Trusted Application
 {:.api .api-request .api-request-example}
 
 ~~~sh
@@ -603,14 +603,15 @@ curl -v -X POST \
 }
 ~~~
 
-#### Primary Authentication with Password Expiration Warn
+#### Primary Authentication with Password Expiration Warning
 
 Authenticates a user with a password that is about to expire.  The user should [change their password](#change-password) to complete the authentication transaction but may opt-out (skip).
 
-> The `warnBeforePasswordExpired` option must be explicitly specified as `true` to allow the authentication transaction to transition to `PASSWORD_WARN` status.<br>
-> Non-expired passwords will successfully complete the authentication transaction if this option is omitted or `false`.
+>Please note:
+* The `warnBeforePasswordExpired` option must be explicitly specified as `true` to allow the authentication transaction to transition to `PASSWORD_WARN` status.
+* Non-expired passwords successfully complete the authentication transaction if this option is omitted or is specified as `false`.
 
-##### Request Example
+##### Request Example: Password Expiration Warning
 {:.api .api-request .api-request-example}
 
 ~~~sh
@@ -696,17 +697,17 @@ curl -v -X POST \
 ### Change Password
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/credentials/change_password
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/authn/credentials/change_password
 
 This operation changes a user's password by providing the existing password and the new password password for authentication transactions with either the `PASSWORD_EXPIRED` or `PASSWORD_WARN` state.
 
 - A user *must* change their expired password for an authentication transaction with `PASSWORD_EXPIRED` status to successfully complete the transaction.
-- A user *may* opt-out of changing their password (skip) when the transaction has a `PASSWORD_WARN` status
+- A user *may* opt-out of changing their password (skip) when the transaction has a `PASSWORD_WARN` status.
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter   | Description                                                | Param Type | DataType  | Required | Default
+Parameter   | Description                                                | Param Type | DataType  | Required |
 ----------- | ---------------------------------------------------------- | ---------- | --------- | -------- |
 stateToken  | [state token](#state-token) for current transaction        | Body       | String    | TRUE     |
 oldPassword | User's current password that is expired or about to expire | Body       | String    | TRUE     |
@@ -794,11 +795,16 @@ curl -v -X POST \
 }
 ~~~
 
+## Multifactor Authentication Operations
+
+You can enroll, activate, and verify factors using the `/api/v1/authn/factors` endpoint.
+
+> You can also enroll, manage, and verify factors outside the authentication context with [`/api/v1/users/:uid/factors/`](factors.html#factor-verification-operations).
 
 ### Enroll Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/factors
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/authn/factors
 
 Enrolls a user with a [factor](factors.html#supported-factors-for-providers) assigned by their **MFA Policy**.
 
@@ -4157,7 +4163,7 @@ curl -v -X POST \
 
 ## Transaction Model
 
-The Authentication API is a *stateful* API that implements a finite state machine with [defined states](#transaction-state) and transitions.  Each authentication or recovery transaction is issued a unique [state token](#state-token) that must be passed with each subsequent request until the transaction is complete or canceled.
+The Authentication API is a *stateful* API that implements a finite state machine with [defined states](#transaction-state) and transitions.  Each initial authentication or recovery request is issued a unique [state token](#state-token) that must be passed with each subsequent request until the transaction is complete or canceled.
 
 The Authentication API leverages the [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) format to publish `next` and `prev` links for the current transaction state which should be used to transition the state machine.
 
