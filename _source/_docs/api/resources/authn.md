@@ -4,7 +4,7 @@ title: Authentication API
 redirect_from: "/docs/api/rest/authn.html"
 ---
 
-## Overview
+# Authentication API
 
 The Okta Authentication API provides operations to authenticate users, perform multi-factor enrollment and verification, recover forgotten passwords, and unlock accounts. It can be used as a standalone API to provide the identity layer on top of your existing application, or it can be integrated with the Okta [Sessions API](sessions.html) to obtain an Okta [session cookie](/docs/examples/session_cookie.html) and access apps within Okta.
 
@@ -16,28 +16,30 @@ The API is targeted for developers who want to build their own end-to-end login 
 
 - **Recovery** allows users to securely reset their password if they've forgotten it, or unlock their account if it has been locked out due to excessive failed login attempts. This functionality is subject to the security policy set by the administrator.
 
-### Application Types
+## Application Types
 
 The behavior of the Okta Authentication API varies depending on the type of your application and your org's security policies such as the **Okta Sign-On Policy**, **MFA Enrollment Policy**, or **Password Policy**.
 
 > Policy evaluation is conditional on the [client request context](../getting_started/design_principles.html#client-request-context) such as IP address.
 
-#### Public Application
+### Public Application
 
 Public applications are any application that anonymously start an authentication or recovery transaction without an API token such as the [Okta Sign-In Widget](/docs/guides/okta_sign-in_widget.html).  Public applications are aggressively rate-limited to prevent abuse and require primary authentication to be successfully completed before releasing any metadata about a user.
 
-#### Trusted Application
+### Trusted Application
 
 Trusted applications are backend applications that act as authentication broker or login portal for your Okta organization and may start an authentication or recovery transaction with an administrator API token.  Trusted apps may implement their own recovery flows and primary authentication process and may receive additional metadata about the user before primary authentication has successfully completed.
 
 > Trusted web applications may need to override the [client request context](../getting_started/design_principles.html#client-request-context) to forward the originating client context for the user.
 
 
-### Getting Started with Authentication
+## Getting Started with Authentication
 
-1. Make sure you need the API. Check out the [Okta Sign-In Widget](/docs/guides/okta_sign-in_widget.html) which is built on the Authentication API. The Sign-In Widget easier to use and supports basic use cases.
+1. Make sure you need the API. Check out the [Okta Sign-In Widget](/docs/guides/okta_sign-in_widget.html) which is built on the Authentication API. The Sign-In Widget is easier to use and supports basic use cases.
 2. For more advanced use cases, learn [the Okta API basics](/docs/api/getting_started/api_test_client.html).
-3. Explore the Authentication API using [the Postman collection](/docs/api/getting_started/api_test_client.html#collections).
+3. Explore the Authentication API: 
+
+    [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/07df454531c56cb5fe71)
 
 ## Authentication Operations
 

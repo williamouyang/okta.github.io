@@ -3,7 +3,7 @@ layout: docs_page
 title: OpenID Connect
 ---
 
-# Overview
+# OpenID Connect API
 
 The OpenID Connect API endpoints enable clients to use [OIDC workflows](http://openid.net/specs/openid-connect-core-1_0.html) with Okta.
 With OpenID Connect, a client can use Okta as a broker. The user authenticates against identity providers like Google, Facebook, LinkedIn, or Microsoft,
