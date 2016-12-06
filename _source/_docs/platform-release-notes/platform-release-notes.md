@@ -15,12 +15,11 @@ API access to [delete users](/docs/api/resources/users.html#delete-user) is now 
 
 ## Platform Bugs Fixed
 
-* User profiles weren't always updated with social profile changes. (OKTA-108602)
-* Users were able to deactivate themselves via the Users API. (OKTA-108192)
-* When two users were created simultaneously with the same login, an HTTP 500 error was returned. 
-    Now a validation error indicating that the login is not unique is returned. (OKTA-105484)
+* Two users created simultaneously with the same login returned an HTTP 500 error. 
+    Now, a validation error is returned. (OKTA-105484)
 * System log queries weren't scoped to the last six months, which affected performance. (OKTA-105346)
 * If an Admin was reassigned to a UserAdmin role that was scoped to a group, requests to the Users API returned fewer records than indicated by the limit parameter. (OKTA-107410)
+* User profiles weren't always updated with social profile changes. (OKTA-108602)
 
 ## Does Your Org Have This Change Yet?
 
