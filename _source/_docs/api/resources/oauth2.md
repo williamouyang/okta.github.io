@@ -783,11 +783,8 @@ This API doesn't require any authentication and returns a JSON object with the f
     "jwks_uri": "https://${org}.okta.com/oauth2/{authorizationServerId}/v1/keys",
     "response_types_supported": [
         "code",
-        "code id_token",
-        "code id_token token",
-        "id_token",
-        "id_token token",
-        "token"
+        "token",
+        "code token"
     ],
     "response_modes_supported": [
         "query",
@@ -800,27 +797,31 @@ This API doesn't require any authentication and returns a JSON object with the f
         "implicit",
         "refresh_token",
         "password"
-        "client_credential"
+        "client_credentials"
     ],
     "subject_types_supported": [
         "public"
     ],
-    "id_token_signing_alg_values_supported": [
-        "RS256"
-    ],
     "scopes_supported": [
-        "openid",
-        "email",
-        "profile",
-        "address",
-        "phone",
-        "scope1"
+        "offline_access",
     ],
     "token_endpoint_auth_methods_supported": [
         "client_secret_basic",
         "client_secret_post",
         "none"
     ],
+    "claims_supported": [
+       "ver",
+       "jti",
+       "iss",
+       "aud",
+       "iat",
+       "exp",
+       "cid",
+       "uid",
+       "scp",
+       "sub"
+  ],
     "code_challenge_methods_supported": [
         "S256"
     ],
@@ -839,4 +840,108 @@ This API doesn't require any authentication and returns a JSON object with the f
 }
 ~~~
 
+### Authorization Server OpenID Connect Metadata
+{:.api .api-operation}
+
+{% api_operation get /oauth2/:authorizationServerId/.well-known/openid-configuration %} {% api_lifecycle beta %}
+
+This API endpoint returns OpenID Connect metadata related to an Authorization Server that can be used by clients to programmatically configure their interactions with Okta.
+This API doesn't require any authentication and returns a JSON object with the following structure.
+
+~~~json
+{
+    "issuer": "https://${org}.okta.com",
+    "authorization_endpoint": "https://${org}.okta.com/oauth2/{authorizationServerId}/v1/authorize",
+    "token_endpoint": "https://${org}.okta.com/oauth2/{authorizationServerId}/v1/token",
+    "userinfo_endpoint": "https://${org}.okta.com/oauth2/{authorizationServerId}/v1/userinfo",
+    "jwks_uri": "https://${org}.okta.com/oauth2/{authorizationServerId}/v1/keys",
+    "response_types_supported": [
+        "code",
+        "id_token",
+        "code id_token",
+        "code token",
+        "id_token token",
+        "code id_token token"
+    ],
+    "response_modes_supported": [
+        "query",
+        "fragment",
+        "form_post",
+        "okta_post_message"
+    ],
+    "grant_types_supported": [
+        "authorization_code",
+        "implicit",
+        "refresh_token",
+        "password"
+    ],
+    "subject_types_supported": [
+        "public"
+    ],
+    "id_token_signing_alg_values_supported": [
+        "RS256"
+    ],
+    "scopes_supported": [
+        "openid",
+        "email",
+        "profile",
+        "address",
+        "phone",
+        "offline_access",
+    ],
+    "token_endpoint_auth_methods_supported": [
+        "client_secret_basic",
+        "client_secret_post",
+        "none"
+    ],
+   "claims_supported": [
+        "iss",
+        "ver",
+        "sub",
+        "aud",
+        "iat",
+        "exp",
+        "jti",
+        "auth_time",
+        "amr",
+        "idp",
+        "nonce",
+        "name",
+        "nickname",
+        "preferred_username",
+        "given_name",
+        "middle_name",
+        "family_name",
+        "email",
+        "email_verified",
+        "profile",
+        "zoneinfo",
+        "locale",
+        "address",
+        "phone_number",
+        "picture",
+        "website",
+        "gender",
+        "birthdate",
+        "updated_at",
+        "at_hash",
+        "c_hash"
+  ],
+    "code_challenge_methods_supported": [
+        "S256"
+    ],
+    "introspection_endpoint": "https://${org}.okta.com/oauth2/{authorizationServerId}/v1/introspect",
+    "introspection_endpoint_auth_methods_supported": [
+        "client_secret_basic",
+        "client_secret_post",
+        "none"
+    ],
+    "revocation_endpoint": "https://${org}.okta.com/oauth2/{authorizationServerId}/v1/revoke",
+    "revocation_endpoint_auth_methods_supported": [
+        "client_secret_basic",
+        "client_secret_post",
+        "none"
+    ]
+}
+~~~
 {% endbeta %}
