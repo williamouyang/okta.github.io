@@ -819,6 +819,7 @@ Enrolls a user with a [factor](factors.html#supported-factors-for-providers) ass
 - [Enroll Symantec VIP Factor](#enroll-symantec-vip-factor)
 - [Enroll YubiKey Factor](#enroll-yubikey-factor)
 - [Enroll Duo Factor](#enroll-duo-factor)
+- [Enroll U2F Factor](#enroll-u2f-factor)
 
 > This operation is only available for users that have not previously enrolled a factor and have transitioned to the `MFA_ENROLL` [state](#transaction-state).
 
@@ -1482,7 +1483,7 @@ curl -v -X POST \
                   "factorResult":"WAITING",
                   "_links":{
                       "complete":{
-                          "href":"http://rain.okta1.com:1802/api/v1/authn/factors/dsfkucEOz3phNMdGP0g3/lifecycle/duoCallback",
+                          "href":"https://your-domain.okta.com/api/v1/authn/factors/dsfkucEOz3phNMdGP0g3/lifecycle/duoCallback",
                           "hints":{
                               "allow":[
                                   "POST"
@@ -1490,7 +1491,7 @@ curl -v -X POST \
                           }
                       },
                       "script":{
-                          "href":"http://rain.okta1.com:1802/js/sections/duo/Duo-Web-v2.js",
+                          "href":"https://your-domain.okta.com/js/sections/duo/Duo-Web-v2.js",
                           "type":"text/javascript; charset=utf-8"
                       }
                   }
@@ -1501,7 +1502,7 @@ curl -v -X POST \
   "_links":{
       "next":{
           "name":"poll",
-          "href":"http://rain.okta1.com:1802/api/v1/authn/factors/dsfkucEOz3phNMdGP0g3/lifecycle/activate/poll",
+          "href":"https://your-domain.okta.com/api/v1/authn/factors/dsfkucEOz3phNMdGP0g3/lifecycle/activate/poll",
           "hints":{
               "allow":[
                    "POST"
@@ -1509,7 +1510,7 @@ curl -v -X POST \
           }
       },
       "cancel":{
-          "href":"http://rain.okta1.com:1802/api/v1/authn/cancel",
+          "href":"https://your-domain.okta.com/api/v1/authn/cancel",
           "hints":{
               "allow":[
                   "POST"
@@ -1517,7 +1518,7 @@ curl -v -X POST \
           }
       },
       "prev":{
-          "href":"http://rain.okta1.com:1802/api/v1/authn/previous",
+          "href":"https://your-domain.okta.com/api/v1/authn/previous",
           "hints":{
               "allow":[
                   "POST"
@@ -1583,7 +1584,7 @@ In this example we just enrolled and activated Duo but the question and SMS fact
                 "vendorName":"OKTA",
                 "_links":{
                     "questions":{
-                        "href":"http://rain.okta1.com:1802/api/v1/users/00ukv3jVTgRjDctlX0g3/factors/questions",
+                        "href":"https://your-domain.okta.com/api/v1/users/00ukv3jVTgRjDctlX0g3/factors/questions",
                         "hints":{
                             "allow":[
                                 "GET"
@@ -1591,7 +1592,7 @@ In this example we just enrolled and activated Duo but the question and SMS fact
                         }
                     },
                     "enroll":{
-                        "href":"http://rain.okta1.com:1802/api/v1/authn/factors",
+                        "href":"https://your-domain.okta.com/api/v1/authn/factors",
                         "hints":{
                             "allow":[
                                 "POST"
@@ -1607,7 +1608,7 @@ In this example we just enrolled and activated Duo but the question and SMS fact
                 "vendorName":"OKTA",
                 "_links":{
                     "enroll":{
-                        "href":"http://rain.okta1.com:1802/api/v1/authn/factors",
+                        "href":"https://your-domain.okta.com/api/v1/authn/factors",
                         "hints":{
                             "allow":[
                                 "POST"
@@ -1623,7 +1624,7 @@ In this example we just enrolled and activated Duo but the question and SMS fact
                 "vendorName":"DUO",
                 "_links":{
                     "enroll":{
-                        "href":"http://rain.okta1.com:1802/api/v1/authn/factors",
+                        "href":"https://your-domain.okta.com/api/v1/authn/factors",
                         "hints":{
                             "allow":[
                                 "POST"
@@ -1637,7 +1638,7 @@ In this example we just enrolled and activated Duo but the question and SMS fact
     },
     "_links":{
         "cancel":{
-            "href":"http://rain.okta1.com:1802/api/v1/authn/cancel",
+            "href":"https://your-domain.okta.com/api/v1/authn/cancel",
             "hints":{
                 "allow":[
                     "POST"
@@ -1645,7 +1646,7 @@ In this example we just enrolled and activated Duo but the question and SMS fact
             }
         },
         "skip":{
-            "href":"http://rain.okta1.com:1802/api/v1/authn/skip",
+            "href":"https://your-domain.okta.com/api/v1/authn/skip",
             "hints":{
                 "allow":[
                     "POST"
@@ -1653,6 +1654,92 @@ In this example we just enrolled and activated Duo but the question and SMS fact
             }
         }
     }
+}
+~~~
+
+#### Enroll U2F Factor
+{:.api .api-operation}
+
+> Enrolling a U2F factor is an {% api-lifecycle ea %} feature.
+
+Enrolls a user with a U2F factor.  The enrollment process starts with getting an `appId` and `nonce` from Okta and using those to get registration information from the U2F key using the U2F javascript API. 
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-d '{
+  "factorType": "u2f",
+  "provider": "FIDO",
+  "stateToken": "$(stateToken}"
+}' "https://${org}.okta.com/api/v1/authn/factors"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "stateToken": "00s7Yewe3Z4aujPLpR4qW4y1hMKzAbyXK5LSKJRW2G",
+  "expiresAt": "2016-12-05T19:40:53.000Z",
+  "status": "MFA_ENROLL_ACTIVATE",
+  "_embedded": {
+    "user": {
+      "id": "00ukv3jVTgRjDctlX0g3",
+      "passwordChanged": "2015-10-28T23:27:57.000Z",
+      "profile": {
+        "login": "first.last@gmail.com",
+        "firstName": "First",
+        "lastName": "Last",
+        "locale": "en",
+        "timeZone": "America/Los_Angeles"
+      }
+    },
+    "factor": {
+      "id": "fuf8y1y14jaygfX5K0h7",
+      "factorType": "u2f",
+      "provider": "FIDO",
+      "vendorName": "FIDO",
+      "_embedded": {
+        "activation": {
+          "version": "U2F_V2",
+          "appId": "https://your-domain.okta.com",
+          "nonce": "s-NaltFnye-xNsJeAhnN",
+          "timeoutSeconds": 20
+        }
+      }
+    }
+  },
+  "_links": {
+    "next": {
+      "name": "activate",
+      "href": "https://your-domain.okta.com/api/v1/authn/factors/fuf8y1y14jaygfX5K0h7/lifecycle/activate",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "cancel": {
+      "href": "https://your-domain.okta.com/api/v1/authn/cancel",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "prev": {
+      "href": "https://your-domain.okta.com/api/v1/authn/previous",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
 }
 ~~~
 
@@ -1666,6 +1753,7 @@ The `sms` and `token:software:totp` [factor types](factors.html#factor-type) req
 - [Activate TOTP Factor](#activate-totp-factor)
 - [Activate SMS Factor](#activate-sms-factor)
 - [Activate Push Factor](#activate-push-factor)
+- [Activate U2F Factor] (#activate-u2f-factor) {% api-lifecycle ea %}
 
 #### Activate TOTP Factor
 {:.api .api-operation}
@@ -2183,6 +2271,115 @@ curl -v -X POST \
 }
 ~~~
 
+#### Activate U2F Factor
+{:.api .api-operation}
+
+> Activating a U2F factor is an {% api-lifecycle ea %} release.
+
+Activation gets the registration information from the U2F token using the platform APIs and passes it to Okta.
+
+##### Get registration information from U2F token by calling the U2F Javascript call
+{:.api .api-response .api-response-example}
+
+~~~html
+//Get the u2f-api.js from https://github.com/google/u2f-ref-code/tree/master/u2f-gae-demo/war/js
+<script src="/u2f-api.js"></script>
+<script>
+//use the appId from the activation object
+var appId = activation.appId;
+var registerRequests = [{
+    version: activation.version, //use the version from the activation object
+    challenge: activation.nonce //use the nonce from the activation object
+    }];
+u2f.register(appId, registerRequests, [], function (data) {
+  if (data.errorCode && data.errorCode !== 0) {
+    //Error from U2F platform
+  } else {
+	  //Get the registrationData from the callback result
+	  var registrationData = data.registrationData;
+	
+	  //Get the clientData from the callback result
+	  var clientData = data.clientData;
+  }
+});
+</script>
+~~~
+
+Activate a `u2f` factor by verifying the registration data and client data.  
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter        | Description                                               | Param Type | DataType | Required | Default
+-----------------| ----------------------------------------------------------| ---------- | -------- | -------- | -------
+fid              | `id` of factor returned from enrollment                   | URL        | String   | TRUE     |
+stateToken       | [state token](#state-token) for current transaction       | Body       | String   | TRUE     |
+registrationData | base64 encoded registration data from U2F javascript call | Body       | String   | TRUE     |
+clientData       | base64 encoded client data from U2F javascript call       | Body       | String   | TRUE     |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+[Authentication Transaction Object](#authentication-transaction-model) with the current [state](#transaction-state) for the authentication transaction.
+
+If the registration nonce is invalid or if registration data is invalid, you will receive a `403 Forbidden` status code with the following error:
+
+~~~http
+HTTP/1.1 403 Forbidden
+Content-Type: application/json
+
+{
+  "errorCode": "E0000068",
+  "errorSummary": "Invalid Passcode/Answer",
+  "errorLink": "E0000068",
+  "errorId": "oaei_IfXcpnTHit_YEKGInpFw",
+  "errorCauses": [
+    {
+      "errorSummary": "Your passcode doesn't match our records. Please try again."
+    }
+  ]
+}
+~~~
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-d '{
+  "registrationData": "BQTl3Iu9V4caCvcI44pmYwIehICWyboL_J2Wl5FA6ZGNx9qT11Df-rHJIy9iP6MSJ_qAaKqdq8O0XVqBG46p6qbpQLIb471thYthrQiW9955tNdORCEhvZX9iYNI1peNlETOr7Qx_PgIZ6Ein6aB3wH9JCTGgsdd4JX3cYixbj1v9W8wggJEMIIBLqADAgECAgRVYr6gMAsGCSqGSIb3DQEBCzAuMSwwKgYDVQQDEyNZdWJpY28gVTJGIFJvb3QgQ0EgU2VyaWFsIDQ1NzIwMDYzMTAgFw0xNDA4MDEwMDAwMDBaGA8yMDUwMDkwNDAwMDAwMFowKjEoMCYGA1UEAwwfWXViaWNvIFUyRiBFRSBTZXJpYWwgMTQzMjUzNDY4ODBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABEszH3c9gUS5mVy-RYVRfhdYOqR2I2lcvoWsSCyAGfLJuUZ64EWw5m8TGy6jJDyR_aYC4xjz_F2NKnq65yvRQwmjOzA5MCIGCSsGAQQBgsQKAgQVMS4zLjYuMS40LjEuNDE0ODIuMS41MBMGCysGAQQBguUcAgEBBAQDAgUgMAsGCSqGSIb3DQEBCwOCAQEArBbZs262s6m3bXWUs09Z9Pc-28n96yk162tFHKv0HSXT5xYU10cmBMpypXjjI-23YARoXwXn0bm-BdtulED6xc_JMqbK-uhSmXcu2wJ4ICA81BQdPutvaizpnjlXgDJjq6uNbsSAp98IStLLp7fW13yUw-vAsWb5YFfK9f46Yx6iakM3YqNvvs9M9EUJYl_VrxBJqnyLx2iaZlnpr13o8NcsKIJRdMUOBqt_ageQg3ttsyq_3LyoNcu7CQ7x8NmeCGm_6eVnZMQjDmwFdymwEN4OxfnM5MkcKCYhjqgIGruWkVHsFnJa8qjZXneVvKoiepuUQyDEJ2GcqvhU2YKY1zBGAiEAxWDh5F7vr0AoEsi3N-uR6KR3ADXlZnQgzROUTVhff8ICIQCiUUG1FkQ9e8PW1dhRk6tjHjL22KZ9JqBrTfpytC5jaQ==",
+  "clientData": "eyAiY2hhbGxlbmdlIjogImFYLS1wMTlibldWcUlnY25HU0hLIiwgIm9yaWdpbiI6ICJodHRwczpcL1wvc25hZ2FuZGxhLm9rdGFwcmV2aWV3LmNvbSIsICJ0eXAiOiAibmF2aWdhdG9yLmlkLmZpbmlzaEVucm9sbG1lbnQiIH0=",
+  "stateToken": "00MBkDX0vBddsuU1VnDsa7-qqIOi7g51YLNQEen1hi"
+}' "https://${org}.okta.com/api/v1/authn/factors/fuf1o51EADOTFXHHBXBP/lifecycle/activate"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "expiresAt": "2015-11-03T10:15:57.000Z",
+  "status": "SUCCESS",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "sessionToken": "00Fpzf4en68pCXTsMjcX8JPMctzN2Wiw4LDOBL_9pe",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "passwordChanged": "2015-09-08T20:14:45.000Z",
+      "profile": {
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    }
+  }
+}
+~~~
+
 ### Verify Factor
 
 Verifies an enrolled factor for an authentication transaction with the `MFA_REQUIRED` or `MFA_CHALLENGE` [state](#transaction-state)
@@ -2192,6 +2389,7 @@ Verifies an enrolled factor for an authentication transaction with the `MFA_REQU
 - [Verify TOTP Factor](#verify-totp-factor)
 - [Verify Push Factor](#verify-push-factor)
 - [Verify Duo Factor](#verify-duo-factor)
+- [Verify U2F Factor](#verify-u2f-factor)
 
 #### Verify Security Question Factor
 {:.api .api-operation}
@@ -2844,7 +3042,7 @@ curl -v -X POST \
                     "factorResult":"WAITING",
                     "_links":{
                         "complete":{
-                            "href":"http://rain.okta1.com:1802/api/v1/authn/factors/dsfkvdLeix4WsKK5W0g3/lifecycle/duoCallback",
+                            "href":"https://your-domain.okta.com/api/v1/authn/factors/dsfkvdLeix4WsKK5W0g3/lifecycle/duoCallback",
                             "hints":{
                                 "allow":[
                                     "POST"
@@ -2852,7 +3050,7 @@ curl -v -X POST \
                             }
                         },
                         "script":{
-                            "href":"http://rain.okta1.com:1802/js/sections/duo/Duo-Web-v2.js",
+                            "href":"https://your-domain.okta.com/js/sections/duo/Duo-Web-v2.js",
                             "type":"text/javascript; charset=utf-8"
                         }
                     }
@@ -2868,7 +3066,7 @@ curl -v -X POST \
     "_links":{
         "next":{
             "name":"poll",
-            "href":"http://rain.okta1.com:1802/api/v1/authn/factors/dsfkvdLeix4WsKK5W0g3/verify",
+            "href":"https://your-domain.okta.com/api/v1/authn/factors/dsfkvdLeix4WsKK5W0g3/verify",
             "hints":{
                 "allow":[
                     "POST"
@@ -2876,7 +3074,7 @@ curl -v -X POST \
             }
         },
         "cancel":{
-            "href":"http://rain.okta1.com:1802/api/v1/authn/cancel",
+            "href":"https://your-domain.okta.com/api/v1/authn/cancel",
             "hints":{
                 "allow":[
                     "POST"
@@ -2884,7 +3082,7 @@ curl -v -X POST \
             }
         },
         "prev":{
-            "href":"http://rain.okta1.com:1802/api/v1/authn/previous",
+            "href":"https://your-domain.okta.com/api/v1/authn/previous",
             "hints":{
                 "allow":[
                     "POST"
@@ -2922,6 +3120,182 @@ curl -v -X POST \
 ~~~
 
 ##### Response Poll Verification Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+    "expiresAt":"2016-07-13T14:14:44.000Z",
+    "status":"SUCCESS",
+    "sessionToken":"201111XUk7La2gw5r5PV1IhU4WSd0fV6mvNYdlJoeqjuyej7S83x3Hr",
+    "_embedded":{
+        "user":{
+            "id":"00ukv3jVTgRjDctlX0g3",
+            "passwordChanged":"2016-07-13T13:29:58.000Z",
+            "profile":{
+                "login":"first.last@example.com",
+                "firstName":"First",
+                "lastName":"Last",
+                "locale":"en_US",
+                "timeZone":"America/Los_Angeles"
+            }
+        }
+    }
+}
+~~~
+
+#### Verify U2F Factor
+{:.api .api-operation}
+
+> Verifying a U2F factor is an {% api-lifecycle beta %} feature.
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/factors/*:fid*/verify</span>
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter    | Description                                         | Param Type | DataType | Required | Default
+------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
+fid          | `id` of factor returned from enrollment             | URL        | String   | TRUE     |
+stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
+clientData   | base64 encoded client data from the U2F token       | Body       | String   | TRUE     |
+signatureData| base64 encoded signature data from the U2F token    | Body       | String   | TRUE     |
+
+##### Start verification to get challenge nonce
+
+Verification of the U2F factor starts with getting the challenge nonce and U2F token details and then using the client side 
+javascript API to get the signed assertion from the U2F token.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-d '{
+  "stateToken": "${stateToken}"
+}' "https://${org}.okta.com/api/v1/authn/factors/${factorId]/verify"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+   "stateToken":"00wCfuPA3qX3azDawSdPGFIhHuzbZX72Gv4bu_ew9d",
+   "expiresAt":"2016-12-06T01:32:39.000Z",
+   "status":"MFA_CHALLENGE",
+   "_embedded":{
+      "user":{
+         "id":"00u21eb3qyRDNNIKTGCW",
+         "passwordChanged":"2015-10-28T23:27:57.000Z",
+         "profile":{
+            "login":"first.last@gmail.com",
+            "firstName":"First",
+            "lastName":"Last",
+            "locale":"en",
+            "timeZone":"America/Los_Angeles"
+         }
+      },
+      "factor":{
+         "id":"fuf8y2l4n5mfH0UWe0h7",
+         "factorType":"u2f",
+         "provider":"FIDO",
+         "vendorName":"FIDO",
+         "profile":{
+            "credentialId":"shvjvW2Fi2GtCJb33nm0105EISG9lf2Jg0jWl42URM6vtDH8-AhnoSKfpoHfAf0kJMaCx13glfdxiLFuPW_1bw",
+            "appId":"https://your-domain.okta.com",
+            "version":"U2F_V2"
+         },
+         "_embedded":{
+            "challenge":{
+               "nonce":"tT1MI7XGzMu48Ivnz3vB",
+               "timeoutSeconds":20
+            }
+         }
+      },
+      "policy":{
+         "allowRememberDevice":true,
+         "rememberDeviceLifetimeInMinutes":0,
+         "rememberDeviceByDefault":false
+      }
+   },
+   "_links":{
+      "next":{
+         "name":"verify",
+         "href":"https://your-domain.okta.com/api/v1/authn/factors/fuf8y2l4n5mfH0UWe0h7/verify",
+         "hints":{
+            "allow":[
+               "POST"
+            ]
+         }
+      },
+      "cancel":{
+         "href":"https://your-domain.okta.com/api/v1/authn/cancel",
+         "hints":{
+            "allow":[
+               "POST"
+            ]
+         }
+      },
+      "prev":{
+         "href":"https://your-domain.okta.com/api/v1/authn/previous",
+         "hints":{
+            "allow":[
+               "POST"
+            ]
+         }
+      }
+   }
+}
+~~~
+
+##### Get the signed assertion from the U2F token 
+{:.api .api-response .api-response-example}
+
+~~~html
+//Get the u2f-api.js from https://github.com/google/u2f-ref-code/tree/master/u2f-gae-demo/war/js
+<script src="/u2f-api.js"></script>
+<script>
+var challengeNonce = factor._embedded.challenge.nonce; //use the nonce from the challenge object 
+var appId = factor.profile.appId; //use the appId from factor profile object
+
+//Use the version and credentialId from factor profile object
+var registeredKeys = [{version: factor.profile.version, keyHandle: factor.profile.credentialId }];
+
+//Call the U2F javascript API to get signed assertion from the U2F token
+u2f.sign(appId, factorData.challenge.nonce, registeredKeys, function (data) {
+  if (data.errorCode && data.errorCode !== 0) {
+    //Error from U2F platform 
+  } else {
+	  //Get the client data from callback result
+	  var clientData = data.clientData;
+
+    //Get the signature data from callback result
+	  var signatureData = data.signatureData;
+  }
+}
+</script>
+~~~
+
+##### Post the signed assertion to Okta to complete verification
+{:.api .api-request .api-request-example}
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-d '{
+  "stateToken": "${stateToken}",
+  "clientData":"eyAiY2hhbGxlbmdlIjogIlJ6ZDhQbEJEWUEyQ0VsbXVGcHlMIiwgIm9yaWdpbiI6ICJodHRwczpcL1wvc25hZ2FuZGxhLm9rdGFwcmV2aWV3LmNvbSIsICJ0eXAiOiAibmF2aWdhdG9yLmlkLmdldEFzc2VydGlvbiIgfQ==",
+  "signatureData":"AQAAAAEwRQIgRDEdmXr_jh1bEHtoUs1l7mMd-eUDO0eKqXKkrK5hUi0CIQDaVX030GgxVPr4RX3c4XgugildmHwDLwKRL0aMS3Sbpw==",
+}' "https://${org}.okta.com/api/v1/authn/factors/${factorId]/verify"
+~~~
+
+##### Response of U2F verification Example
 {:.api .api-response .api-response-example}
 
 ~~~json
