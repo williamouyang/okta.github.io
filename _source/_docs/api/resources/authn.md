@@ -1660,7 +1660,7 @@ In this example we just enrolled and activated Duo but the question and SMS fact
 #### Enroll U2F Factor
 {:.api .api-operation}
 
-> Enrolling a U2F factor is an {% api-lifecycle ea %} feature.
+> Enrolling a U2F factor is an EA feature.
 
 Enrolls a user with a U2F factor.  The enrollment process starts with getting an `appId` and `nonce` from Okta and using those to get registration information from the U2F key using the U2F javascript API. 
 
@@ -2274,7 +2274,7 @@ curl -v -X POST \
 #### Activate U2F Factor
 {:.api .api-operation}
 
-> Activating a U2F factor is an {% api-lifecycle ea %} release.
+> Activating a U2F factor is an EA release.
 
 Activation gets the registration information from the U2F token using the platform APIs and passes it to Okta.
 
@@ -3146,7 +3146,7 @@ curl -v -X POST \
 #### Verify U2F Factor
 {:.api .api-operation}
 
-> Verifying a U2F factor is an {% api-lifecycle beta %} feature.
+> Verifying a U2F factor is an EA feature.
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/factors/*:fid*/verify</span>
 
