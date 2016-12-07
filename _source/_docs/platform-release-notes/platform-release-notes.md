@@ -13,9 +13,15 @@ excerpt: Summary of changes to the Okta Platform since Release 2016.47
 API access to [delete users](/docs/api/resources/users.html#delete-user) is now in EA. To request the feature, contact Support. 
 <!-- OKTA-109291 -->
 
+### System Query Log Change
+
+System logs are truncated after six months. You may want to revise any system log queries for the new limit.
+This change allows us to provide faster, more consistent responses to a wider range of system-log API requests.
+Because the system keeps less data in memory, it responds faster.
+<!-- OKTA-105346 -->
+
 ## Platform Bugs Fixed
 
-* System log queries weren't scoped to the last six months, which affected performance. (OKTA-105346)
 * Two users created simultaneously with the same login returned an HTTP 500 error. 
     Now, a validation error is returned. (OKTA-105484)
 * If an Admin was reassigned to a UserAdmin role that was scoped to a group, requests to the Users API returned fewer records than indicated by the limit parameter. (OKTA-107410)
