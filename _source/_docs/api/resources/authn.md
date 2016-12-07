@@ -1660,7 +1660,9 @@ In this example we just enrolled and activated Duo but the question and SMS fact
 #### Enroll U2F Factor
 {:.api .api-operation}
 
-Enrolls a user with a U2F factor.  The enrollment process starts with getting an appId and nonce from Okta and using those to get registration information from the U2F key using the U2F javascript API. 
+> Enrolling a U2F factor is an {% api-lifecycle ea %} feature.
+
+Enrolls a user with a U2F factor.  The enrollment process starts with getting an `appId` and `nonce` from Okta and using those to get registration information from the U2F key using the U2F javascript API. 
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1751,7 +1753,7 @@ The `sms` and `token:software:totp` [factor types](factors.html#factor-type) req
 - [Activate TOTP Factor](#activate-totp-factor)
 - [Activate SMS Factor](#activate-sms-factor)
 - [Activate Push Factor](#activate-push-factor)
-- [Activate U2F Factor] (#activate-u2f-factor)
+- [Activate U2F Factor] (#activate-u2f-factor) {% api-lifecycle ea %}
 
 #### Activate TOTP Factor
 {:.api .api-operation}
@@ -2272,7 +2274,9 @@ curl -v -X POST \
 #### Activate U2F Factor
 {:.api .api-operation}
 
-Activation involves getting the registration information from the U2F token using the platform APIs and passing it to Okta.
+> Activating a U2F factor is an {% api-lifecycle ea %} release.
+
+Activation gets the registration information from the U2F token using the platform APIs and passes it to Okta.
 
 ##### Get registration information from U2F token by calling the U2F Javascript call
 {:.api .api-response .api-response-example}
@@ -2301,7 +2305,7 @@ u2f.register(appId, registerRequests, [], function (data) {
 </script>
 ~~~
 
-Activate an `u2f` factor by verifying the registration data and client data.  
+Activate a `u2f` factor by verifying the registration data and client data.  
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -3142,6 +3146,8 @@ curl -v -X POST \
 #### Verify U2F Factor
 {:.api .api-operation}
 
+> Verifying a U2F factor is an {% api-lifecycle beta %} feature.
+
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/factors/*:fid*/verify</span>
 
 ##### Request Parameters
@@ -3155,6 +3161,7 @@ clientData   | base64 encoded client data from the U2F token       | Body       
 signatureData| base64 encoded signature data from the U2F token    | Body       | String   | TRUE     |
 
 ##### Start verification to get challenge nonce
+
 Verification of the U2F factor starts with getting the challenge nonce and U2F token details and then using the client side 
 javascript API to get the signed assertion from the U2F token.
 
