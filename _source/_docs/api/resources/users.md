@@ -1966,7 +1966,7 @@ Content-Type: application/json
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:id*/lifecycle/unsuspend</span>
 
-Unsuspends users and returns then to the `ACTIVE` state.  This operation can only be performed on users that have a `SUSPENDED` status.
+Unsuspends a user and returns them to the `ACTIVE` state.  This operation can only be performed on users that have a `SUSPENDED` status.  
 
 
 ##### Request Parameters
@@ -1979,7 +1979,7 @@ id        | `id` of user | URL        | String   | TRUE     |
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Returns an empty object. Returns an empty object.
+Returns an empty object. 
 
 Passing an invalid `id` returns a `404 Not Found` status code with error code `E0000007`.
 Passing an `id` that is not in the `SUSPENDED` state returns a `400 Bad Request` status code with error code `E0000001`.
@@ -2002,6 +2002,55 @@ curl -v -X POST \
 HTTP/1.1 200 OK
 Content-Type: application/json
 ~~~
+
+{% ea %}
+
+### Delete User
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-post"><span class="api-label">DELETE</span> /users/*:id*</span>
+
+Deletes a user permanently.  This operation can only be performed on users that have a `DEPROVISIONED` status.  **This action cannot be recovered!**
+
+This operation on a user entity that has not been deactivated will cause that user to be deactivated.  A second DELETE
+would be required to effect the full deletion.
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter | Description  | Param Type | DataType | Required | Default
+--------- | ------------ | ---------- | -------- | -------- | -------
+id        | `id` of user | URL        | String   | TRUE     |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+Returns an empty object. 
+
+Passing an invalid `id` returns a `404 Not Found` status code with error code `E0000007`.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X DELETE \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~http
+HTTP/1.1 202 ACCEPTED
+Content-Type: application/json
+
+{}
+~~~
+
+{% endea %}
 
 ### Unlock User
 {:.api .api-operation}
