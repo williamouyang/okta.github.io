@@ -108,9 +108,9 @@ $(function() {
 					.appendTo($toc);
 			}
 
+			// due to limited space for default TOC header add extra room for a wrapped title if it is longer than 50 characters
 			if (document.title.length > 50) {
-				$('.TableOfContents .is-level1').css({'margin-bottom': '0'});
-				$('.TableOfContents-indicator').css({'margin-top' : (parseInt($('.TableOfContents-indicator').css('margin-top')) + 15) + 'px'});
+				$('.TableOfContents').addClass('large-header');
 			}
 
 			var $items   = $('h1, h2, h3, h4.api.api-operation, h4:not(.api), h5.api.api-operation, h5:not(.api), h6.api.api-operation, h6:not(.api)', $content);

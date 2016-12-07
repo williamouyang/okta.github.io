@@ -237,3 +237,17 @@ body {
 		margin-top: -30px;
 	}
 }
+
+.TableOfContents {
+
+	&.large-header {
+		.is-level1 {
+			margin-bottom: 0;
+		}
+
+		.TableOfContents-indicator {
+			margin-top: 55px + get-spacing('large');
+		}
+	}
+
+}
