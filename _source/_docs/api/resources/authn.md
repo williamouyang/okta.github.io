@@ -1741,35 +1741,6 @@ curl -v -X POST \
 }
 ~~~
 
-##### Get registration information by calling the U2F Javascript call
-{:.api .api-response .api-response-example}
-
-~~~html
-//Get the u2f-api.js from https://github.com/google/u2f-ref-code/tree/master/u2f-gae-demo/war/js
-<script src="/u2f-api.js"></script>
-<script>
-//use the appId from the activation object
-var appId = activation.appId;
-var registerRequests = [{
-    version: activation.version, //use the version from the activation object
-    challenge: activation.nonce //use the nonce from the activation object
-    }];
-u2f.register(appId, registerRequests, [], function (data) {
-  if (data.errorCode && data.errorCode !== 0) {
-    //Error from U2F platform
-  } else {
-	  //Get the registrationData from the callback result
-	  var registrationData = data.registrationData;
-	
-	  //Get the clientData from the callback result
-	  var clientData = data.clientData;
-  }
-});
-</script>
-~~~
-
-
-
 ### Activate Factor
 {:.api .api-operation}
 
@@ -2301,7 +2272,36 @@ curl -v -X POST \
 #### Activate U2F Factor
 {:.api .api-operation}
 
-Activates an `u2f` factor by verifying the registration data and client data.  
+Activation involves getting the registration information from the U2F token using the platform APIs and passing it to Okta.
+
+##### Get registration information from U2F token by calling the U2F Javascript call
+{:.api .api-response .api-response-example}
+
+~~~html
+//Get the u2f-api.js from https://github.com/google/u2f-ref-code/tree/master/u2f-gae-demo/war/js
+<script src="/u2f-api.js"></script>
+<script>
+//use the appId from the activation object
+var appId = activation.appId;
+var registerRequests = [{
+    version: activation.version, //use the version from the activation object
+    challenge: activation.nonce //use the nonce from the activation object
+    }];
+u2f.register(appId, registerRequests, [], function (data) {
+  if (data.errorCode && data.errorCode !== 0) {
+    //Error from U2F platform
+  } else {
+	  //Get the registrationData from the callback result
+	  var registrationData = data.registrationData;
+	
+	  //Get the clientData from the callback result
+	  var clientData = data.clientData;
+  }
+});
+</script>
+~~~
+
+Activate an `u2f` factor by verifying the registration data and client data.  
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
