@@ -57,8 +57,7 @@
 				"294ceb07-0a2a-c172-ed07-f6964aec1c2d",
 				"b3acf562-5a3a-8a65-8c6d-96e3482a27fc",
 				"d7599423-dfa3-142f-3c19-5ecc00d72ba4",
-				"66200dd6-4065-5a09-a81c-61282dee9110",
-				"482e7272-9855-09c7-9aa2-30394420bce0"
+				"66200dd6-4065-5a09-a81c-61282dee9110"
 			],
 			"collection_name": "Users (Okta API)",
 			"collection_id": "59081abb-bd74-7c67-a8d9-ef999536c95e"
@@ -840,27 +839,6 @@
 			"description": "",
 			"collectionId": "59081abb-bd74-7c67-a8d9-ef999536c95e",
 			"rawModeData": ""
-		},
-		{
-			"id": "482e7272-9855-09c7-9aa2-30394420bce0",
-			"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: SSWS {{apikey}}\n",
-			"url": "{{url}}/api/v1/users/{{userId}}",
-			"pathVariables": {},
-			"preRequestScript": "",
-			"method": "DELETE",
-			"collectionId": "59081abb-bd74-7c67-a8d9-ef999536c95e",
-			"data": [],
-			"dataMode": "raw",
-			"name": "Delete User",
-			"description": "Permanently deletes the specified user.  This operation can only be performed on users that have a DEPROVISIONED status.",
-			"descriptionFormat": "html",
-			"time": 1478552681031,
-			"version": 2,
-			"responses": [],
-			"tests": "",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"folder": "b9631a56-87e4-3b2a-4867-b182c6c318b9",
-			"rawModeData": ""
-		}	]
+		}
+	]
 }
