@@ -46,7 +46,7 @@ Trusted applications are backend applications that act as authentication broker 
 ### Primary Authentication
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/authn
+{% api_operation post /api/v1/authn %}
 
 Every authentication transaction starts with primary authentication which validates a user's primary password credential. **Password Policy**, **MFA Policy**,  and **Sign-On Policy** are evaluated during primary authentication to determine if the user's password is expired, a factor should be enrolled, or additional verification is required. The [transaction state](#transaction-state) of the response depends on the user's status, group memberships and assigned policies. 
 
@@ -699,7 +699,7 @@ curl -v -X POST \
 ### Change Password
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/authn/credentials/change_password
+{% api_operation post api/v1/authn/credentials/change_password %} 
 
 This operation changes a user's password by providing the existing password and the new password password for authentication transactions with either the `PASSWORD_EXPIRED` or `PASSWORD_WARN` state.
 
@@ -806,7 +806,7 @@ You can enroll, activate, and verify factors using the `/api/v1/authn/factors` e
 ### Enroll Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/authn/factors
+{% api_operation post /api/v1/authn/factors %} 
 
 Enrolls a user with a [factor](factors.html#supported-factors-for-providers) assigned by their **MFA Policy**.
 
@@ -1660,7 +1660,7 @@ In this example we just enrolled and activated Duo but the question and SMS fact
 #### Enroll U2F Factor
 {:.api .api-operation}
 
-> Enrolling a U2F factor is an EA feature.
+> Enrolling a U2F factor is an {% api_lifecycle ea %} feature.
 
 Enrolls a user with a U2F factor.  The enrollment process starts with getting an `appId` and `nonce` from Okta and using those to get registration information from the U2F key using the U2F javascript API. 
 
@@ -1746,14 +1746,14 @@ curl -v -X POST \
 ### Activate Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/factors/*:fid*/lifecycle/activate</span>
+{% api_operation post /authn/factors/*:fid*/lifecycle/activate %}
 
 The `sms` and `token:software:totp` [factor types](factors.html#factor-type) require activation to complete the enrollment process.
 
 - [Activate TOTP Factor](#activate-totp-factor)
 - [Activate SMS Factor](#activate-sms-factor)
 - [Activate Push Factor](#activate-push-factor)
-- [Activate U2F Factor] (#activate-u2f-factor) {% api-lifecycle ea %}
+- [Activate U2F Factor] (#activate-u2f-factor) (EA feature)
 
 #### Activate TOTP Factor
 {:.api .api-operation}
@@ -2274,7 +2274,7 @@ curl -v -X POST \
 #### Activate U2F Factor
 {:.api .api-operation}
 
-> Activating a U2F factor is an EA release.
+> Activating a U2F factor is an {% api_lifecycle ea %} release.
 
 Activation gets the registration information from the U2F token using the platform APIs and passes it to Okta.
 
@@ -2394,7 +2394,7 @@ Verifies an enrolled factor for an authentication transaction with the `MFA_REQU
 #### Verify Security Question Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/factors/*:fid*/verify</span>
+{% api_operation post /authn/factors/*:fid*/verify %}
 
 Verifies an answer to a `question` factor.
 
@@ -2469,7 +2469,7 @@ curl -v -X POST \
 #### Verify SMS Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/factors/*:fid*/verify</span>
+{% api_operation post /authn/factors/*:fid*/verify %}
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2635,7 +2635,7 @@ curl -v -X POST \
 #### Verify TOTP Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/factors/*:fid*/verify</span>
+{% api_operation post /authn/factors/*:fid*/verify %}
 
 Verifies an OTP for a `token:software:totp` factor.
 
@@ -2710,7 +2710,7 @@ curl -v -X POST \
 #### Verify Push Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/factors/*:fid*/verify</span>
+{% api_operation post /authn/factors/*:fid*/verify %}
 
 Sends an asynchronous push notification (challenge) to the device for the user to approve or reject.  The `factorResult` for the transaction will have a result of `WAITING`, `SUCCESS`, `REJECTED`, or `TIMEOUT`.
 
@@ -3146,15 +3146,15 @@ curl -v -X POST \
 #### Verify U2F Factor
 {:.api .api-operation}
 
-> Verifying a U2F factor is an EA feature.
+> Verifying a U2F factor is an {% api_lifecycle ea %} feature.
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/factors/*:fid*/verify</span>
+{% api_operation post /authn/factors/*:fid*/verify %}
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
+Parameter    | Description                                         | Param Type | DataType | Required |
+------------ | --------------------------------------------------- | ---------- | -------- | -------- |
 fid          | `id` of factor returned from enrollment             | URL        | String   | TRUE     |
 stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
 clientData   | base64 encoded client data from the U2F token       | Body       | String   | TRUE     |
@@ -3324,7 +3324,7 @@ curl -v -X POST \
 ### Forgot Password
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/recovery/password</span>
+{% api_operation post /authn/recovery/password %}
 
 Starts a new password recovery transaction for a given user and issues a [recovery token](#recovery-token) that can be used to reset a user's password.
 
@@ -3544,7 +3544,7 @@ curl -v -X POST \
 ### Unlock Account
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/recovery/unlock</span>
+{% api_operation post /authn/recovery/unlock %}
 
 Starts a new unlock recovery transaction for a given user and issues a [recovery token](#recovery-token) that can be used to unlock a user's account.
 
@@ -3766,15 +3766,15 @@ curl -v -X POST \
 #### Verify SMS Recovery Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/recovery/factors/sms/verify</span>
+{% api_operation post /authn/recovery/factors/sms/verify %}
 
 Verifies a SMS OTP (`passCode`) sent to the user's mobile phone for primary authentication for a recovery transaction with `RECOVERY_CHALLENGE` status.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                                  | Param Type | DataType | Required | Default
------------- | ------------------------------------------------------------ | ---------- | -------- | -------- | -------
+Parameter    | Description                                                  | Param Type | DataType | Required |
+------------ | ------------------------------------------------------------ | ---------- | -------- | -------- |
 stateToken   | [state token](#state-token) for current recovery transaction | Body       | String   | TRUE     |
 passCode     | OTP sent to device                                           | Body       | String   | TRUE     |
 
@@ -3862,15 +3862,15 @@ curl -v -X POST \
 ###### Resend SMS Recovery Challenge
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/recovery/factors/sms/resend</span>
+{% api_operation post /authn/recovery/factors/sms/resend %}
 
 Resends a SMS OTP (`passCode`) to the user's mobile phone
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                                  | Param Type | DataType | Required | Default
------------- | ------------------------------------------------------------ | ---------- | -------- | -------- | -------
+Parameter    | Description                                                  | Param Type | DataType | Required |
+------------ | ------------------------------------------------------------ | ---------- | -------- | -------- |
 stateToken   | [state token](#state-token) for current recovery transaction | Body       | String   | TRUE     |
 
 #### Response Parameters
@@ -3937,7 +3937,7 @@ curl -v -X POST \
 ### Verify Recovery Token
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/recovery/token</span>
+{% api_operation post /authn/recovery/token %}
 
 Validates a [recovery token](#recovery-token) that was distributed to the end-user to continue the recovery transaction.
 
@@ -4031,7 +4031,7 @@ curl -v -X POST \
 ### Answer Recovery Question
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/recovery/answer</span>
+{% api_operation post /authn/recovery/answer %}
 
 Answers the user's recovery question to ensure only the end-user redeemed the [recovery token](#recovery-token) for recovery transaction with a `RECOVERY` [status](#transaction-state).
 
@@ -4141,15 +4141,15 @@ curl -v -X POST \
 ### Reset Password
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/credentials/reset_password</span>
+{% api_operation post /authn/credentials/reset_password %}
 
 Resets a user's password to complete a recovery transaction with a `PASSWORD_RESET` [state](#transaction-state).
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
+Parameter    | Description                                         | Param Type | DataType | Required |
+------------ | --------------------------------------------------- | ---------- | -------- | -------- |
 stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
 newPassword  | user's new password                                 | Body       | String   | TRUE     |
 
@@ -4236,15 +4236,15 @@ curl -v -X POST \
 ### Get Transaction State
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn</span>
+{% api_operation post /authn %}
 
 Retrieves the current [transaction state](#transaction-state) for a [state token](#state-token).
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
+Parameter    | Description                                         | Param Type | DataType | Required |
+------------ | --------------------------------------------------- | ---------- | -------- | -------- |
 stateToken   | [state token](#state-token) for a transaction       | Body       | String   | TRUE     |
 
 ##### Response Parameters
@@ -4324,7 +4324,7 @@ curl -v -X POST \
 ### Previous Transaction State
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/previous</span>
+{% api_operation post /authn/previous %}
 
 Moves the current [transaction state](#transaction-state) back to the previous state.
 
@@ -4445,7 +4445,7 @@ curl -v -X POST \
 ### Skip Transaction State
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/skip</span>
+{% api_operation post /authn/skip %}
 
 Skips the current [transaction state](#transaction-state) and advances the state machine to the next state.
 
@@ -4454,8 +4454,8 @@ Skips the current [transaction state](#transaction-state) and advances the state
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
+Parameter    | Description                                         | Param Type | DataType | Required |
+------------ | --------------------------------------------------- | ---------- | -------- | -------- |
 stateToken   | [state token](#state-token) for a transaction       | Body       | String   | TRUE     |
 
 ##### Response Parameters
@@ -4500,7 +4500,7 @@ curl -v -X POST \
 ### Cancel Transaction
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/cancel</span>
+{% api_operation post /authn/cancel %}
 
 Cancels the current transaction and revokes the [state token](#state-token).
 

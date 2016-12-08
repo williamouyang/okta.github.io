@@ -18,7 +18,7 @@ To use these collections, you'll need to set up your environment, import the col
 1. [Sign up for an Okta Developer org](https://www.okta.com/platform-signup/)
 2. Log into your Okta Developer org and [create an API key](getting_a_token.html).
 3. [Install the Postman App](http://getpostman.com).
-4. Launch Postman and [import the Okta Example environment for Postman](http://developer.okta.com/docs/api/postman/example.okta.com.environment).
+4. Launch Postman and import the Okta Example environment for Postman by copying this link: <http://developer.okta.com/docs/api/postman/example.okta.com.environment>.
     ![Importing the Okta Example Environment](/assets/img/import_enviro.png)
 
 5. Make sure the `example.okta.com` environment is selected.
@@ -41,7 +41,7 @@ Import the collection for the Users API:
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/78060451b3ba309f5bcf)
 
 > Note: You can import and work with the rest of the Okta API using the link at the top of each API reference page, 
-or use the [Collection Quick Reference](#collection-quick-reference). This tutorial only requires the Users collection import.
+or use the [Collection Quick Reference](#collections-quick-reference). This tutorial only requires the Users collection import.
 
 ## Send a Request
 
