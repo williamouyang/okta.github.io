@@ -2003,7 +2003,7 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 ~~~
 
-{% ea %}
+> Deleting users is an {% api_lifecycle ea %} feature.
 
 ### Delete User
 {:.api .api-operation}
@@ -2049,8 +2049,6 @@ Content-Type: application/json
 
 {}
 ~~~
-
-{% endea %}
 
 ### Unlock User
 {:.api .api-operation}
