@@ -1024,7 +1024,7 @@ curl -v -X POST \
 #### Enroll Okta Call Factor
 {:.api .api-operation}
 
-Enrolls a user with the Okta `call` factor and an [Call profile](factors.html#call-profile).  A voice call with an OTP is made to the device during enrollment and must be [activated](#activate-call-factor) by following the `next` link relation to complete the enrollment process.
+Enrolls a user with the Okta `call` factor and a [Call profile](factors.html#call-profile).  A voice call with an OTP is sent to the device during enrollment and must be [activated](#activate-call-factor) by following the `next` link relation to complete the enrollment process.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -3777,7 +3777,7 @@ curl -v -X POST \
 
 #### Forgot Password with SMS Factor
 
-Starts a new password recovery transaction with a user identifier (`username`) and asynchronously sends a SMS OTP (challenge) to the user's mobile phone.  This operation will transition the recovery transaction to the `RECOVERY_CHALLENGE` state and wait for user to [verify the OTP](#verify-sms-recovery-factor).
+Starts a new password recovery transaction with a user identifier (`username`) and asynchronously sends a SMS OTP (challenge) to the user's phone.  This operation will transition the recovery transaction to the `RECOVERY_CHALLENGE` state and wait for user to [verify the OTP](#verify-sms-recovery-factor).
 
 > Primary authentication of a user's recovery credential (e.g email or SMS) has not yet completed.
 > Okta will not publish additional metadata about the user until primary authentication has successfully completed.
@@ -3839,7 +3839,7 @@ curl -v -X POST \
 
 #### Forgot Password with Call Factor
 
-Starts a new password recovery transaction with a user identifier (`username`) and asynchronously makes a Voice Call with OTP (challenge) to the user's mobile phone.  This operation will transition the recovery transaction to the `RECOVERY_CHALLENGE` state and wait for user to [verify the OTP](#verify-call-recovery-factor).
+Starts a new password recovery transaction with a user identifier (`username`) and asynchronously sends a Voice Call with OTP (challenge) to the user's phone.  This operation will transition the recovery transaction to the `RECOVERY_CHALLENGE` state and wait for user to [verify the OTP](#verify-call-recovery-factor).
 
 > Primary authentication of a user's recovery credential (e.g email or SMS or Voice Call) has not yet completed.
 > Okta will not publish additional metadata about the user until primary authentication has successfully completed.
@@ -3901,7 +3901,7 @@ curl -v -X POST \
 
 #### Forgot Password with Trusted Application
 
-Allows a [trusted application](#trusted-application) such as an external portal to implement it's own primary authentication process and directly obtain a [recovery token](#recovery-token) for a user given just the user's identifier.
+Allows a [trusted application](#trusted-application) such as an external portal to implement its own primary authentication process and directly obtain a [recovery token](#recovery-token) for a user given just the user's identifier.
 
 > Directly obtaining a `recoveryToken` is a highly privileged operation that requires an administrator API token and should be restricted to trusted web applications.  Anyone that obtains a `recoveryToken` for a user and knows the answer to a user's recovery question can reset their password or unlock their account.
 
@@ -4059,7 +4059,7 @@ curl -v -X POST \
 
 #### Unlock Account with SMS Factor
 
-Starts a new unlock recovery transaction with a user identifier (`username`) and asynchronously sends a SMS OTP (challenge) to the user's mobile phone.  This operation will transition the recovery transaction to the `RECOVERY_CHALLENGE` state and wait for user to [verify the OTP](#verify-sms-recovery-factor).
+Starts a new unlock recovery transaction with a user identifier (`username`) and asynchronously sends a SMS OTP (challenge) to the user's phone.  This operation will transition the recovery transaction to the `RECOVERY_CHALLENGE` state and wait for user to [verify the OTP](#verify-sms-recovery-factor).
 
 > Primary authentication of a user's recovery credential (e.g email or SMS) has not yet completed.
 > Okta will not publish additional metadata about the user until primary authentication has successfully completed.
@@ -4195,7 +4195,7 @@ curl -v -X POST \
 
 {% api_operation post /authn/recovery/factors/sms/verify %}
 
-Verifies a SMS OTP (`passCode`) sent to the user's mobile phone for primary authentication for a recovery transaction with `RECOVERY_CHALLENGE` status.
+Verifies a SMS OTP (`passCode`) sent to the user's device for primary authentication for a recovery transaction with `RECOVERY_CHALLENGE` status.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -4291,7 +4291,7 @@ curl -v -X POST \
 
 {% api_operation post /authn/recovery/factors/sms/resend %}
 
-Resends a SMS OTP (`passCode`) to the user's mobile phone
+Resends a SMS OTP (`passCode`) to the user's device
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -4358,14 +4358,14 @@ curl -v -X POST \
 }
 ~~~
 
-> The `factorType` and `recoveryType` properties will vary depending on recovery transaction
+> The `factorType` and `recoveryType` properties vary depending on recovery transaction.
 
 #### Verify Call Recovery Factor
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/recovery/factors/call/verify</span>
 
-Verifies a Voice Call OTP (`passCode`) made to the user's mobile phone for primary authentication for a recovery transaction with `RECOVERY_CHALLENGE` status.
+Verifies a Voice Call OTP (`passCode`) sent to the user's device for primary authentication for a recovery transaction with `RECOVERY_CHALLENGE` status.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
