@@ -3777,7 +3777,7 @@ curl -v -X POST \
 
 #### Forgot Password with SMS Factor
 
-Starts a new password recovery transaction with a user identifier (`username`) and asynchronously sends a SMS OTP (challenge) to the user's phone.  This operation will transition the recovery transaction to the `RECOVERY_CHALLENGE` state and wait for user to [verify the OTP](#verify-sms-recovery-factor).
+Starts a new password recovery transaction with a user identifier (`username`) and asynchronously sends a SMS OTP (challenge) to the user's mobile phone.  This operation will transition the recovery transaction to the `RECOVERY_CHALLENGE` state and wait for user to [verify the OTP](#verify-sms-recovery-factor).
 
 > Primary authentication of a user's recovery credential (e.g email or SMS) has not yet completed.
 > Okta will not publish additional metadata about the user until primary authentication has successfully completed.
@@ -4059,7 +4059,7 @@ curl -v -X POST \
 
 #### Unlock Account with SMS Factor
 
-Starts a new unlock recovery transaction with a user identifier (`username`) and asynchronously sends a SMS OTP (challenge) to the user's phone.  This operation will transition the recovery transaction to the `RECOVERY_CHALLENGE` state and wait for user to [verify the OTP](#verify-sms-recovery-factor).
+Starts a new unlock recovery transaction with a user identifier (`username`) and asynchronously sends a SMS OTP (challenge) to the user's mobile phone.  This operation will transition the recovery transaction to the `RECOVERY_CHALLENGE` state and wait for user to [verify the OTP](#verify-sms-recovery-factor).
 
 > Primary authentication of a user's recovery credential (e.g email or SMS) has not yet completed.
 > Okta will not publish additional metadata about the user until primary authentication has successfully completed.
@@ -4195,7 +4195,7 @@ curl -v -X POST \
 
 {% api_operation post /authn/recovery/factors/sms/verify %}
 
-Verifies a SMS OTP (`passCode`) sent to the user's device for primary authentication for a recovery transaction with `RECOVERY_CHALLENGE` status.
+Verifies a SMS OTP (`passCode`) sent to the user's mobile phone for primary authentication for a recovery transaction with `RECOVERY_CHALLENGE` status.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -4291,7 +4291,7 @@ curl -v -X POST \
 
 {% api_operation post /authn/recovery/factors/sms/resend %}
 
-Resends a SMS OTP (`passCode`) to the user's device
+Resends a SMS OTP (`passCode`) to the user's mobile phone
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
