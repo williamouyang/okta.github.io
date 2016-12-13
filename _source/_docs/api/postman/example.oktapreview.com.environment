@@ -32,7 +32,7 @@
 		},
 		{
 			"key": "username",
-			"value": "user@example.com",
+			"value": "",
 			"type": "text",
 			"name": "username",
 			"enabled": true

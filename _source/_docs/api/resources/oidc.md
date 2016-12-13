@@ -306,7 +306,7 @@ Step 3 involves downloading the public JWKS from Okta (specified by the *jwks_ur
 
 Each public key is identified by a *kid* attribute, which corresponds with the *kid* claim in the [ID Token header](#claims-in-the-header-section).
 
-All apps must roll over keys for adequate security. Please note the following:
+Please note the following:
 
 * For security purposes, Okta automatically rotates keys used to sign the token.
 * The current key rotation schedule is four times a year. This schedule can change without notice.
