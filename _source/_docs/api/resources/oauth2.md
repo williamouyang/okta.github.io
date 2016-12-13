@@ -3,7 +3,7 @@ layout: docs_page
 title: OAuth 2.0
 ---
 
-TEAM: Please review this whole doc--no one's seen it with all beta tags removed.
+<<Please review this whole doc--no one's seen it with all beta tags removed. >>
 
 # OAuth 2.0 API
 

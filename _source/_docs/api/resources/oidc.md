@@ -491,8 +491,7 @@ This API doesn't require any authentication and returns a JSON object with the f
     ]
 }
 ~~~
-
-Team: Please Review the rest of this, these were copied straight from oauth2.md
+<<<Please Review the rest of this, these were copied straight from oauth2.md>>>
 ### Authentication Request
 {:.api .api-operation}
 
