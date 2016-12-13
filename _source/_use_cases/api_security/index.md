@@ -1,13 +1,13 @@
 ---
 layout: docs_page
+weight: 1
 title: API Access Management
+excerpt: Secure your APIs with Okta's implementation of the OAuth 2.0 standard.
 ---
 
-# API Access Management
-
 Use API Access Management, Okta's implementation of the OAuth 2.0 standard, to secure your APIs.
-API Access Management is integrated with Okta's implementation of OpenID Connect for authentication,
-though the latter feature is available separately. Similarly, Okta provides a client management API
+API Access Management is integrated with Okta's implementation of OpenID Connect for authentication;
+OpenID Connect is also available separately. Similarly, Okta provides a client management API
 for onboarding, monitoring, and deprovisioning client apps.
 
 ## OAuth 2.0 and OpenID Connect
@@ -16,20 +16,20 @@ When do you use API Access Management and when do you use OpenID Connect?
  
 ### Simple Use Cases
 
-In general, you should use OpenID Connect to manage single sign on, and use API Access Management to secure your APIs: 
+In general, use OpenID Connect to sign users into apps, and use API Access Management to secure your APIs: 
 create one or more authentication servers, define scopes and claims, and create policies and rules to determine who can access which
 client apps via your API resources.
 
 For example:
 
-* Use Case 1 (API AM): You need to control API access for a variety of consumers: vendors, employees, and customers, for example.
-* Use Case 2 (OpenID Connect): You need single sign-on that integrates with OAuth 2.0. 
+* Use Case 1 (API Access Management): You need to control API access for a variety of consumers: vendors, employees, and customers, for example.
+* Use Case 2 (OpenID Connect): You want users to sign into your custom web application to access their account. 
 
 ### Complex Use Cases
 
 You can also specify authorization servers in your OpenID Connect API calls. 
 Every OpenID resource is also available in a version that lets you specify an authorization server that you created in Okta.
-See <<insert link>> for details.
+See [OpenID Connect and Authorization Servers](/docs/api/resources/oauth2.html#Openid-connect-and-authorization-servers) for details.
  
 ## Benefits of API Access Management
 
@@ -37,7 +37,7 @@ Centralizing the management of your APIs makes it easier for others to consume y
 Using Okta's OAuth-as-a-Service feature, API Access Management, provides many benefits:
 
 * Create one or more hosted authentication servers, which makes it easier to manage sets of API access for multiple client apps across many customer types.
-* Create custom scopes and custom claims that map to the profiles in your user directory. 
+* Create custom scopes and claims. Map your claims to the profiles in your user directory. 
 * Tokens are passed instead of credentials. In addition, the JWT tokens carry payloads for user context.
 * Stay protected with security standards compliance.
 * Manage API access with rules. Specifying the conditions under which actions are taken gives you precise and confident control over your APIs. 
@@ -45,8 +45,7 @@ Using Okta's OAuth-as-a-Service feature, API Access Management, provides many be
 * Enjoy the highest quality, always-available API Access Management. 
 * Let Okta do the work of consuming standards changes to provide more or better services.
 
-> Note: In places where we feel the standards may expose customers to the risk
-  of using bad practices, we have implemented stricter requirements or behaviors.  
+> Note: In some places we have implemented stricter requirements or behaviors for additional security.  
 
 ## Putting the Pieces Together
 
@@ -72,11 +71,11 @@ You can design tokens to disclose the information you want to share depending on
 For example, a shopping site might have one set of claims for customers while they browse, but another claim for admin functions
 like changing their personal information.
 
-Custom claims also help you by reducing the number of lookup calls required to retrieve suer information from the identity provider (IdP).
+Custom claims also help you by reducing the number of lookup calls required to retrieve user information from the identity provider (IdP).
 This benefit depends, of course, on the level of security your apps require. 
 
 ## Getting Started with API Access Management
 
 * [Set up an authorization server](/docs/how-to/set-up-auth-server.html) and use the power of Okta's API Access Management.
-* Visit [the API Access Management endpoint documentation](/docs/api/resources/oauth2.md) and start building your integration today.
-* For simpler use cases focused on single-sign on, visit [the OpenID Connect documentation](/docs/api/resources/oidc.md).
+* Visit [the API Access Management endpoint documentation](/docs/api/resources/oauth2.html) and start building your integration today.
+* For simpler use cases focused on single-sign on, visit [the OpenID Connect documentation](/docs/api/resources/oidc.html).
