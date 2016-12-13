@@ -3,8 +3,6 @@ layout: docs_page
 title: OAuth 2.0
 ---
 
-<<Please review this whole doc--no one's seen it with all beta tags removed. >>
-
 # OAuth 2.0 API
 
 Okta is a fully standards-compliant [OAuth 2.0](http://oauth.net/documentation) authorization server and a certified [OpenID Provider](http://openid.net/certification). 
