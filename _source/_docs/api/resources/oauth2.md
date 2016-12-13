@@ -211,12 +211,26 @@ An Access Token must be validated in the following manner:
 1. Verify that the `iss` (issuer) claim matches the identifier of your authorization server.
 2. Verify that the `aud` (audience) claim is the requested URL.
 3. Verify `cid` (client id) claim is your client id.
-4. Verify the signature according to [JWS](https://tools.ietf.org/html/rfc7515) using the algorithm specified in the JWT `alg` header parameter. Use the public keys provided by Okta via the [Get Keys endpoint](#get-keys).
+4. Verify the signature of the Access Token according to [JWS](https://tools.ietf.org/html/rfc7515) using the algorithm specified in the JWT *alg* header property. Use the public keys provided by Okta via the [Get Keys endpoint](#get-keys).
 5. Verify that the expiry time (from the `exp` claim) has not already passed.
 
-Step 4 uses the same signature verification method as [OIDC](oidc.html#validating-id-tokens).
+Step 4 involves downloading the public JWKS from Okta (specified by the *jwks_uri* property in the [authorization server metadata](#authorization-server-metadata). The result of this call is a [JSON Web Key](https://tools.ietf.org/html/rfc7517) set.
 
-The signing keys for the Access Token are rotated in the same way as [OIDC](oidc.html#validating-id-tokens).
+Each public key is identified by a *kid* attribute, which corresponds with the *kid* claim in the [Access Token header](#token-authentication-method).
+
+The Access Token is signed by an RSA private key, and we publish the future signing key well in advance.
+However, in an emergency situation you can still stay in sync with Okta's key rotation. Have your application check the `kid`, and if it has changed, 
+check the `jwks_uri` value in the [authorization server metadata](#authorization-server-metadata) for a new public key and `kid`.
+
+Please note the following:
+
+* For security purposes, Okta automatically rotates keys used to sign the token.
+* The current key rotation schedule is four times a year. This schedule can change without notice.
+* In case of an emergency, Okta can rotate keys as needed.
+* Okta always publishes keys to the JWKS.
+* To save the network round trip, your app can cache the JWKS response locally. The standard HTTP caching headers are used and should be respected.
+
+Keys used to sign tokens automatically rotate and should always be resolved dynamically against the published JWKS. Your app can fail if you hardcode public keys in your applications. Be sure to include key rollover in your implementation.
 
 ### Alternative Validation
 
