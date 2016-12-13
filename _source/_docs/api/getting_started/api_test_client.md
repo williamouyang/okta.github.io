@@ -15,15 +15,16 @@ To use these collections, you'll need to set up your environment, import the col
 
 ## Set Up Your Environment
 
-1. [Create an API token](getting_a_token.html).
-2. [Install the Postman App](https://www.getpostman.com/apps).
-3. Launch Postman and click the 'import button'. Select import from link, and paste this link into the textbox: <http://developer.okta.com/docs/api/postman/example.oktapreview.com.environment>.
+1. <a href="getting_a_token.html" target="_blank">Create an API token</a>.
+2. <a href="https://www.getpostman.com/apps" target="_blank">Install the Postman App</a>.
+3. Launch Postman and click the 'import button'. Select import from link, and paste this link into the textbox: `http://developer.okta.com/docs/api/postman/example.oktapreview.com.environment`
     ![Importing the Okta Example Environment](/assets/img/import_enviro.png)
 
 4. Once you have clicked import, make sure the `example.oktapreview.com` environment is selected.
     ![Postman app with collections](/assets/img/postman_example_start.png)
 
 5. Click the eye icon next to `example.oktapreview.com` and select **Edit** to replace or add these values:
+    * Rename your environment to something you'll recognize, for example **myOrg**.
     * `url`: Replace the example value with your org's URL, for example **https://myOrg.oktapreview.com**. This becomes the new name of your environment. Do **not** include '-admin' in the subdomain.
     * `apikey`: Enter the API token you created in your org, for example **00LzMWxMq_0sdErHy9Jf1sijEGexYZlsdGr9a4QjkS**.
     * `email-suffix`: Enter the email suffix for your domain, for example **myOrg.com**.
@@ -36,7 +37,7 @@ To use these collections, you'll need to set up your environment, import the col
 
 Import the collection for the Users API: 
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/78060451b3ba309f5bcf)
+<a href="https://www.getpostman.com/run-collection/78060451b3ba309f5bcf" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman"></a>
 
 > Note: You can import and work with the rest of the Okta API using the link at the top of each API reference page, 
 or use the [Collections Quick Reference](#collections-quick-reference). This tutorial only requires the Users collection import.
