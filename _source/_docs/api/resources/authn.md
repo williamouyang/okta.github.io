@@ -37,7 +37,7 @@ Trusted applications are backend applications that act as authentication broker 
 
 1. Make sure you need the API. Check out the [Okta Sign-In Widget](/docs/guides/okta_sign-in_widget.html) which is built on the Authentication API. The Sign-In Widget is easier to use and supports basic use cases.
 2. For more advanced use cases, learn [the Okta API basics](/docs/api/getting_started/api_test_client.html).
-3. Explore the Authentication API: 
+3. Explore the Authentication API:
 
     [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/07df454531c56cb5fe71)
 
@@ -48,10 +48,10 @@ Trusted applications are backend applications that act as authentication broker 
 
 {% api_operation post /api/v1/authn %}
 
-Every authentication transaction starts with primary authentication which validates a user's primary password credential. **Password Policy**, **MFA Policy**,  and **Sign-On Policy** are evaluated during primary authentication to determine if the user's password is expired, a factor should be enrolled, or additional verification is required. The [transaction state](#transaction-state) of the response depends on the user's status, group memberships and assigned policies. 
+Every authentication transaction starts with primary authentication which validates a user's primary password credential. **Password Policy**, **MFA Policy**,  and **Sign-On Policy** are evaluated during primary authentication to determine if the user's password is expired, a factor should be enrolled, or additional verification is required. The [transaction state](#transaction-state) of the response depends on the user's status, group memberships and assigned policies.
 
 The requests and responses vary depending on the application type, and whether a password expiration warning is sent:
- 
+
 - [Primary Authentication with Public Application](#primary-authentication-with-public-application)&mdash;[Request Example](#request-example-public-application)
 - [Primary Authentication with Trusted Application](#primary-authentication-with-trusted-application)&mdash;[Request Example](#request-example-trusted-application)
 - [Primary Authentication with Password Expiration Warning](#primary-authentication-with-password-expiration-warning)&mdash;[Request Example](#request-example-password-expiration-warning)
@@ -731,7 +731,7 @@ curl -v -X POST \
 ### Change Password
 {:.api .api-operation}
 
-{% api_operation post api/v1/authn/credentials/change_password %} 
+{% api_operation post api/v1/authn/credentials/change_password %}
 
 This operation changes a user's password by providing the existing password and the new password password for authentication transactions with either the `PASSWORD_EXPIRED` or `PASSWORD_WARN` state.
 
@@ -838,7 +838,7 @@ You can enroll, activate, and verify factors using the `/api/v1/authn/factors` e
 ### Enroll Factor
 {:.api .api-operation}
 
-{% api_operation post /api/v1/authn/factors %} 
+{% api_operation post /api/v1/authn/factors %}
 
 Enrolls a user with a [factor](factors.html#supported-factors-for-providers) assigned by their **MFA Policy**.
 
@@ -1612,7 +1612,7 @@ curl -v -X POST \
                   "factorResult":"WAITING",
                   "_links":{
                       "complete":{
-                          "href":"https://your-domain.okta.com/api/v1/authn/factors/dsfkucEOz3phNMdGP0g3/lifecycle/duoCallback",
+                          "href":"https://<your org>.okta1.com/api/v1/authn/factors/dsfkucEOz3phNMdGP0g3/lifecycle/duoCallback",
                           "hints":{
                               "allow":[
                                   "POST"
@@ -1620,7 +1620,7 @@ curl -v -X POST \
                           }
                       },
                       "script":{
-                          "href":"https://your-domain.okta.com/js/sections/duo/Duo-Web-v2.js",
+                          "href":"https://<your org>.okta1.com/js/sections/duo/Duo-Web-v2.js",
                           "type":"text/javascript; charset=utf-8"
                       }
                   }
@@ -1631,7 +1631,7 @@ curl -v -X POST \
   "_links":{
       "next":{
           "name":"poll",
-          "href":"https://your-domain.okta.com/api/v1/authn/factors/dsfkucEOz3phNMdGP0g3/lifecycle/activate/poll",
+          "href":"https://<your org>.okta1.com/api/v1/authn/factors/dsfkucEOz3phNMdGP0g3/lifecycle/activate/poll",
           "hints":{
               "allow":[
                    "POST"
@@ -1639,7 +1639,7 @@ curl -v -X POST \
           }
       },
       "cancel":{
-          "href":"https://your-domain.okta.com/api/v1/authn/cancel",
+          "href":"https://<your org>.okta1.com/api/v1/authn/cancel",
           "hints":{
               "allow":[
                   "POST"
@@ -1647,7 +1647,7 @@ curl -v -X POST \
           }
       },
       "prev":{
-          "href":"https://your-domain.okta.com/api/v1/authn/previous",
+          "href":"https://<your org>.okta1.com/api/v1/authn/previous",
           "hints":{
               "allow":[
                   "POST"
@@ -1670,6 +1670,40 @@ curl -v -X POST \
     'post_action': '{activation._links.complete.href}'
   });
 </script>
+~~~
+
+#### Full Page Example for Duo enrollment
+In this example will will put all the elements together in html page. It is important to provide the stateToken information. Some additional information on how to integrate with Duo is provided [here](https://duo.com/docs/duoweb#passing-additional-post-arguments-with-the-signed-response).
+
+~~~html
+<html>
+    <body>
+        <!--
+            The Duo SDK will automatically bind to this iFrame and populate it for us.
+            See https://www.duosecurity.com/docs/duoweb for more info.
+         -->
+        <iframe id="duo_iframe" width="620" height="330" frameborder="0"></iframe>
+        <!--
+            The Duo SDK will automatically bind to this form and submit it for us.
+            See https://www.duosecurity.com/docs/duoweb for more info.
+         -->
+        <form method="POST" id="duo_form">
+            <!-- The state token is required here (in order to bind anonymous request back into Auth API) -->
+            <input type="hidden" name="stateToken" value='{stateToken}' />
+        </form>
+
+        <script src="https://<your org>.okta.com/js/sections/duo/Duo-Web-v2.js"></script>
+
+        <!-- The host, sig_request, and post_action values will be given via the Auth API -->
+        <script>
+            Duo.init({  
+                'host': '<your org duo host>.duosecurity.com',
+                'sig_request': '<activation signature>',
+                'post_action': 'https://<your org>okta.com/api/v1/authn/factors/dsf2lw7BzJeNJwBo10g4/lifecycle/duoCallback'
+            });
+        </script>
+    </body>
+</html>
 ~~~
 
 ##### Poll for Duo WebSdk Activation Request Example
@@ -1791,7 +1825,7 @@ In this example we just enrolled and activated Duo but the question and SMS fact
 
 > Enrolling a U2F factor is an {% api_lifecycle ea %} feature.
 
-Enrolls a user with a U2F factor.  The enrollment process starts with getting an `appId` and `nonce` from Okta and using those to get registration information from the U2F key using the U2F javascript API. 
+Enrolls a user with a U2F factor.  The enrollment process starts with getting an `appId` and `nonce` from Okta and using those to get registration information from the U2F key using the U2F javascript API.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -2505,7 +2539,7 @@ u2f.register(appId, registerRequests, [], function (data) {
   } else {
 	  //Get the registrationData from the callback result
 	  var registrationData = data.registrationData;
-	
+
 	  //Get the clientData from the callback result
 	  var clientData = data.clientData;
   }
@@ -3371,7 +3405,7 @@ signatureData| base64 encoded signature data from the U2F token    | Body       
 
 ##### Start verification to get challenge nonce
 
-Verification of the U2F factor starts with getting the challenge nonce and U2F token details and then using the client side 
+Verification of the U2F factor starts with getting the challenge nonce and U2F token details and then using the client side
 javascript API to get the signed assertion from the U2F token.
 
 ##### Request Example
@@ -3459,14 +3493,14 @@ curl -v -X POST \
 }
 ~~~
 
-##### Get the signed assertion from the U2F token 
+##### Get the signed assertion from the U2F token
 {:.api .api-response .api-response-example}
 
 ~~~html
 //Get the u2f-api.js from https://github.com/google/u2f-ref-code/tree/master/u2f-gae-demo/war/js
 <script src="/u2f-api.js"></script>
 <script>
-var challengeNonce = factor._embedded.challenge.nonce; //use the nonce from the challenge object 
+var challengeNonce = factor._embedded.challenge.nonce; //use the nonce from the challenge object
 var appId = factor.profile.appId; //use the appId from factor profile object
 
 //Use the version and credentialId from factor profile object
@@ -3475,7 +3509,7 @@ var registeredKeys = [{version: factor.profile.version, keyHandle: factor.profil
 //Call the U2F javascript API to get signed assertion from the U2F token
 u2f.sign(appId, factorData.challenge.nonce, registeredKeys, function (data) {
   if (data.errorCode && data.errorCode !== 0) {
-    //Error from U2F platform 
+    //Error from U2F platform
   } else {
 	  //Get the client data from callback result
 	  var clientData = data.clientData;
@@ -4453,7 +4487,7 @@ curl -v -X POST \
       }
     }
   }
-  
+
 ###### Resend Call Recovery Challenge
 {:.api .api-operation}
 
@@ -5411,19 +5445,19 @@ A subset of policy settings for the user's assigned password policy published du
 {
   "expiration":{
     "passwordExpireDays": 0
-  }, 
+  },
   "complexity": {
-    "minLength": 8, 
-    "minLowerCase": 1, 
-    "minUpperCase": 1, 
-    "minNumber": 1, 
-    "minSymbol": 0, 
+    "minLength": 8,
+    "minLowerCase": 1,
+    "minUpperCase": 1,
+    "minNumber": 1,
+    "minSymbol": 0,
     "excludeUsername": "true"
-    }, 
+    },
    "age":{
-     "minAgeMinutes":0, 
-     "historyCount":0 
-    } 
+     "minAgeMinutes":0,
+     "historyCount":0
+    }
 }
 ~~~
 
@@ -5649,4 +5683,3 @@ Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988))
 |--------------------+--------------------------------------------------------------|
 
 > The Links Object is **read-only**
-
