@@ -11,7 +11,7 @@ redirect_from: "/docs/getting_started/getting_a_token.html"
     privileges.
 	
 	If you don't have an Okta organization, you can create a free Okta
-    Developer Edition organization <a href="https://www.okta.com/developer/signup/" target ="_blank">at this link</a>.
+    Developer Edition organization [at this link](https://www.okta.com/developer/signup/){:target="_blank"}.
 
 2.  Click on the blue "Admin" button.
     ![Admin](/assets/img/okta-admin-ui-button-admin.png)
