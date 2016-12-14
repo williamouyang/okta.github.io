@@ -1673,7 +1673,7 @@ curl -v -X POST \
 ~~~
 
 #### Full Page Example for Duo enrollment
-In this example will will put all the elements together in html page. It is important to provide the stateToken information. Some additional information on how to integrate with Duo is provided [here](https://duo.com/docs/duoweb#passing-additional-post-arguments-with-the-signed-response).
+In this example we will put all the elements together in html page. It is important to provide the stateToken information. Some additional information on how to integrate with Duo is provided [here](https://duo.com/docs/duoweb#passing-additional-post-arguments-with-the-signed-response).
 
 ~~~html
 <html>
