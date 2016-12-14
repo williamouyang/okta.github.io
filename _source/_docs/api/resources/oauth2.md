@@ -271,7 +271,7 @@ The requests with client_credential grant type match "no user" condition, which 
 
 The actions in a Rule define which scopes can be granted to the requests, thus determines which claims will be added into the tokens. They also define the lifetime of the Access Token and Refresh Token.
 
-### Authorization Servers
+## Authorization Servers
 
 API Access Management allows you to build custom authorization servers in Okta which can be used to protect your own API endpoints. An authorization server defines your security boundary, for example “staging” or “production.” Within each authorization server you can define your own OAuth scopes, claims, and access policies. This allows your apps and your APIs to anchor to a central authorization point and leverage the rich identity features of Okta, such as Universal Directory for transforming attributes, adaptive MFA for end-users, analytics, and system log, and extend it out to the API economy.
 
@@ -280,7 +280,7 @@ Each authorization server has a unique issuer URI and its own signing key for to
 The authorization server also acts as an OpenID Connect Provider, which means you can request ID tokens in addition to access tokens from the authorization server endpoints.
 To configure an authorization server, log into your org and navigate to **Security** > **API** > **Add Authorization Server**.
 
-### OpenID Connect and Authorization Servers
+## OpenID Connect and Authorization Servers
 
 You can use OpenID Connect without the API Access Management feature, using the [OpenID Connect API](/docs/api/resources/oidc.html).
 However, you can also use OpenID Connect with an authorization server specified:
