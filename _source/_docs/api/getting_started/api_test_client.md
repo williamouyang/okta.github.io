@@ -37,11 +37,7 @@ To use these collections, you'll need to set up your environment, import the col
 
 Import the collection for the Users API: 
 
-<<<<<<< HEAD
-<a href="https://www.getpostman.com/run-collection/78060451b3ba309f5bcf" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman"></a>
-=======
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/78060451b3ba309f5bcf){:target="_blank"}
->>>>>>> 9337ca6090fd96d9cfa4806a8ae4a29509102478
 
 > Note: You can import and work with the rest of the Okta API using the link at the top of each API reference page, 
 or use the [Collections Quick Reference](#collections-quick-reference). This tutorial only requires the Users collection import.
