@@ -1,32 +1,31 @@
 ---
 layout: docs_page
 title: Platform Release Notes
-excerpt: Summary of changes to the Okta Platform since Release 2016.47
+excerpt: Summary of changes to the Okta Platform since Release 2016.49
 ---
 
-# Release 2016.49
+# Release 2016.50
 
-## Feature Enhancements
+## New Feature: API Access Management in EA Release
 
-### Delete User API in EA
+Okta's API Access Management helps enterprises protect their APIs using OAuth 2.0 as a Service. 
+By defining flexible security domains, scopes, claims, and access policies, you can control access as narrowly or as widely as needed for your enterprise.
+With this solution, you can create one or more authorization servers, configure scopes, set access policies and have a fully operational OAuth Authorization Service in minutes. 
+We support the full set of core OAuth and OIDC flows (code, implicit, password, client credential, hybrid, and refresh) and are fully spec compliant.
 
-API access to [delete users](/docs/api/resources/users.html#delete-user) is now in EA. To request the feature, contact Support. 
-<!-- OKTA-109291 -->
+![Authorization Server page](/assets/img/auth_server2.png)
 
-### System Query Log Change
+To get started with API Access Management, visit [API Access Management](/use_cases/api_security/).
 
-System logs are truncated after six months. You may want to revise any system log queries for the new limit.
-This change allows us to provide faster, more consistent responses to a wider range of system-log API requests.
-Because the system keeps less data in memory, it responds faster.
-<!-- OKTA-105346 -->
+## Feature Enhancement: Delete User Endpoint
+
+The endpoint to delete users changed from the Beta endpoint `POST /api/v1/users/{id}/lifecycle/delete` 
+to the more intuitive [`DELETE /api/v1/users/{id}`](/docs/api/resources/users.html#delete-user) for EA.
+The Beta endpoint has been removed. <!-- (OKTA-108195) -->
 
 ## Platform Bugs Fixed
 
-* Two users created simultaneously with the same login returned an HTTP 500 error. 
-    Now, a validation error is returned. (OKTA-105484)
-* If an Admin was reassigned to a UserAdmin role that was scoped to a group, requests to the Users API returned fewer records than indicated by the limit parameter. (OKTA-107410)
-* Creating users with the Users API failed if a bookmark app was assigned to a group. (OKTA-108185)
-* User profiles weren't always updated with social profile changes. (OKTA-108602)
+* Tokens for a suspended user didn't fail introspection. (OKTA-1090006)
 
 ## Does Your Org Have This Change Yet?
 
@@ -41,6 +40,7 @@ For changes outside the Okta platform, see the [Release Notes Knowledge Hub](htt
 
 ## Earlier Platform Release Notes
 
+* [Platform Release Notes for Release 2016.49](platform-release-notes2016-49.html)
 * [Platform Release Notes for Release 2016.47](platform-release-notes2016-47.html)
 * [Platform Release Notes for Release 2016.46](platform-release-notes2016-46.html)
 * [Platform Release Notes for Release 2016.45](platform-release-notes2016-45.html)
