@@ -1658,20 +1658,6 @@ curl -v -X POST \
 }
 ~~~
 
-##### Launch Duo WebSdk iFrame
-{:.api .api-response .api-response-example}
-
-~~~html
-<script src="/js/sections/duo/Duo-Web-v2.js"></script>
-<script>
-  Duo.init({
-    'host': '{activation.host}',
-    'sig_request': '{activation.signature}',
-    'post_action': '{activation._links.complete.href}'
-  });
-</script>
-~~~
-
 #### Full Page Example for Duo enrollment
 In this example we will put all the elements together in html page. It is important to provide the stateToken information. Some additional information on how to integrate with Duo is provided [here](https://duo.com/docs/duoweb#passing-additional-post-arguments-with-the-signed-response).
 
