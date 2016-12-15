@@ -1,6 +1,6 @@
 ---
 layout: docs_page
-weight: 1
+weight: 3
 title: API Access Management
 excerpt: Secure your APIs with Okta's implementation of the OAuth 2.0 standard.
 ---
