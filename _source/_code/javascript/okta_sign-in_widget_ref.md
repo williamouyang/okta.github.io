@@ -7,7 +7,7 @@ redirect_from:
     - "/docs/api/resources/okta_signin_widget.html"
 ---
 
-## Overview
+# Overview
 
 This page contains detailed reference information you can use to customize your Okta sign-in widget.
 Basic instructions for creating a sign-in widget are available in [Okta Sign-In Widget](./okta_sign-in_widget.html).

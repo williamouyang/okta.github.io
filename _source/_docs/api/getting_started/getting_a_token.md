@@ -5,7 +5,7 @@ title: Getting a Token
 redirect_from: "/docs/getting_started/getting_a_token.html"
 ---
 
-## Create an API token
+# Create an API token
 
 1.  Log in to your Okta organization as a user with admin
     privileges.
