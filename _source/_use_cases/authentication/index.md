@@ -79,9 +79,7 @@ comprehensive set of [authentication APIs](/docs/api/resources/authn.html) cover
 authentication exposed through the Okta Platform.  It can be used as a
 standalone API to provide the identity layer on top of your existing
 application and authentication logic, or it can be integrated with the
-[Okta Sessions API](/docs/api/resources/sessions.html) to obtain an Okta session cookie and access apps
-within Okta to provide a single sign-on experience across custom and
-Okta-managed apps.
+Okta [Sessions API](/docs/api/resources/sessions.html) to obtain an Okta [session cookie](/use_cases/authentication/session_cookie) and access apps within Okta to provide a single sign-on experience across custom and Okta-managed apps.
 
 ## Social Authentication
 
