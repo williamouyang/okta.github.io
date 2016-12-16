@@ -1560,7 +1560,7 @@ curl -v -X POST \
 #### Enroll Duo Factor
 {:.api .api-operation}
 
-Enrolls a user with a Duo factor.  The enrollment process starts with an enrollment request to Okta, then continues with a Duo widget and script that handles the enrollment. At the end of the process, Duo makes a callback to Okta to complete the enrollment.
+ The enrollment process starts with an enrollment [request to Okta](#request-example-10), then continues with a Duo widget and script that handles the enrollment embedded in the page. The page needs to create an iframe with name "duo_iframe" as described [here](https://duo.com/docs/duoweb#3.-show-the-iframe). The script address is recieved in the response object in \_embedded.factor.\_embedded.\_links.script object. The information to initialize the Duo object is taken from \_embedded.factor.\_embedded.activation object as it is shown in the [full example](#full-page-example-for-duo-enrollment). In order to mainian the link between Duo and Okta the stateToken mest be passed back when Duo calls the callback. This is done by populating the hidden element in the "duo_form" as it is decribed [here](https://duo.com/docs/duoweb#passing-additional-post-arguments-with-the-signed-response). After Duo enrollment and verification is done, Duo makes a call back to Okta. The last step of authentication is to make call to the [poll link](#activation-poll-request-example) the to get session token and verify sucessful state.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1581,7 +1581,7 @@ curl -v -X POST \
 
 ~~~json
 {
-  "stateToken":"00q8oewUkDwvzTKzQLNgZuZDqdpHue_e_xT89I8j4X",
+  "stateToken":"your-state-token",
   "expiresAt":"2016-07-13T13:14:52.000Z",
   "status":"MFA_ENROLL_ACTIVATE",
   "factorResult":"WAITING",
@@ -1598,7 +1598,7 @@ curl -v -X POST \
           }
       },
       "factor":{
-          "id":"dsfkucEOz3phNMdGP0g3",
+          "id":"your-factor-id",
           "factorType":"web",
           "provider":"DUO",
           "vendorName":"DUO",
@@ -1607,12 +1607,12 @@ curl -v -X POST \
           },
           "_embedded":{
               "activation":{
-                  "host":"<your endpoint>.duosecurity.com",
-                  "signature":"<your signature>",
+                  "host":"<your org duo host>.duosecurity.com",
+                  "signature":"<activation signature>",
                   "factorResult":"WAITING",
                   "_links":{
                       "complete":{
-                          "href":"https://<your org>.okta1.com/api/v1/authn/factors/dsfkucEOz3phNMdGP0g3/lifecycle/duoCallback",
+                          "href":"https://your-domain.okta1.com/api/v1/authn/factors/your-factor-id/lifecycle/duoCallback",
                           "hints":{
                               "allow":[
                                   "POST"
@@ -1620,7 +1620,7 @@ curl -v -X POST \
                           }
                       },
                       "script":{
-                          "href":"https://<your org>.okta1.com/js/sections/duo/Duo-Web-v2.js",
+                          "href":"https://your-domain.okta1.com/js/sections/duo/Duo-Web-v2.js",
                           "type":"text/javascript; charset=utf-8"
                       }
                   }
@@ -1631,7 +1631,7 @@ curl -v -X POST \
   "_links":{
       "next":{
           "name":"poll",
-          "href":"https://<your org>.okta1.com/api/v1/authn/factors/dsfkucEOz3phNMdGP0g3/lifecycle/activate/poll",
+          "href":"https://your-domain.okta1.com/api/v1/authn/factors/your-factor-id/lifecycle/activate/poll",
           "hints":{
               "allow":[
                    "POST"
@@ -1639,7 +1639,7 @@ curl -v -X POST \
           }
       },
       "cancel":{
-          "href":"https://<your org>.okta1.com/api/v1/authn/cancel",
+          "href":"https://your-domain.okta1.com/api/v1/authn/cancel",
           "hints":{
               "allow":[
                   "POST"
@@ -1647,7 +1647,7 @@ curl -v -X POST \
           }
       },
       "prev":{
-          "href":"https://<your org>.okta1.com/api/v1/authn/previous",
+          "href":"https://your-domain.okta1.com/api/v1/authn/previous",
           "hints":{
               "allow":[
                   "POST"
@@ -1659,7 +1659,7 @@ curl -v -X POST \
 ~~~
 
 #### Full Page Example for Duo enrollment
-In this example we will put all the elements together in html page. It is important to provide the stateToken information. Some additional information on how to integrate with Duo is provided [here](https://duo.com/docs/duoweb#passing-additional-post-arguments-with-the-signed-response).
+In this example we will put all the elements together in html page.
 
 ~~~html
 <html>
@@ -1678,22 +1678,23 @@ In this example we will put all the elements together in html page. It is import
             <input type="hidden" name="stateToken" value='{stateToken}' />
         </form>
 
-        <script src="https://<your org>.okta.com/js/sections/duo/Duo-Web-v2.js"></script>
+        <script src="https://your-domain.okta.com/js/sections/duo/Duo-Web-v2.js"></script>
 
         <!-- The host, sig_request, and post_action values will be given via the Auth API -->
         <script>
             Duo.init({  
                 'host': '<your org duo host>.duosecurity.com',
                 'sig_request': '<activation signature>',
-                'post_action': 'https://<your org>okta.com/api/v1/authn/factors/dsf2lw7BzJeNJwBo10g4/lifecycle/duoCallback'
+                'post_action': 'https://your-domain.okta.com/api/v1/authn/factors/your-factor-id/lifecycle/duoCallback'
             });
         </script>
     </body>
 </html>
 ~~~
 
-##### Poll for Duo WebSdk Activation Request Example
+##### Activation Poll Request Example
 {:.api .api-response .api-request-example}
+The poll is to verify successful authentication and to obtain session token.
 
 ~~~sh
 curl -v -X POST \
@@ -1704,105 +1705,27 @@ curl -v -X POST \
 }' "https://${org}.okta.com/api/v1/authn/factors/${factorId}/lifecycle/activate/poll"
 ~~~
 
-##### Poll for Duo WebSdk Activation Response Example
+##### Activation Poll Response Example
 {:.api .api-response .api-response-example}
-
-In this example we just enrolled and activated Duo but the question and SMS factors are not enrolled.
 
 ~~~json
 {
-    "stateToken":"00pAZpdCXV9xYTpknEqP84bObwUKFbp9_huzt8rS0y",
-    "expiresAt":"2016-07-13T13:37:42.000Z",
-    "status":"MFA_ENROLL",
-    "_embedded":{
-        "user":{
-            "id":"00ukv3jVTgRjDctlX0g3",
-            "passwordChanged":"2016-07-13T13:29:58.000Z",
-            "profile":{
-                "login":"first.last@example.com",
-                "firstName":"First",
-                "lastName":"Last",
-                "locale":"en_US",
-                "timeZone":"America/Los_Angeles"
-            }
-        },
-        "factors":[
-            {
-                "factorType":"question",
-                "provider":"OKTA",
-                "vendorName":"OKTA",
-                "_links":{
-                    "questions":{
-                        "href":"https://your-domain.okta.com/api/v1/users/00ukv3jVTgRjDctlX0g3/factors/questions",
-                        "hints":{
-                            "allow":[
-                                "GET"
-                            ]
-                        }
-                    },
-                    "enroll":{
-                        "href":"https://your-domain.okta.com/api/v1/authn/factors",
-                        "hints":{
-                            "allow":[
-                                "POST"
-                            ]
-                        }
-                    }
-                },
-                "status":"NOT_SETUP"
-            },
-            {
-                "factorType":"sms",
-                "provider":"OKTA",
-                "vendorName":"OKTA",
-                "_links":{
-                    "enroll":{
-                        "href":"https://your-domain.okta.com/api/v1/authn/factors",
-                        "hints":{
-                            "allow":[
-                                "POST"
-                            ]
-                        }
-                    }
-                },
-                "status":"NOT_SETUP"
-            },
-            {
-                "factorType":"web",
-                "provider":"DUO",
-                "vendorName":"DUO",
-                "_links":{
-                    "enroll":{
-                        "href":"https://your-domain.okta.com/api/v1/authn/factors",
-                        "hints":{
-                            "allow":[
-                                "POST"
-                            ]
-                        }
-                    }
-                },
-                "status":"ACTIVE"
-            }
-        ]
-    },
-    "_links":{
-        "cancel":{
-            "href":"https://your-domain.okta.com/api/v1/authn/cancel",
-            "hints":{
-                "allow":[
-                    "POST"
-                ]
-            }
-        },
-        "skip":{
-            "href":"https://your-domain.okta.com/api/v1/authn/skip",
-            "hints":{
-                "allow":[
-                    "POST"
-                ]
-            }
+  "expiresAt":"2016-07-13T13:37:42.000Z",
+  "status":"SUCCESS",
+  "sessionToken":"20111zMXPaEe_lEw7pg2Ub810HDkpBwzSVBEPBRpA87LH5sW3Jj35_x",
+  "_embedded":{
+    "user":{
+        "id":"00ukv3jVTgRjDctlX0g3",
+        "passwordChanged":"2016-07-13T13:29:58.000Z",
+        "profile":{
+            "login":"first.last@example.com",
+            "firstName":"First",
+            "lastName":"Last",
+            "locale":"en_US",
+            "timeZone":"America/Los_Angeles"
         }
     }
+  }
 }
 ~~~
 
@@ -3219,9 +3142,7 @@ curl -v -X POST \
 #### Verify Duo Factor
 {:.api .api-operation}
 
-Verification of the Duo factor is implemented as an integration between the Okta API and Duo widget. Verification starts with a
-request to the Okta API, then continues with a Duo widget and script that handles verification. At the end of the process, Duo
-makes a callback to the Okta verification endpoint to complete the verification.
+Verification of the Duo factor is implemented as an integration between the Okta API and Duo widget. The process is very similar to the  [enrollment](#full-page-example-for-duo-enrollment). Verification starts with request to the Okta API, then continues with a Duo widget and script that handles verification. Similarly to enrollment we need to pass the state token as hidden object in "dou_form" to link the Duo verification with Okta. At the end of the process, Duo makes a call back to the Okta verification endpoint to complete the verification. The authentication completes with call to [poll link](#verification-poll-request-example) to verify the state and obtain session token.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -3257,7 +3178,7 @@ curl -v -X POST \
             }
         },
         "factor":{
-            "id":"dsfkvdLeix4WsKK5W0g3",
+            "id":"your-factor-id",
             "factorType":"web",
             "provider":"DUO",
             "vendorName":"DUO",
@@ -3266,12 +3187,12 @@ curl -v -X POST \
             },
             "_embedded":{
                 "verification":{
-                    "host":"<your endpoint>.duosecurity.com",
-                    "signature":"<your signature>",
+                    "host":"<your org duo host>.duosecurity.com",
+                    "signature":"<verification signature>",
                     "factorResult":"WAITING",
                     "_links":{
                         "complete":{
-                            "href":"https://your-domain.okta.com/api/v1/authn/factors/dsfkvdLeix4WsKK5W0g3/lifecycle/duoCallback",
+                            "href":"https://your-domain.okta.com/api/v1/authn/factors/your-factor-id/lifecycle/duoCallback",
                             "hints":{
                                 "allow":[
                                     "POST"
@@ -3295,7 +3216,7 @@ curl -v -X POST \
     "_links":{
         "next":{
             "name":"poll",
-            "href":"https://your-domain.okta.com/api/v1/authn/factors/dsfkvdLeix4WsKK5W0g3/verify",
+            "href":"https://your-domain.okta.com/api/v1/authn/factors/your-factor-id/verify",
             "hints":{
                 "allow":[
                     "POST"
@@ -3322,21 +3243,40 @@ curl -v -X POST \
 }
 ~~~
 
-##### Launch Duo iFrame
+##### Sample for Duo iFrame
 {:.api .api-response .api-response-example}
 
 ~~~html
-<script src="/js/sections/duo/Duo-Web-v2.js"></script>
+...
+<!--
+    The Duo SDK will automatically bind to this iFrame and populate it for us.
+    See https://www.duosecurity.com/docs/duoweb for more info.
+ -->
+<iframe id="duo_iframe" width="620" height="330" frameborder="0"></iframe>
+<!--
+    The Duo SDK will automatically bind to this form and submit it for us.
+    See https://www.duosecurity.com/docs/duoweb for more info.
+ -->
+<form method="POST" id="duo_form">
+    <!-- The state token is required here (in order to bind anonymous request back into Auth API) -->
+    <input type="hidden" name="stateToken" value='{stateToken}' />
+</form>
+
+<script src="https://your-domain.okta.com/js/sections/duo/Duo-Web-v2.js"></script>
+
+<!-- The host, sig_request, and post_action values will be given via the Auth API -->
 <script>
-  Duo.init({
-    'host': '{activation.host}',
-    'sig_request': '{activation.signature}',
-    'post_action': '{activation._links.complete.href}'
-  });
+    Duo.init({  
+        'host': '<your org duo host>.duosecurity.com',
+        'sig_request': '<verification signature>',
+        'post_action': 'https://your-domain.okta.com/api/v1/authn/factors/your-factor-id/lifecycle/duoCallback'
+    });
 </script>
+...
+
 ~~~
 
-##### Request Poll Verification Example
+##### Verification Poll Request Example
 {:.api .api-request .api-request-example}
 
 ~~~sh
@@ -3348,7 +3288,7 @@ curl -v -X POST \
 }' "https://${org}.okta.com/api/v1/authn/factors/${factorId]/verify"
 ~~~
 
-##### Response Poll Verification Example
+##### Verification Poll Response Example
 {:.api .api-response .api-response-example}
 
 ~~~json
