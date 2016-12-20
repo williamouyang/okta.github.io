@@ -146,7 +146,7 @@ While we outline a few different methods below, Okta recommends all ISVs support
 ### Provisioning Options Matrix
 
 Okta has seen broad adoption of the standard in the market amongst our network of app developers over the course of 2016. 
-Okta has doubled down on our investment in our SCIM client and launched our own SCIM provisioning developer program.
+Okta has doubled down on our investment in our SCIM client and launched our own [SCIM provisioning developer program](#joining-the-scim-provisioning-developer-program).
 
 | Standard | Recommendation  |  Summary |
 |:--|:--|:--|
@@ -1179,7 +1179,7 @@ are supporting SCIM as well established software companies
 like [Huddle](https://github.com/Huddle/huddle-apis/wiki/Integrating%20with%20SCIM) 
 and [Citrix](https://developer.citrixonline.com/implementing-scim-apis). 
 Okta has doubled down on our investment in our SCIM server 
-and launched [our own SCIM provisioning developer program](http://developer.okta.com/standards/SCIM/scim_developer_program). <!-- Are we keeping this doc or getting rid of it? -->
+and launched [our own SCIM provisioning developer program](http://developer.okta.com/standards/SCIM/index.html#joining-the-scim-provisioning-developer-program).
 The SCIM standards is strong and is run by Salesforce, Google, and Sailpoint (Okta is also a contributor).
 
 **How should I be managing authentication to my SCIM API?**
