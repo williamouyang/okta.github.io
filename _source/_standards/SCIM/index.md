@@ -560,9 +560,11 @@ system.
 Examples of filters that Okta might send to your SCIM API are as
 follows:
 
-> userName eq "jane.doe"
+~~~ 
+userName eq "jane.doe"
 
-> userName eq "jane.doe@example.com"
+userName eq "jane.doe@example.com"
+~~~
 
 At the moment, Okta only supports the `eq` filter operator. However, the
 [filtering capabilities](https://tools.ietf.org/html/rfc7644#section-3.4.2.2) described in the SCIM 2.0 Protocol Specification are
@@ -586,7 +588,7 @@ described in [table 3](https://tools.ietf.org/html/rfc7644#page-18) of the SCIM 
 For more details on filtering in SCIM 2.0, see [section 3.4.2.2](https://tools.ietf.org/html/rfc7644#section-3.4.2.2)
 of the [SCIM 2.0 Protocol Specification](https://tools.ietf.org/html/rfc7644).
 
-##### Filtering on `externalId`
+##### Filtering on externalId
 
 In addition to supporting filtering on `id`, `userName`, and
 `emails`, your application should also support filtering on
@@ -600,7 +602,9 @@ can change.
 Here is an example of an `externalId` filter that might be sent to
 your application:
 
-> externalId eq "00u1abcdefGHIJKLMNOP"
+~~~
+externalId eq "00u1abcdefGHIJKLMNOP"
+~~~
 
 Note: The sample application included in this project does not yet
 demonstrate how to implement storing and filtering by
@@ -609,7 +613,7 @@ implementation supports storing and filtering by `externalId`. For
 details on supporting `externalId`, see
 [section 3.1](https://tools.ietf.org/html/rfc7643#section-3.1) of [RFC 7643](https://tools.ietf.org/html/rfc7643). Quoted below:
 
-> [externalId is] A String that is an identifier for the resource
+> [externalId is] "A String that is an identifier for the resource
 > as defined by the provisioning client.  The "externalId" may
 > simplify identification of a resource between the provisioning
 > client and the service provider by allowing the client to use a
@@ -836,7 +840,7 @@ Here is the specification for the `/ServiceProviderConfig` endpoint, from
 > Section 5 of RFC7643.  An example representation of SCIM service
 > provider configuration may be found in Section 8.5 of RFC7643.
 
-#### Filtering on `meta.lastModified`
+#### Filtering on meta.lastModified
 
 Okta does not currently make queries for resources using
 `meta.lastModified` as part of a filter expression.
@@ -849,13 +853,6 @@ This will likely be done using the `gt` filter operator. For
 example:
 
 > filter=meta.lastModified gt "2011-05-13T04:42:34Z"
-
-<!-- ### Appendix
-
-How important is this section (“How to run” —> “Support for running from the command line”) be included?
-http://developer.okta.com/standards/SCIM/#appendix-details-on-the-example-scim-server
-
-> Have questions? Need help? Email us at developers@okta.com or post your question on Stack Overflow. -->
 
 ## Publishing Your SCIM-Based Provisioning Integration
 
@@ -1025,11 +1022,13 @@ or need to support the Profile Master action, Okta will need to custom-configure
 Please request this in your email to <developers@okta.com>. 
 
 1. Navigate to the admin interface in your Okta org by clicking **Admin**. 
-    ![Admin Button](/assets/img/scim1.png)
+    ![Admin Button](/assets/img/scim-end-user-ui.png)
 
-2. Click **Applications**, then **Add Application**. <!-- Add image: Mysti can't reproduce screen. -->
+2. Click **Applications**, then **Add Application**. 
+    ![Admin Button](/assets/img/scim-apps.png)
 
-3. Search for “SCIM”. You’ll see three different SCIM template applications for each SCIM version (1.1 and 2.0) based off of the various authentication methods you could choose to support (Header Auth, Basic Auth, or Bearer Token). <!-- Add image: Mysti can't reproduce. -->
+3. Search for “SCIM”. You’ll see three different SCIM template applications for each SCIM version (1.1 and 2.0) based off of the various authentication methods you could choose to support (Header Auth, Basic Auth, or Bearer Token).
+    ![Admin Button](/assets/img/scim-templates.png)
 
 #### Submit for Okta Review
 
@@ -1037,15 +1036,14 @@ Once you have a functioning SCIM integration in your Okta developer org, and hav
 
 Your submission will provide Okta with all the metadata needed to create a customized app (includes default mappings, link to config docs) which will be used by joint customers and eventually published publicly in [the Okta Application Network](https://www.okta.com/resources/find-your-apps/?_ga=1.200024301.294942002.1477328324). Okta will review the submission, create the customized app, run it through our internal QA, and then make it available in your developer org for your own testing.
 
-<!-- Why is there a link in the following line? Is it a call to action or not? -->
-Note: [Submit for Okta Review](https://docs.google.com/forms/d/e/1FAIpQLSfueMM9vbIt6zXCdcI9MdJ16lZc1FHwyIwMkHwNBWF7Kzdocg/viewform)
-
 We recommend completing a few actions before submitting your application to Okta:
 
 1. Check the Profile Attributes for your application.
 2. Check the Attribute Mappings for your application.
 3. Run the second set of Runscope tests: Okta SCIM 2.0 CRUD Test
 4. Prepare the customer-facing configuration guide
+
+After performing these four steps (instructions below), use [this form](https://docs.google.com/forms/d/e/1FAIpQLSfueMM9vbIt6zXCdcI9MdJ16lZc1FHwyIwMkHwNBWF7Kzdocg/viewform) to submit for Okta review.
 
 
 ##### Check the Profile Attributes for your application
@@ -1121,8 +1119,7 @@ We recommend preparing the customer-facing configuration guide before beginning 
 This guide will be exposed externally in Okta’s admin interface to end customers. 
 For more details, see the [configuration guide guidelines](http://saml-doc.okta.com/Provisioning_Docs/SCIM_Configuration_Guide_Instructions.pdf).
 
-<!-- Why is this here? -->
-Note: [Submit for Okta Review](https://docs.google.com/forms/d/e/1FAIpQLSfueMM9vbIt6zXCdcI9MdJ16lZc1FHwyIwMkHwNBWF7Kzdocg/viewform)
+Note: When you are ready, use [this form](https://docs.google.com/forms/d/e/1FAIpQLSfueMM9vbIt6zXCdcI9MdJ16lZc1FHwyIwMkHwNBWF7Kzdocg/viewform) to submit for Okta review.
 
 #### Test with Customers
 
@@ -1157,13 +1154,14 @@ In order for an app to be published in the Okta Application Network, it must mee
 **What are the differences between SCIM 1.1 and 2.0?**
 
 | Section | SCIM 1.1 | SCIM 2.0 | Notes |
-    | --- | --- | --- | --- |
-    | Namespaces | urn:scim:schemas:core:1.0 urn:scim:schemas:extension:enterprise:1.0  |  urn:ietf:params:scim:schemas:core:2.0:User urn:ietf:params:scim:schemas:extension:enterprise:2.0:User | Namespaces are different therefore 2.0 is not backwards compatible with 1.1 |
-    | Service Provider Config Endpoint | /ServiceProviderConfig<b>s</b> | /ServiceProviderConfig | Notice 2.0 does NOT have an 's' at the end |
-    | Patch Protocol | [Section 3.3.2](http://www.simplecloud.info/specs/draft-scim-api-01.html#edit-resource-with-patch) | [Section 3.5.2: Uses JSON Patch](https://tools.ietf.org/html/rfc7644#section-3.5.2) | |
-    | Error Response Schema | [Section 3.9](http://www.simplecloud.info/specs/draft-scim-api-01.html#anchor6) | [Section 3.12](https://tools.ietf.org/html/rfc7644#section-3.12) | |
-    | Reference Type | N/A | Supports ref type pointing to the full url of another SCIM Resource | |
-    | Query by POST /search | N/A | [Section 3.4.3](https://tools.ietf.org/html/rfc7644#section-3.4.3) | |
+| --- | --- | --- | --- |
+| Namespaces | urn:scim:schemas:core:1.0 urn:scim:schemas:extension:enterprise:1.0  |  urn:ietf:params:scim:schemas:core:2.0:User urn:ietf:params:scim:schemas:extension:enterprise:2.0:User | Namespaces are different therefore 2.0 is not backwards compatible with 1.1 |
+| Service Provider Config Endpoint | /ServiceProviderConfig<b>s</b> | /ServiceProviderConfig | Notice 2.0 does NOT have an 's' at the end |
+| Patch Protocol | [Section 3.3.2](http://www.simplecloud.info/specs/draft-scim-api-01.html#edit-resource-with-patch) | [Section 3.5.2: Uses JSON Patch](https://tools.ietf.org/html/rfc7644#section-3.5.2) | |
+| Error Response Schema | [Section 3.9](http://www.simplecloud.info/specs/draft-scim-api-01.html#anchor6) | [Section 3.12](https://tools.ietf.org/html/rfc7644#section-3.12) | |
+| Reference Type | N/A | Supports ref type pointing to the full url of another SCIM Resource | |
+| Query by POST /search | N/A | [Section 3.4.3](https://tools.ietf.org/html/rfc7644#section-3.4.3) | |
+
 **Our API is similar to SCIM, but is not 100% compliant. Can we still integrate with Okta?**
 
 Unfortunately, your app’s SCIM server API must be fully SCIM compliant in order to integrate with Okta. 
@@ -1191,12 +1189,13 @@ In addition to OAuth, Okta also supports basic auth and header token auth option
 
 **I have a multi-tenant app how do I allow my customers to customize their specific tenant in Okta?**
 
-You can use the three-legged OAuth (Authorization Grant flow), 
-this way you know exactly which token/key the customer is using. 
+Use the three-legged OAuth (Authorization Grant flow), 
+so that you know exactly which token/key the customer is using. 
 Another option is by URL. When the customer configures your app in Okta, we can prompt them to add their unique subdomain for your app  (see Zscaler app below). 
 Okta can use part of this url in the SCIM endpoint for that customer, for example http://www.company.com/tenantA/scim or http://www.company.com/tenantB/scim). 
 This subdomain field can be configured with Okta after you submit your app for Okta review.
-<!-- insert image: does David have the original? -->
+
+![Example SCIM endpoint with subdomain](/assets/img/scim-scalar.png)
 
 **Why do I need to implement the type attribute for attributes such as emails/phoneNumbers/addresses?**
 
