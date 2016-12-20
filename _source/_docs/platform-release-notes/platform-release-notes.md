@@ -8,8 +8,11 @@ excerpt: Summary of changes to the Okta Platform since Release 2016.50
 
 ### Platform Bugs Fixed
 
-* When editing scopes in the General Settings tab for a single-page app (SPA), leaving the tab unset the selected scopes. (OKTA-108562)
-* The HAL links for self-service actions forgot password, reset password, and unlock were being returned for every user whether the action was allowed by policy or not. 
+* When editing scopes in the General Settings tab for a single-page app (SPA), switching to another tab deselected all scopes. (OKTA-108562)
+
+* Instead of returning an error, invalid fields and names were added to user profiles in some cases. (OKTA-109719) 
+
+* The HAL links for the self-service actions `forgot_password`, `reset_password`, and `unlock` were returned for every user whether the action was allowed by policy or not. 
 This behavior applied to new orgs as of [2016.45](http://developer.okta.com/docs/platform-release-notes/platform-release-notes2016-45.html#user-api-response-always-contains-hal-links) and is being reversed. 
 As of 2016.51, HAL links for these three operations are returned only if the policy for that user indicates the action is available. (OKTA-110739)
 
