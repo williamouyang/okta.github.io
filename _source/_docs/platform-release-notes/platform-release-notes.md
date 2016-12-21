@@ -1,45 +1,34 @@
 ---
 layout: docs_page
 title: Platform Release Notes
-excerpt: Summary of changes to the Okta Platform since Release 2016.49
+excerpt: Summary of changes to the Okta Platform since Release 2016.50
 ---
 
-# Release 2016.50
+## Release 2016.51
 
-## New Feature: API Access Management in EA Release
+### Platform Bugs Fixed
 
-Okta's API Access Management helps enterprises protect their APIs using OAuth 2.0 as a Service. 
-By defining flexible security domains, scopes, claims, and access policies, you can control access as narrowly or as widely as needed for your enterprise.
-With this solution, you can create one or more authorization servers, configure scopes, set access policies and have a fully operational OAuth Authorization Service in minutes. 
-We support the full set of core OAuth and OIDC flows (code, implicit, password, client credential, hybrid, and refresh) and are fully spec compliant.
+* When editing scopes in the General Settings tab for a single-page app (SPA), switching to another tab deselected all scopes. (OKTA-108562)
 
-![Authorization Server page](/assets/img/auth_server2.png)
+* Instead of returning an error, invalid fields and names were added to user profiles in some cases. (OKTA-109719) 
 
-To get started with API Access Management, visit [API Access Management](/use_cases/api_security/).
+* The HAL links for the self-service actions `forgot_password`, `reset_password`, and `unlock` were returned for every user whether the action was allowed by policy or not. 
+This behavior applied to new orgs as of [2016.45](http://developer.okta.com/docs/platform-release-notes/platform-release-notes2016-45.html#user-api-response-always-contains-hal-links) and is being reversed. 
+As of 2016.51, HAL links for these three operations are returned only if the policy for that user indicates the action is available. (OKTA-110739)
 
-## Feature Enhancement: Delete User Endpoint
+### Does Your Org Have This Change Yet?
 
-The endpoint to delete users changed from the Beta endpoint `POST /api/v1/users/{id}/lifecycle/delete` 
-to the more intuitive [`DELETE /api/v1/users/{id}`](/docs/api/resources/users.html#delete-user) for EA.
-The Beta endpoint has been removed. <!-- (OKTA-108195) -->
-
-## Platform Bugs Fixed
-
-* Tokens for a suspended user didn't fail introspection. (OKTA-1090006)
-
-## Does Your Org Have This Change Yet?
-
-Check the footer of any Admin page in an org to verify the current release for that org. For example,
-scroll to the bottom of the Admin **Dashboard** page to see the version number:
+To verify the current release for an org, click the **Admin** button and check the footer of the Dashboard page.
 
 ![Release Number in Footer](/assets/img/release_notes/version_footer.png)
 
-## Looking for Product Release Notes?
+### Looking for Product Release Notes?
 
 For changes outside the Okta platform, see the [Release Notes Knowledge Hub](http://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub).
 
-## Earlier Platform Release Notes
+### Earlier Platform Release Notes
 
+* [Platform Release Notes for Release 2016.50](platform-release-notes2016-50.html)
 * [Platform Release Notes for Release 2016.49](platform-release-notes2016-49.html)
 * [Platform Release Notes for Release 2016.47](platform-release-notes2016-47.html)
 * [Platform Release Notes for Release 2016.46](platform-release-notes2016-46.html)
