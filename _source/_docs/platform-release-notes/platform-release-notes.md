@@ -8,7 +8,7 @@ excerpt: Summary of changes to the Okta Platform since Release 2016.50
 
 ### Platform Bugs Fixed
 
-* When editing scopes in the General Settings tab for a single-page app (SPA), switching to another tab deselected all scopes. (OKTA-108562)
+* When editing scopes in the General Settings tab for a single-page app (SPA) for OpenID Connect, switching to another tab deselected all scopes. (OKTA-108562)
 
 * Instead of returning an error, invalid fields and names were added to user profiles in some cases. (OKTA-109719) 
 
