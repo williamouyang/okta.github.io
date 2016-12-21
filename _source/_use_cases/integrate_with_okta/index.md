@@ -6,7 +6,7 @@ excerpt: Make your app enterprise-ready and connect with thousands of customers 
 redirect_from: "/docs/getting_started/oan_guidance.html"
 ---
 
-## Overview
+# Overview
 
 
 With over 4000 pre-integrated applications, the [Okta Application Network (OAN)](https://www.okta.com/resources/find-your-apps/) provides a great way for ISVs to integrate with an enterprise grade identity management solution. The goal of the OAN is to take the burden of integration away from your customers while providing a simple, standards-based methodology for your application to support federated single sign-on, automated provisioning, and directory integration. By integrating with Okta, your application also benefits from other powerful features such Okta's integrations with on-prem AD / LDAP infrastructure and multi-factor authentication (MFA).
