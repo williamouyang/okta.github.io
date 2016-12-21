@@ -15,9 +15,9 @@
     <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
     <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
 
-    <title>Okta Music Store | Okta Developer</title>
-    <meta name="description" content="The Okta Music Store is a sample application written in .NET and is a demonstration of how to add Okta as an identity provider for an existing application.">
-    <link rel="canonical" href="http://developer.okta.com/code/dotnet/sample_application">
+    <title>Platform Release Notes | Okta Developer</title>
+    <meta name="description" content="Summary of changes to the Okta Platform since Release 2016.49">
+    <link rel="canonical" href="http://developer.okta.com/docs/platform-release-notes/platform-release-notes2016-50.html">
     <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml">
 
     <!-- GA -->
@@ -201,7 +201,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 
                 
 
-                <li>
+                <li class="is-active">
                     <a href="/docs/platform-release-notes/platform-release-notes.html">
                         Platform Release Notes
                     </a>
@@ -227,33 +227,42 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <!-- END Fixed sidebar -->
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
-        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_code/dotnet/sample_application.md">Edit Page</a>
-      <h1 id="about">About</h1>
+        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/platform-release-notes/platform-release-notes2016-50.md">Edit Page</a>
+      <h1 id="release-201650">Release 2016.50</h1>
 
-<blockquote>
-  <p><i class="fa fa-github"></i> <a href="https://github.com/okta/okta-music-store">Visit the GitHub repository for the “Okta Music Store” .NET Sample Application.</a></p>
-</blockquote>
+<h2 id="new-feature-api-access-management-in-ea-release">New Feature: API Access Management in EA Release</h2>
 
-<p>The Okta Music Store is a sample application written in .NET and is a demonstration of how to add Okta as an identity provider for an existing application.</p>
+<p>Okta’s API Access Management helps enterprises protect their APIs using OAuth 2.0 as a Service. 
+By defining flexible security domains, scopes, claims, and access policies, you can control access as narrowly or as widely as needed for your enterprise.
+With this solution, you can create one or more authorization servers, configure scopes, set access policies and have a fully operational OAuth Authorization Service in minutes. 
+We support the full set of core OAuth and OIDC flows (code, implicit, password, client credential, hybrid, and refresh) and are fully spec compliant.</p>
 
-<p>It is based on a pre-existing sample application known as the <a href="https://mvcmusicstore.codeplex.com/">MVC Music Store</a>, a well-known
-introduction to the <a href="https://www.asp.net/open-source">open source</a> <a href="https://www.asp.net/">ASP.NET web application framework</a>.</p>
+<p><img src="/assets/img/auth_server2.png" alt="Authorization Server page" /></p>
 
-<p>The Okta Music Store builds on top of the MVC Music Store and shows you how to use the Okta SDK to do the following things in an ASP.NET MVC application:</p>
+<p>To get started with API Access Management, visit <a href="/use_cases/api_security/">API Access Management</a>.</p>
+
+<h2 id="feature-enhancement-delete-user-endpoint">Feature Enhancement: Delete User Endpoint</h2>
+
+<p>The endpoint to delete users changed from the Beta endpoint <code class="highlighter-rouge">POST /api/v1/users/{id}/lifecycle/delete</code> 
+to the more intuitive <a href="/docs/api/resources/users.html#delete-user"><code class="highlighter-rouge">DELETE /api/v1/users/{id}</code></a> for EA.
+The Beta endpoint has been removed. <!-- (OKTA-108195) --></p>
+
+<h2 id="platform-bugs-fixed">Platform Bugs Fixed</h2>
 
 <ul>
-  <li>Using Okta to handle your web application user logins.</li>
-  <li>Accessing Okta user profile data from inside a web application.</li>
-  <li>Managing web application users and groups.</li>
-  <li>Adding Single-sign on to your web application.</li>
+  <li>Tokens for a suspended user didn’t fail introspection. (OKTA-1090006)</li>
 </ul>
 
-<p>Get started by <a href="https://github.com/okta/okta-music-store">visiting the GitHub repository for the Okta Music Store</a>.</p>
+<h2 id="does-your-org-have-this-change-yet">Does Your Org Have This Change Yet?</h2>
 
-<p><br />
-<br /></p>
+<p>Check the footer of any Admin page in an org to verify the current release for that org. For example,
+scroll to the bottom of the Admin <strong>Dashboard</strong> page to see the version number:</p>
 
-<p><a href="https://github.com/okta/okta-music-store"><img src="/assets/img/mvc_music_store.png" alt="Screenshot of the MVC Music Store" title="The front page of the MVC Music Store" /></a></p>
+<p><img src="/assets/img/release_notes/version_footer.png" alt="Release Number in Footer" /></p>
+
+<h2 id="looking-for-product-release-notes">Looking for Product Release Notes?</h2>
+
+<p>For changes outside the Okta platform, see the <a href="http://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub">Release Notes Knowledge Hub</a>.</p>
 
       </div>
       <div class="TableOfContents TableOfContentsPreload">
