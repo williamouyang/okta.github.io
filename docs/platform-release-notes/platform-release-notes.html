@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
 
     <title>Platform Release Notes | Okta Developer</title>
-    <meta name="description" content="Summary of changes to the Okta Platform since Release 2016.49">
+    <meta name="description" content="Summary of changes to the Okta Platform since Release 2016.50">
     <link rel="canonical" href="http://developer.okta.com/docs/platform-release-notes/platform-release-notes.html">
     <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml">
 
@@ -122,13 +122,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
                 
             
-            <li><a href="/use_cases/api_security">API Access Management</a></li>
-            
-            
             <li><a href="/use_cases/authentication">Authentication</a></li>
             
             
             <li><a href="/use_cases/mfa">Multi-Factor Authentication</a></li>
+            
+            
+            <li><a href="/use_cases/api_security">API Access Management</a></li>
             
             
             <li><a href="/use_cases/integrate_with_okta">Integrate with Okta</a></li>
@@ -227,45 +227,39 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <!-- END Fixed sidebar -->
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
-      <h1 id="release-201650">Release 2016.50</h1>
+        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/platform-release-notes/platform-release-notes.md">Edit Page</a>
+      <h2 id="release-201651">Release 2016.51</h2>
 
-<h2 id="new-feature-api-access-management-in-ea-release">New Feature: API Access Management in EA Release</h2>
-
-<p>Okta’s API Access Management helps enterprises protect their APIs using OAuth 2.0 as a Service. 
-By defining flexible security domains, scopes, claims, and access policies, you can control access as narrowly or as widely as needed for your enterprise.
-With this solution, you can create one or more authorization servers, configure scopes, set access policies and have a fully operational OAuth Authorization Service in minutes. 
-We support the full set of core OAuth and OIDC flows (code, implicit, password, client credential, hybrid, and refresh) and are fully spec compliant.</p>
-
-<p><img src="/assets/img/auth_server2.png" alt="Authorization Server page" /></p>
-
-<p>To get started with API Access Management, visit <a href="/use_cases/api_security/">API Access Management</a>.</p>
-
-<h2 id="feature-enhancement-delete-user-endpoint">Feature Enhancement: Delete User Endpoint</h2>
-
-<p>The endpoint to delete users changed from the Beta endpoint <code class="highlighter-rouge">POST /api/v1/users/{id}/lifecycle/delete</code> 
-to the more intuitive <a href="/docs/api/resources/users.html#delete-user"><code class="highlighter-rouge">DELETE /api/v1/users/{id}</code></a> for EA.
-The Beta endpoint has been removed. <!-- (OKTA-108195) --></p>
-
-<h2 id="platform-bugs-fixed">Platform Bugs Fixed</h2>
+<h3 id="platform-bugs-fixed">Platform Bugs Fixed</h3>
 
 <ul>
-  <li>Tokens for a suspended user didn’t fail introspection. (OKTA-1090006)</li>
+  <li>
+    <p>When editing scopes in the General Settings tab for a single-page app (SPA) for OpenID Connect, switching to another tab deselected all scopes. (OKTA-108562)</p>
+  </li>
+  <li>
+    <p>Instead of returning an error, invalid fields and names were added to user profiles in some cases. (OKTA-109719)</p>
+  </li>
+  <li>
+    <p>The HAL links for the self-service actions <code class="highlighter-rouge">forgot_password</code>, <code class="highlighter-rouge">reset_password</code>, and <code class="highlighter-rouge">unlock</code> were returned for every user whether the action was allowed by policy or not. 
+This behavior applied to new orgs as of <a href="http://developer.okta.com/docs/platform-release-notes/platform-release-notes2016-45.html#user-api-response-always-contains-hal-links">2016.45</a> and is being reversed. 
+As of 2016.51, HAL links for these three operations are returned only if the policy for that user indicates the action is available. (OKTA-110739)</p>
+  </li>
 </ul>
 
-<h2 id="does-your-org-have-this-change-yet">Does Your Org Have This Change Yet?</h2>
+<h3 id="does-your-org-have-this-change-yet">Does Your Org Have This Change Yet?</h3>
 
-<p>Check the footer of any Admin page in an org to verify the current release for that org. For example,
-scroll to the bottom of the Admin <strong>Dashboard</strong> page to see the version number:</p>
+<p>To verify the current release for an org, click the <strong>Admin</strong> button and check the footer of the Dashboard page.</p>
 
 <p><img src="/assets/img/release_notes/version_footer.png" alt="Release Number in Footer" /></p>
 
-<h2 id="looking-for-product-release-notes">Looking for Product Release Notes?</h2>
+<h3 id="looking-for-product-release-notes">Looking for Product Release Notes?</h3>
 
 <p>For changes outside the Okta platform, see the <a href="http://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub">Release Notes Knowledge Hub</a>.</p>
 
-<h2 id="earlier-platform-release-notes">Earlier Platform Release Notes</h2>
+<h3 id="earlier-platform-release-notes">Earlier Platform Release Notes</h3>
 
 <ul>
+  <li><a href="platform-release-notes2016-50.html">Platform Release Notes for Release 2016.50</a></li>
   <li><a href="platform-release-notes2016-49.html">Platform Release Notes for Release 2016.49</a></li>
   <li><a href="platform-release-notes2016-47.html">Platform Release Notes for Release 2016.47</a></li>
   <li><a href="platform-release-notes2016-46.html">Platform Release Notes for Release 2016.46</a></li>

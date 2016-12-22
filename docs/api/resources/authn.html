@@ -122,13 +122,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
                 
             
-            <li><a href="/use_cases/api_security">API Access Management</a></li>
-            
-            
             <li><a href="/use_cases/authentication">Authentication</a></li>
             
             
             <li><a href="/use_cases/mfa">Multi-Factor Authentication</a></li>
+            
+            
+            <li><a href="/use_cases/api_security">API Access Management</a></li>
             
             
             <li><a href="/use_cases/integrate_with_okta">Integrate with Okta</a></li>
@@ -165,6 +165,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 <li class="is-active"><a href="/docs/api/resources/authn.html">Authentication API</a></li>
                             
+                                
                                 
                                 
                                 
@@ -280,6 +281,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 
                                 
+                                
                         
                             
                                 
@@ -302,6 +304,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 <li><a href="/docs/api/resources/oidc.html">OpenID Connect</a></li>
                             
+                                
                                 
                                 
                                 
@@ -408,6 +411,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 
                                 
+                                
                         
                             
                                 
@@ -472,8 +476,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 
                                 
+                                
                         
                             
+                                
                                 
                                 
                                 
@@ -566,6 +572,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 <li><a href="/docs/api/resources/apps.html">Apps</a></li>
                             
+                                
+                                
                                 
                                 
                                 
@@ -788,8 +796,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 
                                 
+                                
+                                
                         
                             
+                                
+                                
                                 
                                 
                                 
@@ -1028,6 +1040,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 
                                 
+                                
+                                
                         
                             
                                 
@@ -1057,6 +1071,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 <li><a href="/docs/api/resources/groups.html">Groups</a></li>
                             
+                                
+                                
                                 
                                 
                                 
@@ -1270,8 +1286,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 
                                 
+                                
+                                
                         
                             
+                                
+                                
                                 
                                 
                                 
@@ -1510,6 +1530,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 
                                 
+                                
+                                
                         
                             
                                 
@@ -1556,6 +1578,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 <li><a href="/docs/api/resources/schemas.html">Schemas API</a></li>
                             
+                                
+                                
                                 
                                 
                                 
@@ -1752,6 +1776,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 
                                 
+                                
+                                
                         
                             
                                 
@@ -1873,8 +1899,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 
                                 
+                                
+                                
                         
                             
+                                
+                                
                                 
                                 
                                 
@@ -2113,6 +2143,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 
                                 
+                                
+                                
                         
                     </ul>
                 
@@ -2188,6 +2220,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <!-- END Fixed sidebar -->
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
+        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/api/resources/authn.md">Edit Page</a>
       <h1 id="authentication-api">Authentication API</h1>
 
 <p>The Okta Authentication API provides operations to authenticate users, perform multi-factor enrollment and verification, recover forgotten passwords, and unlock accounts. It can be used as a standalone API to provide the identity layer on top of your existing application, or it can be integrated with the Okta <a href="sessions.html">Sessions API</a> to obtain an Okta <a href="/docs/examples/session_cookie.html">session cookie</a> and access apps within Okta.</p>
@@ -3907,7 +3940,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h4 class="api api-operation" id="enroll-duo-factor">Enroll Duo Factor</h4>
 
-<p>Enrolls a user with a Duo factor.  The enrollment process starts with an enrollment request to Okta, then continues with a Duo widget and script that handles the enrollment. At the end of the process, Duo makes a callback to Okta to complete the enrollment.</p>
+<p>The enrollment process starts with enrollment <a href="#request-example-10">request to Okta</a>, then continues with the Duo widget that is embedded in the page. The page needs to create an iframe with name “duo_iframe” as described <a href="https://duo.com/docs/duoweb#3.-show-the-iframe">here</a> to host the widget. The script address is recieved in the response object in _embedded.factor._embedded._links.script object. The information to initialize the Duo object is taken from _embedded.factor._embedded.activation object as it is shown in the <a href="#full-page-example-for-duo-enrollment">full example</a>. In order to mainian the link between Duo and Okta the stateToken must be passed back when Duo calls the callback. This is done by populating the hidden element in the “duo_form” as it is decribed <a href="https://duo.com/docs/duoweb#passing-additional-post-arguments-with-the-signed-response">here</a>. After Duo enrollment and verification is done, the Duo script makes a call back to Okta. To complete the authentication process, make a call using <a href="#activation-poll-request-example">the poll link</a> to get session token and verify sucessful state.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-10">Request Example</h5>
 
@@ -3925,7 +3958,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <h5 class="api api-response api-response-example" id="response-example-12">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="s2">"00q8oewUkDwvzTKzQLNgZuZDqdpHue_e_xT89I8j4X"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="s2">"your-state-token"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="s2">"2016-07-13T13:14:52.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="s2">"MFA_ENROLL_ACTIVATE"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"factorResult"</span><span class="p">:</span><span class="s2">"WAITING"</span><span class="p">,</span><span class="w">
@@ -3942,7 +3975,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"factor"</span><span class="p">:{</span><span class="w">
-          </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"dsfkucEOz3phNMdGP0g3"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"your-factor-id"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"factorType"</span><span class="p">:</span><span class="s2">"web"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"provider"</span><span class="p">:</span><span class="s2">"DUO"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"vendorName"</span><span class="p">:</span><span class="s2">"DUO"</span><span class="p">,</span><span class="w">
@@ -3951,12 +3984,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </span><span class="p">},</span><span class="w">
           </span><span class="nt">"_embedded"</span><span class="p">:{</span><span class="w">
               </span><span class="nt">"activation"</span><span class="p">:{</span><span class="w">
-                  </span><span class="nt">"host"</span><span class="p">:</span><span class="s2">"&lt;your endpoint&gt;.duosecurity.com"</span><span class="p">,</span><span class="w">
-                  </span><span class="nt">"signature"</span><span class="p">:</span><span class="s2">"&lt;your signature&gt;"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"host"</span><span class="p">:</span><span class="s2">"&lt;your org duo host&gt;.duosecurity.com"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"signature"</span><span class="p">:</span><span class="s2">"&lt;activation signature&gt;"</span><span class="p">,</span><span class="w">
                   </span><span class="nt">"factorResult"</span><span class="p">:</span><span class="s2">"WAITING"</span><span class="p">,</span><span class="w">
                   </span><span class="nt">"_links"</span><span class="p">:{</span><span class="w">
                       </span><span class="nt">"complete"</span><span class="p">:{</span><span class="w">
-                          </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta.com/api/v1/authn/factors/dsfkucEOz3phNMdGP0g3/lifecycle/duoCallback"</span><span class="p">,</span><span class="w">
+                          </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta1.com/api/v1/authn/factors/your-factor-id/lifecycle/duoCallback"</span><span class="p">,</span><span class="w">
                           </span><span class="nt">"hints"</span><span class="p">:{</span><span class="w">
                               </span><span class="nt">"allow"</span><span class="p">:[</span><span class="w">
                                   </span><span class="s2">"POST"</span><span class="w">
@@ -3964,7 +3997,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                           </span><span class="p">}</span><span class="w">
                       </span><span class="p">},</span><span class="w">
                       </span><span class="nt">"script"</span><span class="p">:{</span><span class="w">
-                          </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta.com/js/sections/duo/Duo-Web-v2.js"</span><span class="p">,</span><span class="w">
+                          </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta1.com/js/sections/duo/Duo-Web-v2.js"</span><span class="p">,</span><span class="w">
                           </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"text/javascript; charset=utf-8"</span><span class="w">
                       </span><span class="p">}</span><span class="w">
                   </span><span class="p">}</span><span class="w">
@@ -3975,7 +4008,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </span><span class="nt">"_links"</span><span class="p">:{</span><span class="w">
       </span><span class="nt">"next"</span><span class="p">:{</span><span class="w">
           </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"poll"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta.com/api/v1/authn/factors/dsfkucEOz3phNMdGP0g3/lifecycle/activate/poll"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta1.com/api/v1/authn/factors/your-factor-id/lifecycle/activate/poll"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"hints"</span><span class="p">:{</span><span class="w">
               </span><span class="nt">"allow"</span><span class="p">:[</span><span class="w">
                    </span><span class="s2">"POST"</span><span class="w">
@@ -3983,7 +4016,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"cancel"</span><span class="p">:{</span><span class="w">
-          </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta.com/api/v1/authn/cancel"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta1.com/api/v1/authn/cancel"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"hints"</span><span class="p">:{</span><span class="w">
               </span><span class="nt">"allow"</span><span class="p">:[</span><span class="w">
                   </span><span class="s2">"POST"</span><span class="w">
@@ -3991,7 +4024,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"prev"</span><span class="p">:{</span><span class="w">
-          </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta.com/api/v1/authn/previous"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta1.com/api/v1/authn/previous"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"hints"</span><span class="p">:{</span><span class="w">
               </span><span class="nt">"allow"</span><span class="p">:[</span><span class="w">
                   </span><span class="s2">"POST"</span><span class="w">
@@ -4003,20 +4036,42 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </span></code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="launch-duo-websdk-iframe">Launch Duo WebSdk iFrame</h5>
+<h4 id="full-page-example-for-duo-enrollment">Full Page Example for Duo enrollment</h4>
+<p>In this example we will put all the elements together in html page.</p>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/js/sections/duo/Duo-Web-v2.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;script&gt;</span>
-  <span class="nx">Duo</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span>
-    <span class="s1">'host'</span><span class="p">:</span> <span class="s1">'{activation.host}'</span><span class="p">,</span>
-    <span class="s1">'sig_request'</span><span class="p">:</span> <span class="s1">'{activation.signature}'</span><span class="p">,</span>
-    <span class="s1">'post_action'</span><span class="p">:</span> <span class="s1">'{activation._links.complete.href}'</span>
-  <span class="p">});</span>
-<span class="nt">&lt;/script&gt;</span>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="c">&lt;!--
+            The Duo SDK will automatically bind to this iFrame and populate it for us.
+            See https://www.duosecurity.com/docs/duoweb for more info.
+         --&gt;</span>
+        <span class="nt">&lt;iframe</span> <span class="na">id=</span><span class="s">"duo_iframe"</span> <span class="na">width=</span><span class="s">"620"</span> <span class="na">height=</span><span class="s">"330"</span> <span class="na">frameborder=</span><span class="s">"0"</span><span class="nt">&gt;&lt;/iframe&gt;</span>
+        <span class="c">&lt;!--
+            The Duo SDK will automatically bind to this form and submit it for us.
+            See https://www.duosecurity.com/docs/duoweb for more info.
+         --&gt;</span>
+        <span class="nt">&lt;form</span> <span class="na">method=</span><span class="s">"POST"</span> <span class="na">id=</span><span class="s">"duo_form"</span><span class="nt">&gt;</span>
+            <span class="c">&lt;!-- The state token is required here (in order to bind anonymous request back into Auth API) --&gt;</span>
+            <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">name=</span><span class="s">"stateToken"</span> <span class="na">value=</span><span class="s">'{stateToken}'</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/form&gt;</span>
+
+        <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://your-domain.okta.com/js/sections/duo/Duo-Web-v2.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+        <span class="c">&lt;!-- The host, sig_request, and post_action values will be given via the Auth API --&gt;</span>
+        <span class="nt">&lt;script&gt;</span>
+            <span class="nx">Duo</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span>  
+                <span class="s1">'host'</span><span class="p">:</span> <span class="s1">'&lt;your org duo host&gt;.duosecurity.com'</span><span class="p">,</span>
+                <span class="s1">'sig_request'</span><span class="p">:</span> <span class="s1">'&lt;activation signature&gt;'</span><span class="p">,</span>
+                <span class="s1">'post_action'</span><span class="p">:</span> <span class="s1">'https://your-domain.okta.com/api/v1/authn/factors/your-factor-id/lifecycle/duoCallback'</span>
+            <span class="p">});</span>
+        <span class="nt">&lt;/script&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-request-example" id="poll-for-duo-websdk-activation-request-example">Poll for Duo WebSdk Activation Request Example</h5>
+<h5 class="api api-response api-request-example" id="activation-poll-request-example">Activation Poll Request Example</h5>
+<p>The poll is to verify successful authentication and to obtain session token.</p>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -4027,103 +4082,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="poll-for-duo-websdk-activation-response-example">Poll for Duo WebSdk Activation Response Example</h5>
-
-<p>In this example we just enrolled and activated Duo but the question and SMS factors are not enrolled.</p>
+<h5 class="api api-response api-response-example" id="activation-poll-response-example">Activation Poll Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="s2">"00pAZpdCXV9xYTpknEqP84bObwUKFbp9_huzt8rS0y"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="s2">"2016-07-13T13:37:42.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"status"</span><span class="p">:</span><span class="s2">"MFA_ENROLL"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"_embedded"</span><span class="p">:{</span><span class="w">
-        </span><span class="nt">"user"</span><span class="p">:{</span><span class="w">
-            </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"00ukv3jVTgRjDctlX0g3"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"passwordChanged"</span><span class="p">:</span><span class="s2">"2016-07-13T13:29:58.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"profile"</span><span class="p">:{</span><span class="w">
-                </span><span class="nt">"login"</span><span class="p">:</span><span class="s2">"first.last@example.com"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"firstName"</span><span class="p">:</span><span class="s2">"First"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"lastName"</span><span class="p">:</span><span class="s2">"Last"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"locale"</span><span class="p">:</span><span class="s2">"en_US"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"timeZone"</span><span class="p">:</span><span class="s2">"America/Los_Angeles"</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"factors"</span><span class="p">:[</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"factorType"</span><span class="p">:</span><span class="s2">"question"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"provider"</span><span class="p">:</span><span class="s2">"OKTA"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"vendorName"</span><span class="p">:</span><span class="s2">"OKTA"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"_links"</span><span class="p">:{</span><span class="w">
-                    </span><span class="nt">"questions"</span><span class="p">:{</span><span class="w">
-                        </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ukv3jVTgRjDctlX0g3/factors/questions"</span><span class="p">,</span><span class="w">
-                        </span><span class="nt">"hints"</span><span class="p">:{</span><span class="w">
-                            </span><span class="nt">"allow"</span><span class="p">:[</span><span class="w">
-                                </span><span class="s2">"GET"</span><span class="w">
-                            </span><span class="p">]</span><span class="w">
-                        </span><span class="p">}</span><span class="w">
-                    </span><span class="p">},</span><span class="w">
-                    </span><span class="nt">"enroll"</span><span class="p">:{</span><span class="w">
-                        </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta.com/api/v1/authn/factors"</span><span class="p">,</span><span class="w">
-                        </span><span class="nt">"hints"</span><span class="p">:{</span><span class="w">
-                            </span><span class="nt">"allow"</span><span class="p">:[</span><span class="w">
-                                </span><span class="s2">"POST"</span><span class="w">
-                            </span><span class="p">]</span><span class="w">
-                        </span><span class="p">}</span><span class="w">
-                    </span><span class="p">}</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="nt">"status"</span><span class="p">:</span><span class="s2">"NOT_SETUP"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"factorType"</span><span class="p">:</span><span class="s2">"sms"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"provider"</span><span class="p">:</span><span class="s2">"OKTA"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"vendorName"</span><span class="p">:</span><span class="s2">"OKTA"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"_links"</span><span class="p">:{</span><span class="w">
-                    </span><span class="nt">"enroll"</span><span class="p">:{</span><span class="w">
-                        </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta.com/api/v1/authn/factors"</span><span class="p">,</span><span class="w">
-                        </span><span class="nt">"hints"</span><span class="p">:{</span><span class="w">
-                            </span><span class="nt">"allow"</span><span class="p">:[</span><span class="w">
-                                </span><span class="s2">"POST"</span><span class="w">
-                            </span><span class="p">]</span><span class="w">
-                        </span><span class="p">}</span><span class="w">
-                    </span><span class="p">}</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="nt">"status"</span><span class="p">:</span><span class="s2">"NOT_SETUP"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"factorType"</span><span class="p">:</span><span class="s2">"web"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"provider"</span><span class="p">:</span><span class="s2">"DUO"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"vendorName"</span><span class="p">:</span><span class="s2">"DUO"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"_links"</span><span class="p">:{</span><span class="w">
-                    </span><span class="nt">"enroll"</span><span class="p">:{</span><span class="w">
-                        </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta.com/api/v1/authn/factors"</span><span class="p">,</span><span class="w">
-                        </span><span class="nt">"hints"</span><span class="p">:{</span><span class="w">
-                            </span><span class="nt">"allow"</span><span class="p">:[</span><span class="w">
-                                </span><span class="s2">"POST"</span><span class="w">
-                            </span><span class="p">]</span><span class="w">
-                        </span><span class="p">}</span><span class="w">
-                    </span><span class="p">}</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="nt">"status"</span><span class="p">:</span><span class="s2">"ACTIVE"</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"_links"</span><span class="p">:{</span><span class="w">
-        </span><span class="nt">"cancel"</span><span class="p">:{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta.com/api/v1/authn/cancel"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"hints"</span><span class="p">:{</span><span class="w">
-                </span><span class="nt">"allow"</span><span class="p">:[</span><span class="w">
-                    </span><span class="s2">"POST"</span><span class="w">
-                </span><span class="p">]</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"skip"</span><span class="p">:{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta.com/api/v1/authn/skip"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"hints"</span><span class="p">:{</span><span class="w">
-                </span><span class="nt">"allow"</span><span class="p">:[</span><span class="w">
-                    </span><span class="s2">"POST"</span><span class="w">
-                </span><span class="p">]</span><span class="w">
-            </span><span class="p">}</span><span class="w">
+  </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="s2">"2016-07-13T13:37:42.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"sessionToken"</span><span class="p">:</span><span class="s2">"20111zMXPaEe_lEw7pg2Ub810HDkpBwzSVBEPBRpA87LH5sW3Jj35_x"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"_embedded"</span><span class="p">:{</span><span class="w">
+    </span><span class="nt">"user"</span><span class="p">:{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"00ukv3jVTgRjDctlX0g3"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"passwordChanged"</span><span class="p">:</span><span class="s2">"2016-07-13T13:29:58.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"profile"</span><span class="p">:{</span><span class="w">
+            </span><span class="nt">"login"</span><span class="p">:</span><span class="s2">"first.last@example.com"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"firstName"</span><span class="p">:</span><span class="s2">"First"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"lastName"</span><span class="p">:</span><span class="s2">"Last"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"locale"</span><span class="p">:</span><span class="s2">"en_US"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"timeZone"</span><span class="p">:</span><span class="s2">"America/Los_Angeles"</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
@@ -4949,7 +4926,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 	  <span class="c1">//Get the registrationData from the callback result</span>
 	  <span class="kd">var</span> <span class="nx">registrationData</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">registrationData</span><span class="p">;</span>
-	
+
 	  <span class="c1">//Get the clientData from the callback result</span>
 	  <span class="kd">var</span> <span class="nx">clientData</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">clientData</span><span class="p">;</span>
   <span class="p">}</span>
@@ -5785,9 +5762,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h4 class="api api-operation" id="verify-duo-factor">Verify Duo Factor</h4>
 
-<p>Verification of the Duo factor is implemented as an integration between the Okta API and Duo widget. Verification starts with a
-request to the Okta API, then continues with a Duo widget and script that handles verification. At the end of the process, Duo
-makes a callback to the Okta verification endpoint to complete the verification.</p>
+<p>Verification of the Duo factor is implemented as an integration with Duo widget. The process is very similar to the  <a href="#full-page-example-for-duo-enrollment">enrollment</a> where the widget is embedded in iframe - “duo_iframe”. Verification starts with request to the Okta API, then continues with a Duo widget that handles the actual verification. We need to pass the state token as hidden object in “duo_form”. The authentication completes with call to <a href="#verification-poll-request-example">poll link</a> to verify the state and obtain session token.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-22">Request Example</h5>
 
@@ -5820,7 +5795,7 @@ makes a callback to the Okta verification endpoint to complete the verification.
             </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"factor"</span><span class="p">:{</span><span class="w">
-            </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"dsfkvdLeix4WsKK5W0g3"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"your-factor-id"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"factorType"</span><span class="p">:</span><span class="s2">"web"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"provider"</span><span class="p">:</span><span class="s2">"DUO"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"vendorName"</span><span class="p">:</span><span class="s2">"DUO"</span><span class="p">,</span><span class="w">
@@ -5829,12 +5804,12 @@ makes a callback to the Okta verification endpoint to complete the verification.
             </span><span class="p">},</span><span class="w">
             </span><span class="nt">"_embedded"</span><span class="p">:{</span><span class="w">
                 </span><span class="nt">"verification"</span><span class="p">:{</span><span class="w">
-                    </span><span class="nt">"host"</span><span class="p">:</span><span class="s2">"&lt;your endpoint&gt;.duosecurity.com"</span><span class="p">,</span><span class="w">
-                    </span><span class="nt">"signature"</span><span class="p">:</span><span class="s2">"&lt;your signature&gt;"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"host"</span><span class="p">:</span><span class="s2">"&lt;your org duo host&gt;.duosecurity.com"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"signature"</span><span class="p">:</span><span class="s2">"&lt;verification signature&gt;"</span><span class="p">,</span><span class="w">
                     </span><span class="nt">"factorResult"</span><span class="p">:</span><span class="s2">"WAITING"</span><span class="p">,</span><span class="w">
                     </span><span class="nt">"_links"</span><span class="p">:{</span><span class="w">
                         </span><span class="nt">"complete"</span><span class="p">:{</span><span class="w">
-                            </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta.com/api/v1/authn/factors/dsfkvdLeix4WsKK5W0g3/lifecycle/duoCallback"</span><span class="p">,</span><span class="w">
+                            </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta.com/api/v1/authn/factors/your-factor-id/lifecycle/duoCallback"</span><span class="p">,</span><span class="w">
                             </span><span class="nt">"hints"</span><span class="p">:{</span><span class="w">
                                 </span><span class="nt">"allow"</span><span class="p">:[</span><span class="w">
                                     </span><span class="s2">"POST"</span><span class="w">
@@ -5858,7 +5833,7 @@ makes a callback to the Okta verification endpoint to complete the verification.
     </span><span class="nt">"_links"</span><span class="p">:{</span><span class="w">
         </span><span class="nt">"next"</span><span class="p">:{</span><span class="w">
             </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"poll"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta.com/api/v1/authn/factors/dsfkvdLeix4WsKK5W0g3/verify"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta.com/api/v1/authn/factors/your-factor-id/verify"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"hints"</span><span class="p">:{</span><span class="w">
                 </span><span class="nt">"allow"</span><span class="p">:[</span><span class="w">
                     </span><span class="s2">"POST"</span><span class="w">
@@ -5886,20 +5861,39 @@ makes a callback to the Okta verification endpoint to complete the verification.
 </span></code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="launch-duo-iframe">Launch Duo iFrame</h5>
+<h5 class="api api-response api-response-example" id="sample-for-duo-iframe">Sample for Duo iFrame</h5>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/js/sections/duo/Duo-Web-v2.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code>...
+<span class="c">&lt;!--
+    The Duo SDK will automatically bind to this iFrame and populate it for us.
+    See https://www.duosecurity.com/docs/duoweb for more info.
+ --&gt;</span>
+<span class="nt">&lt;iframe</span> <span class="na">id=</span><span class="s">"duo_iframe"</span> <span class="na">width=</span><span class="s">"620"</span> <span class="na">height=</span><span class="s">"330"</span> <span class="na">frameborder=</span><span class="s">"0"</span><span class="nt">&gt;&lt;/iframe&gt;</span>
+<span class="c">&lt;!--
+    The Duo SDK will automatically bind to this form and submit it for us.
+    See https://www.duosecurity.com/docs/duoweb for more info.
+ --&gt;</span>
+<span class="nt">&lt;form</span> <span class="na">method=</span><span class="s">"POST"</span> <span class="na">id=</span><span class="s">"duo_form"</span><span class="nt">&gt;</span>
+    <span class="c">&lt;!-- The state token is required here (in order to bind anonymous request back into Auth API) --&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">name=</span><span class="s">"stateToken"</span> <span class="na">value=</span><span class="s">'{stateToken}'</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://your-domain.okta.com/js/sections/duo/Duo-Web-v2.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+<span class="c">&lt;!-- The host, sig_request, and post_action values will be given via the Auth API --&gt;</span>
 <span class="nt">&lt;script&gt;</span>
-  <span class="nx">Duo</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span>
-    <span class="s1">'host'</span><span class="p">:</span> <span class="s1">'{activation.host}'</span><span class="p">,</span>
-    <span class="s1">'sig_request'</span><span class="p">:</span> <span class="s1">'{activation.signature}'</span><span class="p">,</span>
-    <span class="s1">'post_action'</span><span class="p">:</span> <span class="s1">'{activation._links.complete.href}'</span>
-  <span class="p">});</span>
+    <span class="nx">Duo</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span>  
+        <span class="s1">'host'</span><span class="p">:</span> <span class="s1">'&lt;your org duo host&gt;.duosecurity.com'</span><span class="p">,</span>
+        <span class="s1">'sig_request'</span><span class="p">:</span> <span class="s1">'&lt;verification signature&gt;'</span><span class="p">,</span>
+        <span class="s1">'post_action'</span><span class="p">:</span> <span class="s1">'https://your-domain.okta.com/api/v1/authn/factors/your-factor-id/lifecycle/duoCallback'</span>
+    <span class="p">});</span>
 <span class="nt">&lt;/script&gt;</span>
+...
+
 </code></pre>
 </div>
 
-<h5 class="api api-request api-request-example" id="request-poll-verification-example">Request Poll Verification Example</h5>
+<h5 class="api api-request api-request-example" id="verification-poll-request-example">Verification Poll Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -5910,7 +5904,7 @@ makes a callback to the Okta verification endpoint to complete the verification.
 </span></code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-poll-verification-example">Response Poll Verification Example</h5>
+<h5 class="api api-response api-response-example" id="verification-poll-response-example">Verification Poll Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="s2">"2016-07-13T14:14:44.000Z"</span><span class="p">,</span><span class="w">
@@ -5987,7 +5981,7 @@ makes a callback to the Okta verification endpoint to complete the verification.
 
 <h5 id="start-verification-to-get-challenge-nonce">Start verification to get challenge nonce</h5>
 
-<p>Verification of the U2F factor starts with getting the challenge nonce and U2F token details and then using the client side 
+<p>Verification of the U2F factor starts with getting the challenge nonce and U2F token details and then using the client side
 javascript API to get the signed assertion from the U2F token.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-23">Request Example</h5>
@@ -6078,7 +6072,7 @@ javascript API to get the signed assertion from the U2F token.</p>
 <div class="language-html highlighter-rouge"><pre class="highlight"><code>//Get the u2f-api.js from https://github.com/google/u2f-ref-code/tree/master/u2f-gae-demo/war/js
 <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/u2f-api.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;script&gt;</span>
-<span class="kd">var</span> <span class="nx">challengeNonce</span> <span class="o">=</span> <span class="nx">factor</span><span class="p">.</span><span class="nx">_embedded</span><span class="p">.</span><span class="nx">challenge</span><span class="p">.</span><span class="nx">nonce</span><span class="p">;</span> <span class="c1">//use the nonce from the challenge object </span>
+<span class="kd">var</span> <span class="nx">challengeNonce</span> <span class="o">=</span> <span class="nx">factor</span><span class="p">.</span><span class="nx">_embedded</span><span class="p">.</span><span class="nx">challenge</span><span class="p">.</span><span class="nx">nonce</span><span class="p">;</span> <span class="c1">//use the nonce from the challenge object</span>
 <span class="kd">var</span> <span class="nx">appId</span> <span class="o">=</span> <span class="nx">factor</span><span class="p">.</span><span class="nx">profile</span><span class="p">.</span><span class="nx">appId</span><span class="p">;</span> <span class="c1">//use the appId from factor profile object</span>
 
 <span class="c1">//Use the version and credentialId from factor profile object</span>
@@ -6087,7 +6081,7 @@ javascript API to get the signed assertion from the U2F token.</p>
 <span class="c1">//Call the U2F javascript API to get signed assertion from the U2F token</span>
 <span class="nx">u2f</span><span class="p">.</span><span class="nx">sign</span><span class="p">(</span><span class="nx">appId</span><span class="p">,</span> <span class="nx">factorData</span><span class="p">.</span><span class="nx">challenge</span><span class="p">.</span><span class="nx">nonce</span><span class="p">,</span> <span class="nx">registeredKeys</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">errorCode</span> <span class="o">&amp;&amp;</span> <span class="nx">data</span><span class="p">.</span><span class="nx">errorCode</span> <span class="o">!==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">//Error from U2F platform </span>
+    <span class="c1">//Error from U2F platform</span>
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 	  <span class="c1">//Get the client data from callback result</span>
 	  <span class="kd">var</span> <span class="nx">clientData</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">clientData</span><span class="p">;</span>
@@ -7239,7 +7233,7 @@ Okta will not publish additional metadata about the user until primary authentic
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
-  
+
 </span><span class="err">######</span><span class="w"> </span><span class="err">Resend</span><span class="w"> </span><span class="err">Call</span><span class="w"> </span><span class="err">Recovery</span><span class="w"> </span><span class="err">Challenge</span><span class="w">
 </span><span class="p">{</span><span class="err">:.api</span><span class="w"> </span><span class="err">.api-operation</span><span class="p">}</span><span class="w">
 
@@ -8800,19 +8794,19 @@ Okta will not publish additional metadata about the user until primary authentic
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiration"</span><span class="p">:{</span><span class="w">
     </span><span class="nt">"passwordExpireDays"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-  </span><span class="p">},</span><span class="w"> 
+  </span><span class="p">},</span><span class="w">
   </span><span class="nt">"complexity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> 
-    </span><span class="nt">"minLowerCase"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> 
-    </span><span class="nt">"minUpperCase"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> 
-    </span><span class="nt">"minNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> 
-    </span><span class="nt">"minSymbol"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"minLowerCase"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"minUpperCase"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"minNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"minSymbol"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nt">"excludeUsername"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="w">
-    </span><span class="p">},</span><span class="w"> 
+    </span><span class="p">},</span><span class="w">
    </span><span class="nt">"age"</span><span class="p">:{</span><span class="w">
-     </span><span class="nt">"minAgeMinutes"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w"> 
-     </span><span class="nt">"historyCount"</span><span class="p">:</span><span class="mi">0</span><span class="w"> 
-    </span><span class="p">}</span><span class="w"> 
+     </span><span class="nt">"minAgeMinutes"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+     </span><span class="nt">"historyCount"</span><span class="p">:</span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
@@ -9486,7 +9480,6 @@ Okta will not publish additional metadata about the user until primary authentic
 <blockquote>
   <p>The Links Object is <strong>read-only</strong></p>
 </blockquote>
-
 
       </div>
       <div class="TableOfContents TableOfContentsPreload">
