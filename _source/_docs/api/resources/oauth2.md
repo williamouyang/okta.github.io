@@ -32,7 +32,7 @@ At the very basic level, the main API endpoints are:
     * Does not support refresh tokens
     * Assumes Resource Owner and Public Client are on the same device
 
-    ![Broswer/Single-Page Application](/assets/img/browser_spa_implicit_flow.png)
+    ![Browser/Single-Page Application](/assets/img/browser_spa_implicit_flow.png)
     
 2. Native Application
 

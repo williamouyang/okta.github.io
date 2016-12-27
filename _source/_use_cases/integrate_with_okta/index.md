@@ -62,7 +62,7 @@ While many ISVs use proprietary APIs, Okta recommends that you implement your AP
 
 ### Provisioning: Building an Integration with Okta
 
-[Okta’s SCIM Provisioning Developer Program](http://developer.okta.com/standards/SCIM/scim_developer_program)
+[Okta’s SCIM Provisioning Developer Program](http://developer.okta.com/standards/SCIM/index.html)
 is designed to help you build your SCIM server and integrate provisioning into the Okta Application Network.
 Get started by reviewing the program process, SCIM docs, and applying to the program.
 
