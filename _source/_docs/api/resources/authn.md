@@ -1612,7 +1612,7 @@ curl -v -X POST \
                   "factorResult":"WAITING",
                   "_links":{
                       "complete":{
-                          "href":"https://your-domain.okta1.com/api/v1/authn/factors/your-factor-id/lifecycle/duoCallback",
+                          "href":"https://your-domain.okta.com/api/v1/authn/factors/your-factor-id/lifecycle/duoCallback",
                           "hints":{
                               "allow":[
                                   "POST"
@@ -1620,7 +1620,7 @@ curl -v -X POST \
                           }
                       },
                       "script":{
-                          "href":"https://your-domain.okta1.com/js/sections/duo/Duo-Web-v2.js",
+                          "href":"https://your-domain.okta.com/js/sections/duo/Duo-Web-v2.js",
                           "type":"text/javascript; charset=utf-8"
                       }
                   }
@@ -1631,7 +1631,7 @@ curl -v -X POST \
   "_links":{
       "next":{
           "name":"poll",
-          "href":"https://your-domain.okta1.com/api/v1/authn/factors/your-factor-id/lifecycle/activate/poll",
+          "href":"https://your-domain.okta.com/api/v1/authn/factors/your-factor-id/lifecycle/activate/poll",
           "hints":{
               "allow":[
                    "POST"
@@ -1639,7 +1639,7 @@ curl -v -X POST \
           }
       },
       "cancel":{
-          "href":"https://your-domain.okta1.com/api/v1/authn/cancel",
+          "href":"https://your-domain.okta.com/api/v1/authn/cancel",
           "hints":{
               "allow":[
                   "POST"
@@ -1647,7 +1647,7 @@ curl -v -X POST \
           }
       },
       "prev":{
-          "href":"https://your-domain.okta1.com/api/v1/authn/previous",
+          "href":"https://your-domain.okta.com/api/v1/authn/previous",
           "hints":{
               "allow":[
                   "POST"
@@ -2295,6 +2295,102 @@ curl -v -X POST \
         "allow": [
           "POST"
         ]
+      }
+    }
+  }
+}
+~~~
+
+##### Poll for Push Factor Activation
+
+After the push notification is sent to user's device we need to know when the user completes the activation. This is done by polling the "poll" link.
+
+###### Poll Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-d '{
+  "stateToken": "007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"
+}' "https://${org}.okta.com/api/v1/authn/factors/opfh52xcuft3J4uZc0g3/lifecycle/activate/poll"
+~~~
+
+###### Poll Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "stateToken":"007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb",
+  "expiresAt":"2016-12-22T21:36:47.000Z",
+  "status":"MFA_ENROLL_ACTIVATE",
+  "factorResult":"WAITING",
+  "_embedded":{
+    "user":{
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "passwordChanged": "2016-12-08T20:14:45.000Z",
+      "profile": {
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    },
+    "factor":{
+      "id":"opfh52xcuft3J4uZc0g3",
+      "factorType":"push",
+      "provider":"OKTA",
+      "vendorName":"OKTA",
+      "_embedded":{
+        "activation":{
+          "expiresAt":"2016-12-22T21:41:47.000Z",
+          "factorResult":"WAITING",
+          "_links":{
+            "send":[
+              {
+                "name":"email",
+                "href":"http://your-domain.okta.com/api/v1/authn/factors/opfh52xcuft3J4uZc0g3/lifecycle/activate/email",
+                "hints":{
+                  "allow":["POST"]
+                }
+              },
+              {
+                "name":"sms",
+                "href":"http://your-domain.okta.com/api/v1/authn/factors/opfh52xcuft3J4uZc0g3/lifecycle/activate/sms",
+                "hints":{
+                  "allow":["POST"]
+                }
+              }
+            ],
+            "qrcode":{
+              "href":"http://your-domain.okta.com/api/v1/users/opfh52xcuft3J4uZc0g3/factors/opfn169oIx3k63Klh0g3/qr/20111huUFWDFTAeq_lFQKfKFS_rLABkE_pKgGl5PBUeLvJVmaIrWq5u",
+              "type":"image/png"
+            }
+          }
+        }
+      }
+    }
+  },
+  "_links":{
+    "next":{
+      "name":"poll",
+      "href":"http://your-domain.okta.com/api/v1/authn/factors/opfh52xcuft3J4uZc0g3/lifecycle/activate/poll",
+      "hints":{
+        "allow":["POST"]
+      }
+    },
+    "cancel":{
+      "href":"http://your-domain.okta.com/api/v1/authn/cancel",
+      "hints":{
+        "allow":["POST"]
+      }
+    },
+    "prev":{
+      "href":"http://your-domain.okta.com/api/v1/authn/previous",
+      "hints":{
+        "allow":["POST"]
       }
     }
   }
