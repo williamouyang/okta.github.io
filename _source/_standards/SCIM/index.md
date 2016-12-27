@@ -146,7 +146,7 @@ While we outline a few different methods below, Okta recommends all ISVs support
 ### Provisioning Options Matrix
 
 Okta has seen broad adoption of the standard in the market amongst our network of app developers over the course of 2016. 
-Okta has doubled down on our investment in our SCIM client and launched our own [SCIM provisioning developer program](#joining-the-scim-provisioning-developer-program).
+Okta has doubled down on our investment in our SCIM client and launched our own SCIM provisioning developer program.
 
 | Standard | Recommendation  |  Summary |
 |:--|:--|:--|
@@ -298,14 +298,14 @@ user resource and should also support marking resources as "active"
 or "inactive."
 
 In the SCIM specification, the `id` attribute is used to uniquely
-identify resources. [Section 3.1](//tools.ietf.org/html/rfc7643#section-3.1) of [RFC 7643](https://tools.ietf.org/html/rfc7643) provides more details
+identify resources. [Section 3.1](https://tools.ietf.org/html/rfc7643#section-3.1) of [RFC 7643](https://tools.ietf.org/html/rfc7643) provides more details
 on the `id` attribute:
 
 > "A unique identifier for a SCIM resource as defined by the service
 > provider.  Each representation of the resource MUST include a
 > non-empty "id" value.  This identifier MUST be unique across the
 > SCIM service provider's entire set of resources.  It MUST be a
-> stable, non-reassignable identifier that does not change when the
+> stable, identifier that can't be reassigned, that is, it doesn't change when the
 > same resource is returned in subsequent requests.  The value of
 > the "id" attribute is always issued by the service provider and
 > MUST NOT be specified by the client.  The string "bulkId" is a
@@ -613,7 +613,7 @@ implementation supports storing and filtering by `externalId`. For
 details on supporting `externalId`, see
 [section 3.1](https://tools.ietf.org/html/rfc7643#section-3.1) of [RFC 7643](https://tools.ietf.org/html/rfc7643). Quoted below:
 
-> [externalId is] "A String that is an identifier for the resource
+> (externalId is) "A String that is an identifier for the resource
 > as defined by the provisioning client.  The "externalId" may
 > simplify identification of a resource between the provisioning
 > client and the service provider by allowing the client to use a
@@ -675,8 +675,8 @@ Below is an example of a `curl` command that makes a request to the
 > Note: When returning a paged resource, your API should return a
 > capitalized `Resources` JSON key ("Resources"), however Okta will also
 > support a lowercase string ("resources"). Okta will also accept
-> lowercased JSON strings for the keys of child nodes inside
-> `Resources` object ("startindex", "itemsperpage", "totalresults", etc)
+> lowercase JSON strings for the keys of child nodes inside
+> `Resources` object such as `startindex`, `itemsperpage`, or `totalresults`.
 
 One way to handle paged resources is to have your database do the
 paging for you. Here is how the sample application handles
@@ -817,7 +817,7 @@ Here is the specification for the `/Schemas` endpoint, from
 > definitions can be returned by appending the schema URI to the
 > /Schemas endpoint.  For example:
 >
-> /Schemas/urn:ietf:params:scim:schemas:core:2.0:User
+> `/Schemas/urn:ietf:params:scim:schemas:core:2.0:User`
 >
 > The contents of each schema returned are described in Section 7 of
 > RFC7643.  An example representation of SCIM schemas may be found
@@ -835,7 +835,7 @@ Here is the specification for the `/ServiceProviderConfig` endpoint, from
 > describes the SCIM specification features available on a service
 > provider.  This endpoint SHALL return responses with a JSON object
 > using a "schemas" attribute of
-> "urn:ietf:params:scim:schemas:core:2.0:ServiceProviderConfig".
+> `urn:ietf:params:scim:schemas:core:2.0:ServiceProviderConfig`.
 > The attributes returned in the JSON object are defined in
 > Section 5 of RFC7643.  An example representation of SCIM service
 > provider configuration may be found in Section 8.5 of RFC7643.
@@ -852,7 +852,7 @@ that requests resources which were updated since the last update.
 This will likely be done using the `gt` filter operator. For
 example:
 
-> filter=meta.lastModified gt "2011-05-13T04:42:34Z"
+> `filter=meta.lastModified gt "2011-05-13T04:42:34Z"`
 
 ## Publishing Your SCIM-Based Provisioning Integration
 
@@ -920,7 +920,7 @@ with [Runscope's free trial plan for Okta](https://www.runscope.com/okta). Here 
  
       You will use this file to import Okta's SCIM test suite into Runscope.)
 
- 2.  [Sign up for Runscope](//www.runscope.com/signup).
+ 2.  [Sign up for Runscope](http://www.runscope.com/signup).
  3.  You may see a tutorial after signing up for Runscope, if so, click
     "Skip Tutorial".
  4.  You should now see a screen that says "API Tests".
@@ -964,7 +964,7 @@ configure the test for your SCIM integration. Here is how to do that:
 
     If you are developing your SCIM integration in a local
     development environment, we suggest using the excellent tool
-    [ngrok](https://ngrok.com/) to expose your local development environment to Runscope
+    [ngrok](https://ngrok.com/) to expose your local development environment to Runscope.
 8.  Click the "Save" button at the top of the test.
 
 ##### Running Okta's SCIM tests against your SCIM server
@@ -1040,8 +1040,8 @@ We recommend completing a few actions before submitting your application to Okta
 
 1. Check the Profile Attributes for your application.
 2. Check the Attribute Mappings for your application.
-3. Run the second set of Runscope tests: Okta SCIM 2.0 CRUD Test
-4. Prepare the customer-facing configuration guide
+3. Run the second set of Runscope tests: Okta SCIM 2.0 CRUD Test.
+4. Prepare the customer-facing configuration guide.
 
 After performing these four steps (instructions below), use [this form](https://docs.google.com/forms/d/e/1FAIpQLSfueMM9vbIt6zXCdcI9MdJ16lZc1FHwyIwMkHwNBWF7Kzdocg/viewform) to submit for Okta review.
 
@@ -1089,7 +1089,7 @@ following:
 -   In the "Provisioning" tab, scroll to the bottom and click the
     "Edit Mappings" button in the "Attribute Mappings" section.
 -   Check that each mapping is what you would expect it to be. Be
-    sure to check both of the followign:
+    sure to check both of the following:
     1.  From your application to Okta.
     2.  From Okta to your application.
 
@@ -1155,7 +1155,7 @@ In order for an app to be published in the Okta Application Network, it must mee
 
 | Section | SCIM 1.1 | SCIM 2.0 | Notes |
 | --- | --- | --- | --- |
-| Namespaces | urn:scim:schemas:core:1.0 urn:scim:schemas:extension:enterprise:1.0  |  urn:ietf:params:scim:schemas:core:2.0:User urn:ietf:params:scim:schemas:extension:enterprise:2.0:User | Namespaces are different therefore 2.0 is not backwards compatible with 1.1 |
+| Namespaces | `urn:scim:schemas:core:1.0 urn:scim:schemas:extension:enterprise:1.0`  |  `urn:ietf:params:scim:schemas:core:2.0:User urn:ietf:params:scim:schemas:extension:enterprise:2.0:User` | Namespaces are different therefore 2.0 is not backwards compatible with 1.1 |
 | Service Provider Config Endpoint | /ServiceProviderConfig<b>s</b> | /ServiceProviderConfig | Notice 2.0 does NOT have an 's' at the end |
 | Patch Protocol | [Section 3.3.2](http://www.simplecloud.info/specs/draft-scim-api-01.html#edit-resource-with-patch) | [Section 3.5.2: Uses JSON Patch](https://tools.ietf.org/html/rfc7644#section-3.5.2) | |
 | Error Response Schema | [Section 3.9](http://www.simplecloud.info/specs/draft-scim-api-01.html#anchor6) | [Section 3.12](https://tools.ietf.org/html/rfc7644#section-3.12) | |
@@ -1177,12 +1177,12 @@ are supporting SCIM as well established software companies
 like [Huddle](https://github.com/Huddle/huddle-apis/wiki/Integrating%20with%20SCIM) 
 and [Citrix](https://developer.citrixonline.com/implementing-scim-apis). 
 Okta has doubled down on our investment in our SCIM server 
-and launched [our own SCIM provisioning developer program](http://developer.okta.com/standards/SCIM/index.html#joining-the-scim-provisioning-developer-program).
+and launched our own SCIM provisioning developer program.
 The SCIM standards is strong and is run by Salesforce, Google, and Sailpoint (Okta is also a contributor).
 
 **How should I be managing authentication to my SCIM API?**
 
-Okta recommends using the OAuth 2.0 Authorization Code Grant Flow (aka “3-legged OAuth). 
+Okta recommends using the OAuth 2.0 Authorization Code Grant Flow (aka “three-legged OAuth). 
 Okta doesn't support the Client Credentials or Resource Owner Password Credentials Authorization grant flows. 
 The Authorization Code Grant Flow is more common in SaaS/cloud and is also more secure. 
 In addition to OAuth, Okta also supports basic auth and header token auth options.
@@ -1224,7 +1224,7 @@ Therefore, data validation should be handled by your app’s SCIM Server. In oth
 **How much filtering support is needed?**
 
 The filtering capabilities in the SCIM protocol are pretty broad but the common filtering use case with Okta is quite narrow -- determine if a newly created Okta user already exists in your app based on a matching identifier . This means the eq (equals) operator is all you really need to support for now. We "might" eventually support other operators but don't right now. 
-Note that Okta only supports filtering via the eq operator on the SCIM userName attribute on the SCIM Server side. However, Okta can use any AppUser attribute on the Okta side for passing into the eq operator. Typically this would also be appuser.userName, but appuser.email or appuser.randomAttribute can also work.
+Note that Okta only supports filtering via the eq operator on the SCIM userName attribute on the SCIM Server side. However, Okta can use any AppUser attribute on the Okta side for passing into the eq operator. Typically this would also be `appuser.userName`, but `appuser.email` or `appuser.randomAttribute` can also work.
 
 ### Publishing Questions
 
@@ -1286,10 +1286,10 @@ First, start by doing a `git checkout` of this repository, then
 1.  `cd` to the directory you just checked out:
 
         $ cd okta-scim-beta
-2.  Create an isolated Python environment named "venv" using [virtualenv](http://docs.python-guide.org/en/latest/dev/virtualenvs/):
+2.  Create an isolated Python environment named `venv` using [virtualenv](http://docs.python-guide.org/en/latest/dev/virtualenvs/):
 
         $ virtualenv venv
-3.  Next, activate the newly created virtualenv:
+3.  Next, activate the newly created virtual environment:
 
         $ source venv/bin/activate
 4.  Then, install the dependencies for the sample SCIM server using
