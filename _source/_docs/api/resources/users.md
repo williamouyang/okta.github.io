@@ -2156,7 +2156,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password?provider=FEDERATION&sendEmail=false"
+"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password?provider=FEDERATED&sendEmail=false"
 ~~~
 
 ##### Response Example
