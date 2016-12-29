@@ -217,6 +217,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 
                                 
+                                
+                                
                         
                             
                                 
@@ -238,6 +240,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0</a></li>
                             
+                                
+                                
                                 
                                 
                                 
@@ -347,6 +351,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 
                                 
+                                
+                                
                         
                             
                                 
@@ -375,6 +381,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 <li><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li>
                             
+                                
+                                
                                 
                                 
                                 
@@ -477,8 +485,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 
                                 
+                                
+                                
                         
                             
+                                
+                                
                                 
                                 
                                 
@@ -572,6 +584,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 <li><a href="/docs/api/resources/apps.html">Apps</a></li>
                             
+                                
+                                
+                                
+                                
                                 
                                 
                                 
@@ -798,8 +814,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 
                                 
+                                
+                                
+                                
+                                
                         
                             
+                                
+                                
+                                
+                                
                                 
                                 
                                 
@@ -1042,6 +1066,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 
                                 
+                                
+                                
+                                
+                                
                         
                             
                                 
@@ -1071,6 +1099,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 <li class="is-active"><a href="/docs/api/resources/groups.html">Groups</a></li>
                             
+                                
+                                
+                                
+                                
                                 
                                 
                                 
@@ -1288,8 +1320,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 
                                 
+                                
+                                
+                                
+                                
                         
                             
+                                
+                                
+                                
+                                
                                 
                                 
                                 
@@ -1532,6 +1572,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 
                                 
+                                
+                                
+                                
+                                
                         
                             
                                 
@@ -1578,6 +1622,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 <li><a href="/docs/api/resources/schemas.html">Schemas API</a></li>
                             
+                                
+                                
+                                
+                                
                                 
                                 
                                 
@@ -1778,6 +1826,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 
                                 
+                                
+                                
+                                
+                                
                         
                             
                                 
@@ -1901,8 +1953,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 
                                 
+                                
+                                
+                                
+                                
                         
                             
+                                
+                                
+                                
+                                
                                 
                                 
                                 
@@ -2079,6 +2139,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 
                                 <li><a href="/docs/api/resources/users.html">Users</a></li>
                             
+                                
+                                
+                                
+                                
                                 
                                 
                                 
@@ -2576,11 +2640,15 @@ See <a href="https://support.okta.com/help/articles/Knowledge_Article/92113353-I
 
 <p>Enumerates all groups in your organization.</p>
 
-<p>The default group limit is set to a very high number due to historical reasons which is no longer valid for most organizations.  This will change in a future version of this API.  The recommended page limit is now <code class="highlighter-rouge">limit=200</code>.</p>
+<p>Reminders about the <code class="highlighter-rouge">limit</code> query parameter and query timeouts:</p>
 
-<blockquote>
-  <p>If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller <code class="highlighter-rouge">limit</code> and page the results (See <a href="/docs/api/getting_started/design_principles.html#pagination">Pagination</a>)</p>
-</blockquote>
+<ul>
+  <li>If you don’t specify a value for limit and don’t specify a query, only 200 results are returned for most orgs.</li>
+  <li>If you don’t specify any value for limit and do specify a query, a maximum of 10 results are returned.</li>
+  <li>The maximum value for limit is 200 for most orgs.</li>
+  <li>Don’t write code that depends on the default or maximum value, as it may change.</li>
+  <li>If you receive a HTTP 500 status code, you more than likely have exceeded the request timeout.  Retry your request with a smaller <code class="highlighter-rouge">limit</code> and <a href="/docs/api/getting_started/design_principles.html#pagination">page the results</a>.</li>
+</ul>
 
 <h5 class="api api-request api-request-example" id="request-example-2">Request Example</h5>
 
