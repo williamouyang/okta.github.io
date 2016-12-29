@@ -5505,8 +5505,10 @@ Specifies the password complexity requirements of the assigned password policy
 | minUpperCase | minimum number of upper case characters for password | Number   | FALSE    | FALSE  | TRUE     |           |           |            |
 | minNumber    | minimum number of numeric characters for password    | Number   | FALSE    | FALSE  | TRUE     |           |           |            |
 | minSymbol    | minimum number of symbol characters for password     | Number   | FALSE    | FALSE  | TRUE     |           |           |            |
-| excludeUsername    | Prevents username from appearing in the password     | boolean   | FALSE    | FALSE  | TRUE     |           |           |            |
+| excludeUsername    | Prevents username or domain from appearing in the password     | boolean   | FALSE    | FALSE  | TRUE     |           |           |            |
 |--------------+------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+------------|
+
+> Duplicate the minimum Active Directory requirements in these settings for AD-mastered users. No enforcement is triggered by Okta settings for AD-mastered users.
 
 #### Password Age Object
 
