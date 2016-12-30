@@ -86,6 +86,8 @@ your Okta org:
     Authentication".
 8.  Click the green "Save" button.
 
+For more information about MFA and the Okta org, see the [MFA](https://help.okta.com/en/prod/Content/Topics/Security/MFA.htm) and [Security Policies](https://help.okta.com/en/prod/Content/Topics/Security/Security_Policies.htm) help topics.
+
 ### Creating an API token for your Okta org
 
 Requests made to the Okta API are authenticated via an API
