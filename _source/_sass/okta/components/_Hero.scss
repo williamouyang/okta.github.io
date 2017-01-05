@@ -126,3 +126,41 @@
 		}
 	}
 }
+.Hero--integrate {
+	@extend %Hero;
+	padding: 110px 0 115px;
+	background-image: url('#{$asset-path}/img/bg--hero-integrate.png');
+	background-repeat: repeat;
+	background-size: auto 100%;
+	text-align: center;
+
+	.Hero-subtitle {
+		font-size: 30px;
+	}
+	
+	.Wrap {
+		max-width: $site-width - 200;
+		h1 {
+			margin: 0.5em 0;
+		}
+	}
+	
+	.oan-logo {
+		width: 90px;
+		display: inline-block;
+	}
+}
+@include media('<medium-small') {
+	.Hero--integrate {
+		padding: 100px 0;
+		
+		.Hero-title {
+			font-size: 30px;
+		}
+		
+		.Hero-subtitle {
+			font-size: 24px;
+		}
+	}
+}
+
