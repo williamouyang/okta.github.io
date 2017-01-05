@@ -1581,7 +1581,7 @@ curl -v -X POST \
 
 ~~~json
 {
-  "stateToken":"your-state-token",
+  "stateToken":"00BlN4kOtm7wNxuM8nuXsOK1PFXBkvvTH-buJUrgWX",
   "expiresAt":"2016-07-13T13:14:52.000Z",
   "status":"MFA_ENROLL_ACTIVATE",
   "factorResult":"WAITING",
@@ -1598,7 +1598,7 @@ curl -v -X POST \
           }
       },
       "factor":{
-          "id":"your-factor-id",
+          "id":"dsflnpo99zpfMyaij0g3",
           "factorType":"web",
           "provider":"DUO",
           "vendorName":"DUO",
@@ -1607,12 +1607,12 @@ curl -v -X POST \
           },
           "_embedded":{
               "activation":{
-                  "host":"<your org duo host>.duosecurity.com",
-                  "signature":"<activation signature>",
+                  "host":"api-your-host.duosecurity.com",
+                  "signature":"TX|...your-signature",
                   "factorResult":"WAITING",
                   "_links":{
                       "complete":{
-                          "href":"https://your-domain.okta.com/api/v1/authn/factors/your-factor-id/lifecycle/duoCallback",
+                          "href":"https://your-domain.okta.com/api/v1/authn/factors/dsflnpo99zpfMyaij0g3/lifecycle/duoCallback",
                           "hints":{
                               "allow":[
                                   "POST"
@@ -1631,7 +1631,7 @@ curl -v -X POST \
   "_links":{
       "next":{
           "name":"poll",
-          "href":"https://your-domain.okta.com/api/v1/authn/factors/your-factor-id/lifecycle/activate/poll",
+          "href":"https://your-domain.okta.com/api/v1/authn/factors/dsflnpo99zpfMyaij0g3/lifecycle/activate/poll",
           "hints":{
               "allow":[
                    "POST"
@@ -1675,7 +1675,7 @@ In this example we will put all the elements together in html page.
          -->
         <form method="POST" id="duo_form">
             <!-- The state token is required here (in order to bind anonymous request back into Auth API) -->
-            <input type="hidden" name="stateToken" value='{stateToken}' />
+            <input type="hidden" name="stateToken" value='00BlN4kOtm7wNxuM8nuXsOK1PFXBkvvTH-buJUrgWX' />
         </form>
 
         <script src="https://your-domain.okta.com/js/sections/duo/Duo-Web-v2.js"></script>
@@ -1683,9 +1683,9 @@ In this example we will put all the elements together in html page.
         <!-- The host, sig_request, and post_action values will be given via the Auth API -->
         <script>
             Duo.init({  
-                'host': '<your org duo host>.duosecurity.com',
-                'sig_request': '<activation signature>',
-                'post_action': 'https://your-domain.okta.com/api/v1/authn/factors/your-factor-id/lifecycle/duoCallback'
+                'host': 'api-your-host.duosecurity.com',
+                'sig_request': 'TX|...your-signature',
+                'post_action': 'https://your-domain.okta.com/api/v1/authn/factors/dsflnpo99zpfMyaij0g3/lifecycle/duoCallback'
             });
         </script>
     </body>
@@ -3274,7 +3274,7 @@ curl -v -X POST \
             }
         },
         "factor":{
-            "id":"your-factor-id",
+            "id":"dsflnpo99zpfMyaij0g3",
             "factorType":"web",
             "provider":"DUO",
             "vendorName":"DUO",
@@ -3283,12 +3283,12 @@ curl -v -X POST \
             },
             "_embedded":{
                 "verification":{
-                    "host":"<your org duo host>.duosecurity.com",
-                    "signature":"<verification signature>",
+                    "host":"api-your-host.duosecurity.com",
+                    "signature":"TX|...your-signature",
                     "factorResult":"WAITING",
                     "_links":{
                         "complete":{
-                            "href":"https://your-domain.okta.com/api/v1/authn/factors/your-factor-id/lifecycle/duoCallback",
+                            "href":"https://your-domain.okta.com/api/v1/authn/factors/dsflnpo99zpfMyaij0g3/lifecycle/duoCallback",
                             "hints":{
                                 "allow":[
                                     "POST"
@@ -3312,7 +3312,7 @@ curl -v -X POST \
     "_links":{
         "next":{
             "name":"poll",
-            "href":"https://your-domain.okta.com/api/v1/authn/factors/your-factor-id/verify",
+            "href":"https://your-domain.okta.com/api/v1/authn/factors/dsflnpo99zpfMyaij0g3/verify",
             "hints":{
                 "allow":[
                     "POST"
@@ -3355,7 +3355,7 @@ curl -v -X POST \
  -->
 <form method="POST" id="duo_form">
     <!-- The state token is required here (in order to bind anonymous request back into Auth API) -->
-    <input type="hidden" name="stateToken" value='{stateToken}' />
+    <input type="hidden" name="stateToken" value='00CzoxFVe4R2nv0hTxm32r1kayfrrOkuxcE2rfINwZ' />
 </form>
 
 <script src="https://your-domain.okta.com/js/sections/duo/Duo-Web-v2.js"></script>
@@ -3363,9 +3363,9 @@ curl -v -X POST \
 <!-- The host, sig_request, and post_action values will be given via the Auth API -->
 <script>
     Duo.init({  
-        'host': '<your org duo host>.duosecurity.com',
-        'sig_request': '<verification signature>',
-        'post_action': 'https://your-domain.okta.com/api/v1/authn/factors/your-factor-id/lifecycle/duoCallback'
+        'host': 'api-your-host.duosecurity.com',
+        'sig_request': 'TX|...your-signature',
+        'post_action': 'https://your-domain.okta.com/api/v1/authn/factors/dsflnpo99zpfMyaij0g3/lifecycle/duoCallback'
     });
 </script>
 ...
