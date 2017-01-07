@@ -35,11 +35,15 @@ Explore the Sessions API: [![Run in Postman](https://run.pstmn.io/button.svg)](h
 
 {% api_operation post /sessions %}
 
-Creates a new session for a user with a valid session token. Only use this operation if you need the session `id`, otherwise you should use one of the following flows to obtain a SSO session with a `sessionToken`:
+> Don't use this API unless you need a session `id`. Instead, use the [Authentication API](./authn.html#primary-authentication) to obtain a `sessionToken`,
+ or use one of the following flows to obtain a SSO session with a `sessionToken`:
 
 - [Retrieving a session cookie by visiting the OpenID Connect Authorization Endpoint](/docs/examples/session_cookie.html#retrieving-a-session-cookie-via-openid-connect-authorization-endpoint)
 - [Retrieving a session cookie by visiting a session redirect link](/docs/examples/session_cookie.html#retrieving-a-session-cookie-by-visiting-a-session-redirect-link)
 - [Retrieving a session cookie by visiting an application embed link](/docs/examples/session_cookie.html#retrieving-a-session-cookie-by-visiting-an-application-embed-link)
+
+Creates a new session for a user with a valid session token. Use this API if, for example, you want to set the session cookie yourself instead of
+allowing Okta to set it, or hold the session ID to delete a session via the API instead of visiting the logout URL.
 
 > This operation can be performed anonymously without an API Token.
 
@@ -51,7 +55,7 @@ Parameter        | Description                                                  
 additionalFields | Optional [session properties](#optional-session-properties)   | Query      | String (comma separated values) | FALSE    |
 sessionToken     | Session token obtained via [Authentication API](./authn.html) | Body       | String                          | TRUE     |
 
-> Creating a session with `username` and `password` has been deprecated.  Use the [Authentication API](./authn.html) to obtain a `sessionToken`.
+> Creating a session with `username` and `password` is not recommended.  
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
