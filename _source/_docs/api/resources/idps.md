@@ -2718,7 +2718,7 @@ HTTP/1.1 204 No Content
 
 > You must enable the key rollover feature to perform the following operations. Key rollover is an {% api_lifecycle ea %} feature; contact Customer Support to enable it.
 
-> EA feature constraint: Okta currently uses the same key for both request signing and decrypting SAML Assertions that have been encrypted by the IdP. Changing your signing key will also change your decryption key.
+> EA feature constraint: Okta currently uses the same key for both request signing and decrypting SAML Assertions that have been encrypted by the IdP. Changing your signing key also changes your decryption key.
 
 ### Generate New IdP Signing Key Credential
 {:.api .api-operation}
@@ -2775,7 +2775,7 @@ Location: https://${org}.okta.com/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/k
 }
 ~~~
 
-If validityYears is out of range (2 - 10 years), you will receive an error response.
+If validityYears is out of range (2 - 10 years), you receive an error response.
 
 ~~~http
 HTTP/1.1 400 Bad Request
@@ -3134,8 +3134,8 @@ The `SAML2` protocol supports the `sso` and `acs` endpoints.
 |----------+---------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+----------+----------+-----------+-----------+------------|
 | Property | Description                                                                           | DataType                                                                                            | Nullable | Readonly | MinLength | MaxLength | Validation |
 | -------- | ------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | -------- | -------- | --------- | --------- | ---------- |
-| sso      | IdP's `SingleSignOnService` endpoint where Okta will send an `<AuthnRequest>` message | [Single Sign-On (SSO) Endpoint Object](#single-sign-on-sso-endpoint-object)                         | FALSE    | FALSE    |           |           |            |
-| acs      | Okta's `SPSSODescriptor` endpoint where the IdP will send a `<SAMLResponse>` message  | [Assertion Consumer Service (ACS) Endpoint Object](#assertion-consumer-service-acs-endpoint-object) | FALSE    | FALSE    |           |           |            |
+| sso      | IdP's `SingleSignOnService` endpoint where Okta sends an `<AuthnRequest>` message | [Single Sign-On (SSO) Endpoint Object](#single-sign-on-sso-endpoint-object)                         | FALSE    | FALSE    |           |           |            |
+| acs      | Okta's `SPSSODescriptor` endpoint where the IdP sends a `<SAMLResponse>` message  | [Assertion Consumer Service (ACS) Endpoint Object](#assertion-consumer-service-acs-endpoint-object) | FALSE    | FALSE    |           |           |            |
 |----------+---------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+----------+----------+-----------+-----------+------------|
 
 ###### Single Sign-On (SSO) Endpoint Object
@@ -3707,9 +3707,9 @@ Specifies the user provisioning action during authentication when an IdP user is
 |-------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Action Type | Description                                                                                                                                                                                      |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `AUTO`      | The IdP user profile will be transformed via defined universal directory profile mappings to an Okta user profile and automatically provisioned as an Okta user.                                 |
-| `CALLOUT`   | Okta will callout to an external web service during authentication to validate the IdP user profile, determine whether to provision a new Okta user, and define the resulting Okta user profile. |
-| `DISABLED`  | Okta will reject the authentication request and skip provisioning of a new Okta user if the IdP user is not linked to an existing Okta User.                                                     |
+| `AUTO`      | The IdP user profile is transformed via defined universal directory profile mappings to an Okta user profile and automatically provisioned as an Okta user.                                 |
+| `CALLOUT`   | Okta calls out to an external web service during authentication to validate the IdP user profile, determine whether to provision a new Okta user, and define the resulting Okta user profile. |
+| `DISABLED`  | Okta rejects the authentication request and skip provisioning of a new Okta user if the IdP user is not linked to an existing Okta User.                                                     |
 |--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
 Property Details
@@ -3949,7 +3949,7 @@ Specifies the behavior for establishing, validating, and matching a username for
 Property Details
 
 * Defining a [regular expression pattern](https://en.wikipedia.org/wiki/Regular_expression) to filter untrusted IdP usernames for security purposes is **highly recommended**, especially if you have multiple IdPs connected to your organization.  The filter prevents and IdP from issuing an assertion for **ANY** user including partners or directory users in your Okta organization.
-   For example, the filter pattern `(\S+@example\.com)` will only allow users that have an `@example.com` username suffix and would reject assertions that have any other suffix such as `@corp.example.com` or `@partner.com`.
+   For example, the filter pattern `(\S+@example\.com)` allows only users that have an `@example.com` username suffix and rejects assertions that have any other suffix such as `@corp.example.com` or `@partner.com`.
 
 * Only `SAML2` IdP providers support the `filter` property.
 

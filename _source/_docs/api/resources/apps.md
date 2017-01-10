@@ -2557,7 +2557,7 @@ curl -v -X DELETE \
 HTTP/1.1 204 No Content
 ~~~
 
-If the application has an `ACTIVE` status you will receive an error response.
+If the application has an `ACTIVE` status the response contains an error message.
 
 ~~~ http
 HTTP/1.1 403 Forbidden
@@ -2752,7 +2752,7 @@ appuser   | user's [credentials](#application-user-credentials-object) and [prof
 
 [Application User](#application-user-model) with user profile mappings applied
 
-Your request will be rejected with a `403 Forbidden` status for applications with the `PUSH_NEW_USERS` or `PUSH_PROFILE_UPDATES` features enabled if the request specifies a value for an attribute that is defined by an application user profile mapping (Universal Directory) and the value for the attribute does not match the output of the mapping.
+Your request is rejected with a `403 Forbidden` status for applications with the `PUSH_NEW_USERS` or `PUSH_PROFILE_UPDATES` features enabled if the request specifies a value for an attribute that is defined by an application user profile mapping (Universal Directory) and the value for the attribute does not match the output of the mapping.
 
 *It is recommended to omit mapped properties during assignment to minimize assignment errors.*
 
@@ -3034,7 +3034,7 @@ appuser   | user's [credentials](#application-user-credentials-object) for app |
 
 [Application User](#application-user-model)
 
-Your request will be rejected with a `400 Bad Request` status if you attempt to assign a username or password to an application with an incompatible [Authentication Scheme](#authentication-schemes)
+Your request is rejected with a `400 Bad Request` status if you attempt to assign a username or password to an application with an incompatible [Authentication Scheme](#authentication-schemes)
 
 ~~~json
 {
@@ -3120,18 +3120,18 @@ appuser   | credentials for app                             | Body       | [Appl
 
 [Application User](#application-user-model) with user profile mappings applied
 
-Your request will be rejected with a `403 Forbidden` status for applications with the `PUSH_NEW_USERS` or `PUSH_PROFILE_UPDATES` features enabled if the request specifies a value for an attribute that is defined by an application user profile mapping (Universal Directory) and the value for the attribute does not match the output of the mapping.
+Your request is rejected with a `403 Forbidden` status for applications with the `PUSH_NEW_USERS` or `PUSH_PROFILE_UPDATES` features enabled if the request specifies a value for an attribute that is defined by an application user profile mapping (Universal Directory) and the value for the attribute does not match the output of the mapping.
 
 > The Okta API currently doesn't support entity tags for conditional updates.  It is only safe to fetch the most recent profile with [Get Assigned User for Application](#get-assigned-user-for-application), apply your profile update, then `POST` back the updated profile as long as you are the **only** user updating a user's application profile.
 
 {% beta %}
 
 During the profile image Beta, image property definitions in the schema are of the `Object` data type with an additional `extendedType` of `Image`.
-When a user's app profile is retrieved via the API, however, the value will be a URL (represented as a String).  Some caveats apply:
+When a user's app profile is retrieved via the API, however, the value is a URL (represented as a String).  Some caveats apply:
 
 1) Image properties are described differently in the schema than how the data actually comes back.  This discrepancy is deliberate for the time being, but is likely to change after Beta.  Special handling rules apply (described below).
 
-2) During Beta, the URL returned is a placeholder URL, resolving to a placeholder image.  By GA, the URL returned will resolve to the image (that is, a logged in user can click it and retrieve the image).
+2) During Beta, the URL returned is a placeholder URL, resolving to a placeholder image.  By GA, the URL returned resolves to the image (that is, a logged-in user can click it and retrieve the image).
 
 **Updating image property values via Users API**
 
@@ -3139,7 +3139,7 @@ Okta does not support uploading images via the Apps API.  All operations in this
 
 1)  When performing a full update, if the property is not passed, it is unset (if set).  The same applies if a partial update explicitly sets it to null.
 
-2)  When "updating" the value, it must be set to the value returned by a GET on that user (resulting in no change).  Any other value will not validate.
+2)  When "updating" the value, it must be set to the value returned by a GET on that user (resulting in no change).  No other value is valid.
 
 {% endbeta %}
 
@@ -3220,7 +3220,7 @@ curl -v -X POST \
 
 Removes an assignment for a user from an application.
 
-> This is a destructive operation and the user's app profile will not be recoverable.  If the app is enabled for provisioning and configured to deactivate users, the user will also be deactivated in the target application.
+> This is a destructive operation; you cannot recover the user's app profile.  If the app is enabled for provisioning and configured to deactivate users, the user is also deactivated in the target application.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -3490,7 +3490,7 @@ Location: https://${org}.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/credentials/k
 }
 ~~~
 
-If validityYears is out of range (2 - 10 years), you will receive an error response.
+If validityYears is out of range (2 - 10 years), you receive an error response.
 
 ~~~http
 HTTP/1.1 400 Bad Request
@@ -3565,7 +3565,7 @@ Location: https://${org}.okta.com/api/v1/apps/0oal21k0DVN7DhS3R0g3/credentials/k
 }
 ~~~
 
-If key is already present in the list of key credentials for the target application, you will receive a 400 error response.
+If key is already present in the list of key credentials for the target application, you receive a 400 error response.
 
 ~~~http
 HTTP/1.1 400 Bad Request
@@ -3941,7 +3941,7 @@ The list of provisioning features an app may support are:
 | PUSH_USER_DEACTIVATION | Deactivate Users       | Deactivates a user's account in the app when unassigned from the app in Okta or deactivated.                                                                                                                                                   |
 | REACTIVATE_USERS       | Deactivate Users       | Reactivates an existing inactive user when provisioning a user to the app.                                                                                                                                                                     |
 | PUSH_PASSWORD_UPDATES  | Sync Okta Password     | Updates the user's app password when their password changes in Okta.                                                                                                                                                                           |
-| GROUP_PUSH             | Group Push             | Creates or links a group in the app when a mapping is defined for a group in Okta.  Okta is the the master for group memberships and all group members in Okta who are also assigned to the app will be synced as group members to the app.    |
+| GROUP_PUSH             | Group Push             | Creates or links a group in the app when a mapping is defined for a group in Okta.  Okta is the the master for group memberships and all group members in Okta who are also assigned to the app are synced as group members to the app.    |
 |------------------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
 ##### SignOn Modes
@@ -4140,7 +4140,7 @@ The following expressions are built-in and may be used with the `BUILT_IN` templ
 
 ### Password Object
 
-Specifies a password for a user.  A password value is a **write-only** property.  When a user has a valid password and a response object contains a password credential, then the Password Object will be a bare object without the `value`  property defined (e.g. `password: {}` ) to indicate that a password value exists.
+Specifies a password for a user.  A password value is a **write-only** property.  When a user has a valid password and a response object contains a password credential, then the Password Object is a bare object without the `value`  property defined (e.g. `password: {}` ) to indicate that a password value exists.
 
 |-----------+-------------+----------+----------+---------+-----------+-----------+------------|
 | Property  | Description | DataType | Nullable | Default | MinLength | MaxLength | Validation |
@@ -4346,23 +4346,23 @@ Users in Okta are linked to a user in a target application via an `externalId`. 
 
 ###### Single Sign-On
 
-Users assigned to an application for SSO without provisioning features enabled will have a an `ACTIVE` status with `syncState` as `DISABLED`.
+Users assigned to an application for SSO without provisioning features enabled have a an `ACTIVE` status with `syncState` as `DISABLED`.
 
 ###### User Import
 
-Users imported and confirmed by an application with the `IMPORT_PROFILE_UPDATES` feature will have an `ACTIVE` status.  The application user's `syncState` depends on whether the `PROFILE_MASTERING` feature is enabled for the application. When `PROFILE_MASTERING` is enabled the `syncState` transitions to `SYNCHRONIZED` otherwise the `syncState` is `DISABLED`.
+Users imported and confirmed by an application with the `IMPORT_PROFILE_UPDATES` feature have an `ACTIVE` status.  The application user's `syncState` depends on whether the `PROFILE_MASTERING` feature is enabled for the application. When `PROFILE_MASTERING` is enabled the `syncState` transitions to `SYNCHRONIZED` otherwise the `syncState` is `DISABLED`.
 
 ###### User Provisioning
 
 User provisioning in Okta is an asynchronous background job that is triggered during assignment of user (or indirectly via a group assignment).
 
 1. User is assigned to an application that has `PUSH_NEW_USERS` feature enabled
-    * Application user will have a `STAGED` status with no `externalId` while the background provisioning job is queued.
+    * Application user has a `STAGED` status with no `externalId` while the background provisioning job is queued.
 2. When the background provisioning job completes successfully, the application user transitions to the `PROVISIONED` status.
     * Application user is assigned an `externalId` when successfully provisioned in target application.  The `externalId` should be immutable for the life of the assignment
-3. If the background provisioning job completes with an error, the application user remains with the `STAGED` status but will have `syncState` as `ERROR`.  A provisioning task is created in the Okta Admin UI that must be resolved to retry the job.
+3. If the background provisioning job completes with an error, the application user remains with the `STAGED` status but has `syncState` as `ERROR`.  A provisioning task is created in the Okta Admin UI that must be resolved to retry the job.
 
-When the `PUSH_PROFILE_UPDATES` feature is enabled, updates to an upstream profile are pushed downstream to the application according to profile mastering priority.  The app user's `syncState` will have the following values:
+When the `PUSH_PROFILE_UPDATES` feature is enabled, updates to an upstream profile are pushed downstream to the application according to profile mastering priority.  The app user's `syncState` has the following values:
 
 |--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | syncState    | Description                                                                                                                                                                            |
@@ -4397,7 +4397,7 @@ Specifies a user's credentials for the application.  The [Authentication Scheme]
 
 > The application's [UserName Template](#username-template-object) defines the default username generated when a user is assigned to an application.
 
-If you attempt to assign a username or password to an application with an incompatible [Authentication Scheme](#authentication-schemes) you will receive the following error:
+If you attempt to assign a username or password to an application with an incompatible [Authentication Scheme](#authentication-schemes) you receive the following error:
 
 ~~~json
 {
