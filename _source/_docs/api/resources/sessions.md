@@ -35,7 +35,9 @@ Explore the Sessions API: [![Run in Postman](https://run.pstmn.io/button.svg)](h
 
 {% api_operation post /api/v1/sessions %}
 
-Creates a new session for a user with a valid session token. Only use this operation if you need the session `id`, otherwise you should use one of the following flows to obtain a SSO session with a `sessionToken`:
+Creates a new session for a user with a valid session token. Use this API if, for example, you want to set the session cookie yourself instead of allowing Okta to set it, or want to hold the session ID in order to delete a session via the API instead of visiting the logout URL.
+
+> Don't use this API unless you need a session `id`. Instead, use one of the following flows to obtain a SSO session with a `sessionToken`:
 
 - [Retrieving a session cookie by visiting the OpenID Connect Authorization Endpoint](/docs/examples/session_cookie.html#retrieving-a-session-cookie-via-openid-connect-authorization-endpoint)
 - [Retrieving a session cookie by visiting a session redirect link](/docs/examples/session_cookie.html#retrieving-a-session-cookie-by-visiting-a-session-redirect-link)
@@ -50,8 +52,6 @@ Parameter        | Description                                                  
 ---------------- | ------------------------------------------------------------- | ---------- | ------------------------------- | -------- | -------
 additionalFields | Optional [session properties](#optional-session-properties)   | Query      | String (comma separated values) | FALSE    |
 sessionToken     | Session token obtained via [Authentication API](./authn.html) | Body       | String                          | TRUE     |
-
-> Creating a session with `username` and `password` has been deprecated.  Use the [Authentication API](./authn.html) to obtain a `sessionToken`.
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
