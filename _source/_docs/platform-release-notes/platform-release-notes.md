@@ -25,9 +25,8 @@ The new expression language function `Arrays.toCsvString(array)` converts an arr
 
 ### Platform Bugs Fixed
 
-<!-- * Some users were able to save system log searches with non-unique names. (OKTA-93134) -->
-* Introspection behavior was inconsistent across all token types when users were not in the ACTIVE state. (OKTA-110445)
-* Incorrect text in the UI related to authorization was corrected: 
+* Introspection behavior for OpenID Connect and API Access Management was inconsistent across all token types when users were not in the ACTIVE state. (OKTA-110445)
+* Incorrect text in the Okta user interface, related to authorization (OpenID Connect and API Access Management), was corrected: 
     * **Password** became **Resource Owner Password** in **Apps** > **General Settings** > **Allowed Grant Types**.
     * **Resource Owner Credential** became **Resource Owner Password** in the Edit Rule page of the authorization server configuration dialog
         (**Security** > **API** > **Authorization Servers**). (OKTA-110749)   
