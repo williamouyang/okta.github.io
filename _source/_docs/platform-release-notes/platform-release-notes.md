@@ -23,10 +23,10 @@ For a full description of the rate limit changes, see [API Rate Limit Improvemen
 #### Search for Authorization Servers by Name or Resource URI
 
 You can now search (exact match) for an authorization server name or resource URI:
-To see the new search box, log into your Okta org, and from the Admin Dashboard, visit ** Security > API > Authorization Servers**.
+To see the new search box, log into your Okta org, and from the Admin Dashboard, visit **Security > API > Authorization Servers**.
 <!-- OKTA-97833 -->
 
-![Search box for authorization servers](/assets/img/release_notes/rn_search_as.png)
+![Search box for authorization servers](/assets/img/release_notes/rn-search-as.png)
 
 #### Manual Key Rotation (Key Pinning)
 
