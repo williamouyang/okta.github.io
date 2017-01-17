@@ -37,7 +37,7 @@ Beta releases are either high touch or low touch:
 Okta only enables Beta features in non-production or sandbox environments, because features in Beta are not yet supported by Okta Customer Support and
 may change at any time during the Beta release.
 
-Features in Beta release are marked with the Beta icon: {% api-lifecycle beta %}
+Features in Beta release are marked with the Beta icon: {% api_lifecycle beta %}
 
 ## Early Access (EA)
 
@@ -45,7 +45,7 @@ A feature in an Early Access (EA) release is new or enhanced functionality made 
 Features in EA are supported by Okta Customer Support, SLAs, and announced in Okta's weekly Release Notes. 
 Any bugs or improvements will be managed and fixed with the same timeline and processes as those in General Availability.
 
-Features in EA release are marked with the EA icon: {% api-lifecycle ea %}
+Features in EA release are marked with the EA icon: {% api_lifecycle ea %}
 
 ## General Availability (GA)
 
@@ -61,7 +61,7 @@ Features in GA release are not marked with any icons.
 A feature identified as Deprecated is no longer recommended and may be removed in the future. 
 The timing and recommended path forward will be identified in the relevant documentation, libraries, or references. 
 
-Features that have been deprecated are marked with the Deprecated icon: {% api-lifecycle deprecated %}
+Features that have been deprecated are marked with the Deprecated icon: {% api_lifecycle deprecated %}
 
 When Okta has an end-of-life plan, information about the timing will be included with the icon.
 
@@ -69,11 +69,11 @@ When Okta has an end-of-life plan, information about the timing will be included
 
 | Description | Beta (High touch) | Beta (Low touch) | EA |  GA  | Deprecated |
 |:------------|:------------------|:-----------------|:---|:---|:---|
-| Contact with Product Team  |     Yes              |                   |       |       |       |
-| Stable API                 |   Subject to change  | Subject to change | Yes   | Yes   | Yes   |
-| Okta Support               |                   |                      | Yes   | Yes   | Yes   |
-| Service-level agreements   |                   |                      | Yes   | Yes   | Yes   |
-| Announced in Release Notes |                   |                      | Yes   | Yes   |       |
-| In preview orgs            | By invitation     | By invitation        | By request | Yes | Yes |
-| In production orgs         |                   |                      | By request | Yes | Yes |
-| Documentation              | Limited           | Limited              | Yes   | Yes   | Yes   |
+| Contact with Product Team  |     X              |                   |       |       |       |
+| Stable API                 |   Subject to change  | Subject to change | X   | X   | X   |
+| Okta Support               |                   |                      | X   | X   | X   |
+| Service-level agreements   |                   |                      | X   | X   | X   |
+| Announced in Release Notes |                   |                      | X   | X   |       |
+| In preview orgs            | By invitation     | By invitation        | By request | X | X |
+| In production orgs         |                   |                      | By request | X | X |
+| Documentation              | Limited           | Limited              | X   | X   | X   |
