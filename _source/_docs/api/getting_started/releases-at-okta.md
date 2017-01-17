@@ -68,7 +68,7 @@ When Okta has an end-of-life plan, information about the timing will be included
 ## Quick Reference Table
 
 | Description | Beta (High touch) | Beta (Low touch) | EA |  GA  | Deprecated |
-|:------------|:------------------|:-----------------|:---|:---|:---|
+|:------------|:------------------:|:-----------------:|:---:|:---:|:---:|
 | Contact with Product Team  |     X              |                   |       |       |       |
 | Stable API                 |   Subject to change  | Subject to change | X   | X   | X   |
 | Okta Support               |                   |                      | X   | X   | X   |
