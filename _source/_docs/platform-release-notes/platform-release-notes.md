@@ -8,13 +8,13 @@ excerpt: Summary of changes to the Okta Platform since Release 2017.02
 
 ### Advance Notice: API Rate Limit Improvements
 
-We are making rate limits more granular and will roll the changes out over the next few months.
+We are making rate limits more granular and will roll the changes out over the next few months:
 
 1. Shortly after February 8, 2017, we'll provide system log alerts to let you know that you would have exceeded any of these new API rate limits. 
-2. Shortly after March 8, 2017, these new, more granular rate limits will be enforced. At that point, the warnings in the System Log will change to error notifications.
-3. Sometime in February, 2017, before granular rate limits are enforced, we’ll start treating authenticated end-user interactions on a per-user basis. Interactions like SSO after login won't apply to your org-wide API rate limits.
+2. Sometime in February, 2017, we’ll treat authenticated end-user interactions on a per-user basis. Interactions like SSO after login won't apply to your org-wide API rate limits.
+3. Shortly after March 8, 2017, the new, more granular rate limits will be enforced. At that point, the warnings in the System Log will change to error notifications.
 
-Of course, as each change is released, we'll announced here.
+Of course, as each change is released, we'll announced the change here.
 
 For a full description of the rate limit changes, see [API Rate Limit Improvements](https://support.okta.com/help/articles/Knowledge_Article/API-Rate-Limit-Improvements).<!-- OKTA-110472 -->
 
@@ -33,7 +33,9 @@ To see the new search box, log into your Okta org, and from the Admin Dashboard,
 In the Okta Admin user interface, you can set an authorization server to manually rotate keys.
 Keys are rotated automatically by default. 
 
-To change an authorization server configuration.
+>Important: Automatic key rotation is more secure than manual key rotation. Use manual key rotation only if you can't use automatic key rotation.
+
+To change an authorization server configuration to use manual key rotation:
  
 1. Log into the Okta org.
 2. Choose **Admin**.
