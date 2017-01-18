@@ -8,7 +8,7 @@ excerpt: Summary of changes to the Okta Platform since Release 2017.02
 
 ### Advance Notice: API Rate Limit Improvements
 
-New rate limits have been created to divide some of our current limits into more granular URL buckets, and rolling the changes out over the next few months:
+We are making rate limits more granular and will roll the changes out over the next few months.
 
 1. Shortly after February 8, 2017, we'll provide system log alerts to let you know that you would have exceeded any of these new API rate limits. 
 2. Shortly after March 8, 2017, these new, more granular rate limits will be enforced. At that point, the warnings in the System Log will change to error notifications.
@@ -16,7 +16,7 @@ New rate limits have been created to divide some of our current limits into more
 
 Of course, as each change is released, we'll announced here.
 
-For more details, see [API Rate Limit Improvements](https://support.okta.com/help/articles/Knowledge_Article/API-Rate-Limit-Improvements).<!-- OKTA-110472 -->
+For a full description of the rate limit changes, see [API Rate Limit Improvements](https://support.okta.com/help/articles/Knowledge_Article/API-Rate-Limit-Improvements).<!-- OKTA-110472 -->
 
 ### Feature Improvements
 
