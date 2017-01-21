@@ -14,16 +14,36 @@ Features of the Okta platform travel through a regular lifecycle:
 * [Deprecation](#deprecation)
 
 This lifecycle applies to most features and behaviors of the platform.
-However, Okta is a shared service, so we reserve the right to change a few
-things with little notice when required for the safety of our customers, 
-such as rate limits or errors thrown, or fixes to issues that are affecting customers.
+
+>Note: Okta reserves the right to add new parameters, properties, or resources to the API without advance notice. 
+These updates are non-breaking because they are additive. Follow [the compatibility rules](/docs/api/getting_started/design_principles.html) to ensure your application doesn't break
+when additive changes are made. 
+Breaking changes such as removing or renaming an attribute are released as a new version of the API, and Okta provides a migration path for new API versions.
+
+Changes, regardless of lifecycle stage, are always reported in the [Platform Release Notes](/docs/platform-release-notes/platform-release-notes.html).
+
+## Quick Reference Table
+
+| Description | Beta (High touch) | Beta (Low touch) | EA |  GA  | Deprecated |
+|:------------|:------------------:|:-----------------:|:---:|:---:|:---:|
+| Contact with Product Team  |     X             |                   |       |       |       |
+| API  Changes               | Subject to change | Subject to change | Backwards compatible  | Backwards compatible   | N/A   |
+| Okta Support               |                   |                      | X   | X   |     |
+| Service-level agreements   |                   |                      | X   | X   | X   |
+| Announced in Release Notes |                   |                      | X   | X   | X      |
+| In preview orgs            | By invitation     | By invitation        | By request | X | X |
+| In production orgs         |                   |                      | By request | X | X |
+| Documentation              | Limited           | Limited              | X   | X   | X   |
 
 ## Beta
 
-Okta selects a small number of customers for early testing of features in a Beta release. 
 Features in Beta are managed and supported by the Product Team and have been internally validated for a set of use cases. 
 Minimal documentation is supplied for platform Beta releases; API endpoint and configuration information are usually supplied.
 
+>Important: Okta only enables Beta features in non-production or sandbox environments, because features in Beta aren't supported by Okta Customer Support and
+may change at any time during the Beta release.
+
+Okta selects a small number of customers for early testing of features in a Beta release. 
 Customers participating in a Beta program agree to provide feedback which is required for maturing the feature; 
 however, the timeline for addressing specific areas of feedback (including bugs) is determined by Okta's market requirements for that feature.
 Any customer interested in a feature in Beta must apply by visiting [our Beta Signup page](https://oktabeta.zendesk.com/hc/en-us). 
@@ -34,46 +54,52 @@ Beta releases are either high touch or low touch:
 * High-touch Beta releases involve regular contact with Okta, typically consisting of conference calls covering specified use cases, deployment guidance, and feedback.
 * Low-touch Beta releases are self-directed without ongoing support and limited to collecting feedback.
 
-Okta only enables Beta features in non-production or sandbox environments, because features in Beta are not yet supported by Okta Customer Support and
-may change at any time during the Beta release.
-
-Features in Beta release are marked with the Beta icon: {% api_lifecycle beta %}
+Documentation for features in Beta release are marked with the Beta icon: {% api_lifecycle beta %}
 
 ## Early Access (EA)
 
 A feature in an Early Access (EA) release is new or enhanced functionality made available for customers to selectively "opt-in" to and use in both Production and non-Production environments. 
-Features in EA are supported by Okta Customer Support, SLAs, and announced in Okta's weekly Release Notes. 
-Any bugs or improvements will be managed and fixed with the same timeline and processes as those in General Availability.
+
+Features in EA:
+
+* Are supported by Okta Customer Support.
+* Obey the platform SLAs. APIs are [backwards compatible](/docs/api/getting_started/design_principles.html).
+
+>Note: A platform feature may skip EA if it doesn't affect other features or functionality. 
+Also, although we strive for API-first development, a platform feature in EA may add functionality later.
+
+Any bug fixes or improvements are managed and fixed with the same timeline and processes as those in General Availability.
 
 Features in EA release are marked with the EA icon: {% api_lifecycle ea %}
 
 ## General Availability (GA)
 
-A feature in General Availability ("GA") is new or enhanced functionality that is enabled by default for all new customers. 
-Features in GA will be rolled out to existing customers based on a feature-specific schedule (typically within 3 months of GA release). 
-Features in GA are supported by Okta Customer Support, and issues will be addressed according to your Customer Agreement with Okta. 
-Features moving to GA are announced in Okta's weekly Release Notes; features implementing changes to product behavior or end user experience will be enabled in Preview at least two weeks prior to being enabled in Production.   
+A feature in General Availability (GA) is new or enhanced functionality that is enabled by default for all customers. 
+Beginning in February 2017, features move from EA (enabled by request) to GA (enabled for all orgs) in a regular cadence:
 
-Features in GA release are not marked with any icons.
+1. EA features become GA in preview orgs in the first release of the month. 
+2. These same features become GA in production orgs in the first release of the next month.
+ 
+Features in GA are supported by Okta Customer Support, and issues are addressed according to your Customer Agreement with Okta.    
+
+Documentation for features in GA release are not marked with any icons.
 
 ## Deprecation
 
 A feature identified as Deprecated is no longer recommended and may be removed in the future. 
-The timing and recommended path forward will be identified in the relevant documentation, libraries, or references. 
+The recommended path forward is included in the relevant documentation, libraries, or references.
+When Okta schedules an end-of-life plan, that information is also included.
 
-Features that have been deprecated are marked with the Deprecated icon: {% api_lifecycle deprecated %}
+Documentation for features that have been deprecated are marked with the Deprecated icon: {% api_lifecycle deprecated %}
 
-When Okta has an end-of-life plan, information about the timing will be included with the icon.
+## Exceptions to the Beta-EA-GA Lifecycle
 
-## Quick Reference Table
+Some changes may not go through the full Beta-EA-GA lifecycle:
 
-| Description | Beta (High touch) | Beta (Low touch) | EA |  GA  | Deprecated |
-|:------------|:------------------:|:-----------------:|:---:|:---:|:---:|
-| Contact with Product Team  |     X              |                   |       |       |       |
-| Stable API                 |   Subject to change  | Subject to change | X   | X   | X   |
-| Okta Support               |                   |                      | X   | X   | X   |
-| Service-level agreements   |                   |                      | X   | X   | X   |
-| Announced in Release Notes |                   |                      | X   | X   |       |
-| In preview orgs            | By invitation     | By invitation        | By request | X | X |
-| In production orgs         |                   |                      | By request | X | X |
-| Documentation              | Limited           | Limited              | X   | X   | X   |
+* Bug fixes that won't change any other functionality but the incorrect behavior being fixed.
+* Cosmetic changes, such as changing the label of a field in the Okta User Interface.
+* Changes that are narrow in scope or effect, or purely additive, such as adding a new attribute.
+
+Changes like these may be released to preview orgs any week of the month, and appear in production the next week.
+
+Features exposed in the Okta user interface may be EA or GA without the corresponding API being in the same stage of the lifecycle.
