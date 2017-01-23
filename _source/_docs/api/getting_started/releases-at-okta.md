@@ -102,6 +102,10 @@ Some changes may not go through the full Beta-EA-GA lifecycle:
 
 Changes like these may be released to preview orgs any week of the month, and appear in production the next week.
 
-As with all changes that affect our customers, changes outside the regular Beta-EA-GA lifecycle are reported in the [Platform Release Notes](docs/platform-release-notes/platform-release-notes.html).
+Other exceptions include:
 
->Note: Features exposed in the Okta user interface may be EA or GA without the corresponding API being in the same stage of the lifecycle, or available at all.
+* Occasionally, a feature must be released in phases to ensure performance and reliability. 
+Such features may spend more than one month between preview and production for their GA release.
+* Features exposed in the Okta user interface may be EA or GA without the corresponding API being in the same stage of the lifecycle, or available at all.
+
+As with all changes that affect our customers, changes outside the regular Beta-EA-GA lifecycle are reported in the [Platform Release Notes](/docs/platform-release-notes/platform-release-notes.html).
