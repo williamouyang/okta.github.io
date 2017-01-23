@@ -54,7 +54,7 @@ Beta releases are either high touch or low touch:
 * High-touch Beta releases involve regular contact with Okta, typically consisting of conference calls covering specified use cases, deployment guidance, and feedback.
 * Low-touch Beta releases are self-directed without ongoing support and limited to collecting feedback.
 
-Documentation for features in Beta release are marked with the Beta icon: {% api_lifecycle beta %}
+Documentation for features in Beta release is marked with the Beta icon: {% api_lifecycle beta %}
 
 ## Early Access (EA)
 
@@ -96,10 +96,12 @@ Documentation for features that have been deprecated are marked with the Depreca
 
 Some changes may not go through the full Beta-EA-GA lifecycle:
 
-* Bug fixes that won't change any other functionality but the incorrect behavior being fixed.
+*  Bug fixes that change only the incorrect behavior of the bug.
 * Cosmetic changes, such as changing the label of a field in the Okta User Interface.
 * Changes that are narrow in scope or effect, or purely additive, such as adding a new attribute.
 
 Changes like these may be released to preview orgs any week of the month, and appear in production the next week.
 
-Features exposed in the Okta user interface may be EA or GA without the corresponding API being in the same stage of the lifecycle.
+As with all changes that affect our customers, changes outside the regular Beta-EA-GA lifecycle are reported in the [Platform Release Notes](docs/platform-release-notes/platform-release-notes.html).
+
+>Note: Features exposed in the Okta user interface may be EA or GA without the corresponding API being in the same stage of the lifecycle, or available at all.
