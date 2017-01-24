@@ -1732,7 +1732,7 @@ curl -v -X POST \
 #### Enroll U2F Factor
 {:.api .api-operation}
 
-> Enrolling a U2F factor is an {% api_lifecycle ea %} feature.
+> Enrolling a U2F factor is [an {% api_lifecycle ea %} feature](/docs/api/getting_started/releases-at-okta.html).
 
 Enrolls a user with a U2F factor.  The enrollment process starts with getting an `appId` and `nonce` from Okta and using those to get registration information from the U2F key using the U2F javascript API.
 
@@ -2521,7 +2521,7 @@ curl -v -X POST \
 #### Activate U2F Factor
 {:.api .api-operation}
 
-> Activating a U2F factor is an {% api_lifecycle ea %} release.
+> Activating a U2F factor is [an {% api_lifecycle ea %} feature](/docs/api/getting_started/releases-at-okta.html).
 
 Activation gets the registration information from the U2F token using the platform APIs and passes it to Okta.
 
@@ -3411,7 +3411,7 @@ curl -v -X POST \
 #### Verify U2F Factor
 {:.api .api-operation}
 
-> Verifying a U2F factor is an {% api_lifecycle ea %} feature.
+> Verifying a U2F factor is [an {% api_lifecycle ea %} feature](/docs/api/getting_started/releases-at-okta.html).
 
 {% api_operation post /api/v1/authn/factors/*:fid*/verify %}
 

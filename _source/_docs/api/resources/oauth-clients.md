@@ -12,7 +12,7 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
 Note that clients managed via this API are modeled as applications in Okta and will show in the Applications section of the
 Administrator dashboard. Changes made via the API will reflect in the UI and vice versa.
 
-> This API is currently in **Beta** status.
+> This API is [a {% api_lifecycle beta%} feature](/docs/api/getting_started/releases-at-okta.html).
 
 ## Client Application Model
 
@@ -77,7 +77,7 @@ Client applications have the following properties:
 > Client secret is only shown on the initial creation of a client application (and only if the token_endpoint_auth_method is one that requires a client secret).
   It is never returned in a GET call.
 
-> The `service` application type and `client_credentials` grant type are currently in **Beta** status.
+> The `service` application type and `client_credentials` grant type [a {% api_lifecycle beta%} feature](/docs/api/getting_started/releases-at-okta.html).
 
 > The "grant_types" and "response_types" values described above are partially orthogonal, as they refer to arguments passed to different
   endpoints in the [OAuth 2.0 protocol](https://tools.ietf.org/html/rfc6749). However, they are related in that the "grant_types"

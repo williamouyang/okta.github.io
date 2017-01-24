@@ -2716,7 +2716,7 @@ HTTP/1.1 204 No Content
 
 ## Identity Provider Signing Key Store Operations
 
-> You must enable the key rollover feature to perform the following operations. Key rollover is an {% api_lifecycle ea %} feature; contact Customer Support to enable it.
+> You must enable the key rollover feature to perform the following operations. Key rollover is [an {% api_lifecycle ea %} feature](/docs/api/getting_started/releases-at-okta.html); contact Customer Support to enable it.
 
 > EA feature constraint: Okta currently uses the same key for both request signing and decrypting SAML Assertions that have been encrypted by the IdP. Changing your signing key also changes your decryption key.
 
@@ -3379,7 +3379,7 @@ Federation trust credentials for verifying assertions from the IdP:
 
 Determines the [IdP Key Credential](#identity-provider-key-credential-model) used to sign requests sent to the IdP.
 
-> You must enable the key rollover feature to perform [Signing Key Operations](#identity-provider-signing-key-store-operations). Key rollover is an {% api_lifecycle ea %} feature; contact Customer Support to enable it.
+> You must enable the key rollover feature to perform [Signing Key Operations](#identity-provider-signing-key-store-operations). Key rollover is [an {% api_lifecycle ea %} feature](/docs/api/getting_started/releases-at-okta.html); contact Customer Support to enable it.
 
 |---------+----------------------------------------------------------------------------------------------------------------+----------+----------+----------+-----------+-----------+--------------------------------------------|
 | Property | Description                                                                                                   | DataType | Nullable | Readonly | MinLength | MaxLength | Validation                                 |
@@ -3943,7 +3943,7 @@ Specifies the behavior for establishing, validating, and matching a username for
 | matchAttribute        | Okta user profile attribute for matching transformed IdP username. Only for matchType `CUSTOM_ATTRIBUTE` and `SAML2` IdP*  | String      | TRUE    | FALSE    |           |           | Must be a valid Okta user profile attribute of type String (with no format or 'email' format only), Integer or Number                                                                  |
 |------------------+-------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------+----------+----------+-----------+-----------+---------------------------------------------------------------------|
 
-> \*`CUSTOM_ATTRIBUTE` with `matchType` is currently an {% api_lifecycle ea %} feature. Contact Support to enable it.
+> \*`CUSTOM_ATTRIBUTE` with `matchType` is an [{% api_lifecycle ea %} feature](/docs/api/getting_started/releases-at-okta.html). Contact Support to enable it.
 
 
 Property Details

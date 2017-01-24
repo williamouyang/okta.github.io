@@ -104,7 +104,7 @@ Changes like these may be released to preview orgs any week of the month, and ap
 
 Other exceptions include:
 
-* Occasionally, a feature must be released in phases to ensure performance and reliability. 
+* Occasionally, a feature is released using an iterative, custom schedule to enable close monitoring.
 Such features may spend more than one month between preview and production for their GA release.
 * Features exposed in the Okta user interface may be EA or GA without the corresponding API being in the same stage of the lifecycle, or available at all.
 
