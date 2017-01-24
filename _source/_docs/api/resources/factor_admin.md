@@ -11,7 +11,7 @@ The Okta Factors Administration API is a subset of the Factors API. It provides 
 
 After activating a facor with this API, it cannot be used until you enable a policy that uses this factor. If there is only one factor enabled in the policy, this API cannot disable that factor.
 
-> This API is currently in **Beta** status and provides no guarantees for backwards-compatibility.  Okta is free to break this API until it is released.
+> This API is [a {% api_lifecycle beta%} feature](/docs/api/getting_started/releases-at-okta.html).
 
 
 ## Factor Model

@@ -10,9 +10,9 @@ The OAuth 2.0 APIs provide API security via scoped access tokens, and OpenID Con
 
 There are several use cases and Okta product features built on top of the OAuth 2.0 APIs:
 
-* Social Authentication -- {% api_lifecycle ea %}
-* OpenID Connect -- {% api_lifecycle ea %}
-* API Access Management -- {% api_lifecycle ea %}
+* Social Authentication -- [{% api_lifecycle ea %}](/docs/api/getting_started/releases-at-okta.html)
+* OpenID Connect -- [{% api_lifecycle ea %}](/docs/api/getting_started/releases-at-okta.html)
+* API Access Management -- [{% api_lifecycle ea %}](/docs/api/getting_started/releases-at-okta.html)
 
 It's important to understand which use case you are targeting and build your application according to the correct patterns for that use case. 
 The OAuth 2.0 APIs each have several different [query params](#authentication-request) which dictate which type of flow you are using and the mechanics of that flow.
@@ -441,7 +441,7 @@ http://www.example.com/#error=invalid_scope&error_description=The+requested+scop
 
 {% api_operation post /oauth2/:authorizationServerId/v1/token %}
 
-The API takes a grant type of either *authorization_code*, *password*, *refresh_token*, or *client_credentials* {% api_lifecycle beta %} and the corresponding credentials and returns back an Access Token. A Refresh Token will be returned if *offline_access* scope is requested using authorization_code, password, or refresh_token grant type. Additionally, using the authorization_code grant type will return an ID Token if the *openid* scope is requested.
+The API takes a grant type of either *authorization_code*, *password*, *refresh_token*, or [*client_credentials* {% api_lifecycle beta %}](/docs/api/getting_started/releases-at-okta.html) and the corresponding credentials and returns back an Access Token. A Refresh Token will be returned if *offline_access* scope is requested using authorization_code, password, or refresh_token grant type. Additionally, using the authorization_code grant type will return an ID Token if the *openid* scope is requested.
 
 > Note:  No errors occur if you use this endpoint, but it isn’t useful until custom scopes or resource servers are available. We recommend you wait until custom scopes and resource servers are available.
 
@@ -451,7 +451,7 @@ The following parameters can be posted as a part of the URL-encoded form values 
 
 Parameter          | Description                                                                                         | Type       |
 -------------------+-----------------------------------------------------------------------------------------------------+------------|
-grant_type         | Can be one of the following: *authorization_code*, *password*, *refresh_token*, or *client_credentials* {% api_lifecycle beta %}. Determines the mechanism Okta will use to authorize the creation of the tokens. | String |  
+grant_type         | Can be one of the following: *authorization_code*, *password*, *refresh_token*, or [*client_credentials* {% api_lifecycle beta %}](/docs/api/getting_started/releases-at-okta.html). Determines the mechanism Okta will use to authorize the creation of the tokens. | String |  
 code               | Expected if grant_type specified *authorization_code*. The value is what was returned from the [authorization endpoint](#authentication-request). | String
 refresh_token      | Expected if the grant_type specified *refresh_token*. The value is what was returned from this endpoint via a previous invocation. | String |
 username           | Expected if the grant_type specified *password*. | String |
@@ -462,7 +462,7 @@ code_verifier      | Expected if grant_type specified *authorization_code* for n
 client_id          | Expected if *code_verifier* is included or client credentials are not provided in the Authorization header. This is used in conjunction with the client_secret parameter to authenticate the client application. | String |
 client_secret      | Expected if *code_verifier* is not included and client credentials are not provided in the Authorization header. This is used in conjunction with the client_id parameter to authenticate the client application. | String |
 
-> The [Client Credentials](https://tools.ietf.org/html/rfc6749#section-4.4) flow (if `grant_types` is `client_credentials`) is currently {% api_lifecycle beta %}.
+> The [Client Credentials](https://tools.ietf.org/html/rfc6749#section-4.4) flow (if `grant_types` is `client_credentials`) is [a {% api_lifecycle beta %} feature](/docs/api/getting_started/releases-at-okta.html).
 
 
 ##### Token Authentication Method
@@ -977,7 +977,7 @@ defaultResourceUri        | The url of the resource being secured by this author
 
 {:.api .api-operation}
 
-{% api_operation post /api/v1/as %} {% api_lifecycle beta %}
+{% api_operation post /api/v1/as %} [{% api_lifecycle beta %}](/docs/api/getting_started/releases-at-okta.html)
 
 ~~~sh
 curl -v -X POST \
@@ -1075,7 +1075,7 @@ credentials |  The credentials signing object with the `rotationMode` of the aut
 
 {:.api .api-operation}
 
-{% api_operation post /api/v1/as/:authorizationServerId %} {% api_lifecycle beta %}
+{% api_operation post /api/v1/as/:authorizationServerId %} [{% api_lifecycle beta %}](/docs/api/getting_started/releases-at-okta.html)
 
 ~~~sh
 curl -v -X POST \
@@ -1166,7 +1166,7 @@ Returns authorization server identified by authorizationServerId.
 
 {:.api .api-operation}
 
-{% api_operation get /api/v1/as/:authorizationServerId %} {% api_lifecycle beta %}
+{% api_operation get /api/v1/as/:authorizationServerId %} [{% api_lifecycle beta %}](/docs/api/getting_started/releases-at-okta.html)
 
 #### Request Example
 
@@ -1278,7 +1278,7 @@ Returns the current keys in rotation for the authorization server.
 
 {:.api .api-operation}
 
-{% api_operation get /api/v1/as/:authorizationServerId/credentials/keys %} {% api_lifecycle beta %}
+{% api_operation get /api/v1/as/:authorizationServerId/credentials/keys %} [{% api_lifecycle beta %}](/docs/api/getting_started/releases-at-okta.html)
 
 #### Request Example
 
@@ -1359,7 +1359,7 @@ use        | Can be only *sig*. Determines the type of keys being rotated for th
 
 {:.api .api-operation}
 
-{% api_operation post /api/v1/as/:authorizationServerId/credentials/lifecycle/keyRotate %} {% api_lifecycle beta %}
+{% api_operation post /api/v1/as/:authorizationServerId/credentials/lifecycle/keyRotate %} [{% api_lifecycle beta %}(/docs/api/getting_started/releases-at-okta.html)
 
 
 ##### Request Example

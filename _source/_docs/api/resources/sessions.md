@@ -203,7 +203,7 @@ If the session is invalid, a `404 Not Found` response will be returned.
 ### Extend Session
 {:.api .api-operation}
 
-{% api_operation put /api/v1/sessions/*:id* %} {% api_lifecycle deprecated %}
+{% api_operation put /api/v1/sessions/*:id* %} [{% api_lifecycle deprecated %}](/docs/api/getting_started/releases-at-okta.html)
 
 Extends the lifetime of a user's session.
 

@@ -1159,8 +1159,7 @@ curl -v -X GET \
 #### List Users with Search
 {:.api .api-operation}
 
-> {% api_lifecycle ea margin-bottom %}<br>Listing users with search is an Early Access feature which you can request from Okta Support.
-It's been tested to the same level as Generally Available (GA) features, so you can use it in a production environment.
+> Listing users with search is [an {% api_lifecycle ea %} feature](/docs/api/getting_started/releases-at-okta.html).
 
 Searches for user by the properties specified in the search parameter (case insensitive).
 
@@ -2003,7 +2002,7 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 ~~~
 
-> Deleting users is an {% api_lifecycle ea %} feature.
+> Deleting users is [an {% api_lifecycle ea %} feature](/docs/api/getting_started/releases-at-okta.html).
 
 ### Delete User
 {:.api .api-operation}
@@ -2663,6 +2662,8 @@ The User model defines several read-only properties:
 |-----------------------+-----------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
 
 {% beta %}
+
+>Note: Profile image is [a {% api_lifecycle beta%} feature](/docs/api/getting_started/releases-at-okta.html).
 
 During the profile image Beta, image property definitions in the schema are of the `Object` data type with an additional `extendedType` of `Image`.
 When a user is retrieved via the API, however, the value will be a URL (represented as a String).  Some caveats apply:
