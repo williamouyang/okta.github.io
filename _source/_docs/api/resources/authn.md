@@ -1121,6 +1121,8 @@ curl -v -X POST \
 
 Enrolls a user with the Okta `token:software:totp` factor.  The factor must be [activated](#activate-totp-factor) after enrollment by following the `next` link relation to complete the enrollment process.
 
+> The `/api/v1/authn/factors` endpoint suppports only the Okta Verify and Google Authenticator factors at this time.
+
 ##### Request Example
 {:.api .api-request .api-request-example}
 
@@ -1214,7 +1216,9 @@ curl -v -X POST \
 
 Enrolls a user with the Okta verify `push` factor. The factor must be [activated on the device](#activate-push-factor) by scanning the QR code or visiting the activation link sent via email or sms.
 
-> Use the published activation links to embed the QR code or distribute an activation `email` or `sms`
+Use the published activation links to embed the QR code or distribute an activation `email` or `sms`.
+
+> The `/api/v1/authn/factors` endpoint suppports only the Okta Verify and Google Authenticator factors at this time.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -2399,7 +2403,10 @@ curl -v -X POST \
 
 ##### Send Activation Links
 
-An activation email or sms can be sent when when the user is unable to scan the QR code.
+Sends an activation email or SMS when when the user is unable to scan the QR code provided as part of an Okta Verify transaction.
+If for any reason the user can't scan the QR code, they can use the link provided in email or SMS to complete the transaction.
+
+> The user must click the link from the same device as the one hosting the Okt Verify app.
 
 ###### Request Example (Email)
 {:.api .api-request .api-request-example}
@@ -3796,12 +3803,18 @@ Content-Type: application/json
 
 #### Forgot Password with Email Factor
 
-Starts a new password recovery transaction with a user identifier (`username`) and asynchronously sends a recovery email to the user's primary and secondary email address with a [recovery token](#recovery-token) that can be used to complete the transaction.
+Starts a new password recovery transaction for the email factor:
+ 
+* You must specify a user identifier (`username`) but no password in the request.
+* If the request is successful, Okta sends a recovery email asynchronously to the user's primary and secondary email address with a [recovery token](#recovery-token) so the user can complete the transaction.
 
-Since the recovery email is distributed out-of-band and may be viewed on a different user agent or device, this operation does not return a [state token](#state-token) and does not have a `next` link.
+Primary authentication of a user's recovery credential (e.g `EMAIL` or `SMS`) has not completed when this request is sent.
 
-> Primary authentication of a user's recovery credential (e.g `EMAIL` or `SMS`) has not yet completed.
-> Okta will not publish additional metadata about the user until primary authentication has successfully completed.
+Okta provides security in the following ways:
+
+* Since the recovery email is distributed out-of-band and may be viewed on a different user agent or device, this operation does not return a [state token](#state-token) and does not have a `next` link.
+* Okta doesn't publish additional metadata about the user until primary authentication has successfully completed. 
+See the Response Example in this section for details.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -4509,6 +4522,8 @@ curl -v -X POST \
       }
     }
   }
+ }
+~~~
 
 ###### Resend Call Recovery Challenge
 {:.api .api-operation}
@@ -4903,6 +4918,9 @@ stateToken   | [state token](#state-token) for a transaction       | Body       
 
 [Transaction Object](#transaction-model) with the current [state](#transaction-state) for the authentication or recovery transaction.
 
+##### Request Example
+{:.api .api-request .api-request-example}
+
 ~~~sh
 curl -v -X POST \
 -H "Accept: application/json" \
@@ -4979,17 +4997,23 @@ curl -v -X POST \
 
 Moves the current [transaction state](#transaction-state) back to the previous state.
 
+For example, when changing state from the start of primary authentication to MFA_ENROLL > ENROLL_ACTIVATE > OTP,
+the user's phone might stop working. Since the user can't see the QR code, the transaction must return to MFA_ENROLL. 
+
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
+Parameter    | Description                                         | Param Type | DataType | Required |
+------------ | --------------------------------------------------- | ---------- | -------- | -------- |
 stateToken   | [state token](#state-token) for a transaction       | Body       | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
 [Transaction Object](#transaction-model) with the current [state](#transaction-state) for the authentication or recovery transaction.
+
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~sh
 curl -v -X POST \
@@ -5098,9 +5122,17 @@ curl -v -X POST \
 
 {% api_operation post /api/v1/authn/skip %}
 
-Skips the current [transaction state](#transaction-state) and advances the state machine to the next state.
+Send a skip link to skip the current [transaction state](#transaction-state) and advance to the next state.
 
-> This operation is only available for `MFA_ENROLL` or `PASSWORD_WARN` states when published as a link
+When the user sees a skip link in the response, that means it's okay to skip that stage, clicks the skip link in the response.
+
+For example, after being warned that a password will soon expire, the user can skip the change password
+by clicking a skip link. 
+
+Another example: a user has enrolled in multiple factors. After enrolling in one the user receives a skip link
+to skip the other factors.
+
+> This operation is only available for `MFA_ENROLL` or `PASSWORD_WARN` states when published as a link.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -5113,6 +5145,9 @@ stateToken   | [state token](#state-token) for a transaction       | Body       
 {:.api .api-response .api-response-params}
 
 [Transaction Object](#transaction-model) with the current [state](#transaction-state) for the authentication or recovery transaction.
+
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~sh
 curl -v -X POST \
@@ -5168,6 +5203,9 @@ stateToken   | [state token](#state-token) for a transaction       | Body       
 Parameter    | Description                                                                            | Param Type | DataType | Required | Default
 ------------ | -------------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------
 relayState   | Optional state value that was persisted for the authentication or recovery transaction | Body       | String   | TRUE     |
+
+##### Request Example
+{:.api .api-request .api-request-example}
 
 ~~~sh
 curl -v -X POST \
