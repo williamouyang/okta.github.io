@@ -1159,7 +1159,7 @@ curl -v -X GET \
 #### List Users with Search
 {:.api .api-operation}
 
-> Listing users with search is [an {% api_lifecycle ea %} feature](/docs/api/getting_started/releases-at-okta.html).
+> Listing users with search is an {% api_lifecycle ea %} feature.
 
 Searches for user by the properties specified in the search parameter (case insensitive).
 
@@ -2002,7 +2002,7 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 ~~~
 
-> Deleting users is [an {% api_lifecycle ea %} feature](/docs/api/getting_started/releases-at-okta.html).
+> Deleting users is an {% api_lifecycle ea %} feature.
 
 ### Delete User
 {:.api .api-operation}
@@ -2663,7 +2663,7 @@ The User model defines several read-only properties:
 
 {% beta %}
 
->Note: Profile image is [a {% api_lifecycle beta%} feature](/docs/api/getting_started/releases-at-okta.html).
+>Note: Profile image is a {% api_lifecycle beta %} feature.
 
 During the profile image Beta, image property definitions in the schema are of the `Object` data type with an additional `extendedType` of `Image`.
 When a user is retrieved via the API, however, the value will be a URL (represented as a String).  Some caveats apply:
