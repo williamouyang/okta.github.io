@@ -12,7 +12,7 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
 Note that clients managed via this API are modeled as applications in Okta and will show in the Applications section of the
 Administrator dashboard. Changes made via the API will reflect in the UI and vice versa.
 
-> This API is [a {% api_lifecycle beta%} feature](/docs/api/getting_started/releases-at-okta.html).
+> This API is an {% api_lifecycle beta%} feature.
 
 ## Client Application Model
 
@@ -56,20 +56,20 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
 Client applications have the following properties:
 
 |----------------------------+-------------------------------------------------------------------+------------------------------------------------------------------------+----------+--------+----------|
-| Property                   | Description                                                       | DataType                                                               | Nullable | Unique | Readonly | 
-| -------------------------- | ----------------------------------------------------------------- | ---------------------------------------------------------------------- | -------- | ------ | -------- | 
+| Property                   | Description                                                       | DataType                                                               | Nullable | Unique | Readonly |
+| -------------------------- | ----------------------------------------------------------------- | ---------------------------------------------------------------------- | -------- | ------ | -------- |
 | client_id                  | unique key for the client application                             | String                                                                 | FALSE    | TRUE   | TRUE     |
 | client_id_issued_at        | time at which the client_id was issued (measured in unix seconds) | Number                                                                 | FALSE    | FALSE  | TRUE     |
 | client_name                | human-readable string name of the client application              | String                                                                 | FALSE    | FALSE  | FALSE    |
 | client_secret              | OAuth 2.0 client secret string (used for confidential clients)    | String                                                                 | TRUE     | TRUE   | TRUE     |
-| logo_uri                   | URL string that references a logo for the client                  | String                                                                 | TRUE     | FALSE  | FALSE    | 
+| logo_uri                   | URL string that references a logo for the client                  | String                                                                 | TRUE     | FALSE  | FALSE    |
 | application_type           | The type of client application                                    | `web`, `native`, `browser`, or `service`                               | TRUE     | TRUE   | TRUE     |
 | redirect_uris              | array of redirection URI strings for use in redirect-based flows  | Array                                                                  | TRUE     | FALSE  | FALSE    |
 | response_types             | array of OAuth 2.0 response type strings                          | Array of `code`, `token`, `id_token`                                   | TRUE     | FALSE  | FALSE    |
-| grant_types                | array of OAuth 2.0 grant type strings                             | Array of `authorization_code`, `implicit`, `password`, `refresh_token`, `client_credentials` | FALSE    | FALSE  | FALSE    | 
+| grant_types                | array of OAuth 2.0 grant type strings                             | Array of `authorization_code`, `implicit`, `password`, `refresh_token`, `client_credentials` | FALSE    | FALSE  | FALSE    |
 | token_endpoint_auth_method | requested authentication method for the token endpoint            | `none`, `client_secret_post`, or `client_secret_basic`                 | FALSE    | FALSE  | FALSE    |
 | initiate_login_uri         | URL that a third party can use to initiate a login by the client  | String                                                                 | TRUE     | FALSE  | FALSE    |
-| _links                     | discoverable resources related to the app                         | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)         | TRUE     | FALSE  | TRUE     | 
+| _links                     | discoverable resources related to the app                         | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)         | TRUE     | FALSE  | TRUE     |
 |----------------------------+-------------------------------------------------------------------+------------------------------------------------------------------------+----------+--------+----------|
 
 > The `client_id`, `client_id_issued_at`, and `client_secret` attributes are only available after a client is created.
@@ -86,7 +86,7 @@ Client applications have the following properties:
   the OAuth 2.0 authorization code grant.
 
 > At least one redirect URI and response type is required for all client types, with exceptions: if the client uses the
-  [Resource Owner Password](https://tools.ietf.org/html/rfc6749#section-4.3) flow (if `grant_types` contains the value `password`) 
+  [Resource Owner Password](https://tools.ietf.org/html/rfc6749#section-4.3) flow (if `grant_types` contains the value `password`)
   or [Client Credentials](https://tools.ietf.org/html/rfc6749#section-4.4) flow (if `grant_types` contains the value `client_credentials`)
   then no redirect URI or response type is necessary. In these cases you can pass either null or an empty array for these attributes.
 
@@ -414,7 +414,7 @@ Updates the settings for a client application from your organization.
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter | Description                        | ParamType | DataType                               | Required | 
+Parameter | Description                        | ParamType | DataType                               | Required |
 --------- | ---------------------------------- | --------- | -------------------------------------- | -------- |
 clientId  | `clientId` of a specific client    | URL       | String                                 | TRUE     |
 settings  | OAuth client registration settings | Body      | [Client Settings](#oauth-client-model) | TRUE     |
@@ -501,7 +501,7 @@ Generates a new client secret for the specified client application.
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter | Description                        | ParamType | DataType                               | Required | 
+Parameter | Description                        | ParamType | DataType                               | Required |
 --------- | ---------------------------------- | --------- | -------------------------------------- | -------- |
 clientId  | `clientId` of a specific client    | URL       | String                                 | TRUE     |
 
@@ -571,7 +571,7 @@ Removes a client application from your organization.
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter | Description                        | ParamType | DataType | Required | 
+Parameter | Description                        | ParamType | DataType | Required |
 --------- | ---------------------------------- | --------- | -------- | -------- |
 clientId  | `clientId` of a specific client    | URL       | String   | TRUE     |
 
