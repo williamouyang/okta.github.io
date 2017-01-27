@@ -38,9 +38,27 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
   ],
   "token_endpoint_auth_method": "client_secret_post",
   "initiate_login_uri": "https://www.example-application.com/oauth2/login",
+  "urn:okta:client_status": "active",
   "_links": {
     "newSecret": {
       "href": "https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret",
+      "hints": {
+        "allow": [
+          "POST"
+         ]
+      }
+    },
+    "app": {
+      "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3",
+      "hints": {
+        "allow": [
+	  "GET",
+          "POST"
+         ]
+      }
+    },
+    "deactivate: {
+      "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3/lifecycle/deactivate",
       "hints": {
         "allow": [
           "POST"
@@ -69,6 +87,7 @@ Client applications have the following properties:
 | grant_types                | array of OAuth 2.0 grant type strings                             | Array of `authorization_code`, `implicit`, `password`, `refresh_token`, `client_credentials` | FALSE    | FALSE  | FALSE    |
 | token_endpoint_auth_method | requested authentication method for the token endpoint            | `none`, `client_secret_post`, or `client_secret_basic`                 | FALSE    | FALSE  | FALSE    |
 | initiate_login_uri         | URL that a third party can use to initiate a login by the client  | String                                                                 | TRUE     | FALSE  | FALSE    |
+| urn:okta:client_status     | the status of the client application                              | `active` or `inactive`                                                 | FALSE    | FALSE  | TRUE     |
 | _links                     | discoverable resources related to the app                         | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)         | TRUE     | FALSE  | TRUE     |
 |----------------------------+-------------------------------------------------------------------+------------------------------------------------------------------------+----------+--------+----------|
 
@@ -165,6 +184,7 @@ curl -v -X POST \
   ],
   "token_endpoint_auth_method": "client_secret_post",
   "initiate_login_uri": "https://www.example-application.com/oauth2/login",
+  "urn:okta:client_status": "active",
   "_links": {
     "newSecret": {
       "href": "https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret",
@@ -172,6 +192,23 @@ curl -v -X POST \
         "allow": [
           "POST"
         ]
+      }
+    },
+    "app": {
+      "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3",
+      "hints": {
+        "allow": [
+	  "GET",
+          "POST"
+         ]
+      }
+    },
+    "deactivate: {
+      "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3/lifecycle/deactivate",
+      "hints": {
+        "allow": [
+          "POST"
+         ]
       }
     }
   }
@@ -231,6 +268,7 @@ curl -v -X GET \
   ],
   "token_endpoint_auth_method": "client_secret_post",
   "initiate_login_uri": "https://www.example-application.com/oauth2/login",
+  "urn:okta:client_status": "active",
   "_links": {
     "newSecret": {
       "href": "https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret",
@@ -238,6 +276,23 @@ curl -v -X GET \
         "allow": [
           "POST"
         ]
+      }
+    },
+    "app": {
+      "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3",
+      "hints": {
+        "allow": [
+	  "GET",
+          "POST"
+         ]
+      }
+    },
+    "deactivate: {
+      "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3/lifecycle/deactivate",
+      "hints": {
+        "allow": [
+          "POST"
+         ]
       }
     }
   }
@@ -314,6 +369,7 @@ Link: <https://your-domain.okta.com/oauth2/v1/clients?after=F10CaazJPQ5Zpyu1Ojko
     ],
     "token_endpoint_auth_method": "client_secret_post",
     "initiate_login_uri": "https://www.example-application.com/oauth2/login",
+    "urn:okta:client_status": "active",
     "_links": {
       "newSecret": {
         "href": "https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret",
@@ -322,6 +378,22 @@ Link: <https://your-domain.okta.com/oauth2/v1/clients?after=F10CaazJPQ5Zpyu1Ojko
             "POST"
           ]
         }
+      },
+    "app": {
+      "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3",
+      "hints": {
+        "allow": [
+	  "GET",
+          "POST"
+         ]
+      }
+    },
+    "deactivate: {
+      "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3/lifecycle/deactivate",
+      "hints": {
+        "allow": [
+          "POST"
+         ]
       }
     }
   },
@@ -344,6 +416,33 @@ Link: <https://your-domain.okta.com/oauth2/v1/clients?after=F10CaazJPQ5Zpyu1Ojko
     ],
     "token_endpoint_auth_method": "none",
     "initiate_login_uri": null,
+    "urn:okta:client_status": "active",
+    "_links": {
+      "newSecret": {
+        "href": "https://example.okta.com/oauth2/v1/clients/F10CaazJPQ5Zpyu1Ojko/lifecycle/newSecret",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      },
+    "app": {
+      "href": "https://example.okta.com/api/v1/apps/0oaprd4QHjJYCIGrp0g3",
+      "hints": {
+        "allow": [
+	  "GET",
+          "POST"
+         ]
+      }
+    },
+    "deactivate: {
+      "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3/lifecycle/deactivate",
+      "hints": {
+        "allow": [
+          "POST"
+         ]
+      }
+    }
   }
 ]
 ~~~
@@ -390,6 +489,7 @@ curl -v -X GET \
     ],
     "token_endpoint_auth_method": "client_secret_post",
     "initiate_login_uri": "https://www.example-application.com/oauth2/login",
+    "urn:okta:client_status": "active",
     "_links": {
       "newSecret": {
         "href": "https://payroll.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret",
@@ -397,6 +497,23 @@ curl -v -X GET \
           "allow": [
             "POST"
           ]
+        }
+      },
+      "app": {
+        "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3",
+	"hints": {
+          "allow": [
+	    "GET",
+            "POST"
+           ]
+        }
+      },
+      "deactivate: {
+        "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3/lifecycle/deactivate",
+        "hints": {
+          "allow": [
+            "POST"
+           ]
         }
       }
     }
@@ -478,9 +595,27 @@ curl -v -X PUT \
   ],
   "token_endpoint_auth_method": "client_secret_post",
   "initiate_login_uri": "https://www.example-application.com/oauth2/login",
+  "urn:okta:client_status": "active",
   "_links": {
     "newSecret": {
       "href": "https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret",
+      "hints": {
+        "allow": [
+          "POST"
+         ]
+      }
+    },
+    "app": {
+      "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3",
+      "hints": {
+        "allow": [
+	  "GET",
+          "POST"
+         ]
+      }
+    },
+    "deactivate: {
+      "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3/lifecycle/deactivate",
       "hints": {
         "allow": [
           "POST"
@@ -548,9 +683,27 @@ curl -v -X POST \
   ],
   "token_endpoint_auth_method": "client_secret_post",
   "initiate_login_uri": "https://www.example-application.com/oauth2/login",
+  "urn:okta:client_status": "active",
   "_links": {
     "newSecret": {
       "href": "https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret",
+      "hints": {
+        "allow": [
+          "POST"
+         ]
+      }
+    },
+    "app": {
+      "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3",
+      "hints": {
+        "allow": [
+	  "GET",
+          "POST"
+         ]
+      }
+    },
+    "deactivate: {
+      "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3/lifecycle/deactivate",
       "hints": {
         "allow": [
           "POST"
