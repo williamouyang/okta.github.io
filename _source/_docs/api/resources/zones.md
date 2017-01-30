@@ -2,9 +2,7 @@
 
 Zones are used to group IP Address ranges in a meaningful way such that policy decisions can be made based on the zone a client's IP belongs to.
 
-This document covers details about API endpoint used to create and mange zones.
-
-## IP Zone data model
+## IP Zone Data Model
 
 ~~~json
 {
@@ -63,16 +61,17 @@ This document covers details about API endpoint used to create and mange zones.
 |type | Type of the zone (currently it can only be IP) | String | |
 |id   | Unique identified for this zone                | String | |
 |name | Unique name for this zone                      | String | 128 |
-|gateways | IP addresses (range or cidr form) of the client originating the request that would be treated as being in this zone | Array | 150 |
-|proxies | IP addresses (range or cidr form) of the device that forwards the request from clients. | Array | 150 |
+|gateways | IP addresses (range or cidr form) of this zone | Array | 150 |
+|proxies | IP addresses (range or cidr form) that are allowed to forward request from gateway addresses above. | Array | 150 |
 |gateway.type | Format of the value - either CIDR or RANGE | String | |
 |gateway.value | Value in CIDR/RANGE form depending on the type specified | String | |
 |proxy.type | Format of the value - CIDR or RANGE | String | |
 |proxy.value | Value in CIDR/RANGE form depending on the type specified | String | |
 
-### Creating IP Zone
+### Create IP Zone
 
-#### Successful create
+#### Successful Create
+{:.api .api-request .api-request-example}
 ~~~sh
 curl -X POST 
 -H "Accept: application/json"\
@@ -108,8 +107,8 @@ curl -X POST
 }' "https://yourorg.okta.com/api/v1/org/zones/"
 ~~~
 
-#### Response (Success)
-
+#### Response
+{:.api .api-response .api-response-params}
 ~~~json
 {
   "type": "IP",
@@ -162,8 +161,8 @@ curl -X POST
 }
 ~~~
 
-#### Invalid zone creation request
-
+#### Invalid Zone Creation Request
+{:.api .api-request .api-request-example}
 ~~~sh
 curl -X POST 
 -H "Accept: application/json"\
@@ -217,7 +216,8 @@ curl -X POST
 ' "https://yourorg.okta.com/api/v1/org/zones/"
 ~~~
 
-#### Response (Error case)
+#### Response
+{:.api .api-response .api-response-params}
 ~~~json
 {
   "errorCode": "E0000001",
@@ -232,8 +232,8 @@ curl -X POST
 }
 ~~~
 
-#### Update existing zone
-
+#### Update Existing Zone
+{:.api .api-request .api-request-example}
 ~~~sh
 curl -X PUT 
 -H "Accept: application/json"\
@@ -307,8 +307,8 @@ curl -X PUT
 ' "https://yourorg.okta.com/api/v1/org/zones/nzovw2rFz2YoqmvwZ0g3"
 ~~~
 
-#### Update response
-
+#### Update Response
+{:.api .api-response .api-response-params}
 ~~~json
 {
   "type": "IP",
@@ -377,14 +377,14 @@ curl -X PUT
 }
 ~~~
 
-#### Get zones
-
+#### Get Zones
+{:.api .api-request .api-request-example}
 ~~~sh
 curl "https://yourorg.okta.com/api/v1/org/zones/"
 ~~~
 
 #### Get Response
-
+{:.api .api-response .api-response-params}
 ~~~json
 [
   {
@@ -421,12 +421,14 @@ curl "https://yourorg.okta.com/api/v1/org/zones/"
 ]
 ~~~
 
-#### Get Zones with filter expression
-
+#### Get Zones With Filter Expression
+{:.api .api-request .api-request-example}
 ~~~sh
 curl "https://yourorg.okta.com/api/v1/org/zones/?limit=100&filter=%28id+eq+%22nzoul0wf9jyb8xwZm0g3%22+or+id+eq+%22nzoul1MxmGN18NDQT0g3%22%29"
 ~~~
 
+#### Response
+{:.api .api-response .api-response-params}
 ~~~json
 [
   {
@@ -562,12 +564,14 @@ curl "https://yourorg.okta.com/api/v1/org/zones/?limit=100&filter=%28id+eq+%22nz
  ]
 ~~~
 
-#### Get zone which has a given string in it's name
-
+#### Get Zone With it's Name Containing Given String
+{:.api .api-request .api-request-example}
 ~~~sh
 curl "https://yourorg.okta.com/api/v1/org/zones/?limit=-1&q=First"
 ~~~
 
+#### Response
+{:.api .api-response .api-response-params}
 ~~~json
 [
   {
