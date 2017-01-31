@@ -1,10 +1,10 @@
 ---
 layout: docs_page
 title: Platform Release Notes
-excerpt: Summary of changes to the Okta Platform since Release 2017.04
+excerpt: Summary of changes to the Okta Platform since Release 2017.03
 ---
 
-## Release 2017.05
+## Release 2017.04
 
 ### Advance Notice: API Rate Limit Improvements
 
@@ -20,15 +20,11 @@ For a full description of the rate limit changes, see [API Rate Limit Improvemen
 
 ### Feature Improvements
 
-* For OpenID Connect Client apps, when selecting `General settings > Implicit grant type`, you can now use checkboxes to
-include `ID Tokens`, `Access Tokens`, or both.
-<!-- (OKTA-94252) -->
+* In the Add Rule dialog box (**Security > API > _authorization server name_ > Access Policies > Add Rule**),
+the pre-filled default values include all grant types and the `All scopes` radio button.
+<!-- (OKTA-110748, OKTA-110751) -->
 
-### Platform Bugs Fixed
-
- * In API Access Management, where an `Access Token` contains claims that evaluate to an
- array, we did not send the claims as a JSON array and did not ensure that the values were of
- the correct types. For an example of the output format, see [JWT Payload](/docs/api/resources/oauth2.html#jwt-payload) (OKTA-113034)
+<!-- ### Platform Bugs Fixed -->
 
 ### Does Your Org Have This Change Yet?
 
