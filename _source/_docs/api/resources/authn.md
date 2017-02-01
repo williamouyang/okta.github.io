@@ -73,12 +73,12 @@ context     | Provides additional context for the authentication transaction    
 
 The authentication transaction [state machine](#transaction-state) can be modified via the following opt-in features:
 
-|----------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+------------|
+|----------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+----------+----------+--------+----------|
 | Property                   | Description                                                                                                                                                | DataType | Nullable | Unique | Readonly |
 | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------ | -------- |
 | multiOptionalFactorEnroll  | Transitions transaction back to `MFA_ENROLL` state after successful factor enrollment when additional optional factors are available for enrollment        | Boolean  | TRUE     | FALSE  | FALSE    |
 | warnBeforePasswordExpired  | Transitions transaction to `PASSWORD_WARN` state before `SUCCESS` if the user's password is about to expire and within their password policy warn period   | Boolean  | TRUE     | FALSE  | FALSE    |
-|----------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+------------|
+|----------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+----------+----------+--------+----------|
 
 ##### Context Object
 
@@ -101,7 +101,7 @@ It is recommend that you generate a UUID or GUID for each client and persist the
 
 [Authentication Transaction Object](#authentication-transaction-model) with the current [state](#transaction-state) for the authentication transaction.
 
-`401 Unauthorized` status code is returned for requests with invalid credentials or locked out accounts
+`401 Unauthorized` status code is returned for requests with invalid credentials or locked out accounts.
 
 ~~~http
 HTTP/1.1 401 Unauthorized
@@ -118,7 +118,7 @@ Content-Type: application/json
 
 `403 Forbidden` status code is returned for requests with valid credentials but the user is denied access via **Sign-On Policy** or **MFA Policy**.
 
-> Ensure the user is assigned to a valid **MFA Policy** if additional verification is required in the user's **Sign-On Policy**
+> Ensure the user is assigned to a valid **MFA Policy** if additional verification is required in the user's **Sign-On Policy**.
 
 ~~~http
 HTTP/1.1 403 Forbidden
@@ -133,7 +133,7 @@ Content-Type: application/json
 }
 ~~~
 
-`429 Too Many Requests` status code may be returned when the rate-limit is exceeded
+`429 Too Many Requests` status code may be returned when the rate-limit is exceeded.
 
 > Authentication requests are aggressively rate-limited (e.g. 1 request per username/per second) for security purposes.
 
@@ -859,8 +859,8 @@ Enrolls a user with a [factor](factors.html#supported-factors-for-providers) ass
 #### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter   | Description                                                                   | Param Type  | DataType                                                     | Required | Default
------------ | ----------------------------------------------------------------------------- | ----------- | -------------------------------------------------------------| -------- | -------
+Parameter   | Description                                                                   | Param Type  | DataType                                                     | Required |
+----------- | ----------------------------------------------------------------------------- | ----------- | -------------------------------------------------------------| -------- |
 stateToken  | [state token](#state-token) for current transaction                           | Body        | String                                                       | TRUE     |
 factorType  | type of factor                                                                | Body        | [Factor Type](factors.html#factor-type)                      | TRUE     |
 provider    | factor provider                                                               | Body        | [Provider Type](factors.html#provider-type)                  | TRUE     |
@@ -1121,7 +1121,7 @@ curl -v -X POST \
 
 Enrolls a user with the Okta `token:software:totp` factor.  The factor must be [activated](#activate-totp-factor) after enrollment by following the `next` link relation to complete the enrollment process.
 
-> The `/api/v1/authn/factors` endpoint suppports only the Okta Verify and Google Authenticator factors at this time.
+> This API implements [the TOTP standard](https://tools.ietf.org/html/rfc6238).
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1218,7 +1218,7 @@ Enrolls a user with the Okta verify `push` factor. The factor must be [activated
 
 Use the published activation links to embed the QR code or distribute an activation `email` or `sms`.
 
-> The `/api/v1/authn/factors` endpoint suppports only the Okta Verify and Google Authenticator factors at this time.
+> This API implements [the TOTP standard](https://tools.ietf.org/html/rfc6238).
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1837,11 +1837,13 @@ The `sms`,`call` and `token:software:totp` [factor types](factors.html#factor-ty
 
 Activates a `token:software:totp` factor by verifying the OTP.
 
+> This API implements [the TOTP standard](https://tools.ietf.org/html/rfc6238).
+
 #### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                          | Param Type | DataType | Required | Default
------------- | ---------------------------------------------------- | ---------- | -------- | -------- | -------
+Parameter    | Description                                          | Param Type | DataType | Required |
+------------ | ---------------------------------------------------- | ---------- | -------- | -------- |
 fid          | `id` of factor returned from enrollment              | URL        | String   | TRUE     |
 stateToken   | [state token](#state-token)  for current transaction | Body       | String   | TRUE     |
 passCode     | OTP generated by device                              | Body       | String   | TRUE     |
@@ -1911,13 +1913,13 @@ curl -v -X POST \
 #### Activate SMS Factor
 {:.api .api-operation}
 
-Activates a `sms` factor by verifying the OTP.  The request/response is identical to [activating a TOTP factor](#activate-totp-factor)
+Activates a `sms` factor by verifying the OTP.  The request and response is identical to [activating a TOTP factor](#activate-totp-factor)
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
+Parameter    | Description                                         | Param Type | DataType | Required |
+------------ | --------------------------------------------------- | ---------- | -------- | -------- |
 fid          | `id` of factor returned from enrollment             | URL        | String   | TRUE     |
 stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
 passCode     | OTP sent to mobile device                           | Body       | String   | TRUE     |
@@ -1988,13 +1990,13 @@ curl -v -X POST \
 #### Activate Call Factor
 {:.api .api-operation}
 
-Activates a `call` factor by verifying the OTP.  The request/response is identical to [activating a TOTP factor](#activate-totp-factor)
+Activates a `call` factor by verifying the OTP.  The request and response is identical to [activating a TOTP factor](#activate-totp-factor)
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
+Parameter    | Description                                         | Param Type | DataType | Required |
+------------ | --------------------------------------------------- | ---------- | -------- | -------- |
 fid          | `id` of factor returned from enrollment             | URL        | String   | TRUE     |
 stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
 passCode     | Passcode received via the voice call                | Body       | String   | TRUE     |
@@ -2072,8 +2074,8 @@ Activations have a short lifetime (minutes) and will `TIMEOUT` if they are not c
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
+Parameter    | Description                                         | Param Type | DataType | Required |
+------------ | --------------------------------------------------- | ---------- | -------- | -------- |
 fid          | `id` of factor returned from enrollment             | URL        | String   | TRUE     |
 stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
 
@@ -2406,7 +2408,7 @@ curl -v -X POST \
 Sends an activation email or SMS when when the user is unable to scan the QR code provided as part of an Okta Verify transaction.
 If for any reason the user can't scan the QR code, they can use the link provided in email or SMS to complete the transaction.
 
-> The user must click the link from the same device as the one hosting the Okt Verify app.
+> The user must click the link from the same device as the one where the Okta Verify app is installed.
 
 ###### Request Example (Email)
 {:.api .api-request .api-request-example}
@@ -2564,8 +2566,8 @@ Activate a `u2f` factor by verifying the registration data and client data.
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter        | Description                                               | Param Type | DataType | Required | Default
------------------| ----------------------------------------------------------| ---------- | -------- | -------- | -------
+Parameter        | Description                                               | Param Type | DataType | Required |
+-----------------| ----------------------------------------------------------| ---------- | -------- | -------- |
 fid              | `id` of factor returned from enrollment                   | URL        | String   | TRUE     |
 stateToken       | [state token](#state-token) for current transaction       | Body       | String   | TRUE     |
 registrationData | base64 encoded registration data from U2F javascript call | Body       | String   | TRUE     |
@@ -2656,8 +2658,8 @@ Verifies an answer to a `question` factor.
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
+Parameter    | Description                                         | Param Type | DataType | Required |
+------------ | --------------------------------------------------- | ---------- | -------- | -------- |
 fid          | `id` of factor returned from enrollment             | URL        | String   | TRUE     |
 stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
 answer       | answer to security question                         | Body       | String   | TRUE     |
@@ -2729,8 +2731,8 @@ curl -v -X POST \
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
+Parameter    | Description                                         | Param Type | DataType | Required |
+------------ | --------------------------------------------------- | ---------- | -------- | -------- |
 fid          | `id` of factor                                      | URL        | String   | TRUE     |
 stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
 passCode     | OTP sent to device                                  | Body       | String   | FALSE    |
@@ -2894,11 +2896,13 @@ curl -v -X POST \
 
 Verifies an OTP for a `token:software:totp` factor.
 
+> This API implements [the TOTP standard](https://tools.ietf.org/html/rfc6238).
+
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
+Parameter    | Description                                         | Param Type | DataType | Required |
+------------ | --------------------------------------------------- | ---------- | -------- | -------- |
 fid          | `id` of factor                                      | URL        | String   | TRUE     |
 stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
 passCode     | OTP sent to device                                  | Body       | String   | FALSE    |
@@ -2972,8 +2976,8 @@ Sends an asynchronous push notification (challenge) to the device for the user t
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
+Parameter    | Description                                         | Param Type | DataType | Required |
+------------ | --------------------------------------------------- | ---------- | -------- | -------- |
 fid          | `id` of factor returned from enrollment             | URL        | String   | TRUE     |
 stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
 
@@ -3245,7 +3249,7 @@ curl -v -X POST \
 #### Verify Duo Factor
 {:.api .api-operation}
 
-Verification of the Duo factor is implemented as an integration with Duo widget. The process is very similar to the  [enrollment](#full-page-example-for-duo-enrollment) where the widget is embedded in iframe - "duo_iframe". Verification starts with request to the Okta API, then continues with a Duo widget that handles the actual verification. We need to pass the state token as hidden object in "duo_form". The authentication completes with call to [poll link](#verification-poll-request-example) to verify the state and obtain session token.
+Verification of the Duo factor is implemented as an integration with Duo widget. The process is very similar to the  [enrollment](#full-page-example-for-duo-enrollment) where the widget is embedded in an iframe - "duo_iframe". Verification starts with request to the Okta API, then continues with a Duo widget that handles the actual verification. We need to pass the state token as hidden object in "duo_form". The authentication completes with call to [poll link](#verification-poll-request-example) to verify the state and obtain session token.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -3600,8 +3604,8 @@ curl -v -X POST \
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
+Parameter    | Description                                         | Param Type | DataType | Required |
+------------ | --------------------------------------------------- | ---------- | -------- | -------- |
 fid          | `id` of factor                                      | URL        | String   | TRUE     |
 stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
 passCode     | OTP sent to device                                  | Body       | String   | FALSE    |
@@ -3627,6 +3631,7 @@ If the `passCode` is invalid you will receive a `403 Forbidden` status code with
     }
   ]
 }
+~~~
 
 ##### Send Voice Call Challenge (OTP)
 
@@ -3642,6 +3647,7 @@ curl -v -X POST \
 -d '{
   "stateToken": "007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"
 }' "https://${org}.okta.com/api/v1/authn/factors/clf193zUBEROPBNZKPPE/verify"
+~~~
 
 ###### Response Example
 {:.api .api-response .api-response-example}
@@ -3765,11 +3771,11 @@ Starts a new password recovery transaction for a given user and issues a [recove
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter   | Description                                                                                                      | Param Type | DataType                          | Required | Default | MaxLength
------------ | ---------------------------------------------------------------------------------------------------------------- | ---------- | --------------------------------- | -------- |-------- | ---------
-username    | User's non-qualified short-name (e.g. dade.murphy) or unique fully-qualified login (e.g dade.murphy@example.com) | Body       | String                            | TRUE     |         |
-factorType  | Recovery factor to use for primary authentication                                                                | Body       | `EMAIL` or `SMS` or `Voice Call`  | FALSE    |         |
-relayState  | Optional state value that is persisted for the lifetime of the recovery transaction                              | Body       | String                            | FALSE    |         | 2048
+Parameter   | Description                                                                                                      | Param Type | DataType                          | Required | MaxLength |
+----------- | ---------------------------------------------------------------------------------------------------------------- | ---------- | --------------------------------- | -------- | --------- |
+username    | User's non-qualified short-name (e.g. dade.murphy) or unique fully-qualified login (e.g dade.murphy@example.com) | Body       | String                            | TRUE     |           |
+factorType  | Recovery factor to use for primary authentication                                                                | Body       | `EMAIL` or `SMS` or `Voice Call`  | FALSE    |           |
+relayState  | Optional state value that is persisted for the lifetime of the recovery transaction                              | Body       | String                            | FALSE    |   2048    |
 
 > A valid `factorType` is required for requests without an API token with admin privileges. (See [Forgot Password with Trusted Application](#forgot-password-with-trusted-application))
 
@@ -3808,7 +3814,7 @@ Starts a new password recovery transaction for the email factor:
 * You must specify a user identifier (`username`) but no password in the request.
 * If the request is successful, Okta sends a recovery email asynchronously to the user's primary and secondary email address with a [recovery token](#recovery-token) so the user can complete the transaction.
 
-Primary authentication of a user's recovery credential (e.g `EMAIL` or `SMS`) has not completed when this request is sent.
+Primary authentication of a user's recovery credential (e.g `EMAIL` or `SMS`) has not completed when this request is sent; the user is pending validation.
 
 Okta provides security in the following ways:
 
@@ -4053,11 +4059,11 @@ Starts a new unlock recovery transaction for a given user and issues a [recovery
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter   | Description                                                                                                      | Param Type | DataType                          | Required | Default | MaxLength
------------ | ---------------------------------------------------------------------------------------------------------------- | ---------- | --------------------------------- | -------- |-------- | ---------
-username    | User's non-qualified short-name (e.g. dade.murphy) or unique fully-qualified login (e.g dade.murphy@example.com) | Body       | String                            | TRUE     |         |
-factorType  | Recovery factor to use for primary authentication                                                                | Body       | `EMAIL` or `SMS`                  | FALSE    |         |
-relayState  | Optional state value that is persisted for the lifetime of the recovery transaction                              | Body       | String                            | FALSE    |         | 2048
+Parameter   | Description                                                                                                      | Param Type | DataType                          | Required | Max Length |
+----------- | ---------------------------------------------------------------------------------------------------------------- | ---------- | --------------------------------- | -------- | ---------- |
+username    | User's non-qualified short-name (e.g. dade.murphy) or unique fully-qualified login (e.g dade.murphy@example.com) | Body       | String                            | TRUE     |            |
+factorType  | Recovery factor to use for primary authentication                                                                | Body       | `EMAIL` or `SMS`                  | FALSE    |            |
+relayState  | Optional state value that is persisted for the lifetime of the recovery transaction                              | Body       | String                            | FALSE    |  2048      | 
 
 > A valid `factoryType` is required for requests without an API token with admin privileges. (See [Unlock Account with Trusted Application](#unlock-account-with-trusted-application))
 
@@ -4439,8 +4445,8 @@ Verifies a Voice Call OTP (`passCode`) sent to the user's device for primary aut
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                                  | Param Type | DataType | Required | Default
------------- | ------------------------------------------------------------ | ---------- | -------- | -------- | -------
+Parameter    | Description                                                  | Param Type | DataType | Required |
+------------ | ------------------------------------------------------------ | ---------- | -------- | -------- |
 stateToken   | [state token](#state-token) for current recovery transaction | Body       | String   | TRUE     |
 passCode     | Passcode received via the voice call                         | Body       | String   | TRUE     |
 
@@ -4535,8 +4541,8 @@ Resends a Voice Call with OTP (`passCode`) to the user's phone
 #### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                                  | Param Type | DataType | Required | Default
------------- | ------------------------------------------------------------ | ---------- | -------- | -------- | -------
+Parameter    | Description                                                  | Param Type | DataType | Required |
+------------ | ------------------------------------------------------------ | ---------- | -------- | -------- |
 stateToken   | [state token](#state-token) for current recovery transaction | Body       | String   | TRUE     |
 
 #### Response Parameters
@@ -4610,7 +4616,7 @@ Validates a [recovery token](#recovery-token) that was distributed to the end-us
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter     | Description                                                                                                | Param Type | DataType | Required | Default
+Parameter     | Description                                                                                                | Param Type | DataType | Required |
 ------------- | ---------------------------------------------------------------------------------------------------------- | ---------- | -------- | -------- |
 recoveryToken | [Recovery token](#recovery-token) that was distributed to end-user via out-of-band mechanism such as email | Body       | String   | TRUE     |
 
@@ -4704,8 +4710,8 @@ Answers the user's recovery question to ensure only the end-user redeemed the [r
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
+Parameter    | Description                                         | Param Type | DataType | Required |
+------------ | --------------------------------------------------- | ---------- | -------- | -------- |
 stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
 answer       | answer to user's recovery question                  | Body       | String   | TRUE     |
 
@@ -5124,9 +5130,8 @@ curl -v -X POST \
 
 Send a skip link to skip the current [transaction state](#transaction-state) and advance to the next state.
 
-When the user sees a skip link in the response, that means it's okay to skip that stage, clicks the skip link in the response.
-
-For example, after being warned that a password will soon expire, the user can skip the change password
+If the response returns a skip link, then you can advance to the next state without completing the current state (such as changing your password).
+For example, after being warned that a password will soon expire, the user can skip the change password prompt
 by clicking a skip link. 
 
 Another example: a user has enrolled in multiple factors. After enrolling in one the user receives a skip link
@@ -5193,15 +5198,15 @@ Cancels the current transaction and revokes the [state token](#state-token).
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required | Default
------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------
+Parameter    | Description                                         | Param Type | DataType | Required |
+------------ | --------------------------------------------------- | ---------- | -------- | -------- |
 stateToken   | [state token](#state-token) for a transaction       | Body       | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Parameter    | Description                                                                            | Param Type | DataType | Required | Default
------------- | -------------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------
+Parameter    | Description                                                                            | Param Type | DataType | Required |
+------------ | -------------------------------------------------------------------------------------- | ---------- | -------- | -------- |
 relayState   | Optional state value that was persisted for the authentication or recovery transaction | Body       | String   | TRUE     |
 
 ##### Request Example
@@ -5234,37 +5239,37 @@ The Authentication API leverages the [JSON HAL](http://tools.ietf.org/html/draft
 
 ### Authentication Transaction Model
 
-|---------------+--------------------------------------------------------------------------------------------------------+----------------------------------------------------------------+----------+----------+-----------+-----------+------------|
-| Property      | Description                                                                                            | DataType                                                       | Nullable | Readonly | MinLength | MaxLength | Validation |
-| ------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------- | -------- | -------- | --------- | --------- | ---------- |
-| stateToken    | ephemeral [token](#state-token) that encodes the current state of an authentication transaction        | String                                                         | TRUE     | TRUE     |           |           |            |
-| sessionToken  | ephemeral [one-time token](#session-token) used to bootstrap an Okta session                           | String                                                         | TRUE     | TRUE     |           |           |            |
-| expiresAt     | lifetime of the `stateToken` or `sessionToken` (See [Tokens](#tokens))                                 | Date                                                           | TRUE     | TRUE     |           |           |            |
-| status        | current [state](#transaction-state) of the authentication transaction                                  | [Transaction State](#transaction-state)                        | FALSE    | TRUE     |           |           |            |
-| relayState    | optional opaque value that is persisted for the lifetime of the authentication transaction             | String                                                         | TRUE     | TRUE     |           | 2048      |            |
-| factorResult  | optional status of last verification attempt for a given factor                                        | [Factor Result](#factor-result)                                | TRUE     | TRUE     |           |           |            |
-| _embedded     | [embedded resources](#embedded-resources) for the current `status`                                     | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | TRUE     |           |           |            |
-| _links        | [link relations](#links-object) for the current `status`                                               | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | TRUE     |           |           |            |
-|---------------+--------------------------------------------------------------------------------------------------------+----------------------------------------------------------------+----------+----------+-----------+-----------+------------|
+|---------------+--------------------------------------------------------------------------------------------------------+----------------------------------------------------------------+----------+----------+-----------|
+| Property      | Description                                                                                            | DataType                                                       | Nullable | Readonly | MaxLength |
+| ------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------- | -------- | -------- | --------- |
+| stateToken    | ephemeral [token](#state-token) that encodes the current state of an authentication transaction        | String                                                         | TRUE     | TRUE     |           |
+| sessionToken  | ephemeral [one-time token](#session-token) used to bootstrap an Okta session                           | String                                                         | TRUE     | TRUE     |           |
+| expiresAt     | lifetime of the `stateToken` or `sessionToken` (See [Tokens](#tokens))                                 | Date                                                           | TRUE     | TRUE     |           |
+| status        | current [state](#transaction-state) of the authentication transaction                                  | [Transaction State](#transaction-state)                        | FALSE    | TRUE     |           |
+| relayState    | optional opaque value that is persisted for the lifetime of the authentication transaction             | String                                                         | TRUE     | TRUE     |   2048    |
+| factorResult  | optional status of last verification attempt for a given factor                                        | [Factor Result](#factor-result)                                | TRUE     | TRUE     |           |
+| _embedded     | [embedded resources](#embedded-resources) for the current `status`                                     | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | TRUE     |           |
+| _links        | [link relations](#links-object) for the current `status`                                               | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | TRUE     |           |
+|---------------+--------------------------------------------------------------------------------------------------------+----------------------------------------------------------------+----------+----------+-----------|
 
 > The `relayState` paramater is an opaque value for the transaction and processed as untrusted data which is just echoed in a response.  It is the client's responsibility to escape/encode this value before displaying in a UI such as a HTML document using [best-practices](https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet)
 
 ### Recovery Transaction Model
 
-|---------------+--------------------------------------------------------------------------------------------------------+----------------------------------------------------------------+----------+----------+-----------+-----------+------------|
-| Property      | Description                                                                                            | DataType                                                       | Nullable | Readonly | MinLength | MaxLength | Validation |
-| ------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------- | -------- | -------- | --------- | --------- | ---------- |
-| stateToken    | ephemeral [token](#state-token) that encodes the current state of a recovery transaction               | String                                                         | TRUE     | TRUE     |           |           |            |
-| recoveryToken | ephemeral [one-time token](#recovery-token) for recovery transaction to be distributed to the end-user | String                                                         | TRUE     | TRUE     |           |           |            |
-| expiresAt     | lifetime of the `stateToken` or `recoveryToken` (See [Tokens](#tokens))                                | Date                                                           | TRUE     | TRUE     |           |           |            |
-| status        | current [state](#transaction-state) of the recovery transaction                                        | [Transaction State](#transaction-state)                        | FALSE    | TRUE     |           |           |            |
-| relayState    | optional opaque value that is persisted for the lifetime of the recovery transaction                   | String                                                         | TRUE     | TRUE     |           | 2048      |            |
-| factorType    | type of selected factor for the recovery transaction                                                   | `EMAIL` or `SMS`                                               | FALSE    | TRUE     |           |           |            |
-| recoveryType  | type of recovery operation                                                                             | `PASSWORD` or `UNLOCK`                                         | FALSE    | TRUE     |           |           |            |
-| factorResult  | optional status of last verification attempt for the `factorType`                                      | [Factor Result](#factor-result)                                | TRUE     | TRUE     |           |           |            |
-| _embedded     | [embedded resources](#embedded-resources) for the current `status`                                     | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | TRUE     |           |           |            |
-| _links        | [link relations](#links-object) for the current `status`                                               | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | TRUE     |           |           |            |
-|---------------+--------------------------------------------------------------------------------------------------------+----------------------------------------------------------------+----------+----------+-----------+-----------+------------|
+|---------------+--------------------------------------------------------------------------------------------------------+----------------------------------------------------------------+----------+----------+-----------|
+| Property      | Description                                                                                            | DataType                                                       | Nullable | Readonly | MaxLength |
+| ------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------- | -------- | -------- | --------- |
+| stateToken    | ephemeral [token](#state-token) that encodes the current state of a recovery transaction               | String                                                         | TRUE     | TRUE     |           |
+| recoveryToken | ephemeral [one-time token](#recovery-token) for recovery transaction to be distributed to the end-user | String                                                         | TRUE     | TRUE     |           |
+| expiresAt     | lifetime of the `stateToken` or `recoveryToken` (See [Tokens](#tokens))                                | Date                                                           | TRUE     | TRUE     |           |
+| status        | current [state](#transaction-state) of the recovery transaction                                        | [Transaction State](#transaction-state)                        | FALSE    | TRUE     |           |
+| relayState    | optional opaque value that is persisted for the lifetime of the recovery transaction                   | String                                                         | TRUE     | TRUE     |   2048    |
+| factorType    | type of selected factor for the recovery transaction                                                   | `EMAIL` or `SMS`                                               | FALSE    | TRUE     |           |
+| recoveryType  | type of recovery operation                                                                             | `PASSWORD` or `UNLOCK`                                         | FALSE    | TRUE     |           |
+| factorResult  | optional status of last verification attempt for the `factorType`                                      | [Factor Result](#factor-result)                                | TRUE     | TRUE     |           |
+| _embedded     | [embedded resources](#embedded-resources) for the current `status`                                     | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | TRUE     |           |
+| _links        | [link relations](#links-object) for the current `status`                                               | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | TRUE     |           |
+|---------------+--------------------------------------------------------------------------------------------------------+----------------------------------------------------------------+----------+----------+-----------|
 
 > The `relayState` paramater is an opaque value for the transaction and processed as untrusted data which is just echoed in a response.  It is the client's responsibility to escape/encode this value before displaying in a UI such as a HTML document using [best-practices](https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet)
 
@@ -5440,14 +5445,14 @@ Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988))
 
 A subset of [user properties](users.html#user-model) published in an authentication or recovery transaction after the user successfully completes primary authentication.
 
-|-------------------+---------------------------------------------+-------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
-| Property          | Description                                 | DataType                                              | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| ----------------- | ------------------------------------------- | ----------------------------------------------------- | -------- | ------ | -------- | --------- | ----------| ---------- |
-| id                | unique key for user                         | String                                                | FALSE    | TRUE   | TRUE     |           |           |            |
-| passwordChanged   | timestamp when user's password last changed | Date                                                  | TRUE     | FALSE  | TRUE     |           |           |            |
-| profile           | user's profile                              | [User Profile Object](#user-profile-object)           | FALSE    | FALSE  | TRUE     |           |           |            |
-| recovery_question | user's recovery question                    | [Recovery Question Object](#recovery-question-object) | TRUE     | FALSE  | TRUE     |           |           |            |
-|-------------------+---------------------------------------------+-------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+|-------------------+---------------------------------------------+-------------------------------------------------------+----------+--------+----------|
+| Property          | Description                                 | DataType                                              | Nullable | Unique | Readonly |
+| ----------------- | ------------------------------------------- | ----------------------------------------------------- | -------- | ------ | -------- |
+| id                | unique key for user                         | String                                                | FALSE    | TRUE   | TRUE     |
+| passwordChanged   | timestamp when user's password last changed | Date                                                  | TRUE     | FALSE  | TRUE     |
+| profile           | user's profile                              | [User Profile Object](#user-profile-object)           | FALSE    | FALSE  | TRUE     |
+| recovery_question | user's recovery question                    | [Recovery Question Object](#recovery-question-object) | TRUE     | FALSE  | TRUE     |
+|-------------------+---------------------------------------------+-------------------------------------------------------+----------+--------+----------|
 
 ~~~json
 {
@@ -5470,36 +5475,36 @@ A subset of [user properties](users.html#user-model) published in an authenticat
 
 Subset of [profile properties](users.html#profile-object) for a user
 
-|-----------+------------------------------------------------------------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+-----------------------------------------------------------------------|
-| Property  | Description                                                                                                                  | DataType | Nullable | Unique | Readonly | MinLength | MaxLength | Validation                                                            |
-| --------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------| -------- | ------ | -------- | --------- | --------- | --------------------------------------------------------------------- |
-| login  | unique login for user                                                                                                     | String   | FALSE    | TRUE   | TRUE     |           |           |                                                                       |
-| firstName | first name of user                                                                                                           | String   | FALSE    | FALSE  | TRUE     |           |           |                                                                       |
-| lastName  | last name of user                                                                                                            | String   | FALSE    | FALSE  | TRUE     |           |           |                                                                       |
-| locale    | user's default location for purposes of localizing items such as currency, date time format, numerical representations, etc. | String   | TRUE     | FALSE  | TRUE     |           |           | [RFC 5646](https://tools.ietf.org/html/rfc5646)                       |
-| timeZone  | user's time zone                                                                                                             | String   | TRUE     | FALSE  | TRUE     |           |           | [IANA Time Zone database format](https://tools.ietf.org/html/rfc6557) |
-|-----------+------------------------------------------------------------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+-----------------------------------------------------------------------|
+|-----------+------------------------------------------------------------------------------------------------------------------------------+----------+----------+--------+----------+-----------------------------------------------------------------------|
+| Property  | Description                                                                                                                  | DataType | Nullable | Unique | Readonly | Validation                                                            |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------| -------- | ------ | -------- | --------------------------------------------------------------------- |
+| login     | unique login for user                                                                                                        | String   | FALSE    | TRUE   | TRUE     |                                                                       |
+| firstName | first name of user                                                                                                           | String   | FALSE    | FALSE  | TRUE     |                                                                       |
+| lastName  | last name of user                                                                                                            | String   | FALSE    | FALSE  | TRUE     |                                                                       |
+| locale    | user's default location for purposes of localizing items such as currency, date time format, numerical representations, etc. | String   | TRUE     | FALSE  | TRUE     | [RFC 5646](https://tools.ietf.org/html/rfc5646)                       |
+| timeZone  | user's time zone                                                                                                             | String   | TRUE     | FALSE  | TRUE     | [IANA Time Zone database format](https://tools.ietf.org/html/rfc6557) |
+|-----------+------------------------------------------------------------------------------------------------------------------------------+----------+----------+--------+----------+-----------------------------------------------------------------------|
 
 #### Recovery Question Object
 
 User's recovery question used for verification of a recovery transaction
 
-|-------------------+--------------------------+ ---------+----------+--------+----------|-----------+-----------+------------|
-| Property          | Description              | DataType | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| ----------------- | ------------------------ | -------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| question          | user's recovery question | String   | FALSE    | TRUE   | TRUE     |           |           |            |
-|-------------------+--------------------------+ ---------+----------+--------+----------|-----------+-----------+------------|
+|-------------------+--------------------------+ ---------+----------+--------+----------|
+| Property          | Description              | DataType | Nullable | Unique | Readonly |
+| ----------------- | ------------------------ | -------- | -------- | ------ | -------- |
+| question          | user's recovery question | String   | FALSE    | TRUE   | TRUE     |
+|-------------------+--------------------------+ ---------+----------+--------+----------|
 
 ### Password Policy Object
 
 A subset of policy settings for the user's assigned password policy published during `PASSWORD_WARN`, `PASSWORD_EXPIRED`, or `PASSWORD_RESET` states
 
-|------------+------------------------------+-----------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
-| Property   | Description                  | DataType                                                  | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| ---------- | ---------------------------- | --------------------------------------------------------- | -------- | ------ | -------- | --------- | ----------| ---------- |
-| expiration | password expiration settings | [Password Expiration Object](#password-expiration-object) | TRUE     | FALSE  | TRUE     |           |           |            |
-| complexity | password complexity settings | [Password Complexity Object](#password-complexity-object) | FALSE    | FALSE  | TRUE     |           |           |            |
-|------------+------------------------------+-----------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+|------------+------------------------------+-----------------------------------------------------------+----------+--------+----------|
+| Property   | Description                  | DataType                                                  | Nullable | Unique | Readonly |
+| ---------- | ---------------------------- | --------------------------------------------------------- | -------- | ------ | -------- |
+| expiration | password expiration settings | [Password Expiration Object](#password-expiration-object) | TRUE     | FALSE  | TRUE     |
+| complexity | password complexity settings | [Password Complexity Object](#password-complexity-object) | FALSE    | FALSE  | TRUE     |
+|------------+------------------------------+-----------------------------------------------------------+----------+--------+----------|
 
 ~~~json
 {
@@ -5525,26 +5530,26 @@ A subset of policy settings for the user's assigned password policy published du
 
 Specifies the password age requirements of the assigned password policy
 
-|--------------------+-------------------------------------------+----------+----------+--------+----------+-----------+-----------+------------|
-| Property           | Description                               | DataType | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| ------------------ | ----------------------------------------- | -------- | -------- | ------ | -------- | --------- | ----------| ---------- |
-| passwordExpireDays | number of days before password is expired | Number   | FALSE    | FALSE  | TRUE     |           |           |            |
-|--------------------+-------------------------------------------+----------+----------+--------+----------+-----------+-----------+------------|
+|--------------------+-------------------------------------------+----------+----------+--------+----------|
+| Property           | Description                               | DataType | Nullable | Unique | Readonly |
+| ------------------ | ----------------------------------------- | -------- | -------- | ------ | -------- |
+| passwordExpireDays | number of days before password is expired | Number   | FALSE    | FALSE  | TRUE     |
+|--------------------+-------------------------------------------+----------+----------+--------+----------|
 
 #### Password Complexity Object
 
 Specifies the password complexity requirements of the assigned password policy
 
-|--------------+------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+------------|
-| Property     | Description                                          | DataType | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| ------------ | ---------------------------------------------------- | -------- | -------- | ------ | -------- | --------- | ----------| ---------- |
-| minLength    | minimum number of characters for password            | Number   | FALSE    | FALSE  | TRUE     |           |           |            |
-| minLowerCase | minimum number of lower case characters for password | Number   | FALSE    | FALSE  | TRUE     |           |           |            |
-| minUpperCase | minimum number of upper case characters for password | Number   | FALSE    | FALSE  | TRUE     |           |           |            |
-| minNumber    | minimum number of numeric characters for password    | Number   | FALSE    | FALSE  | TRUE     |           |           |            |
-| minSymbol    | minimum number of symbol characters for password     | Number   | FALSE    | FALSE  | TRUE     |           |           |            |
-| excludeUsername    | Prevents username or domain from appearing in the password     | boolean   | FALSE    | FALSE  | TRUE     |           |           |            |
-|--------------+------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+------------|
+|--------------+------------------------------------------------------+----------+----------+--------+----------|
+| Property     | Description                                          | DataType | Nullable | Unique | Readonly |
+| ------------ | ---------------------------------------------------- | -------- | -------- | ------ | -------- |
+| minLength    | minimum number of characters for password            | Number   | FALSE    | FALSE  | TRUE     |
+| minLowerCase | minimum number of lower case characters for password | Number   | FALSE    | FALSE  | TRUE     |
+| minUpperCase | minimum number of upper case characters for password | Number   | FALSE    | FALSE  | TRUE     |
+| minNumber    | minimum number of numeric characters for password    | Number   | FALSE    | FALSE  | TRUE     |
+| minSymbol    | minimum number of symbol characters for password     | Number   | FALSE    | FALSE  | TRUE     |
+| excludeUsername    | Prevents username or domain from appearing in the password     | boolean   | FALSE    | FALSE  | TRUE     |
+|--------------+------------------------------------------------------+----------+----------+--------+----------|
 
 > Duplicate the minimum Active Directory requirements in these settings for AD-mastered users. No enforcement is triggered by Okta settings for AD-mastered users.
 
@@ -5552,27 +5557,27 @@ Specifies the password complexity requirements of the assigned password policy
 
 Specifies the password requirements related to password age and history
 
-|--------------+------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+------------|
-| Property     | Description                                          | DataType | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| ------------ | ---------------------------------------------------- | -------- | -------- | ------ | -------- | --------- | ----------| ---------- |
-| minAgeMinutes    | minimum number of minutes required since the last password change            | Number   | FALSE    | FALSE  | TRUE     |           |           |            |
-| historyCount |Number of previous passwords that the current password can't match | Number   | FALSE    | FALSE  | TRUE     |           |           |            |
-|--------------+------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+------------|
+|------------------+-------------------------------------------------------------------+----------+----------+--------+----------|
+| Property         | Description                                                       | DataType | Nullable | Unique | Readonly |
+| ---------------- | ----------------------------------------------------------------- | -------- | -------- | ------ | -------- |
+| minAgeMinutes    | Minimum number of minutes required since the last password change | Number   | FALSE    | FALSE  | TRUE     |
+| historyCount     |Number of previous passwords that the current password can't match | Number   | FALSE    | FALSE  | TRUE     |
+|------------------+-------------------------------------------------------------------+----------+----------+--------+----------|
 
 ### Factor Object
 
 A subset of [factor properties](factors.html#factor-model) published in an authentication transaction during `MFA_ENROLL`, `MFA_REQUIRED`, or `MFA_CHALLENGE` states
 
-|----------------+-------------------------------------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
-| Property       | Description                                                                   | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| -------------- | ----------------------------------------------------------------------------- | -------------------------------------------------------------- | -------- | ------ | ---------| --------- | --------- | ---------- |
-| id             | unique key for factor                                                         | String                                                         | TRUE     | TRUE   | TRUE     |           |           |            |
-| factorType     | type of factor                                                                | [Factor Type](factors.html#factor-type)                        | FALSE    | TRUE   | TRUE     |           |           |            |
-| provider       | factor provider                                                               | [Provider Type](factors.html#provider-type)                    | FALSE    | TRUE   | TRUE     |           |           |            |
-| profile        | profile of a [supported factor](factors.html#supported-factors-for-providers) | [Factor Profile Object](factors.html#factor-profile-object)    | TRUE     | FALSE  | TRUE     |           |           |            |
-| _embedded      | [embedded resources](#factor-embedded-resources) related to the factor        | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
-| _links         | [discoverable resources](#factor-links-object) for the factor                 | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
-|----------------+-------------------------------------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+|----------------+-------------------------------------------------------------------------------+----------------------------------------------------------------+----------+--------+----------|
+| Property       | Description                                                                   | DataType                                                       | Nullable | Unique | Readonly |
+| -------------- | ----------------------------------------------------------------------------- | -------------------------------------------------------------- | -------- | ------ | ---------|
+| id             | unique key for factor                                                         | String                                                         | TRUE     | TRUE   | TRUE     |
+| factorType     | type of factor                                                                | [Factor Type](factors.html#factor-type)                        | FALSE    | TRUE   | TRUE     |
+| provider       | factor provider                                                               | [Provider Type](factors.html#provider-type)                    | FALSE    | TRUE   | TRUE     |
+| profile        | profile of a [supported factor](factors.html#supported-factors-for-providers) | [Factor Profile Object](factors.html#factor-profile-object)    | TRUE     | FALSE  | TRUE     |
+| _embedded      | [embedded resources](#factor-embedded-resources) related to the factor        | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |
+| _links         | [discoverable resources](#factor-links-object) for the factor                 | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |
+|----------------+-------------------------------------------------------------------------------+----------------------------------------------------------------+----------+--------+----------|
 
 ~~~json
 {
@@ -5599,17 +5604,19 @@ A subset of [factor properties](factors.html#factor-model) published in an authe
 
 ##### TOTP Factor Activation Object
 
-TOTP factors when activated have an embedded verification object which describes the [TOTP](http://tools.ietf.org/html/rfc6238) algorithm parameters.
+TOTP factors, when activated, have an embedded verification object which describes the [TOTP](http://tools.ietf.org/html/rfc6238) algorithm parameters.
 
-|----------------+---------------------------------------------------+----------------------------------------------------------------+----------|--------|----------|-----------|-----------+------------|
-| Property       | Description                                       | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| -------------- | ------------------------------------------------- | -------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| timeStep       | time-step size for TOTP                           | String                                                         | FALSE    | FALSE  | TRUE     |           |           |            |
-| sharedSecret   | unique secret key for prover                      | String                                                         | FALSE    | FALSE  | TRUE     |           |           |            |
-| encoding       | encoding of `sharedSecret`                        | `base32` or `base64`                                           | FALSE    | FALSE  | TRUE     |           |           |            |
-| keyLength      | number of digits in an TOTP value                 | Number                                                         | FALSE    | FALSE  | TRUE     |           |           |            |
-| _links         | discoverable resources related to the activation  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
-|----------------+---------------------------------------------------+----------------------------------------------------------------+----------|--------|----------|-----------|-----------+------------|
+|----------------+---------------------------------------------------+----------------------------------------------------------------+----------|--------|----------|
+| Property       | Description                                       | DataType                                                       | Nullable | Unique | Readonly |
+| -------------- | ------------------------------------------------- | -------------------------------------------------------------- | -------- | ------ | -------- |
+| timeStep       | time-step size for TOTP                           | String                                                         | FALSE    | FALSE  | TRUE     |
+| sharedSecret   | unique secret key for prover                      | String                                                         | FALSE    | FALSE  | TRUE     |
+| encoding       | encoding of `sharedSecret`                        | `base32` or `base64`                                           | FALSE    | FALSE  | TRUE     |
+| keyLength      | number of digits in an TOTP value                 | Number                                                         | FALSE    | FALSE  | TRUE     |
+| _links         | discoverable resources related to the activation  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |
+|----------------+---------------------------------------------------+----------------------------------------------------------------+----------|--------|----------|
+
+> This object implements [the TOTP standard](https://tools.ietf.org/html/rfc6238).
 
 ~~~ json
 {
@@ -5636,13 +5643,13 @@ Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988))
 
 The phone object describes previously enrolled phone numbers for the `sms` factor.
 
-|---------------+----------------------+-----------------------------------------------+----------+--------+----------+-----------+-----------+------------|
-| Property      | Description          | DataType                                      | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| ------------- | -------------------- | --------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| id            | unique key for phone | String                                        | FALSE    | TRUE   | TRUE     |           |           |            |
-| profile       | profile of phone     | [Phone Profile Object](#phone-profile-object) | FALSE    | FALSE  | TRUE     |           |           |            |
-| status        | status of phone      | `ACTIVE` or `INACTIVE`                        | FALSE    | FALSE  | TRUE     |           |           |            |
-|---------------+----------------------+-----------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+|---------------+----------------------+-----------------------------------------------+----------+--------+----------|
+| Property      | Description          | DataType                                      | Nullable | Unique | Readonly |
+| ------------- | -------------------- | --------------------------------------------- | -------- | ------ | -------- |
+| id            | unique key for phone | String                                        | FALSE    | TRUE   | TRUE     |
+| profile       | profile of phone     | [Phone Profile Object](#phone-profile-object) | FALSE    | FALSE  | TRUE     |
+| status        | status of phone      | `ACTIVE` or `INACTIVE`                        | FALSE    | FALSE  | TRUE     |
+|---------------+----------------------+-----------------------------------------------+----------+--------+----------|
 
 ~~~json
 {
@@ -5656,35 +5663,35 @@ The phone object describes previously enrolled phone numbers for the `sms` facto
 
 ###### Phone Profile Object
 
-|---------------+----------------------|----------+----------|--------|----------|-----------|-----------+------------|
-| Property      | Description          | DataType | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| ------------- | -------------------- | ---------| -------- | ------ | -------- | --------- | --------- | ---------- |
-| phoneNumber   | masked phone number  | String   | FALSE    | FALSE  | TRUE     |           |           |            |
-|---------------+----------------------|----------+----------|--------|----------|-----------|-----------+------------|
+|---------------+----------------------|----------+----------|--------|----------|
+| Property      | Description          | DataType | Nullable | Unique | Readonly |
+| ------------- | -------------------- | ---------| -------- | ------ | -------- |
+| phoneNumber   | masked phone number  | String   | FALSE    | FALSE  | TRUE     |
+|---------------+----------------------|----------+----------|--------|----------|
 
 
 ##### Phone Object
 
 The phone object describes previously enrolled phone numbers for the `sms` factor.
 
-|---------------+----------------------+-----------------------------------------------+----------+--------+----------+-----------+-----------+------------|
-| Property      | Description          | DataType                                      | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| ------------- | -------------------- | --------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| id            | unique key for phone | String                                        | FALSE    | TRUE   | TRUE     |           |           |            |
-| profile       | profile of phone     | [Phone Profile Object](#phone-profile-object) | FALSE    | FALSE  | TRUE     |           |           |            |
-| status        | status of phone      | `ACTIVE` or `INACTIVE`                        | FALSE    | FALSE  | TRUE     |           |           |            |
-|---------------+----------------------+-----------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+|---------------+----------------------+-----------------------------------------------+----------+--------+----------|
+| Property      | Description          | DataType                                      | Nullable | Unique | Readonly |
+| ------------- | -------------------- | --------------------------------------------- | -------- | ------ | -------- |
+| id            | unique key for phone | String                                        | FALSE    | TRUE   | TRUE     |
+| profile       | profile of phone     | [Phone Profile Object](#phone-profile-object) | FALSE    | FALSE  | TRUE     |
+| status        | status of phone      | `ACTIVE` or `INACTIVE`                        | FALSE    | FALSE  | TRUE     |
+|---------------+----------------------+-----------------------------------------------+----------+--------+----------|
 
 ##### Push Factor Activation Object
 
 Push factors must complete activation on the device by scanning the QR code or visiting activation link sent via email or sms.
 
-|----------------+---------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
-| Property       | Description                                       | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| -------------- | ------------------------------------------------- | -------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| expiresAt      | lifetime of activation                            | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
-| _links         | discoverable resources related to the activation  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | FALSE    | FALSE  | TRUE     |           |           |            |
-|----------------+---------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+|----------------+---------------------------------------------------+----------------------------------------------------------------+----------+--------+----------|
+| Property       | Description                                       | DataType                                                       | Nullable | Unique | Readonly |
+| -------------- | ------------------------------------------------- | -------------------------------------------------------------- | -------- | ------ | -------- |
+| expiresAt      | lifetime of activation                            | Date                                                           | FALSE    | FALSE  | TRUE     |
+| _links         | discoverable resources related to the activation  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | FALSE    | FALSE  | TRUE     |
+|----------------+---------------------------------------------------+----------------------------------------------------------------+----------+--------+----------|
 
 ~~~json
 {
