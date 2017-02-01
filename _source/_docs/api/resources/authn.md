@@ -1121,7 +1121,7 @@ curl -v -X POST \
 
 Enrolls a user with the Okta `token:software:totp` factor.  The factor must be [activated](#activate-totp-factor) after enrollment by following the `next` link relation to complete the enrollment process.
 
-> This API implements [the TOTP standard](https://tools.ietf.org/html/rfc6238).
+> This API implements [the TOTP standard](https://tools.ietf.org/html/rfc6238), which is used by apps like Okta Verify and Google Authenticator.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1218,7 +1218,7 @@ Enrolls a user with the Okta verify `push` factor. The factor must be [activated
 
 Use the published activation links to embed the QR code or distribute an activation `email` or `sms`.
 
-> This API implements [the TOTP standard](https://tools.ietf.org/html/rfc6238).
+> This API implements [the TOTP standard](https://tools.ietf.org/html/rfc6238), which is used by apps like Okta Verify and Google Authenticator.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1837,7 +1837,7 @@ The `sms`,`call` and `token:software:totp` [factor types](factors.html#factor-ty
 
 Activates a `token:software:totp` factor by verifying the OTP.
 
-> This API implements [the TOTP standard](https://tools.ietf.org/html/rfc6238).
+> This API implements [the TOTP standard](https://tools.ietf.org/html/rfc6238), which is used by apps like Okta Verify and Google Authenticator.
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2896,7 +2896,7 @@ curl -v -X POST \
 
 Verifies an OTP for a `token:software:totp` factor.
 
-> This API implements [the TOTP standard](https://tools.ietf.org/html/rfc6238).
+> This API implements [the TOTP standard](https://tools.ietf.org/html/rfc6238), which is used by apps like Okta Verify and Google Authenticator.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -5616,7 +5616,7 @@ TOTP factors, when activated, have an embedded verification object which describ
 | _links         | discoverable resources related to the activation  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |
 |----------------+---------------------------------------------------+----------------------------------------------------------------+----------|--------|----------|
 
-> This object implements [the TOTP standard](https://tools.ietf.org/html/rfc6238).
+> This object implements [the TOTP standard](https://tools.ietf.org/html/rfc6238), which is used by apps like Okta Verify and Google Authenticator.
 
 ~~~ json
 {
