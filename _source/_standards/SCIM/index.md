@@ -883,7 +883,7 @@ Note that you cannot use the SCIM template app used for prototyping, as it has l
 #### Review Okta’s SCIM Docs & Prepare Your App
 
 The first step is to build a compliant SCIM server. 
-Even if you already support SCIM, it is important that you review [Okta’s SCIM docs](https://docs.google.com/document/d/1t4F4jsN-ODuNLXRgtljXezSvWrPcYVZt38xUdATsjmE/edit#bookmark=id.knexmp4f60z),
+Even if you already support SCIM, it is important that you review Okta’s SCIM docs above,
 especially the following sections, to understand the specifics of Okta’s support for the SCIM standard:
 
 * [Understanding User Provisioning in Okta](#understanding-user-provisioning-in-okta)

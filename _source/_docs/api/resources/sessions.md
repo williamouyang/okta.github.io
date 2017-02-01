@@ -26,7 +26,7 @@ Okta provides a very rich [Authentication API](./authn.html) to validate a [user
 
 ## Getting Started
 
-Explore the Sessions API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/17d9f7e4f331c1d3c858) 
+Explore the Sessions API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/17d9f7e4f331c1d3c858)
 
 ## Session Operations
 
@@ -203,7 +203,7 @@ If the session is invalid, a `404 Not Found` response will be returned.
 ### Extend Session
 {:.api .api-operation}
 
-{% api_operation put /api/v1/sessions/*:id* %} [{% api_lifecycle deprecated %}](/docs/api/getting_started/releases-at-okta.html)
+{% api_operation put /api/v1/sessions/*:id* %} {% api_lifecycle deprecated %}
 
 Extends the lifetime of a user's session.
 
@@ -667,7 +667,7 @@ Sessions have the following properties:
 | mfaActive                                 | indicates whether the user has [enrolled an MFA factor](./factors.html#list-enrolled-factors) | Boolean                                   | FALSE    | FALSE  | TRUE     |
 |-------------------------------------------+-----------------------------------------------------------------------------------------------+-------------------------------------------+----------+--------+----------|
 
-> The `mfaActive` parameter is [a {% api_lifecycle deprecated %} feature](/docs/api/getting_started/releases-at-okta.html). Use the `lastFactorVerification` attribute in conjunction with `amr` to understand if the user has performed MFA for the current session. Use the [Factors API](./factors.html#list-enrolled-factors) to query the factor enrollment status for a given user.
+> The `mfaActive` parameter is a {% api_lifecycle deprecated %} feature. Use the `lastFactorVerification` attribute in conjunction with `amr` to understand if the user has performed MFA for the current session. Use the [Factors API](./factors.html#list-enrolled-factors) to query the factor enrollment status for a given user.
 
 #### Optional Session Properties
 
@@ -680,9 +680,9 @@ The [Create Session](#create-session) operation can optionally return the follow
 | cookieTokenUrl                                | URL for a a transparent 1x1 pixel image which contains a one-time session token which when visited sets the session cookie in your browser for your organization.                  |
 |-----------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-> The `cookieToken` is [a {% api_lifecycle deprecated %} property](/docs/api/getting_started/releases-at-okta.html). Instead, use the [Authentication API](./authn.html), which supports the full user authentication pipeline and produces a `sessionToken` which can be used in this API.
+> The `cookieToken` is a {% api_lifecycle deprecated %} property. Instead, use the [Authentication API](./authn.html), which supports the full user authentication pipeline and produces a `sessionToken` which can be used in this API.
 
-> The `cookieTokenUrl` is [a {% api_lifecycle deprecated %} property](/docs/api/getting_started/releases-at-okta.html). because modern browsers block cookies set via embedding images from another origin (cross-domain).
+> The `cookieTokenUrl` is a {% api_lifecycle deprecated %} property. because modern browsers block cookies set via embedding images from another origin (cross-domain).
 
 ### Session Status
 

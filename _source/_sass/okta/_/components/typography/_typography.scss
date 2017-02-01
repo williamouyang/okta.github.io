@@ -143,14 +143,42 @@ img {
 	max-width: 100%;
 }
 
+.u-color--Link {
+	@include color('accent');
+}
+
+
 .u-AlignCenter {
-	text-align: center !important;
+	text-align: center;
 }
 
 .u-AlignLeft {
-	text-align: left !important;
+	text-align: left;
 }
 
 .u-AlignRight {
-	text-align: right !important;
+	text-align: right;
+}
+
+@include media("<medium") {
+	.u-medium--AlignCenter{
+		text-align: center;
+	}
+	.u-medium--AlignLeft{
+		text-align: left;
+	}
+	.u-medium--AlignRight{
+		text-align: right;
+	}
+}
+@include media("<small") {
+	.u-small--AlignCenter{
+		text-align: center;
+	}
+	.u-small--AlignLeft{
+		text-align: left;
+	}
+	.u-small--AlignRight{
+		text-align: right;
+	}
 }

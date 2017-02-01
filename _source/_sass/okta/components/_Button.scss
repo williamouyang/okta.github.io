@@ -132,3 +132,15 @@
 		color: get-color('white');
 	}
 }
+
+.Button--whiteOutlineOpaque {
+	@extend %Button;
+	background-color: rgba(255,255,255,0.25);
+	
+	&,
+	&:active,
+	&:hover {
+		border-color: get-color('white');
+		color: get-color('white');
+	}
+}

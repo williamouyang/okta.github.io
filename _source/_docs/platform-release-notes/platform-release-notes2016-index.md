@@ -7,7 +7,9 @@ excerpt: List of changes to the Okta Platform
 ## Index of Platform Release Notes
 
 * [Platform Release Notes for Current Preview Release](platform-release-notes.html)
-* [Platform Release Notes for Release 2017.2](platform-release-notes2017-02.html)
+* [Platform Release Notes for Release 2017.04](platform-release-notes2017-04.html)
+* [Platform Release Notes for Release 2017.03](platform-release-notes2017-03.html)
+* [Platform Release Notes for Release 2017.02](platform-release-notes2017-02.html)
 * [Platform Release Notes for Release 2016.52](platform-release-notes2016-52.html)
 * [Platform Release Notes for Release 2016.51](platform-release-notes2016-51.html)
 * [Platform Release Notes for Release 2016.50](platform-release-notes2016-50.html)
