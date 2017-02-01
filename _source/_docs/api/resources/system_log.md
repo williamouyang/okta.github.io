@@ -5,7 +5,7 @@ title: System Log (Beta)
 
 # System Log API
 
-This API is [a {% api_lifecycle beta%} feature](/docs/api/getting_started/releases-at-okta.html).
+This API is a {% api_lifecycle beta %} feature.
 
 The Okta System Log API provides read access to your organization's system log. This API provides more functionality than the Events API:
 
@@ -29,8 +29,8 @@ Fetch a list of events from your Okta organization system log.
 
 Parameter | Description                                                                         | Param Type | DataType | Required | Minimum  | Maximum | Default
 --------- | ----------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------    -------   -------
-limit     | Specifies the number of results to page                                             | Query      | Number   | FALSE     |       0  |     100 |  
-since     | Specifies the last date before the oldest result is returned                        | Query      | DateTime | TRUE     |       0  |    1000 | 
+limit     | Specifies the number of results to page                                             | Query      | Number   | FALSE     |       0  |     100 |
+since     | Specifies the last date before the oldest result is returned                        | Query      | DateTime | TRUE     |       0  |    1000 |
 filter    | [Filter expression](/docs/api/getting_started/design_principles.html#filtering) for events | Query | String | FALSE    |
 q         | Finds a user that matches firstName, lastName, and email properties                 | Query      | String   | FALSE    |
 until     | Specifies the first date after which results aren't returned, can be empty which denotes no end date | Query      | DateTime | FALSE    |

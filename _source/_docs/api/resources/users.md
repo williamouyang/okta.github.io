@@ -1159,7 +1159,7 @@ curl -v -X GET \
 #### List Users with Search
 {:.api .api-operation}
 
-> Listing users with search is [an {% api_lifecycle ea %} feature](/docs/api/getting_started/releases-at-okta.html).
+> Listing users with search is an {% api_lifecycle ea %} feature.
 
 Searches for user by the properties specified in the search parameter (case insensitive).
 
@@ -2002,7 +2002,7 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 ~~~
 
-> Deleting users is [an {% api_lifecycle ea %} feature](/docs/api/getting_started/releases-at-okta.html).
+> Deleting users is an {% api_lifecycle ea %} feature.
 
 ### Delete User
 {:.api .api-operation}
@@ -2663,7 +2663,7 @@ The User model defines several read-only properties:
 
 {% beta %}
 
->Note: Profile image is [a {% api_lifecycle beta%} feature](/docs/api/getting_started/releases-at-okta.html).
+>Note: Profile image is a {% api_lifecycle beta %} feature.
 
 During the profile image Beta, image property definitions in the schema are of the `Object` data type with an additional `extendedType` of `Image`.
 When a user is retrieved via the API, however, the value will be a URL (represented as a String).  Some caveats apply:
@@ -2762,7 +2762,7 @@ The default user profile is based on the [System for Cross-Domain Identity Manag
 | countryCode       | country name component of user's address (`country`)                                                                         | String   | TRUE     | FALSE  | FALSE    |           |           | [ISO 3166-1 alpha 2 "short" code format](https://tools.ietf.org/html/draft-ietf-scim-core-schema-22#ref-ISO3166)  |
 | postalAddress     | mailing address component of user's address                                                                                  | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
 | preferredLanguage | user's preferred written or spoken languages                                                                                 | String   | TRUE     | FALSE  | FALSE    |           |           | [RFC 7231 Section 5.3.5](https://tools.ietf.org/html/rfc7231#section-5.3.5)                                       |
-| locale            | user's default location for purposes of localizing items such as currency, date time format, numerical representations, etc. | String   | TRUE     | FALSE  | FALSE    |           |           | [RFC 5646](https://tools.ietf.org/html/rfc5646)                                                                   |
+| locale            | user's default location for purposes of localizing items such as currency, date time format, numerical representations, etc. | String   | TRUE     | FALSE  | FALSE    |           |           | See Note for more details.                                                                                        |
 | timezone          | user's time zone                                                                                                             | String   | TRUE     | FALSE  | FALSE    |           |           | [IANA Time Zone database format](https://tools.ietf.org/html/rfc6557)                                             |
 | userType          | used to identify the organization to user relationship such as "Employee" or "Contractor"                                    | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
 | employeeNumber    | organization or company assigned unique identifier for the user                                                              | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
@@ -2773,6 +2773,8 @@ The default user profile is based on the [System for Cross-Domain Identity Manag
 | managerId         | `id` of a user's manager                                                                                                     | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
 | manager           | displayName of the user's manager                                                                                            | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                   |
 |-------------------+------------------------------------------------------------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+-------------------------------------------------------------------------------------------------------------------|
+
+> Note: A locale value is a concatenation of the ISO 639-1 two letter language code, an underscore, and the ISO 3166-1 2 letter country code; e.g., 'en_US' specifies the language English and country US. [Okta Support Doc for ISO compliant Locale values](https://support.okta.com/help/articles/Knowledge_Article/Universal-Directory-enforcement-of-ISO-compliant-Locale-values)
 
 ##### Okta Login
 

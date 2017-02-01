@@ -676,7 +676,7 @@ curl -v -X POST \
                 "filter": null,
                 "action": "AUTO"
             },
-            "subject": { 
+            "subject": {
                 "userNameTemplate": {
                     "template": "idpuser.userPrincipalName",
                     "type": null
@@ -1256,7 +1256,7 @@ curl -v -X GET \
   }
 ]
 ~~~
- 
+
 #### Find Identity Providers by Name
 {:.api .api-operation}
 
@@ -1936,7 +1936,7 @@ Operations for just-in-time provisioning or account linking with a `CALLOUT` act
 
 Fetches an IdP transaction by `id`
 
-You must use a `CALLOUT` action for [user provisioning](#user-provisioning-action-type) or [account linking](#account-link-action-type) 
+You must use a `CALLOUT` action for [user provisioning](#user-provisioning-action-type) or [account linking](#account-link-action-type)
 to obtain an IdP transaction `id`.
 
 ##### Request Parameters
@@ -1977,7 +1977,7 @@ curl -v -X GET \
     "type": "FACEBOOK"
   },
   "context": {
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) 
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko)
         Chrome/47.0.2526.106 Safari/537.36",
     "ipAddress": "127.0.0.1"
   },
@@ -2259,7 +2259,7 @@ curl -v -X POST \
     "type": "FACEBOOK"
   },
   "context": {
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) 
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko)
         Chrome/47.0.2526.106 Safari/537.36",
     "ipAddress": "127.0.0.1"
   },
@@ -2336,7 +2336,7 @@ curl -v -X POST \
     "type": "FACEBOOK"
   },
   "context": {
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) 
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko)
         Chrome/47.0.2526.106 Safari/537.36",
     "ipAddress": "127.0.0.1"
   },
@@ -2363,7 +2363,7 @@ curl -v -X POST \
 
 
 ### Find Users
-{:.api .api-operation} 
+{:.api .api-operation}
 
 {% api_operation get /api/v1/idps/*:id*/users %}
 
@@ -2427,11 +2427,11 @@ GET https://example.okta.com/api/v1/idps/0oa4lb6lbtmH355Hx0h7/users
 ~~~
 
 ### Unlink User from IdP
-{:.api .api-operation} 
+{:.api .api-operation}
 
 {% api_operation delete /api/v1/idps/*:id*/users/*:uid* %}
 
-Removes the link between the Okta user and the IdP user. 
+Removes the link between the Okta user and the IdP user.
 The next time the user federates into Okta via this IdP, they have to re-link their account according to the account link policy configured in Okta for this IdP.
 
 ##### Request Parameters
@@ -2716,7 +2716,7 @@ HTTP/1.1 204 No Content
 
 ## Identity Provider Signing Key Store Operations
 
-> You must enable the key rollover feature to perform the following operations. Key rollover is [an {% api_lifecycle ea %} feature](/docs/api/getting_started/releases-at-okta.html); contact Customer Support to enable it.
+> You must enable the key rollover feature to perform the following operations. Key rollover is an {% api_lifecycle ea %} feature; contact Customer Support to enable it.
 
 > EA feature constraint: Okta currently uses the same key for both request signing and decrypting SAML Assertions that have been encrypted by the IdP. Changing your signing key also changes your decryption key.
 
@@ -3379,7 +3379,7 @@ Federation trust credentials for verifying assertions from the IdP:
 
 Determines the [IdP Key Credential](#identity-provider-key-credential-model) used to sign requests sent to the IdP.
 
-> You must enable the key rollover feature to perform [Signing Key Operations](#identity-provider-signing-key-store-operations). Key rollover is [an {% api_lifecycle ea %} feature](/docs/api/getting_started/releases-at-okta.html); contact Customer Support to enable it.
+> You must enable the key rollover feature to perform [Signing Key Operations](#identity-provider-signing-key-store-operations). Key rollover is an {% api_lifecycle ea %} feature; contact Customer Support to enable it.
 
 |---------+----------------------------------------------------------------------------------------------------------------+----------+----------+----------+-----------+-----------+--------------------------------------------|
 | Property | Description                                                                                                   | DataType | Nullable | Readonly | MinLength | MaxLength | Validation                                 |
@@ -3714,7 +3714,7 @@ Specifies the user provisioning action during authentication when an IdP user is
 
 Property Details
 
-* To successfully provision a new Okta user, JIT provisioning must be enabled in your organization security settings for `AUTO` or `CALLOUT` actions. 
+* To successfully provision a new Okta user, JIT provisioning must be enabled in your organization security settings for `AUTO` or `CALLOUT` actions.
 * If the target username is not unique or the resulting Okta user profile is missing a required profile attribute, JIT provisioning may fail.
 * New Okta users are provisioned with either a `FEDERATION` or `SOCIAL` authentication provider depending on the IdP `type`.
 
@@ -3939,11 +3939,11 @@ Specifies the behavior for establishing, validating, and matching a username for
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ | -------- | -------- | --------- | --------- | ------------------------------------------------------------------- |
 | userNameTemplate | [Okta EL Expression](../getting_started/okta_expression_lang.html) to generate or transform a unique username for the IdP user     | [UserName Template Object](#username-template-object)  | FALSE    | FALSE    |           |           | [Okta EL Expression](../getting_started/okta_expression_lang.html)  |
 | filter           | Optional [regular expression pattern](https://en.wikipedia.org/wiki/Regular_expression) used to filter untrusted IdP usernames      | String                                                 | TRUE     | FALSE    | 0         | 1024      |                                                                     |
-| matchType        | Determines the Okta user profile attribute match conditions for account linking and authentication of the transformed IdP username  | `USERNAME`, `EMAIL`, `USERNAME_OR_EMAIL` or `CUSTOM_ATTRIBUTE`      | FALSE    | FALSE    |           |           |  
+| matchType        | Determines the Okta user profile attribute match conditions for account linking and authentication of the transformed IdP username  | `USERNAME`, `EMAIL`, `USERNAME_OR_EMAIL` or `CUSTOM_ATTRIBUTE`      | FALSE    | FALSE    |           |           |
 | matchAttribute        | Okta user profile attribute for matching transformed IdP username. Only for matchType `CUSTOM_ATTRIBUTE` and `SAML2` IdP*  | String      | TRUE    | FALSE    |           |           | Must be a valid Okta user profile attribute of type String (with no format or 'email' format only), Integer or Number                                                                  |
 |------------------+-------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------+----------+----------+-----------+-----------+---------------------------------------------------------------------|
 
-> \*`CUSTOM_ATTRIBUTE` with `matchType` is an [{% api_lifecycle ea %} feature](/docs/api/getting_started/releases-at-okta.html). Contact Support to enable it.
+> \*`CUSTOM_ATTRIBUTE` with `matchType` is an {% api_lifecycle ea %} feature. Contact Support to enable it.
 
 
 Property Details
@@ -3977,7 +3977,7 @@ Property Details
 
 * IdP user profile attributes can be referenced with the `idpuser` prefix such as `idpuser.subjectNameId`.
 
-* You must define a IdP user profile attribute before it can be referenced in an Okta EL expression. To define an IdP user attribute policy, you may need to create a new IdP instance without a base profile property, edit the IdP user profile, 
+* You must define a IdP user profile attribute before it can be referenced in an Okta EL expression. To define an IdP user attribute policy, you may need to create a new IdP instance without a base profile property, edit the IdP user profile,
    then update the IdP instance with an expression that references the IdP user profile attribute you just created.
 
 ~~~json
@@ -4094,8 +4094,8 @@ Property Details
 
 ### Links Object
 
-Specifies link relationships (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the IdP 
-using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  
+Specifies link relationships (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the IdP
+using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.
 This object is used for dynamic discovery of related resources and lifecycle operations, and is read only.
 
 |--------------------+-----------------------------------------------------------------------------------------------------------------------------------|
@@ -4127,7 +4127,7 @@ The Identity Provider Transaction Model represents an account link or just-in-ti
     "type": "FACEBOOK"
   },
   "context": {
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) 
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko)
         Chrome/47.0.2526.106 Safari/537.36",
     "ipAddress": "54.197.192.167"
   },
@@ -4214,7 +4214,7 @@ Additional context that describes the HTTP client for the transaction:
 ~~~json
 {
   "context": {
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) 
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko)
         Chrome/47.0.2526.106 Safari/537.36",
     "ipAddress": "54.197.192.167"
   }
@@ -4223,7 +4223,7 @@ Additional context that describes the HTTP client for the transaction:
 
 ### Links Object
 
-Specifies link relationships (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the IdP transaction using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  
+Specifies link relationships (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the IdP transaction using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.
 This object is used for dynamic discovery of related resources and lifecycle operations, and is read only.
 
 |--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
