@@ -377,7 +377,7 @@
 
 <p><a href="#authentication-transaction-model">Authentication Transaction Object</a> with the current <a href="#transaction-state">state</a> for the authentication transaction.</p>
 
-<p><code class="highlighter-rouge">401 Unauthorized</code> status code is returned for requests with invalid credentials or locked out accounts</p>
+<p><code class="highlighter-rouge">401 Unauthorized</code> status code is returned for requests with invalid credentials or locked out accounts.</p>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">401</span> <span class="ne">Unauthorized</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -395,7 +395,7 @@
 <p><code class="highlighter-rouge">403 Forbidden</code> status code is returned for requests with valid credentials but the user is denied access via <strong>Sign-On Policy</strong> or <strong>MFA Policy</strong>.</p>
 
 <blockquote>
-  <p>Ensure the user is assigned to a valid <strong>MFA Policy</strong> if additional verification is required in the user’s <strong>Sign-On Policy</strong></p>
+  <p>Ensure the user is assigned to a valid <strong>MFA Policy</strong> if additional verification is required in the user’s <strong>Sign-On Policy</strong>.</p>
 </blockquote>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
@@ -411,7 +411,7 @@
 </span></code></pre>
 </div>
 
-<p><code class="highlighter-rouge">429 Too Many Requests</code> status code may be returned when the rate-limit is exceeded</p>
+<p><code class="highlighter-rouge">429 Too Many Requests</code> status code may be returned when the rate-limit is exceeded.</p>
 
 <blockquote>
   <p>Authentication requests are aggressively rate-limited (e.g. 1 request per username/per second) for security purposes.</p>
@@ -1173,7 +1173,6 @@
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -1183,7 +1182,6 @@
       <td>Body</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>factorType</td>
@@ -1191,7 +1189,6 @@
       <td>Body</td>
       <td><a href="factors.html#factor-type">Factor Type</a></td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>provider</td>
@@ -1199,7 +1196,6 @@
       <td>Body</td>
       <td><a href="factors.html#provider-type">Provider Type</a></td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>profile</td>
@@ -1207,7 +1203,6 @@
       <td>Body</td>
       <td><a href="factors.html#factor-profile-object">Factor Profile Object</a></td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -1461,6 +1456,10 @@
 
 <p>Enrolls a user with the Okta <code class="highlighter-rouge">token:software:totp</code> factor.  The factor must be <a href="#activate-totp-factor">activated</a> after enrollment by following the <code class="highlighter-rouge">next</code> link relation to complete the enrollment process.</p>
 
+<blockquote>
+  <p>This API implements <a href="https://tools.ietf.org/html/rfc6238">the TOTP standard</a>, which is used by apps like Okta Verify and Google Authenticator.</p>
+</blockquote>
+
 <h5 class="api api-request api-request-example" id="request-example-4">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
@@ -1551,8 +1550,10 @@
 
 <p>Enrolls a user with the Okta verify <code class="highlighter-rouge">push</code> factor. The factor must be <a href="#activate-push-factor">activated on the device</a> by scanning the QR code or visiting the activation link sent via email or sms.</p>
 
+<p>Use the published activation links to embed the QR code or distribute an activation <code class="highlighter-rouge">email</code> or <code class="highlighter-rouge">sms</code>.</p>
+
 <blockquote>
-  <p>Use the published activation links to embed the QR code or distribute an activation <code class="highlighter-rouge">email</code> or <code class="highlighter-rouge">sms</code></p>
+  <p>This API implements <a href="https://tools.ietf.org/html/rfc6238">the TOTP standard</a>, which is used by apps like Okta Verify and Google Authenticator.</p>
 </blockquote>
 
 <h5 class="api api-request api-request-example" id="request-example-5">Request Example</h5>
@@ -2157,6 +2158,10 @@
 
 <p>Activates a <code class="highlighter-rouge">token:software:totp</code> factor by verifying the OTP.</p>
 
+<blockquote>
+  <p>This API implements <a href="https://tools.ietf.org/html/rfc6238">the TOTP standard</a>, which is used by apps like Okta Verify and Google Authenticator.</p>
+</blockquote>
+
 <h4 class="api api-request api-request-params" id="request-parameters-3">Request Parameters</h4>
 
 <table>
@@ -2167,7 +2172,6 @@
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -2177,7 +2181,6 @@
       <td>URL</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>stateToken</td>
@@ -2185,7 +2188,6 @@
       <td>Body</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>passCode</td>
@@ -2193,7 +2195,6 @@
       <td>Body</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -2259,7 +2260,7 @@
 
 <h4 class="api api-operation" id="activate-sms-factor">Activate SMS Factor</h4>
 
-<p>Activates a <code class="highlighter-rouge">sms</code> factor by verifying the OTP.  The request/response is identical to <a href="#activate-totp-factor">activating a TOTP factor</a></p>
+<p>Activates a <code class="highlighter-rouge">sms</code> factor by verifying the OTP.  The request and response is identical to <a href="#activate-totp-factor">activating a TOTP factor</a></p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-4">Request Parameters</h5>
 
@@ -2271,7 +2272,6 @@
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -2281,7 +2281,6 @@
       <td>URL</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>stateToken</td>
@@ -2289,7 +2288,6 @@
       <td>Body</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>passCode</td>
@@ -2297,7 +2295,6 @@
       <td>Body</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -2364,7 +2361,7 @@
 
 <h4 class="api api-operation" id="activate-call-factor">Activate Call Factor</h4>
 
-<p>Activates a <code class="highlighter-rouge">call</code> factor by verifying the OTP.  The request/response is identical to <a href="#activate-totp-factor">activating a TOTP factor</a></p>
+<p>Activates a <code class="highlighter-rouge">call</code> factor by verifying the OTP.  The request and response is identical to <a href="#activate-totp-factor">activating a TOTP factor</a></p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-5">Request Parameters</h5>
 
@@ -2376,7 +2373,6 @@
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -2386,7 +2382,6 @@
       <td>URL</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>stateToken</td>
@@ -2394,7 +2389,6 @@
       <td>Body</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>passCode</td>
@@ -2402,7 +2396,6 @@
       <td>Body</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -2483,7 +2476,6 @@
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -2493,7 +2485,6 @@
       <td>URL</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>stateToken</td>
@@ -2501,7 +2492,6 @@
       <td>Body</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -2829,7 +2819,12 @@
 
 <h5 id="send-activation-links">Send Activation Links</h5>
 
-<p>An activation email or sms can be sent when when the user is unable to scan the QR code.</p>
+<p>Sends an activation email or SMS when when the user is unable to scan the QR code provided as part of an Okta Verify transaction.
+If for any reason the user can’t scan the QR code, they can use the link provided in email or SMS to complete the transaction.</p>
+
+<blockquote>
+  <p>The user must click the link from the same device as the one where the Okta Verify app is installed.</p>
+</blockquote>
 
 <h6 class="api api-request api-request-example" id="request-example-email">Request Example (Email)</h6>
 
@@ -2996,7 +2991,6 @@
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -3006,7 +3000,6 @@
       <td>URL</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>stateToken</td>
@@ -3014,7 +3007,6 @@
       <td>Body</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>registrationData</td>
@@ -3022,7 +3014,6 @@
       <td>Body</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>clientData</td>
@@ -3030,7 +3021,6 @@
       <td>Body</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -3125,7 +3115,6 @@
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -3135,7 +3124,6 @@
       <td>URL</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>stateToken</td>
@@ -3143,7 +3131,6 @@
       <td>Body</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>answer</td>
@@ -3151,7 +3138,6 @@
       <td>Body</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -3226,7 +3212,6 @@
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -3236,7 +3221,6 @@
       <td>URL</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>stateToken</td>
@@ -3244,7 +3228,6 @@
       <td>Body</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>passCode</td>
@@ -3252,7 +3235,6 @@
       <td>Body</td>
       <td>String</td>
       <td>FALSE</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -3412,6 +3394,10 @@
 
 <p>Verifies an OTP for a <code class="highlighter-rouge">token:software:totp</code> factor.</p>
 
+<blockquote>
+  <p>This API implements <a href="https://tools.ietf.org/html/rfc6238">the TOTP standard</a>, which is used by apps like Okta Verify and Google Authenticator.</p>
+</blockquote>
+
 <h5 class="api api-request api-request-params" id="request-parameters-10">Request Parameters</h5>
 
 <table>
@@ -3422,7 +3408,6 @@
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -3432,7 +3417,6 @@
       <td>URL</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>stateToken</td>
@@ -3440,7 +3424,6 @@
       <td>Body</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>passCode</td>
@@ -3448,7 +3431,6 @@
       <td>Body</td>
       <td>String</td>
       <td>FALSE</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -3525,7 +3507,6 @@
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -3535,7 +3516,6 @@
       <td>URL</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>stateToken</td>
@@ -3543,7 +3523,6 @@
       <td>Body</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -3811,7 +3790,7 @@
 
 <h4 class="api api-operation" id="verify-duo-factor">Verify Duo Factor</h4>
 
-<p>Verification of the Duo factor is implemented as an integration with Duo widget. The process is very similar to the  <a href="#full-page-example-for-duo-enrollment">enrollment</a> where the widget is embedded in iframe - “duo_iframe”. Verification starts with request to the Okta API, then continues with a Duo widget that handles the actual verification. We need to pass the state token as hidden object in “duo_form”. The authentication completes with call to <a href="#verification-poll-request-example">poll link</a> to verify the state and obtain session token.</p>
+<p>Verification of the Duo factor is implemented as an integration with Duo widget. The process is very similar to the  <a href="#full-page-example-for-duo-enrollment">enrollment</a> where the widget is embedded in an iframe - “duo_iframe”. Verification starts with request to the Okta API, then continues with a Duo widget that handles the actual verification. We need to pass the state token as hidden object in “duo_form”. The authentication completes with call to <a href="#verification-poll-request-example">poll link</a> to verify the state and obtain session token.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-22">Request Example</h5>
 
@@ -4201,7 +4180,6 @@ javascript API to get the signed assertion from the U2F token.</p>
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -4211,7 +4189,6 @@ javascript API to get the signed assertion from the U2F token.</p>
       <td>URL</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>stateToken</td>
@@ -4219,7 +4196,6 @@ javascript API to get the signed assertion from the U2F token.</p>
       <td>Body</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>passCode</td>
@@ -4227,7 +4203,6 @@ javascript API to get the signed assertion from the U2F token.</p>
       <td>Body</td>
       <td>String</td>
       <td>FALSE</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -4253,27 +4228,27 @@ javascript API to get the signed assertion from the U2F token.</p>
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
 
-</span><span class="err">#####</span><span class="w"> </span><span class="err">Send</span><span class="w"> </span><span class="err">Voice</span><span class="w"> </span><span class="err">Call</span><span class="w"> </span><span class="err">Challenge</span><span class="w"> </span><span class="err">(OTP)</span><span class="w">
+<h5 id="send-voice-call-challenge-otp">Send Voice Call Challenge (OTP)</h5>
 
-</span><span class="err">Omit</span><span class="w"> </span><span class="err">`passCode`</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">request</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">sent</span><span class="w"> </span><span class="err">an</span><span class="w"> </span><span class="err">OTP</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">device.</span><span class="w">
+<p>Omit <code class="highlighter-rouge">passCode</code> in the request to sent an OTP to the device.</p>
 
-</span><span class="err">######</span><span class="w"> </span><span class="err">Request</span><span class="w"> </span><span class="err">Example</span><span class="w">
-</span><span class="p">{</span><span class="err">:.api</span><span class="w"> </span><span class="err">.api-request</span><span class="w"> </span><span class="err">.api-request-example</span><span class="p">}</span><span class="w">
+<h6 class="api api-request api-request-example" id="request-example-25">Request Example</h6>
 
-</span><span class="err">~~~sh</span><span class="w">
-</span><span class="err">curl</span><span class="w"> </span><span class="err">-v</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="err">\</span><span class="w">
-</span><span class="err">-H</span><span class="w"> </span><span class="s2">"Accept: application/json"</span><span class="w"> </span><span class="err">\</span><span class="w">
-</span><span class="err">-H</span><span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="err">\</span><span class="w">
-</span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
-  </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"</span><span class="w">
-</span><span class="p">}</span><span class="err">'</span><span class="w"> </span><span class="s2">"https://${org}.okta.com/api/v1/authn/factors/clf193zUBEROPBNZKPPE/verify"</span><span class="w">
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-d <span class="s1">'{
+  "stateToken": "007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"
+}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/authn/factors/clf193zUBEROPBNZKPPE/verify"</span>
+</code></pre>
+</div>
 
-</span><span class="err">######</span><span class="w"> </span><span class="err">Response</span><span class="w"> </span><span class="err">Example</span><span class="w">
-</span><span class="p">{</span><span class="err">:.api</span><span class="w"> </span><span class="err">.api-response</span><span class="w"> </span><span class="err">.api-response-example</span><span class="p">}</span><span class="w">
+<h6 class="api api-response api-response-example" id="response-example-25">Response Example</h6>
 
-</span><span class="err">~~~json</span><span class="w">
-</span><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MFA_CHALLENGE"</span><span class="p">,</span><span class="w">
@@ -4334,7 +4309,7 @@ javascript API to get the signed assertion from the U2F token.</p>
 
 <p>Specify <code class="highlighter-rouge">passCode</code> in the request to verify the factor.</p>
 
-<h6 class="api api-request api-request-example" id="request-example-25">Request Example</h6>
+<h6 class="api api-request api-request-example" id="request-example-26">Request Example</h6>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -4346,7 +4321,7 @@ javascript API to get the signed assertion from the U2F token.</p>
 </code></pre>
 </div>
 
-<h6 class="api api-response api-response-example" id="response-example-25">Response Example</h6>
+<h6 class="api api-response api-response-example" id="response-example-26">Response Example</h6>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
@@ -4400,7 +4375,6 @@ javascript API to get the signed assertion from the U2F token.</p>
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
       <th>MaxLength</th>
     </tr>
   </thead>
@@ -4412,7 +4386,6 @@ javascript API to get the signed assertion from the U2F token.</p>
       <td>String</td>
       <td>TRUE</td>
       <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>factorType</td>
@@ -4421,7 +4394,6 @@ javascript API to get the signed assertion from the U2F token.</p>
       <td><code class="highlighter-rouge">EMAIL</code> or <code class="highlighter-rouge">SMS</code> or <code class="highlighter-rouge">Voice Call</code></td>
       <td>FALSE</td>
       <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>relayState</td>
@@ -4429,7 +4401,6 @@ javascript API to get the signed assertion from the U2F token.</p>
       <td>Body</td>
       <td>String</td>
       <td>FALSE</td>
-      <td> </td>
       <td>2048</td>
     </tr>
   </tbody>
@@ -4470,16 +4441,24 @@ javascript API to get the signed assertion from the U2F token.</p>
 
 <h4 id="forgot-password-with-email-factor">Forgot Password with Email Factor</h4>
 
-<p>Starts a new password recovery transaction with a user identifier (<code class="highlighter-rouge">username</code>) and asynchronously sends a recovery email to the user’s primary and secondary email address with a <a href="#recovery-token">recovery token</a> that can be used to complete the transaction.</p>
+<p>Starts a new password recovery transaction for the email factor:</p>
 
-<p>Since the recovery email is distributed out-of-band and may be viewed on a different user agent or device, this operation does not return a <a href="#state-token">state token</a> and does not have a <code class="highlighter-rouge">next</code> link.</p>
+<ul>
+  <li>You must specify a user identifier (<code class="highlighter-rouge">username</code>) but no password in the request.</li>
+  <li>If the request is successful, Okta sends a recovery email asynchronously to the user’s primary and secondary email address with a <a href="#recovery-token">recovery token</a> so the user can complete the transaction.</li>
+</ul>
 
-<blockquote>
-  <p>Primary authentication of a user’s recovery credential (e.g <code class="highlighter-rouge">EMAIL</code> or <code class="highlighter-rouge">SMS</code>) has not yet completed.
-Okta will not publish additional metadata about the user until primary authentication has successfully completed.</p>
-</blockquote>
+<p>Primary authentication of a user’s recovery credential (e.g <code class="highlighter-rouge">EMAIL</code> or <code class="highlighter-rouge">SMS</code>) has not completed when this request is sent; the user is pending validation.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-26">Request Example</h5>
+<p>Okta provides security in the following ways:</p>
+
+<ul>
+  <li>Since the recovery email is distributed out-of-band and may be viewed on a different user agent or device, this operation does not return a <a href="#state-token">state token</a> and does not have a <code class="highlighter-rouge">next</code> link.</li>
+  <li>Okta doesn’t publish additional metadata about the user until primary authentication has successfully completed. 
+See the Response Example in this section for details.</li>
+</ul>
+
+<h5 class="api api-request api-request-example" id="request-example-27">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -4492,7 +4471,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-26">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-27">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RECOVERY_CHALLENGE"</span><span class="p">,</span><span class="w">
@@ -4528,7 +4507,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-27">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-28">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00xdqXOE5qDXX8-PBR1bYv8AESqIEinDy3yul01tyh"</span><span class="p">,</span><span class="w">
@@ -4593,7 +4572,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-28">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-29">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00xdqXOE5qDXX8-PBR1bYv8AESqIEinDy3yul01tyh"</span><span class="p">,</span><span class="w">
@@ -4646,7 +4625,7 @@ Okta will not publish additional metadata about the user until primary authentic
   <p>The <strong>public IP address</strong> of your <a href="#trusted-application">trusted application</a> must be <a href="../getting_started/design_principles.html#ip-address">whitelisted as a gateway IP address</a> to forward the user agent’s original IP address with the <code class="highlighter-rouge">X-Forwarded-For</code> HTTP header</p>
 </blockquote>
 
-<h5 class="api api-request api-request-example" id="request-example-27">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-28">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -4661,7 +4640,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-29">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-30">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
@@ -4731,8 +4710,7 @@ Okta will not publish additional metadata about the user until primary authentic
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
-      <th>MaxLength</th>
+      <th>Max Length</th>
     </tr>
   </thead>
   <tbody>
@@ -4743,7 +4721,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>String</td>
       <td>TRUE</td>
       <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>factorType</td>
@@ -4752,7 +4729,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td><code class="highlighter-rouge">EMAIL</code> or <code class="highlighter-rouge">SMS</code></td>
       <td>FALSE</td>
       <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>relayState</td>
@@ -4760,7 +4736,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>Body</td>
       <td>String</td>
       <td>FALSE</td>
-      <td> </td>
       <td>2048</td>
     </tr>
   </tbody>
@@ -4810,7 +4785,7 @@ Okta will not publish additional metadata about the user until primary authentic
 Okta will not publish additional metadata about the user until primary authentication has successfully completed.</p>
 </blockquote>
 
-<h5 class="api api-request api-request-example" id="request-example-28">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-29">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -4823,7 +4798,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-30">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-31">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RECOVERY_CHALLENGE"</span><span class="p">,</span><span class="w">
@@ -4859,7 +4834,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-31">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-32">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00xdqXOE5qDXX8-PBR1bYv8AESqIEinDy3yul01tyh"</span><span class="p">,</span><span class="w">
@@ -4912,7 +4887,7 @@ Okta will not publish additional metadata about the user until primary authentic
   <p>The <strong>public IP address</strong> of your <a href="#trusted-application">trusted application</a> must be <a href="../getting_started/design_principles.html#ip-address">whitelisted as a gateway IP address</a> to forward the user agent’s original IP address with the <code class="highlighter-rouge">X-Forwarded-For</code> HTTP header</p>
 </blockquote>
 
-<h5 class="api api-request api-request-example" id="request-example-29">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-30">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -4927,7 +4902,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-32">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-33">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
@@ -5029,7 +5004,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </span></code></pre>
 </div>
 
-<h5 class="api api-request api-request-example" id="request-example-30">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-31">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -5041,7 +5016,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-33">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-34">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00xdqXOE5qDXX8-PBR1bYv8AESqIEinDy3yul01tyh"</span><span class="p">,</span><span class="w">
@@ -5120,7 +5095,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <p><a href="#recovery-transaction-model">Recovery Transaction Object</a> with the current <a href="#transaction-state">state</a> for the recovery transaction.</p>
 
-<h4 class="api api-request api-request-example" id="request-example-31">Request Example</h4>
+<h4 class="api api-request api-request-example" id="request-example-32">Request Example</h4>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -5131,7 +5106,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-example" id="response-example-34">Response Example</h4>
+<h4 class="api api-response api-response-example" id="response-example-35">Response Example</h4>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00xdqXOE5qDXX8-PBR1bYv8AESqIEinDy3yul01tyh"</span><span class="p">,</span><span class="w">
@@ -5191,7 +5166,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -5201,7 +5175,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>Body</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>passCode</td>
@@ -5209,7 +5182,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>Body</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -5234,7 +5206,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </span></code></pre>
 </div>
 
-<h5 class="api api-request api-request-example" id="request-example-32">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-33">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -5246,7 +5218,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-35">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-36">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00xdqXOE5qDXX8-PBR1bYv8AESqIEinDy3yul01tyh"</span><span class="p">,</span><span class="w">
@@ -5288,40 +5260,55 @@ Okta will not publish additional metadata about the user until primary authentic
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
-
-</span><span class="err">######</span><span class="w"> </span><span class="err">Resend</span><span class="w"> </span><span class="err">Call</span><span class="w"> </span><span class="err">Recovery</span><span class="w"> </span><span class="err">Challenge</span><span class="w">
-</span><span class="p">{</span><span class="err">:.api</span><span class="w"> </span><span class="err">.api-operation</span><span class="p">}</span><span class="w">
-
-</span><span class="err">&lt;span</span><span class="w"> </span><span class="err">class=</span><span class="s2">"api-uri-template api-uri-post"</span><span class="err">&gt;&lt;span</span><span class="w"> </span><span class="err">class=</span><span class="s2">"api-label"</span><span class="err">&gt;POST&lt;/span&gt;</span><span class="w"> </span><span class="err">/api/v</span><span class="mi">1</span><span class="err">/authn/recovery/factors/call/resend&lt;/span&gt;</span><span class="w">
-
-</span><span class="err">Resends</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">Voice</span><span class="w"> </span><span class="err">Call</span><span class="w"> </span><span class="err">with</span><span class="w"> </span><span class="err">OTP</span><span class="w"> </span><span class="err">(`passCode`)</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">user's</span><span class="w"> </span><span class="err">phone</span><span class="w">
-
-</span><span class="err">####</span><span class="w"> </span><span class="err">Request</span><span class="w"> </span><span class="err">Parameters</span><span class="w">
-</span><span class="p">{</span><span class="err">:.api</span><span class="w"> </span><span class="err">.api-request</span><span class="w"> </span><span class="err">.api-request-params</span><span class="p">}</span><span class="w">
-
-</span><span class="err">Parameter</span><span class="w">    </span><span class="err">|</span><span class="w"> </span><span class="err">Description</span><span class="w">                                                  </span><span class="err">|</span><span class="w"> </span><span class="err">Param</span><span class="w"> </span><span class="err">Type</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">DataType</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">Required</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">Default</span><span class="w">
-</span><span class="err">------------</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">------------------------------------------------------------</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">----------</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">--------</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">--------</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">-------</span><span class="w">
-</span><span class="err">stateToken</span><span class="w">   </span><span class="err">|</span><span class="w"> </span><span class="p">[</span><span class="err">state</span><span class="w"> </span><span class="err">token</span><span class="p">]</span><span class="err">(#state-token)</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">current</span><span class="w"> </span><span class="err">recovery</span><span class="w"> </span><span class="err">transaction</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">Body</span><span class="w">       </span><span class="err">|</span><span class="w"> </span><span class="err">String</span><span class="w">   </span><span class="err">|</span><span class="w"> </span><span class="err">TRUE</span><span class="w">     </span><span class="err">|</span><span class="w">
-
-</span><span class="err">####</span><span class="w"> </span><span class="err">Response</span><span class="w"> </span><span class="err">Parameters</span><span class="w">
-</span><span class="p">{</span><span class="err">:.api</span><span class="w"> </span><span class="err">.api-response</span><span class="w"> </span><span class="err">.api-response-params</span><span class="p">}</span><span class="w">
-
-</span><span class="p">[</span><span class="err">Recovery</span><span class="w"> </span><span class="err">Transaction</span><span class="w"> </span><span class="err">Object</span><span class="p">]</span><span class="err">(#recovery-transaction-model)</span><span class="w"> </span><span class="err">with</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">current</span><span class="w"> </span><span class="p">[</span><span class="err">state</span><span class="p">]</span><span class="err">(#transaction-state)</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">recovery</span><span class="w"> </span><span class="err">transaction.</span><span class="w">
-
-</span><span class="err">####</span><span class="w"> </span><span class="err">Request</span><span class="w"> </span><span class="err">Example</span><span class="w">
-</span><span class="p">{</span><span class="err">:.api</span><span class="w"> </span><span class="err">.api-request</span><span class="w"> </span><span class="err">.api-request-example</span><span class="p">}</span><span class="w">
-
-</span><span class="err">~~~sh</span><span class="w">
-</span><span class="err">curl</span><span class="w"> </span><span class="err">-v</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="err">\</span><span class="w">
-</span><span class="err">-H</span><span class="w"> </span><span class="s2">"Accept: application/json"</span><span class="w"> </span><span class="err">\</span><span class="w">
-</span><span class="err">-H</span><span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="err">\</span><span class="w">
-</span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
-  </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00xdqXOE5qDXX8-PBR1bYv8AESqIEinDy3yul01tyh"</span><span class="w">
-</span><span class="p">}</span><span class="err">'</span><span class="w"> </span><span class="s2">"https://${org}.okta.com/api/v1/authn/recovery/factors/CALL/resend"</span><span class="w">
+ </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
 
-<h4 class="api api-response api-response-example" id="response-example-36">Response Example</h4>
+<h6 class="api api-operation" id="resend-call-recovery-challenge">Resend Call Recovery Challenge</h6>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/authn/recovery/factors/call/resend</span></p>
+
+<p>Resends a Voice Call with OTP (<code class="highlighter-rouge">passCode</code>) to the user’s phone</p>
+
+<h4 class="api api-request api-request-params" id="request-parameters-19">Request Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>stateToken</td>
+      <td><a href="#state-token">state token</a> for current recovery transaction</td>
+      <td>Body</td>
+      <td>String</td>
+      <td>TRUE</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 class="api api-response api-response-params" id="response-parameters-17">Response Parameters</h4>
+
+<p><a href="#recovery-transaction-model">Recovery Transaction Object</a> with the current <a href="#transaction-state">state</a> for the recovery transaction.</p>
+
+<h4 class="api api-request api-request-example" id="request-example-34">Request Example</h4>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-d <span class="s1">'{
+  "stateToken": "00xdqXOE5qDXX8-PBR1bYv8AESqIEinDy3yul01tyh"
+}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/authn/recovery/factors/CALL/resend"</span>
+</code></pre>
+</div>
+
+<h4 class="api api-response api-response-example" id="response-example-37">Response Example</h4>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00xdqXOE5qDXX8-PBR1bYv8AESqIEinDy3yul01tyh"</span><span class="p">,</span><span class="w">
@@ -5371,7 +5358,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <p>Validates a <a href="#recovery-token">recovery token</a> that was distributed to the end-user to continue the recovery transaction.</p>
 
-<h5 class="api api-request api-request-params" id="request-parameters-19">Request Parameters</h5>
+<h5 class="api api-request api-request-params" id="request-parameters-20">Request Parameters</h5>
 
 <table>
   <thead>
@@ -5381,7 +5368,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -5391,12 +5377,11 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>Body</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
 
-<h5 class="api api-response api-response-params" id="response-parameters-17">Response Parameters</h5>
+<h5 class="api api-response api-response-params" id="response-parameters-18">Response Parameters</h5>
 
 <p><a href="#recovery-transaction-model">Recovery Transaction Object</a> with a <code class="highlighter-rouge">RECOVERY</code> status and an issued <code class="highlighter-rouge">stateToken</code> that must be used to complete the recovery transaction.</p>
 
@@ -5415,7 +5400,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </span></code></pre>
 </div>
 
-<h5 class="api api-request api-request-example" id="request-example-33">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-35">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -5427,7 +5412,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-37">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-38">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00lMJySRYNz3u_rKQrsLvLrzxiARgivP8FB_1gpmVb"</span><span class="p">,</span><span class="w">
@@ -5479,7 +5464,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <p>Answers the user’s recovery question to ensure only the end-user redeemed the <a href="#recovery-token">recovery token</a> for recovery transaction with a <code class="highlighter-rouge">RECOVERY</code> <a href="#transaction-state">status</a>.</p>
 
-<h5 class="api api-request api-request-params" id="request-parameters-20">Request Parameters</h5>
+<h5 class="api api-request api-request-params" id="request-parameters-21">Request Parameters</h5>
 
 <table>
   <thead>
@@ -5489,7 +5474,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -5499,7 +5483,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>Body</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>answer</td>
@@ -5507,12 +5490,11 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>Body</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
 
-<h5 class="api api-response api-response-params" id="response-parameters-18">Response Parameters</h5>
+<h5 class="api api-response api-response-params" id="response-parameters-19">Response Parameters</h5>
 
 <p><a href="#recovery-transaction-model">Recovery Transaction Object</a> with the current <a href="#transaction-state">state</a> for the recovery transaction.</p>
 
@@ -5531,7 +5513,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </span></code></pre>
 </div>
 
-<h5 class="api api-request api-request-example" id="request-example-34">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-36">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -5544,7 +5526,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-38">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-39">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00lMJySRYNz3u_rKQrsLvLrzxiARgivP8FB_1gpmVb"</span><span class="p">,</span><span class="w">
@@ -5610,7 +5592,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <p>Resets a user’s password to complete a recovery transaction with a <code class="highlighter-rouge">PASSWORD_RESET</code> <a href="#transaction-state">state</a>.</p>
 
-<h5 class="api api-request api-request-params" id="request-parameters-21">Request Parameters</h5>
+<h5 class="api api-request api-request-params" id="request-parameters-22">Request Parameters</h5>
 
 <table>
   <thead>
@@ -5640,7 +5622,7 @@ Okta will not publish additional metadata about the user until primary authentic
   </tbody>
 </table>
 
-<h5 class="api api-response api-response-params" id="response-parameters-19">Response Parameters</h5>
+<h5 class="api api-response api-response-params" id="response-parameters-20">Response Parameters</h5>
 
 <p><a href="#recovery-transaction-model">Recovery Transaction Object</a> with the current <a href="#transaction-state">state</a> for the recovery transaction.</p>
 
@@ -5678,7 +5660,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </span></code></pre>
 </div>
 
-<h5 class="api api-request api-request-example" id="request-example-35">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-37">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -5691,7 +5673,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-39">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-40">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
@@ -5723,7 +5705,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <p>Retrieves the current <a href="#transaction-state">transaction state</a> for a <a href="#state-token">state token</a>.</p>
 
-<h5 class="api api-request api-request-params" id="request-parameters-22">Request Parameters</h5>
+<h5 class="api api-request api-request-params" id="request-parameters-23">Request Parameters</h5>
 
 <table>
   <thead>
@@ -5746,9 +5728,11 @@ Okta will not publish additional metadata about the user until primary authentic
   </tbody>
 </table>
 
-<h5 class="api api-response api-response-params" id="response-parameters-20">Response Parameters</h5>
+<h5 class="api api-response api-response-params" id="response-parameters-21">Response Parameters</h5>
 
 <p><a href="#transaction-model">Transaction Object</a> with the current <a href="#transaction-state">state</a> for the authentication or recovery transaction.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-38">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -5759,7 +5743,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-40">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-41">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00lMJySRYNz3u_rKQrsLvLrzxiARgivP8FB_1gpmVb"</span><span class="p">,</span><span class="w">
@@ -5824,7 +5808,10 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <p>Moves the current <a href="#transaction-state">transaction state</a> back to the previous state.</p>
 
-<h5 class="api api-request api-request-params" id="request-parameters-23">Request Parameters</h5>
+<p>For example, when changing state from the start of primary authentication to MFA_ENROLL &gt; ENROLL_ACTIVATE &gt; OTP,
+the user’s phone might stop working. Since the user can’t see the QR code, the transaction must return to MFA_ENROLL.</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-24">Request Parameters</h5>
 
 <table>
   <thead>
@@ -5834,7 +5821,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -5844,14 +5830,15 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>Body</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
 
-<h5 class="api api-response api-response-params" id="response-parameters-21">Response Parameters</h5>
+<h5 class="api api-response api-response-params" id="response-parameters-22">Response Parameters</h5>
 
 <p><a href="#transaction-model">Transaction Object</a> with the current <a href="#transaction-state">state</a> for the authentication or recovery transaction.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-39">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -5862,7 +5849,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-41">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-42">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"</span><span class="p">,</span><span class="w">
@@ -5958,13 +5945,20 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/authn/skip</span></p>
 
-<p>Skips the current <a href="#transaction-state">transaction state</a> and advances the state machine to the next state.</p>
+<p>Send a skip link to skip the current <a href="#transaction-state">transaction state</a> and advance to the next state.</p>
+
+<p>If the response returns a skip link, then you can advance to the next state without completing the current state (such as changing your password).
+For example, after being warned that a password will soon expire, the user can skip the change password prompt
+by clicking a skip link.</p>
+
+<p>Another example: a user has enrolled in multiple factors. After enrolling in one the user receives a skip link
+to skip the other factors.</p>
 
 <blockquote>
-  <p>This operation is only available for <code class="highlighter-rouge">MFA_ENROLL</code> or <code class="highlighter-rouge">PASSWORD_WARN</code> states when published as a link</p>
+  <p>This operation is only available for <code class="highlighter-rouge">MFA_ENROLL</code> or <code class="highlighter-rouge">PASSWORD_WARN</code> states when published as a link.</p>
 </blockquote>
 
-<h5 class="api api-request api-request-params" id="request-parameters-24">Request Parameters</h5>
+<h5 class="api api-request api-request-params" id="request-parameters-25">Request Parameters</h5>
 
 <table>
   <thead>
@@ -5987,9 +5981,11 @@ Okta will not publish additional metadata about the user until primary authentic
   </tbody>
 </table>
 
-<h5 class="api api-response api-response-params" id="response-parameters-22">Response Parameters</h5>
+<h5 class="api api-response api-response-params" id="response-parameters-23">Response Parameters</h5>
 
 <p><a href="#transaction-model">Transaction Object</a> with the current <a href="#transaction-state">state</a> for the authentication or recovery transaction.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-40">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -6000,7 +5996,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-42">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-43">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
@@ -6030,7 +6026,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <p>Cancels the current transaction and revokes the <a href="#state-token">state token</a>.</p>
 
-<h5 class="api api-request api-request-params" id="request-parameters-25">Request Parameters</h5>
+<h5 class="api api-request api-request-params" id="request-parameters-26">Request Parameters</h5>
 
 <table>
   <thead>
@@ -6040,7 +6036,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -6050,12 +6045,11 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>Body</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
 
-<h5 class="api api-response api-response-params" id="response-parameters-23">Response Parameters</h5>
+<h5 class="api api-response api-response-params" id="response-parameters-24">Response Parameters</h5>
 
 <table>
   <thead>
@@ -6065,7 +6059,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -6075,10 +6068,11 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>Body</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
+
+<h5 class="api api-request api-request-example" id="request-example-41">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -6089,7 +6083,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-43">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-44">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"relayState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/myapp/some/deep/link/i/want/to/return/to"</span><span class="w">
@@ -6113,9 +6107,7 @@ Okta will not publish additional metadata about the user until primary authentic
       <th>DataType</th>
       <th>Nullable</th>
       <th>Readonly</th>
-      <th>MinLength</th>
       <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
@@ -6126,8 +6118,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>TRUE</td>
       <td>TRUE</td>
       <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>sessionToken</td>
@@ -6135,8 +6125,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>String</td>
       <td>TRUE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
       <td> </td>
     </tr>
     <tr>
@@ -6146,8 +6134,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>TRUE</td>
       <td>TRUE</td>
       <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>status</td>
@@ -6156,8 +6142,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>TRUE</td>
       <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>relayState</td>
@@ -6165,9 +6149,7 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>String</td>
       <td>TRUE</td>
       <td>TRUE</td>
-      <td> </td>
       <td>2048</td>
-      <td> </td>
     </tr>
     <tr>
       <td>factorResult</td>
@@ -6175,8 +6157,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td><a href="#factor-result">Factor Result</a></td>
       <td>TRUE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
       <td> </td>
     </tr>
     <tr>
@@ -6186,8 +6166,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>TRUE</td>
       <td>TRUE</td>
       <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>_links</td>
@@ -6195,8 +6173,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
       <td>TRUE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
       <td> </td>
     </tr>
   </tbody>
@@ -6216,9 +6192,7 @@ Okta will not publish additional metadata about the user until primary authentic
       <th>DataType</th>
       <th>Nullable</th>
       <th>Readonly</th>
-      <th>MinLength</th>
       <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
@@ -6229,8 +6203,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>TRUE</td>
       <td>TRUE</td>
       <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>recoveryToken</td>
@@ -6238,8 +6210,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>String</td>
       <td>TRUE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
       <td> </td>
     </tr>
     <tr>
@@ -6249,8 +6219,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>TRUE</td>
       <td>TRUE</td>
       <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>status</td>
@@ -6259,8 +6227,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>TRUE</td>
       <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>relayState</td>
@@ -6268,9 +6234,7 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>String</td>
       <td>TRUE</td>
       <td>TRUE</td>
-      <td> </td>
       <td>2048</td>
-      <td> </td>
     </tr>
     <tr>
       <td>factorType</td>
@@ -6278,8 +6242,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td><code class="highlighter-rouge">EMAIL</code> or <code class="highlighter-rouge">SMS</code></td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
       <td> </td>
     </tr>
     <tr>
@@ -6289,8 +6251,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>TRUE</td>
       <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>factorResult</td>
@@ -6298,8 +6258,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td><a href="#factor-result">Factor Result</a></td>
       <td>TRUE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
       <td> </td>
     </tr>
     <tr>
@@ -6309,8 +6267,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>TRUE</td>
       <td>TRUE</td>
       <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>_links</td>
@@ -6318,8 +6274,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
       <td>TRUE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
       <td> </td>
     </tr>
   </tbody>
@@ -6622,9 +6576,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <th>Nullable</th>
       <th>Unique</th>
       <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
@@ -6635,9 +6586,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>TRUE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>passwordChanged</td>
@@ -6646,9 +6594,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>TRUE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>profile</td>
@@ -6657,9 +6602,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>recovery_question</td>
@@ -6668,9 +6610,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>TRUE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -6705,8 +6644,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <th>Nullable</th>
       <th>Unique</th>
       <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
       <th>Validation</th>
     </tr>
   </thead>
@@ -6719,8 +6656,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>TRUE</td>
       <td>TRUE</td>
       <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>firstName</td>
@@ -6729,8 +6664,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
       <td> </td>
     </tr>
     <tr>
@@ -6741,8 +6674,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>TRUE</td>
       <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>locale</td>
@@ -6751,8 +6682,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>TRUE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
       <td><a href="https://tools.ietf.org/html/rfc5646">RFC 5646</a></td>
     </tr>
     <tr>
@@ -6762,8 +6691,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>TRUE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
       <td><a href="https://tools.ietf.org/html/rfc6557">IANA Time Zone database format</a></td>
     </tr>
   </tbody>
@@ -6782,9 +6709,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <th>Nullable</th>
       <th>Unique</th>
       <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
@@ -6795,9 +6719,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>TRUE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -6815,9 +6736,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <th>Nullable</th>
       <th>Unique</th>
       <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
@@ -6828,9 +6746,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>TRUE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>complexity</td>
@@ -6839,9 +6754,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -6879,9 +6791,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <th>Nullable</th>
       <th>Unique</th>
       <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
@@ -6892,9 +6801,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -6912,9 +6818,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <th>Nullable</th>
       <th>Unique</th>
       <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
@@ -6925,9 +6828,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>minLowerCase</td>
@@ -6936,9 +6836,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>minUpperCase</td>
@@ -6947,9 +6844,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>minNumber</td>
@@ -6958,9 +6852,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>minSymbol</td>
@@ -6969,9 +6860,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>excludeUsername</td>
@@ -6980,9 +6868,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -7004,22 +6889,16 @@ Okta will not publish additional metadata about the user until primary authentic
       <th>Nullable</th>
       <th>Unique</th>
       <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>minAgeMinutes</td>
-      <td>minimum number of minutes required since the last password change</td>
+      <td>Minimum number of minutes required since the last password change</td>
       <td>Number</td>
       <td>FALSE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>historyCount</td>
@@ -7028,9 +6907,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -7048,9 +6924,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <th>Nullable</th>
       <th>Unique</th>
       <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
@@ -7061,9 +6934,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>TRUE</td>
       <td>TRUE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>factorType</td>
@@ -7072,9 +6942,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>TRUE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>provider</td>
@@ -7083,9 +6950,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>TRUE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>profile</td>
@@ -7094,9 +6958,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>TRUE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>_embedded</td>
@@ -7105,9 +6966,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>TRUE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>_links</td>
@@ -7116,9 +6974,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>TRUE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -7148,7 +7003,7 @@ Okta will not publish additional metadata about the user until primary authentic
 
 <h5 id="totp-factor-activation-object">TOTP Factor Activation Object</h5>
 
-<p>TOTP factors when activated have an embedded verification object which describes the <a href="http://tools.ietf.org/html/rfc6238">TOTP</a> algorithm parameters.</p>
+<p>TOTP factors, when activated, have an embedded verification object which describes the <a href="http://tools.ietf.org/html/rfc6238">TOTP</a> algorithm parameters.</p>
 
 <table>
   <thead>
@@ -7159,9 +7014,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <th>Nullable</th>
       <th>Unique</th>
       <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
@@ -7172,9 +7024,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>sharedSecret</td>
@@ -7183,9 +7032,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>encoding</td>
@@ -7194,9 +7040,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>keyLength</td>
@@ -7205,9 +7048,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>_links</td>
@@ -7216,12 +7056,13 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>TRUE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
+
+<blockquote>
+  <p>This object implements <a href="https://tools.ietf.org/html/rfc6238">the TOTP standard</a>, which is used by apps like Okta Verify and Google Authenticator.</p>
+</blockquote>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"activation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -7266,9 +7107,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <th>Nullable</th>
       <th>Unique</th>
       <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
@@ -7279,9 +7117,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>TRUE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>profile</td>
@@ -7290,9 +7125,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>status</td>
@@ -7301,9 +7133,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -7329,9 +7158,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <th>Nullable</th>
       <th>Unique</th>
       <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
@@ -7342,9 +7168,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -7362,9 +7185,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <th>Nullable</th>
       <th>Unique</th>
       <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
@@ -7375,9 +7195,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>TRUE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>profile</td>
@@ -7386,9 +7203,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>status</td>
@@ -7397,9 +7211,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -7417,9 +7228,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <th>Nullable</th>
       <th>Unique</th>
       <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
@@ -7430,9 +7238,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>_links</td>
@@ -7441,9 +7246,6 @@ Okta will not publish additional metadata about the user until primary authentic
       <td>FALSE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
   </tbody>
 </table>

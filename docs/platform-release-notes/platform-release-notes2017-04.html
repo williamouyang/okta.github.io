@@ -14,8 +14,8 @@
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
   <title>Platform Release Notes | Okta Developer</title>
-  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.04">
-  <link rel="canonical" href="http://developer.okta.com/docs/platform-release-notes/platform-release-notes.html">
+  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.03">
+  <link rel="canonical" href="http://developer.okta.com/docs/platform-release-notes/platform-release-notes2017-04.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
 
   <script>
@@ -144,8 +144,8 @@
 <!-- END Fixed sidebar -->
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
-        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/platform-release-notes/platform-release-notes.md">Edit Page</a>
-      <h2 id="release-201705">Release 2017.05</h2>
+        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/platform-release-notes/platform-release-notes2017-04.md">Edit Page</a>
+      <h2 id="release-201704">Release 2017.04</h2>
 
 <h3 id="advance-notice-api-rate-limit-improvements">Advance Notice: API Rate Limit Improvements</h3>
 
@@ -164,18 +164,12 @@
 <h3 id="feature-improvements">Feature Improvements</h3>
 
 <ul>
-  <li>For OpenID Connect Client apps, when selecting <code class="highlighter-rouge">General settings &gt; Implicit grant type</code>, you can now use checkboxes to
-include <code class="highlighter-rouge">ID Tokens</code>, <code class="highlighter-rouge">Access Tokens</code>, or both.
-<!-- (OKTA-94252) --></li>
+  <li>In the Add Rule dialog box (<strong>Security &gt; API &gt; <em>authorization server name</em> &gt; Access Policies &gt; Add Rule</strong>),
+the pre-filled default values include all grant types and the <code class="highlighter-rouge">All scopes</code> radio button.
+<!-- (OKTA-110748, OKTA-110751) --></li>
 </ul>
 
-<h3 id="platform-bugs-fixed">Platform Bugs Fixed</h3>
-
-<ul>
-  <li>In API Access Management, where an <code class="highlighter-rouge">Access Token</code> contains claims that evaluate to an
- array, we did not send the claims as a JSON array and did not ensure that the values were of
- the correct types. For an example of the output format, see <a href="/docs/api/resources/oauth2.html#jwt-payload">JWT Payload</a> (OKTA-113034)</li>
-</ul>
+<!-- ### Platform Bugs Fixed -->
 
 <h3 id="does-your-org-have-this-change-yet">Does Your Org Have This Change Yet?</h3>
 

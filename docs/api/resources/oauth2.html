@@ -208,6 +208,13 @@ The OAuth 2.0 APIs each have several different <a href="#authentication-request"
   <li><a href="#token-request">Token</a> endpoint redeems an authorization grant (returned by the <a href="#authentication-request">Authorize</a> endpoint) for an access token.</li>
 </ul>
 
+<h2 id="getting-started">Getting Started</h2>
+
+<p>If you are new to OAuth 2.0, read this topic before experimenting with the Postman collection. If you are familiar with the
+flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>, you may want to experiment with the Postman collection first:</p>
+
+<p><a href="https://app.getpostman.com/run-collection/3230565cff5b258b270d"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+
 <h2 id="basic-flows">Basic Flows</h2>
 
 <ol>
@@ -312,7 +319,11 @@ This authentication method produces a <code class="highlighter-rouge">sessionTok
     </span><span class="s2">"flights"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"custom"</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"flight_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AX102"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"number_of_flights"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"flight_number"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"AX102"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"CT508"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
   </span><span class="nt">"custom_claim"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CustomValue"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -464,7 +475,7 @@ This authentication method produces a <code class="highlighter-rouge">sessionTok
 
 <h4 id="custom-claims">Custom claims</h4>
 
-<p>Custom claims are associated with scopes. If one of the associated scopes is granted to the access token, the custom claim will be added into it. The value of a custom claim can be either an <a href="/reference/okta_expression_language">expression</a> or group filter. The expression will be evaluated at runtime, and if the evaluated result is null, that custom claim will not be added into the access token.</p>
+<p>Custom claims are associated with scopes. If one of the associated scopes is granted to the Access Token, the custom claim is added into it. The value of a custom claim can be either an <a href="/reference/okta_expression_language">expression</a> or a group filter. The expression is evaluated at runtime, and if the evaluated result is null, that custom claim isn’t added into the Access Token. The datatype of a claim is Array if its value is a group filter, or the same datatype as the evaluated result if its value is an expression.</p>
 
 <blockquote>
   <p><em>Note:</em> For the custom claim with group filter, its value has a limit of 100. If more than 100 groups match the filter, then the request fails. Expect that this limit may change in the future.</p>
@@ -972,7 +983,7 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /oauth2/:authorizationServerId/v1/token</span></p>
 
-<p>The API takes a grant type of either <em>authorization_code</em>, <em>password</em>, <em>refresh_token</em>, or <em>client_credentials</em> and the corresponding credentials and returns back an Access Token. A Refresh Token will be returned if <em>offline_access</em> scope is requested using authorization_code, password, or refresh_token grant type. Additionally, using the authorization_code grant type will return an ID Token if the <em>openid</em> scope is requested.</p>
+<p>The API takes a grant type of either <em>authorization_code</em>, <em>password</em>, <em>refresh_token</em>, or <em>client_credentials</em> and the corresponding credentials and returns back an Access Token. A Refresh Token is returned if <em>offline_access</em> scope is requested using authorization_code, password, or refresh_token grant type. Additionally, using the authorization_code grant type returns an ID Token if the <em>openid</em> scope is requested.</p>
 
 <blockquote>
   <p>Note:  No errors occur if you use this endpoint, but it isn’t useful until custom scopes or resource servers are available. We recommend you wait until custom scopes and resource servers are available.</p>
@@ -993,7 +1004,7 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
   <tbody>
     <tr>
       <td>grant_type</td>
-      <td>Can be one of the following: <em>authorization_code</em>, <em>password</em>, <em>refresh_token</em>, or <em>client_credentials</em>. Determines the mechanism Okta will use to authorize the creation of the tokens.</td>
+      <td>Can be one of the following: <em>authorization_code</em>, <em>password</em>, <em>refresh_token</em>, or <em>client_credentials</em>. Determines the mechanism Okta uses to authorize the creation of the tokens.</td>
       <td>String</td>
     </tr>
     <tr>
@@ -1338,7 +1349,7 @@ Use one authentication mechanism with a given request. Using both returns an err
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"active"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="nt">"token_type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Bearer"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"scope"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"openid profile"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"scope"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"openid email flights custom"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"client_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"a9VpZDRCeFh3Nkk2VdYa"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"username"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"john.doe@example.com"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"exp"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1451606400</span><span class="p">,</span><span class="w">
@@ -1347,7 +1358,13 @@ Use one authentication mechanism with a given request. Using both returns an err
     </span><span class="nt">"aud"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api.example.com"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"iss"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-org.okta.com/oauth2/orsmsg0aWLdnF3spV0g3"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"jti"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"AT.7P4KlczBYVcWLkxduEuKeZfeiNYkZIC9uGJ28Cc-YaI"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"uid"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"00uid4BxXw6I6TV4m0g3"</span><span class="w">
+    </span><span class="nt">"uid"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"00uid4BxXw6I6TV4m0g3"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"number_of_flights"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"flight_number"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"AX102"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"CT508"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"custom_claim"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CustomValue"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
@@ -1391,10 +1408,6 @@ Use one authentication mechanism with a given request. Using both returns an err
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /oauth2/:authorizationServerId/v1/revoke</span></p>
 
 <p>The API takes an Access Token or Refresh Token and revokes it. Revoked tokens are considered inactive at the introspection endpoint. A client may only revoke its own tokens.</p>
-
-<blockquote>
-  <p>Note: No errors occur if you use this endpoint, but it isn’t useful until custom scopes or resource servers are available. We recommend you wait until custom scopes and resource servers are available.</p>
-</blockquote>
 
 <h4 id="request-parameters-3">Request Parameters</h4>
 

@@ -205,6 +205,7 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/oauth2/login"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"urn:okta:client_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"newSecret"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"</span><span class="p">,</span><span class="w">
@@ -213,9 +214,26 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
           </span><span class="s2">"POST"</span><span class="w">
          </span><span class="p">]</span><span class="w">
       </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"app"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+	  </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"POST"</span><span class="w">
+         </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"deactivate: {
+      "</span><span class="err">href</span><span class="nt">": "</span><span class="err">https</span><span class="p">:</span><span class="err">//example.okta.com/api/v</span><span class="mi">1</span><span class="err">/apps/</span><span class="mi">0</span><span class="err">oamvqmXCqhomG</span><span class="mi">8</span><span class="err">sX</span><span class="mi">0</span><span class="err">g</span><span class="mi">3</span><span class="err">/lifecycle/deactivate</span><span class="s2">",
+      "</span><span class="err">hints</span><span class="s2">": {
+        "</span><span class="err">allow</span><span class="s2">": [
+          "</span><span class="err">POST"</span><span class="w">
+         </span><span class="err">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
+  </span><span class="err">}</span><span class="w">
+</span><span class="err">}</span><span class="w">
 </span></code></pre>
 </div>
 
@@ -264,8 +282,8 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
       <td>OAuth 2.0 client secret string (used for confidential clients)</td>
       <td>String</td>
       <td>TRUE</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
     </tr>
     <tr>
       <td>logo_uri</td>
@@ -324,6 +342,14 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
       <td>FALSE</td>
     </tr>
     <tr>
+      <td>urn:okta:client_status</td>
+      <td>the status of the client application</td>
+      <td><code class="highlighter-rouge">active</code> or <code class="highlighter-rouge">inactive</code></td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+    </tr>
+    <tr>
       <td>_links</td>
       <td>discoverable resources related to the app</td>
       <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
@@ -335,29 +361,33 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
 </table>
 
 <blockquote>
-  <p>The <code class="highlighter-rouge">client_id</code>, <code class="highlighter-rouge">client_id_issued_at</code>, and <code class="highlighter-rouge">client_secret</code> attributes are only available after a client is created.</p>
+  <p>When creating a client application, you can specify the <code class="highlighter-rouge">client_id</code> or let Okta generate a value for it. Thereafter, the <code class="highlighter-rouge">client_id</code> is immutable.</p>
 </blockquote>
 
 <blockquote>
-  <p>Client secret is only shown on the initial creation of a client application (and only if the token_endpoint_auth_method is one that requires a client secret).
-  It is never returned in a GET call.</p>
+  <p>The <code class="highlighter-rouge">client_secret</code> is only shown on the initial creation of a client application (and only if the <code class="highlighter-rouge">token_endpoint_auth_method</code> is one that requires a client secret).
+  It is never returned in a GET call. If a <code class="highlighter-rouge">client_secret</code> is not provided on creation and the <code class="highlighter-rouge">token_endpoint_auth_method</code> requires one Okta will generate a random <code class="highlighter-rouge">client_secret</code> for the client application.</p>
 </blockquote>
 
 <blockquote>
-  <p>The <code class="highlighter-rouge">service</code> application type and <code class="highlighter-rouge">client_credentials</code> grant type <a href="/docs/api/getting_started/releases-at-okta.html">a 
+  <p>The <code class="highlighter-rouge">client_id</code> and <code class="highlighter-rouge">client_secret</code> must consist of printable characters. The precise set of permissible characters is defined in <a href="https://tools.ietf.org/html/rfc6749#appendix-A">Appendix A of the OAuth 2.0 Spec</a>. Both values may contain at most 100 characters, and the <code class="highlighter-rouge">client_secret</code> must contain at least 14 characters.</p>
+</blockquote>
+
+<blockquote>
+  <p>The <code class="highlighter-rouge">service</code> application type and <code class="highlighter-rouge">client_credentials</code> grant type <a href="/docs/api/getting_started/releases-at-okta.html">are 
           <a href="/docs/api/getting_started/releases-at-okta.html#beta">
             <span class="api-label api-label-beta ">
               <i class="fa fa-warning"></i> Beta
             </span>
           </a>
-           feature</a>.</p>
+           features</a>.</p>
 </blockquote>
 
 <blockquote>
-  <p>The “grant_types” and “response_types” values described above are partially orthogonal, as they refer to arguments passed to different
-  endpoints in the <a href="https://tools.ietf.org/html/rfc6749">OAuth 2.0 protocol</a>. However, they are related in that the “grant_types”
-  available to a client influence the “response_types” that the client is allowed to use, and vice versa. For instance, a “grant_types”
-  value that includes “authorization_code” implies a “response_types” value that includes “code”, as both values are defined as part of
+  <p>The <code class="highlighter-rouge">grant_types</code> and <code class="highlighter-rouge">response_types</code> values described above are partially orthogonal, as they refer to arguments passed to different
+  endpoints in the <a href="https://tools.ietf.org/html/rfc6749">OAuth 2.0 protocol</a>. However, they are related in that the <code class="highlighter-rouge">grant_types</code>
+  available to a client influence the <code class="highlighter-rouge">response_types</code> that the client is allowed to use, and vice versa. For instance, a <code class="highlighter-rouge">grant_types</code>
+  value that includes <code class="highlighter-rouge">authorization_code</code> implies a <code class="highlighter-rouge">response_types</code> value that includes <code class="highlighter-rouge">code</code>, as both values are defined as part of
   the OAuth 2.0 authorization code grant.</p>
 </blockquote>
 
@@ -458,6 +488,7 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/oauth2/login"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"urn:okta:client_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"newSecret"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"</span><span class="p">,</span><span class="w">
@@ -466,9 +497,26 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
           </span><span class="s2">"POST"</span><span class="w">
         </span><span class="p">]</span><span class="w">
       </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"app"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+	  </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"POST"</span><span class="w">
+         </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"deactivate: {
+      "</span><span class="err">href</span><span class="nt">": "</span><span class="err">https</span><span class="p">:</span><span class="err">//example.okta.com/api/v</span><span class="mi">1</span><span class="err">/apps/</span><span class="mi">0</span><span class="err">oamvqmXCqhomG</span><span class="mi">8</span><span class="err">sX</span><span class="mi">0</span><span class="err">g</span><span class="mi">3</span><span class="err">/lifecycle/deactivate</span><span class="s2">",
+      "</span><span class="err">hints</span><span class="s2">": {
+        "</span><span class="err">allow</span><span class="s2">": [
+          "</span><span class="err">POST"</span><span class="w">
+         </span><span class="err">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
+  </span><span class="err">}</span><span class="w">
+</span><span class="err">}</span><span class="w">
 </span></code></pre>
 </div>
 
@@ -538,6 +586,7 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/oauth2/login"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"urn:okta:client_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"newSecret"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"</span><span class="p">,</span><span class="w">
@@ -546,9 +595,26 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
           </span><span class="s2">"POST"</span><span class="w">
         </span><span class="p">]</span><span class="w">
       </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"app"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+	  </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"POST"</span><span class="w">
+         </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"deactivate: {
+      "</span><span class="err">href</span><span class="nt">": "</span><span class="err">https</span><span class="p">:</span><span class="err">//example.okta.com/api/v</span><span class="mi">1</span><span class="err">/apps/</span><span class="mi">0</span><span class="err">oamvqmXCqhomG</span><span class="mi">8</span><span class="err">sX</span><span class="mi">0</span><span class="err">g</span><span class="mi">3</span><span class="err">/lifecycle/deactivate</span><span class="s2">",
+      "</span><span class="err">hints</span><span class="s2">": {
+        "</span><span class="err">allow</span><span class="s2">": [
+          "</span><span class="err">POST"</span><span class="w">
+         </span><span class="err">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
+  </span><span class="err">}</span><span class="w">
+</span><span class="err">}</span><span class="w">
 </span></code></pre>
 </div>
 
@@ -652,6 +718,7 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
     </span><span class="p">],</span><span class="w">
     </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/oauth2/login"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"urn:okta:client_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"newSecret"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"</span><span class="p">,</span><span class="w">
@@ -660,30 +727,73 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
             </span><span class="s2">"POST"</span><span class="w">
           </span><span class="p">]</span><span class="w">
         </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"app"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+	  </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"POST"</span><span class="w">
+         </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"deactivate: {
+      "</span><span class="err">href</span><span class="nt">": "</span><span class="err">https</span><span class="p">:</span><span class="err">//example.okta.com/api/v</span><span class="mi">1</span><span class="err">/apps/</span><span class="mi">0</span><span class="err">oamvqmXCqhomG</span><span class="mi">8</span><span class="err">sX</span><span class="mi">0</span><span class="err">g</span><span class="mi">3</span><span class="err">/lifecycle/deactivate</span><span class="s2">",
+      "</span><span class="err">hints</span><span class="s2">": {
+        "</span><span class="err">allow</span><span class="s2">": [
+          "</span><span class="err">POST</span><span class="s2">"
+         ]
+      }
+    }
+  },
+  {
+    "</span><span class="err">client_id</span><span class="s2">": "</span><span class="err">F</span><span class="mi">10</span><span class="err">CaazJPQ</span><span class="mi">5</span><span class="err">Zpyu</span><span class="mi">1</span><span class="err">Ojko</span><span class="s2">",
+    "</span><span class="err">client_id_issued_at</span><span class="s2">": 1453913425,
+    "</span><span class="err">client_name</span><span class="s2">": "</span><span class="err">Another</span><span class="w"> </span><span class="err">OAuth</span><span class="w"> </span><span class="err">Client</span><span class="s2">",
+    "</span><span class="err">client_uri</span><span class="s2">": "</span><span class="err">http://www.another-application.com</span><span class="s2">",
+    "</span><span class="err">logo_uri</span><span class="s2">": "</span><span class="err">http://www.another-application.com/logo.png</span><span class="s2">",
+    "</span><span class="err">application_type</span><span class="s2">": "</span><span class="err">browser</span><span class="s2">",
+    "</span><span class="err">redirect_uris</span><span class="s2">": [
+      "</span><span class="err">https://www.another-application.com/oauth</span><span class="mi">2</span><span class="err">/redirectUri</span><span class="s2">"
+    ],
+    "</span><span class="err">response_types</span><span class="s2">": [
+      "</span><span class="err">id_token</span><span class="s2">",
+      "</span><span class="err">token</span><span class="s2">"
+    ],
+    "</span><span class="err">grant_types</span><span class="s2">": [
+      "</span><span class="err">implicit</span><span class="s2">"
+    ],
+    "</span><span class="err">token_endpoint_auth_method</span><span class="s2">": "</span><span class="err">none</span><span class="s2">",
+    "</span><span class="err">initiate_login_uri</span><span class="s2">": null,
+    "</span><span class="err">urn:okta:client_status</span><span class="s2">": "</span><span class="err">active</span><span class="s2">",
+    "</span><span class="err">_links</span><span class="s2">": {
+      "</span><span class="err">newSecret</span><span class="s2">": {
+        "</span><span class="err">href</span><span class="s2">": "</span><span class="err">https://example.okta.com/oauth</span><span class="mi">2</span><span class="err">/v</span><span class="mi">1</span><span class="err">/clients/F</span><span class="mi">10</span><span class="err">CaazJPQ</span><span class="mi">5</span><span class="err">Zpyu</span><span class="mi">1</span><span class="err">Ojko/lifecycle/newSecret</span><span class="s2">",
+        "</span><span class="err">hints</span><span class="s2">": {
+          "</span><span class="err">allow</span><span class="s2">": [
+            "</span><span class="err">POST</span><span class="s2">"
+          ]
+        }
+      },
+    "</span><span class="err">app</span><span class="s2">": {
+      "</span><span class="err">href</span><span class="s2">": "</span><span class="err">https://example.okta.com/api/v</span><span class="mi">1</span><span class="err">/apps/</span><span class="mi">0</span><span class="err">oaprd</span><span class="mi">4</span><span class="err">QHjJYCIGrp</span><span class="mi">0</span><span class="err">g</span><span class="mi">3</span><span class="s2">",
+      "</span><span class="err">hints</span><span class="s2">": {
+        "</span><span class="err">allow</span><span class="s2">": [
+	  "</span><span class="err">GET</span><span class="s2">",
+          "</span><span class="err">POST</span><span class="s2">"
+         ]
+      }
+    },
+    "</span><span class="err">deactivate:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"POST"</span><span class="w">
+         </span><span class="p">]</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F10CaazJPQ5Zpyu1Ojko"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Another OAuth Client"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.another-application.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.another-application.com/logo.png"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"browser"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="s2">"https://www.another-application.com/oauth2/redirectUri"</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nt">"response_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="s2">"id_token"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"token"</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nt">"grant_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="s2">"implicit"</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"none"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="err">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="err">]</span><span class="w">
 </span></code></pre>
 </div>
 
@@ -727,6 +837,7 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
     </span><span class="p">],</span><span class="w">
     </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/oauth2/login"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"urn:okta:client_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"newSecret"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://payroll.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"</span><span class="p">,</span><span class="w">
@@ -735,9 +846,26 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
             </span><span class="s2">"POST"</span><span class="w">
           </span><span class="p">]</span><span class="w">
         </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"app"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3"</span><span class="p">,</span><span class="w">
+	</span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+	    </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"POST"</span><span class="w">
+           </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"deactivate: {
+        "</span><span class="err">href</span><span class="nt">": "</span><span class="err">https</span><span class="p">:</span><span class="err">//example.okta.com/api/v</span><span class="mi">1</span><span class="err">/apps/</span><span class="mi">0</span><span class="err">oamvqmXCqhomG</span><span class="mi">8</span><span class="err">sX</span><span class="mi">0</span><span class="err">g</span><span class="mi">3</span><span class="err">/lifecycle/deactivate</span><span class="s2">",
+        "</span><span class="err">hints</span><span class="s2">": {
+          "</span><span class="err">allow</span><span class="s2">": [
+            "</span><span class="err">POST"</span><span class="w">
+           </span><span class="err">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+    </span><span class="err">}</span><span class="w">
+  </span><span class="err">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 </div>
@@ -779,7 +907,7 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
 </table>
 
 <blockquote>
-  <p>All settings must be specified when updating a client application, <strong>partial updates are not supported!</strong></p>
+  <p>All settings must be specified when updating a client application, <strong>partial updates are not supported!</strong> If any settings are missing when updating a client application the update will fail. The one exception to this is the <code class="highlighter-rouge">client_secret</code>, which will not be changed if omitted from an update.</p>
 </blockquote>
 
 <h5 class="api api-response api-response-params" id="response-parameters-3">Response Parameters</h5>
@@ -835,6 +963,7 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/oauth2/login"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"urn:okta:client_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"newSecret"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"</span><span class="p">,</span><span class="w">
@@ -843,9 +972,26 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
           </span><span class="s2">"POST"</span><span class="w">
          </span><span class="p">]</span><span class="w">
       </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"app"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+	  </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"POST"</span><span class="w">
+         </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"deactivate: {
+      "</span><span class="err">href</span><span class="nt">": "</span><span class="err">https</span><span class="p">:</span><span class="err">//example.okta.com/api/v</span><span class="mi">1</span><span class="err">/apps/</span><span class="mi">0</span><span class="err">oamvqmXCqhomG</span><span class="mi">8</span><span class="err">sX</span><span class="mi">0</span><span class="err">g</span><span class="mi">3</span><span class="err">/lifecycle/deactivate</span><span class="s2">",
+      "</span><span class="err">hints</span><span class="s2">": {
+        "</span><span class="err">allow</span><span class="s2">": [
+          "</span><span class="err">POST"</span><span class="w">
+         </span><span class="err">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
+  </span><span class="err">}</span><span class="w">
+</span><span class="err">}</span><span class="w">
 </span></code></pre>
 </div>
 
@@ -919,6 +1065,7 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/oauth2/login"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"urn:okta:client_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"newSecret"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"</span><span class="p">,</span><span class="w">
@@ -927,9 +1074,26 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
           </span><span class="s2">"POST"</span><span class="w">
          </span><span class="p">]</span><span class="w">
       </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"app"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+	  </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"POST"</span><span class="w">
+         </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"deactivate: {
+      "</span><span class="err">href</span><span class="nt">": "</span><span class="err">https</span><span class="p">:</span><span class="err">//example.okta.com/api/v</span><span class="mi">1</span><span class="err">/apps/</span><span class="mi">0</span><span class="err">oamvqmXCqhomG</span><span class="mi">8</span><span class="err">sX</span><span class="mi">0</span><span class="err">g</span><span class="mi">3</span><span class="err">/lifecycle/deactivate</span><span class="s2">",
+      "</span><span class="err">hints</span><span class="s2">": {
+        "</span><span class="err">allow</span><span class="s2">": [
+          "</span><span class="err">POST"</span><span class="w">
+         </span><span class="err">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
+  </span><span class="err">}</span><span class="w">
+</span><span class="err">}</span><span class="w">
 </span></code></pre>
 </div>
 
