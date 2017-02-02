@@ -5130,7 +5130,7 @@ curl -v -X POST \
 
 Send a skip link to skip the current [transaction state](#transaction-state) and advance to the next state.
 
-If the response returns a skip link, then you can advance to the next state without completing the current state (such as changing your password).
+If the response returns a skip link, then you can advance to the next state without completing the current state (such as changing the password).
 For example, after being warned that a password will soon expire, the user can skip the change password prompt
 by clicking a skip link. 
 
