@@ -1,6 +1,6 @@
 ---
 layout: docs_page
-title: Promote Your OAN Integration
+title: Promote Your Integration
 weight: 5
 excerpt: Raise awareness for your Okta Application Network integration among joint customers and new prospects to accelerate adoption, differentiate your app from competitors, and drive new business.
 ---
