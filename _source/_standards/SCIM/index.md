@@ -71,22 +71,20 @@ Because of this, Okta doesn't make delete requests to the user APIs in downstrea
 Okta sets the user’s password to either match the Okta password or to be a randomly generated password. 
 Learn more about the overall use case [here](https://support.okta.com/help/articles/Knowledge_Article/Using-Sync-Password?retURL=%2Fhelp%2Fapex%2FKnowledgeArticleJson%3Fc%3DOkta_Documentation%253ADirectories%26p%3D101%26inline%3D1&popup=true). 
 
-#### Mastering Users
+#### Profile Mastering Users
+
+> Profile Mastering Users is currently a {% api_lifecycle beta %} feature for Okta’s SCIM-Based Provisioning option. 
+[Beta features](/docs/api/getting_started/releases-at-okta.html#beta) are made available to a small set of customers for testing and feedback. 
+While in Beta, Okta may make breaking changes, so the integration with the feature can't be published in the Okta Application Network or used by customers in production environments. 
 
 Mastering is a more sophisticated version of read (import) Users. 
-Mastering defines the flow and maintenance of user object attributes and their lifecycle state. 
+Mastering defines the flow and maintenance of user-object attributes and their lifecycle state. 
 When a profile is mastered from a given resource (application or directory), 
 the Okta user profile’s attributes and lifecycle state are derived exclusively from that resource. 
-In other words, an Okta user mastered by Active Directory has an Okta profile. 
+In other words, an Okta user mastered by Active Directory (or HR system) has an Okta profile. 
 However, the profile isn't editable in Okta by the user or Okta admin, and derives its information exclusively from Active Directory. 
 If the lifecycle state of the user in Active Directory moves to Disabled, 
-the linked Okta user will also switch to the corresponding lifecycle state of Deactivated on the next the read (import). 
-
-A more granular version of mastering is Attribute-Level mastering. 
-This is where Mastering can be applied at the Attribute level, rather than only at the whole Profile level. 
-This permits an Okta user profile to derive portions of its attributes from multiple different Masters. 
-
-Mastering is an advanced action. If you want your integration to support it, we recommend contacting Okta to double check your design before starting development. 
+the linked Okta user also switches to the corresponding lifecycle state of Deactivated on the next the read (import). 
 
 ### Provisioning Use Cases
 
@@ -112,33 +110,36 @@ Okta supports these common Provisioning use cases:
 
 #### App-as-Master
 
+> App-as-Master is currently a {% api_lifecycle beta %} feature for Okta’s SCIM-Based Provisioning option. 
+[Beta features](/docs/api/getting_started/releases-at-okta.html#beta) are made available to a small set of customers for testing and feedback. 
+While in Beta, Okta may make breaking changes, so the integration with the feature can't be published in the Okta Application Network or used by customers in production environments. 
+
 While most apps fit the category of a downstream app in the directory-as-master use case, some apps can be the master. This is the App-as-Master use case.
 
-The app-as-master use case typically applies to apps that can be used as the system of record for all employee profile information. An HR app like Workday or Successfactors Employee Central is the most common example. 
+The app-as-master use case typically applies to apps that can be used as the system of record for all employee profile information. 
+An HR app like Workday or Successfactors Employee Central is the most common example. 
 In this scenario, the HR app, not Active Directory, feeds employee profile details downstream into directories like AD and Okta, and apps like Box. 
 
 <!-- More info on configuring app-as-master in Okta is [here](). Note: link was missing from source -->
 
 > Note: Integrations for the “App-as-Master” use case are significantly more complex than the Directory-as-Master use case and take more time to build and support. 
 This is because these integrations sync a larger number of attributes and lifecycle states, and more directly impact the Okta user profile and downstream apps. 
-If you want your integration to support it, we recommend contacting <developers@okta.com> to double check your design before starting development. 
 
-#### Attribute-Level Mastering
+#### Advanced App-as-Master Use Cases
 
-Most apps fall clearly into the groupings above: 
+There are several advanced App-as-Master use cases that aren't currently supported by the SCIM-Based Provisioning option, but may be added in the future. 
+Until then, consider out-of-band processes that work around these use cases.
 
-* Directory-as-master&mdash;all employee profile attributes in an app are set by the upstream directory
-* App-as-master&mdash;the app itself is the employee system of record for downstream apps, Active Directory, and Okta
+* Attribute-level mastering&mdash;The app wants to be the master for some employee attributes like phone number, while letting Okta or another app master other attributes. We call this attribute-level mastering. 
 
-However, some apps exist somewhere in the middle. These apps want to be the master for certain employee attributes like phone number, while letting the directory master most other attributes. We call this attribute-level mastering.
+* Pre-hire interval&mdash;In an HR-as-Master use case, there is sometimes a desire to import the new employee into Okta from the HR app a few days prior to the hire/start date. This gives IT time to set up the employee’s apps in advance. 
+A pre-hire interval configuration would specify how many days before the employee’s hire date Okta should import the employee. 
 
-Unified communications apps like RingCentral are common examples of apps for which attribute-level mastering might be desired. How does this use case work?
+* Real-time sync/termination&mdash;In an HR-as-Master use case, a change in employee status within the HR system may need to be immediately reflected in Okta.
+Involuntary terminations is one scenario where an employee’s access to sensitive apps and content via Okta needs to be cut off within minutes.
 
-When a new employee joins a company he/she will typically be added first to AD which, via Okta, will trigger the provisioning of a new RingCentral account. In the employee profile attributes that are exchanged between AD and RingCentral, phone number will be missing however, as AD does not initially know the new employee’s phone number. This number is first established in RingCentral.
-
-If the phone number attribute is set in Okta to be Mastered by RingCentral, once the phone number is initially established in RingCentral, it will be synced back to AD. This will allow IT to have more complete information about the new employee.
-
-See Okta's [online help](https://support.okta.com/help/articles/Knowledge_Article/Attribute-Level-Mastering) for more info on configuring attribute-level mastering in Okta.
+* Incremental/delta import&mdash;Importing a large number of user profiles from an app into Okta can take minutes, even hours. 
+This can become a major performance and timing issue if frequent updates are needed. Currently, the SCIM-Based Provisioning option doesn't support the ability to import only those user profiles that have changed since the last import. In the future, we may support this via filtering on `meta.lastModified`. ([More information](#filtering-on-metalastmodified))
 
 ## Ways to Build Provisioning
 
