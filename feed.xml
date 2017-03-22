@@ -8,12 +8,216 @@
     <atom:link href="http://developer.okta.com/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Get Started with Spring Boot, OAuth 2.0, and Okta</title>
+        <description>&lt;p&gt;If you’re building a Spring Boot application, you’ll eventually need to add user authentication. You can do this with OAuth 2.0 (henceforth: OAuth). OAuth is a standard that applications can use to provide client applications with “secure delegated access”. It works over HTTP and authorizes devices, APIs, servers, and applications with access tokens rather than credentials.&lt;/p&gt;
+
+&lt;p&gt;Very simply, OAuth is a protocol that supports authorization workflows. It gives you a way to ensure that a specific user has specific permission.&lt;/p&gt;
+
+&lt;p&gt;OAuth doesn’t validate a user’s identity — that’s taken care of by an authentication service like Okta. Authentication is when you validate a user’s identity (like asking for a username / password to log in), whereas authorization is when you check to see what permissions an existing user already has.&lt;/p&gt;
+
+&lt;p&gt;In this tutorial you’ll build an OAuth client for a Spring Boot application, plus add authentication with the Okta Platform API. You can sign up for a &lt;a href=&quot;https://www.okta.com/developer/signup/&quot;&gt;forever-free Okta developer account here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you don’t want to code along, feel free to grab the &lt;a href=&quot;https://github.com/oktadeveloper/okta-spring-boot-oauth-example&quot;&gt;source code from GitHub&lt;/a&gt;!&lt;/p&gt;
+
+&lt;h2 id=&quot;get-started-with-spring-cloud&quot;&gt;Get Started with Spring Cloud&lt;/h2&gt;
+
+&lt;p&gt;Spring Cloud Security is a project from the good folks at Pivotal that “offers a set of primitives for building secure applications and services with minimum fuss”. Not only is it easy to use in platforms like Cloud Foundry, but it builds on Spring Boot, Spring Security, and &lt;a href=&quot;https://www.oauth.com/&quot;&gt;OAuth&lt;/a&gt;. Because it builds on OAuth, it’s easy to integrate it with an authentication API like Okta’s.&lt;/p&gt;
+
+&lt;p&gt;The Spring Cloud Security project includes a &lt;a href=&quot;https://github.com/spring-cloud/spring-cloud-security/blob/master/docs/src/main/asciidoc/quickstart.adoc&quot;&gt;great quickstart&lt;/a&gt; that will help you get started with very few lines of code.&lt;/p&gt;
+
+&lt;h2 id=&quot;create-a-secure-spring-boot-app&quot;&gt;Create a Secure Spring Boot App&lt;/h2&gt;
+
+&lt;p&gt;Creating a Spring Boot application is dirt simple if you use the Spring CLI. It allows you to write Groovy scripts that get rid of the boilerplate Java and build file configuration. This allows you, the developer, to focus on the necessary code. Refer to the project’s &lt;a href=&quot;https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started-installing-spring-boot.html#getting-started-installing-the-cli&quot;&gt;official documentation for installation instructions&lt;/a&gt;. To install Spring CLI, I recommend using &lt;a href=&quot;https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started-installing-spring-boot.html#getting-started-sdkman-cli-installation&quot;&gt;SDKMAN!&lt;/a&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sdk install springboot
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Or &lt;a href=&quot;https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started-installing-spring-boot.html#getting-started-homebrew-cli-installation&quot;&gt;Homebrew&lt;/a&gt; if you’re on a Mac.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;brew tap pivotal/tap
+brew install springboot
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Create a &lt;code class=&quot;highlighter-rouge&quot;&gt;helloWorld.groovy&lt;/code&gt; file that has a Controller in it.&lt;/p&gt;
+
+&lt;div class=&quot;language-groovy highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Grab&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'spring-boot-starter-security'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RestController&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Application&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+  &lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;'Hello World'&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;@Grab&lt;/code&gt; annotation invokes &lt;a href=&quot;http://docs.groovy-lang.org/latest/html/documentation/grape.html&quot;&gt;Grape&lt;/a&gt; to download dependencies and having Spring Security in the classpath causes its default security rules to be used. That is, protect everything, allow a user with the username &lt;code class=&quot;highlighter-rouge&quot;&gt;user&lt;/code&gt;, and generate a random password on startup for said user.&lt;/p&gt;
+
+&lt;p&gt;Run this app with the following command:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;spring run helloGroovy.groovy
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Navigate to &lt;a href=&quot;http://localhost:8080&quot;&gt;http://localhost:8080&lt;/a&gt; and you’ll be prompted to login with your browser’s basic authentication dialog. Enter &lt;code class=&quot;highlighter-rouge&quot;&gt;user&lt;/code&gt; for the username and copy/paste the generated password from your console. If you copied and pasted the password successfully, you’ll see &lt;code class=&quot;highlighter-rouge&quot;&gt;Hello World&lt;/code&gt; in your browser.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt=&quot;Hello World&quot; src=&quot;/assets/img/blog/spring-boot-oauth/0-hello-world.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;create-an-authorization-server-in-okta&quot;&gt;Create an Authorization Server in Okta&lt;/h2&gt;
+
+&lt;p&gt;To start authenticating against Okta’a API, you have to first create a developer account on &lt;a href=&quot;http://developer.okta.com&quot;&gt;http://developer.okta.com&lt;/a&gt;. After activating your account, sign in and navigate to &lt;strong&gt;Security &amp;gt; API&lt;/strong&gt; and click on the &lt;strong&gt;Add Authorization Server&lt;/strong&gt; button.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt=&quot;Add Authorization Server&quot; src=&quot;/assets/img/blog/spring-boot-oauth/1-add-auth-server.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Enter the name and Resource URI of your choosing. The names aren’t important at this time. I used the following values:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Name:&lt;/strong&gt; Oktamus Prime&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Resource URI:&lt;/strong&gt; http://authenticat.is.easy/withokta&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img alt=&quot;Authorization Server Settings&quot; src=&quot;/assets/img/blog/spring-boot-oauth/2-auth-server-settings.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The Metadata URI you see in this screenshot will come in handy later when you need to specify &lt;code class=&quot;highlighter-rouge&quot;&gt;accessTokenUri&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;userAuthorizationUri&lt;/code&gt; values.&lt;/p&gt;
+
+&lt;h2 id=&quot;create-an-openid-connect-app-in-okta&quot;&gt;Create an OpenID Connect App in Okta&lt;/h2&gt;
+
+&lt;p&gt;To get a client id and secret, you need to create a new OpenID Connect (OIDC) app. Navigate to &lt;strong&gt;Applications &amp;gt; Add Application&lt;/strong&gt; and click on the &lt;strong&gt;Create New App&lt;/strong&gt; button. The application name isn’t important, you can use whatever you like.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt=&quot;OIDC App Name&quot; src=&quot;/assets/img/blog/spring-boot-oauth/4-oidc-name.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click &lt;strong&gt;Next&lt;/strong&gt; to configure OIDC. Add &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:8080&lt;/code&gt; as a Redirect URI and click &lt;strong&gt;Finish&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt=&quot;OIDC Redirects&quot; src=&quot;/assets/img/blog/spring-boot-oauth/5-redirect-uris.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The next screen should look similar to the following screenshot.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt=&quot;OIDC Settings&quot; src=&quot;/assets/img/blog/spring-boot-oauth/6-oidc-settings.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Your &lt;code class=&quot;highlighter-rouge&quot;&gt;clientId&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;clientSecret&lt;/code&gt; values for this app will be just below the fold.&lt;/p&gt;
+
+&lt;h2 id=&quot;create-a-spring-boot-oauth-client&quot;&gt;Create a Spring Boot OAuth Client&lt;/h2&gt;
+
+&lt;p&gt;Create a &lt;code class=&quot;highlighter-rouge&quot;&gt;helloOAuth.groovy&lt;/code&gt; file that uses Spring Security and its &lt;a href=&quot;https://spring.io/guides/tutorials/spring-boot-oauth2/&quot;&gt;OAuth2 support&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-groovy highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Grab&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'spring-boot-starter-security'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RestController&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@EnableOAuth2Sso&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Application&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+  &lt;span class=&quot;nd&quot;&gt;@GetMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;'Hello World'&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Adding the &lt;code class=&quot;highlighter-rouge&quot;&gt;@EnableOAuth2Sso&lt;/code&gt; annotation causes Spring Security to look for a number of properties. Create &lt;code class=&quot;highlighter-rouge&quot;&gt;application.yml&lt;/code&gt; in the same directory and specify the following key/value pairs.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;security&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;oauth2&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;# From OIDC app&lt;/span&gt;
+      &lt;span class=&quot;s&quot;&gt;clientId&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# clientId&lt;/span&gt;
+      &lt;span class=&quot;s&quot;&gt;clientSecret&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# clientSecret&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;# From Authorization Server's metadata&lt;/span&gt;
+      &lt;span class=&quot;s&quot;&gt;accessTokenUri&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# token_endpoint&lt;/span&gt;
+      &lt;span class=&quot;s&quot;&gt;userAuthorizationUri&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# authorization_endpoint &lt;/span&gt;
+      &lt;span class=&quot;s&quot;&gt;clientAuthenticationScheme&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;form&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;resource&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;# from your Auth Server's metadata, check .well-known/openid-configuration if not in .well-known/oauth-authorization-server&lt;/span&gt;
+      &lt;span class=&quot;s&quot;&gt;userInfoUri&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# userinfo_endpoint&lt;/span&gt;
+      &lt;span class=&quot;s&quot;&gt;preferTokenInfo&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;false&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Start your app with &lt;code class=&quot;highlighter-rouge&quot;&gt;spring run helloOAuth.groovy&lt;/code&gt; and navigate to &lt;a href=&quot;http://localhost:8080&quot;&gt;http://localhost:8080&lt;/a&gt;. You’ll be redirected to Okta, but likely see the following error.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt=&quot;Bad Request, Invalid Redirect&quot; src=&quot;/assets/img/blog/spring-boot-oauth/7-bad-request-invalid-redirect.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This happens because Spring Security sends a &lt;code class=&quot;highlighter-rouge&quot;&gt;redirect_uri&lt;/code&gt; value of &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:8080/login&lt;/code&gt;. Navigate to your Okta developer instance and change your OIDC app to have this as a Redirect URI.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt=&quot;Add Redirect URI&quot; src=&quot;/assets/img/blog/spring-boot-oauth/8-add-redirect-uri.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If you hit &lt;a href=&quot;http://localhost:8080&quot;&gt;http://localhost:8080&lt;/a&gt; again, this time you’ll get an error that doesn’t explain as much.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt=&quot;No Scopes&quot; src=&quot;/assets/img/blog/spring-boot-oauth/9-no-scopes.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The whitelabel error page doesn’t tell you anything, but your browser’s address window does: &lt;em&gt;no scopes were requested&lt;/em&gt;. Modify &lt;code class=&quot;highlighter-rouge&quot;&gt;application.yml&lt;/code&gt; to have a &lt;code class=&quot;highlighter-rouge&quot;&gt;scope&lt;/code&gt; property at the same level as &lt;code class=&quot;highlighter-rouge&quot;&gt;clientAuthenticationScheme&lt;/code&gt;. These are some standard OIDC scopes.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      &lt;span class=&quot;s&quot;&gt;clientAuthenticationScheme&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;form&lt;/span&gt;
+      &lt;span class=&quot;s&quot;&gt;scope&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;openid profile email&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Try &lt;a href=&quot;http://localhost:8080&quot;&gt;http://localhost:8080&lt;/a&gt; again and you’ll get an error that &lt;em&gt;User is not assigned to the client app&lt;/em&gt;. Again, you’ll have to look in the address bar to see it.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt=&quot;User Not Assigned&quot; src=&quot;/assets/img/blog/spring-boot-oauth/10-user-not-assigned.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Open your OIDC app in Okta and &lt;strong&gt;Assign People&lt;/strong&gt; to it. Adding your own account is the easiest way to do this.&lt;/p&gt;
+
+&lt;p&gt;The next error you’ll see when trying to authenticate is &lt;em&gt;Policy evaluation failed&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt=&quot;Policy Evaluation Failure&quot; src=&quot;/assets/img/blog/spring-boot-oauth/11-policy-evaluation-failure.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In Okta’s UI, navigate to &lt;strong&gt;Security &amp;gt; API&lt;/strong&gt; and click on your Authorization Server’s name and &lt;strong&gt;Access Policies&lt;/strong&gt;. Click &lt;strong&gt;Add Policy&lt;/strong&gt; to continue.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt=&quot;Access Policies&quot; src=&quot;/assets/img/blog/spring-boot-oauth/12-access-policies.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Enter a name and description and set it to apply to all clients.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt=&quot;Add Policy&quot; src=&quot;/assets/img/blog/spring-boot-oauth/13-add-policy.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click &lt;strong&gt;Create Policy&lt;/strong&gt; to continue. Once that completes, click the &lt;strong&gt;Add Rule&lt;/strong&gt; button.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt=&quot;Add Rule&quot; src=&quot;/assets/img/blog/spring-boot-oauth/14-add-rule.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Give the rule a name, accept the default values, and click the &lt;strong&gt;Create Rule&lt;/strong&gt; button.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt=&quot;Default Grant Rules&quot; src=&quot;/assets/img/blog/spring-boot-oauth/15-default-grant-rules.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Try &lt;a href=&quot;http://localhost:8080&quot;&gt;http://localhost:8080&lt;/a&gt; again and this time it should work. If it does - congrats!&lt;/p&gt;
+
+&lt;p&gt;You can make one additional change to the &lt;code class=&quot;highlighter-rouge&quot;&gt;helloOAuth.groovy&lt;/code&gt; file to prove it’s really working: change the &lt;code class=&quot;highlighter-rouge&quot;&gt;home()&lt;/code&gt; method to return &lt;code class=&quot;highlighter-rouge&quot;&gt;Hello $name&lt;/code&gt; where &lt;code class=&quot;highlighter-rouge&quot;&gt;$name&lt;/code&gt; is from &lt;code class=&quot;highlighter-rouge&quot;&gt;javax.security.Principal&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-groovy highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@GetMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;security&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Principal&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;s1&quot;&gt;'Hello '&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This should result in your app showing a result like the following.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt=&quot;Success&quot; src=&quot;/assets/img/blog/spring-boot-oauth/16-success.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;get-the-source-code&quot;&gt;Get the Source Code&lt;/h2&gt;
+
+&lt;p&gt;The source code for this tutorial and the examples in it are available &lt;a href=&quot;https://github.com/oktadeveloper/okta-spring-boot-oauth-example&quot;&gt;on GitHub&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;This tutorial showed you how to use Spring CLI, Groovy, Spring Boot, Spring Security, and Okta to quickly prototype an OAuth client. This information is useful for those that are developing a Spring MVC application with traditional server-rendered pages. However, these days, lots of developers are using JavaScript frameworks and mobile applications to build their UIs.&lt;/p&gt;
+
+&lt;p&gt;In a future tutorial, I’ll show you how to develop one of these fancy UIs in Angular and use the access token retrieved to talk to a Spring Boot API that’s secured by Spring Security and does JWT validation.&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 21 Mar 2017 00:00:00 -0700</pubDate>
+        <link>http://developer.okta.com/blog/2017/03/21/spring-boot-oauth</link>
+        <guid isPermaLink="true">http://developer.okta.com/blog/2017/03/21/spring-boot-oauth</guid>
+      </item>
+    
+      <item>
         <title>Get Started with Spring Boot, SAML, and Okta</title>
         <description>&lt;p&gt;Today I’d like to show you how build a Spring Boot application that leverages Okta’s Platform API for authentication via SAML. SAML (Security Assertion Markup Language) is an XML-based standard for securely exchanging authentication and authorization information between entities—specifically between identity providers, service providers, and users. Well-known IdPs include Salesforce, Okta, OneLogin, and Shibboleth.&lt;/p&gt;
 
 &lt;p&gt;My Okta developer experience began a couple years ago (in December 2014) when I worked for a client that was adopting it. I was tasked with helping them decide on a web framework to use, so I built prototypes with Node, Ruby, and Spring. I documented my findings in &lt;a href=&quot;https://raibledesigns.com/rd/entry/integrating_node_js_ruby_and&quot;&gt;a blog post&lt;/a&gt;. Along the way, &lt;a href=&quot;https://twitter.com/mraible/status/550057304331001856&quot;&gt;I tweeted&lt;/a&gt; my issues with Spring Boot, and &lt;a href=&quot;http://stackoverflow.com/questions/27713524/how-do-i-configure-spring-security-saml-to-work-with-okta?stw=2&quot;&gt;asked how to fix it&lt;/a&gt; on Stack Overflow. I ended up figuring out the solution through trial-and-error and my findings made it into the &lt;a href=&quot;http://docs.spring.io/autorepo/docs/spring-security-saml/1.0.x-SNAPSHOT/reference/html/chapter-idp-guide.html#d5e1816&quot;&gt;official Spring documentation&lt;/a&gt;&lt;a href=&quot;http://docs.spring.io/autorepo/docs/spring-security-saml/1.0.x-SNAPSHOT/reference/html/chapter-idp-guide.html#d5e1816&quot;&gt;.&lt;/a&gt; Things have changed a lot since then and now Spring Security 4.2 has support for auto-loading custom DSLs. And guess what, there’s even a DSL for SAML configuration!&lt;/p&gt;
 
-&lt;p&gt;Ready to get started? You can follow along in with the written tutorial below, &lt;a href=&quot;https://github.com/oktadeveloper/okta-spring-boot-saml-example&quot;&gt;check out the code on GitHub&lt;/a&gt;, or watch the screencast I made to walk you through the same process!&lt;/p&gt;
+&lt;p&gt;Ready to get started? You can follow along in with the written tutorial below, &lt;a href=&quot;https://github.com/oktadeveloper/okta-spring-boot-saml-example&quot;&gt;check out the code on GitHub&lt;/a&gt;, or watch the screencast I made to walk you through the same process.&lt;/p&gt;
 
 &lt;div style=&quot;text-align: center&quot;&gt;
 &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/JBtyGfrz-jA&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
@@ -31,23 +235,23 @@
 
 &lt;p&gt;Just like I did, the first thing you’ll need to do is create a developer account at &lt;a href=&quot;https://developer.okta.com&quot;&gt;https://developer.okta.com&lt;/a&gt;. After activating your account, login to it and click on the “Admin” button in the top right.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/spring-boot-saml/okta-userhome.png&quot; alt=&quot;Okta UserHome&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&quot;Okta UserHome&quot; src=&quot;/assets/img/blog/spring-boot-saml/okta-userhome.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;On the next screen, click “Add Applications” in the top right.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/spring-boot-saml/okta-dashboard.png&quot; alt=&quot;Okta Dashboard&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&quot;Okta Dashboard&quot; src=&quot;/assets/img/blog/spring-boot-saml/okta-dashboard.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;This will bring you to a screen with a “Create New App” green button on the left.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/spring-boot-saml/create-new-app.png&quot; alt=&quot;Create New App&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&quot;Create New App&quot; src=&quot;/assets/img/blog/spring-boot-saml/create-new-app.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click the button and choose “Web” for the platform and “SAML 2.0” for the sign on method.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/spring-boot-saml/new-app-saml-2.0.png&quot; alt=&quot;New App with SAML 2.0&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&quot;New App with SAML 2.0&quot; src=&quot;/assets/img/blog/spring-boot-saml/new-app-saml-2.0.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click the “Create” button. The next screen will prompt you for an application name. I used “Spring SAML”, but any name will work.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/spring-boot-saml/app-name.png&quot; alt=&quot;Enter App name&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&quot;Enter App name&quot; src=&quot;/assets/img/blog/spring-boot-saml/app-name.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click the “Next” button. This brings you to the second step, configuring SAML. Enter the following values:&lt;/p&gt;
 
@@ -56,19 +260,19 @@
   &lt;li&gt;Audience URI: &lt;code class=&quot;highlighter-rouge&quot;&gt;https://localhost:8443/saml/metadata&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/spring-boot-saml/saml-integration.png&quot; alt=&quot;SAML Integration&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&quot;SAML Integration&quot; src=&quot;/assets/img/blog/spring-boot-saml/saml-integration.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Scroll to the bottom of the form and click “Next”. This will bring you to the third step, feedback. Choose “I’m an Okta customer adding an internal app” and optionally select the App type.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/spring-boot-saml/customer-or-partner.png&quot; alt=&quot;Customer or Partner&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&quot;Customer or Partner&quot; src=&quot;/assets/img/blog/spring-boot-saml/customer-or-partner.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click the “Finish” button to continue. This will bring you to the application’s “Sign On” tab which has a section with a link to your applications metadata in a yellow box. Copy the &lt;strong&gt;Identity Provider metadata&lt;/strong&gt; link as you’ll need it to configure your Spring Boot application.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/spring-boot-saml/saml-metadata.png&quot; alt=&quot;SAML Metadata&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&quot;SAML Metadata&quot; src=&quot;/assets/img/blog/spring-boot-saml/saml-metadata.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The final setup step you’ll need is to assign people to the application. Click on the “People” tab and the “Assign to People” button. You’ll see a list of people with your account in it.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/spring-boot-saml/assign-people.png&quot; alt=&quot;Assign People&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&quot;Assign People&quot; src=&quot;/assets/img/blog/spring-boot-saml/assign-people.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click the assign button, accept the default username (your email), and click the “Done” button.&lt;/p&gt;
 
@@ -76,7 +280,7 @@
 
 &lt;p&gt;Navigate to &lt;a href=&quot;https://start.spring.io&quot;&gt;https://start.spring.io&lt;/a&gt; in your favorite browser and select Security, Web, Thymeleaf, and DevTools as dependencies.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/spring-boot-saml/start.spring.png&quot; alt=&quot;start.spring.io&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&quot;start.spring.io&quot; src=&quot;/assets/img/blog/spring-boot-saml/start.spring.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click “Generate Project”, download the generated ZIP file and open it in your favorite editor. Add the &lt;code class=&quot;highlighter-rouge&quot;&gt;spring-security-saml-dsl&lt;/code&gt; dependency to your &lt;code class=&quot;highlighter-rouge&quot;&gt;pom.xml&lt;/code&gt;.&lt;/p&gt;
 
@@ -210,19 +414,19 @@ Hello SAML!
 
 &lt;p&gt;Start the app using your IDE or &lt;code class=&quot;highlighter-rouge&quot;&gt;mvn spring-boot:run&lt;/code&gt; and navigate to &lt;a href=&quot;https://localhost:8443&quot;&gt;https://localhost:8443&lt;/a&gt;. If you’re using Chrome, you’ll likely see a privacy error.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/spring-boot-saml/connection-not-private.png&quot; alt=&quot;Connection Not Private&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&quot;Connection Not Private&quot; src=&quot;/assets/img/blog/spring-boot-saml/connection-not-private.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click the “ADVANCED” link at the bottom. Then click the “proceed to localhost (unsafe)” link.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/spring-boot-saml/connection-not-private-proceed.png&quot; alt=&quot;Proceed to localhost&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&quot;Proceed to localhost&quot; src=&quot;/assets/img/blog/spring-boot-saml/connection-not-private-proceed.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Next, you’ll be redirected to Okta to sign in and redirected back to your app. If you’re already logged in, you won’t see anything from Okta. If you sign out from Okta, you’ll see a login screen such as the one below.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/spring-boot-saml/okta-login.png&quot; alt=&quot;Okta Login&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&quot;Okta Login&quot; src=&quot;/assets/img/blog/spring-boot-saml/okta-login.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;After you’ve logged in, you should see a screen like the one below.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/spring-boot-saml/hello-saml.png&quot; alt=&quot;Hello SAML&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&quot;Hello SAML&quot; src=&quot;/assets/img/blog/spring-boot-saml/hello-saml.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;source-code&quot;&gt;Source Code&lt;/h2&gt;
 
