@@ -272,7 +272,7 @@ Returns a JSON document with information requested in the scopes list of the tok
 }
 ~~~
 
-The claims in the response are identical to those returned for the requested scopes in the *id_token* JWT, except for the sub-claim which is always present.
+The claims in the response are identical to those returned for the requested scopes in the *id_token* JWT, except for the *sub* claim which is always present.
 See [Scope-Dependent Claims](#scope-dependent-claims-not-always-returned) for more information about individual claims.
 
 #### Response Example (Error)
