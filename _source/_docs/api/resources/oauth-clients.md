@@ -109,8 +109,6 @@ Client applications have the following properties:
 
 > The `client_id` and `client_secret` must consist of printable characters. The precise set of permissible characters is defined in [Appendix A of the OAuth 2.0 Spec](https://tools.ietf.org/html/rfc6749#appendix-A). Both values may contain at most 100 characters, and the `client_secret` must contain at least 14 characters.
 
-> The `service` application type and `client_credentials` grant type [are {% api_lifecycle ea%} features](/docs/api/getting_started/releases-at-okta.html).
-
 > The `grant_types` and `response_types` values described above are partially orthogonal, as they refer to arguments passed to different
   endpoints in the [OAuth 2.0 protocol](https://tools.ietf.org/html/rfc6749). However, they are related in that the `grant_types`
   available to a client influence the `response_types` that the client is allowed to use, and vice versa. For instance, a `grant_types`
