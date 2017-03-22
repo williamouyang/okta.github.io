@@ -825,7 +825,7 @@ http://www.example.com/#error=invalid_scope&error_description=The+requested+scop
 
 {% api_operation post /oauth2/v1/token %}
 
-The API takes a grant type of either *authorization_code*, *password*, *refresh_token*, or *client_credentials* {% api_lifecycle beta %} and the corresponding credentials and returns back an Access Token. A Refresh Token will be returned if *offline_access* scope is requested using authorization_code, password, or refresh_token grant type. Additionally, using the authorization_code grant type will return an ID Token if the *openid* scope is requested.
+The API takes a grant type of either *authorization_code*, *password*, *refresh_token*, or *client_credentials* {% api_lifecycle ea %} and the corresponding credentials and returns back an Access Token. A Refresh Token will be returned if *offline_access* scope is requested using authorization_code, password, or refresh_token grant type. Additionally, using the authorization_code grant type will return an ID Token if the *openid* scope is requested.
 
 > Note:  No errors occur if you use this endpoint, but it isn’t useful until custom scopes or resource servers are available. We recommend you wait until custom scopes and resource servers are available.
 
@@ -844,7 +844,7 @@ scope              | Optional if *refresh_token*, or *password* is specified as 
 redirect_uri       | Expected if grant_type is *authorization_code*. Specifies the callback location where the authorization was sent; must match what is preregistered in Okta for this client. | String |
 code_verifier      | The code verifier of [PKCE](#parameter-details). Okta uses it to recompute the code_challenge and verify if it matches the original code_challenge in the authorization request. | String |
 
-> The [Client Credentials](https://tools.ietf.org/html/rfc6749#section-4.4) flow (if `grant_types` is `client_credentials`) is a {% api_lifecycle beta %} feature.
+> The [Client Credentials](https://tools.ietf.org/html/rfc6749#section-4.4) flow (if `grant_types` is `client_credentials`) is an {% api_lifecycle ea %} feature.
 
 
 ##### Token Authentication Method
