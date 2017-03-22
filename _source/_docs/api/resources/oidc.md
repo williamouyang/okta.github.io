@@ -825,7 +825,7 @@ http://www.example.com/#error=invalid_scope&error_description=The+requested+scop
 
 {% api_operation post /oauth2/v1/token %}
 
-The API takes a grant type of either *authorization_code*, *password*, *refresh_token*, or *client_credentials* {% api_lifecycle ea %} and the corresponding credentials and returns back an Access Token. A Refresh Token will be returned if *offline_access* scope is requested using authorization_code, password, or refresh_token grant type. Additionally, using the authorization_code grant type will return an ID Token if the *openid* scope is requested.
+The API takes a grant type of either *authorization_code*, *password*, *refresh_token*, or *client_credentials* and the corresponding credentials and returns back an Access Token. A Refresh Token will be returned if *offline_access* scope is requested using authorization_code, password, or refresh_token grant type. Additionally, using the authorization_code grant type will return an ID Token if the *openid* scope is requested.
 
 > Note:  No errors occur if you use this endpoint, but it isn’t useful until custom scopes or resource servers are available. We recommend you wait until custom scopes and resource servers are available.
 
@@ -835,7 +835,7 @@ The following parameters can be posted as a part of the URL-encoded form values 
 
 Parameter          | Description                                                                                         | Type       |
 -------------------+-----------------------------------------------------------------------------------------------------+------------|
-grant_type         | Can be one of the following: *authorization_code*, *password*, *refresh_token*, or *client_credentials* (*client_credentials* is in Beta release). Determines the mechanism Okta will use to authorize the creation of the tokens. | String |
+grant_type         | Can be one of the following: *authorization_code*, *password*, *refresh_token*, or *client_credentials*. Determines the mechanism Okta will use to authorize the creation of the tokens. | String |
 code               | Expected if grant_type specified *authorization_code*. The value is what was returned from the [authorization endpoint](#authentication-request). | String |
 refresh_token      | Expected if the grant_type specified *refresh_token*. The value is what was returned from this endpoint via a previous invocation. | String |
 username           | Expected if the grant_type specified *password*. | String |
@@ -843,8 +843,6 @@ password           | Expected if the grant_type specified *password*. | String |
 scope              | Optional if *refresh_token*, or *password* is specified as the grant type. This is a list of scopes that the client wants to be included in the Access Token. For the *refresh_token* grant type, these scopes have to be subset of the scopes used to generate the Refresh Token in the first place. | String |
 redirect_uri       | Expected if grant_type is *authorization_code*. Specifies the callback location where the authorization was sent; must match what is preregistered in Okta for this client. | String |
 code_verifier      | The code verifier of [PKCE](#parameter-details). Okta uses it to recompute the code_challenge and verify if it matches the original code_challenge in the authorization request. | String |
-
-> The [Client Credentials](https://tools.ietf.org/html/rfc6749#section-4.4) flow (if `grant_types` is `client_credentials`) is an {% api_lifecycle ea %} feature.
 
 
 ##### Token Authentication Method
