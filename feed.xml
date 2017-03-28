@@ -8,6 +8,303 @@
     <atom:link href="http://developer.okta.com/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Build an Angular App with Okta's Sign-In Widget in 15 Minutes</title>
+        <description>&lt;p&gt;AngularJS reigned as king of JavaScript MVC frameworks for several years. However, when the Angular team announced they would not provide backwards compatibility for their next version, there was a bit of a stir in its community, giving opportunities for frameworks like React and Vue.js to flourish. Fast forward a few years and both Angular 2 and Angular 4 have been released. Many developers are trying its TypeScript and finding the experience a pleasant one. &lt;a href=&quot;https://jaxenter.com/technology-trends-2017-top-frameworks-131993.html&quot;&gt;According to JAXenter&lt;/a&gt;, it’s doing a pretty good job, and holding strong as the third most popular UI framework, behind React and HTML5.&lt;/p&gt;
+
+&lt;p&gt;In this article, I’ll show you a quick way to get started with Angular, and add user authentication with &lt;a href=&quot;http://developer.okta.com/code/javascript/okta_sign-in_widget&quot;&gt;Okta’s Sign-In Widget&lt;/a&gt;. If you’re just getting started with Angular, you might want to read my &lt;a href=&quot;http://gist.asciidoctor.org/?github-mraible/ng-demo//README.adoc&quot;&gt;Angular tutorial&lt;/a&gt;. If you’d like to get the source code used in this article, you can &lt;a href=&quot;https://github.com/oktadeveloper/okta-angular-sign-in-widget-example&quot;&gt;find it on GitHub&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;why-user-authentication-with-okta&quot;&gt;Why User Authentication with Okta?&lt;/h2&gt;
+
+&lt;p&gt;Okta provides an API service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. We make user account management easier, more secure, and scalable so you can get to production sooner.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&quot;http://developer.okta.com/code/javascript/okta_sign-in_widget_ref&quot;&gt;Okta Sign-in Widget&lt;/a&gt; provides an embeddable JavaScript sign-in implementation that can be easily customized. The Sign-in Widget carries the same feature set in the standard Okta sign-in page of every tenant – with the added flexibility to change the look-and-feel. Included in the widget is support for password reset, forgotten password and strong authentication – all of which are driven by policies configured in Okta. Developers don’t have to write a single line of code to trigger these functions from within the widget. For consumer facing sites, social providers are also supported in the widget.&lt;/p&gt;
+
+&lt;h2 id=&quot;create-an-angular-application&quot;&gt;Create an Angular Application&lt;/h2&gt;
+
+&lt;p&gt;Angular 4 was &lt;a href=&quot;http://angularjs.blogspot.com/2017/03/angular-400-now-available.html&quot;&gt;recently released&lt;/a&gt;, as well as &lt;a href=&quot;https://github.com/angular/angular-cli/blob/master/CHANGELOG.md#100-2017-03-24&quot;&gt;Angular CLI 1.0&lt;/a&gt;. To see how you might use Okta’s Sign-In Widget in a simple Angular application, create a new application with Angular CLI. First, you’ll need to install Angular CLI.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm install -g @angular/cli
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;After this command completes, you can create a new application.&lt;/p&gt;
+
+&lt;p&gt;&amp;lt;pre class=”lang:bash”&amp;gt;
+[mraible:~] $ ng new angular-okta-example
+installing ng
+  create .editorconfig
+  create README.md
+  create src/app/app.component.css
+  create src/app/app.component.html
+  create src/app/app.component.spec.ts
+  create src/app/app.component.ts
+  create src/app/app.module.ts
+  create src/assets/.gitkeep
+  create src/environments/environment.prod.ts
+  create src/environments/environment.ts
+  create src/favicon.ico
+  create src/index.html
+  create src/main.ts
+  create src/polyfills.ts
+  create src/styles.css
+  create src/test.ts
+  create src/tsconfig.app.json
+  create src/tsconfig.spec.json
+  create src/typings.d.ts
+  create .angular-cli.json
+  create e2e/app.e2e-spec.ts
+  create e2e/app.po.ts
+  create e2e/tsconfig.e2e.json
+  create .gitignore
+  create karma.conf.js
+  create package.json
+  create protractor.conf.js
+  create tsconfig.json
+  create tslint.json
+Successfully initialized git.
+Installing packages for tooling via npm.
+Installed packages for tooling via npm.
+You can &lt;code class=&quot;highlighter-rouge&quot;&gt;ng set --global packageManager=yarn&lt;/code&gt;.
+Project ‘angular-okta-example’ successfully created.
+[mraible:~] 1m40s $
+&amp;lt;/pre&amp;gt;&lt;/p&gt;
+
+&lt;p&gt;This will create a new &lt;code class=&quot;highlighter-rouge&quot;&gt;angular-okta-example&lt;/code&gt; directory and install all the necessary dependencies. To verify everything works, run &lt;code class=&quot;highlighter-rouge&quot;&gt;ng e2e&lt;/code&gt; in a terminal window. All tests should pass and you should see results like the following.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt=&quot;Running e2e&quot; src=&quot;/assets/img/blog/angular-sign-in-widget/e2e-success.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;integrate-oktas-sign-in-widget-in-angular&quot;&gt;Integrate Okta’s Sign-In Widget in Angular&lt;/h2&gt;
+
+&lt;p&gt;Now we’re going to leverage Okta’s Sign-In Widget for an easily customizable login view. To start, install the &lt;a href=&quot;https://github.com/okta/okta-signin-widget&quot;&gt;Okta Sign-In Widget&lt;/a&gt; using npm. Note that &lt;a href=&quot;https://github.com/okta/okta-signin-widget/issues/191&quot;&gt;using Yarn won’t work&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm install --save @okta/okta-signin-widget
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Add the widget’s CSS to &lt;code class=&quot;highlighter-rouge&quot;&gt;src/styles.css&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;'~@okta/okta-signin-widget/dist/css/okta-sign-in.min.css'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;'~@okta/okta-signin-widget/dist/css/okta-theme.css'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Add the widget’s JavaScript file to &lt;code class=&quot;highlighter-rouge&quot;&gt;.angular-cli.json&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s2&quot;&gt;&quot;scripts&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;../node_modules/@okta/okta-signin-widget/dist/js/okta-sign-in.min.js&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;src/app/shared/okta/okta.service.ts&lt;/code&gt; and use it to wrap the widget’s configuration and make it an injectable service.&lt;/p&gt;
+
+&lt;div class=&quot;language-ts highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Injectable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'@angular/core'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kr&quot;&gt;declare&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;OktaSignIn&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Injectable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Okta&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;constructor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;widget&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;OktaSignIn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;baseUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'https://dev-{YOUR-ID}.oktapreview.com'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;clientId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'{CLIENT_ID}'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;redirectUri&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'http://localhost:4200'&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;getWidget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;To make this service available to all components in the application, modify &lt;code class=&quot;highlighter-rouge&quot;&gt;app.module.ts&lt;/code&gt; and list &lt;code class=&quot;highlighter-rouge&quot;&gt;Okta&lt;/code&gt; as a provider.&lt;/p&gt;
+
+&lt;div class=&quot;language-ts highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Okta&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'./shared/okta/okta.service'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;NgModule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;providers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Okta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;bootstrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;AppComponent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;Thanks to &lt;a href=&quot;https://twitter.com/nraboy&quot;&gt;Nic Raboy&lt;/a&gt; for teaching me that it’s pretty easy to &lt;a href=&quot;https://www.thepolyglotdeveloper.com/2017/03/javascript-libraries-in-a-typescript-application-revisited/&quot;&gt;include JavaScript libraries in a TypeScript application&lt;/a&gt;. The key is the &lt;code class=&quot;highlighter-rouge&quot;&gt;declare&lt;/code&gt; statement in the code above.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Before this will work, you’ll need to create an OpenID Connect (OIDC) application in Okta so you can replace the &lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;YOUR_ID&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;CLIENT_ID&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt; references when initializing the widget.&lt;/p&gt;
+
+&lt;h2 id=&quot;create-an-openid-connect-app-in-okta&quot;&gt;Create an OpenID Connect App in Okta&lt;/h2&gt;
+
+&lt;p&gt;OpenID Connect is built on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the user and, as well as to obtain their basic profile information. To learn more, see http://openid.net/connect/.&lt;/p&gt;
+
+&lt;p&gt;Login to your Okta account, or create one at &lt;a href=&quot;http://developer.okta.com&quot;&gt;http://developer.okta.com&lt;/a&gt; if you don’t have one. Navigate to &lt;strong&gt;Admin &amp;gt; Add Applications&lt;/strong&gt; and click on the &lt;strong&gt;Create New App&lt;/strong&gt; button. Select &lt;strong&gt;Single Page App (SPA)&lt;/strong&gt; for the Platform and &lt;strong&gt;OpenID Connect&lt;/strong&gt; for the sign on method. Click the &lt;strong&gt;Create&lt;/strong&gt; button and give your application a name. On the next screen, add &lt;strong&gt;http://localhost:4200&lt;/strong&gt; as a Redirect URI and click &lt;strong&gt;Finish&lt;/strong&gt;. You should see settings like the following.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt=&quot;OIDC App Settings&quot; src=&quot;/assets/img/blog/angular-sign-in-widget/oidc-settings.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click on the &lt;strong&gt;People&lt;/strong&gt; tab and the &lt;strong&gt;Assign to People&lt;/strong&gt; button. Assign yourself as a user, or someone else that you know the credentials for.&lt;/p&gt;
+
+&lt;h2 id=&quot;show-the-sign-in-widget&quot;&gt;Show the Sign-In Widget&lt;/h2&gt;
+
+&lt;p&gt;After making these changes, copy the your Client ID and Platform ID into &lt;code class=&quot;highlighter-rouge&quot;&gt;okta.service.ts&lt;/code&gt;. Then modify &lt;code class=&quot;highlighter-rouge&quot;&gt;app.component.ts&lt;/code&gt; to use the &lt;code class=&quot;highlighter-rouge&quot;&gt;Okta&lt;/code&gt; service and the widget to login/logout.&lt;/p&gt;
+
+&lt;div class=&quot;language-ts highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;OnInit&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'@angular/core'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Okta&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'./shared/okta/okta.service'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;selector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'app-root'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;templateUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'./app.component.html'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;styleUrls&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'./app.component.css'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;AppComponent&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;OnInit&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'app works!'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;oktaSignIn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;constructor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;okta&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Okta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;oktaSignIn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;okta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getWidget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;showLogin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;oktaSignIn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;renderEl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'#okta-login-container'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;status&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'SUCCESS'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;claims&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;ngOnInit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;oktaSignIn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;status&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!==&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'INACTIVE'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;login&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;showLogin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;logout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;oktaSignIn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;signOut&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;showLogin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;undefined&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;And modify &lt;code class=&quot;highlighter-rouge&quot;&gt;app.component.html&lt;/code&gt; to have a &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;div&amp;gt;&lt;/code&gt; with &lt;code class=&quot;highlighter-rouge&quot;&gt;id=&quot;okta-login-container&quot;&lt;/code&gt; and a place to show the logged in user’s email.&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ngIf=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;!user&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;okta-login-container&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ngIf=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;user&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  Hello 
+
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;button&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;)=&quot;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;logout&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;()&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Logout&lt;span class=&quot;nt&quot;&gt;&amp;lt;/button&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Run &lt;code class=&quot;highlighter-rouge&quot;&gt;ng serve&lt;/code&gt;, and open your browser to &lt;a href=&quot;http://localhost:4200&quot;&gt;http://localhost:4200&lt;/a&gt;. You should see the sign-in widget.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt=&quot;Sign-In Widget&quot; src=&quot;/assets/img/blog/angular-sign-in-widget/sign-in-widget.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Enter an assigned person’s credentials to login. You should see a “Hello {email}” message with a logout button.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt=&quot;Login Success&quot; src=&quot;/assets/img/blog/angular-sign-in-widget/login-success.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; You may experience an issue where the sign-in process seems to hang. Clicking anywhere in the browser window seems to solve this problem. I’m not sure why.&lt;/p&gt;
+
+&lt;p&gt;If it works - congrats! If it doesn’t, please post a question to Stack Overflow with an &lt;a href=&quot;http://stackoverflow.com/questions/tagged/okta&quot;&gt;okta tag&lt;/a&gt;, or hit me up &lt;a href=&quot;https://twitter.com/mraible&quot;&gt;on Twitter&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;known-issues&quot;&gt;Known Issues&lt;/h3&gt;
+
+&lt;p&gt;There are a couple of known issues in this tutorial. The first is that the widget’s CSS takes over the whole page and will override your app’s CSS. This is a &lt;a href=&quot;https://github.com/okta/okta-signin-widget/issues/126&quot;&gt;documented issue&lt;/a&gt; and you can see &lt;a href=&quot;https://github.com/okta/okta-signin-widget/issues/126#issuecomment-286530056&quot;&gt;my comment on it&lt;/a&gt; to learn more.&lt;/p&gt;
+
+&lt;p&gt;The other issue is that clicking the &lt;strong&gt;Logout&lt;/strong&gt; button doesn’t re-render the Sign-In Widget. You can do a &lt;code class=&quot;highlighter-rouge&quot;&gt;location.reload()&lt;/code&gt; after logging out, but I’m guessing there’s a better way.&lt;/p&gt;
+
+&lt;p&gt;To workaround the first issue, you can remove the global CSS files from &lt;code class=&quot;highlighter-rouge&quot;&gt;styles.css&lt;/code&gt; and add CSS that only affects the widget.&lt;/p&gt;
+
+&lt;h4 id=&quot;customize-the-widget-css&quot;&gt;Customize the Widget CSS&lt;/h4&gt;
+
+&lt;p&gt;Remove the CSS &lt;code class=&quot;highlighter-rouge&quot;&gt;@import&lt;/code&gt; statements to added to &lt;code class=&quot;highlighter-rouge&quot;&gt;src/styles.css&lt;/code&gt;. Add an &lt;code class=&quot;highlighter-rouge&quot;&gt;@import&lt;/code&gt; for &lt;a href=&quot;https://v4-alpha.getbootstrap.com/&quot;&gt;Bootstrap 4&lt;/a&gt; and a few style rules to position elements. Copy the following code into &lt;code class=&quot;highlighter-rouge&quot;&gt;src/styles.css&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;sx&quot;&gt;url(https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt;#okta-login-container&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;auto&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;max-width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;400px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;border&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1px&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;solid&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;silver&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;20px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;box-shadow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;5px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;5px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;5px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;silver&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt;#okta-login-container&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;margin-bottom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;5px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;100%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;5px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt;#okta-login-container&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;checkbox&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;25px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;After making these changes, the sign-in widget will look like the following screenshot.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt=&quot;Custom CSS&quot; src=&quot;/assets/img/blog/angular-sign-in-widget/custom-css.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;fix-your-tests&quot;&gt;Fix Your Tests&lt;/h2&gt;
+&lt;p&gt;If you try to run &lt;code class=&quot;highlighter-rouge&quot;&gt;npm test&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;ng test&lt;/code&gt;, tests will fail:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Chrome 56.0.2924 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Mac OS X 10.11.6&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;: Executed 3 of 3 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;3 FAILED&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0 secs / 0.181 secs&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Chrome 56.0.2924 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Mac OS X 10.11.6&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; AppComponent should render title &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;a h1 tag FAILED
+	Failed: No provider &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;Okta!
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;To fix this, specify &lt;code class=&quot;highlighter-rouge&quot;&gt;Okta&lt;/code&gt; as a provider in &lt;code class=&quot;highlighter-rouge&quot;&gt;src/app/app.component.spec.ts&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-ts highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Okta&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'./shared/okta/okta.service'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;describe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'AppComponent'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;beforeEach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;async&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;TestBed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;configureTestingModule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;declarations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;AppComponent&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;providers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Okta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;compileComponents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}));&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;After making this changes, you should see the sweet smell of success.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Chrome 56.0.2924 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Mac OS X 10.11.6&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;: Executed 3 of 3 SUCCESS &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;8.562 secs / 7.479 secs&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Protractor tests should still work as well. You can prove this by running &lt;code class=&quot;highlighter-rouge&quot;&gt;ng e2e&lt;/code&gt; in a terminal window.&lt;/p&gt;
+
+&lt;h2 id=&quot;angular--okta&quot;&gt;Angular + Okta&lt;/h2&gt;
+
+&lt;p&gt;You can find a completed version of the application created in this blog post &lt;a href=&quot;https://github.com/oktadeveloper/okta-angular-sign-in-widget-example&quot;&gt;on GitHub&lt;/a&gt;. In a future post, I’ll show you how to create a more Angular-native experience, where you control the HTML for the login form.&lt;/p&gt;
+
+&lt;p&gt;Building authentication in an application is hard. It’s even less fun to build it over and over again in each application you build. Okta does the hard part for you and makes it a lot more fun to be a developer! &lt;a href=&quot;https://www.okta.com/developer/signup/&quot;&gt;Sign up for a forever-free developer account and try Okta today!&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I hope you’ve enjoyed this quick tour of our Angular support. If you have questions about Okta’s features, or what we’re building next, please hit me up &lt;a href=&quot;https://twitter.com/mraible&quot;&gt;on Twitter&lt;/a&gt;, &lt;a href=&quot;http://stackoverflow.com/questions/tagged/okta&quot;&gt;post a question to Stack Overflow with an “okta” tag&lt;/a&gt;, or &lt;a href=&quot;https://github.com/oktadeveloper/okta-angular-sign-in-widget-example/issues/new&quot;&gt;open a new issue on GitHub&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 27 Mar 2017 00:00:00 -0700</pubDate>
+        <link>http://developer.okta.com/blog/2017/03/27/angular-okta-sign-in-widget</link>
+        <guid isPermaLink="true">http://developer.okta.com/blog/2017/03/27/angular-okta-sign-in-widget</guid>
+      </item>
+    
+      <item>
         <title>Get Started with Spring Boot, OAuth 2.0, and Okta</title>
         <description>&lt;p&gt;If you’re building a Spring Boot application, you’ll eventually need to add user authentication. You can do this with OAuth 2.0 (henceforth: OAuth). OAuth is a standard that applications can use to provide client applications with “secure delegated access”. It works over HTTP and authorizes devices, APIs, servers, and applications with access tokens rather than credentials.&lt;/p&gt;
 
