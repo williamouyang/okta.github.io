@@ -5,13 +5,13 @@ author: mraible
 tags: [angular, sign-in widget, okta, typescript, angular-cli]
 ---
 
-AngularJS reigned as king of JavaScript MVC frameworks for several years. However, when the Angular team announced they would not provide backwards compatibility for their next version, there was a bit of a stir in its community, giving opportunities for frameworks like React and Vue.js to flourish. Fast forward a few years and both Angular 2 and Angular 4 have been released. Many developers are trying its TypeScript and finding the experience a pleasant one. [According to JAXenter](https://jaxenter.com/technology-trends-2017-top-frameworks-131993.html), it’s doing a pretty good job, and holding strong as the third most popular UI framework, behind React and HTML5. 
+AngularJS reigned as king of JavaScript MVC frameworks for several years. However, when the Angular team announced they would not provide backwards compatibility for their next version, there was a bit of a stir in its community, giving opportunities for frameworks like React and Vue.js to flourish. Fast forward a few years and both Angular 2 and Angular 4 have been released. Many developers are trying its TypeScript and finding the experience a pleasant one. [According to JAXenter](https://jaxenter.com/technology-trends-2017-top-frameworks-131993.html), it’s doing a pretty good job, and holding strong as the third most popular UI framework, behind React and HTML5.
 
 In this article, I’ll show you a quick way to get started with Angular, and add user authentication with [Okta's Sign-In Widget](http://developer.okta.com/code/javascript/okta_sign-in_widget). If you’re just getting started with Angular, you might want to read my [Angular tutorial](http://gist.asciidoctor.org/?github-mraible/ng-demo//README.adoc). If you’d like to get the source code used in this article, you can [find it on GitHub](https://github.com/oktadeveloper/okta-angular-sign-in-widget-example).
 
 ## Why User Authentication with Okta?
 
-Okta provides an API service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. We make user account management easier, more secure, and scalable so you can get to production sooner. 
+Okta provides an API service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. We make user account management easier, more secure, and scalable so you can get to production sooner.
 
 The [Okta Sign-in Widget](http://developer.okta.com/code/javascript/okta_sign-in_widget_ref) provides an embeddable JavaScript sign-in implementation that can be easily customized. The Sign-in Widget carries the same feature set in the standard Okta sign-in page of every tenant – with the added flexibility to change the look-and-feel. Included in the widget is support for password reset, forgotten password and strong authentication – all of which are driven by policies configured in Okta. Developers don’t have to write a single line of code to trigger these functions from within the widget. For consumer facing sites, social providers are also supported in the widget.
 
@@ -23,9 +23,9 @@ Angular 4 was [recently released](http://angularjs.blogspot.com/2017/03/angular-
 npm install -g @angular/cli
 ```
 
-After this command completes, you can create a new application. 
+After this command completes, you can create a new application.
 
-<pre class=”lang:bash”>
+``` bash
 [mraible:~] $ ng new angular-okta-example
 installing ng
   create .editorconfig
@@ -63,7 +63,7 @@ Installed packages for tooling via npm.
 You can `ng set --global packageManager=yarn`.
 Project 'angular-okta-example' successfully created.
 [mraible:~] 1m40s $
-</pre>
+```
 
 This will create a new `angular-okta-example` directory and install all the necessary dependencies. To verify everything works, run `ng e2e` in a terminal window. All tests should pass and you should see results like the following.
 
@@ -85,15 +85,15 @@ Add the widget's CSS to `src/styles.css`:
 ```
 
 Add the widget's JavaScript file to `.angular-cli.json`:
- 
+
 ```json
 "scripts": [
   "../node_modules/@okta/okta-signin-widget/dist/js/okta-sign-in.min.js"
 ],
 ```
- 
+
 Create `src/app/shared/okta/okta.service.ts` and use it to wrap the widget's configuration and make it an injectable service.
- 
+
 ```ts
 import { Injectable } from '@angular/core';
 declare let OktaSignIn: any;
@@ -127,7 +127,7 @@ import { Okta } from './shared/okta/okta.service';
   bootstrap: [AppComponent]
 })
 ```
- 
+
 _Thanks to [Nic Raboy](https://twitter.com/nraboy) for teaching me that it's pretty easy to [include JavaScript libraries in a TypeScript application](https://www.thepolyglotdeveloper.com/2017/03/javascript-libraries-in-a-typescript-application-revisited/). The key is the `declare` statement in the code above._
 
 Before this will work, you'll need to create an OpenID Connect (OIDC) application in Okta so you can replace the `{YOUR_ID}` and `{CLIENT_ID}` references when initializing the widget.
@@ -225,7 +225,7 @@ To workaround the first issue, you can remove the global CSS files from `styles.
 
 #### Customize the Widget CSS
 
-Remove the CSS `@import` statements to added to `src/styles.css`. Add an `@import` for [Bootstrap 4](https://v4-alpha.getbootstrap.com/) and a few style rules to position elements. Copy the following code into `src/styles.css`. 
+Remove the CSS `@import` statements to added to `src/styles.css`. Add an `@import` for [Bootstrap 4](https://v4-alpha.getbootstrap.com/) and a few style rules to position elements. Copy the following code into `src/styles.css`.
 
 ```css
 @import url(https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css);
@@ -293,4 +293,4 @@ You can find a completed version of the application created in this blog post [o
 
 Building authentication in an application is hard. It’s even less fun to build it over and over again in each application you build. Okta does the hard part for you and makes it a lot more fun to be a developer! [Sign up for a forever-free developer account and try Okta today!](https://www.okta.com/developer/signup/).
 
-I hope you’ve enjoyed this quick tour of our Angular support. If you have questions about Okta’s features, or what we’re building next, please hit me up [on Twitter](https://twitter.com/mraible), [post a question to Stack Overflow with an “okta” tag](http://stackoverflow.com/questions/tagged/okta), or [open a new issue on GitHub](https://github.com/oktadeveloper/okta-angular-sign-in-widget-example/issues/new). 
+I hope you’ve enjoyed this quick tour of our Angular support. If you have questions about Okta’s features, or what we’re building next, please hit me up [on Twitter](https://twitter.com/mraible), [post a question to Stack Overflow with an “okta” tag](http://stackoverflow.com/questions/tagged/okta), or [open a new issue on GitHub](https://github.com/oktadeveloper/okta-angular-sign-in-widget-example/issues/new).
