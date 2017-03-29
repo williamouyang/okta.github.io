@@ -1,3 +1,9 @@
+---
+layout: docs_page
+title: Bring Your Own SAML App Certificate
+excerpt: How to use a custom SAML certificate for apps
+---
+
 ## Bring Your Own SAML App Certificate
 
 Okta Admins admin can upload their own SAML certificates to control the private signing keys used to sign my SAML assertions for both inbound and outbound SAML apps. 
