@@ -29,8 +29,7 @@
 
 &lt;p&gt;After this command completes, you can create a new application.&lt;/p&gt;
 
-&lt;p&gt;&amp;lt;pre class=”lang:bash”&amp;gt;
-[mraible:~] $ ng new angular-okta-example
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;mraible:~] &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ng new angular-okta-example
 installing ng
   create .editorconfig
   create README.md
@@ -62,12 +61,13 @@ installing ng
   create tsconfig.json
   create tslint.json
 Successfully initialized git.
-Installing packages for tooling via npm.
-Installed packages for tooling via npm.
-You can &lt;code class=&quot;highlighter-rouge&quot;&gt;ng set --global packageManager=yarn&lt;/code&gt;.
-Project ‘angular-okta-example’ successfully created.
-[mraible:~] 1m40s $
-&amp;lt;/pre&amp;gt;&lt;/p&gt;
+Installing packages &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;tooling via npm.
+Installed packages &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;tooling via npm.
+You can &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;ng &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt; --global &lt;span class=&quot;nv&quot;&gt;packageManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;yarn&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;.
+Project &lt;span class=&quot;s1&quot;&gt;'angular-okta-example'&lt;/span&gt; successfully created.
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;mraible:~] 1m40s &lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;This will create a new &lt;code class=&quot;highlighter-rouge&quot;&gt;angular-okta-example&lt;/code&gt; directory and install all the necessary dependencies. To verify everything works, run &lt;code class=&quot;highlighter-rouge&quot;&gt;ng e2e&lt;/code&gt; in a terminal window. All tests should pass and you should see results like the following.&lt;/p&gt;
 
@@ -532,7 +532,7 @@ brew install springboot
 
 &lt;h2 id=&quot;create-a-saml-application-on-okta&quot;&gt;Create a SAML Application on Okta&lt;/h2&gt;
 
-&lt;p&gt;At the time of this writing, the easiest way to create a SAML-aware Spring Boot application is to use Spring Security’s &lt;a href=&quot;[https://github.com/spring-projects/spring-security-saml-dsl](https://github.com/spring-projects/spring-security-saml-dsl)&quot;&gt;SAML DSL project&lt;/a&gt;. It contains a sample project that provides &lt;a href=&quot;https://github.com/spring-projects/spring-security-saml-dsl/blob/master/samples/spring-security-saml-dsl-sample/README.md&quot;&gt;instructions&lt;/a&gt; for configuring Okta as a SAML provider. These instructions will likely work for you if you’re experienced Spring Boot and Okta developer. If you’re new to both, this “start from scratch” tutorial might work better for you.&lt;/p&gt;
+&lt;p&gt;At the time of this writing, the easiest way to create a SAML-aware Spring Boot application is to use Spring Security’s &lt;a href=&quot;https://github.com/spring-projects/spring-security-saml-dsl&quot;&gt;SAML DSL project&lt;/a&gt;. It contains a sample project that provides &lt;a href=&quot;https://github.com/spring-projects/spring-security-saml-dsl/blob/master/samples/spring-security-saml-dsl-sample/README.md&quot;&gt;instructions&lt;/a&gt; for configuring Okta as a SAML provider. These instructions will likely work for you if you’re experienced Spring Boot and Okta developer. If you’re new to both, this “start from scratch” tutorial might work better for you.&lt;/p&gt;
 
 &lt;p&gt;Just like I did, the first thing you’ll need to do is create a developer account at &lt;a href=&quot;https://developer.okta.com&quot;&gt;https://developer.okta.com&lt;/a&gt;. After activating your account, login to it and click on the “Admin” button in the top right.&lt;/p&gt;
 
