@@ -4,37 +4,35 @@ title: Bring Your Own SAML App Certificate
 excerpt: How to use a custom SAML certificate for apps
 ---
 
+<a name="top"></a>
 ## Bring Your Own SAML App Certificate
 
-Okta Admins admin can upload their own SAML certificates to control the private signing keys used to sign my SAML assertions for both inbound and outbound SAML apps. 
-
+Okta Admins admin can upload their own SAML certificates to sign the assertion for Outbound SAML apps and to sign the AuthNRequest and to decrypt assertion for Inbound SAML to accomodate legacy setups. 
 
 ## Prerequisite
 
-To use your own SAML certificate, you must update the key credential for the affected apps. Key rollover is an **Early Access** (EA) feature; contact Okta support to enable it. 
+{% api_lifecycle ea %}
+
+To use your own SAML certificate, update the key credential for the affected apps. Key rollover is an **Early Access** (EA) feature; contact Okta support to enable it. 
 
 ### Inbound and Outbound SAML Applications
 
-The general procedure is the same for inbound and outbound SAML application; however, some of the api calls are different, as described in the steps below. The general procedure contains the following six steps:
+The general procedure is the same for Inbound and Outbound SAML application; however, some of the api calls are different, as described in the steps below. The general procedure contains the following six steps:
 
-  1. [List your apps](#step1) 
-  2. [Generate a certificate signing request (CSR)](#step2)
-  3. [Sign the CSR](#step3)
-  4. [Publish the CSR](#step4)
-  5. [Update the key credential for the app to specify the new certificate](#step5)
-  6. [Upload the new certificate to the ISV](#step6) 
+  1. [List your apps](#step-1--list-your-apps) 
+  2. [Generate a certificate signing request (CSR)](#step-2--generate-a-csr)
+  3. [Sign the CSR](#step-3--sign-the-csr)
+  4. [Publish the CSR](#step-4--publish-the-csr)
+  5. [Update the key credential for the app to specify the new certificate](#step-5--update-the-key-credential)
+  6. [Upload the new certificate to the ISV](#step-6--upload-the-sha1-certificate-to-the-isv) 
 
-> **Important:** In the third step, you will use your own process to sign the CSR. You cannot move to step four until the process is completed.
-
+> **Important:** In the third step, use your own process to sign the CSR. You can't move to step four until the process is completed.
 
 For information on using the Postman REST API test client for these steps, see [API Test Client](http://developer.okta.com/docs/api/getting_started/api_test_client.html).
 
 #### [Step 1 – List your apps](id:step1)
 
-Use the [List Apps API](http://developer.okta.com/docs/api/resources/apps.html#list-applications) to return a list of all apps and get the app id, name, and label for each app to update.
-
-
-For each app to update, collect the `id`, `name`, and `label` elements.
+Use the [/api/v1/apps API](#top) to return a list of all apps and collect the `id`, `name`, and `label` elements for each app to update.
 
 Request: `GET /api/v1/apps`
 
@@ -96,15 +94,15 @@ Truncated Response:
 
 #### [Step 2 – Generate a CSR](id:step2)
 
-* Use the [Generate CSR API](http://developer.okta.com/docs/api/apps/TBD.html#list-applications) to return a list of all apps to use with outbound SAML apps. 
-* Use the [Generate CSR API2](http://developer.okta.com/docs/api/apps/TBD.html#list-applications) to return a list of all apps to use with inbound SAML apps.
+* Use the [/api/v1/apps/credentials/csrs/ API](#top) to return a list of all apps to use with Outbound SAML apps. 
+* Use the [/api/v1/idps/credentials/csrs/ API](#top) to return a list of all apps to use with Inbound SAML apps.
 
-You can generate a CSR and receive the response in either JSON or PKCS#10 format.
+You can generate a CSR and receive the response in either JSON or [PKCS#10](https://tools.ietf.org/html/rfc2986) format.
 
-The follow request generates a CSR in JSON format to use with outbound SAML apps. For inbound SAML, change the request to `POST /api/v1/idps/:uid/credentials/csrs/`.
+The following request generates a CSR in JSON format to use with Outbound SAML apps. For Inbound SAML, change the POST statement to `POST /api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/`.
 
 ~~~json
-POST /api/v1/apps/:uid/credentials/csrs/
+POST /api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/
 Accept: application/json
 Content-Type: application/json
 
@@ -121,12 +119,10 @@ Content-Type: application/json
     {
       "dnsNames": [ "yourorgunit.example.com" ] 
     },
-  "use": "sig",
-  "key_size": 2048
 }
 
 201 Created
-Location: http://yoururl.com/api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/
+Location: https://your-domain.okta.com/api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/
 
 {
   "id": "abckutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azh000",
@@ -135,7 +131,7 @@ Location: http://yoururl.com/api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/
   "kty": "RSA",
   "_links": {
     "self": {
-      "href": "http://yoururl.com/api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/abckutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azh000",
+      "href": "https://your-domain.okta.com/api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/abckutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azh000",
       "hints": {
         "allow": [
           "GET",
@@ -144,7 +140,7 @@ Location: http://yoururl.com/api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/
       }
     },
     "publish": {
-      "href": "http://yoururl.com/api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/abckutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azh000/lifecycle/publish",
+      "href": "https://your-domain.okta.com/api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/abckutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azh000/lifecycle/publish",
       "hints": {
         "allow": [
           "POST"
@@ -155,15 +151,17 @@ Location: http://yoururl.com/api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/
 }
 ~~~
 
-The following request generates a CSR in PKCS#10 format.
+The following request generates a CSR in PKCS#10 format for Outbound SAML apps. *Accept* specifies the response format; *Content-Type* specifies the request format.
+
+For inbound SAML apps, change the POST statement to `POST /api/v1/idps/00000id1U3iyFqLu0g4/credentials/csrs/`. 
 
 ~~~json
-POST /api/v1/apps/:uid/credentials/csrs/
+POST /api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/
 Accept: application/pkcs10
 Content-Type: application/json
 
 201 Created
-Location: http://yoururl.com/api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/
+Location: https://your-domain.okta.com/api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/
 ABDuuPz0KZJxIoUOyz5hHsI7OUDPSFxLoiNc1dXj_EfK
 Content-Type: application/pkcs10; filename=okta.p10
 Content-Transfer-Encoding: base64
@@ -173,15 +171,15 @@ ABCC6jCCAdICAQAwdjELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
 
 #### [Step 3 – Sign the CSR](id:step3)
 
-Follow the third-party process that your company uses to sign the CSR. Wait for the process to complete before moving to step 4.
+Follow the third-party process that your company uses to sign the CSR. **You can't move to step four until the process is completed.** The signed CSR is required to continue step 4.
 
-**Note: ** The CSR is generated in Base64 DER format. If your process requires a different format, convert it using openSSL or a third-party decoder. Free, third-party decoders are readily available.
+**Note:** The CSR is generated in Base64 DER format. If your process requires a different format, convert it using openSSL or a third-party decoder. Free, third-party decoders are readily available.
 
 #### [Step 4 – Publish the CSR](id:step4)
 
-You can publish the certificate in PEM or CER/DER format using the [Publish Cert API](http://developer.okta.com/docs/api/apps/TBD.html#pubcert). The returned Key ID (kid) is used in the following step.
+Use the [/api/v1/apps/credentials/csrs/lifecycle/publish API](#top) to publish the certificate in PEM or CER/DER format. The returned Key ID (kid) is used in the following step.
 
-The following request generates a CSR in PEM format.
+The following request publishes a CSR with a certificate in PEM format.
 
 ~~~json
 POST /api/v1/apps/00000sid1U3iyFqLu0g4/credentials/csrs/aeT9qCTiUumO7TvxA4jq3gNFIfbtimiSpQ9jssB5iyE/lifecycle/publish
@@ -189,7 +187,7 @@ Accept: application/json
 Content-Type: application/x-pem-file
 ~~~
 
-The following request generates a CSR in CER/DER format.
+The following request publishes a CSR with a certificate in Based64-encoded CER format.
 
 ~~~json
 POST /api/v1/apps/00000sid1U3iyFqLu0g4/credentials/csrs/FzAuuPz0KZJxIoUOyz5hHsI7OUDPSFxLoiNc1dXj_jM/lifecycle/publish
@@ -198,9 +196,7 @@ Content-Type: application/x-x509-ca-cert
 Content-Transfer-Encoding: base64
 ~~~ 
 
-The responses are identical except the *Begin Certificate* and *End Certificate* lines are not present in the CER/DER format. 
-
-The PEM request returns the following response.
+The responses are identical except the *-----Begin Certificate-----* and *-----End Certificate-----* lines are not present in the Base64-encoded CER/DER format, as shown. 
 
 ~~~
 -----BEGIN CERTIFICATE-----
@@ -217,7 +213,7 @@ ZRUaagvFUo1EO9m1xnjpLDIa7+M=
 
 
 201 Created
-Location: http://rain.okta1.com:1802/api/v1/apps/0oa1ysid1U3iyFqLu0g4/credentials/keys/ElsCzR8nbPamANBFu7QPRvtLD6Q3O1KQNJ92zkfFJNw
+Location: http://your-domain.okta.com/api/v1/apps/0oa1ysid1U3iyFqLu0g4/credentials/keys/ElsCzR8nbPamANBFu7QPRvtLD6Q3O1KQNJ92zkfFJNw
 Content-Type: application/json;charset=UTF-8
 
 {
@@ -237,10 +233,11 @@ Content-Type: application/json;charset=UTF-8
 ~~~
 
 
-#### [Step 5 – Update the key credential for the app to specify the new signing key id](id:step5)
+#### [Step 5 – Update the key credential](id:step5)
 
-Call the [Apps API](http://developer.okta.com/docs/api/resources/apps.html#app-id) with the app ID you obtained in step 1. In the body, include
-the app name and the app label that you obtained in step 1, the key ID that you obtained in step 4.
+Update the key credential for the app to specify the new signing key id.
+
+Call the [/api/v1/apps/:aid](http://developer.okta.com/docs/api/resources/apps.html#update-application) with the app ID you obtained in step 1. In the body, include the app name and the app label that you obtained in step 1, the key ID that you obtained in step 4.
 
 Request:
 
@@ -264,7 +261,7 @@ curl -v -X PUT \
 ~~~
 
 
-#### [Step 6 – Upload the SHA1 certificate to the ISV](id:step6)
+#### [Step 6 – Upload the new certificate to the ISV](id:step6)
 
 > After completing step 5, your users cannot access the SAML app until you complete this step.
 
