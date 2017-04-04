@@ -9,6 +9,8 @@ excerpt: How to use a custom SAML certificate for apps
 
 Okta Admins admin can upload their own SAML certificates to sign the assertion for Outbound SAML apps and to sign the AuthNRequest and to decrypt assertion for Inbound SAML to accomodate legacy setups. 
 
+**Note:** SAML SP is referred to as Inbound SAML, and SAML IdP is referred to as Outbound SAML.
+
 ## Prerequisite
 
 {% api_lifecycle ea %}
@@ -99,7 +101,7 @@ Truncated Response:
 
 You can generate a CSR and receive the response in either JSON or [PKCS#10](https://tools.ietf.org/html/rfc2986) format.
 
-The following request generates a CSR in JSON format to use with Outbound SAML apps. For Inbound SAML, change the POST statement to `POST /api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/`.
+The following request generates a CSR in JSON format to use with Outbound SAML apps. For Inbound SAML, change the POST statement to `POST /api/v1/idps/00000id1U3iyFqLu0g4/credentials/csrs/`.
 
 ~~~json
 POST /api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/
@@ -151,12 +153,10 @@ Location: https://your-domain.okta.com/api/v1/apps/00000id1U3iyFqLu0g4/credentia
 }
 ~~~
 
-The following request generates a CSR in PKCS#10 format for Outbound SAML apps. *Accept* specifies the response format; *Content-Type* specifies the request format.
-
-For inbound SAML apps, change the POST statement to `POST /api/v1/idps/00000id1U3iyFqLu0g4/credentials/csrs/`. 
+The following request generates a CSR in PKCS#10 format for Inbound SAML apps. *Accept* specifies the response format; *Content-Type* specifies the request format. For Outbound SAML apps, change the POST statement to `POST /api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/`. 
 
 ~~~json
-POST /api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/
+POST /api/v1/idps/00000id1U3iyFqLu0g4/credentials/csrs/
 Accept: application/pkcs10
 Content-Type: application/json
 
@@ -177,7 +177,10 @@ Follow the third-party process that your company uses to sign the CSR. **You can
 
 #### [Step 4 – Publish the CSR](id:step4)
 
-Use the [/api/v1/apps/credentials/csrs/lifecycle/publish API](#top) to publish the certificate in PEM or CER/DER format. The returned Key ID (kid) is used in the following step.
+- Use the [/api/v1/apps/credentials/csrs/lifecycle/publish API](#top) to publish the certificate in PEM or CER/DER format for Outbound SAML apps. 
+- Use the [/api/v1/idps/credentials/csrs/lifecycle/publish API](#top) to publish the certificate in PEM or CER/DER format for Inbound SAML Apps. 
+
+In both cases, the returned Key ID (kid) is used in the following step.
 
 The following request publishes a CSR with a certificate in PEM format.
 
@@ -237,7 +240,9 @@ Content-Type: application/json;charset=UTF-8
 
 Update the key credential for the app to specify the new signing key id.
 
-Call the [/api/v1/apps/:aid](http://developer.okta.com/docs/api/resources/apps.html#update-application) with the app ID you obtained in step 1. In the body, include the app name and the app label that you obtained in step 1, the key ID that you obtained in step 4.
+Call the [/api/v1/apps/:aid](http://developer.okta.com/docs/api/resources/apps.html#update-application) with the app ID you obtained in step 1. In the body, include the app name and the app label that you obtained in step 1, the key ID that you obtained in step 4. The credentials element for Inbound SAML must contain the entire IdP model.
+
+The following request is for Outbound SAML.
 
 Request:
 
@@ -260,20 +265,49 @@ curl -v -X PUT \
 
 ~~~
 
+The following request is for Inbound SAML. 
 
-#### [Step 6 – Upload the new certificate to the ISV](id:step6)
+Request:
+
+~~~ sh
+curl -v -X PUT \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "name": "appname",
+  "label": "Application Name",
+  "signOnMode": "SAML_2_0",
+  "credentials": {
+      "trust": {
+        "issuer": "urn:example:idp",
+        "audience": "https://www.your-domain.okta.com/saml2/service-provider/spkscufugnmowogbefk",
+        "kid": "59238ef0-1342-4220-be2c-c370f983ce1d"
+      },
+      "signing": {
+        "kid": "w__Yr9AElCftDtLP5CmjzZFMKXndqHtx7B3QPkg9jrI"
+      }
+    }
+ }
+}' "https://${org}.okta.com/api/v1/apps/${aid}"
+
+~~~
+
+
+#### [Step 6 – Upload the new certificate to the ISV](id:step6) 
 
 > After completing step 5, your users cannot access the SAML app until you complete this step.
 
 **Note: ** This step cannot be automated.
 
+For Outbound SAML, complete the following four steps.
 
 1. In the Okta user interface, select **Applications > Applications** and choose your app. 
 2. Select **Sign-On Options**.
 3. Click **View Setup Instructions**, as shown below. <br />![Accessing SAML Setup Instructions](../../assets/img/saml_setup_link.png "Accessing SAML Setup Instructions")
 4. Perform the setup for your app again, using the instructions provided. During this setup, you will upload the certificate in a specified format, the metadata, or the certificate fingerprint.
 
-
+For Inbound SAML, follow the existing procedures for your setup.
 
 
 `
