@@ -240,7 +240,7 @@ Content-Type: application/json;charset=UTF-8
 
 Update the key credential for the app to specify the new signing key id.
 
-Call the [/api/v1/apps/:aid](http://developer.okta.com/docs/api/resources/apps.html#update-application) with the app ID you obtained in step 1. In the body, include the app name and the app label that you obtained in step 1, the key ID that you obtained in step 4. The credentials element for Inbound SAML must contain the entire IdP model.
+Call the [/api/v1/apps/:aid API](http://developer.okta.com/docs/api/resources/apps.html#update-application) with the app ID you obtained in step 1. In the body, include the app name and the app label that you obtained in step 1, the key ID that you obtained in step 4. The credentials element for Inbound SAML must contain the entire IdP model.
 
 The following request is for Outbound SAML.
 
