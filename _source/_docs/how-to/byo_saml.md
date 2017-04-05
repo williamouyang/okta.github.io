@@ -26,7 +26,8 @@ The general procedure is the same for Inbound and Outbound SAML application; how
   3. [Sign the CSR](#step-3--sign-the-csr)
   4. [Publish the CSR](#step-4--publish-the-csr)
   5. [Update the key credential for the app to specify the new certificate](#step-5--update-the-key-credential)
-  6. [Upload the new certificate to the ISV](#step-6--upload-the-sha1-certificate-to-the-isv) 
+  6. [Clone the certificate (optional)](#step-6--clone-the-certificate-(optional))
+  7. [Upload the new certificate to the ISV](#step-6--upload-the-sha1-certificate-to-the-isv) 
 
 > **Important:** In the third step, use your own process to sign the CSR. You can't move to step four until the process is completed.
 
@@ -153,10 +154,10 @@ Location: https://your-domain.okta.com/api/v1/apps/00000id1U3iyFqLu0g4/credentia
 }
 ~~~
 
-The following request generates a CSR in PKCS#10 format for Inbound SAML apps. *Accept* specifies the response format; *Content-Type* specifies the request format. For Outbound SAML apps, change the POST statement to `POST /api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/`. 
+The following request generates a CSR in PKCS#10 format for Outbound SAML apps. *Accept* specifies the response format; *Content-Type* specifies the request format. For Inbound SAML apps, change the POST statement to `POST /api/v1/idps/00000id1U3iyFqLu0g4/credentials/csrs/`. 
 
 ~~~json
-POST /api/v1/idps/00000id1U3iyFqLu0g4/credentials/csrs/
+POST /api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/
 Accept: application/pkcs10
 Content-Type: application/json
 
@@ -171,7 +172,7 @@ ABCC6jCCAdICAQAwdjELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
 
 #### [Step 3 – Sign the CSR](id:step3)
 
-Follow the third-party process that your company uses to sign the CSR. **You can't move to step four until the process is completed.** The signed CSR is required to continue step 4.
+Follow the third-party process that your company uses to sign the CSR. **You can't move to step four until the process is completed**, as the signed CSR is required to continue step 4.
 
 **Note:** The CSR is generated in Base64 DER format. If your process requires a different format, convert it using openSSL or a third-party decoder. Free, third-party decoders are readily available.
 
@@ -240,7 +241,12 @@ Content-Type: application/json;charset=UTF-8
 
 Update the key credential for the app to specify the new signing key id.
 
-Call the [/api/v1/apps/:aid API](http://developer.okta.com/docs/api/resources/apps.html#update-application) with the app ID you obtained in step 1. In the body, include the app name and the app label that you obtained in step 1, the key ID that you obtained in step 4. The credentials element for Inbound SAML must contain the entire IdP model.
+- For Outbound SAML, call the [/api/v1/apps/:aid API](http://developer.okta.com/docs/api/resources/apps.html#update-application).
+- For Inbound SAML, call the [/api/v1/idps/:id API](http://developer.okta.com/docs/api/resources/idps.html#update-identity-provider).
+
+In both cases, pass the app ID you obtained in step 1. In the body, include the app name and the app label that you obtained in step 1, the key ID that you obtained in step 4. 
+
+The credentials element for Inbound SAML must specify all properties when updating IdP configuration. Partial updates are not supported by the `api/v1/idps/:id API`.
 
 The following request is for Outbound SAML.
 
@@ -275,30 +281,87 @@ curl -v -X PUT \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-  "name": "appname",
-  "label": "Application Name",
-  "signOnMode": "SAML_2_0",
-  "credentials": {
-      "trust": {
-        "issuer": "urn:example:idp",
-        "audience": "https://www.your-domain.okta.com/saml2/service-provider/spkscufugnmowogbefk",
-        "kid": "59238ef0-1342-4220-be2c-c370f983ce1d"
-      },
-      "signing": {
-        "kid": "w__Yr9AElCftDtLP5CmjzZFMKXndqHtx7B3QPkg9jrI"
-      }
-    }
- }
-}' "https://${org}.okta.com/api/v1/apps/${aid}"
+  "id": "0oa62bc8wppPw0UGr0h7",
+  "type": "SAML2",
+  "name": "Example IdP",
+  "status": "INACTIVE",
+  "created": null,
+  "lastUpdated": "2016-03-29T21:23:45.000Z",
+  "protocol": {
+    "type": "SAML2",
+    "endpoints": {
+      "sso": {
+        "url": "https://idp.example.com/saml2/sso",
+        "binding": "HTTP-REDIRECT",
+        "destination": "https://idp.example.com/saml2/sso"
+      },
+      "acs": {
+        "binding": "HTTP-POST",
+        "type": "INSTANCE"
+      }
+    },
+    "algorithms": {
+      "request": {
+        "signature": {
+          "algorithm": "SHA-256",
+          "scope": "REQUEST"
+        }
+      },
+      "response": {
+        "signature": {
+          "algorithm": "SHA-256",
+          "scope": "ANY"
+        }
+      }
+    },
+    "settings": {
+      "nameFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
+    },
+    "credentials": {
+      "trust": {
+        "issuer": "https://idp.example.com",
+        "audience": "https://www.okta.com/saml2/service-provider/spCQJRNaaxs7ANqKBO7M",
+        "kid": "your-key-id"
+      }
+    }
+  },
+  "policy": {
+    "provisioning": {
+      "action": "AUTO",
+      "profileMaster": true,
+      "groups": {
+        "action": "NONE"
+      }
+    },
+    "accountLink": {
+      "filter": null,
+      "action": "AUTO"
+    },
+    "subject": {
+      "userNameTemplate": {
+        "template": "idpuser.subjectNameId"
+      },
+      "filter": null,
+      "matchType": "USERNAME"
+    },
+    "maxClockSkew": 120000
+  }
+}' "https://${org}.okta.com/api/v1/idps/your-idps-id"
 
 ~~~
 
+#### [Step 6 – Clone the certificate (optional)](id:step6) 
 
-#### [Step 6 – Upload the new certificate to the ISV](id:step6) 
+To share the certificate you created across multiple Identity Providers, clone it with the
+[/api/v1/idps/:id/credentials/keys/:kid/clone?targetIdpId=:targetIdpId API](#top) using the key id you generated. 
 
-> After completing step 5, your users cannot access the SAML app until you complete this step.
+**Important:** Sharing certificates is not a recommended security practice. This API is provided for use cases that can't be supported by Okta certificate functionality.
 
-**Note: ** This step cannot be automated.
+#### [Step 7 – Upload the new certificate to the ISV](id:step7) 
+
+> After completing step 6, your users cannot access the SAML app until you complete this step.
+
+**Note:** This step cannot be automated.
 
 For Outbound SAML, complete the following four steps.
 
