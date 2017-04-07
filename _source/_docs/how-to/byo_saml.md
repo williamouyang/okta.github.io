@@ -47,7 +47,7 @@ Truncated Response:
 ~~~json
 
 {
-    "id": "0000000000aaaaaBBBBBo",
+    "id": "00000id1U3iyFqLu0g4",
     "name": "appname",
     "label": "Application Name",
     "status": "ACTIVE",
@@ -128,11 +128,11 @@ Content-Type: application/json
   "subjectAltNames": 
     {
       "dnsNames": [ "yourorgunit.example.com" ] 
-    },
+    }
 }
 
 201 Created
-Location: https://your-domain.okta.com/api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/
+Location: https://your-domain.okta.com/api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/abckutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azh000
 
 {
   "id": "abckutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azh000",
@@ -170,14 +170,14 @@ Follow the third-party process that your company uses to sign the CSR. **You can
 #### [Step 4 – Publish the CSR](id:step4)
 
 - Use the [/api/v1/apps/credentials/csrs/lifecycle/publish API](#top) to publish the certificate for Outbound SAML apps. 
-- Use the [/api/v1/idps/credentials/csrs/lifecycle/publish API](#top) to publish the certificate for Inbound SAML Apps. 
+- Use the [/api/v1/idps/credentials/csrs/lifecycle/publish API](#top) to publish the certificate for Inbound SAML apps. 
 
-Base64 encoding and both PEM and CER/DER certificate formats are supported.
+Base64 encoding and both PEM and CER certificate formats are supported.
 
 - For CER format, change the Content-Type statement to `Content-Type: application/x-x509-ca-cert`.
 - For Base64-encoded format, add the statement `Content-Transfer-Encoding: base64` after the Content-Type statement.
 
-Collect the returned Key ID (kid) to use in the next step.
+Collect the returned Key ID (credentials.signing.kid) to use in the next step. 
 
 The following request publishes a CSR with a certificate in PEM format.
 
@@ -227,12 +227,12 @@ The following request is for Outbound SAML.
 
 Request:
 
-~~~ sh
-curl -v -X PUT \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
--H "Authorization: SSWS ${api_token}" \
--d '{
+~~~ json
+PUT /api/v1/apps/00000id1U3iyFqLu0g4
+Accept: application/json
+Content-Type: application/json
+
+{
   "name": "appname",
   "label": "Application Name",
   "signOnMode": "SAML_2_0",
@@ -242,20 +242,18 @@ curl -v -X PUT \
     }
   }
  }
-}' "https://${org}.okta.com/api/v1/apps/${aid}"
-
 ~~~
 
 The following request is for Inbound SAML. 
 
 Request:
 
-~~~ sh
-curl -v -X PUT \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
--H "Authorization: SSWS ${api_token}" \
--d '{
+~~~ json
+PUT /api/v1/idps/00000id1U3iyFqLu0g4
+Accept: application/json
+Content-Type: application/json
+
+{
   "id": "00000id1U3iyFqLu0g4",
   "type": "SAML2",
   "name": "Example IdP",
@@ -296,6 +294,9 @@ curl -v -X PUT \
       "trust": {
         "issuer": "https://idp.example.com",
         "audience": "https://www.okta.com/saml2/service-provider/spCQJRNaaxs7ANqKBO7M",
+        "kid": "ZcLGUsl4Xn3996YYel6KPvOxZOhNWfly5-q36CByH4o"
+      },
+      "signing": {
         "kid": "your-key-id"
       }
     }
@@ -321,7 +322,7 @@ curl -v -X PUT \
     },
     "maxClockSkew": 120000
   }
-}' "https://your-domain.okta.com/api/v1/idps/your-idps-id"
+}
 
 ~~~
 
@@ -354,5 +355,3 @@ For Outbound SAML, complete the following four steps.
 
 For Inbound SAML, follow the existing procedures for your setup.
 
-
-`
