@@ -7,7 +7,7 @@ excerpt: How to use a custom SAML certificate for apps
 <a name="top"></a>
 ## Bring Your Own SAML App Certificate
 
-Okta Admins admin can upload their own SAML certificates to sign the assertion for Outbound SAML apps and to sign the AuthNRequest and to decrypt assertion for Inbound SAML. 
+Okta Admins admin can upload their own SAML certificates to sign the assertion for Outbound SAML apps and to sign the AuthNRequest to decrypt assertion for Inbound SAML. 
 
 **Note:** SAML SP is referred to as Inbound SAML, and SAML IdP is referred to as Outbound SAML.
 
@@ -35,7 +35,7 @@ For information on using the Postman REST API test client for these steps, see [
 
 #### [Step 1 – List your apps](id:step1)
 
-Use the [/api/v1/apps API](#top) to return a list of all apps and collect the `id`, `name`, and `label` elements for each app to update.
+Use the [/api/v1/apps API](http://developer.okta.com/docs/api/resources/apps.html#list-applications) to return a list of all apps and collect the `id`, `name`, and `label` elements for each app to update.
 
 Request: `GET /api/v1/apps`
 
@@ -102,7 +102,11 @@ Truncated Response:
 
 You can generate a CSR and receive the response in either JSON or [PKCS#10](https://tools.ietf.org/html/rfc2986) format.
 
-The following request generates a CSR in JSON format to use with Outbound SAML apps. For Inbound SAML, change the POST statement to `POST /api/v1/idps/00000id1U3iyFqLu0g4/credentials/csrs/`.
+The following request generates a CSR in JSON format to use with Outbound SAML apps. 
+
+- For Inbound SAML, change the POST statement to `POST /api/v1/idps/00000id1U3iyFqLu0g4/credentials/csrs/`.
+- For PKCS#10 format, change the Accept statement to `Accept: application/pkcs10`. <br />*Accept* specifies the response format; *Content-Type* specifies the request format.
+
 
 ~~~json
 POST /api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/
@@ -154,22 +158,6 @@ Location: https://your-domain.okta.com/api/v1/apps/00000id1U3iyFqLu0g4/credentia
 }
 ~~~
 
-The following request generates a CSR in PKCS#10 format for both Outbound and Inbound SAML apps. *Accept* specifies the response format; *Content-Type* specifies the request format. For Inbound SAML apps, change the POST statement to `POST /api/v1/idps/00000id1U3iyFqLu0g4/credentials/csrs/`. 
-
-~~~json
-POST /api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/
-Accept: application/pkcs10
-Content-Type: application/json
-
-201 Created
-Location: https://your-domain.okta.com/api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/
-ABDuuPz0KZJxIoUOyz5hHsI7OUDPSFxLoiNc1dXj_EfK
-Content-Type: application/pkcs10; filename=okta.p10
-Content-Transfer-Encoding: base64
-
-ABCC6jCCAdICAQAwdjELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xEzARBgNVBAoMCk9rdGEsIEluYy4xEDAOBgNVBAsMB0phbmt5Q28xEzARBgNVBAMMCklkUCBJc3N1ZXIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCpus1zL9sVhEDhwEcdQFWYerAOkDn+J3OkpXFyTPBUFLDYe21CoQN0TQOl5CgtEa8rViyNj0Drv8bWppojLbEkBO3FY6YqDbqSlU+ZuBlhvwiaxnGBnKeRLH6RoWn/6+I1GwHkJJDGYzVtYfELu92sZnhLzNJFcleI41OK7Ll1fWI+un4N5Ryd2JHHtczo7t9N0hWgulckmXHM+qOk1/0abXGZUV2QMDNVIgDcSswyK/n3Ri1p5ccJGX8sJdYCiihxE+Ms97z+PO7oLVbdVLkRDcSDE0T/dTK8CThI5otvhM4PlEeYbNUa8/9f88bUteA2oxDdTWJVurH6FeMvZ6iFAgMBAAGgLzAtBgkqhkiG9w0BCQ4xIDAeMBwGA1UdEQQVMBOCEWphbmt5LmV4YW1wbGUuY29tMA0GCSqGSIb3DQEBCwUAA4IBAQB3o1VcZ+NnwBzSKITWKnf9Pb0wY8hrHsVo+jAX0eUrotMCSnCIL3hyLOZW+LXvITfaREM6l/L0vKLqbhNto9trmpn9wy+fFqRboC/0zAyIotPiRDBsCVD+UEKea5IIrDAWsq2Guv1RfUcyI79rblwctfNZbIHj5rpoYVpDqYvQpCHRMmQrzKMDb9qVtZVHbAHqTKEDQTLnQbyvwuw/kmaiPMK7SDSHTPpgq+izW2M6Qqqjn8Mz8RNgQcantXvjcb70uAFt1uxkQR4j9K/kRoY7pjR4d/FrAq/oxfnNPQxyvXYr+/MzOxEFdDKts4vSCYqpOLgQs2xpC6vfhAeHGYEFK
-~~~
-
 #### [Step 3 – Sign the CSR](id:step3)
 
 Follow the third-party process that your company uses to sign the CSR. **You can't move to step four until the process is completed**, as the signed CSR is required to continue step 4.
@@ -185,22 +173,10 @@ In both cases, the returned Key ID (kid) is used in the following step.
 
 The following request publishes a CSR with a certificate in PEM format.
 
-~~~json
-POST /api/v1/apps/00000sid1U3iyFqLu0g4/credentials/csrs/aeT9qCTiUumO7TvxA4jq3gNFIfbtimiSpQ9jssB5iyE/lifecycle/publish
-Accept: application/json
-Content-Type: application/x-pem-file
-~~~
+- For CER format, change the Content-Type statement to `Content-Type: application/x-x509-ca-cert`.
+- For Base64-encoded format, add the statement `Content-Transfer-Encoding: base64` after the Content-Type statement.
 
-The following request publishes a CSR with a certificate in Based64-encoded CER format.
-
-~~~json
-POST /api/v1/apps/00000sid1U3iyFqLu0g4/credentials/csrs/FzAuuPz0KZJxIoUOyz5hHsI7OUDPSFxLoiNc1dXj_jM/lifecycle/publish
-Accept: application/json
-Content-Type: application/x-x509-ca-cert
-Content-Transfer-Encoding: base64
-~~~ 
-
-The responses are identical except the *-----Begin Certificate-----* and *-----End Certificate-----* lines are not present in the Base64-encoded CER/DER format, as shown. 
+The responses are identical except the *-----Begin Certificate-----* and *-----End Certificate-----* lines are not present in CER/DER format, as shown. 
 
 ~~~
 -----BEGIN CERTIFICATE-----
@@ -246,7 +222,7 @@ Update the key credential for the app to specify the new signing key id.
 
 In both cases, pass the app ID you obtained in step 1. In the body, include the app name and the app label that you obtained in step 1, the key ID that you obtained in step 4. 
 
-The entire [Inbound SAML model](http://developer.okta.com/docs/api/resources/idps.html#update-identity-provider) must specify all the properties when updating the IdP configuration. Partial updates are not supported by the `api/v1/idps/:id API`.
+The entire [Inbound SAML model](http://developer.okta.com/docs/api/resources/idps.html#update-identity-provider) must specify all the properties when updating the IdP configuration. Partial updates are not supported by the `/api/v1/idps/:id API`.
 
 The following request is for Outbound SAML.
 
@@ -352,13 +328,13 @@ curl -v -X PUT \
 
 #### [Step 6 – Clone the certificate (optional)](id:step6) 
 
-To share the certificate you created across multiple Identity Providers, clone it with the
+- To share the certificate you created across multiple Identity Providers, clone it with the
 [/api/v1/idps/:id/credentials/keys/:kid/clone?targetIdpId=:targetIdpId API](#top) using the key id you generated. 
 
-To share the certificate you created across multiple appss, clone it with the
-[/api/v1/apps/:id/credentials/keys/:kid/clone?targetIdpId=:targetIdpId API](#top) using the key id you generated.
+- To share the certificate you created across multiple apps, clone it with the
+[/api/v1/apps/:aid/credentials/keys/:kid/clone?targetAid=:targetAid API](http://developer.okta.com/docs/api/resources/apps.html#clone-application-key-credential) using the key id you generated.
 
-**Important:** Sharing certificates is not a recommended security practice. This API is provided for use cases that can't be supported by Okta certificate functionality.
+**Important:** Sharing certificates is not a recommended security practice. This API is provided to support legacy use cases.
 
 #### [Step 7 – Upload the new certificate to the ISV](id:step7) 
 
