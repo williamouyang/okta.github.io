@@ -58,11 +58,11 @@ Zones are used to group IP Address ranges in a meaningful way such that policy d
 
 |Field Name | Description | DataType | Required | MaxLength |
 |----------|-------------|----------|----------|-----------|
-|type | Type of the zone (currently it can only be IP) | String | |
-|id   | Unique identified for this zone                | String | |
+|type | Type of zone (currently it can only be IP) | String | |
+|id   | Unique identifier for this zone                | String | |
 |name | Unique name for this zone                      | String | 128 |
-|gateways | IP addresses (range or cidr form) of this zone | Array | 150 |
-|proxies | IP addresses (range or cidr form) that are allowed to forward request from gateway addresses above. | Array | 150 |
+|gateways | IP addresses (range or CIDR form) of this zone | Array | 150 |
+|proxies | IP addresses (range or CIDR form) that are allowed to forward request from gateway addresses above. | Array | 150 |
 |gateway.type | Format of the value - either CIDR or RANGE | String | |
 |gateway.value | Value in CIDR/RANGE form depending on the type specified | String | |
 |proxy.type | Format of the value - CIDR or RANGE | String | |
@@ -564,7 +564,7 @@ curl "https://yourorg.okta.com/api/v1/org/zones/?limit=100&filter=%28id+eq+%22nz
  ]
 ~~~
 
-#### Get Zone With it's Name Containing Given String
+#### Get Zone Where 'name' Attribute Contains Given String
 {:.api .api-request .api-request-example}
 ~~~sh
 curl "https://yourorg.okta.com/api/v1/org/zones/?limit=-1&q=First"
