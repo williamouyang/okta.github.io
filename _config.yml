@@ -42,6 +42,7 @@ include: [_static]
 
 sass:
     sass_dir: _sass
+    style: compressed
 
 collections:
   standards:
