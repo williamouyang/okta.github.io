@@ -710,7 +710,7 @@ To learn more about forms and validation, see [Angular forms documentation](http
 
 OpenID Connect (OIDC) is built on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the user and, as well as to obtain their basic profile information. To learn more, see [https://openid.net/connect/](https://openid.net/connect/).
 
-To integrate [Okta](http://developer.okta.com) for user authentication, you'll first need to [register](https://www.okta.com/developer/signup/)and create an OIDC application.
+To integrate [Okta](http://developer.okta.com) for user authentication, you'll first need to [register](https://www.okta.com/developer/signup/) and create an OIDC application.
 
 Login to your Okta account, or [create one](https://www.okta.com/developer/signup/) if you don’t have one. Navigate to **Admin > Add Applications** and click on the **Create New App** button. Select **Single Page App (SPA)** for the Platform and **OpenID Connect** for the sign on method. Click the **Create** button and give your application a name. On the next screen, add `http://localhost:4200` as a Redirect URI and click *Finish**. You should see settings like the following.
 
