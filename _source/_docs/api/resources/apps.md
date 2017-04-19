@@ -4521,7 +4521,7 @@ Determines the [key](#application-key-credential-model) used for signing asserti
 | kid        | Reference for [key credential for the app](#application-key-store-operations)    | String   | FALSE    |
 |------------+----------------------------------------------------------------------------------+----------+----------|
 
-> You must enable the key rollover feature to view `kid`. Key rollover is an {% api_lifecycle ea%} feature.
+> You must enable the key rollover feature to view `kid`. Key rollover is an {% api_lifecycle ea %} feature.
 
 ~~~json
 {
