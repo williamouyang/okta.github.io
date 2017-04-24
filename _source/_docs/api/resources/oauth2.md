@@ -260,7 +260,6 @@ No other modifications affect existing tokens.
 
 ## ID Token
 An Authorization Server can also issue an ID Token to the client, as in [OIDC](oidc#id-token), but with the following differences:
-but with the following differences:
 
 * The ID Token cannot contain a reserved scope or claim called 'groups'. To obtain a claim with group information, administrators must define a custom claim with a group filter and associate it with a scope.
 * The custom properties in the app user profile are not included in the Id Token by default, even if profile scope is granted. To obtain a claim for a custom property, administrators must define a custom claim with an Okta Expression Language expression and associate it with a scope.
