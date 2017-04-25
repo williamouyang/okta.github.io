@@ -1,12 +1,16 @@
 ---
 layout: docs_page
 title: Platform Release Notes
-excerpt: Summary of changes to the Okta Platform since Release 2017.12
+excerpt: Summary of changes to the Okta Platform since Release 2017.15
 ---
 
-## Release 2017.14
+## Release 2017.16
 
-### Advance Notice: API Rate Limit Improvements
+### Advance Notices
+
+The items in this section are scheduled for future releases. Although we share our expected release dates, these dates are subject to change. 
+ 
+#### API Rate Limit Improvements
 
 We are making org-wide rate limits more granular, and treating authenticated end-user interactions separately. More granular rate limits will further lessen the likelihood of calls to one URI impacting another. Treating authenticated end-user interactions separately will lessen the chances of one user's impacting another. We’re also providing a transition period so you can see what these changes will look like in your Okta system log before enforcing them:
 
@@ -20,61 +24,84 @@ Of course, as each change is released, we'll announce the change here.
 
 For a full description of the rate limit changes, see [API Rate Limit Improvements](https://support.okta.com/help/articles/Knowledge_Article/API-Rate-Limit-Improvements).<!-- OKTA-110472 -->
 
-### Platform Feature Improvements
+#### Simple HAL Links
 
-#### Revoke Access Tokens and Refresh Tokens
+Okta will enable the Simple HAL Links on User Collections feature for most preview organizations.
+This change is currently scheduled for the 2017.19 release on 5/10/17, to remain in preview for at least one month.
 
-Use the `oauthTokens` parameter when clearing user sessions to revoke all OpenID Connect and OAuth Access Tokens and Refresh Tokens
-issued to the user. For more information, see [the Users API](/docs/api/resources/users.html#clear-user-sessions).<!-- OKTA-116904 -->
+This feature will remove the HAL links that reflect state from user objects returned in collections.
 
-#### Token Requests with Grant Type password
+Currently, a user object returned in a collection contains some or all of the following links:
 
-Token requests with `password` grant type (`grant_type`) and `openid` scope now return an ID Token.
-Previously only the appropriate Access Token or Refresh Token was returned. <!-- OKTA-117288 -->
+```
+"_links": {
+    "suspend": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/lifecycle/suspend",
+      "method": "POST"
+    },
+    "resetPassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/lifecycle/reset_password",
+      "method": "POST"
+    },
+    "expirePassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/lifecycle/expire_password",
+      "method": "POST"
+    },
+    "forgotPassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/credentials/forgot_password",
+      "method": "POST"
+    },
+    "self": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3"
+    },
+    "changeRecoveryQuestion": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/credentials/change_recovery_question",
+      "method": "POST"
+    },
+    "deactivate": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/lifecycle/deactivate",
+      "method": "POST"
+    },
+    "changePassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/credentials/change_password",
+      "method": "POST"
+    }
+}
+```
 
-#### Authentication That Overrides Client Request Context
+Unfortunately, these links are not guaranteed to accurately reflect the state of the specified user.
+As outlined in [Design Principles](docs/api/getting_started/design_principles.html/#links-in-collections):
 
-The API now authenticates a user via a trusted application or proxy that uses the activation token.
-For more information, see [Authentication API](/docs/api/resources/authn.html#primary-authentication-with-activation-token). <!-- OKTA-119692 -->
+"Search and list operations are intended to find matching resources and their identifiers. If you intend to search for a resource and then modify its state or make a lifecycle change, the correct pattern is to first retrieve the resource by 'id' using the "self" link provided for that resource in the collection. This will provide the full set of lifecycle links for that resource based on its most up-to-date state."
+ 
+The Simple HAL Links on User Collections feature ensures that possibly invalid state links are not returned.  Instead only the `self` link is returned:
 
-#### HAL Link for User in Provisioned State
+```
+"_links": {
+    "self": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3"
+    }
+}
+```
+ 
+As noted above, to change user state, the `self` link should be called to retrieve a user object with up-to-date links.
+ 
+>Important: Not all preview organizations will receive this feature. Okta has identified preview organizations that depend on the Okta .NET SDK, which requires the old functionality.
+Okta won't enable the feature for these orgs.
+Instead, Okta will send a customer communication explaining the migration path to enable the feature.
 
-A [HAL link](https://tools.ietf.org/html/draft-kelly-json-hal-06) to `/api/v1/users/:uid/lifecycle/reactivate` is now provided
-for requests when the user is in a PROVISIONED state but doesn't have a password.  <!-- OKTA-119221 -->
+### Platform Feature Improvement: Zones API Generally Available in Preview
 
-#### New Developer Org Banner
-
-A new banner displays when you log into your developer org. It provides links to common onboarding tasks. Once you dismiss the banner, it can't be displayed again. <!-- OKTA-121055 -->
-
-#### Access Policy by IP Range
-
-Access Policies can now be defined based on an IP address range. <!-- OKTA-121280 -->
-
-#### Bring Your Own SAML Certificates
-
-Okta Admins can now upload their own SAML certificates to sign the assertion for Outbound SAML apps. These certificates can also be used to sign the AuthNRequest, as well as to decrypt the assertion for Inbound SAML. For more information, see [Bring Your Own SAML App Certificate](/docs/how-to/byo_saml.html).<!-- OKTA-119158 -->
-
-#### Universal Directory for User Locale
-
-When determining the user locale via the API, Okta uses the locale setting in the Universal Directory. If one isn't found, then Okta uses the org-wide display language instead. If the settings in Universal Directory and org are different for an end user, then Okta will prioritize the locale indicated in Universal Directory settings. This priority may change in future releases. <!-- OKTA-117789 -->
-
-#### Lifecycle Reactivation Endpoint
-
-Added `lifecycle/reactivate` endpoint.
-
-This endpoint enables the API user to recover from failure in the authentication workflow, specifically when the user password is not set. In those cases this endpoint can be used to restart the activation by getting a new token and proceeding to set the user credentials. For more information, see the [API Reference](/docs/api/resources/users.html#reactivate-user). <!-- OKTA-119096 -->
-
-#### Linking Users to Social Identity Providers
-
-Added a number of APIs that allow you to link an existing Okta user to a Social Identity Provider via an `externalId`. For more information, see [Identity Provider User Operations](/docs/api/resources/idps.html#identity-provider-user-operations) <!-- OKTA-97257 -->
+Access policies can now be defined based on an IP address range using [the Zones API](/docs/api/resources/zones.html).
+This feature is Generally Available in preview orgs for at least one month before being Generally Available in production. <!-- OKTA-121280 -->
 
 ### Platform Bugs Fixed
 
- * Request to `/api/v1/users` while the user was still activating failed to return an HTTP 409 error. (OKTA-120458)
- * REACT samples contained errors. (OKTA-120530)
- * IdP key thumbprints were generated using SHA1. They are now generated using SHA-256, and the returned IdP key property has changed from `x5t` to `x5t#S256`. (OKTA-121442)
- * As part of the System Log API, if an invalid value was specified for `after`, we would return 0 results. Now you will get a validation error. (OKTA-119726)
-
+ * When a group was deleted, if that group was referenced by a social or SAML IdP, the reference wasn't removed.
+    These references caused errors when trying to configure the social or SAML IdP. (OKTA-116909)
+ * If the SAML IdP parameter `idp` was specified in the query string for a request to the `oauth2/v1/authorize` endpoint, the request failed in some orgs. (OKTA-120122)
+ * Creating or saving access policies for an authorization server failed for some client IDs. (OKTA-121230)
+ 
 ### Does Your Org Have This Change Yet?
 
 To verify the current release for an org, click the **Admin** button and check the footer of the Dashboard page.
