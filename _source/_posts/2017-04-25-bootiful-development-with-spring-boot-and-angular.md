@@ -322,6 +322,7 @@ export class BeerListComponent implements OnInit {
 
 Modify `beer-list.component.html` so it renders the list of beers.
 
+{% raw %}
 ```html
 <h2>Beer List</h2>
 
@@ -329,6 +330,7 @@ Modify `beer-list.component.html` so it renders the list of beers.
   {{b.name}}
 </div>
 ```
+{% endraw %}
 
 Update `app.component.html` to have the `BeerListComponent` rendered when you’re logged in. 
 
@@ -429,12 +431,14 @@ export class BeerListComponent implements OnInit {
 
 Then update `beer-list.component.html` to include a reference to this image.
 
+{% raw %}
 ```html
 <div *ngFor="let b of beers">
   {{b.name}}<br>
   <img width="200" src="{{b.giphyUrl}}" alt="{{b.name}}">
 </div>
 ```
+{% endraw %}
 
 The result should look something like the following list of beer names with images.
 
