@@ -1,10 +1,21 @@
-# Get Started with Angular and Spring Boot
+---
+layout: blog_post
+title: Bootiful Development with Spring Boot and Angular
+author: mraible
+tags: [spring-boot, start.spring.io, java, angular, typescript, angular-cli]
+---
 
-Spring Boot has greatly simplified how to develop applications with Spring. Its auto-configuration and many starters has fostered a Spring renaissance that makes developing Spring apps fun again! Angular is one of the most popular JavaScript MVC frameworks. One of the easiest ways to build Angular apps is using Angular CLI and TypeScript. In this tutorial, you’ll be using Angular to develop a client that talks to a Spring Boot API. 
+To simplify development and deployment, you want everything in the same artifact, so you put your Angular app "inside" your Spring Boot app, right? But what if you could create your Angular app as a standalone app and make cross-origin requests to your API? Hey guess what, you can do both! 
 
-[ThoughtWorks Technology Radar](https://www.thoughtworks.com/radar) is a document that describes changes that ThoughtWorks thinks are currently interesting in software development. They've recently stated that [Spring Boot should be adopted](https://www.thoughtworks.com/radar/languages-and-frameworks/spring-boot) (Nov 2016) and that [Angular 2 should be assessed](https://www.thoughtworks.com/radar/languages-and-frameworks/angular-2) (Mar 2017). Angular 4 was [released on March 23, 2017](http://angularjs.blogspot.de/2017/03/angular-400-now-available.html) with many performance improvements, so it might move to trial in the next radar.
+I believe that most frontend developers are used to having their apps standalone and making cross-origin requests to APIs. The beauty of having a client app that can point to a server app is you can point it to *any* server and it makes it easy to test your current client code against other servers (e.g. test, staging, production). 
 
-This article will show you how to create REST endpoints with Spring Data REST, configure Spring Boot to allow CORS, and create an Angular app to display its data. This app will display a list of beers from the API, then fetch a GIF from [https://giphy.com/](http://giphy.com) that matches the beer’s name. In a future article, I’ll show you how to turn this application into an PWA (Progressive Web Application) that works without a network connection.
+This post shows how you can have the best of both worlds where the UI and the API are separate apps. You’ll learn how to create REST endpoints with Spring Data REST, configure Spring Boot to allow CORS, and create an Angular app to display its data. This app will display a list of beers from the API, then fetch a GIF from [https://giphy.com/](http://giphy.com) that matches the beer’s name.
+
+If you don’t want to code along, feel free to grab the [source code from GitHub](https://github.com/oktadeveloper/spring-boot-angular-example)! You can also watch a video of this tutorial below.
+
+<div style="text-align: center">
+<iframe width="560" height="315" style="max-width: 100%" src="https://www.youtube.com/embed/bUq83Rz4BHA" frameborder="0" allowfullscreen></iframe>
+</div>
 
 ## Build an API with Spring Boot
 
@@ -16,7 +27,7 @@ To get started with Spring Boot, navigate to [start.spring.io](https://start.spr
 * [Rest Repositories](http://projects.spring.io/spring-data-rest/): Allows you to expose your JPA repositories as REST endpoints 
 * [Web](https://github.com/spring-projects/spring-boot/blob/master/spring-boot-starters/spring-boot-starter-web/pom.xml): Spring MVC with Jackson (for JSON), Hibernate Validator, and embedded Tomcat
 
-<img alt="starts.spring.io" src="/assets/img/blog/angular-spring-boot/start.spring.png" style="width: 800px">
+<img alt="start.spring.io" src="/assets/img/blog/angular-spring-boot/start.spring.png" style="width: 800px">
 
 If you like the command-line better, you can use the following command to download a `demo.zip` file with [HTTPie](https://httpie.org/).
 
@@ -162,6 +173,7 @@ public class BeerController {
                 .filter(this::isGreat)
                 .map(b -> {
                     Map<String, String> m = new HashMap<>();
+                    m.put("id", b.getId().toString());
                     m.put("name", b.getName());
                     return m;
                 }).collect(Collectors.toList());
@@ -185,7 +197,7 @@ You should also see this same result in your terminal window when using HTTPie.
 http localhost:8080/good-beers
 ```
 
-## Create a project with Angular CLI
+## Create a Project with Angular CLI
 
 It’s cool that you created an API to display a list of beers, but APIs aren’t _that_ cool without a UI. In this section, you’ll create a new Angular app, build services to fetch beers/images, and create components to display this data.
 
@@ -195,7 +207,7 @@ To create an Angular project, make sure you have [Node.js](https://nodejs.org/) 
 npm install -g @angular/cli@latest
 ```
 
-Run `ng --version` to confirm you’re using version 1.0.0 (or later). From a terminal window, cd into the root of the `spring-boot-angular` directory and run the following command.
+Run `ng --version` to confirm you’re using version 1.0.0 (or later). From a terminal window, cd into the root of the `spring-boot-angular-example` directory and run the following command.
 
 ```bash
 ng new client
@@ -216,7 +228,7 @@ Executed 1 of 1 spec SUCCESS in 0.77 sec.
 [09:02:38] I/launcher - chrome #01 passed
 ```
 
-**TIP:** If you’re just getting started with Angular, you might want to [watch a video of my recent Getting Started with Angular webinar](https://www.youtube.com/watch?v=Jq3szz2KOOs).
+**TIP:** If you’re just getting started with Angular, you might want to [watch this video of my recent Getting Started with Angular webinar](https://www.youtube.com/watch?v=Jq3szz2KOOs).
 
 If you’d rather not use the command line and have [IntelliJ IDEA](https://www.jetbrains.com/idea/) (or [WebStorm](https://www.jetbrains.com/webstorm/)) installed, you can create a new Static Web Project and select Angular CLI.
 
@@ -255,7 +267,7 @@ mkdir -p src/app/shared/beer
 mv src/app/beer.service.* src/app/shared/beer/.
 ```
 
-Create a `src/app/shared/index.ts` file and export the `BeerService`. The reason for this file is so you can export multiple classes and import them on one line rather than multiple.
+Create a `src/app/shared/index.ts` file and export the `BeerService`. The reason for this file is so you can export multiple classes and import them in one line rather than multiple.
 
 ```typescript
 export * from './beer/beer.service';
@@ -360,6 +372,8 @@ import { Observable } from 'rxjs';
 // http://tutorials.pluralsight.com/front-end-javascript/getting-started-with-angular-2-by-building-a-giphy-search-application
 export class GiphyService {
 
+
+  // Public beta key: https://github.com/Giphy/GiphyAPI#public-beta-key
   giphyApi = '//api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q=';
 
   constructor(public http: Http) {}
@@ -428,17 +442,13 @@ The result should look something like the following list of beer names with imag
 
 You’ve just created an Angular app that talks to a Spring Boot API using cross-domain requests. Congratulations! 
 
-## Source Code
-You can find the source code associated with this article [on GitHub](https://github.com/oktadeveloper/spring-boot-angular-example). If you find any bugs, please file an issue on GitHub, or ask your question on Stack Overflow with an [okta tag](http://stackoverflow.com/questions/tagged/okta). Of course, you can always [ping me on Twitter](https://twitter.com/mraible) too.
-
-## What’s Next?
-
-In a future article, I’ll show you how to create a progressive web application and deploy it to the cloud. 
+## Learn More About Spring Boot and Angular
 
 To learn more about Angular, Spring Boot, or Okta, check out the following resources:
 
 * [Angular with OpenID Connect](http://developer.okta.com/blog/2017/04/17/angular-authentication-with-oidc)
-* [Build an Angular App with Okta's Sign-In Widget in 15 Minutes](http://developer.okta.com/blog/2017/03/27/angular-okta-sign-in-widget)
 * [Get Started with Spring Boot, OAuth 2.0, and Okta](http://developer.okta.com/blog/2017/03/21/spring-boot-oauth)
-* [Get Started with Spring Boot, SAML, and Okta](http://developer.okta.com/blog/2017/03/16/spring-boot-saml)
+* [Getting Started with Spring Boot by Josh Long](https://youtu.be/sbPSjI4tt10) (SF JUG 2015)
+* [Angular Best Practices by Stephen Fluin](https://youtu.be/hHNUohOPCCo) (ng-conf 2017)
 
+You can find the source code associated with this article [on GitHub](https://github.com/oktadeveloper/spring-boot-angular-example). If you find any bugs, please file an issue on GitHub, or ask your question on Stack Overflow with an [okta tag](http://stackoverflow.com/questions/tagged/okta). Of course, you can always [ping me on Twitter](https://twitter.com/mraible) too.
