@@ -1,72 +1,13 @@
-# Zones API
+---
+layout: docs_page
+title: Zones API
+---
+
+## Zones API
 
 Zones are used to group IP Address ranges in a meaningful way such that policy decisions can be made based on the zone a client's IP belongs to.
 
-## IP Zone Data Model
-
-~~~json
-{
-  "type": "IP",
-  "id": "nzouagptWUz5DlLfM0g3",
-  "name": "newNetworkZone",
-  "status": "ACTIVE",
-  "created": "2017-01-24T19:52:34.000Z",
-  "lastUpdated": "2017-01-24T19:52:34.000Z",
-  "system": false,
-  "gateways": [
-    {
-      "type": "CIDR",
-      "value": "1.2.3.4/24"
-    },
-    {
-      "type": "RANGE",
-      "value": "2.3.4.5-2.3.4.15"
-    }
-  ],
-  "proxies": [
-    {
-      "type": "CIDR",
-      "value": "2.2.3.4/24"
-    },
-    {
-      "type": "RANGE",
-      "value": "3.3.4.5-3.3.4.15"
-    }
-  ],
-  "_links": {
-    "self": {
-      "href": "https://yourorg.okta.com/api/v1/org/zones/nzouagptWUz5DlLfM0g3",
-      "hints": {
-        "allow": [
-          "GET",
-          "PUT",
-          "DELETE"
-        ]
-      }
-    },
-    "deactivate": {
-      "href": "https://yourorg.okta.com/api/v1/org/zones/nzouagptWUz5DlLfM0g3/lifecycle/deactivate",
-      "hints": {
-        "allow": [
-          "POST"
-        ]
-      }
-    }
-  }
-}
-~~~
-
-|Field Name | Description | DataType | Required | MaxLength |
-|----------|-------------|----------|----------|-----------|
-|type | Type of zone (currently it can only be IP) | String | |
-|id   | Unique identifier for this zone                | String | |
-|name | Unique name for this zone                      | String | 128 |
-|gateways | IP addresses (range or CIDR form) of this zone | Array | 150 |
-|proxies | IP addresses (range or CIDR form) that are allowed to forward request from gateway addresses above. | Array | 150 |
-|gateway.type | Format of the value - either CIDR or RANGE | String | |
-|gateway.value | Value in CIDR/RANGE form depending on the type specified | String | |
-|proxy.type | Format of the value - CIDR or RANGE | String | |
-|proxy.value | Value in CIDR/RANGE form depending on the type specified | String | |
+## Endpoints
 
 ### Create IP Zone
 
@@ -641,3 +582,70 @@ curl "https://yourorg.okta.com/api/v1/org/zones/?limit=-1&q=First"
   }
 ]
 ~~~
+
+## IP Zone Data Model
+
+~~~json
+{
+  "type": "IP",
+  "id": "nzouagptWUz5DlLfM0g3",
+  "name": "newNetworkZone",
+  "status": "ACTIVE",
+  "created": "2017-01-24T19:52:34.000Z",
+  "lastUpdated": "2017-01-24T19:52:34.000Z",
+  "system": false,
+  "gateways": [
+    {
+      "type": "CIDR",
+      "value": "1.2.3.4/24"
+    },
+    {
+      "type": "RANGE",
+      "value": "2.3.4.5-2.3.4.15"
+    }
+  ],
+  "proxies": [
+    {
+      "type": "CIDR",
+      "value": "2.2.3.4/24"
+    },
+    {
+      "type": "RANGE",
+      "value": "3.3.4.5-3.3.4.15"
+    }
+  ],
+  "_links": {
+    "self": {
+      "href": "https://yourorg.okta.com/api/v1/org/zones/nzouagptWUz5DlLfM0g3",
+      "hints": {
+        "allow": [
+          "GET",
+          "PUT",
+          "DELETE"
+        ]
+      }
+    },
+    "deactivate": {
+      "href": "https://yourorg.okta.com/api/v1/org/zones/nzouagptWUz5DlLfM0g3/lifecycle/deactivate",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+|Field Name | Description | DataType | Required | MaxLength |
+|----------|-------------|----------|----------|-----------|
+|type | Type of zone (currently it can only be IP) | String | |
+|id   | Unique identifier for this zone                | String | |
+|name | Unique name for this zone                      | String | 128 |
+|gateways | IP addresses (range or CIDR form) of this zone | Array | 150 |
+|proxies | IP addresses (range or CIDR form) that are allowed to forward request from gateway addresses above. | Array | 150 |
+|gateway.type | Format of the value - either CIDR or RANGE | String | |
+|gateway.value | Value in CIDR/RANGE form depending on the type specified | String | |
+|proxy.type | Format of the value - CIDR or RANGE | String | |
+|proxy.value | Value in CIDR/RANGE form depending on the type specified | String | |
+
