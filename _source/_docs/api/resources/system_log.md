@@ -649,6 +649,21 @@ A timeout returns a 500 with the message:
 }
 ~~~
 
+A free form query that is too long:
+~~~json
+{
+  "errorCode": "E0000001",
+  "errorSummary": "Api validation failed: 'q': Freeform search cannot contain items longer than 40 characters. Please shorten the items in your search or use an advanced filter to query by specific fields."
+}
+
+Exceeding the rate limit results in:
+~~~json
+{
+  "errorCode": "E0000047",
+  "errorSummary": "API call exceeded rate limit due to too many requests."
+}
+~~~
+
 
 ## Rate Limits
 Callers are limited to 60 queries max per minute.
