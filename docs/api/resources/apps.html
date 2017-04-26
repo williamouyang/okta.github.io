@@ -1164,10 +1164,26 @@
       <td><a href="http://tools.ietf.org/html/rfc3986">URL</a></td>
     </tr>
     <tr>
+      <td>ssoAcsUrlOverride</td>
+      <td>Overrides the <code class="highlighter-rouge">ssoAcsUrl</code> setting</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td><a href="http://tools.ietf.org/html/rfc3986">URL</a></td>
+    </tr>
+    <tr>
       <td>recipient</td>
       <td>The location where the app may present the SAML assertion</td>
       <td>String</td>
       <td>FALSE</td>
+      <td>FALSE</td>
+      <td><a href="http://tools.ietf.org/html/rfc3986">URL</a></td>
+    </tr>
+    <tr>
+      <td>recipientOverride</td>
+      <td>Overrides the <code class="highlighter-rouge">recipient</code> setting</td>
+      <td>String</td>
+      <td>TRUE</td>
       <td>FALSE</td>
       <td><a href="http://tools.ietf.org/html/rfc3986">URL</a></td>
     </tr>
@@ -1180,10 +1196,26 @@
       <td><a href="http://tools.ietf.org/html/rfc3986">URL</a></td>
     </tr>
     <tr>
+      <td>destinationOverride</td>
+      <td>Overrides the <code class="highlighter-rouge">destination</code> setting</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+    <tr>
       <td>audience</td>
       <td>Audience URI (SP Entity ID)</td>
       <td>String</td>
       <td>FALSE</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>audienceOverride</td>
+      <td>Overrides the <code class="highlighter-rouge">audience</code> setting</td>
+      <td>String</td>
+      <td>TRUE</td>
       <td>FALSE</td>
       <td> </td>
     </tr>
@@ -1270,13 +1302,20 @@
   </tbody>
 </table>
 
-<blockquote>
-  <p>Fields that require certificate uploads can’t be enabled through the API, such as Single Log Out and Assertion Encryption. These must be updated through the UI.</p>
-</blockquote>
+<ul>
+  <li>Fields that require certificate uploads can’t be enabled through the API, such as Single Log Out and Assertion Encryption. These must be updated through the UI.</li>
+  <li>Either (or both) “responseSigned” or “assertionSigned” must be TRUE.</li>
+  <li>
+    <p>The override settings <code class="highlighter-rouge">ssoAcsUrlOverride</code>, <code class="highlighter-rouge">recipientOverride</code>, <code class="highlighter-rouge">destinationOverride</code>, and <code class="highlighter-rouge">audienceOverride</code> provide an alternative way of persisting post back and similar other urls.
+  For example, you can use <code class="highlighter-rouge">ssoAcsUrlOverride</code> supports the cloud access security broker (CASB) use case for Office365 app instances.</p>
 
-<blockquote>
-  <p>Either (or both) “responseSigned” or “assertionSigned” must be TRUE.</p>
-</blockquote>
+    <ul>
+      <li>In SAML 1.1 (for example, Office365 apps), <code class="highlighter-rouge">destinationOverride</code> isn’t available.</li>
+      <li>In SAML 2.0, like Box app, all four overrides are available.</li>
+      <li>In App Wizard SAML App, no override attributes are available.</li>
+    </ul>
+  </li>
+</ul>
 
 <h5 id="supported-values-for-custom-saml-app">Supported Values for Custom SAML App</h5>
 <p>The following values are support for creating custom SAML 2.0 Apps. Check <a href="#attribute-statements-object">Attribute Statements</a> to see its supported values.</p>
