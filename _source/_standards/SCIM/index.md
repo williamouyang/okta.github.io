@@ -1047,7 +1047,7 @@ We recommend completing these five steps before actual submission, with detailed
 4. Prepare the customer-facing configuration guide.
 5. Create a demo video showing working integration (optional)
 
-After performing these steps, login to the OAN Manager to complete the submission form and track review status.
+After performing these steps, navigate to the OAN Manager at [https://oanmanager.okta.com/](https://oanmanager.okta.com/) to complete the submission form and track review status.
 
 ##### Check the Profile Attributes for your application
 
