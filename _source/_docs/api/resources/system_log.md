@@ -487,14 +487,75 @@ Describes security data related to an event
 
 Describes an IP address used in a request.
 
-|------------+----------------------------------------------------------------+-----------------+----------|
-| Property   | Description                                                    | DataType        | Nullable |
-| ---------- | -------------------------------------------------------------- | --------------- | -------- |
-| ip         | IP address                                                     | String          | TRUE     |
-| geographicalContext | Geographical context of the IP address                | [GeographicalContext Object](#geographicalcontext-object)          | TRUE     |
-| version    | IP address version                                             | V4 or V6        | TRUE     |
-| source     | Details regarding the source                                   | String          | TRUE     |
-|------------+----------------------------------------------------------------+-----------------+----------|
+| ------------+----------------------------------------------------------------+-----------------+---------- |
+| Property                                                                                                   | Description                            | DataType                                                    | Nullable |
+|:-----------------------------------------------------------------------------------------------------------|:---------------------------------------|:------------------------------------------------------------|:---------|
+| ip                                                                                                         | IP address                             | String                                                      | TRUE     |
+| geographicalContext                                                                                        | Geographical context of the IP address |   [GeographicalContext Object](#geographicalcontext-object) | TRUE     |
+| version                                                                                                    | IP address version                     | V4 or V6                                                    | TRUE     |
+|                                                                                                            |                                        |                                                             |          |
+|                                                                                                            |                                        |                                                             |          |
+| source                                                                                                     | Details regarding the source           | String                                                      | TRUE     |
+| ------------+----------------------------------------------------------------+-----------------+---------- |
+
+## Event Model
+
+### Application Event
+
+| Event                                        | Description                                                |
+|:---------------------------------------------|:-----------------------------------------------------------|
+| application.lifecycle.activate               | An application was activated.                              |
+| application.lifecycle.create                 | An application was created.                                |
+| application.lifecycle.deactivate             | An application was deactivated.                            |
+| application.lifecycle.delete                 | An application was deleted.                                |
+| application.lifecycle.update                 | An application was updated.                                |
+| application.user_memebership.add             | A user was assigned to an application.                     |
+| application.user_memebership.change_username | The name of a user assigned to an application was changed. |
+| application.user_membership.remove           | A user was removed from an application.                    |
+
+
+### Group Event
+
+| Event                        | Description                      |
+|:-----------------------------|:---------------------------------|
+| group.user_membership.add    | A user was added to a group.     |
+| group.user_membership.remove | A user was removed from a group. |
+
+### Policy Events
+
+| Event                       | Description                         |
+|:----------------------------|:------------------------------------|
+| policy.lifecycle.activate   | A rule in a policy was activated.   |
+| policy.lifecycle.create     | A rule in a policy was created.     |
+| policy.lifecycle.deactivate | A rule in a policy was deactivated. |
+| policy.lifecycle.delete     | A rule in a policy was deleted.     |
+| policy.lifecycle.update     | A rule in a policy was updated.     |
+| policy.rule.activate        | A rule in a policy was activated.   |
+| policy.rule.add             | A rule was added to a policy.       |
+| policy.rule.deactivate      | A rule in a policy was deactivated. |
+| policy.rule.delete          | A rule was deleted from a policy.   |
+| policy.rule.update          | A rule in a policy was updated.     |
+
+#### Policy Event Details
+
+* `policy.evaluate_sign_on` provides context on the values used and evaluated in the context of the Okta sign on policy. For example, you can determine which network zones were matched for this event.
+* For `policy.lifecycle` and `policy.rule` events, the corresponding policy is listed in the target object.
+
+### User Events
+
+| Event                     | Description                                               |
+|:--------------------------|:----------------------------------------------------------|
+| user.authentication.sso   | A user attempted to SSO to an application managed in Okta |
+| user.lifecycle.activate   | A user account was activated.                             |
+| user.lifecycle.create     | A user account was created.                               |
+| user.lifecycle.deactivate | A user account was deactivated.                           |
+| user.lifecycle.suspend    | A user account was suspended.                             |
+| user.lifecycle.unsuspend  | A user account was moved from suspended status.           |
+| user.session.start        | Okta issued a session to a user who is authenticating     |
+
+#### User Event Details
+
+* `user.authentication.sso` doesn't capture whether the SSO attempt was successful or failed because Okta can't collect the subsequent authentication attempt status from the third-party service.
 
 ## Response Headers
 
