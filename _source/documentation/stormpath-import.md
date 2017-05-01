@@ -264,45 +264,7 @@ Okta Users created from Stormpath Accounts have a `login` inside the User's Prof
 <a name="stormpath-custom-data"></a>
 ### Stormpath Custom Data
 
-Only Custom Data associated with Accounts will be imported, although it can be skipped entirely if you wish. For more information on this, see [Running the Import](#running-the-import). If you choose to import Custom Data, the Okta import tool will scan all of the Custom Data on every Stormpath Account and create one Custom Profile Schema for all of the Users it is importing. This means that every Okta User Profile contains the same custom attributes.
-
-So, if you have two Stormpath Accounts with different Custom Data:
-
-**Account A**
-
-```
-"customData": {
-    "hello": "world"
-}
-```
-
-**Account B**
-
-```
-"customData": {
-    "goodbye": "planet"
-}
-```
-
-After import, your Okta User Profiles will look like this:
-
-**User A**
-
-```
-"profile": {
-    "hello": "world"
-    "goodbye": ""
-}
-```
-
-**User B**
-
-```
-"profile": {
-    "hello": ""
-    "goodbye": "planet"
-}
-```
+Only Custom Data associated with Accounts will be imported, although it can be skipped entirely if you wish. For more information on this, see [Running the Import](#running-the-import). If you choose to import Custom Data, the Okta import tool will scan all of the Custom Data on every Stormpath Account and create one Custom Profile Schema for all of the Users it is importing. However, Profile attributes will only be returned if they have values. If they are blank, they will not be returned by the API.
 
 What your imported Custom Data looks like depends primarily on whether is a simple `key:value` pair, or a more complex object.
 
