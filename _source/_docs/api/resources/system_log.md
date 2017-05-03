@@ -509,8 +509,8 @@ Describes an IP address used in a request.
 | application.lifecycle.deactivate             | An application was deactivated.                            |
 | application.lifecycle.delete                 | An application was deleted.                                |
 | application.lifecycle.update                 | An application was updated.                                |
-| application.user_memebership.add             | A user was assigned to an application.                     |
-| application.user_memebership.change_username | The name of a user assigned to an application was changed. |
+| application.user_membership.add              | A user was assigned to an application.                     |
+| application.user_membership.change_username  | The name of a user assigned to an application was changed. |
 | application.user_membership.remove           | A user was removed from an application.                    |
 
 
