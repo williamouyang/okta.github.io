@@ -853,6 +853,12 @@ HTTP/1.1 204 No Content
 ##### Response Example (Error)
 {:.api .api-response .api-response-example}
 ~~~http
+HTTP/1.1 204 No Content
+~~~
+
+##### Response Example (Error)
+{:.api .api-response .api-response-example}
+~~~http
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
 {
@@ -1240,6 +1246,25 @@ Updates authorization server identified by *asid*.
 ##### Response Parameters
 {:.api .api-request .api-respons-params}
 
+{% api_operation post /api/v1/authorizationServers/:asid %} {% api_lifecycle ea %}
+
+Updates authorization server identified by *asid*.
+
+>Switching between rotation modes won't change the active signing key.
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+| Parameter          | Description                                                                        | Type                                                                                                    | Required |
+|:-------------------|:-----------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------|:---------|
+| name               | The name of the authorization server                                               | String                                                                                                  | true     |
+| description        | The description of the authorization server                                        | String                                                                                                  | false    |
+| audiences          | The URL of the resource being secured by this authorization server                 | String                                                                                                  | true     |
+| credentials        | The credentials signing object with the `rotationMode` of the authorization server |   [Authorization server credentials object](oauth2.html#authorization-server-credentials-signing-object) | FALSE    |
+
+##### Response Parameters
+{:.api .api-request .api-respons-params}
+
 | Parameter | Description | Type | Required |
 |:----------|:------------|:-----|:---------|
 | name      | description | type | True     |
@@ -1415,8 +1440,8 @@ curl -v -X GET \
     },
     "metadata": [
       {
-        "name": "oauth-authorization-server",
-        "href": "${org}/oauth2/ausnsopoM6vBRB3PD0g3/.well-known/oauth-authorization-server",
+        "href": "http://${org}.okta.com/oauth2/aus5m9r1o4AsDJLe50g4/.well-known/openid-configuration",
+        "name": "openid-configuration",
         "hints": {
           "allow": [
             "GET"
@@ -1424,14 +1449,14 @@ curl -v -X GET \
         }
       },
       {
-        "name": "openid-configuration",
-        "href": "${org}/oauth2/ausnsopoM6vBRB3PD0g3/.well-known/openid-configuration",
+        "href": "http://${org}.okta.com/oauth2/aus5m9r1o4AsDJLe50g4/.well-known/oauth-authorization-server",
+        "name": "oauth-authorization-server",
         "hints": {
           "allow": [
             "GET"
           ]
         }
-      },
+      }    
     ],
     "rotateKey": {
       "href": "http://${org}.okta.com/api/v1/authorizationServers/aus5m9r1o4AsDJLe50g4/credentials/lifecycle/keyRotate",
@@ -1539,6 +1564,193 @@ Returns the policies in the specified authorization server ID
 
 ~~~sh
 curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/policies"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+<!--We should have an example with more than one policy -->
+
+~~~json
+[
+  {
+    "type": "OAUTH_AUTHORIZATION_POLICY",
+    "id": "00p5m9xrrBffPd9ah0g4",
+    "status": "ACTIVE",
+    "name": "default",
+    "description": "default policy",
+    "priority": 1,
+    "system": false,
+    "conditions": {
+      "clients": {
+        "include": [
+          "ALL_CLIENTS"
+        ]
+      }
+    },
+    "created": "2017-04-04T17:51:17.000Z",
+    "lastUpdated": "2017-04-04T17:51:17.000Z",
+    "_links": {
+      "activate": {
+        "href": "http://rain.okta1.com:1802/api/v1/authorizationServers/aus5m9r1o4AsDJLe50g4/policies/00p5m9xrrBffPd9ah0g4/lifecycle/activate",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      },
+      "self": {
+        "href": "http://rain.okta1.com:1802/api/v1/authorizationServers/aus5m9r1o4AsDJLe50g4/policies/00p5m9xrrBffPd9ah0g4",
+        "hints": {
+          "allow": [
+            "GET",
+            "PUT",
+            "DELETE"
+          ]
+        }
+      },
+      "rules": {
+        "href": "http://rain.okta1.com:1802/api/v1/authorizationServers/aus5m9r1o4AsDJLe50g4/policies/00p5m9xrrBffPd9ah0g4/rules",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      }
+    }
+  }
+] 
+~~~
+
+#### Get a Policy
+
+{% api_operation get /api/v1/authorizationServers/:asid/policies/:pid %}
+
+Returns the policies in the specified authorization server ID
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+| Parameter | Description             | Type   | Required |
+|:----------|:------------------------|:-------|:---------|
+| asid      | Authorization server ID | String | True     |
+| pid       | Policy ID               | String | True     |
+
+##### Response Parameters
+{:.api .api-response .api-res-params}
+
+| Parameter   | Description | Type             |
+|:------------|:------------|:-----------------|
+| type        | description | String           |
+| id          | description | String           |
+| status      | description | String           |
+| description | description | String           |
+| priority    | description | Integer          |
+| system      | description | Boolean          |
+| conditions  | description | Condition object | <!~-- um, need help here. Don't understandion clients/include/ |
+
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/policies/00p5m9xrrBffPd9ah0g4"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+[
+  {
+    "type": "OAUTH_AUTHORIZATION_POLICY",
+    "id": "00p5m9xrrBffPd9ah0g4",
+    "status": "ACTIVE",
+    "name": "default",
+    "description": "default policy",
+    "priority": 1,
+    "system": false,
+    "conditions": {
+      "clients": {
+        "include": [
+          "ALL_CLIENTS"
+        ]
+      }
+    },
+    "created": "2017-04-04T17:51:17.000Z",
+    "lastUpdated": "2017-04-04T17:51:17.000Z",
+    "_links": {
+      "activate": {
+        "href": "http://${org}.okta.com/api/v1/authorizationServers/aus5m9r1o4AsDJLe50g4/policies/00p5m9xrrBffPd9ah0g4/lifecycle/activate",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      },
+      "self": {
+        "href": "http://${org}.okta.com/api/v1/authorizationServers/aus5m9r1o4AsDJLe50g4/policies/00p5m9xrrBffPd9ah0g4",
+        "hints": {
+          "allow": [
+            "GET",
+            "PUT",
+            "DELETE"
+          ]
+        }
+      },
+      "rules": {
+        "href": "http:${org}.okta.com/api/v1/authorizationServers/aus5m9r1o4AsDJLe50g4/policies/00p5m9xrrBffPd9ah0g4/rules",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      }
+    }
+  }
+]
+~~~
+
+#### Create a Policy
+
+{% api_operation post /api/v1/authorizationServers/:asid/policies %}
+
+Returns <!-- Not sure what is returned -->
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+| Parameter | Description             | Type   | Required |
+|:----------|:------------------------|:-------|:---------|
+| asid      | Authorization server ID | String | True     |
+
+
+##### Response Parameters
+{:.api .api-response .api-res-params}
+
+| Parameter   | Description | Type             | <!-- Not sure these are returned -->
+|:------------|:------------|:-----------------|
+| type        | description | String           |
+| id          | description | String           |
+| status      | description | String           |
+| description | description | String           |
+| priority    | description | Integer          |
+| system      | description | Boolean          |
+| conditions  | description | Condition object |
+
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
