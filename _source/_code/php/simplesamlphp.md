@@ -104,8 +104,8 @@ PHP, reconfiguring Apache, and creating some symbolic links.
    $ cd ~
    $ mkdir simplesamlphp
    $ cd simplesamlphp
-   $ git clone git@github.com:simplesamlphp/simplesamlphp.git
-   $ git clone git@github.com:jpf/okta-simplesamlphp-example.git
+   $ git clone https://github.com/simplesamlphp/simplesamlphp.git
+   $ git clone https://github.com/jpf/okta-simplesamlphp-example.git
    ~~~
 
 2. Install php56 and php56-mcrypt with [homebrew](http://brew.sh/).
