@@ -1,13 +1,13 @@
 $(function () {
 
     var email_regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-        is_processing = false,
-        has_tried = false,
-        form_valid = false,
-        pass_blacklist = false,
-        one_checked = false,
-        signup_form = '#developer_signup',
-        api_url = 'https://www.okta.com/developerapi';
+    is_processing = false,
+    has_tried = false,
+    form_valid = false,
+    pass_blacklist = false,
+    one_checked = false,
+    signup_form = '#developer_signup',
+    api_url = 'https://www.okta.com/developerapi';
 
     if ((localStorage.getItem('okta_dev_country') == null || localStorage.getItem('okta_dev_region') == null) && typeof geoip2 != 'undefined'){
         var geo_error = function(error) {
@@ -41,6 +41,10 @@ $(function () {
     else {
         update_form_ip();
     }
+
+    // Mixpanel
+    var form_type = $('#type').val();
+    register_mixpanel();
 
     $(signup_form).submit(function(e){
         e.preventDefault;
@@ -80,7 +84,10 @@ $(function () {
                         })
                         .done(function(resp) {
                             var url = window.location.toString(),
-                                thank_you_url = resp.thankyou;
+                            thank_you_url = resp.thankyou;
+
+                            // Track to Mixpanel
+                            track_mixpanel();
 
                             // preserve query string
                             if (url.indexOf('?') > 0) {
@@ -151,7 +158,7 @@ $(function () {
      *
      * @param status            boolean form processing status
      */
-    function form_processing(status) {
+     function form_processing(status) {
         if (status) {
             is_processing = true;
             $('.OccForm-submit').addClass('is-processing');
@@ -167,7 +174,7 @@ $(function () {
      *
      * @param which             form input element
      */
-    function validate_input(which) {
+     function validate_input(which) {
         which.closest('div').removeClass('is-valid');
 
         // field missing value
@@ -205,7 +212,7 @@ $(function () {
     /**
      * Update form values with saved location data
      */
-    function update_form_location() {
+     function update_form_location() {
         if (localStorage.getItem('okta_dev_country') != null) {
             $(signup_form + ' #Country').val(localStorage.getItem('okta_dev_country'));
         }
@@ -221,9 +228,47 @@ $(function () {
     }
 
     /**
+     * Register Mixpanel Tracking
+     */
+    function register_mixpanel() {
+        if (typeof mixpanel != 'undefined') {
+            switch (form_type) {
+                case 'stormpath':
+                mixpanel.register({ "Application": "Okta.COM", "Component": "Stormpath Developer" });
+                mixpanel.track("View Stormpath Form");
+                break;
+                case 'developer':
+                mixpanel.register({ "Application": "Okta.COM", "Component": "Developer" });
+                mixpanel.track("View Developer Form");
+                break;
+            }
+        } else {
+            (0, _debug2.default)('register_mixpanel: mixpanel is not defined');
+        }
+    }
+
+    /**
+     * Track Mixpanel Tracking
+     */
+    function track_mixpanel() {
+        if (typeof mixpanel != 'undefined') {
+            switch (form_type) {
+                case 'stormpath':
+                mixpanel.track("Stormpath Created");
+                break;
+                case 'developer':
+                mixpanel.track("Developer Created");
+                break;
+            }
+        } else {
+            (0, _debug2.default)('track_mixpanel: mixpanel is not defined');
+        }
+    }
+
+    /**
      * Update form value with saved ip data
      */
-    function update_form_ip() {
+     function update_form_ip() {
         if (localStorage.getItem('okta_dev_ip') != null) {
             $(signup_form + ' .request_ip').val(localStorage.getItem('okta_dev_ip'));
         }
@@ -232,8 +277,8 @@ $(function () {
     /**
      * Thank you page url output
      */
-    var generated_domain = localStorage.getItem('okta_dev_domain');
-    if (generated_domain != null) {
+     var generated_domain = localStorage.getItem('okta_dev_domain');
+     if (generated_domain != null) {
         $('#domain_link').html('<p>Access your new developer account now by visiting <a href="https://' + generated_domain + '.oktapreview.com">' + generated_domain + '.oktapreview.com</a></p>');
     }
 });
