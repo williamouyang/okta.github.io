@@ -95,7 +95,7 @@ describe('imported docs string spec', function() {
         'session.get'
       ])).toBe(true);
     });
-    util.itNoHeadless('does not break links in headers', () => {
+    xit('does not break links in headers', () => {
       const page = setupAuthJs();
       page.clickLinkHeader('LOCKED_OUT');
       const authnUrl = '/docs/api/resources/authn';
