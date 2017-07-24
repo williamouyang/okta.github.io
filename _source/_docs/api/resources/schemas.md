@@ -1100,7 +1100,7 @@ The [User Model](./users.html#user-model) schema is defined using [JSON Schema D
 
 > The schema currently only defines the [profile object](./users.html#profile-object).
 
-### Example
+### Example User Schema
 
 ~~~json
 {
@@ -1221,12 +1221,12 @@ The user schema is a valid [JSON Schema Draft 4](https://tools.ietf.org/html/dra
 | ------------- | ---------------------------------------- | ------------------------------------------------------ |--------- | ------ | -------- | --------- | --------- | ----------  |
 | id            | URI of user schema                       | String                                                 | FALSE    | TRUE   | TRUE     |           |           |             |
 | $schema       | JSON Schema version identifier           | String                                                 | FALSE    | FALSE  | TRUE     |           |           |             |
-| name          | name for the schema                      | `user`                                                 | FALSE    | TRUE   | TRUE     |           |           |             |
+| name          | name for the schema                      | String                                                 | FALSE    | TRUE   | TRUE     |           |           |             |
 | title         | user-defined display name for the schema | String                                                 | FALSE    | FALSE  | FALSE    |           |           |             |
 | created       | timestamp when schema was created        | [ISO 8601 String](https://tools.ietf.org/html/rfc3339) | FALSE    | FALSE  | TRUE     |           |           |             |
 | lastUpdated   | timestamp when schema was last updated   | [ISO 8601 String](https://tools.ietf.org/html/rfc3339) | FALSE    | FALSE  | TRUE     |           |           |             |
 | definitions   | user profile subschemas                  | [User Profile Subschemas](#user-profile-subschemas)    | FALSE    | FALSE  | FALSE    |           |           | JSON Schema |
-| type          | type of root schema                      | `object`                                               | FALSE    | FALSE  | TRUE     |           |           |             |
+| type          | type of [root schema](https://tools.ietf.org/html/draft-zyp-json-schema-04#section-3.4)| String   | FALSE    | FALSE  | TRUE     |           |           |             |
 | properties    | user model properties                    | [User Model](./users.html#user-model) property set     | FALSE    | FALSE  | TRUE     |           |           |             |
 |---------------+------------------------------------------+--------------------------------------------------------+-----------+-------+----------+-----------+-----------+-------------|
 
@@ -1427,7 +1427,7 @@ The [App User Model](./apps.html#application-user-model) schema is defined using
 
 > The schema currently only defines the [profile object](./apps.html#application-user-profile-object).
 
-### Example
+### Example App User Schema
 
 ~~~json
 {
@@ -1509,13 +1509,13 @@ The app user schema is a valid [JSON Schema Draft 4](https://tools.ietf.org/html
 | ------------- | ---------------------------------------- | ------------------------------------------------------ |--------- | ------ | -------- | --------- | --------- | ----------  |
 | id            | URI of app user schema                   | String                                                 | FALSE    | TRUE   | TRUE     |           |           |             |
 | $schema       | JSON Schema version identifier           | String                                                 | FALSE    | FALSE  | TRUE     |           |           |             |
-| name          | name for the schema                      | `app user`                                             | FALSE    | TRUE   | TRUE     |           |           |             |
+| name          | name for the schema                      | String                                                 | FALSE    | TRUE   | TRUE     |           |           |             |
 | title         | user-defined display name for the schema | String                                                 | FALSE    | FALSE  | FALSE    |           |           |             |
 | created       | timestamp when schema was created        | [ISO 8601 String](https://tools.ietf.org/html/rfc3339) | FALSE    | FALSE  | TRUE     |           |           |             |
 | lastUpdated   | timestamp when schema was last updated   | [ISO 8601 String](https://tools.ietf.org/html/rfc3339) | FALSE    | FALSE  | TRUE     |           |           |             |
-| definitions   | app user profile subschemas              | [App User Profile Subschemas](#app-user-profile-subschemas)    | FALSE    | FALSE  | FALSE    |           |           | JSON Schema |
-| type          | type of root schema                      | `object`                                               | FALSE    | FALSE  | TRUE     |           |           |             |
-| properties    | user model properties                    | [App User Model](./users.html#app-user-model) property set| FALSE    | FALSE  | TRUE     |           |           |             |
+| definitions   | app user profile subschemas              | [App User Profile Subschemas](#app-user-profile-subschemas)| FALSE    | FALSE  | FALSE    |           |           | JSON Schema |
+| type          | type of [root schema](https://tools.ietf.org/html/draft-zyp-json-schema-04#section-3.4)| String   | FALSE    | FALSE  | TRUE     |           |           |             |
+| properties    | user model properties                    | [App User Model](./apps.html#application-user-model) property set| FALSE    | FALSE  | TRUE     |           |           |             |
 |---------------+------------------------------------------+--------------------------------------------------------+-----------+-------+----------+-----------+-----------+-------------|
 
 ### App User Profile Subschemas
@@ -1561,9 +1561,9 @@ Custom property names for the [profile object](./apps.html#application-user-prof
 
 #### App User Profile Base Subschema
 
-All Okta defined profile properties are defined in a profile sub-schema with the resolution scope `#base`.  These properties cannot be removed or edited (except for permission).
+All Okta-defined profile properties are defined in a profile sub-schema with the resolution scope `#base`.  These properties cannot be removed or edited (except for permission).
 
-The base app user profile varies substantially depending on the application. The following are the properties that are required for all app user profiles :
+The base app user profile varies substantially depending on the application. The following properties are required for all app user profiles:
 
 |-------------------+------------------------------------------------------------------------------------------------------------------------------+----------+----------+--------+----------+-----------+-----------+-------------------------------------------------------------------------------------------------------------------|
 | Property          | Description                                                                                                                  | DataType | Nullable | Unique | Readonly | MinLength | MaxLength | Validation                                                                                                        |
@@ -1609,7 +1609,7 @@ User profile schema properties have the following standard [JSON Schema Draft 4]
 | ------------- | ----------------------------------------------- | ------------------------------------------------------------------ |--------- | ------ | -------- | --------- | --------- | ----------  |
 | title         | user-defined display name for the property      | String                                                             | FALSE    | FALSE  | FALSE    |           |           |             |
 | description   | description of the property                     | String                                                             | TRUE     | FALSE  | FALSE    |           |           |             |
-| type          | type of property                                | `string`, `boolean`, `number`, `integer`, `array`          | FALSE    | FALSE  | FALSE    |           |           |             |
+| type          | type of property                                | `string`, `boolean`, `number`, `integer`, `array`                  | FALSE    | FALSE  | FALSE    |           |           |             |
 |---------------+-------------------------------------------------+--------------------------------------------------------------------+-----------+-------+----------+-----------+-----------+-------------|
 
 Okta has also extended [JSON Schema Draft 4](https://tools.ietf.org/html/draft-zyp-json-schema-04) with the following keywords:
@@ -1621,7 +1621,7 @@ Okta has also extended [JSON Schema Draft 4](https://tools.ietf.org/html/draft-z
 | permissions   | access control permissions for the property     | Array of [Schema Property Permission](#schema-property-permission-object-1) | FALSE    | FALSE  | FALSE    |           |           |             |
 |---------------+-------------------------------------------------+---------------------------------------------------------------------------+-----------+-------+----------+-----------+-----------+-----------
 
-> A read-only [JSON Schema Draft 4](https://tools.ietf.org/html/draft-zyp-json-schema-04) compliant `required` property is also available on the [App User Profile Subschemas](#app-user-profile-subschemas)
+> A read-only [JSON Schema Draft 4](https://tools.ietf.org/html/draft-zyp-json-schema-04) compliant `required` property is also available on the [App User Profile Subschemas](#app-user-profile-subschemas).
 
 ~~~json
 {
@@ -1654,7 +1654,7 @@ Okta has also extended [JSON Schema Draft 4](https://tools.ietf.org/html/draft-z
 
 ##### App User Schema Property Types and Validation
 
-Specific property types support a **subset** of [JSON Schema validations](https://tools.ietf.org/html/draft-fge-json-schema-validation-00)
+Specific property types support a **subset** of [JSON Schema validations](https://tools.ietf.org/html/draft-fge-json-schema-validation-00).
 
 |---------------+-------------------------------------------------------------------------------------------------------------------------------------+-----------------------------|
 | Property Type | Description                                                                                                                         | Validation Keywords         |
