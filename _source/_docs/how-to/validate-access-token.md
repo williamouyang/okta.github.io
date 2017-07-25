@@ -6,22 +6,30 @@ excerpt: How to validate access tokens in your server-side application
 
 ## Overview
 
-If you are building an application that is running on the server-side, like an API, it is likely one of your requirements that your end-users are authenticated. You can use Okta to authenticate your end-users and issue them access and ID tokens, which your application can then use. It is important that your application only uses the access token to grant access, and not the ID token. For more information about this, see the (jakub.todo) section below.
+If you are building an application that is running on the server-side, like an API, it is likely one of your requirements that your end-users are authenticated. You can use Okta to authenticate your end-users and issue them signed access and ID tokens, which your application can then use. It is important that your application only uses the access token to grant access, and not the ID token. For more information about this, see the (jakub.todo) section below.
 
 > For more information on issuing access tokens, see here (jakub.todo). 
 
-Once the tokens are issued to the end-users they are passed to your application, which must validate them. There are two ways to verify a token: locally, or remotely with Okta.
+Once the signed tokens are issued to the end-users they can be passed to your application, which must validate them. There are two ways to verify a token: locally, or remotely with Okta. The token has been signed using an RSA JSON Web Key (JWK) which your application will need in order to validate it. 
+
+We will now cover the used in this document, and an explanation of why you should use access tokens instead of ID tokens for this use case. 
+
+- If you'd like to jump straight to the local validation steps, click here: (jakub.todo) 
+- If you'd like to see how to validate a token directly with Okta, click here: (jakub.todo)
+- If you want to see specifically how to accomplish this using an Okta SDK, click here: (jakub.todo)
 
 ### Terms 
 
 In the OAuth 2.0 flows under discussion here, we have four important roles:
 
-- The authorization server, which is the server that issues the access token. In this case Okta is the authorization server.
+- The authorization server, which is the server that issues the access token. In this case Okta is the authorization server. For more information about setting-up Okta as your authorization server, go here: [Set Up Authorization Server](https://developer.okta.com/docs/how-to/set-up-auth-server.html).
 - The resource owner, which is the entity (for example your application's end-user) that grants permission to access the resource server with an access token. 
 - The client, which is the application that requests the access token from Okta and then passes it to the resource server.
 - The resource server, which accepts the access token and therefore also must verify that it is valid. In this case this is your application.
 
 More information about all of these can be found in our high-level discussion of OAuth 2, which you can find here: (jakub.todo).
+
+The access tokens are in JSON Web Token (JWT) format, the specification for which can be found here: <https://tools.ietf.org/html/rfc7519>. They are signed using private JSON Web Keys (JWK), the specification for which you can find here: <https://tools.ietf.org/html/rfc7517>.
 
 ## Access Tokens vs ID Tokens
 
@@ -35,39 +43,53 @@ ID Tokens are also signed with a client secret, and your resource server has no 
 
 The high-level overview of validating an access token looks like this:
 
-- Parse the 
+- Retrieve and parse your Okta JSON Web Keys (JWK), which should be checked periodically and cached by your application.
+- Decode the access token, which is in JSON Web Token format.
+- Verify the signature used to sign the access token
+- Verify the claims found inside the access token
 
+### Retrieve The JSON Web Keys
 
- verify the following:
+The JSON Web Keys (JWK) need to be retrieved from your [Okta Authorization Server](https://developer.okta.com/docs/how-to/set-up-auth-server.html), though your application should have them cached. Specifically, your Authorization Server's Metadata endpoint contains the `jwks_uri`, which you can use to get the JWK. 
 
-- The JWT itself is well-formed. For more on this see the JWT spec: https://tools.ietf.org/html/rfc7519#section-7.2
-- The `iss` (issuer) claim matches the identifier of your Authorization Server.
-- The `aud` (audience) claim is the value configured in the Authorization Server.
-- The `cid` (client ID) claim is your client id.
-4. The signature of the Access Token according to JWS using the algorithm specified in the JWT `alg` header property. Use the public keys provided by Okta via the Get Keys endpoint.
-5. The expiry time (from the `exp` claim) has not already passed.
+> For more information about retrieving this metadata, see [Retrieve Authorization Server Metadata](https://developer.okta.com/docs/api/resources/oauth2.html#retrieve-authorization-server-metadata).
+ 
 
-## How to Validate the Signature Using the JWKs
+### Decode the Access Token
 
-JSON Web Key - (`jwks_uri`)there is a /keys endpoint
+You will have to decode the access token, which is in JWT format. Here are a few examples of how to do this:
 
-Step 4 involves downloading the public JWKS from Okta (specified by the `jwks_uri` property in the Authorization Server metadata. The result of this call is a JSON Web Key set.
+(jakub.todo)
 
-Each public key is identified by a `kid` attribute, which corresponds with the `kid` claim in the Access Token header.
+### Verify the Token's Signature
 
-The Access Token is signed by an RSA private key, and we publish the future signing key well in advance. However, in an emergency situation you can still stay in sync with Okta’s key rotation. Have your application check the `kid`, and if it has changed and the key is missing from the local cache, check the `jwks_uri` value in the Authorization Server metadata and you can go back to the `jwks_uri` to get keys again from Okta.
+You verify the access token's signature by matching the key that was used to sign in with one of the key's you retrieved from your Okta Authorization Server's JWK endpoint. Specifically, each public key is identified by a `kid` attribute, which corresponds with the `kid` claim in the Access Token header.
+
+If the `kid` claim does not match, it is possible that the signing keys have changed. Check the `jwks_uri` value in the Authorization Server metadata and try retrieving the keys again from Okta.
 
 Please note the following:
 
-- For security purposes, Okta automatically rotates the keys used to sign the token.
+- For security purposes, Okta automatically rotates keys used to sign the token.
 - The current key rotation schedule is four times a year. This schedule can change without notice.
 - In case of an emergency, Okta can rotate keys as needed.
-- Okta always publishes keys to the JWKS.
-- To save the network round trip, your app can cache the JWKS response locally. The standard HTTP caching headers are used and should be respected.
-- The administrator can switch the Authorization Server key rotation mode to MANUAL by updating the Authorization Server and then control when to rotate the keys.
-- Keys used to sign tokens automatically rotate and should always be resolved dynamically against the published JWKS. Your app can fail if you hardcode public keys in your applications. Be sure to include key rollover in your implementation.
+- Okta always publishes keys to the `jwks_uri`.
+- To save the network round trip, your app should cache the `jwks_uri` response locally. The [standard HTTP caching headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control) are used and should be respected.
+- The administrator can switch the Authorization Server key rotation mode by updating the Authorization Server's `rotationMode` property. For more information see the API Reference: [Authorization Server Credentials Signing Object](https://developer.okta.com/docs/api/resources/oauth2.html#authorization-server-credentials-signing-object).
 
-Alternatively, you can also validate an Access or Refresh Token using the Token Introspection endpoint: https://developer.okta.com/docs/api/resources/oauth2.html#introspection-request
+### Verify the Claims
+
+You should verify the following:
+
+- The `iss` (issuer) claim matches the identifier of your Okta Authorization Server.
+- The `aud` (audience) claim is the value configured in the Authorization Server.
+- The `cid` (Client ID) claim is your application's Client ID.
+- The `exp` (Expiry Time) claim is the time at which this token will expire. You should make sure that this has not already passed.
+
+## Validating A Token Remotely With Okta
+
+Alternatively, you can also validate an Access or Refresh Token using the Token Introspection endpoint: [Introspection Request](https://developer.okta.com/docs/api/resources/oauth2.html#introspection-request). This endpoint takes your token as a URL query and returns back a simple JSON response with a boolean `active` property. 
 
 ## Code Samples
+
+(jakub.todo) This may not be a great name for this section.
 
