@@ -94,3 +94,4 @@ Alternatively, you can also validate an Access or Refresh Token using the Token 
 
 (jakub.todo) This may not be a great name for this section.
 
+Link out to SDK-specific info on how to validate tokens here.
