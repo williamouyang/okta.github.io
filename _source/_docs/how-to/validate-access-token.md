@@ -23,7 +23,7 @@ We will now cover the used in this document, and an explanation of why you shoul
 In the OAuth 2.0 flows under discussion here, we have four important roles:
 
 - The authorization server, which is the server that issues the access token. In this case Okta is the authorization server. For more information about setting-up Okta as your authorization server, go here: [Set Up Authorization Server](https://developer.okta.com/docs/how-to/set-up-auth-server.html).
-- The resource owner, which is the entity (for example your application's end-user) that grants permission to access the resource server with an access token. 
+- The resource owner, normally your application's end-user, that grants permission to access the resource server with an access token. 
 - The client, which is the application that requests the access token from Okta and then passes it to the resource server.
 - The resource server, which accepts the access token and therefore also must verify that it is valid. In this case this is your application.
 
@@ -35,13 +35,15 @@ The access tokens are in JSON Web Token (JWT) format, the specification for whic
 
 As mentioned above, it is important that the resource server (your server-side application) only take the access token, as opposed to the ID token. This is because access tokens are intended for authorizing access to a resource, which is exactly the use case you have here. 
 
-ID Tokens, on the other hand, are intended for authentication. They provide information about the end-user, to allow you verify that they are who they say they are. Authentication is the concern of the clients. Because of this, when a client makes an authentication request, the ID Token that is returned contains the `client_id` in the ID Token's `aud` claim. 
+ID Tokens, on the other hand, are intended for authentication. They provide information about the resource owner, to allow you verify that they are who they say they are. Authentication is the concern of the clients. Because of this, when a client makes an authentication request, the ID Token that is returned contains the `client_id` in the ID Token's `aud` claim. 
 
 ID Tokens are also signed with a client secret, and your resource server has no way of verifying whether the ID Token was modified by the client in some unintended or malicious way. More information about ID tokens can be found here: (jakub.todo).
 
 ## What to Check When Validating an Access Token 
 
 The high-level overview of validating an access token looks like this:
+
+(jakub.todo link to sections below)
 
 - Retrieve and parse your Okta JSON Web Keys (JWK), which should be checked periodically and cached by your application.
 - Decode the access token, which is in JSON Web Token format.
@@ -54,7 +56,6 @@ The JSON Web Keys (JWK) need to be retrieved from your [Okta Authorization Serve
 
 > For more information about retrieving this metadata, see [Retrieve Authorization Server Metadata](https://developer.okta.com/docs/api/resources/oauth2.html#retrieve-authorization-server-metadata).
  
-
 ### Decode the Access Token
 
 You will have to decode the access token, which is in JWT format. Here are a few examples of how to do this:
