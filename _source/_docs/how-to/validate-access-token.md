@@ -90,6 +90,8 @@ You should verify the following:
 
 Alternatively, you can also validate an Access or Refresh Token using the Token Introspection endpoint: [Introspection Request](https://developer.okta.com/docs/api/resources/oauth2.html#introspection-request). This endpoint takes your token as a URL query and returns back a simple JSON response with a boolean `active` property. 
 
+(jakub.todo.Why wouldn't you always do this? Maybe this should be addressed higher up)
+
 ## Code Samples
 
 (jakub.todo) This may not be a great name for this section.
