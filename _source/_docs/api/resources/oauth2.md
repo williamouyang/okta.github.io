@@ -879,6 +879,18 @@ Use the following operations for Custom Authorization Servers:
 * [Activate Authorization Server](#activate-authorization-server)
 * [Deactivate Authorization Server](#deactivate-authorization-server)
 
+#### Using the Default Authorization Server
+
+Okta provides a configured Custom Authorization Server named Default Authorization Server. You can use it as it is provided or modify it.
+To make it easier to use, you can specify the `name`, "default" or the `authorizationServerId`. You can't use the server name with
+other Custom Authorization Servers. 
+
+Some request results return links to perform other tasks. For the Default Authorization Server, these links always contain the
+`name`, even if you specified the `authorizationServerId` in the request. 
+
+For every endpoint that specifies `authorizationServerId`, if you are accessing the Default Authorization Server, you can use `default` instead.
+If you change the name of the Default Authorization Server, use the new value.
+
 #### Create Authorization Server
 {:.api .api-operation}
 
