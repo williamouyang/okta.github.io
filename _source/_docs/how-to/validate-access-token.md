@@ -6,7 +6,7 @@ excerpt: How to validate access tokens in your server-side application
 
 ## Overview
 
-If your are building a modern app or APIs, you likely want to know if your end-user is authenticated. This is important to give context or to protect APIs from unauthenticated users. You can use Okta to authenticate your end-users and issue them signed access and ID tokens, which your application can then use. It is important that your application only uses the access token to grant access, and not the ID token. For more information about this, see the (jakub.todo) section below.
+If you are building a modern app or API, you likely want to know if your end-user is authenticated. This is important to give context or to protect APIs from unauthenticated users. You can use Okta to authenticate your end-users and issue them signed access and ID tokens, which your application can then use. It is important that your application only uses the access token to grant access, and not the ID token. For more information about this, see the (jakub.todo) section below.
 
 > For more information on issuing access tokens, see here (jakub.todo). 
 
