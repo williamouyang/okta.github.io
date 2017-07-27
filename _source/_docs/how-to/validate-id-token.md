@@ -86,13 +86,14 @@ Please note the following:
 You should verify the following:
 
 - The `iss` (issuer) claim matches the identifier of your Okta Authorization Server.
-- The `aud` (audience) claim is the value configured in the Authorization Server.
-- The `iat` (Client ID) claim is your application's Client ID.
-- The `exp` (Expiry Time) claim is the time at which this token will expire. You should make sure that this has not already passed.
+- The `aud` (audience) claim is the Client ID of your Okta application.
+- The `iat` (issued at time) claim indicates when this ID token was issued, expressed in Unix time.
+- The `exp` (Expiry Time) claim is the time at which this token will expire., expressed in Unix time. You should make sure that this time has not already passed.
+- The `nonce` claim value should match whatever was passed when you requested the ID token. 
 
 ## Validating A Token Remotely With Okta
 
-Alternatively, you can also validate an Access or Refresh Token using the Token Introspection endpoint: [Introspection Request](https://developer.okta.com/docs/api/resources/oauth2.html#introspection-request). This endpoint takes your token as a URL query and returns back a simple JSON response with a boolean `active` property. 
+Alternatively, you can also validate an ID Token using the Token Introspection endpoint: [Introspection Request](https://developer.okta.com/docs/api/resources/oidc.html#introspection-request). This endpoint takes your token as a URL query and returns back a simple JSON response with a boolean `active` property. 
 
 This incurs a network request which is slower to do verification, but can be used when you want to guarantee that the access token hasn't been revoked. 
 
