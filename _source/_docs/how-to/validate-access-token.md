@@ -64,7 +64,7 @@ You will have to decode the access token, which is in JWT format. Here are a few
 
 ### Verify the Token's Signature
 
-You verify the access token's signature by matching the key that was used to sign in with one of the key's you retrieved from your Okta Authorization Server's JWK endpoint. Specifically, each public key is identified by a `kid` attribute, which corresponds with the `kid` claim in the Access Token header.
+You verify the access token's signature by matching the key that was used to sign in with one of the key's you retrieved from your Okta Authorization Server's JWK endpoint. Specifically, each public key is identified by a `kid` attribute, which corresponds with the `kid` claim in the access token header.
 
 If the `kid` claim does not match, it is possible that the signing keys have changed. Check the `jwks_uri` value in the Authorization Server metadata and try retrieving the keys again from Okta.
 
@@ -82,19 +82,16 @@ Please note the following:
 You should verify the following:
 
 - The `iss` (issuer) claim matches the identifier of your Okta Authorization Server.
-- The `aud` (audience) claim is the value configured in the Authorization Server.
-- The `cid` (Client ID) claim is your application's Client ID.
-- The `exp` (Expiry Time) claim is the time at which this token will expire. You should make sure that this has not already passed.
+- The `client_id` claim is your Okta application's Client ID.
+- The `exp` (Expiry Time) claim is the time at which this token will expire, expressed in Unix time. You should make sure that this has not already passed.
 
 ## Validating A Token Remotely With Okta
 
-Alternatively, you can also validate an Access or Refresh Token using the Token Introspection endpoint: [Introspection Request](https://developer.okta.com/docs/api/resources/oauth2.html#introspection-request). This endpoint takes your token as a URL query and returns back a simple JSON response with a boolean `active` property. 
+Alternatively, you can also validate an access or refresh Token using the Token Introspection endpoint: [Introspection Request](https://developer.okta.com/docs/api/resources/oauth2.html#introspection-request). This endpoint takes your token as a URL query and returns back a simple JSON response with a boolean `active` property. 
 
 This incurs a network request which is slower to do verification, but can be used when you want to guarantee that the access token hasn't been revoked. 
 
 ## Okta Libraries to Help You Verify Access Tokens
-
-(jakub.todo) This may not be a great name for this section.
 
 Link out to SDK-specific info on how to validate tokens here.
 
