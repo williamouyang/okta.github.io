@@ -27,8 +27,6 @@ Although OpenID Connect is built on top of OAuth 2.0, the specification uses sli
 - A Claim is a piece of information about your End-User. 
 - The Relying Party (RP), which is the client application that requests the ID token from Okta.
 
-With these terms in mind, you should be able to parse this sentence from the OpenID Connect spec: `The ID Token is a security token that contains Claims about the Authentication of an End-User by an Authorization Server when using a Client`.
-
 More information about all of this can be found in our high-level discussion of OpenID Connect, which you can find here: (jakub.todo).
 
 The ID tokens are in JSON Web Token (JWT) format, the specification for which can be found here: <https://tools.ietf.org/html/rfc7519>. They are signed using private JSON Web Keys (JWK), the specification for which you can find here: <https://tools.ietf.org/html/rfc7517>.
