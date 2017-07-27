@@ -6,13 +6,13 @@ excerpt: How to validate ID tokens in your client-side application
 
 ## Overview
 
-If 
+If your client application requires authentication and would like to obtain information about the authenticated person, then it should use the OpenID Connect protocol to get an ID token. 
+
+OpenID Connect (OIDC) is an authentication protocol built on top of OAuth 2.0. With OAuth 2.0, a user can authenticate with an authorization server and get you an access token that authorizes access to some server resources. With OIDC, they can also give you a token called an ID token. The ID token contains information about a user and their authentication status. It can be used by your client both for authentication and as a store of information about that user. One OIDC flow can return both access and ID tokens.
 
 > For more information on issuing ID tokens, see here (jakub.todo). 
 
-
-
-We will now cover the terms used in this document, and an explanation of why you should use ID tokens for this use case. 
+We will now cover the terms used in this document, and an explanation of why you should use ID tokens. 
 
 - If you'd like to jump straight to the local validation steps, click here: (jakub.todo) 
 - If you'd like to see how to validate a token directly with Okta, click here: (jakub.todo)
@@ -20,22 +20,26 @@ We will now cover the terms used in this document, and an explanation of why you
 
 ### Terms 
 
-In the OAuth 2.0 flows under discussion here, we have four important roles:
+Although OpenID Connect is built on top of OAuth 2.0, the specification uses slightly different terms:
 
-- The authorization server, which is the server that issues the access token. In this case Okta is the authorization server. For more information about setting-up Okta as your authorization server, go here: [Set Up Authorization Server](https://developer.okta.com/docs/how-to/set-up-auth-server.html).
-- The resource owner, normally your application's end-user, that grants permission to access the resource server with an access token. 
-- The client, which is the application that requests the access token from Okta and then passes it to the resource server.
-- The resource server, which accepts the access token and therefore also must verify that it is valid. In this case this is your application.
+- The OpenID Provider (OP), which is the authorization server that issues the ID token. In this case Okta is the OP. For more information about setting-up Okta as your authorization server, go here: [Set Up Authorization Server](https://developer.okta.com/docs/how-to/set-up-auth-server.html).
+- The End-User whose information is contained in the ID token.
+- A Claim is a piece of information about your End-User. 
+- The Relying Party (RP), which is the client application that requests the ID token from Okta.
 
-More information about all of these can be found in our high-level discussion of OAuth 2.0, which you can find here: (jakub.todo).
+With these terms in mind, you should be able to parse this sentence from the OpenID Connect spec: `The ID Token is a security token that contains Claims about the Authentication of an End-User by an Authorization Server when using a Client`.
 
-The access tokens are in JSON Web Token (JWT) format, the specification for which can be found here: <https://tools.ietf.org/html/rfc7519>. They are signed using private JSON Web Keys (JWK), the specification for which you can find here: <https://tools.ietf.org/html/rfc7517>.
+More information about all of this can be found in our high-level discussion of OpenID Connect, which you can find here: (jakub.todo).
+
+The ID tokens are in JSON Web Token (JWT) format, the specification for which can be found here: <https://tools.ietf.org/html/rfc7519>. They are signed using private JSON Web Keys (JWK), the specification for which you can find here: <https://tools.ietf.org/html/rfc7517>.
 
 ## ID Tokens vs Access Tokens
 
-As mentioned above, it is important that the resource server (your server-side application) only take the access token from a client. This is because access tokens are intended for authorizing access to a resource, which is exactly the use case you have here. 
+The ID Token is a security token granted by the OpenID Provider that contains information about an End-User. This information tells your client application that the user is authenticated, and can also give you information like their username or locale.
 
-ID Tokens, on the other hand, are intended for authentication. They provide information about the resource owner, to allow you verify that they are who they say they are. Authentication is the concern of the clients. Because of this, when a client makes an authentication request, the ID Token that is returned contains the `client_id` in the ID Token's `aud` claim. 
+You can pass an ID Token around different components of your client, and these components can use the ID Token to confirm that the user is authenticated and also to retrieve information about them.
+
+Access tokens, on the other hand, are not intended to carry information about the user. They simply allow access to certain defined server resources. More discussion about when to use access tokens can be found in How To Validate Access Tokens (jakub.todo).
 
 More information about ID tokens can be found here: (jakub.todo).
 
@@ -46,9 +50,9 @@ The high-level overview of validating an ID token looks like this:
 (jakub.todo link to sections below)
 
 - Retrieve and parse your Okta JSON Web Keys (JWK), which should be checked periodically and cached by your application.
-- Decode the access token, which is in JSON Web Token format.
-- Verify the signature used to sign the access token
-- Verify the claims found inside the access token
+- Decode the ID token, which is in JSON Web Token format.
+- Verify the signature used to sign the ID token
+- Verify the claims found inside the ID token
 
 ### Retrieve The JSON Web Keys
 
@@ -58,13 +62,13 @@ The JSON Web Keys (JWK) need to be retrieved from your [Okta Authorization Serve
  
 ### Decode the ID Token
 
-You will have to decode the access token, which is in JWT format. Here are a few examples of how to do this:
+You will have to decode the ID token, which is in JWT format. Here are a few examples of how to do this:
 
 (jakub.todo. Link to code section below)
 
 ### Verify the Token's Signature
 
-You verify the access token's signature by matching the key that was used to sign in with one of the key's you retrieved from your Okta Authorization Server's JWK endpoint. Specifically, each public key is identified by a `kid` attribute, which corresponds with the `kid` claim in the Access Token header.
+You verify the ID token's signature by matching the key that was used to sign in with one of the keys you retrieved from your Okta Authorization Server's JWK endpoint. Specifically, each public key is identified by a `kid` attribute, which corresponds with the `kid` claim in the ID token header.
 
 If the `kid` claim does not match, it is possible that the signing keys have changed. Check the `jwks_uri` value in the Authorization Server metadata and try retrieving the keys again from Okta.
 
@@ -83,7 +87,7 @@ You should verify the following:
 
 - The `iss` (issuer) claim matches the identifier of your Okta Authorization Server.
 - The `aud` (audience) claim is the value configured in the Authorization Server.
-- The `cid` (Client ID) claim is your application's Client ID.
+- The `iat` (Client ID) claim is your application's Client ID.
 - The `exp` (Expiry Time) claim is the time at which this token will expire. You should make sure that this has not already passed.
 
 ## Validating A Token Remotely With Okta
