@@ -1,18 +1,18 @@
 ---
 layout: docs_page
-title: Validating ID Tokens
-excerpt: How to validate ID tokens in your server-side application
+title: Validating ID Tokens on a Client
+excerpt: How to validate ID tokens in your client-side application
 ---
 
 ## Overview
 
-If your are building a modern app or APIs, you likely want to know if your end-user is authenticated. This is important to give context or to protect APIs from unauthenticated users. You can use Okta to authenticate your end-users and issue them signed access and ID tokens, which your application can then use. It is important that your application only uses the access token to grant access, and not the ID token. For more information about this, see the (jakub.todo) section below.
+If 
 
-> For more information on issuing access tokens, see here (jakub.todo). 
+> For more information on issuing ID tokens, see here (jakub.todo). 
 
-Once the signed tokens are issued to the end-users they can be passed to your application, which must validate them. There are two ways to verify a token: locally, or remotely with Okta. The token has been signed with a JSON Web Key (JWK) using the RS256 algorithm. To validate the signature, Okta provides your application with a public key that can be used. 
 
-We will now cover the terms used in this document, and an explanation of why you should use access tokens instead of ID tokens for this use case. 
+
+We will now cover the terms used in this document, and an explanation of why you should use ID tokens for this use case. 
 
 - If you'd like to jump straight to the local validation steps, click here: (jakub.todo) 
 - If you'd like to see how to validate a token directly with Okta, click here: (jakub.todo)
@@ -31,7 +31,7 @@ More information about all of these can be found in our high-level discussion of
 
 The access tokens are in JSON Web Token (JWT) format, the specification for which can be found here: <https://tools.ietf.org/html/rfc7519>. They are signed using private JSON Web Keys (JWK), the specification for which you can find here: <https://tools.ietf.org/html/rfc7517>.
 
-## Access Tokens vs ID Tokens
+## ID Tokens vs Access Tokens
 
 As mentioned above, it is important that the resource server (your server-side application) only take the access token from a client. This is because access tokens are intended for authorizing access to a resource, which is exactly the use case you have here. 
 
@@ -39,9 +39,9 @@ ID Tokens, on the other hand, are intended for authentication. They provide info
 
 More information about ID tokens can be found here: (jakub.todo).
 
-## What to Check When Validating an Access Token 
+## What to Check When Validating an ID Token 
 
-The high-level overview of validating an access token looks like this:
+The high-level overview of validating an ID token looks like this:
 
 (jakub.todo link to sections below)
 
@@ -56,7 +56,7 @@ The JSON Web Keys (JWK) need to be retrieved from your [Okta Authorization Serve
 
 > For more information about retrieving this metadata, see [Retrieve Authorization Server Metadata](https://developer.okta.com/docs/api/resources/oauth2.html#retrieve-authorization-server-metadata).
  
-### Decode the Access Token
+### Decode the ID Token
 
 You will have to decode the access token, which is in JWT format. Here are a few examples of how to do this:
 
