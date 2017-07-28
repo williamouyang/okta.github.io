@@ -690,15 +690,8 @@ curl -v -X GET \
           "title": "Username",
           "type": "string",
           "required": true,
-          "mutability": "READ_WRITE",
           "scope": "NONE",
-          "maxLength": 100,
-          "permissions": [
-            {
-              "principal": "SELF",
-              "action": "READ_ONLY"
-            }
-          ]
+          "maxLength": 100
         }
       },
       "required": [
@@ -771,12 +764,6 @@ curl -v -X POST \
             "required": false,
             "minLength": 1,
             "maxLength": 20,
-            "permissions": [
-              {
-                "principal": "SELF",
-                "action": "READ_WRITE"
-              }
-            ]
           }
         },
         "required": []
@@ -806,15 +793,8 @@ curl -v -X POST \
           "title": "Username",
           "type": "string",
           "required": true,
-          "mutability": "READ_WRITE",
           "scope": "NONE",
-          "maxLength": 100,
-          "permissions": [
-            {
-              "principal": "SELF",
-              "action": "READ_ONLY"
-            }
-          ]
+          "maxLength": 100
         }
       },
       "required": [
@@ -829,16 +809,9 @@ curl -v -X POST \
           "title": "Twitter username",
           "description": "User's username for twitter.com",
           "type": "string",
-          "mutability": "READ_WRITE",
           "scope": "NONE",
           "minLength": 1,
-          "maxLength": 20,
-          "permissions": [
-            {
-              "principal": "SELF",
-              "action": "READ_WRITE"
-            }
-          ]
+          "maxLength": 20
         }
       },
       "required": []
@@ -902,12 +875,6 @@ curl -v -X POST \
             "required": false,
             "minLength": 1,
             "maxLength": 10,
-            "permissions": [
-              {
-                "principal": "SELF",
-                "action": "READ_ONLY"
-              }
-            ]
           }
         },
         "required": []
@@ -937,15 +904,8 @@ curl -v -X POST \
           "title": "Username",
           "type": "string",
           "required": true,
-          "mutability": "READ_WRITE",
           "scope": "NONE",
-          "maxLength": 100,
-          "permissions": [
-            {
-              "principal": "SELF",
-              "action": "READ_ONLY"
-            }
-          ]
+          "maxLength": 100
         }
       },
       "required": [
@@ -960,16 +920,9 @@ curl -v -X POST \
           "title": "Twitter username",
           "description": "User's username for twitter.com",
           "type": "string",
-          "mutability": "READ_WRITE",
           "scope": "NONE",
           "minLength": 1,
-          "maxLength": 10,
-          "permissions": [
-            {
-              "principal": "SELF",
-              "action": "READ_ONLY"
-            }
-          ]
+          "maxLength": 10
         }
       },
       "required": []
@@ -1057,15 +1010,8 @@ curl -v -X POST \
           "title": "Username",
           "type": "string",
           "required": true,
-          "mutability": "READ_WRITE",
           "scope": "NONE",
-          "maxLength": 100,
-          "permissions": [
-            {
-              "principal": "SELF",
-              "action": "READ_ONLY"
-            }
-          ]
+          "maxLength": 100
         }
       },
       "required": [
@@ -1446,15 +1392,8 @@ The [App User Model](./apps.html#application-user-model) schema is defined using
           "title": "Username",
           "type": "string",
           "required": true,
-          "mutability": "READ_WRITE",
           "scope": "NONE",
-          "maxLength": 100,
-          "permissions": [
-            {
-              "principal": "SELF",
-              "action": "READ_ONLY"
-            }
-          ]
+          "maxLength": 100
         }
       },
       "required": [
@@ -1469,16 +1408,9 @@ The [App User Model](./apps.html#application-user-model) schema is defined using
           "title": "Twitter username",
           "description": "User's username for twitter.com",
           "type": "string",
-          "mutability": "READ_WRITE",
           "scope": "NONE",
           "minLength": 1,
-          "maxLength": 20,
-          "permissions": [
-            {
-              "principal": "SELF",
-              "action": "READ_WRITE"
-            }
-          ]
+          "maxLength": 20
         }
       },
       "required": []
@@ -1585,13 +1517,7 @@ All custom profile properties are defined in a profile sub-schema with the resol
             "customPropertyName": {
                 "title": "Title of custom property",
                 "description": "Description of custom property",
-                "type": "string",
-                "permissions": [
-                    {
-                        "principal": "SELF",
-                        "action": "READ_ONLY"
-                    }
-                ]
+                "type": "string"
             }
         },
         "required": []
@@ -1618,7 +1544,6 @@ Okta has also extended [JSON Schema Draft 4](https://tools.ietf.org/html/draft-z
 | Property      | Description                                     | DataType                                                                  | Nullable | Unique | Readonly | MinLength | MaxLength | Validation  |
 | ------------- | ----------------------------------------------- | ------------------------------------------------------------------------- |--------- | ------ | -------- | --------- | --------- | ----------  |
 | required      | determines whether the property is required     | Boolean                                                                   | FALSE    | FALSE  | FALSE    |           |           |             |
-| permissions   | access control permissions for the property     | Array of [Schema Property Permission](#schema-property-permission-object-1) | FALSE    | FALSE  | FALSE    |           |           |             |
 |---------------+-------------------------------------------------+---------------------------------------------------------------------------+-----------+-------+----------+-----------+-----------+-----------
 
 > A read-only [JSON Schema Draft 4](https://tools.ietf.org/html/draft-zyp-json-schema-04) compliant `required` property is also available on the [App User Profile Subschemas](#app-user-profile-subschemas).
@@ -1637,13 +1562,7 @@ Okta has also extended [JSON Schema Draft 4](https://tools.ietf.org/html/draft-z
           "required": false,
           "scope": "NONE",
           "minLength": 1,
-          "maxLength": 20,
-          "permissions": [
-            {
-              "principal": "SELF",
-              "action": "READ_WRITE"
-            }
-          ]
+          "maxLength": 20
         }
       },
       "required": []
@@ -1666,13 +1585,3 @@ Specific property types support a **subset** of [JSON Schema validations](https:
 | `array`       | [JSON Array](https://tools.ietf.org/html/rfc7159#section-5)                                                                         |                             |
 |---------------+-------------------------------------------------------------------------------------------------------------------------------------+-----------------------------|
 
-#### Schema Property Permission Object
-
-A given schema property can be assigned a permission for a principal that restricts access to the property.
-
-|-----------+------------------------------------------------------------------+--------------------------------------------------------------------+-----------+-------+----------+-----------+-----------+------------ |
-| Property  | Description                                                      | DataType                                                           | Nullable | Unique | Readonly | MinLength | MaxLength | Validation  |
-| ----------| ---------------------------------------------------------------- | ------------------------------------------------------------------ |--------- | ------ | -------- | --------- | --------- | ----------  |
-| principal | security principal                                               | `SELF` (end-user)                                                  | FALSE    | TRUE   | FALSE    |           |           |             |
-| action    | determines whether the principal can view or modify the property | `HIDE`, `READ_ONLY`, `READ_WRITE`                                  | FALSE    | FALSE  | FALSE    |           |           |             |
-|-----------+------------------------------------------------------------------+--------------------------------------------------------------------+----------+--------+----------+-----------+-----------+-------------|
