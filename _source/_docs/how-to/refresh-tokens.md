@@ -10,6 +10,8 @@ A refresh token is a special token that is used to generate additional access to
 
 ## How to Get a Refresh Token
 
+(jakub.todo) This breaks the structure of the other sections. We don't cover how to get an access or ID token in the previous two sections, why cover how to get a refresh token here?
+
 Cover what grant flows and what scope you need to get one
 
 The following combinations of grant type and scope will return a Refresh token:
@@ -17,15 +19,20 @@ The following combinations of grant type and scope will return a Refresh token:
 | Grant Type  | Scope |
 |-------------|-------|
 | `authorization_code`  | `offline_scope`  |
-| `refresh_token`  | N/A |
+| `refresh_token`  | `offline_scope` |
 | `password`  | `offline_scope`  |
 
-> Note: This table only shows the minimum combination. For example, with the `authorization_code` grant type you can also include an `openid` scope alongside the `offline_scope` in order to also get an ID token along with the refresh token.
-
-## What About SPAs?
-
-Silent authentication
+> Note: This table only shows the minimum requirements. For example, with the `authorization_code` grant type you can also include an `openid` scope alongside the `offline_scope` in order to also get an ID token along with the refresh token.
 
 ## How to Refresh an Access Token
 
+To refresh your access token, you send a token request with a `grant_type` of `refresh_token`.
+
 ## How to Refresh an ID Token
+
+To refresh your ID token, you send a token request with a `grant_type` of `refresh_token`.
+
+## Refreshing Tokens Silently
+
+
+Silent authentication
