@@ -1544,6 +1544,7 @@ Okta has also extended [JSON Schema Draft 4](https://tools.ietf.org/html/draft-z
 | Property      | Description                                     | DataType                                                                  | Nullable | Unique | Readonly | MinLength | MaxLength | Validation  |
 | ------------- | ----------------------------------------------- | ------------------------------------------------------------------------- |--------- | ------ | -------- | --------- | --------- | ----------  |
 | required      | determines whether the property is required     | Boolean                                                                   | FALSE    | FALSE  | FALSE    |           |           |             |
+| scope         | determines whether an appuser attribute can be set at the Individual or Group Level | `SELF`, `NONE`                        | FALSE    | FALSE  | TRUE     |           |           |             |
 |---------------+-------------------------------------------------+---------------------------------------------------------------------------+-----------+-------+----------+-----------+-----------+-----------
 
 > A read-only [JSON Schema Draft 4](https://tools.ietf.org/html/draft-zyp-json-schema-04) compliant `required` property is also available on the [App User Profile Subschemas](#app-user-profile-subschemas).
