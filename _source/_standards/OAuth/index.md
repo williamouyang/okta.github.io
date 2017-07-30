@@ -402,9 +402,9 @@ Use the Default Authorization Server with Okta SDKs and samples. You can modify 
 
 The Default Authorization Server has the following differences from Custom Authorization Servers you create yourself:
 
-* You can use `name` or the `authorizationServerID` in all authorization server endpoints. Other Customer Authorization Servers can only use the latter value.
-* The links in request results that are used for next steps contain the `name`, not the `authorizationServerID`, even if you specified the
-    the ID instead of name in your request. For more information, see [Default Authorization Server](/docs/api/resources/oauth2.html#default-authorization-server).
+* You can use `name` or the `authorizationServerId` in all authorization server endpoints. Other Customer Authorization Servers can only use the latter value.
+* The links in request results that are used for next steps contain the `name`, not the `authorizationServerId`, even if you specified the
+    the ID instead of name in your request. For more information, see [Default Authorization Server](/docs/api/resources/oauth2.html#using-the-default-authorization-server).
 
 ## OpenID Connect and Authorization Servers
 

@@ -881,15 +881,22 @@ Use the following operations for Custom Authorization Servers:
 
 #### Using the Default Authorization Server
 
-Okta provides a configured Custom Authorization Server named Default Authorization Server. You can use it as it is provided or modify it.
-To make it easier to use, you can specify the `name`, "default" or the `authorizationServerId`. You can't use the server name with
-other Custom Authorization Servers. 
+Okta provides a configured Custom Authorization Server with the name `default`.
+To make this default Custom Authorization Server easier to use, you can specify the `name` value (`default`) or the `authorizationServerId`. You can't use the `name` value
+instead of `authorizationServerId` with other Custom Authorization Servers. For example, both of these requests are valid:
 
-Some request results return links to perform other tasks. For the Default Authorization Server, these links always contain the
-`name`, even if you specified the `authorizationServerId` in the request. 
+* `default` Authorization Server: `GET  /api/v1/authorizationServers/:authorizationServerId`
+* `default` Authorization Server: `GET  /api/v1/authorizationServers/default`
 
-For every endpoint that specifies `authorizationServerId`, if you are accessing the Default Authorization Server, you can use `default` instead.
-If you change the name of the Default Authorization Server, use the new value.
+For a Custom Authorization Server that you create, only the first request is valid.
+
+Some request results contain links to perform other tasks (HAL links). For the `default` Custom Authorization Server, HAL links always contain the
+`name`, even if you specified the `authorizationServerId` in the request. For example, the link returned for scopes in `_links`:
+
+* `default`: "href": "https://${org}.okta.com/api/v1/authorizationServers/**default**/scopes"
+* `myCustomAuthServer`: "href": "https://${org}.okta.com/api/v1/authorizationServers/**ausain6z9zIedDCxB0h7**/scopes"
+                                
+For every endpoint that specifies `authorizationServerId`, if you are accessing the `default` Custom Authorization Server, you can use `default` instead.
 
 #### Create Authorization Server
 {:.api .api-operation}
