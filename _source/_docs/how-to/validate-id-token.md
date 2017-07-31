@@ -52,9 +52,9 @@ The high-level overview of validating an ID token looks like this:
 - Verify the signature used to sign the ID token
 - Verify the claims found inside the ID token
 
-### Retrieve The JSON Web Keys
+### Retrieve The JSON Web Key Set
 
-The JSON Web Keys (JWK) need to be retrieved from your [Okta Authorization Server](https://developer.okta.com/docs/how-to/set-up-auth-server.html), though your application should have them cached. Specifically, your Authorization Server's Metadata endpoint contains the `jwks_uri`, which you can use to get the JWK. 
+The JSON Web Key Set (JWKS) needs to be retrieved from your [Okta Authorization Server](https://developer.okta.com/docs/how-to/set-up-auth-server.html), though your application should have it cached. Specifically, your Authorization Server's Metadata endpoint contains the `jwks_uri`, which you can use to get the JWKS. 
 
 > For more information about retrieving this metadata, see [Retrieve Authorization Server Metadata](https://developer.okta.com/docs/api/resources/oauth2.html#retrieve-authorization-server-metadata).
  
@@ -84,14 +84,14 @@ Please note the following:
 You should verify the following:
 
 - The `iss` (issuer) claim matches the identifier of your Okta Authorization Server.
-- The `aud` (audience) claim is the Client ID of your Okta application.
+- The `aud` (audience) claim should match the Client ID that you used to request the ID Token. This will be the Client ID for the Application you created in Okta.
 - The `iat` (issued at time) claim indicates when this ID token was issued, expressed in Unix time.
 - The `exp` (Expiry Time) claim is the time at which this token will expire., expressed in Unix time. You should make sure that this time has not already passed.
 - The `nonce` claim value should match whatever was passed when you requested the ID token. 
 
 ## Validating A Token Remotely With Okta
 
-Alternatively, you can also validate an ID Token using the Token Introspection endpoint: [Introspection Request](https://developer.okta.com/docs/api/resources/oidc.html#introspection-request). This endpoint takes your token as a URL query and returns back a simple JSON response with a boolean `active` property. 
+Alternatively, you can also validate an ID Token using the Token Introspection endpoint: [Introspection Request](https://developer.okta.com/docs/api/resources/oidc.html#introspection-request). This endpoint takes your token as a URL query and returns back a JSON response with a boolean `active` property. If `active` is `true` then further information about the token is returned as well. 
 
 This incurs a network request which is slower to do verification, but can be used when you want to guarantee that the access token hasn't been revoked. 
 
