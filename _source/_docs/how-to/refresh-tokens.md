@@ -32,7 +32,7 @@ To refresh your access token, you send a token request with a `grant_type` of `r
 
 To refresh your ID token, you send a token request with a `grant_type` of `refresh_token`.
 
-## Refreshing Tokens Silently
+## Getting a Refresh Token Silently
 
 
 Silent authentication
