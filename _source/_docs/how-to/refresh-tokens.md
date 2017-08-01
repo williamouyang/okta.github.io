@@ -4,15 +4,17 @@ title: Refreshing Access and ID Tokens
 excerpt: How to refresh access tokens with Okta.
 ---
 
+## Setting Up Your Application
+
+
+
 ## What Is a Refresh Token?
 
 A refresh token is a special token that is used to generate additional access tokens. This allows you to have short-lived access tokens without having to collect credentials every single time one expires.
 
 ## How to Get a Refresh Token
 
-(jakub.todo) This breaks the structure of the other sections. We don't cover how to get an access or ID token in the previous two sections, why cover how to get a refresh token here?
-
-Cover what grant flows and what scope you need to get one
+To get a refresh token, 
 
 The following combinations of grant type and scope will return a Refresh token:
 
@@ -22,7 +24,9 @@ The following combinations of grant type and scope will return a Refresh token:
 | `refresh_token`  | `offline_scope` |
 | `password`  | `offline_scope`  |
 
-> Note: This table only shows the minimum requirements. For example, with the `authorization_code` grant type you can also include an `openid` scope alongside the `offline_scope` in order to also get an ID token along with the refresh token.
+> Note: This table only shows the minimum requirements. For example, with the `authorization_code` grant type you can also include an `openid` scope alongside the `offline_scope` in order to also get an ID token along with the refresh token. For more information see the [Okta OAuth 2.0 reference page](https://developer.okta.com/docs/api/resources/oauth2.html#response-parameters-1).
+
+## Get a Refresh Token Silently for Your SPA
 
 ## How to Refresh an Access Token
 
