@@ -14,7 +14,7 @@ API Access Management allows you to build custom authorization servers in Okta w
 An authorization server defines your security boundary, for example "staging" or "production."
 Within each authorization server you can define your own OAuth scopes, claims, and access policies.
 This allows your apps and your APIs to anchor to a central authorization point and leverage the rich identity features of Okta,
-such as Universal Directory for transforming attributes, adaptive MFA for end-users, analytics, and system log, and extend it out to the API economy.
+such as Universal Directory for transforming attributes, adaptive MFA for end users, analytics, and system log, and extend it out to the API economy.
 
 At its core, an authorization server is simply an OAuth 2.0 token minting engine.
 Each authorization server has a unique [issuer URI](https://tools.ietf.org/html/rfc7519#section-4.1.1)

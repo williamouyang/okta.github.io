@@ -47,7 +47,7 @@ To do so, follow the steps below:
 ## Create an Authorization Server
 An authorization server defines your security boundary, for example "staging" or "production". Within each
 authorization server you can define your own OAuth scopes, claims, and access policies. This allows your apps and APIs to anchor to a central authorization point and leverage the rich identity features of Okta, such as
-Universal Directory for transforming attributes, adaptive MFA for end-users, analytics, and system log.
+Universal Directory for transforming attributes, adaptive MFA for end users, analytics, and system log.
 
 We will need to set up our own authorization server for our example. This is what the Sign-In Widget will communicate
 with to handle the user authentication services. To set this up, follow the steps below:
