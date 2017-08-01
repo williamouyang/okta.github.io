@@ -881,7 +881,7 @@ Use the following operations for Custom Authorization Servers:
 
 #### Using the Default Authorization Server
 
-For developer orgs created after 8/9/2017, Okta provides a pre-configured Custom Authorization Server with the name `default`.
+Okta provides a pre-configured Custom Authorization Server with the name `default`.
 It allows you to specify `default` instead of the `authorizationServerId`, and includes a basic access policy and rule, which you can edit to control access.
 
 #### Create Authorization Server

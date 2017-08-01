@@ -397,7 +397,7 @@ If you use a Custom Authorization Server, we recommend that you use it instead o
 any platform use cases (perform SSO or secure your API access).
 Doing so will make it easier to consume enhancements to the API Access Management product and features.  
 
-For developer orgs created after 8/9/2017, Okta provides a pre-configured Custom Authorization Server with the name `default`.
+Okta provides a pre-configured Custom Authorization Server with the name `default`.
 It allows you to specify `default` instead of the `authorizationServerId`, and includes a basic access policy and rule, which you can edit to control access.
 
 ## OpenID Connect and Authorization Servers
