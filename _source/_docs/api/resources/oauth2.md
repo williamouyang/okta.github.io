@@ -1566,7 +1566,7 @@ Returns [the claim](#claims-object) you requested
 
 {% api_operation post /api/v1/authorizationServers/:authorizationServerId/claims %}
 
-Create a claim for a Custom Authorization Server
+Creates a claim for a Custom Authorization Server
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
