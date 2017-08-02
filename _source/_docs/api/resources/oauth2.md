@@ -882,7 +882,11 @@ Use the following operations for Custom Authorization Servers:
 #### Using the Default Authorization Server
 
 Okta provides a pre-configured Custom Authorization Server with the name `default`.
-It allows you to specify `default` instead of the `authorizationServerId`, and includes a basic access policy and rule, which you can edit to control access.
+This default authorization server includes a basic access policy and rule, which you can edit to control access. 
+It allows you to specify `default` instead of the `authorizationServerId` in requests to it:
+
+* `https://{YourOktaOrg}}/api/v1/authorizationServers/default`  vs 
+* `https://{YourOktaOrg}}/api/v1/authorizationServers/:authorizationServerId` for other Customer Authorization Servers
 
 #### Create Authorization Server
 {:.api .api-operation}
