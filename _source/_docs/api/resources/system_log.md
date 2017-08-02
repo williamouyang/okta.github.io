@@ -20,7 +20,11 @@ The System Log API has one endpoint:
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9cfb0dd661a5432a77c6){:target="_blank"}
 
-See below for [Examples](#examples) and more on how to use the System Log API.
+See [Examples](#examples) for way you can use the System Log API.
+
+## Data Retention
+
+Log data older than 90 days is not returned, in accordance with Okta's [Data Retention Policy}(https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy).
 
 ## Examples
 
@@ -33,7 +37,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/logs?q=Jane+Doe"
+"https://{yourOktaDomain}.com/api/v1/logs?q=Jane+Doe"
 ```
 
 ### Polling
@@ -44,7 +48,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/logs?filter=event_type+eq+%22user.session.start%22"
+"https://{yourOktaDomain}.com/api/v1/logs?filter=event_type+eq+%22user.session.start%22"
 ```
 
 ### Transferring Data to a separate system
@@ -55,7 +59,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/logs?since=2017-03-11"
+"https://{yourOktaDomain}.com/api/v1/logs?since=2017-03-11"
 ```
 
 ## Event Operations
@@ -164,7 +168,7 @@ Each Log object describes a single action performed by a set of actors for a set
     "result": "SUCCESS"
   },
   "uuid": "f790999f-fe87-467a-9880-6982a583986c",
-  "published": "2016-05-31T22:23:07.777Z",
+  "published": "2017-05-31T22:23:07.777Z",
   "eventType": "user.session.start",
   "displayMessage": "User login to Okta",
   "transaction": {
@@ -569,7 +573,7 @@ Link: <url>; rel="self"
 
 For example:
 ```
-Link: <https://${org}.okta.com/api/v1/logs?q=&sortOrder=DESCENDING&limit=20&until=2017-03-17T23%3A59%3A59%2B00%3A00&since=2017-03-10T00%3A00%3A00%2B00%3A00>; rel="self"
+Link: <https://{yourOktaDomain}.com/api/v1/logs?q=&sortOrder=DESCENDING&limit=20&until=2017-03-17T23%3A59%3A59%2B00%3A00&since=2017-03-10T00%3A00%3A00%2B00%3A00>; rel="self"
 ```
 
 ### Next Link Response Header
@@ -582,7 +586,7 @@ Link: <url>; rel="next"
 
 For example:
 ```
-Link: <https://${org}.okta.com/api/v1/logs?q=&sortOrder=DESCENDING&limit=20&until=2017-03-17T15%3A41%3A12.994Z&after=349996bd-5091-45dc-a39f-d357867a30d7&since=2017-03-10T00%3A00%3A00%2B00%3A00>; rel="next"
+Link: <https://{yourOktaDomain}.com/api/v1/logs?q=&sortOrder=DESCENDING&limit=20&until=2017-03-17T15%3A41%3A12.994Z&after=349996bd-5091-45dc-a39f-d357867a30d7&since=2017-03-10T00%3A00%3A00%2B00%3A00>; rel="next"
 ```
 
 ## Timeouts
