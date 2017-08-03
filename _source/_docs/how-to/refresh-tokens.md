@@ -6,7 +6,7 @@ excerpt: How to refresh access tokens with Okta.
 
 ## What Is a Refresh Token?
 
-A refresh token is a special token that is used to generate additional access tokens. This allows you to have short-lived access tokens without having to collect credentials every single time one expires. Normally you would request this token alongside the access and/or ID tokens as part of a user's initial authentication flow. 
+A refresh token is a special token that is used to generate additional access tokens. This allows you to have short-lived access tokens without having to collect credentials every single time one expires. Normally you would request this token alongside the access and/or ID tokens as part of a user's initial authentication flow.
 
 ## Setting Up Your Application
 
@@ -18,7 +18,7 @@ Once you have an application, you need to make sure that the "Allowed grant type
 
 To get a refresh token, you send a request to your Okta Authorization Server. 
 
-In the case of the Authorization Code or Implicit flows, you use the Authorization Server's `/authorize` endpoint to get an authorization code, specifying an `offline_access` scope. You then send this code the `/token` endpoint to get the refresh token. For more information about this endpoint, see [Obtain an Authorization Grant from a User](https://developer.okta.com/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user). For more information about the Authorization Code and Implicit flows, see: (jakub.todo)
+In the case of the Authorization Code or Implicit flows, you use the Authorization Server's `/authorize` endpoint to get an authorization code, specifying an `offline_access` scope. You then send this code to the `/token` endpoint to get an access token and a refresh token. For more information about this endpoint, see [Obtain an Authorization Grant from a User](https://developer.okta.com/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user). For more information about the Authorization Code and Implicit flows, see: (jakub.todo)
 
 For the Client Credentials and Resource Owner Password flows, you use the Authorization Server's `/token` endpoint directly. For more information about this endpoint, see [Request a Token](https://developer.okta.com/docs/api/resources/oauth2.html#request-a-token). For more information about the Client Credentials and Resource Owner Password flows, see: (jakub.todo)
 
@@ -26,9 +26,11 @@ The following combinations of grant type and scope, when sent to `/token` endpoi
 
 |Grant Type  | Scope |
 |-------------|-------|
-`authorization_code`  | `offline_access`  |
-`refresh_token`  | `offline_access` |
-`password`  | `offline_access`  |
+| `authorization_code`  | `offline_access`*  |
+| `refresh_token`  | `offline_access` |
+| `password`  | `offline_access`  |
+
+> NOTE: The authorization code flow is unique, in that the `offline_access` scope has to be requested as part of the code request to the `/authorize` endpoint, and not the request sent to the `/token` endpoint.
 
 This table only shows the minimum requirements. For example, with the `password` grant type you can also include an `openid` scope alongside the `offline_scope`:
 
@@ -38,18 +40,47 @@ This table only shows the minimum requirements. For example, with the `password`
 
 You would then get back an ID token alongside your access and refresh tokens.
 
+> NOTE: Although you requested access, refresh, and ID tokens, the refresh token can only be used to get a new access token. An ID token will not be returned.
+
 For more information see the [Okta OAuth 2.0 reference page](https://developer.okta.com/docs/api/resources/oauth2.html#response-parameters-1).
-
-
 
 ## Get a Refresh Token Silently for Your SPA
 
-## How to Use a Refresh Token
+In a normal Single-Page Application (SPA) you would likely want to use the Implicit flow (jakub.todo.see here for more on that)
 
-### Refresh an Access Token
+What prompt=none is saying is that you want to prevent the login screen from showing up regardless of the whether the user has session or not. Either they do have a session, in which case you get tokens back, or they don't have a session in which case you get a nice silent error that you can then act on.
+
+To perform silent authentication, you send a request to the `/authorize` endpoint with a `prompt` parameter value of `none`.
+
+check -> success -> tokens (without the user knowing)
+check -> error -> oh snap, i need them to reauthorize to get tokens
+so you redirect
+
+## How to Use a Refresh Token
 
 To refresh your access token, you send a token request with a `grant_type` of `refresh_token`.
 
-### Refresh an ID Token
+```
+http --form POST https://dev-144769.oktapreview.com/oauth2/ausaw8fz3q4Yd3Zk70h7/v1/token \
+  accept:application/json \
+  authorization:'Basic MG9hYmg3M...' \
+  cache-control:no-cache \
+  content-type:application/x-www-form-urlencoded \
+  postman-token:b20452fd-779c-9350-9344-28be9c1b9731 \
+  grant_type=refresh_token \
+  redirect_uri=http://localhost \
+  scope=offline_access \
+  refresh_token=MIOf-U1zQbyfa3MUfJHhvnUqIut9ClH0xjlDXGJAyqo
+```
 
-To refresh your ID token, you send a token request with a `grant_type` of `refresh_token`.
+If the refresh token is valid, then you get back a new access/refresh token combination:
+
+```
+{
+    "access_token": "eyJhbGciOiJ[...]K1Sun9bA",
+    "token_type": "Bearer",
+    "expires_in": 3600,
+    "scope": "offline_access",
+    "refresh_token": "MIOf-U1zQbyfa3MUfJHhvnUqIut9ClH0xjlDXGJAyqo"
+}
+```
