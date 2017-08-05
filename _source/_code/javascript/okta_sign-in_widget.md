@@ -1,5 +1,5 @@
 ---
-layout: docs_page
+layout: software
 title: Okta Sign-In Widget Quickstart
 excerpt: A drop-in widget with custom UI capabilities to power sign-in with Okta.
 weight: 1

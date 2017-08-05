@@ -1,5 +1,5 @@
 ---
-layout: docs_page
+layout: software
 title: Angular + Okta Auth SDK
 weight: 20
 excerpt: Integrate Okta with an Angular application using Auth JS.
