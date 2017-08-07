@@ -9,7 +9,7 @@ title: System Log (Beta)
 
 The Okta System Log API provides read access to your organization's system log. This API provides more functionality than the [Events API](/docs/api/resources/events.html):
 
-* The System Log API contains much more [structured data](docs/api/resources/system_log.html#log-objects) than the [Events API](/docs/api/resources/events.html#event-model).
+* The System Log API contains much more [structured data](/docs/api/resources/system_log.html#log-objects) than the [Events API](/docs/api/resources/events.html#event-model).
 * The System Log API supports additional [SCIM filters](/docs/api/resources/system_log.html#request-parameters) and the `q` query parameter, because of the presence of more structured data than the [Events API](/docs/api/resources/events.html#request-parameters).
 
 ## Getting Started
