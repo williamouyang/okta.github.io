@@ -8,12 +8,12 @@ excerpt: Summary of changes to the Okta Platform since Release 2017.31
 
 ### Platform Feature Enhancements
 
-| Feature Enhancement                                                                                               | Expected in Preview Orgs | Expected in Production Orgs             |
-|:------------------------------------------------------------------------------------------------------------------|:-------------------------|:----------------------------------------|
-|       [Default Custom Authorization Server](#default-custom-authorization-server)                                        | August 9, 2017           | August 14, 2017                         |
-|      [Web App Supports Client Credential Grant Type](#web-app-supports-client-credential-grant-type)                    | August 9, 2017           | August 14, 2017                         |
-|     [OpenID Connect Group Claim Retrieves Application Groups](#openid-connect-group-claim-supports-application-groups) | August 9, 2017           | August 14, 2017                         |
-|                [SHA-256 Signed Certificates for New SAML 2.0 Apps](#sha-256-signed-certificates-for-new-saml-20-apps)            | Generally Available now  | Generally Available beginning 9/11/2017 |
+| Feature Enhancement                                                                                                 | Expected in Preview Orgs | Expected in Production Orgs             |
+|:--------------------------------------------------------------------------------------------------------------------|:-------------------------|:----------------------------------------|
+|       [Default Custom Authorization Server](#default-custom-authorization-server)                                         | August 9, 2017           | August 14, 2017                         |
+|      [Web App Supports Client Credential Grant Type](#web-app-supports-client-credential-grant-type)                     | August 9, 2017           | August 14, 2017                         |
+|     [OpenID Connect Group Claim Retrieves Application Groups](#openid-connect-group-claim-retrieves-application-groups) | August 9, 2017           | August 14, 2017                         |
+|                [SHA-256 Signed Certificates for New SAML 2.0 Apps](#sha-256-signed-certificates-for-new-saml-20-apps)              | Generally Available now  | Generally Available beginning 9/11/2017 |
 
 #### Default Custom Authorization Server
 <!-- OKTA-133786 -->
