@@ -8,14 +8,12 @@ excerpt: Summary of changes to the Okta Platform since Release 2017.31
 
 ### Platform Feature Enhancements
 
-| Feature Enhancement                                                                                          | Expected in Preview Orgs  | Expected in Production Orgs              |
-|:-------------------------------------------------------------------------------------------------------------|:--------------------------|:-----------------------------------------|
-|   [Default Custom Authorization Server](default-custom-authorization-server)                                   | August 8, 2017            | August 14, 2017                          |
-|  [Web App Supports Client Credential Grant Type](web-app-supports-client-credential-grant-type)               | August 8, 2017            | August 14, 2017                          |
-| [OpenID Connect Group Claim Supports App Groups](openid-connect-group-claim-supports-app-groups)             | August 8, 2017            | August 14, 2017                          |
-|            [SHA-256 Signed Certificates for New SAML 2.0 Apps](#sha-256-signed-certificates-for-new-saml-20-apps)       | Generally Available now   | Generally Available beginning 9/11/2017  |
-
-To enable an Early Availability (EA) feature, contact Okta Support. For more information, see [Okta Release Lifecycle](https://developer.okta.com/docs/api/getting_started/releases-at-okta.html). 
+| Feature Enhancement                                                                                               | Expected in Preview Orgs | Expected in Production Orgs             |
+|:------------------------------------------------------------------------------------------------------------------|:-------------------------|:----------------------------------------|
+|       [Default Custom Authorization Server](default-custom-authorization-server)                                        | August 9, 2017           | August 14, 2017                         |
+|      [Web App Supports Client Credential Grant Type](web-app-supports-client-credential-grant-type)                    | August 9, 2017           | August 14, 2017                         |
+|     [OpenID Connect Group Claim Retrieves Application Groups](openid-connect-group-claim-supports-application-groups) | August 9, 2017           | August 14, 2017                         |
+|                [SHA-256 Signed Certificates for New SAML 2.0 Apps](#sha-256-signed-certificates-for-new-saml-20-apps)            | Generally Available now  | Generally Available beginning 9/11/2017 |
 
 #### Default Custom Authorization Server
 <!-- OKTA-133786 -->
@@ -30,14 +28,14 @@ It allows you to specify `default` instead of the `authorizationServerId` in req
 #### Web App Supports Client Credential Grant Type
 <!-- OKTA-102062 -->
 
-You can now configure [the `web` application type to use a `client_credential` grant type](docs/api/resources/oauth-clients.html).
+You can now [configure the `web` application type to use a `client_credential` grant type](/docs/api/resources/oauth-clients.html#client-application-properties).
 This allows you to use one `client_id` for an application that needs to make user-specific calls and back-end calls for data.
 
-### OpenID Connect Group Claim Supports App Groups
+#### OpenID Connect Group Claim Retrieves Application Groups
 <!-- OKTA_132193 -->
 
-The [`getFilteredGroups` function](/reference/okta_expression_language/index.html#group-functions) in Okta's Expression Language now supports app groups in the Okta Authorization Server.
-Previously it only supported app groups in the Custom Authorization Server.  
+OpenID Connect, which uses the Okta Authorization Server, now supports the use of the Okta Expression Language [`getFilteredGroups` function](/reference/okta_expression_language/index.html#group-functions) to retrieve [application groups](/docs/api/resources/apps.html#application-group-model) for use in tokens.
+Previously it only supported application groups in the Custom Authorization Server.  
 
 #### SHA-256 Signed Certificates for New SAML 2.0 Apps
 
@@ -48,8 +46,8 @@ All new SAML 2.0 apps are bootstrapped with SHA-256 signed public certificates. 
 Bug fixes are expected on preview orgs starting August 9, 2017, and on production orgs starting August 14, 2017.
 
 * The **Add policy** button wasn't disabled for Org Admins, who don't have permission to create authorization server policies. (OKTA-127450)
-* Some requests to `oauth2/v1/authorize` with the `state` parameter incorrectly returned an error (OKTA-130916)
-* When an ID token was minted for a custom authorization server, from a request to `/oauth2/:authorizationServerId/v1/token`, an app sign-on event wasn't sent to the log. (OKTA-134554)
+* Some requests to `/oauth2/v1/authorize` with the `state` parameter incorrectly returned an error. (OKTA-130916)
+* When an ID token was minted for a custom authorization server from a request to `/oauth2/:authorizationServerId/v1/token`, an app sign-on event wasn't generated. (OKTA-134554)
 
 ### Does Your Org Have This Change Yet?
 
